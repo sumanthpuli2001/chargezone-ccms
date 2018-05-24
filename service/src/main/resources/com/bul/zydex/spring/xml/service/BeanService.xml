@@ -672,4 +672,13 @@
     <bean id="userRightDescriptionService1" class="com.bul.zydex.service.UserRight.UserRightDescriptionServiceImpl">
         <property name="userRightDescriptionDAO" ref="userRightDescriptionDAO1" />
     </bean>
+    <bean id="emailMetaTagService1" class="com.bul.zydex.service.EmailMetaTagServiceImpl">
+        <property name="emailMetaTagDAO" ref="emailMetaTagDAO1" />
+    </bean>
+    <bean id="modulesService1" class="com.bul.zydex.service.ModulesServiceImpl">
+        <property name="modulesDAO" ref="modulesDAO1" />
+    </bean>
+    <bean id="displaymorNotesService1" class="com.bul.zydex.service.Payroll.DisplaymorNotesServiceImpl">
+        <property name="displaymorNotesDAO" ref="displaymorNotesDAO1" />
+    </bean>
 </beans>

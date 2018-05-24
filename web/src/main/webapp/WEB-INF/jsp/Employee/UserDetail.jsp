@@ -610,7 +610,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Date of Leaving:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>Date of Relieving:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:input path="dateOfLeaving" class="form-control" readonly="true"/>
                                                     </div>
                                                     <div class="col-sm-6">

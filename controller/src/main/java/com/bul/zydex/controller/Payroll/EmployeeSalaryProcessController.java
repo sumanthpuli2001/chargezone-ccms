@@ -287,10 +287,14 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 Object[] o = (Object[]) PolicyAmountList1;
                 String policyName = (String) o[1];
                 Double PolicyAmount = (Double) o[0];
-
+                Double employeeLwp = employeeSalaryProcess.getEmployeeLwp();
+                Calendar cal = Calendar.getInstance();
+                cal.set(Calendar.MONTH, (Integer.parseInt(employeeSalaryProcess.getMonth()) - 1));
+                int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                double PolicyAmount1 = PolicyAmount - (PolicyAmount * employeeLwp / days);
                 employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
                 employeeAdditionalSalary.setPayrollSalaryType(policyName);
-                employeeAdditionalSalary.setAdditionalAmount(PolicyAmount);
+                employeeAdditionalSalary.setAdditionalAmount(PolicyAmount1);
                 employeeAdditionalSalaryService.create(employeeAdditionalSalary);
 
             }
@@ -413,7 +417,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
                             taxpf = (maxiAmount * pf / 100);
                             taxpfConbrutionEmployer = (maxiAmountConbrutionEmployer * pfEmployeer / 100);
-                            
+
                             employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                             employeeDeductionAmount.setDeductionType("Provident Fund");
                             employeeDeductionAmount.setDeductionAmount(taxpf);
@@ -1337,7 +1341,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             }
 
         }
-         headerList.add("Gross Salary");
+        headerList.add("Gross Salary");
 //        List<?> list2 = employeeSalaryProcessService.readsalDeduction(employeeMaster);
         List<?> list2 = employeeSalaryProcessService.readsalDeductionSearch(employeeMaster);
         for (Object o1 : list2) {
@@ -1346,7 +1350,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 headerList.add("" + str1[2]);
             }
         }
-       
+
         headerList.add("Tot.Dedn");
         headerList.add("Net Pay");
         List<?> list6 = ctcAllowanceService.read();
@@ -1387,7 +1391,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                  int netpayable1 = (int) Math.round(additionalAmount);
                 additionalAmount += (Double) o[1];
             }
-              additionalAmount += employeeSalaryProcess1.getEmployeeBasicSalary();
+            additionalAmount += employeeSalaryProcess1.getEmployeeBasicSalary();
 //            empMap.put("Gross Salary", "" + df.format(additionalAmount));
             empMap.put("Gross Salary", "" + df.format((int) Math.round(additionalAmount)));
 //            List dedSalaryList = employeeDeductionAmountService.readEmployeeForSalaryDeductioninfo(employeeSalaryProcess1);
@@ -1398,7 +1402,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 empMap.put("" + o[0], "" + df.format((int) Math.round((double) o[1])));
                 deductionAmount += (Double) o[1];
             }
-          
+
 //            empMap.put("Deduction Amount", "" + df.format(deductionAmount));
             empMap.put("Tot.Dedn", "" + df.format((int) Math.round(deductionAmount)));
             empMap.put("Net Pay", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
@@ -1855,13 +1859,13 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                double tdsAmount = Double.parseDouble(employeeMaster1.getTdsAmount());
 
                                 double leaveTxt = 0;
-//                                Calendar cal = Calendar.getInstance();
-//                                cal.set(Calendar.MONTH, (Integer.parseInt(month1) - 1));
-//                                int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                                Calendar cal = Calendar.getInstance();
+                                cal.set(Calendar.MONTH, (Integer.parseInt(month1) - 1));
+                                int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 //add lwp + absent 
                                 Double BothLwpABsent = lwp1 + absent1;
 
-                                int days = 30;
+//                                int days = 30;
                                 double basicSalary1 = basicSalary - (basicSalary * lwp1 / days);
 //                            conveys start
 //                                double conveyAmount1 = 0;

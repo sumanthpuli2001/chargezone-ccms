@@ -89,7 +89,7 @@
                                                                     <td><input type="text" name="savingTypeAmount1" value="${list1[1]}" class="form-control savingTypeAmount1"></td>
                                                                     
                                                                     <c:choose>
-                                                                        <c:when test="${list1[2] == ""}">
+                                                                        <c:when test="${list1[2] == ''}">
                                                                             <td><span class="label label-warning">Pending Proof</span></td>
                                                                         </c:when>
                                                                         <c:otherwise>

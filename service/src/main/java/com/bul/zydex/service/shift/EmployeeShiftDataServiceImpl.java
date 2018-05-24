@@ -105,11 +105,16 @@ public class EmployeeShiftDataServiceImpl<T> extends GenericsServiceImpl<T> impl
 
     @Override
     public Boolean checkDailyEntry(T object) {
-       return employeeShiftDataDAO.checkDailyEntry(object);
+        return employeeShiftDataDAO.checkDailyEntry(object);
     }
 
     @Override
     public List<?> getShiftDayOff(EmployeeShiftData employeeShiftData) {
-          return employeeShiftDataDAO.getShiftDayOff(employeeShiftData);
+        return employeeShiftDataDAO.getShiftDayOff(employeeShiftData);
+    }
+
+    @Override
+    public void updateNullShiftId() {
+         employeeShiftDataDAO.updateNullShiftId();
     }
 }

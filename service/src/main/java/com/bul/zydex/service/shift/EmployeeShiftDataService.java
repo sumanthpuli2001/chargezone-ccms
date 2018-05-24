@@ -39,4 +39,6 @@ public interface EmployeeShiftDataService<T> extends GenericsService<T> {
     public Boolean checkDailyEntry(T object);
 
     public List<?> getShiftDayOff(EmployeeShiftData employeeShiftData);
+
+    public void updateNullShiftId();
 }

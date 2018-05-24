@@ -271,4 +271,5 @@
     <bean id="userRightDescriptionDAO1" class="com.bul.zydex.dao.UserRight.UserRightDescriptionDAOImpl" parent="sessionFactoryConfig" />
     <bean id="emailMetaTagDAO1" class="com.bul.zydex.dao.EmailMetaTagDAOImpl" parent="sessionFactoryConfig" />
     <bean id="modulesDAO1" class="com.bul.zydex.dao.ModulesDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="displaymorNotesDAO1" class="com.bul.zydex.dao.Payroll.DisplaymorNotesDAOImpl" parent="sessionFactoryConfig" />
 </beans>

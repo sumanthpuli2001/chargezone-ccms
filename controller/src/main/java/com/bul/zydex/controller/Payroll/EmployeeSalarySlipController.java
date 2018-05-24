@@ -7,6 +7,7 @@ package com.bul.zydex.controller.Payroll;
 
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.DisplaymorNotes;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
 import com.bul.zydex.model.EmployeeMaster;
@@ -22,6 +23,7 @@ import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -293,10 +295,16 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 //        }
 //
 //        double totalDeductionAmountESIC = nettotalEsic + totalDeductionAmount;
-
+        DisplaymorNotes displaymorNotes = new DisplaymorNotes();
         double nettotal = total - totalDeductionAmount;
         int nettotal1 = (int) Math.round(nettotal);
         String n1 = df.format(nettotal1);
+        List list = displaymorNotesService.read();
+       for (Object o : list) {
+            displaymorNotes = (DisplaymorNotes) o;
+          
+        }
+        String notes = displaymorNotes.getPayrollNotes();
         mv.getModelMap().put("employeeSalaryProcessList", employeeSalaryProcessList);
         mv.getModelMap().put("employeeAdditionalList", employeeAdditionalList);
         mv.getModelMap().put("employeeDeductionList", employeeDeductionList);
@@ -310,6 +318,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         request.setAttribute("loanRemainigAmount", loanRemainigAmount);
         request.setAttribute("month", month);
         request.setAttribute("year", year);
+        request.setAttribute("notes", notes);
 
         mv.setViewName("Payroll/SalarySlipForm");
         return mv;

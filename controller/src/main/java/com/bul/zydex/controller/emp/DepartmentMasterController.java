@@ -110,7 +110,7 @@ public class DepartmentMasterController extends DepartmentMasterAbstract {
 //this method is for display department wise employee on Hr Deshboard
     public ModelAndView hrDashboard(HttpServletRequest request, HttpServletResponse response, DepartmentMaster departmentMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
-        List<?> departmentWiseEmpCountList = departmentMasterService.countEmpByDepartmentList();
+        List<?> departmentWiseEmpCountList = departmentMasterService.countEmpByDepartmentList3();
         if (!departmentWiseEmpCountList.isEmpty()) {
 
             try {

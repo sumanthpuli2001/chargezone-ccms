@@ -169,8 +169,10 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> getByEmployeeNo(String employeeNo);
 
     public List<?> getAllEmployeeId();
-    
-     public List<?> empOrDateWiseSearchforActiveSecond(EmployeeAdvanceSearch employeeAdvanceSearch);
 
-    public List<?> readEmpLastMnth(String month,Integer year);
+    public List<?> empOrDateWiseSearchforActiveSecond(EmployeeAdvanceSearch employeeAdvanceSearch);
+
+    public List<?> readEmpLastMnth(String month, Integer year);
+
+    public List<?> getGenderDetails();
 }

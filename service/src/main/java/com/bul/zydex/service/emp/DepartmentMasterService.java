@@ -22,7 +22,9 @@ public interface DepartmentMasterService<T> extends GenericsService<T> {
     public List<?> countResignedEmpOfDept();
 
     public List<?> countEmpByDepartmentList2();
-    
-      public List<?> readByName(String departmentName);
+
+    public List<?> countEmpByDepartmentList3();
+
+    public List<?> readByName(String departmentName);
 
 }

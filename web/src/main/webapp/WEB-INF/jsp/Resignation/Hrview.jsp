@@ -232,7 +232,7 @@
                                                 <c:choose>
                                                     <c:when test="${resignationMaster.relievingDate eq '' || resignationMaster.relievingDate eq null}">
                                                         <div class="form-group" style="pointer-events: none;">
-                                                            <label class="col-sm-3 control-label">Reliving Date:</label>
+                                                            <label class="col-sm-3 control-label">Relieving Date:</label>
                                                             <div class="col-sm-1">
                                                                 <input type="radio" name="relivingDateRadio" id="relivingDateShow_id" value="relivingDateShow">
                                                             </div>
@@ -246,7 +246,7 @@
                                                     <c:otherwise>
 
                                                         <div class="form-group" style="pointer-events: none;">
-                                                            <label class="col-sm-3 control-label">Reliving Date:</label>
+                                                            <label class="col-sm-3 control-label">Relieving Date:</label>
                                                             <div class="col-sm-1">
                                                                 <input type="radio" name="relivingDateRadio" checked="true" id="relivingDateShow_id" value="relivingDateShow">
                                                             </div>

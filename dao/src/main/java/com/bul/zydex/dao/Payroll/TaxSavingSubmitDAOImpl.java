@@ -111,4 +111,18 @@ public class TaxSavingSubmitDAOImpl<T> extends GenericsDAOImpl<T> implements Tax
         return list;
 
     }
+
+    @Override
+    public List<?> readTaxSavingSubmitForEmployee(EmployeeMaster employeeMaster, String Financial_year) {
+        String query = "";
+        EmployeeMaster empMaster = (EmployeeMaster) employeeMaster;
+        query += " SELECT b.employeeId, b.employeeName, b.id, c.id "
+                + " FROM TaxSavingSubmit a "
+                + " LEFT JOIN a.employeeMaster b "
+                + " LEFT JOIN a.payrollFinancialYear c"
+                + " WHERE c.id = " + Financial_year;
+
+        List list = getHibernateTemplate().find(query);
+        return list;
+    }
 }

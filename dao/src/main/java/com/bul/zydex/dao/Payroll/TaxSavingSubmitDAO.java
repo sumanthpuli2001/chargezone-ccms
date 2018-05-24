@@ -29,4 +29,5 @@ public interface TaxSavingSubmitDAO<T> extends GenericsDAO<T> {
 
     public List<?> readDataForSaving(int employeeId, int financialId);
 
+    public List<?> readTaxSavingSubmitForEmployee(EmployeeMaster employeeMaster, String Financial_year);
 }

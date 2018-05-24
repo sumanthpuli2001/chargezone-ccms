@@ -20,6 +20,10 @@ import com.bul.zydex.service.Payroll.TaxDeductionDecarationSubmitService;
 import com.bul.zydex.service.Payroll.TaxDeductionDeclarationSavingStatusService;
 import com.bul.zydex.service.Payroll.TaxSavingSubmitService;
 import com.bul.zydex.service.emp.EmployeeMasterService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -83,5 +87,14 @@ public class TaxSavingSubmitAbstract extends CustomAbstract
         this.taxDeductionDeclarationSavingStatusService = taxDeductionDeclarationSavingStatusService;
     }
 
+    protected void financialYearList(HttpServletRequest request) {
+        List<?> financialYearList = payrollFinancialYearService.read();
+        Map<Integer, String> map = new HashMap();
+        for (Object obj : financialYearList) {
+            PayrollFinancialYear payrollFinancialYear = (PayrollFinancialYear) obj;
+            map.put(payrollFinancialYear.getId(), payrollFinancialYear.getTitle());
+        }
+        request.setAttribute("financialYearList", map);
+    }
     
 }

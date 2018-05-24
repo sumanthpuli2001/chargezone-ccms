@@ -890,35 +890,8 @@
                                                                     </c:forEach>
                                                                 </c:when>
                                                                 <c:otherwise>
-
-                                                                    <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
-    <!--                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
                                                                     <tr>
-                                                                        <td style="text-align: center">1</td>
-                                                                        <td><div>
-                                                                                <select id="policyId1"  name="policyId1"  class="form-control">
-                                                                                    <option value="">--SELECT--</option>
-                                                                                    <c:forEach var="policyData" items="${policy}" varStatus = "status">
-                                                                                        <option value="${policyData.key}" >${policyData.value}</option>
-                                                                                    </c:forEach>
-                                                                                </select>
-                                                                            </div>
-                                                                            <span id="policyError1" style="color: red;"></span>
-                                                                        </td>
-                                                                        <!--                                                                        <td style="text-align: center">
-                                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
-                                                                                                                                                </td>-->
-                                                                        <td style="text-align: center">
-                                                                            <input type="number" name="amount1" id="amount1" min="0" class="form-control" value="">
-                                                                        </td>
-                                                                        <td style="text-align: center">
-                                                                            <input type="checkbox" name="taxable1" id="taxable1" >
-                                                                        </td>
-                                                                        <td style="text-align: center">
-                                                                            <span style='margin-top: 5px;'>
-                                                                                <input type="button" value="+" id="policyCloneid" />
-                                                                            </span>
-                                                                        </td>
+                                                                        <td colspan="5" style="text-align: center;">No Data Found</td>
                                                                     </tr>
                                                                 </c:otherwise>
                                                             </c:choose>
@@ -1246,61 +1219,8 @@
                                                                 </c:when>
                                                                 <c:otherwise>
 
-                                                                    <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
-                                                                            <!--<input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
                                                                     <tr>
-                                                                        <td style="text-align: center">1</td>
-                                                                        <td><div>
-                                                                                <select id="ctcId1"  name="ctcId1"  class="form-control">
-                                                                                    <option value="">--SELECT--</option>
-                                                                                    <c:forEach var="policyData" items="${ctc}" varStatus = "status">
-                                                                                        <option value="${policyData.key}" >${policyData.value}</option>
-                                                                                    </c:forEach>
-                                                                                </select>
-                                                                            </div>
-                                                                            <span id="ctcError1" style="color: red;"></span>
-                                                                        </td>
-                                                                        <!--                                                                        <td style="text-align: center">
-                                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
-                                                                                                                                                </td>-->
-                                                                        <td style="text-align: center">
-                                                                            <input type="number" name="ctcamount1" id="ctcamount1" min="0" class="form-control" value="">
-                                                                        </td>
-                                                                        <td style="text-align: center">
-                                                                            <input type="checkbox" name="taxable1" id="taxable1" >
-                                                                        </td>
-                                                                        <td id="monthTd1"><div>
-                                                                                <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
-                                                                                <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
-                                                                                <select id="month1" name="month1"  class="form-control ">
-                                                                                    <option value="">--Select--</option>
-                                                                                    <option value="01">January</option>
-                                                                                    <option value="02">February</option>
-                                                                                    <option value="03">March </option>
-                                                                                    <option value="04">April</option>
-                                                                                    <option value="05">May</option>
-                                                                                    <option value="06">June</option>
-                                                                                    <option value="07">July</option>
-                                                                                    <option value="08">August</option>
-                                                                                    <option value="09">September</option>
-                                                                                    <option value="10">October </option>
-                                                                                    <option value="11">November </option>
-                                                                                    <option value="12">December</option>
-
-                                                                                </select>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: center">
-
-                                                                            <select name="year1" id="year1" class="form-control ">
-
-                                                                            </select>
-                                                                        </td>
-                                                                        <td style="text-align: center">
-                                                                            <span style='margin-top: 5px;'>
-                                                                                <input type="button" value="+" id="ctcCloneid" />
-                                                                            </span>
-                                                                        </td>
+                                                                        <td colspan="5" style="text-align: center;">No Data Found</td>
                                                                     </tr>
                                                                 </c:otherwise>
                                                             </c:choose>

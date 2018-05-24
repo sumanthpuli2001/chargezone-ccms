@@ -677,7 +677,8 @@
     </bean>
     <bean id="modulesService1" class="com.bul.zydex.service.ModulesServiceImpl">
         <property name="modulesDAO" ref="modulesDAO1" />
-     <bean id="displaymorNotesService1" class="com.bul.zydex.service.Payroll.DisplaymorNotesServiceImpl">
+    </bean>
+    <bean id="displaymorNotesService1" class="com.bul.zydex.service.Payroll.DisplaymorNotesServiceImpl">
         <property name="displaymorNotesDAO" ref="displaymorNotesDAO1" />
     </bean>
 </beans>

@@ -16,25 +16,45 @@
         $(document).ready(function () {
             window.onload = changetotalButtonNew();
             window.onload = changetotalButtonNewCTC();
-//            window.onload = changetotalButtonCTC
+//            window.onload = changetotalButton();
+//            window.onload = changetotalButtonCTC();
 
         });
 
     </script>
     <script>
         function changetotalButton() {
+//            alert("hii");
             var total = 0;
             var sum = 0;
+            var sum1 = 0;
             var element1 = 0;
 
-            var element = document.getElementById('amount1').value;
+//            var element = document.getElementById('amount1').value;
+            var element15 = document.getElementById('policyCount').value;
+            for (var i = 1; i <= element15; i++) {
+//                alert('hi' + document.getElementById('amount' + i).value);
+                var element = document.getElementById('amount' + i).value;
+                sum += parseInt(element);
+//                alert("allowance"+sum);
+//                alert(sum);
+            }
 
+            var element16 = document.getElementById('ctcCount').value;
+            for (var i = 1; i <= element16; i++) {
+//                alert('hi' + document.getElementById('amount' + i).value);
+                var element12 = document.getElementById('ctcamount' + i).value;
+                sum1 += parseInt(element12);
+//                  alert("ctc"+sum1);
+            }
 
 
 //            var conyance = parseInt(document.getElementById("conveysAmount").value);
             var basicSalary = parseInt(document.getElementById("basicSalary").value);
-            if (parseInt(element) > 0) {
-                total = total + parseInt(element);
+//            alert("basicsalary"+basicSalary);
+
+            if (parseInt(sum) > 0) {
+                total = total + parseInt(sum);
             }
 //            if (parseInt(conyance) > 0) {
 //                total = total + parseInt(conyance);
@@ -45,7 +65,7 @@
             }
             document.getElementById("txtresult").value = total;
             element1 = document.getElementById('txtresultCTC').value;
-            sum = parseInt(element) + parseInt(element1);
+            sum = parseInt(sum) + parseInt(sum1) + basicSalary;
 
             document.getElementById("txtresultCTC").value = sum;
 
@@ -169,6 +189,7 @@
         });
         function changetotalButtonNew(id) {
             var sum = 0;
+            var sum1 = 0;
             var total = 0;
             var element15 = document.getElementById('policyCount').value;
             for (var i = 1; i <= element15; i++) {
@@ -176,6 +197,13 @@
                 var element = document.getElementById('amount' + i).value;
                 sum += parseInt(element);
 //                alert(sum);
+            }
+
+            var element16 = document.getElementById('ctcCount').value;
+            for (var i = 1; i <= element16; i++) {
+//                alert('hi' + document.getElementById('amount' + i).value);
+                var element12 = document.getElementById('ctcamount' + i).value;
+                sum1 += parseInt(element12);
             }
 //            alert(sum);
 
@@ -192,7 +220,7 @@
 
             }
             document.getElementById("txtresult").value = total;
-            document.getElementById("txtresultCTC").value = total;
+            document.getElementById("txtresultCTC").value = total + sum1;
 
 
 //            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
@@ -252,7 +280,7 @@
                 var element = document.getElementById("amount" + policyDiv).value;
                 val = val - 1;
                 var element2 = document.getElementById('txtresult').value;
-                  var element21 = document.getElementById('txtresultCTC').value;
+                var element21 = document.getElementById('txtresultCTC').value;
 //                alert(element2);
                 document.getElementById('txtresult').value = '';
                 document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
@@ -260,7 +288,7 @@
                 document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
                 document.getElementById("policyCount").value = val;
                 var element1 = document.getElementById(policyDiv);
-                alert(element1);
+//                alert(element1);
 
                 element1.parentNode.removeChild(element1);
             } catch (e) {
@@ -1201,7 +1229,7 @@
 
                                                     <div class="col-sm-6">
                                                         <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary"/>
+                                                        <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();"/>
                                                         <form:errors path="basicSalary" cssClass="errorDiv"/>
                                                     </div>
                                                 </div>

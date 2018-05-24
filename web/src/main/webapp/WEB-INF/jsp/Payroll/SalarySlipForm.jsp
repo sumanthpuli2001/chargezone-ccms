@@ -11,7 +11,7 @@
 <html>
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -80,13 +80,13 @@
                                             <table style=" width: 90%; height: 0px !important;" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">
                                                 <tr>
                                                     <td ><!--style="border:0px"-->
-                                                    <b>Company Code</b>
-                                                    <b>:</b>&nbsp;&nbsp;${employeeMaster.employeeLocation} </td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="border:0px; width: 30%;  height: 0px !important">
-                                                        <b>Emp ID</b>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.employeeId} </td>
+                                                        <b>Company Code</b>
+                                                        <b>:</b>&nbsp;&nbsp;${employeeMaster.employeeLocation} </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border:0px; width: 30%;  height: 0px !important">
+                                                    <b>Emp ID</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.employeeId} </td>
                                                 <td style="border:0px; width: 30%;"><!--style="border:0px"-->
                                                     <b>Emp Name</b>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.employeeName} </td>
@@ -287,8 +287,8 @@
 
                                                     </tr>
                                                 </c:if>
-                                                    
-                                                     <tr>
+
+                                                <tr>
                                                     <th align="left">Notes: ${notes}</th>
 
                                                 </tr>
@@ -325,5 +325,6 @@
     <!--    <form>
             <input type="button" value="Print" onclick="window.print()">
         </form>-->
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>
 

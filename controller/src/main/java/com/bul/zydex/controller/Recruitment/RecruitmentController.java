@@ -944,7 +944,9 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         int numberOfPositionMpp = rm.getNumberOfPosition();
         int Mppbudget = rm.getBudget();
+        int mprId = mm.getId();
         String MppExperience = rm.getExperiance();
+        List<?> list = mprApprovalHistoryService.getByMprId(mprId);
 
         request.setAttribute("jobtypeNAme2", jobtypeNAme2);
         request.setAttribute("departmentName2", departmentName2);
@@ -983,6 +985,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         request.setAttribute("candidateJobApplication", cja);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        request.setAttribute("list", list);
         mv.setViewName("Recruitment/CandidateApproval");
         return mv;
     }

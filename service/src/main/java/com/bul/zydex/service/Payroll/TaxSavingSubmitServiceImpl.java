@@ -34,18 +34,19 @@ public class TaxSavingSubmitServiceImpl<T> extends GenericsServiceImpl<T> implem
 
     @Override
     public List<?> readTaxSavingSubmit(int EmplID, int finicailyear) {
-      return taxSavingSubmitDAO.readTaxSavingSubmit(EmplID, finicailyear);
+        return taxSavingSubmitDAO.readTaxSavingSubmit(EmplID, finicailyear);
     }
 
     @Override
     public List<?> readTaxSavingSubmitSalaryGenerate(int EmplID, int finicailyear) {
-       return taxSavingSubmitDAO.readTaxSavingSubmitSalaryGenerate(EmplID, finicailyear);
+        return taxSavingSubmitDAO.readTaxSavingSubmitSalaryGenerate(EmplID, finicailyear);
     }
 
     @Override
     public List<?> readTaxSavingSubmitSalaryGenerateAfterDate(int EmplID, int finicailyear) {
         return taxSavingSubmitDAO.readTaxSavingSubmitSalaryGenerateAfterDate(EmplID, finicailyear);
     }
+
     public List<?> readTaxSavingSubmitForEmployee(EmployeeMaster employeeMaster) {
         return taxSavingSubmitDAO.readTaxSavingSubmitForEmployee(employeeMaster);
     }
@@ -62,8 +63,12 @@ public class TaxSavingSubmitServiceImpl<T> extends GenericsServiceImpl<T> implem
 
     @Override
     public List<?> readTaxSavingSubmitForEmployee(EmployeeMaster employeeMaster, String Financial_year) {
-        return taxSavingSubmitDAO.readTaxSavingSubmitForEmployee(employeeMaster,Financial_year);
+        return taxSavingSubmitDAO.readTaxSavingSubmitForEmployee(employeeMaster, Financial_year);
     }
 
-    
+    @Override
+    public List<?> readTaxSavingSubmitEmployeeSaving(int EmplID, int finicailyear) {
+        return taxSavingSubmitDAO.readTaxSavingSubmitEmployeeSaving(EmplID, finicailyear);
+    }
+
 }

@@ -223,9 +223,17 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
 
         }
 
-        List<?> list = employeeSalaryProcessService.readEmployeeForFormSixteen(employeeMaster);
-        request.setAttribute("employeelist", list);
-        mv = redirectToFormEmployeeSaving(request, response);
+        boolean isExist = taxSavingSubmitService.isExist(id, Integer.parseInt(Financial_year));
+        if (isExist) {
+            List<?> list = taxSavingSubmitService.readTaxSavingSubmitEmployeeSaving(id, Integer.parseInt(Financial_year));
+            request.setAttribute("employeelist", list);
+             mv.setViewName("Payroll/payrollEmployeeSavingStatus");
+        } else {
+
+            List<?> list = employeeSalaryProcessService.readEmployeeForFormSixteen(employeeMaster);
+            request.setAttribute("employeelist", list);
+            mv = redirectToFormEmployeeSaving(request, response);
+        }
         return mv;
     }
 
@@ -303,9 +311,11 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
                                                     Object[] o132 = (Object[]) taxDeductionDecarationSubmit521;
                                                     taxDeductionAmount = (Double) o132[0];
                                                     String attachment = (String) o132[1];
+                                                    Integer Actionstatus = (Integer) o132[2];
 
                                                     taxDeductioncomponentList1.add(taxDeductionAmount);
                                                     taxDeductioncomponentList1.add(attachment);
+                                                    taxDeductioncomponentList1.add(Actionstatus);
                                                 }
 
                                             }

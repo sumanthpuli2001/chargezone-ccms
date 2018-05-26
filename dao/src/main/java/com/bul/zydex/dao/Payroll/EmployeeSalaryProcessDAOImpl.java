@@ -938,8 +938,8 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         return getHibernateTemplate().find(query);
 //         + " WHERE b.id=" + empId + " and (STR_TO_DATE(a.completeDateStr,'%d/%m/%Y') BETWEEN  STR_TO_DATE('" + startD + "','%d/%m/%Y') AND STR_TO_DATE('" + endD + "','%d/%m/%Y')) "
     }
-    
-     public List<?> readEmployeeForSlip1(EmployeeMaster object) {
+
+    public List<?> readEmployeeForSlip1(EmployeeMaster object) {
         String query = "";
         String condition = "";
         EmployeeMaster employeeMaster = (EmployeeMaster) object;

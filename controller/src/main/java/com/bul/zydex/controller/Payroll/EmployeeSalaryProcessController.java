@@ -775,7 +775,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             for (Object payrolltaxdeductioonAmountList1 : payrolltaxdeductioonAmountList) {
                 Object[] o5 = (Object[]) payrolltaxdeductioonAmountList1;
                 Integer finicailyearID15 = (Integer) o5[0];
-                payrollTaxDeductionAamount += finicailyearID15;
+                 double d = finicailyearID15.doubleValue();
+                payrollTaxDeductionAamount += d;
             }
 //            payrollTaxDeductionAamount = (Double) payrolltaxdeductioonAmountList.get(0);
         }

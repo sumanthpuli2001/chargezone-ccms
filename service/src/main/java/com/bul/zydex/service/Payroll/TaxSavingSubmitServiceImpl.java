@@ -61,5 +61,10 @@ public class TaxSavingSubmitServiceImpl<T> extends GenericsServiceImpl<T> implem
         return taxSavingSubmitDAO.readDataForSaving(employeeId, financialId);
     }
 
+    @Override
+    public List<?> readTaxSavingSubmitEmployeeSaving(int EmplID, int finicailyear) {
+      return taxSavingSubmitDAO.readTaxSavingSubmitEmployeeSaving(EmplID, finicailyear);
+    }
+
     
 }

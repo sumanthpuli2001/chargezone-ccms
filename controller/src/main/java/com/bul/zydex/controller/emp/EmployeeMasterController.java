@@ -267,13 +267,6 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             if (employeeMaster.getPfAmount().equals("")) {
                 employeeMaster.setPfAmount("0");
             }
-            if (employeeMaster.getPfAmountEmployer().equals("")) {
-                employeeMaster.setPfAmountEmployer("0");
-            }
-            String grossTotal = request.getParameter("txtresult");
-            employeeMaster.setGrossTotal(Double.parseDouble(grossTotal));
-            String ctcTotal = request.getParameter("txtresultCTC");
-            employeeMaster.setCtcTotal(Double.parseDouble(ctcTotal));
             employeeMasterService.create(employeeMaster);
             //Code for Employee Policy Detail
             EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
@@ -897,12 +890,6 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        String reportingManagerLevel5 = request.getParameter("reportingManagerLevel5");
 //        String reportingManagerLevel6 = request.getParameter("reportingManagerLevel6");
         String shiftMasterId = request.getParameter("shiftMasterId");
-        if (employeeMaster.getPfAmount().equals("")) {
-            employeeMaster.setPfAmount("0");
-        }
-        if (employeeMaster.getPfAmountEmployer().equals("")) {
-            employeeMaster.setPfAmountEmployer("0");
-        }
 //        employeeMasterValidator.validate(employeeMaster, errors);
 //        if (errors.hasErrors()) {
 //            request.setAttribute("failureMessage",
@@ -1581,7 +1568,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         if (employeeMasterReportManager != null) {
             employeeMaster1.setReportingManagerLevel1(employeeMasterReportManager.getEmployeeName());
         }
+        List l1 = employeeMasterService.getGenderDetails();
+        StringBuilder sb11 = new StringBuilder();
+        sb11.append("['").append("Male").append("',").append(l1.get(0)).append("],");
+        sb11.append("['").append("Female").append("',").append(l1.get(1)).append("]");
         request.setAttribute("employeeMaster", employeeMaster1);
+        request.setAttribute("genderWiseEmployee", sb11);
         empChart(request, response);
         mv.setViewName("forward:locationMaster.htm?act=hrDashboard");
         return mv;

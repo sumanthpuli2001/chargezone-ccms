@@ -2209,5 +2209,13 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " WHERE a.dateOfJoining like '%/" + month + "/" + year + "'";
         return getHibernateTemplate().find(query);
     }
+    
+    @Override
+    public List<?> getGenderDetails() {
+        String query = " ";
+        query += " SELECT count(a.gender)"
+                + " FROM EmployeeMaster a  group by a.gender";
+        return getHibernateTemplate().find(query);
+    }
 
 }

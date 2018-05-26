@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -34,19 +35,34 @@ public class TaxSavingSubmitController extends TaxSavingSubmitAbstract {
         TaxSavingSubmit taxSavingSubmit = new TaxSavingSubmit();
         EmployeeMaster employeeMaster = new EmployeeMaster();
 
-        List<?> list = taxSavingSubmitService.readTaxSavingSubmitForEmployee(employeeMaster);
-
-        request.setAttribute("employeelist", list);
+        financialYearList(request);
+        
         mv.getModelMap().put("taxSavingSubmit", taxSavingSubmit);
         mv.setViewName("Payroll/PayrollEmployeeSavingFilledView");
         return mv;
     }
 
+    public ModelAndView searchFormEmployeeFilledSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+
+        String Financial_year = request.getParameter("fnyear");
+        
+        List<?> list = taxSavingSubmitService.readTaxSavingSubmitForEmployee(employeeMaster,Financial_year);
+        
+        request.setAttribute("employeelist", list);   
+
+        mv = viewFilledForms(request, response);
+        return mv;
+    }
+    
     public ModelAndView viewFilledEmployeeSavingClick(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
         TaxSavingSubmit taxSavingSubmit = new TaxSavingSubmit();
         EmployeeMaster employeeMaster = employeeMasterService.readById(Integer.parseInt(request.getParameter("eid")));
+        
         PayrollFinancialYear payrollFinancialYear = payrollFinancialYearService.readById(Integer.parseInt(request.getParameter("fid")));
+//        PayrollFinancialYear payrollFinancialYear = payrollFinancialYearService.readById(Integer.parseInt(request.getParameter("finyear")));
         PayrollTaxDeductionMaster payrollTaxDeductionMaster = new PayrollTaxDeductionMaster();
         PayrollTaxDeductionComponent payrollTaxDeductionComponent = new PayrollTaxDeductionComponent();
                 

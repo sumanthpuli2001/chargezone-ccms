@@ -520,6 +520,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //        employeeMaster.setUserMaster(userMaster);
 //        List<?> empList = employeeMasterService.readByEmployeeUserId(employeeMaster);
 //        List<?> empList = employeeMasterService.read();
+         employeeShiftDataService.updateNullShiftId();     //.........this line for update employee shift_id null to 1.....//
         List<?> empList = employeeDatetimeDataService.readEmployeeByCurrentDate();
         for (Object zz : empList) {
             try {
@@ -14053,7 +14054,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
     }
 
 //    public ModelAndView overTimeEntry(HttpServletRequest request, HttpServletResponse response) throws Exception {
-   private synchronized void overTimeEntry() throws Exception {
+    private synchronized void overTimeEntry() throws Exception {
         ModelAndView mv = new ModelAndView();
         List<?> list = employeeShiftDataService.checkEmpDailyData();
         if (!list.isEmpty()) {

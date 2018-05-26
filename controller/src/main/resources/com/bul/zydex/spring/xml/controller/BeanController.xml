@@ -914,6 +914,8 @@
         <property name="certificateTemplateValidator" ref="certificateTemplateValidator1" />
         <property name="employeeTypeService" ref="employeeTypeService1" />
         <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="emailMetaTagService" ref="emailMetaTagService1" />
+        <property name="modulesService" ref="modulesService1" />
     </bean>
     
     <bean id="companyMonthlyReportController1" class="com.bul.zydex.controller.Payroll.CompanyMonthlyReportController" parent="controllerConfig" >

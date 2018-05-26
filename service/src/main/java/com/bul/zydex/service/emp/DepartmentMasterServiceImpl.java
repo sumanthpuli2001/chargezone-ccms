@@ -42,13 +42,19 @@ public class DepartmentMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> countResignedEmpOfDept() {
         return departmentMasterDAO.countResignedEmpOfDept();
     }
-    
+
     @Override
     public List<?> countEmpByDepartmentList2() {
         return departmentMasterDAO.countEmpByDepartmentList2();
     }
+
     @Override
-      public List<?> readByName(String departmentName) {
+    public List<?> countEmpByDepartmentList3() {
+        return departmentMasterDAO.countEmpByDepartmentList3();
+    }
+
+    @Override
+    public List<?> readByName(String departmentName) {
         return departmentMasterDAO.readByName(departmentName);
     }
 

@@ -48,5 +48,7 @@ public interface EmployeeShiftDataDAO<T> extends GenericsDAO<T> {
     public Boolean checkDailyEntry(T object);
     
     public List<?> getShiftDayOff(EmployeeShiftData employeeShiftData);
+    
+    public void updateNullShiftId();
 
 }

@@ -92,6 +92,19 @@ public class DepartmentMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return departmentWiseEmpCountList;
     }
 
+    public List<?> countEmpByDepartmentList3() {
+        String hqryString = "select dm.departmentName, count(em.departmentMaster.id) from DepartmentMaster dm"
+                + " left join dm.employeeMasters em"
+                + " where (em.dateOfLeaving is null or em.dateOfLeaving = '') "
+                + " or STR_TO_DATE(em.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()"
+                + " group by dm.departmentName"
+                + " having count(em.departmentMaster.id)>0"
+                + " order by dm.departmentName";
+
+        List departmentWiseEmpCountList = getHibernateTemplate().find(hqryString);
+        return departmentWiseEmpCountList;
+    }
+
     @Override
     public List<?> readByName(String departmentName) {
         String query = "";

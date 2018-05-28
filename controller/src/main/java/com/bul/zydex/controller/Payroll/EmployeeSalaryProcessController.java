@@ -775,7 +775,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             for (Object payrolltaxdeductioonAmountList1 : payrolltaxdeductioonAmountList) {
                 Object[] o5 = (Object[]) payrolltaxdeductioonAmountList1;
                 Integer finicailyearID15 = (Integer) o5[0];
-                 double d = finicailyearID15.doubleValue();
+                double d = finicailyearID15.doubleValue();
                 payrollTaxDeductionAamount += d;
             }
 //            payrollTaxDeductionAamount = (Double) payrolltaxdeductioonAmountList.get(0);
@@ -1247,8 +1247,123 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                     }
 
                                 }
+                            } else {
+                                Double TotalRemainingAmount1 = 0.0;
+                                TotalRemainingAmount1 = yearSalaryGrossTotal - 0.0;
+//                                List<?> taxDeductionDecarationSubmitSavingLimit = taxDeductionDecarationSubmitService.readTaxDeductionDecarationSubmitSalaryGenerateTaxSavingLimit(taxSavingsubmitId);
+//                                if (!taxDeductionDecarationSubmitSavingLimit.isEmpty()) {
+//                                    for (Object taxDeductionDecarationSubmitSavingLimitList : taxDeductionDecarationSubmitSavingLimit) {
+//                                        Object[] o2265 = (Object[]) taxDeductionDecarationSubmitSavingLimitList;
+//                                        Double taxDeclartionAmountTotal = (Double) o2265[0];
+//                                        Integer taxsavingLimitamountTotal = (Integer) o2265[2];
+//                                        Integer addittionalAmounttTotal = (Integer) o2265[3];
+//                                        if (taxDeclartionAmountTotal >= taxsavingLimitamountTotal) {
+//                                            TotalRemainingAmount1 = TotalRemainingAmount1 - addittionalAmounttTotal;
+//
+//                                        }
+//
+//                                    }
+//                                }
+//                                    int year1Fake = 2000000;
+//                                    Double TotalRemainingAmount1 = yearSalaryGrossTotal - taxDeductionDecartionAmount;
+//                                    int i = TotalRemainingAmount1.intValue();
+//                                    SavingAmountRemain=
+                                Double ftax = 0.0;
+                                List<PayrollTaxRateMaster> list = (List<PayrollTaxRateMaster>) payrollTaxRateMasterService.getAgeValuesFOrSalaryGenerate(diffYear);
+                                if (!list.isEmpty()) {
+                                    Double TotalRemainingAmount12 = 0.0;
+                                    Double additionalAmount56 = 0.0;
+                                    Double tax = 0.0;
+                                    Double RemainTdsToPay = 0.0;
+                                    Double monthlyTDs = 0.0;
+                                    int monthlyTDs12 = 0;
+                                    boolean flag = false;
+                                    PayrollTaxRateMaster payrollTaxRateMaster = new PayrollTaxRateMaster();
+                                    for (int j = 0; j <= list.size(); j++) {
+                                        if (!flag) {
+                                            payrollTaxRateMaster = (PayrollTaxRateMaster) list.get(j);
+                                            String taxRate = payrollTaxRateMaster.getTaxRate();
+                                            String incomeFrom = payrollTaxRateMaster.getIncomeFrom();
+                                            String incomeTo = payrollTaxRateMaster.getIncomeTo();
+//                                            if(j==0){
+                                            Double range1 = 0.0;
+                                            Double range = 0.0;
+                                            if (list.size() != j) {
+                                                range1 = Double.parseDouble(incomeTo) - Double.parseDouble(incomeFrom);
+                                                DecimalFormat df1 = new DecimalFormat("#.##");
+                                                range = Double.parseDouble(df1.format(range1));
+                                            } else if (list.size() == j) {
+                                                range1 = Double.parseDouble(incomeFrom);
+                                                DecimalFormat df1 = new DecimalFormat("#.##");
+                                                range = Double.parseDouble(df1.format(range1));
+                                            }
+//                                                DecimalFormat df1 = new DecimalFormat("#.##");
+//                                                System.out.println(df1.format(range));
+//                                            }
+//                                            if (Integer.parseInt(incomeFrom) == 0) {
+//                                                TotalRemainingAmount1 = TotalRemainingAmount1 - Double.parseDouble(incomeTo);
+//                                            }
+//                                            if (Integer.parseInt(incomeFrom) != 0) {
+//                                                TotalRemainingAmount1 = TotalRemainingAmount1 - Double.parseDouble(incomeFrom);
+//                                            }
+
+                                            if (TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                TotalRemainingAmount1 = TotalRemainingAmount1 - range;
+                                            } else if (TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                TotalRemainingAmount1 = 0.0;
+                                                flag = true;
+                                            } else if ((list.size() == (j + 1)) && TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                TotalRemainingAmount1 = 0.0;
+                                                flag = true;
+                                            } else if ((list.size() != (j + 1)) && TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                TotalRemainingAmount1 = 0.0;
+                                                flag = true;
+                                            } else if ((list.size() != (j + 1)) && TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                TotalRemainingAmount1 = 0.0;
+                                                flag = true;
+                                            } else if ((list.size() == (j + 1)) && TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                TotalRemainingAmount1 = 0.0;
+                                                flag = true;
+                                            }
+
+                                            if (range <= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+//                                                TotalRemainingAmount1 = 0.0;
+                                            }
+//                                            if (range >= TotalRemainingAmount1) {
+//                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+//                                                TotalRemainingAmount1 = 0.0;
+//                                            }
+//                                            if (range >= TotalRemainingAmount1) {
+//                                            }
+
+                                            ftax += tax;
+                                        }
+//                                            TotalRemainingAmount12 = TotalRemainingAmount12 - Double.parseDouble(incomeFrom);
+
+                                    }
+
+                                    RemainTdsToPay = tdsAmount1 - ftax;
+                                    monthlyTDs = RemainTdsToPay / currentMonth + 1;
+                                    employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                    employeeDeductionAmount.setDeductionType("TDS");
+                                    monthlyTDs12 = (int) Math.round(Math.abs(monthlyTDs));
+                                    double d = 0.0;
+                                    d = monthlyTDs12;
+//                                    (int) Math.round(additonalAmount)
+                                    employeeDeductionAmount.setDeductionAmount(d);
+                                    employeeDeductionAmountService.create(employeeDeductionAmount);
+//                                        additionalAmount56 += TotalRemainingAmount12;
+                                }
+
                             }
                         }
+
                     }
 
                 }

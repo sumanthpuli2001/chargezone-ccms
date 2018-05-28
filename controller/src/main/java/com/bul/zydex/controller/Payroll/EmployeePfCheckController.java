@@ -211,14 +211,14 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
     public ModelAndView readTextFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 
-        String fileLocationURL = "D:" + File.separator + "PFILE";
+        String fileLocationURL = "E:" + File.separator + "PFILE";
 
         File Folder1 = new File(fileLocationURL);
         if (!Folder1.exists()) {
             Folder1.mkdirs();
         }
         String s = "PF_Report.txt";
-        File downloadFile1 = new File(fileLocationURL + s);
+        File downloadFile1 = new File("E:/PFILE/" + s);
         OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile1));
         boolean success = false;
         outputStream1.close();

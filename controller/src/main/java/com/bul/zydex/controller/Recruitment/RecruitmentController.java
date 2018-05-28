@@ -162,8 +162,8 @@ public class RecruitmentController extends RecruitmentAbstract {
             approvalHistory.setCreatedBy(employeeMaster.getId());
             approvalHistory.setCreateDate(sdf.format(cDate));
             approvalHistory.setStatus(0);
-            approvalHistory.setStatusMessage("Created");
-            approvalHistory.setComment("Creator");
+            approvalHistory.setStatusMessage("MPP Created");
+            approvalHistory.setComment("MPP Creator");
             recruitmentApprovalHistoryService.create(approvalHistory);
 
             request.setAttribute("successMessage",
@@ -395,8 +395,8 @@ public class RecruitmentController extends RecruitmentAbstract {
             mprApprovalHistory.setCreateDate(sdf.format(cDate));
             mprApprovalHistory.setCreatedBy(employeeMaster.getId());
             mprApprovalHistory.setStatus(0);
-            mprApprovalHistory.setStatusMessage("Created");
-            mprApprovalHistory.setComment("Creator");
+            mprApprovalHistory.setStatusMessage("MPR Created");
+            mprApprovalHistory.setComment("MPR Creator");
 
             mprApprovalHistoryService.create(mprApprovalHistory);
 

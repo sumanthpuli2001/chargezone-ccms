@@ -263,6 +263,7 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
     public List tempemployeeSalaryDetail(EmployeeMaster employeeMaster) {
         List<?> list = employeeSalaryProcessService.readEmployeeForPfGov(employeeMaster);
         List tempemployeeSalaryDetail = new ArrayList();
+//        String uano = "";
         for (Object employeePfdetail : list) {
             Object[] o = (Object[]) employeePfdetail;
             List tempemployeePfdetailList = new ArrayList();
@@ -274,8 +275,13 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
             tempemployeePfdetailList.add(employeeMasterID);
             int employeeProcessId = (int) o[3];
             tempemployeePfdetailList.add(employeeProcessId);
-            String uano = (String) o[4];
-            tempemployeePfdetailList.add(uano);
+            if (null != o[4] && "" == o[4]) {
+              String uano = (String) o[4];
+                tempemployeePfdetailList.add(uano);
+            } else {
+                String uano1 = "";
+                tempemployeePfdetailList.add(uano1);
+            }
             Double totalGoss = (Double) o[5];
             tempemployeePfdetailList.add(totalGoss);
 

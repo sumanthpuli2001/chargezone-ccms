@@ -162,8 +162,8 @@ public class RecruitmentController extends RecruitmentAbstract {
             approvalHistory.setCreatedBy(employeeMaster.getId());
             approvalHistory.setCreateDate(sdf.format(cDate));
             approvalHistory.setStatus(0);
-            approvalHistory.setStatusMessage("Created");
-            approvalHistory.setComment("Creator");
+            approvalHistory.setStatusMessage("MPP Created");
+            approvalHistory.setComment("MPP Creator");
             recruitmentApprovalHistoryService.create(approvalHistory);
 
             request.setAttribute("successMessage",
@@ -395,8 +395,8 @@ public class RecruitmentController extends RecruitmentAbstract {
             mprApprovalHistory.setCreateDate(sdf.format(cDate));
             mprApprovalHistory.setCreatedBy(employeeMaster.getId());
             mprApprovalHistory.setStatus(0);
-            mprApprovalHistory.setStatusMessage("Created");
-            mprApprovalHistory.setComment("Creator");
+            mprApprovalHistory.setStatusMessage("MPR Created");
+            mprApprovalHistory.setComment("MPR Creator");
 
             mprApprovalHistoryService.create(mprApprovalHistory);
 
@@ -944,7 +944,9 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         int numberOfPositionMpp = rm.getNumberOfPosition();
         int Mppbudget = rm.getBudget();
+        int mprId = mm.getId();
         String MppExperience = rm.getExperiance();
+        List<?> list = mprApprovalHistoryService.getByMprId(mprId);
 
         request.setAttribute("jobtypeNAme2", jobtypeNAme2);
         request.setAttribute("departmentName2", departmentName2);
@@ -983,6 +985,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         request.setAttribute("candidateJobApplication", cja);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        request.setAttribute("list", list);
         mv.setViewName("Recruitment/CandidateApproval");
         return mv;
     }

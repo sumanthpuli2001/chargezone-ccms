@@ -121,6 +121,57 @@
                                                                         </div>-->
 
                                     <div class="box box-info collapsed-box ">
+                                                <div class="box-header">
+                                                    <h3 class="box-title">Man Power Planing Detail:</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Man Power Planing Budget:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span> ${Mppbudget}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${jobtypeNAme2}</span>    
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                                    <span >${designationName1}</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Location:</label>  &nbsp;&nbsp;&nbsp;
+                                                                    <span >${locationName2}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${departmentName2}</span>   
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                                    <span> ${numberOfPositionMpp}</span>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Work Experience(In Years): </label> &nbsp;&nbsp;&nbsp;
+                                                                    <span>${MppExperience}</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    
+                                    <div class="box box-info collapsed-box ">
                                         <div class="box-header">
                                             <h3 class="box-title">Man Power Requisition Detail:</h3>
                                             <div class="box-tools pull-right">
@@ -477,6 +528,53 @@
                                             </div>
                                         </div>
                                     </div>
+                                                            <div class="box box-info collapsed-box ">
+                                                <div class="box-header">
+                                                    <h3 class="box-title">History:</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="box-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <label><h4></h4></label>
+                                                            <table style="width: 100%;" align="center">
+                                                                <c:choose>
+                                                                    <c:when test="${empty list}">
+                                                                        <tr>
+                                                                            <td align="center">
+                                                                                <c:out value="There is no record found."></c:out>
+                                                                                </td>
+                                                                            </tr>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <thead>
+                                                                        <th colspan="4" style="text-align:center">History Detail </th>
+                                                                        <tr>
+                                                                            <th style="width: 50px;">Name</th>
+                                                                            <th style="width: 50px;">Date</th>
+                                                                            <th style="width: 50px;">Comment</th>
+                                                                            <th style="width: 50px;">Status</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <tbody>
+                                                                    <c:forEach var="list" items="${list}">
+                                                                        <tr>
+                                                                            <td>${list[1]}</td>
+                                                                            <td>${list[6]}</td>
+                                                                            <td>${list[3]}</td>
+                                                                            <td>${list[5]} By&nbsp${list[1]}</td>
+                                                                        </c:forEach>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!-- /.col -->
+                                                    </div>
+                                                </div>
+                                            </div>
                                 </form:form>
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-content -->

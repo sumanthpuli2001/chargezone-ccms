@@ -103,7 +103,7 @@
                                 <div class="form-group">
                                     <div class=" col-sm-12">
                                         <center>
-                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button>
+                                            <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button>
                                         </center>
                                     </div>
                                 </div>
@@ -149,6 +149,7 @@
                                                                     <tr>
                                                                         <th>Employee Id</th>
                                                                         <th>Employee Name</th>
+                                                                        <th>Approval Status</th>
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
@@ -161,6 +162,7 @@
                                                             <tr>
                                                                 <td>${list[0]}</td>
                                                                 <td>${list[1]}</td>
+                                                                <td><span class="label label-warning">Not Filled Yet</span></td>
 
                                                                 <td>  <button type="button" onclick="viewClick('${list[2]}', '${list[3]}');" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                         &nbsp;&nbsp;View

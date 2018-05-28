@@ -125,4 +125,26 @@ public class TaxSavingSubmitDAOImpl<T> extends GenericsDAOImpl<T> implements Tax
         List list = getHibernateTemplate().find(query);
         return list;
     }
+
+    @Override
+    public List<?> readTaxSavingSubmitEmployeeSaving(int EmplID, int finicailyear) {
+        String query = "";
+        query += " Select b.employeeId, b.employeeName, b.id, c.id,a.status"
+                + " From TaxSavingSubmit a "
+                + " LEFT JOIN a.employeeMaster b "
+                + " LEFT JOIN a.payrollFinancialYear c"
+                + " where a.employeeMaster = " + EmplID
+                + " and a.payrollFinancialYear = " + finicailyear;
+//                + " AND STR_TO_DATE(a.startDateTime,'%d/%m/%Y %H:%i') BETWEEN STR_TO_DATE('" + poolCarRequest.getStartDateTime() + " 00:00','%d/%m/%Y %H:%i') AND STR_TO_DATE('" + poolCarRequest.getEndDateTime() + " 00:00','%d/%m/%Y %H:%i')";
+
+        return getHibernateTemplate().find(query);
+//         query += " Select a.employeeId, a.employeeName, a.id, b.id"
+//                + " From EmployeeMaster a,"
+//                + " PayrollFinancialYear b,"
+//                + " TaxSavingSubmit c"
+//                + " Where (a.zydexLocationMaster.id = b.zydexLocationMaster.id or (b.id=c.payrollFinancialYear.id and a.id=c.employeeMaster.id))"
+////                + " and b.id=c.payrollFinancialYear.id"
+//                //                + " and a.id=c.employeeMaster.id"
+//                + " and 1=1 " + condition;
+    }
 }

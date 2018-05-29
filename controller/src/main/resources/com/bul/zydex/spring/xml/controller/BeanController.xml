@@ -1085,6 +1085,11 @@
         <property name="questionLibraryService" ref="questionLibraryService1"/>
         <property name="questionPaperService" ref="questionPaperService1"/>
         <property name="questionAnswerSubmitService" ref="questionAnswerSubmitService1"/>
+        <property name="candidateApplyJob2Service" ref="candidateApplyJob2Service1"/>
+        <property name="candidateFamilyBackgroundService" ref="candidateFamilyBackgroundService1"/>
+        <property name="candidateAcademicQualificationService" ref="candidateAcademicQualificationService1"/>
+        <property name="candidateExperienceDetailService" ref="candidateExperienceDetailService1"/>
+        <property name="candidateOtherReferencesService" ref="candidateOtherReferencesService1"/>
     </bean> 
     <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>

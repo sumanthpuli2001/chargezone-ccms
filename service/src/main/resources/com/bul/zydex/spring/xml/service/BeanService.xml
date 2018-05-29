@@ -669,4 +669,20 @@
     <bean id="emergencyContactService1" class="com.bul.zydex.service.EmergencyContactServiceImpl">
         <property name="emergencyContactDAO" ref="emergencyContactDAO1" />
     </bean>
+    <bean id="candidateApplyJob2Service1" class="com.bul.zydex.service.CandidateJobApply.CandidateApplyJob2ServiceImpl">
+        <property name="candidateApplyJob2DAO" ref="candidateApplyJob2DAO1" />
+    </bean>
+    <bean id="candidateFamilyBackgroundService1" class="com.bul.zydex.service.CandidateJobApply.CandidateFamilyBackgroundServiceImpl">
+        <property name="candidateFamilyBackgroundDAO" ref="candidateFamilyBackgroundDAO1" />
+    </bean>
+    <bean id="candidateAcademicQualificationService1" class="com.bul.zydex.service.CandidateJobApply.CandidateAcademicQualificationServiceImpl">
+        <property name="candidateAcademicQualificationDAO" ref="candidateAcademicQualificationDAO1" />
+    </bean>
+    <bean id="candidateExperienceDetailService1" class="com.bul.zydex.service.CandidateJobApply.CandidateExperienceDetailServiceImpl">
+        <property name="candidateExperienceDetailDAO" ref="candidateExperienceDetailDAO1" />
+    </bean>
+    <bean id="candidateOtherReferencesService1" class="com.bul.zydex.service.CandidateJobApply.CandidateOtherReferencesServiceImpl">
+        <property name="candidateOtherReferencesDAO" ref="candidateOtherReferencesDAO1" />
+    </bean>
+    
 </beans>

@@ -330,17 +330,16 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 if (!employeeCtcList.isEmpty()) {
                     for (Object employeeCtcList1 : employeeCtcList) {
                         Object[] o1 = (Object[]) employeeCtcList1;
-                        if(null != o1[1] && null != o1[0]){
-                         String ctcName1 = (String) o1[1];
-                        Double ctcAmount1 = (Double) o1[0];
-                        employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
-                        employeeAdditionalSalary.setPayrollSalaryType(ctcName1);
-                        employeeAdditionalSalary.setAdditionalAmount(ctcAmount1);
-                        employeeAdditionalSalaryService.create(employeeAdditionalSalary);
-                        
+                        if (null != o1[1] && null != o1[0]) {
+                            String ctcName1 = (String) o1[1];
+                            Double ctcAmount1 = (Double) o1[0];
+                            employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            employeeAdditionalSalary.setPayrollSalaryType(ctcName1);
+                            employeeAdditionalSalary.setAdditionalAmount(ctcAmount1);
+                            employeeAdditionalSalaryService.create(employeeAdditionalSalary);
+
                         }
-                        
-                       
+
                     }
 
                 }

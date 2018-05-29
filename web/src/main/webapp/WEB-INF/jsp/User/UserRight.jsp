@@ -413,10 +413,17 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="col-sm-3">
-                                                    <form:checkbox path="policy"></form:checkbox>
+                                                    <!-- <div class="col-sm-3">
+                                                <%--<form:checkbox path="policy"></form:checkbox>--%>
+                                                    &nbsp;&nbsp;&nbsp;
+                                                <label style="font-weight: normal">Policy</label>
+
+
+                                                </div>-->
+                                                <div class="col-sm-3">
+                                                    <form:checkbox path="govtFormatPF"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
-                                                        <label style="font-weight: normal">Policy</label>
+                                                        <label style="font-weight: normal">Govt. Format PF</label>
 
 
                                                     </div>
@@ -498,15 +505,15 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-3">
-                                                    <form:checkbox path="govtFormatPF"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label style="font-weight: normal">Govt. Format PF</label>
+                                                <!--                                                <div class="form-group">
+                                                                                                    <div class="col-sm-3">
+                                            <form:checkbox path="govtFormatPF"></form:checkbox>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <label style="font-weight: normal">Govt. Format PF</label>
 
 
-                                                    </div>
-                                                </div>
+                                            </div>
+                                        </div>-->
                                             </div>
                                         </div>
                                     </div>

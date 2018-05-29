@@ -79,7 +79,7 @@
                                 <div class="box-body no-padding">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
-                                            <div class="form-group">
+<!--                                            <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Location:<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
@@ -100,9 +100,9 @@
                                                         </c:forEach>
                                                     </select>
 
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
+                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-group">
                                                 <div class="col-sm-6" id="employeeSubTypeId">
                                                     <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
@@ -121,7 +121,7 @@
 
                                                     </select>
                                                 </div>
-                                            </div>
+                                            </div>-->
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Months:<span style="color: red;font-size: 12px;">*</span></label>
@@ -156,8 +156,10 @@
                                 </div><!-- /.row -->
                             </div><!-- /.box-body -->
                             <div class="form-group">
-                                <div class=" col-sm-2">
-                                    <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button>
+                                <div class=" col-sm-12">
+                                    <center>
+                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button><br><br>
+                                    </center>
                                 </div>
                             </div>
 

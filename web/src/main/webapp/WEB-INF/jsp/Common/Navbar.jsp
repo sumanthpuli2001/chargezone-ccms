@@ -655,7 +655,7 @@
                                     <li><a href="employeePfCheck.htm?act=searchSalaryPfDetail&search=none"><i class="fa fa-circle-o"></i>PF</a></li>
                                     <li><a href="employeePtCheck.htm?act=searchSalaryPtDetail&search=none"><i class="fa fa-circle-o"></i>PT </a></li>
                                     <li><a href="employeeSalarySlip.htm?act=searchSalarySlipDetail&search=none"><i class="fa fa-circle-o"></i>Salary Slip </a></li>
-                                    <li><a href="policyMaster.htm?act=searchPolicyDetail&search=none"><i class="fa fa-circle-o"></i>Policy  </a></li>
+                                    <!--<li><a href="policyMaster.htm?act=searchPolicyDetail&search=none"><i class="fa fa-circle-o"></i>Policy  </a></li>-->
                                     <li><a href="companyMonthlyReport.htm?act=searchCompanyMonthlyReport&search=none"><i class="fa fa-circle-o"></i>Company Monthly Report</a></li>
                                     <li><a href="companyPTReport.htm?act=searchCompanyPTReport&search=none"><i class="fa fa-circle-o"></i>PT Slab by Summary</a></li>
                                     <li><a href="bankStatement.htm?act=searchBankStatementDetail&search=none"><i class="fa fa-circle-o"></i>Bank Statement </a></li>

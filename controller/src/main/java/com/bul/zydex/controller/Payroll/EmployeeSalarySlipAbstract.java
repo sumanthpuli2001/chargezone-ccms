@@ -7,6 +7,7 @@ package com.bul.zydex.controller.Payroll;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.AdditionalAmountCheck;
+import com.bul.zydex.model.DisplaymorNotes;
 import com.bul.zydex.model.EmployeeAdditionalSalary;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
@@ -28,6 +29,7 @@ import com.bul.zydex.model.PayrollRecurringDeduction;
 import com.bul.zydex.model.PayrollSalaryType;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.service.Payroll.AdditionalAmountCheckService;
+import com.bul.zydex.service.Payroll.DisplaymorNotesService;
 import com.bul.zydex.service.Payroll.EmployeeAdditionalSalaryService;
 import com.bul.zydex.service.Payroll.EmployeeDeductionAmountService;
 import com.bul.zydex.service.Payroll.EmployeeExcelRecordService;
@@ -80,6 +82,7 @@ public class EmployeeSalarySlipAbstract extends CustomAbstract{
     protected PayrollLoanRemainingAmountService<PayrollLoanRemainingAmount> payrollLoanRemainingAmountService;
     protected PayrollLoanTypeService<PayrollLoanType> payrollLoanTypeService;
     protected UserRightMasterService<UserRightMaster> userRightMasterService;
+    protected DisplaymorNotesService<DisplaymorNotes> displaymorNotesService;
 
     public EmployeeSalaryProcessService<EmployeeSalaryProcess> getEmployeeSalaryProcessService() {
         return employeeSalaryProcessService;
@@ -247,6 +250,14 @@ public class EmployeeSalarySlipAbstract extends CustomAbstract{
 
     public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
         this.userRightMasterService = userRightMasterService;
+    }
+
+    public DisplaymorNotesService<DisplaymorNotes> getDisplaymorNotesService() {
+        return displaymorNotesService;
+    }
+
+    public void setDisplaymorNotesService(DisplaymorNotesService<DisplaymorNotes> displaymorNotesService) {
+        this.displaymorNotesService = displaymorNotesService;
     }
     
     

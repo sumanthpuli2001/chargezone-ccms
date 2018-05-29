@@ -7,8 +7,12 @@ package com.bul.zydex.controller.Payroll;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.CertificateTemplate;
+import com.bul.zydex.model.EmailMetaTag;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeTypeMaster;
+import com.bul.zydex.model.Modules;
+import com.bul.zydex.service.EmailMetaTagService;
+import com.bul.zydex.service.ModulesService;
 import com.bul.zydex.service.Payroll.CertificateTemplateService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
@@ -23,9 +27,12 @@ import org.springframework.validation.Validator;
  * @author Irfan <irfanbhindawala@gmail.com>
  */
 public class CertificateTemplateAbstract extends CustomAbstract {
+
     protected CertificateTemplateService<CertificateTemplate> certificateTemplateService;
-     protected EmployeeTypeService<EmployeeTypeMaster> employeeTypeService;
+    protected EmployeeTypeService<EmployeeTypeMaster> employeeTypeService;
     protected EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService;
+    protected EmailMetaTagService<EmailMetaTag> emailMetaTagService;
+    protected ModulesService<Modules> modulesService;
     protected Validator certificateTemplateValidator;
 
     public EmployeeTypeService<EmployeeTypeMaster> getEmployeeTypeService() {
@@ -43,7 +50,6 @@ public class CertificateTemplateAbstract extends CustomAbstract {
     public void setEmployeeSubTypeService(EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService) {
         this.employeeSubTypeService = employeeSubTypeService;
     }
-    
 
     public CertificateTemplateService<CertificateTemplate> getCertificateTemplateService() {
         return certificateTemplateService;
@@ -61,6 +67,24 @@ public class CertificateTemplateAbstract extends CustomAbstract {
         this.certificateTemplateValidator = certificateTemplateValidator;
     }
 
+    public EmailMetaTagService<EmailMetaTag> getEmailMetaTagService() {
+        return emailMetaTagService;
+    }
+
+    public void setEmailMetaTagService(EmailMetaTagService<EmailMetaTag> emailMetaTagService) {
+        this.emailMetaTagService = emailMetaTagService;
+    }
+
+    public ModulesService<Modules> getModulesService() {
+        return modulesService;
+    }
+
+    public void setModulesService(ModulesService<Modules> modulesService) {
+        this.modulesService = modulesService;
+    }
+    
+    
+
     protected void EmployeeTypeList(HttpServletRequest request) {
         List<?> EmployeeTypeList = employeeTypeService.read();
         Map<Integer, String> map = new HashMap();
@@ -70,8 +94,8 @@ public class CertificateTemplateAbstract extends CustomAbstract {
         }
         request.setAttribute("EmployeeTypeList", map);
     }
-     
-     protected void EmployeeSubTypeList(HttpServletRequest request) {
+
+    protected void EmployeeSubTypeList(HttpServletRequest request) {
         List<?> EmployeeSubTypeList = employeeSubTypeService.read();
         Map<Integer, String> map = new HashMap();
         for (Object obj : EmployeeSubTypeList) {
@@ -80,8 +104,8 @@ public class CertificateTemplateAbstract extends CustomAbstract {
         }
         request.setAttribute("EmployeeSubTypeList", map);
     }
-     
-     protected void CertificateTypeList(HttpServletRequest request) {
+
+    protected void CertificateTypeList(HttpServletRequest request) {
         List<?> certificateList = certificateTemplateService.read();
         Map<Integer, String> map = new HashMap();
         for (Object obj : certificateList) {
@@ -90,7 +114,10 @@ public class CertificateTemplateAbstract extends CustomAbstract {
         }
         request.setAttribute("certificateList", map);
     }
-     
-    
-    
+
+    protected void ModuleList(HttpServletRequest request) {
+        Modules modules = new Modules();
+//        List<?> moduellsit = 
+    }
+
 }

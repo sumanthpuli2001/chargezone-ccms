@@ -520,6 +520,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //        employeeMaster.setUserMaster(userMaster);
 //        List<?> empList = employeeMasterService.readByEmployeeUserId(employeeMaster);
 //        List<?> empList = employeeMasterService.read();
+         employeeShiftDataService.updateNullShiftId();     //.........this line for update employee shift_id null to 1.....//
         List<?> empList = employeeDatetimeDataService.readEmployeeByCurrentDate();
         for (Object zz : empList) {
             try {
@@ -14122,74 +14123,180 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         decidedEndTime = decidedFormatter.parse(shiftMasterObject.getEndTime().toString().trim() + ":00");
                     }
 
-                    ////Code for other than night shifts
-                    if (!shiftMasterObject.getShiftName().equals("Night")) {
-
-                        diff1 = userTimeOut.getTime() - userTimeIn.getTime();
-
-                        totalDayTime = diff1 / (60 * 1000);
-
-                        totalDayTime = totalDayTime + totalDayTime1;
-
-                        empHour = (double) totalDayTime / 60;
-                    }
                     ////End
                     ////Code for Night Shift
+                    Calendar cal = Calendar.getInstance();
+                    int month = cal.get(Calendar.MONTH) + 1;
+                    String sMonth = "" + month;
+                    String sYear = "" + cal.get(Calendar.YEAR);
+                    int toDay = cal.get(Calendar.DAY_OF_MONTH);
+                    ShiftGenerateMonthlySchedule sgms = new ShiftGenerateMonthlySchedule();
+                    sgms.setEmployeeMaster(employeeMaster);
+                    sgms.setShiftMonth(sMonth);
+                    sgms.setShiftYear(sYear);
+                    HolidayMaster hm = new HolidayMaster();
+                    SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM/yyyy");
+                    Calendar cal2 = Calendar.getInstance();
+                    Date currentDate = new Date();
+                    cal2.setTime(currentDate);
+//                    int mnt= cal.get(Calendar.DAY_OF_MONTH);
+                    cal2.add(Calendar.DATE, -1);
+                    Date previousDate = cal2.getTime();
+                    String PrevDate = sdfDate.format(previousDate);
 
-                    if (shiftMasterObject.getShiftName().equals("Night")) {
-                        //Calculation of  employee total working hours
-                        Date nightStartTime = decidedFormatter.parse(shiftMasterObject.getStartTime().toString().trim() + ":00");
-                        diff1 = userMidEnd.getTime() - nightStartTime.getTime();
-                        totalDayTime = diff1 / (60 * 1000);
-                        diff2 = userTimeOut.getTime() - userMidStart.getTime();
-                        totalDayTime1 = diff2 / (60 * 1000);
-                        totalDayTime = totalDayTime + totalDayTime1;
-                        empHour = (double) totalDayTime / 60;
-                        ////End
+                    hm.setHolidayFromDate(PrevDate);
+                    hm.setHolidayToDate(PrevDate);
+                    boolean holidayCheck = holidayMasterService.isExist(hm);
+                    List<?> shiftData = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(sgms, toDay);
+                    if (!shiftData.isEmpty()) {
+                        String Wocheck = (String) shiftData.get(0);
 
-                        ////Calculation of total office working hours
-                        long nightDiff = userMidEnd.getTime() - decidedStartTime.getTime();
-                        long nightInDiff1 = nightDiff / (60 * 1000);
-                        long nightDiff2 = decidedEndTime.getTime() - userMidStart.getTime();
-                        long nightOutDiff2 = nightDiff2 / (60 * 1000);
-                        nightInDiff1 = nightInDiff1 + nightOutDiff2;
-                        totalWorkingTime = (double) nightInDiff1 / 60;
-                        ////End
-                    } else {
-                        ////Code for other than night shifts
-                        long longTotalWorkingTime = decidedEndTime.getTime() - decidedStartTime.getTime();
-                        long workingTimeInHours = longTotalWorkingTime / (60 * 1000);
-                        totalWorkingTime = (double) workingTimeInHours / 60;
-                    }
-                    double timeDiff = 0.0d;
-                    if (totalWorkingTime > empHour) {
-                        timeDiff = totalWorkingTime - empHour;
-                    } else {
-                        timeDiff = empHour - totalWorkingTime;
-                    }
+                        // 1 for ragular day//
+                        if (Wocheck.equals("1") && true == holidayCheck) {
+                            ////Code for other than night shifts
+                            if (!shiftMasterObject.getShiftName().equals("Night")) {
 
-                    if (employeeMaster.getOt().equals(true)) {
-                        if (timeDiff != 0) {
-                            OverTimeMaster overTimeMaster = new OverTimeMaster();
-                            Date currentDate = new Date();
-                            overTimeMaster.setDate(currentDate.toString());
-                            overTimeMaster.setTime(String.valueOf(timeDiff * 60));    //To convert into minutes from hours (multiplied by 60)
-                            overTimeMaster.setEmployeeMaster(employeeMaster);
-                            overTimeMasterService.create(overTimeMaster);
-                            ////End
+                                diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+
+                                totalDayTime = diff1 / (60 * 1000);
+
+                                totalDayTime = totalDayTime + totalDayTime1;
+
+                                empHour = (double) totalDayTime / 60;
+                            }
+                            if (shiftMasterObject.getShiftName().equals("Night")) {
+                                //Calculation of  employee total working hours
+                                Date nightStartTime = decidedFormatter.parse(shiftMasterObject.getStartTime().toString().trim() + ":00");
+                                diff1 = userMidEnd.getTime() - nightStartTime.getTime();
+                                totalDayTime = diff1 / (60 * 1000);
+                                diff2 = userTimeOut.getTime() - userMidStart.getTime();
+                                totalDayTime1 = diff2 / (60 * 1000);
+                                totalDayTime = totalDayTime + totalDayTime1;
+                                empHour = (double) totalDayTime / 60;
+                                ////End
+
+                                ////Calculation of total office working hours
+                                long nightDiff = userMidEnd.getTime() - decidedStartTime.getTime();
+                                long nightInDiff1 = nightDiff / (60 * 1000);
+                                long nightDiff2 = decidedEndTime.getTime() - userMidStart.getTime();
+                                long nightOutDiff2 = nightDiff2 / (60 * 1000);
+                                nightInDiff1 = nightInDiff1 + nightOutDiff2;
+                                totalWorkingTime = (double) nightInDiff1 / 60;
+                                ////End
+                            } else {
+                                ////Code for other than night shifts
+                                long longTotalWorkingTime = decidedEndTime.getTime() - decidedStartTime.getTime();
+                                long workingTimeInHours = longTotalWorkingTime / (60 * 1000);
+                                totalWorkingTime = (double) workingTimeInHours / 60;
+                            }
+                            double timeDiff = 0.0d;
+                            if (totalWorkingTime > empHour) {
+                                timeDiff = totalWorkingTime - empHour;
+                            } else {
+                                timeDiff = empHour - totalWorkingTime;
+                            }
+
+//                            if (employeeMaster.getOt().equals(true)) {
+//                                if (timeDiff != 0) {
+//                                    OverTimeMaster overTimeMaster = new OverTimeMaster();
+//                                    Date currentDate = new Date();
+//                                    overTimeMaster.setDate(currentDate.toString());
+//                                    overTimeMaster.setTime(String.valueOf(timeDiff * 60));    //To convert into minutes from hours (multiplied by 60)
+//                                    overTimeMaster.setEmployeeMaster(employeeMaster);
+//                                    overTimeMasterService.create(overTimeMaster);
+//                                    ////End
+//                                }
+//                            }
+                            if (timeDiff >= 4 && timeDiff <= 7.9) {
+                                time2 = "0.5";                                                                 //For shortleave if time difference gretaer than working hours short leave will be added
+                            } else if (timeDiff >= 8 && timeDiff <= 11.9) {
+                                time2 = "1.0";
+                            } else if (timeDiff >= 12) {
+                                time2 = "1.5";
+                            }
+                            //..................old..code..............//
+//                            if (empHour >= 4 && empHour <= 7.9) {
+//                                time2 = "0.5";                                                                 //For shortleave if time difference gretaer than working hours short leave will be added
+//                            } else if (empHour >= 8 && empHour <= 11.9) {
+//                                time2 = "1.0";
+//                            } else if (empHour >= 12) {
+//                                time2 = "1.5";
+//                            }
+                            //...............................................................//
+                            // -1 for wo//
+                        } else if (Wocheck.equals("-1") || false == holidayCheck) {
+                            ////Code for other than night shifts
+                            if (!shiftMasterObject.getShiftName().equals("Night")) {
+
+                                diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+
+                                totalDayTime = diff1 / (60 * 1000);
+
+                                totalDayTime = totalDayTime + totalDayTime1;
+
+                                empHour = (double) totalDayTime / 60;
+                            }
+                            if (shiftMasterObject.getShiftName().equals("Night")) {
+                                //Calculation of  employee total working hours
+                                Date nightStartTime = decidedFormatter.parse(shiftMasterObject.getStartTime().toString().trim() + ":00");
+                                diff1 = userMidEnd.getTime() - nightStartTime.getTime();
+                                totalDayTime = diff1 / (60 * 1000);
+                                diff2 = userTimeOut.getTime() - userMidStart.getTime();
+                                totalDayTime1 = diff2 / (60 * 1000);
+                                totalDayTime = totalDayTime + totalDayTime1;
+                                empHour = (double) totalDayTime / 60;
+                                ////End
+
+                                ////Calculation of total office working hours
+                                long nightDiff = userMidEnd.getTime() - decidedStartTime.getTime();
+                                long nightInDiff1 = nightDiff / (60 * 1000);
+                                long nightDiff2 = decidedEndTime.getTime() - userMidStart.getTime();
+                                long nightOutDiff2 = nightDiff2 / (60 * 1000);
+                                nightInDiff1 = nightInDiff1 + nightOutDiff2;
+                                totalWorkingTime = (double) nightInDiff1 / 60;
+                                ////End
+                            } else {
+                                ////Code for other than night shifts
+                                long longTotalWorkingTime = decidedEndTime.getTime() - decidedStartTime.getTime();
+                                long workingTimeInHours = longTotalWorkingTime / (60 * 1000);
+                                totalWorkingTime = (double) workingTimeInHours / 60;
+                            }
+                            double timeDiff = 0.0d;
+//                            if (totalWorkingTime > empHour) {
+//                                timeDiff = totalWorkingTime - empHour;
+//                            } else {
+//                                timeDiff = empHour - totalWorkingTime;
+//                            }
+
+//                            if (employeeMaster.getOt().equals(true)) {
+//                                if (timeDiff != 0) {
+//                                    OverTimeMaster overTimeMaster = new OverTimeMaster();
+//                                    Date currentDate = new Date();
+//                                    overTimeMaster.setDate(currentDate.toString());
+//                                    overTimeMaster.setTime(String.valueOf(timeDiff * 60));    //To convert into minutes from hours (multiplied by 60)
+//                                    overTimeMaster.setEmployeeMaster(employeeMaster);
+//                                    overTimeMasterService.create(overTimeMaster);
+//                                    ////End
+//                                }
+//                            }
+                            if (empHour >= 4 && empHour <= 7.9) {
+                                time2 = "0.5";                                                                 //For shortleave if time difference gretaer than working hours short leave will be added
+                            } else if (empHour >= 8 && empHour <= 11.9) {
+                                time2 = "1.0";
+                            } else if (empHour >= 12) {
+                                time2 = "1.5";
+                            }
+
+                        } else {
+
                         }
+                    } else {
+
                     }
-                    if (empHour >= 4 && empHour <= 7.9) {
-                        time2 = "0.5";                                                                 //For shortleave if time difference gretaer than working hours short leave will be added
-                    } else if (empHour >= 8 && empHour <= 11.9) {
-                        time2 = "1.0";
-                    } else if (empHour >= 12) {
-                        time2 = "1.5";
-                    }
+
 //                    if (timeDiff > 4) {
 //                        time2 = "0.5";                
 //                    }
-
                     ////Code for Short Leave
                     EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
                     EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
@@ -14198,7 +14305,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
                     List<?> coffList = leaveTypeMasterService.readLeaveType(coff);
                     if (!coffList.isEmpty()) {
-                        leaveTypeMaster.setId(Integer.parseInt(coffList.get(0).toString()));
+                        leaveTypeMaster = (LeaveTypeMaster) coffList.get(0);
+//                        leaveTypeMaster.setId(Integer.parseInt(coffList.get(0).toString()));
                     }
 
                     employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
@@ -14222,7 +14330,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     }
 
                 } catch (Exception e) {
-
+                    System.out.println(e);
                 }
 
             }

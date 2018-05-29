@@ -49,7 +49,7 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-3">
-                                                <label class="control-label">Enter Title:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <label class="control-label">Document Title:<span style="color: red;font-size: 12px;">*</span></label>
                                             </div>
                                             <div class="col-sm-7">
                                             <form:input path="certificateTitle" placeholder="Enter Certificate Title" maxlength="30" class="form-control"/>
@@ -58,23 +58,33 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-3">
-                                            <label class="control-label">Enter Certificate Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
+                                                <form:option value="" label="-- Select --" ></form:option>
+                                                <form:options items="${level}"></form:options>
+                                            </form:select>
+                                            <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-7">
-                                            <form:input path="certificateType" placeholder="Enter Certificate Type" maxlength="30" class="form-control"/>
-                                            <form:errors path="certificateType" cssClass="errorDiv"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Enter Certificate Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <form:input path="certificateName" placeholder="Enter Certificate Name" maxlength="30" class="form-control"/>
-                                            <form:errors path="certificateName" cssClass="errorDiv"/>
-                                        </div>
-                                    </div>
-                                   
+                                        <!--                                    <div class="form-group">
+                                                                                <div class="col-sm-3">
+                                                                                    <label class="control-label">Enter Certificate Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                                </div>
+                                                                                <div class="col-sm-7">
+                                    <%--<form:input path="certificateType" placeholder="Enter Certificate Type" maxlength="30" class="form-control"/>--%>
+                                    <%--<form:errors path="certificateType" cssClass="errorDiv"/>--%>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-3">
+                                    <label class="control-label">Enter Certificate Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <%--<form:input path="certificateName" placeholder="Enter Certificate Name" maxlength="30" class="form-control"/>--%>
+                                    <%--<form:errors path="certificateName" cssClass="errorDiv"/>--%>
+                                </div>
+                            </div>-->
+
                                     <div class="form-group">
                                         <div class="col-sm-3">
                                             <label class="control-label">Enter Message Script:<span style="color: red;font-size: 12px;">*</span></label>

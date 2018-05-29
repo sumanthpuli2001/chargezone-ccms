@@ -61,6 +61,7 @@ public class EmployeeMasterValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "designationMaster.id", "field.error27", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateOfJoining", "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "shiftType", "field.error27", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employeeLocation", "field.error1", "None");
 
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bankName", "field.error1", "None");
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "bankAccountNo", "field.error1", "None");

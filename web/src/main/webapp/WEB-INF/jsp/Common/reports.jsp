@@ -142,7 +142,7 @@
                                 <div class="col-xs-4 col-sm-4 col-md-4">
                                     <c:if test="${sessionScope.userRight.ptStatement}">
                                         <a  style="font-size: 15px"  href="companyPTReport.htm?act=searchCompanyPTReport&search=none">
-                                            &nbsp<strong>PT Statement </strong>
+                                            &nbsp<strong>PT Slab by Summary</strong>
                                         </a>
                                     </c:if>
                                 </div>
@@ -282,6 +282,28 @@
                                             <strong>360 Appraisal Report</strong>
                                         </a>
                                     </c:if>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="nav-tabs-custom">
+                        <h3 style="text-align: center;">Statutory Report</h3>
+                        <div class="tab-content">
+                            <div class="row">
+                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <%--<c:if test="${sessionScope.userRight.pMPReport}">--%>
+                                        <a  style="font-size: 15px" href="homeController.htm?act=form5">
+                                            <strong>Form 5</strong>
+                                        </a>
+                                    <%--</c:if>--%>
+                                </div>
+                                <div  class="col-xs-4 col-sm-4 col-md-4">
+                                    <%--<c:if test="${sessionScope.userRight.appraisalReport360}">--%>
+                                        <a  style="font-size: 15px" href="homeController.htm?act=form10">
+                                            <strong>Form 10</strong>
+                                        </a>
+                                    <%--</c:if>--%>
                                 </div>
                             </div>
                             <br>

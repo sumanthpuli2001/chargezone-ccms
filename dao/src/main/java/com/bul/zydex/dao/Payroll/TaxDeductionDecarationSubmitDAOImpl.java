@@ -35,7 +35,7 @@ public class TaxDeductionDecarationSubmitDAOImpl<T> extends GenericsDAOImpl<T> i
     @Override
     public List<?> readTaxDeductionDecarationSubmitAmount(int taxSavingSubmitID, int taxDeductionMaster, int taxDeductioncomponent) {
         String query = "";
-        query += " select a.amountTaxDecaration,a.attachment "
+        query += " select a.amountTaxDecaration,a.attachment,a.actionStatus "
                 + " From TaxDeductionDecarationSubmit a "
                 + " where a.taxSavingSubmit = " + taxSavingSubmitID
                 + " and a.payrollTaxDeductionMaster = " + taxDeductionMaster

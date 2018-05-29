@@ -13,6 +13,127 @@
         <title>Employee Edit</title>
     </head>
     <script>
+        $(document).ready(function () {
+            window.onload = changetotalButtonNew();
+            window.onload = changetotalButtonNewCTC();
+//            window.onload = changetotalButton();
+//            window.onload = changetotalButtonCTC();
+
+        });
+
+    </script>
+    <script>
+        function changetotalButton() {
+//            alert("hii");
+            var total = 0;
+            var sum = 0;
+            var sum1 = 0;
+            var element1 = 0;
+
+//            var element = document.getElementById('amount1').value;
+            var element15 = document.getElementById('policyCount').value;
+            for (var i = 1; i <= element15; i++) {
+//                alert('hi' + document.getElementById('amount' + i).value);
+                var element = document.getElementById('amount' + i).value;
+                sum += parseInt(element);
+//                alert("allowance"+sum);
+//                alert(sum);
+            }
+
+            var element16 = document.getElementById('ctcCount').value;
+            for (var i = 1; i <= element16; i++) {
+//                alert('hi' + document.getElementById('amount' + i).value);
+                var element12 = document.getElementById('ctcamount' + i).value;
+                sum1 += parseInt(element12);
+//                  alert("ctc"+sum1);
+            }
+
+
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("basicSalary").value);
+//            alert("basicsalary"+basicSalary);
+
+            if (parseInt(sum) > 0) {
+                total = total + parseInt(sum);
+            }
+//            if (parseInt(conyance) > 0) {
+//                total = total + parseInt(conyance);
+//            }
+            if (parseInt(basicSalary) > 0) {
+                total = total + parseInt(basicSalary);
+
+            }
+            document.getElementById("txtresult").value = total;
+            element1 = document.getElementById('txtresultCTC').value;
+            sum = parseInt(sum) + parseInt(sum1) + basicSalary;
+
+            document.getElementById("txtresultCTC").value = sum;
+
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+        function totalValueChange(ele, oldvalue) {
+//            alert(ele.value);
+            var element = document.getElementById('txtresult').value;
+            var element1 = document.getElementById('txtresultCTC').value;
+//            alert(element1);
+            document.getElementById('txtresult').value = '';
+            document.getElementById('txtresult').value = parseInt(ele.value) + parseInt(element) - oldvalue;
+            document.getElementById('txtresultCTC').value = '';
+            document.getElementById('txtresultCTC').value = parseInt(ele.value) + parseInt(element1) - oldvalue;
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+//        function totalValueChange1(ele) {
+//            alert(parseInt(ele.value));
+//            var element = document.getElementById('txtresult').value;
+//            alert(parseInt(element);
+//                    document.getElementById('txtresult').value = '';
+//            document.getElementById('txtresult').value = parseInt(element) - parseInt(ele.value);
+////            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+//        }
+    </script>
+    <script>
+        function changetotalButtonCTC() {
+            var total = 0;
+
+
+            var element = document.getElementById('ctcamount1').value;
+
+
+
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("txtresult").value);
+            if (parseInt(element) > 0) {
+                total = total + parseInt(element);
+            }
+//            if (parseInt(conyance) > 0) {
+//                total = total + parseInt(conyance);
+//            }
+            if (parseInt(basicSalary) > 0) {
+                total = total + parseInt(basicSalary);
+
+            }
+            document.getElementById("txtresultCTC").value = total;
+
+
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+        function totalValueChangeCTC(ele, oldvalue) {
+
+            var element = document.getElementById('txtresultCTC').value;
+            document.getElementById('txtresultCTC').value = '';
+            document.getElementById('txtresultCTC').value = parseInt(ele.value) + parseInt(element) - oldvalue;
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+//        function totalValueChange1(ele) {
+//            alert(parseInt(ele.value));
+//            var element = document.getElementById('txtresult').value;
+//            alert(parseInt(element);
+//                    document.getElementById('txtresult').value = '';
+//            document.getElementById('txtresult').value = parseInt(element) - parseInt(ele.value);
+////            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+//        }
+    </script>
+    <script>
         function selectsubtype(typeId) {
 
             var employeeId = document.getElementById("id").value;
@@ -45,18 +166,18 @@
             tempCount3 = document.getElementById('policyCount').value;
             $("#policyCloneid").on("click", function () {
                 tempCount3++;
-                var clone = "<tr id='addmoreFile" + tempCount3 + "' style='clear:both;'>"
+                var clone = "<tr id='" + tempCount3 + "' style='clear:both;'>"
                         + "<td style=\"text-align: center\">" + tempCount3 + "</td>"
                         + "<td><div><select id=\"policyId" + tempCount3 + "\" name='policyId" + tempCount3 + "' class=\"form-control\">"
                         + "<option value =\"\"> --SELECT-- </option>"
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.name=this.value)\" onchange=\"totalValueChange(this,this.name);\" min=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
-                        + "<input type=\"button\"value=\"-\"  onclick=\"removePolicy('addmoreFile" + tempCount3 + "');\"/>"
+                        + "<input type=\"button\"value=\"-\"  onclick=\"removePolicy('" + tempCount3 + "');\"/>"
                         + "</span>"
                         + "</td>"
                         + "</tr>";
@@ -66,6 +187,44 @@
 
             });
         });
+        function changetotalButtonNew(id) {
+            var sum = 0;
+            var sum1 = 0;
+            var total = 0;
+            var element15 = document.getElementById('policyCount').value;
+            for (var i = 1; i <= element15; i++) {
+//                alert('hi' + document.getElementById('amount' + i).value);
+                var element = document.getElementById('amount' + i).value;
+                sum += parseInt(element);
+//                alert(sum);
+            }
+
+            var element16 = document.getElementById('ctcCount').value;
+            for (var i = 1; i <= element16; i++) {
+//                alert('hi' + document.getElementById('amount' + i).value);
+                var element12 = document.getElementById('ctcamount' + i).value;
+                sum1 += parseInt(element12);
+            }
+//            alert(sum);
+
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("basicSalary").value);
+            if (parseInt(sum) > 0) {
+                total = total + parseInt(sum);
+            }
+//            if (parseInt(conyance) > 0) {
+//                total = total + parseInt(conyance);
+//            }
+            if (parseInt(basicSalary) > 0) {
+                total = total + parseInt(basicSalary);
+
+            }
+            document.getElementById("txtresult").value = total;
+            document.getElementById("txtresultCTC").value = total + sum1;
+
+
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
 
         function addAPolicy(id) {
             var element2 = document.getElementById('policyId1');
@@ -79,12 +238,58 @@
         }
 
         function removePolicy(policyDiv) {
+//            try {
+////                
+//                tempCount3--;
+////                alert(tempCount3);
+////                alert(policyDiv.index);
+//
+//                var val = document.getElementById("policyCount").value;
+//
+////                alert(val);
+////                var obj2 = document.getElementById("policyId" + tempCount3).value;
+////                alert(obj2);
+//                var element = document.getElementById("amount" + val).value;
+////                 alert(element);
+//                val = val - 1;
+//                var element2 = document.getElementById('txtresult').value;
+//                var element21 = document.getElementById('txtresultCTC').value;
+////                alert(element2);
+//                document.getElementById('txtresult').value = '';
+//                document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
+//                document.getElementById('txtresultCTC').value = '';
+//                document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
+//
+//                document.getElementById("policyCount").value = val;
+//                element1 = document.getElementById(policyDiv);
+//
+//                element1.parentNode.removeChild(element1);
+//            } catch (e) {
+//
+//            }
+
             try {
+//                
                 tempCount3--;
+//                alert(policyDiv);
+
                 var val = document.getElementById("policyCount").value;
+//                alert(val);
+//                var obj2 = document.getElementById("policyId" + tempCount3).value;
+//                alert(policyDiv);
+                var element = document.getElementById("amount" + policyDiv).value;
                 val = val - 1;
+                var element2 = document.getElementById('txtresult').value;
+                var element21 = document.getElementById('txtresultCTC').value;
+//                alert(element2);
+                document.getElementById('txtresult').value = '';
+                document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
+                document.getElementById('txtresultCTC').value = '';
+                document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
                 document.getElementById("policyCount").value = val;
                 var element1 = document.getElementById(policyDiv);
+//                alert(element1);
+
                 element1.parentNode.removeChild(element1);
             } catch (e) {
 
@@ -98,13 +303,13 @@
             $("#ctcCloneid").on("click", function () {
                 tempCount4++;
                 //                alert(tempCount3);
-                var clone = "<tr id='addmoreFile1" + tempCount4 + "' style='clear:both;'>"
+                var clone = "<tr id='" + tempCount4 + "' style='clear:both;'>"
                         + "<td style=\"text-align: center\">" + tempCount4 + "</td>"
                         + "<td id=\"ctcTd" + tempCount4 + "\"><div><select id='ctcId" + tempCount4 + "' name='ctcId" + tempCount4 + "' class=\"form-control\">"
                         + "</select>"
                         + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
                         //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'  min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'   onFocus=\"(this.name=this.value)\" onchange=\"totalValueChangeCTC(this,this.name);\" min=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
                         + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
                         + "<option value=\"\">--SELECT--</option>"
@@ -125,7 +330,7 @@
                         + "</div></td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
-                        + "<input type=\"button\"value=\"-\"  onclick=\"removectc('addmoreFile1" + tempCount4 + "');\"/>"
+                        + "<input type=\"button\"value=\"-\"  onclick=\"removectc('" + tempCount4 + "');\"/>"
                         + "</span>"
                         + "</td>"
                         + "</tr>";
@@ -153,7 +358,34 @@
 
             });
         });
+        function changetotalButtonNewCTC(id) {
+            var sum = 0;
+            var total = 0;
+            var element15 = document.getElementById('ctcCount').value;
+            for (var i = 1; i <= element15; i++) {
+//                alert('hi' + document.getElementById('amount' + i).value);
+                var element = document.getElementById('ctcamount' + i).value;
+                sum += parseInt(element);
+            }
+//            alert(sum);
 
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("txtresult").value);
+            if (parseInt(sum) > 0) {
+                total = total + parseInt(sum);
+            }
+//            if (parseInt(conyance) > 0) {
+//                total = total + parseInt(conyance);
+//            }
+            if (parseInt(basicSalary) > 0) {
+                total = total + parseInt(basicSalary);
+
+            }
+            document.getElementById("txtresultCTC").value = total;
+
+
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
         function addActc(id) {
             //                alert(id);
             var element2 = document.getElementById('ctcId1');
@@ -167,12 +399,36 @@
         }
 
         function removectc(policyDiv) {
+//            try {
+//                tempCount4--;
+//                var val = document.getElementById("ctcCount").value;
+//                val = val - 1;
+//                document.getElementById("ctcCount").value = val;
+//                var element1 = document.getElementById(policyDiv);
+//                element1.parentNode.removeChild(element1);
+//            } catch (e) {
+//
+//            }
             try {
+//                
                 tempCount4--;
+//                alert(policyDiv);
+                var element2 = 0;
+                var element = 0;
                 var val = document.getElementById("ctcCount").value;
+//                alert(val);
+//                var obj2 = document.getElementById("policyId" + tempCount3).value;
+//                alert(obj2);
+                element = document.getElementById("ctcamount" + policyDiv).value;
                 val = val - 1;
+                element2 = document.getElementById('txtresultCTC').value;
+//                alert(element2);
+                document.getElementById('txtresultCTC').value = '';
+                document.getElementById('txtresultCTC').value = parseInt(element2) - parseInt(element);
+
                 document.getElementById("ctcCount").value = val;
                 var element1 = document.getElementById(policyDiv);
+
                 element1.parentNode.removeChild(element1);
             } catch (e) {
 
@@ -797,13 +1053,21 @@
                                                     <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Employee Location Code:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="employeeLocation"  class="form-control"></form:input>
+                                                        <form:errors path="employeeLocation" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeTypeMaster.id"  onchange="selectsubtype(this.value);" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option>
                                                             <form:options items="${EmployeeTypeList}"></form:options>
                                                         </form:select>
                                                         <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6" id="employeeSubTypeId">
                                                             <label>Employee SubType:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="subTypeId" id="subTypeId"class="form-control ">
@@ -813,8 +1077,6 @@
 
 
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
 
@@ -825,6 +1087,9 @@
                                                         <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
 
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Work Location:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="locationMaster.id" class="form-control">
@@ -834,8 +1099,6 @@
 
                                                         <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
@@ -844,6 +1107,10 @@
                                                         <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
 
+
+                                                    </div>
+
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="departmentMaster.id" class="form-control">
@@ -853,9 +1120,6 @@
                                                         <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
 
                                                         </div>
-                                                    </div>
-
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="designationMasterByLevelId" id="designationMasterByLevelId" class="form-control" onchange="setDesignation()">
@@ -872,12 +1136,13 @@
 
                                                         </div>
 
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Role:</label>
                                                         <form:input path="role" class="form-control"></form:input>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -887,6 +1152,9 @@
                                                             </div>
                                                         <form:errors path="dateOfJoining" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                     <c:if test="${sessionScope.userRight.hr == true}" >
                                                         <div class="col-sm-6">
                                                             <label>Last Year's Performance Rating:</label>
@@ -894,8 +1162,6 @@
                                                             <%--<form:hidden path="lastYearPerformanceRating" class="form-control"></form:input>--%>
                                                         </div>
                                                     </c:if>
-                                                </div>
-                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Employee Type:<span style="color: red;font-size: 12px;">*</span></label>
 
@@ -926,13 +1192,14 @@
 
 
                                                     </div>
+
+                                                </div><!-- /.col -->
+                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label >Contact No.:</label>
                                                         <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div><!-- /.col -->
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Date Of Transfer Of Entity:</label>
                                                             <div class="input-group date date_of_transfer"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -941,6 +1208,10 @@
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                         </div>
+
+                                                    </div><!-- /.col -->
+
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
@@ -955,25 +1226,30 @@
                                                             </c:forEach>
                                                         </select>
                                                     </div>
-                                                </div><!-- /.col -->
+
+                                                    <div class="col-sm-6">
+                                                        <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();"/>
+                                                        <form:errors path="basicSalary" cssClass="errorDiv"/>
+                                                    </div>
+                                                </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>PF Amount:</label>
+                                                        <label>PF Contribution(By Employee):</label>
                                                         <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
                                                         <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
+                                                            <label>PF Contribution(By Employer):</label>
+                                                        <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                        <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
                                                             <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="esicNo" class="form-control"    placeholder="Enter ESIC No"/>
                                                             <form:errors path="esicNo" cssClass="errorDiv"/>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-
-                                                    <div class="col-sm-6">
-                                                        <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary"/>
-                                                        <form:errors path="basicSalary" cssClass="errorDiv"/>
                                                     </div>
                                                 </div>
 
@@ -981,8 +1257,8 @@
                                                 <!--</div>-->
                                                 <div class="form-group">
                                                     <div class="col-sm-4">
-                                                            <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <fieldset>
+                                                        <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <fieldset>
                                                             <form:radiobutton path="pf"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <form:radiobutton path="pf" value="true"/>YES
                                                         </fieldset>
@@ -1076,7 +1352,7 @@
                                                                                                                                                             <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
                                                                                                                                                         </td>-->
                                                                             <td style="text-align: center">
-                                                                                <input type="number" name="amount${countVal.count}" id="amount${countVal.count}" min="0" class="form-control" value="${comp[3]}">
+                                                                                <input type="number" name="amount${countVal.count}" id="amount${countVal.count}" min="0"  onchange="changetotalButtonNew(${countVal.count});" class="form-control" value="${comp[3]}">
                                                                             </td>
 
                                                                             <c:if test="${comp[4] eq 1}">
@@ -1135,7 +1411,7 @@
                                                                                                                                                     <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
                                                                                                                                                 </td>-->
                                                                         <td style="text-align: center">
-                                                                            <input type="number" name="amount1" id="amount1" min="0" class="form-control" value="">
+                                                                            <input type="number" name="amount1" id="amount1" min="0" onchange="changetotalButton();"class="form-control" value="">
                                                                         </td>
                                                                         <td style="text-align: center">
                                                                             <input type="checkbox" name="taxable1" id="taxable1" >
@@ -1149,6 +1425,20 @@
                                                                 </c:otherwise>
                                                             </c:choose>
                                                         </table>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <!--<label>Total:<span style="color: red;font-size: 12px;"></span></label>-->
+                                                        <%--<form:input path="tdsAmount" class="form-control"  placeholder="Enter TDS Amount"/>--%>
+                                                        <%--<form:errors path="tdsAmount" cssClass="errorDiv"/>--%>
+                                                    </div>
+                                                    <div class="col-sm-2">
+
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Gross Total:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="grossTotal"  id="txtresult" class="form-control" readonly="true" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 col-sm-12">
@@ -1200,7 +1490,7 @@
                                                                                                                                                             <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
                                                                                                                                                         </td>-->
                                                                             <td style="text-align: center">
-                                                                                <input type="number" name="ctcamount${countVal.count}" id="ctcamount${countVal.count}" min="0" class="form-control" value="${comp[2]}">
+                                                                                <input type="number" name="ctcamount${countVal.count}" id="ctcamount${countVal.count}" min="0" onchange="changetotalButtonNewCTC(${countVal.count});" class="form-control" value="${comp[2]}">
                                                                             </td>
                                                                             <c:if test="${comp[3] eq 1}">
 
@@ -1490,7 +1780,7 @@
                                                                                                                                                     <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
                                                                                                                                                 </td>-->
                                                                         <td style="text-align: center">
-                                                                            <input type="number" name="ctcamount1" id="ctcamount1" min="0" class="form-control" value="">
+                                                                            <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" value="">
                                                                         </td>
                                                                         <td style="text-align: center">
                                                                             <input type="checkbox" name="taxable1" id="taxable1" >
@@ -1533,7 +1823,19 @@
                                                         </table>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
 
+                                                    </div>
+                                                    <div class="col-sm-2">
+
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>CTC Total:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="ctcTotal"  id="txtresultCTC" name="txtresultCTC" class="form-control" readonly="true"  />
+
+                                                    </div>
+                                                </div>
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
@@ -2143,7 +2445,7 @@
         for (var year1 = start; year1 <= end; year1++) {
             options11 += "<option>" + year1 + "</option>";
         }
-        
+
 //         if (objSelect == 2050) {
 //            options11.selected = true;
 //        }

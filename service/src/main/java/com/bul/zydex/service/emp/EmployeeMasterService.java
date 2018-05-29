@@ -170,4 +170,8 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
 
     public List<?> getAllEmployeeId();
 
+    public List<?> readEmpLastMnth(String month, Integer year);
+
+    public List<?> getGenderDetails();
+
 }

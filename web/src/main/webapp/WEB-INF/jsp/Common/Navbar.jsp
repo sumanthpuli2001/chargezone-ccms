@@ -58,7 +58,7 @@
                         </a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.userRight.employeeManagement}">
+                <c:if test="${sessionScope.userRight.budget || sessionScope.userRight.mpr || sessionScope.userRight.mppApproval || sessionScope.userRight.mprApproval || sessionScope.userRight.candidateList || sessionScope.userRight.vacancy || sessionScope.userRight.faceTofaceInterview || sessionScope.userRight.faceTofaceApproval}">
 
                     <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
@@ -514,7 +514,7 @@
                     </ul>
                 </li>
 
-                <c:if test="${sessionScope.userRight.hr}">
+                <c:if test="${sessionScope.userRight.payroll}">
                     <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
                             <i class="fa fa-rupee fa-lg" style="color: #585858;"></i>
@@ -851,6 +851,7 @@
                         <li><a href="urlMaster.htm?act=viewUrlResult"><i class="fa fa-pie-chart fa-lg"></i>Web Service URL</a></li>
                         <!--<li><a href="appraisalPerformance.htm?act=trasferCompatencyEvaluationInEmployeeMaster"><i class="fa fa-pie-chart fa-lg"></i>Competency Evaluation Transfer</a></li>-->
                         <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
+                        <li><a href="policyMaster.htm?act=showPolicyList"><i class="fa fa-pagelines"></i>Policy</a></li>
                             <%--<c:if test="${!sessionScope.userRight.employeeManagement}">--%>
                             <c:if test="${sessionScope.userRight.hr}">
                             <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>

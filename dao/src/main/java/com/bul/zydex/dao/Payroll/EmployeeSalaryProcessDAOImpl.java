@@ -158,8 +158,8 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
             condition += " AND b.year = '" + employeeMaster.getPanCard() + "'";
         }
         query += " Select a.employeeId, a.employeeName,c.deductionAmount,"
-                + " (c.deductionAmount*8.33)/12 as epfAmount,"
-                + " (c.deductionAmount*3.67)/12 as apfAmount,"
+                + " (a.pfAmountEmployer*8.33)/100 as epfAmount,"
+                + " (a.pfAmountEmployer*3.67)/100 as apfAmount,"
                 + " a.id,b.id"
                 + " From EmployeeMaster a"
                 + " left join a.employeeSalaryProcesses b"
@@ -938,8 +938,8 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         return getHibernateTemplate().find(query);
 //         + " WHERE b.id=" + empId + " and (STR_TO_DATE(a.completeDateStr,'%d/%m/%Y') BETWEEN  STR_TO_DATE('" + startD + "','%d/%m/%Y') AND STR_TO_DATE('" + endD + "','%d/%m/%Y')) "
     }
-    
-     public List<?> readEmployeeForSlip1(EmployeeMaster object) {
+
+    public List<?> readEmployeeForSlip1(EmployeeMaster object) {
         String query = "";
         String condition = "";
         EmployeeMaster employeeMaster = (EmployeeMaster) object;

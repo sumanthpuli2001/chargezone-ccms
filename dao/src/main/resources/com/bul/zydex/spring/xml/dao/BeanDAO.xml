@@ -268,7 +268,13 @@
     <bean id="leaveEmployeeDetailsApprovalHistoryDAO1" class="com.bul.zydex.dao.leave.LeaveEmployeeDetailsApprovalHistoryDAOImpl" parent="sessionFactoryConfig"/>
     <bean id="taxDeductionDeclarationSavingStatusDAO1" class="com.bul.zydex.dao.Payroll.TaxDeductionDeclarationSavingStatusDAOImpl" parent="sessionFactoryConfig" />
     <bean id="emergencyContactDAO1" class="com.bul.zydex.dao.EmergencyContactDAOImpl" parent="sessionFactoryConfig" />
-    <bean id="candidateApplyJob2DAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateApplyJob2DAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="userRightDescriptionDAO1" class="com.bul.zydex.dao.UserRight.UserRightDescriptionDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="emailMetaTagDAO1" class="com.bul.zydex.dao.EmailMetaTagDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="modulesDAO1" class="com.bul.zydex.dao.ModulesDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="displaymorNotesDAO1" class="com.bul.zydex.dao.Payroll.DisplaymorNotesDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="policyCreateDAO1" class="com.bul.zydex.dao.policy.PolicyCreateDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="PolicyDropDownDAO1" class="com.bul.zydex.dao.policy.PolicyDropDownDAOImpl" parent="sessionFactoryConfig" />
+     <bean id="candidateApplyJob2DAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateApplyJob2DAOImpl" parent="sessionFactoryConfig"/>
     <bean id="candidateFamilyBackgroundDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateFamilyBackgroundDAOImpl" parent="sessionFactoryConfig"/>
     <bean id="candidateAcademicQualificationDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateAcademicQualificationDAOImpl" parent="sessionFactoryConfig"/>
     <bean id="candidateExperienceDetailDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateExperienceDetailDAOImpl" parent="sessionFactoryConfig"/>

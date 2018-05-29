@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.UserRightDescription" table="user_right_description" catalog="hr_power_astral" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="hrDescription" type="string">
+            <column name="hr_description" length="65535" />
+        </property>
+        <property name="employeeDescription" type="string">
+            <column name="employee_description" length="65535" />
+        </property>
+        <property name="traveLAdminDescription" type="string">
+            <column name="trave_lAdmin_description" length="65535" />
+        </property>
+        <property name="travelExpenseAdminDescription" type="string">
+            <column name="travel_Expense_Admin_description" length="65535" />
+        </property>
+        <property name="poolCarAdminDescription" type="string">
+            <column name="pool_Car_Admin_description" length="65535" />
+        </property>
+        <property name="securityDescription" type="string">
+            <column name="security_description" length="65535" />
+        </property>
+        <property name="cafeteriaAdminDescription" type="string">
+            <column name="cafeteria_Admin_description" length="65535" />
+        </property>
+        <property name="itAdminDescription" type="string">
+            <column name="itAdmin_description" length="65535" />
+        </property>
+        <property name="employeeManagementDescription" type="string">
+            <column name="employee_Management_description" length="65535" />
+        </property>
+        <property name="leaveManagementDescription" type="string">
+            <column name="leave_Management_description" length="65535" />
+        </property>
+        <property name="shiftManagementDescription" type="string">
+            <column name="shift_Management_description" length="65535" />
+        </property>
+        <property name="appraisalPmpDescription" type="string">
+            <column name="appraisal_Pmp_description" length="65535" />
+        </property>
+        <property name="appraisal360Description" type="string">
+            <column name="appraisal360_description" length="65535" />
+        </property>
+        <property name="probationToConfirmationDescription" type="string">
+            <column name="probation_To_Confirmation_description" length="65535" />
+        </property>
+        <property name="employeeExitDesciption" type="string">
+            <column name="employee_Exit_desciption" length="65535" />
+        </property>
+        <property name="employeeReferralDescription" type="string">
+            <column name="employee_Referral_description" length="65535" />
+        </property>
+        <property name="temporaryShiftAssignDesctiption" type="string">
+            <column name="temporary_Shift_Assign_desctiption" length="65535" />
+        </property>
+        <property name="exitInterviewDescription" type="string">
+            <column name="exit_Interview_description" length="65535" />
+        </property>
+        <property name="noDueDescription" type="string">
+            <column name="noDue_description" length="65535" />
+        </property>
+        <property name="attendanceReportDescription" type="string">
+            <column name="attendance_Report_description" length="65535" />
+        </property>
+        <property name="cashAdvanceViewDescription" type="string">
+            <column name="cash_Advance_View_description" length="65535" />
+        </property>
+        <property name="lunaPlantAttendanceMgntDescription" type="string">
+            <column name="luna_Plant_Attendance_Mgnt_description" length="65535" />
+        </property>
+        <property name="gavasatPlantAttendanceMgntDescription" type="string">
+            <column name="gavasat_Plant_Attendance_Mgnt_description" length="65535" />
+        </property>
+        <property name="departmentWiseAttendanceDecription" type="string">
+            <column name="department_Wise_Attendance_decription" length="65535" />
+        </property>
+        <property name="mprDescription" type="string">
+            <column name="mpr_description" length="65535" />
+        </property>
+        <property name="budgetDecription" type="string">
+            <column name="budget_decription" length="65535" />
+        </property>
+        <property name="vacancyDescription" type="string">
+            <column name="vacancy_description" length="65535" />
+        </property>
+        <property name="candidateInductionDescription" type="string">
+            <column name="candidateInduction_description" length="65535" />
+        </property>
+        <property name="assessmentReviewDescription" type="string">
+            <column name="assessment_Review_description" length="65535" />
+        </property>
+        <property name="faceTofaceInterviewDescritpion" type="string">
+            <column name="faceToface_Interview_descritpion" length="65535" />
+        </property>
+        <property name="candidateListDescription" type="string">
+            <column name="candidate_List_description" length="65535" />
+        </property>
+        <property name="mppApprovalDescription" type="string">
+            <column name="mpp_Approval_description" length="65535" />
+        </property>
+        <property name="mprApprovalDescription" type="string">
+            <column name="mpr_Approval_description" length="65535" />
+        </property>
+        <property name="faceTofaceApprovalDecription" type="string">
+            <column name="faceToface_Approval_decription" length="65535" />
+        </property>
+        <property name="payrollDecription" type="string">
+            <column name="payroll_decription" length="65535" />
+        </property>
+        <property name="trainingDescription" type="string">
+            <column name="training_description" length="65535" />
+        </property>
+        <property name="kaizenApprovalDescription" type="string">
+            <column name="kaizen_Approval_description" length="65535" />
+        </property>
+        <property name="employeeMasterReportDescription" type="string">
+            <column name="employee_Master_Report_description" length="65535" />
+        </property>
+        <property name="employeeAttendanceReportDescription" type="string">
+            <column name="employee_Attendance_Report_description" length="65535" />
+        </property>
+        <property name="monthlyAttendanceReportDescription" type="string">
+            <column name="monthly_Attendance_Report_description" length="65535" />
+        </property>
+        <property name="dailyPresentReportDescription" type="string">
+            <column name="daily_Present_Report_description" length="65535" />
+        </property>
+        <property name="searchEmployeeLeaveDetailDescription" type="string">
+            <column name="search_Employee_Leave_Detail_description" length="65535" />
+        </property>
+        <property name="searchEmployeeLeaveBalanceDescription" type="string">
+            <column name="search_Employee_Leave_Balance_description" length="65535" />
+        </property>
+        <property name="searchTravelRequesDescription" type="string">
+            <column name="search_Travel_Reques_description" length="65535" />
+        </property>
+        <property name="searchExpenseRequestDescription" type="string">
+            <column name="search_Expense_Request_description" length="65535" />
+        </property>
+        <property name="pmpReportDescription" type="string">
+            <column name="pMP_Report_description" length="65535" />
+        </property>
+        <property name="appraisalReport360Description" type="string">
+            <column name="appraisal_Report360_description" length="65535" />
+        </property>
+        <property name="formSixteenDescription" type="string">
+            <column name="form_Sixteen_description" length="65535" />
+        </property>
+        <property name="pfDescription" type="string">
+            <column name="pf_description" length="65535" />
+        </property>
+        <property name="ptDescription" type="string">
+            <column name="pt_description" length="65535" />
+        </property>
+        <property name="salarySlipDescription" type="string">
+            <column name="salary_Slip_description" length="65535" />
+        </property>
+        <property name="policyDescription" type="string">
+            <column name="policy_description" length="65535" />
+        </property>
+        <property name="companyMonthlyReportDescription" type="string">
+            <column name="companyMonthlyReport_description" length="65535" />
+        </property>
+        <property name="ptStatementDescription" type="string">
+            <column name="pt_Statement_description" length="65535" />
+        </property>
+        <property name="bankStatementDescription" type="string">
+            <column name="bank_Statement_description" length="65535" />
+        </property>
+        <property name="esicDeductionStatement" type="string">
+            <column name="eSIC_Deduction_Statement" length="65535" />
+        </property>
+        <property name="overTimeReportDescription" type="string">
+            <column name="over_Time_Report_description" length="65535" />
+        </property>
+        <property name="pfChallenDescription" type="string">
+            <column name="pf_Challen_description" length="65535" />
+        </property>
+        <property name="loanDescription" type="string">
+            <column name="loan_description" length="65535" />
+        </property>
+        <property name="attendanceDescription" type="string">
+            <column name="attendance_description" length="65535" />
+        </property>
+        <property name="employeeSalaryYearlyDescription" type="string">
+            <column name="employee_Salary_Yearly_description" length="65535" />
+        </property>
+        <property name="govtFormatPfDescription" type="string">
+            <column name="`govt_Format_PF-description`" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

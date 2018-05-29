@@ -1290,7 +1290,8 @@
         // new Date(year, month [, day [, hours[, minutes[, seconds[, ms]]]]])
         var d2 = new Date(parts1[0], (parts[1] - 1), parts[0], parts2[0], parts2[1]);
         if (selectedText == 'Short Leave') {
-        d2.setTime(d2.getTime() + ('${shortLeaveHoursNo}' * 60 * 60 * 1000));
+        d2.setTime(d2.getTime() + (01 * 60 * 60 * 1000));
+//        d2.setTime(d2.getTime() + ('${shortLeaveHoursNo}' * 60 * 60 * 1000));
         }
 
         var aDate = d2.getDate();

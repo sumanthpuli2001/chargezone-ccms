@@ -74,6 +74,7 @@
                                                                     <th>Employee Name</th>
                                                                     <th>Department</th>
                                                                     <th>Designation</th>
+                                                                    <th>Date of Leaving</th>
                                                                         <c:if test="${sessionScope.userRight.hr}">
                                                                         <th>Action</th>
                                                                         </c:if>
@@ -90,6 +91,7 @@
                                                                 <td>${list[2]}</td>
                                                                 <td>${list[3]}</td>
                                                                 <td>${list[4]}</td>
+                                                                <td>${list[7]}</td>
                                                                 <c:if test="${sessionScope.userRight.hr}">
                                                                     <td>
                                                                         <div class="btn-group">

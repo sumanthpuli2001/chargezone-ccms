@@ -25,15 +25,17 @@ public class UserRightMasterController extends UserRightMasterAbstract {
         String userId = request.getParameter("id");
         UserMaster userMaster = new UserMaster();
         userMaster.setId(Integer.parseInt(userId));
-
+        
         userRightMaster.setUserMaster(userMaster);
         List<?> list = userRightMasterService.readByUserId(userId);
+        List<?> userDescription = userRightDescriptionService.read();
         if (!list.isEmpty()) {
             userRightMaster = (UserRightMaster) list.get(0);
             userRightMaster.getId();
             userRightMaster = userRightMasterService.readById(userRightMaster.getId());
         }
-        mv.getModelMap().put("userRightMaster", userRightMaster);
+         mv.getModelMap().put("userRightMaster", userRightMaster);
+         request.setAttribute("userDescription", userDescription);
         mv.setViewName("User/UserRight");
         return mv;
     }

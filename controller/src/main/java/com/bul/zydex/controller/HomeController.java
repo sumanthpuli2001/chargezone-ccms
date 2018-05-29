@@ -14,7 +14,9 @@ import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.ThoughtMaster;
 import com.bul.zydex.model.UserMaster;
 import java.io.File;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -96,7 +98,7 @@ public class HomeController extends HomeAbstract {
         List<EmployeeMaster> newJoiningList = (List<EmployeeMaster>) employeeMasterService.newJoiningEmployee(lastOldDate);
 
         List<List<?>> newjoineeList = new ArrayList<>();
-        //////////////////today birthdays image/////////////
+        //////////////////New Joinee image/////////////
         for (EmployeeMaster em1 : newJoiningList) {
 
             List data = new ArrayList<>();
@@ -202,20 +204,77 @@ public class HomeController extends HomeAbstract {
     public ModelAndView kaizen(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<?> kaizenlist = kaizenMasterService.readKaizenList();
-            int inc = kaizenlist.size();
-            int inc1 = inc + 1;
-             request.setAttribute("randomNumber", inc1);
-        mv.setViewName( "Kaizen/Kaizen");
+        int inc = kaizenlist.size();
+        int inc1 = inc + 1;
+        request.setAttribute("randomNumber", inc1);
+        mv.setViewName("Kaizen/Kaizen");
         return mv;
 //        int index = 0;
 //        int srNo = (index + 1);
 //        Random random=new Random();   
 //        int randomNumber=random.nextInt(10000000);
     }
-      public ModelAndView report(HttpServletRequest request, HttpServletResponse response) throws Exception {
-          ModelAndView mv = new ModelAndView();
-          mv.setViewName("Common/reports");
-          return mv;
-      }
+
+    public ModelAndView report(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Common/reports");
+        return mv;
+    }
+
+    public ModelAndView form5(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        LocalDate date = LocalDate.now();
+        int month1 = date.getMonthValue();
+        int year = 0;
+        String month = "";
+        month = String.valueOf(month1 - 1);
+        if (0 < (month1 - 1) && (month1 - 1) < 10) {
+            month = "0" + month;
+            year = date.getYear();
+        }
+        if ((month1 - 1) == 0) {
+            month = "12";
+            year = date.getYear() - 1;
+        }
+        List<?> list = employeeMasterService.readEmpLastMnth(("" + month), year);
+        mv.getModelMap().put("list", list);
+        mv.setViewName("Payroll/Form5");
+        return mv;
+    }
+
+    public ModelAndView form10(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        mv.setViewName("Payroll/Form10");
+        return mv;
+    }
+
+    public ModelAndView newJoineDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String empid = request.getParameter("id");
+        EmployeeMaster empDetail = employeeMasterService.readById(Integer.parseInt(empid));
+        DepartmentMaster department = departmentMasterService.readById(empDetail.getDepartmentMaster().getId());
+        DesignationMaster designation = designationMasterService.readById(empDetail.getDesignationMaster().getId());
+//          String dName= department.getDepartmentName();
+        List data = new ArrayList<>();
+        String userName = empDetail.getEmployeeId();
+        String profilePicturePath = "";
+        String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard" + File.separator + "UserProfile"
+                + File.separator + userName + File.separator;
+        File profilePicture = new File(fileLocationURL);
+        if (profilePicture.exists() && profilePicture.listFiles().length > 0) {
+            File[] file = profilePicture.listFiles();
+            profilePicturePath = "StorageYard" + File.separator + "UserProfile" + File.separator + userName + File.separator + file[0].getName();
+        } else {
+            profilePicturePath = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
+        }
+        request.setAttribute("empDetail", empDetail);
+        request.setAttribute("department", department);
+        request.setAttribute("designation", designation);
+        request.setAttribute("profilePicturePath", profilePicturePath);
+        mv.setViewName("Common/JoineeDetail");
+        return mv;
+    }
 
 }

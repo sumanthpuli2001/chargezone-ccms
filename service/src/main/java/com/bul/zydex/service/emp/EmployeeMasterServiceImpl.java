@@ -416,4 +416,14 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> getAllEmployeeId() {
         return employeeMasterDAO.getAllEmployeeId();
     }
+
+    @Override
+    public List<?> readEmpLastMnth(String month,Integer year) {
+        return  employeeMasterDAO.readEmpLastMnth(month,year);
+    }
+    
+    @Override
+    public List<?> getGenderDetails() {
+        return  employeeMasterDAO.getGenderDetails();
+    }
 }

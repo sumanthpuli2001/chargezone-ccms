@@ -6,11 +6,16 @@
 package com.bul.zydex.controller.policy;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeePolicyDetail;
+import com.bul.zydex.model.PolicyCreate;
+import com.bul.zydex.model.PolicyDropDown;
 import com.bul.zydex.model.PolicyMaster;
 import com.bul.zydex.service.EmployeePolicyDetail.EmployeePolicyDetailService;
 import com.bul.zydex.service.Payroll.EmployeeDeductionAmountService;
+import com.bul.zydex.service.policy.PolicyCreateService;
+import com.bul.zydex.service.policy.PolicyDropDownService;
 import com.bul.zydex.service.policy.PolicyMasterService;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +33,8 @@ public class PolicyMasterAbstract extends CustomAbstract {
     protected Validator policyMasterValidator;
     protected EmployeeDeductionAmountService<EmployeeDeductionAmount> employeeDeductionAmountService;
     protected EmployeePolicyDetailService<EmployeePolicyDetail> employeePolicyDetailService;
+    protected PolicyCreateService<PolicyCreate> policyCreateService;
+    protected PolicyDropDownService<PolicyDropDown> policyDropDownService;
 
     public PolicyMasterService<PolicyMaster> getPolicyMasterService() {
         return policyMasterService;
@@ -60,7 +67,22 @@ public class PolicyMasterAbstract extends CustomAbstract {
     public void setEmployeePolicyDetailService(EmployeePolicyDetailService<EmployeePolicyDetail> employeePolicyDetailService) {
         this.employeePolicyDetailService = employeePolicyDetailService;
     }
-    
+
+    public PolicyCreateService<PolicyCreate> getPolicyCreateService() {
+        return policyCreateService;
+    }
+
+    public void setPolicyCreateService(PolicyCreateService<PolicyCreate> policyCreateService) {
+        this.policyCreateService = policyCreateService;
+    }
+
+    public PolicyDropDownService<PolicyDropDown> getPolicyDropDownService() {
+        return policyDropDownService;
+    }
+
+    public void setPolicyDropDownService(PolicyDropDownService<PolicyDropDown> policyDropDownService) {
+        this.policyDropDownService = policyDropDownService;
+    }
 
     protected void policyList(HttpServletRequest request) {
         PolicyMaster policyMaster = new PolicyMaster();
@@ -72,5 +94,16 @@ public class PolicyMasterAbstract extends CustomAbstract {
             policy.put(policyMaster.getId(), policyMaster.getPolicyName());
         }
         request.setAttribute("policy", policy);
+    }
+    protected void policyDropDownList(HttpServletRequest request) {
+        PolicyDropDown policyDropDown = new PolicyDropDown();
+        List<?> policyList = policyDropDownService.read();
+
+        Map<Integer, String> policyd = new HashMap<>();
+        for (Object o : policyList) {
+            policyDropDown = (PolicyDropDown) o;
+            policyd.put(policyDropDown.getId(), policyDropDown.getName());
+        }
+        request.setAttribute("policydp", policyd);
     }
 }

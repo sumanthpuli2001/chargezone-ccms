@@ -43,6 +43,7 @@
         <property name="noDueMasterService" ref="noDueMasterService1" />
         <property name="levelMasterService" ref="levelMasterService1" />
         <property name="probationToConfirmationService" ref="probationToConfirmationService1" />
+       
 
     </bean>
     <bean id="logInController1" class="com.bul.zydex.controller.LogInController" parent="controllerConfig" >
@@ -316,6 +317,7 @@
     <bean id="userRightMasterController1" class="com.bul.zydex.controller.UserRight.UserRightMasterController" parent="controllerConfig" >
         <property name="userRightMasterService" ref="userRightMasterService1" />
         <property name="userRightMasterValidator" ref="userRightMasterValidator1" />
+        <property name="userRightDescriptionService" ref="userRightDescriptionService1" />
     </bean>
 
     <!--Visitor Visited List-->
@@ -448,6 +450,8 @@
         <property name="appraisalkraActivityService" ref="appraisalkraActivityService1" />
         <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1" />
         <property name="appraisal360Service" ref="appraisal360Service1" />
+        <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
         
     </bean>
     <!--Appraisal Filling Data-->
@@ -530,6 +534,8 @@
         <property name="policyMasterValidator" ref="policyMasterValidator1" />
         <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
         <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
+        <property name="policyCreateService" ref="policyCreateService1" />
+        <property name="policyDropDownService" ref="policyDropDownService1" />
         
     </bean>
     <!--EmailTemplate-->
@@ -903,12 +909,15 @@
         <property name="payrollLoanRemainingAmountService" ref="payrollLoanRemainingAmountService1" />
         <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="displaymorNotesService" ref="displaymorNotesService1" />
     </bean>
     <bean id="certificateTemplateController1" class="com.bul.zydex.controller.Payroll.CertificateTemplateController" parent="controllerConfig" >
         <property name="certificateTemplateService" ref="certificateTemplateService1" />
         <property name="certificateTemplateValidator" ref="certificateTemplateValidator1" />
         <property name="employeeTypeService" ref="employeeTypeService1" />
         <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="emailMetaTagService" ref="emailMetaTagService1" />
+        <property name="modulesService" ref="modulesService1" />
     </bean>
     
     <bean id="companyMonthlyReportController1" class="com.bul.zydex.controller.Payroll.CompanyMonthlyReportController" parent="controllerConfig" >
@@ -1237,6 +1246,7 @@
     <bean id="retirementAgeController1" class="com.bul.zydex.controller.Payroll.RetirementAgeController" parent="controllerConfig" >
         <property name="retirementAgeService" ref="retirementAgeService1"></property>
         <property name="companyMasterValidator" ref="companyMasterValidator1"></property>
+        <property name="displaymorNotesService" ref="displaymorNotesService1"></property>
 
     </bean>
     

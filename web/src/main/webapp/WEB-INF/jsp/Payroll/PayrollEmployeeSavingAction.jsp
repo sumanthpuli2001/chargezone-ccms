@@ -39,6 +39,8 @@
                                 <c:if test="${!empty failureMessage}">
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
+
+
                                 <form:form action="taxSavingSubmit.htm?act=viewClick" method="post" commandName="taxSavingSubmit" 
                                            name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
 
@@ -49,7 +51,7 @@
                                                 <b>Employee Name :</b>
                                                 <span>${employeeMaster.employeeName}</span>
                                                 <input type="hidden" name="eid" id="eid" value="${employeeMaster.id}">
-                                                   
+
                                                 &nbsp;&nbsp;&nbsp;
                                                 <b> Year : </b>
                                                 <span>${taxSavingSubmit.payrollFinancialYear.title}</span> 
@@ -80,72 +82,115 @@
                                                             <c:set var="index" value="1"></c:set>
                                                             <c:if test="${Count > 1}">
                                                                 <tr>
-                                                                    <input type="hidden" class="tddsId" name="tddsId" value="${list1[4]}"/>
-                                                                    
-                                                                    <td>${Count-1}</td>
-                                                                    
-                                                                    <td>${list1[0]}</td>
-                                                                    
-                                                                    <td><input type="text" name="savingTypeAmount1" value="${list1[1]}" class="form-control savingTypeAmount1"></td>
-                                                                    
-                                                                    <c:choose>
-                                                                        <c:when test="${list1[2] eq ''}">
-                                                                            <td><span class="label label-warning">Pending Proof</span></td>
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            <td><a href="taxSavingSubmit.htm?act=readFile&amp;fileName=${list1[2]}">${list1[2]}</a></td>
-                                                                        </c:otherwise>
-                                                                    </c:choose>
-                                                                                
+                                                            <input type="hidden" class="tddsId" name="tddsId" value="${list1[4]}"/>
+
+                                                            <td>${Count-1}</td>
+
+                                                            <td>${list1[0]}</td>
+
+                                                            <td><input type="text" name="savingTypeAmount1" value="${list1[1]}" class="form-control savingTypeAmount1"></td>
+
+                                                            <c:choose>
+                                                                <c:when test="${((list1[1] == 0.0 and (list1[2] != '' or list1[2] != null))) or ((list1[1] != 0.0 and (list1[2] == '' or list1[2] == null))) or ((list1[1] == 0.0 and (list1[2] == '' or list1[2] == null)))}">
+                                                                    <td><span class="label label-warning"></span></td>
+                                                                    <td><span class="label label-warning"></span></td>
+                                                                    <td><span class="label label-warning"></span></td>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                    <td><a href="taxSavingSubmit.htm?act=readFile&amp;fileName=${list1[2]}">${list1[2]}</a></td>
+
                                                                     <c:if test="${list1[3] == 0}"><td><span class="label label-warning">Pending</span></td></c:if>
                                                                     <c:if test="${list1[3] == 1}"><td><span class="label label-success">Approved</span></td></c:if>
                                                                     <c:if test="${list1[3] == 2}"><td><span class="label label-danger">Rejected</span></td></c:if>
                                                                     <c:if test="${list1[3] == 3}"><td><span class="label label-warning">Recycled</span></td></c:if>
-                                                                    
-                                                                    <td>
-                                                                        <div class="btn-group">
-                                                                            <button type="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                Action <span class="caret"></span>
-                                                                            </button>
 
-                                                                            <ul class="dropdown-menu" >
-                                                                                <li>
-                                                                                    <a href="#" class="approveId">
-                                                                                        &nbsp;&nbsp;Approve
-                                                                                    </a>
-                                                                                </li>
+                                                                        <td>
+                                                                            <div class="btn-group">
+                                                                                <button type="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                    Action <span class="caret"></span>
+                                                                                </button>
 
-                                                                                <li>
-                                                                                    <a href="#" class="rejectId">
-                                                                                        &nbsp;&nbsp;Reject
-                                                                                    </a>
-                                                                                </li>
+                                                                                <ul class="dropdown-menu" >
+                                                                                    <li>
+                                                                                        <a href="#" class="approveId">
+                                                                                            &nbsp;&nbsp;Approve&nbsp;<i class="fa fa-check" aria-hidden="true"></i>
+                                                                                        </a>
+                                                                                    </li>
 
-                                                                                <li>
-                                                                                    <a href="#" class="recycleId">
-                                                                                        &nbsp;&nbsp;Recycle
-                                                                                    </a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
+                                                                                    <li>
+                                                                                        <a href="#" class="rejectId">
+                                                                                            &nbsp;&nbsp;Reject&nbsp;<i class="fa fa-times" aria-hidden="true"></i>
+                                                                                        </a>
+                                                                                    </li>
 
-                                                            </c:if>
-                                                        </c:forEach>
+                                                                                    <li>
+                                                                                        <a href="#" class="recycleId">
+                                                                                            &nbsp;&nbsp;Recycle&nbsp;<i class="fa fa-recycle" aria-hidden="true"></i>
+                                                                                        </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </td>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            <%--<c:choose>--%>
+                                                            <%--<c:when test="${list1[2]eq ''}">--%>
+                                                            <!--<td><span class="label label-warning">Pending Proof</span></td>-->
+                                                            <%--</c:when>--%>
+                                                            <%--<c:otherwise>--%>
+                                                                <!--<td><a href="taxSavingSubmit.htm?act=readFile&amp;fileName=${list1[2]}">${list1[2]}</a></td>-->
+                                                            <%--</c:otherwise>--%>
+                                                            <%--</c:choose>--%>
+
+                                                            <%--<c:if test="${list1[3] == 0}"><td><span class="label label-warning">Pending</span></td></c:if>--%>
+                                                            <%--<c:if test="${list1[3] == 1}"><td><span class="label label-success">Approved</span></td></c:if>--%>
+                                                            <%--<c:if test="${list1[3] == 2}"><td><span class="label label-danger">Rejected</span></td></c:if>--%>
+                                                            <%--<c:if test="${list1[3] == 3}"><td><span class="label label-warning">Recycled</span></td></c:if>--%>
+
+                                                            <!--                                                                    <td>
+                                                                                                                                    <div class="btn-group">
+                                                                                                                                        <button type="button"  class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                                                            Action <span class="caret"></span>
+                                                                                                                                        </button>
+                                                            
+                                                                                                                                        <ul class="dropdown-menu" >
+                                                                                                                                            <li>
+                                                                                                                                                <a href="#" class="approveId">
+                                                                                                                                                    &nbsp;&nbsp;Approve
+                                                                                                                                                </a>
+                                                                                                                                            </li>
+                                                            
+                                                                                                                                            <li>
+                                                                                                                                                <a href="#" class="rejectId">
+                                                                                                                                                    &nbsp;&nbsp;Reject
+                                                                                                                                                </a>
+                                                                                                                                            </li>
+                                                            
+                                                                                                                                            <li>
+                                                                                                                                                <a href="#" class="recycleId">
+                                                                                                                                                    &nbsp;&nbsp;Recycle
+                                                                                                                                                </a>
+                                                                                                                                            </li>
+                                                                                                                                        </ul>
+                                                                                                                                    </div>
+                                                                                                                                </td>-->
+                                                            </tr>
+
+                                                        </c:if>
+                                                    </c:forEach>
                                                     </tbody>
                                                 </table>
                                             </c:forEach>
-                                            
+
                                         </div>
-                                               
-                                            <center>
-                                                <c:if test="${taxSavingSubmit1.status eq 1}"><td><span style="font-size:15px" class="label label-default">Pending</span></td></c:if>
-                                                <c:if test="${taxSavingSubmit1.status eq 2}"><td><span style="font-size:15px" class="label label-success">Approved</span></td></c:if>
-                                                <c:if test="${taxSavingSubmit1.status eq 3}"><td><span style="font-size:15px" class="label label-warning">Partially Approved</span></td></c:if>
-                                                <c:if test="${taxSavingSubmit1.status eq 4}"><td><span style="font-size:15px" class="label label-danger">Rejected</span></td></c:if>
-                                                <c:if test="${taxSavingSubmit1.status eq 5}"><td><span style="font-size:15px" class="label label-info">Recycled </span></td></c:if>
-                                                
+
+                                        <center>
+                                            <c:if test="${taxSavingSubmit1.status eq 1}"><td><span style="font-size:15px" class="label label-default">Pending</span></td></c:if>
+                                            <c:if test="${taxSavingSubmit1.status eq 2}"><td><span style="font-size:15px" class="label label-success">Approved</span></td></c:if>
+                                            <c:if test="${taxSavingSubmit1.status eq 3}"><td><span style="font-size:15px" class="label label-warning">Partially Approved</span></td></c:if>
+                                            <c:if test="${taxSavingSubmit1.status eq 4}"><td><span style="font-size:15px" class="label label-danger">Rejected</span></td></c:if>
+                                            <c:if test="${taxSavingSubmit1.status eq 5}"><td><span style="font-size:15px" class="label label-info">Recycled </span></td></c:if>
+
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12" style="font-size: 16px; margin: 30px 0px 20px 0px;">
                                                         <div class="col-md-4 col-sm-4" style="text-align: left;">
@@ -160,15 +205,15 @@
                                                         </div>
                                                     </div> 
                                                 </div>
-                                                
-                                            </center>
-                                    </div>
 
-                                   
-                                    
-<!--                                    <div class="col-sm-6 col-sm-offset-5">
-                                        <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
-                                    </div>-->
+                                            </center>
+                                        </div>
+
+
+
+                                        <!--                                    <div class="col-sm-6 col-sm-offset-5">
+                                                                                <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                                                            </div>-->
 
                                 </form:form>
                             </div><!-- /.tab-pane -->
@@ -203,52 +248,54 @@
         }
     </script>
     <script>
-        $(".approveId").on("click", function(){
+        $(".approveId").on("click", function () {
             var eid = $('#eid').val();
             var fid = $('#fid').val();
             var v = $(this).closest('tr').find('input.savingTypeAmount1').val();
             var s = $(this).closest('tr').find('input.tddsId').val();
-            window.location = "taxSavingSubmit.htm?act=changeField&amount="+v+"&status=1&tddsId="+s+"&eid="+eid+"&fid="+fid;
-            
+            window.location = "taxSavingSubmit.htm?act=changeField&amount=" + v + "&status=1&tddsId=" + s + "&eid=" + eid + "&fid=" + fid;
+
         });
-        $(".rejectId").on("click", function(){
+        $(".rejectId").on("click", function () {
             var eid = $('#eid').val();
             var fid = $('#fid').val();
             var v = $(this).closest('tr').find('input.savingTypeAmount1').val();
             var s = $(this).closest('tr').find('input.tddsId').val();
-            window.location = "taxSavingSubmit.htm?act=changeField&amount="+v+"&status=2&tddsId="+s+"&eid="+eid+"&fid="+fid;;
-            
+            window.location = "taxSavingSubmit.htm?act=changeField&amount=" + v + "&status=2&tddsId=" + s + "&eid=" + eid + "&fid=" + fid;
+            ;
+
         });
-        $(".recycleId").on("click", function(){
+        $(".recycleId").on("click", function () {
             var eid = $('#eid').val();
             var fid = $('#fid').val();
             var v = $(this).closest('tr').find('input.savingTypeAmount1').val();
             var s = $(this).closest('tr').find('input.tddsId').val();
-            window.location = "taxSavingSubmit.htm?act=changeField&amount="+v+"&status=3&tddsId="+s+"&eid="+eid+"&fid="+fid;;         
-        });   
-        
-        $(".partApprove").on("click", function(){
-            var eid = $('#eid').val();
-            var fid = $('#fid').val();
-            var tid = $('#tid').val();
-            window.location = "taxSavingSubmit.htm?act=partiallyChange&status=2&eid="+eid+"&fid="+fid+"&tid="+tid;                    
-        });  
-        
-        $(".partReject").on("click", function(){
-            var eid = $('#eid').val();
-            var fid = $('#fid').val();
-            var tid = $('#tid').val();
-            window.location = "taxSavingSubmit.htm?act=partiallyChange&status=4&eid="+eid+"&fid="+fid+"&tid="+tid;         
-        }); 
-        
-        $(".partRecycle").on("click", function(){
-            var eid = $('#eid').val();
-            var fid = $('#fid').val();
-            var tid = $('#tid').val();
-            window.location = "taxSavingSubmit.htm?act=partiallyChange&status=5&eid="+eid+"&fid="+fid+"&tid="+tid;         
+            window.location = "taxSavingSubmit.htm?act=changeField&amount=" + v + "&status=3&tddsId=" + s + "&eid=" + eid + "&fid=" + fid;
+            ;
         });
-        
-        
+
+        $(".partApprove").on("click", function () {
+            var eid = $('#eid').val();
+            var fid = $('#fid').val();
+            var tid = $('#tid').val();
+            window.location = "taxSavingSubmit.htm?act=partiallyChange&status=2&eid=" + eid + "&fid=" + fid + "&tid=" + tid;
+        });
+
+        $(".partReject").on("click", function () {
+            var eid = $('#eid').val();
+            var fid = $('#fid').val();
+            var tid = $('#tid').val();
+            window.location = "taxSavingSubmit.htm?act=partiallyChange&status=4&eid=" + eid + "&fid=" + fid + "&tid=" + tid;
+        });
+
+        $(".partRecycle").on("click", function () {
+            var eid = $('#eid').val();
+            var fid = $('#fid').val();
+            var tid = $('#tid').val();
+            window.location = "taxSavingSubmit.htm?act=partiallyChange&status=5&eid=" + eid + "&fid=" + fid + "&tid=" + tid;
+        });
+
+
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

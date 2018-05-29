@@ -187,6 +187,10 @@
                                             <div class="box-header" style="text-align: right;">
                                                 <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="ExportToExcel('tableid')"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
                                                 <input type="button" class="btn btn-facebook "  style="width: 100px;" value="Print" onclick="printDiv('printableArea')">
+                                                <input type="button" class="btn btn-facebook "  style="width: 100px;" value="TEXT" onclick="textBtnClick();">
+                                                <span data="StorageYard/TextFile/PF_Report" type="application/pdf" width="500" height="300">
+                                                <a href="employeePfCheck.htm?act=downloadTextfile">Download</a>
+                                                </span>
                                             </div>
                                         </c:when>
                                     </c:choose>
@@ -200,6 +204,7 @@
                                                     </tr>
                                             </c:when>
                                             <c:otherwise>
+                                                <input type="hidden" id="monthHiddenValue" value="${month}"/>
                                                 <center>  <img src="StorageYard/Images/HTS_LOGO.png" style="width:15%;height: 15%;" BORDER="0"/> </center> 
 
                                                 <div class="form-group">
@@ -389,6 +394,27 @@
         var htmltable = document.getElementById('tableid');
         var html = htmltable.outerHTML;
         window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+    }
+</script>
+<script type="text/javascript">
+    function ExportToText(tableid) {
+        alert(tableid)
+        var htmltable = document.getElementById('tableid');
+        alert(htmltable);
+        var html = htmltable.outerHTML;
+        alert(html);
+        var innerHtml  = $('#table').html;
+//        innerHtml  = innerHtml.replaceAll('</td>','#~#');
+        alert(innerHtml);
+//        window.open('data:application/vnd.txt,' + encodeURIComponent(html));
+       window.location = 'employeePfCheck.htm?act=readTextFile&id=' + html;
+    }
+</script>
+<script type="text/javascript">
+    function textBtnClick() {
+        var month = document.getElementById('monthHiddenValue').value;
+        var year = $('#year11 option:selected').text();
+        window.location = 'employeePfCheck.htm?act=readTextFile&month=' + month +'&year11=' +year;
     }
 </script>
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

@@ -160,11 +160,16 @@
     <mapping resource="com/bul/zydex/model/LeaveEmployeeDetailsApprovalHistory.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/TaxDeductionDeclarationSavingStatus.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmergencyContact.hbm.xml"/>
-    <mapping/>
-    <mapping resource="../../../CandidateApplyJob2.hbm.xml"/>
-    <mapping resource="../../../CandidateFamilyBackground.hbm.xml"/>
-    <mapping resource="../../../CandidateAcademicQualification.hbm.xml"/>
-    <mapping resource="../../../CandidateExperienceDetail.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/UserRightDescription.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/Candidatef2fInterviewRating.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/DisplaymorNotes.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/EmailMetaTag.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/PolicyDropDown.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/PolicyCreate.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/CandidateApplyJob2.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/CandidateFamilyBackground.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/CandidateAcademicQualification.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/CandidateExperienceDetail.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/CandidateOtherReferences.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -272,4 +272,6 @@
     <bean id="emailMetaTagDAO1" class="com.bul.zydex.dao.EmailMetaTagDAOImpl" parent="sessionFactoryConfig" />
     <bean id="modulesDAO1" class="com.bul.zydex.dao.ModulesDAOImpl" parent="sessionFactoryConfig" />
     <bean id="displaymorNotesDAO1" class="com.bul.zydex.dao.Payroll.DisplaymorNotesDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="policyCreateDAO1" class="com.bul.zydex.dao.policy.PolicyCreateDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="PolicyDropDownDAO1" class="com.bul.zydex.dao.policy.PolicyDropDownDAOImpl" parent="sessionFactoryConfig" />
 </beans>

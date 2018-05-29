@@ -681,4 +681,10 @@
     <bean id="displaymorNotesService1" class="com.bul.zydex.service.Payroll.DisplaymorNotesServiceImpl">
         <property name="displaymorNotesDAO" ref="displaymorNotesDAO1" />
     </bean>
+    <bean id="policyCreateService1" class="com.bul.zydex.service.policy.PolicyCreateServiceImpl">
+        <property name="policyCreateDAO" ref="policyCreateDAO1" />
+    </bean>
+    <bean id="policyDropDownService1" class="com.bul.zydex.service.policy.PolicyDropDownServiceImpl">
+        <property name="PolicyDropDownDAO" ref="PolicyDropDownDAO1" />
+    </bean>
 </beans>

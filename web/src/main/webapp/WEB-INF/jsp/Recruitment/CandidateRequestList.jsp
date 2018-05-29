@@ -77,7 +77,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
-                                                    <label>SEARCH<span style="color: red;font-size: 5px;"></span></label>
+                                                    <label>Search<span style="color: red;font-size: 5px;"></span></label>
                                                     <button type="submit" class="btn btn-primary" style="width: 10px;" data-original-title="" title="" >SEARCH</button>
                                                 </div>
 

@@ -534,6 +534,8 @@
         <property name="policyMasterValidator" ref="policyMasterValidator1" />
         <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
         <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
+        <property name="policyCreateService" ref="policyCreateService1" />
+        <property name="policyDropDownService" ref="policyDropDownService1" />
         
     </bean>
     <!--EmailTemplate-->

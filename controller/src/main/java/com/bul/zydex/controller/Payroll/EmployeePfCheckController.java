@@ -11,6 +11,7 @@ import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeType;
 import com.bul.zydex.model.PayrollProvidentFund;
 import com.bul.zydex.model.RetirementAge;
+import com.bul.zydex.util.DownloadFile;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -211,14 +212,17 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
     public ModelAndView readTextFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 
-        String fileLocationURL = "E:" + File.separator + "PFILE";
+//        String fileLocationURL = "E:" + File.separator + "PFILE";
+        String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "TextFile" + File.separator;
 
         File Folder1 = new File(fileLocationURL);
         if (!Folder1.exists()) {
             Folder1.mkdirs();
         }
         String s = "PF_Report.txt";
-        File downloadFile1 = new File("E:/PFILE/" + s);
+        File downloadFile1 = new File(fileLocationURL + s);
         OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream(downloadFile1));
         boolean success = false;
         outputStream1.close();
@@ -255,7 +259,7 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
         }
         w.close();
         request.setAttribute("successMessage",
-                "Information: Text File successfully Exported You show In Path D:/PFILE");
+                "Information: Text File successfully Exported You Can Click Download");
         mv = searchFormEmployeePfDetailSubmitGov(request, response);
         return mv;
     }
@@ -263,6 +267,7 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
     public List tempemployeeSalaryDetail(EmployeeMaster employeeMaster) {
         List<?> list = employeeSalaryProcessService.readEmployeeForPfGov(employeeMaster);
         List tempemployeeSalaryDetail = new ArrayList();
+//        String uano = "";
         for (Object employeePfdetail : list) {
             Object[] o = (Object[]) employeePfdetail;
             List tempemployeePfdetailList = new ArrayList();
@@ -274,8 +279,13 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
             tempemployeePfdetailList.add(employeeMasterID);
             int employeeProcessId = (int) o[3];
             tempemployeePfdetailList.add(employeeProcessId);
-            String uano = (String) o[4];
-            tempemployeePfdetailList.add(uano);
+            if (null != o[4] && "" == o[4]) {
+                String uano = (String) o[4];
+                tempemployeePfdetailList.add(uano);
+            } else {
+                String uano1 = "";
+                tempemployeePfdetailList.add(uano1);
+            }
             Double totalGoss = (Double) o[5];
             tempemployeePfdetailList.add(totalGoss);
 
@@ -383,5 +393,20 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
 //            }
         }
         return tempemployeeSalaryDetail;
+    }
+
+    public void downloadTextfile(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "TextFile" + File.separator + "PF_Report.txt";
+////        String s = "PF_Report.txt";
+//        File downloadFile1 = new File(fileLocationURL + s);
+
+        request.setAttribute("filePath", fileLocationURL);
+
+        DownloadFile downloadFile = new DownloadFile();
+        downloadFile.doDownload(request, response);
     }
 }

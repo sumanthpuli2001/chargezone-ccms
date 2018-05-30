@@ -11,13 +11,18 @@ import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeType;
 import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.PolicyCreate;
+import com.bul.zydex.model.PolicyDropDown;
 import com.bul.zydex.model.PolicyMaster;
+import java.io.File;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.validation.BindException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -96,7 +101,8 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         mv.setViewName("forward:policyMaster.htm?act=showList");
         return mv;
     }
-     public ModelAndView searchPolicyDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public ModelAndView searchPolicyDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
         PolicyMaster policyMaster = new PolicyMaster();
@@ -156,4 +162,147 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         mv = searchPolicyDetail(request, response);
         return mv;
     }
+
+    public ModelAndView showPolicyList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PolicyCreate policyCreate = new PolicyCreate();
+        List<?> policyList = policyCreateService.readpolicyCreate();
+        mv.getModel().put("list", policyList);
+        mv.getModel().put("policyCreate", policyCreate);
+        mv.setViewName("Policy/ShowPolicy");
+        return mv;
+    }
+
+    public ModelAndView policyCreate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PolicyCreate policyCreate = new PolicyCreate();
+        selectEmployee(request, response);
+        policyDropDownList(request);
+        mv.getModel().put("policyCreate", policyCreate);
+        mv.setViewName("Policy/CreatePolicy");
+        return mv;
+    }
+
+    public ModelAndView newCreateSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PolicyCreate policyCreate = new PolicyCreate();
+        BindException errors = new BindException(policyCreate, "policyCreate");
+        bind(request, policyCreate);
+        String typePolicy = request.getParameter("policyId1");
+        String attachment = request.getParameter("attachment");
+
+        PolicyDropDown pdd = policyDropDownService.readById(Integer.parseInt(typePolicy));
+
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("attachment");
+        String fileLocationURL2 = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "policyAttachment" + File.separator;
+        String fileLocationURL1 = "StorageYard"
+                + File.separator + "policyAttachment" + File.separator;
+        File Folder1 = new File(fileLocationURL2);
+        if (!Folder1.exists()) {
+            Folder1.mkdirs();
+        }
+        if (multipartFile != null && multipartFile.getSize() > 0) {
+            try {
+                File file2 = new File(fileLocationURL2 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                multipartFile.transferTo(file2);
+                policyCreate.setAttachment(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+            } catch (Exception e) {
+
+            }
+        }
+
+        policyCreate.setPolicyDropDown(pdd);
+        policyCreate.setStatus(0);
+        policyCreateService.create(policyCreate);
+        request.setAttribute("successMessage",
+                "Info : Records are create successfully.");
+        mv.getModel().put("policyCreate", policyCreate);
+        mv.setViewName("Policy/CreatePolicy");
+        mv = showPolicyList(request, response);
+        return mv;
+    }
+
+    public ModelAndView editClickSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PolicyCreate policyCreate = new PolicyCreate();
+        BindException errors = new BindException(policyCreate, "policyCreate");
+        bind(request, policyCreate);
+        String typePolicy = request.getParameter("policyId1");
+        String attachment = request.getParameter("attachment");
+
+        PolicyDropDown pdd = policyDropDownService.readById(Integer.parseInt(typePolicy));
+
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("attachment");
+        String fileLocationURL2 = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "policyAttachment" + File.separator;
+        String fileLocationURL1 = "StorageYard"
+                + File.separator + "policyAttachment" + File.separator;
+        File Folder1 = new File(fileLocationURL2);
+        if (!Folder1.exists()) {
+            Folder1.mkdirs();
+        }
+        if (multipartFile != null && multipartFile.getSize() > 0) {
+            try {
+                File file2 = new File(fileLocationURL2 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                multipartFile.transferTo(file2);
+                policyCreate.setAttachment(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+            } catch (Exception e) {
+
+            }
+        }
+
+        policyCreate.setPolicyDropDown(pdd);
+        policyCreate.setStatus(1);
+        policyCreateService.update(policyCreate);
+        request.setAttribute("successMessage",
+                "Info : Records are updated successfully.");
+        mv.getModel().put("policyCreate", policyCreate);
+        mv.setViewName("Policy/CreatePolicy");
+        mv = showPolicyList(request, response);
+        return mv;
+    }
+
+    public ModelAndView editClickView(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PolicyCreate policyCreate = new PolicyCreate();
+        selectEmployee(request, response);
+        policyDropDownList(request);
+        String id = request.getParameter("id");
+        policyCreate = policyCreateService.readById(Integer.parseInt(id));
+        mv.getModel().put("policyCreate", policyCreate);
+        mv.setViewName("Policy/EditViewPolicy");
+        return mv;
+    }
+
+    public ModelAndView policydeleteSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        String savingList[] = request.getParameterValues("checkId");
+        for (String z : savingList) {
+            try {
+
+                PolicyCreate policyCreate = new PolicyCreate();
+                List<?> list = policyCreateService.deletepolicy(z);
+                for (Object object : list) {
+                    policyCreate = (PolicyCreate) object;
+                }
+
+                policyCreateService.delete(Integer.parseInt(z));
+                request.setAttribute("successMessage",
+                        "Info : Records are deleted successfully.");
+            } catch (Exception e) {
+
+            }
+        }
+        mv = showPolicyList(request, response);
+        return mv;
+    }
+
 }

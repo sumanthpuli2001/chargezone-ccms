@@ -164,6 +164,7 @@
     <mapping resource="com/bul/zydex/model/Candidatef2fInterviewRating.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/DisplaymorNotes.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmailMetaTag.hbm.xml"/>
-    <mapping resource="com/bul/zydex/model/PayrollpfRecord.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/PolicyDropDown.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/PolicyCreate.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

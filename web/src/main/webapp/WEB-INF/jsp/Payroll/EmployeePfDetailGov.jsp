@@ -188,6 +188,9 @@
                                                 <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="ExportToExcel('tableid')"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
                                                 <input type="button" class="btn btn-facebook "  style="width: 100px;" value="Print" onclick="printDiv('printableArea')">
                                                 <input type="button" class="btn btn-facebook "  style="width: 100px;" value="TEXT" onclick="textBtnClick();">
+                                                <span data="StorageYard/TextFile/PF_Report" type="application/pdf" width="500" height="300">
+                                                <a href="employeePfCheck.htm?act=downloadTextfile">Download</a>
+                                                </span>
                                             </div>
                                         </c:when>
                                     </c:choose>

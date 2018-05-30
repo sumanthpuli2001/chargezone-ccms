@@ -883,7 +883,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         }
         query += " Select a.employeeId, a.employeeName,"
                 + " a.id,b.id,"
-                + " a.uanNo,b.grossTotal,a.pfAmount,a.dateOfBirth"
+                + " a.uanNo,b.grossTotal,a.pfAmount,a.dateOfBirth,b.employeeBasicSalary"
                 + " From EmployeeMaster a"
                 + " left join a.employeeSalaryProcesses b"
                 + " where b.month  ='" + employeeMaster.getBankAccountNo() + "'"

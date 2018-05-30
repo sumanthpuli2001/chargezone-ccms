@@ -176,7 +176,7 @@ public class CertificateTemplateController extends CertificateTemplateAbstract {
         EmployeeMaster employeeMaster = null;
         try {
 
-            employeeMaster = (EmployeeMaster) employeeMasterService.readByEmployeeNo(Integer.parseInt(id)).get(0);
+            employeeMaster = (EmployeeMaster) employeeMasterService.readByEmployeeNo1(id).get(0);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -203,11 +203,11 @@ public class CertificateTemplateController extends CertificateTemplateAbstract {
         DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
         employeeMaster.setDesignationMaster(designationMaster);
             String msg = certificateTemplate.getCertificateBody();
-            msg = msg.replace("{employee_name}", employeeMaster.getEmployeeName());
-             msg = msg.replace("{company}", employeeMaster.getCompany());
+            msg = msg.replace("[[employee_name]]", employeeMaster.getEmployeeName());
+//             msg = msg.replace("{company}", employeeMaster.getCompany());
              msg = msg.replace("{dateOfJoining}", employeeMaster.getDateOfJoining());
-             msg = msg.replace("{dateOfLeaving}", employeeMaster.getDateOfLeaving());
-             msg = msg.replace("{designationName}", employeeMaster.getDesignationMaster().getDesignationName());
+//             msg = msg.replace("{dateOfLeaving}", employeeMaster.getDateOfLeaving());
+//             msg = msg.replace("{designationName}", employeeMaster.getDesignationMaster().getDesignationName());
             msg = msg.replace("{date}", new SimpleDateFormat("MM/dd/yyyy")
                     .format(new Date()));
             request.setAttribute("msg", msg);

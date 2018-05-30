@@ -278,9 +278,9 @@
 
                                                                     </tr>
                                                             </c:forEach>
-                                                            <c:choose>
-                                                                <c:when test="${!empty employeelist}">
-                                                                    <tr>
+                                                            <%--<c:choose>--%>
+                                                                <%--<c:when test="${!empty employeelist}">--%>
+<!--                                                                    <tr>
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td><b>Total Amount</b></td>
@@ -289,9 +289,9 @@
                                                                         <td><fmt:formatNumber maxFractionDigits="0" value="${totalaPfAmount}"></fmt:formatNumber></td>
 
 
-                                                                        </tr>
-                                                                </c:when>
-                                                            </c:choose>
+                                                                        </tr>-->
+                                                                <%--</c:when>--%>
+                                                            <%--</c:choose>--%>
                                                             </tbody>
                                                         </table>
                                                     </div>

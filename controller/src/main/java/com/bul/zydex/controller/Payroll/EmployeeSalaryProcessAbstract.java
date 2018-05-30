@@ -28,6 +28,7 @@ import com.bul.zydex.model.PayrollLoanDetail;
 import com.bul.zydex.model.PayrollLoanRemainingAmount;
 import com.bul.zydex.model.PayrollLoanType;
 import com.bul.zydex.model.PayrollPfCheck;
+import com.bul.zydex.model.PayrollPfRecord;
 import com.bul.zydex.model.PayrollProfessionalTax;
 import com.bul.zydex.model.PayrollProvidentFund;
 import com.bul.zydex.model.PayrollPtCheck;
@@ -40,6 +41,7 @@ import com.bul.zydex.model.PayrollTaxDeductionComponent;
 import com.bul.zydex.model.PayrollTaxDeductionMaster;
 import com.bul.zydex.model.PayrollTaxRateMaster;
 import com.bul.zydex.model.PolicyMaster;
+import com.bul.zydex.model.RetirementAge;
 import com.bul.zydex.model.TaxDeductionDecarationSubmit;
 import com.bul.zydex.model.TaxSavingSubmit;
 import com.bul.zydex.service.EmployeeCtcDetailSalary.EmployeeCtcDetailSalaryService;
@@ -59,6 +61,7 @@ import com.bul.zydex.service.Payroll.PayrollLoanDetailService;
 import com.bul.zydex.service.Payroll.PayrollLoanRemainingAmountService;
 import com.bul.zydex.service.Payroll.PayrollLoanTypeService;
 import com.bul.zydex.service.Payroll.PayrollPfCheckService;
+import com.bul.zydex.service.Payroll.PayrollPfRecordService;
 import com.bul.zydex.service.Payroll.PayrollProfessionalTaxService;
 import com.bul.zydex.service.Payroll.PayrollProvidentFundService;
 import com.bul.zydex.service.Payroll.PayrollPtCheckService;
@@ -70,6 +73,7 @@ import com.bul.zydex.service.Payroll.PayrollTaxDeclarationPeriodMasterService;
 import com.bul.zydex.service.Payroll.PayrollTaxDeductionComponentService;
 import com.bul.zydex.service.Payroll.PayrollTaxDeductionMasterService;
 import com.bul.zydex.service.Payroll.PayrollTaxRateMasterService;
+import com.bul.zydex.service.Payroll.RetirementAgeService;
 import com.bul.zydex.service.Payroll.TaxDeductionDecarationSubmitService;
 import com.bul.zydex.service.Payroll.TaxSavingSubmitService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
@@ -126,6 +130,8 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected PayrollTaxDeclarationPeriodMasterService<PayrollTaxDeclarationPeriodMaster> payrollTaxDeclarationPeriodMasterService;
     protected PayrollTaxRateMasterService<PayrollTaxRateMaster> payrollTaxRateMasterService;
     protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
+    protected PayrollPfRecordService<PayrollPfRecord> payrollPfRecordService;
+    protected RetirementAgeService<RetirementAge> retirementAgeService;
 
     Validator employeeSalaryProcessValidator;
 
@@ -424,6 +430,24 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     public void setPayrollTaxRateMasterService(PayrollTaxRateMasterService<PayrollTaxRateMaster> payrollTaxRateMasterService) {
         this.payrollTaxRateMasterService = payrollTaxRateMasterService;
     }
+
+    public PayrollPfRecordService<PayrollPfRecord> getPayrollPfRecordService() {
+        return payrollPfRecordService;
+    }
+
+    public void setPayrollPfRecordService(PayrollPfRecordService<PayrollPfRecord> payrollPfRecordService) {
+        this.payrollPfRecordService = payrollPfRecordService;
+    }
+
+    public RetirementAgeService<RetirementAge> getRetirementAgeService() {
+        return retirementAgeService;
+    }
+
+    public void setRetirementAgeService(RetirementAgeService<RetirementAge> retirementAgeService) {
+        this.retirementAgeService = retirementAgeService;
+    }
+    
+    
     
     
     

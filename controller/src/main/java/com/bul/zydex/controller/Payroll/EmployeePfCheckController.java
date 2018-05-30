@@ -98,7 +98,7 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
             employeeMaster.setPanCard(year);
         }
 
-        List<?> list = employeeSalaryProcessService.readEmployeeForPf(employeeMaster);
+        List<?> list = payrollPfRecordService.readEmployeeForPf(employeeMaster);
 
         double totalPfAmount = 0;
         double totalePfAmount = 0;
@@ -279,74 +279,108 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
             Double totalGoss = (Double) o[5];
             tempemployeePfdetailList.add(totalGoss);
 
-            String pfAmount = (String) o[6];
-            tempemployeePfdetailList.add(pfAmount);
-            String dayofbirth = (String) o[7];
-            String birthyear = dayofbirth.substring(6, 10);
-            Calendar cal = Calendar.getInstance();
-            int year2 = cal.get(cal.YEAR);
-            int diffYear = year2 - Integer.parseInt(birthyear);
-            RetirementAge retirementAge = new RetirementAge();
-            List<?> retirementAgeList = retirementAgeService.read();
-            retirementAge = (RetirementAge) retirementAgeList.get(0);
-            String ages = retirementAge.getRetireAge();
-            employeeMaster = employeeMasterService.readById(employeeMasterID);
+            List<?> list2 = payrollPfRecordService.readEmployeePayrolllPfRecord(employeeProcessId);
+            for (Object employeePfdetail1 : list2) {
+                Object[] o1 = (Object[]) employeePfdetail1;
+                Double epfamount = (Double) o1[0];
+                tempemployeePfdetailList.add(epfamount);
+                Double epSamount = (Double) o1[1];
+                tempemployeePfdetailList.add(epSamount);
+                Double epSEpfDiffamount = (Double) o1[2];
+                tempemployeePfdetailList.add(epSEpfDiffamount);
+                Double empEpf = (Double) o1[3];
+                tempemployeePfdetailList.add(empEpf);
+                Double comEps = (Double) o1[4];
+                tempemployeePfdetailList.add(comEps);
+                Double DiffcomEps = (Double) o1[5];
+                tempemployeePfdetailList.add(DiffcomEps);
 
-            boolean pfFlag = payrollPfCheckService.readForPfCheck(employeeMaster.getEmployeeTypeMaster().getId(),
-                    employeeMaster.getEmployeeSubType().getId());
-
-            if (pfFlag) {
-                List<?> pfAmountList = payrollProvidentFundService.readPf(employeeMaster.getZydexLocationMaster().getId());
-                if (!pfAmountList.isEmpty()) {
-                    PayrollProvidentFund payrollProvidentFund = (PayrollProvidentFund) pfAmountList.get(0);
-                    double maxiAmount1 = Double.parseDouble(payrollProvidentFund.getMaximumBasicAmount());
-                    String pfPercentage = payrollProvidentFund.getPfPercentage();
-                    String epfPercentage = payrollProvidentFund.getEpfPercentage();
-
-                    if (maxiAmount1 <= Double.parseDouble(pfAmount)) {
-                        tempemployeePfdetailList.add(maxiAmount1);
-                        tempemployeePfdetailList.add(maxiAmount1);
-                        double Epf1 = 0;
-
-                        Epf1 = (Double.parseDouble(pfAmount) * Double.parseDouble(pfPercentage) / 100);
-                        tempemployeePfdetailList.add(Epf1);// epf wages calculate by 12 percentage of pf 
-                        double Eps1 = 0;
-
-                        if (Integer.parseInt(ages) <= diffYear) {
-                            Eps1 = (maxiAmount1 * Double.parseDouble(epfPercentage) / 100);
-                            tempemployeePfdetailList.add(Eps1);// epf wages calculate by 8.33 percentage of pf    
-                        } else {
-                            tempemployeePfdetailList.add(Eps1);
-                        }
-//                        Eps1 = (maxiAmount1 * Double.parseDouble(epfPercentage) / 100);
-//                        tempemployeePfdetailList.add(Eps1);// epf wages calculate by 8.33 percentage of pf 
-                        double diffEpsEpf = 0;
-                        diffEpsEpf = Epf1 - Eps1;// 
-                        tempemployeePfdetailList.add(diffEpsEpf);// different epf-eps
-
-                    } else {
-                        tempemployeePfdetailList.add(pfAmount);
-                        tempemployeePfdetailList.add(pfAmount);
-                        double Epf2 = 0;
-                        Epf2 = (Double.parseDouble(pfAmount) * Double.parseDouble(pfPercentage) / 100);
-                        tempemployeePfdetailList.add(Epf2);// epf wages calculate by 12 percentage of pf
-                        double Eps2 = 0;
-                        if (Integer.parseInt(ages) <= diffYear) {
-
-                            Eps2 = (Double.parseDouble(pfAmount) * Double.parseDouble(epfPercentage) / 100);
-                            tempemployeePfdetailList.add(Eps2);// epf wages calculate by 8.33 percentage of pf 
-                        } else {
-                            tempemployeePfdetailList.add(Eps2);
-                        }
-
-                        double diffEpsEpf1 = 0;
-                        diffEpsEpf1 = Epf2 - Eps2;// 
-                        tempemployeePfdetailList.add(diffEpsEpf1);// different epf-eps
-                    }
-                    String dateOfBirth = "12/04/1975";
-                    tempemployeeSalaryDetail.add(tempemployeePfdetailList);
-                }
             }
+            tempemployeeSalaryDetail.add(tempemployeePfdetailList);
+
+//            String pfAmount = (String) o[6];
+//            tempemployeePfdetailList.add(pfAmount);
+//            String dayofbirth = (String) o[7];
+//            String birthyear = dayofbirth.substring(6, 10);
+//            Calendar cal = Calendar.getInstance();
+//            int year2 = cal.get(cal.YEAR);
+//            int diffYear = year2 - Integer.parseInt(birthyear);
+//            RetirementAge retirementAge = new RetirementAge();
+//            List<?> retirementAgeList = retirementAgeService.read();
+//            retirementAge = (RetirementAge) retirementAgeList.get(0);
+//            String ages = retirementAge.getRetireAge();
+//            employeeMaster = employeeMasterService.readById(employeeMasterID);
+//            String pfamount = "";
+//            String pfamountEmployeer = "";
+//            pfamount = employeeMaster.getPfAmount();
+//            pfamountEmployeer = employeeMaster.getPfAmountEmployer();
+//            boolean pf = employeeMaster.getPf();
+//            if (pf == true) {
+//                if (null != pfamount || null != pfamountEmployeer) {
+//                    
+//                    boolean pfFlag = payrollPfCheckService.readForPfCheck(employeeMaster.getEmployeeTypeMaster().getId(),
+//                            employeeMaster.getEmployeeSubType().getId());
+//
+//                    if (pfFlag) {
+//                        List<?> pfAmountList = payrollProvidentFundService.readPf(employeeMaster.getZydexLocationMaster().getId());
+//                        if (!pfAmountList.isEmpty()) {
+//                            PayrollProvidentFund payrollProvidentFund = (PayrollProvidentFund) pfAmountList.get(0);
+//                            double maxiAmount1 = Double.parseDouble(payrollProvidentFund.getMaximumBasicAmount());
+//                            String pfPercentage = payrollProvidentFund.getPfPercentage();
+//                            String epfPercentage = payrollProvidentFund.getEpfPercentage();
+//
+//                            if (maxiAmount1 <= Double.parseDouble(pfAmount)) {
+//                                tempemployeePfdetailList.add(maxiAmount1);
+//                                tempemployeePfdetailList.add(maxiAmount1);
+//                                double Epf1 = 0;
+//
+//                                Epf1 = (Double.parseDouble(pfAmount) * Double.parseDouble(pfPercentage) / 100);
+//                                tempemployeePfdetailList.add(Epf1);// epf wages calculate by 12 percentage of pf 
+//                                double Eps1 = 0;
+//
+//                                if (Integer.parseInt(ages) >= diffYear) {
+//                                    Eps1 = (maxiAmount1 * Double.parseDouble(epfPercentage) / 100);
+//                                    tempemployeePfdetailList.add(Eps1);// epf wages calculate by 8.33 percentage of pf    
+//                                } else {
+//                                    tempemployeePfdetailList.add(Eps1);
+//                                }
+////                        Eps1 = (maxiAmount1 * Double.parseDouble(epfPercentage) / 100);
+////                        tempemployeePfdetailList.add(Eps1);// epf wages calculate by 8.33 percentage of pf 
+//                                double diffEpsEpf = 0;
+//                                diffEpsEpf = Epf1 - Eps1;// 
+//                                tempemployeePfdetailList.add(diffEpsEpf);// different epf-eps
+//
+//                            } else {
+//                                tempemployeePfdetailList.add(pfAmount);
+//                                tempemployeePfdetailList.add(pfAmount);
+//                                double Epf2 = 0;
+//                                Epf2 = (Double.parseDouble(pfAmount) * Double.parseDouble(pfPercentage) / 100);
+//                                tempemployeePfdetailList.add(Epf2);// epf wages calculate by 12 percentage of pf
+//                                double Eps2 = 0;
+//                                if (Integer.parseInt(ages) <= diffYear) {
+//
+//                                    Eps2 = (Double.parseDouble(pfAmount) * Double.parseDouble(epfPercentage) / 100);
+//                                    tempemployeePfdetailList.add(Eps2);// epf wages calculate by 8.33 percentage of pf 
+//                                } else {
+//                                    tempemployeePfdetailList.add(Eps2);
+//                                }
+//
+//                                double diffEpsEpf1 = 0;
+//                                diffEpsEpf1 = Epf2 - Eps2;// 
+//                                tempemployeePfdetailList.add(diffEpsEpf1);// different epf-eps
+//                            }
+//                            String dateOfBirth = "12/04/1975";
+//                            tempemployeeSalaryDetail.add(tempemployeePfdetailList);
+//                        }
+//                    }
+//                }else{
+//                
+//                
+//                
+//                
+//                
+//                }
+//            }
         }
         return tempemployeeSalaryDetail;
     }

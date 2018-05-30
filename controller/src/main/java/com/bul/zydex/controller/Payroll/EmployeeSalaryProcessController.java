@@ -23,6 +23,7 @@ import com.bul.zydex.model.PayrollEsicDeduction;
 import com.bul.zydex.model.PayrollLoanDetail;
 import com.bul.zydex.model.PayrollLoanRemainingAmount;
 import com.bul.zydex.model.PayrollLoanType;
+import com.bul.zydex.model.PayrollPfRecord;
 import com.bul.zydex.model.PayrollProfessionalTax;
 import com.bul.zydex.model.PayrollProvidentFund;
 import com.bul.zydex.model.PayrollRecurringAdditionalAmount;
@@ -30,6 +31,7 @@ import com.bul.zydex.model.PayrollRecurringDeduction;
 import com.bul.zydex.model.PayrollSalaryLock;
 import com.bul.zydex.model.PayrollTaxRateMaster;
 import com.bul.zydex.model.PolicyMaster;
+import com.bul.zydex.model.RetirementAge;
 import com.bul.zydex.model.TaxSavingSubmit;
 import com.bul.zydex.util.DownloadFile;
 import java.io.File;
@@ -393,6 +395,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         ///////////////////////PF Start Here///////////////////////
 
         EmployeeMaster employeeMaster = new EmployeeMaster();
+        PayrollPfRecord payrollPfRecord = new PayrollPfRecord();
         employeeMaster = employeeMasterService.readById(employeeSalaryProcess.getEmployeeMaster().getId());
         if (employeeMaster1.getPf() == true) {
             boolean pfFlag = payrollPfCheckService.readForPfCheck(employeeMaster.getEmployeeTypeMaster().getId(),
@@ -403,41 +406,153 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //         for (Object oPf : pfAmountList) {
                 double maxiAmount = 0;
                 double maxiAmountConbrutionEmployer = 0;
+//                double edilimaxiAmountConbrutionEmployer = 0;
                 if (!pfAmountList.isEmpty()) {
                     PayrollProvidentFund payrollProvidentFund = (PayrollProvidentFund) pfAmountList.get(0);
                     double basicSalary = employeeSalaryProcess.getEmployeeBasicSalary();
                     double pf = Double.parseDouble(payrollProvidentFund.getPfPercentage());
                     double pfEmployeer = Double.parseDouble(payrollProvidentFund.getEpfPercentage());
+                    double EDilpfEmployeer = Double.parseDouble(payrollProvidentFund.getApfPercentage());
+                    double maxAmountfromPf = Double.parseDouble(payrollProvidentFund.getMaximumBasicAmount());
                     maxiAmount = Double.parseDouble(employeeMaster.getPfAmount());
                     maxiAmountConbrutionEmployer = Double.parseDouble(employeeMaster.getPfAmountEmployer());
+                    String dayofbirth = employeeMaster.getDateOfBirth();
+                    String birthyear = dayofbirth.substring(6, 10);
+                    Calendar cal = Calendar.getInstance();
+                    int year2 = cal.get(cal.YEAR);
+                    int diffYear = year2 - Integer.parseInt(birthyear);
+                    RetirementAge retirementAge = new RetirementAge();
+                    List<?> retirementAgeList = retirementAgeService.read();
+                    retirementAge = (RetirementAge) retirementAgeList.get(0);
+                    String ages = retirementAge.getRetireAge();
+
+//                    edilimaxiAmountConbrutionEmployer = Double.parseDouble(employeeMaster.get);
                     double taxpf = 0;
                     double taxpfConbrutionEmployer = 0;
+                    double taxpfConbrutionEmployerEdili = 0;
                     if (maxiAmount != 0) {
                         if (maxiAmount <= basicSalary) {
 
-                            taxpf = (maxiAmount * pf / 100);
-                            taxpfConbrutionEmployer = (maxiAmountConbrutionEmployer * pfEmployeer / 100);
+                            taxpf = (maxiAmount * pf / 100);//12
 
                             employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                             employeeDeductionAmount.setDeductionType("Provident Fund");
                             employeeDeductionAmount.setDeductionAmount(taxpf);
                             employeeDeductionAmountService.create(employeeDeductionAmount);
+                            payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            payrollPfRecord.setEpfAmount(maxiAmount);
+                            payrollPfRecord.setDiifepsEpfAmount(maxiAmountConbrutionEmployer);
+                            payrollPfRecord.setEmpContrubtionEpf(taxpf);
+
+                            if (Integer.parseInt(ages) >= diffYear) {
+                                payrollPfRecord.setEpsAmount(maxiAmountConbrutionEmployer);
+                                taxpfConbrutionEmployer = (maxiAmountConbrutionEmployer * pfEmployeer / 100);//8.33
+                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf 
+                                taxpfConbrutionEmployerEdili = (maxiAmountConbrutionEmployer * EDilpfEmployeer / 100);//3.67
+                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+
+                            } else {
+                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                                payrollPfRecord.setEpsAmount(0.0);
+                                taxpfConbrutionEmployerEdili = (maxiAmountConbrutionEmployer * pf / 100);//3.67
+                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                            }
+
+                            payrollPfRecordService.create(payrollPfRecord);
                         } else {
-                            taxpf = basicSalary * pf / 100;
+                            taxpf = basicSalary * pf / 100; /// 12%
 
                             employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                             employeeDeductionAmount.setDeductionType("Provident Fund");
                             employeeDeductionAmount.setDeductionAmount(taxpf);
                             employeeDeductionAmountService.create(employeeDeductionAmount);
+                            // pf record table 
+                            payrollPfRecord.setDiifepsEpfAmount(basicSalary);
+                            payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            payrollPfRecord.setEpfAmount(basicSalary);
+                            payrollPfRecord.setEmpContrubtionEpf(taxpf);
+
+                            if (Integer.parseInt(ages) >= diffYear) {
+                                payrollPfRecord.setEpsAmount(basicSalary);
+                                taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
+                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf 
+                                taxpfConbrutionEmployerEdili = (basicSalary * EDilpfEmployeer / 100);//3.67
+                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                            } else {
+                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                                payrollPfRecord.setEpsAmount(0.0);
+                                taxpfConbrutionEmployerEdili = (basicSalary * pf / 100);//3.67
+                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                            }
+
+//                            payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                            payrollPfRecordService.create(payrollPfRecord);
                         }
 
                     } else {
-                        taxpf = basicSalary * pf / 100;
 
-                        employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                        employeeDeductionAmount.setDeductionType("Provident Fund");
-                        employeeDeductionAmount.setDeductionAmount(taxpf);
-                        employeeDeductionAmountService.create(employeeDeductionAmount);
+                        if (maxAmountfromPf <= basicSalary) {
+
+                            taxpf = (maxAmountfromPf * pf / 100);//12
+
+                            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            employeeDeductionAmount.setDeductionType("Provident Fund");
+                            employeeDeductionAmount.setDeductionAmount(taxpf);
+                            employeeDeductionAmountService.create(employeeDeductionAmount);
+                            payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            payrollPfRecord.setEpfAmount(maxAmountfromPf);
+
+                            payrollPfRecord.setDiifepsEpfAmount(maxAmountfromPf);
+                            payrollPfRecord.setEmpContrubtionEpf(taxpf);
+
+                            if (Integer.parseInt(ages) >= diffYear) {
+                                payrollPfRecord.setEpsAmount(maxAmountfromPf);
+                                taxpfConbrutionEmployer = (maxAmountfromPf * pfEmployeer / 100);//8.33
+                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf  
+                                taxpfConbrutionEmployerEdili = (maxAmountfromPf * EDilpfEmployeer / 100);//3.67
+                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                            } else {
+                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                                payrollPfRecord.setEpsAmount(0.0);
+                                taxpfConbrutionEmployerEdili = (maxAmountfromPf * pf / 100);//3.67
+                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                            }
+
+//                            payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+//                            payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                            payrollPfRecordService.create(payrollPfRecord);
+                        } else {
+                            taxpf = basicSalary * pf / 100; /// 12%
+
+                            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            employeeDeductionAmount.setDeductionType("Provident Fund");
+                            employeeDeductionAmount.setDeductionAmount(taxpf);
+                            employeeDeductionAmountService.create(employeeDeductionAmount);
+                            // pf record table 
+//                            taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
+
+                            payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
+                            payrollPfRecord.setEpfAmount(basicSalary);
+
+                            payrollPfRecord.setDiifepsEpfAmount(basicSalary);
+                            payrollPfRecord.setEmpContrubtionEpf(taxpf);
+                            if (Integer.parseInt(ages) >= diffYear) {
+                                payrollPfRecord.setEpsAmount(basicSalary);
+                                taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
+                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf    
+                                taxpfConbrutionEmployerEdili = (basicSalary * EDilpfEmployeer / 100);//3.67
+                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+
+                            } else {
+                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                                payrollPfRecord.setEpsAmount(0.0);
+                                taxpfConbrutionEmployerEdili = (basicSalary * pf / 100);//3.67
+                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                            }
+//                            payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+
+                            payrollPfRecordService.create(payrollPfRecord);
+                        }
 
                     }
 
@@ -1822,6 +1937,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         EmployeeExcelRecord employeeExcelRecord = new EmployeeExcelRecord();
         PayrollEsicDeduction payrollEsicDeduction = new PayrollEsicDeduction();
         EmployeeDeductionAmount employeeDeductionAmount = new EmployeeDeductionAmount();
+        PayrollPfRecord payrollPfRecord = new PayrollPfRecord();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         String month1 = request.getParameter("month");
         String year11 = request.getParameter("year11");
@@ -2023,6 +2139,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 for (Object o : list322) {
                                     payrollEsicDeduction = (PayrollEsicDeduction) o;
                                     payrollEsicDeductionService.delete(payrollEsicDeduction.getId());
+                                }
+                                List<?> list32213 = payrollPfRecordService.readByEmployePfReport(employeeSalaryProcess);
+                                for (Object o : list32213) {
+                                    payrollPfRecord = (PayrollPfRecord) o;
+                                    payrollPfRecordService.delete(payrollPfRecord.getId());
                                 }
                                 List<?> list3 = employeeSalaryProcessService.readByEmployeeSalaryProcess(employeeSalaryProcess);
                                 for (Object o : list3) {

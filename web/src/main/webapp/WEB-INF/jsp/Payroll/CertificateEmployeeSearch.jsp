@@ -16,6 +16,7 @@
     </head>
 <script>
           function viewClick(id) {
+             
             window.location = "certificateTemplate.htm?act=ViewIndiviualFormCertificate&id="+id;
    
         }

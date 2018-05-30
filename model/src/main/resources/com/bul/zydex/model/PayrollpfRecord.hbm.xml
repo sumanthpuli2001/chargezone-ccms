@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.PayrollPfRecord" table="payroll_pf_record" catalog="hr_power_astral">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="employeeSalaryProcess" class="com.bul.zydex.model.EmployeeSalaryProcess" fetch="select">
+            <column name="employee_salary_process_id" />
+        </many-to-one>
+        
+        <property name="compContrubtionEps" type="java.lang.Double">
+            <column name="comp_contrubtion_eps" precision="22" scale="0" />
+        </property>
+        <property name="empContrubtionEpf" type="java.lang.Double">
+            <column name="emp_contrubtion_epf" precision="22" scale="0" />
+        </property>
+        <property name="differentEpsEpf" type="java.lang.Double">
+            <column name="different_eps_epf" precision="22" scale="0" />
+        </property>
+        <property name="epfAmount" type="java.lang.Double">
+            <column name="epf_amount" precision="22" scale="0" />
+        </property>
+        <property name="epsAmount" type="java.lang.Double">
+            <column name="eps_amount" precision="22" scale="0" />
+        </property>
+        <property name="diifepsEpfAmount" type="java.lang.Double">
+            <column name="diifeps_epf_amount" precision="22" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

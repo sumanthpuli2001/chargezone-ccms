@@ -681,4 +681,7 @@
     <bean id="displaymorNotesService1" class="com.bul.zydex.service.Payroll.DisplaymorNotesServiceImpl">
         <property name="displaymorNotesDAO" ref="displaymorNotesDAO1" />
     </bean>
+    <bean id="payrollPfRecordService1" class="com.bul.zydex.service.Payroll.PayrollPfRecordServiceImpl">
+        <property name="payrollPfRecordDAO" ref="payrollPfRecordDAO1" />
+    </bean>
 </beans>

@@ -274,4 +274,5 @@
     <bean id="displaymorNotesDAO1" class="com.bul.zydex.dao.Payroll.DisplaymorNotesDAOImpl" parent="sessionFactoryConfig" />
     <bean id="policyCreateDAO1" class="com.bul.zydex.dao.policy.PolicyCreateDAOImpl" parent="sessionFactoryConfig" />
     <bean id="PolicyDropDownDAO1" class="com.bul.zydex.dao.policy.PolicyDropDownDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="payrollPfRecordDAO1" class="com.bul.zydex.dao.Payroll.PayrollPfRecordDAOImpl" parent="sessionFactoryConfig" />
 </beans>

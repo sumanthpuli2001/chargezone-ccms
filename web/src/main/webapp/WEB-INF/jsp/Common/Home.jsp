@@ -400,6 +400,10 @@
                                                 <i class="fa fa-twitch"></i>
                                                 <strong>Holiday List</strong>
                                             </a>
+                                            <a style="font-size: 20px;text-align: left;" href="policyMaster.htm?act=dashboardshowPolicy">
+                                                <i class="fa fa-paypal"></i>
+                                                <strong>Policy</strong>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-md-9">

@@ -160,5 +160,107 @@ public class EsicDeductionStatementController extends EsicDeductionStatementAbst
         mv = searchEsicDetail(request, response);
         return mv;
     }
+     public ModelAndView searchEsicDetailGovt(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeSalaryProcess employeeSalaryProcess = new EmployeeSalaryProcess();
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeType employeeType = new EmployeeType();
+        EmployeeSubType employeeSubType = new EmployeeSubType();
+        List<?> list = (List<?>) request.getAttribute("employeelist");
+        zydexLocationList(request);
+        EmployeeTypeList(request);
+        EmployeeSubTypeList(request);
+        request.setAttribute("search", request.getParameter("search"));
+        List<?> list1 = (List<?>) request.getAttribute("SalaryList");
+        mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
+        request.setAttribute("employeelist", list);
+        session.setAttribute("EmployeePfcheck1", list1);
+        mv.setViewName("Payroll/EsicDeductionStatementGovt");
+        return mv;
+    }
+      public ModelAndView searchFormEmployeeEsicStatementDetailSubmitGovt(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeSalaryProcess employeeSalaryProcess = new EmployeeSalaryProcess();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeType employeeType = new EmployeeType();
+        EmployeeSubType employeeSubType = new EmployeeSubType();
+        Double grossTotal = 0.0D;
+        Double EmpCont = 0.0D;
+        Double comCont = 0.0D;
+        String employeeId = "";
+        String employeeName = "";
+
+        List finalList = new ArrayList();
+        List listForMonthAndYear = new ArrayList();
+        String zydex_location_id = request.getParameter("zydexLocationMasterId");
+        String type_of_employee = request.getParameter("employeeTypeMasterId");
+        String employee_sub_id = request.getParameter("subTypeId");
+        String Payment_Type = request.getParameter("paymentType");
+        String month = request.getParameter("month");
+        String year = request.getParameter("year11");
+
+        HttpSession session = request.getSession();
+//       
+
+        if (!zydex_location_id.equals(
+                "")) {
+            employeeMaster.setAdharCard(zydex_location_id);
+        }
+
+        if (!type_of_employee.equals(
+                "")) {
+            employeeMaster.setEmployeeType(type_of_employee);
+        }
+        if (null != employee_sub_id
+                && !employee_sub_id.equals(
+                        "")) {
+            employeeMaster.setCompany(employee_sub_id);
+        }
+//
+
+        if (!Payment_Type.equals(
+                "")) {
+            employeeMaster.setPaymentType(Payment_Type);
+
+        }
+
+        if (!"".equals(month)) {
+            employeeMaster.setBankAccountNo(month);
+        }
+
+        if (!"".equals(year)) {
+            employeeMaster.setPanCard(year);
+        }
+
+        List<?> readEmployeeEsicStatementlist = employeeSalaryProcessService.readEmployeeForEsicStatement(employeeMaster);
+        double totalgrossAmount = 0;
+        Iterator itr = readEmployeeEsicStatementlist.iterator();
+        while (itr.hasNext()) {
+            Object[] next = (Object[]) itr.next();
+            totalgrossAmount += (Double) next[2];
+        }
+        double totalEmpContrubtionAmount = 0;
+        Iterator itr1 = readEmployeeEsicStatementlist.iterator();
+        while (itr1.hasNext()) {
+            Object[] next = (Object[]) itr1.next();
+            totalEmpContrubtionAmount += (Double) next[3];
+        }
+        double totalCompContrubtionAmount = 0;
+        Iterator itr2 = readEmployeeEsicStatementlist.iterator();
+        while (itr2.hasNext()) {
+            Object[] next = (Object[]) itr2.next();
+            totalCompContrubtionAmount += (Double) next[4];
+        }
+
+        request.setAttribute("employeelist", readEmployeeEsicStatementlist);
+        request.setAttribute("totalgrossAmount", totalgrossAmount);
+        request.setAttribute("totalEmpContrubtionAmount", totalEmpContrubtionAmount);
+        request.setAttribute("totalCompContrubtionAmount", totalCompContrubtionAmount);
+        request.setAttribute("month", month);
+        request.setAttribute("year", year);
+        mv = searchEsicDetailGovt(request, response);
+        return mv;
+    }
 
 }

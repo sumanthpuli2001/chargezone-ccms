@@ -14,6 +14,7 @@ import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.PolicyCreate;
 import com.bul.zydex.model.PolicyDropDown;
 import com.bul.zydex.model.PolicyMaster;
+import com.bul.zydex.util.DownloadFile;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
@@ -173,6 +174,16 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         return mv;
     }
 
+    public ModelAndView dashboardshowPolicy(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PolicyCreate policyCreate = new PolicyCreate();
+        List<?> policyList = policyCreateService.readpolicyCreate();
+        mv.getModel().put("list", policyList);
+        mv.getModel().put("policyCreate", policyCreate);
+        mv.setViewName("Policy/dashboardshowPolicy");
+        return mv;
+    }
+
     public ModelAndView policyCreate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PolicyCreate policyCreate = new PolicyCreate();
@@ -303,6 +314,23 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         }
         mv = showPolicyList(request, response);
         return mv;
+    }
+
+    public void downloadAttachment(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        String id = request.getParameter("id");
+        PolicyCreate pc = policyCreateService.readById(Integer.parseInt(id));
+        String attachment = pc.getAttachment();
+
+        String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "policyAttachment" + File.separator + attachment;
+
+        request.setAttribute("filePath", fileLocationURL);
+
+        DownloadFile downloadFile = new DownloadFile();
+        downloadFile.doDownload(request, response);
     }
 
 }

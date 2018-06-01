@@ -44,6 +44,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="StorageYard/Images/login/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="StorageYard/Images/login/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="StorageYard/Images/login/apple-touch-icon-57-precomposed.png">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 
         <!--        <style>
                     .labelDiv {
@@ -70,7 +71,6 @@
                 padding: 5px;
             }
         </style>
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
         <script>
             $(function () {
                 $("#datepicker").datepicker();
@@ -266,6 +266,9 @@
                 var element1 = document.getElementById(removeRowId1);
                 element1.parentNode.removeChild(element1);
             }
+//            function inputRadio(){
+//                    alert("hiii");
+//                }
         </script>
     </head>
     <body>
@@ -302,7 +305,7 @@
                                     </thead>
                                     <tbody>
                                     <c:choose>
-                                        <c:when test="${photographAttachment eq '' or photographAttachment eq null} }">
+                                        <c:when test="${photographAttachment eq ''}">
                                             <tr>
                                                 <td>
                                                     <td><input type="file" name="candidateApplyJob.photograph" class="form-control"/></td>
@@ -374,7 +377,7 @@
                                         <th colspan="2" style="text-align: left">Basic Details :</th>
                                     </tr>
                                     <tr>
-                                        <th>Sex</th>
+                                        <th>Gender</th>
                                         <td style="text-align:left">
                                         <form:radiobutton  path="candidateApplyJob.sex" id="sexMale" value="false" required="true"/>Male &emsp;
                                         <form:radiobutton  path="candidateApplyJob.sex" id="sexFemale" value="true" required="true"/>Female
@@ -382,11 +385,12 @@
                                 </tr>
                                 <tr>
                                     <th>Your D.O.B</th>
-                                    <td><form:input path="candidateApplyJob.dob" class="form-control" id="datepicker" placeholder="Select Your D.O.B" readonly="true" required="true"></form:input></td>
+                                    <td>
+                                        <form:input path="candidateApplyJob.dob" class="form-control form_datetime" id="datepicker" placeholder="Select Your D.O.B" readonly="false" required="true"></form:input></td>
                                     </tr>
                                     <tr>
                                         <th>Father D.O.B</th>
-                                        <td><form:input path="candidateApplyJob.fatherDob" id="datepicker1" class="form-control" size="16" placeholder="Select Father's D.O.B" readonly="true" required="true"></form:input></td>
+                                        <td><form:input path="candidateApplyJob.fatherDob" id="datepicker1" class="form-control form_datetime" size="16" placeholder="dd/MM/yyyy" readonly="false" required="true"></form:input></td>
                                     </tr>
                                     <tr>
                                         <th>Mother Name</th>
@@ -586,47 +590,47 @@
                                 <tbody>
                                     <tr>
                                         <th>Basic</th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupBasic" class="form-control" placeholder="Enter Basic Salary"></form:input></td>
+                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupBasic" class="form-control salary" id="basicSalary" placeholder="Enter Basic Salary"></form:input></td>
 
                                     </tr>
                                     <tr>
                                         <th>DA/VDA/SD/ALL</th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupDaVdaSdAll" class="form-control" placeholder="Enter Da/Vd/Sd/All"></form:input></td>
+                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupDaVdaSdAll" class="form-control salary" id="davdaSalary" placeholder="Enter Da/Vd/Sd/All"></form:input></td>
 
                                     </tr>
                                     <tr>
                                         <th>HRA</th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupHRA" class="form-control" placeholder="Enter HRA"></form:input></td>
+                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupHRA" class="form-control salary" id="hraSalary" placeholder="Enter HRA"></form:input></td>
 
                                     </tr>
                                     <tr>
                                         <th>CONVEYANCE ALL.</th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupConveyanceAll" class="form-control" placeholder="Enter CONVEYANCE ALL."></form:input></td>
+                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupConveyanceAll" class="form-control salary" id="conveyanceSalary" placeholder="Enter CONVEYANCE ALL."></form:input></td>
 
                                     </tr>
                                     <tr>
                                         <th>LTA</th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupLTA" class="form-control" placeholder="Enter LTA"></form:input></td>
+                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupLTA" class="form-control salary" id="ltaSalary" placeholder="Enter LTA"></form:input></td>
 
                                     </tr>
                                     <tr>
                                         <th>MED.</th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupMED" class="form-control" placeholder="Enter MED."></form:input></td>
+                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupMED" class="form-control salary" id="medSalary" placeholder="Enter MED."></form:input></td>
 
                                     </tr>
                                     <tr>
                                         <th>BONUS</th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupBonus" class="form-control" placeholder="Enter Bonus"></form:input></td>
+                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupBonus" class="form-control salary" id="bonusSalary" placeholder="Enter Bonus"></form:input></td>
 
                                     </tr>
                                     <tr>
                                         <th>OTHER, If any</th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupOther" class="form-control" placeholder="Enter Other"></form:input></td>
+                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupOther" class="form-control salary" id="otherSalary" placeholder="Enter Other"></form:input></td>
 
                                     </tr>
                                     <tr>
                                         <th>TOTAL</th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupTotal" class="form-control" placeholder="Enter Total Salary"></form:input></td>                                      
+                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupTotal" class="form-control salaryTotal" placeholder="Enter Total Salary"></form:input></td>                                      
                                     </tr>
                                     <tr>
                                         <th>Salary Slip Attachment</th>
@@ -635,13 +639,13 @@
                                                     <td><input type="file" name="candidateApplyJob2.salarySlipAttachment" class="form-control" required="true"></td>                                      
                                                 </tr> 
                                             </c:when>
-                                        <c:otherwise>
-                                                <td>
-                                                    <input type="file" name="candidateApplyJob2.salarySlipAttachment" class="form-control">
-                                                    <a href="vacancy.htm?act=downloadCandidateSalaryAttachment&amp;fileName=${salarySlipAttachment}">${salarySlipAttachment}</a>
-                                                </td>
-                                            </tr>
-                                        </c:otherwise>
+                                            <c:otherwise>
+                                                    <td>
+                                                        <input type="file" name="candidateApplyJob2.salarySlipAttachment" class="form-control">
+                                                        <a href="vacancy.htm?act=downloadCandidateSalaryAttachment&amp;fileName=${salarySlipAttachment}">${salarySlipAttachment}</a>
+                                                    </td>
+                                                </tr>
+                                            </c:otherwise>
                                     </c:choose>    
                                 </tbody>
                             </table>
@@ -660,14 +664,16 @@
                                     <tr>
                                         <th>ESIC</th>
                                         <td style="text-align: left" id="esicStatusTd">
-                                        <form:radiobutton path="candidateApplyJob2.esicStatus" name="esicStatus" id="esicStatus1" value="1" required="true"/>Yes
-                                        <form:radiobutton path="candidateApplyJob2.esicStatus" name="esicStatus" id="esicStatus0" value="0" required="true"/>No
+                                        <form:radiobutton path="candidateApplyJob2.esicStatus" id="esicStatus1" value="1" required="true"/>Yes
+                                        <form:radiobutton path="candidateApplyJob2.esicStatus" id="esicStatus0" value="0" required="true"/>No
                                     </td>
                                     </tr>
-                                    <tr id="trEsicNo">
-                                        <th>ESIC No</th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.esicNumber" class="form-control" placeholder="Enter ESIC No"></form:input></td>
-                                        </tr>
+                                    <tr>
+                                        <div id="trEsicNo">
+                                            <th>ESIC No</th>
+                                            <td><form:input type="number" min="0" path="candidateApplyJob2.esicNumber" class="form-control" placeholder="Enter ESIC No"></form:input></td>
+                                        </div>
+                                    </tr>
                                         <tr>
                                             <th>PF</th>
                                             <td style="text-align: left" id="pfStatusTd">
@@ -675,9 +681,11 @@
                                             <form:radiobutton path="candidateApplyJob2.pfStatus" id="pfStatus0" value="0" required="true"/>No
                                         </td>
                                     </tr>
-                                    <tr id="trPfNo">
-                                        <th>PF No</th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.pfNumber" class="form-control" placeholder="Enter PF No"></form:input></td>
+                                    <tr>
+                                        <div id="trPfNo">
+                                            <th>PF No</th>
+                                            <td><form:input type="number" min="0" path="candidateApplyJob2.pfNumber" class="form-control" placeholder="Enter PF No"></form:input></td>
+                                        </div>
                                     </tr>
                                 </tbody>
                             </table>
@@ -697,7 +705,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryExpected" class="form-control" placeholder="Enter Salary Expected" required="true"></form:input></td>
+                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryExpected" class="form-control" placeholder="Enter Salary Expected"></form:input></td>
                                         <td><form:input path="candidateApplyJob2.noticePeriod" class="form-control" placeholder="Enter Required Time to Join" required="true"></form:input></td>
                                         <td><form:input type="number" min="0" path="candidateApplyJob.experianceDateJoiningYear" class="form-control" step="any" placeholder="Enter Total Experience In Year" required="true"></form:input></td>
                                         <td><form:input type="number" min="0" path="candidateApplyJob.experianceDateJoiningMonth" class="form-control" step="any" placeholder="Enter Total Experience In Month" required="true"></form:input></td>
@@ -745,7 +753,7 @@
                                                 <td><input type="number" min="0" name="candidateAcademicQualification.academicNumberOfAttempts" class="form-control" placeholder="No of Attempts" required="true"/></td>
                                                 <td><input type="text" name="candidateAcademicQualification.academicMarksInPercent" class="form-control" placeholder="Academic Marks(%)" required="true"/></td>
                                                 <td><input type="text" name="candidateAcademicQualification.academicClass" class="form-control" placeholder="Academic Class" required="true"/></td>
-                                                <td><input type="text" name="candidateAcademicQualification.academicRankOrScholarship" class="form-control" placeholder="Academic Rank/Scholarship" required="true"/></td>
+                                                <td><input type="text" name="candidateAcademicQualification.academicRankOrScholarship" class="form-control" placeholder="Academic Rank/Scholarship"/></td>
                                             </tr>
                                         </c:when>
                                         <c:otherwise>
@@ -760,7 +768,7 @@
                                                     <td><input type="number" min="0" name="candidateAcademicQualification.academicNumberOfAttempts" class="form-control" value="${list.academicNumberOfAttempts}" placeholder="No of Attempts" required="true"/></td>
                                                     <td><input type="text" name="candidateAcademicQualification.academicMarksInPercent" class="form-control" value="${list.academicMarksInPercent}" placeholder="Academic Marks(%)" required="true"/></td>
                                                     <td><input type="text" name="candidateAcademicQualification.academicClass" class="form-control" value="${list.academicClass}" placeholder="Academic Class" required="true"/></td>
-                                                    <td><input type="text" name="candidateAcademicQualification.academicRankOrScholarship" class="form-control" value="${list.academicRankOrScholarship}" placeholder="Academic Rank/Scholarship" required="true"/></td>
+                                                    <td><input type="text" name="candidateAcademicQualification.academicRankOrScholarship" class="form-control" value="${list.academicRankOrScholarship}" placeholder="Academic Rank/Scholarship"/></td>
                                                 </tr>
                                             </c:forEach>
                                         </c:otherwise>
@@ -942,7 +950,7 @@
             <div class="form-group">
                 <div class=" col-sm-12" style="text-align: center;">
                     <c:choose>
-                        <c:when test="${certificateAttachment eq '' or certificateAttachment eq null}">
+                        <c:when test="${certificateAttachment eq ''}">
                             <div class=" col-sm-6" style="text-align: right;">
                                 Resume
                             </div>
@@ -1022,6 +1030,53 @@
     }
     
 </script>
+<script>
+    
+</script>
+<script>
+    
+    $(function (){
+       var salary = 0;
+       $(".salary").on('propertychange input',function(){
+            $( ".salary" ).each(function( i ) {
+              if($( this ).val() !== null && $( this ).val() !== "")
+              {    
+                  salary += parseInt($( this ).val());
+              }
+            }); 
+        }); 
+      $(".salaryTotal").val(parseInt(salary));
+    });
+//    $(function (){
+//       var salary = 0;
+////        for(i=0; i<salary.length; i++)
+////        {
+////            alert(this.salary.val());
+////        } 
+//        $( ".salary" ).each(function( index ) {
+//            if($( this ).val() !== null && $( this ).val() !== "")
+//            {    
+//                salary += parseInt($( this ).val());
+//                $(".salaryTotal").val(parseInt(salary));
+//            }
+//        });
+//        
+//    });
+</script>
+<!--<script>     
+//            $(function () {
+            function inputRadio(){
+//                $('input:radio[name="candidateApplyJob2.esicStatus"]').change(function () {
+                    alert("hiii");
+                    alert(textBox.id);
+//                    if ($(this).is(':checked') && textBox.value == '1') {
+//                        $('#trEsicNo').show();
+//                    } else {
+//                        $('#trEsicNo').hide();
+//                    }
+//                });
+            }
+        </script>-->
 
 <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
 <!--<script src="StorageYard/Plugins/jQuery/jQuery-2.1.4.min.js"></script>-->

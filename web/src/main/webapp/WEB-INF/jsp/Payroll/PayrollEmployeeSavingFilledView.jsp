@@ -110,6 +110,7 @@
                                                                     <tr>
                                                                         <th>Employee Id</th>
                                                                         <th>Employee Name</th>
+                                                                        <th>Status</th>
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
@@ -121,8 +122,13 @@
                                                                 <tr>
                                                                     <td>${list[0]}</td>
                                                                     <td>${list[1]}</td>
-
-                                                                    <td>  <button type="button" onclick="viewClick('${list[2]}', '${list[3]}');" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <c:if test="${list[4] eq 1}"><td><span style="font-size:15px" class="label label-default">Pending</span></td></c:if>
+                                                                    <c:if test="${list[4] eq 2}"><td><span style="font-size:15px" class="label label-success">Approved</span></td></c:if>
+                                                                    <c:if test="${list[4] eq 3}"><td><span style="font-size:15px" class="label label-warning">Partially Approved</span></td></c:if>
+                                                                    <c:if test="${list[4] eq 4}"><td><span style="font-size:15px" class="label label-danger">Rejected</span></td></c:if>
+                                                                    <c:if test="${list[4] eq 5}"><td><span style="font-size:15px" class="label label-info">Recycled </span></td></c:if>
+                                                                    <td>  
+                                                                        <button type="button" onclick="viewClick('${list[2]}', '${list[3]}');" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
                                                                     </td>

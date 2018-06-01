@@ -16,6 +16,7 @@ import com.bul.zydex.model.EmployeeTypeWiseSalary;
 import com.bul.zydex.model.PayrollAdditionalAmount;
 import com.bul.zydex.model.PayrollDeduction;
 import com.bul.zydex.model.PayrollPfCheck;
+import com.bul.zydex.model.PayrollPfRecord;
 import com.bul.zydex.model.PayrollProfessionalTax;
 import com.bul.zydex.model.PayrollProvidentFund;
 import com.bul.zydex.model.PayrollPtCheck;
@@ -31,6 +32,7 @@ import com.bul.zydex.service.Payroll.EmployeeTypeWiseSalaryService;
 import com.bul.zydex.service.Payroll.PayrollAdditionalAmountService;
 import com.bul.zydex.service.Payroll.PayrollDeductionService;
 import com.bul.zydex.service.Payroll.PayrollPfCheckService;
+import com.bul.zydex.service.Payroll.PayrollPfRecordService;
 import com.bul.zydex.service.Payroll.PayrollProfessionalTaxService;
 import com.bul.zydex.service.Payroll.PayrollProvidentFundService;
 import com.bul.zydex.service.Payroll.PayrollPtCheckService;
@@ -67,6 +69,7 @@ public class EmployeePfCheckAbstract  extends CustomAbstract{
     protected PayrollPfCheckService<PayrollPfCheck> payrollPfCheckService;
     protected PayrollProvidentFundService<PayrollProvidentFund> payrollProvidentFundService;
     protected RetirementAgeService<RetirementAge> retirementAgeService;
+     protected PayrollPfRecordService<PayrollPfRecord> payrollPfRecordService;
 
     public EmployeeSalaryProcessService<EmployeeSalaryProcess> getEmployeeSalaryProcessService() {
         return employeeSalaryProcessService;
@@ -203,6 +206,15 @@ public class EmployeePfCheckAbstract  extends CustomAbstract{
     public void setRetirementAgeService(RetirementAgeService<RetirementAge> retirementAgeService) {
         this.retirementAgeService = retirementAgeService;
     }
+
+    public PayrollPfRecordService<PayrollPfRecord> getPayrollPfRecordService() {
+        return payrollPfRecordService;
+    }
+
+    public void setPayrollPfRecordService(PayrollPfRecordService<PayrollPfRecord> payrollPfRecordService) {
+        this.payrollPfRecordService = payrollPfRecordService;
+    }
+    
     
      protected void EmployeeTypeList(HttpServletRequest request) {
         List<?> EmployeeTypeList = employeeTypeService.read();

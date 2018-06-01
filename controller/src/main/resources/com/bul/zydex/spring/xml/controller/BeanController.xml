@@ -808,6 +808,8 @@
         <property name="payrollTaxDeclarationPeriodMasterService" ref="payrollTaxDeclarationPeriodMasterService1" />
         <property name="payrollTaxRateMasterService" ref="payrollTaxRateMasterService1" />
         <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
+        <property name="payrollPfRecordService" ref="payrollPfRecordService1" />
+        <property name="retirementAgeService" ref="retirementAgeService1" />
     </bean>
     <bean id="additionalAmountCheckController1" class="com.bul.zydex.controller.Payroll.AdditionalAmountCheckController" parent="controllerConfig" >
         <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
@@ -866,6 +868,7 @@
         <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
         <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
         <property name="retirementAgeService" ref="retirementAgeService1" />
+        <property name="payrollPfRecordService" ref="payrollPfRecordService1" />
          
     </bean>
     <bean id="employeePtCheckController1" class="com.bul.zydex.controller.Payroll.EmployeePtCheckcontroller" parent="controllerConfig" >

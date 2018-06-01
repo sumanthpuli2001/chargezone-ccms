@@ -687,6 +687,9 @@
     <bean id="policyDropDownService1" class="com.bul.zydex.service.policy.PolicyDropDownServiceImpl">
         <property name="PolicyDropDownDAO" ref="PolicyDropDownDAO1" />
     </bean>
+    <bean id="payrollPfRecordService1" class="com.bul.zydex.service.Payroll.PayrollPfRecordServiceImpl">
+        <property name="payrollPfRecordDAO" ref="payrollPfRecordDAO1" />
+    </bean>
     <bean id="candidateApplyJob2Service1" class="com.bul.zydex.service.CandidateJobApply.CandidateApplyJob2ServiceImpl">
         <property name="candidateApplyJob2DAO" ref="candidateApplyJob2DAO1" />
     </bean>

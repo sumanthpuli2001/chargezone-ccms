@@ -666,6 +666,7 @@
                                     <li><a href="attendanceReport.htm?act=searchAttendanceData&search=none"><i class="fa fa-circle-o"></i>Attendance</a></li>
                                     <li><a href="employeeSalarySlip.htm?act=searchSalaryYearDetail&search=none"><i class="fa fa-circle-o"></i>Employee Salary Yearly</a></li>
                                     <li><a href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none"><i class="fa fa-circle-o"></i>Govt. Format PF</a></li>
+                                    <li><a href="esicDeductionStatement.htm?act=searchEsicDetailGovt&search=none"><i class="fa fa-circle-o"></i>ESIC Deduction Statement Govt</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -961,9 +962,9 @@
 
                     <c:if test="${sessionScope.userRight.employee}">
                         <li><a href="payrollEmployeeFormSixteen.htm?act=redirectToFormEmployeeSaving&search=none"><i class="fa fa-circle-o"></i>Tax Declaration</a></li>
-                        <c:if test="${sessionScope.userRight.travelExpenseAdmin}">
-                        <li><a href="taxSavingSubmit.htm?act=viewFilledForms"><i class="fa fa-circle-o"></i>Tax Deduction Approve</a></li>
-                        </c:if>
+                            <c:if test="${sessionScope.userRight.travelExpenseAdmin}">
+                            <li><a href="taxSavingSubmit.htm?act=viewFilledForms"><i class="fa fa-circle-o"></i>Tax Deduction Approve</a></li>
+                            </c:if>
                         </c:if>
                 </ul>
             </li>

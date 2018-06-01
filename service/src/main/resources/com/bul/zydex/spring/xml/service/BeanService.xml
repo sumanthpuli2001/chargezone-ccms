@@ -704,5 +704,5 @@
     </bean>
     <bean id="candidateOtherReferencesService1" class="com.bul.zydex.service.CandidateJobApply.CandidateOtherReferencesServiceImpl">
         <property name="candidateOtherReferencesDAO" ref="candidateOtherReferencesDAO1" />
-    </bean>
+    </bean> 
 </beans>

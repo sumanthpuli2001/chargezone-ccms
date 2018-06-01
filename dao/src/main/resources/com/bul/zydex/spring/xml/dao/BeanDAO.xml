@@ -279,5 +279,5 @@
     <bean id="candidateFamilyBackgroundDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateFamilyBackgroundDAOImpl" parent="sessionFactoryConfig"/>
     <bean id="candidateAcademicQualificationDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateAcademicQualificationDAOImpl" parent="sessionFactoryConfig"/>
     <bean id="candidateExperienceDetailDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateExperienceDetailDAOImpl" parent="sessionFactoryConfig"/>
-    <bean id="candidateOtherReferencesDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateOtherReferencesDAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="candidateOtherReferencesDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateOtherReferencesDAOImpl" parent="sessionFactoryConfig"/> 
 </beans>

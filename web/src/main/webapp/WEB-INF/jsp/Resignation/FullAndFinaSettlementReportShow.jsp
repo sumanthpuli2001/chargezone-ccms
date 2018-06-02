@@ -62,7 +62,7 @@
                                                         <th  colspan="4" style="text-align: center;">Particular</th>
                                                     </tr>
                                                     <tr>
-                                                        <th  colspan="4" style="text-align: center;">(A ) PAYABLES </th>
+                                                        <th  colspan="4" style="text-align: center;">( A ) PAYABLES </th>
                                                     </tr>
                                                     <tr>
                                                         <th colspan="3"></th>
@@ -90,7 +90,7 @@
                                                     <c:forEach var="ctcDetail1" items="${ctcDetail}">
                                                         <tr>
                                                             <c:if test="${ctcDetail1[1] == 2}"><td><b>Bonus</b></td></c:if>
-                                                            <c:if test="${ctcDetail1[1] == 3}"><td><b>Gratuiety</b></td></c:if>
+                                                            <%--<c:if test="${ctcDetail1[1] == 3}"><td><b>Gratuiety</b></td></c:if>--%>
                                                             <c:if test="${ctcDetail1[1] == 4}"><td><b>LTA</td></b></c:if>
                                                             <c:if test="${ctcDetail1[1] == 5}"><td><b>PERFORMANCE PAY</b></td></c:if>
                                                             <c:if test="${ctcDetail1[1] == 6}"><td><b>Variable</b></td></c:if>
@@ -108,21 +108,40 @@
                                                             <c:if test="${ctcDetail1[4] == 11}"><td><b>NOV</b>'${ctcDetail1[5]}</td></c:if>
                                                             <c:if test="${ctcDetail1[4] == 12}"><td><b>DEC</b>'${ctcDetail1[5]}</td></c:if>
                                                             <c:if test="${ctcDetail1[1] == 2}"><td>${totalMonthlyAmount2}</td></c:if>
-                                                            <c:if test="${ctcDetail1[1] == 3}"><td>${totalMonthlyAmount3}</td></c:if>
+                                                            <%--<c:if test="${ctcDetail1[1] == 3}"><td>${totalMonthlyAmount3}</td></c:if>--%>
                                                             <c:if test="${ctcDetail1[1] == 4}"><td>${totalMonthlyAmount4}</td></c:if>
                                                             <c:if test="${ctcDetail1[1] == 5}"><td>${totalMonthlyAmount5}</td></c:if>
                                                             <c:if test="${ctcDetail1[1] == 6}"><td>${totalMonthlyAmount6}</td></c:if>
                                                             </tr>
                                                     </c:forEach>
+                                                    <c:forEach var="Gratuiety1" items="${Gratuiety}">
+                                                        <tr>
+                                                            <!--<td><b>${Gratuiety1[1]}</b></td>-->
+                                                            <c:if test="${Gratuiety1[1] == 3}"><td><b>Gratuiety</b></td></c:if>
+                                                                <th colspan="1"></th>
+                                                            <c:if test="${Gratuiety1[3] == 01}"><td><b>JAN</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <c:if test="${Gratuiety1[3] == 02}"><td><b>FEB</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <c:if test="${Gratuiety1[3] == 03}"><td><b>MAR</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <c:if test="${Gratuiety1[3] == 04}"><td><b>APR</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <c:if test="${Gratuiety1[3] == 05}"><td><b>MAY</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <c:if test="${Gratuiety1[3] == 06}"><td><b>JUN</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <c:if test="${Gratuiety1[3] == 07}"><td><b>JUL</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <c:if test="${Gratuiety1[3] == 08}"><td><b>AUG</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <c:if test="${Gratuiety1[3] == 09}"><td><b>SEP</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <c:if test="${Gratuiety1[3] == 10}"><td><b>OCT</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <c:if test="${Gratuiety1[3] == 11}"><td><b>NOV</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <c:if test="${Gratuiety1[3] == 12}"><td><b>DEC</b>'${Gratuiety1[4]}</td></c:if>
+                                                            <td>${Gratuiety1[2]}</td>
+                                                            </tr>
+                                                    </c:forEach>
 
                                                     <tr>
                                                         <th colspan="2"></th>
-                                                        <th>(B) TOTAL PAYABLES</th>
+                                                        <th>TOTAL PAYABLES</th>
                                                         <th>${totalpayable}</th>
                                                     </tr>
                                                     <tr>
-                                                        <th  colspan="3" style="text-align: center;">( C ) SALARY DEDUCTIONS </th>
-                                                        <th></th>
+                                                        <th  colspan="4" style="text-align: center;">( B ) SALARY DEDUCTIONS </th>
                                                     </tr>
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
@@ -146,12 +165,14 @@
                                                         </c:forEach>
                                                         <tr>
                                                             <th colspan="2"></th>
-                                                            <th>(D) TOTAL DEDUCTIONS</th>
+                                                            <th>TOTAL DEDUCTIONS</th>
                                                             <th>${deductionAmount}</th>
                                                         </tr>
                                                         <tr>
-                                                            <th  colspan="3" style="text-align: center;">TOTAL NET PAYABLE ( B - D )</th>
-                                                            <!--<th colspan="1"></th>-->
+                                                            <th  colspan="4" style="text-align: center;"> ( A - B ) TOTAL NET PAYABLE</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th colspan="3" style="text-align: center;"></th>
                                                             <th>${finaltotalBD}</th>
                                                         </tr>
                                                     </tbody>

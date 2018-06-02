@@ -87,6 +87,7 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
                 + " hr_power_astral.employee_ctc_detail_salary b"
                 + " ON b.monthly  = a.month"
                 + " WHERE  b.employee_master_id =" + employeeid
+                + " and  a.ctc_master_id!=3"
                 + " group by b.ctc_allowance_id";
         SQLQuery query = s.createSQLQuery(sqlString);
         List<?> list = query.list();
@@ -125,5 +126,34 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
                 + " and c.id=" + ctcAllowanceId;
 
         return getHibernateTemplate().find(query);
+    }
+
+    public List<?> GratuietyFiveYrFetch(int employeeid) {
+//        String query = " Select b.id, a.ctcAllowance, a.amount, a.month, a.year, b.dateOfJoining"
+//                + " FROM EmployeeCtcDetail a"
+//                + " left join a.employeeMaster b"
+//                + " WHERE b.id =" + employeeid
+////                + " and FLOOR(datediff(CURDATE(),STR_TO_DATE(b.dateOfJoining, '%d/%m/%Y')) / 1825)"
+//                + " and a.ctcAllowance = 3";
+//
+//        return getHibernateTemplate().find(query);
+
+        Session s = getSessionFactory().openSession();
+        String sqlString = "SELECT"
+                + "  b.id, a.ctc_master_id, a.amount, a.month, a.year"
+                + " FROM"
+                + " hr_power_astral.employee_ctc_detail a"
+                + " left join"
+                + " hr_power_astral.employee_master b"
+                + " ON a.employee_master_id = b.id"
+                + " WHERE b.id =" + employeeid
+                + " and FLOOR(datediff(CURDATE(),STR_TO_DATE(b.date_of_joining, '%d/%m/%Y')) / 1825)"
+                + " and a.ctc_master_id = 3";
+        SQLQuery query = s.createSQLQuery(sqlString);
+        List<?> list = query.list();
+        s.close();
+//        List<?> list = getHibernateTemplate().find(query);
+        return list;
+        
     }
 }

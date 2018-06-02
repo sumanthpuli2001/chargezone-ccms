@@ -275,4 +275,9 @@
     <bean id="policyCreateDAO1" class="com.bul.zydex.dao.policy.PolicyCreateDAOImpl" parent="sessionFactoryConfig" />
     <bean id="PolicyDropDownDAO1" class="com.bul.zydex.dao.policy.PolicyDropDownDAOImpl" parent="sessionFactoryConfig" />
     <bean id="payrollPfRecordDAO1" class="com.bul.zydex.dao.Payroll.PayrollPfRecordDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="candidateApplyJob2DAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateApplyJob2DAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="candidateFamilyBackgroundDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateFamilyBackgroundDAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="candidateAcademicQualificationDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateAcademicQualificationDAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="candidateExperienceDetailDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateExperienceDetailDAOImpl" parent="sessionFactoryConfig"/>
+    <bean id="candidateOtherReferencesDAO1" class="com.bul.zydex.dao.CandiateJobApply.CandidateOtherReferencesDAOImpl" parent="sessionFactoryConfig"/> 
 </beans>

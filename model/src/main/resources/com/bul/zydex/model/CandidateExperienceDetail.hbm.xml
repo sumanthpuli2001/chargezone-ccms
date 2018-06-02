@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.CandidateExperienceDetail" table="candidate_experience_detail" catalog="hr_power_astral">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="increment" />
+        </id>
+        
+        <property name="experienceYearFrom" type="java.lang.Integer">
+            <column name="experience_year_from" />
+        </property>
+        
+        <property name="experienceYearTo" type="java.lang.Integer">
+            <column name="experience_year_to" />
+        </property>
+        
+        <property name="experienceOrganization" type="string">
+            <column name="experience_organization" />
+        </property>
+        
+        <property name="experienceDepartment" type="string">
+            <column name="experience_department" />
+        </property>
+
+        <property name="experienceDesignation" type="string">
+            <column name="experience_designation" />
+        </property>
+        
+        <property name="experienceJobResponsibilities" type="string">
+            <column name="experience_job_responsibilities" />
+        </property>
+        
+        <property name="experienceRemunerationOnJoin" type="string">
+            <column name="experience_remuneration_on_join" />
+        </property>
+        
+        <property name="experienceRemunerationOnLeaving" type="string">
+            <column name="experience_remuneration_on_leaving" />
+        </property>
+        
+        <property name="experienceReasonForLeaving" type="string">
+            <column name="experience_reason_for_leaving" />
+        </property>
+        
+        <property name="createdDate" type="string">
+            <column name="created_date" />
+        </property>
+        
+        <many-to-one name="candidateApplyJob" class="com.bul.zydex.model.CandidateApplyJob" fetch="select">
+            <column name="candidate_apply_job_id" not-null="true"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

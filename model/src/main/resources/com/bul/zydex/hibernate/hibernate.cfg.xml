@@ -167,5 +167,10 @@
         <mapping resource="com/bul/zydex/model/PolicyDropDown.hbm.xml"/>
         <mapping resource="com/bul/zydex/model/PolicyCreate.hbm.xml"/>
         <mapping resource="com/bul/zydex/model/PayrollpfRecord.hbm.xml"/>
+        <mapping resource="com/bul/zydex/model/CandidateApplyJob2.hbm.xml"/>
+        <mapping resource="com/bul/zydex/model/CandidateFamilyBackground.hbm.xml"/>
+        <mapping resource="com/bul/zydex/model/CandidateAcademicQualification.hbm.xml"/>
+        <mapping resource="com/bul/zydex/model/CandidateExperienceDetail.hbm.xml"/>
+        <mapping resource="com/bul/zydex/model/CandidateOtherReferences.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

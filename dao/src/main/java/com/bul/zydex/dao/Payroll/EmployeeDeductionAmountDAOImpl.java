@@ -217,7 +217,7 @@ public class EmployeeDeductionAmountDAOImpl<T> extends GenericsDAOImpl<T> implem
 
         Session s = getSessionFactory().openSession();
         String sqlString = "SELECT"
-                + " c.id, c.month, c.year ,b.deduction_type, b.deduction_amount"
+                + " c.id, c.month, c.year ,b.deduction_type, b.deduction_amount, c.net_payable, c.gross_total, c.employee_basic_salary"
                 + " FROM"
                 + " hr_power_astral.resignation_master a "
                 + " LEFT JOIN hr_power_astral.employee_salary_process c ON a.emp_master_id = c.employee_master_id"

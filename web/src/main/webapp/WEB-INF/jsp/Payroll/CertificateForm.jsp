@@ -79,7 +79,7 @@
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Type of Certificate :<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <label>Type of Certificate${employeeMaster.id} :<span style="color: red;font-size: 12px;">*</span></label>
                                                    <select class="form-control" id="certificateId" onchange="selectsubtype(this.value);">
                                                         <option value="" label="-- Select --" ></option>
                                                         <c:forEach var="EmpType" items="${certificateList}">
@@ -105,6 +105,8 @@
     </div>
     <script>
         function selectsubtype(typeId) {
+            alert("hhiii");
+            alert(${employeeMaster.id});
 
 //            var empSubTypeId = document.getElementById("employeeSubTypeId").value;
             //            document.getElementById('EmployeeId').innerHTML = "Fetching ... .. .";

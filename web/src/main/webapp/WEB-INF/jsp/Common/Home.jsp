@@ -391,6 +391,10 @@
                                             <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="holidayMaster.htm?act=viewHolidaysLocationWise">
                                                 <i class="fa fa-twitch"></i>&nbsp;Holiday List
                                             </a>
+                                            <a style="font-size: 20px;text-align: left;" href="policyMaster.htm?act=dashboardshowPolicy">
+                                                <i class="fa fa-paypal"></i>
+                                                <strong>Policy</strong>
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-md-9">

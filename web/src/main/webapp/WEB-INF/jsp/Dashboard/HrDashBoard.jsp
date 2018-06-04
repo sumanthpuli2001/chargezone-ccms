@@ -7,28 +7,37 @@
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
         <script type = "text/javascript" >
-            google.load("visualization", "1", {packages: ["corechart"]});
+            google.load("visualization", "1", {packages: ["corechart", 'bar']});
             google.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
-                    ['Department', 'No Of Employees'],
+                    ['Department', ''],
             ${departmentWiseEmp}
-//                    ['Information Technology', 5],
-//                    ['Purchase', 10],
-//                    ['Account', 25],
-//                    ['Management', 35]
+                    //                    ['Information Technology', 5],
+                    //                    ['Purchase', 10],
+                    //                    ['Account', 25],
+                    //                    ['Management', 35]
                 ]);
 
+                //                var options = {
+                //                    legend: 'none',
+                //                    pieSliceText: 'label',
+                //                    title: '',
+                //                    pieStartAngle: 100,
+                //                    chartArea: {left: 20, top: 6, width: 250, height: 250},
+                //                };
                 var options = {
                     legend: 'none',
-                    pieSliceText: 'label',
-                    title: '',
-                    pieStartAngle: 100,
-                    chartArea: {left: 20, top: 6, width: 250, height: 250},
+                    hAxis: {
+                        title: 'Department'
+                    },
+                    vAxis: {
+                        title: 'No Of Employees'
+                    }
                 };
-
-                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                var chart = new google.visualization.ColumnChart(document.getElementById('piechart_3d'));
                 chart.draw(data, options);
+                //                chart.draw(data);
             }
         </script>
         <script type = "text/javascript" >
@@ -56,20 +65,20 @@
                     google.load("visualization", "1", {packages: ["corechart"]});
                     google.setOnLoadCallback(drawChart);
                     function drawChart() {
-
+    
                         var data = google.visualization.arrayToDataTable([
                             ['Task', 'Hours per Day'],
                             ['Presence', 11],
                             ['Absence', 2],
                             ['Approved Leave', 2],
                         ]);
-
+    
                         var options = {
                             title: ''
                         };
-
+    
                         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
+    
                         chart.draw(data, options);
                     }
                 </script>-->
@@ -165,6 +174,25 @@
             google.setOnLoadCallback(drawChart);
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
+                    ['Gender', 'Number'],
+            ${genderWiseEmployee}
+
+                ]);
+
+                var options = {
+                    legend: 'none',
+                    pieHole: 0.4
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart2112'));
+                chart.draw(data, options);
+            }
+        </script>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages: ["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
                     ['Department', 'Resignation'],
             ${departmentWiseResignedEmployee}
 
@@ -173,13 +201,15 @@
 
                 var options = {
                     legend: 'none',
-                    pieSliceText: 'label',
-                    title: '',
-                    pieStartAngle: 100,
-                    chartArea: {left: 20, top: 6, width: 250, height: 250},
+                    hAxis: {
+                        title: 'Department'
+                    },
+                    vAxis: {
+                        title: 'No Of Employees'
+                    }
                 };
 
-                var chart = new google.visualization.PieChart(document.getElementById('piechart33'));
+                var chart = new google.visualization.AreaChart(document.getElementById('piechart33'));
                 chart.draw(data, options);
             }
         </script>
@@ -276,12 +306,31 @@
                                             </div>
                                             <div class="box-body">
                                                 <div class="row">
+                                                    <div class="col-md-4">
+                                                        <!-- USERS LIST -->
+                                                        <div class="box box-danger">
+                                                            <div class="box-header">
+                                                                <h3 class="box-title">Location Wise Employees</h3>
+                                                                <div class="box-tools pull-right">
+                                                                    <button class="btn btn-box-tool" data-widget="collapse">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div><!-- /.box-header -->
+                                                            <div class="box-body" id="chart_divId">
+                                                                <div id="chart_div" style="width: 300px; height: 300px;"></div>
+                                                            </div>
 
+                                                            <!--                                        <div class="box-footer text-center">
+                                                                                                        <a href="Hierarchy.jsp" class="uppercase">View Department WIse</a>
+                                                                                                    </div> /.box-footer -->
+                                                        </div><!--/.box -->
+                                                    </div>
                                                     <div class="col-md-4">
                                                         <!-- Nature of Business Pane -->
                                                         <div class="box box-warning">
                                                             <div class="box-header">
-                                                                <h3 class="box-title">Department Wise Employee</h3>
+                                                                <h3 class="box-title">Employee Count By Department</h3>
                                                                 <div class="box-tools pull-right">
                                                                     <button class="btn btn-box-tool" data-widget="collapse" ><i class="fa fa-minus" id="minusId1"></i></button>                                                                </div>
                                                             </div><!-- /.box-header -->
@@ -292,6 +341,7 @@
                                                                                                                                 </div> /.box-footer -->
                                                         </div><!-- /.box -->
                                                     </div><!-- /.col -->
+
                                                     <div class="col-md-4">
                                                         <!-- Nature of Business Pane -->
                                                         <div class="box box-success">
@@ -310,6 +360,53 @@
                                                                                                                 <a href="javascript::" class="uppercase">View All Business Areas</a>
                                                                                                             </div> /.box-footer -->
                                                     </div><!-- /.box -->
+
+                                                    <div class="col-md-4">
+                                                        <div class="box box-danger">
+                                                            <div class="box-header">
+                                                                <h3 class="box-title">Department Wise Attrition Rate</h3>
+                                                                <div class="box-tools pull-right">
+                                                                    <button class="btn btn-box-tool" data-widget="collapse">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="box-body" id="piechart33Id">
+                                                                <div id="piechart33" style="width: 300px; height: 300px;">
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4">
+                                                        <div class="box box-info">
+                                                            <div class="box-header">
+                                                                <h3 class="box-title">Probation to confirmation</h3>
+                                                                <div class="box-tools pull-right">
+                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="box-body" id="piechart22Id">
+                                                                <div id="piechart22" style="width: 300px; height: 300px;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="box box-info">
+                                                            <div class="box-header">
+                                                                <h3 class="box-title">Gender Distribution</h3>
+                                                                <div class="box-tools pull-right">
+                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="box-body" id="piechart2112Id">
+                                                                <div id="piechart2112" style="width: 300px; height: 300px;"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
 
                                                     <div class="col-md-4">
                                                         <!-- USERS LIST -->
@@ -332,7 +429,7 @@
                                                                                 <!--                                                            <tr class="node-cells">
                                                                                                                                                 <td class="node-cell" colspan="4">
                                                                                                                                                     <div class="node fruit ui-draggable ui-droppable" style="cursor: n-resize;">
-
+    
                                                                                                                                                     </div>
                                                                                                                                                 </td>
                                                                                                                                             </tr>-->
@@ -456,15 +553,15 @@
                                                                                                                                                                                                         </td>
                                                                                                                                                                                                         </tr>
                                                                                                         <c:if test="${subordinateCount > 0}">
-
+    
                                                                                                             <tr>
                                                                                                                 <td colspan="8">
                                                                                                                     <div class="line down"></div>
                                                                                                             <c:if test="${subordinateCount eq 1}">
                                                                                                                 <div>&nbsp;</div>
-
+    
                                                                                                             </c:if>
-
+    
                                                                                                         </td>
                                                                                                     </tr>
                                                                                                     <tr>
@@ -481,7 +578,7 @@
                                                                                                                     <td>&nbsp;</td>
                                                                                                                     <td>&nbsp;</td>
                                                                                                                 </c:if>
-
+    
                                                                                                                 <c:if test="${subordinateCount >= 4}">
                                                                                                                     <td class="line left top">&nbsp;</td>
                                                                                                                     <td class="line right top">&nbsp;</td>
@@ -507,7 +604,7 @@
                                                                                                                                     <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${subordinateList[0][2]} &#13; Department: ${subordinateList[0][3]} &#13; Designation: ${subordinateList[0][4]}">
                                                                                                                                         <img src="${subordinateList[0][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
                                                                                                                                         <span class="box-title" style="font-size: 105%;color: black">${subordinateList[0][2]}</span>
-
+    
                                                                                                                                     </div>
                                                                                                                                 </td></tr>
                                                                                                                         </tbody>
@@ -524,7 +621,7 @@
                                                                                                                                     <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${subordinateList[1][2]} &#13; Department: ${subordinateList[1][3]} &#13; Designation: ${subordinateList[1][4]}">
                                                                                                                                         <img src="${subordinateList[1][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
                                                                                                                                         <span class="box-title" style="font-size: 105%;color: black">${subordinateList[1][2]}</span>
-
+    
                                                                                                                                     </div>
                                                                                                                                 </td>
                                                                                                                             </tr>
@@ -542,7 +639,7 @@
                                                                                                                                     <div class="node ui-draggable ui-droppable" style="cursor: pointer;" title=" Name: ${subordinateList[2][2]} &#13; Department: ${subordinateList[2][3]} &#13; Designation: ${subordinateList[2][4]}">
                                                                                                                                         <img src="${subordinateList[2][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
                                                                                                                                         <span class="box-title" style="font-size: 105%;color: black">${subordinateList[2][2]}</span>
-
+    
                                                                                                                                     </div>
                                                                                                                                 </td>
                                                                                                                             </tr>
@@ -569,7 +666,7 @@
                                                                                                             </c:if>
                                                                                                         </tr>
                                                                                                         </c:if>
-
+    
                                                                                                     </tbody>
                                                                                                 </table>
                                                                                             </td>-->
@@ -584,9 +681,9 @@
                                                                                                 <!--                                                                                            <div class="jOrgChart">
                                                                                                                                                                                                 <table cellpadding="0" cellspacing="0" border="0">
                                                                                                                                                                                                     <tbody>
-
+    
                                                                                                 <%--<c:if test="${subordinateAddiCount > 0}">--%>
-
+    
                                                                                                     <tr>
                                                                                                         <td colspan="8">
                                                                                                             <div class="line down"></div>
@@ -602,7 +699,7 @@
                                                                                                     <td class="line left top">&nbsp;</td>
                                                                                                     <td class="line right top">&nbsp;</td>
                                                                                                 <%--</c:if>--%>
-
+    
                                                                                                 <%--<c:if test="${subordinateAddiCount >= 4}">--%>
                                                                                                     <td class="line left top">&nbsp;</td>
                                                                                                     <td class="line right top">&nbsp;</td>
@@ -622,7 +719,7 @@
                                                                                                                     <td class="node-cell" colspan="2" onclick="viewEmployeeDetail(${subordinateList[4][0]},${subordinateList[4][6]});">
                                                                                                                         <div class="node ui-draggable ui-droppable" title=" Name: ${subordinateList[4][2]} &#13; Department: ${subordinateList[4][3]} &#13; Designation: ${subordinateList[4][4]}">
                                                                                                                             <img src="${subordinateList[4][5]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
-
+    
                                                                                                                         </div>
                                                                                                                     </td></tr>
                                                                                                             </tbody>
@@ -691,7 +788,193 @@
                                                                                                 </div><!-- /.box-footer -->
                                                                                                 </div><!--/.box -->
                                                                                                 </div>
-                                                                                                <!-- /.col -->
+                                                                                                <div class="col-md-4">
+                                                                                                    <!-- Nature of Business Pane -->
+                                                                                                    <div class="box box-primary">
+                                                                                                        <div class="box-header">
+                                                                                                            <h3 class="box-title">Performance Management stage wise</h3>
+                                                                                                            <div class="box-tools pull-right">
+                                                                                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                                                                            </div>
+                                                                                                        </div><!-- /.box-header -->
+                                                                                                        <div class="box-body">
+                                                                                                            <ul class="products-list product-list-in-box">
+                                                                                                                <li class="">
+                                                                                                                    <div class="progress-group" style="padding-bottom: 15px;">
+                                                                                                                        <span class="progress-text">KRA Setting By Employee</span>
+                                                                                                                        <span class="progress-number"><b>${performanceManagementStage[1]}</b>/${performanceManagementStage[0]}</span>
+                                                                                                                        <div class="progress sm">
+                                                                                                                            <div class="progress-bar progress-bar-aqua" style="width: ${(performanceManagementStage[1]/performanceManagementStage[0])*100}%"></div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </li><!-- /.item -->
+
+                                                                                                                <li class="">
+                                                                                                                    <div class="progress-group" style="padding-bottom: 15px;">
+                                                                                                                        <span class="progress-text">KRA Approval By Manager</span>
+                                                                                                                        <span class="progress-number"><b>${performanceManagementStage[2]}</b>/${performanceManagementStage[0]}</span>
+                                                                                                                        <div class="progress sm">
+                                                                                                                            <div class="progress-bar progress-bar-red" style="width: ${(performanceManagementStage[2]/performanceManagementStage[0])*100}%"></div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </li><!-- /.item -->
+
+                                                                                                                <!--                                                                                                                    <li class="">
+                                                                                                                                                                                                    <div class="progress-group" style="padding-bottom: 15px;">
+                                                                                                                                                                                                    <span class="progress-text">Employees Mid Year Self Assessment</span>
+                                                                                                                                                                                                    <span class="progress-number"><b>${performanceManagementStage[3]}</b>/${performanceManagementStage[0]}</span>
+                                                                                                                                                                                                    <div class="progress sm">
+                                                                                                                                                                                                    <div class="progress-bar progress-bar-green" style="width: ${(performanceManagementStage[3]/performanceManagementStage[0])*100}%"></div>
+                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                    </li> /.item -->
+
+                                                                                                                <!--                                                                                                                    <li class="">
+                                                                                                                                                                                                    <div class="progress-group" style="padding-bottom: 15px;">
+                                                                                                                                                                                                    <span class="progress-text">Managers Mid Year Review</span>
+                                                                                                                                                                                                    <span class="progress-number"><b>${performanceManagementStage[4]}</b>/${performanceManagementStage[0]}</span>
+                                                                                                                                                                                                    <div class="progress sm">
+                                                                                                                                                                                                    <div class="progress-bar progress-bar-yellow" style="width: ${(performanceManagementStage[4]/performanceManagementStage[0])*100}%"></div>
+                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                    </li> /.item -->
+
+                                                                                                                <li class="">
+                                                                                                                    <div class="progress-group" style="padding-bottom: 15px;">
+                                                                                                                        <span class="progress-text">Employees  Self Assessment</span>
+                                                                                                                        <span class="progress-number"><b>${performanceManagementStage[5]}</b>/${performanceManagementStage[0]}</span>
+                                                                                                                        <div class="progress sm">
+                                                                                                                            <div class="progress-bar progress-bar-light-blue" style="width: ${(performanceManagementStage[5]/performanceManagementStage[0])*100}%"></div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </li><!-- /.item -->
+
+                                                                                                                <li class="">
+                                                                                                                    <div class="progress-group">
+                                                                                                                        <span class="progress-text">Managers  Review</span>
+                                                                                                                        <span class="progress-number"><b>${performanceManagementStage[6]}</b>/${performanceManagementStage[0]}</span>
+                                                                                                                        <div class="progress sm">
+                                                                                                                            <div class="progress-bar progress-bar-light-darkViolet" style="width: ${(performanceManagementStage[6]/performanceManagementStage[0])*100}%"></div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                                                </li><!-- /.item -->
+
+                                                                                                            </ul>
+                                                                                                            <!--<div id="dual_x_div" style="width: 900px; height: 500px;"></div>-->
+                                                                                                        </div><!-- /.box-body -->
+                                                                                                        <!--                                                    <div class="box-footer text-center">
+                                                                                                                                                                <a href="javascript::" class="uppercase">View All Business Areas</a>
+                                                                                                                                                            </div> /.box-footer -->
+                                                                                                    </div><!-- /.box -->
+                                                                                                </div>
+                                                                                                <div class="col-md-4">
+                                                                                                    <!-- Nature of Business Pane -->
+                                                                                                    <div class="box box-info">
+                                                                                                        <div class="box-header">
+                                                                                                            <h3 class="box-title">Performance rating department wise</h3>
+                                                                                                            <div class="box-tools pull-right">
+                                                                                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                                                                                            </div>
+                                                                                                        </div><!-- /.box-header -->
+                                                                                                        <div class="box-body">
+                                                                                                            <ul class="products-list product-list-in-box">
+                                                                                                                <%--<c:forEach items="${departmentWiseEmpCountList}" var="departmentWiseEmpCountList" varStatus="counter">--%>
+                                                                                                                <c:forEach items="${finalList}" var="performanceRatingList" varStatus="counterInner">
+                                                                                                                    <li class="">
+                                                                                                                        <div class="progress-group">
+                                                                                                                            <span class="progress-text">${performanceRatingList[0]}</span>
+                                                                                                                            <span class="progress-number"></span>
+
+                                                                                                                            <div class="progress sm" style="height: 20px;">
+                                                                                                                                <c:set var="count" value="0" scope="page" />
+                                                                                                                                <%--<c:if test="${performanceRatingList[3] eq departmentWiseEmpCountList[0]}">--%>
+                                                                                                                                <c:set var="totalScore" value="${performanceRatingList[1]+performanceRatingList[2]+performanceRatingList[3]+performanceRatingList[4]+performanceRatingList[5]}" scope="page"/>
+                                                                                                                                <%--</c:if>--%>
+
+                                                                                                                                <c:forEach items="${departmentWiseEmpCountList}" var="departmentWiseEmpCountList" varStatus="counter">
+                                                                                                                                    <c:if test="${departmentWiseEmpCountList[0] eq performanceRatingList[0]}">
+                                                                                                                                        <c:set var="divideScore" value="${(departmentWiseEmpCountList[1]+1) *75/100}" scope="page"/>
+                                                                                                                                        <c:set var="divideScore1" value="${(departmentWiseEmpCountList[1]+1) *25/100}" scope="page"/>
+                                                                                                                                        <div class="progress-bar progress-bar-aqua" style="width: ${(performanceRatingList[1]+1) *divideScore/totalScore}%;background-color: #008000;color: black"><b>${performanceRatingList[1]}</b></div>
+                                                                                                                                        <div class="progress-bar progress-bar-red" style="width: ${(performanceRatingList[2]+1) *divideScore/totalScore}%;background-color: #6AA121;color: black" ><b>${performanceRatingList[2]}</b></div>
+                                                                                                                                        <div class="progress-bar progress-bar-green" style="width: ${(performanceRatingList[3]+1) *divideScore/totalScore}%;background-color: #FFFF00;color: black"><b>${performanceRatingList[3]}</b></div>
+                                                                                                                                        <div class="progress-bar progress-bar-yellow" style="width: ${(performanceRatingList[4]+1) *divideScore/totalScore}%;background-color: #FFA375;;color: black"><b>${performanceRatingList[4]}</b></div>
+                                                                                                                                        <div class="progress-bar progress-bar-light-blue" style="width: ${(performanceRatingList[5]+1) *divideScore/totalScore}%;background-color: #FF8080;color: black"><b>${performanceRatingList[5]}</b></div>
+                                                                                                                                        <div class="progress-bar " style="width: ${divideScore1}%;background-color: #f5f5f5;color: black;text-align: right"><b>${totalScore}</b>/<b>${departmentWiseEmpCountList[1]}</b></div>
+                                                                                                                                            </c:if>
+                                                                                                                                        </c:forEach>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </li><!-- /.item -->
+                                                                                                                </c:forEach>
+                                                                                                                <!--                                                    <li class="">
+                                                                                                                                                                        <div class="progress-group">
+                                                                                                                                                                            <span class="progress-text">HR</span>
+                                                                                                                                                                            <span class="progress-number"></span>
+                                                                                                                                                                            <div class="progress sm" style="height: 20px;">
+                                                                                                                                                                                <div class="progress-bar progress-bar-aqua" style="width: 20%;background-color: #008000;color: black"><b>5</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-red" style="width: 10%;background-color: #6AA121;color: black" ><b>3</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-green" style="width: 10%;background-color: #FFFF00;color: black"><b>2</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-yellow" style="width: 20%;background-color: #FFA375;;color: black"><b>4</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-light-blue" style="width: 15%;background-color: #FF8080;color: black"><b>3</b></div>
+                                                                                                                                                                                <div class="progress-bar " style="width: 25%;background-color: #f5f5f5;color: black;text-align: right"><b>40</b></div>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </li> /.item
+                                                                                                                                                                    <li class="">
+                                                                                                                                                                        <div class="progress-group">
+                                                                                                                                                                            <span class="progress-text">Purchase</span>
+                                                                                                                                                                            <span class="progress-number"></span>
+                                                                                                                                                                            <div class="progress sm" style="height: 20px;">
+                                                                                                                                                                                <div class="progress-bar progress-bar-aqua" style="width: 20%;background-color: #008000;color: black"><b>5</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-red" style="width: 10%;background-color: #6AA121;color: black" ><b>3</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-green" style="width: 10%;background-color: #FFFF00;color: black"><b>2</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-yellow" style="width: 20%;background-color: #FFA375;;color: black"><b>4</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-light-blue" style="width: 15%;background-color: #FF8080;color: black"><b>3</b></div>
+                                                                                                                                                                                <div class="progress-bar " style="width: 25%;background-color: #f5f5f5;color: black;text-align: right"><b>30</b></div>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </li> /.item
+                                                                                                                                                                    <li class="">
+                                                                                                                                                                        <div class="progress-group">
+                                                                                                                                                                            <span class="progress-text">Finance</span>
+                                                                                                                                                                            <span class="progress-number"></span>
+                                                                                                                                                                            <div class="progress sm" style="height: 20px;">
+                                                                                                                                                                                <div class="progress-bar progress-bar-aqua" style="width: 20%;background-color: #008000;color: black"><b>5</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-red" style="width: 10%;background-color: #6AA121;color: black" ><b>3</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-green" style="width: 10%;background-color: #FFFF00;color: black"><b>2</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-yellow" style="width: 20%;background-color: #FFA375;;color: black"><b>4</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-light-blue" style="width: 15%;background-color: #FF8080;color: black"><b>3</b></div>
+                                                                                                                                                                                <div class="progress-bar " style="width: 25%;background-color: #f5f5f5;color: black;text-align: right"><b>35</b></div>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </li> /.item
+                                                                                                                                                                    <li class="">
+                                                                                                                                                                        <div class="progress-group">
+                                                                                                                                                                            <span class="progress-text">Design</span>
+                                                                                                                                                                            <span class="progress-number"></span>
+                                                                                                                                                                            <div class="progress sm" style="height: 20px;">
+                                                                                                                                                                                <div class="progress-bar progress-bar-aqua" style="width: 20%;background-color: #008000;color: black"><b>5</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-red" style="width: 10%;background-color: #6AA121;color: black" ><b>3</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-green" style="width: 10%;background-color: #FFFF00;color: black"><b>2</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-yellow" style="width: 20%;background-color: #FFA375;;color: black"><b>4</b></div>
+                                                                                                                                                                                <div class="progress-bar progress-bar-light-blue" style="width: 15%;background-color: #FF8080;color: black"><b>3</b></div>
+                                                                                                                                                                                <div class="progress-bar " style="width: 25%;background-color: #f5f5f5;color: black;text-align: right"><b>45</b></div>
+                                                                                                                                                                            </div>
+                                                                                                                                                                        </div>
+                                                                                                                                                                    </li> /.item -->
+
+
+
+
+
+                                                                                                            </ul>
+                                                                                                        </div><!-- /.box-body -->
+                                                                                                        <!--                                                    <div class="box-footer text-center">
+                                                                                                                                                                <a href="javascript::" class="uppercase">View All Business Areas</a>
+                                                                                                                                                            </div> /.box-footer -->
+                                                                                                    </div><!-- /.box -->
+                                                                                                </div>
                                                                                                 </div><!-- /.col -->
                                                                                                 <!--                                                            <div class="col-md-8">
                                                                                                                                                                 <div class="chart">
@@ -733,279 +1016,32 @@
                                                                                                 </div><!-- /.col -->
                                                                                                 <div class="row">
 
-                                                                                                    <div class="col-md-4">
-                                                                                                        <!-- USERS LIST -->
-                                                                                                        <div class="box box-danger">
-                                                                                                            <div class="box-header">
-                                                                                                                <h3 class="box-title">Location Wise Employees</h3>
-                                                                                                                <div class="box-tools pull-right">
-                                                                                                                    <button class="btn btn-box-tool" data-widget="collapse">
-                                                                                                                        <i class="fa fa-minus"></i>
-                                                                                                                    </button>
-                                                                                                                </div>
-                                                                                                            </div><!-- /.box-header -->
-                                                                                                            <div class="box-body" id="chart_divId">
-                                                                                                                <div id="chart_div" style="width: 300px; height: 300px;"></div>
-                                                                                                            </div>
+                                                                                                    <!--                                                                                                    <div class="col-md-4">
+                                                                                                                                                                                                        USERS LIST 
+                                                                                                                                                                                                        <div class="box box-danger">
+                                                                                                                                                                                                        <div class="box-header">
+                                                                                                                                                                                                        <h3 class="box-title">Location Wise Employees</h3>
+                                                                                                                                                                                                        <div class="box-tools pull-right">
+                                                                                                                                                                                                        <button class="btn btn-box-tool" data-widget="collapse">
+                                                                                                                                                                                                        <i class="fa fa-minus"></i>
+                                                                                                                                                                                                        </button>
+                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                        </div> /.box-header 
+                                                                                                                                                                                                        <div class="box-body" id="chart_divId">
+                                                                                                                                                                                                        <div id="chart_div" style="width: 300px; height: 300px;"></div>
+                                                                                                                                                                                                        </div>
+                                                                                                    
+                                                                                                                                                                                                        <div class="box-footer text-center">
+                                                                                                                                                                                                        <a href="Hierarchy.jsp" class="uppercase">View Department WIse</a>
+                                                                                                                                                                                                        </div> /.box-footer 
+                                                                                                                                                                                                        </div>/.box 
+                                                                                                                                                                                                        </div>-->
 
-                                                                                                            <!--                                        <div class="box-footer text-center">
-                                                                                                                                                        <a href="Hierarchy.jsp" class="uppercase">View Department WIse</a>
-                                                                                                                                                    </div> /.box-footer -->
-                                                                                                        </div><!--/.box -->
-                                                                                                    </div>
-
-                                                                                                    <div class="col-md-4">
-                                                                                                        <!-- Nature of Business Pane -->
-                                                                                                        <div class="box box-primary">
-                                                                                                            <div class="box-header">
-                                                                                                                <h3 class="box-title">Performance Management stage wise</h3>
-                                                                                                                <div class="box-tools pull-right">
-                                                                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                                                                                </div>
-                                                                                                            </div><!-- /.box-header -->
-                                                                                                            <div class="box-body">
-                                                                                                                <ul class="products-list product-list-in-box">
-                                                                                                                    <li class="">
-                                                                                                                        <div class="progress-group" style="padding-bottom: 15px;">
-                                                                                                                            <span class="progress-text">KRA Setting By Employee</span>
-                                                                                                                            <span class="progress-number"><b>${performanceManagementStage[1]}</b>/${performanceManagementStage[0]}</span>
-                                                                                                                            <div class="progress sm">
-                                                                                                                                <div class="progress-bar progress-bar-aqua" style="width: ${(performanceManagementStage[1]/performanceManagementStage[0])*100}%"></div>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </li><!-- /.item -->
-
-                                                                                                                    <li class="">
-                                                                                                                        <div class="progress-group" style="padding-bottom: 15px;">
-                                                                                                                            <span class="progress-text">KRA Approval By Manager</span>
-                                                                                                                            <span class="progress-number"><b>${performanceManagementStage[2]}</b>/${performanceManagementStage[0]}</span>
-                                                                                                                            <div class="progress sm">
-                                                                                                                                <div class="progress-bar progress-bar-red" style="width: ${(performanceManagementStage[2]/performanceManagementStage[0])*100}%"></div>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </li><!-- /.item -->
-
-<!--                                                                                                                    <li class="">
-                                                                                                                        <div class="progress-group" style="padding-bottom: 15px;">
-                                                                                                                            <span class="progress-text">Employees Mid Year Self Assessment</span>
-                                                                                                                            <span class="progress-number"><b>${performanceManagementStage[3]}</b>/${performanceManagementStage[0]}</span>
-                                                                                                                            <div class="progress sm">
-                                                                                                                                <div class="progress-bar progress-bar-green" style="width: ${(performanceManagementStage[3]/performanceManagementStage[0])*100}%"></div>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </li> /.item -->
-
-<!--                                                                                                                    <li class="">
-                                                                                                                        <div class="progress-group" style="padding-bottom: 15px;">
-                                                                                                                            <span class="progress-text">Managers Mid Year Review</span>
-                                                                                                                            <span class="progress-number"><b>${performanceManagementStage[4]}</b>/${performanceManagementStage[0]}</span>
-                                                                                                                            <div class="progress sm">
-                                                                                                                                <div class="progress-bar progress-bar-yellow" style="width: ${(performanceManagementStage[4]/performanceManagementStage[0])*100}%"></div>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </li> /.item -->
-
-                                                                                                                    <li class="">
-                                                                                                                        <div class="progress-group" style="padding-bottom: 15px;">
-                                                                                                                            <span class="progress-text">Employees  Self Assessment</span>
-                                                                                                                            <span class="progress-number"><b>${performanceManagementStage[5]}</b>/${performanceManagementStage[0]}</span>
-                                                                                                                            <div class="progress sm">
-                                                                                                                                <div class="progress-bar progress-bar-light-blue" style="width: ${(performanceManagementStage[5]/performanceManagementStage[0])*100}%"></div>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </li><!-- /.item -->
-
-                                                                                                                    <li class="">
-                                                                                                                        <div class="progress-group">
-                                                                                                                            <span class="progress-text">Managers  Review</span>
-                                                                                                                            <span class="progress-number"><b>${performanceManagementStage[6]}</b>/${performanceManagementStage[0]}</span>
-                                                                                                                            <div class="progress sm">
-                                                                                                                                <div class="progress-bar progress-bar-light-darkViolet" style="width: ${(performanceManagementStage[6]/performanceManagementStage[0])*100}%"></div>
-                                                                                                                            </div>
-                                                                                                                        </div>
-                                                                                                                    </li><!-- /.item -->
-
-                                                                                                                </ul>
-                                                                                                                <!--<div id="dual_x_div" style="width: 900px; height: 500px;"></div>-->
-                                                                                                            </div><!-- /.box-body -->
-                                                                                                            <!--                                                    <div class="box-footer text-center">
-                                                                                                                                                                    <a href="javascript::" class="uppercase">View All Business Areas</a>
-                                                                                                                                                                </div> /.box-footer -->
-                                                                                                        </div><!-- /.box -->
-                                                                                                    </div><!-- /.col -->
-                                                                                                    <div class="col-md-4">
-                                                                                                        <!-- Nature of Business Pane -->
-                                                                                                        <div class="box box-info">
-                                                                                                            <div class="box-header">
-                                                                                                                <h3 class="box-title">Performance rating department wise</h3>
-                                                                                                                <div class="box-tools pull-right">
-                                                                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                                                                                </div>
-                                                                                                            </div><!-- /.box-header -->
-                                                                                                            <div class="box-body">
-                                                                                                                <ul class="products-list product-list-in-box">
-                                                                                                                    <%--<c:forEach items="${departmentWiseEmpCountList}" var="departmentWiseEmpCountList" varStatus="counter">--%>
-                                                                                                                    <c:forEach items="${finalList}" var="performanceRatingList" varStatus="counterInner">
-                                                                                                                        <li class="">
-                                                                                                                            <div class="progress-group">
-                                                                                                                                <span class="progress-text">${performanceRatingList[0]}</span>
-                                                                                                                                <span class="progress-number"></span>
-
-                                                                                                                                <div class="progress sm" style="height: 20px;">
-                                                                                                                                    <c:set var="count" value="0" scope="page" />
-                                                                                                                                    <%--<c:if test="${performanceRatingList[3] eq departmentWiseEmpCountList[0]}">--%>
-                                                                                                                                    <c:set var="totalScore" value="${performanceRatingList[1]+performanceRatingList[2]+performanceRatingList[3]+performanceRatingList[4]+performanceRatingList[5]}" scope="page"/>
-                                                                                                                                    <%--</c:if>--%>
-
-                                                                                                                                    <c:forEach items="${departmentWiseEmpCountList}" var="departmentWiseEmpCountList" varStatus="counter">
-                                                                                                                                        <c:if test="${departmentWiseEmpCountList[0] eq performanceRatingList[0]}">
-                                                                                                                                            <c:set var="divideScore" value="${(departmentWiseEmpCountList[1]+1) *75/100}" scope="page"/>
-                                                                                                                                            <c:set var="divideScore1" value="${(departmentWiseEmpCountList[1]+1) *25/100}" scope="page"/>
-                                                                                                                                            <div class="progress-bar progress-bar-aqua" style="width: ${(performanceRatingList[1]+1) *divideScore/totalScore}%;background-color: #008000;color: black"><b>${performanceRatingList[1]}</b></div>
-                                                                                                                                            <div class="progress-bar progress-bar-red" style="width: ${(performanceRatingList[2]+1) *divideScore/totalScore}%;background-color: #6AA121;color: black" ><b>${performanceRatingList[2]}</b></div>
-                                                                                                                                            <div class="progress-bar progress-bar-green" style="width: ${(performanceRatingList[3]+1) *divideScore/totalScore}%;background-color: #FFFF00;color: black"><b>${performanceRatingList[3]}</b></div>
-                                                                                                                                            <div class="progress-bar progress-bar-yellow" style="width: ${(performanceRatingList[4]+1) *divideScore/totalScore}%;background-color: #FFA375;;color: black"><b>${performanceRatingList[4]}</b></div>
-                                                                                                                                            <div class="progress-bar progress-bar-light-blue" style="width: ${(performanceRatingList[5]+1) *divideScore/totalScore}%;background-color: #FF8080;color: black"><b>${performanceRatingList[5]}</b></div>
-                                                                                                                                            <div class="progress-bar " style="width: ${divideScore1}%;background-color: #f5f5f5;color: black;text-align: right"><b>${totalScore}</b>/<b>${departmentWiseEmpCountList[1]}</b></div>
-                                                                                                                                                </c:if>
-                                                                                                                                            </c:forEach>
-                                                                                                                                </div>
-                                                                                                                            </div>
-                                                                                                                        </li><!-- /.item -->
-                                                                                                                    </c:forEach>
-                                                                                                                    <!--                                                    <li class="">
-                                                                                                                                                                            <div class="progress-group">
-                                                                                                                                                                                <span class="progress-text">HR</span>
-                                                                                                                                                                                <span class="progress-number"></span>
-                                                                                                                                                                                <div class="progress sm" style="height: 20px;">
-                                                                                                                                                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%;background-color: #008000;color: black"><b>5</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-red" style="width: 10%;background-color: #6AA121;color: black" ><b>3</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-green" style="width: 10%;background-color: #FFFF00;color: black"><b>2</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-yellow" style="width: 20%;background-color: #FFA375;;color: black"><b>4</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-light-blue" style="width: 15%;background-color: #FF8080;color: black"><b>3</b></div>
-                                                                                                                                                                                    <div class="progress-bar " style="width: 25%;background-color: #f5f5f5;color: black;text-align: right"><b>40</b></div>
-                                                                                                                                                                                </div>
-                                                                                                                                                                            </div>
-                                                                                                                                                                        </li> /.item
-                                                                                                                                                                        <li class="">
-                                                                                                                                                                            <div class="progress-group">
-                                                                                                                                                                                <span class="progress-text">Purchase</span>
-                                                                                                                                                                                <span class="progress-number"></span>
-                                                                                                                                                                                <div class="progress sm" style="height: 20px;">
-                                                                                                                                                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%;background-color: #008000;color: black"><b>5</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-red" style="width: 10%;background-color: #6AA121;color: black" ><b>3</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-green" style="width: 10%;background-color: #FFFF00;color: black"><b>2</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-yellow" style="width: 20%;background-color: #FFA375;;color: black"><b>4</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-light-blue" style="width: 15%;background-color: #FF8080;color: black"><b>3</b></div>
-                                                                                                                                                                                    <div class="progress-bar " style="width: 25%;background-color: #f5f5f5;color: black;text-align: right"><b>30</b></div>
-                                                                                                                                                                                </div>
-                                                                                                                                                                            </div>
-                                                                                                                                                                        </li> /.item
-                                                                                                                                                                        <li class="">
-                                                                                                                                                                            <div class="progress-group">
-                                                                                                                                                                                <span class="progress-text">Finance</span>
-                                                                                                                                                                                <span class="progress-number"></span>
-                                                                                                                                                                                <div class="progress sm" style="height: 20px;">
-                                                                                                                                                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%;background-color: #008000;color: black"><b>5</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-red" style="width: 10%;background-color: #6AA121;color: black" ><b>3</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-green" style="width: 10%;background-color: #FFFF00;color: black"><b>2</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-yellow" style="width: 20%;background-color: #FFA375;;color: black"><b>4</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-light-blue" style="width: 15%;background-color: #FF8080;color: black"><b>3</b></div>
-                                                                                                                                                                                    <div class="progress-bar " style="width: 25%;background-color: #f5f5f5;color: black;text-align: right"><b>35</b></div>
-                                                                                                                                                                                </div>
-                                                                                                                                                                            </div>
-                                                                                                                                                                        </li> /.item
-                                                                                                                                                                        <li class="">
-                                                                                                                                                                            <div class="progress-group">
-                                                                                                                                                                                <span class="progress-text">Design</span>
-                                                                                                                                                                                <span class="progress-number"></span>
-                                                                                                                                                                                <div class="progress sm" style="height: 20px;">
-                                                                                                                                                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%;background-color: #008000;color: black"><b>5</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-red" style="width: 10%;background-color: #6AA121;color: black" ><b>3</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-green" style="width: 10%;background-color: #FFFF00;color: black"><b>2</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-yellow" style="width: 20%;background-color: #FFA375;;color: black"><b>4</b></div>
-                                                                                                                                                                                    <div class="progress-bar progress-bar-light-blue" style="width: 15%;background-color: #FF8080;color: black"><b>3</b></div>
-                                                                                                                                                                                    <div class="progress-bar " style="width: 25%;background-color: #f5f5f5;color: black;text-align: right"><b>45</b></div>
-                                                                                                                                                                                </div>
-                                                                                                                                                                            </div>
-                                                                                                                                                                        </li> /.item -->
-
-
-
-
-
-                                                                                                                </ul>
-                                                                                                            </div><!-- /.box-body -->
-                                                                                                            <!--                                                    <div class="box-footer text-center">
-                                                                                                                                                                    <a href="javascript::" class="uppercase">View All Business Areas</a>
-                                                                                                                                                                </div> /.box-footer -->
-                                                                                                        </div><!-- /.box -->
-                                                                                                    </div><!-- /.col -->
+                                                                                                    <!-- /.col -->
+                                                                                                    <!-- /.col -->
 
                                                                                                 </div><!-- /.row -->
-                                                                                                <div class="row">
 
-                                                                                                    <div class="col-md-4">
-                                                                                                        <!-- USERS LIST -->
-                                                                                                        <div class="box box-danger">
-                                                                                                            <div class="box-header">
-                                                                                                                <h3 class="box-title">Department wise employee resignation</h3>
-                                                                                                                <div class="box-tools pull-right">
-                                                                                                                    <button class="btn btn-box-tool" data-widget="collapse">
-                                                                                                                        <i class="fa fa-minus"></i>
-                                                                                                                    </button>
-                                                                                                                </div>
-                                                                                                            </div><!-- /.box-header -->
-                                                                                                            <div class="box-body" id="piechart33Id">
-                                                                                                                <div id="piechart33" style="width: 300px; height: 300px;">
-
-                                                                                                                </div>
-                                                                                                            </div>
-
-
-                                                                                                            <!--                                        <div class="box-footer text-center">
-                                                                                                            <a href="Hierarchy.jsp" class="uppercase">View Department WIse</a>
-                                                                                                       </div> /.box-footer -->
-                                                                                                        </div><!--/.box -->
-                                                                                                    </div>
-
-<!--                                                                                                    <div class="col-md-4">
-                                                                                                         Nature of Business Pane 
-                                                                                                        <div class="box box-primary">
-                                                                                                            <div class="box-header">
-                                                                                                                <h3 class="box-title">Travel expense report</h3>
-                                                                                                                <div class="box-tools pull-right">
-                                                                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                                                                                </div>
-                                                                                                            </div> /.box-header 
-                                                                                                            <div class="box-body" id="piechart11Id">
-                                                                                                                <div id="piechart11" style="width: 300px; height: 300px;"></div>
-
-                                                                                                                <div id="dual_x_div" style="width: 900px; height: 500px;"></div>
-                                                                                                            </div> /.box-body 
-                                                                                                                                                                <div class="box-footer text-center">
-                                                                                                                                                                    <a href="javascript::" class="uppercase">View All Business Areas</a>
-                                                                                                                                                                </div> /.box-footer 
-                                                                                                        </div> /.box 
-                                                                                                    </div> /.col -->
-                                                                                                    <div class="col-md-4">
-                                                                                                        <!-- Nature of Business Pane -->
-                                                                                                        <div class="box box-info">
-                                                                                                            <div class="box-header">
-                                                                                                                <h3 class="box-title">Probation to confirmation</h3>
-                                                                                                                <div class="box-tools pull-right">
-                                                                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                                                                                                </div>
-                                                                                                            </div><!-- /.box-header -->
-                                                                                                            <div class="box-body" id="piechart22Id">
-                                                                                                                <div id="piechart22" style="width: 300px; height: 300px;"></div>
-                                                                                                            </div><!-- /.box-body -->
-                                                                                                            <!--                                                    <div class="box-footer text-center">
-                                                                                                                                                                </div> /.box-footer -->
-                                                                                                        </div><!-- /.box -->
-                                                                                                    </div><!-- /.col -->
-
-                                                                                                </div><!-- /.row -->
                                                                                                 </div><!-- /.tab-pane -->
 
                                                                                                 <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->

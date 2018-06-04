@@ -15,6 +15,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
 /**
  *
@@ -1142,6 +1143,17 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
                 + " LEFT JOIN a.shiftMaster b "
                 + " WHERE a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId();
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public void updateNullShiftId() {
+
+        Session s = getSessionFactory().openSession();
+        Query query = s.createSQLQuery("update employee_shift_data set shift_master_id=1 where shift_master_id is null");
+        int result = query.executeUpdate();
+
+        s.close();
+
     }
 
 }

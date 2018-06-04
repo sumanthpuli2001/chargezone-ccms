@@ -520,6 +520,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //        employeeMaster.setUserMaster(userMaster);
 //        List<?> empList = employeeMasterService.readByEmployeeUserId(employeeMaster);
 //        List<?> empList = employeeMasterService.read();
+         employeeShiftDataService.updateNullShiftId();     //.........this line for update employee shift_id null to 1.....//
         List<?> empList = employeeDatetimeDataService.readEmployeeByCurrentDate();
         for (Object zz : empList) {
             try {
@@ -14053,7 +14054,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
     }
 
 //    public ModelAndView overTimeEntry(HttpServletRequest request, HttpServletResponse response) throws Exception {
-   private synchronized void overTimeEntry() throws Exception {
+    private synchronized void overTimeEntry() throws Exception {
         ModelAndView mv = new ModelAndView();
         List<?> list = employeeShiftDataService.checkEmpDailyData();
         if (!list.isEmpty()) {
@@ -14463,9 +14464,9 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                             cell.setCellStyle(styleBold);
                         }
-                        rownum++;
+//                        rownum++;
                     }
-                    if (j != 0) {
+                    if (j > 1) {
                         id = Integer.parseInt("" + allEmpId.get(j - 1));
                         employeeShiftData.setId(id);
                         List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
@@ -14629,7 +14630,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         firstHalfList.add("" + col);
                         firstHalfList.add("" + lwp);
 
-                        Row row1 = firstSheet.createRow(rownum);
+                        Row row1 = firstSheet.createRow(rownum-1);
                         for (int k1 = 0; k1 < firstHalfList.size(); k1++) {
                             Cell cell = row1.createCell(k1);
 
@@ -14639,10 +14640,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         }
 
                     }
-
+                        rownum++;
                 }
-
-                rownum++;
+                   //done rownum-1 to remove space
+//                rownum++;
             }
 
         } catch (Exception e) {

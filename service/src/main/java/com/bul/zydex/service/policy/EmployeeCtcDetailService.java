@@ -32,4 +32,6 @@ public interface EmployeeCtcDetailService<T> extends GenericsService<T> {
 
     public List<?> CtcDetailempidMasterSalary(int employeeid, int ctcAllowanceId);
 
+    public List<?> GratuietyFiveYrFetch(int employeeid);
+
 }

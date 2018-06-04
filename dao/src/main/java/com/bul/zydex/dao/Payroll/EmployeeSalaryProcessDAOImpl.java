@@ -628,7 +628,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
 //                + " left join a.employeeSalaryProcesses b"
 //                + " left join b.payrollEsicDeduction c"
 //                + " where 1=1 " + condition;
-        query += " Select c.employeeId, c.employeeName,b.grossTotal,a.empContrubtion,a.compContrubtion,c.esicNo,b.month,b.year"
+        query += " Select c.employeeId, c.employeeName,b.grossTotal,a.empContrubtion,a.compContrubtion,c.esicNo,b.month,b.year,b.employeeLeaveEncashment"
                 + " From PayrollEsicDeduction a"
                 + " left join a.employeeSalaryProcess b"
                 + " left join b.employeeMaster c"
@@ -884,7 +884,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         }
         query += " Select a.employeeId, a.employeeName,"
                 + " a.id,b.id,"
-                + " a.uanNo,b.grossTotal,a.pfAmount,a.dateOfBirth"
+                + " a.uanNo,b.grossTotal,a.pfAmount,a.dateOfBirth,b.employeeBasicSalary"
                 + " From EmployeeMaster a"
                 + " left join a.employeeSalaryProcesses b"
                 + " where b.month  ='" + employeeMaster.getBankAccountNo() + "'"
@@ -939,8 +939,8 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         return getHibernateTemplate().find(query);
 //         + " WHERE b.id=" + empId + " and (STR_TO_DATE(a.completeDateStr,'%d/%m/%Y') BETWEEN  STR_TO_DATE('" + startD + "','%d/%m/%Y') AND STR_TO_DATE('" + endD + "','%d/%m/%Y')) "
     }
-    
-     public List<?> readEmployeeForSlip1(EmployeeMaster object) {
+
+    public List<?> readEmployeeForSlip1(EmployeeMaster object) {
         String query = "";
         String condition = "";
         EmployeeMaster employeeMaster = (EmployeeMaster) object;

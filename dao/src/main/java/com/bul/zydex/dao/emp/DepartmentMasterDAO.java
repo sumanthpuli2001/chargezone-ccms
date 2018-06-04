@@ -22,6 +22,8 @@ public interface DepartmentMasterDAO<T> extends GenericsDAO<T> {
     public List<?> countResignedEmpOfDept();
 
     public List<?> countEmpByDepartmentList2();
-    
+
+    public List<?> countEmpByDepartmentList3();
+
     public List<?> readByName(String departmentName);
 }

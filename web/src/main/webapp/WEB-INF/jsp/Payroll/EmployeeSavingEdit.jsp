@@ -53,7 +53,7 @@
                                                 &nbsp;&nbsp;&nbsp;
                                                 <b> Year : </b>
                                                 <span>${payrollFormSixteenMaster.payrollFinancialYear.title}</span> 
-                                                <input type="hidden" id="yearId" name="yearId" value="${payrollFormSixteenMaster.id}">  
+                                                <input type="hidden" id="yearId" name="yearId" value="${payrollFormSixteenMaster.payrollFinancialYear.id}">  
 
                                             </div>
                                         </div>
@@ -73,6 +73,7 @@
                                                             <th>Proof submission </th>
                                                             <th></th>
                                                             <th></th>
+                                                            <th>Action Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -100,8 +101,15 @@
                                                                 <a href="payrollEmployeeFormSixteen.htm?act=downloadEmployeeattachment&amp;fileName=${listOfLoan1[4]}&userId=${employeeMaster.id}&finicailyear=${payrollFormSixteenMaster.payrollFinancialYear.id}&compoentid=${listOfLoan1[1]}">${listOfLoan1[4]}</a> 
 
                                                             </td>
+                                                            <td>
+                                                            <c:if test="${listOfLoan1[5] == 0}"><td><span class="label label-warning">Pending</span></td></c:if>
+                                                            <c:if test="${listOfLoan1[5] == 1}"><td><span class="label label-success">Approved</span></td></c:if>
+                                                            <c:if test="${listOfLoan1[5] == 2}"><td><span class="label label-danger">Rejected</span></td></c:if>
+                                                            <c:if test="${listOfLoan1[5] == 3}"><td><span class="label label-warning">Recycled</span></td></c:if>
+                                                                </td>
 
-                                                        </tr>
+
+                                                            </tr>
                                                     </c:forEach>
                                                 </table>
                                             </c:forEach>

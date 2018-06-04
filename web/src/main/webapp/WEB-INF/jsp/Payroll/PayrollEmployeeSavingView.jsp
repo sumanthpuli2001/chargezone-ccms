@@ -53,7 +53,7 @@
                                                 &nbsp;&nbsp;&nbsp;
                                                 <b> Year : </b>
                                                 <span>${payrollFormSixteenMaster.payrollFinancialYear.title}</span> 
-                                                <input type="hidden" id="yearId" name="yearId" value="${payrollFormSixteenMaster.id}">  
+                                                <input type="hidden" id="yearId" name="yearId" value="${payrollFormSixteenMaster.payrollFinancialYear.id}">  
 
                                             </div>
                                         </div>
@@ -162,7 +162,7 @@
             var emplId = document.getElementById("employeeId").value;
 //            alert(emplId);
             var yearID = document.getElementById("yearId").value;
-            //            alert(yearID);
+//                        alert(yearID);
             var savingTypeIdList = document.getElementById("savingTypeId").value;
 //            alert(savingTypeIdList);
             var savingTypeId = savingTypeIdList.split(",");

@@ -534,6 +534,8 @@
         <property name="policyMasterValidator" ref="policyMasterValidator1" />
         <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
         <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
+        <property name="policyCreateService" ref="policyCreateService1" />
+        <property name="policyDropDownService" ref="policyDropDownService1" />
         
     </bean>
     <!--EmailTemplate-->
@@ -806,6 +808,8 @@
         <property name="payrollTaxDeclarationPeriodMasterService" ref="payrollTaxDeclarationPeriodMasterService1" />
         <property name="payrollTaxRateMasterService" ref="payrollTaxRateMasterService1" />
         <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
+        <property name="payrollPfRecordService" ref="payrollPfRecordService1" />
+        <property name="retirementAgeService" ref="retirementAgeService1" />
     </bean>
     <bean id="additionalAmountCheckController1" class="com.bul.zydex.controller.Payroll.AdditionalAmountCheckController" parent="controllerConfig" >
         <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
@@ -864,6 +868,7 @@
         <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
         <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
         <property name="retirementAgeService" ref="retirementAgeService1" />
+        <property name="payrollPfRecordService" ref="payrollPfRecordService1" />
          
     </bean>
     <bean id="employeePtCheckController1" class="com.bul.zydex.controller.Payroll.EmployeePtCheckcontroller" parent="controllerConfig" >
@@ -1075,6 +1080,11 @@
         <property name="vacancyMasterService" ref="vacancyMasterService1"/>
         <property name="recruitmentApprovalHistoryService" ref="recruitmentApprovalHistoryService1"/>
         <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1"/>
+        <property name="candidateApplyJob2Service" ref="candidateApplyJob2Service1"/>
+        <property name="candidateFamilyBackgroundService" ref="candidateFamilyBackgroundService1"/>
+        <property name="candidateAcademicQualificationService" ref="candidateAcademicQualificationService1"/>
+        <property name="candidateExperienceDetailService" ref="candidateExperienceDetailService1"/>
+        <property name="candidateOtherReferencesService" ref="candidateOtherReferencesService1"/>
     </bean>
     
     <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >
@@ -1095,6 +1105,11 @@
         <property name="questionLibraryService" ref="questionLibraryService1"/>
         <property name="questionPaperService" ref="questionPaperService1"/>
         <property name="questionAnswerSubmitService" ref="questionAnswerSubmitService1"/>
+        <property name="candidateApplyJob2Service" ref="candidateApplyJob2Service1"/>
+        <property name="candidateFamilyBackgroundService" ref="candidateFamilyBackgroundService1"/>
+        <property name="candidateAcademicQualificationService" ref="candidateAcademicQualificationService1"/>
+        <property name="candidateExperienceDetailService" ref="candidateExperienceDetailService1"/>
+        <property name="candidateOtherReferencesService" ref="candidateOtherReferencesService1"/>
     </bean> 
     <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>

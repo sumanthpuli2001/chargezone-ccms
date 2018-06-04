@@ -30,4 +30,7 @@ public interface TaxSavingSubmitService<T> extends GenericsService<T> {
 
     public List<?> readDataForSaving(int employeeId, int financialId);
 
+    public List<?> readTaxSavingSubmitEmployeeSaving(int EmplID, int finicailyear);
+    public List<?> readTaxSavingSubmitForEmployee(EmployeeMaster employeeMaster, String Financial_year);
+
 }

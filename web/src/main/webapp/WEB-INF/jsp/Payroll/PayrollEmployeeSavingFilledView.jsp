@@ -37,6 +37,53 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
+        <form:form class="form-horizontal" role="form1" action="taxSavingSubmit.htm?act=searchFormEmployeeFilledSubmit" method="post" name='form' onsubmit='return saveSubmit11();'>
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <div class="tab-content">
+                                <!--<span style="color: red;font-size: 14px;">* indicates mandatory field.</span>-->
+                                <!--form horizontal starts here-->
+
+                                <div class="box-header">
+                                </div>
+                                <div class="box-body no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+
+                                            <div class="col-sm-4">
+                                                <label>Financial year:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <select name="fnyear" id="fnyear" class="form-control ">
+                                                    <option value="">--Select--</option>
+                                                    <c:forEach var="finyear" items="${financialYearList}">
+                                                        <option value="${finyear.key}" label="${finyear.value}" ></option>
+                                                    </c:forEach>
+                                                </select>
+                                                <span id="fnError" style="color: red;"></span>
+                                            </div>
+                                            <br>
+
+                                        </div>
+                                        <!--</div> /.col -->
+                                    </div><!-- /.row -->
+                                </div><!-- /.box-body -->
+                                <div class="form-group">
+                                    <div class=" col-sm-12">
+                                        <center>
+                                        <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button>
+                                        </center>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="tab_3"></div>
+                            </div>
+                        </div>
+                    </div>
+
+            </section>
+        </form:form>
         
         <form:form action="" method="post" commandName="taxSavingSubmit" name='form1'  class="form-horizontal" role="form">
                 <section class="content">
@@ -63,6 +110,7 @@
                                                                     <tr>
                                                                         <th>Employee Id</th>
                                                                         <th>Employee Name</th>
+                                                                        <th>Status</th>
                                                                         <th>Action</th>
                                                                     </tr>
                                                                 </thead>
@@ -74,8 +122,13 @@
                                                                 <tr>
                                                                     <td>${list[0]}</td>
                                                                     <td>${list[1]}</td>
-
-                                                                    <td>  <button type="button" onclick="viewClick('${list[2]}', '${list[3]}');" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <c:if test="${list[4] eq 1}"><td><span style="font-size:15px" class="label label-default">Pending</span></td></c:if>
+                                                                    <c:if test="${list[4] eq 2}"><td><span style="font-size:15px" class="label label-success">Approved</span></td></c:if>
+                                                                    <c:if test="${list[4] eq 3}"><td><span style="font-size:15px" class="label label-warning">Partially Approved</span></td></c:if>
+                                                                    <c:if test="${list[4] eq 4}"><td><span style="font-size:15px" class="label label-danger">Rejected</span></td></c:if>
+                                                                    <c:if test="${list[4] eq 5}"><td><span style="font-size:15px" class="label label-info">Recycled </span></td></c:if>
+                                                                    <td>  
+                                                                        <button type="button" onclick="viewClick('${list[2]}', '${list[3]}');" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
                                                                     </td>

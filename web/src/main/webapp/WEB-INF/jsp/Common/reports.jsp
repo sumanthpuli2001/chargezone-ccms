@@ -49,7 +49,7 @@
                                     <c:otherwise>
                                         <div class="col-xs-4 col-sm-4 col-md-4">
                                             <c:if test="${sessionScope.userRight.employeeMasterReport}">
-                                                <a  style="font-size: 15px" href="shiftRotationMaster.htm?act=employeeDataSearch">
+                                                <a style="font-size: 15px" href="shiftRotationMaster.htm?act=employeeDataSearch">
                                                     <strong>Employee Master Report</strong>
                                                 </a>
                                             </c:if>
@@ -116,10 +116,17 @@
                                         </a>
                                     </c:if>
                                 </div>
-                                <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <c:if test="${sessionScope.userRight.policy}">
+<!--                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <%--<c:if test="${sessionScope.userRight.policy}">--%>
                                         <a  style="font-size: 15px"  href="policyMaster.htm?act=searchPolicyDetail&search=none">
                                             &nbsp<strong>Policy</strong>
+                                        </a>
+                                    <%--</c:if>--%>
+                                </div>-->
+                                 <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <c:if test="${sessionScope.userRight.govtFormatPF}">
+                                        <a  style="font-size: 15px" href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none">
+                                            &nbsp<strong>Govt. Format PF </strong>
                                         </a>
                                     </c:if>
                                 </div>
@@ -192,13 +199,13 @@
                                         </a>
                                     </c:if>
                                 </div>
-                                <div class="col-xs-4 col-sm-4 col-md-4">
-                                    <c:if test="${sessionScope.userRight.govtFormatPF}">
+<!--                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                    <%--<c:if test="${sessionScope.userRight.govtFormatPF}">--%>
                                         <a  style="font-size: 15px" href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none">
                                             &nbsp<strong>Govt. Format PF </strong>
                                         </a>
-                                    </c:if>
-                                </div>
+                                    <%--</c:if>--%>
+                                </div>-->
                             </div>
                             <br>
                         </div>

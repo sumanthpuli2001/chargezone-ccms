@@ -5,9 +5,15 @@
  */
 package com.bul.zydex.controller.Recruitment;
 
+import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.model.ApprovalUser;
+import com.bul.zydex.model.CandidateAcademicQualification;
 import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateApplyJob2;
+import com.bul.zydex.model.CandidateExperienceDetail;
+import com.bul.zydex.model.CandidateFamilyBackground;
 import com.bul.zydex.model.CandidateJobApplication;
+import com.bul.zydex.model.CandidateOtherReferences;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
@@ -870,8 +876,15 @@ public class RecruitmentController extends RecruitmentAbstract {
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
         int candJobApplicationid = Integer.parseInt(id);
+        
         CandidateJobApplication cja = candidateJobApplicationService.readById(candJobApplicationid);
         candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
+        CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateAcademicQualification = candidateAcademicQualificationService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateExperienceDetail = candidateExperienceDetailService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateFamilyBackground = candidateFamilyBackgroundService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateOtherReferences = candidateOtherReferencesService.readListByApplyJobId(candidateApplyJob.getId());
+        
         VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
 //        MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
 //        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
@@ -990,6 +1003,11 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         request.setAttribute("candidateJobApplication", cja);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.getModelMap().put("candidateApplyJob2", candidateApplyJob2);
+        mv.getModelMap().put("candidateAcademicQualification", candidateAcademicQualification);
+        mv.getModelMap().put("candidateExperienceDetail", candidateExperienceDetail);
+        mv.getModelMap().put("candidateFamilyBackground", candidateFamilyBackground);
+        mv.getModelMap().put("candidateOtherReferences", candidateOtherReferences);
 //        request.setAttribute("list", list);
         mv.setViewName("Recruitment/CandidateApproval");
         return mv;

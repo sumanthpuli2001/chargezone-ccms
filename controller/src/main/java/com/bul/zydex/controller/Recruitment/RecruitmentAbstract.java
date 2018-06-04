@@ -7,8 +7,13 @@ package com.bul.zydex.controller.Recruitment;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.ApprovalUser;
+import com.bul.zydex.model.CandidateAcademicQualification;
 import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateApplyJob2;
+import com.bul.zydex.model.CandidateExperienceDetail;
+import com.bul.zydex.model.CandidateFamilyBackground;
 import com.bul.zydex.model.CandidateJobApplication;
+import com.bul.zydex.model.CandidateOtherReferences;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmployeeMaster;
@@ -27,7 +32,12 @@ import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMppApproval;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.Approval.ApprovalUserService;
+import com.bul.zydex.service.CandidateJobApply.CandidateAcademicQualificationService;
+import com.bul.zydex.service.CandidateJobApply.CandidateApplyJob2Service;
+import com.bul.zydex.service.CandidateJobApply.CandidateExperienceDetailService;
+import com.bul.zydex.service.CandidateJobApply.CandidateFamilyBackgroundService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
+import com.bul.zydex.service.CandidateJobApply.CandidateOtherReferencesService;
 import com.bul.zydex.service.MprApproval.MprApprovalService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
@@ -73,6 +83,53 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected VacancyMasterService<VacancyMaster> vacancyMasterService;
     protected RecruitmentApprovalHistoryService<RecruitmentApprovalHistory> recruitmentApprovalHistoryService;
     protected MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService;
+    protected CandidateApplyJob2Service<CandidateApplyJob2> candidateApplyJob2Service;
+    protected CandidateAcademicQualificationService<CandidateAcademicQualification> candidateAcademicQualificationService;
+    protected CandidateFamilyBackgroundService<CandidateFamilyBackground> candidateFamilyBackgroundService;
+    protected CandidateExperienceDetailService<CandidateExperienceDetail> candidateExperienceDetailService;
+    protected CandidateOtherReferencesService<CandidateOtherReferences> candidateOtherReferencesService;
+
+    public CandidateApplyJob2Service<CandidateApplyJob2> getCandidateApplyJob2Service() {
+        return candidateApplyJob2Service;
+    }
+
+    public void setCandidateApplyJob2Service(CandidateApplyJob2Service<CandidateApplyJob2> candidateApplyJob2Service) {
+        this.candidateApplyJob2Service = candidateApplyJob2Service;
+    }
+
+    public CandidateAcademicQualificationService<CandidateAcademicQualification> getCandidateAcademicQualificationService() {
+        return candidateAcademicQualificationService;
+    }
+
+    public void setCandidateAcademicQualificationService(CandidateAcademicQualificationService<CandidateAcademicQualification> candidateAcademicQualificationService) {
+        this.candidateAcademicQualificationService = candidateAcademicQualificationService;
+    }
+
+    public CandidateFamilyBackgroundService<CandidateFamilyBackground> getCandidateFamilyBackgroundService() {
+        return candidateFamilyBackgroundService;
+    }
+
+    public void setCandidateFamilyBackgroundService(CandidateFamilyBackgroundService<CandidateFamilyBackground> candidateFamilyBackgroundService) {
+        this.candidateFamilyBackgroundService = candidateFamilyBackgroundService;
+    }
+
+    public CandidateExperienceDetailService<CandidateExperienceDetail> getCandidateExperienceDetailService() {
+        return candidateExperienceDetailService;
+    }
+
+    public void setCandidateExperienceDetailService(CandidateExperienceDetailService<CandidateExperienceDetail> candidateExperienceDetailService) {
+        this.candidateExperienceDetailService = candidateExperienceDetailService;
+    }
+
+    public CandidateOtherReferencesService<CandidateOtherReferences> getCandidateOtherReferencesService() {
+        return candidateOtherReferencesService;
+    }
+
+    public void setCandidateOtherReferencesService(CandidateOtherReferencesService<CandidateOtherReferences> candidateOtherReferencesService) {
+        this.candidateOtherReferencesService = candidateOtherReferencesService;
+    }
+    
+    
 
     public MprMasterService<MprMaster> getMprMasterService() {
         return mprMasterService;

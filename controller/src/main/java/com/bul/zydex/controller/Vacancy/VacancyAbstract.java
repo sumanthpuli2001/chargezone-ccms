@@ -7,8 +7,13 @@ package com.bul.zydex.controller.Vacancy;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.ApplayJobUserMaster;
+import com.bul.zydex.model.CandidateAcademicQualification;
 import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateApplyJob2;
+import com.bul.zydex.model.CandidateExperienceDetail;
+import com.bul.zydex.model.CandidateFamilyBackground;
 import com.bul.zydex.model.CandidateJobApplication;
+import com.bul.zydex.model.CandidateOtherReferences;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.JobtypeMaster;
@@ -24,7 +29,12 @@ import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.ApplayJobUserMaster.ApplayJobUserMasterService;
+import com.bul.zydex.service.CandidateJobApply.CandidateAcademicQualificationService;
+import com.bul.zydex.service.CandidateJobApply.CandidateApplyJob2Service;
+import com.bul.zydex.service.CandidateJobApply.CandidateExperienceDetailService;
+import com.bul.zydex.service.CandidateJobApply.CandidateFamilyBackgroundService;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
+import com.bul.zydex.service.CandidateJobApply.CandidateOtherReferencesService;
 import com.bul.zydex.service.QuestionAnswerSubmit.QuestionAnswerSubmitService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
@@ -57,7 +67,7 @@ public class VacancyAbstract extends CustomAbstract {
     protected LocationMasterService<LocationMaster> locationMasterService;
     protected JobtypeMasterService<JobtypeMaster> jobtypeMasterService;
     protected DesignationMasterService<DesignationMaster> designationMasterService;
-    protected CandidateJobApplyService<CandidateApplyJob>candidateJobApplyService;
+    protected CandidateJobApplyService<CandidateApplyJob> candidateJobApplyService;
     protected Validator vacancyValidator;
     protected ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterSerivce;
     protected ApplayJobUserMasterValidator applayJobUserMasterValidator;
@@ -70,6 +80,51 @@ public class VacancyAbstract extends CustomAbstract {
     protected QuestionLibraryService<QuestionLibrary> questionLibraryService;
     protected QuestionAnsService<QuestionAns> questionAnsService;
     protected QuestionAnswerSubmitService<QuestionAnswerSubmit> questionAnswerSubmitService;
+    protected CandidateApplyJob2Service<CandidateApplyJob2> candidateApplyJob2Service;
+    protected CandidateFamilyBackgroundService<CandidateFamilyBackground> candidateFamilyBackgroundService;
+    protected CandidateAcademicQualificationService<CandidateAcademicQualification> candidateAcademicQualificationService;
+    protected CandidateExperienceDetailService<CandidateExperienceDetail> candidateExperienceDetailService;
+    protected CandidateOtherReferencesService<CandidateOtherReferences> candidateOtherReferencesService;
+
+    public CandidateApplyJob2Service<CandidateApplyJob2> getCandidateApplyJob2Service() {
+        return candidateApplyJob2Service;
+    }
+
+    public void setCandidateApplyJob2Service(CandidateApplyJob2Service<CandidateApplyJob2> candidateApplyJob2Service) {
+        this.candidateApplyJob2Service = candidateApplyJob2Service;
+    }
+
+    public CandidateFamilyBackgroundService<CandidateFamilyBackground> getCandidateFamilyBackgroundService() {
+        return candidateFamilyBackgroundService;
+    }
+
+    public void setCandidateFamilyBackgroundService(CandidateFamilyBackgroundService<CandidateFamilyBackground> candidateFamilyBackgroundService) {
+        this.candidateFamilyBackgroundService = candidateFamilyBackgroundService;
+    }
+
+    public CandidateAcademicQualificationService<CandidateAcademicQualification> getCandidateAcademicQualificationService() {
+        return candidateAcademicQualificationService;
+    }
+
+    public void setCandidateAcademicQualificationService(CandidateAcademicQualificationService<CandidateAcademicQualification> candidateAcademicQualificationService) {
+        this.candidateAcademicQualificationService = candidateAcademicQualificationService;
+    }
+
+    public CandidateExperienceDetailService<CandidateExperienceDetail> getCandidateExperienceDetailService() {
+        return candidateExperienceDetailService;
+    }
+
+    public void setCandidateExperienceDetailService(CandidateExperienceDetailService<CandidateExperienceDetail> candidateExperienceDetailService) {
+        this.candidateExperienceDetailService = candidateExperienceDetailService;
+    }
+
+    public CandidateOtherReferencesService<CandidateOtherReferences> getCandidateOtherReferencesService() {
+        return candidateOtherReferencesService;
+    }
+
+    public void setCandidateOtherReferencesService(CandidateOtherReferencesService<CandidateOtherReferences> candidateOtherReferencesService) {
+        this.candidateOtherReferencesService = candidateOtherReferencesService;
+    }
 
     public CandidateJobApplyService<CandidateApplyJob> getCandidateJobApplyService() {
         return candidateJobApplyService;
@@ -110,7 +165,6 @@ public class VacancyAbstract extends CustomAbstract {
     public DesignationMasterService<DesignationMaster> getDesignationMasterService() {
         return designationMasterService;
     }
-
 
     public Validator getVacancyValidator() {
         return vacancyValidator;
@@ -207,14 +261,7 @@ public class VacancyAbstract extends CustomAbstract {
     public void setQuestionAnswerSubmitService(QuestionAnswerSubmitService<QuestionAnswerSubmit> questionAnswerSubmitService) {
         this.questionAnswerSubmitService = questionAnswerSubmitService;
     }
-    
-    
-    
-    
-    
-    
-    
-    
+
     protected void departmentList(HttpServletRequest request) {
         DepartmentMaster departmentMaster = new DepartmentMaster();
         List<?> depttList = departmentMasterService.read();
@@ -261,6 +308,5 @@ public class VacancyAbstract extends CustomAbstract {
 
         request.setAttribute("desigList", dn);
     }
-
 
 }

@@ -8,19 +8,20 @@
             <column name="id" />
             <generator class="identity" />
         </id>
+        <many-to-one name="modules" class="com.bul.zydex.model.Modules" fetch="select">
+            <column name="module" />
+        </many-to-one>
         <property name="certificateName" type="string">
-            <column name="certificate_Name" length="45" not-null="true" />
+            <column name="certificate_Name" length="45" />
         </property>
         <property name="certificateType" type="string">
-            <column name="certificate_Type" length="45" not-null="true" />
+            <column name="certificate_Type" length="45" />
         </property>
-        
         <property name="certificateTitle" type="string">
-            <column name="certificate_Title" not-null="true" />
+            <column name="certificate_Title" />
         </property>
-       
         <property name="certificateBody" type="string">
-            <column name="certificate_Body" not-null="true" />
+            <column name="certificate_Body" />
         </property>
     </class>
 </hibernate-mapping>

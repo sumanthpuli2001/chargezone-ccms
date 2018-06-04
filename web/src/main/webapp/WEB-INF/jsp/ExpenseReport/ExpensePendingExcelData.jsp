@@ -23,7 +23,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Expense Pending</h1>
+            <h1>EXPENSE PENDING</h1>
         </section>
         <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
             <c:choose>

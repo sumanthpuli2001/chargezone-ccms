@@ -644,7 +644,7 @@
 
                                 </ul>
                             </li>
-                            <li>
+<!--                            <li>
                                 <a href="#">
                                     <i class="fa fa-rupee fa-lg"></i>
                                     <span>Report</span>
@@ -667,7 +667,7 @@
                                     <li><a href="employeeSalarySlip.htm?act=searchSalaryYearDetail&search=none"><i class="fa fa-circle-o"></i>Employee Salary Yearly</a></li>
                                     <li><a href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none"><i class="fa fa-circle-o"></i>Govt. Format PF</a></li>
                                 </ul>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="#">
                                     <i class="fa fa-rupee fa-lg"></i>
@@ -680,17 +680,7 @@
                                 </ul>
                             </li>
                     </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-rupee fa-lg"></i>
-                            <span>Certificate</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="certificateTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Certificate Template Result</a></li>
-                            <li><a href="certificateTemplate.htm?act=searchEmployeeDetail&search=none"><i class="fa fa-circle-o"></i> Assign Certificate</a></li>
-                        </ul>
-                    </li>
+
                     <li>
                         <a href="#">
                             <i class="fa fa-rupee fa-lg"></i>
@@ -875,6 +865,17 @@
                                 </ul>
                             </li>
                         </c:if>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-circle-o"></i>
+                                <span>Certificate</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="certificateTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Certificate Template Result</a></li>
+                                <li><a href="certificateTemplate.htm?act=searchEmployeeDetail&search=none"><i class="fa fa-circle-o"></i> Assign Certificate</a></li>
+                            </ul>
+                        </li>
 
                     </ul>
                 </li>
@@ -960,9 +961,9 @@
 
                     <c:if test="${sessionScope.userRight.employee}">
                         <li><a href="payrollEmployeeFormSixteen.htm?act=redirectToFormEmployeeSaving&search=none"><i class="fa fa-circle-o"></i>Tax Declaration</a></li>
-                        <c:if test="${sessionScope.userRight.travelExpenseAdmin}">
-                        <li><a href="taxSavingSubmit.htm?act=viewFilledForms"><i class="fa fa-circle-o"></i>Tax Deduction Approve</a></li>
-                        </c:if>
+                            <c:if test="${sessionScope.userRight.travelExpenseAdmin}">
+                            <li><a href="taxSavingSubmit.htm?act=viewFilledForms"><i class="fa fa-circle-o"></i>Tax Deduction Approve</a></li>
+                            </c:if>
                         </c:if>
                 </ul>
             </li>

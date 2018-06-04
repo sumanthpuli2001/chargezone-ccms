@@ -5,10 +5,14 @@
  */
 package com.bul.zydex.dao;
 
+import java.util.List;
+
 /**
  *
  * @author Aman
  */
 public interface EmailMetaTagDAO<T> extends GenericsDAO<T>{
+
+    public List readEmailMetatag(int moduleId);
     
 }

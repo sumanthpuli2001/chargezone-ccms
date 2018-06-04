@@ -74,7 +74,7 @@ Author     : Dhaval Patel
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Employee Advance Search: </h1>
+            <h1>EMPLOYEE ADVANCE SEARCH </h1>
 
         </section>
         <c:if test="${!empty successMessage}">

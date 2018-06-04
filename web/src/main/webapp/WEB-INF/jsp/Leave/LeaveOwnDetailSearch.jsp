@@ -124,7 +124,7 @@
         <form:form action="leaveTypeMaster.htm?act=deleteSubmit" method="post" commandName="leaveTypeMaster"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <section class="content">
-                <h2>Result :</h2>
+                <h2>RESULT </h2>
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Custom Tabs -->

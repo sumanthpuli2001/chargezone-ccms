@@ -113,7 +113,7 @@
               <div class="row">
                     <div class="col-md-12">
                         <!-- Custom Tabs -->
-                             <h3>Result :</h3>
+                             <h3>RESULT </h3>
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <!--<button type="submit" class="btn btn-danger" ><i class="fa fa-trash"></i>&nbsp&nbsp;Delete</button>-->

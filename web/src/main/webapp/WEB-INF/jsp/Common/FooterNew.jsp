@@ -260,6 +260,6 @@
         });
     }
 </script>
-<label style="font-weight: normal"> © 2016 <a href="http://www.bulwarks.com/" target="_blank"><strong>SPC Life Science </strong></a> All rights reserved. </label>
+<label style="font-weight: normal"> © 2016 <a href="http://www.bulwarks.com/" target="_blank"><strong>SPC Lifesciences </strong></a> All rights reserved. </label>
         </body>
         </html>

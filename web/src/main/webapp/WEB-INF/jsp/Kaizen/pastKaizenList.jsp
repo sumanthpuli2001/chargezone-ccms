@@ -9,13 +9,13 @@
 <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
 <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
 <head>
-    <title>Past Kaizen List</title>
+    <title>PAST KAIZEN LIST</title>
 </head>
 <html>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Past Kaizen List</h1>
+            <h1>PAST KAIZEN LIST</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Past Kaizen List</li>
@@ -42,24 +42,34 @@
                                                         <thead>
 
                                                             <tr>
-                                                                <th style="width: 1px; text-align: center" ><input type="checkbox" id="toggleId" align="Center" ></th>
+                                                                <!--<th style="width: 1px; text-align: center" ><input type="checkbox" id="toggleId" align="Center" ></th>-->
                                                                 <th style="width: 50px;">Sr.No</th>
-                                                                <th style="width: 50px;">Team Name</th>
+                                                                <th style="width: 50px;">Kaizen Team</th>
                                                                 <th style="width: 50px;">Department</th>
-                                                                <th style="width: 50px;">Status</th>
+                                                                <th style="width: 50px;">Date</th>
+                                                                <th style="width: 50px;">Kaizen Idea</th>
+                                                                <th style="width: 50px;">Problem/waste identified (WORMPIT)</th>
+                                                                <th style="width: 50px;">Idea Generator's Name</th>
+                                                                <th style="width: 50px;">Kaizen Completion Target Date</th>
+                                                                <th style="width: 50px;">Kaizen Status (Open/Close)</th>
                                                                 <th style="width: 50px;">Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <c:forEach  var="list1" items="${list}">
                                                                 <tr>
-                                                                    <td align="Center">
+<!--                                                                    <td align="Center">
                                                                         <input type="checkbox" name="checkId" id="checkId" value="${list[0]}">
-                                                                    </td>
+                                                                    </td>-->
                                                                     <td>${list1[1]}</td>
+                                                                    <td>${list1[2]}</td>
+                                                                    <td>${list1[3]}</td>
                                                                     <td>${list1[4]}</td>
                                                                     <td>${list1[5]}</td>
-                                                                    <c:if test="${list1[2] eq 5}"><td><span class="label label-success">Final Approved</span></td></c:if>
+                                                                    <td>${list1[6]}</td>
+                                                                    <td>${list1[9]}</td>
+                                                                    <td>${list1[7]}</td>
+                                                                    <c:if test="${list1[8] eq 5}"><td><span class="label label-success">Final Approved</span></td></c:if>
                                                                         <td>
                                                                             <div class="btn-group">
                                                                                 <button type="button" onclick="viewClick(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">

@@ -45,7 +45,7 @@
     <body>
         <div class="content-wrapper">
             <section class="content-header">
-                <h1>Add Visited Location: </h1>
+                <h1>ADD VISITED LOCATION </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li class="active">Visitor Visited Location</li>

@@ -23,7 +23,7 @@
         <div class="alert alert-info" role="alert">${successMessage}</div>
     </c:if>
     <section class="content-header">
-        <h1>Approver Kaizen List</h1>
+        <h1>APPROVER KAIZEN LIST</h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Approver Kaizen List</li>

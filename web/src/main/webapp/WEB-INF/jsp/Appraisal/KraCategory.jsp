@@ -46,7 +46,7 @@
             </c:if>
 
             <section class="content-header">
-                <h1>KRA Category</h1>
+                <h1>KRA CATEGORY</h1>
 
             </section>
             <div class="content">

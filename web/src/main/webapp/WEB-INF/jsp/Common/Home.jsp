@@ -166,11 +166,11 @@
             .mySlides {
                 display: none;
                 width: 100% !important;
-                height: 350px !important;
+                height: 200px !important;
             }
             div.mySlides img{
                 width: 100% !important;
-                height: 350px !important;
+                height: 200px !important;
             }
 
             /* Add a pointer when hovering over the thumbnail images */
@@ -340,7 +340,7 @@
         </c:if>
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Homepage</h1>
+            <h1>HOMEPAGE</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Homepage</a></li>
                 <li class="active">My Dashboard</li>
@@ -365,68 +365,71 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <h3 class="box-title" style="text-align: center;"> Quick Links</h3>
-
-                                    </div>
-                                    <div class="col-md-9">
-                                        <h3 class="box-title" style="text-align: center;">Life @ Spc</h3>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-
+                                        <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
+                                            <div class="box-header" style="background-color: #006fad !important;text-align: center;">
+                                                <h3 class="box-title" style="font-size: 30px;color: white;font-weight:700;font-size:16px;">QUICK LINKS</h3>
+                                            </div>
+                                        </div>
                                         <div class="vertical-menu">
-                                            <a style="font-size: 20px;text-align: left;"  href="hrServiceRequest.htm?act=searchSubmit">
-                                                <i class="fa fa-envelope"></i><strong> HR Help Desk </strong>
+                                            <a style="font-size: 14px;text-align: left;color: #2c3e50;"  href="hrServiceRequest.htm?act=searchSubmit">
+                                                <i class="fa fa-envelope"></i>&nbsp;HR Help Desk
                                             </a>
-                                            <a style="font-size: 20px;text-align: left;" href="homeController.htm?act=kaizen">
-                                                <i class="fa fa-twitch"></i>
-                                                <strong>Kaizen</strong>
+                                            <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="homeController.htm?act=kaizen">
+                                                <i class="fa fa-twitch"></i>&nbsp;Kaizen
                                             </a>
-                                            <a style="font-size: 20px;text-align: left;" href="emergencyContact.htm?act=viewContact">
-                                                <i class="fa fa-book"></i> &nbsp<strong>Emergency Contact</strong>
+                                            <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="emergencyContact.htm?act=viewContact">
+                                                <i class="fa fa-book"></i>&nbsp;Emergency Contact
                                             </a>
-
-                                            <a style="font-size: 20px;text-align: left;"  href="http://www.spcls.co.in/csr.aspx" target="_blank">
-                                                <i class="fa fa-pencil-square-o"></i> &nbsp<strong>CSR</strong>
+                                            <a style="font-size: 14px;text-align: left;color: #2c3e50;"  href="http://www.spcls.co.in/csr.aspx" target="_blank">
+                                                <i class="fa fa-pencil-square-o"></i>&nbsp;CSR
                                             </a>
-                                            <a style="font-size: 20px;text-align: left;"  href="http://www.spcls.co.in/news-events.aspx" target="_blank">
-                                                <i class="fa fa-newspaper-o"></i> &nbsp<strong>News & Event</strong>
+                                            <a style="font-size: 14px;text-align: left;color: #2c3e50;"  href="http://www.spcls.co.in/news-events.aspx" target="_blank">
+                                                <i class="fa fa-newspaper-o"></i>&nbsp;News & Event
                                             </a>
-                                            <a style="font-size: 20px;text-align: left;" href="holidayMaster.htm?act=viewHolidaysLocationWise">
-                                                <i class="fa fa-twitch"></i>
-                                                <strong>Holiday List</strong>
+                                            <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="holidayMaster.htm?act=viewHolidaysLocationWise">
+                                                <i class="fa fa-twitch"></i>&nbsp;Holiday List
                                             </a>
                                         </div>
                                     </div>
                                     <div class="col-md-9">
-                                        <c:forEach var="gallery" items="${galleryList}">
+                                        <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
+                                            <div class="box-header" style="background-color: #006fad !important;text-align: center;">
+                                                <h3 class="box-title" style="font-size: 30px;color: white;font-weight:700;font-size:16px; ">LIFE @ SPC</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">&nbsp;
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="box-body">
+                                                <div>
+                                                    <c:forEach var="gallery" items="${galleryList}">
 
-                                            <a href="homeController.htm?act=opanGallery">
-                                                <div  class="mySlides">
+                                                        <a href="homeController.htm?act=opanGallery">
+                                                            <div  class="mySlides">
 
-                                                    <img src="StorageYard/galleryimage/${gallery.imagesPath}"  >
-                                                </div>
-                                            </a>
-                                        </c:forEach>
-
-
-
-                                        <a class="prev1" onclick="plusSlides(-1)">❮</a>
-                                        <a class="next1" onclick="plusSlides(1)">❯</a>
-                                        <div>
-                                            <p id="caption"></p>
+                                                                <img src="StorageYard/galleryimage/${gallery.imagesPath}"  >
+                                                            </div>
+                                                        </a>
+                                                    </c:forEach>
+                                                    <a class="prev1" onclick="plusSlides(-1)">❮</a>
+                                                    <a class="next1" onclick="plusSlides(1)">❯</a>
+                                                    <div>
+                                                        <p id="caption"></p>
+                                                    </div>
+                                                </div>      
+                                            </div>      
+                                        </div>      
+                                        <div class="col-md-3">&nbsp;
                                         </div>
                                     </div>           
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
-                                            <div class="box-header" style="background-color: #006fad !important;">
-                                                <h3 class="box-title" id="rAndR" style="color:white;">Rewards And Recognition</h3>
+                                            <div class="box-header" style="background-color: #006fad;text-align: center;">
+                                                <h3 class="box-title" id="rAndR" style="font-size: 30px;color: white;font-weight:700;font-size:16px;">REWARDS AND RECOGNITION</h3>
                                             </div>
                                             <div class="box-body">
                                                 <div>
@@ -456,8 +459,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
-                                            <div class="box-header" style="background-color: #006fad !important;">
-                                                <h3 class="box-title" id="rAndR" style="color:white;">Today's Birthday</h3>
+                                            <div class="box-header" style="background-color: #006fad;text-align: center;">
+                                                <h3 class="box-title" id="rAndR"  style="font-size: 30px;color: white;font-weight:700;font-size:16px;">TODAY'S BIRTHDAY</h3>
                                             </div>
                                             <div class="box-body">
                                                 <br/>
@@ -476,7 +479,7 @@
                                                                         &nbsp;
                                                                         &nbsp;
                                                                         &nbsp;
-                                                                        <a style="font-size: 9px;" onclick="window.open('homeController.htm?act=newJoineDetail&id=' +${todayBirthday[0]}, 'popUpWindow', 'height=400,width=600,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')">View</a>
+                                                                        <a style="font-size: 9px;" onclick="window.open('homeController.htm?act=newJoineDetail&id=' +${todayBirthday[0]}, 'popUpWindow', 'height=400,width=600,left=500%,top=100%,resizable=1,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no')">View</a>
                                                                     </div>
                                                                 </c:forEach>
                                                             </div>
@@ -487,8 +490,8 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
-                                            <div class="box-header" style="background-color: #006fad !important;">
-                                                <h3 class="box-title" id="rAndR" style="color:white;">New Joinee</h3>
+                                            <div class="box-header" style="background-color: #006fad !important;text-align: center;">
+                                                <h3 class="box-title" id="rAndR" style="font-size: 30px;color: white;font-weight:700;font-size:16px;">NEW JOINEE</h3>
                                             </div>
                                             <div class="box-body">
                                                 <br/>
@@ -507,7 +510,7 @@
                                                                         &nbsp;
                                                                         &nbsp;
                                                                         &nbsp;
-                                                                        <a style="font-size: 9px;" onclick="window.open('homeController.htm?act=newJoineDetail&id=' +${newJoining[0]}, 'popUpWindow', 'height=400,width=600,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')">View</a>
+                                                                        <a style="font-size: 9px;" onclick="window.open('homeController.htm?act=newJoineDetail&id=' +${newJoining[0]}, 'popUpWindow', 'height=400,width=600,left=500%,top=100%,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')">View</a>
                                                                     </div>
                                                                 </c:forEach>
                                                             </div>
@@ -567,7 +570,7 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                         <!--<span class="product-title">  ${thoughtMaster}</span>-->
-                                    <marquee style="font-size:18px !important;"><strong style="color: #00BFFF;">Today's Thought:</strong> <span style="color: #006fad">${thoughtMaster.thought}</span></marquee>
+                                    <marquee scrollamount="2" style="font-size:18px !important;"><strong style="color: #006fad;">THOUGHT OF THE DAY : </strong> <span style="color: #006fad">${thoughtMaster.thought}</span></marquee>
                                 </div>
                             </div>
 

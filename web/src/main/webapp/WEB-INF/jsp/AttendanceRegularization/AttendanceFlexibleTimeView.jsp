@@ -16,7 +16,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Time Attendance Flexible Master</h1>
+            <h1>TIME ATTENDANCE FLEXIBLE MASTER</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Edit</li>

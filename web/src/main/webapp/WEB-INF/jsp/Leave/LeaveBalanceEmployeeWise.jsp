@@ -48,7 +48,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Search Employee Leave Balance:</h1>
+            <h1>SEARCH EMPLOYEE LEAVE BALANCE</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa a-dashboard"></i> Home</a></li>
                 <li class="active">Search Leave Balance</li>

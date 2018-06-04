@@ -6,6 +6,7 @@
 package com.bul.zydex.service;
 
 import com.bul.zydex.dao.EmailMetaTagDAO;
+import java.util.List;
 
 /**
  *
@@ -21,6 +22,11 @@ public class EmailMetaTagServiceImpl <T>extends GenericsServiceImpl<T> implement
     public void setEmailMetaTagDAO(EmailMetaTagDAO<T> emailMetaTagDAO) {
         this.emailMetaTagDAO = emailMetaTagDAO;
         setGenericsDAO(emailMetaTagDAO);
+    }
+
+    @Override
+    public List readEmailMetatag(int moduleId) {
+        return emailMetaTagDAO.readEmailMetatag(moduleId);
     }
     
     

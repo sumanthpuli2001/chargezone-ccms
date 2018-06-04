@@ -35,7 +35,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Leave Request: </h1>
+            <h1>LEAVE REQUEST </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Leave Request Of Subordinates</li>
@@ -116,7 +116,7 @@
             <div class="row" >
                 <div class="col-md-12">
                     <!-- Custom Tabs -->
-                    <h3>&nbsp;&nbsp;&nbsp;Result :</h3>
+                    <h3>&nbsp;&nbsp;&nbsp;RESULT /h3>
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="box-header">

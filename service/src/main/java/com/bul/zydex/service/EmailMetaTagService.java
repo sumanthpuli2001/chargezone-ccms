@@ -5,10 +5,14 @@
  */
 package com.bul.zydex.service;
 
+import java.util.List;
+
 /**
  *
  * @author Aman
  */
 public interface EmailMetaTagService<T> extends GenericsService<T>{
+
+    public List readEmailMetatag(int moduleId);
     
 }

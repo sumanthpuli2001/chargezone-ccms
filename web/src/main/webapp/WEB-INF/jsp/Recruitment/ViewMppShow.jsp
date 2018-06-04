@@ -10,12 +10,12 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>View Man Power Planning</title>
+        <title>VIEW MAN POWER PLANNING</title>
     </head>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>View Man Power Planning</h1>
+            <h1>VIEW MAN POWER PLANNING</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">View MPP</li>

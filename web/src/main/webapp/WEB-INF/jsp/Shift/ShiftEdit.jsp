@@ -30,7 +30,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Shift Edit: </h1>
+            <h1>SHIFT EDIT </h1>
 
         </section>
         <c:if test="${!empty successMessage}">

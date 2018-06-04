@@ -33,7 +33,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>search :</h1>
+            <h1>SEARCH </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Result Employee Exit Detail</li>
@@ -264,7 +264,7 @@
                                     </div>
 
                                     <div class="box-header">
-                                        <h3 class="box-title">3)Please provide your candid feedback and rate the following aspects with reference to your job at SPC Life Science. (Please use the 1 – 5 scale below):</h3>
+                                        <h3 class="box-title">3)Please provide your candid feedback and rate the following aspects with reference to your job at SPC Lifesciences. (Please use the 1 – 5 scale below):</h3>
                                     </div><!-- /.box-header -->
                                     <div class="row">
                                         <div class="form-group">
@@ -539,7 +539,7 @@
                                     </div>
 
                                     <div class="box-header">
-                                        <h3 class="box-title">6)Please rate your next job on the following aspects in priority, which made you take the decision of leaving SPC Life Science.
+                                        <h3 class="box-title">6)Please rate your next job on the following aspects in priority, which made you take the decision of leaving SPC Lifesciences.
                                             Please rate top three reasons by mentioning 1, 2 & 3 against each of the below items:</h3>
                                     </div><!-- /.box-header -->
                                     <div class="row">
@@ -604,7 +604,7 @@
                                         </div>
                                     </div>
                                     <div class="box-header">
-                                        <h3 class="box-title">7)Since how long were you considering leaving SPC Life Science? What could have been done to retain you? Please mention in brief:</h3>
+                                        <h3 class="box-title">7)Since how long were you considering leaving SPC Lifesciences? What could have been done to retain you? Please mention in brief:</h3>
                                     </div><!-- /.box-header -->
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">

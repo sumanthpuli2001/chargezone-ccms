@@ -21,7 +21,7 @@
   <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>Gate Pass Form: </h1>
+                <h1>GATE PASS FORM </h1>
                 <div style="float: right"></div>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

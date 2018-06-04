@@ -9,7 +9,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-       
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>PF Create</title>
     </head>
@@ -17,7 +17,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Add New PF Check:</h1>
+            <h1>ADD NEW PF CHECK</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Create</li>
@@ -41,47 +41,47 @@
                                 </c:if>
                                 <form:form class="form-horizontal" method="post"
                                            commandName="payrollPfCheck" action="payrollPfCheck.htm?act=createSubmit">
-                                     <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
-                                            <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                         <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
-                                                         <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
-                                                         <form:option value="" label="-- Select --" ></form:option>
-                                                         <form:options items="${EmployeeTypeList}"></form:options>
-                                                         </form:select>
-                                                         <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
-                                                       </div>
-                                                     </div>
-                                            <div class="form-group">
-                                                    <div class="col-sm-6" id="employeeSubTypeId">
-                                                        <label>Employee SubType:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
-                                                        <form:select path="employeeSubType.id" class="form-control">
-                                                        <form:option value="" label="-- Select --" ></form:option> 
-                                                        </form:select>
-                                                        </div>
-                                                      </div>
-                                                         <div class="form-group">
-                                                          <div class="col-sm-6">
-                                                              <form:errors path="employeeSubType.id" cssClass="errorDiv"></form:errors>
-                                                          </div>
-                                                      </div>
-                                            <div class="form-group">
-                                                       <div class="col-sm-6">
-                                                       <label>PF Applicable:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
-                                                        <%--<form:select path="gender" id="gender" class="form-control">--%>
-                                                        <fieldset id="group1">
-                                                        <form:radiobutton path="pfCheck" value="false"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <form:radiobutton path="pfCheck" value="true"/>YES
-                                                        </fieldset>
-                                                        <form:errors path="pfCheck" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                     </div>
-                                           <div class="form-group">
+                                    <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
+                                            <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
+                                                <form:option value="" label="-- Select --" ></form:option>
+                                                <form:options items="${EmployeeTypeList}"></form:options>
+                                            </form:select>
+                                            <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6" id="employeeSubTypeId">
+                                                <label>Employee SubType:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
+                                            <form:select path="employeeSubType.id" class="form-control">
+                                                <form:option value="" label="-- Select --" ></form:option> 
+                                            </form:select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <form:errors path="employeeSubType.id" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
+                                                <label>PF Applicable:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                            <%--<form:select path="gender" id="gender" class="form-control">--%>
+                                            <fieldset id="group1">
+                                                <form:radiobutton path="pfCheck" value="false"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <form:radiobutton path="pfCheck" value="true"/>YES
+                                            </fieldset>
+                                            <form:errors path="pfCheck" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
                                             <div class="col-sm-6 col-sm-offset-5">
                                                 <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
                                             </div>
-                                         </div>
+                                        </div>
                                 </form:form>
                             </div><!-- /.tab-pane -->
                         </div><!-- /.tab-content -->
@@ -90,32 +90,32 @@
             </div>
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
-   <script>
+    <script>
         function selectsubtype(typeId) {
-         
+
             var empSubTypeId = document.getElementById("subTypeId").value;
-//            document.getElementById('EmployeeId').innerHTML = "Fetching ... .. .";
+ //            document.getElementById('EmployeeId').innerHTML = "Fetching ... .. .";
             $.post("employeeMaster.htm?act=readEmpTypeAjax",
                     {
                         typeId: typeId,
                         empSubTypeId: empSubTypeId
                     }, function (responseTxt, statusTxt, xhr) {
                 if (statusTxt === "success") {
-                    ("responseTxt"+responseTxt);
+                    ("responseTxt" + responseTxt);
                     document.getElementById('employeeSubTypeId').innerHTML = responseTxt;
                 }
                 if (statusTxt === "error")
                     ("Error: " + xhr.status + ": " + xhr.statusText);
             });
         }
-        
-         $( document ).ready(function() {
+
+        $(document).ready(function () {
             var empTypeId = document.getElementById("employeeTypeMaster.id").value;
             selectsubtype(empTypeId);
-            
-});
+
+        });
 
     </script>
-   
+
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

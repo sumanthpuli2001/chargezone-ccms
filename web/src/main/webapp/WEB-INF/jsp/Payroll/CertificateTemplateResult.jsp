@@ -33,7 +33,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>All Certificate Templates List:</h1>
+            <h1>ALL CERTIFICATE TEMPLATES LIST</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Certificate Templates List</li>
@@ -75,8 +75,8 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th align="center" style="width: 1px;"><input type="checkbox" id="toggleId"/></th>
-                                                                    <th>Certificate Name</th>
-                                                                    <th>Certificate Type </th>
+                                                                    <th>Document Title</th>
+                                                                    <!--<th>Certificate Type </th>-->
                                                                     <!--<th></th>-->
                                                                     <th>Action</th>
 
@@ -88,8 +88,8 @@
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
                                                                 <td align="center"><input type="checkbox" name="checkId" id="emailTypeId" value="${list.id}"/></td>
-                                                                <td>${list.certificateName}</td>
-                                                                <td>${list.certificateType}</td>
+                                                                <td>${list.certificateTitle}</td>
+                                                                <!--<td>${list.certificateType}</td>-->
                                                                
 
                                                                 <td>

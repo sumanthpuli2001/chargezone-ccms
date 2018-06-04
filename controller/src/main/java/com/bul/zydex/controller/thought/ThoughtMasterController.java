@@ -99,7 +99,7 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.now();
         thoughtMaster.setCreatedDate(dtf.format(localDate));
-        thoughtMaster.setThought(thought);
+        thoughtMaster.setThought(thought.toUpperCase());
         thoughtMaster.setDate(date);
         thoughtMasterService.create(thoughtMaster);
         request.setAttribute("successMessage",
@@ -114,10 +114,12 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
         HttpSession session = request.getSession();
         BindException errors = new BindException(thoughtMaster, "thoughtMaster");
         bind(request, thoughtMaster);
+        String s = thoughtMaster.getThought().toUpperCase();
         UserMaster user = (UserMaster) session.getAttribute("user");
         thoughtMaster.setUpdatedBy(user.getId());
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate localDate = LocalDate.now();
+        thoughtMaster.setThought(s);
         thoughtMaster.setUpdatedDate(dtf.format(localDate));
         thoughtMasterService.update(thoughtMaster);
         request.setAttribute("successMessage",
@@ -143,7 +145,7 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
 
         return mv;
     }
-    
+
     public ModelAndView submitgallery(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         Gallery gallery = new Gallery();
@@ -153,42 +155,41 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
         LocalDate localDate = LocalDate.now();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartRequest.getFile("photograph");
-         if(rAndRService.isExist( multipartFile.getOriginalFilename())){
-        String fileLocationURL = getServletContext().getRealPath("/")
-                + File.separator + "StorageYard"
-                + File.separator + "galleryimage" + File.separator;
-        String fileLocationURL1 = "StorageYard"
-                + File.separator + "galleryimage" + File.separator;
-        File Folder1 = new File(fileLocationURL);
-        if (!Folder1.exists()) {
-            Folder1.mkdirs();
-        }
-        if (multipartFile != null && multipartFile.getSize() > 0) {
-            try {
-                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
-                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
-                multipartFile.transferTo(file2);
-                gallery.setDisc(request.getParameter("Des"));
-                gallery.setImagesPath(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
-            } catch (Exception e) {
-
+        if (rAndRService.isExist(multipartFile.getOriginalFilename())) {
+            String fileLocationURL = getServletContext().getRealPath("/")
+                    + File.separator + "StorageYard"
+                    + File.separator + "galleryimage" + File.separator;
+            String fileLocationURL1 = "StorageYard"
+                    + File.separator + "galleryimage" + File.separator;
+            File Folder1 = new File(fileLocationURL);
+            if (!Folder1.exists()) {
+                Folder1.mkdirs();
             }
-        }
-        gallery.setCreatedBy(user.getId());
-        gallery.setCreatedDate(dtf.format(localDate));
-        galleryService.create(gallery);
+            if (multipartFile != null && multipartFile.getSize() > 0) {
+                try {
+                    File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    multipartFile.transferTo(file2);
+                    gallery.setDisc(request.getParameter("Des"));
+                    gallery.setImagesPath(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                } catch (Exception e) {
+
+                }
+            }
+            gallery.setCreatedBy(user.getId());
+            gallery.setCreatedDate(dtf.format(localDate));
+            galleryService.create(gallery);
 //        List<CorporateVideo> l1 = (List<CorporateVideo>) corporateVideoService.readCorporateVideoDetail();
 //        mv.getModelMap().put("list", l1);
-        request.setAttribute(
-                "successMessage",
-                "Information : Image is Uploaded Successfully.");
+            request.setAttribute(
+                    "successMessage",
+                    "Information : Image is Uploaded Successfully.");
+        } else {
+            request.setAttribute(
+                    "successMessage",
+                    "Information : Image is Already Exist.");
         }
-        else{
-        request.setAttribute(
-                "successMessage",
-                "Information : Image is Already Exist.");
-        }
-        mv=createthought2(request, response);
+        mv = createthought2(request, response);
         return mv;
     }
 
@@ -201,43 +202,43 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
         LocalDate localDate = LocalDate.now();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartRequest.getFile("photograph");
-        if(rAndRService.isExist( multipartFile.getOriginalFilename())){
-        String fileLocationURL = getServletContext().getRealPath("/")
-                + File.separator + "StorageYard"
-                + File.separator + "RandRimage" + File.separator;
-        String fileLocationURL1 = "StorageYard"
-                + File.separator + "RandRimage" + File.separator;
-        File Folder1 = new File(fileLocationURL);
-        if (!Folder1.exists()) {
-            Folder1.mkdirs();
-        }
-        if (multipartFile != null && multipartFile.getSize() > 0) {
-            try {
-                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
-                File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_")                                    );
-                multipartFile.transferTo(file2);
-                gallery.setDisc(request.getParameter("Des"));
-                gallery.setImagesPath(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
-            } catch (Exception e) {
-
+        if (rAndRService.isExist(multipartFile.getOriginalFilename())) {
+            String fileLocationURL = getServletContext().getRealPath("/")
+                    + File.separator + "StorageYard"
+                    + File.separator + "RandRimage" + File.separator;
+            String fileLocationURL1 = "StorageYard"
+                    + File.separator + "RandRimage" + File.separator;
+            File Folder1 = new File(fileLocationURL);
+            if (!Folder1.exists()) {
+                Folder1.mkdirs();
             }
-        }
-        gallery.setCreatedBy(user.getId());
-        gallery.setCreatedDate(dtf.format(localDate));
-        rAndRService.create(gallery);
-        request.setAttribute(
-                "successMessage",
-                "Information : Image is Uploaded Successfully.");
+            if (multipartFile != null && multipartFile.getSize() > 0) {
+                try {
+                    File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    File file = new File(fileLocationURL1 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    multipartFile.transferTo(file2);
+                    gallery.setDisc(request.getParameter("Des"));
+                    gallery.setImagesPath(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                } catch (Exception e) {
+
+                }
+            }
+            gallery.setCreatedBy(user.getId());
+            gallery.setCreatedDate(dtf.format(localDate));
+            rAndRService.create(gallery);
+            request.setAttribute(
+                    "successMessage",
+                    "Information : Image is Uploaded Successfully.");
 //       mv.setViewName("Thought/createGallery");
-        }
-        else{
-        request.setAttribute(
-                "successMessage",
-                "Information : Image is Already Exist.");
+        } else {
+            request.setAttribute(
+                    "successMessage",
+                    "Information : Image is Already Exist.");
         }
         mv = createthought3(request, response);
         return mv;
     }
+
     public ModelAndView deletegallerySubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String empId[] = request.getParameterValues("checkId");
@@ -245,9 +246,9 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
             try {
                 Gallery Gallery = galleryService.readById(Integer.parseInt(z));
                 String fileLocationURL = getServletContext().getRealPath("/")
-                + File.separator + "StorageYard"
-                + File.separator + "galleryimage" + File.separator +""+Gallery.getImagesPath();
-            File File = new File(fileLocationURL);
+                        + File.separator + "StorageYard"
+                        + File.separator + "galleryimage" + File.separator + "" + Gallery.getImagesPath();
+                File File = new File(fileLocationURL);
                 File.delete();
                 galleryService.delete(Integer.parseInt(z));
             } catch (Exception e) {
@@ -256,20 +257,21 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
         }
         request.setAttribute("successMessage",
                 "Info :Records are deleted successfully.");
-        mv =createthought2(request, response);
+        mv = createthought2(request, response);
 
         return mv;
     }
+
     public ModelAndView deleteeandrSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String empId[] = request.getParameterValues("checkId");
         for (String z : empId) {
             try {
-                 RAndR RAndR = rAndRService.readById(Integer.parseInt(z));
+                RAndR RAndR = rAndRService.readById(Integer.parseInt(z));
                 String fileLocationURL = getServletContext().getRealPath("/")
-                + File.separator + "StorageYard"
-                + File.separator + "RandRimage" + File.separator +""+RAndR.getImagesPath();
-            File File = new File(fileLocationURL);
+                        + File.separator + "StorageYard"
+                        + File.separator + "RandRimage" + File.separator + "" + RAndR.getImagesPath();
+                File File = new File(fileLocationURL);
                 File.delete();
                 rAndRService.delete(Integer.parseInt(z));
             } catch (Exception e) {
@@ -278,7 +280,7 @@ public class ThoughtMasterController extends ThoughtMasterAbstract {
         }
         request.setAttribute("successMessage",
                 "Info :Records are deleted successfully.");
-        mv =createthought3(request, response);
+        mv = createthought3(request, response);
 
         return mv;
     }

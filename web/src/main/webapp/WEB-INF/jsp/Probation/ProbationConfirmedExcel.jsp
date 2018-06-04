@@ -11,7 +11,7 @@
     <body>
         <div class="content-wrapper">
             <section class="content-header">
-                <h1>Probation Confirmed</h1>
+                <h1>PROBATION CONFIRMED</h1>
             </section>
 
             <section class="content">

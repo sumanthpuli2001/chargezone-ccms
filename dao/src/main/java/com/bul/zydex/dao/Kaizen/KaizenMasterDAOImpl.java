@@ -87,10 +87,12 @@ public class KaizenMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Kaizen
     @Override
     public List<?> readPastKaizenMaster() {
         String query = "";
-//                          0       1       2       3               4          5
-        query += " Select a.id, a.srNo, a.status, a.teamName, a.teamName ,a.department"
-                + " From KaizenMaster a "
-                + " Where a.status = 5 ";
+//                          0       1       2          3               4          5              
+        query += " Select a.id, a.srNo,a.teamMember,a.department,a.startDate,a.ideaGenerator,"
+//                      6                   7               8           9
+                + "a.problemDescription,a.compiletionDate,a.status ,em.employeeName"
+                + " From KaizenMaster a , EmployeeMaster em "
+                + " Where a.status = 5  AND a.createdBy = em.id";
                
         List<?> list = getHibernateTemplate().find(query);
         return list;

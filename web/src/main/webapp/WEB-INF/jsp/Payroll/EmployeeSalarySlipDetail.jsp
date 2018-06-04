@@ -91,7 +91,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Search Salary Slip Employee Detail:</h1>
+            <h1>SEARCH SALARY SLIP EMPLOYEE DETAIL</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Search Salary Slip Detail</li>

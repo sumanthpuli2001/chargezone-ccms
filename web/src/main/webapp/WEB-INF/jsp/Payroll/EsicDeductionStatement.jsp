@@ -50,7 +50,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Search ESIC Deduction Statement Employee Detail:</h1>
+            <h1>SEARCH ESIC DEDUCTION STATEMENT EMPLOYEE DETAIL</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Search ESIC Deduction Statement Detail</li>
@@ -217,7 +217,7 @@
                                                                             out.print("<div align=\"right\">Date:" + df.format(date) + "</div>");
                                                                         %>
                                                                     <div class="form-group">
-                                                                        <center><b><font size="4">SPC Life Science </font></b></center> 
+                                                                        <center><b><font size="4">SPC Lifesciences </font></b></center> 
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <header>

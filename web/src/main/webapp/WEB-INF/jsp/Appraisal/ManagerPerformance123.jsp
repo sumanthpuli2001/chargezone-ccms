@@ -530,7 +530,7 @@
                                         </div>
                                         <div class="box box-info collapsed-box">
                                             <div class="box-header">
-                                                <h3 class="box-title">Competency Evaluation (As Per SPC Life Science Competency Framework) :</h3>
+                                                <h3 class="box-title">Competency Evaluation (As Per SPC Lifesciences Competency Framework) :</h3>
                                                 <div class="box-tools pull-right">
                                                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                                                 </div>

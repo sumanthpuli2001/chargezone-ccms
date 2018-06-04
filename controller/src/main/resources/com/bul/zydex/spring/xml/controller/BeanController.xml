@@ -916,6 +916,9 @@
         <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
         <property name="emailMetaTagService" ref="emailMetaTagService1" />
         <property name="modulesService" ref="modulesService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
+        <property name="zydexLocationMasterService" ref="zydexLocationMasterService1" />
+        
     </bean>
     
     <bean id="companyMonthlyReportController1" class="com.bul.zydex.controller.Payroll.CompanyMonthlyReportController" parent="controllerConfig" >

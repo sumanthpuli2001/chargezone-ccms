@@ -26,10 +26,12 @@ public class certificateTemplateValidator implements Validator{
          CertificateTemplate certificateTemplate = (CertificateTemplate) o;
           ValidationUtils.rejectIfEmptyOrWhitespace(errors, "certificateTitle",
                 "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "certificateType",
-                "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "certificateName",
-                "field.error1", "None");
+          ValidationUtils.rejectIfEmptyOrWhitespace(errors, "modules.id",
+                "field.error13", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "certificateType",
+//                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "certificateName",
+//                "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "certificateBody",
                 "field.error1", "None");
     }

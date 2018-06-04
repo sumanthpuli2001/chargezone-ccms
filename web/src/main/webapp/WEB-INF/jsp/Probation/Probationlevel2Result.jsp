@@ -11,13 +11,13 @@
          <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
          <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Probation To Confirmation Result</title>
+        <title>PROBATION TO CONFIRMATION RESULT</title>
     </head>
     <body>
          <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>Probation Approve Confirmation List</h1>
+                <h1>PROBATION APPROVE CONFIRMATION LIST</h1>
                 <div style="float: right"></div>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

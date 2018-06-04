@@ -298,6 +298,70 @@
 
     </script>
     <script>
+        function removePolicyEdit(id) {
+
+            alert(id.value);
+//            try {
+////                
+//                tempCount3--;
+////                alert(tempCount3);
+////                alert(policyDiv.index);
+//
+//                var val = document.getElementById("policyCount").value;
+//
+////                alert(val);
+////                var obj2 = document.getElementById("policyId" + tempCount3).value;
+////                alert(obj2);
+//                var element = document.getElementById("amount" + val).value;
+////                 alert(element);
+//                val = val - 1;
+//                var element2 = document.getElementById('txtresult').value;
+//                var element21 = document.getElementById('txtresultCTC').value;
+////                alert(element2);
+//                document.getElementById('txtresult').value = '';
+//                document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
+//                document.getElementById('txtresultCTC').value = '';
+//                document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
+//
+//                document.getElementById("policyCount").value = val;
+//                element1 = document.getElementById(policyDiv);
+//
+//                element1.parentNode.removeChild(element1);
+//            } catch (e) {
+//
+//            }
+
+            try {
+//                
+                tempCount3--;
+//                alert(policyDiv);
+
+                var val = document.getElementById("policyCount").value;
+//                alert(val);
+//                var obj2 = document.getElementById("policyId" + tempCount3).value;
+//                alert(policyDiv);
+                var element = document.getElementById("amount" + policyDiv).value;
+                val = val - 1;
+                var element2 = document.getElementById('txtresult').value;
+                var element21 = document.getElementById('txtresultCTC').value;
+//                alert(element2);
+                document.getElementById('txtresult').value = '';
+                document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
+                document.getElementById('txtresultCTC').value = '';
+                document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
+                document.getElementById("policyCount").value = val;
+                var element1 = document.getElementById(policyDiv);
+//                alert(element1);
+
+                element1.parentNode.removeChild(element1);
+            } catch (e) {
+
+            }
+        }
+
+
+    </script>
+    <script>
         var tempCount4 = 1;
         $(function () {
             $("#ctcCloneid").on("click", function () {
@@ -1375,9 +1439,9 @@
                                                                                 <%--</c:if>--%>
                                                                                 <%--</c:when>--%>
                                                                                 <%--<c:otherwise>--%>
-                                                                                <!--<span style='margin-top: 5px;'>-->
-                                                                                <!--<input type="button" value="-" id="policyRemoveid" onclick="removeForEdit()"/>-->
-                                                                                <!--</span>-->
+                                                                                <!--                                                                                <span style='margin-top: 5px;'>
+                                                                                                                                                                <input type="button" value="-" id="policyRemoveid" onclick="removeForEdit()"/>
+                                                                                                                                                                </span>-->
                                                                                 <%--</c:otherwise>--%>
                                                                                 <%--</c:choose>--%>
                                                                                 <c:if test="${countVal.last}">
@@ -1387,6 +1451,13 @@
                                                                                         </span>
                                                                                     </c:if>
                                                                                 </c:if>
+                                                                                <%--<c:if test="${!countVal.last}">--%>
+                                                                                    <%--<c:if test="${!countVal.last}">--%>
+                                                                                        <!--<span style='margin-top: 5px;'>-->
+                                                                                            <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicyEdit(tempCount3)"/>-->
+                                                                                        <!--</span>-->
+                                                                                    <%--</c:if>--%>
+                                                                                <%--</c:if>--%>
                                                                             </td>
                                                                         </tr>
                                                                     </c:forEach>
@@ -1729,8 +1800,18 @@
                                                                             <td ><div>
                                                                                     <!--<td style="text-align: center">-->
                                                                                     <input  type="hidden" class="form-control" id="yearBase" value="${comp[5]}">
-                                                                                    <select name="year1" id="year1"  class="form-control" >
-                                                                                        <option  name="year1" id="year1"  value="${comp[5]}">${comp[5]}</option> 
+                                                                                    <select name="year${countVal.count}" id="year${countVal.count}"  class="form-control" >
+                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="${comp[5]}">${comp[5]}</option> 
+                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2018">2018</option> 
+                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2019">2019</option> 
+                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2020">2020</option> 
+                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2021">2021</option> 
+                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2022">2022</option> 
+                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2023">2023</option> 
+                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2024">2024</option> 
+                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2025">2025</option> 
+                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2026">2026</option> 
+                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2027">2027</option> 
 
                                                                                     </select> 
                                                                                 </div>

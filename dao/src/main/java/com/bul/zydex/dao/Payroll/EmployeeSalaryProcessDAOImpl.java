@@ -627,7 +627,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
 //                + " left join a.employeeSalaryProcesses b"
 //                + " left join b.payrollEsicDeduction c"
 //                + " where 1=1 " + condition;
-        query += " Select c.employeeId, c.employeeName,b.grossTotal,a.empContrubtion,a.compContrubtion,c.esicNo,b.month,b.year"
+        query += " Select c.employeeId, c.employeeName,b.grossTotal,a.empContrubtion,a.compContrubtion,c.esicNo,b.month,b.year,b.employeeLeaveEncashment"
                 + " From PayrollEsicDeduction a"
                 + " left join a.employeeSalaryProcess b"
                 + " left join b.employeeMaster c"

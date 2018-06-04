@@ -283,14 +283,15 @@
                                                             <td>${list[5]}</td>
                                                         </tr>
                                                     </c:forEach>
-                                                    <table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">
-                                                        <tr>
-                                                        <tr>
-                                                            <th  colspan="4" style="text-align: center;">1.2 Leave Encashment</th>
-                                                            <th colspan="4" style="text-align: center;" >TOTAL DEDUCTION</th>
-                                                        </tr>
-                                                        </tr>
-                                                    </table>
+                                                </table>
+                                                <!--                                                    <table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">
+                                                                                                        <tr>
+                                                                                                        <tr>
+                                                                                                            <th  colspan="4" style="text-align: center;">1.2 Leave Encashment</th>
+                                                                                                            <th colspan="4" style="text-align: center;" >TOTAL DEDUCTION</th>
+                                                                                                        </tr>
+                                                                                                        </tr>
+                                                                                                    </table>-->
                                             </div>
                                         </div>
                                     </div>

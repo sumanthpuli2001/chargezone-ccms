@@ -655,7 +655,7 @@
                                     <li><a href="employeePfCheck.htm?act=searchSalaryPfDetail&search=none"><i class="fa fa-circle-o"></i>PF</a></li>
                                     <li><a href="employeePtCheck.htm?act=searchSalaryPtDetail&search=none"><i class="fa fa-circle-o"></i>PT </a></li>
                                     <li><a href="employeeSalarySlip.htm?act=searchSalarySlipDetail&search=none"><i class="fa fa-circle-o"></i>Salary Slip </a></li>
-                                    <!--<li><a href="policyMaster.htm?act=searchPolicyDetail&search=none"><i class="fa fa-circle-o"></i>Policy  </a></li>-->
+                                    <li><a href="policyMaster.htm?act=searchPolicyDetail&search=none"><i class="fa fa-circle-o"></i>Policy  </a></li>
                                     <li><a href="companyMonthlyReport.htm?act=searchCompanyMonthlyReport&search=none"><i class="fa fa-circle-o"></i>Company Monthly Report</a></li>
                                     <li><a href="companyPTReport.htm?act=searchCompanyPTReport&search=none"><i class="fa fa-circle-o"></i>PT Slab by Summary</a></li>
                                     <li><a href="bankStatement.htm?act=searchBankStatementDetail&search=none"><i class="fa fa-circle-o"></i>Bank Statement </a></li>
@@ -666,7 +666,6 @@
                                     <li><a href="attendanceReport.htm?act=searchAttendanceData&search=none"><i class="fa fa-circle-o"></i>Attendance</a></li>
                                     <li><a href="employeeSalarySlip.htm?act=searchSalaryYearDetail&search=none"><i class="fa fa-circle-o"></i>Employee Salary Yearly</a></li>
                                     <li><a href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none"><i class="fa fa-circle-o"></i>Govt. Format PF</a></li>
-                                    <li><a href="esicDeductionStatement.htm?act=searchEsicDetailGovt&search=none"><i class="fa fa-circle-o"></i>ESIC Deduction Statement Govt</a></li>
                                 </ul>
                             </li>-->
                             <li>
@@ -842,7 +841,6 @@
                         <li><a href="urlMaster.htm?act=viewUrlResult"><i class="fa fa-pie-chart fa-lg"></i>Web Service URL</a></li>
                         <!--<li><a href="appraisalPerformance.htm?act=trasferCompatencyEvaluationInEmployeeMaster"><i class="fa fa-pie-chart fa-lg"></i>Competency Evaluation Transfer</a></li>-->
                         <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
-                        <li><a href="policyMaster.htm?act=showPolicyList"><i class="fa fa-pagelines"></i>Policy</a></li>
                             <%--<c:if test="${!sessionScope.userRight.employeeManagement}">--%>
                             <c:if test="${sessionScope.userRight.hr}">
                             <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>

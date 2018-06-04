@@ -22,7 +22,7 @@
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
-                                             <input type="button" class="btn btn-facebook" style="float: right; width: 100px;" value="Print" onclick= "printDiv('printableArea')">
+                                <input type="button" class="btn btn-facebook" style="float: right; width: 100px;" value="Print" onclick= "printDiv('printableArea')">
 
                                 <div class="box-body">
                                     <div class="row">
@@ -33,7 +33,7 @@
                                                     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                                                     out.print("ToDay : " + df.format(date));
 //                                                    out.print("<div align=\"right\">DATE : " + df.format(date) + "</div>");
-                                                %>
+%>
                                             <center><b><font size="3">SPC LIFESCIENCES PVT LTD. </font></b></center> 
                                             <div class="form-group">
                                                 <center><b><font size="2">FULL AND FINAL SETTLEMENT </font></b></center> 
@@ -132,7 +132,7 @@
                                                             <c:if test="${Gratuiety1[3] == 11}"><td><b>NOV</b>'${Gratuiety1[4]}</td></c:if>
                                                             <c:if test="${Gratuiety1[3] == 12}"><td><b>DEC</b>'${Gratuiety1[4]}</td></c:if>
                                                             <td>${Gratuiety1[2]}</td>
-                                                            </tr>
+                                                        </tr>
                                                     </c:forEach>
 
                                                     <tr>
@@ -220,15 +220,86 @@
                                                         <td colspan="2" style="text-align: right;">Receiver Signature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                 </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <center><b><font size="3">EMPLOYEE DETAILS</font></b></center> 
+
+                                                    <table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">
+                                                        <tr>
+                                                            <th>Name Of Employee</th>
+                                                            <td>${employeeMaster.employeeName}</td>
+                                                            <th>Notice Period</th>
+                                                            <td>${fullAndFinalSettlement.noticePeriod}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Designation</th>
+                                                            <td>${designationName}</td>
+                                                            <th>Given Notice</th>
+                                                            <td>${fullAndFinalSettlement.givenNotice}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Department</th>
+                                                            <td>${departmentName}</td>
+                                                            <th>Recoverable Days</th>
+                                                            <td>${rm.relievingDate}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Employee Code</th>
+                                                            <td>${employeeMaster.id}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Date of Joining</th>
+                                                            <td>${employeeMaster.dateOfJoining}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Date of Resignation</th>
+                                                            <td>${rm.effectiveDatetime}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Date of Relieving</th>
+                                                            <td>${rm.relievingDate}</td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
+                                                <table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">
+                                                    <tr>
+                                                        <th  colspan="4" style="text-align: center;">1. PAYABLE</th>
+                                                        <th colspan="4" style="text-align: center;" > 2. OTHER DEDUCTION</th>
+                                                    </tr>
+                                                    <c:forEach var="list" items="${list}">
+                                                        <tr>
+                                                            <td><b>gross</b></td>
+                                                            <td>${list[6]}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    <c:forEach var="list" items="${list}">
+                                                        <tr>
+                                                            <td><b>${list[3]}</b></td>
+                                                            <td>${list[4]}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    <c:forEach var="list" items="${list}">
+                                                        <tr>
+                                                            <td><b>salary Net Pay</b></td>
+                                                            <td>${list[5]}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    <table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">
+                                                        <tr>
+                                                        <tr>
+                                                            <th  colspan="4" style="text-align: center;">1.2 Leave Encashment</th>
+                                                            <th colspan="4" style="text-align: center;" >TOTAL DEDUCTION</th>
+                                                        </tr>
+                                                        </tr>
+                                                    </table>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
     <script type="text/javascript">
@@ -240,15 +311,15 @@
         }
     </script>
     <script type="text/javascript">
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
 //
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
-    }
-    
-</script>
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+
+    </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

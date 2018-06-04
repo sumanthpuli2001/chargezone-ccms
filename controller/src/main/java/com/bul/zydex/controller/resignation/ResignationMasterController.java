@@ -1381,6 +1381,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.getModelMap().put("finaltotalBD", finaltotalBD);
         mv.getModelMap().put("fNfList", fNfList);
         mv.getModelMap().put("Gratuiety", Gratuiety);
+        mv.getModelMap().put("esp", esp);
         mv.getModelMap().put("totalMonthlyAmount2", totalMonthlyAmount2);
         mv.getModelMap().put("totalMonthlyAmount3", totalMonthlyAmount3);
         mv.getModelMap().put("totalMonthlyAmount4", totalMonthlyAmount4);

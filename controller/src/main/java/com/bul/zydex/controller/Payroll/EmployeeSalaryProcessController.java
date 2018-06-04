@@ -431,62 +431,123 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                     double taxpfConbrutionEmployer = 0;
                     double taxpfConbrutionEmployerEdili = 0;
                     if (maxiAmount != 0) {
-                        if (maxiAmount <= basicSalary) {
+                        if (maxiAmount <= maxAmountfromPf) {
+                            if (maxAmountfromPf <= basicSalary) {
 
-                            taxpf = (maxiAmount * pf / 100);//12
+                                taxpf = (maxAmountfromPf * pf / 100);//12
 
-                            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                            employeeDeductionAmount.setDeductionType("Provident Fund");
-                            employeeDeductionAmount.setDeductionAmount(taxpf);
-                            employeeDeductionAmountService.create(employeeDeductionAmount);
-                            payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
-                            payrollPfRecord.setEpfAmount(maxiAmount);
-                            payrollPfRecord.setDiifepsEpfAmount(maxiAmountConbrutionEmployer);
-                            payrollPfRecord.setEmpContrubtionEpf(taxpf);
+                                employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                employeeDeductionAmount.setDeductionType("Provident Fund");
+                                employeeDeductionAmount.setDeductionAmount(taxpf);
+                                employeeDeductionAmountService.create(employeeDeductionAmount);
+                                payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                payrollPfRecord.setEpfAmount(maxiAmount);
+                                payrollPfRecord.setDiifepsEpfAmount(maxiAmountConbrutionEmployer);
+                                payrollPfRecord.setEmpContrubtionEpf(taxpf);
 
-                            if (Integer.parseInt(ages) >= diffYear) {
-                                payrollPfRecord.setEpsAmount(maxiAmountConbrutionEmployer);
-                                taxpfConbrutionEmployer = (maxiAmountConbrutionEmployer * pfEmployeer / 100);//8.33
-                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf 
-                                taxpfConbrutionEmployerEdili = (maxiAmountConbrutionEmployer * EDilpfEmployeer / 100);//3.67
-                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                                if (Integer.parseInt(ages) >= diffYear) {
+                                    payrollPfRecord.setEpsAmount(maxiAmountConbrutionEmployer);
+                                    taxpfConbrutionEmployer = (maxiAmountConbrutionEmployer * pfEmployeer / 100);//8.33
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf 
+                                    taxpfConbrutionEmployerEdili = (maxiAmountConbrutionEmployer * EDilpfEmployeer / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
 
+                                } else {
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                                    payrollPfRecord.setEpsAmount(0.0);
+                                    taxpfConbrutionEmployerEdili = (maxiAmountConbrutionEmployer * pf / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                                }
+
+                                payrollPfRecordService.create(payrollPfRecord);
                             } else {
-                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
-                                payrollPfRecord.setEpsAmount(0.0);
-                                taxpfConbrutionEmployerEdili = (maxiAmountConbrutionEmployer * pf / 100);//3.67
-                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
-                            }
+                                taxpf = basicSalary * pf / 100; /// 12%
 
-                            payrollPfRecordService.create(payrollPfRecord);
-                        } else {
-                            taxpf = basicSalary * pf / 100; /// 12%
+                                employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                employeeDeductionAmount.setDeductionType("Provident Fund");
+                                employeeDeductionAmount.setDeductionAmount(taxpf);
+                                employeeDeductionAmountService.create(employeeDeductionAmount);
+                                // pf record table 
+                                payrollPfRecord.setDiifepsEpfAmount(basicSalary);
+                                payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                payrollPfRecord.setEpfAmount(basicSalary);
+                                payrollPfRecord.setEmpContrubtionEpf(taxpf);
 
-                            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                            employeeDeductionAmount.setDeductionType("Provident Fund");
-                            employeeDeductionAmount.setDeductionAmount(taxpf);
-                            employeeDeductionAmountService.create(employeeDeductionAmount);
-                            // pf record table 
-                            payrollPfRecord.setDiifepsEpfAmount(basicSalary);
-                            payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
-                            payrollPfRecord.setEpfAmount(basicSalary);
-                            payrollPfRecord.setEmpContrubtionEpf(taxpf);
-
-                            if (Integer.parseInt(ages) >= diffYear) {
-                                payrollPfRecord.setEpsAmount(basicSalary);
-                                taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
-                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf 
-                                taxpfConbrutionEmployerEdili = (basicSalary * EDilpfEmployeer / 100);//3.67
-                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
-                            } else {
-                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
-                                payrollPfRecord.setEpsAmount(0.0);
-                                taxpfConbrutionEmployerEdili = (basicSalary * pf / 100);//3.67
-                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
-                            }
+                                if (Integer.parseInt(ages) >= diffYear) {
+                                    payrollPfRecord.setEpsAmount(basicSalary);
+                                    taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf 
+                                    taxpfConbrutionEmployerEdili = (basicSalary * EDilpfEmployeer / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                                } else {
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                                    payrollPfRecord.setEpsAmount(0.0);
+                                    taxpfConbrutionEmployerEdili = (basicSalary * pf / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                                }
 
 //                            payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
-                            payrollPfRecordService.create(payrollPfRecord);
+                                payrollPfRecordService.create(payrollPfRecord);
+                            }
+                        } else {
+                            if (maxiAmount <= basicSalary) {
+
+                                taxpf = (maxiAmount * pf / 100);//12
+
+                                employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                employeeDeductionAmount.setDeductionType("Provident Fund");
+                                employeeDeductionAmount.setDeductionAmount(taxpf);
+                                employeeDeductionAmountService.create(employeeDeductionAmount);
+                                payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                payrollPfRecord.setEpfAmount(maxiAmount);
+                                payrollPfRecord.setDiifepsEpfAmount(maxiAmountConbrutionEmployer);
+                                payrollPfRecord.setEmpContrubtionEpf(taxpf);
+
+                                if (Integer.parseInt(ages) >= diffYear) {
+                                    payrollPfRecord.setEpsAmount(maxiAmountConbrutionEmployer);
+                                    taxpfConbrutionEmployer = (maxiAmountConbrutionEmployer * pfEmployeer / 100);//8.33
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf 
+                                    taxpfConbrutionEmployerEdili = (maxiAmountConbrutionEmployer * EDilpfEmployeer / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+
+                                } else {
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                                    payrollPfRecord.setEpsAmount(0.0);
+                                    taxpfConbrutionEmployerEdili = (maxiAmountConbrutionEmployer * pf / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                                }
+
+                                payrollPfRecordService.create(payrollPfRecord);
+                            } else {
+                                taxpf = basicSalary * pf / 100; /// 12%
+
+                                employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                employeeDeductionAmount.setDeductionType("Provident Fund");
+                                employeeDeductionAmount.setDeductionAmount(taxpf);
+                                employeeDeductionAmountService.create(employeeDeductionAmount);
+                                // pf record table 
+                                payrollPfRecord.setDiifepsEpfAmount(basicSalary);
+                                payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                payrollPfRecord.setEpfAmount(basicSalary);
+                                payrollPfRecord.setEmpContrubtionEpf(taxpf);
+
+                                if (Integer.parseInt(ages) >= diffYear) {
+                                    payrollPfRecord.setEpsAmount(basicSalary);
+                                    taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf 
+                                    taxpfConbrutionEmployerEdili = (basicSalary * EDilpfEmployeer / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                                } else {
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                                    payrollPfRecord.setEpsAmount(0.0);
+                                    taxpfConbrutionEmployerEdili = (basicSalary * pf / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                                }
+
+//                            payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                                payrollPfRecordService.create(payrollPfRecord);
+                            }
+
                         }
 
                     } else {
@@ -1022,6 +1083,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                         Double tax = 0.0;
                                         Double RemainTdsToPay = 0.0;
                                         Double monthlyTDs = 0.0;
+                                        int monthlyTDs12 = 0;
                                         boolean flag = false;
                                         PayrollTaxRateMaster payrollTaxRateMaster = new PayrollTaxRateMaster();
                                         for (int j = 0; j <= list.size(); j++) {
@@ -1097,12 +1159,132 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                         monthlyTDs = RemainTdsToPay / currentMonth + 1;
                                         employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                                         employeeDeductionAmount.setDeductionType("TDS");
-                                        employeeDeductionAmount.setDeductionAmount(monthlyTDs);
+//                                        employeeDeductionAmount.setDeductionAmount(monthlyTDs);
+
+                                        monthlyTDs12 = (int) Math.round(Math.abs(monthlyTDs));
+                                        double d = 0.0;
+                                        d = monthlyTDs12;
+//                                    (int) Math.round(additonalAmount)
+                                        employeeDeductionAmount.setDeductionAmount(d);
                                         employeeDeductionAmountService.create(employeeDeductionAmount);
 //                                        additionalAmount56 += TotalRemainingAmount12;
                                     }
 
                                 }
+                            } else {
+                                Double TotalRemainingAmount1 = 0.0;
+                                TotalRemainingAmount1 = yearSalaryGrossTotal - 0.0;
+//                                List<?> taxDeductionDecarationSubmitSavingLimit = taxDeductionDecarationSubmitService.readTaxDeductionDecarationSubmitSalaryGenerateTaxSavingLimit(taxSavingsubmitId);
+//                                if (!taxDeductionDecarationSubmitSavingLimit.isEmpty()) {
+//                                    for (Object taxDeductionDecarationSubmitSavingLimitList : taxDeductionDecarationSubmitSavingLimit) {
+//                                        Object[] o2265 = (Object[]) taxDeductionDecarationSubmitSavingLimitList;
+//                                        Double taxDeclartionAmountTotal = (Double) o2265[0];
+//                                        Integer taxsavingLimitamountTotal = (Integer) o2265[2];
+//                                        Integer addittionalAmounttTotal = (Integer) o2265[3];
+//                                        if (taxDeclartionAmountTotal >= taxsavingLimitamountTotal) {
+//                                            TotalRemainingAmount1 = TotalRemainingAmount1 - addittionalAmounttTotal;
+//
+//                                        }
+//
+//                                    }
+//                                }
+//                                    int year1Fake = 2000000;
+//                                    Double TotalRemainingAmount1 = yearSalaryGrossTotal - taxDeductionDecartionAmount;
+//                                    int i = TotalRemainingAmount1.intValue();
+//                                    SavingAmountRemain=
+                                Double ftax = 0.0;
+                                List<PayrollTaxRateMaster> list = (List<PayrollTaxRateMaster>) payrollTaxRateMasterService.getAgeValuesFOrSalaryGenerate(diffYear);
+                                if (!list.isEmpty()) {
+                                    Double TotalRemainingAmount12 = 0.0;
+                                    Double additionalAmount56 = 0.0;
+                                    Double tax = 0.0;
+                                    Double RemainTdsToPay = 0.0;
+                                    Double monthlyTDs = 0.0;
+                                    int monthlyTDs12 = 0;
+                                    boolean flag = false;
+                                    PayrollTaxRateMaster payrollTaxRateMaster = new PayrollTaxRateMaster();
+                                    for (int j = 0; j <= list.size(); j++) {
+                                        if (!flag) {
+                                            payrollTaxRateMaster = (PayrollTaxRateMaster) list.get(j);
+                                            String taxRate = payrollTaxRateMaster.getTaxRate();
+                                            String incomeFrom = payrollTaxRateMaster.getIncomeFrom();
+                                            String incomeTo = payrollTaxRateMaster.getIncomeTo();
+//                                            if(j==0){
+                                            Double range1 = 0.0;
+                                            Double range = 0.0;
+                                            if (list.size() != j) {
+                                                range1 = Double.parseDouble(incomeTo) - Double.parseDouble(incomeFrom);
+                                                DecimalFormat df1 = new DecimalFormat("#.##");
+                                                range = Double.parseDouble(df1.format(range1));
+                                            } else if (list.size() == j) {
+                                                range1 = Double.parseDouble(incomeFrom);
+                                                DecimalFormat df1 = new DecimalFormat("#.##");
+                                                range = Double.parseDouble(df1.format(range1));
+                                            }
+//                                                DecimalFormat df1 = new DecimalFormat("#.##");
+//                                                System.out.println(df1.format(range));
+//                                            }
+//                                            if (Integer.parseInt(incomeFrom) == 0) {
+//                                                TotalRemainingAmount1 = TotalRemainingAmount1 - Double.parseDouble(incomeTo);
+//                                            }
+//                                            if (Integer.parseInt(incomeFrom) != 0) {
+//                                                TotalRemainingAmount1 = TotalRemainingAmount1 - Double.parseDouble(incomeFrom);
+//                                            }
+
+                                            if (TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                TotalRemainingAmount1 = TotalRemainingAmount1 - range;
+                                            } else if (TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                TotalRemainingAmount1 = 0.0;
+                                                flag = true;
+                                            } else if ((list.size() == (j + 1)) && TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                TotalRemainingAmount1 = 0.0;
+                                                flag = true;
+                                            } else if ((list.size() != (j + 1)) && TotalRemainingAmount1 != 0.0 && range >= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                TotalRemainingAmount1 = 0.0;
+                                                flag = true;
+                                            } else if ((list.size() != (j + 1)) && TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                TotalRemainingAmount1 = 0.0;
+                                                flag = true;
+                                            } else if ((list.size() == (j + 1)) && TotalRemainingAmount1 != 0.0 && range <= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+                                                TotalRemainingAmount1 = 0.0;
+                                                flag = true;
+                                            }
+
+                                            if (range <= TotalRemainingAmount1) {
+                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+//                                                TotalRemainingAmount1 = 0.0;
+                                            }
+//                                            if (range >= TotalRemainingAmount1) {
+//                                                tax = (TotalRemainingAmount1 * Double.parseDouble(taxRate)) / 100;
+//                                                TotalRemainingAmount1 = 0.0;
+//                                            }
+//                                            if (range >= TotalRemainingAmount1) {
+//                                            }
+
+                                            ftax += tax;
+                                        }
+//                                            TotalRemainingAmount12 = TotalRemainingAmount12 - Double.parseDouble(incomeFrom);
+
+                                    }
+
+                                    RemainTdsToPay = tdsAmount1 - ftax;
+                                    monthlyTDs = RemainTdsToPay / currentMonth + 1;
+                                    employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                    employeeDeductionAmount.setDeductionType("TDS");
+                                    monthlyTDs12 = (int) Math.round(Math.abs(monthlyTDs));
+                                    double d = 0.0;
+                                    d = monthlyTDs12;
+//                                    (int) Math.round(additonalAmount)
+                                    employeeDeductionAmount.setDeductionAmount(d);
+                                    employeeDeductionAmountService.create(employeeDeductionAmount);
+//                                        additionalAmount56 += TotalRemainingAmount12;
+                                }
+
                             }
                         }
 
@@ -1149,6 +1331,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                         Double tax = 0.0;
                                         Double RemainTdsToPay = 0.0;
                                         Double monthlyTDs = 0.0;
+                                        int monthlyTDs12 = 0;
                                         boolean flag = false;
                                         PayrollTaxRateMaster payrollTaxRateMaster = new PayrollTaxRateMaster();
                                         for (int j = 0; j <= list.size(); j++) {
@@ -1224,7 +1407,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                         monthlyTDs = RemainTdsToPay / currentMonth + 1;
                                         employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                                         employeeDeductionAmount.setDeductionType("TDS");
-                                        employeeDeductionAmount.setDeductionAmount(monthlyTDs);
+                                        monthlyTDs12 = (int) Math.round(Math.abs(monthlyTDs));
+                                        double d = 0.0;
+                                        d = monthlyTDs12;
+//                                    (int) Math.round(additonalAmount)
+                                        employeeDeductionAmount.setDeductionAmount(d);
                                         employeeDeductionAmountService.create(employeeDeductionAmount);
 //                                        additionalAmount56 += TotalRemainingAmount12;
                                     }
@@ -1281,6 +1468,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                         Double tax = 0.0;
                                         Double RemainTdsToPay = 0.0;
                                         Double monthlyTDs = 0.0;
+                                        int monthlyTDs12 = 0;
                                         boolean flag = false;
                                         PayrollTaxRateMaster payrollTaxRateMaster = new PayrollTaxRateMaster();
                                         for (int j = 0; j <= list.size(); j++) {
@@ -1356,7 +1544,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                         monthlyTDs = RemainTdsToPay / currentMonth + 1;
                                         employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                                         employeeDeductionAmount.setDeductionType("TDS");
-                                        employeeDeductionAmount.setDeductionAmount(monthlyTDs);
+                                        monthlyTDs12 = (int) Math.round(Math.abs(monthlyTDs));
+                                        double d = 0.0;
+                                        d = monthlyTDs12;
+//                                    (int) Math.round(additonalAmount)
+                                        employeeDeductionAmount.setDeductionAmount(d);
                                         employeeDeductionAmountService.create(employeeDeductionAmount);
 //                                        additionalAmount56 += TotalRemainingAmount12;
                                     }
@@ -2152,7 +2344,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 }
 
                                 employeeSalaryProcess.setEmployeeLwp(lwp1);
-                                employeeSalaryProcess.setEmployeeLeaveEncashment(leaveTxt);
+                                employeeSalaryProcess.setEmployeeLeaveEncashment((double) presentdays1);
                                 employeeSalaryProcess.setEmployeeBasicSalary(basicSalary1);
                                 employeeSalaryProcess.setOtAmount(Overtimepay);
 

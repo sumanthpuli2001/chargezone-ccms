@@ -261,9 +261,9 @@
                                                             <c:forEach var="list" items="${employeelist}" varStatus="status">
                                                                 <tr>
                                                                     <td>${status.count}</td>
-                                                                    <td>${list[5]}</td>
                                                                     <td>${list[0]}</td>
                                                                     <td>${list[1]}</td>
+                                                                    <td>${list[8]}</td>
                                                                     <td><fmt:formatNumber maxFractionDigits="0" value="${list[2]}"></fmt:formatNumber>.00</td>
                                                                     <td></td>
                                                                     <td></td>

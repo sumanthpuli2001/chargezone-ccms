@@ -202,6 +202,13 @@
                                                 </a>
                                             </c:if>
                                         </div>
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.govtFormatPF}">
+                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"  href="esicDeductionStatement.htm?act=searchEsicDetailGovt&search=none">
+                                                    Govt. Format Esic Deduction 
+                                                </a>
+                                            </c:if>
+                                        </div>
                                     </div>
                                     <br>
                                 </div>

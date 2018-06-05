@@ -254,9 +254,22 @@ public class CertificateTemplateController extends CertificateTemplateAbstract {
             employeeMaster.setDesignationMaster(designationMaster);
             String msg = certificateTemplate.getCertificateBody();
             try {
-                msg = msg.replaceAll("\\{employee_name\\}", employeeMaster.getEmployeeName());
-                msg = msg.replaceAll("\\{date_of_joining\\}", employeeMaster.getDateOfJoining());
-                msg = msg.replaceAll("\\{department_name\\}", departmentMaster.getDepartmentName());
+                if (employeeMaster.getEmployeeName() != null && !employeeMaster.getEmployeeName().equals("") && !employeeMaster.getEmployeeName().isEmpty()) {
+                    msg = msg.replaceAll("\\{employee_name\\}", employeeMaster.getEmployeeName());
+                } else {
+                    msg = msg.replaceAll("\\{employee_name\\}", "");
+                }
+                if (employeeMaster.getDateOfJoining() != null && !employeeMaster.getDateOfJoining().equals("") && !employeeMaster.getDateOfJoining().isEmpty()) {
+                    msg = msg.replaceAll("\\{date_of_joining\\}", employeeMaster.getDateOfJoining());
+                } else {
+                    msg = msg.replaceAll("\\{date_of_joining\\}", "");
+                }
+                if (departmentMaster.getDepartmentName() != null && !departmentMaster.getDepartmentName().equals("") && !departmentMaster.getDepartmentName().isEmpty()) {
+                    msg = msg.replaceAll("\\{department_name\\}", departmentMaster.getDepartmentName());
+                } else {
+                    msg = msg.replaceAll("\\{department_name\\}", "");
+                }
+                
                 msg = msg.replaceAll("\\{designation_name\\}", designationMaster.getDesignationName());
                 msg = msg.replaceAll("\\{role\\}", employeeMaster.getRole());
                 msg = msg.replaceAll("\\{location\\}", locationMaster.getLocation());
@@ -311,6 +324,8 @@ public class CertificateTemplateController extends CertificateTemplateAbstract {
                 if (employeeMaster.getPfNo() != null && !employeeMaster.getPfNo().equals("")
                         && !employeeMaster.getPfNo().isEmpty()) {
                     msg = msg.replaceAll("\\{pf_no\\}", employeeMaster.getPfNo());
+                } else {
+                    msg = msg.replaceAll("\\{pf_no\\}", "");
                 }
                 msg = msg.replaceAll("\\{uan_no\\}", employeeMaster.getUanNo());
                 msg = msg.replaceAll("\\{basic_salary\\}", employeeMaster.getBasicSalary());
@@ -321,13 +336,17 @@ public class CertificateTemplateController extends CertificateTemplateAbstract {
                 msg = msg.replaceAll("\\{confirmation_date\\}", employeeMaster.getConfirmationDate());
                 msg = msg.replaceAll("\\{pf_amount_employer\\}", employeeMaster.getPfAmountEmployer());
                 msg = msg.replaceAll("\\{employee_location\\}", employeeMaster.getEmployeeLocation());
-                msg = msg.replaceAll("\\{gross_total\\}", employeeMaster.getGrossTotal().toString());
+                if (employeeMaster.getGrossTotal() != null && !employeeMaster.getGrossTotal().equals("") && !employeeMaster.getGrossTotal().isNaN()) {
+                    msg = msg.replaceAll("\\{gross_total\\}", employeeMaster.getGrossTotal().toString());
+                } else {
+                    msg = msg.replaceAll("\\{gross_total\\}", "");
+                }
                 msg = msg.replaceAll("\\{ctc_total\\}", employeeMaster.getCtcTotal().toString());
                 msg = msg.replaceAll("\\{salary_detail\\}", employeeMaster.getSalaryBase().toString());
 
-                request.setAttribute("msg", msg);
             } catch (Exception e) {
             }
+            request.setAttribute("msg", msg);
         }
         mv.setViewName("Payroll/CertificateAjax");
         return mv;

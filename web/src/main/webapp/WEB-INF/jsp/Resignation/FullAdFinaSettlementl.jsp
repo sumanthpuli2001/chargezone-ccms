@@ -55,17 +55,47 @@
                                             </div>
                                             <div class="col-sm-5">
                                                 <label class="control-label">Notice Period :<span style="color: red;font-size: 12px;"></span></label>
-                                                <form:input type="text" path="noticePeriod" name="noticePeriod" id="noticePeriod" class="form-control"/>
+                                                <form:input type="text" path="noticePeriod" placeholder="noticePeriod" id="noticePeriod" class="form-control"/>
                                                 <form:errors path="noticePeriod" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-5">
                                                 <label class="control-label">Given Notice :<span style="color: red;font-size: 12px;"></span></label>
-                                                <form:input type="text" path="givenNotice" name="givenNotice" id="givenNotice" class="form-control"/>
+                                                <form:input type="text" path="givenNotice" placeholder="givenNotice" id="givenNotice" class="form-control"/>
                                                 <form:errors path="givenNotice" cssClass="errorDiv"></form:errors>
                                             </div>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">Recoverable Days :<span style="color: red;font-size: 12px;"></span></label>
+                                                <form:input type="text" path="recoveryDays" placeholder="recoveryDays" id="recoveryDays" class="form-control"/>
+                                                <form:errors path="recoveryDays" cssClass="errorDiv"></form:errors>
+                                            </div>
                                         </div>
+                                            <div colspan="4" style="text-align: left;"><b>OTHER DEDUCTION :</b></div>
+                                        <div class="form-group">
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Shoes Deduction :<span style="color: red;font-size: 12px;"></span></label>
+                                                <form:input type="text" path="shoesDeduction" name="shoesDeduction" id="shoesDeduction" value="0" class="form-control"/>
+                                                <form:errors path="shoesDeduction" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Uniform Deduction :<span style="color: red;font-size: 12px;"></span></label>
+                                                <form:input type="text" path="uniformDeduction" name="uniformDeduction" id="uniformDeduction" value="0" class="form-control"/>
+                                                <form:errors path="uniformDeduction" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                        </div>
+                                            <div class="form-group">
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Other Deduction :<span style="color: red;font-size: 12px;"></span></label>
+                                                <form:input type="text" path="otherDeduction" name="otherDeduction" id="otherDeduction" value="0" class="form-control"/>
+                                                <form:errors path="otherDeduction" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <label class="control-label">Notice Period Recovery :<span style="color: red;font-size: 12px;"></span></label>
+                                                <form:input type="text" path="noticePeriodRecovery" name="noticePeriodRecovery" id="noticePeriodRecovery" value="0" class="form-control"/>
+                                                <form:errors path="noticePeriodRecovery" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                            </div>
                                         <div class="form-group">
                                             <div class="col-sm-6 col-sm-offset-5">
                                                 <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">

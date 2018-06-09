@@ -267,4 +267,25 @@ public class EmployeeDeductionAmountDAOImpl<T> extends GenericsDAOImpl<T> implem
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> fetchsalary(int edaId, String eftDate, String relivDate) {
+            Session s = getSessionFactory().openSession();
+        String sqlString = "SELECT"
+                + " c.id, c.month, c.year ,b.deduction_type, b.deduction_amount, c.net_payable, c.gross_total, c.employee_basic_salary"
+                + " FROM"
+                + " hr_power_astral.resignation_master a "
+                + " LEFT JOIN hr_power_astral.employee_salary_process c ON a.emp_master_id = c.employee_master_id"
+                + " LEFT JOIN hr_power_astral.employee_deduction_amount b ON b.employee_salary_process_id = c.id"
+                + " WHERE"
+                + " month BETWEEN DATE_FORMAT(STR_TO_DATE('" + eftDate + "' , '%d/%m/%Y - %H:%i'),'%m')"
+                + " AND DATE_FORMAT(STR_TO_DATE( '" + relivDate + "' , '%d/%m/%Y - %H:%i'),'%m')"
+                + " AND c.employee_master_id=" + edaId
+                + " group by c.id";
+
+        SQLQuery query = s.createSQLQuery(sqlString);
+        List<?> list = query.list();
+        s.close();
+        return list;
+
+    }
 }

@@ -33,7 +33,7 @@
                                                     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                                                     out.print("ToDay : " + df.format(date));
 //                                                    out.print("<div align=\"right\">DATE : " + df.format(date) + "</div>");
-%>
+                                                %>
                                             <center><b><font size="3">SPC LIFESCIENCES PVT LTD. </font></b></center> 
                                             <div class="form-group">
                                                 <center><b><font size="2">FULL AND FINAL SETTLEMENT </font></b></center> 
@@ -240,7 +240,7 @@
                                                             <th>Department</th>
                                                             <td>${departmentName}</td>
                                                             <th>Recoverable Days</th>
-                                                            <td>${rm.relievingDate}</td>
+                                                            <td>${fullAndFinalSettlement.recoveryDays}</td>
                                                         </tr>
                                                         <tr>
                                                             <th>Employee Code</th>
@@ -265,32 +265,118 @@
                                                         <th  colspan="4" style="text-align: center;">1. PAYABLE</th>
                                                         <th colspan="4" style="text-align: center;" > 2. OTHER DEDUCTION</th>
                                                     </tr>
-                                                    <c:forEach var="list" items="${list}">
+                                                    <tr>
+                                                        <th  colspan="4" style="text-align: left;">1.1 Earned Salary</th>
+                                                        <th colspan="4" style="text-align: center;" ></th>
+                                                    </tr>
+                                                    <td colspan="3" style="text-align: left;"  ><b>COMPONENTS</b></td>
+                                                    <c:forEach var="salary" items="${salary}">
+                                                        <c:if test="${salary[1] == 01}"><td><b>JAN'01</b></td></c:if>
+                                                        <c:if test="${salary[1] == 02}"><td><b>FEB'02</b></td></c:if>
+                                                        <c:if test="${salary[1] == 03}"><td><b>MAR'03</b></td></c:if>
+                                                        <c:if test="${salary[1] == 04}"><td><b>APR'04</b></td></c:if>
+                                                        <c:if test="${salary[1] == 05}"><td><b>MAY'05</b></td></c:if>
+                                                        <c:if test="${salary[1] == 06}"><td><b>JUN'06</b></td></c:if>
+                                                        <c:if test="${salary[1] == 07}"><td><b>JUL'07</b></td></c:if>
+                                                        <c:if test="${salary[1] == 08}"><td><b>AUG'08</b></td></c:if>
+                                                        <c:if test="${salary[1] == 09}"><td><b>SEP'09</b></td></c:if>
+                                                        <c:if test="${salary[1] == 10}"><td><b>OCT'10</b></td></c:if>
+                                                        <c:if test="${salary[1] == 11}"><td><b>NOV'11</b></td></c:if>
+                                                        <c:if test="${salary[1] == 12}"><td><b>DEC'12</b></td></c:if>
+                                                    </c:forEach>
+                                                    <th>2.1 Notice Period Recovery</th>
+                                                    <td>${fullAndFinalSettlement.noticePeriodRecovery}</td>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;"  ><b></b></th>
+                                                        <th></th>
+                                                        <th>2.2 Shoes Deduction</th>
+                                                        <td>${fullAndFinalSettlement.shoesDeduction}</td>
+                                                    </tr>
+                                                    <c:forEach var="salary" items="${salary}">
                                                         <tr>
-                                                            <td><b>gross</b></td>
-                                                            <td>${list[6]}</td>
+                                                            <th colspan="3" style="text-align: left;"  ><b>Gross</b></th>
+                                                            <th>${salary[6]}</th>
+                                                            <th>2.3 Uniform Deduction</th>
+                                                            <td>${fullAndFinalSettlement.uniformDeduction}</td>
                                                         </tr>
                                                     </c:forEach>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;"  ><b>ESIC </b></th>
+                                                        <th>-</th>
+                                                        <th>2.4 Other Deduction</th>
+                                                        <td>${fullAndFinalSettlement.otherDeduction}</td>
+                                                    </tr>
                                                     <c:forEach var="list" items="${list}">
                                                         <tr>
-                                                            <td><b>${list[3]}</b></td>
-                                                            <td>${list[4]}</td>
+                                                            <th colspan="3" style="text-align: left;"  ><b>${list[3]}</b></th>
+                                                            <th>${list[4]}</th>
                                                         </tr>
                                                     </c:forEach>
-                                                    <c:forEach var="list" items="${list}">
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;"  ><b>Reimbursmen </b></th>
+                                                        <th>-</th>
+                                                    </tr>
+                                                    <c:forEach var="salary" items="${salary}">
                                                         <tr>
-                                                            <td><b>salary Net Pay</b></td>
-                                                            <td>${list[5]}</td>
+                                                            <th colspan="3" style="text-align: left;" ><b>Salary Net Pay</b></th>
+                                                            <th>${salary[5]}</th>
                                                         </tr>
                                                     </c:forEach>
-                                                    <table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">
+                                                    <tr>
+                                                        <th  colspan="4" style="text-align: left;">1.8 Leave Encashment</th>
+                                                        <th>TOTAL DEDUCTION</th>
+                                                        <td>${totaldeduction}</td>
+                                                    </tr>
+                                                    <th colspan="3" style="text-align: left;"><b>Pl Calculation</b></th>
+                                                        <c:forEach var="salary" items="${salary}">
+                                                        <th><b>YEAR'${salary[2]}</b></th>
+                                                        </c:forEach>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;">Basic</th>
+                                                            <c:forEach var="salary" items="${salary}">
+                                                            <td><b>${salary[7]}</b></td>
+                                                        </c:forEach>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;">Leave Balance</th>
+                                                        <th>${leavedayscount}</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;" ><b>Pl Final Amt.</b></th>
+                                                        <th><b>${totalLyamountCount}</b></th>
+                                                    </tr>
+                                                </table>
+                                                <c:set var="count" value="0" scope="page" />
+                                                <table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">
+                                                    <tr>
+                                                        <th  colspan="4" style="text-align: left;">1.4 Bonus</th>
+                                                    </tr>
+                                                    <td><b>MONTHS</b></td>
+                                                    <td><b>Paid Days</b></td>
+                                                    <td><b>Earned Basic</b></td>
+                                                    <c:forEach var="daysfetch" items="${daysfetch}" varStatus="index" >
                                                         <tr>
-                                                        <tr>
-                                                            <th  colspan="4" style="text-align: center;">1.2 Leave Encashment</th>
-                                                            <th colspan="4" style="text-align: center;" >TOTAL DEDUCTION</th>
+                                                            <c:if test="${daysfetch[2] == 01}"><td><b>JAN</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 02}"><td><b>FEB</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 03}"><td><b>MAR</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 04}"><td><b>APR</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 05}"><td><b>MAY</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 06}"><td><b>JUN</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 07}"><td><b>JUL</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 08}"><td><b>AUG</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 09}"><td><b>SEP</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 10}"><td><b>OCT</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 11}"><td><b>NOV</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 12}"><td><b>DEC</b></td></c:if>
+                                                            <td>${daysfetch[1]}</td>
+                                                            <td>${bonusFetch[count][1]}</td>
                                                         </tr>
-                                                        </tr>
-                                                    </table>
+                                                        <c:set var="count" value="${count + 1}" scope="page"/>
+                                                    </c:forEach>
+                                                    <td><b>TOTAL</b></td>
+                                                    <td><b>${leavedaysfetch}</b></td>
+                                                    <td><b>${bounsdata}</b></td>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>

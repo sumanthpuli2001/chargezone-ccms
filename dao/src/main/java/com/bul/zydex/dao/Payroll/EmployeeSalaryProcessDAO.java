@@ -84,10 +84,12 @@ public interface EmployeeSalaryProcessDAO<T> extends GenericsDAO<T> {
     public List<?> readsalDeductionSearch(EmployeeMaster object);
 
     public List<?> readEmployeeForPfGov(EmployeeMaster object);
-    
-     public List<?> readEmployeeGrossTotalTaxable(int EmpId, String startDate, String endate);
-    
-     public List<?> readEmployeeForSlip1(EmployeeMaster object);
+
+    public List<?> readEmployeeGrossTotalTaxable(int EmpId, String startDate, String endate);
+
+    public List<?> readEmployeeForSlip1(EmployeeMaster object);
 
     public List<?> readEmpId(int EmpId);
+
+    public List<?> monthDaysFetch(int EmpId);
 }

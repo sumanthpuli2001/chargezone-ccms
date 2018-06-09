@@ -33,7 +33,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1> All List Additional Amount Day Wise:</h1>
+            <h1> ALL LIST ADDITIONAL AMOUNT DAY WISE</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Result</li>

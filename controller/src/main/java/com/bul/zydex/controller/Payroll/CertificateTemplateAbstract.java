@@ -10,12 +10,16 @@ import com.bul.zydex.model.CertificateTemplate;
 import com.bul.zydex.model.EmailMetaTag;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeTypeMaster;
+import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.Modules;
+import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.EmailMetaTagService;
 import com.bul.zydex.service.ModulesService;
 import com.bul.zydex.service.Payroll.CertificateTemplateService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
+import com.bul.zydex.service.location.LocationMasterService;
+import com.bul.zydex.service.zydexLocation.ZydexLocationMasterService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +36,8 @@ public class CertificateTemplateAbstract extends CustomAbstract {
     protected EmployeeTypeService<EmployeeTypeMaster> employeeTypeService;
     protected EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService;
     protected EmailMetaTagService<EmailMetaTag> emailMetaTagService;
+    protected LocationMasterService<LocationMaster>locationMasterService;
+    protected ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
     protected ModulesService<Modules> modulesService;
     protected Validator certificateTemplateValidator;
 
@@ -82,8 +88,22 @@ public class CertificateTemplateAbstract extends CustomAbstract {
     public void setModulesService(ModulesService<Modules> modulesService) {
         this.modulesService = modulesService;
     }
+
+    public LocationMasterService<LocationMaster> getLocationMasterService() {
+        return locationMasterService;
+    }
+
+    public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
+        this.locationMasterService = locationMasterService;
+    }
     
-    
+    public ZydexLocationMasterService<ZydexLocationMaster> getZydexLocationMasterService() {
+        return zydexLocationMasterService;
+    }
+
+    public void setZydexLocationMasterService(ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService) {
+        this.zydexLocationMasterService = zydexLocationMasterService;
+    }
 
     protected void EmployeeTypeList(HttpServletRequest request) {
         List<?> EmployeeTypeList = employeeTypeService.read();
@@ -110,14 +130,32 @@ public class CertificateTemplateAbstract extends CustomAbstract {
         Map<Integer, String> map = new HashMap();
         for (Object obj : certificateList) {
             CertificateTemplate certificateTemplate = (CertificateTemplate) obj;
-            map.put(certificateTemplate.getId(), certificateTemplate.getCertificateName());
+            map.put(certificateTemplate.getId(), certificateTemplate.getCertificateTitle());
         }
         request.setAttribute("certificateList", map);
     }
 
     protected void ModuleList(HttpServletRequest request) {
         Modules modules = new Modules();
-//        List<?> moduellsit = 
+        List<?> moduellsit = modulesService.read();
+        Map<Integer,String> map = new HashMap();
+        
+        for(Object o : moduellsit){
+            modules = (Modules) o;
+            map.put(modules.getId(),modules.getModuleName());
+        }
+        request.setAttribute("modulelist", map);
+    }
+     protected void zydexLocationList(HttpServletRequest request) {
+        ZydexLocationMaster zydexLocationMaster=new ZydexLocationMaster();
+        List<?> zydexLocationList = zydexLocationMasterService.read();
+        Map<Integer, String> dm = new HashMap<>();
+        for (Object o : zydexLocationList) {
+            zydexLocationMaster = (ZydexLocationMaster) o;
+            dm.put(zydexLocationMaster.getId(), zydexLocationMaster.getZydexLocation());
+        }
+
+        request.setAttribute("deptMap", dm);
     }
 
 }

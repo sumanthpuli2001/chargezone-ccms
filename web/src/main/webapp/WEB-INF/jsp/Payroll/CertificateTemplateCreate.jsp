@@ -14,12 +14,27 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Certificate Template Create</title>
+        <style>
+            a.meta_tg {
+                font-size: 12px;
+                margin-left: 5px;
+                padding: 2px 4px;
+                border-radius: 22%;
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
+                text-decoration: none;
+                background: aliceblue;
+                color: black;
+                display: inline-block;
+                transition: 0.3s;
+            }
+        </style>
     </head>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Add New Certificate Template:</h1>
+            <h1>ADD NEW CERTIFICATE TEMPLATE</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Add New Certificate Template</li>
@@ -58,19 +73,32 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-3">
-                                            <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
-                                                <form:option value="" label="-- Select --" ></form:option>
-                                                <form:options items="${level}"></form:options>
-                                            </form:select>
-                                            <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
-                                            </div>
+                                            <label  class="control-label">Modules:<span style="color: red;font-size: 12px;">*</span></label>
                                         </div>
-                                        <!--                                    <div class="form-group">
-                                                                                <div class="col-sm-3">
-                                                                                    <label class="control-label">Enter Certificate Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                                                </div>
-                                                                                <div class="col-sm-7">
+                                        <div class="col-sm-7">
+                                            <form:select path="modules.id" class="form-control" onchange="getMetaTag();" >
+                                                <form:option value="" label="-- Select --" ></form:option>
+                                                <form:options items="${modulelist}"></form:options>
+                                            </form:select>
+                                       <form:errors path="modules.id" cssClass="errorDiv"></form:errors>
+                                        </div>
+                                        <%--<form:errors path="modules.id" cssClass="errorDiv"></form:errors>--%>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-3">
+                                                <label  class="control-label">Meta Tag:<span style="color: red;font-size: 12px;">*</span></label>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <div id="emailMetaTagId">
+
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <!--                                    <div class="form-group">
+                                                                            <div class="col-sm-3">
+                                                                                <label class="control-label">Enter Certificate Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                            </div>
+                                                                            <div class="col-sm-7">
                                     <%--<form:input path="certificateType" placeholder="Enter Certificate Type" maxlength="30" class="form-control"/>--%>
                                     <%--<form:errors path="certificateType" cssClass="errorDiv"/>--%>
                                 </div>
@@ -126,6 +154,40 @@
     <!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
     <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
     <script>
-        initSample();
-    </script>
+        initSample();</script>
 </html>
+<script>
+    function getMetaTag() {
+        var moduleId = document.getElementById('modules.id').value;
+        if (moduleId != "") {
+            $.get("certificateTemplate.htm?act=getEmailMetaTag",
+                    {
+                        moduleId: moduleId
+                    },
+            function (responseJson) {
+                var keys = null;
+                var list = null;
+                keys = $.map(responseJson, function (v, i) {
+                    return v;
+                });
+                $(keys).each(function () {
+                    if (list == null) {
+                        list = "<a class='meta_tg' id='"+ this+"' onclick='metaShow(this);'>" + this + "</a>"
+                    } else {
+                        list += "<a class='meta_tg'id='"+ this+"' onclick='metaShow(this);'>" + this + "</a>"
+                    }
+                });
+                $('#emailMetaTagId')
+                        .append(list);
+            });
+        }
+    }
+</script>
+<script>
+    function metaShow(name) {
+        alert(name.id);
+        var html = '<a href="javascript:void(0)">' + '{' + name.id + '}' + '</a>';
+            CKEDITOR.instances.editor.insertHtml(html);
+    }
+</script>
+

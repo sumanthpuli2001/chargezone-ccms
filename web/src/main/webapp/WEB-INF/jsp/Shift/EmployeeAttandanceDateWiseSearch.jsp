@@ -44,7 +44,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Employee Advance Search: </h1>
+            <h1>MONTHLY ATTENDANCE REPORT</h1>
 
         </section>
         <c:if test="${!empty successMessage}">

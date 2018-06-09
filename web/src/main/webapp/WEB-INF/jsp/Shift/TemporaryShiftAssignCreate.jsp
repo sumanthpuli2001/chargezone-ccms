@@ -52,7 +52,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Temporary Shift Assign Create: </h1>
+            <h1>TEMPORARY SHIFT ASSIGN CREATE </h1>
 
         </section>
         <c:if test="${!empty successMessage}">

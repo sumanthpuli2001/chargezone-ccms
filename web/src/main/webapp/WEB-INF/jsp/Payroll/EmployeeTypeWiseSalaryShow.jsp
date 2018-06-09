@@ -47,7 +47,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>All Assign Salary List:</h1>
+            <h1>ALL ASSIGN SALARY LIST</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Assign Salary List</li>

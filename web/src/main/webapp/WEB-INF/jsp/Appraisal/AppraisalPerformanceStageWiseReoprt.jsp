@@ -91,7 +91,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Employee PMP Search: </h1>
+            <h1>EMPLOYEE PMP SEARCH </h1>
 
         </section>
         <c:if test="${!empty successMessage}">

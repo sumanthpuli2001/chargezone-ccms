@@ -9,7 +9,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-       
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Bonus Create</title>
     </head>
@@ -17,7 +17,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Add New Bonus Wise:</h1>
+            <h1>ADD NEW BONUS WISE</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Create</li>
@@ -42,47 +42,47 @@
                                 <form:form class="form-horizontal" method="post"
                                            commandName="payrollBonus" action="payrollBonus.htm?act=createSubmit">
                                     <div class="form-group">
-                                         <div class="col-sm-6"><span style="color: red;font-size: 12px;"></span>
-                                                    <label>Employee Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <input type="text" name="empId" id="empId" class="form-control">
-                                                        <form:errors path="employeeMaster.id" cssClass="errorDiv"></form:errors>
-                                                    </div>
-                                         </div>
-                                                    
-                                     <div class="form-group">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-6"><span style="color: red;font-size: 12px;"></span>
+                                            <label>Employee Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <input type="text" name="empId" id="empId" class="form-control">
+                                            <form:errors path="employeeMaster.id" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-sm-6">
                                                 <label> Title <span style="color: red;font-size: 12px;">*</span></label>
                                             <form:input path="title" class="form-control" placeholder="Enter Title"></form:input>
                                             <form:errors path="title" cssClass="errorDiv"></form:errors>
                                             </div>
-                                       
+
 
                                             <div class="col-sm-6">
                                                 <label>Amount <span style="color: red;font-size: 12px;">*</span></label>
                                             <form:input path="amount" class="form-control" placeholder="Enter Amount" type="number" min="0" max="10000000"></form:input>
                                             <form:errors path="amount" cssClass="errorDiv"></form:errors>
                                             </div>
-                                            </div>   
-                                       
-                                     <div class="form-group">
+                                        </div>   
+
+                                        <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label> Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                 <form:input path="date" class="form-control" onchange="dateDifference(this.value);" placeholder="Enter Date" readonly="true"></form:input>
-                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                 </div>
-                                                <form:errors path="date" cssClass="errorDiv"></form:errors>
-                                               </div>
-                                            
-                                        <div class="col-sm-6">
+                                            <form:errors path="date" cssClass="errorDiv"></form:errors>
+                                            </div>
+
+                                            <div class="col-sm-6">
                                                 <label>Description<span style="color: red;font-size: 12px;">*</span></label>
-                                        <form:textarea path="description" class="form-control" placeholder="Enter Description"></form:textarea>
+                                            <form:textarea path="description" class="form-control" placeholder="Enter Description"></form:textarea>
                                             <form:errors path="description" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
-                                            
-                                            
+
+
                                         <div class="form-group">
                                             <div class="col-sm-6 col-sm-offset-5">
                                                 <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
@@ -108,7 +108,7 @@
             minView: 2,
             forceParse: 0
         });
-   
+
     </script>
     <script>
         jQuery.noConflict();
@@ -123,6 +123,6 @@
         });
 
     </script>
-   
+
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

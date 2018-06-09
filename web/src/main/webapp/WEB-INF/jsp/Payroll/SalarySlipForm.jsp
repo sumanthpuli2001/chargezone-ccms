@@ -288,11 +288,6 @@
                                                     </tr>
                                                 </c:if>
 
-                                                <tr>
-                                                    <th align="left">Notes: ${notes}</th>
-
-                                                </tr>
-
                                             </thead>
 
                                             <%--</c:otherwise>--%>
@@ -301,7 +296,7 @@
                                         </table>
 
                                     </div>
-
+                                    <div class="row" align="center"><b>Note:</b> ${notes}</div>
 
                                     <!--<input type="submit" value="Export To Pdf" class="btn btn-primary"/>-->
 

@@ -49,7 +49,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Company Monthly Report Detail:</h1>
+            <h1>COMPANY MONTHLY REPORT DETAIL</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Company Monthly Report Detail</li>
@@ -110,7 +110,7 @@
                                 </div><!-- /.row -->
                             </div><!-- /.box-body -->
                             <div class="form-group">
-                                 <div class=" col-sm-12">
+                                <div class=" col-sm-12">
                                     <center>
                                         <button type="submit" class="btn btn-primary" data-original-title="" title="" >Search</button><br><br>
                                     </center>
@@ -178,7 +178,7 @@
                                                                 <c:if test="${month eq 10}">October</c:if>
                                                                 <c:if test="${month eq 11}">November</c:if>
                                                                 <c:if test="${month eq 12}">December</c:if>
-                                                                 ${year}
+                                                                ${year}
                                                                 </font></b></center> 
                                                     </header>
                                                 </div>

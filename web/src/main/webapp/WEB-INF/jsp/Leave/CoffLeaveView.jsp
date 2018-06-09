@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Leave Type Edit</title>
+        <title>LEAVE TYPE EDIT</title>
     </head>
     <script>
         var flag3 = true;
@@ -67,7 +67,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>C-Off Master Edit </h1>
+            <h1>C-OFF MASTER EDIT </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Edit</li>

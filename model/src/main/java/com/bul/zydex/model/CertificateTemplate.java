@@ -10,6 +10,7 @@ public class CertificateTemplate  implements java.io.Serializable {
 
 
      private Integer id;
+     private Modules modules;
      private String certificateName;
      private String certificateType;
      private String certificateTitle;
@@ -18,7 +19,8 @@ public class CertificateTemplate  implements java.io.Serializable {
     public CertificateTemplate() {
     }
 
-    public CertificateTemplate(String certificateName, String certificateType,String certificateTitle,String certificateBody) {
+    public CertificateTemplate(Modules modules, String certificateName, String certificateType, String certificateTitle, String certificateBody) {
+       this.modules = modules;
        this.certificateName = certificateName;
        this.certificateType = certificateType;
        this.certificateTitle = certificateTitle;
@@ -31,6 +33,13 @@ public class CertificateTemplate  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+    public Modules getModules() {
+        return this.modules;
+    }
+    
+    public void setModules(Modules modules) {
+        this.modules = modules;
     }
     public String getCertificateName() {
         return this.certificateName;
@@ -46,8 +55,6 @@ public class CertificateTemplate  implements java.io.Serializable {
     public void setCertificateType(String certificateType) {
         this.certificateType = certificateType;
     }
-    
-   
     public String getCertificateTitle() {
         return this.certificateTitle;
     }
@@ -55,8 +62,7 @@ public class CertificateTemplate  implements java.io.Serializable {
     public void setCertificateTitle(String certificateTitle) {
         this.certificateTitle = certificateTitle;
     }
-    
-       public String getCertificateBody() {
+    public String getCertificateBody() {
         return this.certificateBody;
     }
     
@@ -68,5 +74,6 @@ public class CertificateTemplate  implements java.io.Serializable {
 
 
 }
+
 
 

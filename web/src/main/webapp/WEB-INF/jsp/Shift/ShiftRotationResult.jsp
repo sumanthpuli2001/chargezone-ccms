@@ -50,7 +50,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Shift Rotation Result: </h1>
+            <h1>SHIFT ROTATION RESULT </h1>
             <div style="float: right"></div>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>

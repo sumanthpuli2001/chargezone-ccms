@@ -18,7 +18,7 @@
             <div class="alert alert-info" role="alert">${successMessage}</div>
         </c:if>
         <section class="content-header">
-            <h1>My Kaizen List</h1>
+            <h1>My KAIZEN LIST</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">My Kaizen List</li>

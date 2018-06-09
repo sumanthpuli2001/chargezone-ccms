@@ -61,7 +61,7 @@
                                                     out.print("<div align=\"right\">Date:" + df.format(date) + "</div>");
                                                 %>
                                             <div class="form-group">
-                                                <center><b><font size="4">SPC Life Science</font></b></center> 
+                                                <center><b><font size="4">SPC Lifesciences</font></b></center> 
                                             </div>
                                             <!--                                                <header>
                                                                                                 <center><b><font size="4">Employee Salary Report <c:if test="${month eq 1}">January</c:if>

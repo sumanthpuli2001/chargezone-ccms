@@ -44,10 +44,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>All List Deduction DayWise:</h1>
+            <h1>ALL LIST DEDUCTION DAY WISE</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Deduction DayWise</li>
+                <li class="active">Deduction Day Wise</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">

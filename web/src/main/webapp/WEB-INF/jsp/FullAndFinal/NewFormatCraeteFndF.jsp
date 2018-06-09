@@ -15,7 +15,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Create Format Full And Final Settlement</h1>
+            <h1>CREATE FORMAT FULL AND FINAL SETTLEMENT</h1>
             <ol class="breadcrumb">
                 <li><a href="homeController.htm?act=openHomePage"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Create Format Full And Final Settlement</li>

@@ -77,7 +77,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Face To Face Invitation</h1>
+            <h1>FACE TO FACE INVITATION</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">F2F Invitation</li>

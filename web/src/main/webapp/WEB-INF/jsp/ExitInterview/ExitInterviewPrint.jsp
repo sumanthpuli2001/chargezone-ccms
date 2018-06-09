@@ -128,7 +128,7 @@
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
                                     <div class="box-header">
-                                        <h3 class="box-title">1)Please describe the primary reason(s) for leaving your current position with SPC Life Science.</h3>
+                                        <h3 class="box-title">1)Please describe the primary reason(s) for leaving your current position with SPC Lifesciences.</h3>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
                                         <div class="row">
@@ -146,7 +146,7 @@
                                     </div><!-- /.row -->
                                 </div><!-- /.box-body -->
                                 <div class="box-header">
-                                    <h3 class="box-title">2)Which of the below mentioned factors were you dissatisfied with, which triggered your thought of leaving SPC Life Science?</h3>
+                                    <h3 class="box-title">2)Which of the below mentioned factors were you dissatisfied with, which triggered your thought of leaving SPC Lifesciences?</h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body no-padding">
                                     <div class="row">
@@ -249,7 +249,7 @@
                                     </div><!-- /.row -->
                                 </div><!-- /.box-body -->
                                 <div class="box-header">
-                                    <h3 class="box-title">3)Please provide your candid feedback and rate the following aspects with reference to your job at SPC Life Science. (Please use the 1 – 5 scale below)</h3>
+                                    <h3 class="box-title">3)Please provide your candid feedback and rate the following aspects with reference to your job at SPC Lifesciences. (Please use the 1 – 5 scale below)</h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body no-padding">
                                     <div class="row">
@@ -474,7 +474,7 @@
 
                                     </div><!-- /.row -->
                                     <div class="box-header">
-                                        <h3 class="box-title">6)Which reason made you take decision to leave SPC Life Science?  Rate top 3 reasons from the following: (Rate 1,2 &3 only) 
+                                        <h3 class="box-title">6)Which reason made you take decision to leave SPC Lifesciences?  Rate top 3 reasons from the following: (Rate 1,2 &3 only) 
                                         </h3>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
@@ -526,7 +526,7 @@
                                         </div>
                                     </div><!-- /.row -->
                                     <div class="box-header">
-                                        <h3 class="box-title">7)Since when were you considering leaving SPC Life Science? What can be done to retain you? Please mention in brief.</h3>
+                                        <h3 class="box-title">7)Since when were you considering leaving SPC Lifesciences? What can be done to retain you? Please mention in brief.</h3>
                                     </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
                                         <div class="row">

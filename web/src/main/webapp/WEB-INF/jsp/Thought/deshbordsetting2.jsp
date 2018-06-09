@@ -30,7 +30,7 @@
     </head>
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>Homepage Setting</h1>
+            <h1>HOMEPAGE SETTING</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Homepage</a></li><li>Setting</li>
                 <li class="active">Homepage Setting</li>

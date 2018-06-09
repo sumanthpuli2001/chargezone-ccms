@@ -17,7 +17,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Create New Tax Rate:</h1>
+            <h1>CREATE NEW TAX RATE:</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Create New Tax Rate</li>

@@ -52,7 +52,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Subordinate Punch Data: </h1>
+            <h1>SUBORDINATE PUNCH DATA </h1>
 
         </section>
         <c:if test="${!empty successMessage}">

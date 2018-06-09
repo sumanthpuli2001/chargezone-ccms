@@ -128,7 +128,8 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
                 + " From EmployeeMaster a,"
                 + " PayrollFinancialYear b"
                 + " Where a.zydexLocationMaster.id = b.zydexLocationMaster.id "
-                + " and 1=1 " + condition;
+                + " and 1=1 " + condition
+                + " and a.employeeId != 'admin' ";
 
         return getHibernateTemplate().find(query);
     }

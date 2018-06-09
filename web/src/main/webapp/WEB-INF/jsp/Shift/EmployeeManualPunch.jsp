@@ -44,7 +44,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Employee Manual Punch: </h1>
+            <h1>EMPLOYEE MANUAL PUNCH </h1>
 
         </section>
         <c:if test="${!empty successMessage}">

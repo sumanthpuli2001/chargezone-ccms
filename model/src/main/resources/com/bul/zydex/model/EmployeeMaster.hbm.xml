@@ -263,6 +263,9 @@
         <property name="ctcTotal" type="java.lang.Double">
             <column name="ctc_total" precision="22" scale="0" />
         </property>
+        <property name="confirmationDate" type="string">
+            <column name="confirmation_date" />
+        </property>
            
         <set name="employeeDatetimeDatas" inverse="true">
             <key>

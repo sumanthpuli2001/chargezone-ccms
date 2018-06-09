@@ -44,7 +44,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Employee Advance Search: </h1>
+            <h1>EMPLOYEE MASTER REPORT </h1>
 
         </section>
         <c:if test="${!empty successMessage}">
@@ -95,7 +95,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+<!--                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Searching Criteria:</label>
                                                         <select name="vallist" name="vallist" class="form-control" onchange="selectDropsDown11(this.value);">
@@ -103,7 +103,7 @@
                                                             <option value="other">Other</option>
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                             </div>
                                         </div>
 
@@ -111,12 +111,12 @@
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
 
-                                                <div class="form-group">
+<!--                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Start Date<span style="color : red;font-size:12px;"></span></label>
                                                         <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="dojStartDate" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" ></form:input>
+                                                            <input class="form-control" size="16" type="text" value="" readonly>
+                                                        <%--<form:input path="dojStartDate" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" ></form:input>--%>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                         </div>
@@ -124,13 +124,13 @@
                                                     <div class="col-sm-6">
                                                         <label>End Date<span style="color:red;font-size:12px;"></span></label>
                                                         <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="dojEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" ></form:input>
+                                                            <input class="form-control" size="16" type="text" value="" readonly>
+                                                        <%--<form:input path="dojEndDate"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" ></form:input>--%>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                                 <div class="form-group">
                                                     <div class="col-sm-6" id="employeeName">
                                                         <label>Employee Name:</label>

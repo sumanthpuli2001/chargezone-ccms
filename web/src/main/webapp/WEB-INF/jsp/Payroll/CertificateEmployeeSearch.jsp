@@ -14,13 +14,13 @@
     <head>
         <title> Employee Search</title>
     </head>
-<script>
-          function viewClick(id) {
-             
-            window.location = "certificateTemplate.htm?act=ViewIndiviualFormCertificate&id="+id;
-   
+    <script>
+        function viewClick(id) {
+
+            window.location = "certificateTemplate.htm?act=ViewIndiviualFormCertificate&id=" + id;
+
         }
-        </script>
+    </script>
     <script>
 
         function saveSubmit11() {
@@ -121,7 +121,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                          
+
                                         </div>
                                     </div><!-- /.col -->
                                 </div><!-- /.row -->
@@ -142,70 +142,71 @@
         <form:form action="" method="post" commandName="certificateTemplate"
                    name='form2'  class="form-horizontal" role="form">
             <c:if test="${search ne 'none'}">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Custom Tabs -->
-                        <div class="nav-tabs-custom">
-                            <div class="tab-content">
-<!--                                <div class="box-header" style="text-align: right;">
-                                    <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="window.location = 'leaveEmployeeDetail.htm?act=exportToExcelForLeaveRequest'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
-                                </div>-->
-                                <div class="box-body no-padding">
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="table table-bordered">
-                                                <table id="" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                    <c:choose>
-                                                        <c:when test="${empty employeelist}">
-                                                            <tr>
-                                                                <td align="center">
-                                                                    <c:out value="There is no record found."></c:out>
-                                                                    </td>
-                                                                </tr>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <thead>
+                <section class="content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Custom Tabs -->
+                            <div class="nav-tabs-custom">
+                                <div class="tab-content">
+                                    <!--                                <div class="box-header" style="text-align: right;">
+                                                                        <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="window.location = 'leaveEmployeeDetail.htm?act=exportToExcelForLeaveRequest'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
+                                                                    </div>-->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="table table-bordered">
+                                                    <table id="" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                        <c:choose>
+                                                            <c:when test="${empty employeelist}">
                                                                 <tr>
-                                                                    <th>Employee Id</th>
-                                                                    <th>Employee Name</th>
-                                                                    <th>Action</th>
-                                                                    
-                                                                    <th style="display: none;"></th>
+                                                                    <td align="center">
+                                                                        <c:out value="There is no record found."></c:out>
+                                                                        </td>
+                                                                    </tr>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Employee Id</th>
+                                                                        <th>Employee Name</th>
+                                                                        <th>Action</th>
 
-                                                                </tr>
-                                                            </thead>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <tbody>
-                                                    <input style="display: none;" type="Text" name="employeeListLength"  value="${fn:length(employeelist)}"/>
+                                                                        <th style="display: none;"></th>
 
-                                                    <c:forEach var="list" items="${employeelist}" varStatus="status">
-                                                        <tr>
-                                                            <td>${list[0]}</td>
-                                                            <td>${list[1]}</td>
-                                                             <td>  <button type="button" onclick="viewClick('${list[0]}');" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;View
-                                                                        </button>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <c:if test="${!empty employeelist}">
-                                                
-                                            </c:if>
+                                                                    </tr>
+                                                                </thead>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <tbody>
+                                                        <input style="display: none;" type="Text" name="employeeListLength"  value="${fn:length(employeelist)}"/>
 
-                                        </div><!-- /.col -->
-                                    </div><!-- /.row -->
-                                </div><!-- /.box-body -->
-                            </div><!-- /.tab-content -->
-                        </div><!-- nav-tabs-custom -->
+                                                        <c:forEach var="list" items="${employeelist}" varStatus="status">
+                                                            <tr>
+                                                                <td>${list[0]}</td>
+                                                                <td>${list[1]}</td>
+                                                                <td>  <button type="button" onclick="viewClick('${list[0]}');" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        &nbsp;&nbsp;View
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <c:if test="${!empty employeelist}">
 
-                    </div>
-                </div><!-- /.col -->
-            </section>
-        </c:if>
+                                                </c:if>
+
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.tab-content -->
+                            </div><!-- nav-tabs-custom -->
+
+                        </div>
+                    </div><!-- /.col -->
+                </section>
+            </c:if>
         </form:form>
     </div>
     <script>

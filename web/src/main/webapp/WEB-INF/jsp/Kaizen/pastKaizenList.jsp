@@ -58,9 +58,9 @@
                                                         <tbody>
                                                             <c:forEach  var="list1" items="${list}">
                                                                 <tr>
-<!--                                                                    <td align="Center">
-                                                                        <input type="checkbox" name="checkId" id="checkId" value="${list[0]}">
-                                                                    </td>-->
+                                                                    <!--                                                                    <td align="Center">
+                                                                                                                                            <input type="checkbox" name="checkId" id="checkId" value="${list[0]}">
+                                                                                                                                        </td>-->
                                                                     <td>${list1[1]}</td>
                                                                     <td>${list1[2]}</td>
                                                                     <td>${list1[3]}</td>
@@ -70,6 +70,12 @@
                                                                     <td>${list1[9]}</td>
                                                                     <td>${list1[7]}</td>
                                                                     <c:if test="${list1[8] eq 5}"><td><span class="label label-success">Final Approved</span></td></c:if>
+                                                                    <c:if test="${list1[8] eq 0}"><td><span class="badge">Pending</span></td></c:if>
+                                                                    <c:if test="${list1[8] eq 2 }"><td><span class="label label-warning">Recycled</span></td></c:if>
+                                                                    <c:if test="${list1[8] eq 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
+                                                                    <%--<c:if test="${list1[2] == 5}"><td><span class="label label-success">Final Approved</span></td></c:if>--%>
+                                                                    <c:if test="${list1[8] eq 4}"><td><span class="label label-success">Approved</span></td></c:if>
+                                                                    <c:if test="${list1[8] eq 1}"><td><span class="label label-success">Approved</span></td></c:if>
                                                                         <td>
                                                                             <div class="btn-group">
                                                                                 <button type="button" onclick="viewClick(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
@@ -100,7 +106,7 @@
         function viewClick(id) {
             window.location = 'kaizen.htm?act=viewKaizen&id=' + id;
         }
-       
+
 
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

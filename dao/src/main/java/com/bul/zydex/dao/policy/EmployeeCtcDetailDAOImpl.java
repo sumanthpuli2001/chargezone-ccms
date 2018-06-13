@@ -154,6 +154,17 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
         s.close();
 //        List<?> list = getHibernateTemplate().find(query);
         return list;
-        
+
+    }
+
+    @Override
+    public List<?> bonusFetch(int employeeid) {
+        String query = "SELECT a.id, a.amount, a.month, a.year"
+                + " FROM EmployeeCtcDetailSalary a "
+                + " WHERE a.employeeMaster=" + employeeid
+                + " AND a.ctcAllowance = 2";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
     }
 }

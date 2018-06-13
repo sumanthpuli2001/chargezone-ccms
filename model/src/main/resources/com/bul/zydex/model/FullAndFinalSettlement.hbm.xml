@@ -34,6 +34,21 @@
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
+        <property name="recoveryDays" type="java.lang.Integer">
+            <column name="recovery_dy" />
+        </property>
+        <property name="noticePeriodRecovery" type="java.lang.Integer">
+            <column name="notice_period_recovery" />
+        </property>
+        <property name="shoesDeduction" type="java.lang.Integer">
+            <column name="shoes_deduction" />
+        </property>
+        <property name="uniformDeduction" type="java.lang.Integer">
+            <column name="uniform_deduction" />
+        </property>
+        <property name="otherDeduction" type="java.lang.Integer">
+            <column name="other_deduction" />
+        </property>
     </class>
   
 

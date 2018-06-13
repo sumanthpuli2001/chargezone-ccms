@@ -217,4 +217,9 @@ public class EmployeeSalaryProcessServiceImpl<T> extends GenericsServiceImpl<T> 
         return employeeSalaryProcessDAO.readEmployeeForSlip1(object);
     }
 
+    @Override
+    public List<?> monthDaysFetch(int EmpId) {
+        return employeeSalaryProcessDAO.monthDaysFetch(EmpId);
+
+    }
 }

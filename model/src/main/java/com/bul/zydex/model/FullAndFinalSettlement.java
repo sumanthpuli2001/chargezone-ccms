@@ -20,9 +20,14 @@ public class FullAndFinalSettlement {
     private String updateDate;
     private Integer updatedBy;
     private Integer status;
+    private Integer recoveryDays;
+    private Integer noticePeriodRecovery;
+    private Integer shoesDeduction;
+    private Integer uniformDeduction;
+    private Integer otherDeduction;
 
-    public FullAndFinalSettlement(){
-        
+    public FullAndFinalSettlement() {
+
     }
 
     public FullAndFinalSettlement(Integer id, EmployeeMaster employeeMaster, Integer noticePeriod, Integer givenNotice, String createdDate, Integer createdBy, String updateDate, Integer updatedBy, Integer status) {
@@ -108,8 +113,47 @@ public class FullAndFinalSettlement {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    public Integer getRecoveryDays() {
+        return recoveryDays;
+    }
+
+    public void setRecoveryDays(Integer recoveryDays) {
+        this.recoveryDays = recoveryDays;
+    }
+
+    public Integer getNoticePeriodRecovery() {
+        return noticePeriodRecovery;
+    }
+
+    public void setNoticePeriodRecovery(Integer noticePeriodRecovery) {
+        this.noticePeriodRecovery = noticePeriodRecovery;
+    }
+    
+    public Integer getShoesDeduction() {
+        return shoesDeduction;
+    }
+
+    public void setShoesDeduction(Integer shoesDeduction) {
+        this.shoesDeduction = shoesDeduction;
+    }
+
+    public Integer getUniformDeduction() {
+        return uniformDeduction;
+    }
+
+    public void setUniformDeduction(Integer uniformDeduction) {
+        this.uniformDeduction = uniformDeduction;
+    }
+
+    public Integer getOtherDeduction() {
+        return otherDeduction;
+    }
+
+    public void setOtherDeduction(Integer otherDeduction) {
+        this.otherDeduction = otherDeduction;
+    }
+    
     
 
-
-   
 }

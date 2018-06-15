@@ -975,4 +975,16 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> monthDaysFetch(int EmpId) {
+             String query = "";
+
+        query += " Select a.id, a.presentDays, a.month, a.year, a.workingDays"
+                + " From EmployeeExcelRecord a"
+                + " left join a.employeeSalaryProcess b"
+                + " where b.employeeMaster =" + EmpId;
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

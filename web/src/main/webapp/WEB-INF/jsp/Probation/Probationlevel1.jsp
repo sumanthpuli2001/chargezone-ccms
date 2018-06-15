@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
+        <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
         <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Probation To Confirmation</title>
@@ -95,11 +95,26 @@
             }
         </script>
     </head>
+    <style>
+        table, th, th {
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+        th, th {
+            padding: 15px;
+        }
+        td{
+            border: 1px solid black;
+            border-collapse: collapse;
+
+        }
+
+    </style>
     <body>
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
-                <h1>Probation To Confirmation Form : </h1>
+                <h1>PROBATION TO CONFIRMATION FORM  </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li class="active">Probation To Confirmation</li>
@@ -249,20 +264,155 @@
                                         </div>
                                         <div class="box box-info collapsed-box">
                                             <div class="box-header">
-                                                <h3 class="box-title">Performance Rating:</h3><span style="color: red;font-size: 12px;">*</span>
+                                                <h3 class="box-title">3 C  Behaviours (Each 3C carries 10 Marks i.e. 30 Marks Total)</h3><span style="color: red;font-size: 12px;">*</span>
                                                 <div class="box-tools pull-right">
                                                     <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                                     <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
                                                 </div>
                                             </div><!-- /.box-header -->
+
                                             <div class="box-body no-padding">
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12">
                                                         <div class="form-group">
-                                                            <div class="col-md-3 col-sm-3"></div>
-                                                            <fieldset id="performanceRating">
-                                                                <!--<label class="col-sm-3 control-label">Name of the Joiner:</label>-->
-                                                                <div class="col-sm-10 " >
+                                                            <div class="col-md-3 col-sm-3">
+                                                            </div>
+                                                            <div class="table" style="margin-left: 2%;">
+                                                                <table style="width:95%; ">
+                                                                    <tr >
+                                                                        <th colspan="8" style="text-align: center">Behaviours</th>
+                                                                        <th colspan="2" style="text-align: center">Satisfactory</th>
+                                                                        <th colspan="2" style="text-align: center">Not-Satisfactory</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th colspan="8">C 1: Concentration</th>
+                                                                        <th colspan="2" rowspan="7"><form:radiobutton path="concentration" name="concentration" value="1" required="" /> Yes</th>
+                                                                    <th colspan="2" rowspan="7"><form:radiobutton path="concentration" name="concentration"  value="0" required="" /> No</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  colspan="8">Concentration on the work</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  colspan="8">Attention in detailing of work</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  colspan="8">targeting the highest standard of excellence</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  colspan="8">doing better than yesterday</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  colspan="8">Respect every employee</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  colspan="8">concentrtaion on performance achievement and individual development</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">C 2: Consistency</th>
+                                                                    <th colspan="2" rowspan="3"><form:radiobutton path="consistency" name="consistency"  value="1"  /> Yes
+                                                                    <th colspan="2" rowspan="3"><form:radiobutton path="consistency" name="consistency"  value="0" required="" /> No
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Consistency in building system and for organizations betterment</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">to maintain consistency in respect with organization's future, mission and vision, safety and security of employees</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">C 3: Cooperation</th>
+                                                                    <th colspan="2" rowspan="3"><form:radiobutton path="cooperation" name="cooperation"  value="1" required="" /> Yes
+                                                                    <th colspan="2" rowspan="3"><form:radiobutton path="cooperation" name="cooperation"  value="0" required="" /> No
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Conduct of the highest ethical standard, intellectual , financial and moral . </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Conduct which builds and maintains teamwork</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="12" style="text-align: center;">Job Knowledge & Working Standards</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">1. Job Knowledge</th>
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="knowledge" name="knowledge"  value="1" required="" /> Yes
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="knowledge" name="knowledge"  value="0" required="" /> No
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Knowledge to perform the task</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">2. Discipline</th>
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="discipline" name="discipline"  value="1" required="" /> Yes
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="discipline" name="discipline"  value="0" required="" /> No
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Way of thinking, belief or opinion of approval and disapproval towards the organization decision and action. The way in which one acts or conducts oneself, especially towards others, respects for others, Eagerness to help others.</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">3. Leadership Quality</th>
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="leadership" name="leadership"  value="1" required="" /> Yes
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="leadership" name="leadership"  value="0" required="" /> No
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Deliver result on time, build relationship & develop others & possess good decision making skills</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">4. Communication </th>
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="communication" name="communication"  value="1" required="" /> Yes
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="communication" name="communication"  value="0" required="" /> No
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Express ideas and concerns clearly Proficient and confident in presentation Flexible and effective writing skills </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">5. 5S and Safety Norms </th>
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="safety" name="safety"  value="1" required="" /> Yes
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="safety" name="safety"  value="0" required="" /> No
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Cleanliness of own self, work premises, retrieval of data, safe working practice, safety knowledge</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">6. Team Work </th>
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="team" name="team"  value="1" required="" /> Yes
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="team" name="team"  value="0" required="" /> No
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">The extent to which the employee successfully collaborates with others to accomplish departmental and Organizational goals. Target achieved through team work.</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">7. Integrity/Ethics </th>
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="integrity" name="integrity"  value="1" required="" /> Yes
+                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="integrity" name="integrity"  value="0" required="" /> No
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Practices excellent work ethics. Properly handles confidential information. Avoids situations and actions considered inappropriate or which present a conflict of interest. Demonstrates integrity in all work. Has a strong sense of right and wrong and consistently strives to do what is right.</td>
+                                                                </tr>
+
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Performance Rating:</h3><span style="color: red;font-size: 12px;">*</span>
+                                            <div class="box-tools pull-right">
+                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-md-3 col-sm-3"></div>
+                                                        <fieldset id="performanceRating">
+                                                            <!--<label class="col-sm-3 control-label">Name of the Joiner:</label>-->
+                                                            <div class="col-sm-10 " >
                                                                 <c:if test="${ptc.performanceRating eq 'Excellent'}">
                                                                     <input type="radio" name="performanceRating" id="Excellent" value="Excellent" checked style="width: 15px;height: 15px" > Excellent
                                                                     <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
@@ -428,6 +578,51 @@
                     }
                 });
             });</script>
+        <script>
+
+            $(document).ready(function () {
+                var concentration = $('input:radio[name=concentration]');
+                if (concentration.is(':checked') === false) {
+                    concentration.filter('[value=1]').attr('checked', true);
+                }
+                var consistency = $('input:radio[name=consistency]');
+                if (consistency.is(':checked') === false) {
+                    consistency.filter('[value=1]').attr('checked', true);
+                }
+                var cooperation = $('input:radio[name=cooperation]');
+                if (cooperation.is(':checked') === false) {
+                    cooperation.filter('[value=1]').attr('checked', true);
+                }
+                var knowledge = $('input:radio[name=knowledge]');
+                if (knowledge.is(':checked') === false) {
+                    knowledge.filter('[value=1]').attr('checked', true);
+                }
+                var discipline = $('input:radio[name=discipline]');
+                if (discipline.is(':checked') === false) {
+                    discipline.filter('[value=1]').attr('checked', true);
+                }
+                var leadership = $('input:radio[name=leadership]');
+                if (leadership.is(':checked') === false) {
+                    leadership.filter('[value=1]').attr('checked', true);
+                }
+                var communication = $('input:radio[name=communication]');
+                if (communication.is(':checked') === false) {
+                    communication.filter('[value=1]').attr('checked', true);
+                }
+                var safety = $('input:radio[name=safety]');
+                if (safety.is(':checked') === false) {
+                    safety.filter('[value=1]').attr('checked', true);
+                }
+                var team = $('input:radio[name=team]');
+                if (team.is(':checked') === false) {
+                    team.filter('[value=1]').attr('checked', true);
+                }
+                var integrity = $('input:radio[name=integrity]');
+                if (integrity.is(':checked') === false) {
+                    integrity.filter('[value=1]').attr('checked', true);
+                }
+            });
+        </script>
         <!--         <script type="text/javascript">
                 $('.form_datetime').datetimepicker({
                     weekStart: 1,

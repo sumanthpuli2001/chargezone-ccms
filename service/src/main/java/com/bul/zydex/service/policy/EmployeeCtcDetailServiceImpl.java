@@ -72,4 +72,9 @@ public class EmployeeCtcDetailServiceImpl<T> extends GenericsServiceImpl<T> impl
         return employeeCtcDetailDAO.GratuietyFiveYrFetch(employeeid);
     }
 
+    @Override
+    public List<?> bonusFetch(int employeeid) {
+          return employeeCtcDetailDAO.bonusFetch(employeeid);
+    }
+
 }

@@ -92,7 +92,7 @@ public class KaizenMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Kaizen
 //                      6                   7               8           9
                 + "a.problemDescription,a.compiletionDate,a.status ,em.employeeName"
                 + " From KaizenMaster a , EmployeeMaster em "
-                + " Where a.status = 5  AND a.createdBy = em.id";
+                + " Where a.createdBy = em.id";
                
         List<?> list = getHibernateTemplate().find(query);
         return list;

@@ -90,4 +90,6 @@ public interface EmployeeSalaryProcessService<T> extends GenericsService<T> {
     public List<?> readEmployeeGrossTotalTaxable(int EmpId, String startDate, String endate);
 
     public List<?> readEmpId(int EmpId);
+
+    public List<?> monthDaysFetch(int EmpId);
 }

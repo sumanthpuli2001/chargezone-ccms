@@ -89,4 +89,9 @@ public class EmployeeDeductionAmountServiceImpl<T> extends GenericsServiceImpl<T
         return employeeDeductionAmountDAO.readEmployeeTdsAmount(employeeMasterID, startDate, endate);
     }
 
+    @Override
+    public List<?> fetchsalary(int edaId, String eftDate, String relivDate) {
+          return employeeDeductionAmountDAO.fetchsalary(edaId, eftDate, relivDate);
+    }
+
 }

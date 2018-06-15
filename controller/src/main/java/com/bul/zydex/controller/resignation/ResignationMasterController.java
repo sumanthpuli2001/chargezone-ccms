@@ -1292,11 +1292,14 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         List<?> esp = employeeSalaryProcessService.readEmpId(rm.getEmployeeMaster().getId());
         List<?> ctcDetail = employeeCtcDetailService.empid(fullAndFinalSettlement.getEmployeeMaster().getId());
         List<?> Gratuiety = employeeCtcDetailService.GratuietyFiveYrFetch(fullAndFinalSettlement.getEmployeeMaster().getId());
+        List<?> daysfetch = employeeSalaryProcessService.monthDaysFetch(rm.getEmployeeMaster().getId());
+        List<?> bonusFetchdata = employeeCtcDetailService.bonusFetch(rm.getEmployeeMaster().getId());
 //        List<?> ctcDetail1 = employeeCtcDetailService.CtcDetailempid(fullAndFinalSettlement.getEmployeeMaster().getId());
         List<?> fNfList = formateFullNdFinalLetterService.fetchFnFDate();
 //        EmployeeCtcDetail ecd = (EmployeeCtcDetail) ctcDetail1.get(0);
 //        EmployeeSalaryProcess em = (EmployeeSalaryProcess) esp.get(0);
         List<?> list = employeeDeductionAmountService.readByedaId(rm.getEmployeeMaster().getId(), rm.getEffectiveDatetime(), rm.getRelievingDate());
+        List<?> salary = employeeDeductionAmountService.fetchsalary(rm.getEmployeeMaster().getId(), rm.getEffectiveDatetime(), rm.getRelievingDate());
         Double netPayable = 0.00;
         Double totalMonthlyAmount2 = 0.00;
         Double totalMonthlyAmount3 = 0.00;
@@ -1305,7 +1308,11 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         Double totalMonthlyAmount6 = 0.00;
         Double deductionAmount = 0.00;
         Double mmmm = 0.00;
+        Double salaryamount = 0.00;
         Double Gratuietycal = 0.00;
+        Double bounsdata = 0.0;
+        Float leavedaysfetch = 0.0F;
+        Float workingDays = 0.0F;
 
         for (int i = 0; i < ctcDetail.size(); i++) {
             Object[] o = (Object[]) ctcDetail.get(i);
@@ -1342,6 +1349,37 @@ public class ResignationMasterController extends ResignationMasterAbstract {
             Double reafmowise1 = (Double) o[2];
             Gratuietycal += Double.valueOf(reafmowise1);
         }
+        for (int i = 0; i < bonusFetchdata.size(); i++) {
+            Object[] o = (Object[]) bonusFetchdata.get(i);
+            Double bonusfm = (Double) o[1];
+            bounsdata += Double.valueOf(bonusfm);
+        }
+        
+//        ////  leaves count /////////////////
+        for (int i = 0; i < daysfetch.size(); i++) {
+            Object[] o = (Object[]) daysfetch.get(i);
+            Float leavecount = (Float) o[1];
+            leavedaysfetch += Float.valueOf(leavecount);
+        }
+        for (int i = 0; i < daysfetch.size(); i++) {
+            Object[] o = (Object[]) daysfetch.get(i);
+            Float workingdy = (Float) o[4];
+            workingDays += Float.valueOf(workingdy);
+        }
+        
+        /////////  leaves pays amount count //////////
+        
+        for (int i = 0; i < salary.size(); i++) {
+            Object[] o = (Object[]) salary.get(i);
+            Double workingdy = (Double) o[7];
+            salaryamount += Double.valueOf(workingdy);
+        }
+        
+        Double amountCount = salaryamount / 30;
+        
+        Float leavedayscount = workingDays - leavedaysfetch;
+        
+        Double totalLyamountCount = amountCount * leavedayscount;
 
 //       ///// --------   For Salary For The Month of -------//////
 //        for (int i = 0; i < esp.size(); i++) {
@@ -1361,6 +1399,14 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         Double totalpayable = mmmm + monthAmountTotal;
 //        ------  TOTAL NET PAYABLE ( A - B ) -----  ///////
         Double finaltotalBD = totalpayable - deductionAmount;
+        
+//        ------------  Deduction Amount ------------
+        Integer shoesDeduction =  fullAndFinalSettlement.getShoesDeduction();
+        Integer uniformDeduction =  fullAndFinalSettlement.getUniformDeduction();
+        Integer otherDeduction =  fullAndFinalSettlement.getOtherDeduction();
+        Integer noticePeriodRecovery =  fullAndFinalSettlement.getNoticePeriodRecovery();
+        
+        Integer totaldeduction = noticePeriodRecovery + shoesDeduction + uniformDeduction + otherDeduction;
 
         int designation = employeeMaster.getDesignationMaster().getId();
         designationMaster = designationMasterService.readById(designation);
@@ -1376,12 +1422,20 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.getModelMap().put("ListBW", ListBW);
         mv.getModelMap().put("ctcDetail", ctcDetail);
         mv.getModelMap().put("list", list);
+        mv.getModelMap().put("daysfetch", daysfetch);
+        mv.getModelMap().put("bonusFetch", bonusFetchdata);
+        mv.getModelMap().put("salary", salary);
         mv.getModelMap().put("totalpayable", totalpayable);
         mv.getModelMap().put("deductionAmount", deductionAmount);
         mv.getModelMap().put("finaltotalBD", finaltotalBD);
         mv.getModelMap().put("fNfList", fNfList);
         mv.getModelMap().put("Gratuiety", Gratuiety);
         mv.getModelMap().put("esp", esp);
+        mv.getModelMap().put("bounsdata", bounsdata);
+        mv.getModelMap().put("leavedaysfetch", leavedaysfetch);
+        mv.getModelMap().put("leavedayscount", leavedayscount);
+        mv.getModelMap().put("totaldeduction", totaldeduction);
+        mv.getModelMap().put("totalLyamountCount", totalLyamountCount);
         mv.getModelMap().put("totalMonthlyAmount2", totalMonthlyAmount2);
         mv.getModelMap().put("totalMonthlyAmount3", totalMonthlyAmount3);
         mv.getModelMap().put("totalMonthlyAmount4", totalMonthlyAmount4);

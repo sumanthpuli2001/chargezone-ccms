@@ -31,4 +31,6 @@ public interface EmployeeCtcDetailDAO<T> extends GenericsDAO<T> {
     public List<?> CtcDetailempidMasterSalary(int employeeid,int ctcAllowanceId);
     
     public List<?> GratuietyFiveYrFetch(int employeeid);
+    
+    public List<?> bonusFetch(int employeeid);
 }

@@ -105,7 +105,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Location:</label>
-                                                            <select id="locationDropDown" class="form-control">
+                                                            <select id="locationDropDown" name="locationDropDown" class="form-control">
                                                                 <option value="" label="-- Select --"/>
                                                             </select>
                                                         </div>

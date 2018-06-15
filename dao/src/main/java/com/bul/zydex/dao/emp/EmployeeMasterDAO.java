@@ -7,6 +7,8 @@ package com.bul.zydex.dao.emp;
 
 import com.bul.zydex.dao.GenericsDAO;
 import com.bul.zydex.model.EmployeeAdvanceSearch;
+import com.bul.zydex.model.EmployeeInformation;
+import com.bul.zydex.model.EmployeeMaster;
 import java.util.List;
 
 /**
@@ -175,4 +177,6 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readEmpLastMnth(String month, Integer year);
 
     public List<?> getGenderDetails();
+    
+    public List<?> getEmployeeDetails(EmployeeInformation employeeInformation);
 }

@@ -45,13 +45,16 @@ public class TaxSavingSubmitController extends TaxSavingSubmitAbstract {
     public ModelAndView searchFormEmployeeFilledSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
-
+        
         String Financial_year = request.getParameter("fnyear");
+        if(Financial_year.equals("") && Financial_year.isEmpty()){
+            request.setAttribute("faliureMessage",
+                    "Error : Please Select Financial Year first.");
+        } else{
         
-        List<?> list = taxSavingSubmitService.readTaxSavingSubmitForEmployee(employeeMaster,Financial_year);
-        
-        request.setAttribute("employeelist", list);   
-
+            List<?> list = taxSavingSubmitService.readTaxSavingSubmitForEmployee(employeeMaster,Financial_year);
+            request.setAttribute("employeelist", list);   
+        }
         mv = viewFilledForms(request, response);
         return mv;
     }

@@ -33,7 +33,7 @@ public abstract class HomeAbstract extends CustomAbstract {
     protected CorporateVideoService<CorporateVideo> corporateVideoService;
     protected RAndRService<RAndR> rAndRService;
     protected KaizenMasterService<KaizenMaster> kaizenMasterService;
-
+    
     public LevelMasterService<LevelMaster> getLevelMasterService() {
         return levelMasterService;
     }

@@ -92,7 +92,7 @@ public class VacancyController extends VacancyAbstract {
             CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
 
             mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-            mv.setViewName("Vacancy/applyJobCandidateRegistration");
+            mv.setViewName("Vacancy/MyProfile");
         }
         return mv;
     }

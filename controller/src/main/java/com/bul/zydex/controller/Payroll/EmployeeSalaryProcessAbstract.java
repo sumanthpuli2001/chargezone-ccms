@@ -133,8 +133,11 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected PayrollPfRecordService<PayrollPfRecord> payrollPfRecordService;
     protected RetirementAgeService<RetirementAge> retirementAgeService;
 
+    
     Validator employeeSalaryProcessValidator;
 
+    
+    
     public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
         return employeeShiftDataService;
     }

@@ -949,7 +949,12 @@
                 <a href="homeController.htm?act=report">
                     <i class="fa fa-archive fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Report</span>
                 </a>
-            </li> 
+            </li>
+            <li>
+                <a href="homeController.htm?act=redirectToAllReports" style="background: #fff;">
+                     <i class="fa fa-book fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Employee Detailed Information</span>
+                </a>
+            </li>
             <li>
                 <a href="#" style="background: #fff;">
                     <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
@@ -967,6 +972,7 @@
                         </c:if>
                 </ul>
             </li>
+            
             </ul>
 
         </section>

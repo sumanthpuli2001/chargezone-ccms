@@ -5212,12 +5212,16 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     employeeInfoList.add("");
                     employeeInfoList.add("PR");
                     Date empEndDate = sdf3.parse(empEndTime1[1]);
-                    Date shiftEndDate = sdf3.parse(shiftEndTime);
-                    if (empEndDate.before(shiftEndDate)) {
-                        employeeInfoList.add("AB");
-                    } else {
-                        employeeInfoList.add("PR");
-                        presentCounter++;
+                    Date shiftEndDate = null;
+                    if(!shiftEndTime.isEmpty() && !shiftEndTime.equals(""))
+                    {
+                        shiftEndDate = sdf3.parse(shiftEndTime);
+                        if (empEndDate.before(shiftEndDate)) {
+                            employeeInfoList.add("AB");
+                        } else {
+                            employeeInfoList.add("PR");
+                            presentCounter++;
+                        }
                     }
                 }
                 if (listPunch.size() == 3) {

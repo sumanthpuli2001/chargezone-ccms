@@ -6,6 +6,8 @@
 package com.bul.zydex.service.emp;
 
 import com.bul.zydex.model.EmployeeAdvanceSearch;
+import com.bul.zydex.model.EmployeeInformation;
+import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -173,5 +175,7 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List<?> readEmpLastMnth(String month, Integer year);
 
     public List<?> getGenderDetails();
+
+    public List<?> getEmployeeDetails(EmployeeInformation employeeInformation);
 
 }

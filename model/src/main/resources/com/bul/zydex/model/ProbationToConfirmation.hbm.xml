@@ -86,5 +86,35 @@
         <property name="hrAdditionalRemark" type="string">
             <column name="hr_additional_remark" length="16777215" />
         </property>
+        <property name="concentration" type="java.lang.Boolean">
+            <column name="concentration" />
+        </property>
+        <property name="consistency" type="java.lang.Boolean">
+            <column name="consistency" />
+        </property>
+        <property name="cooperation" type="java.lang.Boolean">
+            <column name="cooperation" />
+        </property>
+        <property name="knowledge" type="java.lang.Boolean">
+            <column name="knowledge" />
+        </property>
+        <property name="discipline" type="java.lang.Boolean">
+            <column name="discipline" />
+        </property>
+        <property name="leadership" type="java.lang.Boolean">
+            <column name="leadership" />
+        </property>
+        <property name="communication" type="java.lang.Boolean">
+            <column name="communication" />
+        </property>
+        <property name="safety" type="java.lang.Boolean">
+            <column name="safety" />
+        </property>
+        <property name="team" type="java.lang.Boolean">
+            <column name="team" />
+        </property>
+        <property name="integrity" type="java.lang.Boolean">
+            <column name="integrity" />
+        </property>
     </class>
 </hibernate-mapping>

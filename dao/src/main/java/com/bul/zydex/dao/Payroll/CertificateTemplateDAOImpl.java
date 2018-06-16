@@ -42,7 +42,8 @@ public class CertificateTemplateDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         query += "Select a.employeeId, a.employeeName "
                 + " From EmployeeMaster a "
-                + " Where 1=1 " + condition;
+                + " Where 1=1 " + condition
+                + " And a.employeeId != 'admin' ";
 
         return getHibernateTemplate().find(query);
     }

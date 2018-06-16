@@ -295,6 +295,16 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     ptc1.setJobHandled(ptc.getJobHandled());
                     ptc1.setPerformanceRating(ptc.getPerformanceRating());
                     ptc1.setRecommendationSelect(ptc.getRecommendationSelect());
+                    ptc1.setConcentration(ptc.getConcentration());
+                    ptc1.setConsistency(ptc.getConsistency());
+                    ptc1.setCooperation(ptc.getCooperation());
+                    ptc1.setKnowledge(ptc.getKnowledge());
+                    ptc1.setDiscipline(ptc.getDiscipline());
+                    ptc1.setLeadership(ptc.getLeadership());
+                    ptc1.setCommunication(ptc.getCommunication());
+                    ptc1.setSafety(ptc.getSafety());
+                    ptc1.setTeam(ptc.getTeam());
+                    ptc1.setIntegrity(ptc.getIntegrity());
                     if (ptc.getRecommendationSelect().equals("No")) {
                         ptc1.setRecommendationRemark(ptc.getRecommendationRemark());
                     } else if (ptc.getRecommendationSelect().equals("Extend")) {

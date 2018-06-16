@@ -7,8 +7,13 @@ package com.bul.zydex.dao.emp;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.EmployeeAdvanceSearch;
+import com.bul.zydex.model.EmployeeInformation;
 import com.bul.zydex.model.EmployeeMaster;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -2209,13 +2214,176 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " WHERE a.dateOfJoining like '%/" + month + "/" + year + "'";
         return getHibernateTemplate().find(query);
     }
-    
+
     @Override
     public List<?> getGenderDetails() {
         String query = " ";
         query += " SELECT count(a.gender)"
                 + " FROM EmployeeMaster a  group by a.gender";
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getEmployeeDetails(EmployeeInformation employeeInformation) {
+
+        String query = "";
+        String condition = "";
+
+        Field[] fields = employeeInformation.getClass().getDeclaredFields();
+        try {
+            for (int i = 0; i < fields.length; i++) {
+                String name = fields[i].getName();
+                String name1 = fields[i].getName();
+                name1 = name.substring(0, 1).toUpperCase() + name.substring(1);
+                String type = fields[i].getGenericType().toString();
+                if (type.equals("class java.lang.Boolean")) {
+                    Method m = employeeInformation.getClass().getMethod("get" + name1);
+                    String value = (String) ("" + m.invoke(employeeInformation));
+
+                    if (!value.equals("null") && name.equals("reportingManager")) {
+                        if (!query.isEmpty() && !query.equals("") && null != query) {
+                            query += " , (Select g.employeeName From  EmployeeMaster g where g.id=a.reportingManagerLevel1) as reportingManagerLevel ";
+                        } else {
+                            query += " (Select g.employeeName From  EmployeeMaster g where g.id=a.reportingManagerLevel1) as reportingManagerLevel ";
+                        }
+//                    } else if (!value.equals("null") && name.equals("dateOfLeaving")) {
+//                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//                        Date date = new Date();
+//                        
+//                        if (!query.isEmpty() && !query.equals("") && null != query) {
+//                            query += " , (Select h.dateOfLeaving from EmployeeMaster h where STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') BETWEEN "
+//                                    + "STR_TO_DATE('" + employeeInformation.getDolStartDate() + "','%d/%m/%Y') "
+//                                    + "AND STR_TO_DATE('" + employeeInformation.getDolEndDate() + "','%d/%m/%Y')"
+//                                    + "AND STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') > " + sdf.format(date) +") as dateOfLeaving ";
+//                        } else {
+//                            query += " (Select h.dateOfLeaving from EmployeeMaster h where STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') > '" + sdf.format(date) +"' and STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') BETWEEN "
+//                                    + "STR_TO_DATE('" + employeeInformation.getDolStartDate() + "','%d/%m/%Y') "
+//                                    + "AND STR_TO_DATE('" + employeeInformation.getDolEndDate() + "','%d/%m/%Y') ";
+//                        }
+                    } else if (!value.equals("null") && name.equals("department")) {
+                        if (!query.isEmpty() && !query.equals("") && null != query) {
+                            query += " ,b.departmentName ";
+                        } else {
+                            query += " b.departmentName ";
+                        }
+                    } else if (!value.equals("null") && name.equals("gender")) {
+                        if (!query.isEmpty() && !query.equals("") && null != query) {
+                            query += " ,case when a.gender = 0 then 'Male' else 'Female' end as gender ";
+                        } else {
+                            query += " case when a.gender = 0 then 'Male' else 'Female' end as gender ";
+                        }
+                    } else if (!value.equals("null") && name.equals("designation")) {
+                        if (!query.isEmpty() && !query.equals("") && null != query) {
+                            query += " ,c.designationName ";
+                        } else {
+                            query += " c.desvalueignationName ";
+                        }
+                    } else if (!value.equals("null") && name.equals("workLocation")) {
+                        if (!query.isEmpty() && !query.equals("") && null != query) {
+                            query += " ,d.location ";
+                        } else {
+                            query += " d.location ";
+                        }
+                    } else if (!value.equals("null") && name.equals("zydexLocation")) {
+                        if (!query.isEmpty() && !query.equals("") && null != query) {
+                            query += " ,f.zydexLocation ";
+                        } else {
+                            query += " f.zydexLocation ";
+                        }
+                    } else if (!value.equals("null") && name.equals("level")) {
+                        if (!query.isEmpty() && !query.equals("") && null != query) {
+                            query += " ,e.level ";
+                        } else {
+                            query += " e.level ";
+                        }
+                    } else if (!value.equals("null")) {
+                        if (!query.isEmpty() && !query.equals("") && null != query) {
+                            query += " , a." + name;
+                        } else {
+                            query += " a." + name;
+                        }
+                    } else {
+
+                    }
+                }
+            }
+
+            if (null != employeeInformation.getEmployeeCode() && !employeeInformation.getEmployeeCode().equals("")) {
+                condition += " and a.employeeId = '" + employeeInformation.getEmployeeCode() + "'";
+            } else {
+                condition += " and 1 = 1";
+            }
+
+            if (null != employeeInformation.getEmployeeMasterName() && !employeeInformation.getEmployeeMasterName().equals("")) {
+                condition += " and a.employeeName = '" + employeeInformation.getEmployeeMasterName() + "'";
+            } else {
+                condition += " and 1= 1 ";
+            }
+
+            if (null != employeeInformation.getDepartmentId() && !employeeInformation.getDepartmentId().equals("")) {
+                condition += " and a.departmentMaster.id = " + employeeInformation.getDepartmentId();
+            } else {
+                condition += " and 1 = 1 ";
+            }
+
+            if (null != employeeInformation.getWorkLocationId() && !employeeInformation.getWorkLocationId().equals("")) {
+                condition += " and a.locationMaster.id = " + employeeInformation.getWorkLocationId();
+            } else {
+                condition += " and 1 = 1 ";
+            }
+
+            if (null != employeeInformation.getDesignationId() && !employeeInformation.getDesignationId().equals("")) {
+                condition += " and a.designationMaster.id = " + employeeInformation.getDesignationId();
+            } else {
+                condition += " and 1 = 1 ";
+            }
+
+            if (null != employeeInformation.getDojStartDate() && !employeeInformation.getDojStartDate().equals("")
+                    && null != employeeInformation.getDojEndDate() && !employeeInformation.getDojEndDate().equals("")) {
+                condition += " and STR_TO_DATE(a.dateOfJoining,'%d/%m/%Y') BETWEEN "
+                        + "STR_TO_DATE('" + employeeInformation.getDojStartDate() + "','%d/%m/%Y') "
+                        + "AND STR_TO_DATE('" + employeeInformation.getDojEndDate() + "','%d/%m/%Y')";
+            } else {
+                condition += " and 1 = 1 ";
+            }
+
+//            if (null != employeeInformation.getDolStartDate() && !employeeInformation.getDolStartDate().equals("")
+//                    && null != employeeInformation.getDolEndDate() && !employeeInformation.getDolEndDate().equals("")) {
+//                condition += " and STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') BETWEEN "
+//                        + "STR_TO_DATE('" + employeeInformation.getDolStartDate() + "','%d/%m/%Y') "
+//                        + "AND STR_TO_DATE('" + employeeInformation.getDolEndDate() + "','%d/%m/%Y')";
+//            } else {
+//                condition += " and 1 = 1 ";
+//            }
+            if (null != employeeInformation.getDolStartDate() && !employeeInformation.getDolStartDate().equals("")
+                    && null != employeeInformation.getDolEndDate() && !employeeInformation.getDolEndDate().equals("")) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                condition += " and (STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') BETWEEN "
+                        + "STR_TO_DATE('" + employeeInformation.getDolStartDate() + "','%d/%m/%Y') "
+                        + "AND STR_TO_DATE('" + employeeInformation.getDolEndDate() + "','%d/%m/%Y')"
+                        + "AND STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') >  STR_TO_DATE('"+sdf.format(date)+"','%d/%m/%Y'))";
+//                        + "AND STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') > " + sdf.format(date) + ")";
+            } else {
+                condition += " and 1 = 1 ";
+            }
+
+            query += " From  EmployeeMaster  a "
+                    + " LEFT JOIN a.departmentMaster b "
+                    + " LEFT JOIN a.designationMaster c "
+                    + " LEFT JOIN a.locationMaster d "
+                    + " LEFT JOIN a.levelMaster e "
+                    + " LEFT JOIN a.zydexLocationMaster f ";
+
+            if (!condition.equals("")) {
+                query += " Where 1=1 " + condition;
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+
+        String q = " SELECT " + query;
+        return getHibernateTemplate().find(q);
     }
 
 }

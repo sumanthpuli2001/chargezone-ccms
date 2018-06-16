@@ -7,6 +7,7 @@ package com.bul.zydex.service.emp;
 
 import com.bul.zydex.dao.emp.EmployeeMasterDAO;
 import com.bul.zydex.model.EmployeeAdvanceSearch;
+import com.bul.zydex.model.EmployeeInformation;
 import com.bul.zydex.service.GenericsServiceImpl;
 import java.util.List;
 
@@ -426,4 +427,11 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> getGenderDetails() {
         return  employeeMasterDAO.getGenderDetails();
     }
+
+    @Override
+    public List<?> getEmployeeDetails(EmployeeInformation employeeInformation) {
+        return  employeeMasterDAO.getEmployeeDetails(employeeInformation);
+    }
+    
+    
 }

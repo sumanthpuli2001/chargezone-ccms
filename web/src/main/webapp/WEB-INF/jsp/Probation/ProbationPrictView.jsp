@@ -41,328 +41,344 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
+                                <form:hidden path="id"></form:hidden>
                                 <form:form method="post" commandName="ptc"
                                            name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
-                                    <form:hidden path="id"></form:hidden>
-                                        <!--<span style="color: red;font-size: 14px;">* indicates mandatory field.</span>-->
-
-                                        <div class="box-header">
-                                            <h3 class="box-title">Employee Detail:</h3>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-2">
-                                                            <label>Employee No.:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                        <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.employeeId}" readonly="true"></form:input>
-                                                        </div>
-                                                        <div class="col-sm-2">
-                                                            <label>Employee Name:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                        <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.employeeName}" readonly="true"></form:input>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-2">
-                                                            <label>Department:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                        <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.departmentMaster.departmentName}" readonly="true"></form:input>
-                                                        </div>
-                                                        <div class="col-sm-2">
-                                                            <label>Designation:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                        <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.designationMaster.designationName}" readonly="true"></form:input>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-2">
-                                                            <label>Level:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                        <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.levelMaster.level}" readonly="true"></form:input>
-                                                        </div>
-                                                        <div class="col-sm-2">
-                                                            <label>Reporting Manager:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                        <form:input path="" class="form-control" size="16" type="text" value="${reportingLevel1}" readonly="true"></form:input>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class=" col-sm-2">
-                                                            <label>Work Location:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                        <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.locationMaster.location}" readonly="true"></form:input>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="box-header">
-                                            <h3 class="box-title">Assessment Period:</h3>
-
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-3 control-label">From Date:</label>
-                                                        <div class=" col-sm-7">
-                                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy hh:ii " data-link-field="dtp_input1">
-                                                            <form:input path="assessmentFromDate" class="form-control" size="16" type="text" value=""  readonly="true"></form:input>
-                                                            <form:errors path="assessmentFromDate" cssClass="errorDiv"></form:errors>
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                    <c:choose>
-                                                        <c:when test="${ptc.hrSelect eq 'Extend'  && !sessionScope.userRight.hr}">
-                                                            <label class="col-sm-3 control-label">Extended Date:</label>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <label class="col-sm-3 control-label">To Date:</label>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <div class=" col-sm-7">
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy hh:ii" data-link-field="dtp_input1">
-                                                            <form:input path="assessmentToDate" class="form-control" size="16" type="text" value=""  readonly="true"></form:input>
-                                                            <form:errors path="assessmentToDate" cssClass="errorDiv"></form:errors>
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-
-                                        <div class="box-header">
-                                            <h3 class="box-title">What are the jobs being handled by the employee?</h3>
-
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <table>
-                                                                <tr>
-                                                                    <td>${ptc.jobHandled}</td>
-                                                            </tr>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
-
-                                    <div class="box-header">
-                                        <h3 class="box-title">Performance Rating:</h3>
-
-                                    </div><!-- /.box-header -->
                                     <div class="box-body no-padding">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group">
-                                                    <div class="col-md-3 col-sm-3"></div>
-                                                    <fieldset id="performanceRating">
-                                                        <!--<label class="col-sm-3 control-label">Name of the Joiner:</label>-->
-                                                        <div class="col-sm-10 " >
-                                                            <c:if test="${ptc.performanceRating eq 'Excellent'}">
-                                                                <input type="radio" name="performanceRating" id="Excellent" value="Excellent" checked style="width: 15px;height: 15px" > Excellent
-                                                            </c:if>
-                                                            <c:if test="${ptc.performanceRating eq 'Very Good'}">
-                                                                <input type="radio" name="performanceRating" id="Very Good" value="Very Good" checked style="width: 15px;height: 15px"> Very Good
-                                                            </c:if>
-                                                            <c:if test="${ptc.performanceRating eq 'Good'}">
-                                                                <input type="radio" name="performanceRating" id="Good"  value="Good" checked style="width: 15px;height: 15px">Good
-                                                            </c:if>
-                                                            <c:if test="${ptc.performanceRating eq 'Average'}">
-                                                                <input type="radio" name="performanceRating" id="Average" value="Average" checked style="width: 15px;height: 15px">Average
-                                                            </c:if>
-                                                            <c:if test="${ptc.performanceRating eq 'NeedsImprovement'}">
-                                                                <input type="radio" name="performanceRating" id="NeedsImprovement" checked value="NeedsImprovement" style="width: 15px;height: 15px">Needs Improvement
-                                                            </c:if>
+                                                    <div class="table" style="margin-left: 2%">
+                                                        <table style="width:100%;" class="noborder">
+                                                            <tr class="noborder">
+                                                                <td colspan="2"  class="noborder"><h3 class="box-title">Employee Detail:</h3></td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <th class="noborder">Employee No:</th>
+                                                                <td class="noborder">${employeeMaster.employeeId}</td>
+                                                                <th class="noborder">Employee Name:</th>
+                                                                <td class="noborder">${employeeMaster.employeeName}</td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <th class="noborder">Department:</th>
+                                                                <td class="noborder">${employeeMaster.departmentMaster.departmentName}</td>
+                                                                <th class="noborder">Designation:</th>
+                                                                <td class="noborder">${employeeMaster.designationMaster.designationName}</td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <th class="noborder">Level:</th>
+                                                                <td class="noborder">${employeeMaster.levelMaster.level}</td>
+                                                                <th class="noborder">Reporting Manager:</th>
+                                                                <td class="noborder">${reportingLevel1}</td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <th class="noborder">Work Location:</th>
+                                                                <td class="noborder">${employeeMaster.locationMaster.location}</td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <td colspan="4" class="noborder"><h3 class="box-title">Assessment Period:</h3><td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <th class="noborder">From Date:</th>
+                                                                <td class="noborder">${ptc.assessmentFromDate}</td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <th class="noborder">To Date:</th>
+                                                                <td class="noborder">${ptc.assessmentToDate}</td>
+                                                            </tr>
+                                                       
 
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
-
-                                    <div class="box-header">
-                                        <h3 class="box-title">Can The Employee Be Confirmed Based On Present Performance?</h3>
-
-                                    </div><!-- /.box-header -->
-                                    <div class="box-body no-padding">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="table-responsive">
-                                                    <table id="demo" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                        <tr>
-                                                            <td >REPORTING MANAGER (RECOMMENDATION)</td>
-                                                            <td>
-                                                                <form:input path="recommendationSelect"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                                </td>
-                                                            <c:if test="${ptc.recommendationSelect eq 'Extend'}">
-                                                                <td id="RecomendationExtPeriodId" >Extention Period</td>
-                                                                <td id="RecomendationExtSelectId" >
-                                                                    ${ptc.recommendationExtendPeriod}
-                                                                    </td>
-                                                            </c:if>
-                                                            <c:if test="${ptc.recommendationSelect eq 'Extend' || ptc.recommendationSelect eq 'No'}">
-                                                                <td id="RecomendationRemarkId" >Remark</td>
-                                                                <td id="RecomendationRemarkTxtId">
-                                                                      ${ptc.recommendationRemark}
-                                                                </c:if>
-                                                            </td>
+                                                        <tr class="noborder">
+                                                            <td colspan="12" class="noborder"> <h3 class="box-title">What are the jobs being handled by the employee?</h3></td>
                                                         </tr>
-                                                        <tr>
-                                                            <td >FUNCTIONAL HEAD (RECOMMENDATION)</td>
-                                                            <td>
-                                                                <form:input path="approvalSelect"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                                </td>
-                                                            <c:if test="${ptc.approvalSelect eq 'Extend'}">
-                                                                <td id="ApprovalExtPeriodId" >Extention Period</td>
-                                                                <td id="ApprovalExtSelectId" >
-                                                                      ${ptc.approvalExtendPeriod}
-                                                                    </td>
-                                                            </c:if>
-                                                            <c:if test="${ptc.approvalSelect eq 'Extend' || ptc.approvalSelect eq 'No'}">
-                                                                <td id="ApprovalRemarkId" >Remark</td>
-                                                                <td id="ApprovalRemarkTxtId">
-                                                                      ${ptc.approvalRemark}
-                                                                </c:if>
-                                                            </td>
+                                                        <tr class="noborder">
+                                                            <td colspan="12" class="noborder">${ptc.jobHandled}</td>
                                                         </tr>
-                                                        <c:if test="${sessionScope.userRight.probationToConfirmation}">
-                                                            <c:if test="${ptc.status ne 4 && ptc.status ne 5}">
+                                                         </table>
+                                                        <div >
+                                                            <table  style="width:95%;">
+                                                                <tr >
+                                                                    <th colspan="8" >Behaviour</th>
+                                                                    <th colspan="2" >Satisfactory</th>
+                                                                    <th colspan="2" >Not-Satisfactory</th>
+                                                                </tr>
+                                                                <tr></tr>
                                                                 <tr>
-                                                                    <td >HR (APPROVAL)</td>
-                                                                    <td>
-                                                                        <form:select path="hrSelect" id="hrSelectId" class="form-control ">
-                                                                            <form:option value="">--SELECT--</form:option>
-                                                                            <form:option value="Yes">Yes</form:option>
-                                                                            <form:option value="No">No</form:option>
-                                                                            <form:option value="Extend">Extend</form:option>
-                                                                        </form:select>
-                                                                        <span id="hrSelectError" style="color: red;"></span>
-                                                                    </td>
-                                                                    <td id="hrExtPeriodId" style="display: none">Extention Period</td>
-                                                                    <td id="hrExtSelectId" style="display: none">
-                                                                        <form:select path="hrExtendPeriod" id="hrextendmonth" name="hrextendmonth" class="form-control ">
-                                                                            <form:option value="">--SELECT--</form:option>
-                                                                            <form:option value="1Month">1 Month</form:option>
-                                                                            <form:option value="2Month">2 Month</form:option>
-                                                                            <form:option value="3Month">3 Month</form:option>
-                                                                            <form:option value="4Month">4 Month</form:option>
-                                                                            <form:option value="5Month">5 Month</form:option>
-                                                                            <form:option value="6Month">6 Month</form:option>
-                                                                            <form:option value="7Month">7 Month</form:option>
-                                                                            <form:option value="8Month">8 Month</form:option>
-                                                                            <form:option value="9Month">9 Month</form:option>
-                                                                        </form:select>
-                                                                        <span id="hrExtendPeriodError" style="color: red;"></span>
-
-                                                                    </td>
-                                                                    <c:if test="${ptc.status ne 3}">
-                                                                        <td id="hrRemarkId" style="display: none">Remark</td>
-                                                                        <td id="hrRemarkTxtId" style="display: none">
-                                                                            ${ptc.hrremark}
-                                                                        </td></c:if>
-                                                                    <c:if test="${ptc.status eq 3}">
-                                                                        <td id="hrRemarkId" >Remark</td>
-                                                                        <td id="hrRemarkTxtId" >
-                                                                            ${ptc.hrApprovalRemark}
-                                                                        </td></c:if>
-                                                                    </tr>
-                                                            </c:if>
-                                                            <c:if test="${ptc.status eq 4 || ptc.status eq 5}">
-                                                                <tr>
-                                                                    <td>HR (APPROVAL)</td>
-                                                                    <td>
-                                                                        <form:input path="hrSelect"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                                        </td>
-                                                                    <c:if test="${ptc.hrSelect eq 'Extend'}">
-                                                                        <td id="hrExtPeriodId" >Extention Period</td>
-                                                                        <td id="hrExtSelectId">
-                                                                            <form:input path="hrExtendPeriod"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                                            </td>
+                                                                    <th colspan="8">C 1: Concentration</th>
+                                                                        <c:if test="${ptc.concentration eq 'true'}">
+                                                                        <th colspan="2" rowspan="7">
+                                                                            <input type="radio" name="concentration" id="Yes" value="Yes" checked style="width: 15px;height: 15px" > Yes
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="7">
+                                                                        </th>
                                                                     </c:if>
-                                                                    <c:if test="${ptc.hrSelect eq 'Extend' || ptc.hrSelect eq 'No'}">
-                                                                        <td id="hrRemarkId">Remark</td>
-                                                                        <td id="hrRemarkTxtId">
-                                                                            ${ptc.hrApprovalRemark}
-                                                                            </td>
+                                                                    <c:if test="${ptc.concentration eq 'false'}">
+                                                                        <th colspan="2" rowspan="7"> 
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="7">
+                                                                            <input type="radio" name="concentration" id="NO" value="No" checked  style="width: 15px;height: 15px" > No
+                                                                        </th>
                                                                     </c:if>
                                                                 </tr>
-                                                            </c:if>
-                                                        </c:if>
-                                                        <c:if test="${!sessionScope.userRight.probationToConfirmation}">
-                                                            <tr>
-                                                                <td>HR (APPROVAL)</td>
-                                                                <td>
-                                                                    <form:input path="hrSelect"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                                    </td>
-                                                                <c:if test="${ptc.hrSelect eq 'Extend'}">
-                                                                    <td id="hrExtPeriodId" >Extention Period</td>
-                                                                    <td id="hrExtSelectId">
-                                                                        <form:input path="hrExtendPeriod"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                                        </td>
-                                                                </c:if>
-                                                                <c:if test="${ptc.hrSelect eq 'Extend' || ptc.hrSelect eq 'No'}">
-                                                                    <td id="hrRemarkId">Remark</td>
-                                                                    <td id="hrRemarkTxtId">
-                                                                        ${ptc.hrApprovalRemark}
-                                                                        </td>
-                                                                </c:if>
-                                                            </tr>
-                                                        </c:if>
-                                                        <tr>
-                                                            <td colspan="9"><b>In case your answer is in negative, please comment. What are the areas identified for improvement & please communicate the same to appraisee. Also write the strategy / steps to overcome the areas of improvement.</b></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <c:if test="${sessionScope.userRight.probationToConfirmation}">
-                                                                <c:if test="${ptc.status eq 4 || ptc.status eq 5}">
-                                                                    <td colspan="9"> ${ptc.improvementComment}</td>
-                                                                </c:if>
-                                                                <c:if test="${ptc.status ne 4 && ptc.status ne 5}">
-                                                                    <td colspan="9">  ${ptc.improvementComment}</td>
-                                                                </c:if>
-                                                            </c:if>
-                                                            <c:if test="${!sessionScope.userRight.probationToConfirmation}">
-                                                                <td colspan="9"> ${ptc.improvementComment}</td>
-                                                            </c:if>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>RECOMMENDATION BY HR (IF ANY):</td>
-                                                            <td colspan="5" >
-                                                                <c:if test="${sessionScope.userRight.probationToConfirmation}">
-                                                                    <c:if test="${ptc.status eq 4 || ptc.status eq 5}">
-                                                                       ${ptc.recomendationByHr}</td>
+                                                                <tr>
+                                                                    <td  colspan="8">Concentration on the work</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  colspan="8">Attention in detailing of work</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  colspan="8">targeting the highest standard of excellence</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  colspan="8">doing better than yesterday</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  colspan="8">Respect every employee</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td  colspan="8">concentrtaion on performance achievement and individual development</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">C 2: Consistency</th>
+                                                                        <c:if test="${ptc.consistency eq 'true'}">
+                                                                        <th colspan="2" rowspan="3">
+                                                                            <input type="radio" name="consistency" id="Yes" value="Yes" checked style="width: 15px;height: 15px" > Yes
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="3">
+                                                                        </th>
                                                                     </c:if>
-                                                                    <c:if test="${ptc.status ne 4 && ptc.status ne 5}">
-                                                                       ${ptc.recomendationByHr}</td>
-                                                                </c:if>
-                                                            </c:if>
-                                                            <c:if test="${!sessionScope.userRight.probationToConfirmation}">
-                                                                ${ptc.recomendationByHr}</td>
-                                                            </c:if>
-                                                        </tr>
-                                                    </table>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
+                                                                    <c:if test="${ptc.consistency eq 'false'}">
+                                                                        <th colspan="2" rowspan="3"> 
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="3">
+                                                                            <input type="radio" name="consistency" id="NO" value="No" checked  style="width: 15px;height: 15px" > No
+                                                                        </th>
+                                                                    </c:if>    
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Consistency in building system and for organizations betterment</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">to maintain consistency in respect with organization's future, mission and vision, safety and security of employees</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">C 3: Cooperation</th>
+                                                                        <c:if test="${ptc.cooperation eq 'true'}">
+                                                                        <th colspan="2" rowspan="3">
+                                                                            <input type="radio" name="cooperation" id="Yes" value="Yes" checked style="width: 15px;height: 15px" > Yes
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="3">
+                                                                        </th>
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.cooperation eq 'false'}">
+                                                                        <th colspan="2" rowspan="3"> 
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="3">
+                                                                            <input type="radio" name="cooperation" id="NO" value="No" checked  style="width: 15px;height: 15px" > No
+                                                                        </th>
+                                                                    </c:if>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Conduct of the highest ethical standard, intellectual , financial and moral . </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Conduct which builds and maintains teamwork</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="12" style="text-align: center;">Job Knowledge & Working Standards</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">1. Job Knowledge</th>
+                                                                        <c:if test="${ptc.knowledge eq 'true'}">
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="knowledge" id="Yes" value="Yes" checked style="width: 15px;height: 15px" > Yes
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                        </th>
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.knowledge eq 'false'}">
+                                                                        <th colspan="2" rowspan="2"> 
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="knowledge" id="NO" value="No" checked  style="width: 15px;height: 15px" > No
+                                                                        </th>
+                                                                    </c:if>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Knowledge to perform the task</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">2. Discipline</th>
+                                                                        <c:if test="${ptc.discipline eq 'true'}">
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="discipline" id="Yes" value="Yes" checked style="width: 15px;height: 15px" > Yes
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                        </th>
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.discipline eq 'false'}">
+                                                                        <th colspan="2" rowspan="2"> 
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="discipline" id="NO" value="No" checked  style="width: 15px;height: 15px" > No
+                                                                        </th>
+                                                                    </c:if>      
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Way of thinking, belief or opinion of approval and disapproval towards the organization decision and action. The way in which one acts or conducts oneself, especially towards others, respects for others, Eagerness to help others.</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">3. Leadership Quality</th>
+                                                                        <c:if test="${ptc.leadership eq 'true'}">
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="leadership" id="Yes" value="Yes" checked style="width: 15px;height: 15px" > Yes
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                        </th>
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.leadership eq 'false'}">
+                                                                        <th colspan="2" rowspan="2"> 
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="leadership" id="NO" value="No" checked  style="width: 15px;height: 15px" > No
+                                                                        </th>
+                                                                    </c:if> 
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Deliver result on time, build relationship & develop others & possess good decision making skills</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">4. Communication </th>
+                                                                        <c:if test="${ptc.communication eq 'true'}">
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="communication" id="Yes" value="Yes" checked style="width: 15px;height: 15px" > Yes
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                        </th>
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.communication eq 'false'}">
+                                                                        <th colspan="2" rowspan="2"> 
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="communication" id="NO" value="No" checked  style="width: 15px;height: 15px" > No
+                                                                        </th>
+                                                                    </c:if>                                                                         
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Express ideas and concerns clearly Proficient and confident in presentation Flexible and effective writing skills </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">5. 5S and Safety Norms </th>
+                                                                        <c:if test="${ptc.safety eq 'true'}">
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="safety" id="Yes" value="Yes" checked style="width: 15px;height: 15px" > Yes
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                        </th>
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.safety eq 'false'}">
+                                                                        <th colspan="2" rowspan="2"> 
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="safety" id="NO" value="No" checked  style="width: 15px;height: 15px" > No
+                                                                        </th>
+                                                                    </c:if>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">Cleanliness of own self, work premises, retrieval of data, safe working practice, safety knowledge</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">6. Team Work </th>
+                                                                        <c:if test="${ptc.team eq 'true'}">
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="team" id="Yes" value="Yes" checked style="width: 15px;height: 15px" > Yes
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                        </th>
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.team eq 'false'}">
+                                                                        <th colspan="2" rowspan="2"> 
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="team" id="NO" value="No" checked  style="width: 15px;height: 15px" > No
+                                                                        </th>
+                                                                    </c:if>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="8">The extent to which the employee successfully collaborates with others to accomplish departmental and Organizational goals.<br> Target achieved through team work.</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th colspan="8">7. Integrity/Ethics </th>
+                                                                        <c:if test="${ptc.integrity eq 'true'}">
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="integrity" id="Yes" value="Yes" checked style="width: 15px;height: 15px" > Yes
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                        </th>
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.integrity eq 'false'}">
+                                                                        <th colspan="2" rowspan="2"> 
+                                                                        </th>
+                                                                        <th colspan="2" rowspan="2">
+                                                                            <input type="radio" name="integrity" id="NO" value="No" checked  style="width: 15px;height: 15px" > No
+                                                                        </th>
+                                                                    </c:if>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+
+                                                        <table  style="width:90%;" class="noborder">
+                                                            <tr class="noborder">
+                                                                <td  class="noborder"> <h3 class="box-title" style="display: inline-block">Performance Rating:</h3>
+                                                                    <c:if test="${ptc.performanceRating eq 'Excellent'}">
+                                                                        <input type="radio" name="performanceRating" id="Excellent" value="Excellent" checked style="width: 15px;height: 15px;float: left;" > Excellent
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.performanceRating eq 'Very Good'}">
+                                                                        <input type="radio" name="performanceRating" id="Very Good" value="Very Good" checked style="width: 15px;height: 15px;float: left;"> Very Good
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.performanceRating eq 'Good'}">
+                                                                        <input type="radio" name="performanceRating" id="Good"  value="Good" checked style="width: 15px;height: 15px;float: left;">Good
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.performanceRating eq 'Average'}">
+                                                                        <input  type="radio" name="performanceRating" id="Average" value="Average" checked style="width: 15px;height: 15px;float: left;">Average
+                                                                    </c:if>
+                                                                    <c:if test="${ptc.performanceRating eq 'NeedsImprovement'}">
+                                                                        <input type="radio" name="performanceRating" id="NeedsImprovement" checked value="NeedsImprovement" style="width: 15px;height: 15px">Needs Improvement
+                                                                    </c:if> 
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="noborder" style="width: 100%;">
+                                                            <tr class="noborder">
+                                                                <td  class="noborder" style="text-align: left !important;"><h3>Can The Employee Be Confirmed Based On Present Performance?</h3></td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <td class="noborder" ><b>REPORTING MANAGER (RECOMMENDATION):</b>&nbsp; ${ptc.recommendationSelect}</td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <td class="noborder"><b>FUNCTIONAL HEAD (RECOMMENDATION):</b>&nbsp; ${ptc.approvalSelect}</td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <td class="noborder"><b>Hr Select:</b>&nbsp; ${ptc.hrSelect}</td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <td class="noborder"><b>Hr Extended Period:</b>&nbsp; ${ptc.hrExtendPeriod}</td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <td class="noborder"><b>Hr Approval Remark:</b>&nbsp; ${ptc.hrApprovalRemark}</td>
+                                                            </tr>
+                                                            <tr class="noborder">
+                                                                <td class="noborder"><b>Manager Justification:</b>&nbsp; ${ptc.managerJustification}</td>
+                                                            </tr>
+
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
 
 
 
@@ -397,6 +413,33 @@
                     }
                 });
             });</script>
-            <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+        <!--                        <style>
+                                    .border{
+                                        border:2px solid black;
+                                    }
+                                </style>-->
+        <style>
+            table, th, th {
+                border: 2px solid black;
+                border-collapse: collapse;
+            }
+            th, th {
+                padding: 15px;
+            }
+            td{
+                border: 1px solid black;
+                border-collapse: collapse;
+
+            }
+            .noborder{
+                border-bottom: 0px !important;
+                border-left: 0px !important;
+                border-top: 0px !important;
+                border-right: 0px !important;
+                padding: 0px !important;
+            }
+
+        </style>
+        <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     </body>
 </html>

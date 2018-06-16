@@ -356,8 +356,8 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
-        VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
-        MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
+        VacancyMaster vm = vacancyMasterService.readByVacancyId(candidateF2FRequest.getVacancyMaster().getId());
+        MprMaster mm = mprMasterService.readByMPRId(vm.getMprMaster().getId());
         List<CandidateF2FApproval> committeedetaillist = new ArrayList<>();
         List<CandidateF2FApproval> comitteeList = (List<CandidateF2FApproval>) candidateF2FApprovalService.readByReqId(candidateF2FRequest.getId());
         for (CandidateF2FApproval cffa : comitteeList) {
@@ -536,7 +536,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
         VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
-        MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
+        MprMaster mm = mprMasterService.readByMPRId(vm.getMprMaster().getId());
         RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
         List<CandidateF2FApproval> committeedetaillist = new ArrayList<>();
         List<CandidateF2FApproval> comitteeList = (List<CandidateF2FApproval>) candidateF2FApprovalService.readByReqId(candidateF2FRequest.getId());

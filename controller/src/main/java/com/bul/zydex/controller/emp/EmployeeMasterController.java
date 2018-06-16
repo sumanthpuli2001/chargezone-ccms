@@ -805,6 +805,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             finalctcList.add(ctcList);
         }
         int empId = employeeMaster.getEmployeeTypeMaster().getId();
+        if(employeeMaster.getEmployeeSubType() != null){
         int empSubId = employeeMaster.getEmployeeSubType().getId();
         Boolean checkPf = payrollPfCheckService.getPFCheckValue(empId, empSubId);
         Boolean checkPt = payrollPtCheckService.getPTCheckValue(empId, empSubId);
@@ -816,6 +817,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        selectedEmployeeLevel6(request, employeeMaster);
         request.setAttribute("checkPf", checkPf);
         request.setAttribute("checkPt", checkPt);
+        }
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
 //        request.setAttribute("company", employeeMaster.getCompany());
         request.setAttribute("employeeType", employeeMaster.getEmployeeType());

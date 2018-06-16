@@ -25,12 +25,13 @@ public class CtcAllowanceController extends CtcAllowanceAbstract {
         return mv;
 
     }
-     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response, CtcAllowance ctcAllowance) throws Exception {
+
+    public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response, CtcAllowance ctcAllowance) throws Exception {
 
         return new ModelAndView("Policy/ctcCreate", "ctcAllowance", ctcAllowance);
     }
 
-    public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response,CtcAllowance ctcAllowance) throws Exception {
+    public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response, CtcAllowance ctcAllowance) throws Exception {
         BindException errors = new BindException(ctcAllowance, "ctcAllowance");
         bind(request, ctcAllowance);
 //        CtcValidator.validate(ctcAllowance, errors);
@@ -40,16 +41,21 @@ public class CtcAllowanceController extends CtcAllowanceAbstract {
 //            mv.addAllObjects(errors.getModel());
 //            mv.setViewName("Policy/ctcCreate");
 //        } else {
+        if ("" != ctcAllowance.getCtcName()) {
             if (ctcAllowanceService.isExist(ctcAllowance)) {
                 ctcAllowanceService.createOrUpdate(ctcAllowance);
                 List<?> ctcList = ctcAllowanceService.read();
                 mv.addObject("ctcList", ctcList);
                 mv.addObject("successMessage", "Information : Information Saved Successfully.");
                 mv.setViewName("Policy/ctcList");
+                return mv;
             } else {
                 mv.setViewName("Policy/ctcCreate");
                 mv.addObject("failureMessage", "Error : Information Is Already Exist. ");
             }
+        }
+        mv.setViewName("Policy/ctcCreate");
+        mv.addObject("failureMessage", "Error : Please Enter ctcName. ");
 //        }
         mv.getModelMap().put("ctcAllowance", ctcAllowance);
         return mv;

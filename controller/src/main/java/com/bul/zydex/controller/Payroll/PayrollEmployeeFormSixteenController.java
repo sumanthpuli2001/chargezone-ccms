@@ -194,13 +194,15 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
 //        String zydex_location_id = request.getParameter("zydexLocationMasterId");
 //        String type_of_employee = request.getParameter("employeeTypeMasterId");
 //        String employee_sub_id = request.getParameter("subTypeId");
-        String Financial_year = request.getParameter("fnyear");
+        if ("" != request.getParameter("fnyear")) {
+            String Financial_year = request.getParameter("fnyear");
+
 //        String Employee_Name = request.getParameter("employeeMasterId");
-        HttpSession session = request.getSession();
-        EmployeeMaster employee = (EmployeeMaster) session.getAttribute("employeeInfo");
-        int id = employee.getId();
-        EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
-        String Employee_Name = employeeMaster1.getEmployeeName();
+            HttpSession session = request.getSession();
+            EmployeeMaster employee = (EmployeeMaster) session.getAttribute("employeeInfo");
+            int id = employee.getId();
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
+            String Employee_Name = employeeMaster1.getEmployeeName();
 ////       
 //        if (!zydex_location_id.equals("")) {
 //            employeeMaster.setAdharCard(zydex_location_id);
@@ -213,27 +215,33 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
 //            employeeMaster.setCompany(employee_sub_id);
 //        }
 //
-        if (!Financial_year.equals("")) {
-            employeeMaster.setPaymentType(Financial_year);
+            if (!Financial_year.equals("")) {
+                employeeMaster.setPaymentType(Financial_year);
 
+            }
+
+            if (!Employee_Name.equals("")) {
+                employeeMaster.setEmployeeName(Employee_Name);
+
+            }
+
+            boolean isExist = taxSavingSubmitService.isExist(id, Integer.parseInt(Financial_year));
+            if (isExist) {
+                List<?> list = taxSavingSubmitService.readTaxSavingSubmitEmployeeSaving(id, Integer.parseInt(Financial_year));
+                request.setAttribute("employeelist", list);
+                mv.setViewName("Payroll/payrollEmployeeSavingStatus");
+            } else {
+
+                List<?> list = employeeSalaryProcessService.readEmployeeForFormSixteen(employeeMaster);
+                request.setAttribute("employeelist", list);
+                mv = redirectToFormEmployeeSaving(request, response);
+            }
+            return mv;
         }
-
-        if (!Employee_Name.equals("")) {
-            employeeMaster.setEmployeeName(Employee_Name);
-
-        }
-
-        boolean isExist = taxSavingSubmitService.isExist(id, Integer.parseInt(Financial_year));
-        if (isExist) {
-            List<?> list = taxSavingSubmitService.readTaxSavingSubmitEmployeeSaving(id, Integer.parseInt(Financial_year));
-            request.setAttribute("employeelist", list);
-             mv.setViewName("Payroll/payrollEmployeeSavingStatus");
-        } else {
-
-            List<?> list = employeeSalaryProcessService.readEmployeeForFormSixteen(employeeMaster);
-            request.setAttribute("employeelist", list);
-            mv = redirectToFormEmployeeSaving(request, response);
-        }
+        request.setAttribute("failureMessage",
+                "Error : Please Select Financial year.");
+         financialYearList(request);
+        mv = redirectToFormEmployeeSaving(request, response);
         return mv;
     }
 

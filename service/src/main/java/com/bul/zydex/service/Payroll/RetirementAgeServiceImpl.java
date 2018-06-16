@@ -23,5 +23,10 @@ public class RetirementAgeServiceImpl<T> extends GenericsServiceImpl<T> implemen
         this.retirementAgeDAO = retirementAgeDAO;
         setGenericsDAO(retirementAgeDAO);
     }
+
+    @Override
+    public boolean isExist(T object) {
+        return retirementAgeDAO.isExist(object);
+    }
       
 }

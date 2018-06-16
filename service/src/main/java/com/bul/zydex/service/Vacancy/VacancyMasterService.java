@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.Vacancy;
 
+import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -21,5 +22,7 @@ public interface VacancyMasterService<T> extends GenericsService<T> {
     public List<?> fetchVacancyBydate(String date);
 
     public List<?> fetchDateWiseData(String startDate, String endDate);
+
+    public VacancyMaster readByVacancyId(int vacancyId);
 
 }

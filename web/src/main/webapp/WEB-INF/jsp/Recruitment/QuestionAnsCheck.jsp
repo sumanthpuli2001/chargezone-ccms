@@ -50,12 +50,12 @@
                                                 <h4> <label>Candidate User Name&nbsp;:&nbsp;</label><label style="color: #0064cd">${candidateApplyJob.name}</label></h4> 
                                             </div>
                                         </c:if>
-                                        <c:if test="${empty list2}">
-                                            <div class="col-sm-6 col-sm-offset-5">
+                                        <%--<c:if test="${empty list2}">--%>
+                                            <!--<div class="col-sm-6 col-sm-offset-5">-->
 
-                                                <c:out value="There is no record found."></c:out>
-                                                </div>
-                                        </c:if>
+                                                <%--<c:out value="There is no record found."></c:out>--%>
+                                                <!--</div>-->
+                                        <%--</c:if>--%>
                                         <%--</c:when>--%>
                                         <%--<c:otherwise>--%>
 

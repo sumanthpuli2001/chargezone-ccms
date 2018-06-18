@@ -188,7 +188,7 @@
                                                         <td colspan="2">&nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="2"><b>${fNfList[0].companyName}</b></td>
+                                                        <td colspan="2"><b>${fNfList[1]}</b></td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2">&nbsp;</td>
@@ -211,7 +211,7 @@
                                                         <td colspan="2">&nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <td colspan="2">${fNfList[0].description}</td>
+                                                        <td colspan="2">${fNfList[2]}</td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2" style="text-align: right;"><b>MR.&nbsp;${employeeMaster.employeeName}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>

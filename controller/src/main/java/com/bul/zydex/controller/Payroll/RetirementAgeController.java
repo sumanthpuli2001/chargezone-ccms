@@ -53,11 +53,14 @@ public class RetirementAgeController extends RetirementAgeAbstract {
                     return mv;
                 } else {
                     mv.addObject("failureMessage", "Error : Information Is Already Exist. ");
+                    mv.addAllObjects(errors.getModel());
                     mv.setViewName("Company/RetirementCreate");
                 }
+            } else {
+                mv.addObject("failureMessage", "Error : Please Enter Retirement Age. ");
+                mv.addAllObjects(errors.getModel());
+                mv.setViewName("Company/RetirementCreate");
             }
-            mv.addObject("failureMessage", "Error : Please Enter Retirement Age. ");
-            mv.setViewName("Company/RetirementCreate");
         }
         mv.getModelMap().put("retirementAge", retirementAge);
         return mv;

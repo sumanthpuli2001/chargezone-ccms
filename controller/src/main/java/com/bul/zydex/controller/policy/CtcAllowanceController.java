@@ -53,10 +53,11 @@ public class CtcAllowanceController extends CtcAllowanceAbstract {
                 mv.setViewName("Policy/ctcCreate");
                 mv.addObject("failureMessage", "Error : Information Is Already Exist. ");
             }
+        } else {
+
+            mv.setViewName("Policy/ctcCreate");
+            mv.addObject("failureMessage", "Error : Please Enter ctcName. ");
         }
-        mv.setViewName("Policy/ctcCreate");
-        mv.addObject("failureMessage", "Error : Please Enter ctcName. ");
-//        }
         mv.getModelMap().put("ctcAllowance", ctcAllowance);
         return mv;
     }

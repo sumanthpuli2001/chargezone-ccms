@@ -54,9 +54,10 @@ public class CompanyMasterController extends CompanyMasterAbstract {
                     mv.addObject("failureMessage", "Error : Information Is Already Exist. ");
                     mv.setViewName("Company/CompanyCreate");
                 }
+            } else {
+                mv.setViewName("Company/CompanyCreate");
+                mv.addObject("failureMessage", "Error : Please Enter CompanyName. ");
             }
-            mv.setViewName("Company/CompanyCreate");
-            mv.addObject("failureMessage", "Error : Please Enter CompanyName. ");
         }
         mv.getModelMap().put("companyMaster", companyMaster);
         return mv;

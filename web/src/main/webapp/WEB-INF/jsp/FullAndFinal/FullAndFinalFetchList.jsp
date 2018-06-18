@@ -92,24 +92,23 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                     <tbody>
-                                                        <c:forEach var="list[0]" items="${list}">
+                                                        <c:forEach var="list" items="${list}">
                                                             <tr>
                                                                 <c:if test="${sessionScope.userRight.employeeManagement}">
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
-                                                                <td>${list[0].companyName}</td>
-                                                                <td>${list[0].createDate}</td>
-                                                                <!--<td>${list[0].createDate}</td>-->
+                                                                <td>${list[1]}</td>
+                                                                <td>${list[2]}</td>
 
 
                                                                 <td>
                                                                     <div class="btn-group">
-                                                                        <button type="button" onclick="viewClick(${list[0].id});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                        <button type="button" onclick="viewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
                                                                     </div>
                                                                     <div class="btn-group">
-                                                                        <button type="button" onclick="editClick(${list[0].id});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                        <button type="button" onclick="editClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;Edit
                                                                         </button>
                                                                     </div>

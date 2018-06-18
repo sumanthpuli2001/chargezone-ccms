@@ -207,7 +207,8 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         request.setAttribute(
                 "successMessage",
                 "Information : The Information is saved Successfully.");
-        mv = createTraineAssigne(request, response);
+         mv.setViewName("forward:trainingType.htm?act=showcalendar");
+//        mv = createTraineAssigne(request, response);
         return mv;
 
     }

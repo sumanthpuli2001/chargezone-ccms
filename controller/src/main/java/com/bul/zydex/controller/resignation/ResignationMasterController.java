@@ -1491,7 +1491,10 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         request.setAttribute("successMessage",
                 "Information: The Format Full And Final Settlement Create successfully");
 
-        mv = fullandfcreateClick(request, response);
+        List<?> list = formateFullNdFinalLetterService.fetchFnFDate();
+        mv.getModelMap().put("list", list);
+        mv.getModelMap().put("formateFullNdFinalLetter", formateFullNdFinalLetter);
+        mv.setViewName("FullAndFinal/FullAndFinalFetchList");
 
         return mv;
     }
@@ -1575,7 +1578,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
 
     public ModelAndView formateLetterDeleteList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        String empId[] = request.getParameterValues("checkId");
+        String[] empId = request.getParameterValues("checkId");
         for (String z : empId) {
             try {
                 formateFullNdFinalLetterService.delete(Integer.parseInt(z));

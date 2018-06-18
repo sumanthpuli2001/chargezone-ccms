@@ -171,9 +171,10 @@ public class QuestionLibraryController extends QuestionLibraryAbstract {
             employeecategoryList(request);
             mv.getModelMap().put("mprEmployeeCategory", mprEmployeeCategory);
             mv.getModelMap().put("questionLibrary", questionLibrary);
-            mv.setViewName("QuestionLibrary/QuestionLibrarynewRecord");
-            request.setAttribute("failureMessage",
-                    "All field are Required.Please Enter Valid data");
+//            mv.setViewName("QuestionLibrary/QuestionLibrarynewRecord");
+            request.setAttribute("successMessage",
+                    "Question Edited successfully");
+            mv = QuestionLibraryCreate(request, response);
         }
 
         return mv;

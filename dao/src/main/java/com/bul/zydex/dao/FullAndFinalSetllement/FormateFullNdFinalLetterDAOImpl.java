@@ -23,7 +23,7 @@ public class FormateFullNdFinalLetterDAOImpl<T> extends GenericsDAOImpl<T> imple
     @Override
     public List<?> fetchFnFDate() {
         
-        String query = "SELECT a"
+        String query = "SELECT a.id,a.companyName,a.createDate"
                 + " FROM FormateFullNdFinalLetter a";
 
         List<?> list = getHibernateTemplate().find(query);

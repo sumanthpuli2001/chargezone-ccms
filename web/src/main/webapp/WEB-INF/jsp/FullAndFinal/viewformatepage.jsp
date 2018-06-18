@@ -52,15 +52,19 @@
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Company Name<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="companyName" class="form-control" placeholder="Company Name" readonly="true"></form:input>
-                                                    <%--<form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>--%>
+                                                     <label>Description:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <span >${formateFullNdFinalLetter.companyName}</span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Company Name<span style="color: red;font-size: 12px;">*</span></label>
+                                                     <label>Description:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <span >${formateFullNdFinalLetter.createDate}</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-10">
                                                     <label>Description:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <form:textarea path="description" class="form-control" id="editor" placeholder="description" readonly="true" ></form:textarea>
-                                                        <form:errors path="description" cssClass="errorDiv"></form:errors>
+                                                    <span >${formateFullNdFinalLetter.description}</span>
                                                     </div>
                                                 </div>
 <!--                                                <div class="form-group">
@@ -86,9 +90,6 @@
 
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 
-        <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
-        <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
-    <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
     <script>
         initSample();
 

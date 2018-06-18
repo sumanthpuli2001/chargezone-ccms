@@ -214,7 +214,7 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
                 + " LEFT JOIN r.employeeMaster a "
                 + " LEFT JOIN a.designationMaster b "
                 + " LEFT JOIN a.departmentMaster c "
-                + " WHERE r.status = 2 ";
+                + " WHERE r.status = 4 ";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

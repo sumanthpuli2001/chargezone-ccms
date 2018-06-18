@@ -106,6 +106,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                             noDueMasterForUpdate.setDeptOtherText("");
                             noDueMasterForUpdate.setDeptOther("");
                             noDueMasterForUpdate.setDeptOtherRemark("");
+                            noDueMasterForUpdate.setStatus(2);
                         }
                         
                     }
@@ -125,6 +126,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                             noDueMasterForUpdate.setItOtherText("");
                             noDueMasterForUpdate.setItOtherRemark("");
                             noDueMasterForUpdate.setItOther("");
+                            noDueMasterForUpdate.setStatus(2);
                         }
                         
                     }
@@ -141,6 +143,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                             noDueMasterForUpdate.setFinanceOther("");
                             noDueMasterForUpdate.setFinanceOtherRemark("");
                             noDueMasterForUpdate.setFinanceOtherText("");
+                            noDueMasterForUpdate.setStatus(2);
                         }
                         
                     }
@@ -164,6 +167,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                         noDueMaster.setDeptOtherText("");
                         noDueMaster.setDeptOther("");
                         noDueMaster.setDeptOtherRemark("");
+                        noDueMaster.setStatus(2);
                         
                     }
                     if (null != request.getParameter("itDept") && request.getParameter("itDept").equals("checked")) {
@@ -180,6 +184,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                         noDueMaster.setItOtherText("");
                         noDueMaster.setItOtherRemark("");
                         noDueMaster.setItOther("");
+                        noDueMaster.setStatus(2);
                         
                     }
                     if (null != request.getParameter("fDept") && request.getParameter("fDept").equals("checked")) {
@@ -194,6 +199,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                         noDueMaster.setFinanceOther("");
                         noDueMaster.setFinanceOtherRemark("");
                         noDueMaster.setFinanceOtherText("");
+                        noDueMaster.setStatus(2);
                         
                     }
                     

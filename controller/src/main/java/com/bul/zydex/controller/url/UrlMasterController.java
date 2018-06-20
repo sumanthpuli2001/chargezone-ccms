@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.url;
 
 import com.bul.zydex.model.UrlMaster;
+import com.bul.zydex.validator.UrlMasterValidator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,11 +52,18 @@ public class UrlMasterController extends UrlMasterAbstract {
     public ModelAndView submitClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         UrlMaster urlMaster = new UrlMaster();
+        BindException errors = new BindException(urlMaster, "urlMaster");
         bind(request, urlMaster);
-        urlMasterService.create(urlMaster);
-        request.setAttribute("successMessage",
-                "Information : The Information is saved Successfully.");
-          mv.setViewName("forward:urlMaster.htm?act=viewUrlResult");
+        urlMasterValidator.validate(urlMaster, errors);
+        if (errors.hasErrors()) {
+            mv.addAllObjects(errors.getModel());
+            mv.setViewName("Url/UrlCreate");
+        } else {
+            urlMasterService.create(urlMaster);
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+            mv = viewUrlResult(request, response);
+        }
         return mv;
 
     }
@@ -67,7 +75,7 @@ public class UrlMasterController extends UrlMasterAbstract {
             urlMasterService.delete(Integer.parseInt(id));
         }
         request.setAttribute("successMessage",
-                "Info : One or more records are deleted successfully.");
+                "Info : Rrecord Deleted successfully.");
         mv.setViewName("forward:urlMaster.htm?act=viewUrlResult");
         return mv;
 

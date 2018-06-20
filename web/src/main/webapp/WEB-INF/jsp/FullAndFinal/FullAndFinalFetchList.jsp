@@ -44,19 +44,19 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="resignationMaster.htm?act=newFormatCreate" method="post" commandName="formateFullNdFinalLetter"
+        <form:form action="resignationMaster.htm?act=formateLetterDeleteList" method="post" commandName="formateFullNdFinalLetter"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
-                <section class="content">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- Custom Tabs -->
-                            <div class="nav-tabs-custom">
-                                <div class="tab-content">
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <div class="tab-content">
                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                    <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
-                                    <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
+                                <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
+                                <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
 
-                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'resignationMaster.htm?act=newFormatCreate'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
+                                <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'resignationMaster.htm?act=newFormatCreate'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
                                 <%--</c:if>--%>
                                 <div class="box-header">
                                 </div>
@@ -81,7 +81,7 @@
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Company Name</th>
-                                                                    <th style="width: 50px;">Approval Person</th>
+                                                                    <!--<th style="width: 50px;">Approval Person</th>-->
                                                                     <th style="width: 50px;">Create Date</th>
                                                                     <th style="width: 100px;">Action</th>
                                                                     <!--<th style="width: 50px;">Edit</th>-->
@@ -92,19 +92,24 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                     <tbody>
-                                                        <c:forEach var="list[0]" items="${list}">
+                                                        <c:forEach var="list" items="${list}">
                                                             <tr>
                                                                 <c:if test="${sessionScope.userRight.employeeManagement}">
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
-                                                                <td>${list[0].companyName}</td>
-                                                                <td>${list[0].createDate}</td>
-                                                                
+                                                                <td>${list[1]}</td>
+                                                                <td>${list[2]}</td>
 
-                                                                    <td>
-                                                                        <div class="btn-group">
-                                                                            <button type="button" onclick="viewClick(${list[0].id});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+
+                                                                <td>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" onclick="viewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" onclick="editClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;Edit
                                                                         </button>
                                                                     </div>
 
@@ -133,7 +138,12 @@
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     <script>
         function viewClick(id) {
-            window.location = 'resignationMaster.htm?act=ViewfullAndfinalSettlement&id=' + id;
+            window.location = 'resignationMaster.htm?act=viewFullndfinle&id=' + id;
+        }
+    </script>
+    <script>
+        function editClick(id) {
+            window.location = 'resignationMaster.htm?act=editView&id=' + id;
         }
     </script>
 </html>

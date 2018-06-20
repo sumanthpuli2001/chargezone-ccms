@@ -1354,7 +1354,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
             Double bonusfm = (Double) o[1];
             bounsdata += Double.valueOf(bonusfm);
         }
-        
+
 //        ////  leaves count /////////////////
         for (int i = 0; i < daysfetch.size(); i++) {
             Object[] o = (Object[]) daysfetch.get(i);
@@ -1366,19 +1366,18 @@ public class ResignationMasterController extends ResignationMasterAbstract {
             Float workingdy = (Float) o[4];
             workingDays += Float.valueOf(workingdy);
         }
-        
+
         /////////  leaves pays amount count //////////
-        
         for (int i = 0; i < salary.size(); i++) {
             Object[] o = (Object[]) salary.get(i);
             Double workingdy = (Double) o[7];
             salaryamount += Double.valueOf(workingdy);
         }
-        
+
         Double amountCount = salaryamount / 30;
-        
+
         Float leavedayscount = workingDays - leavedaysfetch;
-        
+
         Double totalLyamountCount = amountCount * leavedayscount;
 
 //       ///// --------   For Salary For The Month of -------//////
@@ -1399,13 +1398,13 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         Double totalpayable = mmmm + monthAmountTotal;
 //        ------  TOTAL NET PAYABLE ( A - B ) -----  ///////
         Double finaltotalBD = totalpayable - deductionAmount;
-        
+
 //        ------------  Deduction Amount ------------
-        Integer shoesDeduction =  fullAndFinalSettlement.getShoesDeduction();
-        Integer uniformDeduction =  fullAndFinalSettlement.getUniformDeduction();
-        Integer otherDeduction =  fullAndFinalSettlement.getOtherDeduction();
-        Integer noticePeriodRecovery =  fullAndFinalSettlement.getNoticePeriodRecovery();
-        
+        Integer shoesDeduction = fullAndFinalSettlement.getShoesDeduction();
+        Integer uniformDeduction = fullAndFinalSettlement.getUniformDeduction();
+        Integer otherDeduction = fullAndFinalSettlement.getOtherDeduction();
+        Integer noticePeriodRecovery = fullAndFinalSettlement.getNoticePeriodRecovery();
+
         Integer totaldeduction = noticePeriodRecovery + shoesDeduction + uniformDeduction + otherDeduction;
 
         int designation = employeeMaster.getDesignationMaster().getId();
@@ -1492,6 +1491,36 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         request.setAttribute("successMessage",
                 "Information: The Format Full And Final Settlement Create successfully");
 
+        List<?> list = formateFullNdFinalLetterService.fetchFnFDate();
+        mv.getModelMap().put("list", list);
+        mv.getModelMap().put("formateFullNdFinalLetter", formateFullNdFinalLetter);
+        mv.setViewName("FullAndFinal/FullAndFinalFetchList");
+
+        return mv;
+    }
+
+    public ModelAndView EditViewSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        BindException errors = new BindException(formateFullNdFinalLetter, "formateFullNdFinalLetter");
+        bind(request, formateFullNdFinalLetter);
+
+        FormateFullNdFinalLetter ffnfl = formateFullNdFinalLetterService.readById(formateFullNdFinalLetter.getId());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+
+        formateFullNdFinalLetter.setUpdatedDate(sdf.format(cDate));
+        formateFullNdFinalLetter.setUpdatedBy(employeeMaster.getId());
+        formateFullNdFinalLetter.setCreatedBy(ffnfl.getCreatedBy());
+        formateFullNdFinalLetter.setCreateDate(ffnfl.getCreateDate());
+        formateFullNdFinalLetter.setStatus(1);
+        formateFullNdFinalLetterService.update(formateFullNdFinalLetter);
+
+        request.setAttribute("successMessage",
+                "Information: The Format Full And Final Settlement updated successfully");
+
         mv = fullandfcreateClick(request, response);
 
         return mv;
@@ -1510,6 +1539,56 @@ public class ResignationMasterController extends ResignationMasterAbstract {
             }
         }
         mv = fullAndfinal(request, response);
+        return mv;
+    }
+
+    public ModelAndView viewFullndfinle(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        selectEmployee(request, response);
+        selectedEmployeeFor360Feedback(request, employeeMaster);
+
+        String id = request.getParameter("id");
+        formateFullNdFinalLetter = formateFullNdFinalLetterService.readById(Integer.parseInt(id));
+
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("formateFullNdFinalLetter", formateFullNdFinalLetter);
+        mv.setViewName("FullAndFinal/viewformatepage");
+        return mv;
+    }
+
+    public ModelAndView editView(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        selectEmployee(request, response);
+        selectedEmployeeFor360Feedback(request, employeeMaster);
+
+        String id = request.getParameter("id");
+        formateFullNdFinalLetter = formateFullNdFinalLetterService.readById(Integer.parseInt(id));
+
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("formateFullNdFinalLetter", formateFullNdFinalLetter);
+        mv.setViewName("FullAndFinal/EditViewFormatePage");
+        return mv;
+    }
+
+    public ModelAndView formateLetterDeleteList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String[] empId = request.getParameterValues("checkId");
+        for (String z : empId) {
+            try {
+                formateFullNdFinalLetterService.delete(Integer.parseInt(z));
+                request.setAttribute("successMessage",
+                        "Info : One or more records are deleted successfully.");
+            } catch (Exception e) {
+
+            }
+        }
+        mv = fullandfcreateClick(request, response);
         return mv;
     }
 }

@@ -6,6 +6,7 @@
 package com.bul.zydex.service.Vacancy;
 
 import com.bul.zydex.dao.Vacancy.VacancyMasterDAO;
+import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.GenericsServiceImpl;
 import java.util.List;
 
@@ -44,6 +45,11 @@ public class VacancyMasterServiceImpl<T> extends GenericsServiceImpl<T> implemen
     @Override
     public List<?> fetchDateWiseData(String startDate, String endDate) {
         return vacancyMasterDAO.fetchDateWiseData(startDate, endDate);
+    }
+
+    @Override
+    public VacancyMaster readByVacancyId(int vacancyId) {
+        return vacancyMasterDAO.readByVacancyId(vacancyId);
     }
 
 }

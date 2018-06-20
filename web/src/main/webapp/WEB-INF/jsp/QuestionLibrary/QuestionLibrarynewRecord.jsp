@@ -124,7 +124,8 @@
                                         <div class="form-group">
                                             <div class="col-sm-4">
                                                 <form:input path="id" id="id" class="form-control" type="hidden"></form:input>
-                                                    <label>Category<span style="color: red;font-size: 12px;">*</span></label>
+                                                <input type="hidden" id="ans" name="ans" value="${questionAns[0].ans}">
+                                                <label>Category<span style="color: red;font-size: 12px;">*</span></label>
                                                 <form:select path="mprEmployeeCategory.id" id="mprEmployeeCategory" class="form-control" required="true">
                                                     <form:option value="" label="-- Select --" />
                                                     <form:options items="${categoryList}"></form:options>
@@ -194,7 +195,7 @@
                                             </div>-->
 
                                         </div>
-                                            
+
                                         <div id="mcqshow" class="form-group">
                                             <div class="col-sm-6">
                                                 <label>MCQ Options</label>
@@ -279,11 +280,8 @@
                                                             <td id="policyTd1">
                                                                 <input type="text" name="ans5" id="ans1" value="${questionAns.ans}" class="form-control" >
                                                             </td>
-
                                                             <td style="text-align: center">
-                                                                <!--<input type="radio" name="correctans"  value="5" >-->
                                                                 <form:radiobutton path="ansId"  name="correctans"  value="5" />
-                                                                <!--                                                            <input type="checkbox" name="correctans"  value="r1" class="iCheck-helper">-->
                                                             </td>
                                                         </tr>
                                                         <tr id="templateRow">
@@ -292,113 +290,20 @@
                                                                 <input type="text" name="ans6" id="ans1" value="${questionAns.ans}" class="form-control" >
                                                             </td>
                                                             <td style="text-align: center">
-                                                                <!--<input type="radio" name="correctans"  value="6" >-->
                                                                 <form:radiobutton path="ansId" id="ansId"  name="correctans"  value="6"/>
-                                                                <!--                                                            <input type="checkbox" name="correctans"  value="r1" class="iCheck-helper">-->
                                                             </td>
                                                         </tr>
                                                     </c:if>
                                                     <c:forEach var="questionAns" items="${questionAns}" varStatus="status">
                                                         <tr id="templateRow">
-
-                                                            <%--<c:if test="${status.count eq 1}">--%>
                                                             <td style="text-align: center">${status.count}</td>
-                                                            <%--</c:if>--%>
-                                                            <%--<c:if test="${status.count eq 1}">--%>
                                                             <td id="policyTd1">
                                                                 <input type="text" name="ans${status.count}" id="ans1" value="${questionAns.ans}" class="form-control" >
                                                             </td>
-                                                            <%--</c:if>--%>
-                                                            <%--<c:if test="${status.count eq 1}">--%>
                                                             <td style="text-align: center">
-
-<!--<input type="radio" name="correctans"  value="${status.count}" >-->
                                                                 <form:radiobutton path="ansId"  name="correctans" checked="${questionAns.id == questionLibrary.ansId ? 'checked' : '' }" value="${status.count}"/>
-                                                                <!--<input type="checkbox" name="correctans"  value="r1" class="iCheck-helper">-->
                                                             </td>
-
-                                                            <%--</c:if>--%>
-                                                            <%--<c:if test="${status.count eq 1}">--%>
-                                                            <%--</c:if>--%>
                                                         </tr>
-                                                        <%--<c:if test="${status.count eq 3}">--%>
-<!--                                                            <tr id="ans3${status.count}" id="templateRow" >
-
-                                                                <td style="text-align: center" >4</td>
-
-                                                                <td id="policyTd1">
-                                                                    <input type="text" name="ans1"  value="${questionAns.ans}" class="form-control">
-                                                                </td>
-
-                                                                <td style="text-align: center">
-                                                                    <input type="radio" name="correctans" value="r1"  class="iCheck-helper" checked="true">
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="text-align: center" >5</td>
-
-                                                                <td id="policyTd1">
-                                                                    <input type="text" name="ans1"  value="${questionAns.ans}" class="form-control">
-                                                                </td>
-
-                                                                <td style="text-align: center">
-                                                                    <input type="radio" name="correctans" value="r1"  class="iCheck-helper" checked="true">
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="text-align: center" >6</td>
-
-                                                                <td id="policyTd1">
-                                                                    <input type="text" name="ans1"  value="${questionAns.ans}" class="form-control">
-                                                                </td>
-
-                                                                <td style="text-align: center">
-                                                                    <input type="radio" name="correctans" value="r1"  class="iCheck-helper" checked="true">
-                                                                </td>
-
-                                                            </tr>-->
-                                                        <%--</c:if>--%>
-                                                        <%--<c:if test="${status.count eq 4}">--%>
-                                                        <!--                                                            <tr>
-                                                                                                                        <td style="text-align: center" >5</td>
-                                                        
-                                                                                                                        <td id="policyTd1">
-                                                                                                                            <input type="text" name="ans1"  value="${questionAns.ans}" class="form-control">
-                                                                                                                        </td>
-                                                        
-                                                                                                                        <td style="text-align: center">
-                                                                                                                            <input type="radio" name="correctans" value="r1"  class="iCheck-helper" checked="true">
-                                                                                                                        </td>
-                                                                                                                    </tr>
-                                                                                                                    <tr>
-                                                                                                                        <td style="text-align: center" >6</td>
-                                                        
-                                                                                                                        <td id="policyTd1">
-                                                                                                                            <input type="text" name="ans1"  value="${questionAns.ans}" class="form-control">
-                                                                                                                        </td>
-                                                        
-                                                                                                                        <td style="text-align: center">
-                                                                                                                            <input type="radio" name="correctans" value="r1"  class="iCheck-helper" checked="true">
-                                                                                                                        </td>
-                                                        
-                                                                                                                    </tr>-->
-                                                        <%--</c:if>--%>
-                                                        <%--<c:if test="${status.count eq 5}">--%>
-
-                                                        <!--                                                            <tr>
-                                                                                                                        <td style="text-align: center" >6</td>
-                                                        
-                                                                                                                        <td id="policyTd1">
-                                                                                                                            <input type="text" name="ans1"  value="${questionAns.ans}" class="form-control">
-                                                                                                                        </td>
-                                                        
-                                                                                                                        <td style="text-align: center">
-                                                                                                                            <input type="radio" name="correctans" value="r1"  class="iCheck-helper" checked="true">
-                                                                                                                        </td>
-                                                        
-                                                                                                                    </tr>-->
-                                                        <%--</c:if>--%>
-                                                        <%--<c:if test="${status.count ne 1}">--%>
                                                     </c:forEach>
                                                 </table>
                                             </div>
@@ -473,8 +378,8 @@
 //        }
         if ('' == type && '' == marks && '' == mprEmployeeCategory) {
             return false;
-        }else{
-        return true;
-    }
+        } else {
+            return true;
+        }
     }
 </script>

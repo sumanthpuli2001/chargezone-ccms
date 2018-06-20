@@ -42,7 +42,7 @@
                                         </div>
                                         <form:form class="form-horizontal" method="post"
                                                    commandName="vacancyMaster" action="vacancy.htm?act=CreateNewVacancy">
-                                            <input type="hidden" name="mprMasterid" id="mprMasterid" value="${mprMaster.id}">
+                                            <input type="hidden" name="mprMasterid" id="mprMasterid" value="52">
 
                                             <div class="form-group">
                                                 <div class="col-sm-6">

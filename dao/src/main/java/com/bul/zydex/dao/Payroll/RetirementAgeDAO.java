@@ -12,5 +12,6 @@ import com.bul.zydex.dao.GenericsDAO;
  * @author Hussain
  */
 public interface RetirementAgeDAO<T> extends GenericsDAO<T> {
-    
+
+    public boolean isExist(T object);
 }

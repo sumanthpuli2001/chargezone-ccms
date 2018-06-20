@@ -648,6 +648,7 @@
     
     <bean id="urlMasterController1" class="com.bul.zydex.controller.url.UrlMasterController" parent="controllerConfig" >
         <property name="urlMasterService" ref="urlMasterService1"/>
+        <property name="urlMasterValidator" ref="urlMasterValidator1"/>
     </bean>
     <bean id="pmpFormStatusMasterController1" class="com.bul.zydex.controller.PmpFormStatusMaster.PmpFormStatusMasterController" parent="controllerConfig" >
         <property name="pmpFormStatusMasterService" ref="pmpFormStatusMasterService1"/>
@@ -1140,6 +1141,7 @@
         <property name="corporateVideoService" ref="corporateVideoService1"></property>
         <property name="rAndRService" ref="rAndRService1"></property>
         <property name="kaizenMasterService" ref="kaizenMasterService1"></property>
+        <property name="employeeMasterService" ref="employeeMasterService1"></property>
     </bean>
     <bean id="onlineAssessmentController1" class="com.bul.zydex.controller.Recruitment.OnlineAssessmentController" parent="controllerConfig" >
         <property name="onlineAssessmentService" ref="onlineAssessmentService1" />

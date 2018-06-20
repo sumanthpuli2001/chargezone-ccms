@@ -42,15 +42,21 @@ public class CompanyMasterController extends CompanyMasterAbstract {
             mv.getModelMap().put("companyMaster", companyMaster);
             mv.setViewName("Company/CompanyCreate");
         } else {
-            if (companyMasterService.isExist(companyMaster)) {
-                companyMasterService.createOrUpdate(companyMaster);
-                List<?> companyList = companyMasterService.read();
-                mv.addObject("companyList", companyList);
-                mv.addObject("successMessage", "Information : Information Saved Successfully.");
-                mv.setViewName("Company/CompanyList");
+            if ("" != companyMaster.getCompanyName()) {
+                if (companyMasterService.isExist(companyMaster)) {
+                    companyMasterService.createOrUpdate(companyMaster);
+                    List<?> companyList = companyMasterService.read();
+                    mv.addObject("companyList", companyList);
+                    mv.addObject("successMessage", "Information : Information Saved Successfully.");
+                    mv.setViewName("Company/CompanyList");
+                    return mv;
+                } else {
+                    mv.addObject("failureMessage", "Error : Information Is Already Exist. ");
+                    mv.setViewName("Company/CompanyCreate");
+                }
             } else {
-                mv.addObject("failureMessage", "Error : Information Is Already Exist. ");
                 mv.setViewName("Company/CompanyCreate");
+                mv.addObject("failureMessage", "Error : Please Enter CompanyName. ");
             }
         }
         mv.getModelMap().put("companyMaster", companyMaster);

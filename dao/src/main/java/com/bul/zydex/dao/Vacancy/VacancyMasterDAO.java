@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.Vacancy;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.VacancyMaster;
 import java.util.List;
 
 /**
@@ -21,5 +22,7 @@ public interface VacancyMasterDAO<T> extends GenericsDAO<T> {
     public List<?> fetchVacancyBydate(String date);
 
     public List<?> fetchDateWiseData(String startDate, String endDate);
+    
+    public VacancyMaster readByVacancyId(int vacancyId);
 
 }

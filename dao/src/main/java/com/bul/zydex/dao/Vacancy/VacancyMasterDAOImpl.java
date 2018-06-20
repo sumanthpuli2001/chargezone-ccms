@@ -86,4 +86,20 @@ public class VacancyMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Vacan
         return list;
 
     }
+
+    @Override
+    public VacancyMaster readByVacancyId(int vacancyId) {
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        String query = "SELECT a"
+                + " FROM VacancyMaster a "
+                + " Where a.id = " + vacancyId;
+        List<?> list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            vacancyMaster = (VacancyMaster) list.get(0);
+        } else {
+            vacancyMaster = null;
+        }
+        return vacancyMaster;
+
+    }
 }

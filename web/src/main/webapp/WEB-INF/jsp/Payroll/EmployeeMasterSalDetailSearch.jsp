@@ -42,7 +42,21 @@
             }
         }
     </script>
-
+    <script>
+         function checkBlankField() {
+            var flag = true;
+            if ($('#zydexLocationMasterId').val() == '') {
+                document.getElementById('zydexLocationMasterIdError').innerHTML = '-It must be Selected.';
+                flag = false;
+            }
+            return flag;
+        }
+         function OnchangeFunction(idString) {
+            if (document.getElementById(idString).innerHTML != null) {
+                document.getElementById(idString).innerHTML = '';
+            }
+        }
+    </script>
 
 
     <!-- Content Wrapper. Contains page content -->
@@ -62,7 +76,8 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form class="form-horizontal" role="form1" action="employeeSalaryProcess.htm?act=searchMasterEmpDetailSubmit" method="post" name='form' onsubmit='return saveSubmit11();'>
+        <form:form class="form-horizontal" role="form1" action="employeeSalaryProcess.htm?act=searchMasterEmpDetailSubmit" 
+                   method="post" name='form' onsubmit='return checkBlankField();'>
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -81,12 +96,13 @@
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Location:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
+                                                    <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control " onchange="OnchangeFunction('zydexLocationMasterIdError');">
                                                         <option value="" label="-- Select --" ></option>
                                                         <c:forEach var="deptName" items="${deptMap}">
                                                             <option value="${deptName.key}" label="${deptName.value}" ></option>
                                                         </c:forEach>
                                                     </select>
+                                                     <span style="font-size: 14px; color: #dd4b39;" id="zydexLocationMasterIdError"></span>
                                                 </div>
 
                                                 <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">

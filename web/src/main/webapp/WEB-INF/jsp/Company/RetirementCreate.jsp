@@ -12,6 +12,21 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Retirement Create</title>
+            <script>
+            function checkBlankField() {
+                var flag = true;
+                if ($('#retireAge').val().replace(/\s/g, "") == '') {
+                    document.getElementById('retireAgeError').innerHTML = '-It must not be empty or white space.';
+                    flag = false;
+                }
+                return flag;
+            }
+            function trainerOnchangeFunction(idString) {
+                if (document.getElementById(idString).innerHTML != null) {
+                    document.getElementById(idString).innerHTML = '';
+                }
+            }
+        </script>
     </head>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -39,7 +54,7 @@
                                 <c:if test="${!empty failureMessage}">
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
-                                <form:form class="form-horizontal" method="post" 
+                                <form:form class="form-horizontal" method="post" onsubmit="return checkBlankField();"
                                            commandName="retirementAge" action="retirementAge.htm?act=createSubmit">
                                     <form:hidden path="id"></form:hidden>
 
@@ -48,7 +63,8 @@
                                                 <label class="control-label">Enter Retirement Age:<span style="color: red;font-size: 12px;">*</span></label>
                                             </div>
                                             <div class="col-sm-7">
-                                            <form:input path="retireAge" class="form-control"/>
+                                            <form:input path="retireAge" id="retireAge" class="form-control" onchange="trainerOnchangeFunction('retireAgeError');"/>
+                                            <span style="font-size: 14px; color: #dd4b39;" id="retireAgeError"></span>
                                             <form:errors path="retireAge" cssClass="errorDiv"/>
                                         </div>
                                     </div>

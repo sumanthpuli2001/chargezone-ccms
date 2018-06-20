@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.Recruitment;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
+import com.bul.zydex.model.MprApproval;
 import com.bul.zydex.model.MprMaster;
 import java.util.List;
 
@@ -67,7 +68,7 @@ public class MprMasterDAOImpl<T> extends GenericsDAOImpl<T> implements MprMaster
 
     @Override
     public List<?> Mppdelete(String mppId) {
-           String query = "";
+        String query = "";
         query += " "
                 + " SELECT a"
                 + " FROM MprMaster a "
@@ -77,4 +78,19 @@ public class MprMasterDAOImpl<T> extends GenericsDAOImpl<T> implements MprMaster
         return list;
     }
 
+    @Override
+    public MprMaster readByMPRId(int mprId) {
+        MprMaster mprMaster = new MprMaster();
+        String query = "SELECT a"
+                + " FROM MprMaster a "
+                + " Where a.id = " + mprId;
+        List<?> list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            mprMaster = (MprMaster) list.get(0);
+        } else {
+            mprMaster = null;
+        }
+        return mprMaster;
+
     }
+}

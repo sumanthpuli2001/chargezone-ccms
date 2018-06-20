@@ -92,7 +92,7 @@ public class VacancyController extends VacancyAbstract {
             CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
 
             mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-            mv.setViewName("Vacancy/applyJobCandidateRegistration");
+            mv.setViewName("Vacancy/MyProfile");
         }
         return mv;
     }
@@ -949,17 +949,16 @@ public class VacancyController extends VacancyAbstract {
         CandidateApplyJob caj = candidateJobApplyService.readById(candidateApplyJob.getId());
         CandidateApplyJob2 caj2 = candidateApplyJob2Service.readById(candidateApplyJob2.getId());
 
-        if(null != request.getParameter("candidateApplyJob.photograph") || "" != request.getParameter("candidateApplyJob.photograph"))
-        {    
+        if (null != request.getParameter("candidateApplyJob.photograph") || "" != request.getParameter("candidateApplyJob.photograph")) {
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
             MultipartFile multipartFile = multipartRequest.getFile("candidateApplyJob.photograph");
-            
+
             if (multipartFile != null && multipartFile.getSize() > 0) {
                 try {
                     String fileLocationURL = getServletContext().getRealPath("/")
-                        + File.separator + "StorageYard"
-                        + File.separator + "candidate" + File.separator + "candidateimage" + File.separator + candidateId + File.separator + "" + caj.getPhotograph();
-                    
+                            + File.separator + "StorageYard"
+                            + File.separator + "candidate" + File.separator + "candidateimage" + File.separator + candidateId + File.separator + "" + caj.getPhotograph();
+
                     File getFile = new File(fileLocationURL);
                     getFile.delete();
 
@@ -971,94 +970,89 @@ public class VacancyController extends VacancyAbstract {
                     if (!Folder1.exists()) {
                         Folder1.mkdirs();
                     }
-                    
+
                     File file2 = new File(fileLocationURL2 + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
                     multipartFile.transferTo(file2);
                     candidateApplyJob.setPhotograph(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
-                    
+
                 } catch (Exception e) {
                     e.getStackTrace();
                 }
-            }
-            else{
+            } else {
                 candidateApplyJob.setPhotograph(caj.getPhotograph());
             }
         }
-        
+
         //certificate attach
-        if(null != request.getParameter("candidateApplyJob.certificateAttach") || "" != request.getParameter("candidateApplyJob.certificateAttach"))
-        { 
+        if (null != request.getParameter("candidateApplyJob.certificateAttach") || "" != request.getParameter("candidateApplyJob.certificateAttach")) {
             MultipartHttpServletRequest multipartRequest2 = (MultipartHttpServletRequest) request;
             MultipartFile multipartFile2 = multipartRequest2.getFile("candidateApplyJob.certificateAttach");
 
             if (multipartFile2 != null && multipartFile2.getSize() > 0) {
                 try {
                     String fileLocationURL11 = getServletContext().getRealPath("/")
-                    + File.separator + "StorageYard"
-                    + File.separator + "candidate" + File.separator + "candidatecertificate" + File.separator + candidateId  + File.separator + "" + caj.getCertificateAttach();
-                    
+                            + File.separator + "StorageYard"
+                            + File.separator + "candidate" + File.separator + "candidatecertificate" + File.separator + candidateId + File.separator + "" + caj.getCertificateAttach();
+
                     File getFile1 = new File(fileLocationURL11);
                     getFile1.delete();
-                    
+
                     String fileLocationURL4 = getServletContext().getRealPath("/")
-                        + File.separator + "StorageYard"
-                        + File.separator + "candidate" + File.separator + "candidatecertificate"  + File.separator + candidateId + File.separator;
+                            + File.separator + "StorageYard"
+                            + File.separator + "candidate" + File.separator + "candidatecertificate" + File.separator + candidateId + File.separator;
 
                     File Folder12 = new File(fileLocationURL4);
                     if (!Folder12.exists()) {
                         Folder12.mkdirs();
                     }
-                    
+
                     File file2 = new File(fileLocationURL4 + multipartFile2.getOriginalFilename().replaceAll(" ", "_"));
                     multipartFile2.transferTo(file2);
                     candidateApplyJob.setCertificateAttach(multipartFile2.getOriginalFilename().replaceAll(" ", "_"));
-                    
+
                 } catch (Exception e) {
                     e.getStackTrace();
                 }
-            }
-            else{
+            } else {
                 candidateApplyJob.setCertificateAttach(caj.getCertificateAttach());
             }
-                
+
         }
 
         candidateApplyJob.setApplayJobUserMaster(caj.getApplayJobUserMaster());
         candidateJobApplyService.update(candidateApplyJob);
 
-       //candidate salary slip
-        if(null != request.getParameter("candidateApplyJob2.salarySlipAttachment") || "" != request.getParameter("candidateApplyJob2.salarySlipAttachment"))
-        { 
+        //candidate salary slip
+        if (null != request.getParameter("candidateApplyJob2.salarySlipAttachment") || "" != request.getParameter("candidateApplyJob2.salarySlipAttachment")) {
             MultipartHttpServletRequest multipartRequest1 = (MultipartHttpServletRequest) request;
             MultipartFile multipartFile1 = multipartRequest1.getFile("candidateApplyJob2.salarySlipAttachment");
 
             if (multipartFile1 != null && multipartFile1.getSize() > 0) {
                 try {
                     String fileLocationURL1 = getServletContext().getRealPath("/")
-                        + File.separator + "StorageYard"
-                        + File.separator + "candidate" + File.separator + "candidatesalaryslip"  + File.separator + candidateId + File.separator + "" + caj2.getSalarySlipAttachment();
-                    
+                            + File.separator + "StorageYard"
+                            + File.separator + "candidate" + File.separator + "candidatesalaryslip" + File.separator + candidateId + File.separator + "" + caj2.getSalarySlipAttachment();
+
                     File File2 = new File(fileLocationURL1);
                     File2.delete();
-                    
+
                     String fileLocationURL3 = getServletContext().getRealPath("/")
-                    + File.separator + "StorageYard"
-                    + File.separator + "candidate" + File.separator + "candidatesalaryslip"  + File.separator + candidateId + File.separator;
-            
+                            + File.separator + "StorageYard"
+                            + File.separator + "candidate" + File.separator + "candidatesalaryslip" + File.separator + candidateId + File.separator;
+
                     File Folder2 = new File(fileLocationURL3);
                     if (!Folder2.exists()) {
                         Folder2.mkdirs();
                     }
-                    
+
                     File file2 = new File(fileLocationURL3 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
                     multipartFile1.transferTo(file2);
                     candidateApplyJob2.setSalarySlipAttachment(multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
-                    
+
                 } catch (Exception e) {
                     e.getStackTrace();
                 }
-            }
-            else{
+            } else {
                 candidateApplyJob2.setSalarySlipAttachment(caj2.getSalarySlipAttachment());
             }
         }
@@ -1085,75 +1079,75 @@ public class VacancyController extends VacancyAbstract {
 
         if (null == caqList || caqList.isEmpty()) {
             for (int i = 0; i < strCAQ1.length; i++) {
-                if ((!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty()) 
-                    && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty()) 
-                    && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())){
-                        CandidateAcademicQualification caq = new CandidateAcademicQualification();
-                        caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
-                        caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
-                        caq.setAcademicExamination(strCAQ3[i]);
-                        caq.setAcademicBoard(strCAQ4[i]);
-                        caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
-                        caq.setAcademicMarksInPercent(strCAQ6[i]);
-                        caq.setAcademicClass(strCAQ7[i]);
-                        caq.setAcademicRankOrScholarship(strCAQ8[i]);
-                        caq.setCreatedDate(sdf.format(cdate));
-                        caq.setCandidateApplyJob(candidateApplyJob);
-                        candidateAcademicQualificationService.create(caq);
+                if ((!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty())
+                        && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty())
+                        && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())) {
+                    CandidateAcademicQualification caq = new CandidateAcademicQualification();
+                    caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
+                    caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
+                    caq.setAcademicExamination(strCAQ3[i]);
+                    caq.setAcademicBoard(strCAQ4[i]);
+                    caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
+                    caq.setAcademicMarksInPercent(strCAQ6[i]);
+                    caq.setAcademicClass(strCAQ7[i]);
+                    caq.setAcademicRankOrScholarship(strCAQ8[i]);
+                    caq.setCreatedDate(sdf.format(cdate));
+                    caq.setCandidateApplyJob(candidateApplyJob);
+                    candidateAcademicQualificationService.create(caq);
                 }
             }
         } else if ((caqList != null || !caqList.isEmpty()) && (strCAQ1.length == caqList.size())) {
             for (int i = 0; i < strCAQ1.length; i++) {
-                if ((!strCAQ0[i].equals("") && !strCAQ0[i].isEmpty()) 
-                    && (!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty()) 
-                    && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty()) 
-                    && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())){
-                        CandidateAcademicQualification caq = candidateAcademicQualificationService.readById(Integer.parseInt(strCAQ0[i]));
-                        caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
-                        caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
-                        caq.setAcademicExamination(strCAQ3[i]);
-                        caq.setAcademicBoard(strCAQ4[i]);
-                        caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
-                        caq.setAcademicMarksInPercent(strCAQ6[i]);
-                        caq.setAcademicClass(strCAQ7[i]);
-                        caq.setAcademicRankOrScholarship(strCAQ8[i]);
-                        candidateAcademicQualificationService.update(caq);
+                if ((!strCAQ0[i].equals("") && !strCAQ0[i].isEmpty())
+                        && (!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty())
+                        && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty())
+                        && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())) {
+                    CandidateAcademicQualification caq = candidateAcademicQualificationService.readById(Integer.parseInt(strCAQ0[i]));
+                    caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
+                    caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
+                    caq.setAcademicExamination(strCAQ3[i]);
+                    caq.setAcademicBoard(strCAQ4[i]);
+                    caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
+                    caq.setAcademicMarksInPercent(strCAQ6[i]);
+                    caq.setAcademicClass(strCAQ7[i]);
+                    caq.setAcademicRankOrScholarship(strCAQ8[i]);
+                    candidateAcademicQualificationService.update(caq);
                 }
             }
         } else {
             for (int i = 0; i < caqList.size(); i++) {
-                if ((!strCAQ0[i].equals("") && !strCAQ0[i].isEmpty()) 
-                    && (!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty()) 
-                    && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty()) 
-                    && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())){
-                        CandidateAcademicQualification caq = candidateAcademicQualificationService.readById(Integer.parseInt(strCAQ0[i]));
-                        caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
-                        caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
-                        caq.setAcademicExamination(strCAQ3[i]);
-                        caq.setAcademicBoard(strCAQ4[i]);
-                        caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
-                        caq.setAcademicMarksInPercent(strCAQ6[i]);
-                        caq.setAcademicClass(strCAQ7[i]);
-                        caq.setAcademicRankOrScholarship(strCAQ8[i]);
-                        candidateAcademicQualificationService.update(caq); 
+                if ((!strCAQ0[i].equals("") && !strCAQ0[i].isEmpty())
+                        && (!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty())
+                        && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty())
+                        && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())) {
+                    CandidateAcademicQualification caq = candidateAcademicQualificationService.readById(Integer.parseInt(strCAQ0[i]));
+                    caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
+                    caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
+                    caq.setAcademicExamination(strCAQ3[i]);
+                    caq.setAcademicBoard(strCAQ4[i]);
+                    caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
+                    caq.setAcademicMarksInPercent(strCAQ6[i]);
+                    caq.setAcademicClass(strCAQ7[i]);
+                    caq.setAcademicRankOrScholarship(strCAQ8[i]);
+                    candidateAcademicQualificationService.update(caq);
                 }
             }
             for (int i = caqList.size() + 1; i < strCAQ1.length; i++) {
-                if ((!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty()) 
-                    && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty()) 
-                    && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())){
-                        CandidateAcademicQualification caq = new CandidateAcademicQualification();
-                        caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
-                        caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
-                        caq.setAcademicExamination(strCAQ3[i]);
-                        caq.setAcademicBoard(strCAQ4[i]);
-                        caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
-                        caq.setAcademicMarksInPercent(strCAQ6[i]);
-                        caq.setAcademicClass(strCAQ7[i]);
-                        caq.setAcademicRankOrScholarship(strCAQ8[i]);
-                        caq.setCandidateApplyJob(candidateApplyJob);
-                        caq.setCreatedDate(sdf.format(cdate));
-                        candidateAcademicQualificationService.create(caq);
+                if ((!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty())
+                        && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty())
+                        && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())) {
+                    CandidateAcademicQualification caq = new CandidateAcademicQualification();
+                    caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
+                    caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
+                    caq.setAcademicExamination(strCAQ3[i]);
+                    caq.setAcademicBoard(strCAQ4[i]);
+                    caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
+                    caq.setAcademicMarksInPercent(strCAQ6[i]);
+                    caq.setAcademicClass(strCAQ7[i]);
+                    caq.setAcademicRankOrScholarship(strCAQ8[i]);
+                    caq.setCandidateApplyJob(candidateApplyJob);
+                    caq.setCreatedDate(sdf.format(cdate));
+                    candidateAcademicQualificationService.create(caq);
                 }
             }
         }
@@ -1172,85 +1166,85 @@ public class VacancyController extends VacancyAbstract {
 
         if (null == cedList || cedList.isEmpty()) {
             for (int i = 0; i < strCED1.length; i++) {
-                if ((!strCED1[i].equals("") && !strCED1[i].isEmpty()) 
-                    && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty()) 
-                    && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty()) 
-                    && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
-                    && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())){
-                        CandidateExperienceDetail ced = new CandidateExperienceDetail();
-                        ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
-                        ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
-                        ced.setExperienceOrganization(strCED3[i]);
-                        ced.setExperienceDepartment(strCED4[i]);
-                        ced.setExperienceDesignation(strCED5[i]);
-                        ced.setExperienceJobResponsibilities(strCED6[i]);
-                        ced.setExperienceRemunerationOnJoin(strCED7[i]);
-                        ced.setExperienceRemunerationOnLeaving(strCED8[i]);
-                        ced.setExperienceReasonForLeaving(strCED9[i]);
-                        ced.setCreatedDate(sdf.format(cdate));
-                        ced.setCandidateApplyJob(candidateApplyJob);
-                        candidateExperienceDetailService.create(ced);
+                if ((!strCED1[i].equals("") && !strCED1[i].isEmpty())
+                        && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
+                        && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty())
+                        && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
+                        && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
+                    CandidateExperienceDetail ced = new CandidateExperienceDetail();
+                    ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
+                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
+                    ced.setExperienceOrganization(strCED3[i]);
+                    ced.setExperienceDepartment(strCED4[i]);
+                    ced.setExperienceDesignation(strCED5[i]);
+                    ced.setExperienceJobResponsibilities(strCED6[i]);
+                    ced.setExperienceRemunerationOnJoin(strCED7[i]);
+                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
+                    ced.setExperienceReasonForLeaving(strCED9[i]);
+                    ced.setCreatedDate(sdf.format(cdate));
+                    ced.setCandidateApplyJob(candidateApplyJob);
+                    candidateExperienceDetailService.create(ced);
                 }
             }
         } else if ((cedList != null || !cedList.isEmpty()) && (strCED1.length == cedList.size())) {
             for (int i = 0; i < strCED1.length; i++) {
-                if ( (!strCED0[i].equals("") && !strCED0[i].isEmpty()) && (!strCED1[i].equals("") && !strCED1[i].isEmpty()) 
-                    && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty()) 
-                    && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty()) 
-                    && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
-                    && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())){
-                        CandidateExperienceDetail ced = candidateExperienceDetailService.readById(Integer.parseInt(strCED0[i]));
-                        ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
-                        ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
-                        ced.setExperienceOrganization(strCED3[i]);
-                        ced.setExperienceDepartment(strCED4[i]);
-                        ced.setExperienceDesignation(strCED5[i]);
-                        ced.setExperienceJobResponsibilities(strCED6[i]);
-                        ced.setExperienceRemunerationOnJoin(strCED7[i]);
-                        ced.setExperienceRemunerationOnLeaving(strCED8[i]);
-                        ced.setExperienceReasonForLeaving(strCED9[i]);
-                        candidateExperienceDetailService.update(ced);
+                if ((!strCED0[i].equals("") && !strCED0[i].isEmpty()) && (!strCED1[i].equals("") && !strCED1[i].isEmpty())
+                        && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
+                        && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty())
+                        && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
+                        && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
+                    CandidateExperienceDetail ced = candidateExperienceDetailService.readById(Integer.parseInt(strCED0[i]));
+                    ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
+                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
+                    ced.setExperienceOrganization(strCED3[i]);
+                    ced.setExperienceDepartment(strCED4[i]);
+                    ced.setExperienceDesignation(strCED5[i]);
+                    ced.setExperienceJobResponsibilities(strCED6[i]);
+                    ced.setExperienceRemunerationOnJoin(strCED7[i]);
+                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
+                    ced.setExperienceReasonForLeaving(strCED9[i]);
+                    candidateExperienceDetailService.update(ced);
                 }
             }
         } else {
             for (int i = 0; i < cedList.size(); i++) {
-                if ( (!strCED0[i].equals("") && !strCED0[i].isEmpty()) && (!strCED1[i].equals("") && !strCED1[i].isEmpty()) 
-                    && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty()) 
-                    && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty()) 
-                    && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
-                    && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())){
-                        CandidateExperienceDetail ced = candidateExperienceDetailService.readById(Integer.parseInt(strCED0[i]));
-                        ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
-                        ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
-                        ced.setExperienceOrganization(strCED3[i]);
-                        ced.setExperienceDepartment(strCED4[i]);
-                        ced.setExperienceDesignation(strCED5[i]);
-                        ced.setExperienceJobResponsibilities(strCED6[i]);
-                        ced.setExperienceRemunerationOnJoin(strCED7[i]);
-                        ced.setExperienceRemunerationOnLeaving(strCED8[i]);
-                        ced.setExperienceReasonForLeaving(strCED9[i]);
-                        candidateExperienceDetailService.update(ced);
+                if ((!strCED0[i].equals("") && !strCED0[i].isEmpty()) && (!strCED1[i].equals("") && !strCED1[i].isEmpty())
+                        && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
+                        && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty())
+                        && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
+                        && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
+                    CandidateExperienceDetail ced = candidateExperienceDetailService.readById(Integer.parseInt(strCED0[i]));
+                    ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
+                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
+                    ced.setExperienceOrganization(strCED3[i]);
+                    ced.setExperienceDepartment(strCED4[i]);
+                    ced.setExperienceDesignation(strCED5[i]);
+                    ced.setExperienceJobResponsibilities(strCED6[i]);
+                    ced.setExperienceRemunerationOnJoin(strCED7[i]);
+                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
+                    ced.setExperienceReasonForLeaving(strCED9[i]);
+                    candidateExperienceDetailService.update(ced);
                 }
             }
             for (int i = cedList.size() + 1; i < strCED1.length; i++) {
-                if ((!strCED1[i].equals("") && !strCED1[i].isEmpty()) 
-                    && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty()) 
-                    && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty()) 
-                    && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
-                    && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())){
-                        CandidateExperienceDetail ced = new CandidateExperienceDetail();
-                        ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
-                        ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
-                        ced.setExperienceOrganization(strCED3[i]);
-                        ced.setExperienceDepartment(strCED4[i]);
-                        ced.setExperienceDesignation(strCED5[i]);
-                        ced.setExperienceJobResponsibilities(strCED6[i]);
-                        ced.setExperienceRemunerationOnJoin(strCED7[i]);
-                        ced.setExperienceRemunerationOnLeaving(strCED8[i]);
-                        ced.setExperienceReasonForLeaving(strCED9[i]);
-                        ced.setCreatedDate(sdf.format(cdate));
-                        ced.setCandidateApplyJob(candidateApplyJob);
-                        candidateExperienceDetailService.create(ced);
+                if ((!strCED1[i].equals("") && !strCED1[i].isEmpty())
+                        && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
+                        && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty())
+                        && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
+                        && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
+                    CandidateExperienceDetail ced = new CandidateExperienceDetail();
+                    ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
+                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
+                    ced.setExperienceOrganization(strCED3[i]);
+                    ced.setExperienceDepartment(strCED4[i]);
+                    ced.setExperienceDesignation(strCED5[i]);
+                    ced.setExperienceJobResponsibilities(strCED6[i]);
+                    ced.setExperienceRemunerationOnJoin(strCED7[i]);
+                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
+                    ced.setExperienceReasonForLeaving(strCED9[i]);
+                    ced.setCreatedDate(sdf.format(cdate));
+                    ced.setCandidateApplyJob(candidateApplyJob);
+                    candidateExperienceDetailService.create(ced);
                 }
             }
         }
@@ -1266,69 +1260,69 @@ public class VacancyController extends VacancyAbstract {
 
         if (null == cfbList || cfbList.isEmpty()) {
             for (int i = 0; i < strCFB1.length; i++) {
-                if ((!strCFB1[i].equals("") && !strCFB1[i].isEmpty()) 
-                    && (!strCFB2[i].equals("") && !strCFB2[i].isEmpty()) && (!strCFB3[i].equals("") && !strCFB3[i].isEmpty()) 
-                    && (!strCFB4[i].equals("") && !strCFB4[i].isEmpty()) && (!strCFB5[i].equals("") && !strCFB5[i].isEmpty()) 
-                    && (!strCFB6[i].equals("") && !strCFB6[i].isEmpty())){
-                        CandidateFamilyBackground cfb = new CandidateFamilyBackground();
-                        cfb.setFamilyMemberName(strCFB1[i]);
-                        cfb.setRelationWithFamilyMember(strCFB2[i]);
-                        cfb.setFamilyMemberAge(strCFB3[i]);
-                        cfb.setFamilyMemberQualification(strCFB4[i]);
-                        cfb.setFamilyMemberDesignationOccupation(strCFB5[i]);
-                        cfb.setFamilyMemberMonthlyIncome(strCFB6[i]);
-                        cfb.setCreatedDate(sdf.format(cdate));
-                        cfb.setCandidateApplyJob(candidateApplyJob);
-                        candidateFamilyBackgroundService.create(cfb);
+                if ((!strCFB1[i].equals("") && !strCFB1[i].isEmpty())
+                        && (!strCFB2[i].equals("") && !strCFB2[i].isEmpty()) && (!strCFB3[i].equals("") && !strCFB3[i].isEmpty())
+                        && (!strCFB4[i].equals("") && !strCFB4[i].isEmpty()) && (!strCFB5[i].equals("") && !strCFB5[i].isEmpty())
+                        && (!strCFB6[i].equals("") && !strCFB6[i].isEmpty())) {
+                    CandidateFamilyBackground cfb = new CandidateFamilyBackground();
+                    cfb.setFamilyMemberName(strCFB1[i]);
+                    cfb.setRelationWithFamilyMember(strCFB2[i]);
+                    cfb.setFamilyMemberAge(strCFB3[i]);
+                    cfb.setFamilyMemberQualification(strCFB4[i]);
+                    cfb.setFamilyMemberDesignationOccupation(strCFB5[i]);
+                    cfb.setFamilyMemberMonthlyIncome(strCFB6[i]);
+                    cfb.setCreatedDate(sdf.format(cdate));
+                    cfb.setCandidateApplyJob(candidateApplyJob);
+                    candidateFamilyBackgroundService.create(cfb);
                 }
             }
         } else if ((cfbList != null || !cfbList.isEmpty()) && (strCFB1.length == cfbList.size())) {
             for (int i = 0; i < strCFB1.length; i++) {
-                if ((!strCFB0[i].equals("") && !strCFB0[i].isEmpty()) && (!strCFB1[i].equals("") && !strCFB1[i].isEmpty()) 
-                    && (!strCFB2[i].equals("") && !strCFB2[i].isEmpty()) && (!strCFB3[i].equals("") && !strCFB3[i].isEmpty()) 
-                    && (!strCFB4[i].equals("") && !strCFB4[i].isEmpty()) && (!strCFB5[i].equals("") && !strCFB5[i].isEmpty()) 
-                    && (!strCFB6[i].equals("") && !strCFB6[i].isEmpty())){
-                        CandidateFamilyBackground cfb = candidateFamilyBackgroundService.readById(Integer.parseInt(strCFB0[i]));
-                        cfb.setFamilyMemberName(strCFB1[i]);
-                        cfb.setRelationWithFamilyMember(strCFB2[i]);
-                        cfb.setFamilyMemberAge(strCFB3[i]);
-                        cfb.setFamilyMemberQualification(strCFB4[i]);
-                        cfb.setFamilyMemberDesignationOccupation(strCFB5[i]);
-                        cfb.setFamilyMemberMonthlyIncome(strCFB6[i]);
-                        candidateFamilyBackgroundService.update(cfb);
+                if ((!strCFB0[i].equals("") && !strCFB0[i].isEmpty()) && (!strCFB1[i].equals("") && !strCFB1[i].isEmpty())
+                        && (!strCFB2[i].equals("") && !strCFB2[i].isEmpty()) && (!strCFB3[i].equals("") && !strCFB3[i].isEmpty())
+                        && (!strCFB4[i].equals("") && !strCFB4[i].isEmpty()) && (!strCFB5[i].equals("") && !strCFB5[i].isEmpty())
+                        && (!strCFB6[i].equals("") && !strCFB6[i].isEmpty())) {
+                    CandidateFamilyBackground cfb = candidateFamilyBackgroundService.readById(Integer.parseInt(strCFB0[i]));
+                    cfb.setFamilyMemberName(strCFB1[i]);
+                    cfb.setRelationWithFamilyMember(strCFB2[i]);
+                    cfb.setFamilyMemberAge(strCFB3[i]);
+                    cfb.setFamilyMemberQualification(strCFB4[i]);
+                    cfb.setFamilyMemberDesignationOccupation(strCFB5[i]);
+                    cfb.setFamilyMemberMonthlyIncome(strCFB6[i]);
+                    candidateFamilyBackgroundService.update(cfb);
                 }
             }
         } else {
             for (int i = 0; i < cfbList.size(); i++) {
-                if ((!strCFB0[i].equals("") && !strCFB0[i].isEmpty()) && (!strCFB1[i].equals("") && !strCFB1[i].isEmpty()) 
-                    && (!strCFB2[i].equals("") && !strCFB2[i].isEmpty()) && (!strCFB3[i].equals("") && !strCFB3[i].isEmpty()) 
-                    && (!strCFB4[i].equals("") && !strCFB4[i].isEmpty()) && (!strCFB5[i].equals("") && !strCFB5[i].isEmpty()) 
-                    && (!strCFB6[i].equals("") && !strCFB6[i].isEmpty())){
-                        CandidateFamilyBackground cfb = candidateFamilyBackgroundService.readById(Integer.parseInt(strCFB0[i]));
-                        cfb.setFamilyMemberName(strCFB1[i]);
-                        cfb.setRelationWithFamilyMember(strCFB2[i]);
-                        cfb.setFamilyMemberAge(strCFB3[i]);
-                        cfb.setFamilyMemberQualification(strCFB4[i]);
-                        cfb.setFamilyMemberDesignationOccupation(strCFB5[i]);
-                        cfb.setFamilyMemberMonthlyIncome(strCFB6[i]);
-                        candidateFamilyBackgroundService.update(cfb);
+                if ((!strCFB0[i].equals("") && !strCFB0[i].isEmpty()) && (!strCFB1[i].equals("") && !strCFB1[i].isEmpty())
+                        && (!strCFB2[i].equals("") && !strCFB2[i].isEmpty()) && (!strCFB3[i].equals("") && !strCFB3[i].isEmpty())
+                        && (!strCFB4[i].equals("") && !strCFB4[i].isEmpty()) && (!strCFB5[i].equals("") && !strCFB5[i].isEmpty())
+                        && (!strCFB6[i].equals("") && !strCFB6[i].isEmpty())) {
+                    CandidateFamilyBackground cfb = candidateFamilyBackgroundService.readById(Integer.parseInt(strCFB0[i]));
+                    cfb.setFamilyMemberName(strCFB1[i]);
+                    cfb.setRelationWithFamilyMember(strCFB2[i]);
+                    cfb.setFamilyMemberAge(strCFB3[i]);
+                    cfb.setFamilyMemberQualification(strCFB4[i]);
+                    cfb.setFamilyMemberDesignationOccupation(strCFB5[i]);
+                    cfb.setFamilyMemberMonthlyIncome(strCFB6[i]);
+                    candidateFamilyBackgroundService.update(cfb);
                 }
             }
             for (int i = cfbList.size() + 1; i < strCFB1.length; i++) {
-                if ((!strCFB1[i].equals("") && !strCFB1[i].isEmpty()) 
-                    && (!strCFB2[i].equals("") && !strCFB2[i].isEmpty()) && (!strCFB3[i].equals("") && !strCFB3[i].isEmpty()) 
-                    && (!strCFB4[i].equals("") && !strCFB4[i].isEmpty()) && (!strCFB5[i].equals("") && !strCFB5[i].isEmpty()) 
-                    && (!strCFB6[i].equals("") && !strCFB6[i].isEmpty())){
-                        CandidateFamilyBackground cfb = new CandidateFamilyBackground();
-                        cfb.setFamilyMemberName(strCFB1[i]);
-                        cfb.setRelationWithFamilyMember(strCFB2[i]);
-                        cfb.setFamilyMemberAge(strCFB3[i]);
-                        cfb.setFamilyMemberQualification(strCFB4[i]);
-                        cfb.setFamilyMemberDesignationOccupation(strCFB5[i]);
-                        cfb.setFamilyMemberMonthlyIncome(strCFB6[i]);
-                        cfb.setCreatedDate(sdf.format(cdate));
-                        cfb.setCandidateApplyJob(candidateApplyJob);
-                        candidateFamilyBackgroundService.create(cfb);
+                if ((!strCFB1[i].equals("") && !strCFB1[i].isEmpty())
+                        && (!strCFB2[i].equals("") && !strCFB2[i].isEmpty()) && (!strCFB3[i].equals("") && !strCFB3[i].isEmpty())
+                        && (!strCFB4[i].equals("") && !strCFB4[i].isEmpty()) && (!strCFB5[i].equals("") && !strCFB5[i].isEmpty())
+                        && (!strCFB6[i].equals("") && !strCFB6[i].isEmpty())) {
+                    CandidateFamilyBackground cfb = new CandidateFamilyBackground();
+                    cfb.setFamilyMemberName(strCFB1[i]);
+                    cfb.setRelationWithFamilyMember(strCFB2[i]);
+                    cfb.setFamilyMemberAge(strCFB3[i]);
+                    cfb.setFamilyMemberQualification(strCFB4[i]);
+                    cfb.setFamilyMemberDesignationOccupation(strCFB5[i]);
+                    cfb.setFamilyMemberMonthlyIncome(strCFB6[i]);
+                    cfb.setCreatedDate(sdf.format(cdate));
+                    cfb.setCandidateApplyJob(candidateApplyJob);
+                    candidateFamilyBackgroundService.create(cfb);
                 }
             }
         }
@@ -1342,57 +1336,57 @@ public class VacancyController extends VacancyAbstract {
 
         if (null == corList || corList.isEmpty()) {
             for (int i = 0; i < strCOR1.length; i++) {
-                if ((!strCOR1[i].equals("") && !strCOR1[i].isEmpty()) 
-                    && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty()) 
-                    && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())){
-                        CandidateOtherReferences cor = new CandidateOtherReferences();
-                        cor.setReferenceNonRelativesName(strCOR1[i]);
-                        cor.setReferenceNonRelativesOrganization(strCOR2[i]);
-                        cor.setReferenceNonRelativesPosition(strCOR3[i]);
-                        cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
-                        cor.setCreatedDate(sdf.format(cdate));
-                        cor.setCandidateApplyJob(candidateApplyJob);
-                        candidateOtherReferencesService.create(cor);
+                if ((!strCOR1[i].equals("") && !strCOR1[i].isEmpty())
+                        && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
+                        && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())) {
+                    CandidateOtherReferences cor = new CandidateOtherReferences();
+                    cor.setReferenceNonRelativesName(strCOR1[i]);
+                    cor.setReferenceNonRelativesOrganization(strCOR2[i]);
+                    cor.setReferenceNonRelativesPosition(strCOR3[i]);
+                    cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
+                    cor.setCreatedDate(sdf.format(cdate));
+                    cor.setCandidateApplyJob(candidateApplyJob);
+                    candidateOtherReferencesService.create(cor);
                 }
             }
         } else if ((corList != null || !corList.isEmpty()) && (strCOR1.length == corList.size())) {
             for (int i = 0; i < strCOR1.length; i++) {
-                if ((!strCOR0[i].equals("") && !strCOR0[i].isEmpty()) && (!strCOR1[i].equals("") && !strCOR1[i].isEmpty()) 
-                    && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty()) 
-                    && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())){
-                        CandidateOtherReferences cor = candidateOtherReferencesService.readById(Integer.parseInt(strCOR0[i]));
-                        cor.setReferenceNonRelativesName(strCOR1[i]);
-                        cor.setReferenceNonRelativesOrganization(strCOR2[i]);
-                        cor.setReferenceNonRelativesPosition(strCOR3[i]);
-                        cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
-                        candidateOtherReferencesService.update(cor);
+                if ((!strCOR0[i].equals("") && !strCOR0[i].isEmpty()) && (!strCOR1[i].equals("") && !strCOR1[i].isEmpty())
+                        && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
+                        && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())) {
+                    CandidateOtherReferences cor = candidateOtherReferencesService.readById(Integer.parseInt(strCOR0[i]));
+                    cor.setReferenceNonRelativesName(strCOR1[i]);
+                    cor.setReferenceNonRelativesOrganization(strCOR2[i]);
+                    cor.setReferenceNonRelativesPosition(strCOR3[i]);
+                    cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
+                    candidateOtherReferencesService.update(cor);
                 }
             }
         } else {
             for (int i = 0; i < corList.size(); i++) {
-                if ((!strCOR0[i].equals("") && !strCOR0[i].isEmpty()) && (!strCOR1[i].equals("") && !strCOR1[i].isEmpty()) 
-                    && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty()) 
-                    && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())){
-                        CandidateOtherReferences cor = candidateOtherReferencesService.readById(Integer.parseInt(strCOR0[i]));
-                        cor.setReferenceNonRelativesName(strCOR1[i]);
-                        cor.setReferenceNonRelativesOrganization(strCOR2[i]);
-                        cor.setReferenceNonRelativesPosition(strCOR3[i]);
-                        cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
-                        candidateOtherReferencesService.update(cor);
+                if ((!strCOR0[i].equals("") && !strCOR0[i].isEmpty()) && (!strCOR1[i].equals("") && !strCOR1[i].isEmpty())
+                        && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
+                        && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())) {
+                    CandidateOtherReferences cor = candidateOtherReferencesService.readById(Integer.parseInt(strCOR0[i]));
+                    cor.setReferenceNonRelativesName(strCOR1[i]);
+                    cor.setReferenceNonRelativesOrganization(strCOR2[i]);
+                    cor.setReferenceNonRelativesPosition(strCOR3[i]);
+                    cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
+                    candidateOtherReferencesService.update(cor);
                 }
             }
             for (int i = corList.size() + 1; i < strCOR1.length; i++) {
-                if ((!strCOR1[i].equals("") && !strCOR1[i].isEmpty()) 
-                    && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty()) 
-                    && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())){
-                        CandidateOtherReferences cor = new CandidateOtherReferences();
-                        cor.setReferenceNonRelativesName(strCOR1[i]);
-                        cor.setReferenceNonRelativesOrganization(strCOR2[i]);
-                        cor.setReferenceNonRelativesPosition(strCOR3[i]);
-                        cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
-                        cor.setCreatedDate(sdf.format(cdate));
-                        cor.setCandidateApplyJob(candidateApplyJob);
-                        candidateOtherReferencesService.create(cor);
+                if ((!strCOR1[i].equals("") && !strCOR1[i].isEmpty())
+                        && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
+                        && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())) {
+                    CandidateOtherReferences cor = new CandidateOtherReferences();
+                    cor.setReferenceNonRelativesName(strCOR1[i]);
+                    cor.setReferenceNonRelativesOrganization(strCOR2[i]);
+                    cor.setReferenceNonRelativesPosition(strCOR3[i]);
+                    cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
+                    cor.setCreatedDate(sdf.format(cdate));
+                    cor.setCandidateApplyJob(candidateApplyJob);
+                    candidateOtherReferencesService.create(cor);
                 }
             }
         }
@@ -1401,7 +1395,7 @@ public class VacancyController extends VacancyAbstract {
             ajuMaster.setProfileSubmit(1);
             applayJobUserMasterSerivce.update(ajuMaster);
         }
-        
+
         request.setAttribute("successMessage",
                 "Information : The Information is Updated Successfully.");
 
@@ -1416,74 +1410,71 @@ public class VacancyController extends VacancyAbstract {
     }
 
     public void downloadCandidatePhotograph(HttpServletRequest request, HttpServletResponse response) throws Exception {
-       
+
         HttpSession session = request.getSession();
         ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
-        
+
         String fileName = request.getParameter("fileName");
-        
+
         String attachmentFileLocationURL = getServletContext().getRealPath("/")
                 + File.separator + "StorageYard"
-                + File.separator + "candidate" + File.separator + "candidateimage"  + File.separator + ajuMaster.getId().toString() + File.separator + fileName;
+                + File.separator + "candidate" + File.separator + "candidateimage" + File.separator + ajuMaster.getId().toString() + File.separator + fileName;
 
         request.setAttribute("filePath", attachmentFileLocationURL);
 
         DownloadFile downloadFile = new DownloadFile();
         downloadFile.doDownload(request, response);
     }
+
     public void downloadCandidateCertificate(HttpServletRequest request, HttpServletResponse response) throws Exception {
-       
+
         HttpSession session = request.getSession();
         ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
-        
+
         String id = request.getParameter("cajid");
         String fileName = request.getParameter("fileName");
         String attachmentFileLocationURL = null;
-        if(id == null || id.equals("") || id.isEmpty())
-        {
+        if (id == null || id.equals("") || id.isEmpty()) {
             attachmentFileLocationURL = getServletContext().getRealPath("/")
                     + File.separator + "StorageYard"
-                    + File.separator + "candidate" + File.separator + "candidatecertificate"  + File.separator + ajuMaster.getId().toString() + File.separator + fileName;
-        }
-        else{
+                    + File.separator + "candidate" + File.separator + "candidatecertificate" + File.separator + ajuMaster.getId().toString() + File.separator + fileName;
+        } else {
             CandidateApplyJob candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(id));
             attachmentFileLocationURL = getServletContext().getRealPath("/")
-                + File.separator + "StorageYard"
-                + File.separator + "candidate" + File.separator + "candidatecertificate"  + File.separator + candidateApplyJob.getApplayJobUserMaster().getId().toString() + File.separator + fileName;
-        }    
+                    + File.separator + "StorageYard"
+                    + File.separator + "candidate" + File.separator + "candidatecertificate" + File.separator + candidateApplyJob.getApplayJobUserMaster().getId().toString() + File.separator + fileName;
+        }
         request.setAttribute("filePath", attachmentFileLocationURL);
 
         DownloadFile downloadFile = new DownloadFile();
         downloadFile.doDownload(request, response);
     }
-    
+
     public void downloadCandidateSalaryAttachment(HttpServletRequest request, HttpServletResponse response) throws Exception {
-       
+
         HttpSession session = request.getSession();
         ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
-        
+
         String id = request.getParameter("cajid");
         String fileName = request.getParameter("fileName");
         String attachmentFileLocationURL = null;
-        if(id == null || id.equals("") || id.isEmpty())
-        {
+        if (id == null || id.equals("") || id.isEmpty()) {
             attachmentFileLocationURL = getServletContext().getRealPath("/")
-                + File.separator + "StorageYard"
-                + File.separator + "candidate" + File.separator + "candidatesalaryslip"  + File.separator + ajuMaster.getId().toString() + File.separator + fileName;
-        }
-        else{
+                    + File.separator + "StorageYard"
+                    + File.separator + "candidate" + File.separator + "candidatesalaryslip" + File.separator + ajuMaster.getId().toString() + File.separator + fileName;
+        } else {
             CandidateApplyJob candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(id));
             attachmentFileLocationURL = getServletContext().getRealPath("/")
-                + File.separator + "StorageYard"
-                + File.separator + "candidate" + File.separator + "candidatesalaryslip"  + File.separator + candidateApplyJob.getApplayJobUserMaster().getId().toString() + File.separator + fileName;
+                    + File.separator + "StorageYard"
+                    + File.separator + "candidate" + File.separator + "candidatesalaryslip" + File.separator + candidateApplyJob.getApplayJobUserMaster().getId().toString() + File.separator + fileName;
         }
 
-            request.setAttribute("filePath", attachmentFileLocationURL);
+        request.setAttribute("filePath", attachmentFileLocationURL);
 
         DownloadFile downloadFile = new DownloadFile();
         downloadFile.doDownload(request, response);
     }
-    
+
     public ModelAndView clickassessment(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -1864,7 +1855,8 @@ public class VacancyController extends VacancyAbstract {
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         BindException errors = new BindException(vacancyMaster, "vacancyMaster");
         bind(request, vacancyMaster);
-
+        String mprMasterid = request.getParameter("mprMasterid");
+        MprMaster mm = mprMasterService.readById(Integer.parseInt(mprMasterid));
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
 
@@ -1885,7 +1877,7 @@ public class VacancyController extends VacancyAbstract {
             vacancyMaster.setStatus(0);
             vacancyMaster.setCreatedBy(employeeMaster.getId());
             vacancyMaster.setCreatedDate(sdf.format(cDate));
-
+            vacancyMaster.setMprMaster(mm);
             vacancyMasterService.create(vacancyMaster);
 
             request.setAttribute("successMessage",

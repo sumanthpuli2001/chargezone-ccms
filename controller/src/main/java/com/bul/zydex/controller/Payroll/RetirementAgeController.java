@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Hussain
  */
 public class RetirementAgeController extends RetirementAgeAbstract {
-    
+
     public ModelAndView showList(HttpServletRequest request, HttpServletResponse response, RetirementAge retirementAge) throws Exception {
         ModelAndView mv = new ModelAndView("Company/RetirementShow", "retirementAge", retirementAge);
 //        RetirementAge retirementAge=new RetirementAge();
@@ -31,33 +31,42 @@ public class RetirementAgeController extends RetirementAgeAbstract {
 
         return new ModelAndView("Company/RetirementCreate", "retirementAge", retirementAge);
     }
-    
+
     public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response, RetirementAge retirementAge) throws Exception {
         BindException errors = new BindException(retirementAge, "retirementAge");
         bind(request, retirementAge);
         ModelAndView mv = new ModelAndView();
-        companyMasterValidator.validate(retirementAge, errors);
+//        companyMasterValidator.validate(retirementAge, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage", "Error : Information Is Not Valid.");
             mv.addAllObjects(errors.getModel());
             mv.getModelMap().put("retirementAge", retirementAge);
             mv.setViewName("Company/RetirementCreate");
         } else {
-//            if (retirementAgeService.isExist(retirementAge)) {
-                retirementAgeService.createOrUpdate(retirementAge);
-                List<?> companyList = retirementAgeService.read();
-                mv.addObject("companyList", companyList);
-                mv.addObject("successMessage", "Information : Information Saved Successfully.");
-                mv.setViewName("Company/RetirementShow");
-//            } else {
-//                mv.addObject("failureMessage", "Error : Information Is Already Exist. ");
-//                mv.setViewName("Company/RetirementCreate");
-//            }
+            if ("" != retirementAge.getRetireAge()) {
+                if (retirementAgeService.isExist(retirementAge)) {
+                    retirementAgeService.createOrUpdate(retirementAge);
+                    List<?> companyList = retirementAgeService.read();
+                    mv.addObject("companyList", companyList);
+                    mv.addObject("successMessage", "Information : Information Saved Successfully.");
+                    mv.setViewName("Company/RetirementShow");
+                    return mv;
+                } else {
+                    mv.addObject("failureMessage", "Error : Information Is Already Exist. ");
+                    mv.addAllObjects(errors.getModel());
+                    mv.setViewName("Company/RetirementCreate");
+                }
+            } else {
+                mv.addObject("failureMessage", "Error : Please Enter Retirement Age. ");
+                mv.addAllObjects(errors.getModel());
+                mv.setViewName("Company/RetirementCreate");
+            }
         }
         mv.getModelMap().put("retirementAge", retirementAge);
         return mv;
     }
-     public ModelAndView deleteClick(HttpServletRequest request, HttpServletResponse response, RetirementAge retirementAge) throws Exception {
+
+    public ModelAndView deleteClick(HttpServletRequest request, HttpServletResponse response, RetirementAge retirementAge) throws Exception {
         String[] checkId = request.getParameterValues("checkId");
         String checkStr = "";
         ModelAndView mv = new ModelAndView();

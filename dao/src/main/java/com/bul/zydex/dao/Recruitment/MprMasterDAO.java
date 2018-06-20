@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.Recruitment;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.MprMaster;
 import java.util.List;
 
 /**
@@ -21,5 +22,7 @@ public interface MprMasterDAO<T> extends GenericsDAO<T>{
    public List<?>readMprListByUserId(int empId);
    
    public List<?> Mppdelete(String mppId);
+   
+   public MprMaster readByMPRId(int mprId);
     
 }

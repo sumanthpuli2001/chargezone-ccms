@@ -12,5 +12,7 @@ import com.bul.zydex.service.GenericsService;
  * @author Hussain
  */
 public interface RetirementAgeService<T> extends GenericsService<T> {
+
+    public boolean isExist(T object);
     
 }

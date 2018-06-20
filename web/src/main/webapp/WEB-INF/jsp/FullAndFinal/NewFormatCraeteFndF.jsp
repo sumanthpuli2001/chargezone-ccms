@@ -11,6 +11,21 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <title>Create Format Full And Final Settlement</title>
+        <script>
+            function checkBlankField() {
+                var flag = true;
+                if ($('#companyName').val().replace(/\s/g, "") == '') {
+                    document.getElementById('companyNameError').innerHTML = '-It must not be empty or white space.';
+                    flag = false;
+                }
+                return flag;
+            }
+            function trainerOnchangeFunction(idString) {
+                if (document.getElementById(idString).innerHTML != null) {
+                    document.getElementById(idString).innerHTML = '';
+                }
+            }
+        </script>
     </head>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -29,7 +44,8 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="resignationMaster.htm?act=submitCraeteFormat" method="post" commandName="formateFullNdFinalLetter"
+        <form:form action="resignationMaster.htm?act=submitCraeteFormat" method="post"  onsubmit="return checkBlankField();"
+                   commandName="formateFullNdFinalLetter"
                    name='form1' class="form-horizontal" role="form">
             <form:hidden path="id"></form:hidden>
                 <section class="content">
@@ -52,7 +68,8 @@
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Company Name<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="companyName" class="form-control" placeholder="Company Name"></form:input>
+                                                    <form:input path="companyName" id="companyName" class="form-control" placeholder="Company Name" onchange="trainerOnchangeFunction('companyNameError');"></form:input>
+                                                        <span style="font-size: 14px; color: #dd4b39;" id="companyNameError"></span>
                                                     <%--<form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>--%>
                                                 </div>
                                             </div>
@@ -86,11 +103,11 @@
 
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 
-        <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
-        <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
+    <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
+    <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
     <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
     <script>
-        initSample();
+            initSample();
 
 
     </script>

@@ -2452,205 +2452,206 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeSalaryProcess employeeSalaryProcess = new EmployeeSalaryProcess();
 
-        String month = request.getParameter("month");
-        String year = request.getParameter("year11");
+        if ("" != request.getParameter("month")) {
+            String month = request.getParameter("month");
+            String year = request.getParameter("year11");
 
-        EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
-        bind(request, employeeAdvanceSearch);
+            EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
+            bind(request, employeeAdvanceSearch);
 
-        String startDateCombination = "01/" + month + "/" + year;
+            String startDateCombination = "01/" + month + "/" + year;
 
-        YearMonth yearMonthObject = YearMonth.of(Integer.parseInt(year), Integer.parseInt(month));
-        int daysInMonth = yearMonthObject.lengthOfMonth(); //28
+            YearMonth yearMonthObject = YearMonth.of(Integer.parseInt(year), Integer.parseInt(month));
+            int daysInMonth = yearMonthObject.lengthOfMonth(); //28
 
-        String endDateCombination = daysInMonth + "/" + month + "/" + year;
+            String endDateCombination = daysInMonth + "/" + month + "/" + year;
 
-        int rownum = 0;
-        HSSFWorkbook firstFWorkbook = new HSSFWorkbook();
-        HSSFSheet firstSheet = firstFWorkbook.createSheet("FIRST SHEET");
-        Row headerRow = firstSheet.createRow(rownum);
-        headerRow.setHeightInPoints(40);
-        HSSFFont redFont = firstFWorkbook.createFont();
-        redFont.setColor(HSSFColor.RED.index);
-        HSSFCellStyle stylered = firstFWorkbook.createCellStyle();
-        stylered.setFont(redFont);
+            int rownum = 0;
+            HSSFWorkbook firstFWorkbook = new HSSFWorkbook();
+            HSSFSheet firstSheet = firstFWorkbook.createSheet("FIRST SHEET");
+            Row headerRow = firstSheet.createRow(rownum);
+            headerRow.setHeightInPoints(40);
+            HSSFFont redFont = firstFWorkbook.createFont();
+            redFont.setColor(HSSFColor.RED.index);
+            HSSFCellStyle stylered = firstFWorkbook.createCellStyle();
+            stylered.setFont(redFont);
 
-        HSSFFont greenFont = firstFWorkbook.createFont();
-        greenFont.setColor(HSSFColor.GREEN.index);
-        HSSFCellStyle stylegreen = firstFWorkbook.createCellStyle();
-        stylegreen.setFont(greenFont);
+            HSSFFont greenFont = firstFWorkbook.createFont();
+            greenFont.setColor(HSSFColor.GREEN.index);
+            HSSFCellStyle stylegreen = firstFWorkbook.createCellStyle();
+            stylegreen.setFont(greenFont);
 
-        HSSFFont blueFont = firstFWorkbook.createFont();
-        blueFont.setColor(HSSFColor.BLUE.index);
-        HSSFCellStyle styleblue = firstFWorkbook.createCellStyle();
-        styleblue.setFont(blueFont);
+            HSSFFont blueFont = firstFWorkbook.createFont();
+            blueFont.setColor(HSSFColor.BLUE.index);
+            HSSFCellStyle styleblue = firstFWorkbook.createCellStyle();
+            styleblue.setFont(blueFont);
 
-        HSSFFont boldFont = firstFWorkbook.createFont();
-        boldFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
-        HSSFCellStyle styleBold = firstFWorkbook.createCellStyle();
-        styleBold.setFont(boldFont);
+            HSSFFont boldFont = firstFWorkbook.createFont();
+            boldFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+            HSSFCellStyle styleBold = firstFWorkbook.createCellStyle();
+            styleBold.setFont(boldFont);
 
-        EmployeeShiftData employeeShiftData = new EmployeeShiftData();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-        try {
+            try {
 
-            List allEmpId = new ArrayList();
+                List allEmpId = new ArrayList();
 
-            allEmpId.addAll(employeeMasterService.getAllEmployeeId());
+                allEmpId.addAll(employeeMasterService.getAllEmployeeId());
 
-            int earlyMinute = 0;
-            int lateMinute = 0;
-            for (int j = 0; j < allEmpId.size() + 1; j++) {
-                Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
-                Row row = firstSheet.createRow(rownum);
-                int id = 0;
-                if (null != startDateCombination && !startDateCombination.equals("") && null != endDateCombination && !endDateCombination.equals("")) {
+                int earlyMinute = 0;
+                int lateMinute = 0;
+                for (int j = 0; j < allEmpId.size() + 1; j++) {
+                    Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
+                    Row row = firstSheet.createRow(rownum);
+                    int id = 0;
+                    if (null != startDateCombination && !startDateCombination.equals("") && null != endDateCombination && !endDateCombination.equals("")) {
 
-                    Date sDate = sdf.parse(startDateCombination);
-                    employeeShiftData.setInDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
+                        Date sDate = sdf.parse(startDateCombination);
+                        employeeShiftData.setInDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
 
-                    Date eDate = sdf.parse(endDateCombination);
-                    employeeShiftData.setOutDateTime(new SimpleDateFormat("yyyy-MM-dd").format(eDate));
+                        Date eDate = sdf.parse(endDateCombination);
+                        employeeShiftData.setOutDateTime(new SimpleDateFormat("yyyy-MM-dd").format(eDate));
 
-                    if (j == 0) {
-                        List<String> headerRow1 = new ArrayList();
+                        if (j == 0) {
+                            List<String> headerRow1 = new ArrayList();
 
-                        headerRow1.add("Employee No");
-                        headerRow1.add("Employee Name");
-                        headerRow1.add("W.Days");
-                        headerRow1.add("W.off");
-                        headerRow1.add("P.Days");
-                        headerRow1.add("C.L");
+                            headerRow1.add("Employee No");
+                            headerRow1.add("Employee Name");
+                            headerRow1.add("W.Days");
+                            headerRow1.add("W.off");
+                            headerRow1.add("P.Days");
+                            headerRow1.add("C.L");
 //                        headerRow1.add("S.L");
-                        headerRow1.add("P.L");
-                        headerRow1.add("Absent");
-                        headerRow1.add("L.W.P");
-                        headerRow1.add("OT Hrs");
-                        headerRow1.add("Other Deduction");
-                        headerRow1.add("TDS");
-                        headerRow1.add("Incentive");
-                        headerRow1.add("Bonus");
+                            headerRow1.add("P.L");
+                            headerRow1.add("Absent");
+                            headerRow1.add("L.W.P");
+                            headerRow1.add("OT Hrs");
+                            headerRow1.add("Other Deduction");
+                            headerRow1.add("TDS");
+                            headerRow1.add("Incentive");
+                            headerRow1.add("Bonus");
 
-                        for (int k1 = 0; k1 < headerRow1.size(); k1++) {
-                            Cell cell = row.createCell(k1);
+                            for (int k1 = 0; k1 < headerRow1.size(); k1++) {
+                                Cell cell = row.createCell(k1);
 
-                            cell.setCellValue(headerRow1.get(k1));
+                                cell.setCellValue(headerRow1.get(k1));
 
-                            cell.setCellStyle(styleBold);
+                                cell.setCellStyle(styleBold);
+                            }
+                            rownum++;
                         }
-                        rownum++;
-                    }
-                    if (j > 0) {
-                        id = Integer.parseInt("" + allEmpId.get(j - 1));
-                        employeeShiftData.setId(id);
-                        List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
-                        map.put(id, list);
+                        if (j > 0) {
+                            id = Integer.parseInt("" + allEmpId.get(j - 1));
+                            employeeShiftData.setId(id);
+                            List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
+                            map.put(id, list);
 
-                        List<String> firstHalfList = new ArrayList<String>();
-                        EmployeeMaster empMaster = employeeMasterService.readById(id);
-                        firstHalfList.add("" + empMaster.getEmployeeId());
-                        firstHalfList.add("" + empMaster.getEmployeeName());
+                            List<String> firstHalfList = new ArrayList<String>();
+                            EmployeeMaster empMaster = employeeMasterService.readById(id);
+                            firstHalfList.add("" + empMaster.getEmployeeId());
+                            firstHalfList.add("" + empMaster.getEmployeeName());
 
-                        double prcounter = 0;
-                        double abcounter = 0;
-                        double wo = 0;
-                        double cl = 0;
+                            double prcounter = 0;
+                            double abcounter = 0;
+                            double wo = 0;
+                            double cl = 0;
 //                        double sl = 0;
-                        double pl = 0;
-                        double ar = 0;
-                        double lwp = 0;
-                        double otHrs = 0;
-                        double otherDeduction = 0;
-                        double tds = 0;
-                        double incentive = 0;
-                        double bonus = 0;
+                            double pl = 0;
+                            double ar = 0;
+                            double lwp = 0;
+                            double otHrs = 0;
+                            double otherDeduction = 0;
+                            double tds = 0;
+                            double incentive = 0;
+                            double bonus = 0;
 
-                        for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
-                            Iterator itr5 = entry.getValue().iterator();
+                            for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
+                                Iterator itr5 = entry.getValue().iterator();
 
-                            while (itr5.hasNext()) {
-                                Object[] next2 = (Object[]) itr5.next();
+                                while (itr5.hasNext()) {
+                                    Object[] next2 = (Object[]) itr5.next();
 
-                                String firstHalf = "" + next2[1];
-                                int firstHalfVal = 0;
-                                int counter = 0;
+                                    String firstHalf = "" + next2[1];
+                                    int firstHalfVal = 0;
+                                    int counter = 0;
 
-                                Date date = sdf.parse("" + next2[0]);
-                                Calendar c = Calendar.getInstance();
-                                c.setTime(date);
-                                int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
-                                SimpleDateFormat format = new SimpleDateFormat("EEEE");
-                                String dayName = format.format(date);
+                                    Date date = sdf.parse("" + next2[0]);
+                                    Calendar c = Calendar.getInstance();
+                                    c.setTime(date);
+                                    int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+                                    SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                                    String dayName = format.format(date);
 
-                                int n = 1;
+                                    int n = 1;
 
-                                SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
-                                if (firstHalf.contains("fullday")) {
+                                    SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
+                                    if (firstHalf.contains("fullday")) {
 //                                    firstHalfList.add("PR");
-                                    prcounter = prcounter + 1;
+                                        prcounter = prcounter + 1;
 
-                                } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
-                                        && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
-                                    String[] userTimeInStr = firstHalf.split("`");
-                                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                                    String[] userTimeOutStr = firstHalf.split("!");
-                                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                                    String[] leave = firstHalf.split("@");
-                                    String[] leave1 = leave[1].split("#");
-                                    String[] LateHoursStr = firstHalf.split("\\$");
-                                    String[] LateHoursStr1 = LateHoursStr[1].split("%");
-                                    String[] endHoursStr = firstHalf.split("%");
-                                    String[] endHoursStr1 = endHoursStr[1].split("\\^");
-                                    String[] firstStartHoursStr = endHoursStr[1].split("\\+");
-                                    Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
-                                    Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
-                                    Date endHours = sdf1.parse(endHoursStr1[0]);
-                                    Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
-                                    Calendar cal = Calendar.getInstance();
-                                    Calendar cal1 = Calendar.getInstance();
-                                    cal.setTime(firstStartHours);
-                                    cal1.setTime(firstStartHours);
-                                    cal1.add(Calendar.MINUTE, -earlyMinute);
-                                    cal.add(Calendar.MINUTE, lateMinute);
-                                    String newTime = sdf1.format(cal.getTime());
-                                    Date flexibleEndTime = sdf1.parse(newTime);
-                                    Date LateHours = sdf1.parse(LateHoursStr1[0]);
-                                    String newTime1 = sdf1.format(cal1.getTime());
-                                    Date flexibleStartTime = sdf1.parse(newTime1);
-                                    long diff = endHours.getTime() - firstStartHours.getTime();
-                                    long diffMinutes = diff / (60 * 1000);
-                                    long diff1 = 0;
-                                    if (userTimeInStr[0].contains("0.5")) {
+                                    } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                                        String[] userTimeInStr = firstHalf.split("`");
+                                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                        String[] userTimeOutStr = firstHalf.split("!");
+                                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                        String[] leave = firstHalf.split("@");
+                                        String[] leave1 = leave[1].split("#");
+                                        String[] LateHoursStr = firstHalf.split("\\$");
+                                        String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                                        String[] endHoursStr = firstHalf.split("%");
+                                        String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                                        String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                                        Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
+                                        Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                        Date endHours = sdf1.parse(endHoursStr1[0]);
+                                        Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
+                                        Calendar cal = Calendar.getInstance();
+                                        Calendar cal1 = Calendar.getInstance();
+                                        cal.setTime(firstStartHours);
+                                        cal1.setTime(firstStartHours);
+                                        cal1.add(Calendar.MINUTE, -earlyMinute);
+                                        cal.add(Calendar.MINUTE, lateMinute);
+                                        String newTime = sdf1.format(cal.getTime());
+                                        Date flexibleEndTime = sdf1.parse(newTime);
+                                        Date LateHours = sdf1.parse(LateHoursStr1[0]);
+                                        String newTime1 = sdf1.format(cal1.getTime());
+                                        Date flexibleStartTime = sdf1.parse(newTime1);
+                                        long diff = endHours.getTime() - firstStartHours.getTime();
+                                        long diffMinutes = diff / (60 * 1000);
+                                        long diff1 = 0;
+                                        if (userTimeInStr[0].contains("0.5")) {
 //                                        firstHalfList.add("Half AB");
-                                        abcounter = abcounter + 0.5;
-                                        prcounter = prcounter + 0.5;
-                                    } else if (userTimeInStr[0].contains("0")) {
+                                            abcounter = abcounter + 0.5;
+                                            prcounter = prcounter + 0.5;
+                                        } else if (userTimeInStr[0].contains("0")) {
 //                                        firstHalfList.add("AB");
-                                        abcounter = abcounter + 1;
-                                    } else if (firstHalf.contains("AR") && userTimeInStr[0].contains("0.5")) {
+                                            abcounter = abcounter + 1;
+                                        } else if (firstHalf.contains("AR") && userTimeInStr[0].contains("0.5")) {
 //                                        firstHalfList.add("Half AR/P");
-                                        ar = ar + 0.5;
-                                        prcounter = prcounter + 0.5;
-                                    }
+                                            ar = ar + 0.5;
+                                            prcounter = prcounter + 0.5;
+                                        }
 
-                                } else if (firstHalf.equals("WO")) {
+                                    } else if (firstHalf.equals("WO")) {
 //                                    firstHalfList.add("WO");
-                                    wo = wo + 1;
-                                } else if (firstHalf.contains("AR")) {
+                                        wo = wo + 1;
+                                    } else if (firstHalf.contains("AR")) {
 //                                    firstHalfList.add("AR/P");
-                                    ar = ar + 1;
-                                } else if (firstHalf.equals("AB")) {
+                                        ar = ar + 1;
+                                    } else if (firstHalf.equals("AB")) {
 //                                    firstHalfList.add("AB");
-                                    abcounter = abcounter + 1;
-                                } else {
-                                    if (firstHalf.equals("Casual Leave")) {
-                                        cl = cl + 1;
-                                    }
-                                    if (firstHalf.equals("Privilege Leave")) {
-                                        pl = pl + 1;
-                                    }
+                                        abcounter = abcounter + 1;
+                                    } else {
+                                        if (firstHalf.equals("Casual Leave")) {
+                                            cl = cl + 1;
+                                        }
+                                        if (firstHalf.equals("Privilege Leave")) {
+                                            pl = pl + 1;
+                                        }
 //                                    if (firstHalf.equals("Sick Leave")) {
 //                                        sl = sl + 1;
 //                                    }
@@ -2663,80 +2664,85 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                    if (firstHalf.equals("C Off Leave")) {
 //                                        col = col + 1;
 //                                    }
-                                    if (firstHalf.equals("Leave Without Pay")) {
-                                        lwp = lwp + 1;
-                                    }
+                                        if (firstHalf.equals("Leave Without Pay")) {
+                                            lwp = lwp + 1;
+                                        }
 //                                    firstHalfList.add(" " + firstHalf);
+                                    }
+                                    n++;
                                 }
-                                n++;
+
+                            }
+
+                            firstHalfList.add("" + (list.size() - wo));
+                            firstHalfList.add("" + wo);
+                            firstHalfList.add("" + (list.size() - abcounter));
+                            firstHalfList.add("" + cl);
+//                        firstHalfList.add("" + sl);
+                            firstHalfList.add("" + pl);
+                            firstHalfList.add("" + (abcounter - wo));
+                            firstHalfList.add("" + (abcounter - wo));//where lwp = ab
+                            firstHalfList.add("" + otHrs);
+                            firstHalfList.add("" + otherDeduction);
+                            firstHalfList.add("" + tds);
+                            firstHalfList.add("" + incentive);
+                            firstHalfList.add("" + bonus);
+
+                            Row row1 = firstSheet.createRow(rownum);
+                            for (int k1 = 0; k1 < firstHalfList.size(); k1++) {
+                                Cell cell = row1.createCell(k1);
+
+                                cell.setCellValue(firstHalfList.get(k1));
+
+                                cell.setCellStyle(styleBold);
                             }
 
                         }
 
-                        firstHalfList.add("" + (list.size() - wo));
-                        firstHalfList.add("" + wo);
-                        firstHalfList.add("" + (list.size() - abcounter));
-                        firstHalfList.add("" + cl);
-//                        firstHalfList.add("" + sl);
-                        firstHalfList.add("" + pl);
-                        firstHalfList.add("" + (abcounter - wo));
-                        firstHalfList.add("" + (abcounter - wo));//where lwp = ab
-                        firstHalfList.add("" + otHrs);
-                        firstHalfList.add("" + otherDeduction);
-                        firstHalfList.add("" + tds);
-                        firstHalfList.add("" + incentive);
-                        firstHalfList.add("" + bonus);
-
-                        Row row1 = firstSheet.createRow(rownum);
-                        for (int k1 = 0; k1 < firstHalfList.size(); k1++) {
-                            Cell cell = row1.createCell(k1);
-
-                            cell.setCellValue(firstHalfList.get(k1));
-
-                            cell.setCellStyle(styleBold);
-                        }
-
                     }
 
+                    rownum++;
                 }
 
-                rownum++;
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-        }
+            String appPath = request.getServletContext().getRealPath("");
 
-        String appPath = request.getServletContext().getRealPath("");
+            try {
+                String filePath = appPath + File.separator + "StorageYard" + File.separator
+                        + "Other" + File.separator + "UserDoc" + File.separator
+                        + "Attendance" + File.separator + "SalaryExcelDownload1.xls";
+                FileOutputStream fos = new FileOutputStream(new File(filePath));
+                HSSFCellStyle hsfstyle = firstFWorkbook.createCellStyle();
+                hsfstyle.setBorderBottom((short) 1);
+                hsfstyle.setFillBackgroundColor((short) 245);
+                firstFWorkbook.write(fos);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        try {
-            String filePath = appPath + File.separator + "StorageYard" + File.separator
+            String filePath = File.separator + "StorageYard" + File.separator
                     + "Other" + File.separator + "UserDoc" + File.separator
                     + "Attendance" + File.separator + "SalaryExcelDownload1.xls";
-            FileOutputStream fos = new FileOutputStream(new File(filePath));
-            HSSFCellStyle hsfstyle = firstFWorkbook.createCellStyle();
-            hsfstyle.setBorderBottom((short) 1);
-            hsfstyle.setFillBackgroundColor((short) 245);
-            firstFWorkbook.write(fos);
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            appPath = request.getServletContext().getRealPath("");
+
+            String fullPath = appPath + filePath;
+
+            request.setAttribute(
+                    "filePath", fullPath);
+
+            DownloadFile downloadFile = new DownloadFile();
+
+            downloadFile.doDownload(request, response);
+            mv = salaryExcelUpload(request, response);
+            return mv;
         }
-
-        String filePath = File.separator + "StorageYard" + File.separator
-                + "Other" + File.separator + "UserDoc" + File.separator
-                + "Attendance" + File.separator + "SalaryExcelDownload1.xls";
-
-        appPath = request.getServletContext().getRealPath("");
-
-        String fullPath = appPath + filePath;
-
-        request.setAttribute(
-                "filePath", fullPath);
-
-        DownloadFile downloadFile = new DownloadFile();
-
-        downloadFile.doDownload(request, response);
+        request.setAttribute("failureMessage",
+                "Information : Please Select The Month.");
         mv = salaryExcelUpload(request, response);
         return mv;
     }

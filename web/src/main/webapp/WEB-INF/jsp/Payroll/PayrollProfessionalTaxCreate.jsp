@@ -9,6 +9,30 @@
 <html>
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
+    <script>
+        function checkBlankField() {
+            var flag = true;
+            if ($('#salaryFrom').val() == '') {
+                document.getElementById('salaryFromError').innerHTML = '-It must not be empty or white space.';
+                flag = false;
+            }
+            if ($('#salaryTo').val() == '') {
+                document.getElementById('salaryToError').innerHTML = '-It must not be empty or white space.';
+                flag = false;
+            }
+            if ($('#amount').val() == '') {
+                document.getElementById('amountError').innerHTML = '-It must be selected.';
+                flag = false;
+            }
+            return  flag;
+        }
+
+        function OnchangeFunction(idString) {
+            if (document.getElementById(idString).innerHTML != null) {
+                document.getElementById(idString).innerHTML = '';
+            }
+        }
+    </script>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Professional Tax Create</title>
@@ -39,25 +63,28 @@
                                 <c:if test="${!empty failureMessage}">
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
-                                <form:form class="form-horizontal" method="post"
+                                <form:form class="form-horizontal" method="post" onsubmit='return checkBlankField();'
                                            commandName="payrollProfessionalTax" action="payrollProfessionalTax.htm?act=createSubmit">
-                                   
-                                        <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Salary From:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:input path="salaryFrom" maxlength="10" placeholder="Enter Salary From" class="form-control"></form:input>
-                                                <form:errors path="salaryFrom" cssClass="errorDiv"></form:errors>
-                                                </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label>Salary From:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <form:input path="salaryFrom" maxlength="10" placeholder="Enter Salary From" class="form-control" onchange="OnchangeFunction('salaryFromError');"></form:input>
+                                                <span style="font-size: 14px; color: #dd4b39;" id="salaryFromError"></span>
+                                            <form:errors path="salaryFrom" cssClass="errorDiv"></form:errors>
+                                            </div>
                                             <div class="col-sm-6">
                                                 <label>Salary To:<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="salaryTo"  maxlength="10" placeholder="Enter Salary To"  class="form-control"></form:input>
+                                            <form:input path="salaryTo"  maxlength="10" placeholder="Enter Salary To"  class="form-control" onchange="OnchangeFunction('salaryToError');"></form:input>
+                                                <span style="font-size: 14px; color: #dd4b39;" id="salaryToError"></span>
                                             <form:errors path="salaryTo" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-6">
                                                 <label>Amount:<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="amount" type="number" min="0" max="10000000" placeholder="Enter Amount" class="form-control"></form:input>
+                                            <form:input path="amount" type="number" min="0" max="10000000" placeholder="Enter Amount" class="form-control" onchange="OnchangeFunction('amountError');"></form:input>
+                                                <span style="font-size: 14px; color: #dd4b39;" id="amountError"></span>
                                             <form:errors path="amount" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
@@ -76,21 +103,21 @@
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-     <script type="text/javascript">
-            function pepe() {
-                var flag = true;
-              var salaryFrom = document.getElementById("salaryFrom").value;
-              var salaryTo = document.getElementById("salaryTo").value;
-              if(salaryFrom !='' && salaryTo !=''){
-                  salaryFrom = parseFloat(salaryFrom);
-                  salaryTo = parseFloat(salaryTo);
-                  if(salaryTo<salaryFrom){
-                alert(" Salary To is Greater than Salary From.!!");
-                flag = false;
-                  }
-               
-              }
-              return flag;
+    <script type="text/javascript">
+        function pepe() {
+            var flag = true;
+            var salaryFrom = document.getElementById("salaryFrom").value;
+            var salaryTo = document.getElementById("salaryTo").value;
+            if (salaryFrom != '' && salaryTo != '') {
+                salaryFrom = parseFloat(salaryFrom);
+                salaryTo = parseFloat(salaryTo);
+                if (salaryTo < salaryFrom) {
+                    alert(" Salary To is Greater than Salary From.!!");
+                    flag = false;
+                }
+
             }
-        </script>   
+            return flag;
+        }
+    </script>   
 </html>

@@ -47,4 +47,9 @@ public class MprMasterServiceImpl<T> extends GenericsServiceImpl<T> implements M
          return mprMasterDAO.Mppdelete(mppId);
     }
 
+    @Override
+    public MprMaster readByMPRId(int mprId) {
+        return mprMasterDAO.readByMPRId(mprId);
+    }
+
 }

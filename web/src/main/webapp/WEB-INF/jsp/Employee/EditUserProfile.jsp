@@ -35,6 +35,7 @@
             for (var i = 1; i <= element15; i++) {
 //                alert('hi' + document.getElementById('amount' + i).value);
                 var element = document.getElementById('amount' + i).value;
+                 alert(element)
                 sum += parseInt(element);
 //                alert("allowance"+sum);
 //                alert(sum);
@@ -165,6 +166,7 @@
         $(function () {
             tempCount3 = document.getElementById('policyCount').value;
             $("#policyCloneid").on("click", function () {
+//                alert(tempCount3);
                 tempCount3++;
                 var clone = "<tr id='" + tempCount3 + "' style='clear:both;'>"
                         + "<td style=\"text-align: center\">" + tempCount3 + "</td>"
@@ -173,7 +175,7 @@
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.name=this.value)\" onchange=\"totalValueChange(this,this.name);\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.id=this.value)\" onchange=\"totalValueChange(this,this.id);\" min=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -184,9 +186,20 @@
                 $("#policyTable").append(clone);
                 document.getElementById('policyCount').value = tempCount3;
                 addAPolicy(tempCount3);
+//                alert(tempCount3);
 
             });
         });
+        function addAPolicy(id) {
+            var element2 = document.getElementById('policyId1');
+            var obj2 = document.getElementById("policyId" + id);
+            for (var i2 = 0; i2 < element2.options.length; i2++) {
+                var opt2 = document.createElement("option");
+                opt2.value = element2.options[i2].value;
+                opt2.text = element2.options[i2].text;
+                obj2.appendChild(opt2);
+            }
+        }
         function changetotalButtonNew(id) {
             var sum = 0;
             var sum1 = 0;
@@ -226,16 +239,7 @@
 //            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
         }
 
-        function addAPolicy(id) {
-            var element2 = document.getElementById('policyId1');
-            var obj2 = document.getElementById("policyId" + id);
-            for (var i2 = 0; i2 < element2.options.length; i2++) {
-                var opt2 = document.createElement("option");
-                opt2.value = element2.options[i2].value;
-                opt2.text = element2.options[i2].text;
-                obj2.appendChild(opt2);
-            }
-        }
+        
 
         function removePolicy(policyDiv) {
 //            try {
@@ -297,70 +301,7 @@
         }
 
     </script>
-    <script>
-        function removePolicyEdit(id) {
-
-            alert(id.value);
-//            try {
-////                
-//                tempCount3--;
-////                alert(tempCount3);
-////                alert(policyDiv.index);
-//
-//                var val = document.getElementById("policyCount").value;
-//
-////                alert(val);
-////                var obj2 = document.getElementById("policyId" + tempCount3).value;
-////                alert(obj2);
-//                var element = document.getElementById("amount" + val).value;
-////                 alert(element);
-//                val = val - 1;
-//                var element2 = document.getElementById('txtresult').value;
-//                var element21 = document.getElementById('txtresultCTC').value;
-////                alert(element2);
-//                document.getElementById('txtresult').value = '';
-//                document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
-//                document.getElementById('txtresultCTC').value = '';
-//                document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
-//
-//                document.getElementById("policyCount").value = val;
-//                element1 = document.getElementById(policyDiv);
-//
-//                element1.parentNode.removeChild(element1);
-//            } catch (e) {
-//
-//            }
-
-            try {
-//                
-                tempCount3--;
-//                alert(policyDiv);
-
-                var val = document.getElementById("policyCount").value;
-//                alert(val);
-//                var obj2 = document.getElementById("policyId" + tempCount3).value;
-//                alert(policyDiv);
-                var element = document.getElementById("amount" + policyDiv).value;
-                val = val - 1;
-                var element2 = document.getElementById('txtresult').value;
-                var element21 = document.getElementById('txtresultCTC').value;
-//                alert(element2);
-                document.getElementById('txtresult').value = '';
-                document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
-                document.getElementById('txtresultCTC').value = '';
-                document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
-                document.getElementById("policyCount").value = val;
-                var element1 = document.getElementById(policyDiv);
-//                alert(element1);
-
-                element1.parentNode.removeChild(element1);
-            } catch (e) {
-
-            }
-        }
-
-
-    </script>
+   
     <script>
         var tempCount4 = 1;
         $(function () {
@@ -373,7 +314,7 @@
                         + "</select>"
                         + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
                         //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'   onFocus=\"(this.name=this.value)\" onchange=\"totalValueChangeCTC(this,this.name);\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'   onFocus=\"(this.id=this.value)\" onchange=\"totalValueChangeCTC(this,this.id);\" min=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
                         + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
                         + "<option value=\"\">--SELECT--</option>"

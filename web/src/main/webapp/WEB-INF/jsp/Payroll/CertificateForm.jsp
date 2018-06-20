@@ -154,9 +154,7 @@
 
  function download123() {
 
-        alert("in");
                 var path12 = $('.path').val();
-        alert("in : " + path12);
 //                alert(path12);
 //            var saveData = $.ajax({
 //                type: 'POST',

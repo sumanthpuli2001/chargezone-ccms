@@ -12,39 +12,8 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
 
     <head>
-        <title> List Of Certificate</title>
+        <title>List Of Certificate</title>
     </head>
-<script>
-          function viewClick(id) {
-            window.location = "certificateTemplate.htm?act=ViewIndiviualFormCertificate&id="+id;
-   
-        }
-        </script>
-    <script>
-
-        function saveSubmit11() {
-            var flag3 = true;
-//            alert(document.getElementById("month").value);
-            if (document.getElementById("month").value == '') {
-                document.getElementById("monthError").innerHTML = "- It must be selected.";
-                flag3 = false;
-            } else {
-                document.getElementById("monthError").innerHTML = '';
-            }
-//            alert(flag3);
-            if (flag3) {
-                flag3 = false;
-                document.getElementById('saveSubmit1').innerHTML = 'Searching ... .. .';
-                document.form1.submit();
-                return true;
-            } else {
-                return false;
-            }
-        }
-    </script>
-
-
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -172,6 +141,7 @@
     </script>
      <script type="text/javascript">
     function printDiv(divName) {
+        alert("heee");
      var printContents = document.getElementById(divName).innerHTML;
      var originalContents = document.body.innerHTML;
 
@@ -180,7 +150,21 @@
      window.print();
 
      document.body.innerHTML = originalContents;
-}
+};
+
+ function download123() {
+
+        alert("in");
+                var path12 = $('.path').val();
+        alert("in : " + path12);
+//                alert(path12);
+//            var saveData = $.ajax({
+//                type: 'POST',
+//                url: "certificateTemplate.htm?act=downloadTextfile",
+//                data: path12,
+//                dataType: "text",
+//            });
+    }
  </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

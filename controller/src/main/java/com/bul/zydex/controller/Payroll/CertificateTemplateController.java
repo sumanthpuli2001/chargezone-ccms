@@ -16,17 +16,35 @@ import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.Modules;
 import com.bul.zydex.model.ZydexLocationMaster;
+import com.bul.zydex.util.DownloadFile;
 import com.google.gson.Gson;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
+import com.itextpdf.text.PageSize;
+import java.io.FileNotFoundException;
+import java.util.List;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorker;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
+import com.itextpdf.tool.xml.exceptions.CssResolverException;
+import com.itextpdf.tool.xml.html.Tags;
+import com.itextpdf.tool.xml.parser.XMLParser;
+import com.itextpdf.tool.xml.pipeline.css.CSSResolver;
+import com.itextpdf.tool.xml.pipeline.css.CssResolverPipeline;
+import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
+import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
+import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  *
@@ -593,6 +611,8 @@ public class CertificateTemplateController extends CertificateTemplateAbstract {
 
             } catch (Exception e) {
             }
+            String path = getpdf1(msg, employeeMaster.getEmployeeName(), certificateTemplate.getCertificateTitle());
+            request.setAttribute("path", path);
             request.setAttribute("msg", msg);
         }
         mv.setViewName("Payroll/CertificateAjax");
@@ -621,4 +641,39 @@ public class CertificateTemplateController extends CertificateTemplateAbstract {
             out.close();
         }
     }
+
+    public String getpdf1(String msg, String name, String certiName) throws FileNotFoundException, DocumentException, IOException, CssResolverException {
+
+        Document document = new Document(PageSize.A4, 0, 0, 0, 0);
+        String filePath = "StorageYard"
+                + File.separator + "Certificate" + File.separator + name;
+        String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "Certificate" + File.separator + name;
+        File Folder1 = new File(fileLocationURL);
+        if (!Folder1.exists()) {
+            Folder1.mkdirs();
+        }
+        String path = fileLocationURL + File.separator + certiName + ".pdf";
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(path));
+        document.setMargins(0, 0, 0, 0);
+        document.open();
+        CSSResolver cssResolver = XMLWorkerHelper.getInstance().getDefaultCssResolver(false);
+        cssResolver.addCss("div{margin:0 pt; padding: 20pt;}", true);
+        HtmlPipelineContext htmlContext = new HtmlPipelineContext(null);
+        htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
+        PdfWriterPipeline pdf = new PdfWriterPipeline(document, writer);
+        HtmlPipeline html = new HtmlPipeline(htmlContext, pdf);
+        CssResolverPipeline css = new CssResolverPipeline(cssResolver, html);
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div>");
+        sb.append(msg);
+        sb.append("</div>");
+        XMLWorker worker = new XMLWorker(css, true);
+        XMLParser p = new XMLParser(worker);
+        p.parse(new ByteArrayInputStream(sb.toString().getBytes()));
+        document.close();
+        return filePath;
+    }
+
 }

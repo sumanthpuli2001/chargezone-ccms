@@ -227,6 +227,7 @@
                 <prop key="leaveEmployeeDetailsApprovalHistoryController.htm">leaveEmployeeDetailsApprovalHistoryController1</prop>
                 <prop key="taxSavingSubmit.htm">taxSavingSubmitController1</prop>
                 <prop key="emergencyContact.htm">emergencyContactController1</prop>
+                <prop key="projectManagement.htm">projectManagementController1</prop>
             </props>
         </property>
         <property name="order" value="0" />     

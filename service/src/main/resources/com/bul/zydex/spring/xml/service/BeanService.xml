@@ -705,4 +705,13 @@
     <bean id="candidateOtherReferencesService1" class="com.bul.zydex.service.CandidateJobApply.CandidateOtherReferencesServiceImpl">
         <property name="candidateOtherReferencesDAO" ref="candidateOtherReferencesDAO1" />
     </bean> 
+    <bean id="projectManagementService1" class="com.bul.zydex.service.ProjectManagement.ProjectManagementServiceImpl">
+        <property name="projectManagementDAO" ref="projectManagementDAO1" />
+    </bean> 
+    <bean id="clientMasterService1" class="com.bul.zydex.service.ProjectManagement.ClientMasterServiceImpl">
+        <property name="clientMasterDAO" ref="clientMasterDAO1" />
+    </bean> 
+    <bean id="stateMasterService1" class="com.bul.zydex.service.ProjectManagement.StateMasterServiceImpl">
+        <property name="stateMasterDAO" ref="stateMasterDAO1" />
+    </bean> 
 </beans>

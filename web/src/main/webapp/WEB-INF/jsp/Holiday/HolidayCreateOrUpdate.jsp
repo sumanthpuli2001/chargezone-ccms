@@ -37,6 +37,30 @@
                 }
             }
         </script>
+        <script>
+            function checkBlankField() {
+                var flag = true;
+                if ($('#title').val() == '') {
+                    document.getElementById('titleError').innerHTML = '-It must not be empty or white space.';
+                    flag = false;
+                }
+                if ($('#holidayFromDate').val() == '') {
+                    document.getElementById('holidayFromDateError').innerHTML = '-It must not be empty or white space.';
+                    flag = false;
+                }   
+                if ($('#locationMaster').val() == '') {
+                    document.getElementById('locationMasterError').innerHTML = '-It must be selected.';
+                    flag = false;
+                }
+                return  flag;
+            }
+
+            function OnchangeFunction(idString) {
+                if (document.getElementById(idString).innerHTML != null) {
+                    document.getElementById(idString).innerHTML = '';
+                }
+            }
+        </script>
     </head>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -64,7 +88,7 @@
                             <div class="tab-pane active" id="tab_1">
                                 <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
 
-                                <form:form class="form-horizontal" method="post"
+                                <form:form class="form-horizontal" method="post" onsubmit='return checkBlankField();'
                                            modelAttribute="holidayMaster" action="holidayMaster.htm?act=createOrUpdateSubmit">
                                     <form:hidden path="id"></form:hidden>
 
@@ -73,8 +97,9 @@
                                             <form:label class="control-label" path="title">Enter Title:<span style="color: red;font-size: 12px;">*</span></form:label>
                                             </div>
                                             <div class="col-sm-7">
-                                            <form:input path="title" class="form-control"/>
-                                            <form:errors path="title" cssClass="errorDiv"/>
+                                            <form:input path="title" id="title" class="form-control" onchange="OnchangeFunction('titleError');"/>
+                                            <span style="font-size: 14px; color: #dd4b39;" id="titleError"></span>
+                                            <%--<form:errors path="title" cssClass="errorDiv"/>--%>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -83,8 +108,9 @@
                                             </div> 
                                             <div class="col-sm-7">
                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                <form:input path="holidayFromDate" class="form-control" size="16" type="text" readonly="true" onchange="dateValidator(0);"></form:input>
-                                                <form:errors path="holidayFromDate" cssClass="errorDiv"></form:errors>
+                                                <form:input path="holidayFromDate" id="holidayFromDate" class="form-control" size="16" type="text" readonly="true" onchange="dateValidator(0);OnchangeFunction('holidayFromDateError');"></form:input>
+                                                <span style="font-size: 14px; color: #dd4b39;" id="holidayFromDateError"></span>
+                                                <%--<form:errors path="holidayFromDate" cssClass="errorDiv"></form:errors>--%>
                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                 </div>
                                             </div>
@@ -108,11 +134,11 @@
                                             <form:label class="control-label" path="locationMaster.id">Location:<span style="color: red;font-size: 12px;">*</span></form:label>
                                             </div>
                                             <div class="col-sm-7">
-                                            <form:select path="locationMaster.id" class="form-control">
+                                            <form:select path="locationMaster.id" id="locationMaster" class="form-control" onchange="OnchangeFunction('locationMasterError');">
                                                 <form:option value="" label="-- Select --" />
                                                 <form:options items="${locationMap}"/>
                                             </form:select>
-                                            <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
+                                                  <span style="font-size: 14px; color: #dd4b39;" id="locationMasterError"></span>
                                             </div>
                                         </div>    
                                         <br/>

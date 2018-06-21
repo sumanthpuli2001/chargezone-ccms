@@ -1011,20 +1011,34 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         //            Certificate attach code
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("certificateId1");
         String certificateFileLocationURL = getServletContext().getRealPath("/")
                 + File.separator + "StorageYard" + File.separator + "UserCertificate"
                 + File.separator + userName + File.separator;
-        File certificateListFile = new File(certificateFileLocationURL);
-        if (certificateListFile.exists() && certificateListFile.listFiles().length > 0) {
-            File[] certificateListFileArray = certificateListFile.listFiles();
+         File Folder1 = new File(certificateFileLocationURL);
+        if (!Folder1.exists()) {
+            Folder1.mkdirs();
+        }
+        if (multipartFile != null && multipartFile.getSize() > 0) {
             try {
-                request.setAttribute("imageFile", "StorageYard" + File.separator + "UserCertificate" + File.separator + userName + File.separator + certificateListFileArray[0].getName().replaceAll(" ", ""));
+                File file2 = new File(certificateFileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                File file = new File(certificateFileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                multipartFile.transferTo(file2);
             } catch (Exception e) {
+
             }
         }
-        if (!certificateListFile.exists()) {
-            certificateListFile.mkdir();
-        }
+//        File certificateListFile = new File(certificateFileLocationURL);
+//        if (certificateListFile.exists() && certificateListFile.listFiles().length > 0) {
+//            File[] certificateListFileArray = certificateListFile.listFiles();
+//            try {
+//                request.setAttribute("imageFile", "StorageYard" + File.separator + "UserCertificate" + File.separator + userName + File.separator + certificateListFileArray[0].getName().replaceAll(" ", ""));
+//            } catch (Exception e) {
+//            }
+//        }
+//        if (!certificateListFile.exists()) {
+//            certificateListFile.mkdir();
+//        }
         //Code for Employee Policy Detail
         EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
 //       Boolean check =  employeePolicyDetailService.deleteByEmployeeId(employeeMaster.getId());

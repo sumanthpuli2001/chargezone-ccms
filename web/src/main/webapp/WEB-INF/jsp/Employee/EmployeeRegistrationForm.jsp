@@ -1397,7 +1397,7 @@
                                                         <table id="ctcTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                             <tr>
                                                                 <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                <th style="text-align: center; vertical-align: middle">Select CTC</th>
+                                                                <th style="text-align: center; vertical-align: middle">Select CTC Component</th>
                                                                 <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
                                                                 <th style="text-align: center; vertical-align: middle">Amount</th>
                                                                 <th style="text-align: center; vertical-align: middle">Taxable</th>

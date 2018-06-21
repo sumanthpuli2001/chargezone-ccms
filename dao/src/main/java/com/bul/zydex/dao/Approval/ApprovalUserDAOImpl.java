@@ -93,4 +93,16 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
         return list;
     }
 
+    @Override
+    public List<?> approvaldelete(String apid) {
+
+        String query = "";
+        query += "  "
+                + " select a"
+                + " FROM ApprovalUser a "
+                + " WHERE a.approvalMaster.id = " + apid;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

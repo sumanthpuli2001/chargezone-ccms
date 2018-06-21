@@ -1452,11 +1452,11 @@
                                                                                     </c:if>
                                                                                 </c:if>
                                                                                 <%--<c:if test="${!countVal.last}">--%>
-                                                                                    <%--<c:if test="${!countVal.last}">--%>
-                                                                                        <!--<span style='margin-top: 5px;'>-->
-                                                                                            <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicyEdit(tempCount3)"/>-->
-                                                                                        <!--</span>-->
-                                                                                    <%--</c:if>--%>
+                                                                                <%--<c:if test="${!countVal.last}">--%>
+                                                                                <!--<span style='margin-top: 5px;'>-->
+                                                                                <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicyEdit(tempCount3)"/>-->
+                                                                                <!--</span>-->
+                                                                                <%--</c:if>--%>
                                                                                 <%--</c:if>--%>
                                                                             </td>
                                                                         </tr>
@@ -1517,7 +1517,7 @@
                                                         <table id="ctcTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                             <tr>
                                                                 <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                <th style="text-align: center; vertical-align: middle">Select CTC</th>
+                                                                <th style="text-align: center; vertical-align: middle">Select CTC Component</th>
                                                                 <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
                                                                 <th style="text-align: center; vertical-align: middle">Amount</th>
                                                                 <th style="text-align: center; vertical-align: middle">Taxable</th>
@@ -2053,15 +2053,15 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
 
-                                                    <div class="form-group">
-                                                    <c:forEach var="certificatesList" items="${certificatesList}">
+                                                    <!--                                                    <div class="form-group">
+                                                <%--<c:forEach var="certificatesList" items="${certificatesList}">--%>
 
-                                                        <div class="col-sm-12">
-                                                            <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=${certificatesList}&userId=${employeeMaster.userMaster.id}">${certificatesList}</a> ]</span>
-                                                        </div>
-                                                    </c:forEach>
+                                                    <div class="col-sm-12">
+                                                        <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=${certificatesList}&userId=${employeeMaster.userMaster.id}">${certificatesList}</a> ]</span>
+                                                    </div>
+                                                <%--</c:forEach>--%>
 
-                                                </div>
+                                            </div>-->
                                                 <div class="box-body no-padding">
                                                     <div class="row">
                                                         <div class="col-md-12 col-sm-12">
@@ -2076,8 +2076,14 @@
                                                                     <tr id="cloneTr_Id">
                                                                         <td style="text-align: center">1</td>
                                                                         <td>
-                                                                            <input type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png" onchange="checkCertificateFileSize(1);">
+                                                                            <input type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png"  onchange="checkCertificateFileSize(1);">
                                                                             <span style="font-size: 14px; color: red;" id="certificateError"></span>
+                                                                            <c:forEach var="certificatesList" items="${certificatesList}">
+
+                                                                            <div class="col-sm-12">
+                                                                                <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=${certificatesList}&userId=${employeeMaster.userMaster.id}">${certificatesList}</a> ]</span>
+                                                                            </div>
+                                                                            </c:forEach>
                                                                         </td>
                                                                         <td style="text-align: center"><span style='margin-top: 5px;'>
                                                                                 <input type="button" value="+" id="step1cloneid" />  </span>

@@ -1282,7 +1282,7 @@
 
                                     <div class="form-group">
                                         <div class=" col-sm-12" style="text-align: center;">
-                                            <button class="btn btn-primary" onclick="history.back();" style="width: 100px;">BACK</button>
+                                            <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />
                                         </div>
                                     </div>
 

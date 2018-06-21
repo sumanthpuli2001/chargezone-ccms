@@ -644,30 +644,30 @@
 
                                 </ul>
                             </li>
-<!--                            <li>
-                                <a href="#">
-                                    <i class="fa fa-rupee fa-lg"></i>
-                                    <span>Report</span>
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="payrollEmployeeFormSixteen.htm?act=redirectToFormSexteen&search=none"><i class="fa fa-circle-o"></i>Form Sixteen </a></li>
-                                    <li><a href="employeePfCheck.htm?act=searchSalaryPfDetail&search=none"><i class="fa fa-circle-o"></i>PF</a></li>
-                                    <li><a href="employeePtCheck.htm?act=searchSalaryPtDetail&search=none"><i class="fa fa-circle-o"></i>PT </a></li>
-                                    <li><a href="employeeSalarySlip.htm?act=searchSalarySlipDetail&search=none"><i class="fa fa-circle-o"></i>Salary Slip </a></li>
-                                    <li><a href="policyMaster.htm?act=searchPolicyDetail&search=none"><i class="fa fa-circle-o"></i>Policy  </a></li>
-                                    <li><a href="companyMonthlyReport.htm?act=searchCompanyMonthlyReport&search=none"><i class="fa fa-circle-o"></i>Company Monthly Report</a></li>
-                                    <li><a href="companyPTReport.htm?act=searchCompanyPTReport&search=none"><i class="fa fa-circle-o"></i>PT Slab by Summary</a></li>
-                                    <li><a href="bankStatement.htm?act=searchBankStatementDetail&search=none"><i class="fa fa-circle-o"></i>Bank Statement </a></li>
-                                    <li><a href="esicDeductionStatement.htm?act=searchEsicDetail&search=none"><i class="fa fa-circle-o"></i>ESIC Deduction Statement </a></li>
-                                    <li><a href="overTime.htm?act=searchOTDetail&search=none"><i class="fa fa-circle-o"></i>Over Time Report </a></li>
-                                    <li><a href="pFChallen.htm?act=searchPfChallenDetail&search=none"><i class="fa fa-circle-o"></i>PF Challen  </a></li>
-                                    <li><a href="loanReport.htm?act=searchLoanData&search=none"><i class="fa fa-circle-o"></i>Loan</a></li>
-                                    <li><a href="attendanceReport.htm?act=searchAttendanceData&search=none"><i class="fa fa-circle-o"></i>Attendance</a></li>
-                                    <li><a href="employeeSalarySlip.htm?act=searchSalaryYearDetail&search=none"><i class="fa fa-circle-o"></i>Employee Salary Yearly</a></li>
-                                    <li><a href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none"><i class="fa fa-circle-o"></i>Govt. Format PF</a></li>
-                                </ul>
-                            </li>-->
+                            <!--                            <li>
+                                                            <a href="#">
+                                                                <i class="fa fa-rupee fa-lg"></i>
+                                                                <span>Report</span>
+                                                                <i class="fa fa-angle-left pull-right"></i>
+                                                            </a>
+                                                            <ul class="treeview-menu">
+                                                                <li><a href="payrollEmployeeFormSixteen.htm?act=redirectToFormSexteen&search=none"><i class="fa fa-circle-o"></i>Form Sixteen </a></li>
+                                                                <li><a href="employeePfCheck.htm?act=searchSalaryPfDetail&search=none"><i class="fa fa-circle-o"></i>PF</a></li>
+                                                                <li><a href="employeePtCheck.htm?act=searchSalaryPtDetail&search=none"><i class="fa fa-circle-o"></i>PT </a></li>
+                                                                <li><a href="employeeSalarySlip.htm?act=searchSalarySlipDetail&search=none"><i class="fa fa-circle-o"></i>Salary Slip </a></li>
+                                                                <li><a href="policyMaster.htm?act=searchPolicyDetail&search=none"><i class="fa fa-circle-o"></i>Policy  </a></li>
+                                                                <li><a href="companyMonthlyReport.htm?act=searchCompanyMonthlyReport&search=none"><i class="fa fa-circle-o"></i>Company Monthly Report</a></li>
+                                                                <li><a href="companyPTReport.htm?act=searchCompanyPTReport&search=none"><i class="fa fa-circle-o"></i>PT Slab by Summary</a></li>
+                                                                <li><a href="bankStatement.htm?act=searchBankStatementDetail&search=none"><i class="fa fa-circle-o"></i>Bank Statement </a></li>
+                                                                <li><a href="esicDeductionStatement.htm?act=searchEsicDetail&search=none"><i class="fa fa-circle-o"></i>ESIC Deduction Statement </a></li>
+                                                                <li><a href="overTime.htm?act=searchOTDetail&search=none"><i class="fa fa-circle-o"></i>Over Time Report </a></li>
+                                                                <li><a href="pFChallen.htm?act=searchPfChallenDetail&search=none"><i class="fa fa-circle-o"></i>PF Challen  </a></li>
+                                                                <li><a href="loanReport.htm?act=searchLoanData&search=none"><i class="fa fa-circle-o"></i>Loan</a></li>
+                                                                <li><a href="attendanceReport.htm?act=searchAttendanceData&search=none"><i class="fa fa-circle-o"></i>Attendance</a></li>
+                                                                <li><a href="employeeSalarySlip.htm?act=searchSalaryYearDetail&search=none"><i class="fa fa-circle-o"></i>Employee Salary Yearly</a></li>
+                                                                <li><a href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none"><i class="fa fa-circle-o"></i>Govt. Format PF</a></li>
+                                                            </ul>
+                                                        </li>-->
                             <li>
                                 <a href="#">
                                     <i class="fa fa-rupee fa-lg"></i>
@@ -972,7 +972,29 @@
                         </c:if>
                 </ul>
             </li>
-            
+            <li>
+                <a href="#" style="background: #fff;">
+                    <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
+                    <span style="color: #585858;">Project Management</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="projectManagement.htm?act=projectList"><i class="fa fa-circle-o"></i>Create Project</a></li>
+                    <li><a href="projectManagement.htm?act=taskList"><i class="fa fa-circle-o"></i>Create Task</a></li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-circle-o"></i>
+                            <span>Project Setting</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="projectManagement.htm?act=clientList"><i class="fa fa-circle-o"></i>Client Master</a></li>
+                            <li><a href="projectManagement.htm?act=stateList"><i class="fa fa-circle-o"></i>State Master</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </li>
             </ul>
 
         </section>

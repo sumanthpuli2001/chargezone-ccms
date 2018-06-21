@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
 
     <head> 
-        <title>Training Type Master </title>
+        <title>Kaizen </title>
 
     </head>
     <style>
@@ -100,7 +100,7 @@
                                 <div class="box-header">
                                 </div>
                                 <div class="table">
-                                    <table style="width:100%">
+                                    <table style="width:90%">
                                         <tr>
                                             <th colspan="3">Kaizen Sr. No.</th>
                                             <th colspan="5"><input name="srNo" readonly="true" size="3px;" value="${randomNumber}"/></th>
@@ -110,7 +110,7 @@
                                         </tr>
                                         <tr>
                                             <th colspan="3">Team Name </th>
-                                            <th colspan="5"><input id="teamName" name="teamName" type="text" size="50px;" onchange="kaizenOnchangeFunction('teamNameError');"><br>
+                                            <th colspan="5"><input id="teamName" name="teamName" type="text" size="20px;" onchange="kaizenOnchangeFunction('teamNameError');"><br>
                                                 <span style="font-size: 14px; color: #dd4b39;" id="teamNameError"></span></th>
                                             <th colspan="2">Kaizen Idea Generator</th>
                                             <th colspan="2"><input name="ideaGenerator" id="ideaGenerator" type="text"onchange="kaizenOnchangeFunction('ideaGeneratorError');"><br>
@@ -118,7 +118,7 @@
                                         </tr>
                                         <tr>
                                             <th colspan="3">Department </th>
-                                            <th colspan="5"><input name="department" id="department" type="text" size="50px;"onchange="kaizenOnchangeFunction('departmentError');"><br>
+                                            <th colspan="5"><input name="department" id="department" type="text" size="20px;"onchange="kaizenOnchangeFunction('departmentError');"><br>
                                                 <span style="font-size: 14px; color: #dd4b39;" id="departmentError"></span></th>
                                             <th colspan="2" rowspan="3">Team Member </th>
                                             <th colspan="2" rowspan="3">
@@ -174,124 +174,92 @@
                                         <tr>
                                             <th colspan="2" rowspan="1">Intangible Benefit </th>
                                             <th colspan="2" rowspan="1"><input name="intangibleBenefit" id="intangibleBenefit" type="text"onchange="kaizenOnchangeFunction('intangibleBenefitError');">
-                                                  <br>  <span style="font-size: 14px; color: #dd4b39;" id="intangibleBenefitError"></span></th>
+                                                <br>  <span style="font-size: 14px; color: #dd4b39;" id="intangibleBenefitError"></span></th>
                                         </tr>
                                         <tr>
                                             <th colspan="2" rowspan="3" style="vertical-align: top;height: 200px !important;">Horizontal Deployment: </th>
                                             <th colspan="2" rowspan="3" style="height: 200px !important; vertical-align: top;">
                                                 <textarea name="horizontalDeployment" id="horizontalDeployment" style="resize: none" rows="8" cols="23"onchange="kaizenOnchangeFunction('horizontalDeploymentError');"></textarea>
-                                            <br>  <span style="font-size: 14px; color: #dd4b39;" id="horizontalDeploymentError"></span></th>
+                                                <br>  <span style="font-size: 14px; color: #dd4b39;" id="horizontalDeploymentError"></span></th>
                                         </tr>
 
                                         <tr></tr>
                                         <tr></tr>
                                         <tr>
-                                            <th colspan="2" >
+                                            <th colspan="12" >
                                         <div class="col-md-12 col-sm-12">
-                                            <div class="col-md-6 col-sm-6" style="text-align: left;">
+                                            <span class="col-md-2 col-sm-2">
                                                 Productivity
-                                            </div>
-                                            <div class="col-md-6 col-sm-6" style="text-align:right">
                                                 <input type="checkbox" name="productivity" value="1" />  
-                                            </div>
-                                        </div>
-                                        </th>
-                                        <th colspan="2">
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="col-md-6 col-sm-6" style="text-align: left;">
+                                            </span>
+                                            <span class="col-md-2 col-sm-2">
                                                 Quality
-                                            </div>
-                                            <div class="col-md-6 col-sm-6" style="text-align:right">
                                                 <input type="checkbox" name="quality" value="1" />
-                                            </div>
-                                        </div>
-                                        </th>
-                                        <th colspan="2" >
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="col-md-6 col-sm-6" style="text-align: left;">
+                                            </span>
+                                            <span class="col-md-2 col-sm-2">
                                                 Delivery
-                                            </div>
-                                            <div class="col-md-6 col-sm-6" style="text-align:right">
                                                 <input type="checkbox" name="delivery" value="1" /> 
-                                            </div>
-                                        </div>
-                                        </th>
-                                        <th colspan="2">
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="col-md-6 col-sm-6" style="text-align: left;">
+                                            </span>
+                                            <span class="col-md-2 col-sm-2">
                                                 Safety
-                                            </div>
-                                            <div class="col-md-6 col-sm-6" style="text-align:right">
                                                 <input type="checkbox" name="safety" value="1" />
-                                            </div>
-                                        </div>
-                                        </th>
-
-                                        <th colspan="2" >
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="col-md-6 col-sm-6" style="text-align: left;">
+                                            </span>
+                                            <span class="col-md-2 col-sm-2">
                                                 Cost
-                                            </div>
-                                            <div class="col-md-6 col-sm-6" style="text-align:right">
                                                 <input type="checkbox" name="cost" value="1" />  
-                                            </div>
-                                        </div>
-                                        </th>
-                                        <th colspan="2">
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="col-md-6 col-sm-6" style="text-align: left;">
+                                            </span>
+                                            <span class="col-md-2 col-sm-2">
                                                 Morale
-                                            </div>
-                                            <div class="col-md-6 col-sm-6" style="text-align:right">
                                                 <input type="checkbox" name="morale" value="1" /> 
-                                            </div>
+                                            </span>
                                         </div>
-                                        </th>
+                                </div>
+                                </th>
 
-                                        </tr>
+                                </tr>
 
-                                    </table>
-                                    <div class="form-group">
-                                        <br>
-                                        <div class="col-sm-6 col-sm-offset-5">
-                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
-                                        </div>
+                                </table>
+                                <div class="form-group">
+                                    <br>
+                                    <div class="col-sm-6 col-sm-offset-5">
+                                        <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
                                     </div>
                                 </div>
-                            </div> <!--/tab-content -->
-                        </div><!-- nav-tabs-custom -->
+                            </div>
+                        </div> <!--/tab-content -->
+                    </div><!-- nav-tabs-custom -->
 
 
-                    </div><!-- /.col -->
-                </div>
-            </section>
-        </form:form>
-        <!--<div class="tab-pane" id="tab_3"></div> /.tab-pane -->
-    </div>
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-    <script>
-        $(document).ready(function () {
-            $('#datetimepicker2').datepicker({
-            });
+                </div><!-- /.col -->
+        </div>
+    </section>
+</form:form>
+<!--<div class="tab-pane" id="tab_3"></div> /.tab-pane -->
+</div>
+<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+<script>
+    $(document).ready(function () {
+        $('#datetimepicker2').datepicker({
         });
-        $(document).ready(function () {
-            $('#datetimepicker1').datepicker({
-            });
+    });
+    $(document).ready(function () {
+        $('#datetimepicker1').datepicker({
         });
-    </script>
-    <script>
-        function checkFileSize() {
-            if (typeof FileReader !== "undefined") {
-                var fileSize = document.getElementById('photograph').files[0].size;
+    });
+</script>
+<script>
+    function checkFileSize() {
+    if (typeof FileReader !== "undefined") {
+    var fileSize = document.getElementById('photograph').files[0].size;
 //                alert("my File size is   " + fileSize);
-                if (fileSize > 102400) {
-                    document.getElementById('photograph').value = '';
-                    document.getElementById('photographError').innerHTML = "- It must not more than 100kb";
-                } else {
-                    document.getElementById('photographError').innerHTML = '';
-                }
-                // check file size
-        }
-    </script>
+            if (fileSize > 102400) {
+    document.getElementById('photograph').value = '';
+            document.getElementById('photographError').innerHTML = "- It must not more than 100kb";
+    } else {
+    document.getElementById('photographError').innerHTML = '';
+    }
+    // check file size
+    }
+</script>
 </html>

@@ -177,14 +177,18 @@
                 data: {},
                 dataType: "text",
                 success: function (responseTxt) {
+//                      window.location = "trainingAssessment.htm?act=clickassessment";
+//                    saveSubmiturl();
+//                    window.location = "trainingAssessment.htm?act=clickassessment";
 
                 },
             });
-           
+
+
 //            alert("hii");
 ////                alert(finalData.toString());
-//            window.location = "vacancy.htm?act=Login";
 //             alert("hii2");
+//            window.location = "vacancy.htm?act=Login";
 //                 action="vacancy.htm?act=clickSubmitQuestionAnswer" 
         }
     </script>
@@ -281,6 +285,14 @@
         function saveSubmitexpired() {
             var onlineAssmentID = document.getElementById("onlineAssmentID").value;
             window.location = 'trainingAssessment.htm?act=clickSubmitQuestionAnswerExpired&onlineAssmentID=' + onlineAssmentID;
+        }
+    </script>
+    <script>
+        function saveSubmiturl() {
+             
+//            var onlineAssmentID = document.getElementById("onlineAssmentID").value;
+            window.location.href  = 'trainingAssessment.htm?act=clickassessment';
+            
         }
     </script>
     <!--    <script>

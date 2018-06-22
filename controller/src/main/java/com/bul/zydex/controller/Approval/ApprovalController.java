@@ -144,17 +144,16 @@ public class ApprovalController extends ApprovalAbstract {
         ApprovalUser au = (ApprovalUser) approvalUser1.get(0);
 //        List<?> approvalUserList = approvalUserService.readByApprovalId(Integer.parseInt(id));
         List<?> approvalUserList = approvalUserService.readByApprovalFetch(Integer.parseInt(id));
-       
-          for (int i = 0; i < approvalUser1.size(); i++) {
+
+        for (int i = 0; i < approvalUser1.size(); i++) {
             ApprovalUser au1 = (ApprovalUser) approvalUser1.get(i);
-            emid  = au1.getEmployeeMaster().getId();
+            emid = au1.getEmployeeMaster().getId();
         }
-        
+
 //        approvalMaster = approvalMasterService.readById(approvalUser.getApprovalMaster().getId());
         approvalMaster = approvalMasterService.readById(Integer.parseInt(id));
         approvalUser = approvalUserService.readById(Integer.parseInt(id));
 
-        
         employeeMaster = employeeMasterService.readById(emid);
         selectedEmployeeFor360Feedback(request, employeeMaster);
         selectEmployee(request, response);
@@ -163,6 +162,32 @@ public class ApprovalController extends ApprovalAbstract {
         mv.getModelMap().put("approvalUser", approvalUser);
         mv.getModelMap().put("approvalMaster", approvalMaster);
         mv.setViewName("Approval/ViewApprovalDetail");
+        return mv;
+    }
+
+    public ModelAndView deleteApprovalSetting(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+      ModelAndView mv = new ModelAndView();
+        String[] empId = request.getParameterValues("checkId");
+        for (String z : empId) {
+            try {
+                
+                    ApprovalUser approvalUser = new ApprovalUser();
+                List<?> list = approvalUserService.approvaldelete(z);
+                for (Object object : list) {
+                    approvalUser = (ApprovalUser) object;
+                    approvalUserService.delete(approvalUser.getId());
+                }
+                
+                approvalMasterService.delete(Integer.parseInt(z));
+                request.setAttribute("successMessage",
+                        "Info :  Records Deleted Successfully.");
+            } catch (Exception e) {
+
+            }
+        }
+        mv = approvalList(request, response);
         return mv;
     }
 }

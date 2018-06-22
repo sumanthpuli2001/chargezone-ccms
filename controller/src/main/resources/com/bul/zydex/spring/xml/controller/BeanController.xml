@@ -1300,5 +1300,10 @@
     <bean id="emergencyContactController1" class="com.bul.zydex.controller.EmergencyContactController" parent="controllerConfig">
         <property name="emergencyContactService" ref="emergencyContactService1" />
     </bean>
+    <bean id="projectManagementController1" class="com.bul.zydex.controller.ProjectManagement.ProjectManagementController" parent="controllerConfig">
+        <property name="projectManagementService" ref="projectManagementService1"/>
+        <property name="clientMasterService" ref="clientMasterService1"/>
+        <property name="stateMasterService" ref="stateMasterService1"/>
+    </bean>
 </beans>
  

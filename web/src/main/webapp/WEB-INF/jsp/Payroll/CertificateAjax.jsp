@@ -18,7 +18,11 @@
     </head>
    <div class="box-header" style="text-align: right;">
     <input type="button" class="btn btn-facebook col-sm-offset-4"  style="width: 100px;" value="Print" onclick="printDiv('printableArea')">
-    </div>
+    <!--<input type="button" class="btn btn-facebook col-sm-offset-4"  style="width: 100px;" value="Downlaod" onclick="download123()">-->
+    <!--<button class="btn btn-box-tool" data-widget="collapse" onclick="download123()">Value</button>-->
+    <a href="<%= request.getContextPath()%>/StorageYard/Certificate/Nishant%20Machhi/Offer%20Letter.pdf">Download</a>
+    <!--<input type="text"  name="path" id="path" value="<%= request.getContextPath()%>"/>-->
+     </div>
      <div id="printableArea">
     <body class="navbar-fixed">
         <div id="shiftName">

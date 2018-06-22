@@ -195,20 +195,7 @@
                                                 </a>
                                             </c:if>
                                         </div>
-                                        <div class="col-xs-4 col-sm-4 col-md-4">
-                                            <c:if test="${sessionScope.userRight.govtFormatPF}">
-                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"  href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none">
-                                                    Govt. Format PF
-                                                </a>
-                                            </c:if>
-                                        </div>
-                                        <div class="col-xs-4 col-sm-4 col-md-4">
-                                            <c:if test="${sessionScope.userRight.govtFormatPF}">
-                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"  href="esicDeductionStatement.htm?act=searchEsicDetailGovt&search=none">
-                                                    Govt. Format Esic Deduction 
-                                                </a>
-                                            </c:if>
-                                        </div>
+                                   
                                     </div>
                                     <br>
                                 </div>
@@ -313,8 +300,8 @@
                             </div>
                         </div>
                     </div>
-<!--                    <div class="nav-tabs-custom">
-                        <h3 style="text-align: center;">Statutory Report</h3>
+                    <div class="nav-tabs-custom">
+                        <!--<h3 style="text-align: center;">Performance Management</h3>-->
                         <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
                             <div class="box-header" style="background-color: #006fad !important;text-align: center;">
                                 <h3 class="box-title"style="font-size: 30px;color: white;font-weight:700;font-size:16px;">STATUTORY REPORT</h3>
@@ -322,17 +309,38 @@
                             <div class="box-body"> 
                                 <div class="tab-content">
                                     <div class="row">
+                                             <div class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.govtFormatPF}">
+                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"  href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none">
+                                                    Govt. Format PF
+                                                </a>
+                                            </c:if>
+                                        </div>
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.govtFormatPF}">
+                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"  href="esicDeductionStatement.htm?act=searchEsicDetailGovt&search=none">
+                                                    Govt. Format Esic Deduction 
+                                                </a>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-tabs-custom">
+                        <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
+                            <div class="box-header" style="background-color: #006fad !important;text-align: center;">
+                                <h3 class="box-title"style="font-size: 30px;color: white;font-weight:700;font-size:16px;">Employee Detailed Information</h3>
+                            </div>
+                            <div class="box-body"> 
+                                <div class="tab-content">
+                                    <div class="row">
                                         <div class="col-xs-4 col-sm-4 col-md-4">
                                             <%--<c:if test="${sessionScope.userRight.pMPReport}">--%>
-                                            <a  style="font-size: 14px;text-align: left;color: #2c3e50;" href="homeController.htm?act=form5">
-                                                Form 5
-                                            </a>
-                                            <%--</c:if>--%>
-                                        </div>
-                                        <div  class="col-xs-4 col-sm-4 col-md-4">
-                                            <%--<c:if test="${sessionScope.userRight.appraisalReport360}">--%>
-                                            <a  style="font-size: 14px;text-align: left;color: #2c3e50;" href="homeController.htm?act=form10">
-                                                Form 10
+                                            <a  style="font-size: 14px;text-align: left;color: #2c3e50;" href="homeController.htm?act=redirectToAllReports">
+                                                Employee Detailed Information
                                             </a>
                                             <%--</c:if>--%>
                                         </div>
@@ -341,7 +349,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
         </section>
     </div>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ProjectManagementMaster" table="project_management_master" catalog="hr_power_astral" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="45" />
+        </property>
+        <property name="plannedDate" type="string">
+            <column name="planned_date" length="45" />
+        </property>
+        <property name="deadline" type="string">
+            <column name="deadline" length="45" />
+        </property>
+        <property name="manager" type="string">
+            <column name="manager" length="45" />
+        </property>
+        <property name="client" type="string">
+            <column name="client" length="45" />
+        </property>
+        <property name="state" type="string">
+            <column name="state" length="45" />
+        </property>
+        <property name="priority" type="string">
+            <column name="priority" length="45" />
+        </property>
+        <property name="workLocation" type="string">
+            <column name="work_location" length="45" />
+        </property>
+        <property name="riskImpact" type="string">
+            <column name="risk_impact" length="45" />
+        </property>
+        <property name="riskProbability" type="string">
+            <column name="risk_probability" length="45" />
+        </property>
+        <property name="potentialCost" type="string">
+            <column name="potential_cost" length="45" />
+        </property>
+        <property name="mitigationCost" type="string">
+            <column name="mitigation_cost" length="45" />
+        </property>
+        <property name="mitigationPlan" type="string">
+            <column name="mitigation_plan" length="45" />
+        </property>
+        <property name="projectFinishDate" type="string">
+            <column name="project_finish_date" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

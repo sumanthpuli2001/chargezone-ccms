@@ -1808,9 +1808,11 @@ public class VacancyController extends VacancyAbstract {
 
         String[] question = request.getParameterValues("finalData1");
         String[] email = request.getParameterValues("finalData");
+        String[] checkstatus = request.getParameterValues("finalData2");
 //       
         String[] doneId1 = email[0].split(",");
         String[] doneId2 = question[0].split(",");
+        String[] doneId3 = checkstatus[0].split(",");
         String emailId = "";
         String emailId1 = "";
 //     
@@ -1821,14 +1823,21 @@ public class VacancyController extends VacancyAbstract {
             QuestionLibrary questionLibrary = new QuestionLibrary();
             String ques = doneId2[i];
             String ans = doneId1[i];
-            boolean parsable = true;
-            try {
-                Integer.parseInt(ans);
-                questionAns.setId(Integer.parseInt(ans));
-            } catch (Exception e) {
-                parsable = false;
+            String status = doneId3[i];
+            if (Integer.parseInt(status) == (1)) {
                 questionAnswerSubmit.setDescription(ans);
+            } else {
+
+                questionAns.setId(Integer.parseInt(ans));
             }
+//            boolean parsable = true;
+//            try {
+//                Integer.parseInt(ans);
+//                questionAns.setId(Integer.parseInt(ans));
+//            } catch (Exception e) {
+//                parsable = false;
+//                questionAnswerSubmit.setDescription(ans);
+//            }
 //            return parsable;
 
             questionAnswerSubmit.setQuestionAnsId(questionAns);// Question Anaswer Id set

@@ -155,14 +155,17 @@
 
             var data;
             var data1;
+            var data2;
             var finalData = [];
             var finalData1 = [];
             var finalData2 = [];
+//            var finalData2 = [];
             var candidateId = document.getElementById("onlineAssmentID").value;
 //                alert(candidateId);
             var len = document.getElementById("countDetailId").value;
             for (var i = 1; i < parseInt(len) + 1; i++) {
                 data1 = document.getElementById("candidateIDEmp" + i).value;
+                data2 = document.getElementById("checkStatus" + i).value;
                 data = $('input[name=' + i + ']:checked').val();
 //                    data1 = $('input[name=candidateID' + i + ']:checked').val();
                 if (data === undefined) {
@@ -170,16 +173,20 @@
                 }
                 finalData.push(data);
                 finalData1.push(data1);
+                finalData2.push(data2);
             }
             $.ajax({
                 type: "POST",
-                url: "trainingAssessment.htm?act=clickSubmitQuestionAnswer&finalData=" + finalData + "&candidateId=" + candidateId + "&finalData1=" + finalData1,
+                url: "trainingAssessment.htm?act=clickSubmitQuestionAnswer&finalData=" + finalData + "&candidateId=" + candidateId + "&finalData1=" + finalData1 + "&finalData2=" + finalData2,
                 data: {},
-                dataType: "text",
+                processData: true,
+                cache: false,
+                async: false,
+                dataType: "JSON",
                 success: function (responseTxt) {
 //                      window.location = "trainingAssessment.htm?act=clickassessment";
 //                    saveSubmiturl();
-//                    window.location = "trainingAssessment.htm?act=clickassessment";
+                    window.location = "trainingAssessment.htm?act=clickassessment";
 
                 },
             });
@@ -289,10 +296,10 @@
     </script>
     <script>
         function saveSubmiturl() {
-             
+
 //            var onlineAssmentID = document.getElementById("onlineAssmentID").value;
-            window.location.href  = 'trainingAssessment.htm?act=clickassessment';
-            
+            window.location.href = 'trainingAssessment.htm?act=clickassessment';
+
         }
     </script>
     <!--    <script>
@@ -366,6 +373,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
+                                                                 <input type="hidden" name="checkStatus${status.count}" id="checkStatus${status.count}" value="${employeeAdditional[1]}">
                                                                 <c:if test="${employeeAdditional[1] eq 0}">
 
                                                                     <!--                                                                        <input type="checkbox" class="form-check-input" id="checkbox104">

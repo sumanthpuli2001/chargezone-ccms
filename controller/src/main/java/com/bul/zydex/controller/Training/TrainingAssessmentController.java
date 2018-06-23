@@ -170,7 +170,7 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
-         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         TrainingAssessment trainingAssessment = new TrainingAssessment();
 
         String candidateiD = request.getParameter("candidateId");
@@ -178,9 +178,11 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
 
         String[] question = request.getParameterValues("finalData1");
         String[] email = request.getParameterValues("finalData");
+        String[] checkstatus = request.getParameterValues("finalData2");
 //       
         String[] doneId1 = email[0].split(",");
         String[] doneId2 = question[0].split(",");
+        String[] doneId3 = checkstatus[0].split(",");
         String emailId = "";
         String emailId1 = "";
 //     
@@ -191,16 +193,23 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             QuestionLibrary questionLibrary = new QuestionLibrary();
             String ques = doneId2[i];
             String ans = doneId1[i];
-            boolean parsable = true;
-            try {
-                Integer.parseInt(ans);
-                questionAns.setId(Integer.parseInt(ans));
-            } catch (Exception e) {
-                parsable = false;
+            String status = doneId3[i];
+            if (Integer.parseInt(status) == (1)) {
                 trainingQuestionAnswerSubmit.setDescription(ans);
-            }
-//            return parsable;
+            } else {
 
+                questionAns.setId(Integer.parseInt(ans));
+            }
+
+//            boolean parsable = true;
+//            try {
+//                Integer.parseInt(ans);
+//                questionAns.setId(Integer.parseInt(ans));
+//            } catch (Exception e) {
+//                parsable = false;
+//                trainingQuestionAnswerSubmit.setDescription(ans);
+//            }
+//            return parsable;
             trainingQuestionAnswerSubmit.setQuestionAns(questionAns);// Question Anaswer Id set
             trainingAssessment.setId(Integer.parseInt(candidateiD));
             trainingQuestionAnswerSubmit.setTrainingAssessment(trainingAssessment);/// candidate Apply job ID set 
@@ -209,24 +218,23 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             trainingQuestionAnswerSubmitService.create(trainingQuestionAnswerSubmit);
 //             mv.setViewName("Vacancy/AssementOnline");
         }
-           try {
-                EmailTemplate emailTemplate = new EmailTemplate();
-                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
-                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
 // id ( Not created id 138) is for Approved User....
-                emailTemplate = emailTemplateService.readById(156);
-                String To = employeeMaster.getEmailAddress();
-                String from = "";
-                String Subject = emailTemplate.getSubject();
-                String msg = emailTemplate.getBodytext();
-                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
-                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
-                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                sendMail.sendMail(from, To, Subject, msg);
-            } 
-           catch (Exception e) {
-            }
+            emailTemplate = emailTemplateService.readById(156);
+            String To = employeeMaster.getEmailAddress();
+            String from = "";
+            String Subject = emailTemplate.getSubject();
+            String msg = emailTemplate.getBodytext();
+            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+        }
         trainingAssessment = trainingAssessmentService.readById(Integer.parseInt(candidateiD));
         trainingAssessment.setStatus(1);
         trainingAssessment.setAssessmentResultStatus(2);   // 2 for assessment submit by user

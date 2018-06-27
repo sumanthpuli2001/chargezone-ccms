@@ -1437,7 +1437,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                     double taxDeductionDecartionAmount156 = 0;
                                     double SavingAmountRemain = 0;
                                     List<?> taxDeductionDecarationSubmit15 = taxDeductionDecarationSubmitService.readTaxDeductionDecarationSubmitSalaryGenerateAfterDate(taxSavingsubmitId);
-                                    if (!taxDeductionDecarationSubmit15.isEmpty()) {
+                                    if (!taxDeductionDecarationSubmit15.isEmpty() && null != taxDeductionDecarationSubmit15.get(0)) {
                                         taxDeductionDecartionAmount156 = (Double) taxDeductionDecarationSubmit15.get(0);
                                     }
                                     Double TotalRemainingAmount1 = 0.0;

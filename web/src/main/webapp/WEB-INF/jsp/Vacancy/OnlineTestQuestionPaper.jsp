@@ -166,6 +166,7 @@
 
             var data;
             var data1;
+            var data2;
             var finalData = [];
             var finalData1 = [];
             var finalData2 = [];
@@ -175,6 +176,7 @@
             var len = document.getElementById("countDetailId").value;
             for (var i = 1; i < parseInt(len) + 1; i++) {
                 data1 = document.getElementById("candidateIDEmp" + i).value;
+                data2 = document.getElementById("checkStatus" + i).value;
                 data = $('input[name=' + i + ']:checked').val();
 //                    data1 = $('input[name=candidateID' + i + ']:checked').val();
                 if (data === undefined) {
@@ -182,15 +184,16 @@
                 }
                 finalData.push(data);
                 finalData1.push(data1);
+                finalData2.push(data2);
             }
             $.ajax({
                 type: "POST",
-                url: "vacancy.htm?act=clickSubmitQuestionAnswer&finalData=" + finalData + "&candidateId=" + candidateId + "&finalData1=" + finalData1+ "&vanacyID=" + vanacyID,
+                url: "vacancy.htm?act=clickSubmitQuestionAnswer&finalData=" + finalData + "&candidateId=" + candidateId + "&finalData1=" + finalData1 + "&vanacyID=" + vanacyID + "&finalData2=" + finalData2,
                 data: {},
                 processData: true,
                 cache: false,
                 async: false,
-                dataType: "text",
+                dataType: "JSON",
                 success: function (responseTxt) {
 
                 },
@@ -370,10 +373,11 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <c:if test="${employeeAdditional[1] eq 0}">
+                                                            <input type="hidden" name="checkStatus${status.count}" id="checkStatus${status.count}" value="${employeeAdditional[1]}">
+                                                            <c:if test="${employeeAdditional[1] eq 0}">
 
-                                                                    <!--                                                                        <input type="checkbox" class="form-check-input" id="checkbox104">
-                                                                                                                                            <label class="form-check-label" for="checkbox1">${employeeAdditional[2]}</label>-->
+                                                                <!--                                                                        <input type="checkbox" class="form-check-input" id="checkbox104">
+                                                                                                                                        <label class="form-check-label" for="checkbox1">${employeeAdditional[2]}</label>-->
                                                                 <tr><td><input class="form-check-input" name="${status.count}" type="radio" id="radio100${status.count}" value="${employeeAdditional[4]}" >
                                                                         <label class="form-check-label" for="radio100${employeeAdditional[4]}">${employeeAdditional[3]}</label></td></tr>
                                                                 <tr><td><input class="form-check-input" name="${status.count}" type="radio" id="radio100${status.count}" value="${employeeAdditional[6]}">

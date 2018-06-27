@@ -175,6 +175,9 @@
                 type: "POST",
                 url: "trainingAssessment.htm?act=clickSubmitQuestionAnswer&finalData=" + finalData + "&candidateId=" + candidateId + "&finalData1=" + finalData1,
                 data: {},
+                processData: true,
+                cache: false,
+                async: false,
                 dataType: "text",
                 success: function (responseTxt) {
 

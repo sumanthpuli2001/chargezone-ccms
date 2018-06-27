@@ -187,6 +187,9 @@
                 type: "POST",
                 url: "vacancy.htm?act=clickSubmitQuestionAnswer&finalData=" + finalData + "&candidateId=" + candidateId + "&finalData1=" + finalData1+ "&vanacyID=" + vanacyID,
                 data: {},
+                processData: true,
+                cache: false,
+                async: false,
                 dataType: "text",
                 success: function (responseTxt) {
 

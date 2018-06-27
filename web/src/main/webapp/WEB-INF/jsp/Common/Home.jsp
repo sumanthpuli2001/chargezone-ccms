@@ -413,7 +413,7 @@
                                                         <a href="homeController.htm?act=opanGallery">
                                                             <div  class="mySlides">
 
-                                                                <img src="StorageYard/galleryimage/${gallery.imagesPath}"  >
+                                                                <img src="StorageYard/galleryimage/${gallery[1]}"  >
                                                             </div>
                                                         </a>
                                                     </c:forEach>
@@ -442,7 +442,7 @@
                                                         <a href="homeController.htm?act=opanRR">
                                                             <div  class="rrmySlides">
 
-                                                                <img hight="400" width="500" src="StorageYard/RandRimage/${rr.imagesPath}"  >
+                                                                <img hight="400" width="500" src="StorageYard/RandRimage/${rr[1]}"  >
                                                             </div>
                                                         </a>
                                                     </c:forEach>
@@ -611,7 +611,7 @@
                                                     <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
                     <%--<c:forEach var="gallery" items="${galleryList}">--%>
                         <div data-p="240.00">
-                            <img data-u="image" src="StorageYard/galleryimage/${gallery.imagesPath}" />
+                            <img data-u="image" src="StorageYard/galleryimage/${gallery[1]}" />
                         </div>
                     <%--</c:forEach>--%>
 
@@ -658,7 +658,7 @@
                                 <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:980px;height:380px;overflow:hidden;">
                                     <c:forEach var="RR" items="${RRList}">
                                         <div data-p="240.00">
-                                            <img data-u="image" src="StorageYard/RandRimage/${RR.imagesPath}" />
+                                            <img data-u="image" src="StorageYard/RandRimage/${RR[1]}" />
                                         </div>
                                     </c:forEach>
                                 </div>

@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.CandidateF2F;
 
 import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateApplyJob2;
 import com.bul.zydex.model.CandidateF2FApproval;
 import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
@@ -356,6 +357,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
+        CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob.getId());
         VacancyMaster vm = vacancyMasterService.readByVacancyId(candidateF2FRequest.getVacancyMaster().getId());
         MprMaster mm = mprMasterService.readByMPRId(vm.getMprMaster().getId());
         List<CandidateF2FApproval> committeedetaillist = new ArrayList<>();
@@ -451,6 +453,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         request.setAttribute("Mprbudget", Mprbudget);
         request.setAttribute("MprExperience", MprExperience);
         request.setAttribute("Mprdescription", Mprdescription);
+        request.setAttribute("candidateApplyJob", candidateApplyJob);
         request.setAttribute("list", list);
         mv.setViewName("CandidateFtoF/ShowF2FInterview");
         return mv;
@@ -624,7 +627,6 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         List<?> list = mprApprovalHistoryService.getByMprId(mprId);
 
 //        ////////---- MPP s
-        
         request.setAttribute("jobtypeNAme2", jobtypeNAme2);
         request.setAttribute("departmentName2", departmentName2);
         request.setAttribute("locationName2", locationName2);

@@ -24,7 +24,7 @@ public class CandidateF2FRequestDAOImpl<T> extends GenericsDAOImpl<T> implements
     public List<?> interviewReqDetailread(int empId) {
 
         String query = " SELECT a.id,b.name as condidateName,c.name as vacancyName,a.dateOfInterview,"
-                + " a.status,(select cfa.id  from CandidateF2FApproval cfa where a.id=cfa.candidateF2FRequest.id and cfa.employeeMaster.id="+empId+") as flag "
+                + " a.status,(select cfa.id  from CandidateF2FApproval cfa where a.id=cfa.candidateF2FRequest.id and cfa.employeeMaster.id="+empId+") as flag ,b.id "
                 + " FROM CandidateF2FRequest a "
                 + " LEFT JOIN a.candidateApplyJob b "
                 + " LEFT JOIN a.vacancyMaster c "

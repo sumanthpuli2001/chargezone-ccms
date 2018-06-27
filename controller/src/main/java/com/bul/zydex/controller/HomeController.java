@@ -73,8 +73,8 @@ public class HomeController extends HomeAbstract {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String lastOldDate = sdf.format(dateSet);
         String CurrentDate = sdf.format(d);
-        List<?> galleryList = galleryService.read();
-        List<?> RRList = rAndRService.read();
+        List<?> galleryList = galleryService.readgalleryDetail();
+        List<?> RRList = rAndRService.readrandrDetail();
         List<EmployeeMaster> TodaysBirthdays = (List<EmployeeMaster>) employeeMasterService.readEmployeeByBirthday(CurrentDate);
         List<List<?>> BirthdayList = new ArrayList<>();
         //////////////////today birthdays image/////////////
@@ -192,7 +192,7 @@ public class HomeController extends HomeAbstract {
 //    }
     public ModelAndView opanGallery(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        List<?> galleryList = galleryService.read();
+        List<?> galleryList = galleryService.readgalleryDetail();
         request.setAttribute("galleryList", galleryList);
         mv.setViewName("Common/Gallery");
         return mv;
@@ -200,7 +200,7 @@ public class HomeController extends HomeAbstract {
 
     public ModelAndView opanRR(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        List<?> RRList = rAndRService.read();
+        List<?> RRList = rAndRService.readrandrDetail();
         request.setAttribute("RRList", RRList);
         mv.setViewName("Common/RewardAndRecognition");
         return mv;

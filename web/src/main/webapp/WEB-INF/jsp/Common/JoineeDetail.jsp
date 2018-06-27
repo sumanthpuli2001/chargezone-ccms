@@ -36,20 +36,20 @@
                                                 <td>${empDetail.employeeName}</td>
                                             </tr>
                                             <tr>
-                                                <th>Department: </th>
+                                                <th>Department:</th>
                                                 <td> ${department.departmentName}</td>
                                             </tr>
                                             <tr>
-                                                <th>Designation :</th>
+                                                <th>Designation:</th>
                                                 <td> ${designation.designationName}</td>
                                             </tr>
                                             <tr>
-                                                <th>Email: </th>
-                                                <td> ${empDetail.emailAddress}</td>
+                                                <th>Email:</th>
+                                                <td> ${empDetail.officeEmailId}</td>
                                             </tr>
                                             <tr>
-                                                <th>Contact: </th>
-                                                <td> ${empDetail.contactNo1}</td>
+                                                <th>Contact:</th>
+                                                <td> ${empDetail.contactNo2}</td>
                                             </tr>
                                         </table>
                                     </div>

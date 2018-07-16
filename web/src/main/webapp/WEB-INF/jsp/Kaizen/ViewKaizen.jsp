@@ -238,6 +238,48 @@
                 </div>
             </section>
         </form:form>
+        
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <label><h3>History</h3></label>
+                <div class="table table-bordered">
+                    <table border="1" style="width: 100%;">
+                        <c:choose>
+                            <c:when test="${empty listKh}">
+                                <tr>
+                                    <td align="center">
+                                        <c:out value="There is no record found."></c:out>
+                                        </td>
+                                    </tr>
+                            </c:when>
+                            <c:otherwise>
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50px;">Name</th>
+                                        <th style="width: 50px;">Date & Time</th>
+                                        <th style="width: 50px;">Comment's</th>
+                                        <th style="width: 50px;">Status</th>
+                                    </tr>
+                                </thead>
+                            </c:otherwise>
+                        </c:choose>
+                        <tbody>
+                            <c:forEach var="list" items="${listKh}">
+                                <tr>
+                                    <td>${list[5]}</td>
+                                    <td>${list[4]}</td>
+                                    <td>${list[1]}</td>
+                                    <td>${list[3]}</td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div><!-- /.col -->
+        </div>
+        
         <!--<div class="tab-pane" id="tab_3"></div> /.tab-pane -->
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

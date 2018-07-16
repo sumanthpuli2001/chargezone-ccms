@@ -536,6 +536,7 @@
         <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
         <property name="policyCreateService" ref="policyCreateService1" />
         <property name="policyDropDownService" ref="policyDropDownService1" />
+        <property name="policyReadHistoryService" ref="policyReadHistoryService1" />
         
     </bean>
     <!--EmailTemplate-->
@@ -1201,6 +1202,7 @@
         <property name="trainingMasterService" ref="trainingMasterService1" />
         <property name="trainingSubMasterService" ref="trainingSubMasterService1" />
         <property name="trainingMasterValidator" ref="trainingMasterValidator1" />
+        <property name="trainingIdentificationService" ref="trainingIdentificationService1" />
         
     </bean>
     <bean id="employeeFeedbackController1" class="com.bul.zydex.controller.Training.EmployeeFeedbackController" parent="controllerConfig" >
@@ -1286,6 +1288,7 @@
         <property name="kaizenApprovalService" ref="kaizenApprovalService1"></property>
         <property name="approvalUserService" ref="approvalUserService1"></property>
         <property name="designationMasterService" ref="designationMasterService1"></property>
+        <property name="kaizenApprovalHistoryService" ref="kaizenApprovalHistoryService1"></property>
     </bean>
     <bean id="leaveEmployeeDetailsApprovalHistoryController1" class="com.bul.zydex.controller.leave.LeaveEmployeeDetailsApprovalHistoryController" parent="controllerConfig">
         <property name="leaveEmployeeDetailsApprovalHistoryService" ref="leaveEmployeeDetailsApprovalHistoryService1" />

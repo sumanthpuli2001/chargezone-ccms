@@ -31,4 +31,6 @@ public interface TrainingIdentificationDAO<T> extends GenericsDAO<T> {
     public List<?> checkTraineeAvailableStatus(int trainingId, int empId);
 
     public List<?> readEmployeeAndTraining(int trainingId, int id);
+    
+    public List<?> readTrainingById(String trainingId);
 }

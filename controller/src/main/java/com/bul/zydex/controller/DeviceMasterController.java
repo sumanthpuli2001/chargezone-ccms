@@ -247,7 +247,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                                     emailTemplate = emailTemplateService.readById(141);
                                     String Subject = emailTemplate.getSubject();
                                     String msg = emailTemplate.getBodytext();
-                                    sendMail.sendMail("hrms@spcls.co.in", To, Subject, msg);
+                                    sendMail.sendMail("myspc@spcls.co.in", To, Subject, msg);
                                     l2.setCountConnectionOut(0);
 
                                 } else {
@@ -343,7 +343,7 @@ public class DeviceMasterController extends DeviceMasterAbstract {
                                                 emailTemplate = emailTemplateService.readById(141);
                                                 String Subject = emailTemplate.getSubject();
                                                 String msg = emailTemplate.getBodytext();
-                                                sendMail.sendMail("hrms@spcls.co.in", To, Subject, msg);
+                                                sendMail.sendMail("myspc@spcls.co.in", To, Subject, msg);
                                                 l2.setCountConnectionOut(0);
 
                                             } else {

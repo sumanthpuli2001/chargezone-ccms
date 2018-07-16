@@ -128,7 +128,7 @@
 
                                                                 <div class="btn-group">
                                                                     <button type="button" onclick="onlyView(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                        &nbsp;&nbsp;View--${list[6]}
+                                                                        &nbsp;&nbsp;View
                                                                     </button>
                                                                 </div>
 

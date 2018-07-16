@@ -7,6 +7,7 @@ package com.bul.zydex.controller.Training;
 
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
+import com.bul.zydex.model.TrainingIdentification;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingSubMaster;
 import com.bul.zydex.model.TrainingSubType;
@@ -52,7 +53,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         ModelAndView mv = new ModelAndView();
         TrainingMaster trainingMaster = new TrainingMaster();
         EmployeeMaster employeeMaster = new EmployeeMaster();
-        
+
         //The Event date is used for fetching date from calendar +(Plus button)
         String eventdate = request.getParameter("eventdate");
 
@@ -60,8 +61,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         trainingtypeList(request);
         trainingSubtypeList(request);
         selectEmployee(request, response);
-        
-        
+
         selectedEmployeeFor360Feedback(request, employeeMaster);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         request.setAttribute("startdate", eventdate);
@@ -80,13 +80,11 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster.getTrainingSubType().getId());
         EmployeeMaster em = employeeMasterService.readById(Integer.parseInt(trainingMaster.getTrainingOwner()));
         trainingSubType.setTrainingType(trainingType);
-        
+
         selectEmployee(request, response);
-        
-        
-        
+
         int employee = em.getId();
-        employeeMaster = (EmployeeMaster)employeeMasterService.readById(employee);
+        employeeMaster = (EmployeeMaster) employeeMasterService.readById(employee);
         String employeeName = employeeMaster.getEmployeeName();
 
         selectedEmployeeFor360Feedback(request, employeeMaster);
@@ -336,40 +334,33 @@ public class TrainingMasterController extends TrainingMasterAbstract {
     }
 
     public ModelAndView deleteClick(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
-        String[] checkId = request.getParameterValues("checkId");
-        String checkStr = "";
+        
         ModelAndView mv = new ModelAndView();
-        int count = 0;
-//        List<String> checkIdList = Arrays.asList(checkId);
-//            checkIdList.forEach((checkedValues) -> departmentMasterService.delete(Integer.parseInt(checkedValues)));
-        boolean flag = false;
+        String checkId[] = request.getParameterValues("checkId");
         for (String checkedValues : checkId) {
-            try {
-                trainingMasterService.delete(Integer.parseInt(checkedValues));
-            } catch (Exception e) {
-                try {
-                    trainingMaster = trainingMasterService.readById(Integer.parseInt(checkedValues));
-                    if (count == 0) {
-                        checkStr += trainingMaster.getTrainingTitle();
-                    } else {
-                        checkStr += "," + trainingMaster.getTrainingTitle();
-                    }
-                    count++;
-                    flag = true;
-                } catch (Exception ee) {
 
+            try {
+                TrainingIdentification trainingIdentification = new TrainingIdentification();
+                List<?> list = trainingIdentificationService.readTrainingById(checkedValues);
+                for (Object object : list) {
+                    trainingIdentification = (TrainingIdentification) object;
+                    trainingIdentificationService.delete(trainingIdentification.getId());
                 }
+                TrainingSubMaster subMaster = new TrainingSubMaster();
+                List<?> list1 = trainingSubMasterService.deletetrainingId(checkedValues);
+                for (Object object1 : list1) {
+                    subMaster = (TrainingSubMaster) object1;
+                    trainingSubMasterService.delete(subMaster.getId());
+                }
+
+                trainingMasterService.delete(Integer.parseInt(checkedValues));
+                request.setAttribute("successMessage",
+                        "Info : Records are deleted successfully.");
+            } catch (Exception e) {
+
             }
         }
-        if (flag) {
-            mv.addObject("failureMessage", "Error : In Use, Can't Be Deleted.....  " + "<b>" + checkStr + "</b>");
-        } else {
-            mv.addObject("successMessage", "Information Is Deleted Successfully.");
-        }
-//        List<?> trainingList = trainingMasterService.read();
-//          mv.addObject("trainingList", trainingList);
         mv = showList(request, response);
-//        showList(request,response,trainingMaster);
         return mv;
     }
 

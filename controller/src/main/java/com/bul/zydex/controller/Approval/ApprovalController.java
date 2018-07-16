@@ -165,21 +165,41 @@ public class ApprovalController extends ApprovalAbstract {
         return mv;
     }
 
+    public ModelAndView editSubmit(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        ApprovalMaster approvalMaster = new ApprovalMaster();
+        
+        BindException errors = new BindException(approvalMaster, "approvalMaster");
+        bind(request, approvalMaster);
+        String policyId1 = request.getParameter("policyId1");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        ApprovalMaster approvalMaster1 = approvalMasterService.approvalId(approvalMaster.getId());
+        approvalMaster.setUpdatedDate(sdf.format(cDate));
+        approvalMasterService.update(approvalMaster);
+
+        mv = approvalList(request, response);
+        return mv;
+
+    }
+
     public ModelAndView deleteApprovalSetting(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-      ModelAndView mv = new ModelAndView();
+        ModelAndView mv = new ModelAndView();
         String[] empId = request.getParameterValues("checkId");
         for (String z : empId) {
             try {
-                
-                    ApprovalUser approvalUser = new ApprovalUser();
+
+                ApprovalUser approvalUser = new ApprovalUser();
                 List<?> list = approvalUserService.approvaldelete(z);
                 for (Object object : list) {
                     approvalUser = (ApprovalUser) object;
                     approvalUserService.delete(approvalUser.getId());
                 }
-                
+
                 approvalMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info :  Records Deleted Successfully.");

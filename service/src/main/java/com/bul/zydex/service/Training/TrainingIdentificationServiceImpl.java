@@ -72,4 +72,9 @@ public class TrainingIdentificationServiceImpl<T> extends GenericsServiceImpl<T>
         return trainingIdentificationDAO.readEmployeeAndTraining(trainingId,id);
     }
 
+    @Override
+    public List<?> readTrainingById(String trainingId) {
+         return trainingIdentificationDAO.readTrainingById(trainingId);
+    }
+
 }

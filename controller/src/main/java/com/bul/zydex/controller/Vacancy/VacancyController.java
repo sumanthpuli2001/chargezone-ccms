@@ -69,6 +69,7 @@ public class VacancyController extends VacancyAbstract {
         String vacancyId = request.getParameter("vacancyId");
         int vacId = Integer.parseInt(vacancyId);
         ModelAndView mv = new ModelAndView();
+        CombinedCandidateClasses candidateClasses = new CombinedCandidateClasses();
 
         HttpSession session = request.getSession();
         ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
@@ -91,13 +92,19 @@ public class VacancyController extends VacancyAbstract {
             mv.getModelMap().put("applayJobUserMaster", ajuMaster);
             mv.setViewName("Vacancy/MemberVacancyList");
         } else {
-
-            CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
-
-            mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-            mv.setViewName("Vacancy/MyProfile");
+            
+            int canId = Integer.parseInt(request.getParameter("id"));
+            String forward = "forward:vacancy.htm?act=myProfileClick&id="+canId;
+            mv.setViewName(forward);
+           
+//            CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+//
+////            mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+//            mv.getModelMap().put("candidateApplyJob", candidateClasses.getCandidateApplyJob());
+//            mv.setViewName("Vacancy/MyProfile");
         }
-        return mv;
+         return mv;
+
     }
 
     public ModelAndView newVacancyCreate(HttpServletRequest request,
@@ -568,7 +575,7 @@ public class VacancyController extends VacancyAbstract {
 //        int VacId = Integer.parseInt(id);
         Random rnd = new Random();
         String otpCode = String.valueOf(100000 + rnd.nextInt(900000));
-         Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
         SimpleDateFormat sdftime = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         Date ctime = new Date();
         applayJobUserMasterValidator.validate(applayJobUserMaster, errors);

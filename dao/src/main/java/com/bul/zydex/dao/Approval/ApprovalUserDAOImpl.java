@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.Approval;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
+import com.bul.zydex.model.ApprovalMaster;
 import com.bul.zydex.model.ApprovalUser;
 import java.util.List;
 import org.hibernate.SQLQuery;
@@ -105,4 +106,4 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
         return list;
     }
 
-}
+        }

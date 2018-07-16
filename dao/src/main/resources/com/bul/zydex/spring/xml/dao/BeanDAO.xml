@@ -283,4 +283,6 @@
     <bean id="projectManagementDAO1" class="com.bul.zydex.dao.ProjectManagement.ProjectManagementDAOImpl" parent="sessionFactoryConfig"/> 
     <bean id="clientMasterDAO1" class="com.bul.zydex.dao.ProjectManagement.ClientMasterDAOImpl" parent="sessionFactoryConfig"/> 
     <bean id="stateMasterDAO1" class="com.bul.zydex.dao.ProjectManagement.StateMasterDAOImpl" parent="sessionFactoryConfig"/> 
+    <bean id="policyReadHistoryDAO1" class="com.bul.zydex.dao.policy.PolicyReadHistoryDAOImpl" parent="sessionFactoryConfig"/> 
+    <bean id="kaizenApprovalHistoryDAO1" class="com.bul.zydex.dao.Kaizen.KaizenApprovalHistoryDAOImpl" parent="sessionFactoryConfig"/> 
 </beans>

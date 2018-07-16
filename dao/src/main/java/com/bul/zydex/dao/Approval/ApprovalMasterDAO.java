@@ -6,11 +6,14 @@
 package com.bul.zydex.dao.Approval;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.ApprovalMaster;
 
 /**
  *
  * @author Vikas
  */
 public interface ApprovalMasterDAO<T> extends GenericsDAO<T>{
+    
+    public ApprovalMaster approvalId(int aprId);
     
 }

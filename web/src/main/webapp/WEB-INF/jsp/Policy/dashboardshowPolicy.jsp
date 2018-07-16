@@ -75,7 +75,7 @@
                                                                     </c:if>
                                                                     <th style="width: 50px;">Policy Name</th>
                                                                     <th style="width: 50px;">Policy Type</th>
-                                                                    <th style="width: 50px;">Attachment</th>
+                                                                    <th style="width: 50px;">View</th>
 
                                                                 </tr>
                                                             </thead>
@@ -89,7 +89,14 @@
                                                                 </c:if>
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[4]}</td>
-                                                                <td><a onclick='clickdownload(${list[0]});'>${list[2]}</a></td>
+                                                                <!--<td><a onclick='clickdownload(${list[0]});'>${list[2]}</a></td>-->
+                                                                <td>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" onclick="EditClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;View
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
                                                             </tr>
                                                         </c:forEach>
                                                     </tbody>
@@ -112,7 +119,11 @@
 
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-
+   <script>
+        function EditClick(id) {
+            window.location = 'policyMaster.htm?act=readViewDasPolicy&id=' + id;
+        }
+    </script>
     <script>
         function clickdownload(id) {
             window.location = 'policyMaster.htm?act=downloadAttachment&id=' + id;

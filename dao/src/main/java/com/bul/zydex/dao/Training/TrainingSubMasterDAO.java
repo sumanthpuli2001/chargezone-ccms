@@ -13,5 +13,8 @@ import java.util.List;
  * @author Dell-1
  */
 public interface TrainingSubMasterDAO<T> extends GenericsDAO<T> {
-public List<?> ListeventDates(String eventDate);    
+
+    public List<?> ListeventDates(String eventDate);
+    
+    public List<?> deletetrainingId(String trainingId);
 }

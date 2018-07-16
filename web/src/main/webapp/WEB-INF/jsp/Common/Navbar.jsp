@@ -91,7 +91,7 @@
                                 <c:if test="${sessionScope.userRight.faceTofaceApproval}">
                                 <li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Approval</a></li>
                                 </c:if>
-                                <c:if test="${sessionScope.userRight.itAdmin}">
+                                <c:if test="${sessionScope.userRight.hrFtFApproval}">
                                 <li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i>All Candidate F2F Request</a></li>
                                 </c:if>
                         </ul>
@@ -252,89 +252,93 @@
                         <i class="fa fa-angle-left pull-right" ></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="treeview" style="color: #585858;">
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i>
-                                <span>Travel Management</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <c:if test="${sessionScope.userRight.employee}">
-                                    <c:if test="${sessionScope.checkReportingManager}">
-                                        <li><a href="travelRequestMaster.htm?act=requestResult"><i class="fa fa-circle-o"></i>Travel Request</a></li>
-                                        </c:if>
-                                    </c:if>
-                                    <c:if test="${sessionScope.isReportingManagerDataExist}">
-                                    <li><a href="travelRequestMaster.htm?act=requestResult1"><i class="fa fa-circle-o"></i>Subordinates Travel Request</a></li>
-                                    </c:if>
-                                    <%--<c:if test="${sessionScope.userRight.employee}">--%>
-                                    <%--</c:if>--%>
-                                <!--<li><a href="travelRequestMaster.htm?act=viewRequestResultManagerSide"><i class="fa fa-circle-o"></i>Subordinates Travel Report</a></li>-->
-                                <c:if test="${!sessionScope.checkReportingManager}">
-                                    <li><a href="travelRequestMaster.htm?act=requestResultCEO"><i class="fa fa-circle-o"></i>Travel Result CEO</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.travelAdmin}">
-
-                                    <!--<li><a href="travelRequestMaster.htm?act=searchTravelRequest"><i class="fa fa-circle-o"></i>Search Travel Request</a></li>-->
-                                    <li><a href="travelRequestMaster.htm?act=viewRequestAdminSubmit"><i class="fa fa-circle-o"></i>Search Travel Request </a></li>
-                                    </c:if>
-                                    <%--<c:if test="${sessionScope.userRight.employee}">--%>
-                                <!--<li><a href="travelRequestMaster.htm?act=searchOwnTravelRequest"><i class="fa fa-circle-o"></i>Own Travel Report</a></li>-->
-                                <!--<li><a href="travelRequestMaster.htm?act=searchTravelRequestAdmin"><i class="fa fa-circle-o"></i>Subordinates Travel Report</a></li>-->
-                                <!--<li><a href="expenseMaster.htm?act=createExpenseResult"><i class="fa fa-circle-o"></i>Expense Request</a></li>-->
-                                <!--<li><a href="expenseMaster.htm?act=createExpenseApproveList"><i class="fa fa-circle-o"></i>Subordinates Expense Request</a></li>-->
-                                <!--<li><a href="expenseMaster.htm?act=searchSubordinatesExpenseReport"><i class="fa fa-circle-o"></i>Subordinates Expense Report</a></li>-->
-                                <%--</c:if>--%>
-                                <%--<c:if test="${sessionScope.userRight.travelExpenseAdmin}">--%>
-                                <!--<li><a href="expenseMaster.htm?act=viewExpenseAdminSide"><i class="fa fa-circle-o"></i>Final Expense Approve</a></li>-->
-                                <!--<li><a href="expenseMaster.htm?act=searchExpenseRequest"><i class="fa fa-circle-o"></i>Search Expense Request</a></li>-->
-                                <%--</c:if>--%>
-                                <%--<c:if test="${sessionScope.userRight.employee}">--%>
-                                <!--<li><a href="expenseMaster.htm?act=searchOwnExpenseRequest"><i class="fa fa-circle-o"></i>Own Expense Report</a></li>-->
-                                <%--</c:if>--%>
-                                <!--<li><a href="expenseMaster.htm?act=createExpenseResult"><i class="fa fa-circle-o"></i>Expense Report</a></li>-->
-                                <%--</c:if>--%>
-                            </ul>
-                        </li>
-                        <li class="treeview" style="color: #585858;">
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i>
-                                <span>Expense Request</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-
-                                <c:if test="${sessionScope.userRight.employee}">
-                                    <!--<li><a href="travelRequestMaster.htm?act=searchOwnTravelRequest"><i class="fa fa-circle-o"></i>Own Travel Report</a></li>-->
-                                    <!--<li><a href="travelRequestMaster.htm?act=searchTravelRequestAdmin"><i class="fa fa-circle-o"></i>Subordinates Travel Report</a></li>-->
-                                    <c:if test="${sessionScope.checkReportingManager}">
-                                        <li><a href="expenseMaster.htm?act=createExpenseResult"><i class="fa fa-circle-o"></i>Expense Request</a></li>
+                        <c:if test="${sessionScope.userRight.travelManagementRights}">
+                            <li class="treeview" style="color: #585858;">
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>Travel Management</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <c:if test="${sessionScope.userRight.employee}">
+                                        <c:if test="${sessionScope.checkReportingManager}">
+                                            <li><a href="travelRequestMaster.htm?act=requestResult"><i class="fa fa-circle-o"></i>Travel Request</a></li>
+                                            </c:if>
                                         </c:if>
                                         <c:if test="${sessionScope.isReportingManagerDataExist}">
-
-                                        <li><a href="expenseMaster.htm?act=createExpenseApproveList"><i class="fa fa-circle-o"></i>Subordinates Expense Request</a></li>
+                                        <li><a href="travelRequestMaster.htm?act=requestResult1"><i class="fa fa-circle-o"></i>Subordinates Travel Request</a></li>
                                         </c:if>
+                                        <%--<c:if test="${sessionScope.userRight.employee}">--%>
+                                        <%--</c:if>--%>
+                                    <!--<li><a href="travelRequestMaster.htm?act=viewRequestResultManagerSide"><i class="fa fa-circle-o"></i>Subordinates Travel Report</a></li>-->
+                                    <c:if test="${!sessionScope.checkReportingManager}">
+                                        <li><a href="travelRequestMaster.htm?act=requestResultCEO"><i class="fa fa-circle-o"></i>Travel Result CEO</a></li>
+                                        </c:if>
+                                        <c:if test="${sessionScope.userRight.travelAdmin}">
+
+                                        <!--<li><a href="travelRequestMaster.htm?act=searchTravelRequest"><i class="fa fa-circle-o"></i>Search Travel Request</a></li>-->
+                                        <li><a href="travelRequestMaster.htm?act=viewRequestAdminSubmit"><i class="fa fa-circle-o"></i>Search Travel Request </a></li>
+                                        </c:if>
+                                        <%--<c:if test="${sessionScope.userRight.employee}">--%>
+                                    <!--<li><a href="travelRequestMaster.htm?act=searchOwnTravelRequest"><i class="fa fa-circle-o"></i>Own Travel Report</a></li>-->
+                                    <!--<li><a href="travelRequestMaster.htm?act=searchTravelRequestAdmin"><i class="fa fa-circle-o"></i>Subordinates Travel Report</a></li>-->
+                                    <!--<li><a href="expenseMaster.htm?act=createExpenseResult"><i class="fa fa-circle-o"></i>Expense Request</a></li>-->
+                                    <!--<li><a href="expenseMaster.htm?act=createExpenseApproveList"><i class="fa fa-circle-o"></i>Subordinates Expense Request</a></li>-->
                                     <!--<li><a href="expenseMaster.htm?act=searchSubordinatesExpenseReport"><i class="fa fa-circle-o"></i>Subordinates Expense Report</a></li>-->
-                                </c:if>
-                                <c:if test="${sessionScope.userRight.travelExpenseAdmin}">
-                                    <li><a href="expenseMaster.htm?act=viewExpenseAdminSide"><i class="fa fa-circle-o"></i>Final Expense Approve</a></li>
-                                    <li><a href="expenseMaster.htm?act=searchExpenseRequest"><i class="fa fa-circle-o"></i>Search Expense Request</a></li>
-                                    <li><a href="expenseMaster.htm?act=pendingExpenseRequestList"><i class="fa fa-circle-o"></i>View Pending Expense Request</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.travelExpenseAdmin or sessionScope.userRight.cashAdvanceView}">
-                                    <li><a href="travelRequestMaster.htm?act=viewCashAdvanceSectionByAdmin"><i class="fa fa-circle-o"></i>Cash Advance Request</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.employee}">
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${sessionScope.userRight.travelExpenseAdmin}">--%>
+                                    <!--<li><a href="expenseMaster.htm?act=viewExpenseAdminSide"><i class="fa fa-circle-o"></i>Final Expense Approve</a></li>-->
+                                    <!--<li><a href="expenseMaster.htm?act=searchExpenseRequest"><i class="fa fa-circle-o"></i>Search Expense Request</a></li>-->
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${sessionScope.userRight.employee}">--%>
                                     <!--<li><a href="expenseMaster.htm?act=searchOwnExpenseRequest"><i class="fa fa-circle-o"></i>Own Expense Report</a></li>-->
-                                </c:if>
-                                <!--<li><a href="expenseMaster.htm?act=createExpenseResult"><i class="fa fa-circle-o"></i>Expense Report</a></li>-->
-                                <%--</c:if>--%>
-                            </ul>
-                        </li>
+                                    <%--</c:if>--%>
+                                    <!--<li><a href="expenseMaster.htm?act=createExpenseResult"><i class="fa fa-circle-o"></i>Expense Report</a></li>-->
+                                    <%--</c:if>--%>
+                                </ul>
+                            </li>
+                        </c:if>
+                        <c:if test="${sessionScope.userRight.expenseRequestRights}">
+                            <li class="treeview" style="color: #585858;">
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>Expense Request</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+
+                                    <c:if test="${sessionScope.userRight.employee}">
+                                        <!--<li><a href="travelRequestMaster.htm?act=searchOwnTravelRequest"><i class="fa fa-circle-o"></i>Own Travel Report</a></li>-->
+                                        <!--<li><a href="travelRequestMaster.htm?act=searchTravelRequestAdmin"><i class="fa fa-circle-o"></i>Subordinates Travel Report</a></li>-->
+                                        <c:if test="${sessionScope.checkReportingManager}">
+                                            <li><a href="expenseMaster.htm?act=createExpenseResult"><i class="fa fa-circle-o"></i>Expense Request</a></li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.isReportingManagerDataExist}">
+
+                                            <li><a href="expenseMaster.htm?act=createExpenseApproveList"><i class="fa fa-circle-o"></i>Subordinates Expense Request</a></li>
+                                            </c:if>
+                                        <!--<li><a href="expenseMaster.htm?act=searchSubordinatesExpenseReport"><i class="fa fa-circle-o"></i>Subordinates Expense Report</a></li>-->
+                                    </c:if>
+                                    <c:if test="${sessionScope.userRight.travelExpenseAdmin}">
+                                        <li><a href="expenseMaster.htm?act=viewExpenseAdminSide"><i class="fa fa-circle-o"></i>Final Expense Approve</a></li>
+                                        <li><a href="expenseMaster.htm?act=searchExpenseRequest"><i class="fa fa-circle-o"></i>Search Expense Request</a></li>
+                                        <li><a href="expenseMaster.htm?act=pendingExpenseRequestList"><i class="fa fa-circle-o"></i>View Pending Expense Request</a></li>
+                                        </c:if>
+                                        <c:if test="${sessionScope.userRight.travelExpenseAdmin or sessionScope.userRight.cashAdvanceView}">
+                                        <li><a href="travelRequestMaster.htm?act=viewCashAdvanceSectionByAdmin"><i class="fa fa-circle-o"></i>Cash Advance Request</a></li>
+                                        </c:if>
+                                        <c:if test="${sessionScope.userRight.employee}">
+                                        <!--<li><a href="expenseMaster.htm?act=searchOwnExpenseRequest"><i class="fa fa-circle-o"></i>Own Expense Report</a></li>-->
+                                    </c:if>
+                                    <!--<li><a href="expenseMaster.htm?act=createExpenseResult"><i class="fa fa-circle-o"></i>Expense Report</a></li>-->
+                                    <%--</c:if>--%>
+                                </ul>
+                            </li>
+                        </c:if>
                         <li class="treeview" style="color: #585858;">
                             <a href="#">
                                 <i class="fa fa-circle-o"></i>
-                                <span>Employee Request</span>
+                                <span>Employee Self Service</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
@@ -400,7 +404,7 @@
                                 <!--<li><a href="cafeteriaRequest.htm?act=searchApproverSubmit"><i class="fa fa-circle-o"></i>Cafeteria Request Approve</a></li>-->
                                 <%--</c:if>--%>
                                 <c:if test="${sessionScope.userRight.cafeteriaAdmin}">
-                                    <li><a href="cafeteriaRequest.htm?act=adminApproveSubmit"><i class="fa fa-circle-o"></i>Cafeteria Request Admin</a></li>
+                                    <li><a href="cafeteriaRequest.htm?act=adminApproveSubmit"><i class="fa fa-circle-o"></i>Cafeteria Booking Request</a></li>
                                     <!--<li><a href="cafeteriaRequest.htm?act=searchAdminClick"><i class="fa fa-circle-o"></i>Search Cafeteria Request Admin</a></li>-->
                                 </c:if>
                                 <c:if test="${!sessionScope.userRight.itAdmin}">
@@ -504,7 +508,7 @@
                             <li><a href="competencyEvaluationTextmaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Competency Evaluation <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Text Result</a></li>
                             <li class="treeview"><a href="pmpFormStatusMaster.htm?act=showpmpStatusMaster"> <i class="fa fa-circle-o"></i>Unlock PMP Form</span></a></li>
                             </c:if>
-                        <li><a href="appraisal360.htm?act=dashboardResult"><i class="fa fa-circle-o"></i>360 FeedBack Form</a></li>
+                        <li><a href="appraisal360.htm?act=dashboardResult"><i class="fa fa-circle-o"></i>360 Review FeedBack</a></li>
                             <c:if test="${sessionScope.userRight.appraisal360}">
                             <li><a href="appraisal360.htm?act=createAppraisalResult"><i class="fa fa-circle-o"></i>360 Appraisal</a></li>
                             <li><a href="appraisal360.htm?act=searchEmpAppraisal360"><i class="fa fa-circle-o"></i>360 Appraisal Search</a></li>
@@ -839,6 +843,7 @@
                         <li><a href="visitorVisitedLocation.htm?act=createClick"><i class="fa fa-circle-o"></i>Visitor Visited Location</a></li>
                         <li><a href="timeAttandanceFlaxibleMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Time Attendance Flexible</a></li>
                         <li><a href="urlMaster.htm?act=viewUrlResult"><i class="fa fa-pie-chart fa-lg"></i>Web Service URL</a></li>
+                        <li><a href="policyMaster.htm?act=showPolicyList"><i class="fa fa-circle-o"></i>Policy</a></li>
                         <!--<li><a href="appraisalPerformance.htm?act=trasferCompatencyEvaluationInEmployeeMaster"><i class="fa fa-pie-chart fa-lg"></i>Competency Evaluation Transfer</a></li>-->
                         <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
                             <%--<c:if test="${!sessionScope.userRight.employeeManagement}">--%>
@@ -950,11 +955,11 @@
                     <i class="fa fa-archive fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Report</span>
                 </a>
             </li>
-<!--            <li>
-                <a href="homeController.htm?act=redirectToAllReports" style="background: #fff;">
-                     <i class="fa fa-book fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Employee Detailed Information</span>
-                </a>
-            </li>-->
+            <!--            <li>
+                            <a href="homeController.htm?act=redirectToAllReports" style="background: #fff;">
+                                 <i class="fa fa-book fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Employee Detailed Information</span>
+                            </a>
+                        </li>-->
             <li>
                 <a href="#" style="background: #fff;">
                     <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>

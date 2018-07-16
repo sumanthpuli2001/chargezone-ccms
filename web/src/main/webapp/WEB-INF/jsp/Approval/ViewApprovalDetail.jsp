@@ -97,7 +97,8 @@
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
                                 <form:form class="form-horizontal" method="post"
-                                           commandName="approvalMaster" action="approval.htm?act=submitApproval" onsubmit="return saveSubmit()" >
+                                           commandName="approvalMaster" action="approval.htm?act=editSubmit" onsubmit="return saveSubmit()" >
+                                    <form:hidden path="id"></form:hidden>
                                     <form:hidden path="id"></form:hidden>
                                         <div class="col-sm-4"><span style="color: red;font-size: 12px;"></span>
                                             <label>Approval Name:<span style="color: red;font-size: 12px;"></span></label>
@@ -121,7 +122,7 @@
                                                             <th style="text-align: center; vertical-align: middle">Level</th>
                                                             <!--<th style="text-align: center; vertical-align: middle">Amount</th>-->
                                                             <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                        <input type="hidden" name="policyCount" id="policyCount" value="1"/>
+                                                        <input type="hidden" name="policyId1" value="${policyId1}" id="policyNumber1" value="1"/>
                                                         </tr>
                                                         <tr>
                                                             <!--<td style="text-align: center"></td>-->

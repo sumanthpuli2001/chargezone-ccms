@@ -23,7 +23,7 @@
                         + "<td id=\"policyTd" + tempCount3 + "\"><div><input type=\"text\" id='policyId" + tempCount3 + "' name='policyId" + tempCount3 + "' class=\"form-control\" >"
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
-                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "' value=" + tempCount3 + " readonly=\"true\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "' value=" + ${approvalUser[0].level} + " readonly=\"true\" class=\"form-control\"></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -98,8 +98,7 @@
                                 </c:if>
                                 <form:form class="form-horizontal" method="post"
                                            commandName="approvalMaster" action="approval.htm?act=editSubmit" onsubmit="return saveSubmit()" >
-                                    <form:hidden path="id"></form:hidden>
-                                    <form:hidden path="id"></form:hidden>
+                                    <form:hidden name="id" path="id"></form:hidden>
                                         <div class="col-sm-4"><span style="color: red;font-size: 12px;"></span>
                                             <label>Approval Name:<span style="color: red;font-size: 12px;"></span></label>
                                              <form:input path="name" class="form-control" placeholder="Number Of Position"></form:input>
@@ -122,22 +121,17 @@
                                                             <th style="text-align: center; vertical-align: middle">Level</th>
                                                             <!--<th style="text-align: center; vertical-align: middle">Amount</th>-->
                                                             <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                        <input type="hidden" name="policyId1" value="${policyId1}" id="policyNumber1" value="1"/>
+                                                        <input type="hidden" name="policyNumber1" id="policyNumber1" value="1"/>
                                                         </tr>
                                                         <tr>
-                                                            <!--<td style="text-align: center"></td>-->
                                                             <td id="policyTd1"><div>
                                                                     <input type="text" name="policyId1" id="policyId1" class="form-control"/>
                                                                     <errors id="policyerror" cssClass="errorDiv"></errors>
-                                                                    <!--                                                                <select  name="policyId1" id="policyId1" class="form-control">
-                                                                                                                                        <option value="" label="-- Select --"></option>
-                                                                                                                                        <options items="${policyId1}"></options>
-                                                                                                                                    </select>-->
                                                             </div>
                                                             <span id="policyError1" style="color: red;"></span>
                                                         </td>
                                                         <td style="text-align: center">
-                                                            <input type="text"  name="policyNumber1" id="policyNumber1" value="${approvalUser.level}" readonly="true"class="form-control">
+                                                            <input type="text"  name="policyNumber1" id="policyNumber1" value="${approvalUser[0].level}" readonly="true"class="form-control">
                                                         </td>
 
                                                         <td style="text-align: center">

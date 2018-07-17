@@ -147,9 +147,9 @@
                                             </th>
                                         </tr>
                                         <tr>
-                                            <th colspan="2">Completion Date  </th>
+                                            <th colspan="2">Tangible Benefit  </th>
                                             <th colspan="2">
-                                                <input type="text" name="compiletionDate" id="datetimepicker1" class="form-control" placeholder="Please select Completion Date" name="validityFrom" readonly="true" required="true"/>
+                                                <input type="text" name="tangibleBenefit" id="tangibleBenefit" type="text" onchange="kaizenOnchangeFunction('tangibleBenefitError');"/>
                                             </th>
                                         </tr>
                                         <tr>
@@ -167,8 +167,8 @@
                                                 <input type="file"   class="form-control" id="afterPhoto" name="afterPhoto" accept="image/jpg,image/jpeg,image/png" onchange="checkFileSize();">
                                                 <span style="font-size: 14px; color: red;" id="photographError"></span>
                                             </th>
-                                            <th colspan="2" rowspan="1">Tangible Benefit </th>
-                                            <th colspan="2" rowspan="1"><input name="tangibleBenefit" id="tangibleBenefit" type="text" onchange="kaizenOnchangeFunction('tangibleBenefitError');">
+<!--                                            <th colspan="2" rowspan="1">Tangible Benefit </th>
+                                            <th colspan="2" rowspan="1"><input name="tangibleBenefit" id="tangibleBenefit" type="text" onchange="kaizenOnchangeFunction('tangibleBenefitError');">-->
                                                 <br>  <span style="font-size: 14px; color: #dd4b39;" id="tangibleBenefitError"></span></th>
                                         </tr>
                                         <tr>

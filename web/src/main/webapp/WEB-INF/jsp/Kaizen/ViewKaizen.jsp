@@ -88,8 +88,11 @@
                                         </tr>
                                         <tr>
                                             <th colspan="2">Completion Date  </th>
-                                            <th colspan="2"> ${list.compiletionDate}
-                                            </th>
+                                                <c:forEach var="list" items="${listKh}">
+                                                    <c:if test="${list[2] eq 5}">
+                                                    <th colspan="2">${list[4]}</th>
+                                                </c:if>
+                                            </c:forEach>
                                         </tr>
                                         <tr>
                                             <th colspan="2">Budget Requirement  </th>
@@ -212,23 +215,23 @@
                                         </tr>
 
                                     </table>
-<!--                                    <div class="form-group">
-                                        <br>
-                                        <div class="col-sm-6 col-sm-offset-5">
-                                            <button type="button" onclick="viewClick(${list.id});" class="btn btn-primary" aria-haspopup="true" aria-expanded="false">
-                                                &nbsp;&nbsp;Approved
-                                            </button>
-                                            <div class="col-sm-4" style="text-align: left">
-                                                <button type="submit" class="btn btn-success" id="btnType2"  class="btn btn-primary" name="btnType"  value="Approve" style="width: 100px"> &nbsp;&nbsp;Approved</button>
-                                            </div>
-                                            <div class="col-sm-4" style="text-align: center">
-                                                <button type="submit" class="btn btn-warning" id="btnType2"  class="btn btn-primary" name="btnType"  value="Recycle"  style="width: 100px"> &nbsp;&nbsp;Recycle</button>
-                                            </div>
-                                            <div class="col-sm-4" style="text-align: right">
-                                                <button type="submit" class="btn btn-danger" onclick="return reject();" id="btnType1" class="btn btn-primary" name="btnType" value="Reject" style="width: 100px" > &nbsp;&nbsp;Reject</button>
-                                            </div>
-                                        </div>
-                                    </div>-->
+                                    <!--                                    <div class="form-group">
+                                                                            <br>
+                                                                            <div class="col-sm-6 col-sm-offset-5">
+                                                                                <button type="button" onclick="viewClick(${list.id});" class="btn btn-primary" aria-haspopup="true" aria-expanded="false">
+                                                                                    &nbsp;&nbsp;Approved
+                                                                                </button>
+                                                                                <div class="col-sm-4" style="text-align: left">
+                                                                                    <button type="submit" class="btn btn-success" id="btnType2"  class="btn btn-primary" name="btnType"  value="Approve" style="width: 100px"> &nbsp;&nbsp;Approved</button>
+                                                                                </div>
+                                                                                <div class="col-sm-4" style="text-align: center">
+                                                                                    <button type="submit" class="btn btn-warning" id="btnType2"  class="btn btn-primary" name="btnType"  value="Recycle"  style="width: 100px"> &nbsp;&nbsp;Recycle</button>
+                                                                                </div>
+                                                                                <div class="col-sm-4" style="text-align: right">
+                                                                                    <button type="submit" class="btn btn-danger" onclick="return reject();" id="btnType1" class="btn btn-primary" name="btnType" value="Reject" style="width: 100px" > &nbsp;&nbsp;Reject</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
                                 </div>
                             </div> <!--/tab-content -->
                         </div><!-- nav-tabs-custom -->
@@ -238,7 +241,7 @@
                 </div>
             </section>
         </form:form>
-        
+
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <label><h3>History</h3></label>
@@ -279,7 +282,7 @@
 
             </div><!-- /.col -->
         </div>
-        
+
         <!--<div class="tab-pane" id="tab_3"></div> /.tab-pane -->
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

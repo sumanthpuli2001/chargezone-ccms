@@ -137,7 +137,6 @@ public class ApprovalController extends ApprovalAbstract {
         ApprovalMaster approvalMaster = new ApprovalMaster();
         ApprovalMaster approvalMaster2 = new ApprovalMaster();
         EmployeeMaster employeeMaster = new EmployeeMaster();
-        ApprovalUser approvalUser = new ApprovalUser();
         String id = request.getParameter("id");
         int emid = 0;
         List<?> approvalUser1 = approvalUserService.reademyId(Integer.parseInt(id));
@@ -152,7 +151,7 @@ public class ApprovalController extends ApprovalAbstract {
 
 //        approvalMaster = approvalMasterService.readById(approvalUser.getApprovalMaster().getId());
         approvalMaster = approvalMasterService.readById(Integer.parseInt(id));
-        approvalUser = approvalUserService.readById(Integer.parseInt(id));
+        List<?> approvalUser = approvalUserService.readByApId(Integer.parseInt(id));
 
         employeeMaster = employeeMasterService.readById(emid);
         selectedEmployeeFor360Feedback(request, employeeMaster);
@@ -160,6 +159,7 @@ public class ApprovalController extends ApprovalAbstract {
 
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("approvalUser", approvalUser);
+        mv.getModelMap().put("au", au);
         mv.getModelMap().put("approvalMaster", approvalMaster);
         mv.setViewName("Approval/ViewApprovalDetail");
         return mv;
@@ -169,8 +169,12 @@ public class ApprovalController extends ApprovalAbstract {
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
+        int otherDetailCount = 0;
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         ApprovalMaster approvalMaster = new ApprovalMaster();
-        
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        ApprovalUser approvalUser = new ApprovalUser();
+        String approvalMasterId = request.getParameter("id");
         BindException errors = new BindException(approvalMaster, "approvalMaster");
         bind(request, approvalMaster);
         String policyId1 = request.getParameter("policyId1");
@@ -179,6 +183,38 @@ public class ApprovalController extends ApprovalAbstract {
         ApprovalMaster approvalMaster1 = approvalMasterService.approvalId(approvalMaster.getId());
         approvalMaster.setUpdatedDate(sdf.format(cDate));
         approvalMasterService.update(approvalMaster);
+
+        ///deleted the previous Approval user
+        List<?> approvalUserDetail = approvalUserService.readApprovalUser(approvalMasterId);
+        for (Object userobject : approvalUserDetail) {
+            Object[] approval = (Object[]) userobject;
+            Integer approvalUserId = (Integer) approval[0];
+            approvalUserService.delete(approvalUserId);
+        }
+
+        /////code for multiple Employee
+        otherDetailCount = Integer.parseInt(request.getParameter("policyNumber1"));
+        for (int i = 1; i < otherDetailCount + 1; i++) {
+            if (null != request.getParameter("policyId" + i) && null != request.getParameter("policyNumber" + i)) {
+                if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+                    int policyId = Integer.parseInt(request.getParameter("policyId" + i));
+                    employeeMaster = employeeMasterService.readById(policyId);
+//                    employeeMaster.setId(policyId);
+                    approvalUser.setEmployeeMaster(employeeMaster);
+                    approvalUser.setApprovalMaster(approvalMaster);
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+                    Date cDate1 = new Date();
+                    approvalUser.setCreatedDate(sdf1.format(cDate1));
+                    approvalUser.setCreatedBy(employeeMaster1.getId());
+                    String policyNumber = request.getParameter("policyNumber" + i);
+                    approvalUser.setLevel(Integer.parseInt(policyNumber));
+                    approvalUser.setStatus(0);
+                    approvalUserService.create(approvalUser);
+//                        policyMaster.setId(policyId);
+
+                }
+            }
+        }
 
         mv = approvalList(request, response);
         return mv;

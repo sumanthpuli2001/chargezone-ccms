@@ -88,7 +88,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 //        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(4);
         BindException errors = new BindException(kaizenMaster, "kaizenMaster");
         bind(request, kaizenMaster);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDate localDate = LocalDate.now();
         String srNo = request.getParameter("srNo");
         String teamLeader = request.getParameter("teamLeader");
@@ -425,7 +425,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
 
 //        KaizenApproval kaizenApproval = kaizenApprovalService.readByIdAndEmp(kaizenMaster.getId(), employeeMaster.getId());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date cDate = new Date();
 
         if (btnType.equals("Approve")) {
@@ -589,7 +589,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
             kaizenApprovalHistoryService.create(kaizenApprovalHistory);
 
             request.setAttribute("successMessage",
-                    "Information : The request is Reject Successfully.");
+                    "Information : The request is OnHold Successfully.");
 
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
@@ -623,7 +623,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         String btnType = request.getParameter("btnType");
         String comment = request.getParameter("comment");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date cDate = new Date();
 
         KaizenMaster kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
@@ -743,6 +743,42 @@ public class KaizenMasterController extends KaizenMasterAbstract {
                 DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Approved User....
                 emailTemplate = emailTemplateService.readById(146);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+        }
+        if (btnType.equals("OnHold")) {
+            kaizenMaster.setStatus(10);
+            kaizenApprovalHistory.setStatus(10);
+            kaizenApproval.setComment(comment);
+
+            kaizenMasterService.update(kaizenMaster);
+            kaizenApprovalService.update(kaizenApproval);
+
+            kaizenApprovalHistory.setComment(comment);
+            kaizenApprovalHistory.setStatusMessage(btnType);
+            kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+            kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+            kaizenApprovalHistoryService.create(kaizenApprovalHistory);
+
+            request.setAttribute("successMessage",
+                    "Information : The request is OnHold Successfully.");
+
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+                // id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(160);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();

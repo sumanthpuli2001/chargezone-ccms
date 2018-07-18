@@ -140,7 +140,7 @@
                                                     <div class="row">
                                                         <div class="col-md-12 col-sm-12">
                                                             <div class="table table-bordered">
-                                                                <table id="tableid" class="table" table-bordered table-striped table-hover style="" align="Center"  >
+                                                                <table border="1" id="tableid" style="width: 100%;">
 
                                                                     <thead>
                                                                         <tr>

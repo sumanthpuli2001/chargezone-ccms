@@ -158,7 +158,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-10">
-                                                <label class="control-label">Question :<span style="color: red;font-size: 12px;">*</span></label>
+                                                <label class="control-label">Question :</label>
                                                 <label>&nbsp;</label>  
                                                 <form:textarea  path="question" id="editor"></form:textarea>
                                                 <form:errors path="question" cssClass="errorDiv"/>
@@ -207,8 +207,8 @@
                                                 <table id="questionTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                     <tr>
                                                         <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                        <th style="text-align: center; vertical-align: middle">Answer <span style="color: red;font-size: 12px;">*</span></th>
-                                                        <th style="text-align: center; vertical-align: middle">Correct Answer <span style="color: red;font-size: 12px;">*</span></th>
+                                                        <th style="text-align: center; vertical-align: middle">Answer </th>
+                                                        <th style="text-align: center; vertical-align: middle">Correct Answer </th>
                                                         <!--<th style="text-align: center; vertical-align: middle">Add New</th>-->
                                                     <input type="hidden" name="questionCount" id="questionCount" value="1"/>
                                                     </tr>

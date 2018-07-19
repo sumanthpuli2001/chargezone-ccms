@@ -89,14 +89,14 @@
                                                                 <th>Candidate Name</th>
                                                                 <th>Candidate Contact No.</th>
                                                                 <th>Position Referred For</th>
-                                                                <th>Status</th>
+                                                                <!--<th>Status</th>-->
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <c:set var="count" value="0" scope="page" />
                                                         <tbody>
                                                             <c:forEach  var="employeeRefList" items="${employeeRefList}" varStatus="index">
-                                                                <c:if test="${((sessionScope.employeeInfo.id eq finalApprover) or sessionScope.userRight.employeeReferral) or sessionScope.employeeInfo.employeeName eq employeeRefList[3]}">
+                                                                <c:if test="${( sessionScope.userRight.employeeReferral) or sessionScope.employeeInfo.employeeName eq employeeRefList[3]}">
                                                                     <c:set var="count" value="${count + 1}" scope="page"/>
                                                                     <tr>
                                                                         <!--<td align="center">-->
@@ -123,23 +123,6 @@
                                                                         </td>
                                                                         <td>
                                                                             ${employeeRefList[13]}-${employeeRefList[14]}
-                                                                        </td>
-                                                                        <td>
-                                                                            <c:if test="${employeeRefList[0].status eq 0}">
-                                                                            <span class="label label-default">${employeeRefList[0].statusRemark}</span>
-                                                                            </c:if>
-                                                                            <c:if test="${employeeRefList[0].status eq 1}">
-                                                                            <span class="label label-success">${employeeRefList[0].statusRemark}</span>
-                                                                            </c:if>
-                                                                            <c:if test="${employeeRefList[0].status eq 5}">
-                                                                            <span class="label label-danger">${employeeRefList[0].statusRemark}</span>
-                                                                            </c:if>
-                                                                            <c:if test="${employeeRefList[0].status eq 2}">
-                                                                            <span class="label label-info">${employeeRefList[0].statusRemark}</span>
-                                                                            </c:if>
-                                                                            <c:if test="${employeeRefList[0].status eq 3}">
-                                                                            <span class="label label-success">${employeeRefList[0].statusRemark}</span>
-                                                                            </c:if>
                                                                         </td>
                                                                         <td>
                                                                             <div class="btn-group">

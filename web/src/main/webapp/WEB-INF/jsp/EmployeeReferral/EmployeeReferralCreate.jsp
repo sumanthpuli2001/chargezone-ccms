@@ -39,8 +39,7 @@
             }
 
         </script>
-
-        <c:if test="${((sessionScope.employeeInfo.id eq finalApprover) or sessionScope.userRight.employeeReferral) && employeeReferral.status ne 0}">
+        <c:if test="${(sessionScope.userRight.employeeReferral) && employeeReferral.status ne 0}">
             <script>
                 $(document).ready(function () {
                     $('#referringCandidateDiv input').attr('readonly', true);
@@ -317,15 +316,15 @@
                                                     <div class="form-group">
                                                         <label class="col-lg-4 control-label">Upload Resume:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <div class="col-lg-6">
-                                                        <c:if test="${((sessionScope.employeeInfo.id eq finalApprover) or sessionScope.userRight.employeeReferral)&&(employeeReferral.id eq null)}">
+                                                        <c:if test="${(employeeReferral.id eq null)}">
                                                             <input type="file" name="candidateCV" id="candidateCV" class="form-control" onchange="checkFileSize(this);"/>
                                                         </c:if>
                                                         <c:choose>
-                                                            <c:when test="${!((sessionScope.employeeInfo.id eq finalApprover) or sessionScope.userRight.employeeReferral)&&(employeeReferral.id eq null)}">
+                                                            <c:when test="${!(employeeReferral.id eq null)}">
                                                                 <input type="file" name="candidateCV" id="candidateCV" class="form-control" onchange="checkFileSize(this);"/>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <c:if test="${((sessionScope.user.userName eq employeeDetail[0])or(sessionScope.user.userName eq employeeRefList[2]))&&(employeeReferral.id ne null)&& !((sessionScope.employeeInfo.id eq finalApprover) or sessionScope.userRight.employeeReferral)}">
+                                                                <c:if test="${(employeeReferral.id ne null)&& !(sessionScope.userRight.employeeReferral)}">
                                                                     <input type="text" name="candidateCVfileName" id="candidateCVfileName" class="form-control" value="${candidateCVFileName}" readonly/>
                                                                     <c:if test="${isFileRemoved eq 'notRemoved'}">
                                                                         <a href="${candidateCVFile}" target="_blank">Download And Check</a>
@@ -335,7 +334,7 @@
                                                         </c:choose>
                                                         <span style="font-size: 14px; color: red;" id="candidateCVError"></span>
                                                         <!--<input type="hidden" id="candidateCVfileName" name="candidateCVfileName" value=""/>-->
-                                                        <c:if test="${((sessionScope.employeeInfo.id eq finalApprover) or sessionScope.userRight.employeeReferral)&&(employeeReferral.id ne null)}">
+                                                        <c:if test="${(employeeReferral.id ne null)}">
                                                             <input type="text" name="candidateCVfileName" id="candidateCVfileName" class="form-control" value="${candidateCVFileName}" readonly/>
                                                             <c:if test="${isFileRemoved eq 'notRemoved'}">
                                                                 <div id="downloadRemoveDiv">
@@ -368,7 +367,7 @@
                                                         </div>
                                                     </div>
                                                 <%--<c:if test="${employeeReferral.status eq 5 && !(sessionScope.userRight.hr or sessionScope.userRight.employeeReferral)}">--%>
-                                                <c:if test="${(employeeReferral.status eq 2 or employeeReferral.status eq 5) &&!((sessionScope.employeeInfo.id eq finalApprover) or sessionScope.userRight.employeeReferral)}">
+                                                <c:if test="${(employeeReferral.status eq 2 or employeeReferral.status eq 5) &&!(sessionScope.userRight.employeeReferral)}">
 
                                                     <div class="form-group">
                                                         <form:label path="hrRemark" class="col-lg-4 control-label">Remark By HR:</form:label>
@@ -385,7 +384,7 @@
                                 </div>
                                 <c:if test="${employeeReferral.id ne null}">
                                     <c:choose>
-                                        <c:when test="${(sessionScope.userRight.employeeReferral) and ((sessionScope.employeeInfo.id ne employeeRefList[1])or(sessionScope.employeeInfo.id ne employeeDetail[7]))}">
+                                        <c:when test="{}">
                                             <div class="form-group">
                                                 <c:if test="${ employeeReferral.status eq 0}">
                                                     <div class="col-sm-6" style="text-align: left;">
@@ -408,7 +407,7 @@
                                 </c:if>
                                 <!--Travel request and type detail completes here-->
                                 <%--<c:if test="${sessionScope.userRight.hr or sessionScope.userRight.employeeReferral}">--%>
-                                <c:if test="${((sessionScope.employeeInfo.id eq finalApprover) or sessionScope.userRight.employeeReferral) && ((employeeReferral.status eq 1) or (employeeReferral.status eq 2) or (employeeReferral.status eq 3))}">
+                                <c:if test="{}">
                                     <div class="box box-info collapsed-box" id="printArea3">
                                         <div class="box-header">
                                             <h3 class="box-title">Joiner Detail:</h3>

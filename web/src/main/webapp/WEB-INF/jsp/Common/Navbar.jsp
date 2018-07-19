@@ -817,74 +817,7 @@
                         </c:if>
                 </ul>
             </li>
-            <c:if test="${sessionScope.userRight.hr}">
-                <li class="treeview" style="color: #585858;">
-                    <a href="#" style="background: #fff;">
-                        <i class="fa fa-wrench fa-lg" style="color: #585858;"></i>
-                        <span style="color: #585858;">Setting</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="resignationMaster.htm?act=fullandfcreateClick"><i class="fa fa-circle-o"></i>F&F Settlement Letter Formate</a></li>
-                        <!--<li><a href="modulesMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Modules Master</a></li>-->
-                        <!--<li><a href="componentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Component Master</a></li>-->
-                        <li><a href="approval.htm?act=approvalList"><i class="fa fa-circle-o"></i>Approval Setting</a></li>
-                        <li><a href="deviceMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Device Management</a></li>
-                        <li><a href="departmentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Department List</a></li>
-                        <li><a href="designationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Designation List</a></li>
-                        <li><a href="levelMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Level Master</a></li>
-                        <li><a href="locationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Location Master</a></li>
-                        <li><a href="holidayMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Holiday Master</a></li>
-                        <li><a href="holidayMaster.htm?act=holidayExcelUpload"><i class="fa fa-circle-o"></i>Holiday Excel Import</a></li>
-                        <li><a href="policyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Policy Master</a></li>
-                        <li><a href="zydexLocationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Location Master</a></li>
-                        <li><a href="currencyMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Currency Master</a></li>
-                        <li><a href="policyDeviationForAir.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Policy Deviation Master</a></li>
-                        <li><a href="visitorVisitedLocation.htm?act=createClick"><i class="fa fa-circle-o"></i>Visitor Visited Location</a></li>
-                        <li><a href="timeAttandanceFlaxibleMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Time Attendance Flexible</a></li>
-                        <li><a href="urlMaster.htm?act=viewUrlResult"><i class="fa fa-pie-chart fa-lg"></i>Web Service URL</a></li>
-                        <li><a href="policyMaster.htm?act=showPolicyList"><i class="fa fa-circle-o"></i>Policy</a></li>
-                        <!--<li><a href="appraisalPerformance.htm?act=trasferCompatencyEvaluationInEmployeeMaster"><i class="fa fa-pie-chart fa-lg"></i>Competency Evaluation Transfer</a></li>-->
-                        <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
-                            <%--<c:if test="${!sessionScope.userRight.employeeManagement}">--%>
-                            <c:if test="${sessionScope.userRight.hr}">
-                            <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>
-                            <li><a href="questionLibrary.htm?act=questionPaperView"><i class="fa fa-circle-o"></i>Question Paper</a></li>
-                            </c:if>
-                            <%--</c:if>--%>
-                        <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Homepage Setting</a></li>
-                        <li><a href="classifiedBox.htm?act=showResult"><i class="fa fa-circle-o"></i>Classified Setting</a></li>
-                        <li><a href="ctcAllowance.htm?act=showList"><i class="fa fa-circle-o"></i>CTC Master</a></li>
-                        <li><a href="retirementAge.htm?act=showList"><i class="fa fa-circle-o"></i>Retirement Ages</a></li>
-                        <li><a href="emergencyContact.htm?act=createContact"><i class="fa fa-circle-o"></i>Emergency Contacts</a></li>
-                            <c:if test="${sessionScope.userRight.hr}">
-                            <li class="treeview" style="color: #585858;">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i>
-                                    <span>Email Template Master</span>
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="emailTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Template Result</a></li>
-                                    <li><a href="emailAddMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Add Master</a></li>
-                                </ul>
-                            </li>
-                        </c:if>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i>
-                                <span>Certificate</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="certificateTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Certificate Template Result</a></li>
-                                <li><a href="certificateTemplate.htm?act=searchEmployeeDetail&search=none"><i class="fa fa-circle-o"></i> Assign Certificate</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </li>
-            </c:if>
+            
 
 
 
@@ -1000,6 +933,76 @@
                 </ul>
 
             </li>
+            
+            <c:if test="${sessionScope.userRight.hr}">
+                <li class="treeview" style="color: #585858;">
+                    <a href="#" style="background: #fff;">
+                        <i class="fa fa-wrench fa-lg" style="color: #585858;"></i>
+                        <span style="color: #585858;">Setting</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="resignationMaster.htm?act=fullandfcreateClick"><i class="fa fa-circle-o"></i>F&F Settlement Letter Formate</a></li>
+                        <!--<li><a href="modulesMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Modules Master</a></li>-->
+                        <!--<li><a href="componentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Component Master</a></li>-->
+                        <li><a href="approval.htm?act=approvalList"><i class="fa fa-circle-o"></i>Approval Setting</a></li>
+                        <li><a href="deviceMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Device Management</a></li>
+                        <li><a href="departmentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Department List</a></li>
+                        <li><a href="designationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Designation List</a></li>
+                        <li><a href="levelMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Level Master</a></li>
+                        <li><a href="locationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Location Master</a></li>
+                        <li><a href="holidayMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Holiday Master</a></li>
+                        <li><a href="holidayMaster.htm?act=holidayExcelUpload"><i class="fa fa-circle-o"></i>Holiday Excel Import</a></li>
+                        <li><a href="policyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Allowance</a></li>
+                        <li><a href="zydexLocationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Location Master</a></li>
+                        <li><a href="currencyMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Currency Master</a></li>
+                        <li><a href="policyDeviationForAir.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Policy Deviation Master</a></li>
+                        <li><a href="visitorVisitedLocation.htm?act=createClick"><i class="fa fa-circle-o"></i>Visitor Visited Location</a></li>
+                        <li><a href="timeAttandanceFlaxibleMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Time Attendance Flexible</a></li>
+                        <li><a href="urlMaster.htm?act=viewUrlResult"><i class="fa fa-pie-chart fa-lg"></i>Web Service URL</a></li>
+                        <li><a href="policyMaster.htm?act=showPolicyList"><i class="fa fa-circle-o"></i>Policy</a></li>
+                        <!--<li><a href="appraisalPerformance.htm?act=trasferCompatencyEvaluationInEmployeeMaster"><i class="fa fa-pie-chart fa-lg"></i>Competency Evaluation Transfer</a></li>-->
+                        <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
+                            <%--<c:if test="${!sessionScope.userRight.employeeManagement}">--%>
+                            <c:if test="${sessionScope.userRight.hr}">
+                            <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>
+                            <li><a href="questionLibrary.htm?act=questionPaperView"><i class="fa fa-circle-o"></i>Question Paper</a></li>
+                            </c:if>
+                            <%--</c:if>--%>
+                        <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Homepage Setting</a></li>
+                        <li><a href="classifiedBox.htm?act=showResult"><i class="fa fa-circle-o"></i>Classified Setting</a></li>
+                        <li><a href="ctcAllowance.htm?act=showList"><i class="fa fa-circle-o"></i>CTC Master</a></li>
+                        <li><a href="retirementAge.htm?act=showList"><i class="fa fa-circle-o"></i>Retirement Ages</a></li>
+                        <li><a href="emergencyContact.htm?act=createContact"><i class="fa fa-circle-o"></i>Emergency Contacts</a></li>
+                            <c:if test="${sessionScope.userRight.hr}">
+                            <li class="treeview" style="color: #585858;">
+                                <a href="#">
+                                    <i class="fa fa-circle-o"></i>
+                                    <span>Email Template Master</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="emailTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Template Result</a></li>
+                                    <li><a href="emailAddMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Add Master</a></li>
+                                </ul>
+                            </li>
+                        </c:if>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-circle-o"></i>
+                                <span>Certificate</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="certificateTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Certificate Template Result</a></li>
+                                <li><a href="certificateTemplate.htm?act=searchEmployeeDetail&search=none"><i class="fa fa-circle-o"></i> Assign Certificate</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </li>
+            </c:if>
+            
             </ul>
 
         </section>

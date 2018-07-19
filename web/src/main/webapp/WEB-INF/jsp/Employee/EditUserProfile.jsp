@@ -639,10 +639,6 @@
 
         function removeStep1Tr(cloneTr_Id) {
             try {
-                i1--;
-                var val = document.getElementById("firstStepCount").value;
-                val = val - 1;
-                document.getElementById("firstStepCount").value = val;
                 var element1 = document.getElementById(cloneTr_Id);
                 element1.parentNode.removeChild(element1);
             } catch (e) {
@@ -2014,6 +2010,7 @@
                                                                         <th style="text-align: center;width:55px"></th>
                                                                     </tr>
                                                                     <input type="hidden" name="firstStepCount" id="firstStepCount" value="1">
+                                                                    <input type="hidden" name="certificateId1" id="certificateId1" value="certificatesList">
                                                                     <tr id="cloneTr_Id">
                                                                         <td style="text-align: center">1</td>
                                                                         <td>

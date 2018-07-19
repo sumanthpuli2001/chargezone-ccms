@@ -805,18 +805,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             finalctcList.add(ctcList);
         }
         int empId = employeeMaster.getEmployeeTypeMaster().getId();
-        if(employeeMaster.getEmployeeSubType() != null){
-        int empSubId = employeeMaster.getEmployeeSubType().getId();
-        Boolean checkPf = payrollPfCheckService.getPFCheckValue(empId, empSubId);
-        Boolean checkPt = payrollPtCheckService.getPTCheckValue(empId, empSubId);
+        if (employeeMaster.getEmployeeSubType() != null) {
+            int empSubId = employeeMaster.getEmployeeSubType().getId();
+            Boolean checkPf = payrollPfCheckService.getPFCheckValue(empId, empSubId);
+            Boolean checkPt = payrollPtCheckService.getPTCheckValue(empId, empSubId);
 
 //        selectedEmployeeLevel2(request, employeeMaster);
 //        selectedEmployeeLevel3(request, employeeMaster);
 //        selectedEmployeeLevel4(request, employeeMaster);
 //        selectedEmployeeLevel5(request, employeeMaster);
 //        selectedEmployeeLevel6(request, employeeMaster);
-        request.setAttribute("checkPf", checkPf);
-        request.setAttribute("checkPt", checkPt);
+            request.setAttribute("checkPf", checkPf);
+            request.setAttribute("checkPt", checkPt);
         }
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
 //        request.setAttribute("company", employeeMaster.getCompany());
@@ -873,6 +873,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         employeeMaster.setEmployeeType(employeeType);
         String userId = "" + request.getParameter("userMaster.id");
         String id = request.getParameter("id");
+        int firstStepCount = Integer.parseInt(request.getParameter("firstStepCount"));
         String zid = request.getParameter("zydexLocationMaster.id");
         String employeeSubTypeId = request.getParameter("subTypeId");
         if (null != zid && !zid.equals("")) {
@@ -1011,21 +1012,23 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         //            Certificate attach code
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        MultipartFile multipartFile = multipartRequest.getFile("certificateId1");
-        String certificateFileLocationURL = getServletContext().getRealPath("/")
-                + File.separator + "StorageYard" + File.separator + "UserCertificate"
-                + File.separator + userName + File.separator;
-         File Folder1 = new File(certificateFileLocationURL);
-        if (!Folder1.exists()) {
-            Folder1.mkdirs();
-        }
-        if (multipartFile != null && multipartFile.getSize() > 0) {
-            try {
-                File file2 = new File(certificateFileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
-                File file = new File(certificateFileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
-                multipartFile.transferTo(file2);
-            } catch (Exception e) {
+        for (int i = 1; i < firstStepCount + 1; i++) {
+            MultipartFile multipartFile = multipartRequest.getFile("certificateId" + i);
+            if (multipartFile != null && multipartFile.getSize() > 0) {
+                String certificateFileLocationURL = getServletContext().getRealPath("/")
+                        + File.separator + "StorageYard" + File.separator + "UserCertificate"
+                        + File.separator + userName + File.separator;
+                File Folder1 = new File(certificateFileLocationURL);
+                if (!Folder1.exists()) {
+                    Folder1.mkdirs();
+                }
+                try {
+                    File file2 = new File(certificateFileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    File file = new File(certificateFileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    multipartFile.transferTo(file2);
+                } catch (Exception e) {
 
+                }
             }
         }
 //        File certificateListFile = new File(certificateFileLocationURL);

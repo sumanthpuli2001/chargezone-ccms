@@ -2362,7 +2362,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 condition += " and (STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') BETWEEN "
                         + "STR_TO_DATE('" + employeeInformation.getDolStartDate() + "','%d/%m/%Y') "
                         + "AND STR_TO_DATE('" + employeeInformation.getDolEndDate() + "','%d/%m/%Y')"
-                        + "AND STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') >  STR_TO_DATE('"+sdf.format(date)+"','%d/%m/%Y'))";
+                        + "AND STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') >  STR_TO_DATE('" + sdf.format(date) + "','%d/%m/%Y'))";
 //                        + "AND STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y') > " + sdf.format(date) + ")";
             } else {
                 condition += " and 1 = 1 ";
@@ -2384,6 +2384,17 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         String q = " SELECT " + query;
         return getHibernateTemplate().find(q);
+    }
+
+    @Override
+    public List<?> reademidById(int id) {
+        String query = "";
+
+        query += " FROM EmployeeMaster a"
+                + " WHERE a.id = " + id;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
     }
 
 }

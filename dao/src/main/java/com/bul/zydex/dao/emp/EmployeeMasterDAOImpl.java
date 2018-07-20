@@ -2397,4 +2397,15 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return list;
     }
 
+    @Override
+    public List<?> readDepartmentEmployee(int departId) {
+        String query = "";
+        query = " Select a.id,a.employeeName "
+                + " From EmployeeMaster a "
+                + " Where a.departmentMaster= " + departId;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

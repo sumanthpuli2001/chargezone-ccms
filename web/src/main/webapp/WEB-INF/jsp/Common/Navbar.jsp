@@ -918,7 +918,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="projectManagement.htm?act=projectList"><i class="fa fa-circle-o"></i>Create Project</a></li>
-                    <li><a href="projectManagement.htm?act=taskList"><i class="fa fa-circle-o"></i>Create Task</a></li>
+                    <li><a href="projectManagement.htm?act=myProjectList"><i class="fa fa-circle-o"></i>My Project</a></li>
                     <li>
                         <a href="#">
                             <i class="fa fa-circle-o"></i>
@@ -928,12 +928,13 @@
                         <ul class="treeview-menu">
                             <li><a href="projectManagement.htm?act=clientList"><i class="fa fa-circle-o"></i>Client Master</a></li>
                             <li><a href="projectManagement.htm?act=stateList"><i class="fa fa-circle-o"></i>State Master</a></li>
+                            <li><a href="projectManagement.htm?act=priorityList"><i class="fa fa-circle-o"></i>Priority Master</a></li>
                         </ul>
                     </li>
                 </ul>
 
             </li>
-            
+
             <c:if test="${sessionScope.userRight.hr}">
                 <li class="treeview" style="color: #585858;">
                     <a href="#" style="background: #fff;">
@@ -998,11 +999,15 @@
                                 <li><a href="certificateTemplate.htm?act=searchEmployeeDetail&search=none"><i class="fa fa-circle-o"></i> Assign Certificate</a></li>
                             </ul>
                         </li>
-
+                        <li class="active treeview">
+                            <a href="dynamicApprovalSetting.htm?act=viewDynamicCycle">
+                                <i class="fa fa-clock-o fa-lg"></i> <span>Approval Cycle</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </c:if>
-            
+
             </ul>
 
         </section>

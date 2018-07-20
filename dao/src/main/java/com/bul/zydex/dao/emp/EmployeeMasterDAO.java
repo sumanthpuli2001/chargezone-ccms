@@ -177,8 +177,10 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readEmpLastMnth(String month, Integer year);
 
     public List<?> getGenderDetails();
-    
+
     public List<?> getEmployeeDetails(EmployeeInformation employeeInformation);
-    
-     public List<?> reademidById(int id);
+
+    public List<?> reademidById(int id);
+
+    public List<?> readDepartmentEmployee(int departId);
 }

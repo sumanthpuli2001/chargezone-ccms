@@ -179,6 +179,7 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List<?> getEmployeeDetails(EmployeeInformation employeeInformation);
 
     public List<?> reademidById(int id);
+
     public List<?> readDepartmentEmployee(int departId);
 
 }

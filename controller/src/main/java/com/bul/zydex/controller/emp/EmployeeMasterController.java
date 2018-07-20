@@ -605,7 +605,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
             }
             if (!certificateListFile.exists()) {
-                certificateListFile.mkdir();
+                certificateListFile.mkdirs();
             }
             String firstStepCount = request.getParameter("firstStepCount");
             for (int i = 1; i <= Integer.parseInt(firstStepCount); i++) {
@@ -805,18 +805,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             finalctcList.add(ctcList);
         }
         int empId = employeeMaster.getEmployeeTypeMaster().getId();
-        if(employeeMaster.getEmployeeSubType() != null){
-        int empSubId = employeeMaster.getEmployeeSubType().getId();
-        Boolean checkPf = payrollPfCheckService.getPFCheckValue(empId, empSubId);
-        Boolean checkPt = payrollPtCheckService.getPTCheckValue(empId, empSubId);
+        if (employeeMaster.getEmployeeSubType() != null) {
+            int empSubId = employeeMaster.getEmployeeSubType().getId();
+            Boolean checkPf = payrollPfCheckService.getPFCheckValue(empId, empSubId);
+            Boolean checkPt = payrollPtCheckService.getPTCheckValue(empId, empSubId);
 
 //        selectedEmployeeLevel2(request, employeeMaster);
 //        selectedEmployeeLevel3(request, employeeMaster);
 //        selectedEmployeeLevel4(request, employeeMaster);
 //        selectedEmployeeLevel5(request, employeeMaster);
 //        selectedEmployeeLevel6(request, employeeMaster);
-        request.setAttribute("checkPf", checkPf);
-        request.setAttribute("checkPt", checkPt);
+            request.setAttribute("checkPf", checkPf);
+            request.setAttribute("checkPt", checkPt);
         }
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
 //        request.setAttribute("company", employeeMaster.getCompany());
@@ -4839,8 +4839,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             InputStream file = multipartFile.getInputStream();
             Workbook workbook = WorkbookFactory.create(file);
             Sheet sheet = workbook.getSheetAt(0);
-
+            int totalCol = 2;
             for (Row row : sheet) {
+
                 int i = 2;
                 if (row.getRowNum() == 0) {
                     try {
@@ -4859,6 +4860,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             policyMasterService.create(policyMaster);
                         }
                         i += 2;
+                        totalCol += 2;
                     }
                 } else {
 
@@ -4893,40 +4895,57 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
                         }
 
-                        int y = 2;
+                        for (int y = 2; y < totalCol; y += 2) {
 
-                        while (null != row.getCell(y) && " " != row.getCell(y).toString() && !row.getCell(y).toString().replace(" ", "").isEmpty()) {
-
+//                        while (null != row.getCell(y) && " " != row.getCell(y).toString() && !row.getCell(y).toString().replace(" ", "").isEmpty()) {
                             EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
 
                             XSSFCell cell = (XSSFCell) row.getCell(y); // amount
                             XSSFCell cell1 = (XSSFCell) row.getCell(y + 1); // yes or no
 
-                            employeePolicyDetail.setAmount(Double.parseDouble(cell.toString().replaceAll(",", "")));
+                            if (null != row.getCell(y) && " " != row.getCell(y).toString() && !row.getCell(y).toString().replace(" ", "").isEmpty()) {
+                                employeePolicyDetail.setAmount(Double.parseDouble(cell.toString().replaceAll(",", "")));
 
-                            if (cell1.toString().equalsIgnoreCase("yes")) {
-                                employeePolicyDetail.setStatus(1);
-                            } else if (cell1.toString().equalsIgnoreCase("no")) {
-                                employeePolicyDetail.setStatus(0);
+                                if (cell1.toString().equalsIgnoreCase("yes")) {
+                                    employeePolicyDetail.setStatus(1);
+                                } else if (cell1.toString().equalsIgnoreCase("no")) {
+                                    employeePolicyDetail.setStatus(0);
+                                } else {
+
+                                }
+                                String policyName = (String) firstHeaderRow.getCell(y).toString();
+                                policyMaster.setId(result1.get(policyName.toUpperCase()));
+                                employeePolicyDetail.setPolicyMaster(policyMaster);
+                                employeePolicyDetail.setEmployeeMaster(empMaster);
+
+                                List<?> l = employeePolicyDetailService.readForMasterAdditionalAmount(empMaster.getId(), policyMaster.getId());
+                                Integer id = 0;
+                                if (!l.isEmpty() && 0 != l.size() && null != l) {
+                                    Object[] a = (Object[]) l.get(0);
+                                    id = (Integer) a[2];
+                                }
+                                if (id != 0) {
+                                    employeePolicyDetail.setId(id);
+                                }
+                                employeePolicyDetailService.createOrUpdate(employeePolicyDetail);
+//                                y += 2;
+//                        }
                             } else {
+                                String policyName = (String) firstHeaderRow.getCell(y).toString();
+                                policyMaster.setId(result1.get(policyName.toUpperCase()));
+                                employeePolicyDetail.setPolicyMaster(policyMaster);
+                                employeePolicyDetail.setEmployeeMaster(empMaster);
 
+                                List<?> l = employeePolicyDetailService.readForMasterAdditionalAmount(empMaster.getId(), policyMaster.getId());
+                                Integer id = 0;
+                                if (!l.isEmpty() && 0 != l.size() && null != l) {
+                                    Object[] a = (Object[]) l.get(0);
+                                    id = (Integer) a[2];
+                                    if (id != 0) {
+                                        employeePolicyDetailService.delete(id);
+                                    }
+                                }
                             }
-                            String policyName = (String) firstHeaderRow.getCell(y).toString();
-                            policyMaster.setId(result1.get(policyName.toUpperCase()));
-                            employeePolicyDetail.setPolicyMaster(policyMaster);
-                            employeePolicyDetail.setEmployeeMaster(empMaster);
-
-                            List<?> l = employeePolicyDetailService.readForMasterAdditionalAmount(empMaster.getId(), policyMaster.getId());
-                            Integer id = 0;
-                            if (!l.isEmpty() && 0 != l.size() && null != l) {
-                                Object[] a = (Object[]) l.get(0);
-                                id = (Integer) a[2];
-                            }
-                            if (id != 0) {
-                                employeePolicyDetail.setId(id);
-                            }
-                            employeePolicyDetailService.createOrUpdate(employeePolicyDetail);
-                            y += 2;
                         }
 //                        }
                     }

@@ -432,6 +432,11 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> getEmployeeDetails(EmployeeInformation employeeInformation) {
         return  employeeMasterDAO.getEmployeeDetails(employeeInformation);
     }
+
+    @Override
+    public List<?> readDepartmentEmployee(int departId) {
+        return employeeMasterDAO.readDepartmentEmployee(departId);
+    }
     
     
 }

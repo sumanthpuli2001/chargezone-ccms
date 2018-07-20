@@ -13,39 +13,48 @@ public class ProjectManagementMaster  implements java.io.Serializable {
 
 
      private Integer id;
+     private ClientMaster clientMaster;
+     private PriorityMaster priorityMaster;
+     private StateMaster stateMaster;
+     private ZydexLocationMaster zydexLocationMaster;
+     private String projectCode;
      private String name;
      private String plannedDate;
      private String deadline;
-     private String manager;
-     private String client;
-     private String state;
-     private String priority;
-     private String workLocation;
      private String riskImpact;
-     private String riskProbability;
-     private String potentialCost;
-     private String mitigationCost;
-     private String mitigationPlan;
-     private String projectFinishDate;
+     private String manager;
+     private String finishDate;
+     private String taskCompleted;
+     private String budget;
+     private String billingType;
+     private String description;
 
     public ProjectManagementMaster() {
     }
 
-    public ProjectManagementMaster(String name, String plannedDate, String deadline, String manager, String client, String state, String priority, String workLocation, String riskImpact, String riskProbability, String potentialCost, String mitigationCost, String mitigationPlan, String projectFinishDate) {
+	
+    public ProjectManagementMaster(ClientMaster clientMaster, PriorityMaster priorityMaster, StateMaster stateMaster, ZydexLocationMaster zydexLocationMaster) {
+        this.clientMaster = clientMaster;
+        this.priorityMaster = priorityMaster;
+        this.stateMaster = stateMaster;
+        this.zydexLocationMaster = zydexLocationMaster;
+    }
+    public ProjectManagementMaster(ClientMaster clientMaster, PriorityMaster priorityMaster, StateMaster stateMaster, ZydexLocationMaster zydexLocationMaster, String projectCode, String name, String plannedDate, String deadline, String riskImpact, String manager, String finishDate, String taskCompleted, String budget, String billingType, String description) {
+       this.clientMaster = clientMaster;
+       this.priorityMaster = priorityMaster;
+       this.stateMaster = stateMaster;
+       this.zydexLocationMaster = zydexLocationMaster;
+       this.projectCode = projectCode;
        this.name = name;
        this.plannedDate = plannedDate;
        this.deadline = deadline;
-       this.manager = manager;
-       this.client = client;
-       this.state = state;
-       this.priority = priority;
-       this.workLocation = workLocation;
        this.riskImpact = riskImpact;
-       this.riskProbability = riskProbability;
-       this.potentialCost = potentialCost;
-       this.mitigationCost = mitigationCost;
-       this.mitigationPlan = mitigationPlan;
-       this.projectFinishDate = projectFinishDate;
+       this.manager = manager;
+       this.finishDate = finishDate;
+       this.taskCompleted = taskCompleted;
+       this.budget = budget;
+       this.billingType = billingType;
+       this.description = description;
     }
    
     public Integer getId() {
@@ -54,6 +63,41 @@ public class ProjectManagementMaster  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+    public ClientMaster getClientMaster() {
+        return this.clientMaster;
+    }
+    
+    public void setClientMaster(ClientMaster clientMaster) {
+        this.clientMaster = clientMaster;
+    }
+    public PriorityMaster getPriorityMaster() {
+        return this.priorityMaster;
+    }
+    
+    public void setPriorityMaster(PriorityMaster priorityMaster) {
+        this.priorityMaster = priorityMaster;
+    }
+    public StateMaster getStateMaster() {
+        return this.stateMaster;
+    }
+    
+    public void setStateMaster(StateMaster stateMaster) {
+        this.stateMaster = stateMaster;
+    }
+    public ZydexLocationMaster getZydexLocationMaster() {
+        return this.zydexLocationMaster;
+    }
+    
+    public void setZydexLocationMaster(ZydexLocationMaster zydexLocationMaster) {
+        this.zydexLocationMaster = zydexLocationMaster;
+    }
+    public String getProjectCode() {
+        return this.projectCode;
+    }
+    
+    public void setProjectCode(String projectCode) {
+        this.projectCode = projectCode;
     }
     public String getName() {
         return this.name;
@@ -76,41 +120,6 @@ public class ProjectManagementMaster  implements java.io.Serializable {
     public void setDeadline(String deadline) {
         this.deadline = deadline;
     }
-    public String getManager() {
-        return this.manager;
-    }
-    
-    public void setManager(String manager) {
-        this.manager = manager;
-    }
-    public String getClient() {
-        return this.client;
-    }
-    
-    public void setClient(String client) {
-        this.client = client;
-    }
-    public String getState() {
-        return this.state;
-    }
-    
-    public void setState(String state) {
-        this.state = state;
-    }
-    public String getPriority() {
-        return this.priority;
-    }
-    
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
-    public String getWorkLocation() {
-        return this.workLocation;
-    }
-    
-    public void setWorkLocation(String workLocation) {
-        this.workLocation = workLocation;
-    }
     public String getRiskImpact() {
         return this.riskImpact;
     }
@@ -118,44 +127,50 @@ public class ProjectManagementMaster  implements java.io.Serializable {
     public void setRiskImpact(String riskImpact) {
         this.riskImpact = riskImpact;
     }
-    public String getRiskProbability() {
-        return this.riskProbability;
+    public String getManager() {
+        return this.manager;
     }
     
-    public void setRiskProbability(String riskProbability) {
-        this.riskProbability = riskProbability;
+    public void setManager(String manager) {
+        this.manager = manager;
     }
-    public String getPotentialCost() {
-        return this.potentialCost;
-    }
-    
-    public void setPotentialCost(String potentialCost) {
-        this.potentialCost = potentialCost;
-    }
-    public String getMitigationCost() {
-        return this.mitigationCost;
+    public String getFinishDate() {
+        return this.finishDate;
     }
     
-    public void setMitigationCost(String mitigationCost) {
-        this.mitigationCost = mitigationCost;
+    public void setFinishDate(String finishDate) {
+        this.finishDate = finishDate;
     }
-    public String getMitigationPlan() {
-        return this.mitigationPlan;
-    }
-    
-    public void setMitigationPlan(String mitigationPlan) {
-        this.mitigationPlan = mitigationPlan;
-    }
-    public String getProjectFinishDate() {
-        return this.projectFinishDate;
+    public String getTaskCompleted() {
+        return this.taskCompleted;
     }
     
-    public void setProjectFinishDate(String projectFinishDate) {
-        this.projectFinishDate = projectFinishDate;
+    public void setTaskCompleted(String taskCompleted) {
+        this.taskCompleted = taskCompleted;
+    }
+    public String getBudget() {
+        return this.budget;
+    }
+    
+    public void setBudget(String budget) {
+        this.budget = budget;
+    }
+    public String getBillingType() {
+        return this.billingType;
+    }
+    
+    public void setBillingType(String billingType) {
+        this.billingType = billingType;
+    }
+    public String getDescription() {
+        return this.description;
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 
 
 
 }
-

@@ -179,4 +179,6 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> getGenderDetails();
     
     public List<?> getEmployeeDetails(EmployeeInformation employeeInformation);
+
+    public List<?> readDepartmentEmployee(int departId);
 }

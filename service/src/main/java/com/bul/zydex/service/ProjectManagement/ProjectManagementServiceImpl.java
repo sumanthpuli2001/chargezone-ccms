@@ -7,6 +7,7 @@ package com.bul.zydex.service.ProjectManagement;
 
 import com.bul.zydex.dao.ProjectManagement.ProjectManagementDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
@@ -22,6 +23,26 @@ public class ProjectManagementServiceImpl<T> extends GenericsServiceImpl<T> impl
     public void setProjectManagementDAO(ProjectManagementDAO<T> projectManagementDAO) {
         this.projectManagementDAO = projectManagementDAO;
         setGenericsDAO(projectManagementDAO);
+    }
+
+    @Override
+    public List<?> readProjectMList() {
+        return projectManagementDAO.readProjectMList();
+    }
+
+    @Override
+    public List<?> readManagerEmployeeDepart(T object) {
+        return projectManagementDAO.readManagerEmployeeDepart(object);
+    }
+
+    @Override
+    public List<?> deleteProjectManagement(String projectId) {
+        return projectManagementDAO.deleteProjectManagement(projectId);
+    }
+
+    @Override
+    public List<?> readProjectEmployee(int projectEmpid) {
+        return  projectManagementDAO.readProjectEmployee(projectEmpid);
     }
     
     

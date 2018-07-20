@@ -1304,6 +1304,20 @@
         <property name="projectManagementService" ref="projectManagementService1"/>
         <property name="clientMasterService" ref="clientMasterService1"/>
         <property name="stateMasterService" ref="stateMasterService1"/>
+        <property name="priorityMasterService" ref="priorityMasterService1"/>
+        <property name="zydexLocationMasterService" ref="zydexLocationMasterService1"/>
+        <property name="departmentMasterService" ref="departmentMasterService1"/>
+        <property name="createTaskService" ref="createTaskService1"/>
+        <property name="TaskEmployeeDepartmentService" ref="taskEmployeeDepartmentService1"/>
+    </bean>
+    <bean id="dynamicApprovalSettingController1" class="com.bul.zydex.controller.Approval.DynamicApprovalSettingController" parent="controllerConfig" >
+        <property name="dynamicApprovalSettingService" ref="dynamicApprovalSettingService1"/>
+        <property name="dynamicApprovalSettingApproverService" ref="dynamicApprovalSettingApproverService1"/>
+        <property name="dynamicApprovalSettingEmailService" ref="dynamicApprovalSettingEmailService1"/>
+        <property name="modulesService" ref="modulesService1"/>
+        <property name="companyMasterService" ref="companyMasterService1"/>
+        <property name="zydexLocationMasterService" ref="zydexLocationMasterService1"/>
+        <property name="projectManagementService" ref="projectManagementService1"/>
     </bean>
 </beans>
  

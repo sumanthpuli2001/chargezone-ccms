@@ -10,6 +10,21 @@
             <column name="id" />
             <generator class="identity" />
         </id>
+        <many-to-one name="clientMaster" class="com.bul.zydex.model.ClientMaster" fetch="select">
+            <column name="client" not-null="true" />
+        </many-to-one>
+        <many-to-one name="priorityMaster" class="com.bul.zydex.model.PriorityMaster" fetch="select">
+            <column name="priority" not-null="true" />
+        </many-to-one>
+        <many-to-one name="stateMaster" class="com.bul.zydex.model.StateMaster" fetch="select">
+            <column name="state" not-null="true" />
+        </many-to-one>
+        <many-to-one name="zydexLocationMaster" class="com.bul.zydex.model.ZydexLocationMaster" fetch="select">
+            <column name="work_location" not-null="true" />
+        </many-to-one>
+        <property name="projectCode" type="string">
+            <column name="project_code" length="45" />
+        </property>
         <property name="name" type="string">
             <column name="name" length="45" />
         </property>
@@ -19,38 +34,26 @@
         <property name="deadline" type="string">
             <column name="deadline" length="45" />
         </property>
+        <property name="riskImpact" type="string">
+            <column name="risk_Impact" length="45" />
+        </property>
         <property name="manager" type="string">
             <column name="manager" length="45" />
         </property>
-        <property name="client" type="string">
-            <column name="client" length="45" />
+        <property name="finishDate" type="string">
+            <column name="finish_date" length="45" />
         </property>
-        <property name="state" type="string">
-            <column name="state" length="45" />
+        <property name="taskCompleted" type="string">
+            <column name="task_completed" length="45" />
         </property>
-        <property name="priority" type="string">
-            <column name="priority" length="45" />
+        <property name="budget" type="string">
+            <column name="budget" length="45" />
         </property>
-        <property name="workLocation" type="string">
-            <column name="work_location" length="45" />
+        <property name="billingType" type="string">
+            <column name="billing_type" length="45" />
         </property>
-        <property name="riskImpact" type="string">
-            <column name="risk_impact" length="45" />
-        </property>
-        <property name="riskProbability" type="string">
-            <column name="risk_probability" length="45" />
-        </property>
-        <property name="potentialCost" type="string">
-            <column name="potential_cost" length="45" />
-        </property>
-        <property name="mitigationCost" type="string">
-            <column name="mitigation_cost" length="45" />
-        </property>
-        <property name="mitigationPlan" type="string">
-            <column name="mitigation_plan" length="45" />
-        </property>
-        <property name="projectFinishDate" type="string">
-            <column name="project_finish_date" length="45" />
+        <property name="description" type="string">
+            <column name="description" length="45" />
         </property>
     </class>
 </hibernate-mapping>

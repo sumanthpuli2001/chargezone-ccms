@@ -337,6 +337,7 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         policyReadHistoryService.create(policyReadHistory);
 
         mv.getModel().put("policyCreate", policyCreate);
+        mv.getModel().put("employeeMaster", employeeMaster);
         mv.setViewName("Policy/ReadViewPolicy");
         return mv;
     }
@@ -354,6 +355,7 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         policyCreate.setStatus(3);
         policyCreate.setAcceptPolicy(1);
         policyCreate.setAcceptPolicyTime(sdf.format(cDate));
+        policyCreate.setAcceptByPolicyId(employeeMaster.getId());
         policyCreateService.update(policyCreate);
 
         PolicyReadHistory policyReadHistory = policyReadHistoryService.readByPolicyId(Integer.parseInt(id));
@@ -372,10 +374,11 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         for (String z : savingList) {
             try {
 
-                PolicyCreate policyCreate = new PolicyCreate();
+                PolicyReadHistory prh = new PolicyReadHistory();
                 List<?> list = policyCreateService.deletepolicy(z);
                 for (Object object : list) {
-                    policyCreate = (PolicyCreate) object;
+                    prh = (PolicyReadHistory) object;
+                    policyReadHistoryService.delete(prh.getId());
                 }
 
                 policyCreateService.delete(Integer.parseInt(z));

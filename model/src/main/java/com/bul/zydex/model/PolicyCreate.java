@@ -24,12 +24,13 @@ public class PolicyCreate implements java.io.Serializable {
     private String readDate;
     private String readBy;
     private String acceptPolicyTime;
+    private Integer acceptByPolicyId;
 
     public PolicyCreate() {
 
     }
 
-    public PolicyCreate(Integer id, String name, PolicyDropDown policyDropDown, String attachment, Integer status, String createdDate, String createdBy, String updatedDate, String updatedBy, Integer acceptPolicy, String readDate, String readBy, String acceptPolicyTime) {
+    public PolicyCreate(Integer id, String name, PolicyDropDown policyDropDown, String attachment, Integer status, String createdDate, String createdBy, String updatedDate, String updatedBy, Integer acceptPolicy, String readDate, String readBy, String acceptPolicyTime, Integer acceptByPolicyId) {
         this.id = id;
         this.name = name;
         this.policyDropDown = policyDropDown;
@@ -43,6 +44,7 @@ public class PolicyCreate implements java.io.Serializable {
         this.readDate = readDate;
         this.readBy = readBy;
         this.acceptPolicyTime = acceptPolicyTime;
+        this.acceptByPolicyId = acceptByPolicyId;
     }
 
     public Integer getId() {
@@ -149,5 +151,14 @@ public class PolicyCreate implements java.io.Serializable {
         this.acceptPolicyTime = acceptPolicyTime;
     }
 
+    public Integer getAcceptByPolicyId() {
+        return acceptByPolicyId;
+    }
+
+    public void setAcceptByPolicyId(Integer acceptByPolicyId) {
+        this.acceptByPolicyId = acceptByPolicyId;
+    }
+
+    
     
 }

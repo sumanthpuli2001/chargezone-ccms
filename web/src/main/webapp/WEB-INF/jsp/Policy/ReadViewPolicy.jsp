@@ -74,13 +74,12 @@
                                             <span id="attachmentError" style="color: red;"></span>
                                         </div>
                                     </div>
-                                    <%--<c:if test="${policyCreate.acceptPolicy != 1}">--%>
+                                    <c:if test="${employeeMaster.id != policyCreate.acceptByPolicyId || policyCreate.acceptPolicy != 1}">
                                         <div class="form-group">
                                             <div class="col-sm-6 col-sm-offset-5">
                                                 <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="Accept">
-                                            </div>
                                         </div>
-                                    <%--</c:if>--%>
+                                    </c:if>
                                 </div>
                             </form:form>
                         </div><!-- /.tab-pane -->

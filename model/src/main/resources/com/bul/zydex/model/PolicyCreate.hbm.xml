@@ -46,6 +46,9 @@
         <property name="acceptPolicyTime" type="string">
             <column name="accept_policy_time" />
         </property>
+        <property name="acceptByPolicyId" type="java.lang.Integer">
+            <column name="accept_by_policy_id" />
+        </property>
     </class>
   
 

@@ -15,7 +15,7 @@
         <script>
             function viewClick(id) {
 //            window.location = 'employeeMaster.htm?act=viewClick&id=' + id;
-                window.location = 'trainingType.htm?act=edittraining&id=' + id;
+                window.location = 'projectManagement.htm?act=viewMyProject&projectId=' + id;
             }
 
             function deleteCheck11() {
@@ -120,7 +120,7 @@
                                                                                 <a href="#"
                                                                                    onclick="viewClick(${list[2]});">
                                                                                     <!--onclick="viewClick($//{list[0]},$//{list[1]});">-->
-                                                                                    &nbsp;&nbsp;Edit
+                                                                                    &nbsp;&nbsp;View
                                                                                 </a>
                                                                             </li>
                                                                             <%--</c:if>--%>

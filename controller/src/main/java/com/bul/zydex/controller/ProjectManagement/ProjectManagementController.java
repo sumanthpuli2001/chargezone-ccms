@@ -142,8 +142,7 @@ public class ProjectManagementController extends ProjectManagementAbstract {
                     projectManagementService.delete(projectManagementMaster.getId());
                 }
                 projectManagementService.delete(Integer.parseInt(z));
-            } 
-            catch (Exception e) {
+            } catch (Exception e) {
             }
         }
         request.setAttribute("successMessage",
@@ -158,6 +157,44 @@ public class ProjectManagementController extends ProjectManagementAbstract {
         List<?> list = projectManagementService.readProjectEmployee(employeeMaster.getId());
         request.setAttribute("list", list);
         mv.setViewName("ProjectManagement/myProjectList");
+        return mv;
+    }
+
+    public ModelAndView viewMyProject(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        int projectId = Integer.parseInt(request.getParameter("projectId"));
+        ProjectManagementMaster projectManagementMaster = projectManagementService.readById(projectId);
+        ClientMaster clientMaster = clientMasterService.readById(projectManagementMaster.getClientMaster().getId());
+        StateMaster stateMaster = stateMasterService.readById(projectManagementMaster.getStateMaster().getId());
+        PriorityMaster priorityMaster = priorityMasterService.readById(projectManagementMaster.getPriorityMaster().getId());
+        ZydexLocationMaster workLocation = zydexLocationMasterService.readById(projectManagementMaster.getZydexLocationMaster().getId());
+        EmployeeMaster employeeMaster = employeeMasterService.readById(Integer.parseInt(projectManagementMaster.getManager()));
+        try {
+            String attachementFileLocationURL = getServletContext().getRealPath("/")
+                    + File.separator + "StorageYard" + File.separator + "UserAttachementForProjectManagement"
+                    + File.separator + projectId + File.separator;
+            String attachementFileURL = "StorageYard" + File.separator + "UserAttachementForProjectManagement"
+                    + File.separator + projectId + File.separator;
+            List l = new ArrayList();
+            File[] files = new File(attachementFileLocationURL).listFiles();
+            for (File file : files) {
+                if (file.isFile()) {
+                    List l1 = new ArrayList();
+                    l1.add(attachementFileURL + file.getName());
+                    l1.add(file.getName());
+                    l.add(l1);
+                }
+                request.setAttribute("attachementList", l);
+            }
+        } catch (Exception e) {
+        }
+        request.setAttribute("projectManagement", projectManagementMaster);
+        request.setAttribute("clientMaster", clientMaster);
+        request.setAttribute("stateMaster", stateMaster);
+        request.setAttribute("priorityMaster", priorityMaster);
+        request.setAttribute("workLocation", workLocation);
+        request.setAttribute("employeeMaster", employeeMaster);
+        mv.setViewName("ProjectManagement/viewMyProject");
         return mv;
     }
 

@@ -77,7 +77,7 @@ public class OutController extends OutAbstract {
                     if (!list.isEmpty()) {
                         userMaster = (UserMaster) list.get(0);
                     }
-                    String from = "hrms@spcls.co.in";
+                    String from = "myspc@spcls.co.in";
                     String to = employeeMaster.getOfficeEmailId();
                     String subject = "Account Detail";
                     String message = "" + "<html>" + "<body>"

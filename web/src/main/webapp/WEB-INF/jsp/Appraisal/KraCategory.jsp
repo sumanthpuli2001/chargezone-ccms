@@ -52,7 +52,7 @@
             <div class="content">
                 <!-- Main content -->
                 <form:form action="kraCategory.htm?act=createSubmit" method="post" commandName="kraCategory"
-                           name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
+                           name='form1' class="form-horizontal" role="form">
                     <form:hidden path="id"></form:hidden>
                         <!--<form class="form-horizontal" role="form" commandName>-->
 
@@ -87,7 +87,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="tab-content">
-                                    <button type="submit" class="btn btn-danger" ><i class="fa fa-trash"></i>&nbsp&nbsp;Delete</button>
+                                    <!--<button type="submit" class="btn btn-danger" ><i class="fa fa-trash"></i>&nbsp&nbsp;Delete</button>-->
                                     <div class="box-body no-padding">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
@@ -102,20 +102,34 @@
                                                         <c:otherwise>
                                                             <thead>
                                                                 <tr>
-                                                                    <th align="center" style="width: 1px;"><input type="checkbox" id="toggleId"/></th>
+                                                                    <!--<th align="center" style="width: 1px;"><input type="checkbox" id="toggleId"/></th>-->
                                                                     <th style="text-align: justify;">Module Name</th>
-                                                                    <th style="text-align: center;width: 20%;">Action</th>
+                                                                    <th style="width: 20%;">Action</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
                                                                 <tr>
                                                                     <c:forEach var="catList" items="${catList}">
-                                                                        <td align="center"><input type="checkbox" name="checkId" id="leaveTypeId" value="${catList.id}"/></td>
+                                                                        <!--<td align="center"><input type="checkbox" name="checkId" id="leaveTypeId" value="${catList.id}"/></td>-->
                                                                         <td>${catList.kraCategoryName}</td>
                                                                         <td>
-                                                                            <button class="btn btn-default center-block" style="width: 75px;" onclick="location.href = 'kraCategory.htm?act=editClick&id=${catList.id}'">
-                                                                                Edit 
-                                                                            </button>
+                                                                            <div class="btn-group">
+                                                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                    Action <span class="caret"></span>
+                                                                                </button>
+                                                                                <ul class="dropdown-menu" >
+                                                                                    <li style="width: 100px;">
+                                                                                        <a href="#" onclick="location.href = 'kraCategory.htm?act=editClick&id=${catList.id}'">
+                                                                                            Edit 
+                                                                                        </a>
+                                                                                    </li>
+                                                                                    <li style="width: 100px; color: red;">
+                                                                                        <a href="#"  onclick="return deleteClick(${catList.id});" >
+                                                                                            delete
+                                                                                        </a>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
                                                                         </td>
                                                                     </tr>
                                                                 </c:forEach>
@@ -135,5 +149,15 @@
         </div>
         <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     </body>
+    <script>
+        function deleteClick(id) {
+            var checkboxes = confirm("Are you sure you want to delete?");
+            if (checkboxes) {
+                window.location = 'kraCategory.htm?act=deletekraCategory&id=' + id;
+                return true;
+            }
+            return false;
+        }
+    </script>
 
 </html>

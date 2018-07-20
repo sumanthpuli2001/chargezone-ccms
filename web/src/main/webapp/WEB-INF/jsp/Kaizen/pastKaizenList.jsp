@@ -30,7 +30,7 @@
                                 <div class="row">
                                     <div class="col-md-12 col-sm-12">
                                         <div class="table table-bordered">
-                                            <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="center"  >
+                                            <table id="table1" class="table table-bordered table-striped table-hover" style="" align="center">
 
                                                 <c:choose>
                                                     <c:when test="${empty list}">
@@ -73,7 +73,7 @@
                                                                     <c:if test="${list1[8] eq 0}"><td><span class="badge">Pending</span></td></c:if>
                                                                     <c:if test="${list1[8] eq 2 }"><td><span class="label label-warning">Recycled</span></td></c:if>
                                                                     <c:if test="${list1[8] eq 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
-                                                                    <%--<c:if test="${list1[2] == 5}"><td><span class="label label-success">Final Approved</span></td></c:if>--%>
+                                                                    <c:if test="${list1[8] eq 10}"><td><span class="label label-default">OnHold</span></td></c:if>
                                                                     <c:if test="${list1[8] eq 4}"><td><span class="label label-success">Approved</span></td></c:if>
                                                                     <c:if test="${list1[8] eq 1}"><td><span class="label label-success">Approved</span></td></c:if>
                                                                         <td>

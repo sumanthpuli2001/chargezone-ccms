@@ -9,12 +9,14 @@ import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
+import com.bul.zydex.model.TrainingIdentification;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingSubMaster;
 import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.model.support.User;
 import com.bul.zydex.service.Training.TrainerService;
+import com.bul.zydex.service.Training.TrainingIdentificationService;
 import com.bul.zydex.service.Training.TrainingMasterService;
 import com.bul.zydex.service.Training.TrainingSubMasterService;
 import com.bul.zydex.service.Training.TrainingSubTypeService;
@@ -46,6 +48,7 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
     protected TrainingMasterService<TrainingMaster> trainingMasterService;
     protected TrainingSubMasterService<TrainingSubMaster> trainingSubMasterService;
     protected Validator trainingMasterValidator;
+    protected TrainingIdentificationService<TrainingIdentification> trainingIdentificationService;
 
     public TrainingTypeService<TrainingType> getTrainingTypeService() {
         return trainingTypeService;
@@ -93,6 +96,14 @@ public abstract class TrainingMasterAbstract extends CustomAbstract{
 
     public void setTrainingMasterValidator(Validator trainingMasterValidator) {
         this.trainingMasterValidator = trainingMasterValidator;
+    }
+
+    public TrainingIdentificationService<TrainingIdentification> getTrainingIdentificationService() {
+        return trainingIdentificationService;
+    }
+
+    public void setTrainingIdentificationService(TrainingIdentificationService<TrainingIdentification> trainingIdentificationService) {
+        this.trainingIdentificationService = trainingIdentificationService;
     }
     
 

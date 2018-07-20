@@ -43,7 +43,18 @@
             }
         }
     </script>
-
+<script>
+$(document).ready(function(){
+    $("#hide").click(function(){
+        $(this).hide();
+        $("#show").show();
+    });
+    $("#show").click(function(){
+        $(this).hide();
+        $("#hide").show();
+    });
+});
+</script>
 
 
     <!-- Content Wrapper. Contains page content -->
@@ -186,10 +197,11 @@
                                         <c:when test="${!empty employeelist}">
                                             <div class="box-header" style="text-align: right;">
                                                 <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="ExportToExcel('tableid')"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
-                                                <input type="button" class="btn btn-facebook "  style="width: 100px;" value="Print" onclick="printDiv('printableArea')">
-                                                <input type="button" class="btn btn-facebook "  style="width: 100px;" value="TEXT" onclick="textBtnClick();">
+                                                <button type="button" class="btn btn-facebook "  style="width: 100px;" value="Print" onclick="printDiv('printableArea')"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Print</button>
+                                                <button type="button" class="btn btn-facebook "  style="width: 100px;" id="hide" value="TEXT" onclick="textBtnClick();"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Text</button>
                                                 <span data="StorageYard/TextFile/PF_Report" type="application/pdf" width="500" height="300">
-                                                <a href="employeePfCheck.htm?act=downloadTextfile">Download</a>
+                                                <a href="employeePfCheck.htm?act=downloadTextfile" id="show">Download</a>
+                                                <!--<button type="button" href="employeePfCheck.htm?act=downloadTextfile" class="btn btn-facebook "  style="width: 100px;" id="show" value="Download"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Download</button>-->
                                                 </span>
                                             </div>
                                         </c:when>

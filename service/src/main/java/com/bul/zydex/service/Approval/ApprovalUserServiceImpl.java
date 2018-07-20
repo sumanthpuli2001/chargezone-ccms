@@ -46,4 +46,19 @@ public class ApprovalUserServiceImpl<T> extends GenericsServiceImpl<T> implement
          return approvalUserDAO.readByApprovalFetch(apid);
     }
 
-}
+    @Override
+    public List<?> approvaldelete(String apid) {
+        return approvalUserDAO.approvaldelete(apid);
+    }
+
+    @Override
+    public List<?> readByApId(int id) {
+        return approvalUserDAO.readByApId(id);
+    }
+
+    @Override
+    public List<?> readApprovalUser(String approvalMasterId) {
+        return approvalUserDAO.readApprovalUser(approvalMasterId);
+    }
+
+    }

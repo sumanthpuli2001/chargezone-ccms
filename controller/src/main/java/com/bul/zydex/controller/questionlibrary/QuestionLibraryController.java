@@ -139,6 +139,11 @@ public class QuestionLibraryController extends QuestionLibraryAbstract {
                     questionAnsService.delete(ans.getId());
                 }
                 if (0 == asd) {
+
+                    radiocount = Integer.parseInt(selected);
+//                radiocount = Integer.parseInt(selected.substring(1));
+                }
+                if (0 == asd) {
                     for (int i = 1; i <= otherDetailCount; i++) {
                         QuestionAns questionAns = new QuestionAns();
                         if (null != request.getParameter("ans" + i)) {

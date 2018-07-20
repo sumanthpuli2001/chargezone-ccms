@@ -456,7 +456,7 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
                                                     <label><h4></h4></label>
-                                                    <table style="width: 100%;" align="center">
+                                                    <table border="1" style="width: 100%;" align="center">
                                                         <c:choose>
                                                             <c:when test="${empty list}">
                                                                 <tr>

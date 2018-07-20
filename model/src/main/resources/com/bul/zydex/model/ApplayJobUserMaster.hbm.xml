@@ -25,5 +25,14 @@
         <property name="profileSubmit" type="java.lang.Integer">
             <column name="profile_submit" />
         </property>
+        <property name="otp" type="string">
+            <column name="otp" />
+        </property>
+        <property name="statusOtp" type="java.lang.Integer">
+            <column name="status_otp" />
+        </property>
+        <property name="timeValidity" type="string">
+            <column name="time_validite" />
+        </property>
     </class>
 </hibernate-mapping>

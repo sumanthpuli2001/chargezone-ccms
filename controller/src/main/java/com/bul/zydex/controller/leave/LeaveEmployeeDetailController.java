@@ -733,7 +733,6 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 leaveEmployeeDetailService.create(leaveEmployeeDetail);
 
                                 balanceDay = employeeLeaveBalance1.getNoOfLeaveRemain();
-                                
 
                                 if (srtLeave1 == 1 && balanceDay >= 1) {
 
@@ -2162,10 +2161,21 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             }
 
         }
+        leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
+        List<?> list = leaveEmployeeDetailService.empLeaveRequestDetail(leaveEmployeeDetail);
+        request.setAttribute("list", list);
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
         String currentDate = dateFormat1.format(new Date());
+        String startDate = "";
+        String endDate = "";
+        for (Object o : list) {
+            Object[] obj = (Object[]) o;
+            startDate = (String) obj[1];
+            endDate = (String) obj[3];
+        }
+
         EmployeeMaster employeeMasterFromSession = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-        List<?> sameDateCheck = leaveEmployeeDetailService.getEmployeeLeaveDetailByDate(currentDate, employeeMasterFromSession.getId());
+        List<?> sameDateCheck = leaveEmployeeDetailService.getEmployeeLeaveDetailByDate(startDate, endDate, reportingId);
         List<?> approvalHistoryList = leaveEmployeeDetailsApprovalHistoryService.getByLeaveEmpDetailId(Integer.parseInt(id));
 
         request.setAttribute("sameDateCheck", sameDateCheck);
@@ -2174,9 +2184,6 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         request.setAttribute("empReqMap", empReqMap);
         request.setAttribute("totalDaysMap", totalDaysMap);
 
-        leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
-        List<?> list = leaveEmployeeDetailService.empLeaveRequestDetail(leaveEmployeeDetail);
-        request.setAttribute("list", list);
         mv.getModelMap().put("leaveEmployeeDetail", leaveEmployeeDetail);
         mv.setViewName("Leave/LeaveRequestApprove");
         return mv;

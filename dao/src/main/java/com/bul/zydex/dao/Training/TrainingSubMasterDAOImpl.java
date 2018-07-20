@@ -44,4 +44,17 @@ public class TrainingSubMasterDAOImpl<T> extends GenericsDAOImpl<T> implements T
         return list;
     }
 
+    @Override
+    public List<?> deletetrainingId(String trainingId) {
+        String query = "";
+        query += " "
+                + " SELECT  a "
+                + " FROM TrainingSubMaster a "
+                + " WHERE a.trainingMasterid=" + trainingId;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+
+    }
+
 }

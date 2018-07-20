@@ -771,17 +771,17 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
     }
 
     @Override
-    public List<?> getEmployeeLeaveDetailByDate(String currentDate,int approverId) {
+    public List<?> getEmployeeLeaveDetailByDate(String startDate, String endDate, int approverId) {
         String query = "";
-                        //  0               1               2       3               4           5               6           
+        //  0               1               2       3               4           5               6           
         query = " select a.startDate,a.startDateStatus,a.endDate,a.endDateStatus,a.noOfDays,b.employeeName,c.leaveType "
                 + " from LeaveEmployeeDetail a  "
                 + " left join a.employeeMaster b "
                 + " left join a.leaveTypeMaster c "
-                + " where STR_TO_DATE('" + currentDate + "','%d/%m/%Y') "
-                + " between STR_TO_DATE(a.startDate, '%d/%m/%Y') "
-                + " and STR_TO_DATE(a.endDate, '%d/%m/%Y') "
-                + " and a.approverId ="+approverId
+                + " where (STR_TO_DATE(a.startDate, '%d/%m/%Y') >= STR_TO_DATE('" + startDate + "', '%d/%m/%Y') AND STR_TO_DATE('" + startDate + "', '%d/%m/%Y') >= STR_TO_DATE(a.endDate, '%d/%m/%Y') or "
+                + " STR_TO_DATE(a.endDate, '%d/%m/%Y') >= STR_TO_DATE('" + endDate + "', '%d/%m/%Y') AND STR_TO_DATE('" + endDate + "', '%d/%m/%Y') >= STR_TO_DATE(a.endDate, '%d/%m/%Y') or "
+                + "(STR_TO_DATE(a.startDate, '%d/%m/%Y') >= STR_TO_DATE('" + startDate + "', '%d/%m/%Y') AND STR_TO_DATE('" + endDate + "', '%d/%m/%Y') >= STR_TO_DATE(a.endDate, '%d/%m/%Y')))"
+                + " and a.approverId =" + approverId
                 + " and a.status=3 group by a.id";
 
         return getHibernateTemplate().find(query);

@@ -873,6 +873,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         employeeMaster.setEmployeeType(employeeType);
         String userId = "" + request.getParameter("userMaster.id");
         String id = request.getParameter("id");
+        int firstStepCount = Integer.parseInt(request.getParameter("firstStepCount"));
         String zid = request.getParameter("zydexLocationMaster.id");
         String employeeSubTypeId = request.getParameter("subTypeId");
         if (null != zid && !zid.equals("")) {
@@ -1011,20 +1012,36 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         //            Certificate attach code
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        String certificateFileLocationURL = getServletContext().getRealPath("/")
-                + File.separator + "StorageYard" + File.separator + "UserCertificate"
-                + File.separator + userName + File.separator;
-        File certificateListFile = new File(certificateFileLocationURL);
-        if (certificateListFile.exists() && certificateListFile.listFiles().length > 0) {
-            File[] certificateListFileArray = certificateListFile.listFiles();
-            try {
-                request.setAttribute("imageFile", "StorageYard" + File.separator + "UserCertificate" + File.separator + userName + File.separator + certificateListFileArray[0].getName().replaceAll(" ", ""));
-            } catch (Exception e) {
+        for (int i = 1; i < firstStepCount + 1; i++) {
+            MultipartFile multipartFile = multipartRequest.getFile("certificateId" + i);
+            if (multipartFile != null && multipartFile.getSize() > 0) {
+                String certificateFileLocationURL = getServletContext().getRealPath("/")
+                        + File.separator + "StorageYard" + File.separator + "UserCertificate"
+                        + File.separator + userName + File.separator;
+                File Folder1 = new File(certificateFileLocationURL);
+                if (!Folder1.exists()) {
+                    Folder1.mkdirs();
+                }
+                try {
+                    File file2 = new File(certificateFileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    File file = new File(certificateFileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    multipartFile.transferTo(file2);
+                } catch (Exception e) {
+
+                }
             }
         }
-        if (!certificateListFile.exists()) {
-            certificateListFile.mkdir();
-        }
+//        File certificateListFile = new File(certificateFileLocationURL);
+//        if (certificateListFile.exists() && certificateListFile.listFiles().length > 0) {
+//            File[] certificateListFileArray = certificateListFile.listFiles();
+//            try {
+//                request.setAttribute("imageFile", "StorageYard" + File.separator + "UserCertificate" + File.separator + userName + File.separator + certificateListFileArray[0].getName().replaceAll(" ", ""));
+//            } catch (Exception e) {
+//            }
+//        }
+//        if (!certificateListFile.exists()) {
+//            certificateListFile.mkdir();
+//        }
         //Code for Employee Policy Detail
         EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
 //       Boolean check =  employeePolicyDetailService.deleteByEmployeeId(employeeMaster.getId());

@@ -10,6 +10,7 @@ import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.KaizenApproval;
+import com.bul.zydex.model.KaizenApprovalHistory;
 import com.bul.zydex.model.KaizenMaster;
 import com.bul.zydex.model.UserMaster;
 import java.io.File;
@@ -87,7 +88,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 //        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(4);
         BindException errors = new BindException(kaizenMaster, "kaizenMaster");
         bind(request, kaizenMaster);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDate localDate = LocalDate.now();
         String srNo = request.getParameter("srNo");
         String teamLeader = request.getParameter("teamLeader");
@@ -98,6 +99,8 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         String problemDescription = request.getParameter("problemDescription");
 //        String beforePhoto = request.getParameter("beforePhoto");
         //Storeing Images
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date cDate = new Date();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartRequest.getFile("beforePhoto");
         MultipartFile multipartFile1 = multipartRequest.getFile("afterPhoto");
@@ -200,6 +203,15 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         kaizenMaster.setCurrentLevel(0);
         kaizenMasterService.create(kaizenMaster);
 
+        KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+        kaizenApprovalHistory.setComment("Kaizen Create");
+        kaizenApprovalHistory.setStatus(0);
+        kaizenApprovalHistory.setStatusMessage("Kaizen Create");
+        kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+        kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+        kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+        kaizenApprovalHistoryService.create(kaizenApprovalHistory);
+
         request.setAttribute("successMessage",
                 "Information : The Information is saved Successfully.");
 
@@ -223,6 +235,9 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         String department = request.getParameter("department");
         String teamMember = request.getParameter("teamMember");
         String problemDescription = request.getParameter("problemDescription");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date cDate = new Date();
 
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartRequest.getFile("beforePhoto");
@@ -324,6 +339,15 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         kaizenMaster.setCurrentLevel(0);
         kaizenMasterService.update(kaizenMaster);
 
+        KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+        kaizenApprovalHistory.setComment("Kaizen Edit");
+        kaizenApprovalHistory.setStatus(0);
+        kaizenApprovalHistory.setStatusMessage("Kaizen Edit");
+        kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+        kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+        kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+        kaizenApprovalHistoryService.create(kaizenApprovalHistory);
+
         request.setAttribute("successMessage",
                 "Information : The Information is Updated Successfully.");
         mv = kaizenMasterList(request, response);
@@ -336,8 +360,11 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");
         KaizenMaster kaizenMaster = new KaizenMaster();
+        KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+        List<?> KaizenHistory = kaizenApprovalHistoryService.readByKaizenId(Integer.parseInt(id));
         kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
         mv.getModelMap().put("list", kaizenMaster);
+        mv.getModelMap().put("listKh", KaizenHistory);
         mv.setViewName("Kaizen/ViewKaizen");
         return mv;
     }
@@ -366,8 +393,11 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");
         KaizenMaster kaizenMaster = new KaizenMaster();
+        KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+        List<?> KaizenHistory = kaizenApprovalHistoryService.readByKaizenId(Integer.parseInt(id));
         kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
         mv.getModelMap().put("list", kaizenMaster);
+        mv.getModelMap().put("listKh", KaizenHistory);
         mv.setViewName("Kaizen/ViewKaizenApproval");
         return mv;
     }
@@ -376,8 +406,11 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");
         KaizenMaster kaizenMaster = new KaizenMaster();
+         KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+        List<?> KaizenHistory = kaizenApprovalHistoryService.readByKaizenId(Integer.parseInt(id));
         kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
         mv.getModelMap().put("list", kaizenMaster);
+        mv.getModelMap().put("listKh", KaizenHistory);
         mv.setViewName("Kaizen/viewApproveKaizenSumbit");
         return mv;
     }
@@ -392,7 +425,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(3);
 
 //        KaizenApproval kaizenApproval = kaizenApprovalService.readByIdAndEmp(kaizenMaster.getId(), employeeMaster.getId());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date cDate = new Date();
 
         if (btnType.equals("Approve")) {
@@ -412,6 +445,15 @@ public class KaizenMasterController extends KaizenMasterAbstract {
                 kaizenApproval.setKaizenMaster(kaizenMaster);
                 kaizenApproval.setLevel(au.getLevel());
                 kaizenApprovalService.create(kaizenApproval);
+
+                KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+                kaizenApprovalHistory.setComment(btnType);
+                kaizenApprovalHistory.setStatus(1);
+                kaizenApprovalHistory.setStatusMessage("Kaizen Approve");
+                kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+                kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+                kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+                kaizenApprovalHistoryService.create(kaizenApprovalHistory);
             }
             request.setAttribute("successMessage",
                     "Information : The request is Approved Successfully.");
@@ -448,6 +490,15 @@ public class KaizenMasterController extends KaizenMasterAbstract {
             kaizenApproval.setCreatedDate(sdf.format(cDate));
             kaizenApprovalService.create(kaizenApproval);
 
+            KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+            kaizenApprovalHistory.setComment(btnType);
+            kaizenApprovalHistory.setStatus(2);
+            kaizenApprovalHistory.setStatusMessage("Kaizen Recycle");
+            kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+            kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+            kaizenApprovalHistoryService.create(kaizenApprovalHistory);
+
             request.setAttribute("successMessage",
                     "Information : The request is Recycled Successfully.");
 
@@ -484,6 +535,15 @@ public class KaizenMasterController extends KaizenMasterAbstract {
             kaizenApproval.setCreatedDate(sdf.format(cDate));
             kaizenApprovalService.create(kaizenApproval);
 
+            KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+            kaizenApprovalHistory.setComment(btnType);
+            kaizenApprovalHistory.setStatus(3);
+            kaizenApprovalHistory.setStatusMessage("Kaizen Reject");
+            kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+            kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+            kaizenApprovalHistoryService.create(kaizenApprovalHistory);
+
             request.setAttribute("successMessage",
                     "Information : The request is Reject Successfully.");
 
@@ -505,6 +565,50 @@ public class KaizenMasterController extends KaizenMasterAbstract {
             } catch (Exception e) {
             }
         }
+        if (btnType.equals("OnHold")) {
+
+            kaizenMaster.setStatus(10);
+            kaizenMaster.setUpdatedBy(employeeMaster.getId());
+            kaizenMaster.setUpdatedDate(sdf.format(cDate));
+            kaizenMasterService.update(kaizenMaster);
+
+            KaizenApproval kaizenApproval = new KaizenApproval();
+            kaizenApproval.setKaizenMaster(kaizenMaster);
+            kaizenApproval.setComment(comment);
+            kaizenApproval.setCreatedBy(employeeMaster.getId());
+            kaizenApproval.setCreatedDate(sdf.format(cDate));
+            kaizenApprovalService.create(kaizenApproval);
+
+            KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+            kaizenApprovalHistory.setComment(btnType);
+            kaizenApprovalHistory.setStatus(10);
+            kaizenApprovalHistory.setStatusMessage("Kaizen OnHold");
+            kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+            kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+            kaizenApprovalHistoryService.create(kaizenApprovalHistory);
+
+            request.setAttribute("successMessage",
+                    "Information : The request is OnHold Successfully.");
+
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+                // id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(160);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+        }
 
         mv = kaizenList(request, response);
 
@@ -513,10 +617,15 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
     public ModelAndView kaizenApproval(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+        KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         String id = request.getParameter("id");
         String btnType = request.getParameter("btnType");
         String comment = request.getParameter("comment");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date cDate = new Date();
+
         KaizenMaster kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
         KaizenApproval kaizenApproval = kaizenApprovalService.readByIdAndEmp(kaizenMaster.getId(), employeeMaster.getId());
 
@@ -527,14 +636,22 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         if (btnType.equals("Approve")) {
             if (userLevel == totalLevel) {
                 kaizenMaster.setStatus(5);
-
+                kaizenApprovalHistory.setStatus(5);
             } else {
                 kaizenMaster.setStatus(4);
+                kaizenApprovalHistory.setStatus(4);
                 kaizenMaster.setCurrentLevel(currentLevel + 1);
             }
             kaizenApproval.setComment(comment);
             kaizenMasterService.update(kaizenMaster);
             kaizenApprovalService.update(kaizenApproval);
+
+            kaizenApprovalHistory.setComment(comment);
+            kaizenApprovalHistory.setStatusMessage(btnType);
+            kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+            kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+            kaizenApprovalHistoryService.create(kaizenApprovalHistory);
 
             request.setAttribute("successMessage",
                     "Information : The request is Approved Successfully.");
@@ -561,16 +678,25 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         if (btnType.equals("Recycle")) {
             if (userLevel > 1) {
                 kaizenMaster.setStatus(2);
+                kaizenApprovalHistory.setStatus(2);
                 kaizenMaster.setCurrentLevel(currentLevel - 1);
 
             } else {
                 kaizenMaster.setStatus(2);
+                kaizenApprovalHistory.setStatus(2);
                 kaizenMaster.setCurrentLevel(currentLevel - 1);
 
             }
             kaizenApproval.setComment(comment);
             kaizenMasterService.update(kaizenMaster);
             kaizenApprovalService.update(kaizenApproval);
+
+            kaizenApprovalHistory.setComment(comment);
+            kaizenApprovalHistory.setStatusMessage(btnType);
+            kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+            kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+            kaizenApprovalHistoryService.create(kaizenApprovalHistory);
 
             request.setAttribute("successMessage",
                     "Information : The request is Recycled Successfully.");
@@ -595,10 +721,18 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
         if (btnType.equals("Reject")) {
             kaizenMaster.setStatus(3);
+            kaizenApprovalHistory.setStatus(3);
             kaizenApproval.setComment(comment);
 
             kaizenMasterService.update(kaizenMaster);
             kaizenApprovalService.update(kaizenApproval);
+
+            kaizenApprovalHistory.setComment(comment);
+            kaizenApprovalHistory.setStatusMessage(btnType);
+            kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+            kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+            kaizenApprovalHistoryService.create(kaizenApprovalHistory);
 
             request.setAttribute("successMessage",
                     "Information : The request is Reject Successfully.");
@@ -609,6 +743,42 @@ public class KaizenMasterController extends KaizenMasterAbstract {
                 DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 // id ( Not created id 138) is for Approved User....
                 emailTemplate = emailTemplateService.readById(146);
+                String To = employeeMaster.getEmailAddress();
+                String from = "";
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+        }
+        if (btnType.equals("OnHold")) {
+            kaizenMaster.setStatus(10);
+            kaizenApprovalHistory.setStatus(10);
+            kaizenApproval.setComment(comment);
+
+            kaizenMasterService.update(kaizenMaster);
+            kaizenApprovalService.update(kaizenApproval);
+
+            kaizenApprovalHistory.setComment(comment);
+            kaizenApprovalHistory.setStatusMessage(btnType);
+            kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+            kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+            kaizenApprovalHistoryService.create(kaizenApprovalHistory);
+
+            request.setAttribute("successMessage",
+                    "Information : The request is OnHold Successfully.");
+
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+                // id ( Not created id 138) is for Approved User....
+                emailTemplate = emailTemplateService.readById(160);
                 String To = employeeMaster.getEmailAddress();
                 String from = "";
                 String Subject = emailTemplate.getSubject();

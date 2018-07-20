@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.bul.zydex.dao.thought;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
@@ -14,24 +13,25 @@ import java.util.List;
  *
  * @author Rishi
  */
-public class GalleryDAOImpl<T> extends GenericsDAOImpl<T> implements GalleryDAO<T>  {
+public class GalleryDAOImpl<T> extends GenericsDAOImpl<T> implements GalleryDAO<T> {
 
     @Override
     protected Class getDomainClass() {
         return Gallery.class;
     }
-    
-     @Override
+
+    @Override
     public List<?> readgalleryDetail() {
         String query = "";
         query += " "
                 + " SELECT a.id, a.imagesPath, a.disc"
-                + " FROM Gallery a ";
+                + " FROM Gallery a "
+                + " ORDER BY a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
-    
+
     @Override
     public boolean isExist(String name) {
         boolean flag = false;

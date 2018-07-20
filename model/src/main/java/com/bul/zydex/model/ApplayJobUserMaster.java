@@ -17,17 +17,23 @@ public class ApplayJobUserMaster implements java.io.Serializable {
     private String createdDate;
     private Integer firstTime;
     private Integer profileSubmit;
-    
-    public ApplayJobUserMaster (){
-        
+    private String otp;
+    private Integer statusOtp;
+    private String timeValidity;
+
+    public ApplayJobUserMaster() {
     }
 
-    public ApplayJobUserMaster(Integer id, String userName, String password, String createdDate, Integer firstTime) {
+    public ApplayJobUserMaster(Integer id, String userName, String password, String createdDate, Integer firstTime, Integer profileSubmit, String otp, Integer statusOtp, String timeValidity) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.createdDate = createdDate;
         this.firstTime = firstTime;
+        this.profileSubmit = profileSubmit;
+        this.otp = otp;
+        this.statusOtp = statusOtp;
+        this.timeValidity = timeValidity;
     }
 
     public Integer getId() {
@@ -77,7 +83,30 @@ public class ApplayJobUserMaster implements java.io.Serializable {
     public void setProfileSubmit(Integer profileSubmit) {
         this.profileSubmit = profileSubmit;
     }
-    
 
+    public String getOtp() {
+        return otp;
+    }
+
+    public void setOtp(String otp) {
+        this.otp = otp;
+    }
+
+    public Integer getStatusOtp() {
+        return statusOtp;
+    }
+
+    public void setStatusOtp(Integer statusOtp) {
+        this.statusOtp = statusOtp;
+    }
+
+    public String getTimeValidity() {
+        return timeValidity;
+    }
+
+    public void setTimeValidity(String timeValidity) {
+        this.timeValidity = timeValidity;
+    }
+    
     
 }

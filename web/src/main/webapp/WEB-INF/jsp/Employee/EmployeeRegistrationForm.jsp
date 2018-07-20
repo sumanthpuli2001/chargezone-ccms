@@ -1276,12 +1276,12 @@
                                                 </div>
                                                 <div  class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>PF Amount(By Employee):</label>
+                                                        <label>PF Amount(By Employee Basic Salary):</label>
                                                         <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
                                                         <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>PF Amount(By Employer):</label>
+                                                            <label>PF Amount(By Employer Basic Salary):</label>
                                                         <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
                                                         <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -1397,7 +1397,7 @@
                                                         <table id="ctcTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                             <tr>
                                                                 <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                <th style="text-align: center; vertical-align: middle">Select CTC</th>
+                                                                <th style="text-align: center; vertical-align: middle">Select CTC Component</th>
                                                                 <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
                                                                 <th style="text-align: center; vertical-align: middle">Amount</th>
                                                                 <th style="text-align: center; vertical-align: middle">Taxable</th>

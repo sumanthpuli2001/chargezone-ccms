@@ -204,6 +204,7 @@ public class NoDueMasterController extends NoDueMasterAbstract {
                     }
                     
                 }
+                 noDueMaster.setStatus(2);
                 noDueMasterService.create(noDueMaster);
                 
             }

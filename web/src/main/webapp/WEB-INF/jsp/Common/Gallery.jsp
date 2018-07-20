@@ -113,7 +113,7 @@
         <c:forEach var="gallery" items="${galleryList}">
             <div style="width:22%;margin: 1%;display: inline-block;">
 
-                <img onclick="imageClick(this.src);" style="width: 100%;height:150px;"src="StorageYard/galleryimage/${gallery.imagesPath}"  >
+                <img onclick="imageClick(this.src);" style="width: 100%;height:150px;"src="StorageYard/galleryimage/${gallery[1]}"  >
             </div>
         </c:forEach>
     </div>

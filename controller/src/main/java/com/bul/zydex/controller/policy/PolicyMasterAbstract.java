@@ -12,11 +12,13 @@ import com.bul.zydex.model.EmployeePolicyDetail;
 import com.bul.zydex.model.PolicyCreate;
 import com.bul.zydex.model.PolicyDropDown;
 import com.bul.zydex.model.PolicyMaster;
+import com.bul.zydex.model.PolicyReadHistory;
 import com.bul.zydex.service.EmployeePolicyDetail.EmployeePolicyDetailService;
 import com.bul.zydex.service.Payroll.EmployeeDeductionAmountService;
 import com.bul.zydex.service.policy.PolicyCreateService;
 import com.bul.zydex.service.policy.PolicyDropDownService;
 import com.bul.zydex.service.policy.PolicyMasterService;
+import com.bul.zydex.service.policy.PolicyReadHistoryService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +37,7 @@ public class PolicyMasterAbstract extends CustomAbstract {
     protected EmployeePolicyDetailService<EmployeePolicyDetail> employeePolicyDetailService;
     protected PolicyCreateService<PolicyCreate> policyCreateService;
     protected PolicyDropDownService<PolicyDropDown> policyDropDownService;
+    protected PolicyReadHistoryService<PolicyReadHistory> policyReadHistoryService;
 
     public PolicyMasterService<PolicyMaster> getPolicyMasterService() {
         return policyMasterService;
@@ -83,6 +86,16 @@ public class PolicyMasterAbstract extends CustomAbstract {
     public void setPolicyDropDownService(PolicyDropDownService<PolicyDropDown> policyDropDownService) {
         this.policyDropDownService = policyDropDownService;
     }
+
+    public PolicyReadHistoryService<PolicyReadHistory> getPolicyReadHistoryService() {
+        return policyReadHistoryService;
+    }
+
+    public void setPolicyReadHistoryService(PolicyReadHistoryService<PolicyReadHistory> policyReadHistoryService) {
+        this.policyReadHistoryService = policyReadHistoryService;
+    }
+    
+    
 
     protected void policyList(HttpServletRequest request) {
         PolicyMaster policyMaster = new PolicyMaster();

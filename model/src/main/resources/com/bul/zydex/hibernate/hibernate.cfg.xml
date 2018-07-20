@@ -175,6 +175,8 @@
     <mapping resource="com/bul/zydex/model/ProjectManagementMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/ClientMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/StateMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/PolicyReadHistory.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/KaizenApprovalHistory.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/PriorityMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/CreateTask.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/TaskEmployeeDepartment.hbm.xml"/>

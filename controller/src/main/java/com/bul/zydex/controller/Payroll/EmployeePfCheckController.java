@@ -252,6 +252,15 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
         BufferedWriter w = new BufferedWriter(osw);
         for (int i = 0; i < tempemployeeSalaryDetail.size(); i++) {
             List l = (List) tempemployeeSalaryDetail.get(i);
+            l.remove(2).equals(l);
+            l.remove(2).equals(l);
+            l.remove(2).equals(l);
+            for (int y = 2; y < 9; y++) {
+                if (null != l.get(y)) {
+                    Double l1 = (Double) l.get(y);
+                    l.set(y, String.format("%.0f", l1));
+                }
+            }
             listString = (String) l.stream().map(Object::toString)
                     .collect(Collectors.joining("#~#"));
             w.append(listString);

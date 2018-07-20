@@ -47,6 +47,7 @@
         <form:form action="recruitment.htm?act=budgetdeleteSubmit" method="post" commandName="recruitmentMaster"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <form:hidden path="id"></form:hidden>
+             <input type="hidden" name="name" value="${list[0]}"/>  
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">

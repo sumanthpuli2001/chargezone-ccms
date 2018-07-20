@@ -14,10 +14,15 @@ import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.PolicyCreate;
 import com.bul.zydex.model.PolicyDropDown;
 import com.bul.zydex.model.PolicyMaster;
+import com.bul.zydex.model.PolicyReadHistory;
 import com.bul.zydex.util.DownloadFile;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -197,11 +202,14 @@ public class PolicyMasterController extends PolicyMasterAbstract {
     public ModelAndView newCreateSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PolicyCreate policyCreate = new PolicyCreate();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(policyCreate, "policyCreate");
         bind(request, policyCreate);
         String typePolicy = request.getParameter("policyId1");
         String attachment = request.getParameter("attachment");
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
         PolicyDropDown pdd = policyDropDownService.readById(Integer.parseInt(typePolicy));
 
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -228,6 +236,8 @@ public class PolicyMasterController extends PolicyMasterAbstract {
 
         policyCreate.setPolicyDropDown(pdd);
         policyCreate.setStatus(0);
+        policyCreate.setCreatedDate(sdf.format(cDate));
+        policyCreate.setCreatedBy(employeeMaster.getEmployeeName());
         policyCreateService.create(policyCreate);
         request.setAttribute("successMessage",
                 "Info : Records are create successfully.");
@@ -240,10 +250,16 @@ public class PolicyMasterController extends PolicyMasterAbstract {
     public ModelAndView editClickSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PolicyCreate policyCreate = new PolicyCreate();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(policyCreate, "policyCreate");
         bind(request, policyCreate);
         String typePolicy = request.getParameter("policyId1");
         String attachment = request.getParameter("attachment");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+
+        PolicyCreate ttd = policyCreateService.readById(policyCreate.getId());
 
         PolicyDropDown pdd = policyDropDownService.readById(Integer.parseInt(typePolicy));
 
@@ -271,6 +287,11 @@ public class PolicyMasterController extends PolicyMasterAbstract {
 
         policyCreate.setPolicyDropDown(pdd);
         policyCreate.setStatus(1);
+        policyCreate.setAttachment(attachment);
+        policyCreate.setCreatedDate(ttd.getCreatedDate());
+        policyCreate.setCreatedBy(ttd.getCreatedBy());
+        policyCreate.setUpdatedDate(sdf.format(cDate));
+        policyCreate.setUpdatedBy(employeeMaster.getEmployeeName());
         policyCreateService.update(policyCreate);
         request.setAttribute("successMessage",
                 "Info : Records are updated successfully.");
@@ -289,6 +310,58 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         policyCreate = policyCreateService.readById(Integer.parseInt(id));
         mv.getModel().put("policyCreate", policyCreate);
         mv.setViewName("Policy/EditViewPolicy");
+        return mv;
+    }
+
+    public ModelAndView readViewDasPolicy(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date cDate = new Date();
+        PolicyReadHistory policyReadHistory = new PolicyReadHistory();
+//        PolicyCreate policyCreate = new PolicyCreate();
+        selectEmployee(request, response);
+        policyDropDownList(request);
+        String id = request.getParameter("id");
+        PolicyCreate policyCreate = policyCreateService.readById(Integer.parseInt(id));
+        policyCreate.setStatus(2);
+        policyCreate.setReadBy(employeeMaster.getEmployeeName());
+        policyCreate.setReadDate(sdf.format(cDate));
+        policyCreateService.update(policyCreate);
+
+        policyReadHistory.setPolicyCreate(policyCreate);
+        policyReadHistory.setReaderBy(employeeMaster.getEmployeeName());
+        policyReadHistory.setReaderDate(sdf.format(cDate));
+        policyReadHistory.setPolicyAcept(policyCreate.getAcceptPolicy());
+        policyReadHistory.setPolicyAceptTime(sdf.format(cDate));
+        policyReadHistoryService.create(policyReadHistory);
+
+        mv.getModel().put("policyCreate", policyCreate);
+        mv.setViewName("Policy/ReadViewPolicy");
+        return mv;
+    }
+
+    public ModelAndView policyAccept(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date cDate = new Date();
+//        PolicyCreate policyCreate = new PolicyCreate();
+        selectEmployee(request, response);
+        policyDropDownList(request);
+        String id = request.getParameter("id");
+        PolicyCreate policyCreate = policyCreateService.readById(Integer.parseInt(id));
+        policyCreate.setStatus(3);
+        policyCreate.setAcceptPolicy(1);
+        policyCreate.setAcceptPolicyTime(sdf.format(cDate));
+        policyCreateService.update(policyCreate);
+
+        PolicyReadHistory policyReadHistory = policyReadHistoryService.readByPolicyId(Integer.parseInt(id));
+        policyReadHistory.setPolicyAcept(1);
+        policyReadHistory.setPolicyAceptTime(sdf.format(cDate));
+        policyReadHistoryService.update(policyReadHistory);
+
+        mv = dashboardshowPolicy(request, response);
         return mv;
     }
 
@@ -331,6 +404,38 @@ public class PolicyMasterController extends PolicyMasterAbstract {
 
         DownloadFile downloadFile = new DownloadFile();
         downloadFile.doDownload(request, response);
+    }
+
+    public ModelAndView policyReport(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        PolicyCreate policyCreate = new PolicyCreate();
+
+        List<?> policyListName = policyCreateService.read();
+        Map<Integer, String> poilnm = new HashMap<>();
+        for (Object o : policyListName) {
+            policyCreate = (PolicyCreate) o;
+            poilnm.put(policyCreate.getId(), policyCreate.getName());
+        }
+        mv.getModelMap().put("policyName", poilnm);
+        mv.getModelMap().put("policyCreate", policyCreate);
+        mv.setViewName("Policy/PolicyReport");
+        return mv;
+    }
+
+    public ModelAndView policyReportGet(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+
+        String policyId1 = request.getParameter("policyId1");
+        PolicyCreate policyCreate = new PolicyCreate();
+        List<?> policylist = policyReadHistoryService.readPolicyId(Integer.parseInt(policyId1));
+        request.setAttribute("list", policylist);
+        mv.getModelMap().put("policyCreate", policyCreate);
+        mv = policyReport(request, response);
+        return mv;
     }
 
 }

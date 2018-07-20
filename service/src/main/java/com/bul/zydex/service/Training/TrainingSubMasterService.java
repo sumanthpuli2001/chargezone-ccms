@@ -15,4 +15,6 @@ import java.util.List;
 public interface TrainingSubMasterService<T> extends GenericsService<T> {
     
     public List<?> ListeventDates(String eventDate);
+    
+    public List<?> deletetrainingId(String trainingId);
 }

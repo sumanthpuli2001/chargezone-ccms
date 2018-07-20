@@ -7,6 +7,7 @@ package com.bul.zydex.controller.CandidateF2F;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.CandidateApplyJob;
+import com.bul.zydex.model.CandidateApplyJob2;
 import com.bul.zydex.model.CandidateF2FApproval;
 import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
@@ -18,6 +19,7 @@ import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.CandidateF2FApproval.CandidateF2FApprovalService;
 import com.bul.zydex.service.CandidateF2FRequest.CandidateF2FRequestService;
+import com.bul.zydex.service.CandidateJobApply.CandidateApplyJob2Service;
 import com.bul.zydex.service.CandidateJobApply.CandidateJobApplyService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.Recruitment.JobtypeMasterService;
@@ -43,6 +45,7 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
     protected MprMasterService<MprMaster> mprMasterService;
     protected RecruitmentService<RecruitmentMaster> recruitmentService;
     protected MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService;
+     protected CandidateApplyJob2Service<CandidateApplyJob2> candidateApplyJob2Service;
 
     public RecruitmentService<RecruitmentMaster> getRecruitmentService() {
         return recruitmentService;
@@ -122,6 +125,14 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
 
     public void setMprApprovalHistoryService(MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService) {
         this.mprApprovalHistoryService = mprApprovalHistoryService;
+    }
+
+    public CandidateApplyJob2Service<CandidateApplyJob2> getCandidateApplyJob2Service() {
+        return candidateApplyJob2Service;
+    }
+
+    public void setCandidateApplyJob2Service(CandidateApplyJob2Service<CandidateApplyJob2> candidateApplyJob2Service) {
+        this.candidateApplyJob2Service = candidateApplyJob2Service;
     }
 
     

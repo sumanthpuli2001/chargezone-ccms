@@ -714,6 +714,12 @@
     <bean id="stateMasterService1" class="com.bul.zydex.service.ProjectManagement.StateMasterServiceImpl">
         <property name="stateMasterDAO" ref="stateMasterDAO1" />
     </bean> 
+    <bean id="policyReadHistoryService1" class="com.bul.zydex.service.policy.PolicyReadHistoryServiceImpl">
+        <property name="policyReadHistoryDAO" ref="policyReadHistoryDAO1" />
+    </bean> 
+    <bean id="kaizenApprovalHistoryService1" class="com.bul.zydex.service.Kaizen.KaizenApprovalHistoryServiceImpl">
+        <property name="kaizenApprovalHistoryDAO" ref="kaizenApprovalHistoryDAO1" />
+    </bean> 
     <bean id="priorityMasterService1" class="com.bul.zydex.service.ProjectManagement.PriorityMasterServiceImpl">
         <property name="priorityMasterDAO" ref="priorityMasterDAO1" />
     </bean> 

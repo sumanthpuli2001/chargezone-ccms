@@ -16,6 +16,7 @@
         var tempCount3 = 1;
         $(function () {
             $("#policyCloneid").on("click", function () {
+                var rowCount = $('table#policyTable tr:last').index() + 1;
                 tempCount3++;
                 //                alert(tempCount3);
                 var clone = "<tr id='addmoreFile" + tempCount3 + "' >"
@@ -23,7 +24,7 @@
                         + "<td id=\"policyTd" + tempCount3 + "\"><div><input type=\"text\" id='policyId" + tempCount3 + "' name='policyId" + tempCount3 + "' class=\"form-control\" >"
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
-                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "' value=" + tempCount3 + " readonly=\"true\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "' value=" + (parseInt(rowCount)) + " readonly=\"true\" class=\"form-control\"></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -39,7 +40,6 @@
                     noResultsText: "No Result",
                     tokenLimit: "1",
                     searchingText: "Searching ... .. .",
-                    prePopulate: ${preList}
                 });
 //                var expenseType = document.getElementById('expenseType').value;
                 addAPolicy(tempCount3);
@@ -62,11 +62,14 @@
 
         function removePolicy(policyDiv) {
             try {
-                tempCount3--;
+//                tempCount3--;
+//                alert(tempCount);
                 var val = document.getElementById("policyCount").value;
                 val = val - 1;
+//                alert(val);
                 document.getElementById("policyCount").value = val;
                 var element1 = document.getElementById(policyDiv);
+//                alert(element1.parentNode);
                 element1.parentNode.removeChild(element1);
             } catch (e) {
 
@@ -97,11 +100,11 @@
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
                                 <form:form class="form-horizontal" method="post"
-                                           commandName="approvalMaster" action="approval.htm?act=submitApproval" onsubmit="return saveSubmit()" >
-                                    <form:hidden path="id"></form:hidden>
+                                           commandName="approvalMaster" action="approval.htm?act=editSubmit" onsubmit="return saveSubmit()" >
+                                    <form:hidden name="id" path="id"></form:hidden>
                                         <div class="col-sm-4"><span style="color: red;font-size: 12px;"></span>
                                             <label>Approval Name:<span style="color: red;font-size: 12px;"></span></label>
-                                             <form:input path="name" class="form-control" placeholder="Number Of Position"></form:input>
+                                            <form:input path="name" class="form-control" placeholder="Number Of Position"></form:input>
                                             <span  id="monthError" cssClass="errorDiv"></span>
                                         </div>
 
@@ -117,34 +120,30 @@
                                                     <table id="policyTable" class="table table-bordered table-striped table-hover" style="margin-top: 10px" align="Center"  >
                                                         <tr>
                                                             <!--<th style="text-align: center; vertical-align: middle;width: 5%"></th>-->
-                                                            <th style="text-align: center; vertical-align: middle">User Name</th>
-                                                            <th style="text-align: center; vertical-align: middle">Level</th>
+                                                            <th style="text-align: center; vertical-align: middle;">Approval User</th>
+                                                            <!--<th style="text-align: center; vertical-align: middle">Level</th>-->
                                                             <!--<th style="text-align: center; vertical-align: middle">Amount</th>-->
-                                                            <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                            <!--<th style="text-align: center; vertical-align: middle">Add New</th>-->
+                                                        <input type="hidden" name="policyNumber1" id="policyNumber1" value="1"/>
                                                         <input type="hidden" name="policyCount" id="policyCount" value="1"/>
                                                         </tr>
                                                         <tr>
-                                                            <!--<td style="text-align: center"></td>-->
                                                             <td id="policyTd1"><div>
                                                                     <input type="text" name="policyId1" id="policyId1" class="form-control"/>
                                                                     <errors id="policyerror" cssClass="errorDiv"></errors>
-                                                                    <!--                                                                <select  name="policyId1" id="policyId1" class="form-control">
-                                                                                                                                        <option value="" label="-- Select --"></option>
-                                                                                                                                        <options items="${policyId1}"></options>
-                                                                                                                                    </select>-->
-                                                            </div>
-                                                            <span id="policyError1" style="color: red;"></span>
-                                                        </td>
-                                                        <td style="text-align: center">
-                                                            <input type="text"  name="policyNumber1" id="policyNumber1" value="${approvalUser.level}" readonly="true"class="form-control">
-                                                        </td>
+                                                                </div>
+                                                                <span id="policyError1" style="color: red;"></span>
+                                                            </td>
+<!--                                                            <td style="text-align: center">
+                                                            <input type="text"  name="policyNumber1" id="policyNumber1" value="" readonly="true"class="form-control">
+                                                            </td>
 
-                                                        <td style="text-align: center">
-                                                            <span style='margin-top: 5px;'>
-                                                                <input type="button" value="+" id="policyCloneid" />
-                                                            </span>
-                                                        </td>
-                                                    </tr>
+                                                            <td style="text-align: center">
+                                                                <span style='margin-top: 5px;'>
+                                                                    <input type="button" value="+" id="policyCloneid" />
+                                                                </span>
+                                                            </td>-->
+                                                        </tr>
                                                 </table>
                                             </div>
                                         </div>
@@ -173,40 +172,36 @@
             </div><!-- /.col -->
         </section>
     </div>
-<script>
-    jQuery.noConflict();
-    jQuery(document).ready(function () {
+    <script>
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
+            jQuery("#policyId1").tokenInput(${list}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
+                searchingText: "Searching ... .. .",
+                prePopulate: ${preList1}
+            });
+        });</script>
+    <script>
+        var flag3 = true;
+        function saveSubmit() {
+            //        if (document.getElementById("name").value === "") {
+            //
+            //            document.getElementById("monthError").innerHTML = "- It must be filled.";
+            //            flag3 = false;
+            //        }
+            //            alert(document.getElementById("month").value);
+            if (document.getElementById("policyId1").value === "") {
 
-        jQuery("#policyId1").tokenInput(${list}, {
-            preventDuplicates: true,
-            noResultsText: "No Result",
-            tokenLimit: "1",
-            searchingText: "Searching ... .. .",
-            prePopulate: ${preList}
-        });
-    });
-
-</script>
-<script>
-    var flag3 = true;
-    function saveSubmit() {
-//        if (document.getElementById("name").value === "") {
-//
-//            document.getElementById("monthError").innerHTML = "- It must be filled.";
-//            flag3 = false;
-//        }
-//            alert(document.getElementById("month").value);
-        if (document.getElementById("policyId1").value === "") {
-
-            document.getElementById("policyerror").innerHTML = "- It must be filled.";
-            flag3 = false;
+                document.getElementById("policyerror").innerHTML = "- It must be filled.";
+                flag3 = false;
+            }
+            else {
+                return true;
+            }
+            return false;
         }
-        else {
-            return true;
-        }
-        return false;
-    }
-</script>
+    </script>
 
-<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

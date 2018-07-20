@@ -32,5 +32,10 @@ public class TrainingSubMasterServiceImpl<T> extends GenericsServiceImpl<T> impl
         return trainingSubMasterDAO.ListeventDates(eventDate);
     }
 
+    @Override
+    public List<?> deletetrainingId(String trainingId) {
+         return trainingSubMasterDAO.deletetrainingId(trainingId);
+    }
+
     
 }

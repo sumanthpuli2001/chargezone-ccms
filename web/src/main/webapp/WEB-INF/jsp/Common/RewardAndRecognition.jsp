@@ -119,7 +119,7 @@
 
             <div style="width:22%;margin: 1%;display: inline-block;">
 
-                <img onclick="imageClick(this.src);" style="width: 100%;height:150px;"src="StorageYard/RandRimage/${rr.imagesPath}"  >
+                <img onclick="imageClick(this.src);" style="width: 100%;height:150px;"src="StorageYard/RandRimage/${rr[1]}"  >
             </div>
         </c:forEach>
     </div>

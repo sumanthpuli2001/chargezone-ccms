@@ -1,9 +1,4 @@
-<%-- 
-    Document   : viewMyProject
-    Created on : Jul 20, 2018, 12:32:06 PM
-    Author     : Aman
---%>
-
+ 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,9 +9,9 @@
         <title>View Project</title>
         <script>
             function viewClick(id) {
-                window.location = 'projectManagement.htm?act=createTask&projectId=' + id;
+                window.location = 'projectManagement.htm?act=viewTask&taskId=' + id;
             }
-
+            
             function deleteCheck11() {
                 var checkboxes = confirm("Are you sure you want to delete?");
                 if (checkboxes) {
@@ -141,6 +136,83 @@
                                 <c:forEach var="list" items="${attachementList}">
                                     <a href="${list[0]}">${list[1]}</a><br>
                                 </c:forEach>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="box-body no-padding">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="table table-bordered">
+                                <table class="table table-bordered table-striped table-hover" >
+                                    <c:choose>
+                                        <c:when test="${empty list}">
+                                            <tr>
+                                                <td align="center">
+                                                    <c:out value="There is no Task found."></c:out>
+                                                    </td>
+                                                </tr>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <thead>
+                                                <tr>
+                                                    <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                    <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
+                                                        <%--</c:if>--%>
+                                                    <th style="width: 50px;">Task Name</th>
+                                                    <th style="width: 50px;">Task % Completed</th>
+                                                    <!--<th style="width: 50px;">Priority</th>-->
+                                                    <th style="width: 50px;">Planned Start</th>
+                                                    <th style="width: 50px;">Planned Finish</th>
+                                                    <th style="width: 50px;">Action</th>
+
+                                                </tr>
+                                            </thead>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <tbody>
+                                        <c:forEach var="list" items="${list}">
+                                            <tr>
+                                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                <!--<td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list}"/></td>-->
+                                                    <%--</c:if>--%>
+                                                <!--<td>/</td>-->
+                                                <td>${list.name}</td>
+                                                <td>${list.taskCompleted}</td>
+                                                <td>${list.plannedStart}</td>
+                                                <td>${list.plannedFinish}</td>
+                                                <!--<td></td>-->
+                                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Action <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" >
+                                                            <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+
+                                                            <li style="width: 100px;">
+                                                                <a href="#"
+                                                                   onclick="viewClick(${list.id});">
+                                                                    &nbsp;&nbsp;View
+                                                                </a>
+                                                            </li>
+<!--                                                            <li style="width: 100px;">
+                                                                <a href="#"
+                                                                   onclick="editTask('${list.id}', '${projectManagement.id}');">
+                                                                    &nbsp;&nbsp;Edit
+                                                                </a>
+                                                            </li>-->
+                                                            <%--</c:if>--%>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                                <%--</c:if>--%>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

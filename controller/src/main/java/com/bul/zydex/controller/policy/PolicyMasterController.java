@@ -329,13 +329,12 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         policyCreate.setReadDate(sdf.format(cDate));
         policyCreateService.update(policyCreate);
 
-        policyReadHistory.setPolicyCreate(policyCreate);
-        policyReadHistory.setReaderBy(employeeMaster.getEmployeeName());
-        policyReadHistory.setReaderDate(sdf.format(cDate));
-        policyReadHistory.setPolicyAcept(policyCreate.getAcceptPolicy());
-        policyReadHistory.setPolicyAceptTime(sdf.format(cDate));
-        policyReadHistoryService.create(policyReadHistory);
-
+//        policyReadHistory.setPolicyCreate(policyCreate);
+//        policyReadHistory.setReaderBy(employeeMaster.getEmployeeName());
+//        policyReadHistory.setReaderDate(sdf.format(cDate));
+//        policyReadHistory.setPolicyAcept(policyCreate.getAcceptPolicy());
+//        policyReadHistory.setPolicyAceptTime(sdf.format(cDate));
+//        policyReadHistoryService.create(policyReadHistory);
         mv.getModel().put("policyCreate", policyCreate);
         mv.getModel().put("employeeMaster", employeeMaster);
         mv.setViewName("Policy/ReadViewPolicy");
@@ -358,10 +357,16 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         policyCreate.setAcceptByPolicyId(employeeMaster.getId());
         policyCreateService.update(policyCreate);
 
-        PolicyReadHistory policyReadHistory = policyReadHistoryService.readByPolicyId(Integer.parseInt(id));
+        PolicyReadHistory policyReadHistory = new PolicyReadHistory();
+//        policyReadHistory.setPolicyAcept(1);
+//        policyReadHistory.setPolicyAceptTime(sdf.format(cDate));
+//        policyReadHistoryService.update(policyReadHistory);
+        policyReadHistory.setPolicyCreate(policyCreate);
+        policyReadHistory.setReaderBy(employeeMaster.getEmployeeName());
+        policyReadHistory.setReaderDate(sdf.format(cDate));
         policyReadHistory.setPolicyAcept(1);
         policyReadHistory.setPolicyAceptTime(sdf.format(cDate));
-        policyReadHistoryService.update(policyReadHistory);
+        policyReadHistoryService.create(policyReadHistory);
 
         mv = dashboardshowPolicy(request, response);
         return mv;
@@ -433,10 +438,15 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         ModelAndView mv = new ModelAndView();
 
         String policyId1 = request.getParameter("policyId1");
-        PolicyCreate policyCreate = new PolicyCreate();
-        List<?> policylist = policyReadHistoryService.readPolicyId(Integer.parseInt(policyId1));
-        request.setAttribute("list", policylist);
-        mv.getModelMap().put("policyCreate", policyCreate);
+        if (policyId1 != "") {
+            PolicyCreate policyCreate = new PolicyCreate();
+            List<?> policylist = policyReadHistoryService.readPolicyId(Integer.parseInt(policyId1));
+            request.setAttribute("list", policylist);
+            mv.getModelMap().put("policyCreate", policyCreate);
+        } else {
+            request.setAttribute("failureMessage",
+                    "Info : Please Select Policy Type.");
+        }
         mv = policyReport(request, response);
         return mv;
     }

@@ -163,6 +163,8 @@ public class ProjectManagementController extends ProjectManagementAbstract {
     public ModelAndView viewMyProject(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         int projectId = Integer.parseInt(request.getParameter("projectId"));
+        int taskId = Integer.parseInt(request.getParameter("taskId"));
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         ProjectManagementMaster projectManagementMaster = projectManagementService.readById(projectId);
         ClientMaster clientMaster = clientMasterService.readById(projectManagementMaster.getClientMaster().getId());
         StateMaster stateMaster = stateMasterService.readById(projectManagementMaster.getStateMaster().getId());
@@ -188,12 +190,14 @@ public class ProjectManagementController extends ProjectManagementAbstract {
             }
         } catch (Exception e) {
         }
+        List<?> list = createTaskService.read();
         request.setAttribute("projectManagement", projectManagementMaster);
         request.setAttribute("clientMaster", clientMaster);
         request.setAttribute("stateMaster", stateMaster);
         request.setAttribute("priorityMaster", priorityMaster);
         request.setAttribute("workLocation", workLocation);
         request.setAttribute("employeeMaster", employeeMaster);
+        request.setAttribute("list", list);
         mv.setViewName("ProjectManagement/viewMyProject");
         return mv;
     }

@@ -17,5 +17,6 @@ public interface CreateTaskService<T>extends GenericsService<T>{
     public List<?> readTaskList(String id);
 
     public List<?> deleteTask(String createTaskId);
+
     
 }

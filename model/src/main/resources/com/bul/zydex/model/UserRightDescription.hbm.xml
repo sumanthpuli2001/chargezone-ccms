@@ -208,5 +208,8 @@
         <property name="policyViewDetail" type="string">
             <column name="policy_view_detail" length="65535" />
         </property>
+        <property name="esicChalan" type="string">
+            <column name="esic_chalan" length="65535" />
+        </property>
     </class>
 </hibernate-mapping>

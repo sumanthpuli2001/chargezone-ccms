@@ -738,4 +738,7 @@
     <bean id="dynamicApprovalSettingEmailService1" class="com.bul.zydex.service.Approval.DynamicApprovalSettingEmailServiceImpl">
         <property name="dynamicApprovalSettingEmailDAO" ref="dynamicApprovalSettingEmailDAO1" />
     </bean>
+     <bean id="eSICMasterService1" class="com.bul.zydex.service.PayrollESIC.ESICMasterServiceImpl">
+        <property name="eSICMasterDAO" ref="eSICMasterDAO1" />
+    </bean>
 </beans>

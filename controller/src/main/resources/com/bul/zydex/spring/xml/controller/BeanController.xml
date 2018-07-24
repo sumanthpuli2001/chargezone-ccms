@@ -1323,5 +1323,8 @@
         <property name="zydexLocationMasterService" ref="zydexLocationMasterService1"/>
         <property name="projectManagementService" ref="projectManagementService1"/>
     </bean>
+    <bean id="payrollESICController1" class="com.bul.zydex.controller.Payroll.PayrollESICController" parent="controllerConfig">
+        <property name="eSICMasterService" ref="eSICMasterService1" />
+    </bean>
 </beans>
  

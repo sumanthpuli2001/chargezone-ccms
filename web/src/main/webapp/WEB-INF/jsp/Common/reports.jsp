@@ -186,6 +186,13 @@
                                                 </a>
                                             </c:if>
                                         </div>
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.esicChalan}">
+                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"   href="payrollESIC.htm?act=esicChalan&search=none">
+                                                    ESIC Chalan
+                                                </a>
+                                            </c:if>
+                                        </div>
 
                                     </div>
                                     <br>
@@ -231,21 +238,21 @@
                             <div class="box-body"> 
                                 <div class="tab-content">
                                     <div class="row">
-                                  
-                                                <div class="col-xs-4 col-sm-4 col-md-4">
-                                                    <c:if test="${sessionScope.userRight.searchTravelReques}">
-                                                        <a  style="font-size: 14px;text-align: left;color: #2c3e50;"href="travelRequestMaster.htm?act=viewRequestAdminSubmit">
-                                                            Search Travel Request 
-                                                        </a>
-                                                    </c:if>
-                                                </div>
-                                                <div  class="col-xs-4 col-sm-4 col-md-4">
-                                                    <c:if test="${sessionScope.userRight.searchExpenseRequest}">
-                                                        <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="expenseMaster.htm?act=searchExpenseRequest">
-                                                            Search Expense Request
-                                                        </a>
-                                                    </c:if>
-                                                </div>
+
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.searchTravelReques}">
+                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"href="travelRequestMaster.htm?act=viewRequestAdminSubmit">
+                                                    Search Travel Request 
+                                                </a>
+                                            </c:if>
+                                        </div>
+                                        <div  class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.searchExpenseRequest}">
+                                                <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="expenseMaster.htm?act=searchExpenseRequest">
+                                                    Search Expense Request
+                                                </a>
+                                            </c:if>
+                                        </div>
                                     </div>
                                     <br>
                                 </div>
@@ -348,9 +355,9 @@
                                     <div class="row">
                                         <div class="col-xs-4 col-sm-4 col-md-4">
                                             <c:if test="${sessionScope.userRight.policyViewDetail}">
-                                            <a  style="font-size: 14px;text-align: left;color: #2c3e50;" href="policyMaster.htm?act=policyReport">
-                                                 Policy Report View
-                                            </a>
+                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;" href="policyMaster.htm?act=policyReport">
+                                                    Policy Report View
+                                                </a>
                                             </c:if>
                                         </div>
                                     </div>

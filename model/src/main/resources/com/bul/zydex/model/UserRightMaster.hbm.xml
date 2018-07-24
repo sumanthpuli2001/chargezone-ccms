@@ -203,5 +203,8 @@
         <property name="policyViewDetail" type="java.lang.Boolean">
             <column name="policy_view_detail" />
         </property>
+        <property name="esicChalan" type="java.lang.Boolean">
+            <column name="esic_chalan" />
+        </property>
     </class>
 </hibernate-mapping>

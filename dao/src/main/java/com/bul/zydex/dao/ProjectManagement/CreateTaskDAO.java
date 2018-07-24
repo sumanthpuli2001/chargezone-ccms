@@ -17,5 +17,6 @@ public interface CreateTaskDAO<T>extends GenericsDAO<T>{
     public List<?> readTaskList(String id);
 
     public List<?> deleteTask(String createTaskId);
+
     
 }

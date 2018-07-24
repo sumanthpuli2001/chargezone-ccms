@@ -13,9 +13,9 @@
     <head> 
         <title>TASK LIST </title>
         <script>
-            function viewClick(id) {
+            function viewClick(projectId,taskId) {
 //            window.location = 'employeeMaster.htm?act=viewClick&id=' + id;
-                window.location = 'trainingType.htm?act=edittraining&id=' + id;
+                window.location = 'projectManagement.htm?act=viewMyProject&projectId=' + projectId + '&taskId=' + taskId;
             }
 
             function deleteCheck11() {
@@ -118,9 +118,9 @@
 
                                                                             <li style="width: 100px;">
                                                                                 <a href="#"
-                                                                                   onclick="viewClick(${list[2]});">
+                                                                                   onclick="viewClick('${list[2]}','${list[1]}');">
                                                                                     <!--onclick="viewClick($//{list[0]},$//{list[1]});">-->
-                                                                                    &nbsp;&nbsp;Edit
+                                                                                    &nbsp;&nbsp;View
                                                                                 </a>
                                                                             </li>
                                                                             <%--</c:if>--%>

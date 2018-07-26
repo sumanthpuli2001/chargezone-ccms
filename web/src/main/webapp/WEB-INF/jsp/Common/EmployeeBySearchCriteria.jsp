@@ -56,7 +56,7 @@
                                                     <option value="employee">Employee Information</option>
                                                     <option value="leave">Leave Information</option>
                                                     <option value="attendance">Attendance Information</option>
-                                                    <option value="probation">Probation To Confirmation </option>
+                                                    <option value="probation">Probation To Confirmation</option>
                                                     <option value="expense">Expense Information</option>
                                                     <option value="training">Training Information</option>
                                                     <option value="recruitment">Recruitment Information</option>
@@ -418,14 +418,14 @@
                                                             </script>
                                                         </form:form>    
                                                         </div>
-                                                        <div class="col-sm-12 leave showBox">You have selected <strong>green option</strong> so i am here
+                                                        <div class="col-sm-12 leave showBox">You have selected <strong>Leave Information</strong> so i am here
 
                                                         </div>
-                                                        <div class="col-sm-12 attendance showBox">You have selected <strong>blue option</strong> so i am here</div>        
-                                                        <div class="col-sm-12 probation showBox">You have selected <strong>brown option</strong> so i am here</div>        
-                                                        <div class="col-sm-12 expense showBox">You have selected <strong>black option</strong> so i am here</div>        
-                                                        <div class="col-sm-12 training showBox">You have selected <strong>yellow option</strong> so i am here</div>        
-                                                        <div class="col-sm-12 recruitment showBox">You have selected <strong>violet option</strong> so i am here</div>        
+                                                        <div class="col-sm-12 attendance showBox">You have selected <strong>Attendance Information</strong> so i am here</div>        
+                                                        <div class="col-sm-12 probation showBox">You have selected <strong>Probation To Confirmation</strong> so i am here</div>        
+                                                        <div class="col-sm-12 expense showBox">You have selected <strong>Expense Information</strong> so i am here</div>        
+                                                        <div class="col-sm-12 training showBox">You have selected <strong>Training Information</strong> so i am here</div>        
+                                                        <div class="col-sm-12 recruitment showBox">You have selected <strong>Recruitment Information</strong> so i am here</div>        
                                                         </div>
                                                         </div><!-- /.col -->
                                                         </div><!-- /.row -->

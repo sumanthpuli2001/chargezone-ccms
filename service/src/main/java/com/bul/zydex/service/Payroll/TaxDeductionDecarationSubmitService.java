@@ -40,4 +40,6 @@ public interface TaxDeductionDecarationSubmitService<T> extends GenericsService<
     public List<?> readTaxDeductionDecarationSubmitSalaryGenerateAfterDate(int taxSavingSubmitID);
 
     public List<?> readTaxDeductionDecarationSubmitSalaryGenerateTaxSavingLimit(int taxSavingSubmitID);
+
+    public List<?> readComponentAmountByEmployeeId(int eId, int fId);
 }

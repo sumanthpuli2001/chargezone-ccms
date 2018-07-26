@@ -106,6 +106,7 @@ public class TaxDeductionDecarationSubmitDAOImpl<T> extends GenericsDAOImpl<T> i
 //                + " AND STR_TO_DATE(a.startDateTime,'%d/%m/%Y %H:%i') BETWEEN STR_TO_DATE('" + poolCarRequest.getStartDateTime() + " 00:00','%d/%m/%Y %H:%i') AND STR_TO_DATE('" + poolCarRequest.getEndDateTime() + " 00:00','%d/%m/%Y %H:%i')";
         return getHibernateTemplate().find(query);
     }
+
     public List<?> readForStatusOne() {
         String query = "SELECT a.amountTaxDecaration, b.component, c.section"
                 + " FROM TaxDeductionDeclarationSubmit a "
@@ -150,14 +151,13 @@ public class TaxDeductionDecarationSubmitDAOImpl<T> extends GenericsDAOImpl<T> i
         return list;
     }
 
-
     @Override
     public List<?> readPendingByEmployeeId(int eid) {
         String query = " SELECT a.id, a.actionStatus, b.id, c.id "
-                     + " FROM TaxDeductionDecarationSubmit a "
-                     + " LEFT JOIN a.taxSavingSubmit b "
-                     + " LEFT JOIN b.employeeMaster c "
-                     + " WHERE a.actionStatus = 0 and c.id = " + eid;
+                + " FROM TaxDeductionDecarationSubmit a "
+                + " LEFT JOIN a.taxSavingSubmit b "
+                + " LEFT JOIN b.employeeMaster c "
+                + " WHERE a.actionStatus = 0 and c.id = " + eid;
         List list = getHibernateTemplate().find(query);
         return list;
     }
@@ -165,13 +165,26 @@ public class TaxDeductionDecarationSubmitDAOImpl<T> extends GenericsDAOImpl<T> i
     @Override
     public List<?> readApproveByTaxSavingId(int savingid) {
         String query = " SELECT a.actionStatus "
-                     + " FROM TaxDeductionDecarationSubmit a "
-                     + " LEFT JOIN a.taxSavingSubmit b "
-                     + " WHERE a.actionStatus in(0,2,3) and b.id = " + savingid;
+                + " FROM TaxDeductionDecarationSubmit a "
+                + " LEFT JOIN a.taxSavingSubmit b "
+                + " WHERE a.actionStatus in(0,2,3) and b.id = " + savingid;
         List list = getHibernateTemplate().find(query);
         return list;
     }
 
+    @Override
+    public List<?> readComponentAmountByEmployeeId(int eId, int fId) {
+        String query = "";
+        query += " SELECT c.section, d.component, b.amountTaxDecaration"
+                + " FROM TaxDeductionDecarationSubmit b "
+                + " LEFT JOIN b.taxSavingSubmit a "
+                + " LEFT JOIN b.payrollTaxDeductionMaster c "
+                + " LEFT JOIN b.payrollTaxDeductionComponent d "
+                + " WHERE b.actionStatus = 1 AND"
+                + " a.employeeMaster.id = " + eId
+                + " AND a.payrollFinancialYear.id = " + fId;
+        List list = getHibernateTemplate().find(query);
+        return list;
+    }
 
 }
-

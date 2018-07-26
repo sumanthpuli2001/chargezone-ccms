@@ -230,6 +230,7 @@
                                         <li><a href="shiftRotationMaster.htm?act=employeeDataSearch2"><i class="fa fa-circle-o"></i> Employee Attendance Report</a></li>
                                         <li><a href="shiftRotationMaster.htm?act=employeeAttandanceDataSearch"><i class="fa fa-circle-o"></i> Monthly Attendance Report  </a></li>
                                         <li><a href="shiftRotationMaster.htm?act=employeePresentSearch"><i class="fa fa-circle-o"></i>Daily Present Report</a></li>
+                                        <li><a href="shiftRotationMaster.htm?act=employeeDataOTSearch"><i class="fa fa-circle-o"></i>OT Report</a></li>
                                         <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>
                                         <!--<li><a href="shiftRotationMaster.htm?act=employeeManualPunch"><i class="fa fa-circle-o"></i>Manual Punch</a></li>-->
                                     </c:if>

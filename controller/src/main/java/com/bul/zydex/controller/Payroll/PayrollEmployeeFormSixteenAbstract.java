@@ -9,6 +9,7 @@ import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.AdditionalAmountCheck;
 import com.bul.zydex.model.EmployeeAdditionalSalary;
 import com.bul.zydex.model.EmployeeDeductionAmount;
+import com.bul.zydex.model.EmployeePolicyDetail;
 import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeTypeMaster;
@@ -29,6 +30,7 @@ import com.bul.zydex.model.PayrollTaxDeductionMaster;
 import com.bul.zydex.model.TaxDeductionDecarationSubmit;
 import com.bul.zydex.model.TaxSavingSubmit;
 import com.bul.zydex.model.ZydexLocationMaster;
+import com.bul.zydex.service.EmployeePolicyDetail.EmployeePolicyDetailService;
 import com.bul.zydex.service.Payroll.AdditionalAmountCheckService;
 import com.bul.zydex.service.Payroll.EmployeeAdditionalSalaryService;
 import com.bul.zydex.service.Payroll.EmployeeDeductionAmountService;
@@ -88,6 +90,15 @@ public class PayrollEmployeeFormSixteenAbstract extends CustomAbstract {
     protected PayrollTaxDeductionComponentService<PayrollTaxDeductionComponent> payrollTaxDeductionComponentService;
     protected TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> taxDeductionDecarationSubmitService;
     protected TaxSavingSubmitService<TaxSavingSubmit> taxSavingSubmitService;
+    protected EmployeePolicyDetailService<EmployeePolicyDetail> employeePolicyDetailService;
+
+    public EmployeePolicyDetailService<EmployeePolicyDetail> getEmployeePolicyDetailService() {
+        return employeePolicyDetailService;
+    }
+
+    public void setEmployeePolicyDetailService(EmployeePolicyDetailService<EmployeePolicyDetail> employeePolicyDetailService) {
+        this.employeePolicyDetailService = employeePolicyDetailService;
+    }    
 
     public TaxDeductionDecarationSubmitService<TaxDeductionDecarationSubmit> getTaxDeductionDecarationSubmitService() {
         return taxDeductionDecarationSubmitService;

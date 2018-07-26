@@ -42,4 +42,7 @@ public interface EmployeeDeductionAmountService<T> extends GenericsService<T> {
     public List<?> fetchsalary(int edaId, String eftDate, String relivDate);
 
     public List<?> readEmployeeTdsAmount(int employeeMasterID, String startDate, String endate);
+    
+    public List<?> readEmployeeTdsAmountWithMonth(int employeeMasterID, String startDate, String endate);
+    
 }

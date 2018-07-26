@@ -191,5 +191,20 @@
         <property name="formSixteen" type="java.lang.Boolean">
             <column name="form_sixteen" />
         </property>
+        <property name="travelManagementRights" type="java.lang.Boolean">
+            <column name="travel_management_rights" />
+        </property>
+        <property name="expenseRequestRights" type="java.lang.Boolean">
+            <column name="expense_request_rights" />
+        </property>
+        <property name="hrFtFApproval" type="java.lang.Boolean">
+            <column name="hr_ftf_approval" />
+        </property>
+        <property name="policyViewDetail" type="java.lang.Boolean">
+            <column name="policy_view_detail" />
+        </property>
+        <property name="esicChalan" type="java.lang.Boolean">
+            <column name="esic_chalan" />
+        </property>
     </class>
 </hibernate-mapping>

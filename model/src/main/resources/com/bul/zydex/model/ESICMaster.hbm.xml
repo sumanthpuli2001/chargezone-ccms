@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+  <class name="com.bul.zydex.model.ESICMaster" table="esic_master" catalog="hr_power_astral">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="bankName" type="string">
+            <column name="bank_name" length="45" />
+        </property>
+        <property name="companyName" type="string">
+            <column name="company_name" length="45" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="45" />
+        </property>
+        <property name="employeeCodeNo" type="string">
+            <column name="employee_code_no" length="45" />
+        </property>
+ 
+    </class>
+  
+
+</hibernate-mapping>

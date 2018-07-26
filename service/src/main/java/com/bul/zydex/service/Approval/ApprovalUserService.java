@@ -24,4 +24,8 @@ public interface ApprovalUserService<T> extends GenericsService<T> {
 
     public List<?> approvaldelete(String apid);
 
+    public List<?> readByApId(int id);
+
+    public List<?> readApprovalUser(String approvalMasterId);
+
 }

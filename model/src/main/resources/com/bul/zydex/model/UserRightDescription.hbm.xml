@@ -196,5 +196,20 @@
         <property name="govtFormatPfDescription" type="string">
             <column name="`govt_Format_PF-description`" length="65535" />
         </property>
+        <property name="travelManagementRightsDescription" type="string">
+            <column name="travel_management_rights_description" length="65535" />
+        </property>
+        <property name="expenseRequestRightsDescription" type="string">
+            <column name="expense_request_rights_description" length="65535" />
+        </property>
+        <property name="hrFtFApproval" type="string">
+            <column name="hr_ftf_approval" length="65535" />
+        </property>
+        <property name="policyViewDetail" type="string">
+            <column name="policy_view_detail" length="65535" />
+        </property>
+        <property name="esicChalan" type="string">
+            <column name="esic_chalan" length="65535" />
+        </property>
     </class>
 </hibernate-mapping>

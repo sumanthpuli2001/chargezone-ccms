@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.CreateTask" table="create_task" catalog="hr_power_astral" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="priorityMaster" class="com.bul.zydex.model.PriorityMaster" fetch="select">
+            <column name="priority" />
+        </many-to-one>
+        <many-to-one name="projectManagementMaster" class="com.bul.zydex.model.ProjectManagementMaster" fetch="select">
+            <column name="project_management_id" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="45" />
+        </property>
+        <property name="plannedStart" type="string">
+            <column name="planned_start" length="45" />
+        </property>
+        <property name="plannedFinish" type="string">
+            <column name="planned_finish" length="45" />
+        </property>
+        <property name="manuallySchedule" type="java.lang.Boolean">
+            <column name="manually_schedule" />
+        </property>
+        <property name="duration" type="string">
+            <column name="duration" length="45" />
+        </property>
+        <property name="plannedEffort" type="string">
+            <column name="planned_effort" length="45" />
+        </property>
+        <property name="taskCompleted" type="string">
+            <column name="task_completed" length="45" />
+        </property>
+        <property name="timeLogging" type="java.lang.Boolean">
+            <column name="time_logging" />
+        </property>
+        <property name="actualStart" type="string">
+            <column name="actual_start" length="45" />
+        </property>
+        <property name="actualFinish" type="string">
+            <column name="actual_finish" length="45" />
+        </property>
+        <property name="budget" type="string">
+            <column name="budget" length="45" />
+        </property>
+        <property name="plannedLabourCost" type="string">
+            <column name="planned_labour_cost" length="45" />
+        </property>
+        <property name="plannedFixedCost" type="string">
+            <column name="planned_fixed_cost" length="45" />
+        </property>
+        <property name="billingType" type="string">
+            <column name="billing_type" length="45" />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

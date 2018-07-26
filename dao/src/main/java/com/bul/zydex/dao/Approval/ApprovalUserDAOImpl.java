@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.Approval;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
+import com.bul.zydex.model.ApprovalMaster;
 import com.bul.zydex.model.ApprovalUser;
 import java.util.List;
 import org.hibernate.SQLQuery;
@@ -101,6 +102,28 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
                 + " select a"
                 + " FROM ApprovalUser a "
                 + " WHERE a.approvalMaster.id = " + apid;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> readByApId(int id) {
+        String query = "SELECT a"
+                + " FROM ApprovalUser a "
+                + " WHERE a.approvalMaster.id = " + id;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> readApprovalUser(String approvalMasterId) {
+        String query = "";
+        query = " Select a.id,e.employeeName"
+                + " From ApprovalUser a  "
+                + " left join a.employeeMaster e"
+                + " Where a.approvalMaster =" + approvalMasterId;
+
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }

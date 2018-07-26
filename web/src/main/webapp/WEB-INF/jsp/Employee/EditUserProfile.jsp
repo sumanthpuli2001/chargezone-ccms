@@ -639,10 +639,6 @@
 
         function removeStep1Tr(cloneTr_Id) {
             try {
-                i1--;
-                var val = document.getElementById("firstStepCount").value;
-                val = val - 1;
-                document.getElementById("firstStepCount").value = val;
                 var element1 = document.getElementById(cloneTr_Id);
                 element1.parentNode.removeChild(element1);
             } catch (e) {
@@ -1240,12 +1236,12 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>PF Contribution(By Employee):</label>
+                                                        <label>PF Contribution(By Employee Basic Salary):</label>
                                                         <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
                                                         <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>PF Contribution(By Employer):</label>
+                                                            <label>PF Contribution(By Employer Basic Salary):</label>
                                                         <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
                                                         <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -2014,6 +2010,7 @@
                                                                         <th style="text-align: center;width:55px"></th>
                                                                     </tr>
                                                                     <input type="hidden" name="firstStepCount" id="firstStepCount" value="1">
+                                                                    <input type="hidden" name="certificateId1" id="certificateId1" value="certificatesList">
                                                                     <tr id="cloneTr_Id">
                                                                         <td style="text-align: center">1</td>
                                                                         <td>

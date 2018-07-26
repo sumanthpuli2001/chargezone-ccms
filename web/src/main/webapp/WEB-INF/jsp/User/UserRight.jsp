@@ -31,8 +31,8 @@
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
-    
-    
+
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -81,143 +81,148 @@
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" id="1" title="${userDescription[0].hrDescription}">HR Head</label>
 
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="employee"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" id="2" title="${userDescription[0].employeeDescription}">Employee</label>
 
-                                                    </div>
+                                                </div>
 
-                                                    <div class="col-sm-3">
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="travelAdmin"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].traveLAdminDescription}">Travel Admin</label>
 
-                                                    </div>
+                                                </div>
 
-                                                    <div class="col-sm-3">
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="itAdmin"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].itAdminDescription}">IT Admin</label>
 
-                                                    </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-3">
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="travelExpenseAdmin"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].travelExpenseAdminDescription}">Finance Department Admin</label>
 
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="poolCarAdmin"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].poolCarAdminDescription}">PoolCarAdmin</label>
 
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="security"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].securityDescription}">Security</label>
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="cafeteriaAdmin"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].cafeteriaAdminDescription}">Cafeteria Admin</label>
 
-                                                    </div>
+                                                </div>
 
-                                                </div><!-- /.col -->
-                                                <div class="form-group">
-                                                    <div class="col-sm-3">
+                                            </div><!-- /.col -->
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="employeeManagement"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].employeeManagementDescription}">Employee Management</label>
 
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="leaveManagement"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].leaveManagementDescription}">Leave Management</label>
 
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="shiftManagement"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].shiftManagementDescription}">Shift Management</label>
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="appraisalPmp"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].appraisalPmpDescription}">Appraisal PMP</label>
 
-                                                    </div>
+                                                </div>
 
-                                                </div><!-- /.col -->
-                                                <div class="form-group">
-                                                    <div class="col-sm-3">
+                                            </div><!-- /.col -->
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="appraisal360"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].appraisal360Description}">360 Appraisal</label>
 
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="probationToConfirmation"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].probationToConfirmationDescription}">Probation To Confirmation</label>
 
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="employeeExit"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].employeeExitDesciption}">Employee Exit</label>
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="employeeReferral"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].employeeReferralDescription}">Employee Referral</label>
 
-                                                    </div>
+                                                </div>
 
-                                                </div><!-- /.col -->
-                                                <div class="form-group">
-                                                    <div class="col-sm-3">
+                                            </div><!-- /.col -->
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="temporaryShiftAssign"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].temporaryShiftAssignDesctiption}">Temporary Shift Assign</label>
 
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="exitInterview"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].exitInterviewDescription}">Exit Interview</label>
 
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="noDue"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].noDueDescription}">No Due</label>
-                                                    </div>
-                                                    <div class="col-sm-3">
+                                                </div>
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="attendanceReport"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].attendanceReportDescription}">Attendance Management</label>
-                                                    </div>
-                                                </div><!-- /.col -->
-                                                <div class="form-group">
-                                                    <div class="col-sm-3">
+                                                </div>
+                                            </div><!-- /.col -->
+                                            <div class="form-group">
+                                                <div class="col-sm-3">
                                                     <form:checkbox path="cashAdvanceView"></form:checkbox>
                                                         &nbsp;&nbsp;&nbsp;
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].cashAdvanceViewDescription}">Cash Advance View</label>
 
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                    <form:checkbox path="departmentWiseAttendance"></form:checkbox>
-                                                        
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].departmentWiseAttendanceDecription}">Department Wise Attendance</label>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <form:checkbox path="travelManagementRights"></form:checkbox>
 
-                                                    </div>
+                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].travelManagementRightsDescription}">Travel Management</label>
+
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <form:checkbox path="expenseRequestRights"></form:checkbox>
+
+                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].expenseRequestRightsDescription}">Expense Request</label>
+
                                                 </div>
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
@@ -232,67 +237,67 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="faceTofaceInterview"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].faceTofaceInterviewDescritpion}">Face To Face InterView</label>
+                                                        <form:checkbox path="faceTofaceInterview"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].faceTofaceInterviewDescritpion}">Face To Face InterView</label>
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="candidateList"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].candidateListDescription}">Candidate List</label>
-
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-3">
-                                                    <form:checkbox path="mpr"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].mprDescription}">MPR Create</label>
-
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                    <form:checkbox path="budget"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].budgetDecription}">MPP Budget Create</label>
-
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                    <form:checkbox path="vacancy"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].vacancyDescription}">Vacancy</label>
-
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                    <form:checkbox path="candidateInduction"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].candidateInductionDescription}">Candidate Induction</label>
+                                                        <form:checkbox path="candidateList"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].candidateListDescription}">Candidate List</label>
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="assessmentReview"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].assessmentReviewDescription}">Assessment Review</label>
+                                                        <form:checkbox path="mpr"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].mprDescription}">MPR Create</label>
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="mppApproval"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].mppApprovalDescription}">MPP Budget Approval</label>
+                                                        <form:checkbox path="budget"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].budgetDecription}">MPP Budget Create</label>
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="mprApproval"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].mprApprovalDescription}">MPR Approval</label>
+                                                        <form:checkbox path="vacancy"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].vacancyDescription}">Vacancy</label>
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="faceTofaceApproval"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].faceTofaceApprovalDecription}">Face To Face Approval</label>
+                                                        <form:checkbox path="candidateInduction"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].candidateInductionDescription}">Candidate Induction</label>
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-3">
+                                                        <form:checkbox path="assessmentReview"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].assessmentReviewDescription}">Assessment Review</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <form:checkbox path="mppApproval"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].mppApprovalDescription}">MPP Budget Approval</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <form:checkbox path="mprApproval"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].mprApprovalDescription}">MPR Approval</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <form:checkbox path="faceTofaceApproval"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].faceTofaceApprovalDecription}">Face To Face Approval</label>
 
                                                     </div>
 
@@ -300,21 +305,27 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="payroll"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].payrollDecription}">Payroll</label>
+                                                        <form:checkbox path="payroll"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].payrollDecription}">Payroll</label>
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="training"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].trainingDescription}">Training</label>
+                                                        <form:checkbox path="training"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].trainingDescription}">Training</label>
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="kaizenApproval"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].kaizenApprovalDescription}">kaizen Approval</label>
+                                                        <form:checkbox path="kaizenApproval"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].kaizenApprovalDescription}">kaizen Approval</label>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <form:checkbox path="hrFtFApproval"></form:checkbox>
+
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].hrFtFApproval}">All Candidate F2F Request</label>
 
                                                     </div>
                                                 </div>
@@ -332,190 +343,198 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="employeeMasterReport"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].employeeMasterReportDescription}">employee Master Report</label>
+                                                        <form:checkbox path="employeeMasterReport"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].employeeMasterReportDescription}">employee Master Report</label>
 
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="employeeAttendanceReport"></form:checkbox>
+                                                        <form:checkbox path="employeeAttendanceReport"></form:checkbox>
                                                         <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].employeeAttendanceReportDescription}">employee Attendance Report</label>
 
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="monthlyAttendanceReport"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].monthlyAttendanceReportDescription}">monthly Attendance Report</label>
+                                                        <form:checkbox path="monthlyAttendanceReport"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].monthlyAttendanceReportDescription}">monthly Attendance Report</label>
 
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="dailyPresentReport"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].dailyPresentReportDescription}">daily Present Report</label>
+                                                        <form:checkbox path="dailyPresentReport"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].dailyPresentReportDescription}">daily Present Report</label>
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="searchEmployeeLeaveDetail"></form:checkbox>
+                                                        <form:checkbox path="searchEmployeeLeaveDetail"></form:checkbox>
                                                         <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].searchEmployeeLeaveDetailDescription}">Search Employee Leave</label>
 
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="searchEmployeeLeaveBalance"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].searchEmployeeLeaveBalanceDescription}">Employee Leave Balance</label>
+                                                        <form:checkbox path="searchEmployeeLeaveBalance"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].searchEmployeeLeaveBalanceDescription}">Employee Leave Balance</label>
 
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="searchTravelReques"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].searchTravelRequesDescription}">search Travel Request</label>
+                                                        <form:checkbox path="searchTravelReques"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].searchTravelRequesDescription}">search Travel Request</label>
 
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="searchExpenseRequest"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].searchExpenseRequestDescription}">Search Expense Request</label>
+                                                        <form:checkbox path="searchExpenseRequest"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].searchExpenseRequestDescription}">Search Expense Request</label>
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="formSixteen"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].formSixteenDescription}">Form Sixteen</label>
+                                                        <form:checkbox path="formSixteen"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].formSixteenDescription}">Form Sixteen</label>
 
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="pf"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].pfDescription}">PF</label>
+                                                        <form:checkbox path="pf"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].pfDescription}">PF</label>
 
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="pt"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].ptDescription}">PT</label>
+                                                        <form:checkbox path="pt"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].ptDescription}">PT</label>
 
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="salarySlip"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].salarySlipDescription}">Salary Slip</label>
+                                                        <form:checkbox path="salarySlip"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].salarySlipDescription}">Salary Slip</label>
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <!-- <div class="col-sm-3">
-                                                <%--<form:checkbox path="policy"></form:checkbox>--%>
-                                                    &nbsp;&nbsp;&nbsp;
-                                                <label style="font-weight: normal">Policy</label>
-
-
-                                                </div>-->
-                                                <div class="col-sm-3">
-                                                    <form:checkbox path="govtFormatPF"></form:checkbox>
+                                                    <%--<form:checkbox path="policy"></form:checkbox>--%>
                                                         &nbsp;&nbsp;&nbsp;
-                                                        <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].govtFormatPfDescription}">Govt. Format PF</label>
+                                                    <label style="font-weight: normal">Policy</label>
+    
+    
+                                                    </div>-->
+                                                    <div class="col-sm-3">
+                                                        <form:checkbox path="govtFormatPF"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].govtFormatPfDescription}">Govt. Format PF</label>
 
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="companyMonthlyReport"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].companyMonthlyReportDescription}">Company Monthly Report</label>
+                                                        <form:checkbox path="companyMonthlyReport"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].companyMonthlyReportDescription}">Company Monthly Report</label>
 
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="ptStatement"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].ptStatementDescription}">PT Slab By Summary</label>
+                                                        <form:checkbox path="ptStatement"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].ptStatementDescription}">PT Slab By Summary</label>
 
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="bankStatement"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].bankStatementDescription}">Bank Statement</label>
+                                                        <form:checkbox path="bankStatement"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].bankStatementDescription}">Bank Statement</label>
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="eSICDeductionStatement"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].esicDeductionStatement}">ESIC Deduction Statement</label>
+                                                        <form:checkbox path="eSICDeductionStatement"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].esicDeductionStatement}">ESIC Deduction Statement</label>
 
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="overTimeReport"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].overTimeReportDescription}">Over Time Report</label>
+                                                        <form:checkbox path="overTimeReport"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].overTimeReportDescription}">Over Time Report</label>
 
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="pfChallen"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].pfChallenDescription}">PF Challen</label>
+                                                        <form:checkbox path="pfChallen"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].pfChallenDescription}">PF Challen</label>
 
                                                     </div>
 
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="loan"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].loanDescription}">Loan</label>
+                                                        <form:checkbox path="loan"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].loanDescription}">Loan</label>
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="attendance"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].attendanceDescription}">Attendance</label>
+                                                        <form:checkbox path="attendance"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].attendanceDescription}">Attendance</label>
 
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="employeeSalaryYearly"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].employeeSalaryYearlyDescription}">Employee Salary Yearly</label>
+                                                        <form:checkbox path="employeeSalaryYearly"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].employeeSalaryYearlyDescription}">Employee Salary Yearly</label>
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="pMPReport"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].pmpReportDescription}">PMP Report</label>
+                                                        <form:checkbox path="pMPReport"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].pmpReportDescription}">PMP Report</label>
 
 
                                                     </div>
                                                     <div class="col-sm-3">
-                                                    <form:checkbox path="appraisalReport360"></form:checkbox>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].appraisalReport360Description}">360 Appraisal Report</label>
+                                                        <form:checkbox path="appraisalReport360"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].appraisalReport360Description}">360 Appraisal Report</label>
 
                                                     </div>
                                                 </div>
-<!--                                                <div class="form-group">
+                                                <div class="form-group">
                                                     <div class="col-sm-3">
-                                                        <%--<form:checkbox path="govtFormatPF"></form:checkbox>--%>
-                                                        &nbsp;&nbsp;&nbsp;
-                                                        <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].govtFormatPfDescription}">Govt. Format PF</label>
+                                                        <form:checkbox path="policyViewDetail"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].policyViewDetail}">Policy View Detail</label>
 
-                                                    </div>
-                                                </div>-->
+
+                                                    </div></div>
+                                                <!--                                                <div class="form-group">
+                                                                                                    <div class="col-sm-3">
+                                                <%--<form:checkbox path="govtFormatPF"></form:checkbox>--%>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <label style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].govtFormatPfDescription}">Govt. Format PF</label>
+
+                                            </div>
+                                        </div>-->
                                             </div>
                                         </div>
                                     </div>
@@ -526,15 +545,15 @@
                                 </div><!-- nav-tabs-custom -->
                             </div><!-- /.col -->
                         </div>
-                </section>                                 
-        </form:form>
-        <!--</div>-->
-        <!--Employee detail completes here-->
-        <!--read only entries ends here-->
+                        </section>                                 
+                    </form:form>
+                    <!--</div>-->
+                    <!--Employee detail completes here-->
+                    <!--read only entries ends here-->
 
-            </div>
+                </div>
 
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-</html>
+                <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+                </html>
 
 

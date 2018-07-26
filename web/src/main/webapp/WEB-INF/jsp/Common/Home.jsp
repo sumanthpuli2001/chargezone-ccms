@@ -474,16 +474,14 @@
                                                         <div class="node ui-draggable ui-droppable"> 
                                                             <div >
                                                                 <c:forEach var="todayBirthday" items="${TodaysBirthdays}">
-                                                                    <div style="float: left;display: inline-block;margin-left:10px; ">
+                                                                    <div style="text-align: center;float: left;display: inline-block;margin-left:10px;width: 80px; ">
                                                                         <img src="${todayBirthday[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
                                                                         <br/>
                                                                         <label class="test">${todayBirthday[1]}</label>
                                                                         <br/>
-                                                                        &nbsp;
-                                                                        &nbsp;
-                                                                        &nbsp;
-                                                                        &nbsp;
-                                                                        <a style="font-size: 9px;" onclick="window.open('homeController.htm?act=newJoineDetail&id=' +${todayBirthday[0]}, 'popUpWindow', 'height=400,width=600,left=500%,top=100%,resizable=1,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no')">View</a>
+                                                                        <div style="text-align: center;">
+                                                                            <a style="font-size: 9px;"  onclick="window.open('homeController.htm?act=newJoineDetail&id=' +${todayBirthday[0]}, 'popUpWindow', 'height=400,width=600,left=500%,top=100%,resizable=1,scrollbars=no,toolbar=no,menubar=no,location=no,directories=no')">View</a>
+                                                                        </div>
                                                                     </div>
                                                                 </c:forEach>
                                                             </div>
@@ -505,16 +503,14 @@
                                                         <div class="node ui-draggable ui-droppable"> 
                                                             <div >
                                                                 <c:forEach var="newJoining" items="${newJoiningList}">
-                                                                    <div style="float: left;display: inline-block;margin-left:10px; ">
+                                                                    <div style="text-align: center;float: left;display: inline-block;margin-left:10px;width: 80px; ">
                                                                         <img src="${newJoining[2]}" style="border-radius: 50%;max-width: 100%;height: 60px;width: 60px;">
                                                                         <br/>
                                                                         <label class="test">${newJoining[1]}</label>
                                                                         <br/>
-                                                                        &nbsp;
-                                                                        &nbsp;
-                                                                        &nbsp;
-                                                                        &nbsp;
-                                                                        <a style="font-size: 9px;" onclick="window.open('homeController.htm?act=newJoineDetail&id=' +${newJoining[0]}, 'popUpWindow', 'height=400,width=600,left=500%,top=100%,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')">View</a>
+                                                                        <div style="text-align: center;">
+                                                                            <a style="font-size: 9px;" onclick="window.open('homeController.htm?act=newJoineDetail&id=' +${newJoining[0]}, 'popUpWindow', 'height=400,width=600,left=500%,top=100%,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')">View</a>
+                                                                        </div>
                                                                     </div>
                                                                 </c:forEach>
                                                             </div>

@@ -22,6 +22,33 @@
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
+        <property name="createdDate" type="string">
+            <column name="created_date" />
+        </property>
+        <property name="createdBy" type="string">
+            <column name="created_by" />
+        </property>
+          <property name="updatedDate" type="string">
+            <column name="updated_date" />
+        </property>
+        <property name="updatedBy" type="string">
+            <column name="updated_by" />
+        </property>
+        <property name="acceptPolicy" type="java.lang.Integer">
+            <column name="accept_policy" />
+        </property>
+           <property name="readDate" type="string">
+            <column name="read_date" />
+        </property>
+        <property name="readBy" type="string">
+            <column name="read_by" />
+        </property>
+        <property name="acceptPolicyTime" type="string">
+            <column name="accept_policy_time" />
+        </property>
+        <property name="acceptByPolicyId" type="java.lang.Integer">
+            <column name="accept_by_policy_id" />
+        </property>
     </class>
   
 

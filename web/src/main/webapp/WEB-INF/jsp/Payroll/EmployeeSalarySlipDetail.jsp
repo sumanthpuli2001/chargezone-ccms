@@ -233,7 +233,6 @@
                                     <!--                                  <div class="box-header" style="text-align: right;">
                                                                     <input type="button" class="btn btn-primary" value="Print" onclick="printDiv('printableArea')">
                                                                        </div>-->
-                                    <button type="submit" class="btn btn-primary" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;Print</button>
                                     <div id="printableArea">
                                         <div class="box-body no-padding">
                                             <div class="row">
@@ -252,18 +251,19 @@
 
 
                                                                     <thead>
-                                                                        <tr>
-                                                                            <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
-                                                                            <th>Emp Id</th>
-                                                                            <th>Emp Name</th>
-                                                                            <th>Net Salary</th>
-                                                                            <th>Action</th>
-                                                                                <c:if test="${sessionScope.userRight.payroll}">
-                                                                                <th>Edit</th>
-                                                                                </c:if>
+                                                                    <button type="submit" class="btn btn-primary" title="" style="width: 100px;"><i class="fa fa-print"></i>&nbsp;&nbsp;Print</button>
+                                                                    <tr>
+                                                                        <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
+                                                                        <th>Emp Id</th>
+                                                                        <th>Emp Name</th>
+                                                                        <th>Net Salary</th>
+                                                                        <th>Action</th>
+                                                                            <c:if test="${sessionScope.userRight.payroll}">
+                                                                            <th>Edit</th>
+                                                                            </c:if>
 
 
-                                                                        </tr>
+                                                                    </tr>
                                                                     </thead>
                                                                 </c:otherwise>
                                                             </c:choose>

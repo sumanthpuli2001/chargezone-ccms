@@ -23,4 +23,8 @@ public interface ApprovalUserDAO<T> extends GenericsDAO<T> {
     public List<?> readByApprovalFetch(int apid);
 
     public List<?> approvaldelete(String apid);
+    
+    public List<?> readByApId(int id);
+
+    public List<?> readApprovalUser(String approvalMasterId);
 }

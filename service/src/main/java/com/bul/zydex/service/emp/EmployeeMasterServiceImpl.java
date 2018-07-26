@@ -419,19 +419,27 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     }
 
     @Override
-    public List<?> readEmpLastMnth(String month,Integer year) {
-        return  employeeMasterDAO.readEmpLastMnth(month,year);
+    public List<?> readEmpLastMnth(String month, Integer year) {
+        return employeeMasterDAO.readEmpLastMnth(month, year);
     }
-    
+
     @Override
     public List<?> getGenderDetails() {
-        return  employeeMasterDAO.getGenderDetails();
+        return employeeMasterDAO.getGenderDetails();
     }
 
     @Override
     public List<?> getEmployeeDetails(EmployeeInformation employeeInformation) {
-        return  employeeMasterDAO.getEmployeeDetails(employeeInformation);
+        return employeeMasterDAO.getEmployeeDetails(employeeInformation);
     }
-    
-    
+
+    @Override
+    public List<?> reademidById(int id) {
+        return employeeMasterDAO.reademidById(id);
+    }
+
+    @Override
+    public List<?> readDepartmentEmployee(int departId) {
+        return employeeMasterDAO.readDepartmentEmployee(departId);
+    }
 }

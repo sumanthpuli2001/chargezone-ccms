@@ -11,6 +11,7 @@ import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -137,49 +138,107 @@ public class ApprovalController extends ApprovalAbstract {
         ApprovalMaster approvalMaster = new ApprovalMaster();
         ApprovalMaster approvalMaster2 = new ApprovalMaster();
         EmployeeMaster employeeMaster = new EmployeeMaster();
-        ApprovalUser approvalUser = new ApprovalUser();
         String id = request.getParameter("id");
         int emid = 0;
         List<?> approvalUser1 = approvalUserService.reademyId(Integer.parseInt(id));
         ApprovalUser au = (ApprovalUser) approvalUser1.get(0);
 //        List<?> approvalUserList = approvalUserService.readByApprovalId(Integer.parseInt(id));
         List<?> approvalUserList = approvalUserService.readByApprovalFetch(Integer.parseInt(id));
-
+        List employeeMasterList = new ArrayList();
         for (int i = 0; i < approvalUser1.size(); i++) {
             ApprovalUser au1 = (ApprovalUser) approvalUser1.get(i);
+            employeeMasterList.add(au1.getEmployeeMaster());
             emid = au1.getEmployeeMaster().getId();
         }
 
 //        approvalMaster = approvalMasterService.readById(approvalUser.getApprovalMaster().getId());
         approvalMaster = approvalMasterService.readById(Integer.parseInt(id));
-        approvalUser = approvalUserService.readById(Integer.parseInt(id));
+        List<?> approvalUser = approvalUserService.readByApId(Integer.parseInt(id));
 
         employeeMaster = employeeMasterService.readById(emid);
-        selectedEmployeeFor360Feedback(request, employeeMaster);
+        selectedEmployeeFor360Feedback1(request, employeeMasterList);
         selectEmployee(request, response);
 
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("approvalUser", approvalUser);
+        mv.getModelMap().put("au", au);
         mv.getModelMap().put("approvalMaster", approvalMaster);
         mv.setViewName("Approval/ViewApprovalDetail");
         return mv;
     }
 
+    public ModelAndView editSubmit(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        int otherDetailCount = 0;
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        ApprovalMaster approvalMaster = new ApprovalMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        ApprovalUser approvalUser = new ApprovalUser();
+        String approvalMasterId = request.getParameter("id");
+        BindException errors = new BindException(approvalMaster, "approvalMaster");
+        bind(request, approvalMaster);
+        String policyId1 = request.getParameter("policyId1");
+        String[] policyIdList = policyId1.split(",");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        ApprovalMaster approvalMaster1 = approvalMasterService.approvalId(approvalMaster.getId());
+        approvalMaster.setUpdatedDate(sdf.format(cDate));
+        approvalMasterService.update(approvalMaster);
+
+        ///deleted the previous Approval user
+        List<?> approvalUserDetail = approvalUserService.readApprovalUser(approvalMasterId);
+        for (Object userobject : approvalUserDetail) {
+            Object[] approval = (Object[]) userobject;
+            Integer approvalUserId = (Integer) approval[0];
+            approvalUserService.delete(approvalUserId);
+        }
+
+        /////code for multiple Employee
+        otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
+        for (int i = 0; i < policyIdList.length; i++) {
+//            if (null != request.getParameter("policyId" + i) && null != request.getParameter("policyNumber" + i)) {
+//                if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+//                    int policyId = Integer.parseInt(request.getParameter("policyId" + i));
+            employeeMaster = employeeMasterService.readById(Integer.parseInt("" + policyIdList[i]));
+//                    employeeMaster.setId(policyId);
+            approvalUser.setEmployeeMaster(employeeMaster);
+            approvalUser.setApprovalMaster(approvalMaster);
+            SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+            Date cDate1 = new Date();
+            approvalUser.setCreatedDate(sdf1.format(cDate1));
+            approvalUser.setCreatedBy(employeeMaster1.getId());
+            String policyNumber = request.getParameter("policyNumber" + i);
+            approvalUser.setLevel(i + 1);
+            approvalUser.setStatus(0);
+            approvalUserService.create(approvalUser);
+//                        policyMaster.setId(policyId);
+//
+//                }
+//            }
+        }
+
+        mv = approvalList(request, response);
+        return mv;
+
+    }
+
     public ModelAndView deleteApprovalSetting(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-      ModelAndView mv = new ModelAndView();
+        ModelAndView mv = new ModelAndView();
         String[] empId = request.getParameterValues("checkId");
         for (String z : empId) {
             try {
-                
-                    ApprovalUser approvalUser = new ApprovalUser();
+
+                ApprovalUser approvalUser = new ApprovalUser();
                 List<?> list = approvalUserService.approvaldelete(z);
                 for (Object object : list) {
                     approvalUser = (ApprovalUser) object;
                     approvalUserService.delete(approvalUser.getId());
                 }
-                
+
                 approvalMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info :  Records Deleted Successfully.");

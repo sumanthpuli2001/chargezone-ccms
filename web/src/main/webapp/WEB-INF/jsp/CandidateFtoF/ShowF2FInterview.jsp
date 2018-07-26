@@ -678,8 +678,7 @@
                                                             </div>
                                                             <div class="col-sm-8">
 
-                                                                <textarea class="form-control"
-                                                                          id="message" name="message" disabled></textarea>
+                                                                <form:input path="message" id="budget1" readonly="true" class="form-control" placeholder="Budget"></form:input>
                                                             </div>
                                                         </div>
                                                     </div>

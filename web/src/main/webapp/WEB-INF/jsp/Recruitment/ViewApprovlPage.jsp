@@ -130,9 +130,9 @@
 
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12">
-                                                        <label><h3>Approval Detail</h3></label>
+                                                        <label><h3>Approval History</h3></label>
                                                         <div class="table table-bordered">
-                                                            <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="center"  >
+                                                            <table border="1" id="tableid" style="width: 100%;">
                                                             <c:choose>
                                                                 <c:when test="${empty list}">
                                                                     <tr>

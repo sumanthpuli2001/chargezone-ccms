@@ -6,14 +6,16 @@
 package com.bul.zydex.service.Approval;
 
 import com.bul.zydex.dao.Approval.ApprovalMasterDAO;
+import com.bul.zydex.model.ApprovalMaster;
+import com.bul.zydex.model.ApprovalUser;
 import com.bul.zydex.service.GenericsServiceImpl;
 
 /**
  *
  * @author Vikas
  */
-public class ApprovalMasterServiceImpl<T> extends GenericsServiceImpl<T> implements ApprovalMasterService<T>{
-    
+public class ApprovalMasterServiceImpl<T> extends GenericsServiceImpl<T> implements ApprovalMasterService<T> {
+
     private ApprovalMasterDAO<T> approvalMasterDAO;
 
     public ApprovalMasterDAO<T> getApprovalMasterDAO() {
@@ -24,7 +26,10 @@ public class ApprovalMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
         this.approvalMasterDAO = approvalMasterDAO;
         setGenericsDAO(approvalMasterDAO);
     }
-    
-    
-    
+
+    @Override
+    public ApprovalMaster approvalId(int aprId) {
+        return approvalMasterDAO.approvalId(aprId);
+    }
+
 }

@@ -714,4 +714,31 @@
     <bean id="stateMasterService1" class="com.bul.zydex.service.ProjectManagement.StateMasterServiceImpl">
         <property name="stateMasterDAO" ref="stateMasterDAO1" />
     </bean> 
+    <bean id="policyReadHistoryService1" class="com.bul.zydex.service.policy.PolicyReadHistoryServiceImpl">
+        <property name="policyReadHistoryDAO" ref="policyReadHistoryDAO1" />
+    </bean> 
+    <bean id="kaizenApprovalHistoryService1" class="com.bul.zydex.service.Kaizen.KaizenApprovalHistoryServiceImpl">
+        <property name="kaizenApprovalHistoryDAO" ref="kaizenApprovalHistoryDAO1" />
+    </bean> 
+    <bean id="priorityMasterService1" class="com.bul.zydex.service.ProjectManagement.PriorityMasterServiceImpl">
+        <property name="priorityMasterDAO" ref="priorityMasterDAO1" />
+    </bean> 
+    <bean id="createTaskService1" class="com.bul.zydex.service.ProjectManagement.CreateTaskServiceImpl">
+        <property name="createTaskDAO" ref="createTaskDAO1" />
+    </bean> 
+    <bean id="taskEmployeeDepartmentService1" class="com.bul.zydex.service.ProjectManagement.TaskEmployeeDepartmentServiceImpl">
+        <property name="taskEmployeeDepartmentDAO" ref="taskEmployeeDepartmentDAO1" />
+    </bean> 
+    <bean id="dynamicApprovalSettingService1" class="com.bul.zydex.service.Approval.DynamicApprovalSettingServiceImpl">
+        <property name="dynamicApprovalSettingDAO" ref="dynamicApprovalSettingDAO1" />
+    </bean>
+    <bean id="dynamicApprovalSettingApproverService1" class="com.bul.zydex.service.Approval.DynamicApprovalSettingApproverServiceImpl">
+        <property name="dynamicApprovalSettingApproverDAO" ref="dynamicApprovalSettingApproverDAO1" />
+    </bean>
+    <bean id="dynamicApprovalSettingEmailService1" class="com.bul.zydex.service.Approval.DynamicApprovalSettingEmailServiceImpl">
+        <property name="dynamicApprovalSettingEmailDAO" ref="dynamicApprovalSettingEmailDAO1" />
+    </bean>
+     <bean id="eSICMasterService1" class="com.bul.zydex.service.PayrollESIC.ESICMasterServiceImpl">
+        <property name="eSICMasterDAO" ref="eSICMasterDAO1" />
+    </bean>
 </beans>

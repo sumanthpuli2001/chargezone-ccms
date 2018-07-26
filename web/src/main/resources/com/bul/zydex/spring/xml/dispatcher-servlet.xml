@@ -228,6 +228,8 @@
                 <prop key="taxSavingSubmit.htm">taxSavingSubmitController1</prop>
                 <prop key="emergencyContact.htm">emergencyContactController1</prop>
                 <prop key="projectManagement.htm">projectManagementController1</prop>
+                <prop key="dynamicApprovalSetting.htm">dynamicApprovalSettingController1</prop>
+                <prop key="payrollESIC.htm">payrollESICController1</prop>
             </props>
         </property>
         <property name="order" value="0" />     

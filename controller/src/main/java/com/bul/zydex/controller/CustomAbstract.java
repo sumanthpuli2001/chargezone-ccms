@@ -44,7 +44,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
-
 /**
  *
  * @author Administrator
@@ -62,13 +61,13 @@ public abstract class CustomAbstract extends MultiActionController {
     protected CurrencyMasterService<CurrencyMaster> currencyMasterService;
     protected DateFormat dateFormat = new SimpleDateFormat(
             "MM/dd/yyyy HH:mm");
-    protected  ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
-     protected EmailTemplateService<EmailTemplate> emailTemplateService;
+    protected ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
+    protected EmailTemplateService<EmailTemplate> emailTemplateService;
     protected SendMail sendMail;
-    protected  EmailAddMasterService<EmailAddMaster> emailAddMasterService;
+    protected EmailAddMasterService<EmailAddMaster> emailAddMasterService;
 
     public EmailTemplateService<EmailTemplate> getEmailTemplateService() {
-        return emailTemplateService; 
+        return emailTemplateService;
     }
 
     public void setEmailTemplateService(EmailTemplateService<EmailTemplate> emailTemplateService) {
@@ -82,7 +81,6 @@ public abstract class CustomAbstract extends MultiActionController {
     public void setSendMail(SendMail sendMail) {
         this.sendMail = sendMail;
     }
-    
 
     public ZydexLocationMasterService<ZydexLocationMaster> getZydexLocationMasterService() {
         return zydexLocationMasterService;
@@ -91,7 +89,6 @@ public abstract class CustomAbstract extends MultiActionController {
     public void setZydexLocationMasterService(ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService) {
         this.zydexLocationMasterService = zydexLocationMasterService;
     }
-    
 
     public UserActivityLogService<UserActivityLog> getUserActivityLogService() {
         return userActivityLogService;
@@ -169,7 +166,6 @@ public abstract class CustomAbstract extends MultiActionController {
         this.currencyMasterService = currencyMasterService;
     }
 
-
     @Override
     protected void bind(HttpServletRequest request, Object command)
             throws Exception {
@@ -232,7 +228,7 @@ public abstract class CustomAbstract extends MultiActionController {
             tempStr += "{id: \"" + arrayOfObject[0]
                     + "\", name: \"" + arrayOfObject[1]
                     + "  /" + arrayOfObject[2]
-                    + "  /" + arrayOfObject[3]+ "\"}";
+                    + "  /" + arrayOfObject[3] + "\"}";
 //                    + "  /" + arrayOfObject[4]
 //                    + "  /" + arrayOfObject[5] 
 
@@ -253,8 +249,9 @@ public abstract class CustomAbstract extends MultiActionController {
 
         request.setAttribute("deptMap", dm);
     }
+
     protected void zydexLocationList(HttpServletRequest request) {
-        ZydexLocationMaster zydexLocationMaster=new ZydexLocationMaster();
+        ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
         List<?> zydexLocationList = zydexLocationMasterService.read();
         Map<Integer, String> dm = new HashMap<>();
         for (Object o : zydexLocationList) {
@@ -292,10 +289,10 @@ public abstract class CustomAbstract extends MultiActionController {
                 tempStr += ", ";
             }
             flag = true;
-             tempStr += "{id: \"" + arrayOfObject[0]
+            tempStr += "{id: \"" + arrayOfObject[0]
                     + "\", name: \"" + arrayOfObject[1]
                     + "  /" + arrayOfObject[2]
-                    + "  /" + arrayOfObject[3]+ "\"}";
+                    + "  /" + arrayOfObject[3] + "\"}";
 //            tempStr += "{id: \"" + arrayOfObject[0]
 //                    + "\", name: \"" + arrayOfObject[0]
 //                    + "  /" + arrayOfObject[1]
@@ -317,13 +314,13 @@ public abstract class CustomAbstract extends MultiActionController {
 
         request.setAttribute("currencyMap", currencyMap);
     }
-      
-public void selectedEmployeeFor360Feedback(HttpServletRequest request,
+
+    public void selectedEmployeeFor360Feedback(HttpServletRequest request,
             EmployeeMaster employeeMaster) throws Exception {
         String tempStr = "";
         tempStr += "[";
-        if (null != employeeMaster.getId()&& !employeeMaster.getId().equals("")) {
-            
+        if (null != employeeMaster.getId() && !employeeMaster.getId().equals("")) {
+
             EmployeeMaster employeeMaster1;
             List<Object> list1 = new ArrayList<Object>();
             employeeMaster = employeeMasterService.readById(employeeMaster.getId());
@@ -341,41 +338,46 @@ public void selectedEmployeeFor360Feedback(HttpServletRequest request,
                 }
                 flag = true;
                 tempStr += "{id: \"" + arrayOfObject.getId()
-                    + "\", name: \"" + arrayOfObject.getId()
-                    + "  /" + arrayOfObject.getEmployeeName()
-                    + "  /" + arrayOfObject.getDepartmentMaster().getDepartmentName() + "\"}";
+                        + "\", name: \"" + arrayOfObject.getId()
+                        + "  /" + arrayOfObject.getEmployeeName()
+                        + "  /" + arrayOfObject.getDepartmentMaster().getDepartmentName() + "\"}";
             }
         }
         tempStr += "]";
         request.setAttribute("preList", tempStr);
     }
 
-public void selectedEmployeeFor360Feedback1(HttpServletRequest request,
+    public void selectedEmployeeFor360Feedback1(HttpServletRequest request,
             List<Object> list) throws Exception {
-    EmployeeMaster employeeMaster5 = new EmployeeMaster();
-      String tempStr = "[";
-                    for(Object o: list){
-                        employeeMaster5 = (EmployeeMaster)o;
-                        employeeMaster5 = employeeMasterService.readById(employeeMaster5.getId());
-                        DepartmentMaster departmentMaster = new DepartmentMaster();
-                        departmentMaster= departmentMasterService.readById(employeeMaster5.getDepartmentMaster().getId());
-                        employeeMaster5.setDepartmentMaster(departmentMaster);
-                           boolean flag = false;
-                          if (flag) {
+        EmployeeMaster employeeMaster5 = new EmployeeMaster();
+        String tempStr = "[";
+        int i = 1;
+        for (Object o : list) {
+            employeeMaster5 = (EmployeeMaster) o;
+            employeeMaster5 = employeeMasterService.readById(employeeMaster5.getId());
+            DepartmentMaster departmentMaster = new DepartmentMaster();
+            departmentMaster = departmentMasterService.readById(employeeMaster5.getDepartmentMaster().getId());
+            employeeMaster5.setDepartmentMaster(departmentMaster);
+            boolean flag = false;
+            if (flag) {
                 tempStr += ", ";
             }
             flag = true;
+            if (tempStr.contains("id")) {
+                tempStr += ',';
+            }
             tempStr += "{id: \"" + employeeMaster5.getId()
-                    + "\", name: \"" + employeeMaster5.getId()
+                    + "\", name: \"" + i + "Level :- " + employeeMaster5.getId()
                     + "  /" + employeeMaster5.getEmployeeName()
                     + "  /" + employeeMaster5.getDepartmentMaster().getDepartmentName() + "\"}";
+            i++;
         }
         tempStr += "]";
-         request.setAttribute("preList1", tempStr);
-    
-}
+        request.setAttribute("preList1", tempStr);
 
- public void selectEmployeeForLuna(HttpServletRequest request,
+    }
+
+    public void selectEmployeeForLuna(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         List<?> list = employeeMasterService.readEmployeeForPlant();
         String tempStr = "[";
@@ -389,24 +391,24 @@ public void selectedEmployeeFor360Feedback1(HttpServletRequest request,
             if (flag) {
                 tempStr += ", ";
             }
-            if(arrayOfObject[3].equals("Luna Plant")){
-            flag = true;
-             tempStr += "{id: \"" + arrayOfObject[0]
-                    + "\", name: \"" + arrayOfObject[1]
-                    + "  /" + arrayOfObject[2]
-                    + "  /" + arrayOfObject[3]+ "\"}";   
-            }else{
-                flag = false;  
+            if (arrayOfObject[3].equals("Luna Plant")) {
+                flag = true;
+                tempStr += "{id: \"" + arrayOfObject[0]
+                        + "\", name: \"" + arrayOfObject[1]
+                        + "  /" + arrayOfObject[2]
+                        + "  /" + arrayOfObject[3] + "\"}";
+            } else {
+                flag = false;
             }
         }
         tempStr += "]";
 
         request.setAttribute("lunaList", tempStr);
     }
- 
-  public void selectEmployeeForGavasat(HttpServletRequest request,
+
+    public void selectEmployeeForGavasat(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-       List<?> list = employeeMasterService.readEmployeeForPlant();
+        List<?> list = employeeMasterService.readEmployeeForPlant();
         String tempStr = "[";
         Object[] arrayOfObject;
 
@@ -418,14 +420,14 @@ public void selectedEmployeeFor360Feedback1(HttpServletRequest request,
             if (flag) {
                 tempStr += ", ";
             }
-            if(arrayOfObject[3].equals("Gavasad Plant")){
-            flag = true;
-             tempStr += "{id: \"" + arrayOfObject[0]
-                    + "\", name: \"" + arrayOfObject[1]
-                    + "  /" + arrayOfObject[2]
-                    + "  /" + arrayOfObject[3]+ "\"}";   
-            }else{
-                flag = false;  
+            if (arrayOfObject[3].equals("Gavasad Plant")) {
+                flag = true;
+                tempStr += "{id: \"" + arrayOfObject[0]
+                        + "\", name: \"" + arrayOfObject[1]
+                        + "  /" + arrayOfObject[2]
+                        + "  /" + arrayOfObject[3] + "\"}";
+            } else {
+                flag = false;
             }
         }
         tempStr += "]";

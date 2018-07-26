@@ -15,7 +15,11 @@
         <script>
             function viewClick(id) {
 //            window.location = 'employeeMaster.htm?act=viewClick&id=' + id;
-                window.location = 'trainingType.htm?act=edittraining&id=' + id;
+                window.location = 'projectManagement.htm?act=viewProject&projectId=' + id;
+            }
+            function editClick(id) {
+                alert(id);
+                window.location = 'projectManagement.htm?act=editProject&id=' + id;
             }
 
             function deleteCheck11() {
@@ -48,7 +52,7 @@
         <c:if test="${!empty faliureMessage}">
             <div class="fadeOutEffect alert alert-danger" role="alert">${faliureMessage}</div>
         </c:if>
-        <form:form action="trainingType.htm?act=deleteSubmittrainingtype" method="post"
+        <form:form action="projectManagement.htm?act=deleteProject" method="post"
                    name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
@@ -57,10 +61,10 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <c:if test="${sessionScope.userRight.employeeManagement}">
-                                <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
+                                    <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
 
 
-                                <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'projectManagement.htm?act=createClient'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
+                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'projectManagement.htm?act=createProject'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
                                 </c:if>
                                 <div class="box-header">
                                 </div>
@@ -84,8 +88,10 @@
                                                                         <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
-                                                                    <th style="width: 50px;">Training Type</th>
-                                                                    <th style="width: 50px;">Created Date</th>
+                                                                    <th style="width: 50px;">Project Code</th>
+                                                                    <th style="width: 50px;">Project Name</th>
+                                                                    <th style="width: 50px;">Planned Date</th>
+                                                                    <th style="width: 50px;">DeadLine</th>
                                                                     <th style="width: 50px;">Status</th>
                                                                     <!--<th style="width: 50px;"></th>-->
                                                                     <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
@@ -104,17 +110,10 @@
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
                                                                 <td>${list[1]}</td>
-                                                                <td>
-                                                                    ${list[2]}
-                                                                </td>
-                                                                <td>
-                                                                    <c:if test="${list[3]eq 0}">
-                                                                        Active
-                                                                    </c:if>
-                                                                    <c:if test="${list[3]eq 1}">
-                                                                        Inactive
-                                                                    </c:if>
-                                                                </td>
+                                                                <td>${list[2]}</td>
+                                                                <td>${list[3]}</td>
+                                                                <td>${list[4]}</td>
+                                                                <td></td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
                                                                     <div class="btn-group">
@@ -127,6 +126,11 @@
                                                                             <li style="width: 100px;">
                                                                                 <a href="#"
                                                                                    onclick="viewClick(${list[0]});">
+                                                                                    <!--onclick="viewClick($//{list[0]},$//{list[1]});">-->
+                                                                                    &nbsp;&nbsp;View
+                                                                                </a>
+                                                                                <a href="#"
+                                                                                   onclick="editClick(${list[0]});">
                                                                                     <!--onclick="viewClick($//{list[0]},$//{list[1]});">-->
                                                                                     &nbsp;&nbsp;Edit
                                                                                 </a>

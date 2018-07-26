@@ -26,7 +26,7 @@ public class SendMail {
 //        if(to.contains("spcls.co.in")){
             
 //        helper.setFrom(from);
-        helper.setFrom("hrms@spcls.co.in");
+        helper.setFrom("myspc@spcls.co.in");
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(msg, true);

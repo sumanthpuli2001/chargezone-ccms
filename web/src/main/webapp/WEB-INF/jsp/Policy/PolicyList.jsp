@@ -10,7 +10,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Policy List</title>
+        <title>Allowance List</title>
         <script>
             function deleteCheck11() {
                 var checkboxes = "";
@@ -29,10 +29,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>ALL POLICY LIST</h1>
+            <h1>AllOWANCE LIST</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">All Policies List</li>
+                <li class="active">Allowance</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -73,7 +73,7 @@
                                                                 <tr>
                                                                     <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
                                                                     <th>Sr.No.</th>
-                                                                    <th>Policy Name</th>
+                                                                    <th>Allowance Name</th>
                                                                 </tr>
                                                             </thead>
                                                             <c:set var="count" value="0" scope="page" />

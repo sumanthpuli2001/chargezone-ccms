@@ -43,12 +43,10 @@
                                 <div class="tab-content">
                                     <div class="row">
                                         <c:choose>
-                                            <c:when test="${empty sessionScope.userRight.employeeMasterReport eq sessionScope.userRight.employeeAttendanceReport eq sessionScope.userRight.monthlyAttendanceReport eq sessionScope.userRight.dailyPresentReport}">
-                                                <tr>
-                                                    <td align="center">
-                                                        <c:out value="'Access Denied'"></c:out>
-                                                        </td>
-                                                    </tr>
+                                            <c:when test="{}">
+                                                <div align="center">
+                                                    <c:out value="'Access Denied'"></c:out>
+                                                    </div>
                                             </c:when>
                                             <c:otherwise>
                                                 <div class="col-xs-4 col-sm-4 col-md-4">
@@ -166,13 +164,6 @@
                                             </c:if>
                                         </div>
                                         <div class="col-xs-4 col-sm-4 col-md-4">
-                                            <c:if test="${sessionScope.userRight.pfChallen}">
-                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"   href="pFChallen.htm?act=searchPfChallenDetail&search=none">
-                                                    PF Challen  
-                                                </a>
-                                            </c:if>
-                                        </div>
-                                        <div class="col-xs-4 col-sm-4 col-md-4">
                                             <c:if test="${sessionScope.userRight.loan}">
                                                 <a  style="font-size: 14px;text-align: left;color: #2c3e50;"  href="loanReport.htm?act=searchLoanData&search=none">
                                                     Loan 
@@ -195,7 +186,14 @@
                                                 </a>
                                             </c:if>
                                         </div>
-                                   
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.esicChalan}">
+                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"   href="payrollESIC.htm?act=esicChalan&search=none">
+                                                    ESIC Chalan
+                                                </a>
+                                            </c:if>
+                                        </div>
+
                                     </div>
                                     <br>
                                 </div>
@@ -240,31 +238,21 @@
                             <div class="box-body"> 
                                 <div class="tab-content">
                                     <div class="row">
-                                        <c:choose>
-                                            <c:when test="${empty sessionScope.userRight.searchTravelReques eq sessionScope.userRight.searchExpenseRequest}">
-                                                <tr>
-                                                    <td align="center">
-                                                        <c:out value="'Access Denied'"></c:out>
-                                                        </td>
-                                                    </tr>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <c:if test="${sessionScope.userRight.searchTravelReques}">
-                                                    <div class="col-xs-4 col-sm-4 col-md-4">
-                                                        <a  style="font-size: 14px;text-align: left;color: #2c3e50;"href="travelRequestMaster.htm?act=viewRequestAdminSubmit">
-                                                            Search Travel Request 
-                                                        </a>
-                                                    </c:if>
-                                                </div>
-                                                <div  class="col-xs-4 col-sm-4 col-md-4">
-                                                    <c:if test="${sessionScope.userRight.searchExpenseRequest}">
-                                                        <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="expenseMaster.htm?act=searchExpenseRequest">
-                                                            Search Expense Request
-                                                        </a>
-                                                    </c:if>
-                                                </div>
-                                            </c:otherwise>
-                                        </c:choose>
+
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.searchTravelReques}">
+                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"href="travelRequestMaster.htm?act=viewRequestAdminSubmit">
+                                                    Search Travel Request 
+                                                </a>
+                                            </c:if>
+                                        </div>
+                                        <div  class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.searchExpenseRequest}">
+                                                <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="expenseMaster.htm?act=searchExpenseRequest">
+                                                    Search Expense Request
+                                                </a>
+                                            </c:if>
+                                        </div>
                                     </div>
                                     <br>
                                 </div>
@@ -309,7 +297,7 @@
                             <div class="box-body"> 
                                 <div class="tab-content">
                                     <div class="row">
-                                             <div class="col-xs-4 col-sm-4 col-md-4">
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
                                             <c:if test="${sessionScope.userRight.govtFormatPF}">
                                                 <a  style="font-size: 14px;text-align: left;color: #2c3e50;"  href="employeePfCheck.htm?act=searchSalaryPfGovDetail&search=none">
                                                     Govt. Format PF
@@ -323,6 +311,13 @@
                                                 </a>
                                             </c:if>
                                         </div>
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.pfChallen}">
+                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"   href="pFChallen.htm?act=searchPfChallenDetail&search=none">
+                                                    PF Challen  
+                                                </a>
+                                            </c:if>
+                                        </div>
                                     </div>
                                     <br>
                                 </div>
@@ -332,7 +327,7 @@
                     <div class="nav-tabs-custom">
                         <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
                             <div class="box-header" style="background-color: #006fad !important;text-align: center;">
-                                <h3 class="box-title"style="font-size: 30px;color: white;font-weight:700;font-size:16px;">Employee Detailed Information</h3>
+                                <h3 class="box-title"style="font-size: 30px;color: white;font-weight:700;font-size:16px;">EMPLOYEE DETAIL INFORMATION</h3>
                             </div>
                             <div class="box-body"> 
                                 <div class="tab-content">
@@ -350,7 +345,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="nav-tabs-custom">
+                        <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
+                            <div class="box-header" style="background-color: #006fad !important;text-align: center;">
+                                <h3 class="box-title"style="font-size: 30px;color: white;font-weight:700;font-size:16px;">POLICY</h3>
+                            </div>
+                            <div class="box-body"> 
+                                <div class="tab-content">
+                                    <div class="row">
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.policyViewDetail}">
+                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;" href="policyMaster.htm?act=policyReport">
+                                                    Policy Report View
+                                                </a>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
         </section>
     </div>
 </section>

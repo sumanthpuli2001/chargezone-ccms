@@ -60,6 +60,23 @@
                 }
             }
         </script>
+
+        <script>
+
+            function saveSubmit11() {
+                var flag = true;
+                if ($('#userName').val().replace(/\s/g, "") == '') {
+                    document.getElementById('userNameError').innerHTML = '-It must not be empty or white space.';
+                    flag = false;
+                }
+                return flag;
+            }
+            function otpOnchangeFunction(idString) {
+                if (document.getElementById(idString).innerHTML != null) {
+                    document.getElementById(idString).innerHTML = '';
+                }
+            }
+        </script>
     </head>
     <body>
         <section class="content-header">
@@ -76,7 +93,7 @@
         <br/>
         <br/>
         <form:form class="form-horizontal" method="post"
-                   commandName="applayJobUserMaster" action="vacancy.htm?act=signUpCandidate&id=${vacid}">
+                   commandName="applayJobUserMaster" onsubmit='return saveSubmit11();' action="vacancy.htm?act=signUpCandidate&id=${vacid}">
             <form:hidden path="id"></form:hidden>
                 <!--<input type="hidden" name="lockCounter" value="0"/>-->
                 <section class="content">
@@ -86,11 +103,12 @@
                                 <div class="col-sm-3">
                                 </div>
                                 <div class="col-sm-1" style="text-align: center">
-                                    <label>Email Id:<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Email Id</label>
                                 </div>
                                 <div class="col-sm-3">
-                                <form:input path="userName" class="form-control" placeholder="userName"></form:input>
+                                <form:input path="userName" class="form-control"  pattern="[^ @]*@[^ @]*" placeholder="abc@domain.com" onchange="otpOnchangeFunction('userNameError');"></form:input>
                                 <form:errors path="userName" cssClass="errorDiv"></form:errors>
+                                    <span id="userNameError" style="color: red;"></span>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +119,7 @@
                                 <div class="col-sm-3">
                                 </div>
                                 <div class="col-sm-1" style="text-align: center" >
-                                    <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
+                                    <label>Password</label>
                                 </div>
                                 <div class="col-sm-3">
                                 <form:password path="password" class="form-control" placeholder="password"></form:password>
@@ -111,7 +129,7 @@
                         </div>
                     </div>
                 </section>
-                
+
 
                 <div class="form-group">
                     <div class="col-sm-5">

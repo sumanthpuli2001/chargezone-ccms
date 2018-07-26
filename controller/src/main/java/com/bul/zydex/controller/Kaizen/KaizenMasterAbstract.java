@@ -9,8 +9,10 @@ import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.ApprovalUser;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.KaizenApproval;
+import com.bul.zydex.model.KaizenApprovalHistory;
 import com.bul.zydex.model.KaizenMaster;
 import com.bul.zydex.service.Approval.ApprovalUserService;
+import com.bul.zydex.service.Kaizen.KaizenApprovalHistoryService;
 import com.bul.zydex.service.Kaizen.KaizenApprovalService;
 import com.bul.zydex.service.Kaizen.KaizenMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
@@ -25,6 +27,7 @@ public class KaizenMasterAbstract extends CustomAbstract {
     protected ApprovalUserService<ApprovalUser> approvalUserService;
     protected KaizenApprovalService<KaizenApproval> kaizenApprovalService;
     protected DesignationMasterService<DesignationMaster> designationMasterService;
+    protected KaizenApprovalHistoryService<KaizenApprovalHistory> kaizenApprovalHistoryService;
 
     public KaizenMasterService<KaizenMaster> getKaizenMasterService() {
         return kaizenMasterService;
@@ -57,5 +60,15 @@ public class KaizenMasterAbstract extends CustomAbstract {
     public DesignationMasterService<DesignationMaster> getDesignationMasterService() {
         return designationMasterService;
     }
+
+    public KaizenApprovalHistoryService<KaizenApprovalHistory> getKaizenApprovalHistoryService() {
+        return kaizenApprovalHistoryService;
+    }
+
+    public void setKaizenApprovalHistoryService(KaizenApprovalHistoryService<KaizenApprovalHistory> kaizenApprovalHistoryService) {
+        this.kaizenApprovalHistoryService = kaizenApprovalHistoryService;
+    }
+    
+    
 
 }

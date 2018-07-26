@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
- <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
+    <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -40,12 +40,12 @@
                                 </c:if>
                                 <form:form class="form-horizontal" method="post" enctype="multipart/form-data" name='form' role="form" commandName="policyCreate" onsubmit='return saveSubmit11();' action="policyMaster.htm?act=editClickSubmit">
                                     <form:hidden path="id"></form:hidden>
-
-                                        <div class="form-group">
-                                            <div class="col-sm-3">
-                                                <label class="control-label">Enter Policy Name:<span style="color: red;font-size: 5px;">*</span></label>
-                                            </div>
-                                            <div class="col-sm-5">
+                                    <input type="hidden" name="attachment" id="policyName" value="${policyCreate.attachment}">
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Enter Policy Name:<span style="color: red;font-size: 5px;">*</span></label>
+                                        </div>
+                                        <div class="col-sm-5">
                                             <form:input path="name" id="name" class="form-control" placeholder="Policy Name"/>
                                             <span id="nameError" style="color: red;"></span>
                                         </div>

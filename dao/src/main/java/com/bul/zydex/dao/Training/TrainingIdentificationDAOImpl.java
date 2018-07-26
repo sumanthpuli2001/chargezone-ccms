@@ -51,14 +51,13 @@ public class TrainingIdentificationDAOImpl<T> extends GenericsDAOImpl<T> impleme
 //                + " And a.employeeMaster.id=" + userid;
 //
 //        List<?> list = getHibernateTemplate().find(query);
-        
-        Session s=getSessionFactory().openSession();
+
+        Session s = getSessionFactory().openSession();
         String sqlString = "SELECT"
                 + " c.training_master_id,c.title,c.trainingdate"
                 + " FROM"
                 + " hr_power_astral.training_master b"
                 + " LEFT JOIN"
-                
                 + " training_identification a ON b.id = a.training_id"
                 + " LEFT JOIN"
                 + " training_sub_master c ON b.id = c.training_master_id"
@@ -151,13 +150,25 @@ public class TrainingIdentificationDAOImpl<T> extends GenericsDAOImpl<T> impleme
 
     @Override
     public List<?> readEmployeeAndTraining(int trainingId, int id) {
-        String query=""
-                   +"select a.id,a.description, a.dateTime, a.employeeMaster.employeeName"
+        String query = ""
+                + "select a.id,a.description, a.dateTime, a.employeeMaster.employeeName"
                 + " FROM EmployeeFeedback a"
                 + " where a.trainingMaster.id=" + trainingId
                 + " and a.employeeMaster.id=" + id;
-         List<?> list = getHibernateTemplate().find(query);
+        List<?> list = getHibernateTemplate().find(query);
         return list;
     }
 
+    @Override
+    public List<?> readTrainingById(String trainingId) {
+        String query = "";
+        query += " "
+                + " SELECT  a "
+                + " FROM TrainingIdentification a "
+                + " WHERE a.trainingMaster=" + trainingId;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+
+    }
 }

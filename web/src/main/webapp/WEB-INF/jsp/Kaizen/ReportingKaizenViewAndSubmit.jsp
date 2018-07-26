@@ -226,13 +226,16 @@
                                     <div class="form-group">
                                         <br>
                                         <div>
-                                            <div class="col-sm-4" style="text-align: left">
-                                                <button type="submit" class="btn btn-success" id="btnType2"  class="btn btn-primary" name="btnType"  value="Approve" style="width: 100px"> &nbsp;&nbsp;Approved</button>
+                                            <div class="col-sm-3" style="text-align: left">
+                                                <button type="submit" class="btn btn-success" id="btnType2"  class="btn btn-primary" name="btnType"  value="Approve" style="width: 100px">&nbsp;Approved</button>
                                             </div>
-                                            <div class="col-sm-4" style="text-align: center">
+                                            <div class="col-sm-3" style="text-align: center">
                                                 <button type="submit" class="btn btn-warning" id="btnType2"  class="btn btn-primary" name="btnType"  value="Recycle"  style="width: 100px"> &nbsp;&nbsp;Recycle</button>
                                             </div>
-                                            <div class="col-sm-4" style="text-align: right">
+                                            <div class="col-sm-3" style="text-align: center">
+                                                <button type="submit" class="btn btn-primary" id="btnType2"  class="btn btn-primary" name="btnType"  value="OnHold"  style="width: 100px"> &nbsp;&nbsp;On Hold</button>
+                                            </div>
+                                            <div class="col-sm-3" style="text-align: right">
                                                 <button type="submit" class="btn btn-danger" onclick="return reject();" id="btnType1" class="btn btn-primary" name="btnType" value="Reject" style="width: 100px" > &nbsp;&nbsp;Reject</button>
                                             </div>
                                         </div>

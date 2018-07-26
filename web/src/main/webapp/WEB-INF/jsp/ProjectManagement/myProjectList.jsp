@@ -13,9 +13,9 @@
     <head> 
         <title>TASK LIST </title>
         <script>
-            function viewClick(id) {
+            function viewClick(projectId,taskId) {
 //            window.location = 'employeeMaster.htm?act=viewClick&id=' + id;
-                window.location = 'trainingType.htm?act=edittraining&id=' + id;
+                window.location = 'projectManagement.htm?act=viewMyProject&projectId=' + projectId + '&taskId=' + taskId;
             }
 
             function deleteCheck11() {
@@ -36,10 +36,10 @@
     </head>
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>TASK LIST</h1>
+            <h1>MY PROJECT LIST</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">TASK LIST</li>
+                <li class="active">MY PROJECT LIST</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -56,12 +56,12 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                <c:if test="${sessionScope.userRight.employeeManagement}">
-                                <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
+                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                    <!--<button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>-->
 
 
-                                <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'projectManagement.htm?act=createTask'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
-                                </c:if>
+                                    <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'projectManagement.htm?act=createTask'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
+                                <%--</c:if>--%>
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">
@@ -83,14 +83,14 @@
                                                                     <c:if test="${sessionScope.userRight.employeeManagement}">
                                                                         <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
                                                                         </c:if>
-                                                                    <!--<th>user id</th>-->
-                                                                    <th style="width: 50px;">Training Type</th>
-                                                                    <th style="width: 50px;">Created Date</th>
-                                                                    <th style="width: 50px;">Status</th>
+                                                                    <th style="width: 50px;">Project Code</th>
+                                                                    <th style="width: 50px;">Project Name</th>
+                                                                    <th style="width: 50px;">Planned Date</th>
+                                                                    <th style="width: 50px;">DeadLine</th>
+                                                                    <!--<th style="width: 50px;">Status</th>-->
                                                                     <!--<th style="width: 50px;"></th>-->
                                                                     <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 50px;">Action</th>
-                                                                        <%--</c:if>--%>
 
                                                                 </tr>
                                                             </thead>
@@ -103,18 +103,10 @@
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
-                                                                <td>${list[1]}</td>
-                                                                <td>
-                                                                    ${list[2]}
-                                                                </td>
-                                                                <td>
-                                                                    <c:if test="${list[3]eq 0}">
-                                                                        Active
-                                                                    </c:if>
-                                                                    <c:if test="${list[3]eq 1}">
-                                                                        Inactive
-                                                                    </c:if>
-                                                                </td>
+                                                                <td>${list[3]}</td>
+                                                                <td>${list[4]}</td>
+                                                                <td>${list[5]}</td>
+                                                                <td>${list[6]}</td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
                                                                     <div class="btn-group">
@@ -126,9 +118,9 @@
 
                                                                             <li style="width: 100px;">
                                                                                 <a href="#"
-                                                                                   onclick="viewClick(${list[0]});">
+                                                                                   onclick="viewClick('${list[2]}','${list[1]}');">
                                                                                     <!--onclick="viewClick($//{list[0]},$//{list[1]});">-->
-                                                                                    &nbsp;&nbsp;Edit
+                                                                                    &nbsp;&nbsp;View
                                                                                 </a>
                                                                             </li>
                                                                             <%--</c:if>--%>

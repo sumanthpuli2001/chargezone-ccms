@@ -130,13 +130,13 @@
                                     </td>
                                 </tr>
 
-                                <tr style="background-color:whitesmoke">
+                                <tr>
                                     <td colspan="10"></td>
                                 </tr>   
 
                                 <tr>
-                                    <td style="border-right:none;" colspan="3"><b>PAN / GIR No.</b></td>
-                                    <td style="border-right:none;" colspan="3"><b>TAN No</b></td>
+                                    <td colspan="3"><b>PAN / GIR No.</b></td>
+                                    <td colspan="3"><b>TAN No</b></td>
                                     <td colspan="4"><b>PAN / GIR No.</b></td>
                                 </tr>
                                 <tr>
@@ -258,6 +258,9 @@
                                     <td style="text-align: left;" colspan="7">
                                         2 LESS : Allowances to the extent exempt under section 10
                                     </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td style="text-align: left;" colspan="6">&emsp;Allowance</td>
@@ -543,7 +546,7 @@
                                     </tr>
 
                                     <tr style="background-color:whitesmoke">
-                                        <td colspan="10" style="border: none;"></td>
+                                        <td colspan="10"></td>
                                     </tr>
 
                                     <tr>
@@ -553,7 +556,7 @@
                                     </tr>
 
                                     <tr style="background-color:whitesmoke">
-                                        <td colspan="10" style="border: none;"></td>
+                                        <td colspan="10"></td>
                                     </tr>
 
                                     <tr>
@@ -570,7 +573,7 @@
                                 <c:forEach var="list" items="${tdsList}" varStatus="index">
                                     <tr>
                                         <td style="padding: 2px;">${index.count}</td>
-                                        <td style="padding: 2px;padding: 2px;">Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${list[1]}"/> </td>
+                                        <td style="padding: 2px;text-align:right;">Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${list[1]}"/> </td>
                                         <td style="padding: 2px;"></td>
                                         <td style="padding: 2px;"></td>
                                         <td style="text-align:right;padding: 2px;">Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${list[1]}"/></td>
@@ -595,7 +598,7 @@
                                 </tr>
 
                                 <tr style="background-color:whitesmoke;">
-                                    <td colspan="10" style="border: none;"></td>
+                                    <td colspan="10"></td>
                                 </tr>
 
                                 <tr>

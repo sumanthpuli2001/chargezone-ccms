@@ -672,10 +672,11 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     
 
     protected void EmployeeTypeList(HttpServletRequest request) {
+        EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
         List<?> EmployeeTypeList = employeeTypeService.read();
         Map<Integer, String> map = new HashMap();
         for (Object obj : EmployeeTypeList) {
-            EmployeeTypeMaster employeeTypeMaster = (EmployeeTypeMaster) obj;
+            employeeTypeMaster = (EmployeeTypeMaster) obj;
             map.put(employeeTypeMaster.getId(), employeeTypeMaster.getTypeOfEmployee());
         }
         request.setAttribute("EmployeeTypeList", map);

@@ -35,7 +35,7 @@
             for (var i = 1; i <= element15; i++) {
 //                alert('hi' + document.getElementById('amount' + i).value);
                 var element = document.getElementById('amount' + i).value;
-                 alert(element)
+                alert(element)
                 sum += parseInt(element);
 //                alert("allowance"+sum);
 //                alert(sum);
@@ -239,7 +239,7 @@
 //            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
         }
 
-        
+
 
         function removePolicy(policyDiv) {
 //            try {
@@ -301,7 +301,7 @@
         }
 
     </script>
-   
+
     <script>
         var tempCount4 = 1;
         $(function () {
@@ -1854,6 +1854,13 @@
 
                                                     </div>
                                                 </div>
+
+                                                <div class="col-md-12 col-sm-12">
+                                                    <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:textarea  path="jobDescription" id="editor"></form:textarea>
+                                                    <form:errors path="jobDescription" cssClass="errorDiv"/>
+                                                </div>
+
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
@@ -2018,9 +2025,9 @@
                                                                             <span style="font-size: 14px; color: red;" id="certificateError"></span>
                                                                             <c:forEach var="certificatesList" items="${certificatesList}">
 
-                                                                            <div class="col-sm-12">
-                                                                                <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=${certificatesList}&userId=${employeeMaster.userMaster.id}">${certificatesList}</a> ]</span>
-                                                                            </div>
+                                                                                <div class="col-sm-12">
+                                                                                    <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=${certificatesList}&userId=${employeeMaster.userMaster.id}">${certificatesList}</a> ]</span>
+                                                                                </div>
                                                                             </c:forEach>
                                                                         </td>
                                                                         <td style="text-align: center"><span style='margin-top: 5px;'>
@@ -2029,11 +2036,6 @@
                                                                     </tr>
                                                                 </table>
                                                             </div></div>
-                                                        <div class="col-md-12 col-sm-12">
-                                                            <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:textarea  path="jobDescription" id="editor"></form:textarea>
-                                                            <form:errors path="jobDescription" cssClass="errorDiv"/>
-                                                        </div>
                                                     </div></div>
                                             </div>
                                         </div>

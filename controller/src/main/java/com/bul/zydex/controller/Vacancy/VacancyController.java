@@ -1885,6 +1885,7 @@ public class VacancyController extends VacancyAbstract {
         MprMaster mm = mprMasterService.readById(Integer.parseInt(mprMasterid));
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
+        vacancyMaster.setDescription(vacancyMaster.getDescription().replaceAll("&Acirc;", ""));
 
         departmentList(request);
         designationList(request);

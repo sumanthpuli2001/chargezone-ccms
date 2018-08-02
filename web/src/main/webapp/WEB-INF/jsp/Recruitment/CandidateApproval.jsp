@@ -253,7 +253,7 @@
                                                         <div id="printableArea">
                                                         <div class="col-sm-12">
                                                             <div class="col-sm-6">
-                                                                <table style="width:100%;">
+                                                                <table border="1">
                                                                     <tr>
                                                                         <td>
                                                                             <span><img src="StorageYard/candidate/candidateimage/${candidateApplyJob.applayJobUserMaster.id}/${candidateApplyJob.photograph}" style="border: 1px solid black;" width="85px; !important" height="100px; !important"></span>
@@ -262,7 +262,7 @@
                                                                 </table>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <table style="border: 1px solid black;width:100%;">
+                                                                <table border="1" style="border: 1px solid black;width:100%;">
                                                                     <tr>
                                                                         <td>
                                                                             <label>Post Applied For:</label> &nbsp;&nbsp;&nbsp;
@@ -276,7 +276,7 @@
                                                         <div class="col-sm-12">
                                                             </br></br>
                                                             <label>PERSONAL DATA:</label> </br>
-                                                            <table style="border: 1px solid black;width:100%;">
+                                                            <table border="1" style="border: 1px solid black;width:100%;">
                                                                 <tr>
                                                                     <td style="text-align: center;">
                                                                         <label>First Name:</label> &nbsp;&nbsp;
@@ -296,7 +296,7 @@
                                                         
                                                         <div class="col-sm-12">
                                                             </br></br>
-                                                            <table class="table table-bordered" style="width:100%;">
+                                                            <table border="1" class="table table-bordered" style="width:100%;">
                                                                 <tr>
                                                                     <td><label>Gender</label></td>
                                                                     <c:if test="${candidateApplyJob.sex eq 'false'}"><td colspan="3">Male</td></c:if>
@@ -318,16 +318,12 @@
                                                                     <td colspan="3">${candidateApplyJob.emailId}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="5"><label>Present Address</label></td>
+                                                                    <td><label>Present Address</label></td>
+                                                                    <td colspan="3">${candidateApplyJob.presentAddress}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="5">${candidateApplyJob.presentAddress}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="5"><label>Permanent Address</label></td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="5">${candidateApplyJob.permanentAddress}</td>
+                                                                    <td><label>Permanent Address</label></td>
+                                                                    <td colspan="3">${candidateApplyJob.permanentAddress}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td><label>Date of Birth</label></td>
@@ -420,7 +416,7 @@
                                                         <div class="col-sm-12">
                                                             </br>
                                                             <label>FAMILY BACKGROUND:</label> </br>
-                                                            <table class="table table-bordered">
+                                                            <table border="1" class="table table-bordered">
                                                                 <tr>
                                                                     <td style="text-align: center;">
                                                                         <label>Name</label>
@@ -457,7 +453,7 @@
                                                         <div class="col-sm-12">
                                                             </br>
                                                             <label>ACADEMIC QUALIFICATION:</label> </br>
-                                                            <table class="table table-bordered">
+                                                            <table border="1" class="table table-bordered">
                                                                 <tr>
                                                                     <td colspan="2" style="text-align: center; vertical-align: middle"><label>Year</label></td>
                                                                     <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Examination</label></td>
@@ -492,7 +488,7 @@
                                                         <div class="col-sm-12">
                                                             </br>
                                                             <label>ACADEMIC QUALIFICATION:</label> </br>
-                                                            <table class="table table-bordered">
+                                                            <table border="1" class="table table-bordered">
                                                                 <tr>
                                                                     <td colspan="2" style="text-align: center; vertical-align: middle"><label>Year</label></td>
                                                                     <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Organization</label></td>
@@ -528,7 +524,7 @@
                                                             </br>
                                                             <div class="col-sm-6">
                                                                 <label>Present Salary Details:</label> </br>
-                                                                <table class="table table-bordered">
+                                                                <table border="1" class="table table-bordered">
                                                                     <tr>
                                                                         <td style="text-align: center; vertical-align: middle"><label>Present Salary Breakup</label></td>
                                                                         <td style="text-align: center; vertical-align: middle"><label>Salary Slip to be Attached</label></td>
@@ -579,17 +575,17 @@
                                                             </div>
                                                             </br>
                                                             <div class="col-sm-6">
-                                                                <table class="table table-bordered" style="width:100%">
+                                                                <table border="1" class="table table-bordered" style="width:100%">
                                                                     <tr>
                                                                         <td style="vertical-align: middle;"><label>Salary Expected:</label>&nbsp;&nbsp;<span>${candidateApplyJob2.salaryExpected}</span></td>
                                                                     </tr>
                                                                 </table>
-                                                                <table class="table table-bordered">
+                                                                <table border="1" class="table table-bordered">
                                                                     <tr>
                                                                         <td style="vertical-align: middle"><label>Joining Time Required:&nbsp;&nbsp;</label><span>${candidateApplyJob2.noticePeriod}</span></td>
                                                                     </tr>
                                                                 </table>
-                                                                <table class="table table-bordered">
+                                                                <table border="1" class="table table-bordered">
                                                                     <tr>
                                                                         <td style="vertical-align: middle">
                                                                             <c:if test="${candidateApplyJob2.esicStatus eq 1}"><label>ESIC:</label>&nbsp;&nbsp;<span>Yes</span></br></c:if>
@@ -601,7 +597,7 @@
                                                                         </td>
                                                                     </tr>
                                                                 </table>
-                                                                <table class="table table-bordered">
+                                                                <table border="1" class="table table-bordered">
                                                                     <tr>
                                                                         <td style="vertical-align: middle">
                                                                             <label>Download Attached Resume:</label>&nbsp;&nbsp;<span><a href="vacancy.htm?act=downloadCandidateCertificate&cajid=${candidateApplyJob.id}&fileName=${candidateApplyJob.certificateAttach}">${candidateApplyJob.certificateAttach}</a></span></br>
@@ -614,7 +610,7 @@
                                                         <div class="col-sm-12">
                                                             </br>
                                                             <label>REFERENCES(Other than relatives):</label> </br>
-                                                            <table class="table table-bordered">
+                                                            <table border="1" class="table table-bordered">
                                                                 <tr>
                                                                     <td  style="text-align: center; vertical-align: middle"><label>Name</label></td>
                                                                     <td  style="text-align: center; vertical-align: middle"><label>Organization</label></td>

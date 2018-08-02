@@ -103,90 +103,90 @@ public class LogInController extends LogInAbstract {
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 
-        int lockCounter = Integer.parseInt(request.getParameter("lockCounter"));
+            int lockCounter = Integer.parseInt(request.getParameter("lockCounter"));
 
-        UserMaster user = new UserMaster();
-        BindException errors = new BindException(user, "userMaster");
-        bind(request, user);
-        loginValidator.validate(user, errors);
-        if (errors.hasErrors()) {
-            request.setAttribute("faliureMessage",
-                    "Error : Username or Password is not valid.");
-            mv.addAllObjects(errors.getModel());
-            mv.getModelMap().put("user", user);
-            mv.setViewName("User/Login");
-        } else {
-            List<?> tempList = userMasterService.read(user);
-            if (null == tempList || tempList.isEmpty()) {
-
-                List<?> tempList2 = userMasterService.readByUserName(user);
-                if (!tempList2.isEmpty()) {
-                    lockCounter += 1;
-                    request.setAttribute("lockCounter", lockCounter);
-                    if (5 == lockCounter) {
-                        UserMaster user2;
-                        user2 = (UserMaster) tempList2.get(0);
-                        user2.setBlockStatus(true);
-                        userMasterService.update(user2);
-                        request.setAttribute("faliureMessage",
-                                "Error : Your account is locked as You have attemped five times.");
-                    } else {
-                        request.setAttribute("faliureMessage",
-                                "Error : Username or Password is not valid or exist.");
-                    }
-                } else {
-                    request.setAttribute("faliureMessage",
-                            "Error : Username or Password is not valid or exist.");
-                }
+            UserMaster user = new UserMaster();
+            BindException errors = new BindException(user, "userMaster");
+            bind(request, user);
+            loginValidator.validate(user, errors);
+            if (errors.hasErrors()) {
+                request.setAttribute("faliureMessage",
+                        "Error : Username or Password is not valid.");
                 mv.addAllObjects(errors.getModel());
                 mv.getModelMap().put("user", user);
                 mv.setViewName("User/Login");
             } else {
-                UserMaster user3;
-                user3 = (UserMaster) tempList.get(0);
-                int userId = 0;
-                boolean DateOfLeavingflag = false;
-                userId = user3.getId();
-                if (userId != 0) {
-                    List list = employeeMasterService.readDateOfLeaving(userId);
-                    if (!list.isEmpty()) {
-                        if (!"".equals(list.get(0)) && null != list.get(0)) {
-                            String date = (String) list.get(0);
-                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
-                            Date doldate = sdf.parse(date);
-                            String today = sdf.format(new Date());
-                            Date tDate = sdf.parse(today);
-                            if (doldate.before(tDate)) {
-                                DateOfLeavingflag = true;
+                List<?> tempList = userMasterService.read(user);
+                if (null == tempList || tempList.isEmpty()) {
+
+                    List<?> tempList2 = userMasterService.readByUserName(user);
+                    if (!tempList2.isEmpty()) {
+                        lockCounter += 1;
+                        request.setAttribute("lockCounter", lockCounter);
+                        if (5 == lockCounter) {
+                            UserMaster user2;
+                            user2 = (UserMaster) tempList2.get(0);
+                            user2.setBlockStatus(true);
+                            userMasterService.update(user2);
+                            request.setAttribute("faliureMessage",
+                                    "Error : Your account is locked as You have attemped five times.");
+                        } else {
+                            request.setAttribute("faliureMessage",
+                                    "Error : Username or Password is not valid or exist.");
+                        }
+                    } else {
+                        request.setAttribute("faliureMessage",
+                                "Error : Username or Password is not valid or exist.");
+                    }
+                    mv.addAllObjects(errors.getModel());
+                    mv.getModelMap().put("user", user);
+                    mv.setViewName("User/Login");
+                } else {
+                    UserMaster user3;
+                    user3 = (UserMaster) tempList.get(0);
+                    int userId = 0;
+                    boolean DateOfLeavingflag = false;
+                    userId = user3.getId();
+                    if (userId != 0) {
+                        List list = employeeMasterService.readDateOfLeaving(userId);
+                        if (!list.isEmpty()) {
+                            if (!"".equals(list.get(0)) && null != list.get(0)) {
+                                String date = (String) list.get(0);
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+                                Date doldate = sdf.parse(date);
+                                String today = sdf.format(new Date());
+                                Date tDate = sdf.parse(today);
+                                if (doldate.before(tDate)) {
+                                    DateOfLeavingflag = true;
+                                }
                             }
                         }
                     }
-                }
-                if (user3.isBlockStatus()) {
-                    request.setAttribute("faliureMessage",
-                            "Error : Your account is locked.");
-                    mv.addAllObjects(errors.getModel());
-                    mv.getModelMap().put("user", user3);
-                    mv.setViewName("User/Login");
-                } else if (user3.isFirstTime()) {
-                    request.setAttribute("userName",
-                            user3.getUserName());
-                    mv.setViewName("forward:out.html?act=changePwd");
-                } else if (DateOfLeavingflag == true) {
-                    request.setAttribute("faliureMessage",
-                            "Error : Sorry,Your Account is Deactivated.");
-                    mv.addAllObjects(errors.getModel());
-                    mv.getModelMap().put("user", user3);
-                    mv.setViewName("User/Login");
-                } else {
-                    request.setAttribute("user", user3);
-                    mv = home(request, response);
+                    if (user3.isBlockStatus()) {
+                        request.setAttribute("faliureMessage",
+                                "Error : Your account is locked.");
+                        mv.addAllObjects(errors.getModel());
+                        mv.getModelMap().put("user", user3);
+                        mv.setViewName("User/Login");
+                    } else if (user3.isFirstTime()) {
+                        request.setAttribute("userName",
+                                user3.getUserName());
+                        mv.setViewName("forward:out.html?act=changePwd");
+                    } else if (DateOfLeavingflag == true) {
+                        request.setAttribute("faliureMessage",
+                                "Error : Sorry,Your Account is Deactivated.");
+                        mv.addAllObjects(errors.getModel());
+                        mv.getModelMap().put("user", user3);
+                        mv.setViewName("User/Login");
+                    } else {
+                        request.setAttribute("user", user3);
+                        mv = home(request, response);
+                    }
                 }
             }
+            request.setAttribute("lockCounter", lockCounter);
+            return mv;
         }
-        request.setAttribute("lockCounter", lockCounter);
-        return mv;
-    }
 
     public ModelAndView newPwdSubmit(HttpServletRequest request,
             HttpServletResponse response) throws Exception {

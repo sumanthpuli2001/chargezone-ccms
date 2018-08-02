@@ -196,9 +196,11 @@ public class KaizenMasterController extends KaizenMasterAbstract {
             kaizenMaster.setMorale(1);
         }
         kaizenMaster.setCreatedBy(employeeMaster.getId());
-        kaizenMaster.setCreatedDate(dtf.format(localDate));
+        kaizenMaster.setCreatedDate(sdf.format(cDate));
         kaizenMaster.setStatus(0);
+        if("" != employeeMaster.getReportingManagerLevel1()){
         kaizenMaster.setReportingId(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+        }
         kaizenMaster.setTotalLevel(0);
         kaizenMaster.setCurrentLevel(0);
         kaizenMasterService.create(kaizenMaster);

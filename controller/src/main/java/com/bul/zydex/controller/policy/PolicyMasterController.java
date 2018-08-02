@@ -329,12 +329,21 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         policyCreate.setReadDate(sdf.format(cDate));
         policyCreateService.update(policyCreate);
 
-//        policyReadHistory.setPolicyCreate(policyCreate);
-//        policyReadHistory.setReaderBy(employeeMaster.getEmployeeName());
-//        policyReadHistory.setReaderDate(sdf.format(cDate));
-//        policyReadHistory.setPolicyAcept(policyCreate.getAcceptPolicy());
-//        policyReadHistory.setPolicyAceptTime(sdf.format(cDate));
-//        policyReadHistoryService.create(policyReadHistory);
+        try {
+//            policyReadHistory1 = policyReadHistoryService.readByPolicyId(Integer.parseInt(id));
+//            policyReadHistory2 = policyReadHistoryService.policyReadCheck(Integer.parseInt(id), policyReadHistory1.getReaderBy());
+//            if (policyReadHistory2 != null) {
+                policyReadHistory.setPolicyCreate(policyCreate);
+                policyReadHistory.setReaderBy(employeeMaster.getEmployeeName());
+                policyReadHistory.setReaderDate(sdf.format(cDate));
+                policyReadHistory.setPolicyAcept(0);
+                policyReadHistoryService.create(policyReadHistory);
+//            }
+
+        } catch (Exception e) {
+
+        }
+
         mv.getModel().put("policyCreate", policyCreate);
         mv.getModel().put("employeeMaster", employeeMaster);
         mv.setViewName("Policy/ReadViewPolicy");
@@ -358,15 +367,11 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         policyCreateService.update(policyCreate);
 
         PolicyReadHistory policyReadHistory = new PolicyReadHistory();
-//        policyReadHistory.setPolicyAcept(1);
-//        policyReadHistory.setPolicyAceptTime(sdf.format(cDate));
-//        policyReadHistoryService.update(policyReadHistory);
-        policyReadHistory.setPolicyCreate(policyCreate);
-        policyReadHistory.setReaderBy(employeeMaster.getEmployeeName());
-        policyReadHistory.setReaderDate(sdf.format(cDate));
+        policyReadHistory = policyReadHistoryService.readByPolicyId(Integer.parseInt(id));
+
         policyReadHistory.setPolicyAcept(1);
         policyReadHistory.setPolicyAceptTime(sdf.format(cDate));
-        policyReadHistoryService.create(policyReadHistory);
+        policyReadHistoryService.update(policyReadHistory);
 
         mv = dashboardshowPolicy(request, response);
         return mv;

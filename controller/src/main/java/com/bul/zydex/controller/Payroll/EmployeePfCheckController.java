@@ -255,11 +255,19 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
             l.remove(2).equals(l);
             l.remove(2).equals(l);
             l.remove(2).equals(l);
+
             for (int y = 2; y < 9; y++) {
-                if (null != l.get(y)) {
-                    Double l1 = (Double) l.get(y);
-                    l.set(y, String.format("%.0f", l1));
+                try {
+
+                    if (null != l.get(y)) {
+
+                        Double l1 = (Double) l.get(y);
+                        l.set(y, String.format("%.0f", l1));
+                    }
+                } catch (Exception e) {
+
                 }
+
             }
             listString = (String) l.stream().map(Object::toString)
                     .collect(Collectors.joining("#~#"));

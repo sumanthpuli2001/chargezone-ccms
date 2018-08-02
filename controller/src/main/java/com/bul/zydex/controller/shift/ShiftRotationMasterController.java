@@ -520,7 +520,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //        employeeMaster.setUserMaster(userMaster);
 //        List<?> empList = employeeMasterService.readByEmployeeUserId(employeeMaster);
 //        List<?> empList = employeeMasterService.read();
-         employeeShiftDataService.updateNullShiftId();     //.........this line for update employee shift_id null to 1.....//
+        employeeShiftDataService.updateNullShiftId();     //.........this line for update employee shift_id null to 1.....//
         List<?> empList = employeeDatetimeDataService.readEmployeeByCurrentDate();
         for (Object zz : empList) {
             try {
@@ -5213,8 +5213,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     employeeInfoList.add("PR");
                     Date empEndDate = sdf3.parse(empEndTime1[1]);
                     Date shiftEndDate = null;
-                    if(!shiftEndTime.isEmpty() && !shiftEndTime.equals(""))
-                    {
+                    if (!shiftEndTime.isEmpty() && !shiftEndTime.equals("")) {
                         shiftEndDate = sdf3.parse(shiftEndTime);
                         if (empEndDate.before(shiftEndDate)) {
                             employeeInfoList.add("AB");
@@ -14025,12 +14024,16 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                }
                 }
 
+            } else {
+                request.setAttribute("successMessage", "Information : The Excel Uploaded Successfully.");
+                 mv = employeeShiftChangeMonthly(request, response);
             }
-            request.setAttribute("successMessage", "Information : The Excel Uploaded Successfully.");
             if (count > 0) {
                 request.setAttribute("failureMessage", "Information : " + countEmpId + " Rcecords Not Inserted Due To Employe No Is Not Correct");
+                 mv = employeeShiftChangeMonthly(request, response);
+            } else {
+                mv = employeeShiftChangeMonthly(request, response);
             }
-            mv = employeeShiftChangeMonthly(request, response);
         } catch (Exception e) {
             request.setAttribute("failureMessage", "Information : The Excel Not Upload Successfully. Please Check Excel Data.");
             mv = employeeShiftChangeMonthly(request, response);
@@ -14634,7 +14637,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         firstHalfList.add("" + col);
                         firstHalfList.add("" + lwp);
 
-                        Row row1 = firstSheet.createRow(rownum-1);
+                        Row row1 = firstSheet.createRow(rownum - 1);
                         for (int k1 = 0; k1 < firstHalfList.size(); k1++) {
                             Cell cell = row1.createCell(k1);
 
@@ -14644,9 +14647,9 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         }
 
                     }
-                        rownum++;
+                    rownum++;
                 }
-                   //done rownum-1 to remove space
+                //done rownum-1 to remove space
 //                rownum++;
             }
 

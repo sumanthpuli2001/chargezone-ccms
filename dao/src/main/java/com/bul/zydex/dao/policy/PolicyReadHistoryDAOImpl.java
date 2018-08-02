@@ -50,4 +50,23 @@ public class PolicyReadHistoryDAOImpl<T> extends GenericsDAOImpl<T> implements P
         return list;
     }
 
+    @Override
+    public PolicyReadHistory policyReadCheck(int policyId, String readerName) {
+
+        PolicyReadHistory policyReadHistory = new PolicyReadHistory();
+
+        String query = " SELECT a"
+                + " FROM PolicyReadHistory a "
+                + " WHERE a.policyCreate.id = " + policyId
+                + " AND a.readerBy = " + readerName;
+
+        List<?> list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            policyReadHistory = (PolicyReadHistory) list.get(0);
+        } else {
+            policyReadHistory = null;
+        }
+        return policyReadHistory;
+    }
+
 }

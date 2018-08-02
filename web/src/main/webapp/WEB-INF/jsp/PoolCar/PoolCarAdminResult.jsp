@@ -95,7 +95,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>End Date<span style="color: red;font-size: 12px;"></span></label>
+                                                            <label>End Date:<span style="color: red;font-size: 12px;"></span></label>
                                                             <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <input id="endDate" name="endDate" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" />
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>

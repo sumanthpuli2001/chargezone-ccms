@@ -9,7 +9,6 @@
 <html>
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
-      <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -1340,5 +1339,6 @@
     <!--<form>
         <input type="button" value="Print" onclick="window.print()">
     </form> ------>
+     <%--<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>--%>
 </html>
 

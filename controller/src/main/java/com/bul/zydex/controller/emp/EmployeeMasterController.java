@@ -861,6 +861,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        selectedEmployeeLevel5(request, employeeMaster);
 //        selectedEmployeeLevel6(request, employeeMaster);
         BindException errors = new BindException(employeeMaster, "employeeMaster");
+        employeeMaster.setJobDescription(employeeMaster.getJobDescription().replaceAll("&Acirc;", ""));
 
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s
         List<?> lastYearPerformanceRatingsOfEmployeeList = employeeMasterService.getLastYearPerformanceRatingOfEmployee(employeeMaster.getId());

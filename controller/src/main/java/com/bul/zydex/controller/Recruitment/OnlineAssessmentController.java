@@ -140,7 +140,6 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
             mprApprovalHistory.setMprMaster(vm.getMprMaster());
             mprApprovalHistoryService.create(mprApprovalHistory);
 
-           
             DepartmentMaster departmentMaster = new DepartmentMaster();
             LocationMaster locationMaster = new LocationMaster();
             JobtypeMaster jobtypeMaster = new JobtypeMaster();
@@ -261,10 +260,13 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
             mv.setViewName("Recruitment/CandidateApproval");
 
         } catch (Exception e) {
-            request.setAttribute("failureMessage",
-                    "All field are Required.Please Enter Valid data");
+//            request.setAttribute("failureMessage",
+//                    "All field are Required.Please Enter Valid data");
 
         }
+        request.setAttribute("successMessage",
+                "Information : Assessment Submitted successfully.");
+        mv.setViewName("Recruitment/CandidateApproval");
         return mv;
 
     }

@@ -91,7 +91,9 @@
                                                             <td><input type="text" name="savingTypeAmount1" value="${list1[1]}" class="form-control savingTypeAmount1"></td>
 
                                                             <c:choose>
-                                                                <c:when test="${((list1[1] == 0.0 and (list1[2] != '' or list1[2] != null))) or ((list1[1] != 0.0 and (list1[2] == '' or list1[2] == null))) or ((list1[1] == 0.0 and (list1[2] == '' or list1[2] == null)))}">
+                                                              
+                                                                <%--<c:when test="${((list1[1] == 0.0 and (list1[2] != '' or list1[2] != null))) or ((list1[1] != 0.0 and (list1[2] == '' or list1[2] == null))) or ((list1[1] == 0.0 and (list1[2] == '' or list1[2] == null)))}">--%>
+                                                                <c:when test="">
                                                                     <td><span class="label label-warning"></span></td>
                                                                     <td><span class="label label-warning"></span></td>
                                                                     <td><span class="label label-warning"></span></td>

@@ -701,7 +701,6 @@
         <property name="payrollFormSixteenMasterService" ref="payrollFormSixteenMasterService1" />
         <property name="payrollFormSixteenMasterValidator" ref="payrollFormSixteenMasterValidator1" />
         <property name="payrollFinancialYearService" ref="payrollFinancialYearService1" />
-      
     </bean>
     <bean id="payrollStationWiseSavingTaxController1" class="com.bul.zydex.controller.Payroll.PayrollStationWiseSavingTaxController" parent="controllerConfig" >
         <property name="payrollStationWiseSavingTaxService" ref="payrollStationWiseSavingTaxService1" />
@@ -812,6 +811,7 @@
         <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
         <property name="payrollPfRecordService" ref="payrollPfRecordService1" />
         <property name="retirementAgeService" ref="retirementAgeService1" />
+        <property name="employeeDatetimeDataService" ref="employeeDatetimeDataService1" />
     </bean>
     <bean id="additionalAmountCheckController1" class="com.bul.zydex.controller.Payroll.AdditionalAmountCheckController" parent="controllerConfig" >
         <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />
@@ -826,6 +826,7 @@
         <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
         <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
         <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeePolicyDetailService" ref="employeePolicyDetailService1" />
         <property name="employeeAdditionalSalaryService" ref="employeeAdditionalSalaryService1" />
         <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
         <property name="payrollSalaryTypeService" ref="payrollSalaryTypeService1" />

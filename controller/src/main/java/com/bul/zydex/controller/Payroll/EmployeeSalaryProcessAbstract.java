@@ -11,6 +11,7 @@ import com.bul.zydex.model.CtcAllowance;
 import com.bul.zydex.model.EmployeeAdditionalSalary;
 import com.bul.zydex.model.EmployeeCtcDetail;
 import com.bul.zydex.model.EmployeeCtcDetailSalary;
+import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
 import com.bul.zydex.model.EmployeePolicyDetail;
@@ -81,6 +82,7 @@ import com.bul.zydex.service.emp.EmployeeTypeService;
 import com.bul.zydex.service.policy.CtcAllowanceService;
 import com.bul.zydex.service.policy.EmployeeCtcDetailService;
 import com.bul.zydex.service.policy.PolicyMasterService;
+import com.bul.zydex.service.shift.EmployeeDatetimeDataService;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
 import java.util.HashMap;
 import java.util.List;
@@ -132,11 +134,18 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
     protected PayrollPfRecordService<PayrollPfRecord> payrollPfRecordService;
     protected RetirementAgeService<RetirementAge> retirementAgeService;
+    protected EmployeeDatetimeDataService<EmployeeDatetimeData> employeeDatetimeDataService;
 
     
     Validator employeeSalaryProcessValidator;
 
-    
+    public EmployeeDatetimeDataService<EmployeeDatetimeData> getEmployeeDatetimeDataService() {
+        return employeeDatetimeDataService;
+    }
+
+    public void setEmployeeDatetimeDataService(EmployeeDatetimeDataService<EmployeeDatetimeData> employeeDatetimeDataService) {
+        this.employeeDatetimeDataService = employeeDatetimeDataService;
+    }
     
     public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
         return employeeShiftDataService;

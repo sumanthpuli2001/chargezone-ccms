@@ -17,20 +17,18 @@ import com.bul.zydex.model.PayrollTaxDeductionComponent;
 import com.bul.zydex.model.PayrollTaxDeductionMaster;
 import com.bul.zydex.model.TaxDeductionDecarationSubmit;
 import com.bul.zydex.model.TaxSavingSubmit;
-import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.util.DownloadFile;
 import java.io.File;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -141,18 +139,149 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
             totalBasicSalary += (Double) next[0];
             totalAdditionalAmount += (Double) next[1];
         }
-        double totallist = totalBasicSalary + totalAdditionalAmount;
-        List<?> employeeDeductionPtAmountList = employeeDeductionAmountService.readCheckDeductionPtAmount(Integer.parseInt(id), payrollFinancialYear);
 
-        mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
-        request.setAttribute("employeeMaster", employeeMaster);
-        request.setAttribute("payrollFormSixteenMaster", payrollFormSixteenMaster);
-        request.setAttribute("payrollSavingAmountList", payrollSavingAmountList);
-        request.setAttribute("totallist", totallist);
-        request.setAttribute("totalSavinglist", totalSavinglist);
-        request.setAttribute("employeeDeductionAmountList", employeeDeductionAmountList);
-        request.setAttribute("employeeDeductionPtAmountList", employeeDeductionPtAmountList);
-        mv.setViewName("Payroll/FormSixteenForm");
+        double totallist = 0.00;
+        totallist += totalBasicSalary + totalAdditionalAmount;
+
+        //adding policydetail amount to total gross;
+        try {
+            List<Double> employeePolicyDetailAmountList = (List<Double>) employeePolicyDetailService.readBypolicyAmountWithTaxable(Integer.parseInt(id));
+            if (employeePolicyDetailAmountList != null && employeePolicyDetailAmountList.size() > 0) {
+                if (employeePolicyDetailAmountList.get(0) != null && !employeePolicyDetailAmountList.get(0).equals("")) {
+                    totallist += employeePolicyDetailAmountList.get(0);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //adding pt amount;
+        double deductionPtAmount = 0.00;
+        try {
+            List<?> employeeDeductionPtAmountList = employeeDeductionAmountService.readCheckDeductionPtAmount(Integer.parseInt(id), payrollFinancialYear);
+            if (employeeDeductionPtAmountList != null && employeeDeductionPtAmountList.size() > 0) {
+                Object[] o = (Object[]) employeeDeductionPtAmountList.get(0);
+                String s = (String) o[1];
+                if (s != null && !s.equals("")) {
+                    deductionPtAmount += Double.parseDouble(s);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        List<String> sectionNameList = new ArrayList<String>();
+        List<List> component80CList = new ArrayList<List>();
+        List<List> tdsList = new ArrayList<List>();
+        //adding pf amount;
+        double deductionPfAmount = 0.00;
+        double tdsTotal = 0.00;
+        try {
+            List<?> employeeDeductionPfAmountList = employeeDeductionAmountService.readCheckDeductionAmount(Integer.parseInt(id), payrollFinancialYear);
+            if (employeeDeductionPfAmountList != null && employeeDeductionPfAmountList.size() > 0) {
+                Object[] o = (Object[]) employeeDeductionPfAmountList.get(0);
+                String s = (String) o[1];
+                if (s != null && !s.equals("")) {
+                    deductionPfAmount += Double.parseDouble(s);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            List<?> sectionComponentAmountList = taxDeductionDecarationSubmitService.readComponentAmountByEmployeeId(Integer.parseInt(id), Integer.parseInt(financialYearId));
+            if (!sectionComponentAmountList.isEmpty()) {
+
+                Iterator itrSectionComponent = (Iterator) sectionComponentAmountList.iterator();
+                while (itrSectionComponent.hasNext()) {
+                    Object[] next = (Object[]) itrSectionComponent.next();
+                    sectionNameList.add("" + next[0]);
+                    if (next[0].equals("80C")) {
+                        List list = new ArrayList();
+                        list.add("" + next[1]);
+                        list.add("" + next[2]);
+                        component80CList.add(list);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            List<?> tdsAmountList = employeeDeductionAmountService.readEmployeeTdsAmountWithMonth(Integer.parseInt(id), payrollFinancialYear.getStartDate(), payrollFinancialYear.getEndDate());
+//            if (!tdsAmountList.isEmpty()) {
+
+                List dates = new ArrayList<>();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/yyyy");
+
+                Calendar beginCalendar = Calendar.getInstance();
+                Calendar finishCalendar = Calendar.getInstance();
+
+                try {
+                    beginCalendar.setTime(dateFormat.parse(payrollFinancialYear.getStartDate()));
+                    finishCalendar.setTime(dateFormat.parse(payrollFinancialYear.getEndDate()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                while (beginCalendar.before(finishCalendar)) {
+                    List finalListTemp = new ArrayList();
+                    String date = dateFormat1.format(beginCalendar.getTime());
+                    dates.add(date);
+                    finalListTemp.add(date);
+                    finalListTemp.add("" + 0.00);
+                    tdsList.add(finalListTemp);
+                    beginCalendar.add(Calendar.MONTH, 1);
+                }
+                List onlyDatesFromDb = new ArrayList();
+                for (Object l1 : tdsAmountList) {
+                    Object[] next = (Object[]) l1;
+                    onlyDatesFromDb.add(next[1]);
+                }
+
+                 for (int i = 0; i < onlyDatesFromDb.size(); i++) {
+                    if (dates.indexOf("" + onlyDatesFromDb.get(i)) > 0) {
+                        int index = dates.indexOf("" + onlyDatesFromDb.get(i));
+                        Object[] next = (Object[]) tdsAmountList.get(i);
+                        Double a = (Double) next[2];
+                        ((List) tdsList.get(index)).set(1,a);
+                        tdsTotal += a;
+                    }
+                }
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mv.getModelMap()
+                .put("employeeSalaryProcess", employeeSalaryProcess);
+        request.setAttribute(
+                "employeeMaster", employeeMaster);
+        request.setAttribute(
+                "payrollFormSixteenMaster", payrollFormSixteenMaster);
+        request.setAttribute(
+                "payrollSavingAmountList", payrollSavingAmountList);
+        request.setAttribute(
+                "totallist", totallist);
+        request.setAttribute(
+                "totalSavinglist", totalSavinglist);
+        request.setAttribute(
+                "employeeDeductionAmountList", employeeDeductionAmountList);
+        request.setAttribute(
+                "employeeDeductionPtAmountList", deductionPtAmount);
+        request.setAttribute(
+                "deductionPfAmount", deductionPfAmount);
+        request.setAttribute(
+                "component80CList", component80CList);
+        request.setAttribute(
+                "tdsList", tdsList);
+        request.setAttribute(
+                "tdsTotal", tdsTotal);
+        mv.setViewName(
+                "Payroll/FormSixteenForm");
         return mv;
     }
 
@@ -240,7 +369,7 @@ public class PayrollEmployeeFormSixteenController extends PayrollEmployeeFormSix
         }
         request.setAttribute("failureMessage",
                 "Error : Please Select Financial year.");
-         financialYearList(request);
+        financialYearList(request);
         mv = redirectToFormEmployeeSaving(request, response);
         return mv;
     }

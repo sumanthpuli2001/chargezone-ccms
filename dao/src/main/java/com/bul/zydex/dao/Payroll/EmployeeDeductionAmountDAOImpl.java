@@ -7,7 +7,6 @@ package com.bul.zydex.dao.Payroll;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.EmployeeDeductionAmount;
-import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.PayrollFinancialYear;
 import java.text.SimpleDateFormat;
@@ -67,6 +66,35 @@ public class EmployeeDeductionAmountDAOImpl<T> extends GenericsDAOImpl<T> implem
         return list;
 
     }
+   
+//    public List<?> readCheckDeductionAmount(int empId, PayrollFinancialYear payrollFinancialYear) {
+//
+//        String sDate = payrollFinancialYear.getStartDate();
+//        String eDate = payrollFinancialYear.getEndDate();
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        SimpleDateFormat sdf1 = new SimpleDateFormat("MM/yyyy");
+//        try {
+//
+//            Date s1Date = sdf.parse(sDate);
+//            Date e1Date = sdf.parse(eDate);
+//
+//            sDate = sdf1.format(s1Date);
+//            eDate = sdf1.format(e1Date);
+//
+//        } catch (Exception e) {
+//
+//        }
+//        String query = "";
+//        query += "select a.deductionType,SUM(a.deductionAmount) from EmployeeDeductionAmount a "
+//                + " left join a.employeeSalaryProcess b"
+//                + " where a.deductionType like '%Provident Fund%'"
+//                + " and b.employeeMaster.id  = " + empId
+//                + " and STR_TO_DATE(CONCAT(b.month,'/',b.year), '%m/%Y') BETWEEN STR_TO_DATE('" + sDate + "', '%m/%Y') and STR_TO_DATE('" + eDate + "', '%m/%Y')";
+//
+//        List<?> list = getHibernateTemplate().find(query);
+//        return list;
+//
+//    }
 
     @Override
     public List<?> readEmployeeForSalaryDeductioninfo(EmployeeSalaryProcess employeeSalaryProcess) {
@@ -257,6 +285,39 @@ public class EmployeeDeductionAmountDAOImpl<T> extends GenericsDAOImpl<T> implem
 //        String condition = "";
 
         query += " Select a.deductionType,a.deductionAmount"
+                + " From EmployeeDeductionAmount a"
+                + " left join a.employeeSalaryProcess b"
+                + " where b.employeeMaster.id= " + employeeMasterID
+                + " and a.deductionType like '%TDS%'"
+                + " and STR_TO_DATE(CONCAT(b.month,'/',b.year), '%m/%Y') BETWEEN STR_TO_DATE('" + sDate + "', '%m/%Y') and STR_TO_DATE('" + eDate + "', '%m/%Y')"
+                + " group by b.id";
+
+        return getHibernateTemplate().find(query);
+    }
+    
+    @Override
+    public List<?> readEmployeeTdsAmountWithMonth(int employeeMasterID, String startDate, String endate) {
+        String query = "";
+        String condition = "";
+        String sDate = startDate;
+        String eDate = endate;
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat sdf1 = new SimpleDateFormat("MM/yyyy");
+        try {
+
+            Date s1Date = sdf.parse(startDate);
+            Date e1Date = sdf.parse(endate);
+
+            sDate = sdf1.format(s1Date);
+            eDate = sdf1.format(e1Date);
+
+        } catch (Exception e) {
+
+        }
+//      String query = "";
+//        String condition = "";
+
+        query += " Select a.deductionType,CONCAT(b.month,'/',b.year),a.deductionAmount"
                 + " From EmployeeDeductionAmount a"
                 + " left join a.employeeSalaryProcess b"
                 + " where b.employeeMaster.id= " + employeeMasterID

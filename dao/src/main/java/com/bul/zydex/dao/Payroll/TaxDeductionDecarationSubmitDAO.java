@@ -39,4 +39,6 @@ public interface TaxDeductionDecarationSubmitDAO<T> extends GenericsDAO<T> {
     public List<?> readTaxDeductionDecarationSubmitSalaryGenerateAfterDate(int taxSavingSubmitID);
 
     public List<?> readTaxDeductionDecarationSubmitSalaryGenerateTaxSavingLimit(int taxSavingSubmitID);
+
+    public List<?> readComponentAmountByEmployeeId(int eId, int fId);
 }

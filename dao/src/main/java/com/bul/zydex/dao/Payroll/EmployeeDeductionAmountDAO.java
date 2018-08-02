@@ -42,5 +42,7 @@ public interface EmployeeDeductionAmountDAO<T> extends GenericsDAO<T> {
 
     public List<?> readEmployeeTdsAmount(int employeeMasterID, String startDate, String endate);
     
+    public List<?> readEmployeeTdsAmountWithMonth(int employeeMasterID, String startDate, String endate);
+    
     public List<?> fetchsalary(int edaId, String eftDate, String relivDate);
 }

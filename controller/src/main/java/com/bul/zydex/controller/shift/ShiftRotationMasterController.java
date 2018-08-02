@@ -14089,6 +14089,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                     int empId = employeeShiftData.getEmployeeMaster().getId();
                     EmployeeMaster employeeMaster = employeeMasterService.readById(empId);
+                    boolean otStatus = employeeMaster.getOt();
 
                     long diff1 = 0;
                     long diff2 = 0;
@@ -14200,7 +14201,17 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             if (totalWorkingTime > empHour) {
                                 timeDiff = totalWorkingTime - empHour;
                             } else {
-                                timeDiff = empHour - totalWorkingTime;
+                                //CHANGED HERE on 06/07/2018 for SPC OT for -1 regular hours + 5 hours
+                                if (otStatus == true) {
+                                    timeDiff = empHour - totalWorkingTime;
+                                } else {
+                                    timeDiff = empHour - (totalWorkingTime + 5.0);
+                                    if(timeDiff >= 0){
+                                        time2 = "1.0";
+                                    } else{
+                                        time2 = "0.0";
+                                    }
+                                }
                             }
 
 //                            if (employeeMaster.getOt().equals(true)) {
@@ -14214,13 +14225,14 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                                    ////End
 //                                }
 //                            }
-                            if (timeDiff >= 4 && timeDiff <= 7.9) {
-                                time2 = "0.5";                                                                 //For shortleave if time difference gretaer than working hours short leave will be added
-                            } else if (timeDiff >= 8 && timeDiff <= 11.9) {
-                                time2 = "1.0";
-                            } else if (timeDiff >= 12) {
-                                time2 = "1.5";
-                            }
+                            
+//                            if (timeDiff >= 4 && timeDiff <= 7.9) {
+//                                time2 = "0.5";                                                                 //For shortleave if time difference gretaer than working hours short leave will be added
+//                            } else if (timeDiff >= 8 && timeDiff <= 11.9) {
+//                                time2 = "1.0";
+//                            } else if (timeDiff >= 12) {
+//                                time2 = "1.5";
+//                            } 
                             //..................old..code..............//
 //                            if (empHour >= 4 && empHour <= 7.9) {
 //                                time2 = "0.5";                                                                 //For shortleave if time difference gretaer than working hours short leave will be added
@@ -14269,11 +14281,20 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 totalWorkingTime = (double) workingTimeInHours / 60;
                             }
                             double timeDiff = 0.0d;
-//                            if (totalWorkingTime > empHour) {
-//                                timeDiff = totalWorkingTime - empHour;
-//                            } else {
-//                                timeDiff = empHour - totalWorkingTime;
-//                            }
+                            if (totalWorkingTime > empHour) {
+                                timeDiff = totalWorkingTime - empHour;
+                            }  else {
+                                if (otStatus == true) {
+                                    timeDiff = empHour - totalWorkingTime;
+                                } else {
+                                    timeDiff = empHour - (totalWorkingTime + 5.0);
+                                    if(timeDiff > 0){
+                                        time2 = "1.0";
+                                    } else{
+                                        time2 = "0.0";
+                                    }
+                                }
+                            }
 
 //                            if (employeeMaster.getOt().equals(true)) {
 //                                if (timeDiff != 0) {
@@ -14286,13 +14307,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                                    ////End
 //                                }
 //                            }
-                            if (empHour >= 4 && empHour <= 7.9) {
-                                time2 = "0.5";                                                                 //For shortleave if time difference gretaer than working hours short leave will be added
-                            } else if (empHour >= 8 && empHour <= 11.9) {
-                                time2 = "1.0";
-                            } else if (empHour >= 12) {
-                                time2 = "1.5";
-                            }
+                               
+//                            if (empHour >= 5) {
+//                                time2 = "0.5";                                                                 //For shortleave if time difference gretaer than working hours short leave will be added
+//                            }
+//                            if (empHour >= 4 && empHour <= 7.9) {
+//                                time2 = "0.5";                                                                 //For shortleave if time difference gretaer than working hours short leave will be added
+//                            }
+//                              else if (empHour >= 8 && empHour <= 11.9) {
+//                                time2 = "1.0";
+//                            } else if (empHour >= 12) {
+//                                time2 = "1.5";
+//                            }
 
                         } else {
 
@@ -14651,6 +14677,1883 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 }
                 //done rownum-1 to remove space
 //                rownum++;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+        }
+
+        String appPath = request.getServletContext().getRealPath("");
+
+        try {
+            String filePath = appPath + File.separator + "StorageYard" + File.separator
+                    + "Other" + File.separator + "UserDoc" + File.separator
+                    + "EmployeeShiftData" + File.separator + "EmployeeAdvanceSearch.xls";
+            FileOutputStream fos = new FileOutputStream(new File(filePath));
+            HSSFCellStyle hsfstyle = firstFWorkbook.createCellStyle();
+            hsfstyle.setBorderBottom((short) 1);
+            hsfstyle.setFillBackgroundColor((short) 245);
+            firstFWorkbook.write(fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String filePath = File.separator + "StorageYard" + File.separator
+                + "Other" + File.separator + "UserDoc" + File.separator
+                + "EmployeeShiftData" + File.separator + "EmployeeAdvanceSearch.xls";
+
+        appPath = request.getServletContext().getRealPath("");
+
+        String fullPath = appPath + filePath;
+
+        request.setAttribute(
+                "filePath", fullPath);
+
+        DownloadFile downloadFile = new DownloadFile();
+
+        downloadFile.doDownload(request, response);
+        mv = employeeDataSearch(request, response);
+        return mv;
+    }
+
+    public ModelAndView employeeDataOTSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
+        selectEmployee1(request, response);
+        selectZydexLocation(request, response);
+        selectLevel(request, response);
+        department(request, response);
+        mv.getModelMap().put("employeeAdvanceSearch", employeeAdvanceSearch);
+        mv.setViewName("Shift/EmployeeOTSearch");
+
+        return mv;
+    }
+
+    public ModelAndView employeeOTDataExcelSheet(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+
+        String empId = request.getParameter("employeeMasterId");
+        String zydexLocationId = request.getParameter("zydexLocationId");
+        String levelId = request.getParameter("levelId");
+        String departmentId = request.getParameter("departmentId");
+        String startDate = request.getParameter("inDateTime");
+        String endDate = request.getParameter("outDateTime");
+        if (empId.isEmpty() && empId.equals("") || startDate.isEmpty() && startDate.equals("") || endDate.isEmpty() && endDate.equals("")) {
+            request.setAttribute("failureMessage", "Error : The Excel can not be Generated. Please select all criteria properly.");
+            mv = employeeDataOTSearch(request, response);
+            return mv;
+        }
+        String searchval = request.getParameter("vallist");
+
+        EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
+        bind(request, employeeAdvanceSearch);
+        if (null != searchval && request.getParameter("vallist").toString().equals("other")) {
+            employeeAdvanceSearch.setId(null);
+            employeeAdvanceSearch.setZydexLocationId(zydexLocationId);
+            employeeAdvanceSearch.setLevelID(levelId);
+            employeeAdvanceSearch.setDepartmentId(departmentId);
+        } else {
+            employeeAdvanceSearch.setId(empId);
+            employeeAdvanceSearch.setZydexLocationId(null);
+            employeeAdvanceSearch.setLevelID(null);
+            employeeAdvanceSearch.setDepartmentId(null);
+        }
+
+        int rownum = 0;
+        HSSFWorkbook firstFWorkbook = new HSSFWorkbook();
+        HSSFSheet firstSheet = firstFWorkbook.createSheet("FIRST SHEET");
+        Row headerRow = firstSheet.createRow(rownum);
+        headerRow.setHeightInPoints(40);
+        HSSFFont redFont = firstFWorkbook.createFont();
+        redFont.setColor(HSSFColor.RED.index);
+        HSSFCellStyle stylered = firstFWorkbook.createCellStyle();
+        stylered.setFont(redFont);
+
+        HSSFFont greenFont = firstFWorkbook.createFont();
+        greenFont.setColor(HSSFColor.GREEN.index);
+        HSSFCellStyle stylegreen = firstFWorkbook.createCellStyle();
+        stylegreen.setFont(greenFont);
+
+        HSSFFont blueFont = firstFWorkbook.createFont();
+        blueFont.setColor(HSSFColor.BLUE.index);
+        HSSFCellStyle styleblue = firstFWorkbook.createCellStyle();
+        styleblue.setFont(blueFont);
+
+        HSSFFont boldFont = firstFWorkbook.createFont();
+        boldFont.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        HSSFCellStyle styleBold = firstFWorkbook.createCellStyle();
+        styleBold.setFont(boldFont);
+
+        List<String> headerRow1 = new ArrayList();
+        if (employeeAdvanceSearch.getEmployeeId() == true) {
+            headerRow1.add("Employee ID");
+
+        }
+        if (employeeAdvanceSearch.getEmployeeName() == true) {
+            headerRow1.add("Employee Name");
+        }
+        if (employeeAdvanceSearch.getFatherName() == true) {
+            headerRow1.add("Father Name");
+        }
+        if (employeeAdvanceSearch.getMotherName() == true) {
+            headerRow1.add("Mother Name");
+        }
+        if (employeeAdvanceSearch.getGender() == true) {
+            headerRow1.add("Gender");
+        }
+        if (employeeAdvanceSearch.getMaritalStatus() == true) {
+            headerRow1.add("MaritalStatus");
+        }
+        if (employeeAdvanceSearch.getSpouseName() == true) {
+            headerRow1.add("Spouse Name");
+        }
+        if (employeeAdvanceSearch.getDateOfBirth() == true) {
+            headerRow1.add("DateOfBirth");
+        }
+        if (employeeAdvanceSearch.getPresentAddress() == true) {
+            headerRow1.add("PresentAddress");
+        }
+        if (employeeAdvanceSearch.getPermanentAddress() == true) {
+            headerRow1.add("PermanentAddress");
+        }
+        if (employeeAdvanceSearch.getBloodGroups() == true) {
+            headerRow1.add("BloodGroup");
+        }
+        if (employeeAdvanceSearch.getEmailAddress() == true) {
+            headerRow1.add("EmailAddress");
+        }
+        if (employeeAdvanceSearch.getContactNo1() == true) {
+            headerRow1.add("ContactNo1");
+        }
+        if (employeeAdvanceSearch.getContactNo2() == true) {
+            headerRow1.add("ContactNo2");
+        }
+        if (employeeAdvanceSearch.getEmergencyContactPerson() == true) {
+            headerRow1.add("Emergency Contact Person");
+        }
+        if (employeeAdvanceSearch.getEmergencyContactNo() == true) {
+            headerRow1.add("Emergency Contact No");
+        }
+        if (employeeAdvanceSearch.getPanCard() == true) {
+            headerRow1.add("PAN Card No");
+        }
+        if (employeeAdvanceSearch.getPassportNo() == true) {
+            headerRow1.add("PassportNo");
+        }
+        if (employeeAdvanceSearch.getPassportIssueDate() == true) {
+            headerRow1.add("PassportIssueDate");
+        }
+        if (employeeAdvanceSearch.getPassportExpiryDate() == true) {
+            headerRow1.add("PassportExpiryDate");
+        }
+        if (employeeAdvanceSearch.getAdharCard() == true) {
+            headerRow1.add("AdharCard");
+        }
+        if (employeeAdvanceSearch.getOfficeEmailId() == true) {
+            headerRow1.add("Official E-Mail ID");
+        }
+        if (employeeAdvanceSearch.getHighestEducationDetails() == true) {
+            headerRow1.add("Highest Education Details");
+        }
+        if (employeeAdvanceSearch.getExperienceYearOnDoj() == true) {
+            headerRow1.add("Exp. On Date Of Joining Year");
+        }
+        if (employeeAdvanceSearch.getExperienceMonthOnDoj() == true) {
+            headerRow1.add("Exp. On Date Of Joining Month");
+        }
+        if (employeeAdvanceSearch.getCompany() == true) {
+            headerRow1.add("Company");
+        }
+        if (employeeAdvanceSearch.getZydexLocation() == true) {
+            headerRow1.add("Zydex Location");
+        }
+        if (employeeAdvanceSearch.getWorkLocation() == true) {
+            headerRow1.add("Work Location");
+        }
+        if (employeeAdvanceSearch.getLevel() == true) {
+            headerRow1.add("Level");
+        }
+        if (employeeAdvanceSearch.getDepartment() == true) {
+            headerRow1.add("Department");
+        }
+        if (employeeAdvanceSearch.getDesignation() == true) {
+            headerRow1.add("Designation");
+        }
+        if (employeeAdvanceSearch.getRole() == true) {
+            headerRow1.add("Role");
+        }
+        if (employeeAdvanceSearch.getDateOfJoining() == true) {
+            headerRow1.add("DateOfJoining");
+        }
+        if (employeeAdvanceSearch.getEmployeeType() == true) {
+            headerRow1.add("EmployeeType");
+        }
+        if (employeeAdvanceSearch.getBankName() == true) {
+            headerRow1.add("BankName");
+        }
+        if (employeeAdvanceSearch.getBankAccountNo() == true) {
+            headerRow1.add("BankAccountNo");
+        }
+        if (employeeAdvanceSearch.getBankIfscCode() == true) {
+            headerRow1.add("IFSC Code");
+        }
+        if (employeeAdvanceSearch.getReportingManager() == true) {
+            headerRow1.add("Reporting Manager");
+        }
+        if (employeeAdvanceSearch.getCityOfEmployee() == true) {
+            headerRow1.add("City");
+        }
+        if (employeeAdvanceSearch.getChild1() == true) {
+            headerRow1.add("Child1");
+        }
+        if (employeeAdvanceSearch.getChild2() == true) {
+            headerRow1.add("Child2");
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpFather() == true) {
+            headerRow1.add("Father's Date Of Birth");
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpMother() == true) {
+            headerRow1.add("Mother's Date Of Birth");
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpSpous() == true) {
+            headerRow1.add("Spouse's Date Of Birth");
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpChilld1() == true) {
+            headerRow1.add("Child1's Date Of Birth");
+        }
+        if (employeeAdvanceSearch.getDateOfBirthOfEmpChild2() == true) {
+            headerRow1.add("Date Of Transfer Of Entity");
+        }
+
+        List<List<String>> recordToAdd = new ArrayList();
+        List<List<String>> recordToAdd1 = new ArrayList();
+        EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar calForFlexiNotSupport1 = Calendar.getInstance();
+        Calendar calForFlexiNotSupport2 = Calendar.getInstance();
+        if (!startDate.equals("")) {
+            Date notflexibleSupportDate = sdf.parse(startDate);
+            String FixedFlexibleDate = "01/04/2016";
+            Date notflexibleSupportDate1 = sdf.parse(FixedFlexibleDate);
+            calForFlexiNotSupport1.setTime(notflexibleSupportDate);
+            calForFlexiNotSupport2.setTime(notflexibleSupportDate1);
+        }
+
+        if (null != empId && !empId.equals("")) {
+            employeeShiftData.setId(Integer.parseInt(empId));
+        }
+        if (null != startDate && !startDate.equals("")) {
+            Date sDate = sdf.parse(startDate);
+            employeeShiftData.setInDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
+        }
+        if (null != endDate && !endDate.equals("")) {
+            Date eDate = sdf.parse(endDate);
+            employeeShiftData.setOutDateTime(new SimpleDateFormat("yyyy-MM-dd").format(eDate));
+        }
+
+        recordToAdd.add(headerRow1);
+
+        String active = request.getParameter("active");
+        String inactive = request.getParameter("inactive");
+        if (null == inactive) {
+            inactive = "";
+        }
+        if (null == active) {
+            active = "";
+        }
+        List<?> empDetail = new ArrayList<>();
+        if (active.equals("on") && inactive.equals("on")) {
+            empDetail = employeeMasterService.empOrDateWiseSearch(employeeAdvanceSearch);
+        } else if (active.equals("on") && inactive.equals("")) {
+            empDetail = employeeMasterService.empOrDateWiseSearchforActive(employeeAdvanceSearch);
+        } else if (active.equals("") && inactive.equals("on")) {
+            empDetail = employeeMasterService.empOrDateWiseSearchforInActive(employeeAdvanceSearch);
+        }
+
+        Iterator it = empDetail.iterator();
+        while (it.hasNext()) {
+
+//            Row row = firstSheet.createRow(rownum);
+            List<String> employeeInfoList = new ArrayList();
+            List<String> employeeInfoList1 = new ArrayList();
+            Object[] next = (Object[]) it.next();
+            employeeInfoList1.add("" + next[48]);
+            if (employeeAdvanceSearch.getEmployeeId() == true) {
+                employeeInfoList.add("" + next[0]);
+            }
+            if (employeeAdvanceSearch.getEmployeeName() == true) {
+                employeeInfoList.add("" + next[1]);
+            }
+
+            if (null == next[2]) {
+                next[2] = "";
+            }
+            if (null == next[3]) {
+                next[3] = "";
+            }
+            if (null == next[4]) {
+                next[4] = "";
+            }
+            if (null == next[5]) {
+                next[5] = "";
+            }
+            if (null == next[6]) {
+                next[6] = "";
+            }
+            if (null == next[7]) {
+                next[7] = "";
+            }
+            if (null == next[8]) {
+                next[8] = "";
+            }
+            if (null == next[9]) {
+                next[9] = "";
+            }
+            if (null == next[10]) {
+                next[10] = "";
+            }
+            if (null == next[11]) {
+                next[11] = "";
+            }
+            if (null == next[12]) {
+                next[12] = "";
+            }
+            if (null == next[13]) {
+                next[13] = "";
+            }
+            if (null == next[14]) {
+                next[14] = "";
+            }
+            if (null == next[15]) {
+                next[15] = "";
+            }
+            if (null == next[16]) {
+                next[16] = "";
+            }
+            if (null == next[17]) {
+                next[17] = "";
+            }
+            if (null == next[18]) {
+                next[18] = "";
+            }
+            if (null == next[19]) {
+                next[19] = "";
+            }
+            if (null == next[20]) {
+                next[20] = "";
+            }
+            if (null == next[21]) {
+                next[21] = "";
+            }
+            if (null == next[22]) {
+                next[22] = "";
+            }
+            if (null == next[23]) {
+                next[23] = "";
+            }
+            if (null == next[24]) {
+                next[24] = "";
+            }
+            if (null == next[25]) {
+                next[25] = "";
+            }
+            if (null == next[26]) {
+                next[26] = "";
+            }
+            if (null == next[27]) {
+                next[27] = "";
+            }
+            if (null == next[28]) {
+                next[28] = "";
+            }
+            if (null == next[29]) {
+                next[29] = "";
+            }
+            if (null == next[30]) {
+                next[30] = "";
+            }
+            if (null == next[31]) {
+                next[31] = "";
+            }
+            if (null == next[32]) {
+                next[32] = "";
+            }
+            if (null == next[33]) {
+                next[33] = "";
+            }
+            if (null == next[34]) {
+                next[34] = "";
+            }
+            if (null == next[35]) {
+                next[35] = "";
+            }
+            if (null == next[36]) {
+                next[36] = "";
+            }
+            if (null == next[37]) {
+                next[37] = "";
+            }
+            if (null == next[38]) {
+                next[38] = "";
+            }
+            if (null == next[39]) {
+                next[39] = "";
+            }
+            if (null == next[40]) {
+                next[40] = "";
+            }
+            if (null == next[41]) {
+                next[41] = "";
+            }
+            if (null == next[42]) {
+                next[42] = "";
+            }
+            if (null == next[43]) {
+                next[43] = "";
+            }
+            if (null == next[44]) {
+                next[44] = "";
+            }
+            if (null == next[45]) {
+                next[45] = "";
+            }
+            if (null == next[46]) {
+                next[46] = "";
+            }
+            if (null == next[47]) {
+                next[47] = "";
+            }
+
+            if (employeeAdvanceSearch.getFatherName() == true) {
+                employeeInfoList.add("" + next[2]);
+            }
+            if (employeeAdvanceSearch.getMotherName() == true) {
+                employeeInfoList.add("" + next[3]);
+            }
+            if (employeeAdvanceSearch.getGender() == true) {
+                employeeInfoList.add("" + next[4]);
+            }
+            if (employeeAdvanceSearch.getMaritalStatus() == true) {
+                employeeInfoList.add("" + next[5]);
+            }
+            if (employeeAdvanceSearch.getSpouseName() == true) {
+                employeeInfoList.add("" + next[6]);
+            }
+            if (employeeAdvanceSearch.getDateOfBirth() == true) {
+                employeeInfoList.add("" + next[7]);
+            }
+            if (employeeAdvanceSearch.getPresentAddress() == true) {
+                employeeInfoList.add("" + next[8]);
+            }
+            if (employeeAdvanceSearch.getPermanentAddress() == true) {
+                employeeInfoList.add("" + next[9]);
+            }
+            if (employeeAdvanceSearch.getBloodGroups() == true) {
+                employeeInfoList.add("" + next[10]);
+            }
+            if (employeeAdvanceSearch.getEmailAddress() == true) {
+                employeeInfoList.add("" + next[11]);
+            }
+            if (employeeAdvanceSearch.getContactNo1() == true) {
+                employeeInfoList.add("" + next[12]);
+            }
+            if (employeeAdvanceSearch.getContactNo2() == true) {
+                employeeInfoList.add("" + next[13]);
+            }
+            if (employeeAdvanceSearch.getEmergencyContactPerson() == true) {
+                employeeInfoList.add("" + next[14]);
+            }
+            if (employeeAdvanceSearch.getEmergencyContactNo() == true) {
+                employeeInfoList.add("" + next[15]);
+            }
+            if (employeeAdvanceSearch.getPanCard() == true) {
+                employeeInfoList.add("" + next[16]);
+            }
+            if (employeeAdvanceSearch.getPassportNo() == true) {
+                employeeInfoList.add("" + next[17]);
+            }
+            if (employeeAdvanceSearch.getPassportIssueDate() == true) {
+                employeeInfoList.add("" + next[18]);
+            }
+            if (employeeAdvanceSearch.getPassportExpiryDate() == true) {
+                employeeInfoList.add("" + next[19]);
+            }
+            if (employeeAdvanceSearch.getAdharCard() == true) {
+                employeeInfoList.add("" + next[20]);
+            }
+            if (employeeAdvanceSearch.getOfficeEmailId() == true) {
+                employeeInfoList.add("" + next[21]);
+            }
+            if (employeeAdvanceSearch.getHighestEducationDetails() == true) {
+                employeeInfoList.add("" + next[22]);
+            }
+            if (employeeAdvanceSearch.getExperienceYearOnDoj() == true) {
+                employeeInfoList.add("" + next[23]);
+            }
+            if (employeeAdvanceSearch.getExperienceMonthOnDoj() == true) {
+                employeeInfoList.add("" + next[24]);
+            }
+            if (employeeAdvanceSearch.getCompany() == true) {
+                employeeInfoList.add("" + next[25]);
+            }
+            if (employeeAdvanceSearch.getZydexLocation() == true) {
+                employeeInfoList.add("" + next[26]);
+            }
+            if (employeeAdvanceSearch.getWorkLocation() == true) {
+                employeeInfoList.add("" + next[27]);
+            }
+            if (employeeAdvanceSearch.getLevel() == true) {
+                employeeInfoList.add("" + next[28]);
+            }
+            if (employeeAdvanceSearch.getDepartment() == true) {
+                employeeInfoList.add("" + next[29]);
+            }
+            if (employeeAdvanceSearch.getDesignation() == true) {
+                employeeInfoList.add("" + next[30]);
+            }
+            if (employeeAdvanceSearch.getRole() == true) {
+                employeeInfoList.add("" + next[31]);
+            }
+            if (employeeAdvanceSearch.getDateOfJoining() == true) {
+                employeeInfoList.add("" + next[32]);
+            }
+            if (employeeAdvanceSearch.getEmployeeType() == true) {
+                employeeInfoList.add("" + next[33]);
+            }
+            if (employeeAdvanceSearch.getBankName() == true) {
+                employeeInfoList.add("" + next[34]);
+            }
+            if (employeeAdvanceSearch.getBankAccountNo() == true) {
+                employeeInfoList.add("" + next[35]);
+            }
+            if (employeeAdvanceSearch.getBankIfscCode() == true) {
+                employeeInfoList.add("" + next[36]);
+            }
+            if (employeeAdvanceSearch.getReportingManager() == true) {
+                employeeInfoList.add("" + next[37]);
+            }
+            if (employeeAdvanceSearch.getCityOfEmployee() == true) {
+                employeeInfoList.add("" + next[38]);
+            }
+            if (employeeAdvanceSearch.getChild1() == true) {
+                employeeInfoList.add("" + next[39]);
+            }
+            if (employeeAdvanceSearch.getChild2() == true) {
+                employeeInfoList.add("" + next[40]);
+            }
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpFather() == true) {
+                employeeInfoList.add("" + next[41]);
+            }
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpMother() == true) {
+                employeeInfoList.add("" + next[42]);
+            }
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpSpous() == true) {
+                employeeInfoList.add("" + next[43]);
+            }
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpChilld1() == true) {
+                employeeInfoList.add("" + next[44]);
+            }
+            if (employeeAdvanceSearch.getDateOfBirthOfEmpChild2() == true) {
+                employeeInfoList.add("" + next[45]);
+            }
+            if (employeeAdvanceSearch.getDateOfTransferOfEntity() == true) {
+                employeeInfoList.add("" + next[46]);
+            }
+
+            recordToAdd.add(employeeInfoList);
+            recordToAdd1.add(employeeInfoList1);
+
+        }
+
+        try {
+
+            String empId1 = "0";
+            int z = 0;
+            for (int j = 0; j < recordToAdd.size(); j++) {
+                Map<Integer, List<?>> map = new LinkedHashMap<Integer, List<?>>();
+                Map<Integer, List<?>> map1 = new LinkedHashMap<Integer, List<?>>();
+                Row row = firstSheet.createRow(rownum);
+                List<String> l2 = recordToAdd.get(j);
+
+                boolean myFlage = false;
+                int id = 0;
+                int countK = 1;
+                for (int k = 0; k < l2.size(); k++) {
+                    Cell cell = row.createCell(k);
+
+                    cell.setCellValue(l2.get(k));
+                    if (j == 0) {
+                        cell.setCellStyle(styleBold);
+                    }
+                }
+
+                if (null != startDate && !startDate.equals("") && null != endDate && !endDate.equals("")) {
+
+                    if (j != 0) {
+
+                        List<String> l3 = new ArrayList<>();
+                        try {
+                            l3 = recordToAdd1.get(z);
+                            empId1 = l3.get(0);
+                            z++;
+                        } catch (Exception e) {
+                        }
+
+                        id = Integer.parseInt(empId1);
+                        employeeShiftData.setId(id);
+
+                        EmployeeMaster emp = employeeMasterService.readById(id);
+
+                        List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
+                        map.put(id, list);
+                        boolean flexible = false;
+                        int earlyMinute = 0;
+                        int lateMinute = 0;
+//                        List<?> timeAttFlexibleList = timeAttandanceFlaxibleMasterService.read();
+//                        if (!timeAttFlexibleList.isEmpty()) {
+//                            for (Object flexiObject : timeAttFlexibleList) {
+//                                TimeAttandanceFlaxibleMaster timeAttandanceFlaxibleMaster = (TimeAttandanceFlaxibleMaster) flexiObject;
+//                                int zydexLocId = timeAttandanceFlaxibleMaster.getZydexLocationMaster().getId();
+//                                EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
+//                                int zydexLocId2 = employeeMaster1.getZydexLocationMaster().getId();
+//                                if (zydexLocId == zydexLocId2) {
+                        flexible = true;
+//                                    earlyMinute = Integer.parseInt(timeAttandanceFlaxibleMaster.getEarlyFlexibleTime());
+//                                    lateMinute = Integer.parseInt(timeAttandanceFlaxibleMaster.getLateFlexibleTime());
+//                                    break;
+//                                }
+//                            }
+//                        }
+                        if (flexible == true) {
+                            rownum = rownum + 1;
+                            Row row4 = firstSheet.createRow(rownum);
+                            Cell cell4 = row4.createCell(0);
+                            cell4.setCellValue("");
+                            rownum = rownum + 1;
+
+                            Row row1 = firstSheet.createRow(rownum);
+                            Cell cell1 = row1.createCell(0);
+                            cell1.setCellValue("Employee Daily Attendance Information");
+                            cell1.setCellStyle(styleBold);
+                            double prcounter = 0;
+                            double abcounter = 0;
+                            double wo = 0;
+                            double shl = 0;
+                            double shla = 0;
+                            double cl = 0;
+                            double sl = 0;
+                            double pl = 0;
+                            double holiday = 0;
+                            double tr = 0;
+                            double ar = 0;
+                            double mtl = 0;
+                            double ptl = 0;
+                            double coff = 0;
+                            double lwp = 0;
+                            double empHour2 = 0;
+                            long otcounter = 0;
+                            long otMinuteCounter = 0;
+
+                            //                int zz = 0;
+                            for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
+                                rownum = rownum + 1;
+                                Row row33 = firstSheet.createRow(rownum);
+                                rownum = rownum + 1;
+                                Row row3 = firstSheet.createRow(rownum);
+
+                                Iterator itr1 = entry.getValue().iterator();
+                                int i = 1;
+                                int k = 1;
+                                int l = 1;
+                                int m = 1;
+                                int n = 1;
+                                int o = 1;
+                                int p = 1;
+                                int t = 1;
+                                SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
+                                Cell cellTitle = row3.createCell(0);
+                                cellTitle.setCellValue("Date");
+                                cellTitle.setCellStyle(styleBold);
+                                while (itr1.hasNext()) {
+                                    Object[] next = (Object[]) itr1.next();
+                                    Cell cell3 = row3.createCell(i);
+                                    cell3.setCellValue("" + next[0]);
+                                    CellUtil.setAlignment(cell3, firstFWorkbook, CellStyle.ALIGN_CENTER);
+
+                                    i++;
+                                }
+                                rownum = rownum + 1;
+                                Row row5 = firstSheet.createRow(rownum);
+                                Iterator itr2 = entry.getValue().iterator();
+                                Cell cellTitle1 = row5.createCell(0);
+                                cellTitle1.setCellValue("Shift Name");
+                                cellTitle1.setCellStyle(styleBold);
+                                while (itr2.hasNext()) {
+                                    Object[] next = (Object[]) itr2.next();
+                                    Cell cell5 = row5.createCell(l);
+                                    String shiftName = "" + next[1];
+                                    if (shiftName.contains("#")) {
+                                        String[] shiftName1 = shiftName.split("#");
+                                        String[] shiftName2 = shiftName1[1].split("\\$");
+                                        cell5.setCellValue("" + shiftName2[0]);
+                                    } else if (!shiftName.contains("`")) {
+                                        cell5.setCellValue("-");
+                                    }
+
+                                    CellUtil.setAlignment(cell5, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    l++;
+
+                                }
+                                rownum = rownum + 1;
+                                Row row6 = firstSheet.createRow(rownum);
+                                Iterator itr3 = entry.getValue().iterator();
+                                Cell cellTitle2 = row6.createCell(0);
+                                cellTitle2.setCellValue("First In");
+                                cellTitle2.setCellStyle(styleBold);
+                                int weekNameCounter1 = 0;
+                                while (itr3.hasNext()) {
+                                    Object[] next = (Object[]) itr3.next();
+                                    Cell cell6 = row6.createCell(k);
+                                    String firstIn = "" + next[1];
+                                    if (firstIn.contains("`") && !firstIn.contains("?")) {
+                                        String[] firstIn1 = firstIn.split("`");
+                                        String[] firstIn12 = firstIn1[1].split("!");
+                                        cell6.setCellValue("" + firstIn12[0]);
+                                    } else if (!firstIn.contains("`") && !firstIn.contains("?") && !firstIn.contains("AB") && !firstIn.equals("WO") && !firstIn.contains("TR") && !firstIn.contains("AR")) {
+                                        if (firstIn.contains("Casual Leave")) {
+                                            cl = cl + 1;
+                                        }
+                                        if (firstIn.contains("Privilege Leave")) {
+                                            pl = pl + 1;
+                                        }
+                                        if (firstIn.contains("Sick Leave")) {
+                                            sl = sl + 1;
+                                        }
+                                        if (firstIn.contains("Maternity Leave")) {
+                                            mtl = mtl + 1;
+                                        }
+                                        if (firstIn.contains("Paternity Leave")) {
+                                            ptl = ptl + 1;
+                                        }
+                                        if (firstIn.contains("C Off Leave")) {
+                                            coff = coff + 1;
+                                        }
+                                        if (firstIn.contains("Leave Without Pay")) {
+                                            lwp = lwp + 1;
+                                        }
+                                        cell6.setCellValue("" + next[1]);
+                                    } else if (!firstIn.contains("`") && firstIn.contains("?") && !firstIn.contains("AB") && !firstIn.equals("WO") && !firstIn.contains("TR") && !firstIn.contains("AR")) {
+                                        String[] hostring = firstIn.split("\\?");
+                                        cell6.setCellValue("" + hostring[0]);
+                                        holiday = holiday + 1;
+                                    } else if (!firstIn.contains("`") && firstIn.contains("?") && firstIn.contains("AB") && !firstIn.equals("WO") && !firstIn.contains("TR") && !firstIn.contains("AR")) {
+                                        cell6.setCellValue("-");
+                                    } else if (firstIn.equals("WO")) {
+                                        cell6.setCellValue(firstIn);
+                                        wo = wo + 1;
+                                    } else if (firstIn.equals("TR")) {
+                                        cell6.setCellValue(firstIn);
+                                        tr = tr + 1;
+                                        cell6.setCellStyle(styleblue);
+                                    }
+                                    CellUtil.setAlignment(cell6, firstFWorkbook, CellStyle.ALIGN_CENTER);
+//                                    2nd Sat Week Off Codding
+                                    Calendar cal = Calendar.getInstance();
+                                    Date date = sdf.parse("" + next[0]);
+                                    cal.setTime(date);
+                                    SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                                    String dayName = format.format(date);
+                                    EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
+                                    ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
+
+                                    if (dayName.equals("Saturday")) {
+                                        weekNameCounter1++;
+                                        if (weekNameCounter1 == 2) {
+                                            if (firstIn.contains("Casual Leave")) {
+                                                cl = cl - 0.5;
+                                            }
+                                            if (firstIn.contains("Privilege Leave")) {
+                                                pl = pl - 0.5;
+                                            }
+                                            if (firstIn.contains("Sick Leave")) {
+                                                sl = sl - 0.5;
+                                            }
+                                            if (firstIn.contains("Maternity Leave")) {
+                                                mtl = mtl - 0.5;
+                                            }
+                                            if (firstIn.contains("Paternity Leave")) {
+                                                ptl = ptl - 0.5;
+                                            }
+                                            if (firstIn.contains("C Off Leave")) {
+                                                coff = coff - 0.5;
+                                            }
+                                            if (firstIn.contains("Leave Without Pay")) {
+                                                lwp = lwp - 0.5;
+                                            }
+                                        }
+
+                                    }
+//                                    2nd Sat Week Off Codding
+                                    k++;
+                                }
+
+                                rownum = rownum + 1;
+                                Row row7 = firstSheet.createRow(rownum);
+                                Cell cellTitle3 = row7.createCell(0);
+                                cellTitle3.setCellValue("Last Out");
+                                cellTitle3.setCellStyle(styleBold);
+                                Iterator itr4 = entry.getValue().iterator();
+                                while (itr4.hasNext()) {
+                                    Object[] next = (Object[]) itr4.next();
+                                    Cell cell7 = row7.createCell(m);
+                                    String lastOut = "" + next[1];
+                                    if (lastOut.contains("!")) {
+                                        String[] lastOut1 = lastOut.split("`");
+                                        String[] lastOut2 = lastOut1[1].split("!");
+                                        String[] lastOut3 = lastOut.split("!");
+                                        String[] lastOut4 = lastOut3[1].split("@");
+                                        Date lout = sdf1.parse(lastOut4[0]);
+                                        Date fin = sdf1.parse(lastOut2[0]);
+                                        if (lout.equals(fin)) {
+                                            cell7.setCellValue("-");
+                                        } else {
+                                            cell7.setCellValue("" + lastOut4[0]);
+                                        }
+
+                                    } else if (lastOut.contains("@")) {
+                                        cell7.setCellValue("-");
+                                    }
+                                    CellUtil.setAlignment(cell7, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    m++;
+                                }
+                                rownum = rownum + 1;
+                                Row row8 = firstSheet.createRow(rownum);
+                                Cell cellTitle4 = row8.createCell(0);
+                                cellTitle4.setCellValue("First Half");
+                                cellTitle4.setCellStyle(styleBold);
+                                Iterator itr5 = entry.getValue().iterator();
+                                int firstCounter = 0;
+
+                                while (itr5.hasNext()) {
+                                    Object[] next = (Object[]) itr5.next();
+                                    Cell cell8 = row8.createCell(n);
+                                    String firstHalf = "" + next[1];
+                                    int firstHalfVal = 0;
+                                    int counter = 0;
+
+                                    Date date = sdf.parse("" + next[0]);
+                                    Calendar c = Calendar.getInstance();
+                                    c.setTime(date);
+                                    int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+                                    SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                                    String dayName = format.format(date);
+
+                                    if (firstHalf.contains("fullday")) {
+                                        cell8.setCellValue("PR");
+                                        prcounter = prcounter + 0.5;
+                                        cell8.setCellStyle(stylegreen);
+
+                                    } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                                        String[] userTimeInStr = firstHalf.split("`");
+                                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                        String[] userTimeOutStr = firstHalf.split("!");
+                                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                        String[] leave = firstHalf.split("@");
+                                        String[] leave1 = leave[1].split("#");
+                                        String[] LateHoursStr = firstHalf.split("\\$");
+                                        String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                                        String[] endHoursStr = firstHalf.split("%");
+                                        String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                                        String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                                        Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
+                                        Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                        Date endHours = sdf1.parse(endHoursStr1[0]);
+                                        Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
+                                        Calendar cal = Calendar.getInstance();
+                                        Calendar cal1 = Calendar.getInstance();
+                                        cal.setTime(firstStartHours);
+                                        cal1.setTime(firstStartHours);
+                                        cal1.add(Calendar.MINUTE, -earlyMinute);
+                                        cal.add(Calendar.MINUTE, lateMinute);
+                                        String newTime = sdf1.format(cal.getTime());
+                                        Date flexibleEndTime = sdf1.parse(newTime);
+                                        Date LateHours = sdf1.parse(LateHoursStr1[0]);
+                                        String newTime1 = sdf1.format(cal1.getTime());
+                                        Date flexibleStartTime = sdf1.parse(newTime1);
+                                        long diff = endHours.getTime() - firstStartHours.getTime();
+                                        long diffMinutes = diff / (60 * 1000);
+                                        long diff1 = 0;
+                                        if (userTimeIn.after(flexibleStartTime) || userTimeIn.equals(flexibleStartTime)) {
+                                            diff1 = endHours.getTime() - userTimeIn.getTime();
+                                        } else {
+                                            diff1 = endHours.getTime() - flexibleStartTime.getTime();
+                                        }
+                                        long diffMinutes1 = diff1 / (60 * 1000);
+                                        if (dayName.equals("Saturday") && dayOfWeek == 2 && diffMinutes1 >= 240) {
+                                            cell8.setCellValue("PR");
+                                            prcounter = prcounter + 0.5;
+                                            cell8.setCellStyle(stylegreen);
+                                        } else if (diffMinutes1 >= diffMinutes) {
+                                            cell8.setCellValue("PR");
+                                            prcounter = prcounter + 0.5;
+                                            cell8.setCellStyle(stylegreen);
+
+                                        } else if (userTimeIn != null) {
+                                            if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                                cell8.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell8.setCellStyle(stylegreen);
+                                            } else if (userTimeOut.before(userTimeIn)) {
+                                                cell8.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell8.setCellStyle(stylegreen);
+                                            } else if (leave1[0] != null && !leave1[0].contains("Short Leave")) {
+                                                if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                                    cell8.setCellValue("PR");
+                                                    prcounter = prcounter + 0.5;
+                                                    cell8.setCellStyle(stylegreen);
+                                                } else if (leave1[0].contains("AB")) {
+                                                    cell8.setCellValue("AB");
+                                                    abcounter = abcounter + 0.5;
+                                                    cell8.setCellStyle(stylered);
+                                                } else if (leave1[0].contains("AR")) {
+                                                    cell8.setCellValue("AR/P");
+                                                    ar = ar + 0.5;
+                                                    cell8.setCellStyle(styleblue);
+                                                } else {
+                                                    if (leave1[0].contains("Casual Leave")) {
+                                                        cl = cl + 0.5;
+                                                    }
+                                                    if (leave1[0].contains("Privilege Leave")) {
+                                                        pl = pl + 0.5;
+                                                    }
+                                                    if (leave1[0].contains("Sick Leave")) {
+                                                        sl = sl + 0.5;
+                                                    }
+                                                    if (leave1[0].contains("Maternity Leave")) {
+                                                        mtl = mtl + 0.5;
+                                                    }
+                                                    if (leave1[0].contains("Paternity Leave")) {
+                                                        ptl = ptl + 0.5;
+                                                    }
+                                                    if (leave1[0].contains("C Off Leave")) {
+                                                        coff = coff + 0.5;
+                                                    }
+                                                    if (leave1[0].contains("Leave Without Pay")) {
+                                                        lwp = lwp + 0.5;
+                                                    }
+                                                    cell8.setCellValue(" " + leave1[0]);
+                                                }
+
+                                            } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
+                                                if (firstHalf.contains("*")) {
+                                                    String[] shortArray = firstHalf.split("\\*");
+                                                    String[] endArray = shortArray[1].split("\\-");
+                                                    String[] startTime = endArray[1].split("\\+");
+                                                    Date shortIn = sdf1.parse(shortArray[1]);
+                                                    Date shortend = sdf1.parse(endArray[1]);
+                                                    Date startTime1 = sdf1.parse(startTime[1]);
+                                                    if (shortIn.before(endHours)) {
+                                                        cell8.setCellValue("SHL/P");
+                                                        cell8.setCellStyle(stylegreen);
+                                                        shl = shl + 1;
+                                                    } else if (leave1[0].contains("~ AR")) {
+                                                        cell8.setCellValue("AR/P");
+                                                        ar = ar + 0.5;
+                                                        cell8.setCellStyle(styleblue);
+                                                    } else if (userTimeIn.after(endHours)) {
+                                                        cell8.setCellValue("SHL/A");
+                                                        shla = shla + 1;
+                                                        cell8.setCellStyle(stylered);
+                                                    } else if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                                        cell8.setCellValue("PR");
+                                                        prcounter = prcounter + 0.5;
+                                                        cell8.setCellStyle(stylegreen);
+                                                    } else {
+                                                        cell8.setCellValue("AB");
+                                                        abcounter = abcounter + 0.5;
+                                                        cell8.setCellStyle(stylered);
+                                                    }
+                                                } else {
+                                                    cell8.setCellValue("AB");
+                                                    abcounter = abcounter + 0.5;
+                                                    cell8.setCellStyle(stylered);
+                                                }
+                                            } else if (null != leave1[0] && !leave1[0].contains("AB")) {
+                                                if (leave1[0].contains("Casual Leave")) {
+                                                    cl = cl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Privilege Leave")) {
+                                                    pl = pl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Sick Leave")) {
+                                                    sl = sl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Maternity Leave")) {
+                                                    mtl = mtl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Paternity Leave")) {
+                                                    ptl = ptl + 0.5;
+                                                }
+                                                if (leave1[0].contains("C Off Leave")) {
+                                                    coff = coff + 0.5;
+                                                }
+                                                if (leave1[0].contains("Leave Without Pay")) {
+                                                    lwp = lwp + 0.5;
+                                                }
+                                                cell8.setCellValue(" " + leave1[0]);
+
+                                            } else if (leave1[0].contains("AB")) {
+                                                cell8.setCellValue("-");
+                                            } else {
+                                                cell8.setCellValue("AB");
+                                                abcounter = abcounter + 0.5;
+                                                cell8.setCellStyle(stylered);
+                                            }
+
+                                        } else if (userTimeIn != null && !firstHalf.contains("WO") && !firstHalf.contains("?")) {
+                                            cell8.setCellValue("AB");
+                                            abcounter = abcounter + 0.5;
+                                            cell8.setCellStyle(stylered);
+                                        } else if (firstHalf.contains("WO") || firstHalf.contains("?")) {
+                                            cell8.setCellValue("-");
+                                        }
+
+                                    } else if (firstHalf.equals("WO")) {
+                                        cell8.setCellValue("");
+                                    } else if (firstHalf.contains("AR")) {
+                                        cell8.setCellValue("AR/P");
+                                        ar = ar + 0.5;
+                                        cell8.setCellStyle(styleblue);
+                                    } else if (firstHalf.equals("AB")) {
+                                        cell8.setCellValue("AB");
+                                        abcounter = abcounter + 0.5;
+                                        cell8.setCellStyle(stylered);
+                                    }
+                                    CellUtil.setAlignment(cell8, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    n++;
+                                }
+
+                                rownum = rownum + 1;
+                                Row row9 = firstSheet.createRow(rownum);
+                                Cell cellTitle5 = row9.createCell(0);
+                                cellTitle5.setCellValue("Second Half");
+                                cellTitle5.setCellStyle(styleBold);
+                                Iterator itr6 = entry.getValue().iterator();
+                                int weekNameCounter = 0;
+                                boolean satWeekOff = false;
+                                while (itr6.hasNext()) {
+                                    Object[] next = (Object[]) itr6.next();
+                                    Cell cell9 = row9.createCell(o);
+                                    String secondHalf = "" + next[1];
+                                    int firstHalfVal = 0;
+                                    int counter = 0;
+                                    String shiftName = "";
+//                                    2nd Sat Week Off Codding
+                                    Calendar cal = Calendar.getInstance();
+                                    Date date = sdf.parse("" + next[0]);
+                                    cal.setTime(date);
+                                    SimpleDateFormat format = new SimpleDateFormat("EEEE");
+                                    String dayName = format.format(date);
+                                    int dayOfWeek = cal.get(Calendar.WEEK_OF_MONTH);
+                                    EmployeeMaster employeeMaster1 = employeeMasterService.readById(id);
+                                    ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(employeeMaster1.getZydexLocationMaster().getId());
+
+                                    if (dayName.equals("Saturday")) {
+                                        if (dayOfWeek == 2) {
+                                            satWeekOff = true;
+                                        } else {
+                                            satWeekOff = false;
+                                        }
+
+                                    } else {
+                                        satWeekOff = false;
+                                    }
+//                                    2nd Sat Week Off Codding
+
+//                                    Lunch Breck Cut Off
+                                    List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
+                                    long lunchTime = 0;
+                                    long totalDayTime = 0;
+                                    long totalDayTime1 = 0;
+                                    long totalTime = 0;
+                                    long shiftdiffMinutes = 0;
+                                    String startTime = "";
+                                    String endTime = "";
+                                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                    long outTime = 0;
+                                    int d = 1;
+                                    int s = 2;
+                                    boolean checkLunchTime = false;
+                                    try {
+                                        if (listPunch.size() > 2) {
+                                            while (listPunch.size() > d && listPunch.size() > s) {
+                                                Object[] startLunchTime = (Object[]) listPunch.get(d);
+                                                Object[] endLunchTime = (Object[]) listPunch.get(s);
+                                                startTime = (String) startLunchTime[0];
+                                                endTime = (String) endLunchTime[0];
+                                                Date launchStrTime = sdf3.parse(startTime);
+                                                Date launchEndTime = sdf3.parse(endTime);
+                                                long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                                lunchTime = diff / (60 * 1000);
+                                                outTime = outTime + lunchTime;
+                                                d = d + 2;
+                                                s = s + 2;
+                                            }
+                                            String[] userTimeInStr = secondHalf.split("`");
+                                            String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                            String[] userTimeOutStr = secondHalf.split("!");
+                                            String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                            Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
+                                            Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                            String[] startHoursStr = secondHalf.split("%");
+                                            String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+                                            String[] endHoursStr = secondHalf.split("&");
+                                            Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
+                                            Calendar cal1 = Calendar.getInstance();
+                                            cal1.setTime(firstStartHours);
+                                            cal1.add(Calendar.MINUTE, -earlyMinute);
+
+                                            String newTime1 = sdf1.format(cal1.getTime());
+                                            Date flexibleInTime = sdf1.parse(newTime1);
+                                            Date endHours = sdf1.parse(endHoursStr[1]);
+                                            long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
+                                            shiftdiffMinutes = shiftTotalTime / (60 * 1000);
+                                            long diff1 = 0;
+                                            long diff2 = 0;
+                                            if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                                                diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+
+                                            } else {
+                                                diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                                            }
+                                            totalDayTime = diff1 / (60 * 1000);
+
+                                            diff2 = userTimeOut.getTime() - userTimeIn.getTime();
+                                            totalDayTime1 = diff2 / (60 * 1000);
+
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+//                                        =========================For who goes out side 4 lunch they have max 60 min time for lunch=======================
+                                            long outTime1 = outTime;
+                                            outTime = outTime - 30;
+//                                        ===============30 minute lunch time 4 all employeee so who goes out side cut 30 min from their lunch time===============
+                                            if (outTime1 == totalDayTime1) {
+                                                totalTime = totalDayTime;
+                                            } else if (outTime > 0) {
+                                                totalTime = totalDayTime - outTime;
+                                                checkLunchTime = true;
+                                            }
+
+                                        }
+                                    } catch (Exception e) {
+
+                                    }
+
+//                                    Lunch Breck Cut Off
+                                    if (secondHalf.contains(" # ")) {
+                                        String[] string1 = secondHalf.split("#");
+                                        String[] string2 = string1[1].split("\\$");
+                                        shiftName = string2[0].trim();
+
+                                    }
+                                    if (satWeekOff == true && (zydexLocationMaster.getZydexLocation().equals("HO") || zydexLocationMaster.getZydexLocation().equals("R&D"))) {
+                                        cell9.setCellValue("WO");
+                                        wo = wo + 0.5;
+                                    } else if (secondHalf.equals("AR")) {
+                                        cell9.setCellValue("AR/P");
+                                        ar = ar + 0.5;
+                                        cell9.setCellStyle(styleblue);
+                                    } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR") && !secondHalf.contains("Short Leave")) {
+                                        cell9.setCellValue("AB");
+                                        abcounter = abcounter + 0.5;
+                                        cell9.setCellStyle(stylered);
+                                    } else if (secondHalf.contains("fullday")) {
+                                        cell9.setCellValue("PR");
+                                        prcounter = prcounter + 0.5;
+                                        cell9.setCellStyle(stylegreen);
+
+                                    } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
+                                            && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
+                                            && !secondHalf.equals("Paternity Leave") && !secondHalf.equals("Maternity Leave") && !secondHalf.equals("Leave Without Pay")) {
+                                        String[] leave = secondHalf.split("@");
+                                        String[] leave1 = leave[1].split("#");
+                                        String[] userTimeInStr = secondHalf.split("`");
+                                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                        String[] userTimeOutStr = secondHalf.split("!");
+                                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                        String[] secondHalfTimeStr = secondHalf.split("\\^");
+                                        String[] secondHalfTimeStr1 = secondHalfTimeStr[1].split("&");
+                                        String[] endHoursStr = secondHalf.split("&");
+                                        String[] startHoursStr = secondHalf.split("%");
+                                        String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+
+                                        Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
+                                        Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                        Date userTimeOut1 = sdf1.parse("23:59");
+                                        Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
+                                        String[] getInHours = userTimeInStr1[0].split(":");
+                                        String[] getOutHours = userTimeOutStr1[0].split(":");
+                                        String abc = getInHours[0].trim();
+                                        String xyz = getOutHours[0].trim();
+                                        int i11 = Integer.parseInt(abc) - Integer.parseInt(xyz);
+                                        int totalDuration = 24 - i11;
+                                        String totalDuration2 = getOutHours[0];
+                                        Date endHours = sdf1.parse(endHoursStr[1]);
+                                        Date secondHalfTimeStr2 = sdf1.parse(secondHalfTimeStr1[0]);
+
+                                        Calendar cal1 = Calendar.getInstance();
+                                        Calendar cal2 = Calendar.getInstance();
+                                        cal1.setTime(firstStartHours);
+                                        cal1.add(Calendar.MINUTE, -earlyMinute);
+                                        cal2.setTime(firstStartHours);
+                                        cal2.add(Calendar.MINUTE, lateMinute);
+                                        String newTime = sdf1.format(cal2.getTime());
+                                        Date flexibleEndTime = sdf1.parse(newTime);
+
+                                        String newTime1 = sdf1.format(cal1.getTime());
+                                        Date flexibleInTime = sdf1.parse(newTime1);
+                                        long diff = endHours.getTime() - firstStartHours.getTime();
+                                        long diffMinutes = diff / (60 * 1000);
+                                        long diff1 = 0;
+                                        if (userTimeIn.after(flexibleInTime) || userTimeIn.equals(flexibleInTime)) {
+                                            if (userTimeOut.before(userTimeIn)) {
+                                                diff1 = userTimeOut1.getTime() - userTimeIn.getTime();
+                                            } else {
+                                                diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+                                            }
+
+                                        } else if (userTimeOut.before(userTimeIn)) {
+                                            diff1 = userTimeOut1.getTime() - flexibleInTime.getTime();
+                                        } else {
+                                            diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
+                                        }
+                                        long diffMinutes1 = diff1 / (60 * 1000);
+
+                                        if (userTimeIn != null) {
+                                            if (leave1[0].contains("AR")) {
+                                                cell9.setCellValue("AR/P");
+                                                ar = ar + 0.5;
+                                                cell9.setCellStyle(styleblue);
+
+                                            } else if (null != leave1[0] && leave1[0].contains("Short Leave")) {
+                                                if (secondHalf.contains("*")) {
+                                                    String[] shortArray = secondHalf.split("\\*");
+                                                    String[] endArray = secondHalf.split("\\^");
+                                                    String[] secondhalfstartTime = endArray[1].split("&");
+                                                    Date shortIn = sdf1.parse(shortArray[1]);
+                                                    Date shortend = sdf1.parse(endArray[1]);
+                                                    Date secondhalfstartTime1 = sdf1.parse(secondhalfstartTime[0]);
+                                                    if ((secondhalfstartTime1.before(shortIn) || secondhalfstartTime1.equals(shortIn)) && (shortIn.before(endHours) || shortIn.equals(endHours))) {
+                                                        if (userTimeOut.after(secondHalfTimeStr2)) {
+                                                            cell9.setCellValue("SHL/P");
+                                                            shl = shl + 1;
+                                                            cell9.setCellStyle(stylegreen);
+                                                        } else if (leave1[0].contains("~ AR")) {
+                                                            cell9.setCellValue("AR/P");
+                                                            ar = ar + 0.5;
+                                                            cell9.setCellStyle(styleblue);
+                                                        } else if (userTimeOut.before(secondHalfTimeStr2) || userTimeOut.equals(secondHalfTimeStr2)) {
+                                                            cell9.setCellValue("SHL/A");
+                                                            shla = shla + 1;
+                                                            cell9.setCellStyle(stylered);
+                                                        } else {
+                                                            cell9.setCellValue("AB");
+                                                            abcounter = abcounter + 0.5;
+                                                            cell9.setCellStyle(stylered);
+                                                        }
+                                                    } else if (diffMinutes1 >= 240 && userTimeIn.before(secondHalfTimeStr2)) {
+                                                        cell9.setCellValue("PR");
+                                                        prcounter = prcounter + 0.5;
+                                                        cell9.setCellStyle(stylegreen);
+                                                    }
+                                                } else if (diffMinutes1 >= 240 && userTimeIn.before(secondHalfTimeStr2)) {
+                                                    cell9.setCellValue("PR");
+                                                    prcounter = prcounter + 0.5;
+                                                    cell9.setCellStyle(stylegreen);
+                                                } else {
+                                                    cell9.setCellValue("AB");
+                                                    abcounter = abcounter + 0.5;
+                                                    cell9.setCellStyle(stylered);
+                                                }
+                                            } else if (diffMinutes1 >= diffMinutes && userTimeIn.before(flexibleEndTime)) {
+                                                cell9.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell9.setCellStyle(stylegreen);
+                                            } else if (diffMinutes1 <= diffMinutes && userTimeIn.before(flexibleEndTime) && !secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
+                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                                    && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
+                                                cell9.setCellValue("AB");
+                                                abcounter = abcounter + 0.5;
+                                                cell9.setCellStyle(stylered);
+                                            } else if (diffMinutes1 >= 240 && userTimeIn.after(secondHalfTimeStr2)) {
+                                                cell9.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell9.setCellStyle(stylegreen);
+                                            } else if ((userTimeIn.before(secondHalfTimeStr2) || userTimeIn.equals(secondHalfTimeStr2)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                                cell9.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell9.setCellStyle(stylegreen);
+                                            } else if (shiftName.contains("Night") && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
+                                                cell9.setCellValue("PR");
+                                                prcounter = prcounter + 0.5;
+                                                cell9.setCellStyle(stylegreen);
+                                            } else if (null != leave1[0] && !leave1[0].contains("AB") && !leave1[0].contains("AR")) {
+                                                if (leave1[0].contains("Casual Leave")) {
+                                                    cl = cl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Privilege Leave")) {
+                                                    pl = pl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Sick Leave")) {
+                                                    sl = sl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Maternity Leave")) {
+                                                    mtl = mtl + 0.5;
+                                                }
+                                                if (leave1[0].contains("Paternity Leave")) {
+                                                    ptl = ptl + 0.5;
+                                                }
+                                                if (leave1[0].contains("C Off Leave")) {
+                                                    coff = coff + 0.5;
+                                                }
+                                                if (leave1[0].contains("Leave Without Pay")) {
+                                                    lwp = lwp + 0.5;
+                                                }
+                                                cell9.setCellValue(" " + leave1[0]);
+
+                                            } else if (leave1[0].contains("AB")) {
+                                                cell9.setCellValue("AB");
+                                                abcounter = abcounter + 0.5;
+                                                cell9.setCellStyle(stylered);
+                                            } else {
+                                                cell9.setCellValue("AB");
+                                                abcounter = abcounter + 0.5;
+                                                cell9.setCellStyle(stylered);
+                                            }
+
+                                        } else if (userTimeIn != null && !secondHalf.contains("WO") && !secondHalf.contains("?")) {
+                                            cell9.setCellValue("AB");
+                                            abcounter = abcounter + 0.5;
+                                            cell9.setCellStyle(stylered);
+                                        } else if (secondHalf.contains("WO") || secondHalf.contains("?")) {
+                                            cell9.setCellValue("-");
+                                        }
+
+                                    } else if (secondHalf.equals("WO")) {
+                                        cell9.setCellValue("-");
+                                    } else if (secondHalf.equals("AB")) {
+                                        cell9.setCellValue("AB");
+                                        abcounter = abcounter + 0.5;
+                                        cell9.setCellStyle(stylered);
+                                    }
+                                    CellUtil.setAlignment(cell9, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    o++;
+                                }
+
+                                rownum = rownum + 1;
+                                Row row10 = firstSheet.createRow(rownum);
+                                Cell cellTitle6 = row10.createCell(0);
+                                cellTitle6.setCellValue("Working Hour");
+                                cellTitle6.setCellStyle(styleBold);
+                                Iterator itr7 = entry.getValue().iterator();
+                                while (itr7.hasNext()) {
+                                    Object[] next = (Object[]) itr7.next();
+                                    Cell cell10 = row10.createCell(p);
+                                    String secondHalf = "" + next[1];
+                                    List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
+                                    long lunchTime = 0;
+                                    long outTime = 0;
+                                    long totalDayTime = 0;
+                                    long totalDayTime1 = 0;
+                                    long totalTime = 0;
+                                    long shiftdiffMinutes = 0;
+                                    String startTime = "";
+                                    String endTime = "";
+                                    int d = 1;
+                                    int s = 2;
+//                                    boolean checkLunchTime = false;
+                                    SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                    if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
+                                        if (listPunch.size() > 2) {
+                                            while (listPunch.size() > d && listPunch.size() > s) {
+
+                                                Object[] startLunchTime = (Object[]) listPunch.get(d);
+                                                Object[] endLunchTime = (Object[]) listPunch.get(s);
+                                                startTime = (String) startLunchTime[0];
+                                                endTime = (String) endLunchTime[0];
+                                                Date launchStrTime = sdf3.parse(startTime);
+                                                Date launchEndTime = sdf3.parse(endTime);
+                                                long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                                lunchTime = diff / (60 * 1000);
+                                                outTime = outTime + lunchTime;
+                                                d = d + 2;
+                                                s = s + 2;
+                                            }
+                                        }
+                                        if (!secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
+                                                && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                                && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
+                                            String[] userTimeInStr = secondHalf.split("`");
+                                            String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                            String[] userTimeOutStr = secondHalf.split("!");
+                                            String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                            Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
+                                            Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+//                                        Date userTimeOut1 = sdf1.parse("23:59");
+                                            String[] startHoursStr = secondHalf.split("%");
+                                            String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+                                            String[] endHoursStr = secondHalf.split("&");
+                                            Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
+                                            Calendar cal1 = Calendar.getInstance();
+                                            cal1.setTime(firstStartHours);
+                                            cal1.add(Calendar.MINUTE, -earlyMinute);
+                                            String newTime1 = sdf1.format(cal1.getTime());
+//                                        Date flexibleInTime = sdf1.parse(newTime1);
+                                            Date endHours = sdf1.parse(endHoursStr[1]);
+                                            long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
+                                            shiftdiffMinutes = shiftTotalTime / (60 * 1000);
+                                            long diff1 = 0;
+//                                       
+                                            diff1 = userTimeOut.getTime() - userTimeIn.getTime();
+//                                      
+                                            if (diff1 != 0) {
+                                                totalDayTime = diff1 / (60 * 1000);
+                                                double empHour = (double) totalDayTime / 60;
+                                                int hours = (int) empHour;
+                                                int minutes = (int) (empHour * 60) % 60;
+                                                String hour = "" + hours;
+                                                String minute = "" + minutes;
+                                                if (hours < 10 && hours > 0) {
+                                                    hour = "0" + hour;
+                                                } else if (hours <= 0) {
+                                                    hour = "00";
+                                                }
+                                                if (minutes < 10 && minutes > 0) {
+                                                    minute = "0" + minute;
+                                                } else if (minutes <= 0) {
+                                                    minute = "00";
+                                                }
+                                                String workingHours = hour + ":" + minute;
+                                                cell10.setCellValue(workingHours);
+                                            } else {
+                                                cell10.setCellValue("-");
+                                            }
+                                        } else {
+                                            cell10.setCellValue("-");
+                                        }
+                                    } else {
+                                        cell10.setCellValue("-");
+                                    }
+
+//                                    Lunch Breck Cut Off
+                                    CellUtil.setAlignment(cell10, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    p++;
+                                }
+
+                                rownum = rownum + 1;
+                                Row row11 = firstSheet.createRow(rownum);
+                                Cell cellTitle7 = row11.createCell(0);
+                                cellTitle7.setCellValue("OT Hours");
+                                cellTitle7.setCellStyle(styleBold);
+                                Iterator itr8 = entry.getValue().iterator();
+                                while (itr8.hasNext()) {
+                                    Object[] next = (Object[]) itr8.next();
+                                    Cell cell11 = row11.createCell(t);
+                                    String secondHalf = "" + next[1];
+                                    if (emp.getOt().equals(true)) {
+
+//                                    Lunch Breck Cut Off
+                                        List listPunch = employeeDatetimeDataService.readPuchDataDateWise("" + next[0], id);
+                                        long lunchTime = 0;
+                                        long outTime = 0;
+                                        long totalDayTime = 0;
+                                        long totalDayTime1 = 0;
+                                        long totalTime = 0;
+                                        long shiftdiffMinutes = 0;
+                                        String startTime = "";
+                                        String endTime = "";
+                                        int d = 1;
+                                        int s = 2;
+//                                    boolean checkLunchTime = false;
+                                        SimpleDateFormat sdf3 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                                        if (listPunch.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
+                                            if (listPunch.size() > 2) {
+                                                while (listPunch.size() > d && listPunch.size() > s) {
+
+                                                    Object[] startLunchTime = (Object[]) listPunch.get(d);
+                                                    Object[] endLunchTime = (Object[]) listPunch.get(s);
+                                                    startTime = (String) startLunchTime[0];
+                                                    endTime = (String) endLunchTime[0];
+                                                    Date launchStrTime = sdf3.parse(startTime);
+                                                    Date launchEndTime = sdf3.parse(endTime);
+                                                    long diff = launchEndTime.getTime() - launchStrTime.getTime();
+                                                    lunchTime = diff / (60 * 1000);
+                                                    outTime = outTime + lunchTime;
+                                                    d = d + 2;
+                                                    s = s + 2;
+                                                }
+                                            }
+                                            if (!secondHalf.contains("WO") && !secondHalf.contains("TR") && !secondHalf.contains("AR") && !secondHalf.contains("?")
+                                                    && !secondHalf.contains("Casual Leave") && !secondHalf.contains("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.contains("Privilege Leave") && !secondHalf.contains("Sick Leave")
+                                                    && !secondHalf.contains("Paternity Leave") && !secondHalf.contains("Maternity Leave") && !secondHalf.contains("Leave Without Pay")) {
+                                                String[] userTimeInStr = secondHalf.split("`");
+                                                String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                                String[] userTimeOutStr = secondHalf.split("!");
+                                                String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                                Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
+                                                Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                                Date userTimeOut1 = sdf1.parse("23:59");
+                                                String[] startHoursStr = secondHalf.split("%");
+                                                String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+                                                String[] endHoursStr = secondHalf.split("&");
+                                                Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
+                                                Calendar cal1 = Calendar.getInstance();
+                                                cal1.setTime(firstStartHours);
+                                                cal1.add(Calendar.MINUTE, -earlyMinute);
+                                                String newTime1 = sdf1.format(cal1.getTime());
+//                                        Date flexibleInTime = sdf1.parse(newTime1);
+                                                Date endHours = sdf1.parse(endHoursStr[1]);
+                                                long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
+//                                        shiftdiffMinutes = shiftTotalTime / (60 * 1000);
+
+//                                        long sumOfActualHours = firstStartHours.getTime()+endHours.getTime();
+                                                long sumOfHoursForOT = userTimeOut.getTime() - userTimeIn.getTime();
+//                                        long sumOfHoursForOTDiff = sumOfHoursForOT/(60 * 1000);
+
+                                                long diff = Math.abs(sumOfHoursForOT) - Math.abs(shiftTotalTime);
+
+                                                if (diff < 0 || diff == 0) {
+                                                    cell11.setCellValue("-");
+                                                } else {
+                                                    totalDayTime = diff / (60 * 1000);
+                                                    double empHour = (double) totalDayTime / 60;
+                                                    int hours = (int) empHour;
+                                                    int minutes = (int) (empHour * 60) % 60;
+
+                                                    String totalHour1 = "";
+                                                    String totalMinute1 = "";
+
+                                                    int otMinuteCounter1 = (hours * 60) + minutes;
+
+                                                    int hours3 = (int) otMinuteCounter1 / 60;
+                                                    int minutes3 = (int) otMinuteCounter1 % 60;
+//                                            int hours4 = 0;
+//                                            int minutes4 = 0;
+
+                                                    if (hours3 >= 1) {
+                                                        totalHour1 += hours3;
+//                                                hours4 += hours3;
+                                                    } else {
+                                                        totalHour1 += "0";
+                                                    }
+
+                                                    if (minutes3 >= 0 && minutes3 < 30) {
+                                                        totalMinute1 += "0";
+                                                    } else if ((minutes3 >= 30 && minutes3 < 60) && hours3 >= 1) {
+                                                        totalMinute1 += "30";
+                                                    } else {
+                                                        totalMinute1 += "0";
+                                                    }
+//                                            if (minutes < 10 && minutes > 0) {
+//                                                totalMinute1 = "0" + totalMinute1;
+//                                            } else if (minutes <= 0) {
+//                                                totalMinute1 = "00";
+//                                            }
+//                                            if (hours < 10 && hours > 0) {
+//                                                totalHour1 = "0" + totalHour1;
+//                                            } else if (hours <= 0) {
+//                                                totalHour1 = "00";
+//                                            }
+
+                                                    String otHours = totalHour1 + ":" + totalMinute1;
+                                                    cell11.setCellValue(otHours);
+
+                                                    otMinuteCounter += (Integer.parseInt(totalHour1) * 60) + Integer.parseInt(totalMinute1);
+
+                                                }
+
+                                            } else {
+                                                cell11.setCellValue("-");
+                                            }
+                                        } else {
+                                            cell11.setCellValue("-");
+                                        }
+
+                                    } else {
+                                        cell11.setCellValue("-");
+                                    }
+
+                                    CellUtil.setAlignment(cell11, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    t++;
+                                }
+                            }
+
+                            rownum = rownum + 1;
+                            Row dayCount1 = firstSheet.createRow(rownum);
+                            rownum = rownum + 1;
+                            Row dayCount = firstSheet.createRow(rownum);
+                            Cell dayCounrCell = dayCount.createCell(0);
+                            dayCounrCell.setCellValue("Day Count");
+                            dayCounrCell.setCellStyle(styleBold);
+
+                            rownum = rownum + 1;
+                            Row row13 = firstSheet.createRow(rownum);
+                            for (int y = 1; y < 10;) {
+                                if (prcounter != 0) {
+                                    Cell cell12 = row13.createCell(y);
+                                    cell12.setCellValue("PR");
+                                    cell12.setCellStyle(stylegreen);
+                                    CellUtil.setAlignment(cell12, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    y++;
+                                }
+                                if (abcounter != 0) {
+                                    Cell cell13 = row13.createCell(y);
+                                    cell13.setCellValue("AB");
+                                    cell13.setCellStyle(stylered);
+                                    CellUtil.setAlignment(cell13, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    y++;
+                                }
+                                if (shl != 0) {
+                                    Cell cell14 = row13.createCell(y);
+                                    cell14.setCellValue("SHL/P");
+                                    cell14.setCellStyle(stylegreen);
+                                    CellUtil.setAlignment(cell14, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    y++;
+                                }
+                                if (shla != 0) {
+                                    Cell cell15 = row13.createCell(y);
+                                    cell15.setCellValue("SHL/A");
+                                    cell15.setCellStyle(stylered);
+                                    CellUtil.setAlignment(cell15, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    y++;
+                                }
+                                if (cl != 0) {
+                                    Cell cell16 = row13.createCell(y);
+                                    cell16.setCellValue("CL");
+                                    cell16.setCellStyle(styleBold);
+                                    CellUtil.setAlignment(cell16, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    y++;
+                                }
+                                if (sl != 0) {
+                                    Cell cell17 = row13.createCell(y);
+                                    cell17.setCellValue("SL");
+                                    cell17.setCellStyle(styleBold);
+                                    CellUtil.setAlignment(cell17, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    y++;
+                                }
+                                if (pl != 0) {
+                                    Cell cell18 = row13.createCell(y);
+                                    cell18.setCellValue("PL");
+                                    cell18.setCellStyle(styleBold);
+                                    CellUtil.setAlignment(cell18, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    y++;
+                                }
+                                if (holiday != 0) {
+                                    Cell cell19 = row13.createCell(y);
+                                    cell19.setCellValue("HOLIDAY");
+                                    cell19.setCellStyle(styleBold);
+                                    CellUtil.setAlignment(cell19, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    y++;
+                                }
+                                if (ar != 0) {
+                                    Cell cell20 = row13.createCell(y);
+                                    cell20.setCellValue("AR/P");
+                                    cell20.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell20, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    y++;
+                                }
+                                if (wo != 0) {
+                                    Cell cell21 = row13.createCell(y);
+                                    cell21.setCellValue("WO");
+                                    cell21.setCellStyle(styleBold);
+                                    CellUtil.setAlignment(cell21, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    y++;
+                                }
+                                if (tr != 0) {
+                                    Cell cell22 = row13.createCell(y);
+                                    cell22.setCellValue("TR");
+                                    cell22.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell22, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (coff != 0) {
+                                    Cell cell23 = row13.createCell(y);
+                                    cell23.setCellValue("COFF");
+                                    cell23.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell23, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (mtl != 0) {
+                                    Cell cell24 = row13.createCell(y);
+                                    cell24.setCellValue("MTL");
+                                    cell24.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell24, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (ptl != 0) {
+                                    Cell cell25 = row13.createCell(y);
+                                    cell25.setCellValue("PTL");
+                                    cell25.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell25, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (lwp != 0) {
+                                    Cell cell26 = row13.createCell(y);
+                                    cell26.setCellValue("LWP");
+                                    cell26.setCellStyle(styleblue);
+                                    CellUtil.setAlignment(cell26, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (otMinuteCounter != 0) {
+                                    Cell cell27 = row13.createCell(y);
+                                    cell27.setCellValue("OT");
+                                    cell27.setCellStyle(stylegreen);
+                                    CellUtil.setAlignment(cell27, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    y++;
+                                }
+                                break;
+                            }
+
+                            rownum = rownum + 1;
+                            Row row12 = firstSheet.createRow(rownum);
+                            for (int x = 1; x < 10;) {
+                                if (prcounter != 0) {
+                                    Cell cell12 = row12.createCell(x);
+                                    cell12.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    double newshl = shl / 2;
+                                    double nepr = prcounter - newshl;
+                                    cell12.setCellValue(nepr);
+                                    CellUtil.setAlignment(cell12, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    x++;
+                                }
+                                if (abcounter != 0) {
+                                    Cell cell13 = row12.createCell(x);
+                                    cell13.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell13.setCellValue(abcounter);
+                                    CellUtil.setAlignment(cell13, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    x++;
+                                }
+                                if (shl != 0) {
+                                    Cell cell14 = row12.createCell(x);
+                                    cell14.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell14.setCellValue(shl);
+                                    CellUtil.setAlignment(cell14, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    x++;
+                                }
+                                if (shla != 0) {
+                                    Cell cell15 = row12.createCell(x);
+                                    cell15.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell15.setCellValue(shla);
+                                    CellUtil.setAlignment(cell15, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    x++;
+                                }
+                                if (cl != 0) {
+                                    Cell cell16 = row12.createCell(x);
+                                    cell16.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell16.setCellValue(cl);
+                                    CellUtil.setAlignment(cell16, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    x++;
+                                }
+                                if (sl != 0) {
+                                    Cell cell17 = row12.createCell(x);
+                                    cell17.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell17.setCellValue(sl);
+                                    CellUtil.setAlignment(cell17, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    x++;
+                                }
+                                if (pl != 0) {
+                                    Cell cell18 = row12.createCell(x);
+                                    cell18.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell18.setCellValue(pl);
+                                    CellUtil.setAlignment(cell18, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    x++;
+                                }
+                                if (holiday != 0) {
+                                    Cell cell19 = row12.createCell(x);
+                                    cell19.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell19.setCellValue(holiday);
+                                    CellUtil.setAlignment(cell19, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    x++;
+                                }
+                                if (ar != 0) {
+                                    Cell cell20 = row12.createCell(x);
+                                    cell20.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell20.setCellValue(ar);
+                                    CellUtil.setAlignment(cell20, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    x++;
+                                }
+                                if (wo != 0) {
+                                    Cell cell21 = row12.createCell(x);
+                                    cell21.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell21.setCellValue(wo);
+                                    CellUtil.setAlignment(cell21, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                    x++;
+                                }
+                                if (tr != 0) {
+                                    Cell cell22 = row12.createCell(x);
+                                    cell22.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell22.setCellValue(tr);
+                                    CellUtil.setAlignment(cell22, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (coff != 0) {
+                                    Cell cell23 = row12.createCell(x);
+                                    cell23.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell23.setCellValue(coff);
+                                    CellUtil.setAlignment(cell23, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (mtl != 0) {
+                                    Cell cell24 = row12.createCell(x);
+                                    cell24.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell24.setCellValue(mtl);
+                                    CellUtil.setAlignment(cell24, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (ptl != 0) {
+                                    Cell cell25 = row12.createCell(x);
+                                    cell25.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell25.setCellValue(ptl);
+                                    CellUtil.setAlignment(cell25, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (lwp != 0) {
+                                    Cell cell26 = row12.createCell(x);
+                                    cell26.setCellType(Cell.CELL_TYPE_NUMERIC);
+                                    cell26.setCellValue(lwp);
+                                    CellUtil.setAlignment(cell26, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                if (otMinuteCounter != 0) {
+                                    Cell cell27 = row12.createCell(x);
+                                    cell27.setCellType(Cell.CELL_TYPE_NUMERIC);
+
+//                                    double empHour = (double) otMinuteCounter / 60;
+                                    int hours = (int) otMinuteCounter / 60;
+                                    int minutes = (int) otMinuteCounter % 60;
+
+                                    String totalHour1 = "" + hours;
+                                    String totalMinute1 = "" + minutes;
+
+                                    if (minutes < 10 && minutes > 0) {
+                                        totalMinute1 = "0" + totalMinute1;
+                                    } else if (minutes <= 0) {
+                                        totalMinute1 = "00";
+                                    }
+                                    if (hours < 10 && hours > 0) {
+                                        totalHour1 = "0" + totalHour1;
+                                    } else if (hours <= 0) {
+                                        totalHour1 = "00";
+                                    }
+
+                                    String otHours = totalHour1 + ":" + totalMinute1;
+                                    cell27.setCellValue(otHours);
+                                    CellUtil.setAlignment(cell27, firstFWorkbook, CellStyle.ALIGN_CENTER);
+                                }
+                                break;
+                            }
+
+                        }
+                    }
+
+                }
+
+                rownum++;
             }
 
         } catch (Exception e) {

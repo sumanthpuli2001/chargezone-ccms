@@ -6,7 +6,6 @@
 package com.bul.zydex.service.Payroll;
 
 import com.bul.zydex.dao.Payroll.EmployeeDeductionAmountDAO;
-import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.PayrollFinancialYear;
 import com.bul.zydex.service.GenericsServiceImpl;
@@ -92,6 +91,11 @@ public class EmployeeDeductionAmountServiceImpl<T> extends GenericsServiceImpl<T
     @Override
     public List<?> fetchsalary(int edaId, String eftDate, String relivDate) {
           return employeeDeductionAmountDAO.fetchsalary(edaId, eftDate, relivDate);
+    }
+
+    @Override
+    public List<?> readEmployeeTdsAmountWithMonth(int employeeMasterID, String startDate, String endate) {
+        return employeeDeductionAmountDAO.readEmployeeTdsAmountWithMonth(employeeMasterID, startDate, endate);
     }
 
 }

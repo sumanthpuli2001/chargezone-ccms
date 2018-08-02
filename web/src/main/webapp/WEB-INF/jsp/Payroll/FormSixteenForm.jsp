@@ -1,7 +1,7 @@
 <%--
     Document   : Form16Print
     Created on : 5.8.2016 , 5:50:46 PM
-    Author     : Prem
+    Author     : DELL-3
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,8 +13,64 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Form 16 Print</title>
+        <style>
+            /*            table.table-bordered{
+                            border:1px solid black;
+                        }*/
+            table.table-bordered > tbody > tr > th{
+                border: 1px solid;
+                border-color: #000 !important;
+                text-align: center;
+                vertical-align: middle;
+                font-size:12px;
+            }
+            table.table-bordered > tbody > tr > td{
+                border: 1px solid;
+                border-color: #000 !important;
+                text-align: center;
+                vertical-align: middle;
+                font-size:12px;
+            }
+
+            page {
+                background: white;
+                display: block;
+                margin: 0 auto;
+                margin-bottom: 0.5cm;
+                box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+            }
+            page[size="A4"] {  
+                width: 21cm;
+                height: 29.7cm; 
+            }
+            page[size="A4"][layout="portrait"] {
+                width: 29.7cm;
+                height: 21cm;  
+            }
+            page[size="A3"] {
+                width: 29.7cm;
+                height: 42cm;
+            }
+            page[size="A3"][layout="portrait"] {
+                width: 42cm;
+                height: 29.7cm;  
+            }
+            page[size="A5"] {
+                width: 14.8cm;
+                height: 21cm;
+            }
+            page[size="A5"][layout="portrait"] {
+                width: 21cm;
+                height: 14.8cm;  
+            }
+            @media print {
+                body, page {
+                    margin: 0;
+                    box-shadow: 0;
+                }
+            }
+        </style>
     </head>
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -23,1322 +79,574 @@
                 <input type="button" class="btn btn-primary" value="Print" onclick="window.print('printDiv')">
             </h3>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Form Sixteen Form </li>
+                <li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+                <li class="active">Form Sixteen Form</li>
             </ol>
         </section>
 
-
         <!-- Main content -->
-        <section class="content">
-            <div class="row" id="printDiv">
-               
-                <div class="col-md-12">
+        <div class="row">
+            <section class="content">
+                <div class="col-sm-10" id="printDiv">
                     <!-- Custom Tabs -->
-                    <div class="nav-tabs-custom">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab_1">
-                                <c:if test="${!empty successMessage}">
-                                    <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
-                                </c:if>
-                                <c:if test="${!empty failureMessage}">
-                                    <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
-                                </c:if>
-                                <form:form class="form-horizontal" method="post"
-                                           action="">
-
-
-                                    <div class="box-body no-padding">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="table table-bordered">
-                                                    <table id="" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-
-                                                        <thead>
-
-
-                                                        </thead>
-                                                        <form>
-                                                            <tbody><tr height="17" style="mso-height-source:userset;height:12.75pt">
-                                                                    <td style="border: 1px solid black;border-right:none;border-bottom:none" colspan="5" align="center"><b>Form No. 16</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="5" align="center">Certificate under section 203 of the Income-tax Act,</td></tr>
-                                                                <tr height="17" style="mso-height-source:userset;height:12.75pt">
-                                                                    <td style="border: 1px solid black;border-right:none;border-bottom:none" colspan="5" align="center"><b>[ See rule 31 (1) (a) ]</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="5" align="center">1961 for tax deducted at source from income</td>
-                                                                </tr>
-                                                                <tr height="16" style="mso-height-source:userset;height:12.0pt">
-                                                                    <td style="border: 1px solid black;border-right:none" colspan="5">&nbsp;</td>
-                                                                    <td style="border: 1px solid black" colspan="5" align="center">chargeable under the head " Salaries "</td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="10"></td>
-                                                                </tr>
-                                                                <tr height="18" style="mso-height-source:userset;height:13.5pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="6">Name and
-                                                                        Address of the Employer</td>
-
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="4">Name and Designation of the Employee</td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="6">
-                                                                        <!--employee Station Name-->
-                                                                        <b>
-                                                                            ${employeeMaster.company}
-                                                                        </b>
-                                                                    </td><td style="border: 1px solid black;border-bottom:none" colspan="4">
-                                                                        <!-- Employee Name-->
-                                                                        <b>
-                                                                            ${employeeMaster.employeeName} ${employeeMaster.designationMaster.designationName}
-                                                                        </b>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="6"></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="4">
-                                                                        <!--employee Designation Type-->
-                                                                        <b>
-                                                                        </b>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="6">
-                                                                        <!-- Employee Address-->
-                                                                    </td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="4"><b>Form 24 Seq. No. :</b></td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="6">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="4">&nbsp;</td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="4"><b>PAN / GIR No.</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="2"><b>TAN No</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="4"><b>PAN / GIR No.</b></td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="4"><b> ${employeeMaster.panCard}</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="2"><b>${payrollFormSixteenMaster.tanNo}</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="4"><b> ${employeeMaster.panCard}</b>
-
-
-                                                                    </td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="6" align="center">TDS Circle where Annual Return/Statement</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="2" align="center">Period</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="2" align="center">Assessment</td>
-                                                                </tr>
-
-                                                                <tr height="19" style="mso-height-source:userset;height:14.25pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="6" align="center">under Sec.206 is to be filed.</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">From</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">To</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="2" align="center">Year</td>
-                                                                </tr>
-
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="6">&nbsp;</td>
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                </tr>
-
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="6">&nbsp;</td
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                </tr>
-
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="6">&nbsp;</td
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                </tr>
-                                                                <tr height="20" style="height:15.0pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="3" width="183"><b>Ist</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="3" width="215">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none"></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="2">&nbsp;</td>
-                                                                </tr>
-                                                                <tr height="20" style="height:15.0pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="3" width="183"><b>IInd</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="3" width="215">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none"></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                </tr>
-                                                                <tr height="20" style="height:15.0pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="3" width="183"><b>IIIrd</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="3" width="215">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none"></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                </tr>
-                                                                <tr height="21" style="height:15.75pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="3" width="183"><b>IVth</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="3">&nbsp;</td>
-                                                                    <!--employee Financial Year-->
-
-
-                                                                    <td style="border: 1px solid black;border-bottom:none" align="right"><b>${payrollFormSixteenMaster.payrollFinancialYear.startDate}</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none"><b>${payrollFormSixteenMaster.payrollFinancialYear.endDate}</b></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="2" align="center"><b>${payrollFormSixteenMaster.payrollFinancialYear.title}</b></td>
-                                                                </tr>
-                                                                <tr height="11" style="mso-height-source:userset;height:8.25pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="10"></td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="10" align="center">DETAILS OF
-                                                                        SALARY PAID AND ANY OTHER INCOME AND TAX DEDUCTED</td>
-                                                                </tr>
-                                                                <tr height="12" style="mso-height-source:userset;height:9.0pt">
-                                                                    <td style="border: 1px solid black" colspan="10"></td>
-                                                                </tr>
-                                                                <tr height="14" style="mso-height-source:userset;height:10.5pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="10">&nbsp;</td>
-                                                                </tr>
-                                                                <tr height="18" style="mso-height-source:userset;height:13.5pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="10">1 GROSS SALARY<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7">a) Salary as per
-                                                                        provisions contained in sec.17(1)<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="3">
-                                                                        <!--employee Gross Yearly Salary -->
-                                                                        Indian Rupee. ${totallist}
-                                                                    </td></tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7">b) Value of perquisites
-                                                                        u/s 17(2) (as per FormNo.12BA, wherever applicable)</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="3">Indian Rupee.0 </td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black" colspan="7">c) Profits in lieu of
-                                                                        salary under section 17(3) (as per Form No.12BA,<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                    <td style="border: 1px solid black" colspan="3">Indian Rupee.0 </td>
-                                                                </tr>
-                                                                <tr height="18" style="mso-height-source:userset;height:13.5pt">
-                                                                    <td style="border: 1px solid black" colspan="7"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp; </span>wherever applicable)<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                    <td style="border: 1px solid black" colspan="3"></td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7">d) Total<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="3">
-                                                                        <!--Total Salary-->
-                                                                        ${totallist}
-                                                                    </td>
-                                                                </tr>
-                                                                <tr height="15" style="mso-height-source:userset;height:15.95pt">
-
-                                                                    <td style="border: 1px solid black" colspan="10"></td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="10">2 LESS : Allowances to
-                                                                        the extent exempt under section 10</td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black" colspan="5">Allowance</td>
-                                                                    <td style="border: 1px solid black" colspan="2">Amount</td>
-
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="5">Conveyance Allowance</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="2">Indian Rupee.0 </td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                </tr>
-                                                                <tr height="18" style="mso-height-source:userset;height:13.5pt">
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7"></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">Indian Rupee.0 </td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-
-                                                                </tr>
-                                                                <tr height="19" style="mso-height-source:userset;height:14.25pt">
-
-                                                                    <td style="border: 1px solid black" colspan="7">3 BALANCE<span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp; </span>( 1 - 2 )</td>
-
-                                                                    <td style="border: 1px solid black">
-                                                                        <!--employee Gross Yearly Salary -->
-                                                                        ${totallist}
-                                                                    </td>
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black"></td>
-                                                                </tr>
-                                                                <tr height="16" style="mso-height-source:userset;height:12.0pt">
-
-                                                                    <td style="border: 1px solid black" colspan="7"></td>
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="19" style="mso-height-source:userset;height:14.25pt">
-                                                                    <!--<td style="border: 1px solid black" height=19 class=xl66 style='height:14.25pt'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7">4 DEDUCTION</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none"></td>
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none"></td>
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="5"><span style="mso-spacerun:yes"></span>(a) Tax on employment<span style="mso-spacerun:yes"></span></td>
-                                                                    <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                    <td style="border: 1px solid black" colspan="2">
-
-                                                                        Indian Rupee.${employeeDeductionPtAmountList[0][1]}
-
-                                                                    </td>
-                                                                    <!--<td style="border: 1px solid black"></td>-->
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="5"><span style="mso-spacerun:yes"></span>(b) Entertainment Allowance<span style="mso-spacerun:yes"></span></td>
-                                                                    <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="2">Indian Rupee.0 </td>
-                                                                    <!--<td style="border: 1px solid black"></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="14" style="mso-height-source:userset;height:10.5pt">
-                                                                    <!--<td style="border: 1px solid black" height=14 class=xl66 style='height:10.5pt'></td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7"></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7">5 AGGREGATE OF 4<span style="mso-spacerun:yes">&nbsp; </span>( a to b )</td>
-                                                                    <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" class="xl126"> <!--total pt Value-->
-
-                                                                        Indian Rupee.${employeeDeductionPtAmountList[0][1]}
-
-                                                                    </td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" class="xl126">
-                                                                        <!--total pt Value-->
-
-                                                                        Indian Rupee.${employeeDeductionPtAmountList[0][1]}
-                                                                    </td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" class="xl127">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="20" style="mso-height-source:userset;height:15.0pt">
-                                                                    <!--<td style="border: 1px solid black" height=20 class=xl66 style='height:15.0pt'></td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7"></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7">6 INCOME CHARGEABLE
-                                                                        UNDER THE HEAD SALARIES ( 3 - 5)</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none" class="xl126">
-                                                                        <!--total chargeableSalary Value-->
-                                                                        Indian Rupee.  ${totallist-employeeDeductionPtAmountList[0][1]}
-                                                                    </td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="10" style="mso-height-source:userset;height:7.5pt">
-                                                                    <!--<td style="border: 1px solid black" height=10 class=xl66 style='height:7.5pt'></td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7"></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7">7 ADD Any other income
-                                                                        reported by the employee</td>
-                                                                    <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">Indian Rupee.0 </td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="7" style="mso-height-source:userset;height:5.25pt">
-                                                                    <!--<td style="border: 1px solid black" height=7 class=xl66 style='height:5.25pt'></td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7"></td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7">8 GROSS TOTAL INCOME ( 6
-                                                                        + 7 )</td>
-                                                                    <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">Indian Rupee.${totallist-employeeDeductionPtAmountList[0][1]}</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="20" style="mso-height-source:userset;height:15.0pt">
-                                                                    <!--<td style="border: 1px solid black" height=20 class=xl66 style='height:15.0pt'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="20" style="mso-height-source:userset;height:15.0pt">
-                                                                    <!--<td style="border: 1px solid black" height=20 class=xl66 style='height:15.0pt'></td>-->
-                                                                    <td style="border: 1px solid black" colspan="10"></td>
-                                                                    <!--<td style="border: 1px solid black" colspan=3 style='mso-ignore:colspan'></td>-->
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="20" style="mso-height-source:userset;height:15.0pt">
-                                                                    <!--<td style="border: 1px solid black" height=20 class=xl66 style='height:15.0pt'></td>-->
-                                                                    <td style="border: 1px solid black" colspan="7">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <td style="border: 1px solid black">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7">9 DEDUCTION UNDER
-                                                                        CHAPTER VI - A</td>
-                                                                    <!--<td style="border: 1px solid black" style='border-top:none'>&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black" style='border-top:none'>&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black" style='border-top:none'>&nbsp;</td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <!--                                <td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="10"></td>
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black" style='border-left:none'>&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="7">(A) Sections 80C, 80CCC
-                                                                        and 80D</td>
-                                                                    <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none">Gross Amt</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">Deducti. Amt</td>
-                                                                    <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                                <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                    <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                    <td style="border: 1px solid black;border-bottom:none" colspan="10"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>A. Section 80C</td>
-                                                                    <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                    <!--<td style="border: 1px solid black"></td>-->
-                                                                    <!--<td style="border: 1px solid black"></td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black" style='border-left:none'>&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                    <!--<td style="border: 1px solid black" ></td>-->
-                                                                </tr>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td style="border: 1px solid black">1<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                    <td style="border: 1px solid black" colspan="6">${employeeDeductionAmountList[0][0]}</td>
-                                                                    <td style="border: 1px solid black" class="xl126" colspan="3">Indian Rupee:${employeeDeductionAmountList[0][1]}</td>
-                                                                </tr>
-                                                            </tbody>     
-                                                            </td>
-                                                            <!--<td style="border: 1px solid black" style='border-left:none'>&nbsp;</td>-->
-                                                            <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                            <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tbody>
-                                                                <c:forEach var="list" items="${payrollSavingAmountList}" varStatus="status">
-                                                                    <tr>
-                                                                        <td style="border: 1px solid black">${status.count+1}<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                        <td style="border: 1px solid black" colspan="6">${list[0]}</td>
-                                                                        <td style="border: 1px solid black" class="xl126" colspan="3">Indian Rupee:${list[1]}</td>
-                                                                    </tr>
-                                                                </c:forEach>
-                                                            </tbody>     
-                                                            </td>
-                                                            <!--<td style="border: 1px solid black" style='border-left:none'>&nbsp;</td>-->
-                                                            <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                            <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black;border-bottom:none" colspan="7">B. Section 80 CCC</td>
-                                                                <!--<td style="border: 1px solid black" colspan=3 style='mso-ignore:colspan'></td>-->
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <td style="border: 1px solid black;border-bottom:none" colspan="3">Indian Rupee.0.0</td>
-                                                                <!--<td style="border: 1px solid black" style='border-left:none'>&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black;border-bottom:none" colspan="7">C. Section 80 D</td>
-                                                                <!--<td style="border: 1px solid black" colspan=3 style='mso-ignore:colspan'></td>-->
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <td style="border: 1px solid black;border-bottom:none" colspan="3">Indian Rupee.0 </td>
-                                                                <!--<td style="border: 1px solid black" style='border-left:none'>&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black;border-bottom:none" colspan="10"></td>
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black" style='border-left:none'>&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black;border-bottom:none" colspan="10">(B) Other Sections (e.g.
-                                                                    80E, 80G etc.) under chapter VI A</td>
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black" style='border-left:none'>&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black;border-bottom:none" colspan="6"></td>
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <td style="border: 1px solid black;border-bottom:none">Gross Amt</td>
-                                                                <td style="border: 1px solid black;border-bottom:none">Qualify Amt</td>
-                                                                <td style="border: 1px solid black;border-bottom:none">Deduct. Amt</td>
-                                                                <td style="border: 1px solid black;border-bottom:none">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black">(a)<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                <td style="border: 1px solid black" colspan="4">Section 80C</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">  Indian Rupee.0</td>
-                                                                <td style="border: 1px solid black" align="right">
-
-
-                                                                    ${totalSavinglist+employeeDeductionAmountList[0][1]}
-                                                                </td>
-                                                                <td style="border: 1px solid black" class="xl126">Indian Rupee.${totalSavinglist+employeeDeductionAmountList[0][1]}</td>
-                                                                <td style="border: 1px solid black" class="xl126">Indian Rupee.${totalSavinglist+employeeDeductionAmountList[0][1]}</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black">(b)<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                <td style="border: 1px solid black" colspan="4">Section 80CCC</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black" align="right">0.00</td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black">(c)<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                <td style="border: 1px solid black" colspan="4">Section 80D</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black" align="right">0.00</td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black">(d)<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                <td style="border: 1px solid black" colspan="4">Section 80E</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black" align="right">0.00</td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black">(e)</td>
-                                                                <td style="border: 1px solid black" colspan="4">Section 80G</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black" align="right">0.00</td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black">(f)</td>
-                                                                <td style="border: 1px solid black" colspan="4">Section - Housing Loan
-                                                                    Interest</td>
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black" align="right">0.00</td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="7"></td>
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">10 Aggregate of
-                                                                    Deductible amount under Chapter VI - A</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" class="xl126">
-
-
-                                                                    Indian Rupee. ${totalSavinglist+employeeDeductionAmountList[0][1]}
-                                                                </td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="7"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">11 TOTAL INCOME<span style="mso-spacerun:yes">&nbsp;&nbsp; </span>( 8 - 10 )</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    Indian Rupee.
-                                                                      <fmt:formatNumber value="${(totallist-employeeDeductionPtAmountList[0][1]) - (totalSavinglist+employeeDeductionAmountList[0][1])}"></fmt:formatNumber>
-                                                                </td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black" >&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="7" class="xl147"></td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">12 TAX ON TOTAL INCOME</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" class="xl125">
-                                                                    Indian Rupee.0.00
-
-                                                                </td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="7"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">13 SURCHARGE ( ON TAX
-                                                                    COMPUTED AT SR.NO.12)</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" align="right">0.00</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="7"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">14 EDUCATION CESS @ 2%
-                                                                    ON (TAX AT S. NO. 12 PLUS SURCHARGE AT S.</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" align="right">0.00</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">NO.13)</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="7"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black;" colspan="7">15 TAX PAYABLE
-                                                                    (12+13+14)</td>
-                                                                <!--                                <td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" align="right">
-                                                                    Indian Rupee.0.00
-                                                                </td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7"></td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black"></td>
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">16<span style="mso-spacerun:yes">&nbsp; </span>Relief under section 89 (attach details)</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="7"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black;border-bottom:none" colspan="7">17 Tax payable (15-16)</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" class="xl126">
-                                                                    Indian Rupee.0.00
-                                                                </td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="7"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">18 Less : (a) Tax
-                                                                    deducted at source u/s 192(1)</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>(b) Tax paid by the
-                                                                    employer on behalf of the employee u/s 192(1A) on</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7"><span style="mso-spacerun:yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>perquisites u/s 17(2)</td>
-                                                                <!--<td style="border: 1px solid black" class=xl154 style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <td style="border: 1px solid black">Indian Rupee.0 </td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="7"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">19 TAX PAYABLE /
-                                                                    (REFUNDABLE)<span style="mso-spacerun:yes">&nbsp; </span>( 17 - 18 )</td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" class="xl126">
-                                                                    Indian Rupee.0.00
-                                                                </td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="7">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="10"></td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="10" align="center">DETAILS OF
-                                                                    TAX DEDUCTED AND DEPOSITED INTO CENTRAL GOVERNMENT ACCOUNT</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="39" style="mso-height-source:userset;height:29.25pt">
-                                                                <!--<td style="border: 1px solid black" height=39 class=xl66 style='height:29.25pt'></td>-->
-                                                                <td style="border: 1px solid black" rowspan="2" width="41">Sr.No.</td>
-                                                                <td style="border: 1px solid black" rowspan="2" width="90">TDS</td>
-                                                                <td style="border: 1px solid black" rowspan="2" width="52">Surcharges</td>
-                                                                <td style="border: 1px solid black" rowspan="2" width="67">Education Cess</td>
-                                                                <td style="border: 1px solid black" rowspan="2" width="68">Total Tax Deposited</td>
-                                                                <td style="border: 1px solid black" rowspan="2" width="80">Chq No./ DD No.</td>
-                                                                <td style="border: 1px solid black" rowspan="2" width="80">BSR Code of Bank Branch</td>
-                                                                <td style="border: 1px solid black" rowspan="2" width="77">Date on which tax deposited (DD/MM/YY)</td>
-                                                                <td style="border: 1px solid black" colspan="2" rowspan="2" width="161">Transfer voucher/Challan
-                                                                    Identification No.</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="54" style="mso-height-source:userset;height:40.5pt">
-                                                                <!--<td style="border: 1px solid black" height=54 class=xl66 style='height:40.5pt'></td>-->
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-
-
-
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  1</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  2</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  3</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  4</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  5</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  6</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  7</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  8</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  9</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  10</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  11</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <td style="border: 1px solid black">  12</td>
-                                                                <td style="border: 1px solid black"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    0.0
-
-
-                                                                </td>
-
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-
-
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">
-                                                                    Indian Rupee.<br>0.00
-                                                                </td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="2">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="0" style="display:none;mso-height-source:userset;mso-height-alt:
-                                                                319">
-                                                                <!--<td style="border: 1px solid black" height=0 class=xl66></td>-->
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <td style="border: 1px solid black" colspan="3"></td>
-                                                                <td style="border: 1px solid black" align="right">0.00</td>
-                                                                <td style="border: 1px solid black" colspan="4"></td>
-                                                                <td style="border: 1px solid black">&nbsp;</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="10"></td>
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="10">I &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;
-                                                                    <b> ${payrollFormSixteenMaster.ename}</b>
-                                                                    &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; , son/ of &nbsp;&nbsp;&nbsp; <b> ${payrollFormSixteenMaster.fname}</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;working in the capacity
-                                                                    of &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;<b> ${employeeMaster.designationMaster.designationName}</b></td>
-                                                                <!--                                <td style="border: 1px solid black" colspan=3>-->
-                                                                <!-- Employee Name-->
-
-
-                                                                <!--<td style="border: 1px solid black">, son/ of</td>-->
-                                                                <!--                                <td style="border: 1px solid black" colspan=2 >
-
-
-                                                            </td>-->
-                                                                <!--                                <td style="border: 1px solid black" colspan=2 style='mso-ignore:colspan'>working in the capacity
-                                                                                                    of</td>-->
-                                                                <!--<td style="border: 1px solid black" class=xl127>PARTNER</td>-->
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <input type="hidden" name="totalTemp" id="totalTemp" value="0.00">
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" class="totalWords11" id="totalWords11" colspan="10">(Designation) do hereby
-                                                                    certify that a sum of &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<span style="display:none">Indian Rupee.</span>&nbsp; &nbsp;&nbsp;&nbsp;<b> Indian Rupee.</b><b>0.00</b> &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;(Indian Rupee.<span></span>)</td>
-
-                                                                <!--                                 <td style="border: 1px solid black" class="totalWords11" id="totalWords11" colspan="5"style='mso-ignore:colspan;border-right:1.0pt solid black'>
-                                                                                               </td>-->
-
-                                                            </tr>
-                                                            <!--                            <tr height=21 style='mso-height-source:userset;height:15.95pt'>
-                                                                                            <td height=21 class=xl66 style='height:15.95pt'></td>
-                                                                                            <td class=xl128 colspan=4 style='mso-ignore:colspan'>(Designation) do hereby
-                                                                                                certify that<span style='mso-spacerun:yes'>&nbsp; </span>a sum of <span
-                                                                                                    style='display:none'>Indian Rupee.</span></td>
-                                                                                            <td class=xl176 align=right>
-                                                            Indian Rupee.<br>0.00
-
-
-                                                        </td>
-                                                    <input hidden="hidden" name="totalTemp" id="totalTemp" value="0.00"/>
-                                                            <td class="totalWords11" colspan=5 id="totalWords11" style='mso-ignore:colspan;border-right:1.0pt solid black'>
-                                                            Indian Rupee.(<span></span>)</td>
-                                                        <td class=xl67></td>
-                                                        </tr>-->
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl177 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="10">has
-                                                                    been deducted at source and paid to the credit of the Central Government. I
-                                                                    further certify that the information given above is<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl177 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black" colspan="10">true and correct baseed
-                                                                    on the book of accounts, documents and other available records</td>
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                                <!--<td style="border: 1px solid black" >&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl177 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="10"></td>
-                                                                <!--<td style="border: 1px solid black" >&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black"></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:25.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="10"></td>
-                                                                <!--<td style="border: 1px solid black" style='mso-ignore:colspan'></td>-->
-                                                                <!--<td style="border: 1px solid black" >&nbsp;</td>-->
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="6"></td>
-                                                                <td style="border: 1px solid black" colspan="4" align="center">Signature of the person responsible for the</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <!--<td style="border: 1px solid black">&nbsp;</td>-->
-                                                                <td style="border: 1px solid black" colspan="6"></td>
-                                                                <td style="border: 1px solid black" colspan="4" align="center">deduction of tax.</td>
-                                                                <!--<td style="border: 1px solid black" ></td>-->
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-                                                                <!--<td style="border: 1px solid black" height=21 class=xl66 style='height:15.95pt'></td>-->
-                                                                <td style="border: 1px solid black">Place :</td>
-                                                                <td style="border: 1px solid black">
-                                                                    <b>
-                                                                        ${payrollFormSixteenMaster.place}
-                                                                    </b>
-                                                                </td>
-                                                                <td style="border: 1px solid black" colspan="3"></td>
-                                                                <td style="border: 1px solid black">Full Name :</td>
-                                                                <td style="border: 1px solid black" colspan="4">
-                                                                    <!-- Employee Name-->
-                                                                    <b>
-                                                                        ${payrollFormSixteenMaster.ename} ${payrollFormSixteenMaster.fname}
-                                                                    </b>
-                                                                </td>
-
-                                                            </tr>
-                                                            <tr height="21" style="mso-height-source:userset;height:15.95pt">
-
-                                                                <td style="border: 1px solid black">Date :<span style="mso-spacerun:yes">&nbsp;</span></td>
-                                                                <td style="border: 1px solid black"><b> ${payrollFormSixteenMaster.date}</b></td>
-                                                                <td style="border: 1px solid black" colspan="3"></td>
-                                                                <td style="border: 1px solid black">Designation :</td>
-                                                                <td style="border: 1px solid black" colspan="4">
-                                                                    <!--employee Designation Type-->
-                                                                    <b> ${employeeMaster.designationMaster.designationName}</b>
-                                                                    <span style="mso-spacerun:yes">&nbsp;</span></td>
-
-                                                            </tr>
-                                                            </tbody>
-                                                        </form>
-                                                    </table>
-
-
-                                                </div>
-
-
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
-
-                                </form:form>
-                            </div><!-- /.tab-pane -->
-                        </div><!-- /.tab-content -->
-                    </div><!-- nav-tabs-custom -->
-                </div><!-- /.col -->
-            </div>
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
-    <!--<form>
-        <input type="button" value="Print" onclick="window.print()">
-    </form> ------>
-     <%--<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>--%>
+                    <div class="tab-pane active" id="tab_1">
+                        <c:if test="${!empty successMessage}">
+                            <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
+                        </c:if>
+                        <c:if test="${!empty failureMessage}">
+                            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+                        </c:if>
+                        <table class="table table-bordered table-hover" style="background-color: white">
+                            <tbody>
+                                <tr>
+                                    <td colspan="5">
+                                        <b>Form No. 16 </br> [ See rule 31 (1) (a) ] </b>
+                                    </td>
+                                    <td colspan="5">
+                                        Certificate under section 203 of the Income-tax Act, 1961 for tax deducted at source from income </br> chargeable under the head " Salaries "
+                                    </td>
+                                </tr> 
+
+                                <tr style="background-color:whitesmoke">
+                                    <td style="border:none;" colspan="10"></td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border-right:none;" colspan="6">Name and Address of the Employer</td>
+                                    <td colspan="4">Name and Designation of the Employee</td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right:none;" colspan="6">
+                                        <b>${employeeMaster.company}</b>
+                                    </td>
+                                    <td colspan="4">
+                                        <b>${employeeMaster.employeeName} </br> ${employeeMaster.designationMaster.designationName}</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right:none;" colspan="6"></td>
+                                    <td colspan="4">
+                                        <b>Form 24 Seq. No.:</b>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="10"></td>
+                                </tr>   
+
+                                <tr>
+                                    <td colspan="3"><b>PAN / GIR No.</b></td>
+                                    <td colspan="3"><b>TAN No</b></td>
+                                    <td colspan="4"><b>PAN / GIR No.</b></td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right:none;" colspan="3">${payrollFormSixteenMaster.panNo}</td>
+                                    <td style="border-right:none;" colspan="3">${payrollFormSixteenMaster.tanNo}</td>
+                                    <td colspan="4"><b>${employeeMaster.panCard}</b></td>
+                                </tr>
+
+                                <tr style="background-color:whitesmoke">
+                                    <td colspan="10"></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="6" rowspan="2">TDS Circle where Annual Return/Statement</br>under Sec.206 is to be filed.</td>
+                                    <td colspan="2">Period</td>
+                                    <td colspan="2">Assessment</td>
+                                </tr>
+                                <tr>
+                                    <td>From</td>
+                                    <td>To</td>
+                                    <td colspan="2">Year</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6">Acknowledgement Nos. of all quarterly statements of TDS under sub-section (3) of section 200 as provided by TIN Facilitation Centre or NSDL web-site</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">Quarter</td>
+                                    <td colspan="3">Acknowledgement No</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Ist</b></td>
+                                    <td colspan="3"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>IInd</b></td>
+                                    <td colspan="3"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>IIIrd</b></td>
+                                    <td colspan="3"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>IVth</b></td>
+                                    <td colspan="3"></td>
+                                    <td><b>${payrollFormSixteenMaster.payrollFinancialYear.startDate}</b</td>
+                                    <td><b>${payrollFormSixteenMaster.payrollFinancialYear.endDate}</b></td>
+                                    <td colspan="2"><b>${payrollFormSixteenMaster.payrollFinancialYear.title}</b></td>
+                                </tr>
+
+                                <tr style="background-color:whitesmoke">
+                                    <td colspan="10"></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="10">DETAILS OF SALARY PAID AND ANY OTHER INCOME AND TAX DEDUCTED</td>
+                                </tr>
+
+                                <tr style="background-color:whitesmoke">
+                                    <td colspan="10"></td>
+                                </tr>
+
+                                <tr>
+                                    <td style="text-align: left;" colspan="7">1 GROSS SALARY</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="7">&emsp;a) Salary as per
+                                        provisions contained in sec.17(1)</td>
+                                    <td style="text-align:right"> 
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${totallist}"/>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="7">&emsp;b) Value of perquisites
+                                        u/s 17(2) <br/>&emsp;&emsp;(as per FormNo.12BA, wherever applicable)</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="7">&emsp;c) Profits in lieu of
+                                        salary under section 17(3) <br/>&emsp;&emsp; (as per Form No.12BA,wherever applicable)</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="7">&emsp;d) Total</td>
+                                    <td></td>
+                                    <td style="text-align: right">
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${totallist}"/>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="7">
+                                        2 LESS : Allowances to the extent exempt under section 10
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="6">&emsp;Allowance</td>
+                                    <td>Amount</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="6">&emsp;Conveyance Allowance</td>
+                                    <td style="text-align: right;">Rs. 0.00</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7"></td>
+                                    <td style="text-align: right;">Rs. 0.00</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="7">3 BALANCE&nbsp;&nbsp;&nbsp;( 1 - 2 )</td>
+                                    <td></td>
+                                    <td style="text-align: right">
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${totallist}"/>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="7">4 DEDUCTION</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align: left" colspan="5">&emsp;(a) Tax on employment</td>
+                                    <td  style="text-align: right">
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${employeeDeductionPtAmountList}"/>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td  style="text-align: left" colspan="5">&emsp;(b) Entertainment Allowance</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="7">5 AGGREGATE OF 4  ( a to b )</td>
+                                    <td style="text-align:right">
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${employeeDeductionPtAmountList}"/>
+                                    </td>
+                                    <td style="text-align:right">
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${employeeDeductionPtAmountList}"/>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="7">6 INCOME CHARGEABLE UNDER THE HEAD SALARIES ( 3 - 5)</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="text-align:right">.
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${totallist-employeeDeductionPtAmountList}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="7">7 ADD Any other income reported by the employee</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="7">8 GROSS TOTAL INCOME ( 6 + 7 )</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="text-align:right">
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${totallist-employeeDeductionPtAmountList}"/>
+                                    </td>
+                                </tr>
+
+                                <tr style="background-color:whitesmoke">
+                                    <td colspan="10"></td>
+                                </tr>
+
+                                <tr>
+                                    <td style="text-align: left;" colspan="7">9 DEDUCTION UNDER CHAPTER VI - A</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="7">(A) Sections 80C, 80CCC and 80D</td>
+                                    <td>Gross Amt</td>
+                                    <td>Deducti. Amt</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;" colspan="7">&emsp;&nbsp;&nbsp; A. Section 80C</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="7">&emsp;&emsp;&emsp;Provident Fund</td>
+                                    <td style="border: 1px solid black;text-align:right">
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${deductionPfAmount}"/>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <c:forEach var="list" items="${component80CList}" varStatus="status">
+                                    <tr>
+                                        <td colspan="7" style="text-align:left">&emsp;&emsp;&emsp;${list[0]}</td>
+                                        <td style="text-align:right">
+                                            Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${list[1]}"/>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </c:forEach>
+                                <tr>
+                                    <td style="text-align: left" colspan="7">&emsp;&nbsp;&nbsp;B. Section 80 CCC</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left;border-bottom:none" colspan="7">&emsp;&nbsp;&nbsp;C. Section 80 D</td>
+                                    <td style="text-align:right;border-bottom:none">Rs. 0.00</td>
+                                    <td style="border-bottom:none"></td>
+                                    <td  style="border-bottom:none"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7" style="border-top:none"></td>
+                                    <td style="border-top:none"></td>
+                                    <td style="border-top:none"></td>
+                                    <td style="border-top:none"></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="6">(B) Other Sections (e.g. 80E, 80G etc.) under chapter VI A</td>
+                                    <td>Gross Amt</td>
+                                    <td>Qualify Amt</td>
+                                    <td>Deduct. Amt</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="5">&emsp;&nbsp;&nbsp;(a) Section 80C</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${deductionPfAmount}"/>
+                                    </td>
+                                    <td style="text-align:right">
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${deductionPfAmount}"/>
+                                    </td>
+                                    <td style="text-align:right">
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${deductionPfAmount}"/>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="5">&emsp;&nbsp;&nbsp;(b) Section 80CCC</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="5">&emsp;&nbsp;&nbsp;(c) Section 80D</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="5">&emsp;&nbsp;&nbsp;(d) Section 80E</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="5">&emsp;&nbsp;&nbsp;(e) Section 80G</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="5">&emsp;&nbsp;&nbsp;(f) Section - Housing Loan Interest</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td style="text-align:right">Rs. 0.00</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="7">10 Aggregate of Deductible amount under Chapter VI - A</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="text-align:right">
+                                        Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${deductionPfAmount}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: left" colspan="7">11 TOTAL INCOME &nbsp;&nbsp;( 8 - 10 )</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="border: 1px solid black;text-align:right">
+                                        Rs .<fmt:formatNumber value="${(totallist-employeeDeductionPtAmountList) - deductionPfAmount}"></fmt:formatNumber>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left" colspan="7">12 TAX ON TOTAL INCOME</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align:right">Rs. 0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left" colspan="7">13 SURCHARGE ( ON TAX COMPUTED AT SR.NO.12)</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align:right">Rs. 0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left" colspan="7">14 EDUCATION CESS @ 2% ON (TAX AT S. NO. 12 PLUS SURCHARGE AT SR.NO.13)</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align:right">
+                                            <!--12 number value*0.2-->
+                                            Rs. 0.00
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left" colspan="7">15 TAX PAYABLE (12+13+14)</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align:right">Rs. 0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left" colspan="7">16&nbsp; Relief under section 89 (attach details)</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align:right">Rs. 0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left" colspan="7">17 Tax payable (15-16)</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align:right">
+                                            <!--15 - 16 number value-->
+                                            Rs. 0.00
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left" colspan="7">18 Less : (a) Tax
+                                            deducted at source u/s 192(1)</td>
+                                        <td></td>
+                                        <td style="text-align:right">Rs. 0.00</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left" colspan="7">&emsp;&emsp;&emsp;&emsp;&nbsp; (b) Tax paid by the employer on behalf of the employee u/s 
+                                            </br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;192(1A) on perquisites u/s 17(2)</td>
+                                        <td></td>
+                                        <td style="text-align:right">Rs. 0.00</td>
+                                        <td style="text-align:right">Rs. 0.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: left" colspan="7">19 TAX PAYABLE /(REFUNDABLE)&nbsp; ( 17 - 18 )</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align:right">Rs. 0.00</td>
+                                    </tr>
+
+                                    <tr style="background-color:whitesmoke">
+                                        <td colspan="10"></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td colspan="10">
+                                            DETAILS OF TAX DEDUCTED AND DEPOSITED INTO CENTRAL GOVERNMENT ACCOUNT
+                                        </td>
+                                    </tr>
+
+                                    <tr style="background-color:whitesmoke">
+                                        <td colspan="10"></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="padding: 3px;">Sr.No.</td>
+                                        <td style="padding: 2px;">TDS</td>
+                                        <td style="padding: 2px;">Surcharges</td>
+                                        <td style="padding: 2px;">Education</br>Cess</td>
+                                        <td style="padding: 2px;">Total </br>Tax Deposited</td>
+                                        <td style="padding: 2px;">Chq No.</br>/ DD No.</td>
+                                        <td style="padding: 2px;">BSR Code </br>of Bank Branch</td>
+                                        <td style="padding: 2px;">Date </br>on which </br>tax deposited (DD/MM/YY)</td>
+                                        <td colspan="2" style="padding: 2px;">Transfer </br>voucher/Challan </br>Identification No.</td>
+                                    </tr>
+                                <c:forEach var="list" items="${tdsList}" varStatus="index">
+                                    <tr>
+                                        <td style="padding: 2px;">${index.count}</td>
+                                        <td style="padding: 2px;text-align:right;">Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${list[1]}"/> </td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="text-align:right;padding: 2px;">Rs. <fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${list[1]}"/></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td style="padding: 2px;"></td>
+                                        <td colspan="2" style="padding: 2px;"></td>
+                                    </tr>
+                                </c:forEach>
+                                <tr>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="text-align:right;padding: 2px;">
+                                        Rs .<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${tdsTotal}"/>
+                                    </td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;"></td>
+                                    <td style="padding: 2px;" colspan="2"></td>
+                                </tr>
+
+                                <tr style="background-color:whitesmoke;">
+                                    <td colspan="10"></td>
+                                </tr>
+
+                                <tr>
+                                    <td style="border: 1px solid black;text-align:justify" colspan="10" >
+                                        I &emsp;<b><u>${payrollFormSixteenMaster.ename}</u></b>, &emsp;son/ of &emsp;<b><u>${payrollFormSixteenMaster.fname}</u></b> &emsp; working in the capacity
+                                        of &emsp;&emsp;<b><u>${employeeMaster.designationMaster.designationName}</u></b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: justify;" class="totalWords11" id="totalWords11" colspan="10">
+                                        (Designation) do hereby certify that a sum of &emsp;<b> Rs .<b><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${tdsTotal}"/>&emsp;(Rs. Zero only) &emsp;&emsp; has been deducted at source and paid to the credit of the Central Government. 
+                                        &emsp;I further certify that the information given above is true and correct based
+                                        on the book of accounts, documents and other available records.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="10" style="border: none;border-left:1px solid black;border-right:1px solid black;padding:10px 8px"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: none;border-left:1px solid black;" colspan="6" rowspan="3"></td>
+                                    <td style="border: none;border-top:2px solid black;border-right:1px solid black;" colspan="4" rowspan="2">Signature of the person responsible for the <br/>deduction of tax.</td>
+                                </tr>
+                                <tr>
+                                </tr>
+                                <tr style="border:none;">
+                                </tr>
+                                <tr>
+                                    <td style="border: none;border-left:1px solid black;text-align: left;" colspan="5">Place:&emsp;<b>${payrollFormSixteenMaster.place}</b></td>
+                                    <td style="border: none;border-right:1px solid black;text-align: left;" colspan="5">
+                                        Full Name: &emsp;&nbsp;&nbsp;<b> ${payrollFormSixteenMaster.ename}</b>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom:1px solid black">
+                                    <td style="border: none;border-left:1px solid black;text-align: left;" colspan="5">Date:&emsp;<b>${payrollFormSixteenMaster.date}</b></td>
+                                    <td style="border: none;border-right:1px solid black;text-align: left;" colspan="5">
+                                        Designation: &nbsp;&nbsp;<b> ${employeeMaster.designationMaster.designationName}</b>
+                                    </td>
+                                </tr>
+                                <tr style="background-color:whitesmoke">
+                                    <td colspan="10"></td>
+                                </tr>
+                            <input type="hidden" name="totalTemp" id="totalTemp" value="0.00">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>
-

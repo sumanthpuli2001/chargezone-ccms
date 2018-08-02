@@ -92,5 +92,9 @@ public class TaxDeductionDecarationSubmitServiceImpl<T> extends GenericsServiceI
         return taxDeductionDecarationSubmitDAO.readApproveByTaxSavingId(savingid);
     }
 
-    
+    @Override
+    public List<?> readComponentAmountByEmployeeId(int eId, int fId) {
+        return taxDeductionDecarationSubmitDAO.readComponentAmountByEmployeeId(eId,fId);
+    }
+
 }

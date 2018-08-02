@@ -98,7 +98,6 @@
                                                 <option value="10">October </option>
                                                 <option value="11">November </option>
                                                 <option value="12">December</option>
-
                                             </select>
                                             <span id="monthError" style="color: red;"></span>
                                         </div>

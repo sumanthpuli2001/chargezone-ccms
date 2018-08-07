@@ -76,7 +76,7 @@
     </head>
     <body>
         <section class="content-header">
-            <button type="button" class="btn btn-primary" style="float: right; width: 130px;" onclick="window.location = 'vacancy.htm?act=backToHomeVacancyList'"><i class="fa fa-home"></i>&nbsp&nbsp&nbsp;Home</button>
+            <button type="button" class="btn btn-primary" style="float: right; width: 150px;" onclick="window.location = 'vacancy.htm?act=backToHomeVacancyList'"></i>Current Vacancies </button>
             <button type="button" class="btn btn-primary" style="float: left; width: 130px;" onclick="window.location = 'vacancy.htm?act=logout'"><i class="fa fa-long-arrow-left"></i>&nbsp&nbsp&nbsp;Log Out</button>
             <label>Candidate User Name&nbsp : &nbsp&nbsp${sessionScope.ApplayJobUserMaster.userName}</label>
         </section>
@@ -91,7 +91,7 @@
         <ul class="nav nav-tabs" style="text-align: center" >
             <li class="active " ><a href="">My Application</a></li>
             <li ><a href="vacancy.htm?act=myProfileClick&id=${sessionScope.ApplayJobUserMaster.id}">My Profile</a></li>
-              <li ><a onclick="viewClick(${sessionScope.ApplayJobUserMaster.id});">Assessment</a></li>
+              <!--<li ><a onclick="viewClick(${sessionScope.ApplayJobUserMaster.id});">Assessment</a></li>-->
         </ul>
         <br/>
         <br/>

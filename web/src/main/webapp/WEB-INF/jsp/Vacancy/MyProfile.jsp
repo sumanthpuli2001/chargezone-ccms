@@ -11,6 +11,9 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jsp/Common/Top.jsp"%>
+
+<%--<%@include file="/WEB-INF/jsp/Common/Header.jsp"%>--%>
+<%--<%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>--%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,177 +74,220 @@
             }
         </style>
         <script>
-            $(function () {
-            $("#datepicker").datepicker();
-            });
-            $(function () {
-            $("#datepicker1").datepicker();
-            });
-            $(function () {
-            $("#datepicker2").datepicker();
-            });
-            var i1 = 1;
-            var i2 = 1;
-            var i3 = 1;
-            var i4 = 1;
-            $(function () {
-            $('#buttonQualification').click(function () {
-            i1++;
-            var addNewRow = "<tr id='table_1_rowNo_" + i1 + "'>" +
-                    "<td>" +
-                    "<input type=\"number\" min=\"0\" name=\"candidateAcademicQualification.academicYearFrom\" class=\"form-control academicFrom\" id=\"academicFrom\" placeholder=\"Year From\"/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='number' min='0' name='candidateAcademicQualification.academicYearTo' class='form-control academicTo' id='academicTo' placeholder='Year To'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateAcademicQualification.academicExamination' class='form-control' placeholder='Academic Qualification'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateAcademicQualification.academicBoard' class='form-control' placeholder='Academic Board'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='number' min='0' name='candidateAcademicQualification.academicNumberOfAttempts' class='form-control' placeholder='No Of Attempts'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateAcademicQualification.academicMarksInPercent' class='form-control' placeholder='Academic Marks(%)'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateAcademicQualification.academicClass' class='form-control' placeholder='Academic Class'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateAcademicQualification.academicRankOrScholarship' class='form-control' placeholder='Academic Rank/Scholarship'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<button type=\"button\" class='btn btn-flat' style='width: 50px;' id='removeQualification' onClick=\"removeChild1('table_1_rowNo_" + i1 + "');\" value=\"-\">-</button>" +
-                    "</td>" +
-                    "</tr>";
-            document.getElementById("countId").value = i1;
-            $('#tbodyQualification').append(addNewRow);
+//            $(function () {
+//            $("#datepicker").datepicker();
+//            });
+            $(function() {
+            $('#datepicker').datepicker({
+            changeMonth: true,
+                    changeYear: true,
+                    showButtonPanel: true,
+                    dateFormat: 'dd/mm/yy',
+                    onClose: function(dateText, inst) {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                            var date = $("#ui-datepicker-div .ui-datepicker-date :selected").val();
+                            
+                    }
             });
             });
-            $(function () {
-            i2++;
-            $('#buttonExperience').click(function () {
-            var addNewRow = "<tr id='table_2_rowNo_" + i2 + "'>" +
-                    "<td>" +
-                    "<input type=\"number\" min=\"0\" name=\"candidateExperienceDetail.experienceYearFrom\" class=\"form-control experienceFrom\" id=\"experienceFrom\" placeholder=\"Year From\"/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='number' min='0' name='candidateExperienceDetail.experienceYearTo' class='form-control experienceTo' id='experienceTo' placeholder='Year To'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateExperienceDetail.experienceOrganization' class='form-control' placeholder='Experience Organization'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateExperienceDetail.experienceDepartment' class='form-control' placeholder='Experience Department'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateExperienceDetail.experienceDesignation' class='form-control' placeholder='Experience Designation'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateExperienceDetail.experienceJobResponsibilities' class='form-control' placeholder='Experience Job Responsibilities'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type=\"number\" min=\"0\" name=\"candidateExperienceDetail.experienceRemunerationOnJoin\" class=\"form-control\" placeholder=\"Remuneration On Join\"/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type=\"number\" min=\"0\" name=\"candidateExperienceDetail.experienceRemunerationOnLeaving\" class=\"form-control\" placeholder=\"Remuneration On Leave\"/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateExperienceDetail.experienceReasonForLeaving' class='form-control' placeholder='Reason For Leaving'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<button type=\"button\" class='btn btn-flat' style='width: 50px;' id='removeExperience' onClick=\"removeChild2('table_2_rowNo_" + i2 + "');\" value=\"-\">-</button>" +
-                    "</td>" +
-                    "</tr>";
-            document.getElementById("countId").value = i2;
-            $('#tbodyExperience').append(addNewRow);
+            $(function() {
+            $('#datepicker45').datepicker({
+            changeMonth: true,
+                    changeYear: true,
+                    showButtonPanel: true,
+                    dateFormat: 'dd/mm/yy',
+                    onClose: function(dateText, inst) {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                            var date = $("#ui-datepicker-div .ui-datepicker-date :selected").val();
+                           
+                    }
             });
             });
-            $(function () {
-            i3++;
-            $('#buttonFamilyBackground').click(function () {
-            var addNewRow = "<tr id='table_3_rowNo_" + i3 + "'>" +
-                    "<td>" +
-                    "<input type='text' name='candidateFamilyBackground.familyMemberName' class='form-control' placeholder='Name'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateFamilyBackground.relationWithFamilyMember' class='form-control' placeholder='Relation With Member'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type=\"number\" min=\"0\" name=\"candidateFamilyBackground.familyMemberAge\" class=\"form-control \"  placeholder='Age'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateFamilyBackground.familyMemberQualification' class='form-control' placeholder='Qualification'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateFamilyBackground.familyMemberMonthlyIncome' class='form-control' placeholder='Designation Ocuupation'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type=\"number\" min=\"0\" name=\"candidateFamilyBackground.familyMemberMonthlyIncome\" class=\"form-control\" placeholder='Monthly Income'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<button type=\"button\" class='btn btn-flat' style='width: 50px;' id='removeFamilyBackground' onClick=\"removeChild3('table_3_rowNo_" + i3 + "');\" value=\"-\">-</button>" +
-                    "</td>" +
-                    "</tr>";
-            document.getElementById("countId").value = i3;
-            $('#tbodyFamilyBackground').append(addNewRow);
+            $(function() {
+            $('#datepicker46').datepicker({
+            changeMonth: true,
+                    changeYear: true,
+                    showButtonPanel: true,
+                    dateFormat: 'dd/mm/yy',
+                    onClose: function(dateText, inst) {
+                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                            var date = $("#ui-datepicker-div .ui-datepicker-date :selected").val();
+                            
+                    }
             });
             });
-            $(function () {
-            i4++;
-            $('#buttonOtherReferences').click(function () {
-            var addNewRow = "<tr id='table_4_rowNo_" + i4 + "'>" +
-                    "<td>" +
-                    "<input type='text' name='candidateOtherReferences.referenceNonRelativesName' class='form-control' placeholder='Name'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateOtherReferences.referenceNonRelativesOrganization' class='form-control' placeholder='Organization'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type='text' name='candidateOtherReferences.referenceNonRelativesPosition' class='form-control' placeholder='Position'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<input type=\"number\" min=\"0\" name=\"candidateOtherReferences.referenceNonRelativesContactNmber\" class=\"form-control\" placeholder='Contact Nmber'/>" +
-                    "</td>" +
-                    "<td>" +
-                    "<button type=\"button\" class='btn btn-flat' style='width: 50px;' id='removeOtherReferences' onClick=\"removeChild4('table_4_rowNo_" + i4 + "');\" value=\"-\">-</button>" +
-                    "</td>" +
-                    "</tr>";
-            document.getElementById("countId").value = i4;
-            $('#tbodyOtherReferences').append(addNewRow);
-            });
-            });
-        </script>
+           
+           
+                    $(function () {
+                    $("#datepicker1").datepicker();
+                    });
+                    $(function () {
+                    $("#datepicker2").datepicker();
+                    });
+                    var i1 = 1;
+                    var i2 = 1;
+                    var i3 = 1;
+                    var i4 = 1;
+                    $(function () {
+                    $('#buttonQualification').click(function () {
+                    i1++;
+                            var addNewRow = "<tr id='table_1_rowNo_" + i1 + "'>" +
+                            "<td>" +
+                            "<input type=\"number\" min=\"0\" name=\"candidateAcademicQualification.academicYearFrom\" class=\"form-control academicFrom\" id=\"academicFrom\" placeholder=\"Year From\"/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='number' min='0' name='candidateAcademicQualification.academicYearTo' class='form-control academicTo' id='academicTo' placeholder='Year To'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateAcademicQualification.academicExamination' class='form-control' placeholder='Academic Qualification'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateAcademicQualification.academicBoard' class='form-control' placeholder='Academic Board'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='number' min='0' name='candidateAcademicQualification.academicNumberOfAttempts' class='form-control' placeholder='No Of Attempts'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateAcademicQualification.academicMarksInPercent' class='form-control' placeholder='Academic Marks(%)'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateAcademicQualification.academicClass' class='form-control' placeholder='Academic Class'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateAcademicQualification.academicRankOrScholarship' class='form-control' placeholder='Academic Rank/Scholarship'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<button type=\"button\" class='btn btn-flat' style='width: 50px;' id='removeQualification' onClick=\"removeChild1('table_1_rowNo_" + i1 + "');\" value=\"-\">-</button>" +
+                            "</td>" +
+                            "</tr>";
+                            document.getElementById("countId").value = i1;
+                            $('#tbodyQualification').append(addNewRow);
+                    });
+                    });
+                    $(function () {
+                    i2++;
+                            $('#buttonExperience').click(function () {
+                    var addNewRow = "<tr id='table_2_rowNo_" + i2 + "'>" +
+                            "<td>" +
+                            "<input type=\"number\" min=\"0\" name=\"candidateExperienceDetail.experienceYearFrom\" class=\"form-control experienceFrom\" id=\"experienceFrom\" placeholder=\"Year From\"/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='number' min='0' name='candidateExperienceDetail.experienceYearTo' class='form-control experienceTo' id='experienceTo' placeholder='Year To'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateExperienceDetail.experienceOrganization' class='form-control' placeholder='Experience Organization'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateExperienceDetail.experienceDepartment' class='form-control' placeholder='Experience Department'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateExperienceDetail.experienceDesignation' class='form-control' placeholder='Experience Designation'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateExperienceDetail.experienceJobResponsibilities' class='form-control' placeholder='Experience Job Responsibilities'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type=\"number\" min=\"0\" name=\"candidateExperienceDetail.experienceRemunerationOnJoin\" class=\"form-control\" placeholder=\"Remuneration On Join\"/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type=\"number\" min=\"0\" name=\"candidateExperienceDetail.experienceRemunerationOnLeaving\" class=\"form-control\" placeholder=\"Remuneration On Leave\"/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateExperienceDetail.experienceReasonForLeaving' class='form-control' placeholder='Reason For Leaving'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<button type=\"button\" class='btn btn-flat' style='width: 50px;' id='removeExperience' onClick=\"removeChild2('table_2_rowNo_" + i2 + "');\" value=\"-\">-</button>" +
+                            "</td>" +
+                            "</tr>";
+                            document.getElementById("countId").value = i2;
+                            $('#tbodyExperience').append(addNewRow);
+                    });
+                    });
+                    $(function () {
+                    i3++;
+                            $('#buttonFamilyBackground').click(function () {
+                    var addNewRow = "<tr id='table_3_rowNo_" + i3 + "'>" +
+                            "<td>" +
+                            "<input type='text' name='candidateFamilyBackground.familyMemberName' class='form-control' placeholder='Name'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateFamilyBackground.relationWithFamilyMember' class='form-control' placeholder='Relation With Member'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type=\"number\" min=\"0\" name=\"candidateFamilyBackground.familyMemberAge\" class=\"form-control \"  placeholder='Age'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateFamilyBackground.familyMemberQualification' class='form-control' placeholder='Qualification'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateFamilyBackground.familyMemberMonthlyIncome' class='form-control' placeholder='Designation Ocuupation'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type=\"number\" min=\"0\" name=\"candidateFamilyBackground.familyMemberMonthlyIncome\" class=\"form-control\" placeholder='Monthly Income'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<button type=\"button\" class='btn btn-flat' style='width: 50px;' id='removeFamilyBackground' onClick=\"removeChild3('table_3_rowNo_" + i3 + "');\" value=\"-\">-</button>" +
+                            "</td>" +
+                            "</tr>";
+                            document.getElementById("countId").value = i3;
+                            $('#tbodyFamilyBackground').append(addNewRow);
+                    });
+                    });
+                    $(function () {
+                    i4++;
+                            $('#buttonOtherReferences').click(function () {
+                    var addNewRow = "<tr id='table_4_rowNo_" + i4 + "'>" +
+                            "<td>" +
+                            "<input type='text' name='candidateOtherReferences.referenceNonRelativesName' class='form-control' placeholder='Name'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateOtherReferences.referenceNonRelativesOrganization' class='form-control' placeholder='Organization'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type='text' name='candidateOtherReferences.referenceNonRelativesPosition' class='form-control' placeholder='Position'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<input type=\"number\" min=\"0\" name=\"candidateOtherReferences.referenceNonRelativesContactNmber\" class=\"form-control\" placeholder='Contact Nmber'/>" +
+                            "</td>" +
+                            "<td>" +
+                            "<button type=\"button\" class='btn btn-flat' style='width: 50px;' id='removeOtherReferences' onClick=\"removeChild4('table_4_rowNo_" + i4 + "');\" value=\"-\">-</button>" +
+                            "</td>" +
+                            "</tr>";
+                            document.getElementById("countId").value = i4;
+                            $('#tbodyOtherReferences').append(addNewRow);
+                    });
+                    });</script>
         <script>
-            function removeChild1(removeRowId1) {
+                    function removeChild1(removeRowId1) {
 
-            i1--;
-            document.getElementById("countId").value = i1;
-            var element1 = document.getElementById(removeRowId1);
-            element1.parentNode.removeChild(element1);
-            }
+                    i1--;
+                            document.getElementById("countId").value = i1;
+                            var element1 = document.getElementById(removeRowId1);
+                            element1.parentNode.removeChild(element1);
+                    }
             function removeChild2(removeRowId1) {
 
             i1--;
-            document.getElementById("countId").value = i2;
-            var element1 = document.getElementById(removeRowId1);
-            element1.parentNode.removeChild(element1);
+                    document.getElementById("countId").value = i2;
+                    var element1 = document.getElementById(removeRowId1);
+                    element1.parentNode.removeChild(element1);
             }
             function removeChild3(removeRowId1) {
 
             i1--;
-            document.getElementById("countId").value = i3;
-            var element1 = document.getElementById(removeRowId1);
-            element1.parentNode.removeChild(element1);
+                    document.getElementById("countId").value = i3;
+                    var element1 = document.getElementById(removeRowId1);
+                    element1.parentNode.removeChild(element1);
             }
             function removeChild4(removeRowId1) {
 
             i1--;
-            document.getElementById("countId").value = i4;
-            var element1 = document.getElementById(removeRowId1);
-            element1.parentNode.removeChild(element1);
+                    document.getElementById("countId").value = i4;
+                    var element1 = document.getElementById(removeRowId1);
+                    element1.parentNode.removeChild(element1);
             }
 //            function inputRadio(){
 //                    alert("hiii");
@@ -362,32 +408,32 @@
                                 </tr>
                                 <tr>
                                     <th>Your D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                            <td>
-                                                <form:input path="candidateApplyJob.dob" class="form-control form_datetime" id="datepicker" placeholder="Select Your D.O.B" readonly="true" required="true"></form:input>
-                                            </td>
-                                        </div>
-                                    </tr>
-                                    <tr>
-                                        <th>Father D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                            <td><form:input path="candidateApplyJob.fatherDob" id="datepicker1" class="form-control" size="16" placeholder="dd/MM/yyyy" readonly="true" required="true"></form:input>
-                                        </div>
-                                    </tr>
-                                    <tr>
-                                        <th>Mother Name<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <td><form:input path="candidateApplyJob.motherName" class="form-control" placeholder="Enter Mother Name" required="true"></form:input></td>
-                                    </tr>
-                                    <tr>
-                                        <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                            <th>Mother D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
-                                            <td><form:input path="candidateApplyJob.motherDob" id="datepicker2"  class="form-control" size="16" placeholder="Select Mother's D.O.B" readonly="true" required="true"></form:input></td>
-                                        </div>
-                                    </tr>
-                                    <tr>
-                                        <th>Blood Group<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <td>
-                                        <form:select path="candidateApplyJob.bloodGroup" id="bloodGroups" class="form-control" required="true">
+                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                <td>
+                                    <form:input path="candidateApplyJob.dob" class="form-control" id="datepicker" placeholder="Select Your D.O.B" readonly="true" required="true"></form:input>
+                                    </td>
+                                </div>
+                                </tr>
+                                <tr>
+                                    <th>Father D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
+                                <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                    <td><form:input path="candidateApplyJob.fatherDob" id="datepicker45" class="form-control" size="16" placeholder="dd/MM/yyyy" readonly="true" required="true"></form:input>
+                                </div>
+                                </tr>
+                                <tr>
+                                    <th>Mother Name<span style="color: red;font-size: 12px;"> *</span></th>
+                                    <td><form:input path="candidateApplyJob.motherName" class="form-control" placeholder="Enter Mother Name" required="true"></form:input></td>
+                                </tr>
+                                <tr>
+                                <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                    <th>Mother D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
+                                    <td><form:input path="candidateApplyJob.motherDob" id="datepicker46"  class="form-control" size="16" placeholder="Select Mother's D.O.B" readonly="true" required="true"></form:input></td>
+                                </div>
+                                </tr>
+                                <tr>
+                                    <th>Blood Group<span style="color: red;font-size: 12px;"> *</span></th>
+                                    <td>
+                                    <form:select path="candidateApplyJob.bloodGroup" id="bloodGroups" class="form-control" required="true">
                                 <option value="">--Select--</option>
                                 <form:option value="A +ve">A+</form:option>
                                 <form:option value="A -ve">A-</form:option>
@@ -980,8 +1026,8 @@
     <![endif]-->
 
 </body>
-                <script type="text/javascript">
-                $('.form_datetime').datetimepicker({
+<script type="text/javascript">
+                        $('.form_datetime_dob').datetimepicker({
                 //language:  'fr',
                 weekStart: 1,
                         todayBtn: 1,
@@ -989,51 +1035,52 @@
                         todayHighlight: 1,
                         startView: 2,
                         minView: 2,
+                        startDate: dt1,
+                        endDate: dt,
                         forceParse: 0
-                });
-                                                        </script>
+                });</script>
 
 
 </script>
 <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
 <script type="text/javascript">
-    function checkFilecertificate()
-    {
-    var fup = document.getElementById('certificateId1');
-    var certificateId1 = fup.value;
+            function checkFilecertificate()
+            {
+            var fup = document.getElementById('certificateId1');
+                    var certificateId1 = fup.value;
 //            alert(certificateId1);
-    var ext = certificateId1.substring(certificateId1.lastIndexOf('.') + 1);
-    if (ext == "pdf")
-    {
-    return true;
-    } else
-    {
-    alert("Upload pdf files only");
-    fup.focus();
-    return false;
-    }
-    }
+                    var ext = certificateId1.substring(certificateId1.lastIndexOf('.') + 1);
+                    if (ext == "pdf")
+            {
+            return true;
+            } else
+            {
+            alert("Upload pdf files only");
+                    fup.focus();
+                    return false;
+            }
+            }
 
 </script>
 <script>
     $('#trEsicNo').hide();
-    $('#trPfNo').hide();
-    $(function(){
-    $('input[name=esicStatus]').on('ifChecked', function (event) {
-    alert("hiii");
-    if (this.value === 1) {
-    $('#trEsicNo').show(500);
-    } else {
-    $('#trEsicNo').hide(500);
-    }
-    });
-    });
-                    <!--
-                    
-                    
-                    
-                    
-                    $(function(){
+            $('#trPfNo').hide();
+            $(function(){
+            $('input[name=esicStatus]').on('ifChecked', function (event) {
+            alert("hiii");
+                    if (this.value === 1) {
+            $('#trEsicNo').show(500);
+            } else {
+            $('#trEsicNo').hide(500);
+            }
+            });
+            });
+            < !--
+
+
+
+
+            $(function(){
 //            $('input[name=pfStatus]').on('ifChecked', function (event) {
 //                alert("hiii");
 //                if (this.value === 1) {
@@ -1042,42 +1089,40 @@
 //                    $('#trPfNo').hide(500);
             }
             });
-            });
-            -->
-</script>
+    });
+            -- ></script>
 <script>
 
             $(function () {
             $(".salary").on('propertychange input', function () {
-    var s = 0.0;
-    $("#salaryTotal").val(s);
-    $(".salary").each(function (i) {
-    if ($(this).val() !== null && $(this).val() !== "")
-    {
-    s += parseInt($(this).val());
+            var s = 0.0;
+                    $("#salaryTotal").val(s);
+                    $(".salary").each(function (i) {
+            if ($(this).val() !== null && $(this).val() !== "")
+            {
+            s += parseInt($(this).val());
 //                  alert(s);
             }
             });
-            $("#salaryTotal").val(parseInt(s));
+                    $("#salaryTotal").val(parseInt(s));
             });
-            });
-</script>
+            });</script>
 <script>
             function validateForm()
 
             {
 
             var x = document.getElementById('').value;
-    var atpos = x.indexOf(“@”);
-    var dotpos = x.lastIndexOf(“.”);
-    if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length)
+                    var atpos = x.indexOf(“@”);
+                    var dotpos = x.lastIndexOf(“.”);
+                    if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= x.length)
 
-    {
+            {
 
-    alert(“Please enter a valid email address.”);
-    return false;
-        }
-            
+            alert(“Please enter a valid email address.”);
+                    return false;
+            }
+
             }
 </script>
 

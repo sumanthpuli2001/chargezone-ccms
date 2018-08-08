@@ -78,7 +78,6 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
         VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
 
-        
         List<CandidateF2FApproval> committeedetaillist = new ArrayList<>();
         List<CandidateF2FApproval> comitteeList = (List<CandidateF2FApproval>) candidateF2FApprovalService.readByReqId(candidateF2FRequest.getId());
         for (CandidateF2FApproval cffa : comitteeList) {
@@ -142,7 +141,6 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
 //        request.setAttribute("numberOfPositionMpp", numberOfPositionMpp);
 //        request.setAttribute("Mppbudget", Mppbudget);
 //        request.setAttribute("MppExperience", MppExperience);
-
         //        MPR Master -------------
         if (vm.getMprMaster() != null) {
             MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
@@ -702,8 +700,8 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
         VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
-        MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
-        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
+
+//        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
         List<CandidateF2FApproval> committeedetaillist = new ArrayList<>();
         List<CandidateF2FApproval> comitteeList = (List<CandidateF2FApproval>) candidateF2FApprovalService.readByReqId(candidateF2FRequest.getId());
         for (CandidateF2FApproval cffa : comitteeList) {
@@ -740,56 +738,68 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         int position = vm.getNumberOfPosition();
 
 //        /        Mpp Master --------------------
-        int jobtypeId2 = rm.getJobtypeMaster().getId();
-        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
-        String jobtypeNAme2 = jobtypeMaster.getJobTypeName();
+//        int jobtypeId2 = rm.getJobtypeMaster().getId();
+//        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+//        String jobtypeNAme2 = jobtypeMaster.getJobTypeName();
+//
+//        int department2 = rm.getDepartmentMaster().getId();
+//        departmentMaster = departmentMasterService.readById(department);
+//        String departmentName2 = departmentMaster.getDepartmentName();
+//
+//        int localtion2 = rm.getLocationMaster().getId();
+//        locationMaster = locationMasterService.readById(localtion);
+//        String locationName2 = locationMaster.getLocation();
+//
+//        int designation2 = rm.getDesignationMaster().getId();
+//        designationMaster = designationMasterService.readById(designation);
+//        String designationName2 = designationMaster.getDesignationName();
+//
+//        int numberOfPositionMpp = rm.getNumberOfPosition();
+//        int Mppbudget = rm.getBudget();
+//        String MppExperience = rm.getExperiance();
 
-        int department2 = rm.getDepartmentMaster().getId();
-        departmentMaster = departmentMasterService.readById(department);
-        String departmentName2 = departmentMaster.getDepartmentName();
-
-        int localtion2 = rm.getLocationMaster().getId();
-        locationMaster = locationMasterService.readById(localtion);
-        String locationName2 = locationMaster.getLocation();
-
-        int designation2 = rm.getDesignationMaster().getId();
-        designationMaster = designationMasterService.readById(designation);
-        String designationName2 = designationMaster.getDesignationName();
-
-        int numberOfPositionMpp = rm.getNumberOfPosition();
-        int Mppbudget = rm.getBudget();
-        String MppExperience = rm.getExperiance();
-
-        request.setAttribute("jobtypeNAme2", jobtypeNAme2);
-        request.setAttribute("departmentName2", departmentName2);
-        request.setAttribute("locationName2", locationName2);
-        request.setAttribute("designationName2", designationName2);
-        request.setAttribute("numberOfPositionMpp", numberOfPositionMpp);
-        request.setAttribute("Mppbudget", Mppbudget);
-        request.setAttribute("MppExperience", MppExperience);
+//        request.setAttribute("jobtypeNAme2", jobtypeNAme2);
+//        request.setAttribute("departmentName2", departmentName2);
+//        request.setAttribute("locationName2", locationName2);
+//        request.setAttribute("designationName2", designationName2);
+//        request.setAttribute("numberOfPositionMpp", numberOfPositionMpp);
+//        request.setAttribute("Mppbudget", Mppbudget);
+//        request.setAttribute("MppExperience", MppExperience);
 
         //        MPR Master -------------
-        int jobtypeId1 = mm.getJobtypeMaster().getId();
-        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
-        String jobtypeNAme1 = jobtypeMaster.getJobTypeName();
+        if (vm.getMprMaster() != null) {
+            MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
+            int jobtypeId1 = mm.getJobtypeMaster().getId();
+            jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+            String jobtypeNAme1 = jobtypeMaster.getJobTypeName();
 
-        int department1 = mm.getDepartmentMaster().getId();
-        departmentMaster = departmentMasterService.readById(department);
-        String departmentName1 = departmentMaster.getDepartmentName();
+            int department1 = mm.getDepartmentMaster().getId();
+            departmentMaster = departmentMasterService.readById(department);
+            String departmentName1 = departmentMaster.getDepartmentName();
 
-        int localtion1 = mm.getLocationMaster().getId();
-        locationMaster = locationMasterService.readById(localtion);
-        String locationName1 = locationMaster.getLocation();
+            int localtion1 = mm.getLocationMaster().getId();
+            locationMaster = locationMasterService.readById(localtion);
+            String locationName1 = locationMaster.getLocation();
 
-        int designation1 = mm.getDesignationMaster().getId();
-        designationMaster = designationMasterService.readById(designation);
-        String designationName1 = designationMaster.getDesignationName();
+            int designation1 = mm.getDesignationMaster().getId();
+            designationMaster = designationMasterService.readById(designation);
+            String designationName1 = designationMaster.getDesignationName();
 
-        String MprName = mm.getName();
-        int numberOfPositionMpr = mm.getNumberOfPosition();
-        int Mprbudget = mm.getBudget();
-        String MprExperience = mm.getExperience();
-        String Mprdescription = mm.getDescription();
+            String MprName = mm.getName();
+            int numberOfPositionMpr = mm.getNumberOfPosition();
+            int Mprbudget = mm.getBudget();
+            String MprExperience = mm.getExperience();
+            String Mprdescription = mm.getDescription();
+            request.setAttribute("jobtypeNAme1", jobtypeNAme1);
+            request.setAttribute("departmentName1", departmentName1);
+            request.setAttribute("locationName1", locationName1);
+            request.setAttribute("designationName1", designationName1);
+            request.setAttribute("MprName", MprName);
+            request.setAttribute("numberOfPositionMpr", numberOfPositionMpr);
+            request.setAttribute("Mprbudget", Mprbudget);
+            request.setAttribute("MprExperience", MprExperience);
+            request.setAttribute("Mprdescription", Mprdescription);
+        }
 
         request.setAttribute("applicationId", applicationId);
 
@@ -814,15 +824,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         request.setAttribute("toDate", toDate);
         request.setAttribute("description", description);
 //        MPR Master -------------
-        request.setAttribute("jobtypeNAme1", jobtypeNAme1);
-        request.setAttribute("departmentName1", departmentName1);
-        request.setAttribute("locationName1", locationName1);
-        request.setAttribute("designationName1", designationName1);
-        request.setAttribute("MprName", MprName);
-        request.setAttribute("numberOfPositionMpr", numberOfPositionMpr);
-        request.setAttribute("Mprbudget", Mprbudget);
-        request.setAttribute("MprExperience", MprExperience);
-        request.setAttribute("Mprdescription", Mprdescription);
+
         request.setAttribute("applicationId", applicationId);
 
         candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);

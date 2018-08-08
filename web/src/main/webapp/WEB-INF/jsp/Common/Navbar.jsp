@@ -878,7 +878,7 @@
                     <!--<li><a href="kaizen.htm?act=myKaizen"><i class="fa fa-circle-o"></i>My Kaizen</a></li>-->
                     <li><a href="kaizen.htm?act=kaizenList"><i class="fa fa-circle-o"></i>Approver Kaizen List</a></li>
                     <li><a href="kaizen.htm?act=kaizenMasterList"><i class="fa fa-circle-o"></i>My Kaizen List</a></li>
-                    <li><a href="kaizen.htm?act=pastKaizenMasterList"><i class="fa fa-circle-o"></i>Past Kaizen List</a></li>
+                    <li><a href="kaizen.htm?act=pastKaizenMasterList"><i class="fa fa-circle-o"></i>Kaizen Summary List</a></li>
                         <c:if test="${sessionScope.userRight.kaizenApproval}">
                         <li><a href="kaizen.htm?act=kaizenApproverList"><i class="fa fa-circle-o"></i>Kaizen Approver</a></li>
                         </c:if>
@@ -911,7 +911,7 @@
                         </c:if>
                 </ul>
             </li>
-            <li>
+<!--            <li>
                 <a href="#" style="background: #fff;">
                     <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
                     <span style="color: #585858;">Project Management</span>
@@ -934,7 +934,7 @@
                     </li>
                 </ul>
 
-            </li>
+            </li>-->
 
             <c:if test="${sessionScope.userRight.hr}">
                 <li class="treeview" style="color: #585858;">

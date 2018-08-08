@@ -24,24 +24,82 @@
         </style>
     </head>
     <style type="text/css">
+        /*        @media print {
+                    #demo234 tr th  {
+                        background-color: darkgrey !important;
+                        border-color: black !important;
+                    }
+                    #demo234 tr#tbl111 td {
+                        background-color: #337AB7 !important;
+                        border-color: black !important;
+                    }
+                    #demo234 tr#tbl112 td {
+                        background-color: #5CB85C !important;
+                        border-color: black !important;
+                    }
+                    #demo234 tr#tbl113 td {
+                        background-color: #F0AD4E !important;
+                        border-color: black !important;
+                    }
+                    #demo234 tr#tbl114 td {
+                        background-color: #FFA375 !important;
+                        border-color: black !important;
+                    }
+                    #demo234 tr#tbl115 td {
+                        background-color: #D9534F !important;
+                        border-color: black !important;
+                    }
+                }*/
+        table.table-bordered > tbody > tr > th{
+            border: 1px solid;
+            border-color: #000 !important;
+            text-align: center;
+            vertical-align: middle;
+            font-size:12px;
+        }
+        table.table-bordered > tbody > tr > td{
+            border: 1px solid;
+            border-color: #000 !important;
+            text-align: center;
+            vertical-align: middle;
+            font-size:12px;
+        }
+
+        page {
+            background: white;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 0.5cm;
+            box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+        }
+        page[size="A4"] {  
+            width: 21cm;
+            height: 29.7cm; 
+        }
+        page[size="A4"][layout="portrait"] {
+            width: 29.7cm;
+            height: 21cm;  
+        }
+        page[size="A3"] {
+            width: 29.7cm;
+            height: 42cm;
+        }
+        page[size="A3"][layout="portrait"] {
+            width: 42cm;
+            height: 29.7cm;  
+        }
+        page[size="A5"] {
+            width: 14.8cm;
+            height: 21cm;
+        }
+        page[size="A5"][layout="portrait"] {
+            width: 21cm;
+            height: 14.8cm;  
+        }
         @media print {
-            #demo234 tr th  {
-                background-color: darkgrey !important;
-            }
-            #demo234 tr#tbl111 td {
-                background-color: #337AB7 !important;
-            }
-            #demo234 tr#tbl112 td {
-                background-color: #5CB85C !important;
-            }
-            #demo234 tr#tbl113 td {
-                background-color: #F0AD4E !important;
-            }
-            #demo234 tr#tbl114 td {
-                background-color: #FFA375 !important;
-            }
-            #demo234 tr#tbl115 td {
-                background-color: #D9534F !important;
+            body, page {
+                margin: 0;
+                box-shadow: 0;
             }
         }
 
@@ -217,6 +275,9 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="box-header" style="" align="Center" >
+                            <h3 class="box-title">Performance Appraisal</h3>
+                        </div>
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
@@ -448,20 +509,19 @@
                                                 <div class="table-responsive">
                                                     <table id="demo1" class="table table-bordered table-striped table-hover" style="" align="Center">
                                                         <tr id="weightage">
-<!--                                                            <td style="margin: 0px;width: 100px;"></td>
-                                                            <td style="margin: 0px;width: 100px;"></td>-->
+                                                            <!--                                                            <td style="margin: 0px;width: 100px;"></td>
+                                                                                                                        <td style="margin: 0px;width: 100px;"></td>-->
                                                             <td style="margin: 0px;width: 200px;" id="weightageScoreId" align="right"><b>Weightage</b></td>
                                                             <td style="margin: 0px;width: 100px;" id="dhaval">
                                                                 <input type="text" id="weightageScore" name="weightageScore" class="form-control"  value="${weightageScore}" style="margin: 0px;width: 100px;" readonly="true">
                                                             </td>
-                                                            <td style="margin: 0px;width: 140px;" id="empScoreId" align="right"><b>Employee Total Score</b></td>
+                                                            <td style="margin: 0px;width: 150px;" id="empScoreId" align="right"><b>Employee Total Score</b></td>
                                                             <td style="margin: 0px;width: 100px;" id="dhaval">
                                                                 <input type="text" id="empScore" name="empScore" class="form-control"  value="${empScore}" style="margin: 0px;width: 100px;" readonly="true">
                                                             </td>
-                                                            <td style="margin: 0px;width: 150px;" id="totalScoreId" align="right"><b>Manager Total Score</b>
+                                                            <td style="margin: 0px;width: 150px;" id="totalScoreId" align="right"><b>Manager Total Score</b></td>
+                                                            <td><input id="totalScore" name="totalScore" value="${totalScore}" class="form-control" value="${totalScore}" style="margin: 0px;width: 100px;" readonly="true">
                                                             </td>
-                                                            <td><input id="totalScore" name="totalScore" value="${totalScore}" class="form-control" value="${totalScore}" style="margin: 0px;width: 100px;" readonly="true"></input></td>
-                                                            <td></td>
                                                         </tr>
                                                     </table>
                                                 </div>

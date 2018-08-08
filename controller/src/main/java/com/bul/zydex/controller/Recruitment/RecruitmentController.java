@@ -290,7 +290,7 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
-
+        mprMaster.setDescription(mprMaster.getDescription().replaceAll("&Acirc;", ""));
         recruitmentMaster = recruitmentService.readById(Integer.parseInt(id));
         int jobtype = recruitmentMaster.getJobtypeMaster().getId();
         jobtypeMaster = jobtypeMasterService.readById(jobtype);
@@ -870,13 +870,14 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         String id = request.getParameter("id");
         DepartmentMaster departmentMaster = new DepartmentMaster();
         LocationMaster locationMaster = new LocationMaster();
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         DesignationMaster designationMaster = new DesignationMaster();
         int candJobApplicationid = Integer.parseInt(id);
-        
+
         CandidateJobApplication cja = candidateJobApplicationService.readById(candJobApplicationid);
         candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
         CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob.getId());
@@ -884,7 +885,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         List<?> candidateExperienceDetail = candidateExperienceDetailService.readListByApplyJobId(candidateApplyJob.getId());
         List<?> candidateFamilyBackground = candidateFamilyBackgroundService.readListByApplyJobId(candidateApplyJob.getId());
         List<?> candidateOtherReferences = candidateOtherReferencesService.readListByApplyJobId(candidateApplyJob.getId());
-        
+
         VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
 //        MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
 //        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
@@ -983,7 +984,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             List<?> list = mprApprovalHistoryService.getByMprId(mprId);
             request.setAttribute("list", list);
         }
-
+        List<?> list = mprApprovalHistoryService.gethistory(candJobApplicationid);
         //        Vacancy Master-------------
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
@@ -1008,7 +1009,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.getModelMap().put("candidateExperienceDetail", candidateExperienceDetail);
         mv.getModelMap().put("candidateFamilyBackground", candidateFamilyBackground);
         mv.getModelMap().put("candidateOtherReferences", candidateOtherReferences);
-//        request.setAttribute("list", list);
+        request.setAttribute("list", list);
         mv.setViewName("Recruitment/CandidateApproval");
         return mv;
     }

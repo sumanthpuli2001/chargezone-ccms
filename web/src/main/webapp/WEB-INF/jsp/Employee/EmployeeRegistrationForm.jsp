@@ -612,7 +612,7 @@
 //            }
             try {
                 tempCount3--;
-               
+
                 var val = document.getElementById("policyCount").value;
 
                 var element = document.getElementById("amount" + val).value;
@@ -1477,7 +1477,11 @@
 
                                                     </div>
                                                 </div>
-
+                                                <div class="col-md-12 col-sm-12">
+                                                    <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:textarea  path="jobDescription" id="editor"></form:textarea>
+                                                    <form:errors path="jobDescription" cssClass="errorDiv"/>
+                                                </div>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
@@ -1676,11 +1680,7 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12 col-sm-12">
-                                                <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <form:textarea  path="jobDescription" id="editor"></form:textarea>
-                                                <form:errors path="jobDescription" cssClass="errorDiv"/>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>

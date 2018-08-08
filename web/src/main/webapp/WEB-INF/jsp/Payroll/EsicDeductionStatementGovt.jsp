@@ -217,7 +217,7 @@
                                                                             out.print("<div align=\"right\">Date:" + df.format(date) + "</div>");
                                                                         %>
                                                                     <div class="form-group">
-                                                                        <center><b><font size="4">SPC Life Science </font></b></center> 
+                                                                        <center><b><font size="4">SPC LIFESCIENCES PVT LTD</font></b></center> 
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <header>

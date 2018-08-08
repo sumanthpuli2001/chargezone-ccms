@@ -37,6 +37,11 @@ public class PolicyReadHistoryServiceImpl<T> extends GenericsServiceImpl<T> impl
     public List<?> readPolicyId(int id) {
         return policyReadHistoryDAO.readPolicyId(id);
     }
+
+    @Override
+    public PolicyReadHistory policyReadCheck(String readerName) {
+         return policyReadHistoryDAO.policyReadCheck(readerName);
+    }
     
     
     

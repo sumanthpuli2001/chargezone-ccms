@@ -227,7 +227,7 @@
                                         <br>
                                         <div>
                                             <div class="col-sm-3" style="text-align: left">
-                                                <button type="submit" class="btn btn-success" id="btnType2"  class="btn btn-primary" name="btnType"  value="Approve" style="width: 100px">&nbsp;Approved</button>
+                                                <button type="submit" class="btn btn-success" id="btnType2"  class="btn btn-primary" name="btnType"  value="Approve" style="width: 100px">&nbsp;Approve</button>
                                             </div>
                                             <div class="col-sm-3" style="text-align: center">
                                                 <button type="submit" class="btn btn-warning" id="btnType2"  class="btn btn-primary" name="btnType"  value="Recycle"  style="width: 100px"> &nbsp;&nbsp;Recycle</button>

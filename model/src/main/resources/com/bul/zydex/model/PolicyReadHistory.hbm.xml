@@ -10,9 +10,9 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="policyCreate" class="com.bul.zydex.model.PolicyCreate" fetch="select">
+          <property name="policyId" type="java.lang.Integer">
             <column name="policy_id" />
-        </many-to-one>
+        </property>
         <property name="readerDate" type="string">
             <column name="reader_date" />
         </property>
@@ -24,6 +24,9 @@
         </property>
          <property name="policyAceptTime" type="string">
             <column name="policy_accept_time" />
+        </property>
+           <property name="policyReadStatus" type="java.lang.Integer">
+            <column name="policy_read_status" />
         </property>
     </class>
   

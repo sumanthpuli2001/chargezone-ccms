@@ -13,10 +13,12 @@ import java.util.List;
  *
  * @author Dell-1
  */
-public interface PolicyReadHistoryService<T> extends GenericsService<T>{
-    
+public interface PolicyReadHistoryService<T> extends GenericsService<T> {
+
     public PolicyReadHistory readByPolicyId(int id);
-    
-     public List<?> readPolicyId(int id);
-    
+
+    public PolicyReadHistory policyReadCheck(String readerName);
+
+    public List<?> readPolicyId(int id);
+
 }

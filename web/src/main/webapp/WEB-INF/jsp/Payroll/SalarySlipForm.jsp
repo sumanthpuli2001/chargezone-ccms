@@ -80,13 +80,13 @@
                                             <table style=" width: 90%; height: 0px !important;" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">
                                                 <tr>
                                                     <td ><!--style="border:0px"-->
-                                                        <b>Company Code</b>
+                                                        <b>Company Code&nbsp;</b>
                                                         <b>:</b>&nbsp;&nbsp;${employeeMaster.employeeLocation} </td>
                                             </tr>
                                             <tr>
                                                 <td style="border:0px; width: 30%;  height: 0px !important">
-                                                    <b>Emp ID</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.employeeId} </td>
+                                                    <b>Emp ID&nbsp;</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.employeeId} </td>
                                                 <td style="border:0px; width: 30%;"><!--style="border:0px"-->
                                                     <b>Emp Name</b>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.employeeName} </td>
@@ -95,15 +95,15 @@
 
                                             <tr>
                                                 <td><!--style="border:0px"-->
-                                                    <b>Department</b>
+                                                    <b>Department&nbsp;</b>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.departmentMaster.departmentName} </td>
                                                 <td><!--style="border:0px"-->
                                                     <b>Designation</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.designationMaster.designationName}</td>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.designationMaster.designationName}</td>
                                             </tr>
                                             <td><!--style="border:0px"-->
-                                                <b>DOJ</b>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.dateOfJoining} </td>
+                                                <b>DOJ&nbsp;</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.dateOfJoining} </td>
                                             <td><!--style="border:0px"-->
                                                 <b>Bank A/C No</b>
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.bankAccountNo} </td>
@@ -111,8 +111,8 @@
 
 
                                                 <td><!--style="border:0px"-->
-                                                    <b>P.F. A/C No</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.pfNo} </td>
+                                                    <b>P.F. A/C No&nbsp;</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.pfNo} </td>
 
                                                 <c:if test="${not empty employeeMaster.esicNo}">
                                                     <td><!--style="border:0px"-->

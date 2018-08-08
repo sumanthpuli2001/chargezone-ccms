@@ -12,8 +12,10 @@ import com.bul.zydex.service.GenericsService;
  *
  * @author Vikas
  */
-public interface ApprovalMasterService<T> extends GenericsService<T>{
-    
+public interface ApprovalMasterService<T> extends GenericsService<T> {
+
     public ApprovalMaster approvalId(int aprId);
-    
+
+    public ApprovalMaster readByapprovalname(String name);
+
 }

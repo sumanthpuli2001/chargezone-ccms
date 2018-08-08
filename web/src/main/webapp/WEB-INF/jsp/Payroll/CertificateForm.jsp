@@ -141,7 +141,6 @@
     </script>
      <script type="text/javascript">
     function printDiv(divName) {
-        alert("heee");
      var printContents = document.getElementById(divName).innerHTML;
      var originalContents = document.body.innerHTML;
 
@@ -151,18 +150,6 @@
 
      document.body.innerHTML = originalContents;
 };
-
- function download123() {
-
-                var path12 = $('.path').val();
-//                alert(path12);
-//            var saveData = $.ajax({
-//                type: 'POST',
-//                url: "certificateTemplate.htm?act=downloadTextfile",
-//                data: path12,
-//                dataType: "text",
-//            });
-    }
  </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

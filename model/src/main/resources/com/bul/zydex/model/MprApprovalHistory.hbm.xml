@@ -5,7 +5,7 @@
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-   <class name="com.bul.zydex.model.MprApprovalHistory" table="mpr_approval_history" catalog="hr_power_astral">
+    <class name="com.bul.zydex.model.MprApprovalHistory" table="mpr_approval_history" catalog="hr_power_astral">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
@@ -31,10 +31,13 @@
         <property name="createdBy" type="java.lang.Integer">
             <column name="created_by" />
         </property>
-           <many-to-one name="mprMaster" class="com.bul.zydex.model.MprMaster" fetch="select">
+        <many-to-one name="mprMaster" class="com.bul.zydex.model.MprMaster" fetch="select">
             <column name="mpr_id" />
         </many-to-one>
-   </class>
+        <property name="applicationId" type="java.lang.Integer">
+            <column name="application_id" />
+        </property>
+    </class>
   
 
 </hibernate-mapping>

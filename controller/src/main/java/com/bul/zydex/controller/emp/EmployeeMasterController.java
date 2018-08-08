@@ -23,6 +23,7 @@ import com.bul.zydex.model.HoursBasis;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.MprApprovalHistory;
 import com.bul.zydex.model.PayrollPfCheck;
 import com.bul.zydex.model.PayrollPtCheck;
 import com.bul.zydex.model.PmpFormStatusMaster;
@@ -861,6 +862,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        selectedEmployeeLevel5(request, employeeMaster);
 //        selectedEmployeeLevel6(request, employeeMaster);
         BindException errors = new BindException(employeeMaster, "employeeMaster");
+        employeeMaster.setJobDescription(employeeMaster.getJobDescription().replaceAll("&Acirc;", ""));
 
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s
         List<?> lastYearPerformanceRatingsOfEmployeeList = employeeMasterService.getLastYearPerformanceRatingOfEmployee(employeeMaster.getId());
@@ -2546,7 +2548,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String motherName = "";
         String dob = "";
         String dobNonFormated = "";
-        String sex = "";
+        String gender = "";
         String maritalStatus = "";
         String spouseName = "";
         String pan = "";
@@ -2584,7 +2586,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String uanNo = ""; //uano
         String typeofemployee = ""; // employee Type
         String employeeSubtype = ""; // employee sub type
-        boolean gender = false;
+        boolean gender1 = false;
         StringBuffer stringBuffer = new StringBuffer();
         StringBuffer stringBufferOfExceptions = new StringBuffer();
         stringBufferOfExceptions.append("");
@@ -2642,7 +2644,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //DOB formatting before employee creation.
 //                        Date dateDOB = sdfDOJ.parse(dobNonFormated);
 //                        dob = "" + sdfDOJ2.format(dateDOB);
-                            sex = "" + (null == row.getCell((short) 19) ? "" : row.getCell((short) 19));
+                            gender = "" + (null == row.getCell((short) 19) ? "" : row.getCell((short) 19));
                             maritalStatus = "" + (null == row.getCell((short) 20) ? "" : row.getCell((short) 20));
                             spouseName = "" + (null == row.getCell((short) 21) ? "" : row.getCell((short) 21));
                             permenantAddress = "" + (null == row.getCell((short) 22) ? "" : row.getCell((short) 22));
@@ -2812,12 +2814,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMaster.setFatherName(fatherName);
                             employeeMaster.setMotherName(motherName);
                             employeeMaster.setDateOfBirth(dobNonFormated);
-                            if (sex.contains("Male")) {
-                                gender = false;
+                            if (gender.contains("Male")) {
+                                gender1 = false;
                             } else {
-                                gender = true;
+                                gender1 = true;
                             }
-                            employeeMaster.setGender(gender);
+                            employeeMaster.setGender(gender1);
                             employeeMaster.setMaritalStatus(maritalStatus);
                             employeeMaster.setSpouseName(spouseName);
                             employeeMaster.setPanCard(pan.toUpperCase());
@@ -4242,6 +4244,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
         EmployeeSubType employeeSubType = new EmployeeSubType();
         ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
+        MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
 //        ShiftMaster shiftMaster = new ShiftMaster();
         selectEmployee(request, response);
         selectedEmployeeLevel1(request, employeeMaster);
@@ -4300,6 +4305,16 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         employeeMaster.setEmergencyContactNo(candidateApplyJob.getEmergencyContactNo());
         employeeMaster.setPermanentAddress(candidateApplyJob.getPermanentAddress());
         employeeMaster.setHighestEducationDetails(candidateApplyJob.getHighestEducationQualification());
+
+        mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+        mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+        mprApprovalHistory.setStatus(11);
+        mprApprovalHistory.setComment("Inducation");
+        mprApprovalHistory.setStatusMessage("Inducation");
+        mprApprovalHistory.setCreateDate(sdf.format(cDate));
+        mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
+        mprApprovalHistoryService.create(mprApprovalHistory);
 
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("applicationId", applicationId);

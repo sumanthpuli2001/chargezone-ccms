@@ -270,39 +270,39 @@
         }
 
     </script>
-<!--    <script>
-        var i1 = 1;
-        $(function () {
-            $("#step1cloneid").on("click", function () {
-                i1 = document.getElementById("firstStepCount").value;
-                i1++;
-                if (i1 <= 8) {
-                    var clone = "<tr id='cloneTr_Id" + i1 + "'>"
-                            + "<td style=\"text-align: center\">" + i1 + "</td>"
-                            + "<td><input type=\"file\" class=\"form-control\" accept='image/jpg,image/jpeg,image/png' id='certificateId" + i1 + "' name='certificateId" + i1 + "' onchange='checkCertificateFileSize(" + i1 + ")'/></td>"
-                            + "<td style=\"text-align: center\"><input type =\"button\" value=\"-\" onclick=\"removeStep1Tr('cloneTr_Id" + i1 + "');\"/>"
-                            + "</tr>";
-                    $("#table_1").append(clone);
-                    document.getElementById("firstStepCount").value = i1;
-                }
+    <!--    <script>
+            var i1 = 1;
+            $(function () {
+                $("#step1cloneid").on("click", function () {
+                    i1 = document.getElementById("firstStepCount").value;
+                    i1++;
+                    if (i1 <= 8) {
+                        var clone = "<tr id='cloneTr_Id" + i1 + "'>"
+                                + "<td style=\"text-align: center\">" + i1 + "</td>"
+                                + "<td><input type=\"file\" class=\"form-control\" accept='image/jpg,image/jpeg,image/png' id='certificateId" + i1 + "' name='certificateId" + i1 + "' onchange='checkCertificateFileSize(" + i1 + ")'/></td>"
+                                + "<td style=\"text-align: center\"><input type =\"button\" value=\"-\" onclick=\"removeStep1Tr('cloneTr_Id" + i1 + "');\"/>"
+                                + "</tr>";
+                        $("#table_1").append(clone);
+                        document.getElementById("firstStepCount").value = i1;
+                    }
+                });
             });
-        });
-
-        function removeStep1Tr(cloneTr_Id) {
-            try {
-                i1--;
-                var val = document.getElementById("firstStepCount").value;
-                val = val - 1;
-                document.getElementById("firstStepCount").value = val;
-                var element1 = document.getElementById(cloneTr_Id);
-                element1.parentNode.removeChild(element1);
-            } catch (e) {
-
+    
+            function removeStep1Tr(cloneTr_Id) {
+                try {
+                    i1--;
+                    var val = document.getElementById("firstStepCount").value;
+                    val = val - 1;
+                    document.getElementById("firstStepCount").value = val;
+                    var element1 = document.getElementById(cloneTr_Id);
+                    element1.parentNode.removeChild(element1);
+                } catch (e) {
+    
+                }
+    
+    
             }
-
-
-        }
-    </script>-->
+        </script>-->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -310,7 +310,7 @@
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Job Description</li>
-           </ol>
+            </ol>
         </section>
         <div class="col-sm-6" style="text-align: right;">
             <span style="alignment-adjust: middle;">
@@ -319,123 +319,126 @@
         </div>
         <!-- Main content -->
         <form:form class="form-horizontal" role="form" action="employeeMaster.htm?act=editSubmit" commandName="employeeMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
-                <section class="content">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- Custom Tabs -->
-                            <div class="nav-tabs-custom">
-                                <div class="tab-content">
-<!--                                    <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>-->
-                                    <!--form horizontal starts here-->
-<!--                                    <div class="box box-info collapsed-box "id="printArea1">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Personal Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1();"><i class="fa fa-plus" id="minusId1" ></i></button>
-                                                                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    
-                                                        <div class="form-group">
-                                                            <div class="col-sm-2">
-                                                                <label>Employee No.:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <input type="Text" value="${employeeMaster.employeeId}" class="form-control" readonly/>
-                                                            <input type="hidden" value="${employeeMaster.employeeId}" id="empid" name="empid"/>
-                                                        </div>
-                                                        <div class="col-sm-2">
-                                                            <label>Employee Name:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" value="${employeeMaster.employeeName}" class="form-control" readonly/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-2">
-                                                            <label>Designation:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" value="${designationMaster.designationName}" class="form-control" readonly/>
-                                                        </div>
-                                                        <div class="col-sm-2">
-                                                            <label>Level:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" value="${levelMaster.level}" class="form-control" readonly/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-2">
-                                                            <label>Department:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" value="${departmentMaster.departmentName}" class="form-control" readonly/>
-                                                        </div>
-
-                                                        <div class="col-sm-2">
-                                                            <label>Reports To:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" value="${employeeMaster.reportingManagerLevel1}" class="form-control" readonly/>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-2">
-                                                            <label>Joining date:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" value="${employeeMaster.dateOfJoining}" class="form-control" readonly/>
-                                                        </div>
-                                                    </div>
-                                            </div> /.col 
-                                        </div> /.row 
-                                    </div> /.box-body 
-                                </div>-->
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <div class="tab-content">
+                                <!--                                    <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>-->
+                                <!--form horizontal starts here-->
+                                <!--                                    <div class="box box-info collapsed-box "id="printArea1">
+                                                                        <div class="box-header">
+                                                                            <h3 class="box-title">Personal Detail:</h3>
+                                                                            <div class="box-tools pull-right">
+                                                                                <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1();"><i class="fa fa-plus" id="minusId1" ></i></button>
+                                                                                                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="box-body no-padding">
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 col-sm-12">
+                                                                                    
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-2">
+                                                                                                <label>Employee No.:</label>
+                                                                                            </div>
+                                                                                            <div class="col-sm-4">
+                                                                                                <input type="Text" value="${employeeMaster.employeeId}" class="form-control" readonly/>
+                                                                                            <input type="hidden" value="${employeeMaster.employeeId}" id="empid" name="empid"/>
+                                                                                        </div>
+                                                                                        <div class="col-sm-2">
+                                                                                            <label>Employee Name:</label>
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <input type="Text" value="${employeeMaster.employeeName}" class="form-control" readonly/>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-sm-2">
+                                                                                            <label>Designation:</label>
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <input type="Text" value="${designationMaster.designationName}" class="form-control" readonly/>
+                                                                                        </div>
+                                                                                        <div class="col-sm-2">
+                                                                                            <label>Level:</label>
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <input type="Text" value="${levelMaster.level}" class="form-control" readonly/>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-sm-2">
+                                                                                            <label>Department:</label>
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <input type="Text" value="${departmentMaster.departmentName}" class="form-control" readonly/>
+                                                                                        </div>
+                                
+                                                                                        <div class="col-sm-2">
+                                                                                            <label>Reports To:</label>
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <input type="Text" value="${employeeMaster.reportingManagerLevel1}" class="form-control" readonly/>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-sm-2">
+                                                                                            <label>Joining date:</label>
+                                                                                        </div>
+                                                                                        <div class="col-sm-4">
+                                                                                            <input type="Text" value="${employeeMaster.dateOfJoining}" class="form-control" readonly/>
+                                                                                        </div>
+                                                                                    </div>
+                                                                            </div> /.col 
+                                                                        </div> /.row 
+                                                                    </div> /.box-body 
+                                                                </div>-->
                                 <div  id="printArea2">
-<!--                                    <div class="box-header">
-                                        <h3 class="box-title">Employee Certificate Attachments</h3>
-                                        <div class="box-tools pull-right">
-                                            <span id="spanId8">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId8" ></i></button>
-                                            <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                                        </div>
-                                    </div> /.box-header -->
+                                    <!--                                    <div class="box-header">
+                                                                            <h3 class="box-title">Employee Certificate Attachments</h3>
+                                                                            <div class="box-tools pull-right">
+                                                                                <span id="spanId8">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId8" ></i></button>
+                                                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                                                                            </div>
+                                                                        </div> /.box-header -->
                                     <div class="box-body no-padding">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
-                                            <div class="box-body no-padding">
-                                                <div class="row">
+                                                <div class="box-header" style="" align="Center" >
+                                                    <h3 class="box-title"><b>Job Description</b></h3>
+                                                </div>
+                                                <div class="box-body no-padding">
+                                                    <div class="row">
                                                         <div class="col-md-12 col-sm-12">
                                                             ${employeeMaster.jobDescription}
                                                         </div>
-                                                        </div>
-                                            </div>
-                                                    
+                                                    </div>
                                                 </div>
+
                                             </div>
                                         </div>
-
                                     </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6" style="text-align: right;">
-                                                    <button type="button" value="back" onclick="window.history.back()" id="buttonPressed" class="btn btn-warning" data-original-title="" style="width: 100px">BACK</button>
-                                                </div>
-                                                        </div>
 
                                 </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6" style="text-align: right;">
+                                        <button type="button" value="back" onclick="window.history.back()" id="buttonPressed" class="btn btn-warning" data-original-title="" style="width: 100px">BACK</button>
+                                    </div>
+                                </div>
 
-
-                                <div class="tab-pane" id="tab_3"></div>
                             </div>
+
+
+                            <div class="tab-pane" id="tab_3"></div>
                         </div>
                     </div>
+                </div>
             </section>
         </form:form>
     </div>
-   
+
     <script type="text/javascript">
         $('.date_of_transfer').datetimepicker({
             //language:  'fr',

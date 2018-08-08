@@ -117,13 +117,13 @@
                                                 </a>
                                             </c:if>
                                         </div>
-                                        <div class="col-xs-4 col-sm-4 col-md-4">
-                                            <c:if test="${sessionScope.userRight.policy}">
-                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"   href="policyMaster.htm?act=searchPolicyDetail&search=none">
-                                                    Policy
-                                                </a>
-                                            </c:if>
-                                        </div>
+                                        <!--<div class="col-xs-4 col-sm-4 col-md-4">-->
+                                            <%--<c:if test="${sessionScope.userRight.policy}">--%>
+                                                <!--<a  style="font-size: 14px;text-align: left;color: #2c3e50;"   href="policyMaster.htm?act=searchPolicyDetail&search=none">-->
+                                                    <!--Policy-->
+                                                <!--</a>-->
+                                            <%--</c:if>--%>
+                                        <!--</div>-->
                                         <div class="col-xs-4 col-sm-4 col-md-4">
                                             <c:if test="${sessionScope.userRight.companyMonthlyReport}">
                                                 <a  style="font-size: 14px;text-align: left;color: #2c3e50;"   href="companyMonthlyReport.htm?act=searchCompanyMonthlyReport&search=none">

@@ -19,4 +19,6 @@ public interface PolicyReadHistoryDAO<T> extends GenericsDAO<T>{
     
     public List<?> readPolicyId(int id);
     
+    public PolicyReadHistory policyReadCheck(String readerName);
+    
 }

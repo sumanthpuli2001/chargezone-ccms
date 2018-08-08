@@ -39,7 +39,7 @@ public class PolicyCreateDAOImpl<T> extends GenericsDAOImpl<T> implements Policy
         query += " "
                 + " SELECT a"
                 + " FROM PolicyReadHistory a "
-                + " WHERE a.policyCreate.id= " + id;
+                + " WHERE a.policyId = " + id;
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

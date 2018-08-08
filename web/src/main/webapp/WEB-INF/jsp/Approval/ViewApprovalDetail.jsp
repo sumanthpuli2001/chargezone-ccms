@@ -103,7 +103,7 @@
                                            commandName="approvalMaster" action="approval.htm?act=editSubmit" onsubmit="return saveSubmit()" >
                                     <form:hidden name="id" path="id"></form:hidden>
                                         <div class="col-sm-4"><span style="color: red;font-size: 12px;"></span>
-                                            <label>Approval Name:<span style="color: red;font-size: 12px;"></span></label>
+                                            <label>Module Name:<span style="color: red;font-size: 12px;"></span></label>
                                             <form:input path="name" class="form-control" placeholder="Number Of Position"></form:input>
                                             <span  id="monthError" cssClass="errorDiv"></span>
                                         </div>

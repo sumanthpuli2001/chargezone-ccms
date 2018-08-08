@@ -82,39 +82,39 @@ public class ApprovalController extends ApprovalAbstract {
         String apName = request.getParameter("name");
         approvalMaster.setName(apName);
         String id = request.getParameter("id");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date cDate = new Date();
-        approvalMaster.setCreatedBy(employeeMaster1.getId());
-        approvalMaster.setCreatedDate(sdf.format(cDate));
-        approvalMaster.setStatus(0);
-        approvalMasterService.create(approvalMaster);
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date cDate = new Date();
+            approvalMaster.setCreatedBy(employeeMaster1.getId());
+            approvalMaster.setCreatedDate(sdf.format(cDate));
+            approvalMaster.setStatus(0);
+            approvalMasterService.create(approvalMaster);
 
-        otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
-        for (int i = 0; i <= otherDetailCount; i++) {
-            if (null != request.getParameter("policyId" + i) && null != request.getParameter("policyNumber" + i)) {
-                if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
-                    int policyId = Integer.parseInt(request.getParameter("policyId" + i));
-                    employeeMaster = employeeMasterService.readById(policyId);
+            otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
+            for (int i = 0; i <= otherDetailCount; i++) {
+                if (null != request.getParameter("policyId" + i) && null != request.getParameter("policyNumber" + i)) {
+                    if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+                        int policyId = Integer.parseInt(request.getParameter("policyId" + i));
+                        employeeMaster = employeeMasterService.readById(policyId);
 //                    employeeMaster.setId(policyId);
-                    approvalUser.setEmployeeMaster(employeeMaster);
-                    approvalUser.setApprovalMaster(approvalMaster);
-                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-                    Date cDate1 = new Date();
-                    approvalUser.setCreatedDate(sdf1.format(cDate1));
-                    approvalUser.setCreatedBy(employeeMaster1.getId());
-                    String policyNumber = request.getParameter("policyNumber" + i);
-                    approvalUser.setLevel(Integer.parseInt(policyNumber));
-                    approvalUser.setStatus(0);
-                    approvalUserService.create(approvalUser);
+                        approvalUser.setEmployeeMaster(employeeMaster);
+                        approvalUser.setApprovalMaster(approvalMaster);
+                        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+                        Date cDate1 = new Date();
+                        approvalUser.setCreatedDate(sdf1.format(cDate1));
+                        approvalUser.setCreatedBy(employeeMaster1.getId());
+                        String policyNumber = request.getParameter("policyNumber" + i);
+                        approvalUser.setLevel(Integer.parseInt(policyNumber));
+                        approvalUser.setStatus(0);
+                        approvalUserService.create(approvalUser);
 //                        policyMaster.setId(policyId);
 
+                    }
                 }
             }
-        }
 
-        mv = approvalList(request, response);
+            mv = approvalList(request, response);
 
-        return mv;
+            return mv;
 
     }
 
@@ -177,52 +177,52 @@ public class ApprovalController extends ApprovalAbstract {
         EmployeeMaster employeeMaster = new EmployeeMaster();
         ApprovalUser approvalUser = new ApprovalUser();
         String approvalMasterId = request.getParameter("id");
-        BindException errors = new BindException(approvalMaster, "approvalMaster");
-        bind(request, approvalMaster);
-        String policyId1 = request.getParameter("policyId1");
-        String[] policyIdList = policyId1.split(",");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date cDate = new Date();
-        ApprovalMaster approvalMaster1 = approvalMasterService.approvalId(approvalMaster.getId());
-        approvalMaster.setUpdatedDate(sdf.format(cDate));
-        approvalMasterService.update(approvalMaster);
+            BindException errors = new BindException(approvalMaster, "approvalMaster");
+            bind(request, approvalMaster);
+            String policyId1 = request.getParameter("policyId1");
+            String[] policyIdList = policyId1.split(",");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date cDate = new Date();
+            ApprovalMaster approvalMaster1 = approvalMasterService.approvalId(approvalMaster.getId());
+            approvalMaster.setUpdatedDate(sdf.format(cDate));
+            approvalMasterService.update(approvalMaster);
 
-        ///deleted the previous Approval user
-        List<?> approvalUserDetail = approvalUserService.readApprovalUser(approvalMasterId);
-        for (Object userobject : approvalUserDetail) {
-            Object[] approval = (Object[]) userobject;
-            Integer approvalUserId = (Integer) approval[0];
-            approvalUserService.delete(approvalUserId);
-        }
+            ///deleted the previous Approval user
+            List<?> approvalUserDetail = approvalUserService.readApprovalUser(approvalMasterId);
+            for (Object userobject : approvalUserDetail) {
+                Object[] approval = (Object[]) userobject;
+                Integer approvalUserId = (Integer) approval[0];
+                approvalUserService.delete(approvalUserId);
+            }
 
-        /////code for multiple Employee
-        otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
-        for (int i = 0; i < policyIdList.length; i++) {
+            /////code for multiple Employee
+            otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
+            for (int i = 0; i < policyIdList.length; i++) {
 //            if (null != request.getParameter("policyId" + i) && null != request.getParameter("policyNumber" + i)) {
 //                if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
 //                    int policyId = Integer.parseInt(request.getParameter("policyId" + i));
-            employeeMaster = employeeMasterService.readById(Integer.parseInt("" + policyIdList[i]));
+                employeeMaster = employeeMasterService.readById(Integer.parseInt("" + policyIdList[i]));
 //                    employeeMaster.setId(policyId);
-            approvalUser.setEmployeeMaster(employeeMaster);
-            approvalUser.setApprovalMaster(approvalMaster);
-            SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-            Date cDate1 = new Date();
-            approvalUser.setCreatedDate(sdf1.format(cDate1));
-            approvalUser.setCreatedBy(employeeMaster1.getId());
-            String policyNumber = request.getParameter("policyNumber" + i);
-            approvalUser.setLevel(i + 1);
-            approvalUser.setStatus(0);
-            approvalUserService.create(approvalUser);
+                approvalUser.setEmployeeMaster(employeeMaster);
+                approvalUser.setApprovalMaster(approvalMaster);
+                SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+                Date cDate1 = new Date();
+                approvalUser.setCreatedDate(sdf1.format(cDate1));
+                approvalUser.setCreatedBy(employeeMaster1.getId());
+                String policyNumber = request.getParameter("policyNumber" + i);
+                approvalUser.setLevel(i + 1);
+                approvalUser.setStatus(0);
+                approvalUserService.create(approvalUser);
 //                        policyMaster.setId(policyId);
 //
 //                }
 //            }
+            }
+
+            mv = approvalList(request, response);
+            return mv;
+
         }
-
-        mv = approvalList(request, response);
-        return mv;
-
-    }
 
     public ModelAndView deleteApprovalSetting(HttpServletRequest request,
             HttpServletResponse response) throws Exception {

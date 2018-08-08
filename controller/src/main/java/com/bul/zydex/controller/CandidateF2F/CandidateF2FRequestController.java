@@ -128,6 +128,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mprApprovalHistory.setComment("Face To Face Interview");
         mprApprovalHistory.setStatusMessage("Face To Face Interview");
         mprApprovalHistory.setMprMaster(vm.getMprMaster());
+        mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
         mprApprovalHistoryService.create(mprApprovalHistory);
 
         otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
@@ -185,6 +186,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mprApprovalHistory.setStatusMessage("ShortListed");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
         mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
         mprApprovalHistoryService.create(mprApprovalHistory);
 
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
@@ -243,6 +245,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mprApprovalHistory.setStatusMessage("Candidate Rejected");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
         mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
         mprApprovalHistoryService.create(mprApprovalHistory);
 
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
@@ -314,6 +317,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mprApprovalHistory.setStatusMessage("Send Offer Laters");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
         mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
         mprApprovalHistoryService.create(mprApprovalHistory);
 
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();

@@ -102,7 +102,7 @@
                                            commandName="approvalMaster" action="approval.htm?act=submitApproval" onsubmit="return saveSubmit()" >
                                     <form:hidden path="id"></form:hidden>
                                         <div class="col-sm-4"><span style="color: red;font-size: 12px;"></span>
-                                            <label>Approval Name:<span style="color: red;font-size: 12px;"></span></label>
+                                            <label>Module Name:<span style="color: red;font-size: 12px;"></span></label>
                                             <input name="name" id ="name" class="form-control" required></input>
                                             <span  id="monthError" cssClass="errorDiv"></span>
                                         </div>
@@ -119,7 +119,7 @@
                                                     <table id="policyTable" class="table table-bordered table-striped table-hover" style="margin-top: 10px" align="Center"  >
                                                         <tr>
                                                             <!--<th style="text-align: center; vertical-align: middle;width: 5%"></th>-->
-                                                            <th style="text-align: center; vertical-align: middle">User Name</th>
+                                                            <th style="text-align: center; vertical-align: middle">Approval Name</th>
                                                             <th style="text-align: center; vertical-align: middle">Level</th>
                                                             <!--<th style="text-align: center; vertical-align: middle">Amount</th>-->
                                                             <th style="text-align: center; vertical-align: middle">Add New</th>

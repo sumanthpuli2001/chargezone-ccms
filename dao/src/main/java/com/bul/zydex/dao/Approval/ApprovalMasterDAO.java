@@ -16,4 +16,6 @@ public interface ApprovalMasterDAO<T> extends GenericsDAO<T>{
     
     public ApprovalMaster approvalId(int aprId);
     
+    public ApprovalMaster readByapprovalname(String name);
+    
 }

@@ -16,4 +16,6 @@ public interface MprApprovalHistoryService<T> extends GenericsService<T> {
 
     public List<?> getByMprId(int mprId);
 
+    public List<?> gethistory(int mprId);
+
 }

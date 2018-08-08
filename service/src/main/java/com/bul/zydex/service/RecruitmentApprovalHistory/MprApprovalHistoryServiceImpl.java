@@ -31,6 +31,11 @@ public class MprApprovalHistoryServiceImpl<T> extends GenericsServiceImpl<T> imp
     public List<?> getByMprId(int mprId) {
        return mprApprovalHistoryDAO.getByMprId(mprId);
     }
+
+    @Override
+    public List<?> gethistory(int appId) {
+        return mprApprovalHistoryDAO.gethistory(appId);
+    }
     
     
 

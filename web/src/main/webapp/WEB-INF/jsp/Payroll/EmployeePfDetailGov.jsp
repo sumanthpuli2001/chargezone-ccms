@@ -43,18 +43,18 @@
             }
         }
     </script>
-<script>
-$(document).ready(function(){
-    $("#hide").click(function(){
-        $(this).hide();
-        $("#show").show();
-    });
-    $("#show").click(function(){
-        $(this).hide();
-        $("#hide").show();
-    });
-});
-</script>
+    <script>
+        $(document).ready(function () {
+            $("#hide").click(function () {
+                $(this).hide();
+                $("#show").show();
+            });
+            $("#show").click(function () {
+                $(this).hide();
+                $("#hide").show();
+            });
+        });
+    </script>
 
 
     <!-- Content Wrapper. Contains page content -->
@@ -90,49 +90,49 @@ $(document).ready(function(){
                                 <div class="box-body no-padding">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
-<!--                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Location:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
-                                                        <option value="" label="-- Select --" ></option>
-                                                        <c:forEach var="deptName" items="${deptMap}">
-                                                            <option value="${deptName.key}" label="${deptName.value}" ></option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </div>
+                                            <!--                                            <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Location:<span style="color: red;font-size: 12px;"></span></label>
+                                                                                                <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
+                                                                                                    <option value="" label="-- Select --" ></option>
+                                            <c:forEach var="deptName" items="${deptMap}">
+                                                <option value="${deptName.key}" label="${deptName.value}" ></option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
 
-                                                <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
-                                                <div class="col-sm-6">
-                                                    <label>Type of Employee :<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="employeeTypeMasterId" id="employeeTypeMasterId" onchange="selectsubtype(this.value);" class="form-control">
-                                                        <option value="" label="-- Select --" ></option>
-                                                        <c:forEach var="EmpType" items="${EmployeeTypeList}">
-                                                            <option value="${EmpType.key}" label="${EmpType.value}" ></option>
-                                                        </c:forEach>
-                                                    </select>
+                                    <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
+                                    <div class="col-sm-6">
+                                        <label>Type of Employee :<span style="color: red;font-size: 12px;"></span></label>
+                                        <select name="employeeTypeMasterId" id="employeeTypeMasterId" onchange="selectsubtype(this.value);" class="form-control">
+                                            <option value="" label="-- Select --" ></option>
+                                            <c:forEach var="EmpType" items="${EmployeeTypeList}">
+                                                <option value="${EmpType.key}" label="${EmpType.value}" ></option>
+                                            </c:forEach>
+                                        </select>
 
-                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <div class="form-group">
-                                                <div class="col-sm-6" id="employeeSubTypeId">
-                                                    <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
-                                                        <option value="" label="-- Select --" ></option> 
-
-                                                    </select>
-                                                </div>
-
-
-                                                <div class="col-sm-6">
-                                                    <label>Payment Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="paymentType" id="paymentType" class="form-control ">
-                                                        <option value="">--Select--</option>
-                                                        <option value="0">Cheque</option>
-                                                        <option value="1">Cash</option>
-
-                                                    </select>
-                                                </div>
-                                            </div>-->
+                                    </div>-->
+                                            <!--                                            </div>-->
+                                            <!--                                            <div class="form-group">
+                                                                                            <div class="col-sm-6" id="employeeSubTypeId">
+                                                                                                <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
+                                                                                                <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
+                                                                                                    <option value="" label="-- Select --" ></option> 
+                                            
+                                                                                                </select>
+                                                                                            </div>
+                                            
+                                            
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Payment Type:<span style="color: red;font-size: 12px;"></span></label>
+                                                                                                <select name="paymentType" id="paymentType" class="form-control ">
+                                                                                                    <option value="">--Select--</option>
+                                                                                                    <option value="0">Cheque</option>
+                                                                                                    <option value="1">Cash</option>
+                                            
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>-->
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Months:<span style="color: red;font-size: 12px;">*</span></label>
@@ -198,10 +198,29 @@ $(document).ready(function(){
                                             <div class="box-header" style="text-align: right;">
                                                 <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="ExportToExcel('tableid')"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
                                                 <button type="button" class="btn btn-facebook "  style="width: 100px;" value="Print" onclick="printDiv('printableArea')"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Print</button>
-                                                <button type="button" class="btn btn-facebook "  style="width: 100px;" id="hide" value="TEXT" onclick="textBtnClick();"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Text</button>
+                                                <c:if test="${flag eq 'true'}">
+                                                    <button type="button" class="btn btn-facebook "  style="width: 100px;display: none;" id="hide" value="TEXT" onclick="textBtnClick();"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Text</button>
+                                                </c:if>
+                                                <c:if test="${flag ne 'true'}">
+                                                    <button type="button" class="btn btn-facebook "  style="width: 100px;" id="hide" value="TEXT" onclick="textBtnClick();"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Text</button>
+                                                </c:if>
+
+                                                <c:if test="${flag eq 'true'}">
+                                                    <span data="StorageYard/TextFile/PF_Report" type="application/pdf" width="500" height="300">
+                                                        <a href="employeePfCheck.htm?act=downloadTextfile" id="show">Download</a>
+                                                        <!--<button type="button" href="employeePfCheck.htm?act=downloadTextfile" class="btn btn-facebook "  style="width: 100px;" id="show" value="Download"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Download</button>-->
+                                                    </span>
+                                                </c:if>
+                                                <c:if test="${flag ne 'true'}">
+                                                    <span data="StorageYard/TextFile/PF_Report" type="application/pdf" width="500" height="300">
+                                                        <a href="employeePfCheck.htm?act=downloadTextfile" id="show" style="display: none;">Download</a>
+                                                        <!--<button type="button" href="employeePfCheck.htm?act=downloadTextfile" class="btn btn-facebook "  style="width: 100px;" id="show" value="Download"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Download</button>-->
+                                                    </span>
+                                                </c:if>
+
                                                 <span data="StorageYard/TextFile/PF_Report" type="application/pdf" width="500" height="300">
-                                                <a href="employeePfCheck.htm?act=downloadTextfile" id="show">Download</a>
-                                                <!--<button type="button" href="employeePfCheck.htm?act=downloadTextfile" class="btn btn-facebook "  style="width: 100px;" id="show" value="Download"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Download</button>-->
+                                                    <a href="employeePfCheck.htm?act=downloadTextfile" id="show" style="display: none;">Download</a>
+                                                    <!--<button type="button" href="employeePfCheck.htm?act=downloadTextfile" class="btn btn-facebook "  style="width: 100px;" id="show" value="Download"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Download</button>-->
                                                 </span>
                                             </div>
                                         </c:when>
@@ -220,7 +239,7 @@ $(document).ready(function(){
                                                 <center>  <img src="StorageYard/Images/HTS_LOGO.png" style="width:15%;height: 15%;" BORDER="0"/> </center> 
 
                                                 <div class="form-group">
-                                                    <center><b><font size="4">ASTRAL STERITECH PVT LTD </font></b></center> 
+                                                    <center><b><font size="4">SPC LIFESCIENCES PVT LTD</font></b></center> 
                                                 </div>
                                                 <header>
                                                     <center><b><font size="4">Employee PF Report for the month of<c:if test="${month eq 1}">January</c:if>
@@ -262,7 +281,7 @@ $(document).ready(function(){
                                                                             <th>EPF Contribution remitted</th>
                                                                             <th>EPS Contribution remitted</th>
                                                                             <th>EPF and EPS Diff remitted</th>
-                                                                            
+
 
                                                                         </tr>
                                                                     </thead>
@@ -291,18 +310,18 @@ $(document).ready(function(){
                                                                     </tr>
                                                             </c:forEach>
                                                             <%--<c:choose>--%>
-                                                                <%--<c:when test="${!empty employeelist}">--%>
-<!--                                                                    <tr>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td><b>Total Amount</b></td>
-                                                                        <td><fmt:formatNumber maxFractionDigits="0" value="${totalPfAmount}"></fmt:formatNumber></td>
-                                                                        <td><fmt:formatNumber maxFractionDigits="0" value="${totalePfAmount}"></fmt:formatNumber></td>
-                                                                        <td><fmt:formatNumber maxFractionDigits="0" value="${totalaPfAmount}"></fmt:formatNumber></td>
-
-
-                                                                        </tr>-->
-                                                                <%--</c:when>--%>
+                                                            <%--<c:when test="${!empty employeelist}">--%>
+                                                            <!--                                                                    <tr>
+                                                                                                                                    <td></td>
+                                                                                                                                    <td></td>
+                                                                                                                                    <td><b>Total Amount</b></td>
+                                                                                                                                    <td><fmt:formatNumber maxFractionDigits="0" value="${totalPfAmount}"></fmt:formatNumber></td>
+                                                                                                                                    <td><fmt:formatNumber maxFractionDigits="0" value="${totalePfAmount}"></fmt:formatNumber></td>
+                                                                                                                                    <td><fmt:formatNumber maxFractionDigits="0" value="${totalaPfAmount}"></fmt:formatNumber></td>
+                                                            
+                                                            
+                                                                                                                                    </tr>-->
+                                                            <%--</c:when>--%>
                                                             <%--</c:choose>--%>
                                                             </tbody>
                                                         </table>
@@ -415,19 +434,31 @@ $(document).ready(function(){
         alert(htmltable);
         var html = htmltable.outerHTML;
         alert(html);
-        var innerHtml  = $('#table').html;
+        var innerHtml = $('#table').html;
 //        innerHtml  = innerHtml.replaceAll('</td>','#~#');
-        alert(innerHtml);
+//        alert(innerHtml);
 //        window.open('data:application/vnd.txt,' + encodeURIComponent(html));
-       window.location = 'employeePfCheck.htm?act=readTextFile&id=' + html;
+        window.location = 'employeePfCheck.htm?act=readTextFile&id=' + html;
     }
 </script>
 <script type="text/javascript">
     function textBtnClick() {
         var month = document.getElementById('monthHiddenValue').value;
         var year = $('#year11 option:selected').text();
-        window.location = 'employeePfCheck.htm?act=readTextFile&month=' + month +'&year11=' +year;
+        window.location = 'employeePfCheck.htm?act=readTextFile&month=' + month + '&year11=' + year;
     }
+
+//    $(window).load(function () {
+//        alert("in");
+//        var url_string = window.location.href;
+//        var url = new URL(url_string);
+//        var c = url.searchParams.get("year11");
+//        alert(year11);
+//                if (){
+//        document.getElementById("show").style.display = 'none';
+//        document.getElementById("hide").style.display = 'inline-block';
+//        }
+//    }
 </script>
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

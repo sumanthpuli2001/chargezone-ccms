@@ -162,7 +162,7 @@
                                                                     <header>
                                                                         <center>  <img src=" StorageYard/Images/logo.png" style="width:15%;height: 15%;" BORDER="0"/></center>
                                                                         <div class="form-group">
-                                                                            <center><b><font size="4">SPC Lifesciences </font></b></center> 
+                                                                            <center><b><font size="4">SPC LIFESCIENCES PVT LTD </font></b></center> 
                                                                         </div>
                                                                         <center><b><font size="4">${policyName[0]} Deduction Statement for the month of
                                                                                 <c:if test="${month eq 1}">January</c:if>

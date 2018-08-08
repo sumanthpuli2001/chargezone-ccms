@@ -102,7 +102,7 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
 //        int month = now.get(Calendar.MONTH) + 1;
         String name = monthName[now.get(Calendar.MONTH)];
         //if ((empCompany.equals("Zydex Industries") || empCompany.equalsIgnoreCase("ZydexIndustries")) && !empCompany.equals("")) {
-            empCompany = "SPCL";
+        empCompany = "SPCL";
         //} else {
         //    empCompany = "ZIPL";
         //}
@@ -509,23 +509,27 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                         } else {
                             EmployeeMaster employeeMaster2 = new EmployeeMaster();
                             employeeMaster2 = employeeMasterService.readById(Integer.parseInt(appoverObj));
-                            if (pass == 0) {
-                                pattern += employeeMaster2.getEmployeeName() + "_Pending_ ";
-                            } else {
-                                pattern += "~ " + employeeMaster2.getEmployeeName() + "_Pending_ ";
+                            if (employeeMaster2 != null) {
+                                if (pass == 0) {
+                                    pattern += employeeMaster2.getEmployeeName() + "_Pending_ ";
+                                } else {
+                                    pattern += "~ " + employeeMaster2.getEmployeeName() + "_Pending_ ";
+                                }
                             }
                         }
                         pass++;
                         EmployeeMaster employeeMaster3 = new EmployeeMaster();
                         employeeMaster3 = employeeMasterService.readById(Integer.parseInt(appoverObj));
-                        DesignationMaster designationMaster1 = new DesignationMaster();
-                        designationMaster1 = designationMasterService.readById(employeeMaster3.getDesignationMaster().getId());
-                        LevelMaster levelMaster = new LevelMaster();
-                        levelMaster = levelMasterService.readById(employeeMaster3.getLevelMaster().getId());
-                        if ((levelMaster.getLevel().equals("3A") || levelMaster.getLevel().equals("3B") || levelMaster.getLevel().equals("2D")
-                                || levelMaster.getLevel().equals("2C") || levelMaster.getLevel().equals("2E") || levelMaster.getLevel().equals("2B") || levelMaster.getLevel().equals("2A")
-                                || (levelMaster.getLevel().equals("0") && (designationMaster1.getDesignationName().equals("Proprietor") || designationMaster1.getDesignationName().equals("Project Cordinator")))) && !designationMaster1.getDesignationName().equals("CEO")) {
-                            break;
+                        if (employeeMaster3 != null) {
+                            DesignationMaster designationMaster1 = new DesignationMaster();
+                            designationMaster1 = designationMasterService.readById(employeeMaster3.getDesignationMaster().getId());
+                            LevelMaster levelMaster = new LevelMaster();
+                            levelMaster = levelMasterService.readById(employeeMaster3.getLevelMaster().getId());
+                            if ((levelMaster.getLevel().equals("3A") || levelMaster.getLevel().equals("3B") || levelMaster.getLevel().equals("2D")
+                                    || levelMaster.getLevel().equals("2C") || levelMaster.getLevel().equals("2E") || levelMaster.getLevel().equals("2B") || levelMaster.getLevel().equals("2A")
+                                    || (levelMaster.getLevel().equals("0") && (designationMaster1.getDesignationName().equals("Proprietor") || designationMaster1.getDesignationName().equals("Project Cordinator")))) && !designationMaster1.getDesignationName().equals("CEO")) {
+                                break;
+                            }
                         }
                     }
                 }
@@ -1626,23 +1630,27 @@ public class TravelRequestMasterController extends TravelRequestMasterAbstract {
                         } else {
                             EmployeeMaster employeeMaster3 = new EmployeeMaster();
                             employeeMaster3 = employeeMasterService.readById(Integer.parseInt(appoverObj));
-                            if (pass == 0) {
-                                pattern += employeeMaster3.getEmployeeName() + "_Pending_ ";
-                            } else {
-                                pattern += "~ " + employeeMaster3.getEmployeeName() + "_Pending_ ";
+                            if (employeeMaster3 != null) {
+                                if (pass == 0) {
+                                    pattern += employeeMaster3.getEmployeeName() + "_Pending_ ";
+                                } else {
+                                    pattern += "~ " + employeeMaster3.getEmployeeName() + "_Pending_ ";
+                                }
                             }
                         }
                         pass++;
                         EmployeeMaster employeeMaster4 = new EmployeeMaster();
                         employeeMaster4 = employeeMasterService.readById(Integer.parseInt(appoverObj));
-                        DesignationMaster designationMaster1 = new DesignationMaster();
-                        designationMaster1 = designationMasterService.readById(employeeMaster4.getDesignationMaster().getId());
-                        LevelMaster levelMaster = new LevelMaster();
-                        levelMaster = levelMasterService.readById(employeeMaster4.getLevelMaster().getId());
-                        if ((levelMaster.getLevel().equals("3A") || levelMaster.getLevel().equals("3B") || levelMaster.getLevel().equals("2D")
-                                || levelMaster.getLevel().equals("2C") || levelMaster.getLevel().equals("2E") || levelMaster.getLevel().equals("2B") || levelMaster.getLevel().equals("2A")
-                                || (levelMaster.getLevel().equals("0") && (designationMaster1.getDesignationName().equals("Proprietor") || designationMaster1.getDesignationName().equals("Project Cordinator")))) && !designationMaster1.getDesignationName().equals("CEO")) {
-                            break;
+                        if (employeeMaster4 != null) {
+                            DesignationMaster designationMaster1 = new DesignationMaster();
+                            designationMaster1 = designationMasterService.readById(employeeMaster4.getDesignationMaster().getId());
+                            LevelMaster levelMaster = new LevelMaster();
+                            levelMaster = levelMasterService.readById(employeeMaster4.getLevelMaster().getId());
+                            if ((levelMaster.getLevel().equals("3A") || levelMaster.getLevel().equals("3B") || levelMaster.getLevel().equals("2D")
+                                    || levelMaster.getLevel().equals("2C") || levelMaster.getLevel().equals("2E") || levelMaster.getLevel().equals("2B") || levelMaster.getLevel().equals("2A")
+                                    || (levelMaster.getLevel().equals("0") && (designationMaster1.getDesignationName().equals("Proprietor") || designationMaster1.getDesignationName().equals("Project Cordinator")))) && !designationMaster1.getDesignationName().equals("CEO")) {
+                                break;
+                            }
                         }
                     }
 

@@ -36,4 +36,20 @@ public class ApprovalMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Appr
         return approvalMaster;
     }
 
+    @Override
+    public ApprovalMaster readByapprovalname(String name) {
+        ApprovalMaster approvalMaster = new ApprovalMaster();
+        String query = "SELECT a"
+                + " FROM ApprovalMaster a "
+                + " WHERE a.name = '" + name +"'";
+
+        List<?> list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            approvalMaster = (ApprovalMaster) list.get(0);
+        } else {
+            approvalMaster = null;
+        }
+        return approvalMaster;
+    }
+
 }

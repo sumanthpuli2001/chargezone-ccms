@@ -436,6 +436,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
             kaizenMaster.setStatus(1);
             kaizenMaster.setUpdatedBy(employeeMaster.getId());
             kaizenMaster.setUpdatedDate(sdf.format(cDate));
+            kaizenMaster.setCompiletionDate(sdf.format(cDate));
 
             kaizenMasterService.update(kaizenMaster);
 
@@ -449,7 +450,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
                 kaizenApprovalService.create(kaizenApproval);
 
                 KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
-                kaizenApprovalHistory.setComment(btnType);
+                kaizenApprovalHistory.setComment(comment);
                 kaizenApprovalHistory.setStatus(1);
                 kaizenApprovalHistory.setStatusMessage("Kaizen Approve");
                 kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
@@ -493,7 +494,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
             kaizenApprovalService.create(kaizenApproval);
 
             KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
-            kaizenApprovalHistory.setComment(btnType);
+            kaizenApprovalHistory.setComment(comment);
             kaizenApprovalHistory.setStatus(2);
             kaizenApprovalHistory.setStatusMessage("Kaizen Recycle");
             kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
@@ -538,7 +539,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
             kaizenApprovalService.create(kaizenApproval);
 
             KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
-            kaizenApprovalHistory.setComment(btnType);
+            kaizenApprovalHistory.setComment(comment);
             kaizenApprovalHistory.setStatus(3);
             kaizenApprovalHistory.setStatusMessage("Kaizen Reject");
             kaizenApprovalHistory.setKaizenMaster(kaizenMaster);

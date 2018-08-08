@@ -35,4 +35,17 @@ public class MprApprovalHistoryDAOImpl<T> extends GenericsDAOImpl<T> implements 
         return list;
     }
 
+    @Override
+    public List<?> gethistory(int mprId) {
+           String query = "";
+        //                  0       1               2               3           4       5               6           7           8          
+        query += "select a.id,a.approvalUserName,a.approvalUserId,a.comment,a.status,a.statusMessage,a.createDate,a.createdBy"
+                + " FROM MprApprovalHistory a "
+                + " WHERE a.applicationId=" + mprId
+                + " order by a.id desc ";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

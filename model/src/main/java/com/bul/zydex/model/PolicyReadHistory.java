@@ -12,22 +12,24 @@ package com.bul.zydex.model;
 public class PolicyReadHistory {
 
     private Integer id;
-    private PolicyCreate policyCreate;
+    private Integer policyId;
     private String readerDate;
     private String readerBy;
     private Integer policyAcept;
     private String policyAceptTime;
+    private Integer policyReadStatus;
 
     public PolicyReadHistory() {
     }
 
-    public PolicyReadHistory(Integer id, PolicyCreate policyCreate, String readerDate, String readerBy, Integer policyAcept, String policyAceptTime) {
+    public PolicyReadHistory(Integer id, Integer policyId, String readerDate, String readerBy, Integer policyAcept, String policyAceptTime, Integer policyReadStatus) {
         this.id = id;
-        this.policyCreate = policyCreate;
+        this.policyId = policyId;
         this.readerDate = readerDate;
         this.readerBy = readerBy;
         this.policyAcept = policyAcept;
         this.policyAceptTime = policyAceptTime;
+        this.policyReadStatus = policyReadStatus;
     }
 
     public Integer getId() {
@@ -38,12 +40,12 @@ public class PolicyReadHistory {
         this.id = id;
     }
 
-    public PolicyCreate getPolicyCreate() {
-        return policyCreate;
+    public Integer getPolicyId() {
+        return policyId;
     }
 
-    public void setPolicyCreate(PolicyCreate policyCreate) {
-        this.policyCreate = policyCreate;
+    public void setPolicyId(Integer policyId) {
+        this.policyId = policyId;
     }
 
     public String getReaderDate() {
@@ -76,6 +78,14 @@ public class PolicyReadHistory {
 
     public void setPolicyAceptTime(String policyAceptTime) {
         this.policyAceptTime = policyAceptTime;
+    }
+
+    public Integer getPolicyReadStatus() {
+        return policyReadStatus;
+    }
+
+    public void setPolicyReadStatus(Integer policyReadStatus) {
+        this.policyReadStatus = policyReadStatus;
     }
     
     

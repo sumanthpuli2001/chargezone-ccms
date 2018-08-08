@@ -27,7 +27,7 @@ public class PolicyReadHistoryDAOImpl<T> extends GenericsDAOImpl<T> implements P
 
         String query = " SELECT a"
                 + " FROM PolicyReadHistory a "
-                + " WHERE a.policyCreate.id = " + id;
+                + " WHERE a.policyId = " + id;
 
         List<?> list = getHibernateTemplate().find(query);
         if (!list.isEmpty()) {
@@ -41,24 +41,22 @@ public class PolicyReadHistoryDAOImpl<T> extends GenericsDAOImpl<T> implements P
     @Override
     public List<?> readPolicyId(int id) {
         String query = "";
-        query += "select a.id,a.readerDate,a.readerBy,a.policyAcept,a.policyAceptTime,b.name,b.attachment,b.createdDate,b.createdBy "
+        query += "select a.id,a.readerDate,a.readerBy,a.policyAcept,a.policyAceptTime "
                 + " FROM PolicyReadHistory a "
-                + " LEFT JOIN a.policyCreate b "
-                + " WHERE a.policyCreate.id = " + id;
+                + " WHERE a.policyId = " + id;
 
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
 
     @Override
-    public PolicyReadHistory policyReadCheck(int policyId, String readerName) {
+    public PolicyReadHistory policyReadCheck(String readerName) {
 
         PolicyReadHistory policyReadHistory = new PolicyReadHistory();
 
         String query = " SELECT a"
                 + " FROM PolicyReadHistory a "
-                + " WHERE a.policyCreate.id = " + policyId
-                + " AND a.readerBy = " + readerName;
+                + " WHERE a.readerBy = '" + readerName +"'";
 
         List<?> list = getHibernateTemplate().find(query);
         if (!list.isEmpty()) {

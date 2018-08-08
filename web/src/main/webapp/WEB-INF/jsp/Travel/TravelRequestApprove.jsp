@@ -1019,7 +1019,7 @@
                                 </div>
                                 <!--Travel Purpose In Detail completes Here-->
                                 <div class="form-group">
-                                    <c:if test="${sessionScope.userRight.travelAdmin eq false}">
+                                    <%--<c:if test="${sessionScope.userRight.travelAdmin eq false}">--%>
                                         <%--<c:if test="${travelRequestMaster.status ne 3 && travelRequestMaster.status ne 6}"></c:if>--%>
                                         <c:if test="${travelRequestMaster.status ne 8 || travelRequestMaster.status ne 6}">
                                             <div class="col-sm-4" style="text-align: left">
@@ -1040,7 +1040,7 @@
                                                 <button type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-warning" data-original-title="" title="" value="rework" style="width: 100px">REWORK</button>
                                             </div>
                                         </c:if>
-                                    </c:if>
+                                    <%--</c:if>--%>
                                 </div>
                                 <%--</c:if>--%>
 

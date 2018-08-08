@@ -277,6 +277,7 @@ public class EmployeePfCheckController extends EmployeePfCheckAbstract {
         w.close();
         request.setAttribute("successMessage",
                 "Information: Text File successfully Exported You Can Click Download");
+          request.setAttribute("flag","true");
         mv = searchFormEmployeePfDetailSubmitGov(request, response);
         return mv;
     }

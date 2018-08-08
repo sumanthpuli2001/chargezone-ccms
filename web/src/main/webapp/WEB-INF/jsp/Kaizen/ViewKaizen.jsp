@@ -88,15 +88,11 @@
                                         </tr>
                                         <tr>
                                             <th colspan="2">Completion Date  </th>
-                                                <c:forEach var="list" items="${listKh}">
-                                                    <c:if test="${list[2] eq 5}">
-                                                    <th colspan="2">${list[4]}</th>
-                                                </c:if>
-                                            </c:forEach>
-                                        </tr>
-                                        <tr>
-                                            <th colspan="2">Budget Requirement  </th>
-                                            <th colspan="2">${list.budgetRequirement}</th>
+                                            <th colspan="2"><c:if test="${list.status eq 5}">${list.compiletionDate}</c:if></th>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="2">Budget Requirement  </th>
+                                                <th colspan="2">${list.budgetRequirement}</th>
                                         </tr>
                                         <tr style="vertical-align: top;">
                                             <th colspan="3" rowspan="5">Improvement Description :<br><br>

@@ -20,12 +20,13 @@ public class MprApprovalHistory implements java.io.Serializable {
     private String createDate;
     private Integer createdBy;
     private MprMaster mprMaster;
+    private Integer applicationId;
     
     public MprApprovalHistory(){
         
     }
 
-    public MprApprovalHistory(Integer id, String approvalUserName, Integer approvalUserId, String comment, Integer status, String statusMessage, String createDate, Integer createdBy, MprMaster mprMaster) {
+    public MprApprovalHistory(Integer id, String approvalUserName, Integer approvalUserId, String comment, Integer status, String statusMessage, String createDate, Integer createdBy, MprMaster mprMaster, Integer applicationId) {
         this.id = id;
         this.approvalUserName = approvalUserName;
         this.approvalUserId = approvalUserId;
@@ -35,6 +36,7 @@ public class MprApprovalHistory implements java.io.Serializable {
         this.createDate = createDate;
         this.createdBy = createdBy;
         this.mprMaster = mprMaster;
+        this.applicationId = applicationId;
     }
 
     public Integer getId() {
@@ -107,6 +109,14 @@ public class MprApprovalHistory implements java.io.Serializable {
 
     public void setMprMaster(MprMaster mprMaster) {
         this.mprMaster = mprMaster;
+    }
+
+    public Integer getApplicationId() {
+        return applicationId;
+    }
+
+    public void setApplicationId(Integer applicationId) {
+        this.applicationId = applicationId;
     }
     
     

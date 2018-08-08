@@ -69,13 +69,13 @@
                                                                     <td>${list1[6]}</td>
                                                                     <td>${list1[9]}</td>
                                                                     <td>${list1[7]}</td>
-                                                                    <c:if test="${list1[8] eq 5}"><td><span class="label label-success">Final Approved</span></td></c:if>
+                                                                    <c:if test="${list1[8] eq 5}"><td><span class="label label-success">Close</span></td></c:if>
                                                                     <c:if test="${list1[8] eq 0}"><td><span class="badge">Open</span></td></c:if>
                                                                     <c:if test="${list1[8] eq 2 }"><td><span class="label label-warning">Recycled</span></td></c:if>
                                                                     <c:if test="${list1[8] eq 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
                                                                     <c:if test="${list1[8] eq 10}"><td><span class="label label-default">OnHold</span></td></c:if>
-                                                                    <c:if test="${list1[8] eq 4}"><td><span class="label label-success">Close</span></td></c:if>
-                                                                    <c:if test="${list1[8] eq 1}"><td><span class="label label-success">Close</span></td></c:if>
+                                                                    <c:if test="${list1[8] eq 4}"><td><span class="label label-success">Final Approve Pending</span></td></c:if>
+                                                                    <c:if test="${list1[8] eq 1}"><td><span class="label label-success">Final Approve Pending</span></td></c:if>
                                                                         <td>
                                                                             <div class="btn-group">
                                                                                 <button type="button" onclick="viewClick(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">

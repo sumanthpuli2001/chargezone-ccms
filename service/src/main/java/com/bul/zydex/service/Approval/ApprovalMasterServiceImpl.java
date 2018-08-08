@@ -32,4 +32,9 @@ public class ApprovalMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
         return approvalMasterDAO.approvalId(aprId);
     }
 
+    @Override
+    public ApprovalMaster readByapprovalname(String name) {
+        return approvalMasterDAO.readByapprovalname(name);
+    }
+
 }

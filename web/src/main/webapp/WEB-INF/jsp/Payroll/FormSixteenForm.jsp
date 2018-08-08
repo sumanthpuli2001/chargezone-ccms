@@ -89,6 +89,9 @@
             <section class="content">
                 <div class="col-sm-10" id="printDiv">
                     <!-- Custom Tabs -->
+                    <div class="box-header" style="" align="Center" >
+                        <h3 class="box-title"><b>Form 16</b></h3>
+                    </div>
                     <div class="tab-pane active" id="tab_1">
                         <c:if test="${!empty successMessage}">
                             <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
@@ -610,43 +613,43 @@
                                 <tr>
                                     <td style="text-align: justify;" class="totalWords11" id="totalWords11" colspan="10">
                                         (Designation) do hereby certify that a sum of &emsp;<b> Rs .<b><fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${tdsTotal}"/>&emsp;(Rs. Zero only) &emsp;&emsp; has been deducted at source and paid to the credit of the Central Government. 
-                                        &emsp;I further certify that the information given above is true and correct based
-                                        on the book of accounts, documents and other available records.
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="10" style="border: none;border-left:1px solid black;border-right:1px solid black;padding:10px 8px"></td>
-                                </tr>
-                                <tr>
-                                    <td style="border: none;border-left:1px solid black;" colspan="6" rowspan="3"></td>
-                                    <td style="border: none;border-top:2px solid black;border-right:1px solid black;" colspan="4" rowspan="2">Signature of the person responsible for the <br/>deduction of tax.</td>
-                                </tr>
-                                <tr>
-                                </tr>
-                                <tr style="border:none;">
-                                </tr>
-                                <tr>
-                                    <td style="border: none;border-left:1px solid black;text-align: left;" colspan="5">Place:&emsp;<b>${payrollFormSixteenMaster.place}</b></td>
-                                    <td style="border: none;border-right:1px solid black;text-align: left;" colspan="5">
-                                        Full Name: &emsp;&nbsp;&nbsp;<b> ${payrollFormSixteenMaster.ename}</b>
-                                    </td>
-                                </tr>
-                                <tr style="border-bottom:1px solid black">
-                                    <td style="border: none;border-left:1px solid black;text-align: left;" colspan="5">Date:&emsp;<b>${payrollFormSixteenMaster.date}</b></td>
-                                    <td style="border: none;border-right:1px solid black;text-align: left;" colspan="5">
-                                        Designation: &nbsp;&nbsp;<b> ${employeeMaster.designationMaster.designationName}</b>
-                                    </td>
-                                </tr>
-                                <tr style="background-color:whitesmoke">
-                                    <td colspan="10"></td>
-                                </tr>
-                            <input type="hidden" name="totalTemp" id="totalTemp" value="0.00">
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-</html>
+                                                &emsp;I further certify that the information given above is true and correct based
+                                                on the book of accounts, documents and other available records.
+                                                </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="10" style="border: none;border-left:1px solid black;border-right:1px solid black;padding:10px 8px"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border: none;border-left:1px solid black;" colspan="6" rowspan="3"></td>
+                                                    <td style="border: none;border-top:2px solid black;border-right:1px solid black;" colspan="4" rowspan="2">Signature of the person responsible for the <br/>deduction of tax.</td>
+                                                </tr>
+                                                <tr>
+                                                </tr>
+                                                <tr style="border:none;">
+                                                </tr>
+                                                <tr>
+                                                    <td style="border: none;border-left:1px solid black;text-align: left;" colspan="5">Place:&emsp;<b>${payrollFormSixteenMaster.place}</b></td>
+                                                    <td style="border: none;border-right:1px solid black;text-align: left;" colspan="5">
+                                                        Full Name: &emsp;&nbsp;&nbsp;<b> ${payrollFormSixteenMaster.ename}</b>
+                                                    </td>
+                                                </tr>
+                                                <tr style="border-bottom:1px solid black">
+                                                    <td style="border: none;border-left:1px solid black;text-align: left;" colspan="5">Date:&emsp;<b>${payrollFormSixteenMaster.date}</b></td>
+                                                    <td style="border: none;border-right:1px solid black;text-align: left;" colspan="5">
+                                                        Designation: &nbsp;&nbsp;<b> ${employeeMaster.designationMaster.designationName}</b>
+                                                    </td>
+                                                </tr>
+                                                <tr style="background-color:whitesmoke">
+                                                    <td colspan="10"></td>
+                                                </tr>
+                                                <input type="hidden" name="totalTemp" id="totalTemp" value="0.00">
+                                                </tbody>
+                                                </table>
+                                                </div>
+                                                </div>
+                                                </section>
+                                                </div>
+                                                </div>
+                                                <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+                                                </html>

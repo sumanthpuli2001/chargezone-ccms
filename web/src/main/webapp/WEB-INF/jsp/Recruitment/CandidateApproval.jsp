@@ -575,16 +575,26 @@
                                                             </div>
                                                             </br>
                                                             <div class="col-sm-6">
-                                                                <table border="1" class="table table-bordered" style="width:100%">
+                                                                <table border="1" class="table table-bordered">
                                                                     <tr>
                                                                         <td style="vertical-align: middle;"><label>Salary Expected:</label>&nbsp;&nbsp;<span>${candidateApplyJob2.salaryExpected}</span></td>
                                                                     </tr>
-                                                                </table>
-                                                                <table border="1" class="table table-bordered">
+                                                                <!--</table>-->
+                                                                <!--<table border="1" class="table table-bordered">-->
+                                                                    <tr>
+                                                                        <td style="vertical-align: middle"><label>Total Experience In Year:&nbsp;&nbsp;</label><span>${candidateApplyJob.experianceDateJoiningYear}</span></td>
+                                                                    </tr>
+                                                                <!--</table>-->
+                                                                <!--<table border="1" class="table table-bordered">-->
+                                                                    <tr>
+                                                                        <td style="vertical-align: middle"><label>Total Experience In Month:&nbsp;&nbsp;</label><span>${candidateApplyJob.experianceDateJoiningMonth}</span></td>
+                                                                    </tr>
+                                                                <!--</table>-->
+                                                                <!--<table border="1" class="table table-bordered">-->
                                                                     <tr>
                                                                         <td style="vertical-align: middle"><label>Joining Time Required:&nbsp;&nbsp;</label><span>${candidateApplyJob2.noticePeriod}</span></td>
                                                                     </tr>
-                                                                </table>
+                                                                <!--</table>-->
                                                                 <table border="1" class="table table-bordered">
                                                                     <tr>
                                                                         <td style="vertical-align: middle">

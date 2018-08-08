@@ -134,7 +134,7 @@
                                                 <center>  <img src=" StorageYard/Images/logo.png" style="width:15%;height: 15%;" BORDER="0"/> </center> 
 
                                                 <div class="form-group">
-                                                    <center><b><font size="4">SPC Lifesciences  </font></b></center> 
+                                                    <center><b><font size="4">SPC LIFESCIENCES PVT LTD</font></b></center> 
                                                 </div>
                                                 <div class="box-body no-padding">
                                                     <div class="row">
@@ -159,7 +159,7 @@
                                                                 <c:forEach var="list" items="${list}">
 
                                                                 <tr>
-                                                                    <td>${list[5]}</td>
+                                                                    <td>${pc.name}</td>
                                                                     <td>${list[1]}</td>
                                                                     <td>${list[2]}</td>
                                                                     <td>${list[4]}</td>

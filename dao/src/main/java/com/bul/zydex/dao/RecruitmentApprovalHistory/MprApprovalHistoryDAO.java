@@ -15,5 +15,7 @@ import java.util.List;
 public interface MprApprovalHistoryDAO<T> extends GenericsDAO<T> {
 
     public List<?> getByMprId(int mprId);
+    
+    public List<?> gethistory(int mprId);
 
 }

@@ -17,7 +17,7 @@ public interface PolicyReadHistoryService<T> extends GenericsService<T> {
 
     public PolicyReadHistory readByPolicyId(int id);
 
-    public PolicyReadHistory policyReadCheck(int policyId, String readerName);
+    public PolicyReadHistory policyReadCheck(String readerName);
 
     public List<?> readPolicyId(int id);
 

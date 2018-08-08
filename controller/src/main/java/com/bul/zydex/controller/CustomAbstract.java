@@ -41,6 +41,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.poi.ss.usermodel.Header;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
@@ -61,6 +62,7 @@ public abstract class CustomAbstract extends MultiActionController {
     protected CurrencyMasterService<CurrencyMaster> currencyMasterService;
     protected DateFormat dateFormat = new SimpleDateFormat(
             "MM/dd/yyyy HH:mm");
+    protected Header header;
     protected ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
     protected EmailTemplateService<EmailTemplate> emailTemplateService;
     protected SendMail sendMail;

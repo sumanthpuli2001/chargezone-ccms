@@ -83,8 +83,8 @@
                                                                         <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
                                                                         </c:if>
                                                                     <!--<th>user id</th>-->
-                                                                    <th style="width: 50px;">name</th>
-                                                                    <th style="width: 50px;">Employee Name</th>
+                                                                    <th style="width: 50px;">Module Name</th>
+                                                                    <th style="width: 50px;">Approval Name</th>
                                                                     <!--<th style="width: 50px;">level</th>-->
                                                                     <th style="width: 50px;">Action</th>
 

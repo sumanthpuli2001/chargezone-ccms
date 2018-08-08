@@ -870,6 +870,7 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         ModelAndView mv = new ModelAndView();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         String id = request.getParameter("id");
         DepartmentMaster departmentMaster = new DepartmentMaster();
         LocationMaster locationMaster = new LocationMaster();
@@ -983,7 +984,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             List<?> list = mprApprovalHistoryService.getByMprId(mprId);
             request.setAttribute("list", list);
         }
-
+        List<?> list = mprApprovalHistoryService.gethistory(candJobApplicationid);
         //        Vacancy Master-------------
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
@@ -1008,7 +1009,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.getModelMap().put("candidateExperienceDetail", candidateExperienceDetail);
         mv.getModelMap().put("candidateFamilyBackground", candidateFamilyBackground);
         mv.getModelMap().put("candidateOtherReferences", candidateOtherReferences);
-//        request.setAttribute("list", list);
+        request.setAttribute("list", list);
         mv.setViewName("Recruitment/CandidateApproval");
         return mv;
     }

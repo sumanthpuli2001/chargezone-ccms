@@ -81,6 +81,8 @@ public class CertificateTemplateController extends CertificateTemplateAbstract {
         CertificateTemplate certificateTemplate = new CertificateTemplate();
         BindException errors = new BindException(certificateTemplate, "certificateTemplate");
         bind(request, certificateTemplate);
+
+        certificateTemplate.setCertificateBody(certificateTemplate.getCertificateBody().replaceAll("&Acirc;", ""));
         certificateTemplateValidator.validate(certificateTemplate, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -142,6 +144,7 @@ public class CertificateTemplateController extends CertificateTemplateAbstract {
                     "Error : The Entered Information is not valid.");
             mv = editClick(request, response);
         } else {
+            certificateTemplate.setCertificateBody(certificateTemplate.getCertificateBody().replaceAll("&Acirc;", ""));
             certificateTemplateService.update(certificateTemplate);
             request.setAttribute("successMessage",
                     "Information : The Information is Updated Successfully.");

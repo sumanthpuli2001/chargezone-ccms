@@ -24,6 +24,7 @@ import com.bul.zydex.model.HoursBasis;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.MprApprovalHistory;
 import com.bul.zydex.model.PayrollPfCheck;
 import com.bul.zydex.model.PayrollPtCheck;
 import com.bul.zydex.model.PmpFormStatusMaster;
@@ -42,6 +43,7 @@ import com.bul.zydex.service.Payroll.PayrollPfCheckService;
 import com.bul.zydex.service.Payroll.PayrollPtCheckService;
 import com.bul.zydex.service.PmpFormStatusMaster.PmpFormStatusMasterService;
 import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
+import com.bul.zydex.service.RecruitmentApprovalHistory.MprApprovalHistoryService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.appraisalPerformance.CompetencyEvaluationMasterService;
 import com.bul.zydex.service.company.CompanyMasterService;
@@ -101,6 +103,7 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     protected CtcAllowanceService<CtcAllowance> ctcAllowanceService;
     protected EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService;
     protected ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterService;
+    protected MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService;
 
     public CompetencyEvaluationMasterService<CompetencyEvaluationMaster> getCompetencyEvaluationMasterService() {
         return competencyEvaluationMasterService;
@@ -667,6 +670,14 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
 
     public void setApplayJobUserMasterService(ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterService) {
         this.applayJobUserMasterService = applayJobUserMasterService;
+    }
+
+    public MprApprovalHistoryService<MprApprovalHistory> getMprApprovalHistoryService() {
+        return mprApprovalHistoryService;
+    }
+
+    public void setMprApprovalHistoryService(MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService) {
+        this.mprApprovalHistoryService = mprApprovalHistoryService;
     }
     
     

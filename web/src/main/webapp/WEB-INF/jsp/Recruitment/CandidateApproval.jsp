@@ -637,6 +637,11 @@
                                                                 </c:forEach>
                                                             </table>
                                                         </div>
+                                                        <div class="col-sm-12">
+                                                            </br>
+                                                            <label>Sign. Of candidate :</label> </br>
+                                                           
+                                                        </div>
                                                         </div>                
                                                     </div>
                                                                         

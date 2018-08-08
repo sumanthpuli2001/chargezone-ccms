@@ -91,19 +91,30 @@ public class VacancyController extends VacancyAbstract {
             request.setAttribute("list", CandidateJobApplyList);
             mv.getModelMap().put("applayJobUserMaster", ajuMaster);
             mv.setViewName("Vacancy/MemberVacancyList");
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                emailTemplate = emailTemplateService.readById(160);
+                String To = ajuMaster.getUserName();
+                String Subject = emailTemplate.getSubject();
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", ajuMaster.getUserName());
+                sendMail.sendMail("", To, Subject, msg);
+            } catch (Exception e) {
+
+            }
         } else {
-            
+
             int canId = Integer.parseInt(request.getParameter("id"));
-            String forward = "forward:vacancy.htm?act=myProfileClick&id="+canId;
+            String forward = "forward:vacancy.htm?act=myProfileClick&id=" + canId;
             mv.setViewName(forward);
-           
+
 //            CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
 //
 ////            mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
 //            mv.getModelMap().put("candidateApplyJob", candidateClasses.getCandidateApplyJob());
 //            mv.setViewName("Vacancy/MyProfile");
         }
-         return mv;
+        return mv;
 
     }
 

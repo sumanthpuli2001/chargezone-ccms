@@ -757,7 +757,6 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
 //        int numberOfPositionMpp = rm.getNumberOfPosition();
 //        int Mppbudget = rm.getBudget();
 //        String MppExperience = rm.getExperiance();
-
 //        request.setAttribute("jobtypeNAme2", jobtypeNAme2);
 //        request.setAttribute("departmentName2", departmentName2);
 //        request.setAttribute("locationName2", locationName2);
@@ -765,7 +764,6 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
 //        request.setAttribute("numberOfPositionMpp", numberOfPositionMpp);
 //        request.setAttribute("Mppbudget", Mppbudget);
 //        request.setAttribute("MppExperience", MppExperience);
-
         //        MPR Master -------------
         if (vm.getMprMaster() != null) {
             MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
@@ -842,12 +840,15 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
 
         ModelAndView mv = new ModelAndView();
         CandidateF2FRequest candidateF2FRequest = new CandidateF2FRequest();
+        MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         bind(request, candidateF2FRequest);
         String btnType = request.getParameter("btnType");
         String applicationId = request.getParameter("applicationId");
         String message = request.getParameter("message");
         String InterviewerAsHr = request.getParameter("InterviewerAsHr");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         CandidateF2FApproval candidateF2FApproval = candidateF2FApprovalService.readByEmpIdAndReqId(employeeMaster.getId(), candidateF2FRequest.getId());
 
@@ -869,6 +870,16 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             /////////approve
             cja.setStatus(11);
             candidateJobApplicationService.update(cja);
+
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setComment(message);
+            mprApprovalHistory.setStatusMessage(btnType);
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+            mprApprovalHistory.setCreateDate(sdf.format(cDate));
+            mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
+            mprApprovalHistoryService.create(mprApprovalHistory);
+
             request.setAttribute("successMessage",
                     "Information : The Request is Approved successfully.");
 
@@ -887,6 +898,14 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             candidateJobApplicationService.update(cja);
             request.setAttribute("successMessage",
                     "Information : The Request is Hold successfully.");
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setComment(message);
+            mprApprovalHistory.setStatusMessage(btnType);
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+            mprApprovalHistory.setCreateDate(sdf.format(cDate));
+            mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
+            mprApprovalHistoryService.create(mprApprovalHistory);
         }
         if (btnType.equals("REJECT")) {
 
@@ -902,6 +921,15 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             candidateJobApplicationService.update(cja);
             request.setAttribute("successMessage",
                     "Information : The Request is Rejected successfully.");
+            
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setComment(message);
+            mprApprovalHistory.setStatusMessage(btnType);
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+            mprApprovalHistory.setCreateDate(sdf.format(cDate));
+            mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
+            mprApprovalHistoryService.create(mprApprovalHistory);
 
         }
         List<?> f2flist = new ArrayList<>();

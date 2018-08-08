@@ -64,23 +64,23 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         request.setAttribute("successMessage",
                 "Information : The Candidate Face To Face Invitation successfully.");
 
-        try {
-            EmailTemplate emailTemplate = new EmailTemplate();
-            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
-            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
-            // id ( Not created id 138) is for Face To Face Invitation User....
-            emailTemplate = emailTemplateService.readById(155);
-            String To = cja.getCandidateApplyJob().getEmailId();
-            String from = "";
-            String Subject = emailTemplate.getSubject();
-            String msg = emailTemplate.getBodytext();
-            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
-            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
-            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-            sendMail.sendMail(from, To, Subject, msg);
-        } catch (Exception e) {
-        }
+//        try {
+//            EmailTemplate emailTemplate = new EmailTemplate();
+//            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+//            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+//            // id ( Not created id 138) is for Face To Face Invitation User....
+//            emailTemplate = emailTemplateService.readById(155);
+//            String To = cja.getCandidateApplyJob().getEmailId();
+//            String from = "";
+//            String Subject = emailTemplate.getSubject();
+//            String msg = emailTemplate.getBodytext();
+//            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+//            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+//            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+//            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//            sendMail.sendMail(from, To, Subject, msg);
+//        } catch (Exception e) {
+//        }
 
         return mv;
     }
@@ -156,6 +156,26 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateRequestList");
+        try {
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+            // id ( Not created id 138) is for Face To Face Invitation User....
+            emailTemplate = emailTemplateService.readById(155);
+            String To = candidateJobApplication.getCandidateApplyJob().getEmailId();
+            String from = "";
+            String Subject = emailTemplate.getSubject();
+            String msg = emailTemplate.getBodytext();
+            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+            msg = msg.replaceAll("\\{from_location\\}", candidateF2FRequest.getLocation());
+            msg = msg.replaceAll("\\{from_dateOfInterview\\}", candidateF2FRequest.getDateOfInterview());
+            msg = msg.replaceAll("\\{from_position\\}", vm.getName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+        }
 //        mv = createCandidateF2FInvitation(request, response);
         return mv;
     }

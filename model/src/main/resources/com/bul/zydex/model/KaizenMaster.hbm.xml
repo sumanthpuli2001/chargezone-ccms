@@ -96,5 +96,8 @@
         <property name="totalLevel" type="java.lang.Integer">
             <column name="total_level" />
         </property>
+        <property name="comment" type="string">
+            <column name="comment" length="100" />
+        </property>
     </class>
 </hibernate-mapping>

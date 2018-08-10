@@ -90,133 +90,275 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         bind(request, kaizenMaster);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDate localDate = LocalDate.now();
-        String srNo = request.getParameter("srNo");
-        String teamLeader = request.getParameter("teamLeader");
-        String teamName = request.getParameter("teamName");
-        String ideaGenerator = request.getParameter("ideaGenerator");
-        String department = request.getParameter("department");
-        String teamMember = request.getParameter("teamMember");
-        String problemDescription = request.getParameter("problemDescription");
+        String btnType = request.getParameter("btnType");
+        String comment = request.getParameter("comment");
+
+        if (btnType.equals("SUBMIT")) {
+
+            String srNo = request.getParameter("srNo");
+            String teamLeader = request.getParameter("teamLeader");
+            String teamName = request.getParameter("teamName");
+            String ideaGenerator = request.getParameter("ideaGenerator");
+            String department = request.getParameter("department");
+            String teamMember = request.getParameter("teamMember");
+            String problemDescription = request.getParameter("problemDescription");
 //        String beforePhoto = request.getParameter("beforePhoto");
-        //Storeing Images
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        Date cDate = new Date();
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-        MultipartFile multipartFile = multipartRequest.getFile("beforePhoto");
-        MultipartFile multipartFile1 = multipartRequest.getFile("afterPhoto");
-        String fileLocationURL = getServletContext().getRealPath("/")
-                + File.separator + "StorageYard"
-                + File.separator + "Kaizen" + File.separator + "beforePhoto" + File.separator;
-        File Folder1 = new File(fileLocationURL);
-        if (!Folder1.exists()) {
-            Folder1.mkdirs();
-        }
-        String fileLocationURL1 = getServletContext().getRealPath("/")
-                + File.separator + "StorageYard"
-                + File.separator + "Kaizen" + File.separator + "afterPhoto" + File.separator;
-
-        File Folder2 = new File(fileLocationURL1);
-        if (!Folder2.exists()) {
-            Folder2.mkdirs();
-        }
-        if (multipartFile != null && multipartFile.getSize() > 0) {
-            try {
-                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
-                multipartFile.transferTo(file2);
-                kaizenMaster.setBeforePhoto(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
-            } catch (Exception e) {
-
+            //Storeing Images
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date cDate = new Date();
+            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+            MultipartFile multipartFile = multipartRequest.getFile("beforePhoto");
+            MultipartFile multipartFile1 = multipartRequest.getFile("afterPhoto");
+            String fileLocationURL = getServletContext().getRealPath("/")
+                    + File.separator + "StorageYard"
+                    + File.separator + "Kaizen" + File.separator + "beforePhoto" + File.separator;
+            File Folder1 = new File(fileLocationURL);
+            if (!Folder1.exists()) {
+                Folder1.mkdirs();
             }
-        }
-        if (multipartFile1 != null && multipartFile1.getSize() > 0) {
-            try {
-                File file2 = new File(fileLocationURL1 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
-                multipartFile1.transferTo(file2);
-                kaizenMaster.setAfterPhoto(multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
-            } catch (Exception e) {
+            String fileLocationURL1 = getServletContext().getRealPath("/")
+                    + File.separator + "StorageYard"
+                    + File.separator + "Kaizen" + File.separator + "afterPhoto" + File.separator;
 
+            File Folder2 = new File(fileLocationURL1);
+            if (!Folder2.exists()) {
+                Folder2.mkdirs();
             }
-        }
+            if (multipartFile != null && multipartFile.getSize() > 0) {
+                try {
+                    File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    multipartFile.transferTo(file2);
+                    kaizenMaster.setBeforePhoto(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                } catch (Exception e) {
 
-        String startDate = request.getParameter("startDate");
-        String compiletionDate = request.getParameter("compiletionDate");
-        String budgetRequirement = request.getParameter("budgetRequirement");
+                }
+            }
+            if (multipartFile1 != null && multipartFile1.getSize() > 0) {
+                try {
+                    File file2 = new File(fileLocationURL1 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                    multipartFile1.transferTo(file2);
+                    kaizenMaster.setAfterPhoto(multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                } catch (Exception e) {
 
-        String tangibleBenefit = request.getParameter("tangibleBenefit");
-        String intangibleBenefit = request.getParameter("intangibleBenefit");
-        String horizontalDeployment = request.getParameter("horizontalDeployment");
-        String productivity = request.getParameter("productivity");
-        String quality = request.getParameter("quality");
-        String delivery = request.getParameter("delivery");
-        String safety = request.getParameter("safety");
-        String cost = request.getParameter("cost");
-        String morale = request.getParameter("morale");
+                }
+            }
 
-        kaizenMaster.setSrNo(srNo);
-        kaizenMaster.setTeamLeader(teamLeader);
-        kaizenMaster.setTeamName(teamName);
-        kaizenMaster.setIdeaGenerator(ideaGenerator);
-        kaizenMaster.setDepartment(department);
-        kaizenMaster.setTeamMember(teamMember);
-        kaizenMaster.setProblemDescription(problemDescription);
-        kaizenMaster.setStartDate(startDate);
-        kaizenMaster.setCompiletionDate(compiletionDate);
-        kaizenMaster.setBudgetRequirement(budgetRequirement);
-        kaizenMaster.setTangibleBenefit(tangibleBenefit);
-        kaizenMaster.setIntangibleBenefit(intangibleBenefit);
-        kaizenMaster.setHorizontalDeployment(horizontalDeployment);
-        if (productivity == null) {
-            kaizenMaster.setProductivity(0);
-        } else {
-            kaizenMaster.setProductivity(1);
-        }
-        if (quality == null) {
-            kaizenMaster.setQuality(0);
-        } else {
-            kaizenMaster.setQuality(1);
-        }
-        if (delivery == null) {
-            kaizenMaster.setDelivery(0);
-        } else {
-            kaizenMaster.setDelivery(1);
-        }
-        if (safety == null) {
-            kaizenMaster.setSafety(0);
-        } else {
-            kaizenMaster.setSafety(1);
-        }
-        if (cost == null) {
-            kaizenMaster.setCost(0);
-        } else {
-            kaizenMaster.setCost(1);
-        }
-        if (morale == null) {
-            kaizenMaster.setMorale(0);
-        } else {
-            kaizenMaster.setMorale(1);
-        }
-        kaizenMaster.setCreatedBy(employeeMaster.getId());
-        kaizenMaster.setCreatedDate(sdf.format(cDate));
-        kaizenMaster.setStatus(0);
-        if ("" != employeeMaster.getReportingManagerLevel1()) {
-            kaizenMaster.setReportingId(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
-        }
-        kaizenMaster.setTotalLevel(0);
-        kaizenMaster.setCurrentLevel(0);
-        kaizenMasterService.create(kaizenMaster);
+            String startDate = request.getParameter("startDate");
+            String compiletionDate = request.getParameter("compiletionDate");
+            String budgetRequirement = request.getParameter("budgetRequirement");
 
-        KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
-        kaizenApprovalHistory.setComment("Kaizen Create");
-        kaizenApprovalHistory.setStatus(0);
-        kaizenApprovalHistory.setStatusMessage("Kaizen Create");
-        kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
-        kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
-        kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
-        kaizenApprovalHistoryService.create(kaizenApprovalHistory);
+            String tangibleBenefit = request.getParameter("tangibleBenefit");
+            String intangibleBenefit = request.getParameter("intangibleBenefit");
+            String horizontalDeployment = request.getParameter("horizontalDeployment");
+            String productivity = request.getParameter("productivity");
+            String quality = request.getParameter("quality");
+            String delivery = request.getParameter("delivery");
+            String safety = request.getParameter("safety");
+            String cost = request.getParameter("cost");
+            String morale = request.getParameter("morale");
 
-        request.setAttribute("successMessage",
-                "Information : The Information is saved Successfully.");
+            kaizenMaster.setSrNo(srNo);
+            kaizenMaster.setTeamLeader(teamLeader);
+            kaizenMaster.setTeamName(teamName);
+            kaizenMaster.setIdeaGenerator(ideaGenerator);
+            kaizenMaster.setDepartment(department);
+            kaizenMaster.setTeamMember(teamMember);
+            kaizenMaster.setProblemDescription(problemDescription);
+            kaizenMaster.setStartDate(startDate);
+            kaizenMaster.setCompiletionDate(compiletionDate);
+            kaizenMaster.setBudgetRequirement(budgetRequirement);
+            kaizenMaster.setTangibleBenefit(tangibleBenefit);
+            kaizenMaster.setIntangibleBenefit(intangibleBenefit);
+            kaizenMaster.setHorizontalDeployment(horizontalDeployment);
+            if (productivity == null) {
+                kaizenMaster.setProductivity(0);
+            } else {
+                kaizenMaster.setProductivity(1);
+            }
+            if (quality == null) {
+                kaizenMaster.setQuality(0);
+            } else {
+                kaizenMaster.setQuality(1);
+            }
+            if (delivery == null) {
+                kaizenMaster.setDelivery(0);
+            } else {
+                kaizenMaster.setDelivery(1);
+            }
+            if (safety == null) {
+                kaizenMaster.setSafety(0);
+            } else {
+                kaizenMaster.setSafety(1);
+            }
+            if (cost == null) {
+                kaizenMaster.setCost(0);
+            } else {
+                kaizenMaster.setCost(1);
+            }
+            if (morale == null) {
+                kaizenMaster.setMorale(0);
+            } else {
+                kaizenMaster.setMorale(1);
+            }
+            kaizenMaster.setCreatedBy(employeeMaster.getId());
+            kaizenMaster.setCreatedDate(sdf.format(cDate));
+            kaizenMaster.setStatus(0);
+            if ("" != employeeMaster.getReportingManagerLevel1()) {
+                kaizenMaster.setReportingId(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+            }
+            kaizenMaster.setTotalLevel(0);
+            kaizenMaster.setCurrentLevel(0);
+            kaizenMaster.setComment(comment);
+            kaizenMasterService.create(kaizenMaster);
 
+            KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+            kaizenApprovalHistory.setComment(comment);
+            kaizenApprovalHistory.setStatus(0);
+            kaizenApprovalHistory.setStatusMessage("Kaizen Create");
+            kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+            kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+            kaizenApprovalHistoryService.create(kaizenApprovalHistory);
+
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully And Publish This Kizen.");
+
+            mv.setViewName("forward:homeController.htm?act=openHomePage");
+            return mv;
+
+//          ---------------------  OnHold Code By Vikas -----------------
+        }
+        if (btnType.equals("OnHold")) {
+
+            String srNo = request.getParameter("srNo");
+            String teamLeader = request.getParameter("teamLeader");
+            String teamName = request.getParameter("teamName");
+            String ideaGenerator = request.getParameter("ideaGenerator");
+            String department = request.getParameter("department");
+            String teamMember = request.getParameter("teamMember");
+            String problemDescription = request.getParameter("problemDescription");
+//        String beforePhoto = request.getParameter("beforePhoto");
+            //Storeing Images
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            Date cDate = new Date();
+            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+            MultipartFile multipartFile = multipartRequest.getFile("beforePhoto");
+            MultipartFile multipartFile1 = multipartRequest.getFile("afterPhoto");
+            String fileLocationURL = getServletContext().getRealPath("/")
+                    + File.separator + "StorageYard"
+                    + File.separator + "Kaizen" + File.separator + "beforePhoto" + File.separator;
+            File Folder1 = new File(fileLocationURL);
+            if (!Folder1.exists()) {
+                Folder1.mkdirs();
+            }
+            String fileLocationURL1 = getServletContext().getRealPath("/")
+                    + File.separator + "StorageYard"
+                    + File.separator + "Kaizen" + File.separator + "afterPhoto" + File.separator;
+
+            File Folder2 = new File(fileLocationURL1);
+            if (!Folder2.exists()) {
+                Folder2.mkdirs();
+            }
+            if (multipartFile != null && multipartFile.getSize() > 0) {
+                try {
+                    File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                    multipartFile.transferTo(file2);
+                    kaizenMaster.setBeforePhoto(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                } catch (Exception e) {
+
+                }
+            }
+            if (multipartFile1 != null && multipartFile1.getSize() > 0) {
+                try {
+                    File file2 = new File(fileLocationURL1 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                    multipartFile1.transferTo(file2);
+                    kaizenMaster.setAfterPhoto(multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                } catch (Exception e) {
+
+                }
+            }
+
+            String startDate = request.getParameter("startDate");
+            String compiletionDate = request.getParameter("compiletionDate");
+            String budgetRequirement = request.getParameter("budgetRequirement");
+
+            String tangibleBenefit = request.getParameter("tangibleBenefit");
+            String intangibleBenefit = request.getParameter("intangibleBenefit");
+            String horizontalDeployment = request.getParameter("horizontalDeployment");
+            String productivity = request.getParameter("productivity");
+            String quality = request.getParameter("quality");
+            String delivery = request.getParameter("delivery");
+            String safety = request.getParameter("safety");
+            String cost = request.getParameter("cost");
+            String morale = request.getParameter("morale");
+
+            kaizenMaster.setSrNo(srNo);
+            kaizenMaster.setTeamLeader(teamLeader);
+            kaizenMaster.setTeamName(teamName);
+            kaizenMaster.setIdeaGenerator(ideaGenerator);
+            kaizenMaster.setDepartment(department);
+            kaizenMaster.setTeamMember(teamMember);
+            kaizenMaster.setProblemDescription(problemDescription);
+            kaizenMaster.setStartDate(startDate);
+            kaizenMaster.setCompiletionDate(compiletionDate);
+            kaizenMaster.setBudgetRequirement(budgetRequirement);
+            kaizenMaster.setTangibleBenefit(tangibleBenefit);
+            kaizenMaster.setIntangibleBenefit(intangibleBenefit);
+            kaizenMaster.setHorizontalDeployment(horizontalDeployment);
+            if (productivity == null) {
+                kaizenMaster.setProductivity(0);
+            } else {
+                kaizenMaster.setProductivity(1);
+            }
+            if (quality == null) {
+                kaizenMaster.setQuality(0);
+            } else {
+                kaizenMaster.setQuality(1);
+            }
+            if (delivery == null) {
+                kaizenMaster.setDelivery(0);
+            } else {
+                kaizenMaster.setDelivery(1);
+            }
+            if (safety == null) {
+                kaizenMaster.setSafety(0);
+            } else {
+                kaizenMaster.setSafety(1);
+            }
+            if (cost == null) {
+                kaizenMaster.setCost(0);
+            } else {
+                kaizenMaster.setCost(1);
+            }
+            if (morale == null) {
+                kaizenMaster.setMorale(0);
+            } else {
+                kaizenMaster.setMorale(1);
+            }
+            kaizenMaster.setCreatedBy(employeeMaster.getId());
+            kaizenMaster.setCreatedDate(sdf.format(cDate));
+            kaizenMaster.setStatus(11);
+            if ("" != employeeMaster.getReportingManagerLevel1()) {
+                kaizenMaster.setReportingId(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+            }
+            kaizenMaster.setTotalLevel(0);
+            kaizenMaster.setCurrentLevel(0);
+            kaizenMaster.setComment(comment);
+            kaizenMasterService.create(kaizenMaster);
+
+            KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+            kaizenApprovalHistory.setComment(comment);
+            kaizenApprovalHistory.setStatus(11);
+            kaizenApprovalHistory.setStatusMessage("Kaizen Create");
+            kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+            kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+            kaizenApprovalHistoryService.create(kaizenApprovalHistory);
+
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+
+        }
         mv.setViewName("forward:homeController.htm?act=openHomePage");
         return mv;
     }
@@ -378,9 +520,11 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         String id = request.getParameter("id");
         KaizenMaster kaizenMaster = new KaizenMaster();
         kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
+        List<?> KaizenHistory = kaizenApprovalHistoryService.readByKaizenId(Integer.parseInt(id));
         List<?> approvalUser = approvalUserService.readByapprovalId(3);
         mv.getModelMap().put("listAu", approvalUser);
         mv.getModelMap().put("list", kaizenMaster);
+        mv.getModelMap().put("listKh", KaizenHistory);
         mv.setViewName("Kaizen/ReportingKaizenViewAndSubmit");
         return mv;
     }
@@ -807,5 +951,154 @@ public class KaizenMasterController extends KaizenMasterAbstract {
 
         return mv;
 
+    }
+
+    public ModelAndView onholdOpen(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String id = request.getParameter("id");
+        KaizenMaster kaizenMaster = new KaizenMaster();
+        kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
+        mv.getModelMap().put("list", kaizenMaster);
+        mv.setViewName("Kaizen/EditOnholdKaizen");
+        return mv;
+    }
+
+    public ModelAndView OnHoldKaizenSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        String id = request.getParameter("id");
+        String comment = request.getParameter("comment");
+        KaizenMaster kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
+        BindException errors = new BindException(kaizenMaster, "kaizenMaster");
+        bind(request, kaizenMaster);
+
+        String srNo = request.getParameter("srNo");
+        String teamLeader = request.getParameter("teamLeader");
+        String teamName = request.getParameter("teamName");
+        String ideaGenerator = request.getParameter("ideaGenerator");
+        String department = request.getParameter("department");
+        String teamMember = request.getParameter("teamMember");
+        String problemDescription = request.getParameter("problemDescription");
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Date cDate = new Date();
+
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("beforePhoto");
+        MultipartFile multipartFile1 = multipartRequest.getFile("afterPhoto");
+        String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "Kaizen" + File.separator + "beforePhoto" + File.separator;
+        File Folder1 = new File(fileLocationURL);
+        if (!Folder1.exists()) {
+            Folder1.mkdirs();
+        }
+        String fileLocationURL1 = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "Kaizen" + File.separator + "afterPhoto" + File.separator;
+
+        File Folder2 = new File(fileLocationURL1);
+        if (!Folder2.exists()) {
+            Folder2.mkdirs();
+        }
+        if (multipartFile != null && multipartFile.getSize() > 0) {
+            try {
+                File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+                multipartFile.transferTo(file2);
+                kaizenMaster.setBeforePhoto(multipartFile.getOriginalFilename().replaceAll(" ", "_"));
+            } catch (Exception e) {
+
+            }
+        }
+        if (multipartFile1 != null && multipartFile1.getSize() > 0) {
+            try {
+                File file2 = new File(fileLocationURL1 + multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+                multipartFile1.transferTo(file2);
+                kaizenMaster.setAfterPhoto(multipartFile1.getOriginalFilename().replaceAll(" ", "_"));
+            } catch (Exception e) {
+
+            }
+        }
+
+        String startDate = request.getParameter("startDate");
+        String compiletionDate = request.getParameter("compiletionDate");
+        String budgetRequirement = request.getParameter("budgetRequirement");
+
+        String tangibleBenefit = request.getParameter("tangibleBenefit");
+        String intangibleBenefit = request.getParameter("intangibleBenefit");
+        String horizontalDeployment = request.getParameter("horizontalDeployment");
+        String productivity = request.getParameter("productivity");
+        String quality = request.getParameter("quality");
+        String delivery = request.getParameter("delivery");
+        String safety = request.getParameter("safety");
+        String cost = request.getParameter("cost");
+        String morale = request.getParameter("morale");
+
+        kaizenMaster.setSrNo(srNo);
+        kaizenMaster.setTeamLeader(teamLeader);
+        kaizenMaster.setTeamName(teamName);
+        kaizenMaster.setIdeaGenerator(ideaGenerator);
+        kaizenMaster.setDepartment(department);
+        kaizenMaster.setTeamMember(teamMember);
+        kaizenMaster.setProblemDescription(problemDescription);
+        kaizenMaster.setStartDate(startDate);
+        kaizenMaster.setCompiletionDate(compiletionDate);
+        kaizenMaster.setBudgetRequirement(budgetRequirement);
+        kaizenMaster.setTangibleBenefit(tangibleBenefit);
+        kaizenMaster.setIntangibleBenefit(intangibleBenefit);
+        kaizenMaster.setHorizontalDeployment(horizontalDeployment);
+        if (productivity == null) {
+            kaizenMaster.setProductivity(0);
+        } else {
+            kaizenMaster.setProductivity(1);
+        }
+        if (quality == null) {
+            kaizenMaster.setQuality(0);
+        } else {
+            kaizenMaster.setQuality(1);
+        }
+        if (delivery == null) {
+            kaizenMaster.setDelivery(0);
+        } else {
+            kaizenMaster.setDelivery(1);
+        }
+        if (safety == null) {
+            kaizenMaster.setSafety(0);
+        } else {
+            kaizenMaster.setSafety(1);
+        }
+        if (cost == null) {
+            kaizenMaster.setCost(0);
+        } else {
+            kaizenMaster.setCost(1);
+        }
+        if (morale == null) {
+            kaizenMaster.setMorale(0);
+        } else {
+            kaizenMaster.setMorale(1);
+        }
+        kaizenMaster.setStatus(0);
+        if ("" != employeeMaster.getReportingManagerLevel1()) {
+            kaizenMaster.setReportingId(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+        }
+        kaizenMaster.setTotalLevel(0);
+        kaizenMaster.setCurrentLevel(0);
+        kaizenMaster.setComment(comment);
+        kaizenMasterService.update(kaizenMaster);
+
+        KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+        kaizenApprovalHistory.setComment(comment);
+        kaizenApprovalHistory.setStatus(0);
+        kaizenApprovalHistory.setStatusMessage("Kaizen Onhold After Published");
+        kaizenApprovalHistory.setKaizenMaster(kaizenMaster);
+        kaizenApprovalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+        kaizenApprovalHistory.setCreatedDate(sdf.format(cDate));
+        kaizenApprovalHistoryService.create(kaizenApprovalHistory);
+
+        request.setAttribute("successMessage",
+                "Information : The Information is Updated Successfully.");
+        mv = kaizenMasterList(request, response);
+
+        return mv;
     }
 }

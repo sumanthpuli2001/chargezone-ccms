@@ -39,6 +39,7 @@ public class KaizenMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Kaizen
                 + " FROM KaizenMaster a , EmployeeMaster e"
                 + " WHERE a.reportingId = " + id
                 + " And e.id = a.createdBy"
+                + " And a.status != 11"
                 + " order by a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);

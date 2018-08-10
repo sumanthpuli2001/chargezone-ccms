@@ -69,6 +69,7 @@
                                                                     <c:if test="${list1[2] == 4}"><td><span class="badge label-success">Approved</span></td></c:if>
                                                                     <c:if test="${list1[2] == 5}"><td><span class="label label-success">Final Approved</span></td></c:if>
                                                                     <c:if test="${list1[2] == 10}"><td><span class="label label-default">OnHold</span></td></c:if>
+                                                                    <c:if test="${list1[2] == 11}"><td><span class="label label-default">OnHold By Creator</span></td></c:if>
                                                                         <td>
                                                                             <div class="btn-group">
                                                                                 <button type="button" onclick="viewClick(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
@@ -78,6 +79,14 @@
                                                                         <c:if test="${list1[2] eq 0 || list1[2] eq 2 || list1[2] eq 10}">
                                                                             <div class="btn-group">
                                                                                 <button type="button" onclick="editClick(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                    &nbsp;&nbsp;Edit
+                                                                                </button>
+                                                                            </div>
+                                                                        </c:if>
+                                                                                <!-----------------User Only OnHold-------------->
+                                                                        <c:if test="${list1[2] eq 11}">
+                                                                            <div class="btn-group">
+                                                                                <button type="button" onclick="onhold(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                     &nbsp;&nbsp;Edit
                                                                                 </button>
                                                                             </div>
@@ -108,6 +117,9 @@
         }
         function editClick(id) {
             window.location = 'kaizen.htm?act=editKaizen&id=' + id;
+        }
+        function onhold(id) {
+            window.location = 'kaizen.htm?act=onholdOpen&id=' + id;
         }
 
     </script>

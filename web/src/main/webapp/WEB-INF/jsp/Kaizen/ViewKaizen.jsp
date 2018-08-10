@@ -211,6 +211,18 @@
                                         </tr>
 
                                     </table>
+                                    <br>
+                                    <br>
+                                    <div class="form-group">
+                                        <div class="col-sm-2">
+                                            <label>Comment:<span style="color: red;font-size: 12px;"></span></label>
+
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <textarea path="comment" name="comment" class="form-control" placeholder="Creator Comment" readonly="true">${list.comment}</textarea>
+                                        </div>
+                                    </div>
+
                                     <!--                                    <div class="form-group">
                                                                             <br>
                                                                             <div class="col-sm-6 col-sm-offset-5">
@@ -239,98 +251,98 @@
         </form:form>
 
         <section class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="nav-tabs-custom">
-                    <div class="tab-content">
-                        <label><h3>Kaizen Approval Level</h3></label>
-                        <div class="table table-bordered">
-                            <table border="1" style="width: 100%;">
-                                <c:choose>
-                                    <c:when test="${empty listAu}">
-                                        <tr>
-                                            <td align="center">
-                                                <c:out value="There is no record found."></c:out>
-                                                </td>
-                                            </tr>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <thead>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <label><h3>Kaizen Approval Level</h3></label>
+                            <div class="table table-bordered">
+                                <table border="1" style="width: 100%;">
+                                    <c:choose>
+                                        <c:when test="${empty listAu}">
                                             <tr>
-                                                <th style="width: 50px;">Approval Name</th>
-                                                <th style="width: 50px;">Level</th>
-                                                <!--<th style="width: 50px;">Status</th>-->    
+                                                <td align="center">
+                                                    <c:out value="There is no record found."></c:out>
+                                                    </td>
+                                                </tr>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 50px;">Approval Name</th>
+                                                    <th style="width: 50px;">Level</th>
+                                                    <!--<th style="width: 50px;">Status</th>-->    
+                                                </tr>
+                                            </thead>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <tbody>
+                                        <c:forEach var="list" items="${listAu}">
+                                            <tr>
+                                                <td>${list[1]}</td>
+                                                <td>${list[2]}</td>
+                                                <%--<c:forEach var="list" items="${listKh}">--%>
+                                                <%--<c:if test="${list[2] eq 0}"><td><span class="badge">Pending</span></td></c:if>--%>
+                                                <%--<c:if test="${list[2] eq 1}"><td><span class="badge">Approved</span></td></c:if>--%>
+                                                <%--<c:if test="${list[2] eq 2}"><td><span class="badge">Recycled</span></td></c:if>--%>
+                                                <%--<c:if test="${list[2] eq 3}"><td><span class="badge">Rejected</span></td></c:if>--%>
+                                                <%--<c:if test="${list[2] eq 5}"><td><span class="badge">Final Approved</span></td></c:if>--%>
+                                                <%--</c:forEach>--%>
                                             </tr>
-                                        </thead>
-                                    </c:otherwise>
-                                </c:choose>
-                                <tbody>
-                                    <c:forEach var="list" items="${listAu}">
-                                        <tr>
-                                            <td>${list[1]}</td>
-                                            <td>${list[2]}</td>
-                                            <%--<c:forEach var="list" items="${listKh}">--%>
-                                            <%--<c:if test="${list[2] eq 0}"><td><span class="badge">Pending</span></td></c:if>--%>
-                                            <%--<c:if test="${list[2] eq 1}"><td><span class="badge">Approved</span></td></c:if>--%>
-                                            <%--<c:if test="${list[2] eq 2}"><td><span class="badge">Recycled</span></td></c:if>--%>
-                                            <%--<c:if test="${list[2] eq 3}"><td><span class="badge">Rejected</span></td></c:if>--%>
-                                            <%--<c:if test="${list[2] eq 5}"><td><span class="badge">Final Approved</span></td></c:if>--%>
-                                            <%--</c:forEach>--%>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="content">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="nav-tabs-custom">
-                    <div class="tab-content">
-                        <label><h3>History</h3></label>
-                        <div class="table table-bordered">
-                            <table border="1" style="width: 100%;">
-                                <c:choose>
-                                    <c:when test="${empty listKh}">
-                                        <tr>
-                                            <td align="center">
-                                                <c:out value="There is no record found."></c:out>
-                                                </td>
-                                            </tr>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <thead>
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <label><h3>History</h3></label>
+                            <div class="table table-bordered">
+                                <table border="1" style="width: 100%;">
+                                    <c:choose>
+                                        <c:when test="${empty listKh}">
                                             <tr>
-                                                <th style="width: 50px;">Name</th>
-                                                <th style="width: 50px;">Date & Time</th>
-                                                <th style="width: 50px;">Comment's</th>
-                                                <th style="width: 50px;">Status</th>
+                                                <td align="center">
+                                                    <c:out value="There is no record found."></c:out>
+                                                    </td>
+                                                </tr>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 50px;">Name</th>
+                                                    <th style="width: 50px;">Date & Time</th>
+                                                    <th style="width: 50px;">Comment's</th>
+                                                    <th style="width: 50px;">Status</th>
+                                                </tr>
+                                            </thead>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <tbody>
+                                        <c:forEach var="list" items="${listKh}">
+                                            <tr>
+                                                <td>${list[5]}</td>
+                                                <td>${list[4]}</td>
+                                                <td>${list[1]}</td>
+                                                <td>${list[3]}</td>
                                             </tr>
-                                        </thead>
-                                    </c:otherwise>
-                                </c:choose>
-                                <tbody>
-                                    <c:forEach var="list" items="${listKh}">
-                                        <tr>
-                                            <td>${list[5]}</td>
-                                            <td>${list[4]}</td>
-                                            <td>${list[1]}</td>
-                                            <td>${list[3]}</td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
         <!--<div class="tab-pane" id="tab_3"></div> /.tab-pane -->
     </div>

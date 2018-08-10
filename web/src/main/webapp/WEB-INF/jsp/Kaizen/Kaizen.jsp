@@ -167,9 +167,9 @@
                                                 <input type="file"   class="form-control" id="afterPhoto" name="afterPhoto" accept="image/jpg,image/jpeg,image/png" onchange="checkFileSize();">
                                                 <span style="font-size: 14px; color: red;" id="photographError"></span>
                                             </th>
-<!--                                            <th colspan="2" rowspan="1">Tangible Benefit </th>
-                                            <th colspan="2" rowspan="1"><input name="tangibleBenefit" id="tangibleBenefit" type="text" onchange="kaizenOnchangeFunction('tangibleBenefitError');">-->
-                                                <br>  <span style="font-size: 14px; color: #dd4b39;" id="tangibleBenefitError"></span></th>
+                                            <!--                                            <th colspan="2" rowspan="1">Tangible Benefit </th>
+                                                                                        <th colspan="2" rowspan="1"><input name="tangibleBenefit" id="tangibleBenefit" type="text" onchange="kaizenOnchangeFunction('tangibleBenefitError');">-->
+                                        <br>  <span style="font-size: 14px; color: #dd4b39;" id="tangibleBenefitError"></span></th>
                                         </tr>
                                         <tr>
                                             <th colspan="2" rowspan="1">Intangible Benefit </th>
@@ -219,10 +219,25 @@
                                 </tr>
 
                                 </table>
+                                <br>
+                                <br>
+                                <div class="form-group">
+                                    <div class="col-sm-2">
+                                        <label>Comment:<span style="color: red;font-size: 12px;"></span></label>
+
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <textarea path="comment" name="comment" class="form-control" placeholder="Creator Comment"></textarea>
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <br>
-                                    <div class="col-sm-6 col-sm-offset-5">
+                                    <div class="col-sm-6" style="text-align: right">
                                         <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                    </div>
+                                    <div class="col-sm-3" style="text-align: left">
+                                        <button type="submit" class="btn btn-facebook" id="btnType2"  class="btn btn-primary" name="btnType"  value="OnHold"  style="width: 100px"> &nbsp;&nbsp;On Hold</button>
                                     </div>
                                 </div>
                             </div>

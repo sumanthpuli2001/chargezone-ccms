@@ -61,4 +61,9 @@ public class ApprovalUserServiceImpl<T> extends GenericsServiceImpl<T> implement
         return approvalUserDAO.readApprovalUser(approvalMasterId);
     }
 
+    @Override
+    public List<?> readByapprovalId(int id) {
+        return approvalUserDAO.readByapprovalId(id);
+    }
+
     }

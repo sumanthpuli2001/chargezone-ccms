@@ -198,8 +198,8 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         kaizenMaster.setCreatedBy(employeeMaster.getId());
         kaizenMaster.setCreatedDate(sdf.format(cDate));
         kaizenMaster.setStatus(0);
-        if("" != employeeMaster.getReportingManagerLevel1()){
-        kaizenMaster.setReportingId(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+        if ("" != employeeMaster.getReportingManagerLevel1()) {
+            kaizenMaster.setReportingId(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
         }
         kaizenMaster.setTotalLevel(0);
         kaizenMaster.setCurrentLevel(0);
@@ -365,6 +365,8 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
         List<?> KaizenHistory = kaizenApprovalHistoryService.readByKaizenId(Integer.parseInt(id));
         kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
+        List<?> approvalUser = approvalUserService.readByapprovalId(3);
+        mv.getModelMap().put("listAu", approvalUser);
         mv.getModelMap().put("list", kaizenMaster);
         mv.getModelMap().put("listKh", KaizenHistory);
         mv.setViewName("Kaizen/ViewKaizen");
@@ -376,6 +378,8 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         String id = request.getParameter("id");
         KaizenMaster kaizenMaster = new KaizenMaster();
         kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
+        List<?> approvalUser = approvalUserService.readByapprovalId(3);
+        mv.getModelMap().put("listAu", approvalUser);
         mv.getModelMap().put("list", kaizenMaster);
         mv.setViewName("Kaizen/ReportingKaizenViewAndSubmit");
         return mv;
@@ -396,10 +400,12 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         String id = request.getParameter("id");
         KaizenMaster kaizenMaster = new KaizenMaster();
         KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+        List<?> approvalUser = approvalUserService.readByapprovalId(3);
         List<?> KaizenHistory = kaizenApprovalHistoryService.readByKaizenId(Integer.parseInt(id));
         kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
         mv.getModelMap().put("list", kaizenMaster);
         mv.getModelMap().put("listKh", KaizenHistory);
+        mv.getModelMap().put("listAu", approvalUser);
         mv.setViewName("Kaizen/ViewKaizenApproval");
         return mv;
     }
@@ -408,11 +414,13 @@ public class KaizenMasterController extends KaizenMasterAbstract {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");
         KaizenMaster kaizenMaster = new KaizenMaster();
-         KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+        KaizenApprovalHistory kaizenApprovalHistory = new KaizenApprovalHistory();
+        List<?> approvalUser = approvalUserService.readByapprovalId(3);
         List<?> KaizenHistory = kaizenApprovalHistoryService.readByKaizenId(Integer.parseInt(id));
         kaizenMaster = kaizenMasterService.readById(Integer.parseInt(id));
         mv.getModelMap().put("list", kaizenMaster);
         mv.getModelMap().put("listKh", KaizenHistory);
+        mv.getModelMap().put("listAu", approvalUser);
         mv.setViewName("Kaizen/viewApproveKaizenSumbit");
         return mv;
     }

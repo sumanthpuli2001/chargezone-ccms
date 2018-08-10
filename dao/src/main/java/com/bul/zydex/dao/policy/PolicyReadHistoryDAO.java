@@ -21,4 +21,6 @@ public interface PolicyReadHistoryDAO<T> extends GenericsDAO<T>{
     
     public PolicyReadHistory policyReadCheck(String readerName);
     
+    public PolicyReadHistory policyReadCheckId(int id,String readerName);
+    
 }

@@ -15,6 +15,7 @@ import com.bul.zydex.model.PolicyCreate;
 import com.bul.zydex.model.PolicyDropDown;
 import com.bul.zydex.model.PolicyMaster;
 import com.bul.zydex.model.PolicyReadHistory;
+import com.bul.zydex.service.policy.PolicyDropDownService;
 import com.bul.zydex.util.DownloadFile;
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -318,6 +319,7 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date cDate = new Date();
+        PolicyDropDown policyDropDown = new PolicyDropDown();
         PolicyReadHistory policyReadHistory = new PolicyReadHistory();
         PolicyReadHistory policyReadHistory1 = new PolicyReadHistory();
         PolicyReadHistory policyReadHistory2 = new PolicyReadHistory();
@@ -330,6 +332,10 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         policyCreate.setReadBy(employeeMaster.getEmployeeName());
         policyCreate.setReadDate(sdf.format(cDate));
         policyCreateService.update(policyCreate);
+        
+        int policyId = policyCreate.getPolicyDropDown().getId();
+        policyDropDown = policyDropDownService.readById(policyId);
+        String policytype = policyDropDown.getName();
 
         try {
 //            policyReadHistory1 = policyReadHistoryService.policyReadCheck(employeeMaster.getEmployeeName());
@@ -350,8 +356,8 @@ public class PolicyMasterController extends PolicyMasterAbstract {
                 policyReadHistory.setPolicyReadStatus(1);
                 policyReadHistoryService.create(policyReadHistory);
             } else {
-                policyReadHistory1 = policyReadHistoryService.policyReadCheck(employeeMaster.getEmployeeName());
-                if (policyReadHistory1.getPolicyReadStatus() != 1) {
+                policyReadHistory1 = policyReadHistoryService.policyReadCheckId(Integer.parseInt(id), employeeMaster.getEmployeeName());
+                if (policyReadHistory1 == null) {
                     policyReadHistory.setPolicyId(Integer.parseInt(id));
                     policyReadHistory.setReaderBy(employeeMaster.getEmployeeName());
                     policyReadHistory.setReaderDate(sdf.format(cDate));
@@ -367,6 +373,8 @@ public class PolicyMasterController extends PolicyMasterAbstract {
 
         mv.getModel().put("policyCreate", policyCreate);
         mv.getModel().put("employeeMaster", employeeMaster);
+        mv.getModel().put("policytype", policytype);
+        mv.getModel().put("policyReadHistory", policyReadHistory1);
         mv.setViewName("Policy/ReadViewPolicy");
         return mv;
     }
@@ -375,12 +383,13 @@ public class PolicyMasterController extends PolicyMasterAbstract {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String id = request.getParameter("id");
         Date cDate = new Date();
         selectEmployee(request, response);
         policyDropDownList(request);
 
         PolicyReadHistory policyReadHistory = new PolicyReadHistory();
-        policyReadHistory = policyReadHistoryService.policyReadCheck(employeeMaster.getEmployeeName());
+        policyReadHistory = policyReadHistoryService.policyReadCheckId(Integer.parseInt(id), employeeMaster.getEmployeeName());
 
         policyReadHistory.setPolicyAcept(1);
         policyReadHistory.setPolicyAceptTime(sdf.format(cDate));

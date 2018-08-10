@@ -128,4 +128,16 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
         return list;
     }
 
+    @Override
+    public List<?> readByapprovalId(int id) {
+        String query = "";
+        query = "SELECT a.id, b.employeeName, a.level"
+                + " FROM ApprovalUser a "
+                + " left join a.employeeMaster b"
+                + " WHERE a.approvalMaster.id = " + id;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

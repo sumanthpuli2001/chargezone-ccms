@@ -28,4 +28,6 @@ public interface ApprovalUserService<T> extends GenericsService<T> {
 
     public List<?> readApprovalUser(String approvalMasterId);
 
+    public List<?> readByapprovalId(int id);
+
 }

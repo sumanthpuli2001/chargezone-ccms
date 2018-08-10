@@ -27,4 +27,6 @@ public interface ApprovalUserDAO<T> extends GenericsDAO<T> {
     public List<?> readByApId(int id);
 
     public List<?> readApprovalUser(String approvalMasterId);
+    
+    public List<?> readByapprovalId(int id);
 }

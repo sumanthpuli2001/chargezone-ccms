@@ -43,25 +43,19 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-3">
-                                                <label class="control-label">Enter Policy Name:<span style="color: red;font-size: 5px;">*</span></label>
+                                                <label class="control-label">Policy Name:<span style="color: red;font-size: 5px;">*</span></label>
                                             </div>
                                             <div class="col-sm-5">
-                                            <form:input path="name" id="name" class="form-control" placeholder="Policy Name" readonly="true"/>
-                                            <span id="nameError" style="color: red;"></span>
+                                                <span>${policyCreate.name}</span>  
                                         </div>
                                     </div>
                                     <div class="form-group">${policyDropDown.name}
                                         <input type="hidden" name="policyName" id="policyName" value="${policyDropDown.name}">
                                         <div class="col-sm-3">
-                                            <label>policy Type :<span style="color: red;font-size: 12px;"></span></label>
+                                            <label>Policy Type :<span style="color: red;font-size: 12px;"></span></label>
                                         </div>
                                         <div class="col-sm-5">
-                                            <select name="policyId1" id="policyId1"  class="form-control" readonly="true">
-                                                <c:forEach var="comp" items="${policydp}">
-                                                    <option value="${comp.key}" label="${comp.value}" ></option>
-                                                </c:forEach>
-                                            </select>
-                                            <span id="policyError" style="color: red;"></span>
+                                            <span>${policytype}</span>    
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -74,37 +68,37 @@
                                             <span id="attachmentError" style="color: red;"></span>
                                         </div>
                                     </div>
-                                    <c:if test="${employeeMaster.id != policyCreate.acceptByPolicyId || policyCreate.acceptPolicy != 1}">
+                                    <c:if test="${employeeMaster.id == policyReadHistory.policyId || policyReadHistory.policyAcept != 1}">
                                         <div class="form-group">
                                             <div class="col-sm-6 col-sm-offset-5">
                                                 <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="Accept">
-                                        </div>
-                                    </c:if>
-                                </div>
-                            </form:form>
-                        </div><!-- /.tab-pane -->
-                    </div><!-- /.tab-content -->
-                </div><!-- nav-tabs-custom -->
-            </div><!-- /.col -->
-    </div>
-</section><!-- /.content -->
-</div><!-- /.content-wrapper -->
-<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-<script>
-    function attachment(id) {
-        if (typeof FileReader !== "undefined") {
-            var fileSize = document.getElementById('certificateId' + id).files[0].size;
-//                alert("my File size is   " + fileSize);
-            if (fileSize > 1048576) {
-                document.getElementById('certificateId' + id).value = '';
-                document.getElementById('certificateError').innerHTML = "- It must not more than 1mb";
-            } else {
-                document.getElementById('certificateError').innerHTML = '';
+                                            </div>
+                                        </c:if>
+                                    </div>
+                                </form:form>
+                            </div><!-- /.tab-pane -->
+                        </div><!-- /.tab-content -->
+                    </div><!-- nav-tabs-custom -->
+                </div><!-- /.col -->
+            </div>
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <script>
+        function attachment(id) {
+            if (typeof FileReader !== "undefined") {
+                var fileSize = document.getElementById('certificateId' + id).files[0].size;
+                //                alert("my File size is   " + fileSize);
+                if (fileSize > 1048576) {
+                    document.getElementById('certificateId' + id).value = '';
+                    document.getElementById('certificateError').innerHTML = "- It must not more than 1mb";
+                } else {
+                    document.getElementById('certificateError').innerHTML = '';
+                }
+                // check file size
             }
-            // check file size
+
+
         }
-
-
-    }
-</script>
+    </script>
 </html>

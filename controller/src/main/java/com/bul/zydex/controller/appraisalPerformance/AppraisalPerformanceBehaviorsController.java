@@ -82,7 +82,8 @@ public class AppraisalPerformanceBehaviorsController extends AppraisalPerformanc
 //        mv.addObject("performanceRatingmap", map);
         request.setAttribute("finalList", finalList);
         mv.addObject("departmentWiseEmpCountList", departmentWiseEmpCountList);
-        mv.setViewName("forward:userMaster.htm?act=hrDashboardShow");
+        mv.setViewName("forward:hrServiceRequest.htm?act=approverClickHRDesktop");
+//        mv.setViewName("forward:userMaster.htm?act=hrDashboardShow");
 //        mv.setViewName("Dashboard/HrDashBoard");
         return mv;
     }

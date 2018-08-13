@@ -442,4 +442,9 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> readDepartmentEmployee(int departId) {
         return employeeMasterDAO.readDepartmentEmployee(departId);
     }
+
+    @Override
+    public List<?> readDayBirthdayWish(String dateBirth) {
+        return employeeMasterDAO.readDayBirthdayWish(dateBirth);
+    }
 }

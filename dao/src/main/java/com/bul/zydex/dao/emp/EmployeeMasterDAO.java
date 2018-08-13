@@ -9,6 +9,7 @@ import com.bul.zydex.dao.GenericsDAO;
 import com.bul.zydex.model.EmployeeAdvanceSearch;
 import com.bul.zydex.model.EmployeeInformation;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeeSalaryProcess;
 import java.util.List;
 
 /**
@@ -183,4 +184,6 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> reademidById(int id);
 
     public List<?> readDepartmentEmployee(int departId);
+
+    public List<?> readDayBirthdayWish(String dateBirth);
 }

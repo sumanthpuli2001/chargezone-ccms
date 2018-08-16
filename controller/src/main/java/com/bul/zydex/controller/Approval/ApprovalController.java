@@ -82,7 +82,7 @@ public class ApprovalController extends ApprovalAbstract {
         String apName = request.getParameter("name");
         approvalMaster.setName(apName);
         ApprovalMaster am = approvalMasterService.readByapprovalname(apName);
-        if (apName == am.getName()) {
+//        if (apName == am.getName()) {
             String id = request.getParameter("id");
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Date cDate = new Date();
@@ -117,11 +117,11 @@ public class ApprovalController extends ApprovalAbstract {
             mv = approvalList(request, response);
 
             return mv;
-        }
-        request.setAttribute("failureMessage",
-                "Info :  This Module Already Asign Approval Level.");
-        mv = createApprovalSetting(request, response);
-        return mv;
+//        }
+//        request.setAttribute("failureMessage",
+//                "Info :  This Module Already Asign Approval Level.");
+//        mv = createApprovalSetting(request, response);
+//        return mv;
     }
 
     public ModelAndView approvalList(HttpServletRequest request,

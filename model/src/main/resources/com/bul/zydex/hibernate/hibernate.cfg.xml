@@ -181,5 +181,7 @@
     <mapping resource="com/bul/zydex/model/CreateTask.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/TaskEmployeeDepartment.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/ESICMaster.hbm.xml.xml"/>
+    <mapping resource="com/bul/zydex/model/VacancyApproval.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/VacancyApprovalHistory.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

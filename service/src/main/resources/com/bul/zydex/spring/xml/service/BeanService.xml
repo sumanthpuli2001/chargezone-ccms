@@ -741,4 +741,10 @@
      <bean id="eSICMasterService1" class="com.bul.zydex.service.PayrollESIC.ESICMasterServiceImpl">
         <property name="eSICMasterDAO" ref="eSICMasterDAO1" />
     </bean>
+     <bean id="vacancyApprovalService1" class="com.bul.zydex.service.Vacancy.VacancyApprovalServiceImpl">
+        <property name="vacancyApprovalDAO" ref="vacancyApprovalDAO1" />
+    </bean>
+     <bean id="vacancyApprovalHistoryService1" class="com.bul.zydex.service.Vacancy.VacancyApprovalHistoryServiceImpl">
+        <property name="vacancyApprovalHistoryDAO" ref="vacancyApprovalHistoryDAO1" />
+    </bean>
 </beans>

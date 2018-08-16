@@ -23,6 +23,8 @@ public interface VacancyMasterService<T> extends GenericsService<T> {
 
     public List<?> fetchDateWiseData(String startDate, String endDate);
 
+    public List<?> fetchApprovVacancy(int empId);
+
     public VacancyMaster readByVacancyId(int vacancyId);
 
 }

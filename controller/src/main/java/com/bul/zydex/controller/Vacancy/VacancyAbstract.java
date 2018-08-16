@@ -7,6 +7,7 @@ package com.bul.zydex.controller.Vacancy;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.ApplayJobUserMaster;
+import com.bul.zydex.model.ApprovalUser;
 import com.bul.zydex.model.CandidateAcademicQualification;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateApplyJob2;
@@ -27,8 +28,11 @@ import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionDetails;
 import com.bul.zydex.model.QuestionLibrary;
 import com.bul.zydex.model.QuestionPaper;
+import com.bul.zydex.model.VacancyApproval;
+import com.bul.zydex.model.VacancyApprovalHistory;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.ApplayJobUserMaster.ApplayJobUserMasterService;
+import com.bul.zydex.service.Approval.ApprovalUserService;
 import com.bul.zydex.service.CandidateJobApply.CandidateAcademicQualificationService;
 import com.bul.zydex.service.CandidateJobApply.CandidateApplyJob2Service;
 import com.bul.zydex.service.CandidateJobApply.CandidateExperienceDetailService;
@@ -42,6 +46,8 @@ import com.bul.zydex.service.Recruitment.MprEmployeeCategoryService;
 import com.bul.zydex.service.Recruitment.MprEmployeeTypeMasterService;
 import com.bul.zydex.service.Recruitment.MprMasterService;
 import com.bul.zydex.service.Recruitment.OnlineAssessmentService;
+import com.bul.zydex.service.Vacancy.VacancyApprovalHistoryService;
+import com.bul.zydex.service.Vacancy.VacancyApprovalService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
@@ -85,6 +91,9 @@ public class VacancyAbstract extends CustomAbstract {
     protected CandidateAcademicQualificationService<CandidateAcademicQualification> candidateAcademicQualificationService;
     protected CandidateExperienceDetailService<CandidateExperienceDetail> candidateExperienceDetailService;
     protected CandidateOtherReferencesService<CandidateOtherReferences> candidateOtherReferencesService;
+    protected VacancyApprovalService<VacancyApproval> vacancyApprovalService;
+    protected VacancyApprovalHistoryService<VacancyApprovalHistory> vacancyApprovalHistoryService;
+    protected ApprovalUserService<ApprovalUser> approvalUserService;
 
     public CandidateApplyJob2Service<CandidateApplyJob2> getCandidateApplyJob2Service() {
         return candidateApplyJob2Service;
@@ -261,6 +270,32 @@ public class VacancyAbstract extends CustomAbstract {
     public void setQuestionAnswerSubmitService(QuestionAnswerSubmitService<QuestionAnswerSubmit> questionAnswerSubmitService) {
         this.questionAnswerSubmitService = questionAnswerSubmitService;
     }
+
+    public VacancyApprovalService<VacancyApproval> getVacancyApprovalService() {
+        return vacancyApprovalService;
+    }
+
+    public void setVacancyApprovalService(VacancyApprovalService<VacancyApproval> vacancyApprovalService) {
+        this.vacancyApprovalService = vacancyApprovalService;
+    }
+
+    public VacancyApprovalHistoryService<VacancyApprovalHistory> getVacancyApprovalHistoryService() {
+        return vacancyApprovalHistoryService;
+    }
+
+    public void setVacancyApprovalHistoryService(VacancyApprovalHistoryService<VacancyApprovalHistory> vacancyApprovalHistoryService) {
+        this.vacancyApprovalHistoryService = vacancyApprovalHistoryService;
+    }
+
+    public ApprovalUserService<ApprovalUser> getApprovalUserService() {
+        return approvalUserService;
+    }
+
+    public void setApprovalUserService(ApprovalUserService<ApprovalUser> approvalUserService) {
+        this.approvalUserService = approvalUserService;
+    }
+    
+    
 
     protected void departmentList(HttpServletRequest request) {
         DepartmentMaster departmentMaster = new DepartmentMaster();

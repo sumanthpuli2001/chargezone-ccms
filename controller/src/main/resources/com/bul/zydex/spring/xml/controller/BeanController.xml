@@ -1114,6 +1114,9 @@
         <property name="candidateAcademicQualificationService" ref="candidateAcademicQualificationService1"/>
         <property name="candidateExperienceDetailService" ref="candidateExperienceDetailService1"/>
         <property name="candidateOtherReferencesService" ref="candidateOtherReferencesService1"/>
+        <property name="vacancyApprovalService" ref="vacancyApprovalService1"/>
+        <property name="vacancyApprovalHistoryService" ref="vacancyApprovalHistoryService1"/>
+        <property name="approvalUserService" ref="approvalUserService1"/>
     </bean> 
     <bean id="thoughtMasterController1" class="com.bul.zydex.controller.thought.ThoughtMasterController" parent="controllerConfig" >
         <property name="thoughtMasterService" ref="thoughtMasterService1"></property>

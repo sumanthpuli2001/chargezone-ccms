@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.Vacancy;
 
 import com.bul.zydex.model.ApplayJobUserMaster;
+import com.bul.zydex.model.ApprovalUser;
 import com.bul.zydex.model.CandidateAcademicQualification;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateApplyJob2;
@@ -26,6 +27,11 @@ import com.bul.zydex.model.OnlineAssessment;
 import com.bul.zydex.model.QuestionAns;
 import com.bul.zydex.model.QuestionAnswerSubmit;
 import com.bul.zydex.model.QuestionLibrary;
+import com.bul.zydex.model.RecruitmentApprovalHistory;
+import com.bul.zydex.model.RecruitmentMaster;
+import com.bul.zydex.model.RecruitmentMppApproval;
+import com.bul.zydex.model.VacancyApproval;
+import com.bul.zydex.model.VacancyApprovalHistory;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.util.DownloadFile;
 import java.io.File;
@@ -388,12 +394,14 @@ public class VacancyController extends VacancyAbstract {
         mv.addObject("jobtype1", jobtype1);
 
         String id = request.getParameter("id");
+        List<?> HistoryList = vacancyApprovalHistoryService.readByVacancyId(Integer.parseInt(id));
         vacancyMaster = vacancyMasterService.readById(Integer.parseInt(id));
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
         mv.getModelMap().put("designationMaster", designationMaster);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.getModelMap().put("list", HistoryList);
         mv.setViewName("Vacancy/ViewVecancy");
         return mv;
     }
@@ -403,13 +411,14 @@ public class VacancyController extends VacancyAbstract {
 
         ModelAndView mv = new ModelAndView();
         VacancyMaster vacancyMaster = new VacancyMaster();
+        VacancyApprovalHistory approvalHistory = new VacancyApprovalHistory();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(vacancyMaster, "vacancyMaster");
         bind(request, vacancyMaster);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String comment = request.getParameter("comment");
         Date cDate = new Date();
         VacancyMaster vacancyMaster1 = vacancyMasterService.readById(vacancyMaster.getId());
-//        payrollProfessionalTaxValidator.validate(payrollProfessionalTax, errors);
         Map<Integer, String> locationMap = readLocations();
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -423,7 +432,16 @@ public class VacancyController extends VacancyAbstract {
             vacancyMaster.setUpdatedDate(sdf.format(cDate));
             vacancyMaster.setMprMaster(vacancyMaster1.getMprMaster());
             vacancyMaster.setStatus(0);
+            vacancyMaster.setCurrentLevel(1);
+            vacancyMaster.setTotalLevel(vacancyMaster1.getTotalLevel());
             vacancyMasterService.update(vacancyMaster);
+
+            approvalHistory.setVacancyMaster(vacancyMaster);
+            approvalHistory.setCreatedDate(sdf.format(cDate));
+            approvalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            approvalHistory.setComment(comment);
+            approvalHistory.setStatus(0);
+            vacancyApprovalHistoryService.create(approvalHistory);
             request.setAttribute("successMessage",
                     "Information: The Information is Edited Successfully");
         }
@@ -1892,6 +1910,7 @@ public class VacancyController extends VacancyAbstract {
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         BindException errors = new BindException(vacancyMaster, "vacancyMaster");
         bind(request, vacancyMaster);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(5);
         String mprMasterid = request.getParameter("mprMasterid");
         MprMaster mm = mprMasterService.readById(Integer.parseInt(mprMasterid));
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -1916,7 +1935,28 @@ public class VacancyController extends VacancyAbstract {
             vacancyMaster.setCreatedBy(employeeMaster.getId());
             vacancyMaster.setCreatedDate(sdf.format(cDate));
             vacancyMaster.setMprMaster(mm);
+            vacancyMaster.setCurrentLevel(1);
+            vacancyMaster.setTotalLevel(approvalList.size());
             vacancyMasterService.create(vacancyMaster);
+
+            for (ApprovalUser au : approvalList) {
+                VacancyApproval vacancyApproval = new VacancyApproval();
+                vacancyApproval.setEmployeeMaster(au.getEmployeeMaster());
+                vacancyApproval.setVacancyMaster(vacancyMaster);
+                vacancyApproval.setLevel(au.getLevel());
+                vacancyApproval.setCreatedBy(employeeMaster.getId());
+                vacancyApproval.setCreatedDate(sdf.format(cDate));
+                vacancyApprovalService.create(vacancyApproval);
+            }
+
+            VacancyApprovalHistory vah = new VacancyApprovalHistory();
+            vah.setVacancyMaster(vacancyMaster);
+            vah.setComment("Vacancy Creator");
+            vah.setCreatedBy(employeeMaster.getEmployeeName());
+            vah.setCreatedDate(sdf.format(cDate));
+            vah.setStatus(0);
+            vah.setStatusMessage("Vacancy Creted");
+            vacancyApprovalHistoryService.create(vah);
 
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
@@ -2051,5 +2091,210 @@ public class VacancyController extends VacancyAbstract {
             return new ModelAndView("Vacancy/CandidateOTPSubmit", "applayJobUserMaster", applayJobUserMaster);
 
         }
+    }
+
+    public ModelAndView vacancyShowByApprove(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        List<?> vacancylist = vacancyMasterService.fetchApprovVacancy(employeeMaster.getId());
+        mv.getModelMap().put("list", vacancylist);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/VacancyApprovalList");
+        return mv;
+    }
+
+    public ModelAndView viewApproveVacancy(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        if (vacancyMaster.getId() != null) {
+            vacancyMaster = vacancyMasterService.readById(vacancyMaster.getId());
+            vacancyMaster.setLocationMaster(vacancyMaster.getLocationMaster());
+            vacancyMaster.setDepartmentMaster(vacancyMaster.getDepartmentMaster());
+            vacancyMaster.setJobtypeMaster(vacancyMaster.getJobtypeMaster());
+            vacancyMaster.setDesignationMaster(vacancyMaster.getDesignationMaster());
+        } else {
+            vacancyMaster.setLocationMaster(new LocationMaster());
+            vacancyMaster.setDepartmentMaster(new DepartmentMaster());
+            vacancyMaster.setJobtypeMaster(new JobtypeMaster());
+            vacancyMaster.setDesignationMaster(new DesignationMaster());
+        }
+        departmentList(request);
+        designationList(request);
+        Map<Integer, String> locationMap = readLocations();
+        Map<Integer, String> jobtype1 = jobtypeList();
+        mv.addObject("locationMap", locationMap);
+        mv.addObject("jobtype1", jobtype1);
+
+        String id = request.getParameter("id");
+        vacancyMaster = vacancyMasterService.readById(Integer.parseInt(id));
+        mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("locationMaster", locationMaster);
+        mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+        mv.getModelMap().put("designationMaster", designationMaster);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.setViewName("Vacancy/ViewApproveVacancy");
+        return mv;
+    }
+
+    public ModelAndView ShowVacancy(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        if (vacancyMaster.getId() != null) {
+            vacancyMaster = vacancyMasterService.readById(vacancyMaster.getId());
+            vacancyMaster.setLocationMaster(vacancyMaster.getLocationMaster());
+            vacancyMaster.setDepartmentMaster(vacancyMaster.getDepartmentMaster());
+            vacancyMaster.setJobtypeMaster(vacancyMaster.getJobtypeMaster());
+            vacancyMaster.setDesignationMaster(vacancyMaster.getDesignationMaster());
+        } else {
+            vacancyMaster.setLocationMaster(new LocationMaster());
+            vacancyMaster.setDepartmentMaster(new DepartmentMaster());
+            vacancyMaster.setJobtypeMaster(new JobtypeMaster());
+            vacancyMaster.setDesignationMaster(new DesignationMaster());
+        }
+        departmentList(request);
+        designationList(request);
+        Map<Integer, String> locationMap = readLocations();
+        Map<Integer, String> jobtype1 = jobtypeList();
+        mv.addObject("locationMap", locationMap);
+        mv.addObject("jobtype1", jobtype1);
+
+        String id = request.getParameter("id");
+        List<?> HistoryList = vacancyApprovalHistoryService.readByVacancyId(Integer.parseInt(id));
+        vacancyMaster = vacancyMasterService.readById(Integer.parseInt(id));
+
+        int jobtypeId = vacancyMaster.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+        int department = vacancyMaster.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName = departmentMaster.getDepartmentName();
+
+        int localtion = vacancyMaster.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName = locationMaster.getLocation();
+
+        int designation = vacancyMaster.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName = designationMaster.getDesignationName();
+
+        mv.getModelMap().put("departmentName", departmentName);
+        mv.getModelMap().put("locationName", locationName);
+        mv.getModelMap().put("jobtypeNAme", jobtypeNAme);
+        mv.getModelMap().put("designationName", designationName);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv.getModelMap().put("list", HistoryList);
+        mv.setViewName("Vacancy/ShowVacancyOnly");
+        return mv;
+    }
+
+    public ModelAndView submitVacancyApprove(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster1 = new VacancyMaster();
+        VacancyApprovalHistory approvalHistory = new VacancyApprovalHistory();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        bind(request, vacancyMaster1);
+        String btnType = request.getParameter("btnType");
+        String id = request.getParameter("id");
+        String comment = request.getParameter("comment");
+        VacancyMaster vacancyMaster = vacancyMasterService.readById(Integer.parseInt(id));
+        VacancyApproval vacancyApproval = vacancyApprovalService.readEmpIdAndVaId(employeeMaster.getId(), Integer.parseInt(id));
+        int userLevel = vacancyApproval.getLevel();
+        int CurrentLevel = vacancyMaster.getCurrentLevel();
+        int totalLevel = vacancyMaster.getTotalLevel();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+
+        if (btnType.equals("Approve")) {
+
+            if (userLevel == totalLevel) {
+                vacancyMaster.setStatus(5);
+                approvalHistory.setStatus(5);
+            } else {
+                vacancyMaster.setStatus(4);
+                approvalHistory.setStatus(5);
+                vacancyMaster.setCurrentLevel(CurrentLevel + 1);
+
+            }
+
+            vacancyApproval.setComment(comment);
+            vacancyMasterService.update(vacancyMaster);
+            vacancyApprovalService.update(vacancyApproval);
+            approvalHistory.setVacancyMaster(vacancyMaster);
+            approvalHistory.setCreatedDate(sdf.format(cDate));
+            approvalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            approvalHistory.setComment(comment);
+            approvalHistory.setStatusMessage(btnType);
+            vacancyApprovalHistoryService.create(approvalHistory);
+            request.setAttribute("successMessage",
+                    "Information : The Request is Approved successfully.");
+
+        }
+        if (btnType.equals("Recycle")) {
+
+            if (userLevel > 1) {
+                vacancyMaster.setStatus(2);
+                vacancyMaster.setCurrentLevel(CurrentLevel - 1);
+                approvalHistory.setStatus(2);
+            } else {
+                vacancyMaster.setStatus(1);
+                approvalHistory.setStatus(2);
+                vacancyMaster.setCurrentLevel(CurrentLevel - 1);
+
+            }
+
+            vacancyApproval.setComment(comment);
+            vacancyMasterService.update(vacancyMaster);
+            vacancyApprovalService.update(vacancyApproval);
+            approvalHistory.setVacancyMaster(vacancyMaster);
+            approvalHistory.setCreatedDate(sdf.format(cDate));
+            approvalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            approvalHistory.setComment(comment);
+            approvalHistory.setStatusMessage(btnType);
+            vacancyApprovalHistoryService.create(approvalHistory);
+
+            request.setAttribute("successMessage",
+                    "Information : The Request is Returned successfully.");
+
+        }
+
+        if (btnType.equals("Reject")) {
+
+            vacancyMaster.setStatus(3);
+            vacancyApproval.setComment(comment);
+            vacancyMasterService.update(vacancyMaster);
+            vacancyApprovalService.update(vacancyApproval);
+
+            approvalHistory.setVacancyMaster(vacancyMaster);
+            approvalHistory.setCreatedDate(sdf.format(cDate));
+            approvalHistory.setCreatedBy(employeeMaster.getEmployeeName());
+            approvalHistory.setComment(comment);
+            approvalHistory.setStatus(3);
+            approvalHistory.setStatusMessage(btnType);
+            vacancyApprovalHistoryService.create(approvalHistory);
+            request.setAttribute("successMessage",
+                    "Information : The Request is Rejectd successfully.");
+
+        }
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+        mv = vacancyShowByApprove(request, response);
+        return mv;
     }
 }

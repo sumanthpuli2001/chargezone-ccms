@@ -102,4 +102,20 @@ public class VacancyMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Vacan
         return vacancyMaster;
 
     }
+
+    @Override
+    public List<?> fetchApprovVacancy(int empId) {
+        String query = "";
+        query += " "
+                + " SELECT mvm.id, mvm.name, mvm.numberOfPosition, mvm.experience, mvm.fromDate, mvm.toDate, mvm.status, mvm.currentLevel, va.level "
+                + " FROM VacancyApproval va "
+                + " Left Join va.vacancyMaster mvm "
+                + " Where mvm.currentLevel >= va.level "
+                + " And mvm.status != 5 "
+                + " And va.employeeMaster.id = " + empId
+                + " order by mvm.id desc";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 }

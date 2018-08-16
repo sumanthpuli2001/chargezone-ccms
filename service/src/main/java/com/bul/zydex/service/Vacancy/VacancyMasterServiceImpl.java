@@ -39,7 +39,7 @@ public class VacancyMasterServiceImpl<T> extends GenericsServiceImpl<T> implemen
 
     @Override
     public List<?> fetchVacancyBydate(String date) {
-           return vacancyMasterDAO.fetchVacancyBydate(date);
+        return vacancyMasterDAO.fetchVacancyBydate(date);
     }
 
     @Override
@@ -50,6 +50,11 @@ public class VacancyMasterServiceImpl<T> extends GenericsServiceImpl<T> implemen
     @Override
     public VacancyMaster readByVacancyId(int vacancyId) {
         return vacancyMasterDAO.readByVacancyId(vacancyId);
+    }
+
+    @Override
+    public List<?> fetchApprovVacancy(int empId) {
+        return vacancyMasterDAO.fetchApprovVacancy(empId);
     }
 
 }

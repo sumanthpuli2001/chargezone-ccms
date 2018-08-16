@@ -132,6 +132,19 @@
                                                         <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                 </div>
+
+                                                <br>
+                                                <br>
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label>Comment:<span style="color: red;font-size: 12px;"></span></label>
+
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        <textarea path="comment" name="comment" class="form-control" placeholder="Approval Comment"></textarea>
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-group">
                                                     <div class="col-sm-6 col-sm-offset-5">
                                                         <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
@@ -148,6 +161,54 @@
                 </div><!-- /.col -->
             </div>
         </section>
+
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <label><h3>History</h3></label>
+                            <div class="table table-bordered">
+                                <table border="1" style="width: 100%;" >
+                                    <c:choose>
+                                        <c:when test="${empty list}">
+                                            <tr>
+                                                <td align="center">
+                                                    <c:out value="There is no record found."></c:out>
+                                                    </td>
+                                                </tr>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 50px;">Name</th>
+                                                    <th style="width: 50px;">Date & Time</th>
+                                                    <th style="width: 50px;">Comment's</th>
+                                                    <th style="width: 50px;">Status</th>
+                                                </tr>
+                                            </thead>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <tbody>
+                                        <c:forEach var="list" items="${list}">
+                                            <tr>
+                                                <td>${list[5]}</td>
+                                                <td>${list[4]}</td>
+                                                <td>${list[1]}</td>
+                                                <td>${list[3]}</td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
     <script type="text/javascript">
         $('.form_datetime').datetimepicker({

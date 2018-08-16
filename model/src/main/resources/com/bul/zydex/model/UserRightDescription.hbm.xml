@@ -211,5 +211,8 @@
         <property name="esicChalan" type="string">
             <column name="esic_chalan" length="65535" />
         </property>
+        <property name="vacancyApprove" type="string">
+            <column name="vacancy_approve" length="65535" />
+        </property>
     </class>
 </hibernate-mapping>

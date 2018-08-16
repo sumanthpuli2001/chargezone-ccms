@@ -929,33 +929,24 @@ public class VacancyController extends VacancyAbstract {
             CandidateApplyJob candidateApplyJob1 = candidateJobApplyService.readByapplayjobusermasterid(Integer.parseInt(id));
             combinedCandidateClasses.setCandidateApplyJob(candidateApplyJob1);
 
-            CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob1.getId());
-            combinedCandidateClasses.setCandidateApplyJob2(candidateApplyJob2);
+            if (candidateApplyJob1 != null) {
+                CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob1.getId());
+                combinedCandidateClasses.setCandidateApplyJob2(candidateApplyJob2);
 
-            List<?> caqList = candidateAcademicQualificationService.readListByApplyJobId(candidateApplyJob1.getId());
-            List<?> cedList = candidateExperienceDetailService.readListByApplyJobId(candidateApplyJob1.getId());
-            List<?> cfbList = candidateFamilyBackgroundService.readListByApplyJobId(candidateApplyJob1.getId());
-            List<?> corList = candidateOtherReferencesService.readListByApplyJobId(candidateApplyJob1.getId());
-//            CandidateAcademicQualification candidateAcademicQualification = candidateAcademicQualificationService.readByApplyJobId(candidateApplyJob1.getId());
-//            combinedCandidateClasses.setCandidateAcademicQualification(candidateAcademicQualification);
-//
-//            CandidateExperienceDetail candidateExperienceDetail = candidateExperienceDetailService.readByApplyJobId(candidateApplyJob1.getId());
-//            combinedCandidateClasses.setCandidateExperienceDetail(candidateExperienceDetail);
-//
-//            CandidateFamilyBackground candidateFamilyBackground = candidateFamilyBackgroundService.readByApplyJobId(candidateApplyJob1.getId());
-//            combinedCandidateClasses.setCandidateFamilyBackground(candidateFamilyBackground);
-//
-//            CandidateOtherReferences candidateOtherReferences = candidateOtherReferencesService.readByApplyJobId(candidateApplyJob1.getId());
-//            combinedCandidateClasses.setCandidateOtherReferences(candidateOtherReferences);
+                List<?> caqList = candidateAcademicQualificationService.readListByApplyJobId(candidateApplyJob1.getId());
+                List<?> cedList = candidateExperienceDetailService.readListByApplyJobId(candidateApplyJob1.getId());
+                List<?> cfbList = candidateFamilyBackgroundService.readListByApplyJobId(candidateApplyJob1.getId());
+                List<?> corList = candidateOtherReferencesService.readListByApplyJobId(candidateApplyJob1.getId());
+                mv.getModelMap().put("caqList", caqList);
+                mv.getModelMap().put("cedList", cedList);
+                mv.getModelMap().put("cfbList", cfbList);
+                mv.getModelMap().put("corList", corList);
+            }
             if (candidateApplyJob1 != null) {
                 mv.getModelMap().put("combinedCandidateClasses", combinedCandidateClasses);
                 request.setAttribute("photographAttachment", combinedCandidateClasses.getCandidateApplyJob().getPhotograph());
                 request.setAttribute("salarySlipAttachment", combinedCandidateClasses.getCandidateApplyJob2().getSalarySlipAttachment());
                 request.setAttribute("certificateAttachment", combinedCandidateClasses.getCandidateApplyJob().getCertificateAttach());
-                mv.getModelMap().put("caqList", caqList);
-                mv.getModelMap().put("cedList", cedList);
-                mv.getModelMap().put("cfbList", cfbList);
-                mv.getModelMap().put("corList", corList);
                 mv.setViewName("Vacancy/MyProfile");
             } else {
                 mv.getModelMap().put("combinedCandidateClasses", combinedCandidateClasses);

@@ -213,4 +213,24 @@ public class HrServiceRequestDAOImpl<T> extends GenericsDAOImpl<T> implements Hr
         }
         return i;
     }
+
+    @Override
+    public List<?> readByrequesteeIdHrDesktop() {
+//     HrServiceRequest hrServiceRequest = (HrServiceRequest) object;
+        String query = "";
+        String condition = "";
+
+//        Select  b.employeeId, b.employeeName,a.queryType,a.status
+        query += " SELECT a.id, b.employeeId, b.employeeName,  a.queryType , b.id ,a.status,a.requestDate,a.hrApproveDate "
+                + " From HrServiceRequest a "
+                + " left join a.employeeMasterByEmployeeMasterId b"
+                + " LEFT JOIN b.departmentMaster c "
+                + " LEFT JOIN b.designationMaster d "
+                + " Where a.status in (1)"
+                + "Order by a.id Desc";
+//                + " where a.status in (1,5,6,10) ";
+//                + " and a.employeeMasterByEmployeeMasterId = " + poolCarRequest.getEmployeeMasterByApproverId().getId() ;
+
+        return getHibernateTemplate().find(query);
+    }
 }

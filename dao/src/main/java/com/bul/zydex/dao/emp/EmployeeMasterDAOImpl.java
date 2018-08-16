@@ -2408,4 +2408,17 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return list;
     }
 
+    @Override
+    public List<?> readDayBirthdayWish(String dateBirth) {
+        String query = "";
+        String condition = "";
+        int year = 1990;
+        query += " select a.employeeId,a.employeeName,a.officeEmailId"
+                + " From EmployeeMaster a"
+                //                + " where DATE_FORMAT(STR_TO_DATE(dateOfBirth, '%d/%m/%Y'),'%d/%m')=DATE_FORMAT(STR_TO_DATE('01/" + employeeSalaryProcess.getMonth() + "/" + employeeSalaryProcess.getYear() + "', '%d/%m/%Y'),'%m/%Y')";
+                + " where DATE_FORMAT(STR_TO_DATE(dateOfBirth, '%d/%m/%Y'),'%d/%m')=DATE_FORMAT(STR_TO_DATE('" + dateBirth + "/" + year + "', '%d/%m/%Y'),'%d/%m')";
+//                + " Where 1=1" + condition;
+        return getHibernateTemplate().find(query);
+    }
+
 }

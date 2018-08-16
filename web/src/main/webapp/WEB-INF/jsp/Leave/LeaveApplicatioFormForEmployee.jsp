@@ -1951,7 +1951,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-12">
                                                         <label>Leave Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="leaveTypeMaster.id" class="form-control" onchange="modelopenpopup();daysCount();leaveSetting();calculateDayByAjax();">
+                                                        <form:select path="leaveTypeMaster.id" class="form-control" onchange="modelopenpopup();daysCount();leaveSetting();">
                                                             <form:option value="" label="-- Select --"/>
                                                             <form:options items="${leaveTypemap}" />
                                                         </form:select>
@@ -1966,7 +1966,7 @@
                                                             <label>Leave Start Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <%--<form:input path="leaveStartDateId" class="form-control" size="16" type="text" value="" onchange="leaveSetting(); daysCount();" readonly="true"></form:input>--%>
-                                                                <form:input path="startDate" class="form-control" size="16" type="text" value="" onchange="checkStartDateFun();calculateDayByAjax();leaveSetting();leaveTypecheck();
+                                                                <form:input path="startDate" class="form-control" size="16" type="text" value="" onchange="checkStartDateFun();leaveSetting();leaveTypecheck();
                                                                             daysCount();calculateSecondSatByAjax();" readonly="true"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
@@ -2016,7 +2016,7 @@
                                                             <label>Leave End Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <%--<form:input id="leaveEndDateId" class="form-control" size="16" type="text" value="" onchange="leaveSetting(); daysCount();" readonly="true"></form:input>--%>
-                                                                <form:input path="endDate" class="form-control" onchange="checkEndDateFun();calculateDayByAjax();leaveSetting();leaveTypecheck();
+                                                                <form:input path="endDate" class="form-control" onchange="checkEndDateFun();leaveSetting();leaveTypecheck();
                                                                             daysCount();calculateSecondSatByAjax();" readonly="true"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>

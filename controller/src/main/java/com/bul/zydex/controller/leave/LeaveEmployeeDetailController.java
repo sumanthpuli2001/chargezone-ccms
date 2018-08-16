@@ -3172,9 +3172,10 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         for (String z : weekOffDay.split(",")) {
             int weekOff = 0;
             if (!z.equals("")) {
-                if (z.equals("sunday")) {
-                    weekOff = 1;
-                } else if (z.equals("monday")) {
+//                if (z.equals("sunday")) {
+//                    weekOff = 1;
+//                } else 
+                if (z.equals("monday")) {
                     weekOff = 2;
                 } else if (z.equals("tuesday")) {
                     weekOff = 3;
@@ -3191,11 +3192,11 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 String daString = sdf.format(nDate);
                 HolidayMaster holidayMaster = new HolidayMaster();
                 holidayMaster.setHolidayFromDate(daString);
-                List list = holidayMasterService.checkHoliday(strDate, "" + employeeMaster1.getLocationMaster().getId());
+//                List list = holidayMasterService.checkHoliday(strDate, "" + employeeMaster1.getLocationMaster().getId());
 
-                if (c.get(Calendar.DAY_OF_WEEK) == weekOff || list.size() > 0) {
-                    message = "Selected Date is Holiday/WeekOff.So You can't Apply Leave on this Day.";
-                }
+//                if (c.get(Calendar.DAY_OF_WEEK) == weekOff || list.size() > 0) {
+//                    message = "Selected Date is Holiday/WeekOff.So You can't Apply Leave on this Day.";
+//                }
             }
         }
 //        }
@@ -3234,9 +3235,10 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         for (String z : weekOffDay.split(",")) {
             int weekOff = 0;
             if (!z.equals("")) {
-                if (z.equals("sunday")) {
-                    weekOff = 1;
-                } else if (z.equals("monday")) {
+//                if (z.equals("sunday")) {
+//                    weekOff = 1;
+//                } else 
+                    if (z.equals("monday")) {
                     weekOff = 2;
                 } else if (z.equals("tuesday")) {
                     weekOff = 3;
@@ -3253,11 +3255,11 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 String daString = sdf.format(nDate);
                 HolidayMaster holidayMaster = new HolidayMaster();
                 holidayMaster.setHolidayFromDate(daString);
-                List list = holidayMasterService.checkHoliday(enDate, "" + employeeMaster1.getLocationMaster().getId());
+//                List list = holidayMasterService.checkHoliday(enDate, "" + employeeMaster1.getLocationMaster().getId());
 
-                if (c.get(Calendar.DAY_OF_WEEK) == weekOff || list.size() > 0) {
-                    message = "Selected Date is Holiday/WeekOff.So You can't Apply Leave on this Day.";
-                }
+//                if (c.get(Calendar.DAY_OF_WEEK) == weekOff || list.size() > 0) {
+//                    message = "Selected Date is Holiday/WeekOff.So You can't Apply Leave on this Day.";
+//                }
 
             }
         }

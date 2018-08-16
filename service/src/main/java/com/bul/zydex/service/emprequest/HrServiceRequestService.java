@@ -31,4 +31,6 @@ public interface HrServiceRequestService<T> extends GenericsService<T> {
 
     public int countHrServiceApproverPendingRequest(T object);
 
+    public List<?> readByrequesteeIdHrDesktop();
+
 }

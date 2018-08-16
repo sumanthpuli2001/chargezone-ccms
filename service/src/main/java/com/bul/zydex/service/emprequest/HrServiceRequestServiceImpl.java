@@ -73,5 +73,10 @@ public class HrServiceRequestServiceImpl<T> extends GenericsServiceImpl<T> imple
     public int countHrServiceApproverPendingRequest(T object) {
         return hrServiceRequestDAO.countHrServiceApproverPendingRequest(object);
     }
+
+    @Override
+    public List<?> readByrequesteeIdHrDesktop() {
+        return hrServiceRequestDAO.readByrequesteeIdHrDesktop();
+    }
     
 }

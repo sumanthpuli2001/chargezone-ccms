@@ -31,4 +31,6 @@ public interface HrServiceRequestDAO<T> extends GenericsDAO<T> {
 
     public int countHrServiceApproverPendingRequest(T object);
 
+    public List<?> readByrequesteeIdHrDesktop();
+
 }

@@ -553,4 +553,20 @@ public class HrServiceRequestController extends HrServiceRequestAbstract {
         mv.setViewName("HrService/ExportHRServiceResult");
         return mv;
     }
+
+    public ModelAndView approverClickHRDesktop(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        HrServiceRequest hrServiceRequest = new HrServiceRequest();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+
+        List<?> hrlist = hrServiceRequestService.readByrequesteeIdHrDesktop();
+        mv.getModelMap().put("hrlist", hrlist);
+//        mv.getModelMap().put("employeeMaster", employeeMaster);
+//        mv.getModelMap().put("hrServiceRequest", hrServiceRequest);
+        HttpSession session = request.getSession();
+        session.setAttribute("hrApprovelist", hrlist);
+        mv.setViewName("forward:userMaster.htm?act=hrDashboardShow");
+        return mv;
+    }
 }

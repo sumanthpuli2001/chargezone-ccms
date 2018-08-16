@@ -254,7 +254,7 @@
                                                             </tr>
                                                         </table>
                                                         <div class="col-sm-6">
-                                                            <table style="width:100%;">
+                                                            <table border="1">
                                                                 <tr>
                                                                     <td>
                                                                         <span><img src="StorageYard/candidate/candidateimage/${candidateApplyJob.applayJobUserMaster.id}/${candidateApplyJob.photograph}" style="border: 1px solid black;" width="85px; !important" height="100px; !important"></span>
@@ -631,6 +631,11 @@
                                                                 </tr>
                                                             </c:forEach>
                                                         </table>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        </br>
+                                                        <label>Sign. Of candidate :</label> </br>
+
                                                     </div>
                                                 </div>                
                                             </div>

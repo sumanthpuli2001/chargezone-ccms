@@ -416,13 +416,13 @@
                                                 </div>
                                                 <div id="printableArea">
                                                     <div class="col-md-12 col-sm-12">
-                                                          <table>
-                                                                    <tr>
-                                                                        <td style="text-align: right;">
-                                                                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
+                                                        <table>
+                                                            <tr>
+                                                                <td style="text-align: right;">
+                                                                    <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
                                                         <div class="box-body no-padding">
                                                             <div class="col-sm-6">
                                                                 <label>Position:</label> &nbsp;&nbsp;&nbsp;
@@ -574,7 +574,7 @@
                                                                 </tr>
                                                             </table>
                                                         </div>
-                                                                  <div class="col-sm-6">
+                                                        <div class="col-sm-6">
                                                             <label>Overall Rating <span style="color: red;font-size: 15px;">*</span>&nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
                                                         </div>
                                                         <div class="col-sm-6" style="padding:0 5%;">
@@ -613,19 +613,23 @@
                                                     </div>
                                                     <div class="col-md-12 col-sm-12">
                                                         <div class="col-sm-6">
-                                                            <label>Interviewer Comment&nbsp;&nbsp;-:-</label>
+                                                            <table>
+                                                                <tr>
+                                                                    <td><label>Interviewer Comment&nbsp;&nbsp;-:-</label></td>
+                                                                    <td><c:forEach  var="comment" items="${commentlist}" varStatus="loop">
+                                                                            <div class="col-sm-3">
+                                                                                <label>${comment[2]}:</label>
+                                                                            </div>
+                                                                            <div class="col-sm-9">
+                                                                                <textarea class="form-control" id="interviewerRemark" name="interviewerRemark"   disabled>${comment[1]}</textarea>
+                                                                            </div>
+                                                                        </c:forEach></td>
+                                                                </tr>
+                                                            </table>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 col-sm-12" style="padding: 0 5%">
-                                                        </br>
-                                                        <c:forEach  var="comment" items="${commentlist}" varStatus="loop">
-                                                            <div class="col-sm-3">
-                                                                &emsp;&emsp;<label>${comment[2]}:</label> &nbsp;&nbsp;&nbsp;
-                                                            </div>
-                                                            <div class="col-sm-9">
-                                                                <textarea class="form-control" id="interviewerRemark" name="interviewerRemark"   disabled>${comment[1]}</textarea>
-                                                            </div>
-                                                        </c:forEach>
+                                                    <div class="col-sm-12">
+                                                        <label>Sign. Of candidate :</label>
                                                     </div>
                                                 </div>
                                             </div>

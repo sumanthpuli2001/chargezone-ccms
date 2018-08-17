@@ -78,10 +78,11 @@ public class UserRightMaster  implements java.io.Serializable {
      private boolean hrFtFApproval;
      private boolean policyViewDetail;
      private boolean esicChalan;
+     private boolean vacancyApprove;
     public UserRightMaster() {
     }
 
-    public UserRightMaster(UserMaster userMaster, boolean hr, boolean employee, boolean travelAdmin, boolean travelExpenseAdmin, boolean poolCarAdmin, boolean security, boolean cafeteriaAdmin, boolean itAdmin, boolean employeeManagement, boolean leaveManagement, boolean shiftManagement, boolean appraisalPmp, boolean appraisal360, boolean probationToConfirmation, boolean employeeExit, boolean employeeReferral, boolean temporaryShiftAssign, boolean exitInterview, boolean noDue, boolean attendanceReport, boolean cashAdvanceView, boolean lunaPlantAttendanceMgnt, boolean gavasatPlantAttendanceMgnt, boolean departmentWiseAttendance, boolean mpr, boolean budget, boolean vacancy, boolean candidateInduction, boolean assessmentReview, boolean faceTofaceInterview, boolean candidateList, boolean mppApproval, boolean mprApproval, boolean faceTofaceApproval, boolean payroll, boolean training, boolean kaizenApproval, boolean travelManagementRights, boolean expenseRequestRights, boolean hrFtFApproval, boolean policyViewDetail, boolean esicChalan) {
+    public UserRightMaster(UserMaster userMaster, boolean hr, boolean employee, boolean travelAdmin, boolean travelExpenseAdmin, boolean poolCarAdmin, boolean security, boolean cafeteriaAdmin, boolean itAdmin, boolean employeeManagement, boolean leaveManagement, boolean shiftManagement, boolean appraisalPmp, boolean appraisal360, boolean probationToConfirmation, boolean employeeExit, boolean employeeReferral, boolean temporaryShiftAssign, boolean exitInterview, boolean noDue, boolean attendanceReport, boolean cashAdvanceView, boolean lunaPlantAttendanceMgnt, boolean gavasatPlantAttendanceMgnt, boolean departmentWiseAttendance, boolean mpr, boolean budget, boolean vacancy, boolean candidateInduction, boolean assessmentReview, boolean faceTofaceInterview, boolean candidateList, boolean mppApproval, boolean mprApproval, boolean faceTofaceApproval, boolean payroll, boolean training, boolean kaizenApproval, boolean travelManagementRights, boolean expenseRequestRights, boolean hrFtFApproval, boolean policyViewDetail, boolean esicChalan, boolean vacancyApprove) {
         this.userMaster = userMaster;
         this.hr = hr;
         this.employee = employee;
@@ -125,6 +126,7 @@ public class UserRightMaster  implements java.io.Serializable {
         this.hrFtFApproval = hrFtFApproval;
         this.policyViewDetail = policyViewDetail;
         this.esicChalan = esicChalan;
+        this.vacancyApprove = vacancyApprove;
         
     }
 
@@ -678,6 +680,14 @@ public class UserRightMaster  implements java.io.Serializable {
 
     public void setEsicChalan(boolean esicChalan) {
         this.esicChalan = esicChalan;
+    }
+
+    public boolean isVacancyApprove() {
+        return vacancyApprove;
+    }
+
+    public void setVacancyApprove(boolean vacancyApprove) {
+        this.vacancyApprove = vacancyApprove;
     }
     
     

@@ -292,4 +292,6 @@
     <bean id="dynamicApprovalSettingApproverDAO1" class="com.bul.zydex.dao.Approval.DynamicApprovalSettingApproverDAOImpl" parent="sessionFactoryConfig" />
     <bean id="dynamicApprovalSettingEmailDAO1" class="com.bul.zydex.dao.Approval.DynamicApprovalSettingEmailDAOImpl" parent="sessionFactoryConfig" />
     <bean id="eSICMasterDAO1" class="com.bul.zydex.dao.PayrollESIC.ESICMasterDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="vacancyApprovalDAO1" class="com.bul.zydex.dao.Vacancy.VacancyApprovalDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="vacancyApprovalHistoryDAO1" class="com.bul.zydex.dao.Vacancy.VacancyApprovalHistoryDAOImpl" parent="sessionFactoryConfig" />
 </beans>

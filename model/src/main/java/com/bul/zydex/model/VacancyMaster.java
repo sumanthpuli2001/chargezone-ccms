@@ -31,12 +31,14 @@ public class VacancyMaster implements java.io.Serializable {
     private String createdDate;
     private Integer updatedBy;
     private String updatedDate;
+    private Integer currentLevel;
+    private Integer totalLevel;
 
     public VacancyMaster() {
 
     }
 
-    public VacancyMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer salaryRange, String experience, String responsibility, String skill, String fromDate, String toDate, String description, Integer status, DesignationMaster designationMasterm, MprMaster mprMaster, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate) {
+    public VacancyMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer salaryRange, String experience, String responsibility, String skill, String fromDate, String toDate, String description, Integer status, DesignationMaster designationMasterm, MprMaster mprMaster, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer currentLevel, Integer totalLevel) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
@@ -57,6 +59,8 @@ public class VacancyMaster implements java.io.Serializable {
         this.createdDate = createdDate;
         this.updatedBy = updatedBy;
         this.updatedDate = updatedDate;
+        this.currentLevel = currentLevel;
+        this.totalLevel = totalLevel;
     }
 
     public Integer getId() {
@@ -218,6 +222,23 @@ public class VacancyMaster implements java.io.Serializable {
     public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
     }
+
+    public Integer getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(Integer currentLevel) {
+        this.currentLevel = currentLevel;
+    }
+
+    public Integer getTotalLevel() {
+        return totalLevel;
+    }
+
+    public void setTotalLevel(Integer totalLevel) {
+        this.totalLevel = totalLevel;
+    }
+    
     
 
 }

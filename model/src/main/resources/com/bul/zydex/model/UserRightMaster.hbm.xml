@@ -206,5 +206,8 @@
         <property name="esicChalan" type="java.lang.Boolean">
             <column name="esic_chalan" />
         </property>
+        <property name="vacancyApprove" type="java.lang.Boolean">
+            <column name="vacancy_approve" />
+        </property>
     </class>
 </hibernate-mapping>

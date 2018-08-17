@@ -252,6 +252,13 @@
                                                         </div>
                                                         <div id="printableArea">
                                                         <div class="col-sm-12">
+                                                                  <table>
+                                                                    <tr>
+                                                                        <td style="text-align: right;">
+                                                                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
                                                             <div class="col-sm-6">
                                                                 <table border="1">
                                                                     <tr>
@@ -260,6 +267,9 @@
                                                                         </td>
                                                                     </tr>
                                                                 </table>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                          
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <table border="1" style="border: 1px solid black;width:100%;">

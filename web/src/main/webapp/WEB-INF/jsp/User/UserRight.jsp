@@ -248,6 +248,12 @@
                                                             <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].candidateListDescription}">Candidate List</label>
 
                                                     </div>
+                                                    <div class="col-sm-3">
+                                                        <form:checkbox path="vacancyApprove"></form:checkbox>
+                                                            &nbsp;&nbsp;&nbsp;
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].vacancyApprove}">Vacancy Approve</label>
+
+                                                    </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-3">

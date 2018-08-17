@@ -24,5 +24,7 @@ public interface VacancyMasterDAO<T> extends GenericsDAO<T> {
     public List<?> fetchDateWiseData(String startDate, String endDate);
     
     public VacancyMaster readByVacancyId(int vacancyId);
+    
+    public List<?> fetchApprovVacancy(int empId);
 
 }

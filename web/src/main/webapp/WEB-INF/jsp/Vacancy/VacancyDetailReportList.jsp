@@ -25,15 +25,15 @@
         <script>
             function deleteCheck11() {
                 var checkboxes = confirm("Are you sure you want to delete?");
-                if(checkboxes){
-                checkboxes = document.getElementsByName('checkId');
-                for (var i = 0, n = checkboxes.length; i < n; i++) {
-                    if (checkboxes[i].checked) {
-                        return true;
+                if (checkboxes) {
+                    checkboxes = document.getElementsByName('checkId');
+                    for (var i = 0, n = checkboxes.length; i < n; i++) {
+                        if (checkboxes[i].checked) {
+                            return true;
+                        }
                     }
+                    alert("Please, Select one or more record(s).");
                 }
-                alert("Please, Select one or more record(s).");
-            }
                 return false;
             }
         </script>
@@ -85,8 +85,8 @@
                                                                     <th style="width: 50px;">Experience</th>
                                                                     <th style="width: 50px;">Start Date</th>
                                                                     <th style="width: 50px;">End Date</th>
-                                                                    <!--<th style="width: 50px;">Budget</th>-->
-                                                                    <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                    <th style="width: 50px;">Status</th>
+                                                                        <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>
 
@@ -106,14 +106,28 @@
                                                                 <td>${list[4]}</td>
                                                                 <td>${list[6]}</td>
                                                                 <td>${list[7]}</td>
-                                                                <!--<td>${list[2]}</td>-->
-                                                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                <td>
-                                                                    <div class="btn-group">
-                                                                        <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                            &nbsp;&nbsp;Edit
+                                                                <c:if test="${list[5] == 0}"><td><span class="badge">Pending</span></td></c:if>
+                                                                <c:if test="${list[5] == 2}"><td><span class="badge">Pending</span></td></c:if>
+
+                                                                <c:if test="${list[5] == 1}"><td><span class="label label-warning">Recycled</span></td></c:if>
+
+                                                                <c:if test="${list[5] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
+
+                                                                <c:if test="${list[5] == 4}"><td><span class="label label-success">Approved</span></td></c:if>
+                                                                <c:if test="${list[5] == 5}"><td><span class="label label-success">Final Approved</span></td></c:if>
+                                                                    <td>
+                                                                        <div class="btn-group">
+                                                                            <button type="button" onclick="viewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;View
                                                                         </button>
                                                                     </div>
+                                                                    <c:if test="${list[5] eq 0 || list[5] eq 1}">
+                                                                        <div class="btn-group">
+                                                                            <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                &nbsp;&nbsp;Edit
+                                                                            </button>
+                                                                        </div>
+                                                                    </c:if>
                                                                 </td>
                                                                 <%--</c:if>--%>
                                                             </tr>
@@ -141,6 +155,9 @@
     <script>
         function editViewClick(id) {
             window.location = 'vacancy.htm?act=viewEditVacancy&id=' + id;
+        }
+        function viewClick(id) {
+            window.location = 'vacancy.htm?act=ShowVacancy&id=' + id;
         }
     </script>
 </html>

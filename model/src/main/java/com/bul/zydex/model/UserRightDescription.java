@@ -79,11 +79,12 @@ public class UserRightDescription implements java.io.Serializable {
     private String hrFtFApproval;
     private String policyViewDetail;
     private String esicChalan;
+    private String vacancyApprove;
 
     public UserRightDescription() {
     }
 
-    public UserRightDescription(String hrDescription, String employeeDescription, String traveLAdminDescription, String travelExpenseAdminDescription, String poolCarAdminDescription, String securityDescription, String cafeteriaAdminDescription, String itAdminDescription, String employeeManagementDescription, String leaveManagementDescription, String shiftManagementDescription, String appraisalPmpDescription, String appraisal360Description, String probationToConfirmationDescription, String employeeExitDesciption, String employeeReferralDescription, String temporaryShiftAssignDesctiption, String exitInterviewDescription, String noDueDescription, String attendanceReportDescription, String cashAdvanceViewDescription, String lunaPlantAttendanceMgntDescription, String gavasatPlantAttendanceMgntDescription, String departmentWiseAttendanceDecription, String mprDescription, String budgetDecription, String vacancyDescription, String candidateInductionDescription, String assessmentReviewDescription, String faceTofaceInterviewDescritpion, String candidateListDescription, String mppApprovalDescription, String mprApprovalDescription, String faceTofaceApprovalDecription, String payrollDecription, String trainingDescription, String kaizenApprovalDescription, String employeeMasterReportDescription, String employeeAttendanceReportDescription, String monthlyAttendanceReportDescription, String dailyPresentReportDescription, String searchEmployeeLeaveDetailDescription, String searchEmployeeLeaveBalanceDescription, String searchTravelRequesDescription, String searchExpenseRequestDescription, String pmpReportDescription, String appraisalReport360Description, String formSixteenDescription, String pfDescription, String ptDescription, String salarySlipDescription, String policyDescription, String companyMonthlyReportDescription, String ptStatementDescription, String bankStatementDescription, String esicDeductionStatement, String overTimeReportDescription, String pfChallenDescription, String loanDescription, String attendanceDescription, String employeeSalaryYearlyDescription, String govtFormatPfDescription, String travelManagementRightsDescription, String expenseRequestRightsDescription, String hrFtFApproval, String policyViewDetail, String esicChalan) {
+    public UserRightDescription(String hrDescription, String employeeDescription, String traveLAdminDescription, String travelExpenseAdminDescription, String poolCarAdminDescription, String securityDescription, String cafeteriaAdminDescription, String itAdminDescription, String employeeManagementDescription, String leaveManagementDescription, String shiftManagementDescription, String appraisalPmpDescription, String appraisal360Description, String probationToConfirmationDescription, String employeeExitDesciption, String employeeReferralDescription, String temporaryShiftAssignDesctiption, String exitInterviewDescription, String noDueDescription, String attendanceReportDescription, String cashAdvanceViewDescription, String lunaPlantAttendanceMgntDescription, String gavasatPlantAttendanceMgntDescription, String departmentWiseAttendanceDecription, String mprDescription, String budgetDecription, String vacancyDescription, String candidateInductionDescription, String assessmentReviewDescription, String faceTofaceInterviewDescritpion, String candidateListDescription, String mppApprovalDescription, String mprApprovalDescription, String faceTofaceApprovalDecription, String payrollDecription, String trainingDescription, String kaizenApprovalDescription, String employeeMasterReportDescription, String employeeAttendanceReportDescription, String monthlyAttendanceReportDescription, String dailyPresentReportDescription, String searchEmployeeLeaveDetailDescription, String searchEmployeeLeaveBalanceDescription, String searchTravelRequesDescription, String searchExpenseRequestDescription, String pmpReportDescription, String appraisalReport360Description, String formSixteenDescription, String pfDescription, String ptDescription, String salarySlipDescription, String policyDescription, String companyMonthlyReportDescription, String ptStatementDescription, String bankStatementDescription, String esicDeductionStatement, String overTimeReportDescription, String pfChallenDescription, String loanDescription, String attendanceDescription, String employeeSalaryYearlyDescription, String govtFormatPfDescription, String travelManagementRightsDescription, String expenseRequestRightsDescription, String hrFtFApproval, String policyViewDetail, String esicChalan, String vacancyApprove) {
         this.hrDescription = hrDescription;
         this.employeeDescription = employeeDescription;
         this.traveLAdminDescription = traveLAdminDescription;
@@ -151,6 +152,7 @@ public class UserRightDescription implements java.io.Serializable {
         this.hrFtFApproval = hrFtFApproval;
         this.policyViewDetail = policyViewDetail;
         this.esicChalan = esicChalan;
+        this.vacancyApprove = vacancyApprove;
     }
 
     public Integer getId() {
@@ -695,6 +697,14 @@ public class UserRightDescription implements java.io.Serializable {
 
     public void setEsicChalan(String esicChalan) {
         this.esicChalan = esicChalan;
+    }
+
+    public String getVacancyApprove() {
+        return vacancyApprove;
+    }
+
+    public void setVacancyApprove(String vacancyApprove) {
+        this.vacancyApprove = vacancyApprove;
     }
 
     

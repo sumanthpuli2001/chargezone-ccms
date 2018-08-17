@@ -67,5 +67,11 @@
         <property name="updatedDate" type="string">
             <column name="updated_date" />
         </property>
+        <property name="currentLevel" type="java.lang.Integer">
+            <column name="current_level" />
+        </property>
+        <property name="totalLevel" type="java.lang.Integer">
+            <column name="total_level" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -56,7 +56,7 @@
                                         <form:form class="form-horizontal" method="post" commandName="candidateApplyJob" action="recruitment.htm?act=assessmentClick">
                                             <input type="hidden" id="empreqid" name="empreqid" value="${mprMaster.id}">
 
-                                            <div class="box box-info collapsed-box ">
+<!--                                            <div class="box box-info collapsed-box ">
                                                 <div class="box-header">
                                                     <h3 class="box-title">Man Power Planing Detail:</h3>
                                                     <div class="box-tools pull-right">
@@ -105,8 +105,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="box box-info collapsed-box ">
+                                            </div>-->
+<!--                                            <div class="box box-info collapsed-box ">
                                                 <div class="box-header">
                                                     <h3 class="box-title">Man Power Requisition Detail:</h3>
                                                     <div class="box-tools pull-right">
@@ -165,7 +165,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
 
                                             <div class="box box-info collapsed-box ">
                                                 <div class="box-header">
@@ -711,13 +711,13 @@
                                                         <button type="button" class="btn btn-danger" onclick="return reject(${candidateJobApplication.id},${candidateApplyJob.id});" value="Reject">Reject</button>
                                                     </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 11}">
-                                                        <button type="button" class="btn btn-primary" onclick="offerLate(${candidateJobApplication.id},${candidateApplyJob.id});">offer Latter</button>
+                                                        <button type="button" class="btn btn-primary" style="width:130px !important;" onclick="offerLate(${candidateJobApplication.id},${candidateApplyJob.id});">offer Latter</button>
                                                     </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 1}">
                                                         <button type="button" class="btn btn-primary" onclick="shortlisted(${candidateJobApplication.id},${candidateApplyJob.id});">Shortlist</button>
                                                     </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 11 || candidateJobApplication.status eq 14}">
-                                                        <button type="button" class="btn btn-primary" onclick="induction(${candidateJobApplication.id},${candidateApplyJob.id});">Induction</button>
+                                                        <button type="button" class="btn btn-primary" style="width:130px !important;"  onclick="induction(${candidateJobApplication.id},${candidateApplyJob.id});">Induction</button>
                                                     </c:if>
                                                     <c:if
                                                         test="${candidateJobApplication.status eq 2}">
@@ -727,12 +727,12 @@
                                                         test="${candidateJobApplication.status eq 6}">
                                                         <button type="button" class="btn btn-default" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">F To F Interview</button>
                                                     </c:if>    
-                                                    <c:if test="${candidateJobApplication.status eq 2}">
-                                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
-                                                    </c:if>
-                                                    <c:if test="${candidateJobApplication.status eq 4}">
-                                                        <button type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent"  >Check Assessment</button>
-                                                    </c:if>
+                                                    <%--<c:if test="${candidateJobApplication.status eq 2}">--%>
+                                                        <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>-->
+                                                    <%--</c:if>--%>
+                                                    <%--<c:if test="${candidateJobApplication.status eq 4}">--%>
+                                                        <!--<button type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent"  >Check Assessment</button>-->
+                                                    <%--</c:if>--%>
                                                 </div>
 
 

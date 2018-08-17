@@ -72,10 +72,11 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     public List<?> readForAliveEmployeesNew() {
         String query = "";
         query += " "
-                + " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role"
+                + " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role, d.id"
                 + " FROM EmployeeMaster a "
                 + " LEFT JOIN a.designationMaster b "
                 + " LEFT JOIN a.departmentMaster c "
+                + " LEFT JOIN a.userMaster d "
                 + " where (a.dateOfLeaving is null or a.dateOfLeaving = '') "
                 + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
 

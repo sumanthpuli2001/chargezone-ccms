@@ -864,6 +864,17 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         String applicationId = request.getParameter("applicationId");
         String message = request.getParameter("message");
         String InterviewerAsHr = request.getParameter("InterviewerAsHr");
+        String technicalKnowledge = request.getParameter("technicalKnowledge");
+        String experience = request.getParameter("experience");
+        String commSkill = request.getParameter("commSkill");
+        String interPerSkill = request.getParameter("interPerSkill");
+        String leaderSkill = request.getParameter("leaderSkill");
+        String excellent = request.getParameter("excellent");
+        String strengths = request.getParameter("strengths");
+        String weaknesses = request.getParameter("weaknesses");
+        String typeOfTraining = request.getParameter("typeOfTraining");
+        String technicalareas = request.getParameter("technicalareas");
+        String otherSkills = request.getParameter("otherSkills");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
@@ -877,11 +888,23 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
 
         if (btnType.equals("APPROVE")) {
 
-            candidateF2FRequest.setStatus(2);
+            candidateF2FRequest.setStatus(5);
             candidateF2FRequest.setHrStatus(1);
             candidateF2FRequest.setMessage(message);
             candidateF2FRequest.setHrEmpId(employeeMaster.getId());
             candidateF2FRequest.setHrName(employeeMaster.getEmployeeName());
+            candidateF2FRequest.setUserStatus(1);
+            candidateF2FRequest.setTechnicalKnowledge(Integer.parseInt(technicalKnowledge));
+            candidateF2FRequest.setExperience(Integer.parseInt(experience));
+            candidateF2FRequest.setCommSkill(Integer.parseInt(commSkill));
+            candidateF2FRequest.setInterPerSkill(Integer.parseInt(interPerSkill));
+            candidateF2FRequest.setLeaderSkill(Integer.parseInt(leaderSkill));
+            candidateF2FRequest.setExcellent(Integer.parseInt(excellent));
+            candidateF2FRequest.setStrengths(strengths);
+            candidateF2FRequest.setWeaknesses(weaknesses);
+            candidateF2FRequest.setTypeOfTraining(typeOfTraining);
+            candidateF2FRequest.setTechnicalareas(technicalareas);
+            candidateF2FRequest.setOtherSkills(otherSkills);
             candidateF2FRequestService.update(candidateF2FRequest);
 
             /////////approve
@@ -894,6 +917,12 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             mprApprovalHistory.setStatusMessage(btnType);
             mprApprovalHistory.setCreatedBy(employeeMaster.getId());
             mprApprovalHistory.setCreateDate(sdf.format(cDate));
+            mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setCreateDate(sdf.format(cDate));
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+            mprApprovalHistory.setStatus(5);
             mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
             mprApprovalHistoryService.create(mprApprovalHistory);
 
@@ -908,6 +937,17 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             candidateF2FRequest.setMessage(message);
             candidateF2FRequest.setHrEmpId(employeeMaster.getId());
             candidateF2FRequest.setHrName(employeeMaster.getEmployeeName());
+            candidateF2FRequest.setTechnicalKnowledge(Integer.parseInt(technicalKnowledge));
+            candidateF2FRequest.setExperience(Integer.parseInt(experience));
+            candidateF2FRequest.setCommSkill(Integer.parseInt(commSkill));
+            candidateF2FRequest.setInterPerSkill(Integer.parseInt(interPerSkill));
+            candidateF2FRequest.setLeaderSkill(Integer.parseInt(leaderSkill));
+            candidateF2FRequest.setExcellent(Integer.parseInt(excellent));
+            candidateF2FRequest.setStrengths(strengths);
+            candidateF2FRequest.setWeaknesses(weaknesses);
+            candidateF2FRequest.setTypeOfTraining(typeOfTraining);
+            candidateF2FRequest.setTechnicalareas(technicalareas);
+            candidateF2FRequest.setOtherSkills(otherSkills);
             candidateF2FRequestService.update(candidateF2FRequest);
 
             ///hold
@@ -922,6 +962,12 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             mprApprovalHistory.setCreatedBy(employeeMaster.getId());
             mprApprovalHistory.setCreateDate(sdf.format(cDate));
             mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setCreateDate(sdf.format(cDate));
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+            mprApprovalHistory.setStatus(3);
+            mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
             mprApprovalHistoryService.create(mprApprovalHistory);
         }
         if (btnType.equals("REJECT")) {
@@ -931,6 +977,17 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             candidateF2FRequest.setMessage(message);
             candidateF2FRequest.setHrEmpId(employeeMaster.getId());
             candidateF2FRequest.setHrName(employeeMaster.getEmployeeName());
+            candidateF2FRequest.setTechnicalKnowledge(Integer.parseInt(technicalKnowledge));
+            candidateF2FRequest.setExperience(Integer.parseInt(experience));
+            candidateF2FRequest.setCommSkill(Integer.parseInt(commSkill));
+            candidateF2FRequest.setInterPerSkill(Integer.parseInt(interPerSkill));
+            candidateF2FRequest.setLeaderSkill(Integer.parseInt(leaderSkill));
+            candidateF2FRequest.setExcellent(Integer.parseInt(excellent));
+            candidateF2FRequest.setStrengths(strengths);
+            candidateF2FRequest.setWeaknesses(weaknesses);
+            candidateF2FRequest.setTypeOfTraining(typeOfTraining);
+            candidateF2FRequest.setTechnicalareas(technicalareas);
+            candidateF2FRequest.setOtherSkills(otherSkills);
             candidateF2FRequestService.update(candidateF2FRequest);
 
             ///////reject
@@ -945,6 +1002,12 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             mprApprovalHistory.setStatusMessage(btnType);
             mprApprovalHistory.setCreatedBy(employeeMaster.getId());
             mprApprovalHistory.setCreateDate(sdf.format(cDate));
+            mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setCreateDate(sdf.format(cDate));
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+            mprApprovalHistory.setStatus(10);
             mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
             mprApprovalHistoryService.create(mprApprovalHistory);
 

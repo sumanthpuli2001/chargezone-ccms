@@ -3818,17 +3818,20 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             LeaveTypeMaster leaveTypeMaster2 = new LeaveTypeMaster();
             LeaveTypeMaster leaveTypeMaster3 = new LeaveTypeMaster();
             LeaveTypeMaster leaveTypeMaster4 = new LeaveTypeMaster();
+            LeaveTypeMaster leaveTypeMaster5 = new LeaveTypeMaster();
             EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
             EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
             EmployeeLeaveBalance employeeLeaveBalance2 = new EmployeeLeaveBalance();
             EmployeeLeaveBalance employeeLeaveBalance3 = new EmployeeLeaveBalance();
             EmployeeLeaveBalance employeeLeaveBalance4 = new EmployeeLeaveBalance();
+            EmployeeLeaveBalance employeeLeaveBalance5 = new EmployeeLeaveBalance();
             try {
                 String clId = "";
                 String slId = "";
                 String plId = "";
                 String pTlId = "";
                 String srtlId = "";
+                String coffId = "";
 
                 Object[] next = (Object[]) itr.next();
                 String employeeId = "" + next[0];
@@ -3914,11 +3917,35 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 } else {
                     empInfoList.add("");
                 }
+                //                c.off
+                List leaveTypeList5 = leaveTypeMasterService.readLeaveType("C Off Leave");
+                if (!leaveTypeList5.isEmpty()) {
+                    leaveTypeMaster5 = (LeaveTypeMaster) leaveTypeList5.get(0);
+                    coffId = "" + leaveTypeMaster5.getId();
+                }
+                employeeLeaveBalance5.setEmployeeMaster(employeeMaster);
+                employeeLeaveBalance5.setLeaveTypeMaster(leaveTypeMaster5);
+                List balanceList5 = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance5);
+                if (!balanceList5.isEmpty()) {
+                    employeeLeaveBalance5 = (EmployeeLeaveBalance) balanceList5.get(0);
+                    empInfoList.add("" + employeeLeaveBalance5.getNoOfLeaveRemain());
+                } else {
+                    empInfoList.add("");
+                }
+                
+                
+                
+                
+                
+                
+                
+                
                 String casualLeaveBalId = "" + employeeLeaveBalance.getId();
                 String sickLeaveBalId = "" + employeeLeaveBalance1.getId();
                 String privilegeLeaveBalId = "" + employeeLeaveBalance2.getId();
                 String paternityLeaveBalId = "";
                 String shortLeaveBalId = "";
+                String coffLeaveBalId = "";
                 if (employeeLeaveBalance3.getId() == null) {
                     paternityLeaveBalId = "0";
                 } else {
@@ -3930,8 +3957,13 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 } else {
                     shortLeaveBalId = "" + employeeLeaveBalance4.getId();
                 }
+                if (employeeLeaveBalance5.getId() == null) {
+                    coffLeaveBalId = "0";
+                } else {
+                    coffLeaveBalId = "" + employeeLeaveBalance5.getId();
+                }
 
-                empInfoList.add(clId + "_" + slId + "_" + plId + "_" + pTlId + "_" + srtlId);
+                empInfoList.add(clId + "_" + slId + "_" + plId + "_" + pTlId + "_" + srtlId+ "_" + coffId);
 //                empInfoList.add(casualLeaveBalId + "_" + sickLeaveBalId + "_" + privilegeLeaveBalId + "_" + paternityLeaveBalId + "_" + shortLeaveBalId);
 
                 map.put(employeeMaster.getId(), empInfoList);

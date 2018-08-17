@@ -167,6 +167,7 @@
                                                                     <th>Privilege Leave</th>
                                                                     <th>Paternity Leave</th>
                                                                     <th>Short Leave</th>
+                                                                    <th>C.OFF</th>
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
@@ -183,9 +184,10 @@
                                                                 <td style="text-align: center;">${employeeBalanceMap.value[4]}</td>
                                                                 <td style="text-align: center;">${employeeBalanceMap.value[5]}</td>
                                                                 <td style="text-align: center;">${employeeBalanceMap.value[6]}</td>
+                                                                <td style="text-align: center;">${employeeBalanceMap.value[7]}</td>
                                                                 <%--</c:forEach>--%>
                                                                 <td>
-                                                                    <c:set var="leaveType" value="${fn:split(employeeBalanceMap.value[7], '_')}"></c:set>
+                                                                    <c:set var="leaveType" value="${fn:split(employeeBalanceMap.value[8], '_')}"></c:set>
                                                                         <div class="btn-group">
                                                                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                                 Edit <span class="caret"></span>
@@ -223,6 +225,14 @@
                                                                                     </a>
                                                                                 </li>
                                                                             </c:if>
+                                                                            <%--<c:if test="${leaveType[3] ne '0'}">--%>
+                                                                                <li>
+                                                                                    <a href="#" data-toggle="modal" data-target="#myModal"
+                                                                                       onclick="viewClick(${employeeBalanceMap.key},${leaveType[5]});">
+                                                                                        &nbsp;&nbsp;C.OFF
+                                                                                    </a>
+                                                                                </li>
+                                                                            <%--</c:if>--%>
                                                                         </ul>
                                                                     </div>
                                                                 </td>

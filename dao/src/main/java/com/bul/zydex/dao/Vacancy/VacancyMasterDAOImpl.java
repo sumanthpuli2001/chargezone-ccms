@@ -54,6 +54,7 @@ public class VacancyMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Vacan
                 + " FROM VacancyMaster a "
                 + " WHERE STR_TO_DATE(a.fromDate,'%d/%m/%Y') <=  STR_TO_DATE('" + date + "','%d/%m/%Y')"
                 + " AND STR_TO_DATE(a.toDate,'%d/%m/%Y') >=  STR_TO_DATE('" + date + "','%d/%m/%Y')"
+                + " AND a.status = 5"
                 + " order by a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);

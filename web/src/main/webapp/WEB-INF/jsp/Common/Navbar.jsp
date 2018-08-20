@@ -85,9 +85,9 @@
                                 <c:if test="${sessionScope.userRight.vacancy}">
                                 <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
                                 </c:if>
-                                <%--<c:if test="${sessionScope.userRight.faceTofaceInterview}">--%>
-                                <!--<li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Request</a></li>-->
-                                <%--</c:if>--%>
+                                <c:if test="${sessionScope.userRight.hr}">
+                                <li><a href="candidateF2FApproval.htm?act=candidateF2FReqHr"><i class="fa fa-circle-o"></i>Hr Candidate F2F  Request </a></li>
+                                </c:if>
                                 <%--<c:if test="${sessionScope.userRight.faceTofaceApproval}">--%>
                                 <!--<li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Approval</a></li>-->
                                 <%--</c:if>--%>

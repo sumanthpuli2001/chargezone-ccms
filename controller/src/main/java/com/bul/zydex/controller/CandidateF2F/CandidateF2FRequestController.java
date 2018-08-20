@@ -81,7 +81,6 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
 //            sendMail.sendMail(from, To, Subject, msg);
 //        } catch (Exception e) {
 //        }
-
         return mv;
     }
 
@@ -198,14 +197,16 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         cja.setStatus(2);
         candidateJobApplicationService.update(cja);
 
-        mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
-        mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+        if (employeeMaster != null) {
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        }
         mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistory.setStatus(2);
         mprApprovalHistory.setComment("ShortListed");
         mprApprovalHistory.setStatusMessage("ShortListed");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
-        mprApprovalHistory.setCreatedBy(employeeMaster.getId());
         mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
         mprApprovalHistoryService.create(mprApprovalHistory);
 
@@ -257,14 +258,16 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         cja.setStatus(3);
         candidateJobApplicationService.update(cja);
 
-        mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
-        mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+        if (employeeMaster != null) {
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        }
         mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistory.setStatus(3);
         mprApprovalHistory.setComment("Candidate Rejected");
         mprApprovalHistory.setStatusMessage("Candidate Rejected");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
-        mprApprovalHistory.setCreatedBy(employeeMaster.getId());
         mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
         mprApprovalHistoryService.create(mprApprovalHistory);
 
@@ -329,14 +332,16 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         cja.setStatus(14);
         candidateJobApplicationService.update(cja);
 
-        mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
-        mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+        if (employeeMaster != null) {
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        }
         mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistory.setStatus(14);
         mprApprovalHistory.setComment("Send Offer Laters");
         mprApprovalHistory.setStatusMessage("Send Offer Laters");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
-        mprApprovalHistory.setCreatedBy(employeeMaster.getId());
         mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
         mprApprovalHistoryService.create(mprApprovalHistory);
 

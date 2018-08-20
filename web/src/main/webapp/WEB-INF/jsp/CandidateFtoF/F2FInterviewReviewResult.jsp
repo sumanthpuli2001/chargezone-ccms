@@ -109,6 +109,13 @@
 
                                                                     </span>    
                                                                 </c:if>
+                                                                <c:if test="${list[4] eq 20}">
+
+                                                                    <span class="label label-success">
+                                                                        Finish
+
+                                                                    </span>    
+                                                                </c:if>
                                                                 <c:if test="${list[4] eq 5}">
 
                                                                     <span class="label label-success">
@@ -147,7 +154,7 @@
                                                                         </button>
                                                                     </div>
                                                                 </c:if>
-                                                                <c:if test="${list[4] eq 2 && list[5] ne null}">
+                                                                <c:if test="${list[4] eq 0}">
                                                                     <div class="btn-group">
                                                                         <button type="button" onclick="reviewAscommitteeAndHrClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;Approval

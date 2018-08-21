@@ -461,6 +461,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         }
 
         List<?> list = mprApprovalHistoryService.gethistory(Integer.parseInt(applicationId));
+        List<?> list1 = vacancyApprovalHistoryService.readByVacancyId(vm.getId());
         candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
         candidateF2FRequest.setVacancyMaster(vm);
         request.setAttribute("commentlist", approverCommentList);
@@ -483,6 +484,9 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         request.setAttribute("toDate", toDate);
         request.setAttribute("description", description);
         request.setAttribute("HistoryList", list);
+        request.setAttribute("list1", list1);
+        request.setAttribute("candidateApplyJob", candidateApplyJob);
+        request.setAttribute("candidateApplyJob2", candidateApplyJob2);
 //        MPR Master -------------
 
         mv.setViewName("CandidateFtoF/ShowF2FInterview");
@@ -866,6 +870,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         mv.setViewName("CandidateFtoF/reviewAscommitteeAndHrClick");
         return mv;
     }
+
     public ModelAndView apprpoveHrViewPage(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
@@ -879,6 +884,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
+        CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob.getId());
         VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
 
 //        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
@@ -978,7 +984,8 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
             request.setAttribute("MprExperience", MprExperience);
             request.setAttribute("Mprdescription", Mprdescription);
         }
-
+        List<?> list = mprApprovalHistoryService.gethistory(Integer.parseInt(applicationId));
+        List<?> list1 = vacancyApprovalHistoryService.readByVacancyId(vm.getId());
         request.setAttribute("applicationId", applicationId);
 
         candidateF2FRequest.setCandidateApplyJob(candidateApplyJob);
@@ -1009,7 +1016,11 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         candidateF2FRequest.setVacancyMaster(vm);
         request.setAttribute("commentlist", approverCommentList);
         request.setAttribute("comitteeList", committeedetaillist);
+        request.setAttribute("list1", list1);
+        request.setAttribute("list", list);
         mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
+        mv.getModelMap().put("candidateApplyJob2", candidateApplyJob2);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
 
         mv.setViewName("CandidateFtoF/viewHrApprove");
         return mv;
@@ -1043,7 +1054,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         CandidateF2FApproval candidateF2FApproval = candidateF2FApprovalService.readByEmpIdAndReqId(employeeMaster.getId(), candidateF2FRequest.getId());
 
-        candidateF2FApproval.setComment(InterviewerAsHr);
+        candidateF2FApproval.setComment(message);
         candidateF2FApproval.setStatus(1);
         candidateF2FApprovalService.update(candidateF2FApproval);
 

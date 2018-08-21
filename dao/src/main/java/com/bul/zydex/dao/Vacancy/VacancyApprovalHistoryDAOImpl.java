@@ -26,7 +26,8 @@ public class VacancyApprovalHistoryDAOImpl<T> extends GenericsDAOImpl<T> impleme
         query += " "
                 + " SELECT a.id, a.comment, a.status, a.statusMessage, a.createdDate, a.createdBy "
                 + " FROM VacancyApprovalHistory a "
-                + " WHERE a.vacancyMaster.id = " + id;
+                + " WHERE a.vacancyMaster.id = " + id
+                + " order by a.id ";
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }

@@ -139,6 +139,7 @@
                                                                 <td>${list[10]}</td>
                                                                 <td>${list[9]}</td>
                                                                 <td>
+                                                                    <c:if test="${list[8] eq 0}"><span class="label label-default">New Applicant</span></c:if>
                                                                     <c:if test="${list[8] eq 1}"><span class="label label-default">New Applicant</span></c:if>
                                                                     <c:if test="${list[8] eq 2}"><span class="label label-default">Shortlisted</span></c:if>
                                                                     <c:if test="${list[8] eq 3}"><span class="label label-default">Rejected</span></c:if>

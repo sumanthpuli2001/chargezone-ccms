@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <title>Vacancy Detail List Report</title>
-           <style>
+        <style>
             td,tr,th,table{
                 text-align: left;
                 vertical-align: middle;
@@ -110,66 +110,66 @@
                                            commandName="candidateF2FRequest" action="candidateF2FApproval.htm?act=approvalFaceToFaceInvitation" onsubmit="return saveSubmit()" >
                                     <input type="hidden" id="applicationId" name="applicationId" value="${applicationId}">   
 
-<!--                                    <div class="box box-info collapsed-box ">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Man Power Requisition Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="box-body">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>MPR Name:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${vacancyName}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>MPR Budget:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${Mprbudget}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${jobtypeNAme1}</span>    
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
-                                                            <span >${designationName1}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Location:</label>  &nbsp;&nbsp;&nbsp;
-                                                            <span >${locationName1}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Department:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${departmentName1}</span>   
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${numberOfPositionMpr}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Work Experience(In Years):</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${MprExperience}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Description:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${Mprdescription}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>-->
+                                    <!--                                    <div class="box box-info collapsed-box ">
+                                                                            <div class="box-header">
+                                                                                <h3 class="box-title">Man Power Requisition Detail:</h3>
+                                                                                <div class="box-tools pull-right">
+                                                                                    <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="box-body">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>MPR Name:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${vacancyName}</span>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>MPR Budget:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${Mprbudget}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${jobtypeNAme1}</span>    
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                                                                <span >${designationName1}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Location:</label>  &nbsp;&nbsp;&nbsp;
+                                                                                                <span >${locationName1}</span>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${departmentName1}</span>   
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${numberOfPositionMpr}</span>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Work Experience(In Years):</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${MprExperience}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Description:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${Mprdescription}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
 
                                     <div class="box box-info collapsed-box ">
                                         <div class="box-header">
@@ -256,9 +256,9 @@
                                                 </div>
                                                 <div id="printableArea">
                                                     <div class="col-sm-12">
-                                                            <div class="box-header" style="text-align: right;">
-                                                                <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
-                                                            </div>
+                                                        <div class="box-header" style="text-align: right;">
+                                                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                                                        </div>
                                                         <div class="col-sm-6">
                                                             <table border="1">
                                                                 <tr>
@@ -720,9 +720,9 @@
                                                 </div>
                                                 <div id="printableAreatwo">
                                                     <div class="col-md-12 col-sm-12">
-                                                          <div class="box-header" style="text-align: right;">
-                                                                <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
-                                                            </div>
+                                                        <div class="box-header" style="text-align: right;">
+                                                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                                                        </div>
                                                         <div class="box-body no-padding">
                                                             <div class="col-sm-6">
                                                                 <label>Position:</label> &nbsp;&nbsp;&nbsp;
@@ -747,7 +747,7 @@
                                                         <div class="form-group">
                                                             <table>
                                                                 <tr>
-                                                                    <td><label>&nbsp;&nbsp;&nbsp;&nbsp; Interview Panel Member:</label></td>
+                                                                    <td><label>Interview Panel Member:</label></td>
                                                                     <td>
                                                                         <c:forEach  var="test" items="${comitteeList}">
 
@@ -878,8 +878,11 @@
                                                                     </tr>
                                                                 </table>
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                                <label>Overall Rating <span style="color: red;font-size: 15px;">*</span>&nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
+                                                            <div class="col-md-12 col-sm-12"></br></div>            
+                                                            <div class="col-md-12 col-sm-12">
+                                                                <div class="col-sm-6">
+                                                                    <label>Overall Rating &nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
+                                                                </div>
                                                             </div>
                                                             <div class="col-sm-6" style="padding:0 5%;">
                                                                 <table id="questionTable" border="1" class="table" style="" align="Center"  >
@@ -916,8 +919,6 @@
                                                                     </c:if>
                                                                     <div class="col-sm-8">
                                                                         <label>${comment[2]}</label>
-                                                                        <textarea class="form-control"
-                                                                                  id="interviewerRemark" name="interviewerRemark"   disabled>${comment[1]}</textarea>
                                                                     </div>
 
                                                                 </div>
@@ -927,7 +928,7 @@
                                                                     <label>Comment:</label> &nbsp;&nbsp;&nbsp;
                                                                 </div>
                                                                 <div class="col-sm-8">
-                                                                    <form:input path="message" id="budget1" readonly="true" class="form-control" placeholder="Comment:"></form:input>
+                                                                    <div>${candidateF2FRequest.message}</div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -953,6 +954,37 @@
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12">
                                                         <label><h4></h4></label>
+                                                        <table border="1" style="width: 100%;" align="center">
+                                                                <c:choose>
+                                                                    <c:when test="${empty list1}">
+                                                                        <tr>
+                                                                            <td align="center">
+                                                                                <c:out value="There is no record found."></c:out>
+                                                                                </td>
+                                                                            </tr>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <thead>
+                                                                        <th colspan="4" style="text-align:center">Vacancy History Detail </th>
+                                                                        <tr>
+                                                                            <th style="width: 50px;">Vacancy Name</th>
+                                                                            <th style="width: 50px;">Date</th>
+                                                                            <th style="width: 50px;">Comment's</th>
+                                                                            <th style="width: 50px;">Status</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <tbody>
+                                                                    <c:forEach var="list" items="${list1}">
+                                                                        <tr>
+                                                                            <td>${vacancyName}</td>
+                                                                            <td>${list[4]}</td>
+                                                                            <td>${list[3]}</td>
+                                                                            <td>${list[5]} By&nbsp${list[1]}</td>
+                                                                        </c:forEach>
+                                                                </tbody>
+                                                            </table>
                                                         <table border="1" style="width: 100%;" align="center">
                                                         <c:choose>
                                                             <c:when test="${empty HistoryList}">

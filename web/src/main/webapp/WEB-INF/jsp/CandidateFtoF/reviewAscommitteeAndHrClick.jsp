@@ -9,7 +9,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <title>Vacancy Detail List Report</title>
-           <style>
+        <style>
             td,tr,th,table{
                 text-align: left;
                 vertical-align: middle;
@@ -108,117 +108,117 @@
                                            commandName="candidateF2FRequest" action="candidateF2FApproval.htm?act=approvalFaceToFaceInvitationForCommASHr" onsubmit="return saveSubmit()" >
                                     <input type="hidden" id="applicationId" name="applicationId" value="${applicationId}">   
 
-<!--                                    <div class="box box-info collapsed-box ">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Man Power Planing Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="box-body">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Man Power Planing Budget:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${Mppbudget}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${jobtypeNAme2}</span>    
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
-                                                            <span >${designationName1}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Location:</label>  &nbsp;&nbsp;&nbsp;
-                                                            <span >${locationName2}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Department:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${departmentName2}</span>   
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${numberOfPositionMpp}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Work Experience(In Years): </label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${MppExperience}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>-->
+                                    <!--                                    <div class="box box-info collapsed-box ">
+                                                                            <div class="box-header">
+                                                                                <h3 class="box-title">Man Power Planing Detail:</h3>
+                                                                                <div class="box-tools pull-right">
+                                                                                    <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="box-body">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Man Power Planing Budget:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${Mppbudget}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${jobtypeNAme2}</span>    
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                                                                <span >${designationName1}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Location:</label>  &nbsp;&nbsp;&nbsp;
+                                                                                                <span >${locationName2}</span>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${departmentName2}</span>   
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${numberOfPositionMpp}</span>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Work Experience(In Years): </label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${MppExperience}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
 
-<!--                                    <div class="box box-info collapsed-box ">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Man Power Requisition Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="box-body">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>MPR Name:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${vacancyName}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>MPR Budget:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${Mprbudget}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${jobtypeNAme1}</span>    
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
-                                                            <span >${designationName1}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Location:</label>  &nbsp;&nbsp;&nbsp;
-                                                            <span >${locationName1}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Department:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${departmentName1}</span>   
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${numberOfPositionMpr}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Work Experience(In Years): </label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${MprExperience}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Description:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${Mprdescription}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>-->
+                                    <!--                                    <div class="box box-info collapsed-box ">
+                                                                            <div class="box-header">
+                                                                                <h3 class="box-title">Man Power Requisition Detail:</h3>
+                                                                                <div class="box-tools pull-right">
+                                                                                    <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="box-body">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>MPR Name:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${vacancyName}</span>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>MPR Budget:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${Mprbudget}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${jobtypeNAme1}</span>    
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                                                                <span >${designationName1}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Location:</label>  &nbsp;&nbsp;&nbsp;
+                                                                                                <span >${locationName1}</span>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${departmentName1}</span>   
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${numberOfPositionMpr}</span>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Work Experience(In Years): </label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${MprExperience}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Description:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${Mprdescription}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
 
                                     <div class="box box-info collapsed-box ">
                                         <div class="box-header">
@@ -981,10 +981,20 @@
                                                             </tr>
                                                         </table>
 
-                                                        <div class="form-group">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <div class="form-group">
 
                                                             <div class="col-sm-2">
-                                                                <label>Comment:</label> &nbsp;&nbsp;&nbsp;
+                                                                <label>&nbsp;&nbsp;&nbsp;Comment:</label>
                                                             </div>
                                                             <div class="col-sm-8">
 
@@ -993,148 +1003,142 @@
                                                             </div>
                                                             <span id="messageError" style="color: red;"></span>
                                                         </div>
-                                                    </div>
-                                                </div>
+                                        <div class="col-sm-4" style="text-align: left">
+                                            <%--<c:if test="${recruitmentMaster.mppStatus == 1 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 0}">--%>
+                                            <input type="submit" class="btn btn-danger" id="btnType2" name="btnType"  value="REJECT" style="width: 100px"></input>
+                                            <%--</c:if>--%>
+                                        </div>
+                                        <div class="col-sm-4" style="text-align: center">
+                                            <%--<c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 3 || recruitmentMaster.mppStatus == 1}">--%>
+                                            <input type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="ON HOLD"  style="width: 100px"></input>
+                                            <%--</c:if>--%>
+                                        </div>
+                                        <div class="col-sm-4" style="text-align: right">
+                                            <%--<c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 3}">--%>
+                                            <input type="submit" class="btn btn-success"  id="btnType1" name="btnType" value="APPROVE" style="width: 100px" ></input>
+                                            <%--</c:if>--%>
+                                        </div>
+                                    </div>
+                                </form:form>
+                            </div><!-- /.tab-pane -->
+                        </div><!-- /.tab-content -->
+                    </div><!-- nav-tabs-custom -->
+                </div><!-- /.col -->
+            </div>
+    </div>
 
+    <script>
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
 
+            jQuery("#policyId1").tokenInput(${list}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+                prePopulate: ${preList}
+            });
+        });
 
-                                                <div class="form-group">
-                                                    <div class="col-sm-4" style="text-align: left">
-                                                        <%--<c:if test="${recruitmentMaster.mppStatus == 1 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 0}">--%>
-                                                        <input type="submit" class="btn btn-danger" id="btnType2" name="btnType"  value="REJECT" style="width: 100px"></input>
-                                                        <%--</c:if>--%>
-                                                    </div>
-                                                    <div class="col-sm-4" style="text-align: center">
-                                                        <%--<c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 3 || recruitmentMaster.mppStatus == 1}">--%>
-                                                        <input type="submit" class="btn btn-warning" id="btnType2" name="btnType"  value="ON HOLD"  style="width: 100px"></input>
-                                                        <%--</c:if>--%>
-                                                    </div>
-                                                    <div class="col-sm-4" style="text-align: right">
-                                                        <%--<c:if test="${recruitmentMaster.mppStatus == 0 || recruitmentMaster.mppStatus == 2 || recruitmentMaster.mppStatus == 3}">--%>
-                                                        <input type="submit" class="btn btn-success"  id="btnType1" name="btnType" value="APPROVE" style="width: 100px" ></input>
-                                                        <%--</c:if>--%>
-                                                    </div>
-                                                </div>
-                                            </form:form>
-                                        </div><!-- /.tab-pane -->
-                                    </div><!-- /.tab-content -->
-                                </div><!-- nav-tabs-custom -->
-                            </div><!-- /.col -->
-                        </div>
-                    </div>
+    </script>
+    <script>
+        var flag3 = true;
+        function saveSubmit() {
+            if (document.getElementById("InterviewerAsHr").value === "") {
 
-                    <script>
-                        jQuery.noConflict();
-                        jQuery(document).ready(function () {
+                document.getElementById("InterviewerAsHrError").innerHTML = " It must be filled.";
+                flag3 = false;
+            } else if (document.getElementById("message").value === "") {
 
-                            jQuery("#policyId1").tokenInput(${list}, {
-                                preventDuplicates: true,
-                                noResultsText: "No Result",
-                                tokenLimit: "1",
-                                searchingText: "Searching ... .. .",
-                                prePopulate: ${preList}
-                            });
-                        });
+                document.getElementById("messageError").innerHTML = " It must be filled.";
+                flag3 = false;
+            }
+            //            alert(document.getElementById("month").value);
+            //            if (document.getElementById("policyId1").value === "") {
+            //
+            //                document.getElementById("policyerror").innerHTML = "- It must be filled.";
+            //                flag3 = false;
+            else {
+                return true;
+            }
+            return false;
+        }
+    </script>
 
-                    </script>
-                    <script>
-                        var flag3 = true;
-                        function saveSubmit() {
-                            if (document.getElementById("InterviewerAsHr").value === "") {
+    <!--<script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    
+    </script>-->
 
-                                document.getElementById("InterviewerAsHrError").innerHTML = " It must be filled.";
-                                flag3 = false;
-                            } else if (document.getElementById("message").value === "") {
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <script type="text/javascript">
+        function printDivtwo(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>
 
-                                document.getElementById("messageError").innerHTML = " It must be filled.";
-                                flag3 = false;
-                            }
-                            //            alert(document.getElementById("month").value);
-                            //            if (document.getElementById("policyId1").value === "") {
-                            //
-                            //                document.getElementById("policyerror").innerHTML = "- It must be filled.";
-                            //                flag3 = false;
-                            else {
-                                return true;
-                            }
-                            return false;
-                        }
-                    </script>
+    <script>
+        function buttonFun1() {
+            var className = $('#minusId1').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId1').innerHTML = 'Expand';
+            }
+        }
+        function buttonFun2() {
+            var className = $('#minusId2').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId2').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId2').innerHTML = 'Expand';
+            }
+        }
+        function buttonFun3() {
+            var className = $('#minusId3').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId3').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId3').innerHTML = 'Expand';
+            }
+        }
+        function buttonFun4() {
+            var className = $('#minusId4').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId4').innerHTML = 'Expand';
+            }
+        }
+    </script>
 
-                    <!--<script type="text/javascript">
-                        $('.form_datetime').datetimepicker({
-                            //language:  'fr',
-                            weekStart: 1,
-                            todayBtn: 1,
-                            autoclose: 1,
-                            todayHighlight: 1,
-                            startView: 2,
-                            minView: 2,
-                            forceParse: 0
-                        });
-                    
-                    </script>-->
+</html>
+<script>
+    $(document).ready(function () {
+        $('#datetimepicker2').datepicker({
+        });
+    });
+</script>
+<script>
+    function myFunction() {
 
-                    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-                    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
-                    <script type="text/javascript">
-                        function printDivtwo(divName) {
-                            var printContents = document.getElementById(divName).innerHTML;
-                            var originalContents = document.body.innerHTML;
-                            document.body.innerHTML = printContents;
-                            window.print();
-                            document.body.innerHTML = originalContents;
-                        }
-                    </script>
+        document.getElementById("InterviewerAsHrError").innerHTML = " ";
+        document.getElementById("messageError").innerHTML = " ";
+    }
 
-                    <script>
-                        function buttonFun1() {
-                            var className = $('#minusId1').attr('class');
-                            if (className == 'fa fa-plus') {
-                                document.getElementById('spanId1').innerHTML = 'Minimize';
-                            } else {
-                                document.getElementById('spanId1').innerHTML = 'Expand';
-                            }
-                        }
-                        function buttonFun2() {
-                            var className = $('#minusId2').attr('class');
-                            if (className == 'fa fa-plus') {
-                                document.getElementById('spanId2').innerHTML = 'Minimize';
-                            } else {
-                                document.getElementById('spanId2').innerHTML = 'Expand';
-                            }
-                        }
-                        function buttonFun3() {
-                            var className = $('#minusId3').attr('class');
-                            if (className == 'fa fa-plus') {
-                                document.getElementById('spanId3').innerHTML = 'Minimize';
-                            } else {
-                                document.getElementById('spanId3').innerHTML = 'Expand';
-                            }
-                        }
-                        function buttonFun4() {
-                            var className = $('#minusId4').attr('class');
-                            if (className == 'fa fa-plus') {
-                                document.getElementById('spanId4').innerHTML = 'Minimize';
-                            } else {
-                                document.getElementById('spanId4').innerHTML = 'Expand';
-                            }
-                        }
-                    </script>
-
-                    </html>
-                    <script>
-                        $(document).ready(function () {
-                            $('#datetimepicker2').datepicker({
-                            });
-                        });
-                    </script>
-                    <script>
-                        function myFunction() {
-
-                            document.getElementById("InterviewerAsHrError").innerHTML = " ";
-                            document.getElementById("messageError").innerHTML = " ";
-                        }
-
-                    </script>
+</script>
 

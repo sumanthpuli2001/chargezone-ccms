@@ -31,6 +31,7 @@ import com.bul.zydex.model.RecruitmentApprovalHistory;
 import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMppApproval;
 import com.bul.zydex.model.VacancyMaster;
+import com.bul.zydex.service.Vacancy.VacancyApprovalHistoryService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 //import com.bul.zydex.model.RecruitmentMaster;
@@ -985,6 +986,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             request.setAttribute("list", list);
         }
         List<?> list = mprApprovalHistoryService.gethistory(candJobApplicationid);
+        List<?> list1 = vacancyApprovalHistoryService.readByVacancyId(vm.getId());
         //        Vacancy Master-------------
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("locationMaster", locationMaster);
@@ -1010,6 +1012,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.getModelMap().put("candidateFamilyBackground", candidateFamilyBackground);
         mv.getModelMap().put("candidateOtherReferences", candidateOtherReferences);
         request.setAttribute("list", list);
+        request.setAttribute("list1", list1);
         mv.setViewName("Recruitment/CandidateApproval");
         return mv;
     }

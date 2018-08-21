@@ -252,13 +252,9 @@
                                                         </div>
                                                         <div id="printableArea">
                                                         <div class="col-sm-12">
-                                                                  <table>
-                                                                    <tr>
-                                                                        <td style="text-align: right;">
-                                                                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
+                                                             <div class="box-header" style="text-align: right;">
+                                                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                                                        </div>
                                                             <div class="col-sm-6">
                                                                 <table border="1">
                                                                     <tr>
@@ -497,7 +493,7 @@
                                                         
                                                         <div class="col-sm-12">
                                                             </br>
-                                                            <label>ACADEMIC QUALIFICATION:</label> </br>
+                                                            <label>EXPERIENCE INFORMATION(Starting With Present Job):</label> </br>
                                                             <table border="1" class="table table-bordered">
                                                                 <tr>
                                                                     <td colspan="2" style="text-align: center; vertical-align: middle"><label>Year</label></td>
@@ -670,6 +666,37 @@
                                                             <label><h4></h4></label>
                                                             <table border="1" style="width: 100%;" align="center">
                                                                 <c:choose>
+                                                                    <c:when test="${empty list1}">
+                                                                        <tr>
+                                                                            <td align="center">
+                                                                                <c:out value="There is no record found."></c:out>
+                                                                                </td>
+                                                                            </tr>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <thead>
+                                                                        <th colspan="4" style="text-align:center">Vacancy History Detail </th>
+                                                                        <tr>
+                                                                            <th style="width: 50px;">Vacancy Name</th>
+                                                                            <th style="width: 50px;">Date</th>
+                                                                            <th style="width: 50px;">Comment's</th>
+                                                                            <th style="width: 50px;">Status</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <tbody>
+                                                                    <c:forEach var="list" items="${list1}">
+                                                                        <tr>
+                                                                            <td>${vacancyName}</td>
+                                                                            <td>${list[4]}</td>
+                                                                            <td>${list[3]}</td>
+                                                                            <td>${list[5]} By&nbsp${list[1]}</td>
+                                                                        </c:forEach>
+                                                                </tbody>
+                                                            </table>
+                                                            <table border="1" style="width: 100%;" align="center">
+                                                                <c:choose>
                                                                     <c:when test="${empty list}">
                                                                         <tr>
                                                                             <td align="center">
@@ -679,11 +706,11 @@
                                                                     </c:when>
                                                                     <c:otherwise>
                                                                         <thead>
-                                                                        <th colspan="4" style="text-align:center">History Detail </th>
+                                                                        <th colspan="4" style="text-align:center">Candidate History</th>
                                                                         <tr>
                                                                             <th style="width: 50px;">Name</th>
                                                                             <th style="width: 50px;">Date</th>
-                                                                            <th style="width: 50px;">Comment</th>
+                                                                            <th style="width: 50px;">Comment's</th>
                                                                             <th style="width: 50px;">Status</th>
                                                                         </tr>
                                                                         </thead>

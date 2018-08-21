@@ -120,19 +120,16 @@
                                     </c:if>
                                 </c:forEach>
                             </p>
-<!--                            <p>
-                                <label style="font-weight: 500;">From Date:</label> 
-                                <label style=" font-weight: normal;font-size:14px; color: grey;">${vacancyMaster.fromDate}</label>
-                            </p>-->
+                            <!--                            <p>
+                                                            <label style="font-weight: 500;">From Date:</label> 
+                                                            <label style=" font-weight: normal;font-size:14px; color: grey;">${vacancyMaster.fromDate}</label>
+                                                        </p>-->
                             <p>
                                 <label style="font-weight: 500;">Vacancy Last Date:</label>
                                 <label style=" font-weight: normal;font-size:14px; color: grey;">${vacancyMaster.toDate}</label>
                             </p>
-                            <p>
-                                <label style="font-weight: 500;">Description:</label>
-                                <label style='font-weight:normal;font-size:14px; color: grey;'>${vacancyMaster.description}</label>
-                            </p>
-                            
+
+
                         </div>
                         <div class="col-md-8 col-sm-12 col-xs-12" style="width: 65% !important;">
 
@@ -155,6 +152,12 @@
                             <p>
                                 <label style="font-weight: 500;">Salary :</label>
                                 <label style=" font-weight: normal; font-size:14px; color: grey;">${vacancyMaster.salaryRange}</label>
+                            </p>
+                        </div>
+                        <div>
+                            <p>
+                                <label style="font-weight: 500;">:-Description-:</label>
+                                <label style='font-weight:normal;font-size:14px; color: grey;'>${vacancyMaster.description}</label>
                             </p>
                         </div>
                     </div>

@@ -105,6 +105,20 @@
                                                                 <c:if test="${list[4] eq 2}">
 
                                                                     <span class="label label-success">
+                                                                        Approved By Hr
+
+                                                                    </span>    
+                                                                </c:if>
+                                                                <c:if test="${list[4] eq 20}">
+
+                                                                    <span class="label label-success">
+                                                                        Finish
+
+                                                                    </span>    
+                                                                </c:if>
+                                                                <c:if test="${list[4] eq 5}">
+
+                                                                    <span class="label label-success">
                                                                         Approved
 
                                                                     </span>    
@@ -140,7 +154,7 @@
                                                                         </button>
                                                                     </div>
                                                                 </c:if>
-                                                                <c:if test="${list[4] eq 0 && list[5] ne null}">
+                                                                <c:if test="${list[4] eq 0}">
                                                                     <div class="btn-group">
                                                                         <button type="button" onclick="reviewAscommitteeAndHrClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;Approval

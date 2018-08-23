@@ -139,6 +139,7 @@
                                                                 <td>${list[10]}</td>
                                                                 <td>${list[9]}</td>
                                                                 <td>
+                                                                    <c:if test="${list[8] eq 0}"><span class="label label-default">New Applicant</span></c:if>
                                                                     <c:if test="${list[8] eq 1}"><span class="label label-default">New Applicant</span></c:if>
                                                                     <c:if test="${list[8] eq 2}"><span class="label label-default">Shortlisted</span></c:if>
                                                                     <c:if test="${list[8] eq 3}"><span class="label label-default">Rejected</span></c:if>
@@ -149,7 +150,7 @@
                                                                     <c:if test="${list[8] eq 8}"><span class="label label-default">F2F interview Invitation</span></c:if>
                                                                     <c:if test="${list[8] eq 9}"><span class="label label-default">Candidate On hold</span></c:if>
                                                                     <c:if test="${list[8] eq 10}"><span class="label label-default">Candidate Rejected </span></c:if>
-                                                                    <c:if test="${list[8] eq 11}"><span class="label label-default">Candidate Selected</span></c:if>
+                                                                    <c:if test="${list[8] eq 11 || list[8] eq 20}"><span class="label label-default">Candidate Selected</span></c:if>
                                                                     <c:if test="${list[8] eq 12}"><span class="label label-default">Employee Induction</span></c:if>
                                                                     <c:if test="${list[8] eq 13}"><span class="label label-default">Employee On board </span></c:if>
                                                                     <c:if test="${list[8] eq 14}"><span class="label label-default">Send Offer Later </span></c:if>

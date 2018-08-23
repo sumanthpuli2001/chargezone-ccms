@@ -30,6 +30,7 @@ import com.bul.zydex.model.RecruitmentApprovalHistory;
 //import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMppApproval;
+import com.bul.zydex.model.VacancyApprovalHistory;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.Approval.ApprovalUserService;
 import com.bul.zydex.service.CandidateJobApply.CandidateAcademicQualificationService;
@@ -49,6 +50,7 @@ import com.bul.zydex.service.Recruitment.RecruitmentService;
 import com.bul.zydex.service.RecruitmentApprovalHistory.MprApprovalHistoryService;
 import com.bul.zydex.service.RecruitmentApprovalHistory.RecruitmentApprovalHistoryService;
 import com.bul.zydex.service.RecruitmentMppApproval.RecruitmentMppApprovalService;
+import com.bul.zydex.service.Vacancy.VacancyApprovalHistoryService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
@@ -88,6 +90,7 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected CandidateFamilyBackgroundService<CandidateFamilyBackground> candidateFamilyBackgroundService;
     protected CandidateExperienceDetailService<CandidateExperienceDetail> candidateExperienceDetailService;
     protected CandidateOtherReferencesService<CandidateOtherReferences> candidateOtherReferencesService;
+    protected VacancyApprovalHistoryService<VacancyApprovalHistory> vacancyApprovalHistoryService;
 
     public CandidateApplyJob2Service<CandidateApplyJob2> getCandidateApplyJob2Service() {
         return candidateApplyJob2Service;
@@ -128,8 +131,6 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setCandidateOtherReferencesService(CandidateOtherReferencesService<CandidateOtherReferences> candidateOtherReferencesService) {
         this.candidateOtherReferencesService = candidateOtherReferencesService;
     }
-    
-    
 
     public MprMasterService<MprMaster> getMprMasterService() {
         return mprMasterService;
@@ -258,7 +259,14 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setMprApprovalHistoryService(MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService) {
         this.mprApprovalHistoryService = mprApprovalHistoryService;
     }
-    
+
+    public VacancyApprovalHistoryService<VacancyApprovalHistory> getVacancyApprovalHistoryService() {
+        return vacancyApprovalHistoryService;
+    }
+
+    public void setVacancyApprovalHistoryService(VacancyApprovalHistoryService<VacancyApprovalHistory> vacancyApprovalHistoryService) {
+        this.vacancyApprovalHistoryService = vacancyApprovalHistoryService;
+    }
     
 
     public void selectBudget(HttpServletRequest request,

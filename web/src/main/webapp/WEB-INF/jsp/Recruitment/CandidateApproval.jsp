@@ -56,7 +56,7 @@
                                         <form:form class="form-horizontal" method="post" commandName="candidateApplyJob" action="recruitment.htm?act=assessmentClick">
                                             <input type="hidden" id="empreqid" name="empreqid" value="${mprMaster.id}">
 
-                                            <div class="box box-info collapsed-box ">
+<!--                                            <div class="box box-info collapsed-box ">
                                                 <div class="box-header">
                                                     <h3 class="box-title">Man Power Planing Detail:</h3>
                                                     <div class="box-tools pull-right">
@@ -105,8 +105,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="box box-info collapsed-box ">
+                                            </div>-->
+<!--                                            <div class="box box-info collapsed-box ">
                                                 <div class="box-header">
                                                     <h3 class="box-title">Man Power Requisition Detail:</h3>
                                                     <div class="box-tools pull-right">
@@ -165,7 +165,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div>-->
 
                                             <div class="box box-info collapsed-box ">
                                                 <div class="box-header">
@@ -252,13 +252,9 @@
                                                         </div>
                                                         <div id="printableArea">
                                                         <div class="col-sm-12">
-                                                                  <table>
-                                                                    <tr>
-                                                                        <td style="text-align: right;">
-                                                                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
+                                                             <div class="box-header" style="text-align: right;">
+                                                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                                                        </div>
                                                             <div class="col-sm-6">
                                                                 <table border="1">
                                                                     <tr>
@@ -497,7 +493,7 @@
                                                         
                                                         <div class="col-sm-12">
                                                             </br>
-                                                            <label>ACADEMIC QUALIFICATION:</label> </br>
+                                                            <label>EXPERIENCE INFORMATION(Starting With Present Job):</label> </br>
                                                             <table border="1" class="table table-bordered">
                                                                 <tr>
                                                                     <td colspan="2" style="text-align: center; vertical-align: middle"><label>Year</label></td>
@@ -670,6 +666,37 @@
                                                             <label><h4></h4></label>
                                                             <table border="1" style="width: 100%;" align="center">
                                                                 <c:choose>
+                                                                    <c:when test="${empty list1}">
+                                                                        <tr>
+                                                                            <td align="center">
+                                                                                <c:out value="There is no record found."></c:out>
+                                                                                </td>
+                                                                            </tr>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <thead>
+                                                                        <th colspan="4" style="text-align:center">Vacancy History Detail </th>
+                                                                        <tr>
+                                                                            <th style="width: 50px;">Vacancy Name</th>
+                                                                            <th style="width: 50px;">Date</th>
+                                                                            <th style="width: 50px;">Comment's</th>
+                                                                            <th style="width: 50px;">Status</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <tbody>
+                                                                    <c:forEach var="list" items="${list1}">
+                                                                        <tr>
+                                                                            <td>${vacancyName}</td>
+                                                                            <td>${list[4]}</td>
+                                                                            <td>${list[3]}</td>
+                                                                            <td>${list[5]} By&nbsp${list[1]}</td>
+                                                                        </c:forEach>
+                                                                </tbody>
+                                                            </table>
+                                                            <table border="1" style="width: 100%;" align="center">
+                                                                <c:choose>
                                                                     <c:when test="${empty list}">
                                                                         <tr>
                                                                             <td align="center">
@@ -679,11 +706,11 @@
                                                                     </c:when>
                                                                     <c:otherwise>
                                                                         <thead>
-                                                                        <th colspan="4" style="text-align:center">History Detail </th>
+                                                                        <th colspan="4" style="text-align:center">Candidate History</th>
                                                                         <tr>
                                                                             <th style="width: 50px;">Name</th>
                                                                             <th style="width: 50px;">Date</th>
-                                                                            <th style="width: 50px;">Comment</th>
+                                                                            <th style="width: 50px;">Comment's</th>
                                                                             <th style="width: 50px;">Status</th>
                                                                         </tr>
                                                                         </thead>
@@ -711,13 +738,13 @@
                                                         <button type="button" class="btn btn-danger" onclick="return reject(${candidateJobApplication.id},${candidateApplyJob.id});" value="Reject">Reject</button>
                                                     </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 11}">
-                                                        <button type="button" class="btn btn-primary" onclick="offerLate(${candidateJobApplication.id},${candidateApplyJob.id});">offer Latter</button>
+                                                        <button type="button" class="btn btn-primary" style="width:130px !important;" onclick="offerLate(${candidateJobApplication.id},${candidateApplyJob.id});">offer Latter</button>
                                                     </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 1}">
                                                         <button type="button" class="btn btn-primary" onclick="shortlisted(${candidateJobApplication.id},${candidateApplyJob.id});">Shortlist</button>
                                                     </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 11 || candidateJobApplication.status eq 14}">
-                                                        <button type="button" class="btn btn-primary" onclick="induction(${candidateJobApplication.id},${candidateApplyJob.id});">Induction</button>
+                                                        <button type="button" class="btn btn-primary" style="width:130px !important;"  onclick="induction(${candidateJobApplication.id},${candidateApplyJob.id});">Induction</button>
                                                     </c:if>
                                                     <c:if
                                                         test="${candidateJobApplication.status eq 2}">
@@ -727,12 +754,12 @@
                                                         test="${candidateJobApplication.status eq 6}">
                                                         <button type="button" class="btn btn-default" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">F To F Interview</button>
                                                     </c:if>    
-                                                    <c:if test="${candidateJobApplication.status eq 2}">
-                                                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
-                                                    </c:if>
-                                                    <c:if test="${candidateJobApplication.status eq 4}">
-                                                        <button type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent"  >Check Assessment</button>
-                                                    </c:if>
+                                                    <%--<c:if test="${candidateJobApplication.status eq 2}">--%>
+                                                        <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>-->
+                                                    <%--</c:if>--%>
+                                                    <%--<c:if test="${candidateJobApplication.status eq 4}">--%>
+                                                        <!--<button type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent"  >Check Assessment</button>-->
+                                                    <%--</c:if>--%>
                                                 </div>
 
 

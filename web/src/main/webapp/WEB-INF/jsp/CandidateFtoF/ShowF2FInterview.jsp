@@ -11,6 +11,16 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <title>Vacancy Detail List Report</title>
+        <style>
+            td,tr,th,table{
+                text-align: left;
+                vertical-align: middle;
+                padding: 10px;
+            }
+            table.table-bordered > tbody > tr > td{
+                border:1px solid black;
+            }
+        </style>
     </head>
     <script>
         var tempCount3 = 1;
@@ -77,7 +87,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>FACE TO FACE INVITATION</h1>
+            <h1>FACE TO FACE INVITATION VIEW</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">F2F Invitation</li>
@@ -100,66 +110,66 @@
                                            commandName="candidateF2FRequest" action="candidateF2FApproval.htm?act=approvalFaceToFaceInvitation" onsubmit="return saveSubmit()" >
                                     <input type="hidden" id="applicationId" name="applicationId" value="${applicationId}">   
 
-                                    <div class="box box-info collapsed-box ">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Man Power Requisition Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="box-body">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>MPR Name:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${vacancyName}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>MPR Budget:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${Mprbudget}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${jobtypeNAme1}</span>    
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
-                                                            <span >${designationName1}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Location:</label>  &nbsp;&nbsp;&nbsp;
-                                                            <span >${locationName1}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Department:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${departmentName1}</span>   
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${numberOfPositionMpr}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Work Experience(In Years):</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${MprExperience}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Description:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${Mprdescription}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!--                                    <div class="box box-info collapsed-box ">
+                                                                            <div class="box-header">
+                                                                                <h3 class="box-title">Man Power Requisition Detail:</h3>
+                                                                                <div class="box-tools pull-right">
+                                                                                    <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun4()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="box-body">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 col-sm-12">
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>MPR Name:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${vacancyName}</span>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>MPR Budget:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${Mprbudget}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Job Type:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${jobtypeNAme1}</span>    
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
+                                                                                                <span >${designationName1}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Location:</label>  &nbsp;&nbsp;&nbsp;
+                                                                                                <span >${locationName1}</span>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Department:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${departmentName1}</span>   
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${numberOfPositionMpr}</span>
+                                                                                            </div>
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Work Experience(In Years):</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span>${MprExperience}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Description:</label> &nbsp;&nbsp;&nbsp;
+                                                                                                <span> ${Mprdescription}</span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>-->
 
                                     <div class="box box-info collapsed-box ">
                                         <div class="box-header">
@@ -246,13 +256,9 @@
                                                 </div>
                                                 <div id="printableArea">
                                                     <div class="col-sm-12">
-                                                        <table>
-                                                            <tr>
-                                                                <td>
-                                                                    <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
+                                                        <div class="box-header" style="text-align: right;">
+                                                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                                                        </div>
                                                         <div class="col-sm-6">
                                                             <table border="1">
                                                                 <tr>
@@ -642,62 +648,301 @@
 
                                         </div>
                                     </div>
+                                    <!--                                    <div class="box box-info collapsed-box ">
+                                                                            <div class="box-header">
+                                                                                <h3 class="box-title">Candidate Face To Face Detail:</h3>
+                                                                                <div class="box-tools pull-right">
+                                                                                    <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="box-body">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 col-sm-12">
+                                                                                        <div class="box-body no-padding">
+                                                                                            <div class="form-group">
+                                                                                                <div class="col-sm-6">
+                                                                                                    <label>Date Of Interview  :</label> &nbsp;&nbsp;&nbsp;
+                                                                                                    <span>${candidateF2FRequest.dateOfInterview}</span>
+                                                                                                </div>
+                                                                                                <div class="col-sm-6">
+                                                                                                    <label>Venue :</label> &nbsp;&nbsp;&nbsp;
+                                                                                                    <span>${candidateF2FRequest.location}</span>
+                                                                                                </div>
+                                                                                            </div>
+                                    <%--<c:forEach  var="comment" items="${commentlist}" varStatus="loop">--%>
+                                        <div class="form-group">
+                                    <%--<c:if test="${loop.index eq 0}">--%>
+                                        <div class="col-sm-2">
+                                            <label>Interviewer Comment:</label> &nbsp;&nbsp;&nbsp;
+                                        </div>
+                                    <%--</c:if>--%>
+                                    <%--<c:if test="${loop.index ne 0}">--%>
+                                        <div class="col-sm-2">
+
+                                        </div>
+                                    <%--</c:if>--%>
+                                    <div class="col-sm-8">
+                                        <label>${comment[2]}</label> &nbsp;&nbsp;&nbsp;
+                                        <textarea class="form-control"
+                                                  id="interviewerRemark" name="interviewerRemark"   disabled>${comment[1]}</textarea>
+                                    </div>
+
+                                </div>
+                                    <%--</c:forEach>--%>
+                                    <div class="form-group">
+
+                                        <div class="col-sm-2">
+                                            <label>HR Comment:</label> &nbsp;&nbsp;&nbsp;
+                                        </div>
+                                        <div class="col-sm-8">
+
+                                    <%--<form:input path="message" id="budget1" readonly="true" class="form-control" placeholder="Comment:"></form:input>--%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+
                                     <div class="box box-info collapsed-box ">
                                         <div class="box-header">
-                                            <h3 class="box-title">Candidate Face To Face Detail:</h3>
+                                            <h3 class="box-title">Candidate F2F Observations:</h3>
                                             <div class="box-tools pull-right">
                                                 <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
                                             </div>
                                         </div>
                                         <div class="box-body">
                                             <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="box-body no-padding">
-                                                        <div class="form-group">
+                                                <div class="box-header" style="text-align: right;">
+                                                    <button class="btn btn-facebook "  style="width: 100px;" onclick="printDivtwo('printableAreatwo')">Print &nbsp;<span><i class="fa fa-print"></i></span></button>
+                                                </div>
+                                                <div id="printableAreatwo">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="box-header" style="text-align: right;">
+                                                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                                                        </div>
+                                                        <div class="box-body no-padding">
+                                                            <div class="col-sm-6">
+                                                                <label>Position:</label> &nbsp;&nbsp;&nbsp;
+                                                                <span>${candidateF2FRequest.vacancyMaster.name}</span>
+                                                            </div>
                                                             <div class="col-sm-6">
                                                                 <label>Date Of Interview  :</label> &nbsp;&nbsp;&nbsp;
                                                                 <span>${candidateF2FRequest.dateOfInterview}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+
+                                                            <div class="col-sm-6">
+                                                                <label>Name of the candidate:</label> &nbsp;&nbsp;&nbsp;
+                                                                <span>${candidateF2FRequest.candidateApplyJob.name}</span>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label>Venue :</label> &nbsp;&nbsp;&nbsp;
                                                                 <span>${candidateF2FRequest.location}</span>
                                                             </div>
                                                         </div>
-                                                        <c:forEach  var="comment" items="${commentlist}" varStatus="loop">
-                                                            <div class="form-group">
-                                                                <c:if test="${loop.index eq 0}">
-                                                                    <div class="col-sm-2">
-                                                                        <label>Interviewer Comment:</label> &nbsp;&nbsp;&nbsp;
-                                                                    </div>
-                                                                </c:if>
-                                                                <c:if test="${loop.index ne 0}">
-                                                                    <div class="col-sm-2">
+                                                        <div class="form-group">
+                                                            <table>
+                                                                <tr>
+                                                                    <td><label>Interview Panel Member:</label></td>
+                                                                    <td>
+                                                                        <c:forEach  var="test" items="${comitteeList}">
 
-                                                                    </div>
-                                                                </c:if>
-                                                                <div class="col-sm-8">
-                                                                    <label>${comment[2]}</label> &nbsp;&nbsp;&nbsp;
-                                                                    <textarea class="form-control"
-                                                                              id="interviewerRemark" name="interviewerRemark"   disabled>${comment[1]}</textarea>
-                                                                </div>
+                                                                            &nbsp;&nbsp;&nbsp; &nbsp;<span>${test.employeeMaster.employeeName}</span>
+                                                                            <br>
+                                                                        </c:forEach>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
 
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12" div  style="margin-top:20px">
+                                                            <div class="col-sm-6">
+                                                                <label>Interview Evaluation&nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
                                                             </div>
-                                                        </c:forEach>
+                                                            </br>
+                                                            <div style="padding:0 5%;">
+                                                                <table id="questionTable" border="1" class="table" style="" align="Center" >
+                                                                    <tr>
+                                                                        <th style="text-align: center; vertical-align: middle">Rating</th>
+                                                                        <th style="text-align: center; vertical-align: middle">Excellent</th>
+                                                                        <th style="text-align: center; vertical-align: middle">Very Good</th>
+                                                                        <th style="text-align: center; vertical-align: middle">Acceptable</th>
+                                                                        <th style="text-align: center; vertical-align: middle">Not Suitable</th>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align: center">Technical knowledge<span style="color: red;font-size: 20px;">*</span></td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="technicalKnowledge" required="required"  value="1" />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="technicalKnowledge" required="required"  value="2" />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="technicalKnowledge" required="required"  value="3" />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="technicalKnowledge" required="required"  value="4" />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align: center">Experience<span style="color: red;font-size: 20px;">*</span></td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="experience" required="required"  value="1"  />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="experience" required="required"  value="2"  />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="experience" required="required"  value="3" />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="experience" required="required"  value="4"  />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align: center">Communication Skills<span style="color: red;font-size: 20px;">*</span></td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="commSkill" required="required"  value="1"  />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="commSkill" required="required"  value="2"  />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="commSkill" required="required"  value="3" />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="commSkill" required="required"  value="4"  />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align: center">Inter-Personal Skills<span style="color: red;font-size: 20px;">*</span></td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="interPerSkill" required="required"  value="1"  />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="interPerSkill" required="required"  value="2" />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="interPerSkill" required="required"  value="3" />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="interPerSkill" required="required"  value="4"  />
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="text-align: center">Leadership Skills<span style="color: red;font-size: 20px;">*</span></td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="leaderSkill" required="required"  value="1"  />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="leaderSkill" required="required"  value="2"  />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="leaderSkill" required="required"  value="3" />
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <form:radiobutton path="leaderSkill" required="required"  value="4"  />
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12"></br></div>            
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="col-sm-6">
+                                                                <label>Area for Training Required &nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-12 col-sm-12" style="padding:0 5%;">
+                                                            <div class="col-sm-6">
+                                                                <table border="1" class="table table-bordered" style="text-align:center;" align="Center" >
+                                                                    <tr>
+                                                                        <td><label>Strengths</label></td>
+                                                                        <td>${candidateF2FRequest.strengths}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label>Weaknesses</label></td>
+                                                                        <td>${candidateF2FRequest.weaknesses}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label>Type Of Training</label></td>
+                                                                        <td>${candidateF2FRequest.typeOfTraining}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label>Other Skills</label></td>
+                                                                        <td>${candidateF2FRequest.otherSkills}</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                            <div class="col-md-12 col-sm-12"></br></div>            
+                                                            <div class="col-md-12 col-sm-12">
+                                                                <div class="col-sm-6">
+                                                                    <label>Overall Rating &nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6" style="padding:0 5%;">
+                                                                <table id="questionTable" border="1" class="table" style="" align="Center"  >
+                                                                    <tr>
+                                                                        <td style="text-align: center"> <label>Excellent:</label>
+                                                                            <form:radiobutton path="excellent" required="required" readonly="true" value="1" />
+                                                                        </td>
+                                                                        <td style="text-align: center"><label>Very Good:</label>
+                                                                            <form:radiobutton path="excellent" required="required" readonly="true" value="2" />
+                                                                        </td>
+                                                                        <td style="text-align: center"><label>Acceptable:</label>
+                                                                            <form:radiobutton path="excellent" required="required" readonly="true" value="3" />
+                                                                        </td>
+                                                                        <td style="text-align: center"><label>Not Suitable:</label>
+                                                                            <form:radiobutton path="excellent" required="required" readonly="true" value="4" />
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
                                                         <div class="form-group">
 
-                                                            <div class="col-sm-2">
-                                                                <label>HR Comment:</label> &nbsp;&nbsp;&nbsp;
-                                                            </div>
-                                                            <div class="col-sm-8">
+                                                            <c:forEach  var="comment" items="${commentlist}" varStatus="loop">
+                                                                <div class="form-group">
+                                                                    <c:if test="${loop.index eq 0}">
+                                                                        <div class="col-sm-2">
+                                                                            <label>Interviewer:</label>
+                                                                        </div>
+                                                                    </c:if>
+                                                                    <c:if test="${loop.index ne 0}">
+                                                                        <div class="col-sm-2">
 
-                                                                <form:input path="message" id="budget1" readonly="true" class="form-control" placeholder="Comment:"></form:input>
+                                                                        </div>
+                                                                    </c:if>
+                                                                    <div class="col-sm-8">
+                                                                        <label>${comment[2]}</label>
+                                                                    </div>
+
                                                                 </div>
+                                                            </c:forEach>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-2">
+                                                                    <label>Comment:</label> &nbsp;&nbsp;&nbsp;
+                                                                </div>
+                                                                <div class="col-sm-8">
+                                                                    <div>${candidateF2FRequest.message}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                </br>
+                                                                <label>Sign. Of candidate :</label> </br>
+
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="box box-info collapsed-box ">
                                             <div class="box-header">
                                                 <h3 class="box-title">History:</h3>
@@ -709,6 +954,37 @@
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12">
                                                         <label><h4></h4></label>
+                                                        <table border="1" style="width: 100%;" align="center">
+                                                                <c:choose>
+                                                                    <c:when test="${empty list1}">
+                                                                        <tr>
+                                                                            <td align="center">
+                                                                                <c:out value="There is no record found."></c:out>
+                                                                                </td>
+                                                                            </tr>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <thead>
+                                                                        <th colspan="4" style="text-align:center">Vacancy History Detail </th>
+                                                                        <tr>
+                                                                            <th style="width: 50px;">Vacancy Name</th>
+                                                                            <th style="width: 50px;">Date</th>
+                                                                            <th style="width: 50px;">Comment's</th>
+                                                                            <th style="width: 50px;">Status</th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <tbody>
+                                                                    <c:forEach var="list" items="${list1}">
+                                                                        <tr>
+                                                                            <td>${vacancyName}</td>
+                                                                            <td>${list[4]}</td>
+                                                                            <td>${list[3]}</td>
+                                                                            <td>${list[5]} By&nbsp${list[1]}</td>
+                                                                        </c:forEach>
+                                                                </tbody>
+                                                            </table>
                                                         <table border="1" style="width: 100%;" align="center">
                                                         <c:choose>
                                                             <c:when test="${empty HistoryList}">
@@ -745,6 +1021,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -844,6 +1121,15 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 <script type="text/javascript">
     function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
+<script type="text/javascript">
+    function printDivtwo(divName) {
         var printContents = document.getElementById(divName).innerHTML;
         var originalContents = document.body.innerHTML;
         document.body.innerHTML = printContents;

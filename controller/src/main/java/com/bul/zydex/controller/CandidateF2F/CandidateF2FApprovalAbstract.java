@@ -16,6 +16,7 @@ import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprApprovalHistory;
 import com.bul.zydex.model.MprMaster;
 import com.bul.zydex.model.RecruitmentMaster;
+import com.bul.zydex.model.VacancyApprovalHistory;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.CandidateF2FApproval.CandidateF2FApprovalService;
 import com.bul.zydex.service.CandidateF2FRequest.CandidateF2FRequestService;
@@ -26,6 +27,7 @@ import com.bul.zydex.service.Recruitment.JobtypeMasterService;
 import com.bul.zydex.service.Recruitment.MprMasterService;
 import com.bul.zydex.service.Recruitment.RecruitmentService;
 import com.bul.zydex.service.RecruitmentApprovalHistory.MprApprovalHistoryService;
+import com.bul.zydex.service.Vacancy.VacancyApprovalHistoryService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
 
@@ -45,7 +47,8 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
     protected MprMasterService<MprMaster> mprMasterService;
     protected RecruitmentService<RecruitmentMaster> recruitmentService;
     protected MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService;
-     protected CandidateApplyJob2Service<CandidateApplyJob2> candidateApplyJob2Service;
+    protected CandidateApplyJob2Service<CandidateApplyJob2> candidateApplyJob2Service;
+    protected VacancyApprovalHistoryService<VacancyApprovalHistory> vacancyApprovalHistoryService;
 
     public RecruitmentService<RecruitmentMaster> getRecruitmentService() {
         return recruitmentService;
@@ -54,7 +57,7 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
     public void setRecruitmentService(RecruitmentService<RecruitmentMaster> recruitmentService) {
         this.recruitmentService = recruitmentService;
     }
-    
+
     public CandidateF2FRequestService<CandidateF2FRequest> getCandidateF2FRequestService() {
         return candidateF2FRequestService;
     }
@@ -135,5 +138,14 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
         this.candidateApplyJob2Service = candidateApplyJob2Service;
     }
 
+    public VacancyApprovalHistoryService<VacancyApprovalHistory> getVacancyApprovalHistoryService() {
+        return vacancyApprovalHistoryService;
+    }
+
+    public void setVacancyApprovalHistoryService(VacancyApprovalHistoryService<VacancyApprovalHistory> vacancyApprovalHistoryService) {
+        this.vacancyApprovalHistoryService = vacancyApprovalHistoryService;
+    }
     
+    
+
 }

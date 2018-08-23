@@ -41,7 +41,7 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
                 + " LEFT JOIN a.candidateApplyJob b "
                 + " LEFT JOIN a.vacancyMaster c "
                 + " LEFT JOIN c.departmentMaster de "
-                + " Where a.status!=0 "
+//                + " Where a.status!=0 "
                 + " order by a.id desc";
 
         List<?> list = getHibernateTemplate().find(query);

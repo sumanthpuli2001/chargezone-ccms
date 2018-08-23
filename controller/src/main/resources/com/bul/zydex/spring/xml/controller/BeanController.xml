@@ -190,6 +190,8 @@
         <property name="attendanceRegularizationMasterService" ref="attendanceRegularizationMasterService1"/>
         <property name="travelRequestMasterService" ref="travelRequestMasterService1"/>
         <property name="timeAttandanceFlaxibleMasterService" ref="timeAttandanceFlaxibleMasterService1"/>
+        <property name="shiftRegularizationService" ref="shiftRegularizationService1"/>
+        <property name="shiftRegularizationValidator" ref="shiftRegularizationValidator1"/>
     </bean>
     <bean id="shiftRotationInfoController1" class="com.bul.zydex.controller.shift.ShiftRotationInfoController" parent="controllerConfig" >
         <property name="shiftRotationInfoService" ref="shiftRotationInfoService1" />

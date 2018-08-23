@@ -2422,4 +2422,33 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readEmployeeDetailUserIdWiseShiftApplication(T object) {
+        EmployeeMaster employeeMaster = (EmployeeMaster) object;
+        String query = "";
+
+        query += " Select a.employeeId, a.employeeName, b.designationName, d.level, c.departmentName, lm.location ,a.reportingManagerLevel1, a.company, a.contactNo2,zl.zydexLocation,a.id "
+                + "FROM EmployeeMaster a"
+                + " LEFT JOIN a.designationMaster b"
+                + " LEFT JOIN a.departmentMaster c"
+                + " LEFT JOIN a.levelMaster d"
+                + " LEFT JOIN a.locationMaster lm"
+                + " LEFT JOIN a.zydexLocationMaster zl"
+                + " WHERE a.userMaster.id = " + employeeMaster.getUserMaster().getId();
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readEmployeeDetailUserIdWiseShiftRegurazation(T object) {
+        EmployeeMaster employeeMaster = (EmployeeMaster) object;
+        String query = "";
+
+        query += " Select a.id,a.employeeId, a.employeeName,a.reportingManagerLevel1"
+                + "FROM EmployeeMaster a"
+                + " WHERE a.userMaster.id = " + employeeMaster.getUserMaster().getId();
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

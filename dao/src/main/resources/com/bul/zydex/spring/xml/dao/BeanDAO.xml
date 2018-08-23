@@ -294,4 +294,5 @@
     <bean id="eSICMasterDAO1" class="com.bul.zydex.dao.PayrollESIC.ESICMasterDAOImpl" parent="sessionFactoryConfig" />
     <bean id="vacancyApprovalDAO1" class="com.bul.zydex.dao.Vacancy.VacancyApprovalDAOImpl" parent="sessionFactoryConfig" />
     <bean id="vacancyApprovalHistoryDAO1" class="com.bul.zydex.dao.Vacancy.VacancyApprovalHistoryDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="shiftRegularizationDAO1" class="com.bul.zydex.dao.shift.ShiftRegularizationDAOImpl" parent="sessionFactoryConfig" />
 </beans>

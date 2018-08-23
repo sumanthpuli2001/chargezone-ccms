@@ -159,4 +159,5 @@
     <bean id="payrollTaxRateMasterValidator1" class="com.bul.zydex.validator.Payroll.PayrollTaxRateMasterValidator" />
     <bean id="fullAndFinalSettlementValidator1" class="com.bul.zydex.validator.Recruitment.fullAndFinalSettlementValidator" />
     <bean id="urlMasterValidator1" class="com.bul.zydex.validator.UrlMasterValidator" />
+    <bean id="shiftRegularizationValidator1" class="com.bul.zydex.validator.shift.ShiftRegularizationValidator" />
 </beans>

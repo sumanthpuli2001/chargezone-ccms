@@ -197,7 +197,8 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     <c:if test="${sessionScope.userRight.hr or sessionScope.userRight.shiftManagement}">
-
+                                        <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplication"><i class="fa fa-circle-o"></i>Shift Application</a></li>
+                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i>Subordinates Request</a></li>
                                         <li><a href="shiftMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Shift</a></li>
 
                                         <li><a href="hoursBasis.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Hours </a></li>
@@ -821,7 +822,7 @@
                         </c:if>
                 </ul>
             </li>
-            
+
 
 
 
@@ -914,30 +915,30 @@
                         </c:if>
                 </ul>
             </li>
-<!--            <li>
-                <a href="#" style="background: #fff;">
-                    <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
-                    <span style="color: #585858;">Project Management</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="projectManagement.htm?act=projectList"><i class="fa fa-circle-o"></i>Create Project</a></li>
-                    <li><a href="projectManagement.htm?act=myProjectList"><i class="fa fa-circle-o"></i>My Project</a></li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-circle-o"></i>
-                            <span>Project Setting</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="projectManagement.htm?act=clientList"><i class="fa fa-circle-o"></i>Client Master</a></li>
-                            <li><a href="projectManagement.htm?act=stateList"><i class="fa fa-circle-o"></i>State Master</a></li>
-                            <li><a href="projectManagement.htm?act=priorityList"><i class="fa fa-circle-o"></i>Priority Master</a></li>
-                        </ul>
-                    </li>
-                </ul>
-
-            </li>-->
+            <!--            <li>
+                            <a href="#" style="background: #fff;">
+                                <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
+                                <span style="color: #585858;">Project Management</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="projectManagement.htm?act=projectList"><i class="fa fa-circle-o"></i>Create Project</a></li>
+                                <li><a href="projectManagement.htm?act=myProjectList"><i class="fa fa-circle-o"></i>My Project</a></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-circle-o"></i>
+                                        <span>Project Setting</span>
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li><a href="projectManagement.htm?act=clientList"><i class="fa fa-circle-o"></i>Client Master</a></li>
+                                        <li><a href="projectManagement.htm?act=stateList"><i class="fa fa-circle-o"></i>State Master</a></li>
+                                        <li><a href="projectManagement.htm?act=priorityList"><i class="fa fa-circle-o"></i>Priority Master</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+            
+                        </li>-->
 
             <c:if test="${sessionScope.userRight.hr}">
                 <li class="treeview" style="color: #585858;">

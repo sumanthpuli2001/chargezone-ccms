@@ -747,4 +747,7 @@
      <bean id="vacancyApprovalHistoryService1" class="com.bul.zydex.service.Vacancy.VacancyApprovalHistoryServiceImpl">
         <property name="vacancyApprovalHistoryDAO" ref="vacancyApprovalHistoryDAO1" />
     </bean>
+      <bean id="shiftRegularizationService1" class="com.bul.zydex.service.shift.ShiftRegularizationServiceImpl">
+        <property name="shiftRegularizationDAO" ref="shiftRegularizationDAO1"/>
+    </bean>
 </beans>

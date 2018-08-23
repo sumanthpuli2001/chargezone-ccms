@@ -31,4 +31,14 @@ public class VacancyApprovalHistoryDAOImpl<T> extends GenericsDAOImpl<T> impleme
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+    @Override
+    public List<?> vacyId(String id) {
+        String query = "";
+        query += " "
+                + " SELECT a"
+                + " FROM VacancyApprovalHistory a "
+                + " WHERE a.vacancyMaster.id = " + id;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 }

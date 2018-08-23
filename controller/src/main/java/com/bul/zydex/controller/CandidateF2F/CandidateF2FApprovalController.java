@@ -381,6 +381,10 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
         CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateAcademicQualification = candidateAcademicQualificationService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateExperienceDetail = candidateExperienceDetailService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateFamilyBackground = candidateFamilyBackgroundService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateOtherReferences = candidateOtherReferencesService.readListByApplyJobId(candidateApplyJob.getId());
         VacancyMaster vm = vacancyMasterService.readByVacancyId(candidateF2FRequest.getVacancyMaster().getId());
 
         List<CandidateF2FApproval> committeedetaillist = new ArrayList<>();
@@ -473,6 +477,10 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         mv.getModelMap().put("locationMaster", locationMaster);
         mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
         mv.getModelMap().put("designationMaster", designationMaster);
+        mv.getModelMap().put("candidateAcademicQualification", candidateAcademicQualification);
+        mv.getModelMap().put("candidateExperienceDetail", candidateExperienceDetail);
+        mv.getModelMap().put("candidateFamilyBackground", candidateFamilyBackground);
+        mv.getModelMap().put("candidateOtherReferences", candidateOtherReferences);
         request.setAttribute("jobtypeNAme", jobtypeNAme);
         request.setAttribute("departmentName", departmentName);
         request.setAttribute("locationName", locationName);
@@ -735,6 +743,7 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
+        CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob.getId());
         VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
 
 //        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
@@ -865,6 +874,8 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         candidateF2FRequest.setVacancyMaster(vm);
         request.setAttribute("commentlist", approverCommentList);
         request.setAttribute("comitteeList", committeedetaillist);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.getModelMap().put("candidateApplyJob2", candidateApplyJob2);
         mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
 
         mv.setViewName("CandidateFtoF/reviewAscommitteeAndHrClick");
@@ -885,6 +896,10 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         candidateF2FRequest = candidateF2FRequestService.readById(Integer.parseInt(applicationId));
         candidateApplyJob = candidateJobApplyService.readById(candidateF2FRequest.getCandidateApplyJob().getId());
         CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateAcademicQualification = candidateAcademicQualificationService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateExperienceDetail = candidateExperienceDetailService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateFamilyBackground = candidateFamilyBackgroundService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateOtherReferences = candidateOtherReferencesService.readListByApplyJobId(candidateApplyJob.getId());
         VacancyMaster vm = vacancyMasterService.readById(candidateF2FRequest.getVacancyMaster().getId());
 
 //        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
@@ -1008,7 +1023,6 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         request.setAttribute("fromDate", fromDate);
         request.setAttribute("toDate", toDate);
         request.setAttribute("description", description);
-//        MPR Master -------------
 
         request.setAttribute("applicationId", applicationId);
 
@@ -1021,7 +1035,10 @@ public class CandidateF2FApprovalController extends CandidateF2FApprovalAbstract
         mv.getModelMap().put("candidateF2FRequest", candidateF2FRequest);
         mv.getModelMap().put("candidateApplyJob2", candidateApplyJob2);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
-
+        mv.getModelMap().put("candidateAcademicQualification", candidateAcademicQualification);
+        mv.getModelMap().put("candidateExperienceDetail", candidateExperienceDetail);
+        mv.getModelMap().put("candidateFamilyBackground", candidateFamilyBackground);
+        mv.getModelMap().put("candidateOtherReferences", candidateOtherReferences);
         mv.setViewName("CandidateFtoF/viewHrApprove");
         return mv;
     }

@@ -16,4 +16,6 @@ public interface VacancyApprovalHistoryDAO<T> extends GenericsDAO<T>{
     
     public List<?> readByVacancyId(int id);
     
+    public List<?> vacyId(String id);
+    
 }

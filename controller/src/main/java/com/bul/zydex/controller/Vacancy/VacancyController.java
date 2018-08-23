@@ -307,6 +307,18 @@ public class VacancyController extends VacancyAbstract {
                     candidateJobApplication = (CandidateJobApplication) object;
                     candidateJobApplicationService.delete(candidateJobApplication.getId());
                 }
+                VacancyApproval vacancyApproval = new VacancyApproval();
+                List<?> list1 = vacancyApprovalService.vacancyId(z);
+                for (Object object1 : list1) {
+                    vacancyApproval = (VacancyApproval) object1;
+                    vacancyApprovalService.delete(vacancyApproval.getId());
+                }
+                VacancyApprovalHistory vacancyApprovalHistory = new VacancyApprovalHistory();
+                List<?> list2 = vacancyApprovalHistoryService.vacyId(z);
+                for (Object object2 : list2) {
+                    vacancyApprovalHistory = (VacancyApprovalHistory) object2;
+                    vacancyApprovalHistoryService.delete(vacancyApprovalHistory.getId());
+                }
                 vacancyMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info :The Records are deleted successfully.");

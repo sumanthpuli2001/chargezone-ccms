@@ -82,46 +82,50 @@ public class ApprovalController extends ApprovalAbstract {
         String apName = request.getParameter("name");
         approvalMaster.setName(apName);
         ApprovalMaster am = approvalMasterService.readByapprovalname(apName);
-//        if (apName == am.getName()) {
-            String id = request.getParameter("id");
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            Date cDate = new Date();
-            approvalMaster.setCreatedBy(employeeMaster1.getId());
-            approvalMaster.setCreatedDate(sdf.format(cDate));
-            approvalMaster.setStatus(0);
-            approvalMasterService.create(approvalMaster);
+        if (am != null) {
+            if (apName == am.getName()) {
 
-            otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
-            for (int i = 0; i <= otherDetailCount; i++) {
-                if (null != request.getParameter("policyId" + i) && null != request.getParameter("policyNumber" + i)) {
-                    if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
-                        int policyId = Integer.parseInt(request.getParameter("policyId" + i));
-                        employeeMaster = employeeMasterService.readById(policyId);
+            } else {
+                request.setAttribute("failureMessage",
+                        "Info :  This Module Already Asign Approval Level.");
+                mv = createApprovalSetting(request, response);
+                return mv;
+            }
+        }
+        String id = request.getParameter("id");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        approvalMaster.setCreatedBy(employeeMaster1.getId());
+        approvalMaster.setCreatedDate(sdf.format(cDate));
+        approvalMaster.setStatus(0);
+        approvalMasterService.create(approvalMaster);
+
+        otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
+        for (int i = 0; i <= otherDetailCount; i++) {
+            if (null != request.getParameter("policyId" + i) && null != request.getParameter("policyNumber" + i)) {
+                if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+                    int policyId = Integer.parseInt(request.getParameter("policyId" + i));
+                    employeeMaster = employeeMasterService.readById(policyId);
 //                    employeeMaster.setId(policyId);
-                        approvalUser.setEmployeeMaster(employeeMaster);
-                        approvalUser.setApprovalMaster(approvalMaster);
-                        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-                        Date cDate1 = new Date();
-                        approvalUser.setCreatedDate(sdf1.format(cDate1));
-                        approvalUser.setCreatedBy(employeeMaster1.getId());
-                        String policyNumber = request.getParameter("policyNumber" + i);
-                        approvalUser.setLevel(Integer.parseInt(policyNumber));
-                        approvalUser.setStatus(0);
-                        approvalUserService.create(approvalUser);
+                    approvalUser.setEmployeeMaster(employeeMaster);
+                    approvalUser.setApprovalMaster(approvalMaster);
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+                    Date cDate1 = new Date();
+                    approvalUser.setCreatedDate(sdf1.format(cDate1));
+                    approvalUser.setCreatedBy(employeeMaster1.getId());
+                    String policyNumber = request.getParameter("policyNumber" + i);
+                    approvalUser.setLevel(Integer.parseInt(policyNumber));
+                    approvalUser.setStatus(0);
+                    approvalUserService.create(approvalUser);
 //                        policyMaster.setId(policyId);
 
-                    }
                 }
             }
+        }
 
-            mv = approvalList(request, response);
+        mv = approvalList(request, response);
 
-            return mv;
-//        }
-//        request.setAttribute("failureMessage",
-//                "Info :  This Module Already Asign Approval Level.");
-//        mv = createApprovalSetting(request, response);
-//        return mv;
+        return mv;
     }
 
     public ModelAndView approvalList(HttpServletRequest request,

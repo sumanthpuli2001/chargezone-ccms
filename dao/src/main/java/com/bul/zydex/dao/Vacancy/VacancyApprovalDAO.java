@@ -7,6 +7,7 @@ package com.bul.zydex.dao.Vacancy;
 
 import com.bul.zydex.dao.GenericsDAO;
 import com.bul.zydex.model.VacancyApproval;
+import java.util.List;
 
 /**
  *
@@ -15,5 +16,7 @@ import com.bul.zydex.model.VacancyApproval;
 public interface VacancyApprovalDAO<T> extends GenericsDAO<T>{
     
     public VacancyApproval readEmpIdAndVaId(int empid, int id);
+    
+    public List<?> vacancyId(String vacancyId);
     
 }

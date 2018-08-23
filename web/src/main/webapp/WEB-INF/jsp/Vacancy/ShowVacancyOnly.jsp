@@ -47,61 +47,56 @@
                                             <form:hidden path="id"></form:hidden>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Job Type :</label>  &nbsp;
-                                                        <span >${jobtypeNAme}</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Department :</label> &nbsp;
-                                                    <span>${departmentName}</span>    
+                                                        <label>Vacancy Name&nbsp;&nbsp;</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                        <span> ${vacancyMaster.name}</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Job Role :</label>  &nbsp;
-                                                    <span >${designationName}</span>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Location :</label> &nbsp;
-                                                    <span>${locationName}</span>   
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Vacancy Created Date :</label> &nbsp;
+                                                    <label>Vacancy Created Date&nbsp;&nbsp;:</label>
                                                     <span> ${vacancyMaster.fromDate}</span>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Vacancy End Date :</label> &nbsp;
+                                                    <label>Vacancy End Date:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
                                                     <span>${vacancyMaster.toDate}</span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Vacancy Name :</label>
-                                                    <span>${vacancyMaster.name}</span>
+                                                    <label>Location&nbsp;&nbsp;</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                    <span> ${locationName}</span>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Work Experience(In Year) :</label>
-                                                    <span>${vacancyMaster.experience}</span>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Number Of Position :</label>
+                                                    <label>Number Of Position:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
                                                     <span>${vacancyMaster.numberOfPosition}</span>
                                                 </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Salary :</label>
-                                                    <span>${vacancyMaster.salaryRange}</span>
+                                                    <label>Job Type&nbsp;&nbsp;</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                    <span >${jobtypeNAme}</span>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Department:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                    <span>${departmentName}</span>    
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <div class="col-sm-10">
-                                                    <label>Description:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:textarea path="description" class="form-control" id="editor" placeholder="description"></form:textarea>
-                                                        <form:errors path="description" cssClass="errorDiv"></form:errors>
-                                                    </div>
+                                                <div class="col-sm-6">
+                                                    <label>Job Role&nbsp;&nbsp;</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                    <span >${designationName}</span>
                                                 </div>
+                                                <div class="col-sm-6">
+                                                    <label>Work Experience(In Years)&nbsp;:</label>
+                                                    <span>${vacancyMaster.experience}</span>   
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label>Description:</label> &nbsp;&nbsp;&nbsp;
+                                                    <span>${vacancyMaster.description}</span>
+                                                </div>
+                                            </div>
 
 
                                         </form:form>

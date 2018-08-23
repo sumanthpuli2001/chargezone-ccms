@@ -83,49 +83,49 @@
                                             <input type="hidden" name="employeeTypeMasterId" value=""/>
                                             <input type="hidden" name="employeeSubTypeId" value=""/>
                                             <input type="hidden" name="paymentType" value=""/>
-<!--                                            <div class="form-group">
-                                                <div class="col-sm-6">
-                                                    <label>Location:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
-                                                        <option value="" label="-- Select --" ></option>
-                                                        <%--<c:forEach var="deptName" items="${deptMap}">--%>
-                                                            <option value="${deptName.key}" label="${deptName.value}" ></option>
-                                                        <%--</c:forEach>--%>
-                                                    </select>
-                                                </div>
+                                            <!--                                            <div class="form-group">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Location:<span style="color: red;font-size: 12px;"></span></label>
+                                                                                                <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
+                                                                                                    <option value="" label="-- Select --" ></option>
+                                            <%--<c:forEach var="deptName" items="${deptMap}">--%>
+                                                <option value="${deptName.key}" label="${deptName.value}" ></option>
+                                            <%--</c:forEach>--%>
+                                        </select>
+                                    </div>
 
-                                                <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
-                                                <div class="col-sm-6">
-                                                    <label>Type of Employee :<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="employeeTypeMasterId" id="employeeTypeMasterId" onchange="selectsubtype(this.value);" class="form-control">
-                                                        <option value="" label="-- Select --" ></option>
-                                                        <%--<c:forEach var="EmpType" items="${EmployeeTypeList}">--%>
-                                                            <option value="${EmpType.key}" label="${EmpType.value}" ></option>
-                                                        <%--</c:forEach>--%>
-                                                    </select>
+                                    <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
+                                    <div class="col-sm-6">
+                                        <label>Type of Employee :<span style="color: red;font-size: 12px;"></span></label>
+                                        <select name="employeeTypeMasterId" id="employeeTypeMasterId" onchange="selectsubtype(this.value);" class="form-control">
+                                            <option value="" label="-- Select --" ></option>
+                                            <%--<c:forEach var="EmpType" items="${EmployeeTypeList}">--%>
+                                                <option value="${EmpType.key}" label="${EmpType.value}" ></option>
+                                            <%--</c:forEach>--%>
+                                        </select>
 
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6" id="employeeSubTypeId">
-                                                    <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
-                                                        <option value="" label="-- Select --" ></option> 
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6" id="employeeSubTypeId">
+                                        <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
+                                        <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
+                                            <option value="" label="-- Select --" ></option> 
 
-                                                    </select>
-                                                </div>
+                                        </select>
+                                    </div>
 
 
-                                                <div class="col-sm-6">
-                                                    <label>Payment Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="paymentType" id="paymentType" class="form-control ">
-                                                        <option value="">--Select--</option>
-                                                        <option value="0">Cheque</option>
-                                                        <option value="1">Cash</option>
+                                    <div class="col-sm-6">
+                                        <label>Payment Type:<span style="color: red;font-size: 12px;"></span></label>
+                                        <select name="paymentType" id="paymentType" class="form-control ">
+                                            <option value="">--Select--</option>
+                                            <option value="0">Cheque</option>
+                                            <option value="1">Cash</option>
 
-                                                    </select>
-                                                </div>
-                                            </div>-->
+                                        </select>
+                                    </div>
+                                </div>-->
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Months:<span style="color: red;font-size: 12px;">*</span></label>
@@ -281,6 +281,8 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
+                                                    <br>
+                                                    <div class="row" align="center"><b>Note:</b>This is an electronically generated document, hence does not require signature</div>
                                                     <c:if test="${!empty employeelist}">
 
                                                     </c:if>

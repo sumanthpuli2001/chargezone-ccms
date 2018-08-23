@@ -77,32 +77,32 @@
                                 <div class="box-body no-padding">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
-                                             <input type="hidden" name="employeeTypeMasterId" value=""/>
+                                            <input type="hidden" name="employeeTypeMasterId" value=""/>
                                             <input type="hidden" name="employeeSubTypeId" value=""/>
-<!--                                            <div class="form-group">
-                                                <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
-                                                <div class="col-sm-6">
-                                                    <label>Type of Employee :<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="employeeTypeMasterId" id="employeeTypeMasterId" onchange="selectsubtype(this.value);" class="form-control">
-                                                        <option value="" label="" >--Select--</option>
-                                                        <%--<c:forEach var="EmpType" items="${EmployeeTypeList}">--%>
-                                                            <option value="${EmpType.key}" label="${EmpType.value}" >${EmpType.value}</option>
-                                                        <%--</c:forEach>--%>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
-                                                                                                        <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
-                                                                                                            <option value="" label="-- Select --" ></option> 
-                                                                                                        </select>
-                                                    <select name="employeeSubTypeId" id="employeeSubTypeId"  class="form-control">
-                                                        <option value="" label="" >--Select--</option>
-                                                        <%--<c:forEach var="EmpSubType" items="${EmployeeSubTypeList}">--%>
-                                                            <option value="${EmpSubType.key}" label="${EmpSubType.value}" >${EmpSubType.value}</option>
-                                                        <%--</c:forEach>--%>
-                                                    </select>
-                                                </div>
-                                            </div>-->
+                                            <!--                                            <div class="form-group">
+                                                                                            <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Type of Employee :<span style="color: red;font-size: 12px;"></span></label>
+                                                                                                <select name="employeeTypeMasterId" id="employeeTypeMasterId" onchange="selectsubtype(this.value);" class="form-control">
+                                                                                                    <option value="" label="" >--Select--</option>
+                                            <%--<c:forEach var="EmpType" items="${EmployeeTypeList}">--%>
+                                                <option value="${EmpType.key}" label="${EmpType.value}" >${EmpType.value}</option>
+                                            <%--</c:forEach>--%>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
+                                                                                            <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
+                                                                                                <option value="" label="-- Select --" ></option> 
+                                                                                            </select>
+                                        <select name="employeeSubTypeId" id="employeeSubTypeId"  class="form-control">
+                                            <option value="" label="" >--Select--</option>
+                                            <%--<c:forEach var="EmpSubType" items="${EmployeeSubTypeList}">--%>
+                                                <option value="${EmpSubType.key}" label="${EmpSubType.value}" >${EmpSubType.value}</option>
+                                            <%--</c:forEach>--%>
+                                        </select>
+                                    </div>
+                                </div>-->
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Months:<span style="color: red;font-size: 12px;">*</span></label>
@@ -179,12 +179,12 @@
                                                 </c:when>
                                                 <c:otherwise>
                                                     <center>   <img src=" StorageYard/Images/logo.png" style="width:15%;height: 15%;" BORDER="0"/>  </center> 
-                                                    <%
-                                                        Date date = new Date();
-                                                        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-                                                        //                                           out.print( "Date.." + df.format(date));
-                                                        out.print("<div align=\"right\">Date:" + df.format(date) + "</div>");
-                                                    %>
+                                                        <%
+                                                            Date date = new Date();
+                                                            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                                                            //                                           out.print( "Date.." + df.format(date));
+                                                            out.print("<div align=\"right\">Date:" + df.format(date) + "</div>");
+                                                        %>
                                                     <div class="form-group">
                                                         <center><b><font size="4">SPC LIFESCIENCES PVT LTD</font></b></center> 
                                                     </div>
@@ -203,7 +203,7 @@
                                                                     <c:if test="${month eq 10}">October</c:if>
                                                                     <c:if test="${month eq 11}">November</c:if>
                                                                     <c:if test="${month eq 12}">December</c:if>
-                                                                     ${year}
+                                                                    ${year}
                                                                     </font></b></center> 
                                                         </header>
                                                         <table border="1" style="width: 100%" name="companyPTReport" id="companyMonthlyReport" cellspacing="0" cellpadding="0" align="center" id="demo" class="table table-bordered table-striped table-hover">
@@ -236,6 +236,8 @@
 
                                                                         </tbody>                                           
                                                                     </table>
+                                                                    <br>
+                                                                    <div class="row" align="center"><b>Note:</b>This is an electronically generated document, hence does not require signature</div>
                                                                 </div>
 
 

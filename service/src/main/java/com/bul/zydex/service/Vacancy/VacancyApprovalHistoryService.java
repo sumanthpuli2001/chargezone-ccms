@@ -16,4 +16,6 @@ public interface VacancyApprovalHistoryService<T> extends GenericsService<T> {
 
     public List<?> readByVacancyId(int id);
 
+    public List<?> vacyId(String id);
+
 }

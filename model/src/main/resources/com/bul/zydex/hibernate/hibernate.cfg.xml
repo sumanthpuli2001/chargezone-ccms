@@ -183,5 +183,6 @@
     <mapping resource="com/bul/zydex/model/ESICMaster.hbm.xml.xml"/>
     <mapping resource="com/bul/zydex/model/VacancyApproval.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/VacancyApprovalHistory.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/ShiftRegularization.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

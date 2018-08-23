@@ -6,6 +6,8 @@
 package com.bul.zydex.controller.shift;
 
 import com.bul.zydex.model.AttendanceRegularization;
+import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeAdvanceSearch;
 import com.bul.zydex.model.EmployeeDatetimeData;
@@ -19,12 +21,14 @@ import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.RotationMaster;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
 import com.bul.zydex.model.ShiftMaster;
+import com.bul.zydex.model.ShiftRegularization;
 import com.bul.zydex.model.ShiftRotationInfo;
 import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.TempShiftAssignMaster;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.model.TravelRequestMaster;
 import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.util.DownloadFile;
 import static com.itextpdf.text.PageSize.A1;
@@ -41,6 +45,7 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -48,6 +53,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -63,6 +69,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellUtil;
+import org.json.JSONObject;
 import org.springframework.validation.BindException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -16607,7 +16614,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
     private synchronized void birthdaywishEmail() throws Exception {
         ModelAndView mv = new ModelAndView();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM");
-         Date cDate = new Date();
+        Date cDate = new Date();
         String presentDay = sdf.format(cDate);
         List daywiseBirthdayList = employeeMasterService.readDayBirthdayWish(presentDay);
         if (!daywiseBirthdayList.isEmpty()) {
@@ -16617,20 +16624,647 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 String employeeName = (String) o[1];
                 String officeEmail = (String) o[2];
                 try {
-            EmailTemplate emailTemplate = new EmailTemplate();
-            emailTemplate = emailTemplateService.readById(161);
-            String from = "";
-            String Subject = emailTemplate.getSubject();
-            String msg = emailTemplate.getBodytext();
-            Subject = Subject.replaceAll("\\{user\\}", employeeName);
-            sendMail.sendMail(from, officeEmail, Subject, msg);
-        } catch (Exception e) {
-        }
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    emailTemplate = emailTemplateService.readById(161);
+                    String from = "";
+                    String Subject = emailTemplate.getSubject();
+                    String msg = emailTemplate.getBodytext();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeName);
+                    sendMail.sendMail(from, officeEmail, Subject, msg);
+                } catch (Exception e) {
+                }
 
             }
 
         }
 //        return mv;
+    }
+
+    public ModelAndView searchSubmitShiftApplication(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        int id = user.getId();
+        List<?> list = shiftRegularizationService.userWiseShiftRegularizationList(id);
+        List<?> list1 = shiftRegularizationService.userReportingManager(id);
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        String managerName = "";
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        if (!list1.isEmpty()) {
+            employeeMaster = (EmployeeMaster) list1.get(0);
+//            List<?> reportingmanagerNameList = employeeMasterService.readByEmployeeLevel1Id(employeeMaster);
+
+            employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+//            if (!reportingmanagerNameList.isEmpty()) {
+//                Object[] o = (Object[]) reportingmanagerNameList.get(0);
+//                managerName = (String) o[2];
+//            }
+        }
+        mv.getModelMap().put("managerName", employeeMaster1.getEmployeeName());
+        mv.getModelMap().put("list", list);
+        mv.getModelMap().put("shiftRegularization", shiftRegularization);
+        mv.setViewName("Shift/ShiftApplicationResult");
+        return mv;
+    }
+
+    public ModelAndView createClickShiftApplication(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        EmployeeMaster employeeMaster2 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
+        shiftRotaionList(request);
+//        hoursBasisList(request);
+        shiftList(request);
+        int reportingId = 0;
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWiseShiftApplication(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            int emplid = (Integer) arrayOfObject[10];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+            employeeMaster2 = employeeMasterService.readById(emplid);
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+        }
+
+        mv.getModelMap().put("shiftRegularization", shiftRegularization);
+//        request.setAttribute("employeeMaster", employeeMaster2);
+        request.setAttribute("shiftType", employeeMaster2.getShiftType());
+        request.setAttribute("shiftHoursId", employeeMaster2.getShiftHoursId());
+        mv.setViewName("Shift/ShiftApplicationFormForEmployee");
+        return mv;
+    }
+
+    public void readRotationAjaxShiftCHange(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        ModelAndView mv = new ModelAndView();
+        ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
+        String date = request.getParameter("date");
+        String rotationId = request.getParameter("rotationId");
+        HttpSession session = request.getSession();
+        EmployeeMaster employee = (EmployeeMaster) session.getAttribute("employeeInfo");
+        int id = employee.getId();
+        employee.setId(id);
+        String[] endDateSplited = date.split("/");
+        String month1 = endDateSplited[1];
+        String year1 = endDateSplited[2];
+        String day = endDateSplited[0];
+        String shiftId = "";
+        ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
+        shiftGenerateMonthlySchedule.setEmployeeMaster(employee);
+        shiftGenerateMonthlySchedule.setShiftMonth(month1);
+        shiftGenerateMonthlySchedule.setShiftYear(year1);
+        List empShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, Integer.parseInt(day));
+        try {
+            if (!empShiftList.isEmpty()) {
+                shiftId = "" + empShiftList.get(0);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        String userId = request.getParameter("userId");
+//        shiftAjaxmap(request, rotationId);
+        Map<Integer, String> shiftMap = new HashMap();
+        List<?> list = null;
+        if (!"".equals(rotationId)) {
+
+            int rotationId1 = Integer.parseInt(rotationId);
+            list = rotationMasterService.readForShift(rotationId1);
+            Iterator it = list.iterator();
+            while (it.hasNext()) {
+                Object next[] = (Object[]) it.next();
+                int newShiftId = (int) next[0];
+                String shiftName = (String) next[1];
+                shiftMap.put(newShiftId, shiftName);
+            }
+        }
+
+//        request.setAttribute("shiftAjaxMap", shiftMap);
+//        String shiftMasterId = request.getParameter("shiftMasterId");
+//        String firstShiftId = shiftRotationInfoService.readFirstShfitId(userId, rotationId);
+//        if (firstShiftId == "") {
+//            firstShiftId = shiftMasterId;
+//        }
+        JSONObject json = new JSONObject();
+        json.put("shiftAjaxMap", shiftMap);
+        json.put("firstShiftId", shiftId);
+        json.put("firstShiftId2", shiftId);
+        PrintWriter out = response.getWriter();
+        out.println(json.toString());
+//        mv.setViewName("Shift/ShiftRotationAjax");
+//        return mv;
+    }
+
+    public ModelAndView createSubmitShiftRegurization(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        UserMaster userMaster = new UserMaster();
+        ShiftMaster userMasterPrevious = new ShiftMaster();
+        ShiftMaster userMasterCurrent = new ShiftMaster();
+        int reportingId = 0;
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        int userMasterId = user.getId();
+        employeeMaster.setUserMaster(user);
+        BindException errors = new BindException(shiftRegularization, "shiftRegularization");
+        bind(request, shiftRegularization);
+        String newShift = request.getParameter("newShift");
+        String preciousShiftId = request.getParameter("preciousShiftId");
+        userMasterPrevious.setId(Integer.parseInt(preciousShiftId));
+        userMasterCurrent.setId(Integer.parseInt(newShift));
+//        String firstShiftId2 = request.getParameter("firstShiftIdID");
+//        String rotationId = request.getParameter("rotationId");
+//        String shiftMasterId = request.getParameter("shiftMasterId");
+
+        shiftRegularizationValidator.validate(shiftRegularization, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+            List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+            if (!empDetailList.isEmpty()) {
+                request.setAttribute("employeeMaster", empDetailList.get(0));
+                Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+                String reportmanager = (String) arrayOfObject[6];
+                if (!reportmanager.equals("")) {
+                    reportingId = Integer.parseInt(reportmanager);
+                }
+
+                employeeMaster1.setId(reportingId);
+            }
+            List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+            if (!reportmanager1.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+                request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+            }
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+
+            mv.getModelMap().put("shiftRegularization", shiftRegularization);
+            mv.setViewName("Shift/ShiftApplicationFormForEmployee");
+        } else {
+            shiftRegularization.setUserMasterId(user);
+            shiftRegularization.setStatus(0);
+            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String currentDate = dateFormat1.format(new Date());
+            shiftRegularization.setDateOfSubmit(currentDate);
+            shiftRegularization.setShiftMasterCurrent(userMasterCurrent);
+            shiftRegularization.setShiftMasterPrevious(userMasterPrevious);
+            shiftRegularizationService.createOrUpdate(shiftRegularization);
+
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+
+            mv.setViewName("redirect:shiftRotationMaster.htm?act=searchSubmitShiftApplication");
+            try {
+//                mailSendArApply(request);
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                // id 14 is for Attendence regularization apply....
+                emailTemplate = emailTemplateService.readById(14);
+                String To = employeeMasterHr.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+        }
+        return mv;
+    }
+
+    public ModelAndView editClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        String id = request.getParameter("id");
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
+        int reportingId = 0;
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+        }
+
+        shiftRegularization = shiftRegularizationService.readById(Integer.parseInt(id));
+        int status1 = shiftRegularization.getStatus();
+        String status = Integer.toString(status1);
+        String remark = shiftRegularization.getApprovalComment();
+        int cureentShift = shiftRegularization.getShiftMasterCurrent().getId();
+        ShiftMaster shiftMaster = new ShiftMaster();
+//        shiftMaster.setId(shiftRegularization.getShiftMasterCurrent());
+        shiftMaster = shiftMasterService.readById(cureentShift);
+        String shiftNAme = shiftMaster.getShiftName();
+        request.setAttribute("remark", remark);
+        request.setAttribute("status", status);
+        request.setAttribute("shiftNAme", shiftNAme);
+        mv.getModelMap().put("shiftRegularization", shiftRegularization);
+        mv.setViewName("Shift/shiftRegularizationFormForEmployeeEdit");
+        return mv;
+    }
+
+    public ModelAndView editSubmitShiftRegurization(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        ShiftRegularization shiftRegularization1 = new ShiftRegularization();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+//        AttendanceRegularization attendanceRegularization1 = new AttendanceRegularization();
+        bind(request, shiftRegularization);
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        String id = request.getParameter("id");
+        String btnSubmit = request.getParameter("btnSubmit");
+        shiftRegularization1 = shiftRegularizationService.readById(Integer.parseInt(id));
+        shiftRegularization.setShiftMasterCurrent(shiftRegularization1.getShiftMasterCurrent());
+        shiftRegularization.setShiftMasterPrevious(shiftRegularization1.getShiftMasterPrevious());
+        shiftRegularization.setUserMasterId(shiftRegularization1.getUserMasterId());
+//        shiftRegularization.set
+        if (btnSubmit.equals("Submit")) {
+
+            if (shiftRegularization1.getStatus() == 7) {
+                shiftRegularization.setStatus(0);
+                shiftRegularization.setApprovalComment(shiftRegularization1.getApprovalComment());
+                shiftRegularization.setUserMasterId(shiftRegularization1.getUserMasterId());
+            }
+//        else {
+//            attendanceRegularization.setStatus(2);
+//            attendanceRegularization.setManagerRemark(attendanceRegularization1.getManagerRemark());
+//            attendanceRegularization.setUserMasterId(attendanceRegularization1.getUserMasterId());
+//        }
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+            try {
+
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                EmployeeMaster EmployeeHR = new EmployeeMaster();
+                EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                //id=14 is for attandence regularization Apply...
+                emailTemplate = emailTemplateService.readById(14);
+                String EmpStr = request.getParameter("empid");
+                if (null != EmpStr && !"".equals(EmpStr)) {
+                    int Empid = Integer.parseInt(EmpStr);
+                    List list = employeeMasterService.readByEmployeeNo(Empid);
+                    if (!list.isEmpty()) {
+                        employeeMaster1 = (EmployeeMaster) list.get(0);
+                        String To = EmployeeHR.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+
+                        String name = "Attendance";
+                        EmailAddMaster emailAddMaster = new EmailAddMaster();
+                        emailAddMaster.setModuleName(name);
+                        emailAddMaster.setDepartmentMaster(employeeMasterModel.getDepartmentMaster());
+                        List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                        if (!emailSendList.isEmpty()) {
+                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                            String emailId = emailAddMaster1.getEmailId();
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMasterModel.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                }
+
+                            }
+                        }
+                        List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+                        if (!allDeptmailList.isEmpty()) {
+                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                            String emailId = emailAddMaster1.getEmailId();
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMasterModel.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
+            } catch (Exception e) {
+            }
+
+        } else if (btnSubmit.equals("Withdraw")) {
+            shiftRegularization.setStatus(2);
+            try {
+
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                EmployeeMaster EmployeeHR = new EmployeeMaster();
+                EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                //id=18 is for attandence regularization withdrow...
+                emailTemplate = emailTemplateService.readById(18);
+                String EmpStr = request.getParameter("empid");
+                if (null != EmpStr && !"".equals(EmpStr)) {
+                    int Empid = Integer.parseInt(EmpStr);
+                    List list = employeeMasterService.readByEmployeeNo(Empid);
+                    if (!list.isEmpty()) {
+                        employeeMaster1 = (EmployeeMaster) list.get(0);
+                        String To = EmployeeHR.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+
+                    }
+
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String currentDate = dateFormat1.format(new Date());
+        shiftRegularization.setDateOfSubmit(currentDate);
+        shiftRegularizationService.createOrUpdate(shiftRegularization);
+//        mv = searchSubmit(request, response);
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=searchSubmitShiftApplication");
+        return mv;
+    }
+
+    public ModelAndView approvalSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        int id = employeeMaster.getId();
+        List<?> list = shiftRegularizationService.approvalLeval1WiseShiftRegularizationList(id);
+        List<?> list1 = shiftRegularizationService.userReportingManager(id);
+        String managerName = "";
+        if (!list1.isEmpty()) {
+            employeeMaster = (EmployeeMaster) list1.get(0);
+            if (!employeeMaster.getReportingManagerLevel1().equals("")) {
+                List<?> reportingmanagerNameList = employeeMasterService.readByEmployeeLevel1Id(employeeMaster);
+                if (!reportingmanagerNameList.isEmpty()) {
+                    Object[] o = (Object[]) reportingmanagerNameList.get(0);
+                    managerName = (String) o[2];
+                }
+            }
+        }
+        mv.getModelMap().put("managerName", managerName);
+        mv.getModelMap().put("list", list);
+        mv.getModelMap().put("shiftRegularization", shiftRegularization);
+        mv.setViewName("Shift/shiftRegularizationApprovalResult");
+        return mv;
+    }
+
+    public ModelAndView approvalEditSubmitByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        String id = "" + request.getParameter("id");
+//        String remark = "" + request.getParameter("remark");
+        String remark = "";
+        shiftRegularization = shiftRegularizationService.readById(Integer.parseInt(id));
+        shiftRegularization.setStatus(1);
+        shiftRegularization.setApprovalComment(remark);
+
+//        EmployeeMaster approverName = new EmployeeMaster();
+        EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//        String requestdate = sdf.format(new Date());
+//        shiftRegularization.setDateOfApproval(requestdate);
+//        shiftRegularization.setApproverId(approverName);
+//        shiftRegularizationService.createOrUpdate(shiftRegularization);
+
+////        Employee Date Time Data
+        if (shiftRegularization.getStatus() == 1) {
+            String rotationDate = shiftRegularization.getRotationDate();
+            int userid = shiftRegularization.getUserMasterId().getId();
+            UserMaster user = new UserMaster();
+            EmployeeMaster employeeMaster1 = new EmployeeMaster();
+            user.setId(userid);
+            employeeMaster1.setUserMaster(user);
+            List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWiseShiftRegurazation(employeeMaster1);
+            if (!empDetailList.isEmpty()) {
+//                request.setAttribute("employeeMaster", empDetailList.get(0));
+                Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+                Integer emmpld = (Integer) arrayOfObject[0];
+            }
+
+//                   
+        }
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmit");
+        return mv;
+    }
+
+    public ModelAndView approvalEditClickByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        String id = request.getParameter("id");
+        shiftRegularization = shiftRegularizationService.readById(Integer.parseInt(id));
+        int status1 = shiftRegularization.getStatus();
+        String status = Integer.toString(status1);
+        request.setAttribute("status", status);
+        String remarkNmame = shiftRegularization.getApprovalComment();
+        request.setAttribute("remarkNmame", remarkNmame);
+        int userId = shiftRegularization.getUserMasterId().getId();
+        int cureentShift = shiftRegularization.getShiftMasterCurrent().getId();
+        int PastShift = shiftRegularization.getShiftMasterPrevious().getId();
+        ShiftMaster shiftMaster = new ShiftMaster();
+        ShiftMaster shiftMaster1 = new ShiftMaster();
+//        shiftMaster.setId(shiftRegularization.getShiftMasterCurrent());
+        shiftMaster = shiftMasterService.readById(cureentShift);
+        shiftMaster1 = shiftMasterService.readById(PastShift);
+        String shiftNAme = shiftMaster.getShiftName();
+        String PastShift1 = shiftMaster1.getShiftName();
+        UserMaster user = new UserMaster();
+        user.setId(userId);
+        employeeMaster.setUserMaster(user);
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+        }
+
+        mv.getModelMap().put("shiftRegularization", shiftRegularization);
+        request.setAttribute("shiftNAme", shiftNAme);
+        request.setAttribute("PastShift1", PastShift1);
+        mv.setViewName("Shift/shiftRegularizationApprovalAdmin");
+        return mv;
+    }
+
+    public ModelAndView rejectSubmitByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        String id = request.getParameter("id");
+        String remark = "";
+        shiftRegularization = shiftRegularizationService.readById(Integer.parseInt(id));
+        shiftRegularization.setStatus(3);
+        shiftRegularization.setApprovalComment(remark);
+        EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String requestdate = sdf.format(new Date());
+        shiftRegularization.setDateOfApproval(requestdate);
+        shiftRegularization.setApproverId(approverName);
+        shiftRegularizationService.createOrUpdate(shiftRegularization);
+
+        try {
+
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            UserMaster userMaster = new UserMaster();
+            userMaster.setId(shiftRegularization.getUserMasterId().getId());
+            EmployeeMaster employeeMaster1 = new EmployeeMaster();
+            employeeMaster1.setUserMaster(userMaster);
+            List list = employeeMasterService.readByUserName(employeeMaster1);
+            //id=17 is for attandence regularization reject...
+            emailTemplate = emailTemplateService.readById(17);
+//            String EmpStr = request.getParameter("empid");
+//            if (null != EmpStr && !"".equals(EmpStr)) {
+//                int Empid = Integer.parseInt(EmpStr);
+//                List list = employeeMasterService.readByEmployeeNo(Empid);
+            if (!list.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) list.get(0);
+                String To = employeeMaster1.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+
+//                }
+            }
+
+        } catch (Exception e) {
+        }
+
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmit");
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
+        return mv;
+    }
+
+    public ModelAndView reworkSubmitByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String id = request.getParameter("id");
+        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        String remark = "";
+        shiftRegularization = shiftRegularizationService.readById(Integer.parseInt(id));
+        shiftRegularization.setStatus(7);
+        shiftRegularization.setApprovalComment(remark);
+        EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String requestdate = sdf.format(new Date());
+        shiftRegularization.setDateOfApproval(requestdate);
+        shiftRegularization.setApproverId(approverName);
+        shiftRegularizationService.createOrUpdate(shiftRegularization);
+        try {
+
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            EmployeeMaster employeeMaster1 = new EmployeeMaster();
+            //id=16 is for attandence regularization rework...
+            emailTemplate = emailTemplateService.readById(16);
+            UserMaster userMaster = new UserMaster();
+            userMaster.setId(shiftRegularization.getUserMasterId().getId());
+            employeeMaster1.setUserMaster(userMaster);
+            List<?> list = employeeMasterService.readByUserName(employeeMaster1);
+//            String EmpStr = request.getParameter("empid");
+//            if (null != EmpStr && !"".equals(EmpStr)) {
+//                int Empid = Integer.parseInt(EmpStr);
+//                List list = employeeMasterService.readByEmployeeNo(Empid);
+            if (!list.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) list.get(0);
+                String To = employeeMaster1.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+
+            }
+
+        } catch (Exception e) {
+        }
+
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmit");
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
+        return mv;
     }
 
 }

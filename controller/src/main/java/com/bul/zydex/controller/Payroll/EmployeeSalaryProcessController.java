@@ -692,7 +692,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         ////////////////////// PT Ends Here ///////////////////////////
         /////////////////////ESIC Start Here///////////////////////
         double grossTotalEsic = 0.0;
-        grossTotalEsic = employeeSalaryProcess.getGrossTotal();
+        grossTotalEsic = netSalary;
         if (employeeMaster1.getEsic() == true) {
 
             double nettotalEsic = 0;
@@ -2274,8 +2274,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             EmployeeMaster employeeMaster = new EmployeeMaster();
 //                            int empNo = Integer.parseInt(employeeNo);
 //                            int empNo = Integer.parseInt(employeeNo);
-
-                            List<?> list = employeeMasterService.readByEmployeeNo1(employeeNo);
+                            String s2 = employeeNo.replace(".0", "");
+                            List<?> list = employeeMasterService.readByEmployeeNo1(s2);
                             if (!list.isEmpty()) {
                                 employeeMaster = (EmployeeMaster) list.get(0);
                                 int empId = employeeMaster.getId();

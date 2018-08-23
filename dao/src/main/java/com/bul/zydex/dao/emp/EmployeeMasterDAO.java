@@ -186,4 +186,8 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readDepartmentEmployee(int departId);
 
     public List<?> readDayBirthdayWish(String dateBirth);
+
+    public List<?> readEmployeeDetailUserIdWiseShiftApplication(T object);
+
+    public List<?> readEmployeeDetailUserIdWiseShiftRegurazation(T object);
 }

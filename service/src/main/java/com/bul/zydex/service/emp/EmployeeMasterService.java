@@ -184,4 +184,8 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
 
     public List<?> readDayBirthdayWish(String dateBirth);
 
+    public List<?> readEmployeeDetailUserIdWiseShiftApplication(T object);
+
+    public List<?> readEmployeeDetailUserIdWiseShiftRegurazation(T object);
+
 }

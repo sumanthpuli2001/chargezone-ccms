@@ -17093,10 +17093,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //        EmployeeMaster approverName = new EmployeeMaster();
         EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//        String requestdate = sdf.format(new Date());
-//        shiftRegularization.setDateOfApproval(requestdate);
-//        shiftRegularization.setApproverId(approverName);
-//        shiftRegularizationService.createOrUpdate(shiftRegularization);
+        String requestdate = sdf.format(new Date());
+        shiftRegularization.setDateOfApproval(requestdate);
+        shiftRegularization.setApproverId(approverName);
+        shiftRegularizationService.createOrUpdate(shiftRegularization);
 
 ////        Employee Date Time Data
         if (shiftRegularization.getStatus() == 1) {
@@ -17111,6 +17111,28 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                request.setAttribute("employeeMaster", empDetailList.get(0));
                 Object[] arrayOfObject = (Object[]) empDetailList.get(0);
                 Integer emmpld = (Integer) arrayOfObject[0];
+                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                employeeMaster2.setId(emmpld);
+                ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
+                shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster2);
+                String rotationDate1 = shiftRegularization.getRotationDate();
+                Integer cureentshift144 = shiftRegularization.getShiftMasterCurrent().getId();
+                String[] endDateSplited = rotationDate1.split("/");
+                String month1 = endDateSplited[1];
+                String year1 = endDateSplited[2];
+                String day = endDateSplited[0];
+                shiftGenerateMonthlySchedule.setShiftMonth(month1);
+                shiftGenerateMonthlySchedule.setShiftYear(year1);
+                List<?> empShiftList = shiftGenerateMonthlyScheduleService.ReadEmployeeShiftByMonthYear(emmpld, Integer.parseInt(month1), Integer.parseInt(year1));
+                int remainingDays = 0;
+                String shiftId = "";
+                int flag = 0;
+                if (empShiftList.size() > 0) {
+                    shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) empShiftList.get(0);
+                    Integer shiftID = shiftGenerateMonthlySchedule.getId();
+                    shiftGenerateMonthlyScheduleService.updateDayWiseShift(shiftID, Integer.parseInt(day),cureentshift144);
+                }
+
             }
 
 //                   

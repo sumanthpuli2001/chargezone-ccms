@@ -12,6 +12,9 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
  *
@@ -126,10 +129,18 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
 
     @Override
     public void updateDayWiseShift(int id, int dayNo, int shiftId) {
-        String query = "";
 
-        query += "UPDATE ShiftGenerateMonthlySchedule SET concat(day_" + dayNo + ") =" + shiftId
-                + " Where a.id=" + id;
+//       
+        Session s = getSessionFactory().openSession();
+        String sqlString = "update"
+                + " hr_power_astral.shift_generate_monthly_schedule a"
+                + " SET a.day_" + dayNo + " =" + shiftId
+                + " where a.id =" + id;
+
+        SQLQuery sqlQuery = s.createSQLQuery(sqlString);
+        sqlQuery.executeUpdate();
+        s.close();
+//      
 
     }
 
@@ -143,6 +154,14 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
                 + " And a.shiftMonth = " + month
                 + " And a.shiftYear =" + year;
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public void updateDayWiseShiftReguration(int id, int dayNo) {
+        String query = "";
+
+        query += "UPDATE ShiftGenerateMonthlySchedule SET concat(day_" + dayNo + ")"
+                + " Where a.id=" + id;
     }
 
 }

@@ -2444,8 +2444,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
         String query = "";
 
-        query += " Select a.id,a.employeeId, a.employeeName,a.reportingManagerLevel1"
-                + "FROM EmployeeMaster a"
+        query += " Select a.id,a.employeeId"
+                + " FROM EmployeeMaster a"
                 + " WHERE a.userMaster.id = " + employeeMaster.getUserMaster().getId();
 
         return getHibernateTemplate().find(query);

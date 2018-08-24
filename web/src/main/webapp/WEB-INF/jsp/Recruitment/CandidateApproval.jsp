@@ -305,9 +305,6 @@
                                                                     <c:if test="${candidateApplyJob.sex eq 'true'}"><td colspan="3">Female</td></c:if>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="5"><label>Telephone Number</label></td>
-                                                                </tr>
-                                                                <tr>
                                                                     <td><label>Residence</label></td>
                                                                     <td colspan="3">${candidateApplyJob2.residentPhoneNumber}</td>
                                                                 </tr>

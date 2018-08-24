@@ -37,4 +37,13 @@ public class VacancyApprovalDAOImpl<T> extends GenericsDAOImpl<T> implements Vac
         return vacancyApproval;
     }
 
+    @Override
+    public List<?> vacancyId(String vacancyId) {
+        String query = "SELECT a"
+                + " FROM VacancyApproval a "
+                + " WHERE a.vacancyMaster.id = " + vacancyId;
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 }

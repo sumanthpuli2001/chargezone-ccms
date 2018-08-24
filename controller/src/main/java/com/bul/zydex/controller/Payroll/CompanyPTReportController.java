@@ -83,19 +83,22 @@ public class CompanyPTReportController extends CompanyPTReportAbstract {
 
             PayrollProfessionalTax professionalTaxData = (PayrollProfessionalTax) professionalTaxListObj;
             numberOfEmployessWithAmount.add(professionalTaxData.getAmount());
-            for (Object empWithSalaryObj : empList) {
-                Object[] empWithSalary = (Object[]) empWithSalaryObj;
-                companyName = (String) empWithSalary[2];
-                basicSalary = (Double.parseDouble((String) empWithSalary[1]));
-                grossTotal = (Double) ( empWithSalary[4]);
-                int employeeSalaryProcessid = (Integer) empWithSalary[3];
+            try {
+                for (Object empWithSalaryObj : empList) {
+                    Object[] empWithSalary = (Object[]) empWithSalaryObj;
+                    companyName = (String) empWithSalary[2];
+                    basicSalary = (Double.parseDouble((String) empWithSalary[1]));
+                    grossTotal = (Double) (empWithSalary[4]);
+                    int employeeSalaryProcessid = (Integer) empWithSalary[3];
 
-                
-                if (Double.parseDouble(professionalTaxData.getSalaryFrom()) <= grossTotal
-                        && Double.parseDouble(professionalTaxData.getSalaryTo()) >= grossTotal) {
-                    numberOfEmployees++;
+                    if (Double.parseDouble(professionalTaxData.getSalaryFrom()) <= grossTotal
+                            && Double.parseDouble(professionalTaxData.getSalaryTo()) >= grossTotal) {
+                        numberOfEmployees++;
+                    }
+
                 }
-
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             numberOfEmployessWithAmount.add(numberOfEmployees);
             totalProfessionalTaxAmount = numberOfEmployees * Double.parseDouble(professionalTaxData.getAmount());

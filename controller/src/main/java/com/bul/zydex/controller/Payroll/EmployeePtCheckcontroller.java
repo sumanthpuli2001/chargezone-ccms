@@ -87,17 +87,25 @@ public class EmployeePtCheckcontroller extends EmployeePtCheckAbstract {
         List<?> list = employeeSalaryProcessService.readEmployeeForPt(employeeMaster);
         double totalPtAmount = 0;
         Iterator itr = list.iterator();
-        while (itr.hasNext()) {
-            Object[] next = (Object[]) itr.next();
-            totalPtAmount += (Double) next[2];
+        try {
+            while (itr.hasNext()) {
+                Object[] next = (Object[]) itr.next();
+                totalPtAmount += (Double) next[2];
+            }
+        } catch (Exception E) {
+
         }
         double totalGrossTotal = 0;
         Iterator itr1 = list.iterator();
-        while (itr1.hasNext()) {
-            Object[] next = (Object[]) itr1.next();
-            totalGrossTotal += (Double) next[5];
+        try {
+            while (itr1.hasNext()) {
+                Object[] next = (Object[]) itr1.next();
+                totalGrossTotal += (Double) next[5];
+            }
+        } catch (Exception e) {
+
         }
-        
+
         request.setAttribute("employeelist", list);
         request.setAttribute("totalPtAmount", totalPtAmount);
         request.setAttribute("totalGrossTotal", totalGrossTotal);

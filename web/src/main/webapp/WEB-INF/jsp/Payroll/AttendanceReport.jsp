@@ -240,6 +240,8 @@
 
                                                                         </tbody>                                           
                                                                     </table>
+                                                                    <br>
+                                                                    <div class="row" align="center"><b>Note:</b>This is an electronically generated document, hence does not require signature</div>
                                                                 </div>
 
 

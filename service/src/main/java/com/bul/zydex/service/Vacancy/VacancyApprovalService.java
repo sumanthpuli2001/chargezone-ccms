@@ -7,13 +7,16 @@ package com.bul.zydex.service.Vacancy;
 
 import com.bul.zydex.model.VacancyApproval;
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author Dell-1
  */
-public interface VacancyApprovalService<T> extends GenericsService<T>{
-    
+public interface VacancyApprovalService<T> extends GenericsService<T> {
+
     public VacancyApproval readEmpIdAndVaId(int empid, int id);
-    
+
+    public List<?> vacancyId(String vacancyId);
+
 }

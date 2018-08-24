@@ -993,7 +993,7 @@
                             Resume<span style="color: red;font-size: 12px;"> *</span>
                         </div>
                         <div class=" col-sm-4" style="text-align: left;">
-                            <input type="file" name="candidateApplyJob.certificateAttach" class="form-control">
+                            <input type="file" name="candidateApplyJob.certificateAttach" class="form-control" required="true">
                         </div>
                         <div class=" col-sm-4" style="text-align: left;">
                             <a href="vacancy.htm?act=downloadCandidateCertificate&amp;fileName=${certificateAttachment}">${certificateAttachment}</a>

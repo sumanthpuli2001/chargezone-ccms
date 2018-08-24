@@ -5141,90 +5141,104 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             List<?> empDetail = employeeMasterService.empOrDateWiseSearchforActive(employeeAdvanceSearch);
             Iterator it = empDetail.iterator();
             int presentCounter = 0;
-            while (it.hasNext()) {
-                EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
-                List<String> employeeInfoList = new ArrayList();
-                Object[] next = (Object[]) it.next();
-                int id = (int) next[48];
-                EmployeeMaster employeeMaster1 = new EmployeeMaster();
-                employeeMaster1.setId(id);
-                ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
-                String[] s1 = startDate.split("/");
-                String currentDays = s1[0];
-                String currentMonth = s1[1];
-                String currentyear = s1[2];
-                shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster1);
-                shiftGenerateMonthlySchedule.setShiftMonth(currentMonth);
-                shiftGenerateMonthlySchedule.setShiftYear(currentyear);
-                String shiftId = "";
-                List<?> empShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, Integer.parseInt(currentDays));
-                ShiftMaster shiftMaster = new ShiftMaster();
-                ShiftMaster shiftMaster1 = new ShiftMaster();
-                String shiftName = "";
-                String shiftFirstHalfEndTime = "";
-                String shiftEndTime = "";
-                String empEndTime = "";
-                String[] empEndTime1 = null;
-                SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm");
-                if (!empShiftList.isEmpty()) {
-                    shiftId = "" + empShiftList.get(0);
-                }
-                if (empShiftList.size() > 0) {
-                    shiftMaster.setId(Integer.parseInt(shiftId));
-                    shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
-                    shiftName = shiftMaster1.getShiftName();
-                    shiftFirstHalfEndTime = shiftMaster1.getHalfEndTime1();
-                    shiftEndTime = shiftMaster1.getEndTime();
-                }
-                employeeInfoList.add("" + next[0]);
-                employeeInfoList.add("" + next[1]);
-                employeeInfoList.add(shiftName);
-                List listPunch = employeeDatetimeDataService.readPuchDataDateWise(startDate, id);
-                Iterator it1 = listPunch.iterator();
-                Iterator it2 = listPunch.iterator();
-                int numAttempts = 0;
-                while (it1.hasNext() && numAttempts < 4) {
-                    Object[] next1 = (Object[]) it1.next();
-                    String str = "" + next1[0];
-                    String[] str1 = str.split(" ");
-                    employeeInfoList.add("" + str1[1]);
-                    numAttempts++;
-                }
+            try {
+                while (it.hasNext()) {
+                    EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
+                    List<String> employeeInfoList = new ArrayList();
+                    Object[] next = (Object[]) it.next();
+                    int id = (int) next[48];
+                    EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                    employeeMaster1.setId(id);
+                    ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
+                    String[] s1 = startDate.split("/");
+                    String currentDays = s1[0];
+                    String currentMonth = s1[1];
+                    String currentyear = s1[2];
+                    shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster1);
+                    shiftGenerateMonthlySchedule.setShiftMonth(currentMonth);
+                    shiftGenerateMonthlySchedule.setShiftYear(currentyear);
+                    String shiftId = "";
+                    List<?> empShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData(shiftGenerateMonthlySchedule, Integer.parseInt(currentDays));
+                    ShiftMaster shiftMaster = new ShiftMaster();
+                    ShiftMaster shiftMaster1 = new ShiftMaster();
+                    String shiftName = "";
+                    String shiftFirstHalfEndTime = "";
+                    String shiftEndTime = "";
+                    String empEndTime = "";
+                    String[] empEndTime1 = null;
+                    SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm");
+                    if (!empShiftList.isEmpty()) {
+                        shiftId = "" + empShiftList.get(0);
+                    }
+                    if (empShiftList.size() > 0) {
+                        shiftMaster.setId(Integer.parseInt(shiftId));
+                        shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
+                        shiftName = shiftMaster1.getShiftName();
+                        shiftFirstHalfEndTime = shiftMaster1.getHalfEndTime1();
+                        shiftEndTime = shiftMaster1.getEndTime();
+                    }
+                    employeeInfoList.add("" + next[0]);
+                    employeeInfoList.add("" + next[1]);
+                    employeeInfoList.add(shiftName);
+                    List listPunch = employeeDatetimeDataService.readPuchDataDateWise(startDate, id);
+                    Iterator it1 = listPunch.iterator();
+                    Iterator it2 = listPunch.iterator();
+                    int numAttempts = 0;
+                    while (it1.hasNext() && numAttempts < 4) {
+                        Object[] next1 = (Object[]) it1.next();
+                        String str = "" + next1[0];
+                        String[] str1 = str.split(" ");
+                        employeeInfoList.add("" + str1[1]);
+                        numAttempts++;
+                    }
 
-                while (listPunch.size() >= 2) {
+                    while (listPunch.size() >= 2) {
 
-                    Object[] startTimeListEnd = (Object[]) listPunch.get(listPunch.size() - 1);
+                        Object[] startTimeListEnd = (Object[]) listPunch.get(listPunch.size() - 1);
 
-                    empEndTime = (String) startTimeListEnd[0];
-                    empEndTime1 = empEndTime.split(" ");
-                    break;
+                        empEndTime = (String) startTimeListEnd[0];
+                        empEndTime1 = empEndTime.split(" ");
+                        break;
 
-                }
+                    }
 
-                if (listPunch.isEmpty()) {
-                    employeeInfoList.add("");
-                    employeeInfoList.add("");
-                    employeeInfoList.add("");
-                    employeeInfoList.add("");
-                    employeeInfoList.add("AB");
-                    employeeInfoList.add("AB");
-                }
-                if (listPunch.size() == 1) {
-                    employeeInfoList.add("");
-                    employeeInfoList.add("");
-                    employeeInfoList.add("");
-                    employeeInfoList.add("PR");
-                    employeeInfoList.add("PR");
-                    presentCounter++;
-                }
-                if (listPunch.size() == 2) {
-                    employeeInfoList.add("");
-                    employeeInfoList.add("");
-                    employeeInfoList.add("PR");
-                    Date empEndDate = sdf3.parse(empEndTime1[1]);
-                    Date shiftEndDate = null;
-                    if (!shiftEndTime.isEmpty() && !shiftEndTime.equals("")) {
-                        shiftEndDate = sdf3.parse(shiftEndTime);
+                    if (listPunch.isEmpty()) {
+                        employeeInfoList.add("");
+                        employeeInfoList.add("");
+                        employeeInfoList.add("");
+                        employeeInfoList.add("");
+                        employeeInfoList.add("AB");
+                        employeeInfoList.add("AB");
+                    }
+                    if (listPunch.size() == 1) {
+                        employeeInfoList.add("");
+                        employeeInfoList.add("");
+                        employeeInfoList.add("");
+                        employeeInfoList.add("PR");
+                        employeeInfoList.add("PR");
+                        presentCounter++;
+                    }
+                    if (listPunch.size() == 2) {
+                        employeeInfoList.add("");
+                        employeeInfoList.add("");
+                        employeeInfoList.add("PR");
+                        Date empEndDate = sdf3.parse(empEndTime1[1]);
+                        Date shiftEndDate = null;
+                        if (!shiftEndTime.isEmpty() && !shiftEndTime.equals("")) {
+                            shiftEndDate = sdf3.parse(shiftEndTime);
+                            if (empEndDate.before(shiftEndDate)) {
+                                employeeInfoList.add("AB");
+                            } else {
+                                employeeInfoList.add("PR");
+                                presentCounter++;
+                            }
+                        }
+                    }
+                    if (listPunch.size() == 3) {
+                        employeeInfoList.add("");
+                        employeeInfoList.add("PR");
+                        Date empEndDate = sdf3.parse(empEndTime1[1]);
+                        Date shiftEndDate = sdf3.parse(shiftEndTime);
                         if (empEndDate.before(shiftEndDate)) {
                             employeeInfoList.add("AB");
                         } else {
@@ -5232,47 +5246,37 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             presentCounter++;
                         }
                     }
-                }
-                if (listPunch.size() == 3) {
-                    employeeInfoList.add("");
-                    employeeInfoList.add("PR");
-                    Date empEndDate = sdf3.parse(empEndTime1[1]);
-                    Date shiftEndDate = sdf3.parse(shiftEndTime);
-                    if (empEndDate.before(shiftEndDate)) {
-                        employeeInfoList.add("AB");
-                    } else {
+                    if (listPunch.size() > 3) {
                         employeeInfoList.add("PR");
-                        presentCounter++;
+                        Date empEndDate = sdf3.parse(empEndTime1[1]);
+                        Date shiftEndDate = sdf3.parse(shiftEndTime);
+                        if (empEndDate.before(shiftEndDate)) {
+                            employeeInfoList.add("AB");
+                        } else {
+                            employeeInfoList.add("PR");
+                            presentCounter++;
+                        }
                     }
-                }
-                if (listPunch.size() > 3) {
-                    employeeInfoList.add("PR");
-                    Date empEndDate = sdf3.parse(empEndTime1[1]);
-                    Date shiftEndDate = sdf3.parse(shiftEndTime);
-                    if (empEndDate.before(shiftEndDate)) {
-                        employeeInfoList.add("AB");
-                    } else {
-                        employeeInfoList.add("PR");
-                        presentCounter++;
+                    while (listPunch.size() >= 2) {
+                        Object[] startTimeListStart = (Object[]) listPunch.get(0);
+                        Object[] startTimeListEnd = (Object[]) listPunch.get(listPunch.size() - 1);
+                        String startTime = (String) startTimeListStart[0];
+                        String endTime = (String) startTimeListEnd[0];
+                        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                        Date strDate = sdf2.parse(startTime);
+                        Date endDate = sdf2.parse(endTime);
+                        long diff = endDate.getTime() - strDate.getTime();
+                        long diffHours = diff / (60 * 1000);
+                        double empHour = (double) diffHours / 60;
+                        employeeInfoList.add("" + new DecimalFormat("##.##").format(empHour));
+                        break;
                     }
-                }
-                while (listPunch.size() >= 2) {
-                    Object[] startTimeListStart = (Object[]) listPunch.get(0);
-                    Object[] startTimeListEnd = (Object[]) listPunch.get(listPunch.size() - 1);
-                    String startTime = (String) startTimeListStart[0];
-                    String endTime = (String) startTimeListEnd[0];
-                    SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                    Date strDate = sdf2.parse(startTime);
-                    Date endDate = sdf2.parse(endTime);
-                    long diff = endDate.getTime() - strDate.getTime();
-                    long diffHours = diff / (60 * 1000);
-                    double empHour = (double) diffHours / 60;
-                    employeeInfoList.add("" + new DecimalFormat("##.##").format(empHour));
-                    break;
-                }
 
-                recordToAdd.add(employeeInfoList);
+                    recordToAdd.add(employeeInfoList);
 
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
             headerRow2.add("Total Present");

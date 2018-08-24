@@ -432,10 +432,10 @@ public class VacancyController extends VacancyAbstract {
         Date cDate = new Date();
         VacancyMaster vacancyMaster1 = vacancyMasterService.readById(vacancyMaster.getId());
         Map<Integer, String> locationMap = readLocations();
+        vacancyValidator.validate(vacancyMaster, errors);
         if (errors.hasErrors()) {
-            request.setAttribute("failureMessage",
-                    "Error : The Professional Tax is not valid.");
             mv.addAllObjects(errors.getModel());
+            mv = viewEditVacancy(request, response);
         } else {
 
             vacancyMaster.setCreatedBy(vacancyMaster1.getCreatedBy());
@@ -456,10 +456,9 @@ public class VacancyController extends VacancyAbstract {
             vacancyApprovalHistoryService.create(approvalHistory);
             request.setAttribute("successMessage",
                     "Information: The Information is Edited Successfully");
+            mv.getModelMap().put("vacancyMaster", vacancyMaster);
+            mv = vacancyDetailList(request, response);
         }
-
-        mv.getModelMap().put("vacancyMaster", vacancyMaster);
-        mv = vacancyDetailList(request, response);
 
         return mv;
     }
@@ -1929,8 +1928,6 @@ public class VacancyController extends VacancyAbstract {
 
         vacancyValidator.validate(vacancyMaster, errors);
         if (errors.hasErrors()) {
-            request.setAttribute("failureMessage",
-                    "All field are Required.Please Enter Valid data");
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Vacancy/NewButtonCreateVacancy");
         } else {

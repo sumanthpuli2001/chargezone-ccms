@@ -25,6 +25,18 @@ public class VacancyValidator implements Validator {
     public void validate(Object o, Errors errors) {
         VacancyMaster vacancyMaster = (VacancyMaster) o;
 
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "departmentMaster.id",
+                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "locationMaster.id",
+                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobtypeMaster.id",
+                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "designationMaster.id",
+                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numberOfPosition",
+                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experience",
+                "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fromDate",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "toDate",

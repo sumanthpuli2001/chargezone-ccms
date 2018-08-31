@@ -156,7 +156,7 @@
                         </div>
                         <div>
                             <p>
-                                <label style="font-weight: 500;">:-Description-:</label>
+                                <label style="font-weight: 500;">Description:</label>
                                 <label style='font-weight:normal;font-size:14px; color: grey;'>${vacancyMaster.description}</label>
                             </p>
                         </div>

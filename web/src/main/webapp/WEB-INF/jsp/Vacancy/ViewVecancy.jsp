@@ -127,7 +127,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-10">
-                                                        <label>Description:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>Description1:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:textarea path="description" class="form-control" id="editor" placeholder="description"></form:textarea>
                                                         <form:errors path="description" cssClass="errorDiv"></form:errors>
                                                     </div>
@@ -135,7 +135,7 @@
 
                                                 <br>
                                                 <br>
-                                                <div class="form-group">
+<!--                                                <div class="form-group">
                                                     <div class="col-sm-2">
                                                         <label>Comment:<span style="color: red;font-size: 12px;"></span></label>
 
@@ -143,7 +143,7 @@
                                                     <div class="col-sm-8">
                                                         <textarea path="comment" name="comment" class="form-control" placeholder="Approval Comment"></textarea>
                                                     </div>
-                                                </div>
+                                                </div>-->
 
                                                 <div class="form-group">
                                                     <div class="col-sm-6 col-sm-offset-5">

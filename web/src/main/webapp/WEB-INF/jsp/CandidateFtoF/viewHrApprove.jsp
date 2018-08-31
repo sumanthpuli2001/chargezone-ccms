@@ -355,9 +355,6 @@
                                                                 <c:if test="${candidateApplyJob.sex eq 'true'}"><td colspan="3">Female</td></c:if>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="5"><label>Telephone Number</label></td>
-                                                                </tr>
-                                                                <tr>
                                                                     <td><label>Residence</label></td>
                                                                     <td colspan="3">${candidateApplyJob2.residentPhoneNumber}</td>
                                                             </tr>
@@ -370,16 +367,12 @@
                                                                 <td colspan="3">${candidateApplyJob.emailId}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="5"><label>Present Address</label></td>
+                                                                <td><label>Present Address</label></td>
+                                                                <td colspan="3">${candidateApplyJob.presentAddress}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="5">${candidateApplyJob.presentAddress}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="5"><label>Permanent Address</label></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="5">${candidateApplyJob.permanentAddress}</td>
+                                                                <td><label>Permanent Address</label></td>
+                                                                <td colspan="3">${candidateApplyJob.permanentAddress}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td><label>Date of Birth</label></td>

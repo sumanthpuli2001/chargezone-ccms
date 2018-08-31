@@ -30,6 +30,7 @@ import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.TempShiftAssignMaster;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.model.TravelRequestMaster;
+import com.bul.zydex.model.WoffRegularization;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
 import com.bul.zydex.service.attendanceRegularization.TimeAttandanceFlaxibleMasterService;
@@ -48,6 +49,7 @@ import com.bul.zydex.service.shift.ShiftRegularizationService;
 import com.bul.zydex.service.shift.ShiftRotationInfoService;
 import com.bul.zydex.service.shift.ShiftRotationMasterService;
 import com.bul.zydex.service.shift.TemporaryShiftAssignService;
+import com.bul.zydex.service.shift.WoffRegularizationService;
 import com.bul.zydex.service.travel.TravelRequestMasterService;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -83,6 +85,7 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
     protected TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> timeAttandanceFlaxibleMasterService;
     protected ShiftRegularizationService<ShiftRegularization> shiftRegularizationService;
     protected Validator shiftRegularizationValidator;
+    protected WoffRegularizationService<WoffRegularization> woffRegularizationService;
 
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
         return timeAttandanceFlaxibleMasterService;
@@ -389,6 +392,18 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
     public void setShiftRegularizationValidator(Validator shiftRegularizationValidator) {
         this.shiftRegularizationValidator = shiftRegularizationValidator;
     }
+
+    public WoffRegularizationService<WoffRegularization> getWoffRegularizationService() {
+        return woffRegularizationService;
+    }
+
+    public void setWoffRegularizationService(WoffRegularizationService<WoffRegularization> woffRegularizationService) {
+        this.woffRegularizationService = woffRegularizationService;
+    }
+
+   
+    
+
     public void mailSendArApply(HttpServletRequest request) throws Exception {
 
         try {

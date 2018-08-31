@@ -32,4 +32,6 @@ public interface ShiftGenerateMonthlyScheduleDAO<T> extends GenericsDAO<T> {
 
     public void updateDayWiseShiftReguration(int id, int dayNo);
 
+    public List<?> employeeListReadByMonthWoff(int month, int year,int empID);
+
 }

@@ -198,7 +198,9 @@
                                 <ul class="treeview-menu">
                                     <c:if test="${sessionScope.userRight.hr or sessionScope.userRight.shiftManagement}">
                                         <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplication"><i class="fa fa-circle-o"></i>Shift Application</a></li>
-                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i>Subordinates Request</a></li>
+                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
+                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> Woff Subordinates Request</a></li>
+                                         <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff"><i class="fa fa-circle-o"></i>Woff Application</a></li>
                                         <li><a href="shiftMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Shift</a></li>
 
                                         <li><a href="hoursBasis.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Hours </a></li>

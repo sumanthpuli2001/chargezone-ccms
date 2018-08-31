@@ -750,4 +750,7 @@
       <bean id="shiftRegularizationService1" class="com.bul.zydex.service.shift.ShiftRegularizationServiceImpl">
         <property name="shiftRegularizationDAO" ref="shiftRegularizationDAO1"/>
     </bean>
+      <bean id="woffRegularizationService1" class="com.bul.zydex.service.shift.WoffRegularizationServiceImpl">
+        <property name="woffRegularizationDAO" ref="woffRegularizationDAO1"/>
+    </bean>
 </beans>

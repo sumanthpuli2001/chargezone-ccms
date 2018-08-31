@@ -164,4 +164,18 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
                 + " Where a.id=" + id;
     }
 
+    @Override
+    public List<?> employeeListReadByMonthWoff(int month, int year, int empID) {
+     String query = "";
+        query += " Select a.id,b.employeeId,b.employeeName,b.id"
+                + " FROM ShiftGenerateMonthlySchedule a"
+                + " LEFT JOIN a.employeeMaster b"
+                + " Where a.shiftMonth = " + month
+                + " And a.shiftYear =" + year
+                + " And b.id =" + empID;
+        return getHibernateTemplate().find(query);   
+    }
+
+   
+
 }

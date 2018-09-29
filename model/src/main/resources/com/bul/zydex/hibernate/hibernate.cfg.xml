@@ -4,7 +4,7 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://192.168.110:3306/hr_power_astral?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://192.168.220:3306/hr_power_astral?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
     <mapping resource="com/bul/zydex/model/CafeteriaRequest.hbm.xml"/>
@@ -185,5 +185,6 @@
     <mapping resource="com/bul/zydex/model/VacancyApprovalHistory.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/ShiftRegularization.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/WoffRegularization.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/CandidateF2FObservation.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

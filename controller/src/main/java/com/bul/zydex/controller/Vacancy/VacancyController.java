@@ -841,7 +841,7 @@ public class VacancyController extends VacancyAbstract {
 
                 } else {
                     request.setAttribute("successMessage",
-                            "You are already apply for this job.");
+                            "You are already applied for this job.");
                     Date d = new Date();
                     String date = sdf.format(d);
                     List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
@@ -948,10 +948,23 @@ public class VacancyController extends VacancyAbstract {
                 List<?> cedList = candidateExperienceDetailService.readListByApplyJobId(candidateApplyJob1.getId());
                 List<?> cfbList = candidateFamilyBackgroundService.readListByApplyJobId(candidateApplyJob1.getId());
                 List<?> corList = candidateOtherReferencesService.readListByApplyJobId(candidateApplyJob1.getId());
+                List<?> candidateJobApplyNAmeList = candidateJobApplicationService.readListByApplyJobId(candidateApplyJob1.getId());
+                String jobprofileName = "";
+                if (!candidateJobApplyNAmeList.isEmpty()) {
+                    jobprofileName = (String) candidateJobApplyNAmeList.get(0);
+//                    for (Object PolicyAmountList1 : candidateJobApplyNAmeList) {
+//                        Object[] o = (Object[]) PolicyAmountList1;
+//                        String policyName = (String) o[0];
+//
+//                    }
+
+                }
                 mv.getModelMap().put("caqList", caqList);
                 mv.getModelMap().put("cedList", cedList);
                 mv.getModelMap().put("cfbList", cfbList);
                 mv.getModelMap().put("corList", corList);
+                mv.getModelMap().put("candidateJobApplyNAmeList", candidateJobApplyNAmeList);
+                request.setAttribute("jobprofileName", jobprofileName);
             }
             if (candidateApplyJob1 != null) {
                 mv.getModelMap().put("combinedCandidateClasses", combinedCandidateClasses);
@@ -1955,7 +1968,7 @@ public class VacancyController extends VacancyAbstract {
             vah.setCreatedBy(employeeMaster.getEmployeeName());
             vah.setCreatedDate(sdf.format(cDate));
             vah.setStatus(0);
-            vah.setStatusMessage("Vacancy Creted");
+            vah.setStatusMessage("Vacancy Created");
             vacancyApprovalHistoryService.create(vah);
 
             request.setAttribute("successMessage",
@@ -2241,7 +2254,8 @@ public class VacancyController extends VacancyAbstract {
             approvalHistory.setCreatedDate(sdf.format(cDate));
             approvalHistory.setCreatedBy(employeeMaster.getEmployeeName());
             approvalHistory.setComment(comment);
-            approvalHistory.setStatusMessage(btnType);
+            approvalHistory.setStatusMessage("Approved");
+//            approvalHistory.setStatusMessage(btnType);
             vacancyApprovalHistoryService.create(approvalHistory);
             request.setAttribute("successMessage",
                     "Information : The Request is Approved successfully.");
@@ -2267,7 +2281,8 @@ public class VacancyController extends VacancyAbstract {
             approvalHistory.setCreatedDate(sdf.format(cDate));
             approvalHistory.setCreatedBy(employeeMaster.getEmployeeName());
             approvalHistory.setComment(comment);
-            approvalHistory.setStatusMessage(btnType);
+//            approvalHistory.setStatusMessage(btnType);
+            approvalHistory.setStatusMessage("Recycled");
             vacancyApprovalHistoryService.create(approvalHistory);
 
             request.setAttribute("successMessage",
@@ -2287,7 +2302,8 @@ public class VacancyController extends VacancyAbstract {
             approvalHistory.setCreatedBy(employeeMaster.getEmployeeName());
             approvalHistory.setComment(comment);
             approvalHistory.setStatus(3);
-            approvalHistory.setStatusMessage(btnType);
+            approvalHistory.setStatusMessage("Rejected");
+//            approvalHistory.setStatusMessage(btnType);
             vacancyApprovalHistoryService.create(approvalHistory);
             request.setAttribute("successMessage",
                     "Information : The Request is Rejectd successfully.");

@@ -62,4 +62,9 @@ public class CandidateJobApplicationServiceImpl<T> extends GenericsServiceImpl<T
     public List<?> deleteVacancyId(String vacancyId) {
          return candidateJobApplicationDAO.deleteVacancyId(vacancyId);
     }
+
+    @Override
+    public List<?> readListByApplyJobId(Integer id) {
+        return candidateJobApplicationDAO.readListByApplyJobId(id);
+    }
 }

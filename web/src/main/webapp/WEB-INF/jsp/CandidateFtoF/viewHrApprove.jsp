@@ -82,6 +82,17 @@
         }
 
     </script>
+    <script>
+        function OnprintApplicationForm() {
+
+            var applicationID = document.getElementById("applicationId").value;
+
+            var applicationApplyID = document.getElementById("applicationApllyID").value;
+
+            window.location = 'candidateF2FApproval.htm?act=printShowCandidateView&id=' + applicationID + '&applicationApplyID=' + applicationApplyID;
+
+        }
+    </script>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -105,8 +116,9 @@
                                     <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
                                 </c:if>
                                 <form:form class="form-horizontal" method="post"
-                                           commandName="candidateF2FRequest" action="candidateF2FApproval.htm?act=SubmitFtoFByHr" onsubmit="return saveSubmit()" >
+                                           commandName="candidateF2FObservation" action="candidateF2FApproval.htm?act=SubmitFtoFByHr" onsubmit="return saveSubmit()" >
                                     <input type="hidden" id="applicationId" name="applicationId" value="${applicationId}">   
+                                    <input type="hidden" id="applicationApllyID" name="applicationApllyID" value="${applicationApplyID}">   
 
                                     <!--                                    <div class="box box-info collapsed-box ">
                                                                             <div class="box-header">
@@ -297,7 +309,7 @@
                                         <div class="box-body">
                                             <div class="row">
                                                 <div class="box-header" style="text-align: right;">
-                                                    <button class="btn btn-facebook "  style="width: 100px;" onclick="printDiv('printableArea')">Print &nbsp;<span><i class="fa fa-print"></i></span></button>
+                                                    <label class="btn btn-facebook "  style="width: 100px;" onclick="OnprintApplicationForm();">Print &nbsp;<span><i class="fa fa-print"></i></span></label>
                                                 </div>
                                                 <div id="printableArea">
                                                     <div class="col-sm-12">
@@ -318,7 +330,8 @@
                                                                 <tr>
                                                                     <td>
                                                                         <label>Post Applied For:</label> &nbsp;&nbsp;&nbsp;
-                                                                        <span>${candidateApplyJob2.postAppliedFor}</span>
+                                                                        <!--<span>${candidateApplyJob2.postAppliedFor}</span>-->
+                                                                        <span>${vacancyName}</span>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -756,6 +769,303 @@
                         </div>
                     </div>
                 </div>-->
+
+                                    <c:forEach var="list" items="${f2flist}">
+                                        <div class="box box-info collapsed-box ">
+                                            <div class="box-header">
+                                                <h3 class="box-title">Candidate F2F Observations :  <b>${list.hrName}</b></h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onClick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="box-body">
+                                                <div class="row">
+                                                    <div class="box-header" style="text-align: right;">
+                                                        <button class="btn btn-facebook "  style="width: 100px;" onclick="printDivtwo('printableAreatwo')">Print &nbsp;<span><i class="fa fa-print"></i></span></button>
+                                                    </div>
+                                                    <div id="printableAreatwo">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="box-header" style="text-align: right;">
+                                                                <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                                                            </div>
+                                                            <table style=" width: 90%; height: 0px !important;" border="1" class="table table-bordered" style="" cellspacing="0" cellpadding="0"  align="Center">
+                                                                <tr>
+                                                                    <td ><!--style="border:0px"-->
+                                                                        <b>Date Of Interview&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                        &nbsp;&nbsp;${candidateF2FRequest.dateOfInterview} </td> 
+                                                                    <td ><!--style="border:0px"-->
+                                                                        <b>Name of the candidate&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                        &nbsp;&nbsp;${candidateF2FRequest.candidateApplyJob.name} </td> 
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td ><!--style="border:0px"-->
+                                                                        <b>Venue&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                        &nbsp;&nbsp;${candidateF2FRequest.location} </td> 
+                                                                    <td ><!--style="border:0px"-->
+                                                                        <b>Position&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                        &nbsp;&nbsp;${candidateF2FRequest.vacancyMaster.name} </td> 
+
+                                                                </tr>
+                                                                <tr >
+                                                                    <td><label>Interview Panel Member:</label></td>
+                                                                    <td>
+                                                                        <c:forEach  var="test" items="${comitteeList}">
+
+                                                                            &nbsp;&nbsp;&nbsp; &nbsp;<span>${test.employeeMaster.employeeName}</span>
+                                                                            <br>
+                                                                        </c:forEach>
+                                                                    </td>
+                                                                </tr>
+                                                                <!--                                                            <div class="box-body no-padding">
+                                                                                                                                <div class="col-sm-6">
+                                                                                                                                    <label>Date Of Interview</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                                                                                    <span>${candidateF2FRequest.dateOfInterview}</span>
+                                                                                                                                </div>
+                                                                                                                                <div class="col-sm-6">
+                                                                                                                                    <label>Venue </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                                                                                    <span>${candidateF2FRequest.location}</span>
+                                                                                                                                </div>                 
+                                                                                                                            </div>-->
+                                                                <!--                                                            <div class="box-body no-padding">
+                                                                                                                                <div class="col-sm-6">
+                                                                                                                                    <label>Name of the candidate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b></label>
+                                                                                                                                    <span>${candidateF2FRequest.candidateApplyJob.name}</span>
+                                                                                                                                </div>
+                                                                
+                                                                                                                                <div class="col-sm-6">
+                                                                                                                                    <label>Position</label>&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                                                                                    <span>${candidateF2FRequest.vacancyMaster.name}</span>
+                                                                                                                                </div>
+                                                                                                                            </div>-->
+                                                            </table>
+                                                            <br>
+
+                                                            <!--                                                        <div class="form-group">
+                                                                                                                        <table>
+                                                                                                                            <tr >
+                                                                                                                                <td><label>Interview Panel Member:</label></td>
+                                                                                                                                <td>
+                                                            <%--<c:forEach  var="test" items="${comitteeList}">--%>
+    
+                                                                &nbsp;&nbsp;&nbsp; &nbsp;<span>${test.employeeMaster.employeeName}</span>
+                                                                <br>
+                                                            <%--</c:forEach>--%>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+    
+                                            </div>-->
+                                                            <div  >
+                                                                <!--                                                            <div>
+                                                                                                                                <label>Interview Evaluation&nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
+                                                                                                                            </div>-->
+                                                                <input type="hidden" id="technicalKnowledge" name="technicalKnowledge" value="${candidateF2FRequest.technicalKnowledge}">
+                                                                <input type="hidden" id="experience" name="experience" value="${candidateF2FRequest.experience}">
+                                                                <input type="hidden" id="commSkill" name="commSkill" value="${candidateF2FRequest.commSkill}">
+                                                                <input type="hidden" id="interPerSkill" name="interPerSkill" value="${candidateF2FRequest.interPerSkill}">
+                                                                <input type="hidden" id="leaderSkill" name="leaderSkill" value="${candidateF2FRequest.leaderSkill}">
+                                                                <input type="hidden" id="strengths" name="strengths" value="${candidateF2FRequest.strengths}">
+                                                                <input type="hidden" id="excellent" name="excellent" value="${candidateF2FRequest.excellent}">
+                                                                <input type="hidden" id="weaknesses" name="weaknesses" value="${candidateF2FRequest.weaknesses}">
+                                                                <input type="hidden" id="typeOfTraining" name="typeOfTraining" value="${candidateF2FRequest.typeOfTraining}">
+                                                                <input type="hidden" id="otherSkills" name="otherSkills" value="${candidateF2FRequest.otherSkills}">
+                                                                <!--<input type="hidden" id="otherSkills" name="otherSkills" value="${candidateF2FRequest.otherSkills}">-->
+                                                                <div >
+                                                                    <table style=" width: 90%; height: 0px !important;" border="1" class="table table-bordered" cellspacing="0" cellpadding="0"  style="" align="Center">
+                                                                        <tr>
+                                                                            <td>
+                                                                                <label>Interview Evaluation&nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
+                                                                            </td>
+                                                                            <td>
+
+                                                                            </td>
+                                                                            <td>
+
+                                                                            </td>
+                                                                            <td>
+
+                                                                            </td>
+                                                                            <td>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="text-align: left; vertical-align: middle">Rating</td>
+                                                                            <td style="text-align: left; vertical-align: middle">Excellent</td>
+                                                                            <td style="text-align: left; vertical-align: middle">Very Good</td>
+                                                                            <td style="text-align: left; vertical-align: middle">Acceptable</td>
+                                                                            <td style="text-align: left; vertical-align: middle">Not Suitable</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="text-align: left">Technical knowledge</td>
+                                                                            <td style="text-align: left">
+                                                                                <c:if test="${list.technicalKnowledge == 1}">Excellent</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.technicalKnowledge == 2}">Very Good</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.technicalKnowledge == 3}">Acceptable</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.technicalKnowledge == 4}">Not Suitable</c:if>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="text-align: left">Experience</td>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.experience == 1}">Excellent</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.experience == 2}">Very Good</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.experience == 3}">Acceptable</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.experience == 4}">Not Suitable</c:if>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="text-align: left">Communication Skills</td>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.commSkill == 1}">Excellent</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.commSkill == 2}">Very Good</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.commSkill == 3}">Acceptable</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.commSkill == 4}">Not Suitable</c:if>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="text-align: left">Inter-Personal Skills</td>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.interPerSkill == 1}">Excellent</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.interPerSkill == 2}">Very Good</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.interPerSkill == 3}">Acceptable</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.interPerSkill == 4}">Not Suitable</c:if>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="text-align: left">Leadership Skills</td>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.leaderSkill == 1}">Excellent</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.leaderSkill == 2}">Very Good</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.leaderSkill == 3}">Acceptable</c:if>
+                                                                                <td style="text-align: left">
+                                                                                <c:if test="${list.leaderSkill == 4}">Not Suitable</c:if>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                                <!--                                                            <div class="col-md-12 col-sm-12"></br></div>            -->
+                                                                <!--                                                            <div >
+                                                                                                                                <div >
+                                                                                                                                    <label>Area for Training Required &nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp;
+                                                                                                                                </div>
+                                                                                                                            </div>-->
+                                                                <br>
+
+                                                                <div >
+                                                                    <div >
+                                                                        <table style=" width: 90%; height: 0px !important;" border="1" class="table table-bordered" cellspacing="0" cellpadding="0"  style="" align="Center">
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <label>Area for Training Required &nbsp;&nbsp;-:-</label> &nbsp;&nbsp;&nbsp; 
+                                                                                </td>
+                                                                                <td>
+
+                                                                                </td>
+
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><label>Strengths</label></td>
+                                                                                <td>${list.strengths}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><label>Weaknesses</label></td>
+                                                                            <td>${list.weaknesses}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><label>Type Of Training</label></td>
+                                                                            <td>${list.typeOfTraining}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><label>Other Skills</label></td>
+                                                                            <td>${list.otherSkills}</td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+                                                            <br>
+
+                                                            <!--<div class="col-md-12 col-sm-12"></br></div>--> 
+                                                            <table style=" width: 90%; height: 0px !important;" border="1" class="table table-bordered"  cellspacing="0" cellpadding="0" style="" align="Center">
+                                                                <tr>
+                                                                    <td> <label>Overall Rating  </label>&nbsp;&nbsp;-</td> 
+                                                                    <td ><span> <c:if test="${list.excellent == 1}">Excellent</c:if>
+                                                                            <c:if test="${list.excellent == 2}">Very Good</c:if>
+                                                                            <c:if test="${list.excellent == 3}">Acceptable</c:if>
+                                                                            <c:if test="${list.excellent == 4}">Not Suitable</c:if></span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                    <%--<c:forEach  var="comment" items="${commentlist}" varStatus="loop">--%>
+
+                                                                        <%--<c:if test="${loop.index eq 0}">--%>
+                                                                            <td>
+                                                                                <label>Interviewer:</label>
+                                                                            </td>
+                                                                        <%--</c:if>--%>
+                                                                        <%--<c:if test="${loop.index ne 0}">--%>
+<!--                                                                            <td>
+
+                                                                            </td>-->
+                                                                        <%--</c:if>--%>
+                                                                        <td>
+                                                                            <label>${list.hrName}</label>
+                                                                        </td>
+
+                                                                        <!--</div>-->
+                                                                    <%--</c:forEach>--%>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Comment: </label> &nbsp;&nbsp;&nbsp;
+                                                                    </td>
+                                                                    <!--<div class="col-sm-8">-->
+                                                                    <td>${list.comment}</td>
+                                                                    <!--</div>-->
+                                                                    <!--</div>-->
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        Sign. Of candidate : 
+                                                                    </td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <!--                                                                <div class="col-sm-12">
+                                                                                                                            </br>
+                                                                                                                            <label>Sign. Of candidate :</label> </br>
+                                                                
+                                                                                                                        </div>-->
+                                                            </table>
+                                                            <!--<div class="col-sm-6">-->
+                                                            <!--<label>Overall Rating &nbsp;&nbsp;-:-</label>--> 
+                                                            <!--<span>--> 
+                                                            <%--<c:if test="${candidateF2FRequest.excellent == 1}">Excellent</c:if>--%>
+                                                            <%--<c:if test="${candidateF2FRequest.excellent == 2}">Very Good</c:if>--%>
+                                                            <%--<c:if test="${candidateF2FRequest.excellent == 3}">Acceptable</c:if>--%>
+
+
+                                                            <!--</div>-->
+
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </c:forEach> 
                                     <div class="box box-info collapsed-box ">
                                         <div class="box-header">
                                             <h3 class="box-title">Candidate F2F Observations :</h3>
@@ -773,42 +1083,60 @@
                                                         <div class="box-header" style="text-align: right;">
                                                             <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
                                                         </div>
-                                                        <div class="box-body no-padding">
-                                                            <div class="col-sm-6">
-                                                                <label>Position:</label> &nbsp;&nbsp;&nbsp;
-                                                                <span>${candidateF2FRequest.vacancyMaster.name}</span>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label>Date Of Interview  :</label> &nbsp;&nbsp;&nbsp;
-                                                                <span>${candidateF2FRequest.dateOfInterview}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
+                                                           <table style=" width: 90%; height: 0px !important;" border="1" class="table table-bordered" style="" cellspacing="0" cellpadding="0"  align="Center">
+                                                            <tr>
+                                                                <td ><!--style="border:0px"-->
+                                                                    <b>Date Of Interview&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                    &nbsp;&nbsp;${candidateF2FRequest.dateOfInterview} </td> 
+                                                                <td ><!--style="border:0px"-->
+                                                                    <b>Name of the candidate&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                    &nbsp;&nbsp;${candidateF2FRequest.candidateApplyJob.name} </td> 
 
-                                                            <div class="col-sm-6">
-                                                                <label>Name of the candidate:</label> &nbsp;&nbsp;&nbsp;
-                                                                <span>${candidateF2FRequest.candidateApplyJob.name}</span>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label>Venue :</label> &nbsp;&nbsp;&nbsp;
-                                                                <span>${candidateF2FRequest.location}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <table>
-                                                                <tr>
-                                                                    <td><label>&nbsp;&nbsp;&nbsp;&nbsp; Interview Panel Member:</label></td>
-                                                                    <td>
-                                                                        <c:forEach  var="test" items="${comitteeList}">
+                                                            </tr>
+                                                            <tr>
+                                                                <td ><!--style="border:0px"-->
+                                                                    <b>Venue&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                    &nbsp;&nbsp;${candidateF2FRequest.location} </td> 
+                                                                <td ><!--style="border:0px"-->
+                                                                    <b>Position&nbsp;</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                    &nbsp;&nbsp;${candidateF2FRequest.vacancyMaster.name} </td> 
 
-                                                                            &nbsp;&nbsp;&nbsp; &nbsp;<span>${test.employeeMaster.employeeName}</span>
-                                                                            <br>
-                                                                        </c:forEach>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
+                                                            </tr>
+                                                            <tr >
+                                                                <td><label>Interview Panel Member:</label></td>
+                                                                <td>
+                                                                    <c:forEach  var="test" items="${comitteeList}">
 
-                                                        </div>
+                                                                        &nbsp;&nbsp;&nbsp; &nbsp;<span>${test.employeeMaster.employeeName}</span>
+                                                                        <br>
+                                                                    </c:forEach>
+                                                                </td>
+                                                            </tr>
+                                                            <!--                                                            <div class="box-body no-padding">
+                                                                                                                            <div class="col-sm-6">
+                                                                                                                                <label>Date Of Interview</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                                                                                <span>${candidateF2FRequest.dateOfInterview}</span>
+                                                                                                                            </div>
+                                                                                                                            <div class="col-sm-6">
+                                                                                                                                <label>Venue </label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                                                                                <span>${candidateF2FRequest.location}</span>
+                                                                                                                            </div>                 
+                                                                                                                        </div>-->
+                                                            <!--                                                            <div class="box-body no-padding">
+                                                                                                                            <div class="col-sm-6">
+                                                                                                                                <label>Name of the candidate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b></label>
+                                                                                                                                <span>${candidateF2FRequest.candidateApplyJob.name}</span>
+                                                                                                                            </div>
+                                                            
+                                                                                                                            <div class="col-sm-6">
+                                                                                                                                <label>Position</label>&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                                                                                                <span>${candidateF2FRequest.vacancyMaster.name}</span>
+                                                                                                                            </div>
+                                                                                                                        </div>-->
+                                                        </table>
+                                                     
+                                                   
+                                                       
                                                         <div class="form-group">
 
                                                             <div class="col-sm-6">
@@ -816,6 +1144,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-12 col-sm-12">
+                                                               <%--<form:input path="technicalKnowledge" id="technicalKnowledge" class="form-control" type="hidden"></form:input>--%>
+                                                               <%--<form:input path="technicalKnowledge" id="technicalKnowledge" class="form-control" type="hidden"></form:input>--%>
                                                             <!--<div class="table-responsive">-->
                                                             <table id="questionTable" class="table" style="" align="Center"  >
                                                                 <tr>
@@ -956,50 +1286,31 @@
                                                             <table id="questionTable" class="table" style="" align="Center"  >
                                                                 <tr>
                                                                     <td style="text-align: center"> <label>Excellent:</label>
-                                                                    <form:radiobutton path="excellent" required="required" readonly="true" value="1" />
+                                                                    <form:radiobutton path="excellent" required="required"  value="1" />
                                                                 </td>
                                                                 <td style="text-align: center"><label>Very Good:</label>
-                                                                    <form:radiobutton path="excellent" required="required" readonly="true"  value="2" />
+                                                                    <form:radiobutton path="excellent" required="required"  value="2" />
                                                                 </td>
                                                                 <td style="text-align: center"><label>Acceptable:</label>
-                                                                    <form:radiobutton path="excellent" required="required" readonly="true"  value="3" />
+                                                                    <form:radiobutton path="excellent" required="required"  value="3" />
                                                                 </td>
                                                                 <td style="text-align: center"><label>Not Suitable:</label>
-                                                                    <form:radiobutton path="excellent" required="required" readonly="true"  value="4" />
+                                                                    <form:radiobutton path="excellent" required="required"  value="4" />
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                        <c:forEach  var="comment" items="${commentlist}" varStatus="loop">
-                                                            <div class="form-group">
-                                                                <c:if test="${loop.index eq 0}">
-                                                                    <div class="col-sm-2">
-                                                                        <label>Interviewer:</label>
-                                                                    </div>
-                                                                </c:if>
-                                                                <c:if test="${loop.index ne 0}">
-                                                                    <div class="col-sm-2">
 
-                                                                    </div>
-                                                                </c:if>
-                                                                <div class="col-sm-8">
-                                                                    <label>${comment[2]}</label>
-                                                                </div>
-
-                                                            </div>
-                                                        </c:forEach>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-2">
-                                                                <label>Comment:</label> &nbsp;&nbsp;&nbsp;
-                                                            </div>
-                                                            <div class="col-sm-8">
-                                                                <div>${candidateF2FRequest.message}</div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+
+
+
+
 
                                     <div class="box box-info collapsed-box ">
                                         <div class="box-header">

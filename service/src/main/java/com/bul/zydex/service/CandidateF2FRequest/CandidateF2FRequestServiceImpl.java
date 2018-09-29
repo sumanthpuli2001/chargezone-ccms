@@ -37,4 +37,9 @@ public class CandidateF2FRequestServiceImpl<T> extends GenericsServiceImpl<T> im
         return candidateF2FRequestDAO.readById(id);
     }
 
+    @Override
+    public List<?> interviewReqDetailreadHR(int empId) {
+     return candidateF2FRequestDAO.interviewReqDetailreadHR(empId);
+    }
+
 }

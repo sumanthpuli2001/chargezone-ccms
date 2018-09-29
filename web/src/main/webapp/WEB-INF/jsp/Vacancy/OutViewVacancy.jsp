@@ -95,9 +95,9 @@
                         <div class='col-md-4 col-sm-4 col-xs-12'>
 
                             <p>
-                                <label style="font-weight: 500;">Location:</label> <c:forEach  var="list" items="${locationMap}">
+                                <label style="font-weight: 500;">Location</label> <c:forEach  var="list" items="${locationMap}">
                                     <c:if test="${vacancyMaster.locationMaster.id eq list.key}">
-                                        <label style=" font-weight: normal;font-size:14px; color: grey;">${list.value}</label>
+                                        <label style=" font-weight: normal;font-size:14px; color: grey;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${list.value}</label>
                                     </c:if>
                                 </c:forEach></p>
                             <p>
@@ -105,18 +105,18 @@
                                 <label style=" font-weight: normal;font-size:14px; color: grey;">${vacancyMaster.numberOfPosition}</label>
                             </p>
                             <p>
-                                <label style="font-weight: 500;">Designation:</label>
+                                <label style="font-weight: 500;">Designation</label>
                                 <c:forEach  var="list" items="${desigList}">
                                     <c:if test="${vacancyMaster.designationMaster.id eq list.key}">
-                                        <label style=" font-weight: normal;font-size:14px; color: grey;">${list.value}</label>
+                                        <label style=" font-weight: normal;font-size:14px; color: grey;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${list.value}</label>
                                     </c:if>
                                 </c:forEach>
                             </p>
                             <p>
-                                <label style="font-weight: 500;">Department:</label>
+                                <label style="font-weight: 500;">Department</label>
                                 <c:forEach  var="list" items="${deptMap}">
                                     <c:if test="${vacancyMaster.departmentMaster.id eq list.key}">
-                                        <label style=" font-weight: normal;font-size:14px; color: grey;">${list.value}</label>
+                                        <label style=" font-weight: normal;font-size:14px; color: grey;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${list.value}</label>
                                     </c:if>
                                 </c:forEach>
                             </p>
@@ -125,8 +125,8 @@
                                                             <label style=" font-weight: normal;font-size:14px; color: grey;">${vacancyMaster.fromDate}</label>
                                                         </p>-->
                             <p>
-                                <label style="font-weight: 500;">Vacancy Last Date:</label>
-                                <label style=" font-weight: normal;font-size:14px; color: grey;">${vacancyMaster.toDate}</label>
+                                <label style="font-weight: 500;">Vacancy Last Date</label>
+                                <label style=" font-weight: normal;font-size:14px; color: grey;">&nbsp;&nbsp;:&nbsp;${vacancyMaster.toDate}</label>
                             </p>
 
 
@@ -134,33 +134,36 @@
                         <div class="col-md-8 col-sm-12 col-xs-12" style="width: 65% !important;">
 
                             <p>
-                                <label style="font-weight: 500;">Name:</label> 
-                                <label style=" font-weight: normal;font-size:14px; color: grey;" >${vacancyMaster.name}</label>
+                                <label style="font-weight: 500;">Name</label> 
+                                <label style=" font-weight: normal;font-size:14px; color: grey;" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${vacancyMaster.name}</label>
                             </p>
                             <p>
                                 <label style="font-weight: 500;">Work Experience(In Years):</label>
                                 <label style=" font-weight: normal; font-size:14px; color: grey;">${vacancyMaster.experience}</label>
                             </p>
                             <p>
-                                <label style="font-weight: 500;">Job Type:</label> 
+                                <label style="font-weight: 500;">Job Type</label> 
                                 <c:forEach  var="list" items="${jobtype1}">
                                     <c:if test="${vacancyMaster.jobtypeMaster.id eq list.key}">
-                                        <label style=" font-weight: normal;font-size:14px; color: grey;">${list.value}</label>
+                                        <label style=" font-weight: normal;font-size:14px; color: grey;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${list.value}</label>
                                     </c:if>
                                 </c:forEach>
                             </p>
                             <p>
-                                <label style="font-weight: 500;">Salary :</label>
-                                <label style=" font-weight: normal; font-size:14px; color: grey;">${vacancyMaster.salaryRange}</label>
+                                <label style="font-weight: 500;">Salary</label>
+                                <label style=" font-weight: normal; font-size:14px; color: grey;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${vacancyMaster.salaryRange}</label>
                             </p>
                         </div>
-                        <div>
+                        
+                    </div>
+                            <div class="col-md-12 col-sm-12" style="text-align: left; margin-left: 15%; width: 85%;">
+                                 <div class="col-md-8 col-sm-12 col-xs-12" style="width: 65% !important;">
                             <p>
                                 <label style="font-weight: 500;">Description:</label>
                                 <label style='font-weight:normal;font-size:14px; color: grey;'>${vacancyMaster.description}</label>
                             </p>
                         </div>
-                    </div>
+                            </div>
                 </div>
 
             </section>

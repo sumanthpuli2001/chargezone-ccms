@@ -81,46 +81,41 @@
             $('#datepicker').datepicker({
             changeMonth: true,
                     changeYear: true,
-                    showButtonPanel: true,
+//                    showButtonPanel: true,
                     dateFormat: 'dd/mm/yy',
                     onClose: function(dateText, inst) {
                     var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
                             var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
                             var date = $("#ui-datepicker-div .ui-datepicker-date :selected").val();
-                            
                     }
             });
             });
-            $(function() {
-            $('#datepicker45').datepicker({
-            changeMonth: true,
-                    changeYear: true,
-                    showButtonPanel: true,
-                    dateFormat: 'dd/mm/yy',
-                    onClose: function(dateText, inst) {
-                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                            var date = $("#ui-datepicker-div .ui-datepicker-date :selected").val();
-                           
-                    }
-            });
-            });
-            $(function() {
-            $('#datepicker46').datepicker({
-            changeMonth: true,
-                    changeYear: true,
-                    showButtonPanel: true,
-                    dateFormat: 'dd/mm/yy',
-                    onClose: function(dateText, inst) {
-                    var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
-                            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
-                            var date = $("#ui-datepicker-div .ui-datepicker-date :selected").val();
-                            
-                    }
-            });
-            });
-           
-           
+                    $(function() {
+                    $('#datepicker45').datepicker({
+                    changeMonth: true,
+                            changeYear: true,
+//                            showButtonPanel: true,
+                            dateFormat: 'dd/mm/yy',
+                            onClose: function(dateText, inst) {
+                            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                                    var date = $("#ui-datepicker-div .ui-datepicker-date :selected").val();
+                            }
+                    });
+                    });
+                    $(function() {
+                    $('#datepicker46').datepicker({
+                    changeMonth: true,
+                            changeYear: true,
+//                            showButtonPanel: true,
+                            dateFormat: 'dd/mm/yy',
+                            onClose: function(dateText, inst) {
+                            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                                    var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                                    var date = $("#ui-datepicker-div .ui-datepicker-date :selected").val();
+                            }
+                    });
+                    });
                     $(function () {
                     $("#datepicker1").datepicker();
                     });
@@ -355,35 +350,44 @@
                                         <th style="text-align: left">Post Applied For<span style="color: red;font-size: 12px;"> *</span></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><form:input path="candidateApplyJob2.postAppliedFor" class="form-control" placeholder="Enter Applied Post" required="true"></form:input></td>
+                                <c:if test="${empty candidateJobApplyNAmeList}">
+                                    <tbody>
+                                        <tr>
+                                            <td><form:input path="candidateApplyJob2.postAppliedFor" class="form-control" placeholder="Enter Applied Post" required="true"></form:input></td>
+                                            </tr>
+                                        </tbody>
+                                </c:if>
+                                <c:if test="${!empty candidateJobApplyNAmeList}">
+                                    <tbody>
+                                        <tr>
+                                            <td><input value="${jobprofileName}" class="form-control" placeholder="Enter Applied Post" required="true"></input></td>
                                         </tr>
                                     </tbody>
-                                </table>
-                                </br>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12">
-                            <center>
-                                <h3>Personal Information</h3>
-                            </center>
+                                </c:if>
+                            </table>
                             </br>
-                        </div>    
+                        </div>
+                    </div>
 
-                        <div class="col-sm-12">
-                            <table class="table-bordered" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: center">First Name<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <th style="text-align: center">Middle Name<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <th style="text-align: center">Last Name<span style="color: red;font-size: 12px;"> *</span></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><form:input path="candidateApplyJob.name" class="form-control" placeholder="First Name" required="true"></form:input></td>
+                    <div class="col-sm-12">
+                        <center>
+                            <h3>Personal Information</h3>
+                        </center>
+                        </br>
+                    </div>    
+
+                    <div class="col-sm-12">
+                        <table class="table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center">First Name<span style="color: red;font-size: 12px;"> *</span></th>
+                                    <th style="text-align: center">Middle Name<span style="color: red;font-size: 12px;"> *</span></th>
+                                    <th style="text-align: center">Last Name<span style="color: red;font-size: 12px;"> *</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><form:input path="candidateApplyJob.name" class="form-control" placeholder="First Name" required="true"></form:input></td>
                                     <td><form:input path="candidateApplyJob.fatherName" class="form-control" placeholder="Middle Name" required="true"></form:input></td>
                                     <td><form:input path="candidateApplyJob2.lastName" class="form-control" placeholder="Last Name" required="true"></form:input></td>
                                     </tr>
@@ -992,12 +996,23 @@
                         <div class=" col-sm-4" style="text-align: right;">
                             Resume<span style="color: red;font-size: 12px;"> *</span>
                         </div>
-                        <div class=" col-sm-4" style="text-align: left;">
-                            <input type="file" name="candidateApplyJob.certificateAttach" class="form-control" required="true">
-                        </div>
-                        <div class=" col-sm-4" style="text-align: left;">
-                            <a href="vacancy.htm?act=downloadCandidateCertificate&amp;fileName=${certificateAttachment}">${certificateAttachment}</a>
-                        </div> 
+                        <c:if test="${empty certificateAttachment}">
+                            <div class=" col-sm-4" style="text-align: left;">
+                                <input type="file" name="candidateApplyJob.certificateAttach" class="form-control" required="true">
+                            </div>
+                            <div class=" col-sm-4" style="text-align: left;">
+                                <a href="vacancy.htm?act=downloadCandidateCertificate&amp;fileName=${certificateAttachment}">${certificateAttachment}</a>
+                            </div>  
+                        </c:if>
+                        <c:if test="${!empty certificateAttachment}">
+                            <div class=" col-sm-4" style="text-align: left;">
+                                <input type="file" name="candidateApplyJob.certificateAttach" class="form-control" >
+                            </div>
+                            <div class=" col-sm-4" style="text-align: left;">
+                                <a href="vacancy.htm?act=downloadCandidateCertificate&amp;fileName=${certificateAttachment}">${certificateAttachment}</a>
+                            </div>  
+                        </c:if>
+
                     </c:otherwise>
                 </c:choose>
             </div>

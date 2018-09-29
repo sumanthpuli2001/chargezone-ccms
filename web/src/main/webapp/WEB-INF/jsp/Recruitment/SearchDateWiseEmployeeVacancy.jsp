@@ -119,7 +119,7 @@
                                                                     <c:if test="${list[8] eq 11}"><span class="label label-default">Candidate Selected</span></c:if>
                                                                     <c:if test="${list[8] eq 12}"><span class="label label-default">Employee Induction</span></c:if>
                                                                     <c:if test="${list[8] eq 13}"><span class="label label-default">Employee On board </span></c:if>
-                                                                    <c:if test="${list[8] eq 14}"><span class="label label-default">Send Offer Later </span></c:if>
+                                                                    <c:if test="${list[8] eq 14}"><span class="label label-default">Send Offer Letter </span></c:if>
                                                                     </td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>

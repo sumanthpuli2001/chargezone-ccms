@@ -254,6 +254,7 @@
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                     <li class="active">Performance Appraisal</li>
                 </ol>
+
                 <div class="col-md-12" style="text-align: center;">
                     <!--<input type="button" value="Print" id="printBtn" name="printBtn" style="margin-left: 959px; width: 100px;" class="btn btn-primary" onclick="appraisalSelectedPrint()">-->
                     <!--<a href="appraisalPerformance.htm?act=appraisalPerformancePrint&id=${empId}&userid=${userid}&appraisalId=${appraisalId}" target="_blank"  class="btn btn-primary">Print</a>-->
@@ -275,6 +276,9 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="box-header" style="text-align: right;">
+                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                        </div>
                         <div class="box-header" style="" align="Center" >
                             <h3 class="box-title">Performance Appraisal</h3>
                         </div>
@@ -294,65 +298,54 @@
                                         <div class="row">
 
                                             <div class="col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <div class="col-sm-2">
-                                                        <label>Employee No.:</label>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input type="Text" class="form-control" readonly value="${employeeMaster[0]}">
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Employee Name:</label>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input type="Text" id="employeeName" name="employeeName"  class="form-control" readonly value="${employeeMaster[1]}">
-                                                    </div>
-                                                </div>
+                                                <table width="100%">
+                                                    <tr>
+                                                        <td>
+                                                            <label>Employee No</label> &nbsp;&nbsp;&nbsp;:&nbsp;
+                                                            <span>${employeeMaster[0]}</span>
+                                                        </td>
+                                                        <td>
+                                                            <label>Employee Name</label> &nbsp;&nbsp;&nbsp;:&nbsp;
+                                                            <span>${employeeMaster[1]}</span>
+                                                        </td>
 
-                                                <div class="form-group">
-                                                    <div class="col-sm-2">
-                                                        <label>Designation:</label>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input type="Text" class="form-control" readonly value="${employeeMaster[2]}">
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Level:</label>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input type="Text" class="form-control" readonly value="${employeeMaster[3]}">
-                                                    </div>
-                                                </div>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Designation</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
+                                                            <span>${employeeMaster[2]}</span>
+                                                        </td>
+                                                        <td>
+                                                            <label>Level</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
+                                                            <span>${employeeMaster[3]}</span>
+                                                        </td>
 
-                                                <div class="form-group">
-                                                    <div class="col-sm-2">
-                                                        <label>Department:</label>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input type="Text" class="form-control" readonly value="${employeeMaster[4]}">
-                                                    </div>
-                                                    <div class="col-sm-2">
-                                                        <label>Work Location:</label>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input type="Text" class="form-control" readonly value="${employeeMaster[5]}">
-                                                    </div>
-                                                </div>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Department</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
+                                                            <span>${employeeMaster[4]}</span>
+                                                        </td>
+                                                        <td>
+                                                            <label>Work Location</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
+                                                            <span>${employeeMaster[5]}</span>
+                                                        </td>
 
-                                                <div class="form-group">
-                                                    <div class="col-sm-2">
-                                                        <label>Reporting Manager:</label>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input type="Text" class="form-control" readonly value="${reportingManager}">
-                                                        <select id="kraCategoryMapHiddenMap" name="kraCategoryMapHiddenMap" class="form-control" style="display: none;" >
-                                                            <option value="">--SELECT--</option>
-                                                            <c:forEach var="kraCategory" items="${kraCategoryMap}">
-                                                                <option value="${kraCategory.key}">${kraCategory.value}</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label>Reporting Manager:</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;
+                                                            <span>${reportingManager}</span>
+                                                        </td>
+                                                        
+
+                                                    </tr>
+                                                    
+
+                                                </table>
+                                                
+
+                                                
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->

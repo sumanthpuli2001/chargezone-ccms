@@ -148,12 +148,13 @@
                                                                     <c:if test="${list[8] eq 6}"><span class="label label-default">Assessment Pass </span></c:if>
                                                                     <c:if test="${list[8] eq 7}"><span class="label label-default">Assessment Fail</span></c:if>
                                                                     <c:if test="${list[8] eq 8}"><span class="label label-default">F2F interview Invitation</span></c:if>
-                                                                    <c:if test="${list[8] eq 9}"><span class="label label-default">Candidate On hold</span></c:if>
-                                                                    <c:if test="${list[8] eq 10}"><span class="label label-default">Candidate Rejected </span></c:if>
-                                                                    <c:if test="${list[8] eq 11 || list[8] eq 20}"><span class="label label-default">Candidate Selected</span></c:if>
+                                                                    <c:if test="${list[8] eq 23}"><span class="label label-default">Candidate On hold</span></c:if>
+                                                                    <c:if test="${list[8] eq 22}"><span class="label label-default">Candidate Rejected </span></c:if>
+                                                                    <c:if test="${list[8] eq 21}"><span class="label label-default">Candidate Selected</span></c:if>
                                                                     <c:if test="${list[8] eq 12}"><span class="label label-default">Employee Induction</span></c:if>
                                                                     <c:if test="${list[8] eq 13}"><span class="label label-default">Employee On board </span></c:if>
-                                                                    <c:if test="${list[8] eq 14}"><span class="label label-default">Send Offer Later </span></c:if>
+                                                                    <c:if test="${list[8] eq 14}"><span class="label label-default">Sent Offer Letter </span></c:if>
+                                                                    <c:if test="${list[8] eq 20 || list[8] eq 9 || list[8] eq 10 }"><span class="label label-default">Pending </span></c:if>
                                                                     </td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>

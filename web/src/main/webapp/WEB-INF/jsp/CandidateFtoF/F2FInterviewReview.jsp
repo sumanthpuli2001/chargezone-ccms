@@ -110,6 +110,7 @@
                                            commandName="candidateF2FRequest" action="candidateF2FApproval.htm?act=approvalFaceToFaceInvitation" onsubmit="return saveSubmit()" >
                                     <input type="hidden" id="applicationId" name="applicationId" value="${applicationId}">   
                                     <input type="hidden" id="mprid" name="mprid" value="${mprid}">   
+                                    <input type="hidden" id="applicationApplyID" name="applicationApplyID" value="${applicationIdApplicationID}">   
 
 <!--                                    <div class="box box-info collapsed-box ">
                                         <div class="box-header">
@@ -235,44 +236,44 @@
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Vacancy Name:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${vacancyName}</span>
+                                                            <label>Vacancy Name</label> 
+                                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp; ${vacancyName}</span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Vacancy Created Date:</label> &nbsp;&nbsp;&nbsp;
+                                                            <label>Vacancy Created Date:</label> 
                                                             <span> ${fromDate}</span>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Vacancy End Date:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${toDate}</span>
+                                                            <label>Vacancy End Date</label> 
+                                                            <span>&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${toDate}</span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Location:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span> ${locationName}</span>
+                                                            <label>Location</label> 
+                                                            <span>&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp; ${locationName}</span>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${position}</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Job Type:</label>  &nbsp;&nbsp;&nbsp;
-                                                            <span >${jobtypeNAme}</span>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Department:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${departmentName}</span>    
+                                                         <div class="col-sm-6">
+                                                            <label>Number Of Position</label> 
+                                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${position}</span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Job Role:</label>  &nbsp;&nbsp;&nbsp;
-                                                            <span >${designationName}</span>
+                                                            <label>Job Type:</label>  
+                                                            <span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp; ${jobtypeNAme}</span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Department</label> 
+                                                            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${departmentName}</span>    
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Job Role</label> 
+                                                            <span >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp; ${designationName}</span>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label>Work Experience(In Years):</label> &nbsp;&nbsp;&nbsp;
@@ -284,17 +285,14 @@
                                                             <label>Description:</label> &nbsp;&nbsp;&nbsp;
                                                             <span>${description}</span>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Number Of Position:</label> &nbsp;&nbsp;&nbsp;
-                                                            <span>${position}</span>
-                                                        </div>
+                                                       
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="box box-info collapsed-box ">
+                                   <div class="box box-info collapsed-box ">
                                         <div class="box-header">
                                             <h3 class="box-title">Candidate Detail:</h3>
                                             <div class="box-tools pull-right">
@@ -325,7 +323,8 @@
                                                                 <tr>
                                                                     <td>
                                                                         <label>Post Applied For:</label> &nbsp;&nbsp;&nbsp;
-                                                                        <span>${candidateApplyJob2.postAppliedFor}</span>
+                                                                        <!--<span>${candidateApplyJob2.postAppliedFor}</span>-->
+                                                                        <span>${jobVancyName}</span>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -362,9 +361,6 @@
                                                                 <c:if test="${candidateApplyJob.sex eq 'true'}"><td colspan="3">Female</td></c:if>
                                                                 </tr>
                                                                 <tr>
-                                                                    <td colspan="5"><label>Telephone Number</label></td>
-                                                                </tr>
-                                                                <tr>
                                                                     <td><label>Residence</label></td>
                                                                     <td colspan="3">${candidateApplyJob2.residentPhoneNumber}</td>
                                                             </tr>
@@ -377,16 +373,12 @@
                                                                 <td colspan="3">${candidateApplyJob.emailId}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="5"><label>Present Address</label></td>
+                                                                <td><label>Present Address</label></td>
+                                                                <td colspan="3">${candidateApplyJob.presentAddress}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="5">${candidateApplyJob.presentAddress}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="5"><label>Permanent Address</label></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="5">${candidateApplyJob.permanentAddress}</td>
+                                                                <td><label>Permanent Address</label></td>
+                                                                <td colspan="3">${candidateApplyJob.permanentAddress}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td><label>Date of Birth</label></td>
@@ -550,7 +542,7 @@
 
                                                     <div class="col-sm-12">
                                                         </br>
-                                                        <label>ACADEMIC QUALIFICATION:</label> </br>
+                                                        <label>EXPERIENCE INFORMATION(Starting With Present Job):</label> </br>
                                                         <table border="1"  class="table table-bordered">
                                                             <tr>
                                                                 <td colspan="2" style="text-align: center; vertical-align: middle"><label>Year</label></td>
@@ -567,7 +559,7 @@
                                                                 <td style="text-align: center; vertical-align: middle"><label>On Joining</label></td>
                                                                 <td style="text-align: center; vertical-align: middle"><label>On Leaving</label></td>
                                                             </tr>
-                                                            <c:forEach items="${candidateExperienceDetail}" var="list">
+                                                            <c:forEach var="list" items="${candidateExperienceDetail}">
                                                                 <tr>
                                                                     <td style="text-align: center;"> ${list.experienceYearFrom} </td>
                                                                     <td style="text-align: center;"> ${list.experienceYearTo} </td>
@@ -697,9 +689,10 @@
                                                     </div>
                                                 </div>                
                                             </div>
+
                                         </div>
                                     </div>
-                                    <div class="box box-info collapsed-box ">
+                                   <div class="box box-info collapsed-box ">
                                         <div class="box-header">
                                             <h3 class="box-title">Candidate Face To Face Detail:</h3>
                                             <div class="box-tools pull-right">
@@ -940,7 +933,7 @@
                                                 <label><h4></h4></label>
                                                 <table border="1" style="width: 100%;" align="center">
                                                     <c:choose>
-                                                        <c:when test="${empty list}">
+                                                        <c:when test="${empty HistoryList}">
                                                             <tr>
                                                                 <td align="center">
                                                                     <c:out value="There is no record found."></c:out>
@@ -960,7 +953,7 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                     <tbody>
-                                                        <c:forEach var="list" items="${list}">
+                                                        <c:forEach var="list" items="${HistoryList}">
                                                             <tr>
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[6]}</td>

@@ -880,6 +880,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         int candJobApplicationid = Integer.parseInt(id);
 
         CandidateJobApplication cja = candidateJobApplicationService.readById(candJobApplicationid);
+         
         candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
         CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob.getId());
         List<?> candidateAcademicQualification = candidateAcademicQualificationService.readListByApplyJobId(candidateApplyJob.getId());
@@ -888,9 +889,11 @@ public class RecruitmentController extends RecruitmentAbstract {
         List<?> candidateOtherReferences = candidateOtherReferencesService.readListByApplyJobId(candidateApplyJob.getId());
 
         VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
+//         List<?> approverCommentList = candidateF2FApprovalService.readEmployeeCommentByReqId(candidateF2FRequest.getId());
+//        candidateF2FRequest.setMessage(candidateF2FRequest.getMessage());
 //        MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
 //        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
-
+        String vancyName = vm.getName();
         int jobtypeId = vm.getJobtypeMaster().getId();
         jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
         String jobtypeNAme = jobtypeMaster.getJobTypeName();
@@ -982,6 +985,7 @@ public class RecruitmentController extends RecruitmentAbstract {
             request.setAttribute("Mprbudget", Mprbudget);
             request.setAttribute("MprExperience", MprExperience);
             request.setAttribute("Mprdescription", Mprdescription);
+            request.setAttribute("vancyName", vancyName);
             List<?> list = mprApprovalHistoryService.getByMprId(mprId);
             request.setAttribute("list", list);
         }
@@ -1011,8 +1015,10 @@ public class RecruitmentController extends RecruitmentAbstract {
         mv.getModelMap().put("candidateExperienceDetail", candidateExperienceDetail);
         mv.getModelMap().put("candidateFamilyBackground", candidateFamilyBackground);
         mv.getModelMap().put("candidateOtherReferences", candidateOtherReferences);
+        request.setAttribute("vancyName", vancyName);
         request.setAttribute("list", list);
         request.setAttribute("list1", list1);
+        request.setAttribute("iduservancy", id);
         mv.setViewName("Recruitment/CandidateApproval");
         return mv;
     }
@@ -1513,6 +1519,159 @@ public class RecruitmentController extends RecruitmentAbstract {
         questionList(request);
         mv.setViewName("Recruitment/SearchDateWiseEmployeeVacancy");
 
+        return mv;
+    }
+      public ModelAndView CandidateViewClickPrint(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
+        ModelAndView mv = new ModelAndView();
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        String id = request.getParameter("id");
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        JobtypeMaster jobtypeMaster = new JobtypeMaster();
+        DesignationMaster designationMaster = new DesignationMaster();
+        int candJobApplicationid = Integer.parseInt(id);
+
+        CandidateJobApplication cja = candidateJobApplicationService.readById(candJobApplicationid);
+        candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
+        CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateAcademicQualification = candidateAcademicQualificationService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateExperienceDetail = candidateExperienceDetailService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateFamilyBackground = candidateFamilyBackgroundService.readListByApplyJobId(candidateApplyJob.getId());
+        List<?> candidateOtherReferences = candidateOtherReferencesService.readListByApplyJobId(candidateApplyJob.getId());
+
+        VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
+//        MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
+//        RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
+        String vancyName = vm.getName();
+        int jobtypeId = vm.getJobtypeMaster().getId();
+        jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+        String jobtypeNAme = jobtypeMaster.getJobTypeName();
+
+        int department = vm.getDepartmentMaster().getId();
+        departmentMaster = departmentMasterService.readById(department);
+        String departmentName = departmentMaster.getDepartmentName();
+
+        int localtion = vm.getLocationMaster().getId();
+        locationMaster = locationMasterService.readById(localtion);
+        String locationName = locationMaster.getLocation();
+
+        int designation = vm.getDesignationMaster().getId();
+        designationMaster = designationMasterService.readById(designation);
+        String designationName = designationMaster.getDesignationName();
+
+        String vacancyName = vm.getName();
+        String fromDate = vm.getFromDate();
+        String toDate = vm.getToDate();
+        String description = vm.getDescription();
+        String experiance = vm.getExperience();
+        int salaryRange = vm.getSalaryRange();
+        int position = vm.getNumberOfPosition();
+
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+        questionList(request);
+        //        MPR Master -------------
+        if (null != vm.getMprMaster()) {
+            MprMaster mm = mprMasterService.readById(vm.getMprMaster().getId());
+            RecruitmentMaster rm = recruitmentService.readById(mm.getRecruitmentMaster().getId());
+            int jobtypeId1 = mm.getJobtypeMaster().getId();
+            jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+            String jobtypeNAme1 = jobtypeMaster.getJobTypeName();
+
+            int department1 = mm.getDepartmentMaster().getId();
+            departmentMaster = departmentMasterService.readById(department);
+            String departmentName1 = departmentMaster.getDepartmentName();
+
+            int localtion1 = mm.getLocationMaster().getId();
+            locationMaster = locationMasterService.readById(localtion);
+            String locationName1 = locationMaster.getLocation();
+
+            int designation1 = mm.getDesignationMaster().getId();
+            designationMaster = designationMasterService.readById(designation);
+            String designationName1 = designationMaster.getDesignationName();
+
+            String MprName = mm.getName();
+            int numberOfPositionMpr = mm.getNumberOfPosition();
+            int Mprbudget = mm.getBudget();
+            String MprExperience = mm.getExperience();
+            String Mprdescription = mm.getDescription();
+
+//        Mpp Master --------------------
+            int jobtypeId2 = rm.getJobtypeMaster().getId();
+            jobtypeMaster = jobtypeMasterService.readById(jobtypeId);
+            String jobtypeNAme2 = jobtypeMaster.getJobTypeName();
+
+            int department2 = rm.getDepartmentMaster().getId();
+            departmentMaster = departmentMasterService.readById(department);
+            String departmentName2 = departmentMaster.getDepartmentName();
+
+            int localtion2 = rm.getLocationMaster().getId();
+            locationMaster = locationMasterService.readById(localtion);
+            String locationName2 = locationMaster.getLocation();
+
+            int designation2 = rm.getDesignationMaster().getId();
+            designationMaster = designationMasterService.readById(designation);
+            String designationName2 = designationMaster.getDesignationName();
+
+            int numberOfPositionMpp = rm.getNumberOfPosition();
+            int Mppbudget = rm.getBudget();
+            int mprId = mm.getId();
+            String MppExperience = rm.getExperiance();
+            request.setAttribute("jobtypeNAme2", jobtypeNAme2);
+            request.setAttribute("departmentName2", departmentName2);
+            request.setAttribute("locationName2", locationName2);
+            request.setAttribute("designationName2", designationName2);
+            request.setAttribute("numberOfPositionMpp", numberOfPositionMpp);
+            request.setAttribute("Mppbudget", Mppbudget);
+            request.setAttribute("MppExperience", MppExperience);
+
+//              MPR Master -------------
+            request.setAttribute("jobtypeNAme1", jobtypeNAme1);
+            request.setAttribute("departmentName1", departmentName1);
+            request.setAttribute("locationName1", locationName1);
+            request.setAttribute("designationName1", designationName1);
+            request.setAttribute("MprName", MprName);
+            request.setAttribute("numberOfPositionMpr", numberOfPositionMpr);
+            request.setAttribute("Mprbudget", Mprbudget);
+            request.setAttribute("MprExperience", MprExperience);
+            request.setAttribute("Mprdescription", Mprdescription);
+            request.setAttribute("jobVanacyName", vancyName);
+            List<?> list = mprApprovalHistoryService.getByMprId(mprId);
+            request.setAttribute("list", list);
+        }
+        List<?> list = mprApprovalHistoryService.gethistory(candJobApplicationid);
+        List<?> list1 = vacancyApprovalHistoryService.readByVacancyId(vm.getId());
+        //        Vacancy Master-------------
+        mv.getModelMap().put("departmentMaster", departmentMaster);
+        mv.getModelMap().put("locationMaster", locationMaster);
+        mv.getModelMap().put("jobtypeMaster", jobtypeMaster);
+        mv.getModelMap().put("designationMaster", designationMaster);
+        request.setAttribute("jobtypeNAme", jobtypeNAme);
+        request.setAttribute("departmentName", departmentName);
+        request.setAttribute("locationName", locationName);
+        request.setAttribute("position", position);
+        request.setAttribute("designationName", designationName);
+        request.setAttribute("experiance", experiance);
+        request.setAttribute("vacancyName", vacancyName);
+        request.setAttribute("fromDate", fromDate);
+        request.setAttribute("toDate", toDate);
+        request.setAttribute("description", description);
+//        // onlineAssessment -------------
+        mv.getModelMap().put("onlineAssessment", onlineAssessment);
+        request.setAttribute("candidateJobApplication", cja);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.getModelMap().put("candidateApplyJob2", candidateApplyJob2);
+        mv.getModelMap().put("candidateAcademicQualification", candidateAcademicQualification);
+        mv.getModelMap().put("candidateExperienceDetail", candidateExperienceDetail);
+        mv.getModelMap().put("candidateFamilyBackground", candidateFamilyBackground);
+        mv.getModelMap().put("candidateOtherReferences", candidateOtherReferences);
+        request.setAttribute("jobVanacyName", vancyName);
+        request.setAttribute("list", list);
+        request.setAttribute("list1", list1);
+        request.setAttribute("iduservancy", id);
+        mv.setViewName("CandidateFtoF/ShowF2FInterviewPrint");
         return mv;
     }
 

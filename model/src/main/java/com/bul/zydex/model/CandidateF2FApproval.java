@@ -5,6 +5,9 @@
  */
 package com.bul.zydex.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author Vikas
@@ -20,7 +23,7 @@ public class CandidateF2FApproval {
     private String createdDate;
     private Integer updatedBy;
     private String updatedDate;
-
+     
     public CandidateF2FApproval() {
 
     }

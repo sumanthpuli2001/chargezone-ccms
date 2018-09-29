@@ -8,16 +8,17 @@
 <!DOCTYPE html>
 
 <script>
-    function reviewClick(f2fRequestId) {
-        window.location = 'candidateF2FApproval.htm?act=openInterviewReviewPage&id=' + f2fRequestId;
+    function reviewClick(f2fRequestId, applicationApplyID) {
+        window.location = 'candidateF2FApproval.htm?act=openInterviewReviewPage&id=' + f2fRequestId+ '&applicationId=' + applicationApplyID;
     }
-    function apprpoveHr(f2fRequestId) {
-        window.location = 'candidateF2FApproval.htm?act=apprpoveHrViewPage&id=' + f2fRequestId;
+    function apprpoveHr(f2fRequestId, applicationApplyID) {
+        window.location = 'candidateF2FApproval.htm?act=apprpoveHrViewPage&id=' + f2fRequestId + '&applicationId=' + applicationApplyID;
     }
 </script>
 <script>
-    function onlyView(f2fRequestId) {
-        window.location = 'candidateF2FApproval.htm?act=showViewClick&id=' + f2fRequestId;
+    function onlyView(f2fRequestId, applicationApplyID) {
+        window.location = 'candidateF2FApproval.htm?act=showViewClick&id=' + f2fRequestId + '&applicationId=' + applicationApplyID;
+        ;
     }
 </script>
 
@@ -78,7 +79,7 @@
                                                             <tr>
                                                                 <th>Candidate Name</th>
                                                                 <th>Vacancy Name</th>
-                                                                <th>Date</th>
+                                                                <th>Date of Interview</th>
                                                                 <th>Status</th>
                                                                 <th>Action</th>
                                                             </tr>
@@ -101,7 +102,7 @@
 
                                                                     <span class="label label-default">Submitted By Comittee</span>    
                                                                 </c:if>
-                                                                <c:if test="${list[4] eq 5}">
+                                                                <c:if test="${list[4] eq 5 }">
 
                                                                     <span class="label label-success">
                                                                         Approved By Assigning
@@ -115,14 +116,32 @@
 
                                                                     </span>    
                                                                 </c:if>
-                                                                <c:if test="${list[4] eq 3}">
+                                                                <c:if test="${list[4] eq 21}">
 
-                                                                    <span class="label label-warning">
-                                                                        ON-HOLD
+                                                                    <span class="label label-success">
+                                                                        Approved
 
                                                                     </span>    
                                                                 </c:if>
-                                                                <c:if test="${list[4] eq 4}">
+                                                                <c:if test="${list[4] eq 3 }">
+
+                                                                    <span class="label label-warning">
+                                                                        ON-HOLD By Assigning
+
+                                                                    </span>    
+                                                                </c:if>
+                                                                <c:if test="${list[8] eq 23}">
+
+                                                                    <span class="label label-warning">
+                                                                        ON-HOLD 
+
+                                                                    </span>    
+                                                                </c:if>
+                                                                <c:if test="${list[4] eq 4 }">
+
+                                                                    <span class="label label-danger">Rejected By Panel</span>    
+                                                                </c:if>
+                                                                <c:if test="${list[8] eq 22}">
 
                                                                     <span class="label label-danger">Rejected</span>    
                                                                 </c:if>
@@ -133,15 +152,15 @@
                                                             <td>
 
                                                                 <div class="btn-group">
-                                                                    <button type="button" onclick="onlyView(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                    <button type="button" onclick="onlyView(${list[0]},${list[7]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                         &nbsp;&nbsp;View
                                                                     </button>
                                                                 </div>
 
 
-                                                                <c:if test="${list[4] eq 5}">
+                                                                <c:if test="${list[4] eq 5 || list[4] eq 3 || list[4] eq 4 }">
                                                                     <div class="btn-group">
-                                                                        <button type="button" onclick="apprpoveHr(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                        <button type="button" onclick="apprpoveHr(${list[0]},${list[7]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;Approval
                                                                         </button>
                                                                     </div>

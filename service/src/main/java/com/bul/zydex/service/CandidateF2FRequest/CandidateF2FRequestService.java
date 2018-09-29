@@ -18,4 +18,6 @@ public interface CandidateF2FRequestService<T> extends GenericsService<T> {
     public List<?> interviewReqDetailread(int empId);
 
     public CandidateF2FRequest readById(int id);
+
+    public List<?> interviewReqDetailreadHR(int empId);
 }

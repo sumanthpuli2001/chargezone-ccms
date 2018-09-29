@@ -227,15 +227,17 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //            request.setAttribute("employeeMaster", employeeMaster);
             mv.getModelMap().put("employeeMaster", employeeMaster);
             mv.setViewName("Employee/EmployeeRegistrationForm");
-        } else if (DOJ.before(DOB1)) {
-            request.setAttribute("failureMessage",
-                    "Error : Enter Valid Date of Joining");
-
-            selectEmployee(request, response);
-            selectedEmployeeLevel1(request, employeeMaster);
-            request.setAttribute("employeeMaster", employeeMaster);
-            mv.setViewName("Employee/EmployeeRegistrationForm");
-        } else if (!userMasterService.isExist(userName) && !userName.equals("") && !"".equals(password)) {
+        } 
+//        else if (DOJ.before(DOB1)) {
+//            request.setAttribute("failureMessage",
+//                    "Error : Enter Valid Date of Joining");
+//
+//            selectEmployee(request, response);
+//            selectedEmployeeLevel1(request, employeeMaster);
+//            request.setAttribute("employeeMaster", employeeMaster);
+//            mv.setViewName("Employee/EmployeeRegistrationForm");
+//        }
+        else if (!userMasterService.isExist(userName) && !userName.equals("") && !"".equals(password)) {
 
 //            if (!password.equals("")) {
 //                if (employeeMaster.getShiftType().equals("HourlyBase")) {
@@ -252,7 +254,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     employeeMaster.setShiftHoursId(Integer.parseInt(shfitId));
                 }
             }
-            employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
+//            employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
             // employeeMaster.setId(userMaster.getId());
             employeeMaster.setUserMaster(userMaster);
 //                employeeMaster.setReportingManagerLevel1(reportingManagerLevel1);
@@ -4306,22 +4308,21 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         employeeMaster.setPermanentAddress(candidateApplyJob.getPermanentAddress());
         employeeMaster.setHighestEducationDetails(candidateApplyJob.getHighestEducationQualification());
 
-        mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
-        mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
-        mprApprovalHistory.setStatus(11);
-        mprApprovalHistory.setComment("Inducation");
-        mprApprovalHistory.setStatusMessage("Inducation");
-        mprApprovalHistory.setCreateDate(sdf.format(cDate));
-        mprApprovalHistory.setCreatedBy(employeeMaster.getId());
-        mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
-        mprApprovalHistoryService.create(mprApprovalHistory);
-
+//        mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+//        mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+//        mprApprovalHistory.setStatus(11);
+//        mprApprovalHistory.setComment("Induction");
+//        mprApprovalHistory.setStatusMessage("Induction");
+//        mprApprovalHistory.setCreateDate(sdf.format(cDate));
+//        mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+//        mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
+//        mprApprovalHistoryService.create(mprApprovalHistory);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("applicationId", applicationId);
         mv.getModelMap().put("candidateId", candidateId);
         mv.setViewName("Employee/EmployeeInductionForm");
-        request.setAttribute("successMessage",
-                "Information : The Induction successfully.");
+//        request.setAttribute("successMessage",
+//                "Information : The Induction successfully.");
         return mv;
     }
 
@@ -4430,7 +4431,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             selectedEmployeeLevel1(request, employeeMaster);
 //            request.setAttribute("employeeMaster", employeeMaster);
             mv.getModelMap().put("employeeMaster", employeeMaster);
-            mv.setViewName("Employee/EmployeeRegistrationForm");
+            mv.setViewName("Employee/EmployeeInductionForm");
         } else if (DOJ.before(DOB1)) {
             request.setAttribute("failureMessage",
                     "Error : Enter Valid Date of Joining");
@@ -4438,7 +4439,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             selectEmployee(request, response);
             selectedEmployeeLevel1(request, employeeMaster);
             request.setAttribute("employeeMaster", employeeMaster);
-            mv.setViewName("Employee/EmployeeRegistrationForm");
+            mv.setViewName("Employee/EmployeeInductionForm");
         } else if (!userMasterService.isExist(userName) && !userName.equals("") && !"".equals(password)) {
 
 //            if (!password.equals("")) {
@@ -4473,10 +4474,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 employeeMaster.setPfAmount("0");
             }
             CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
-            ApplayJobUserMaster ajum = applayJobUserMasterService.readById(cja.getApplayJobUserMaster().getId());
-            ajum.setFirstTime(5);
+//            ApplayJobUserMaster ajum = applayJobUserMasterService.readById(cja.getApplayJobUserMaster().getId());
+//            ajum.setFirstTime(5);
             cja.setStatus(13);
-            candidateJobApplicationService.create(cja);
+            candidateJobApplicationService.update(cja);
             employeeMasterService.create(employeeMaster);
             //Code for Employee Policy Detail
             EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
@@ -4538,6 +4539,21 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
             }
             //End
+            
+            
+            MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
+            SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+            Date cDate = new Date();
+            EmployeeMaster employeeMaster5225 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            mprApprovalHistory.setApprovalUserId(employeeMaster5225.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster5225.getEmployeeName());
+            mprApprovalHistory.setStatus(11);
+            mprApprovalHistory.setComment("Induction");
+            mprApprovalHistory.setStatusMessage("Induction");
+            mprApprovalHistory.setCreateDate(sdf2.format(cDate));
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+            mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
+            mprApprovalHistoryService.create(mprApprovalHistory);
 
             PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
             pmpFormStatusMaster.setEmployeeMaster(employeeMaster);
@@ -4839,7 +4855,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             request.setAttribute("failureMessage",
                     "Error : User isExist.");
             mv.addAllObjects(errors.getModel());
-            mv.setViewName("Employee/EmployeeRegistrationForm");
+            mv.setViewName("Employee/EmployeeInductionForm");
 
         }
 //            mv.getModelMap().put("userMaster", userMaster);

@@ -179,7 +179,9 @@
                 <div class="col-md-12" style="text-align: center;">
                     <!--<input type="button" value="Print" id="printBtn" name="printBtn" style="margin-left: 959px; width: 100px;" class="btn btn-primary" onclick="appraisalSelectedPrint()">-->
                     <a href="appraisalPerformance.htm?act=appraisalPrintToPdfByEmployee&id=${empId}&userid=${userid}&appraisalId=${appraisalId}&year=${year}" target="_blank"  class="btn btn-primary">Print</a>
-
+                    <div class="box-header" style="text-align: right;">
+                        <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                    </div>
                     <input type="hidden" id="empId" name="empId" value="${empId}">
                     <input type="hidden" id="userid" name="userid" value="${userid}">
                     <input type="hidden" id="appraisalId" name="appraisalId" value="${appraisalId}">

@@ -1093,6 +1093,7 @@
         <property name="candidateExperienceDetailService" ref="candidateExperienceDetailService1"/>
         <property name="candidateOtherReferencesService" ref="candidateOtherReferencesService1"/>
         <property name="vacancyApprovalHistoryService" ref="vacancyApprovalHistoryService1"/>
+        <property name="candidateF2FRequestService" ref="candidateF2FRequestService1"/>
     </bean>
     
     <bean id="vacancyController1" class="com.bul.zydex.controller.Vacancy.VacancyController" parent="controllerConfig" >
@@ -1245,6 +1246,7 @@
         <property name="candidateAcademicQualificationService" ref="candidateAcademicQualificationService1"/>
         <property name="candidateExperienceDetailService" ref="candidateExperienceDetailService1"/>
         <property name="candidateOtherReferencesService" ref="candidateOtherReferencesService1"/>
+        <property name="candidateF2FObservationService" ref="candidateF2FObservationService1"/>
     </bean>
     <bean id="trainingAssessmentController1" class="com.bul.zydex.controller.Training.TrainingAssessmentController" parent="controllerConfig" >
         <property name="trainingAssessmentService" ref="trainingAssessmentService1"></property>

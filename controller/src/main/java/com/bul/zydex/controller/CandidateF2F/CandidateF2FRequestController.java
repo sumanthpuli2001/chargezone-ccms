@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import static jdk.nashorn.internal.objects.NativeFunction.bind;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
@@ -61,18 +62,18 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.getModelMap().put("candidateApplyJob1", candidateApplyJob1);
         mv.setViewName("CandidateFtoF/candidateF2FInvitation");
-        request.setAttribute("successMessage",
-                "Information : The Candidate Face To Face Invitation successfully.");
+//        request.setAttribute("successMessage",
+//                "Information : The Candidate Face To Face Invitation successfully.");
 
 //        try {
 //            EmailTemplate emailTemplate = new EmailTemplate();
 //            EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
 //            DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
 //            // id ( Not created id 138) is for Face To Face Invitation User....
-//            emailTemplate = emailTemplateService.readById(155);
+//            emailTemplate = emailTemplateService.readById(17);
 //            String To = cja.getCandidateApplyJob().getEmailId();
 //            String from = "";
-//            String Subject = emailTemplate.getSubject();
+//            String Subject = "Interview Call Letter for the position of "+vm.getName();
 //            String msg = emailTemplate.getBodytext();
 //            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
 //            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
@@ -86,7 +87,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
 
     public ModelAndView submitFtoF(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-
+        HttpSession session = request.getSession();
         ModelAndView mv = new ModelAndView();
         CandidateF2FRequest candidateF2FRequest = new CandidateF2FRequest();
         CandidateF2FApproval candidateF2FApproval = new CandidateF2FApproval();
@@ -105,7 +106,8 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
 
         candidateJobApplication = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
         VacancyMaster vm = vacancyMasterService.readById(candidateJobApplication.getVacancyMaster().getId());
-
+        candidateApplyJob.setId(candidateJobApplication.getCandidateApplyJob().getId());
+        CandidateApplyJob candidateApplyJob1 = candidateJobApplyService.readById(candidateApplyJob.getId());
         candidateF2FRequest.setCandidateJobApplication(candidateJobApplication);
         candidateF2FRequest.setCandidateApplyJob(candidateJobApplication.getCandidateApplyJob());
         candidateF2FRequest.setVacancyMaster(candidateJobApplication.getVacancyMaster());
@@ -155,23 +157,40 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateRequestList");
+        request.setAttribute("successMessage",
+                "Information : The Candidate Face To Face Invitation Sent successfully.");
         try {
-            EmailTemplate emailTemplate = new EmailTemplate();
+//            EmailTemplate emailTemplate = new EmailTemplate();
             EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
             DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
             // id ( Not created id 138) is for Face To Face Invitation User....
-            emailTemplate = emailTemplateService.readById(155);
-            String To = candidateJobApplication.getCandidateApplyJob().getEmailId();
+//            emailTemplate = emailTemplateService.readById(17);
+            CertificateTemplate certificateTemplate = new CertificateTemplate();
+            certificateTemplate = certificateTemplateService.readById(17);
+            String To = candidateApplyJob1.getEmailId();
             String from = "";
-            String Subject = emailTemplate.getSubject();
-            String msg = emailTemplate.getBodytext();
-            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
-            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
-            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-            msg = msg.replaceAll("\\{from_location\\}", candidateF2FRequest.getLocation());
-            msg = msg.replaceAll("\\{from_dateOfInterview\\}", candidateF2FRequest.getDateOfInterview());
-            msg = msg.replaceAll("\\{from_position\\}", vm.getName());
+            String Subject = "Interview Call Letter for the position of " + vm.getName();
+            String msg = certificateTemplate.getCertificateBody();
+            EmployeeMaster employee = (EmployeeMaster) session.getAttribute("employeeInfo");
+            Integer dep = employee.getDesignationMaster().getId();
+            DesignationMaster designationMaster1 = new DesignationMaster();
+            designationMaster1 = designationMasterService.readById(dep);
+//            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{name\\}", candidateApplyJob1.getName());
+            msg = msg.replaceAll("\\{name_position\\}", vm.getName());
+            msg = msg.replaceAll("\\{date_of_birth\\}", sdf.format(cDate));
+            msg = msg.replaceAll("\\{date_of_joining\\}", candidateF2FRequest.getDateOfInterview());
+            msg = msg.replaceAll("\\{passport_no\\}", candidateF2FRequest.getLocation());
+
+            msg = msg.replaceAll("\\{employee_name\\}", employee.getEmployeeName());
+            msg = msg.replaceAll("\\{contact_no1\\}", employee.getContactNo1());
+            msg = msg.replaceAll("\\{department_name\\}", designationMaster1.getDesignationName());
+//            msg = msg.replaceAll("\\{payment_type\\}", candidateF2FRequest.getLocation());
+//            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+//            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//            msg = msg.replaceAll("\\{from_location\\}", candidateF2FRequest.getLocation());
+//            msg = msg.replaceAll("\\{from_dateOfInterview\\}", candidateF2FRequest.getDateOfInterview());
+//            msg = msg.replaceAll("\\{from_position\\}", vm.getName());
             sendMail.sendMail(from, To, Subject, msg);
         } catch (Exception e) {
         }
@@ -301,7 +320,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
 
     public ModelAndView offerLater(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-
+        HttpSession session = request.getSession();
         ModelAndView mv = new ModelAndView();
         MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -317,14 +336,19 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
 
         try {
             CertificateTemplate certificateTemplate = new CertificateTemplate();
-            certificateTemplate = certificateTemplateService.readById(1);
+            certificateTemplate = certificateTemplateService.readById(10);
             String from = employeeMaster.getOfficeEmailId();
             String To = candidateApplyJob.getEmailId();
-            String Subject = certificateTemplate.getCertificateType();
+            String Subject = "Offer Letter for the position of " + vm.getName();
             String msg = certificateTemplate.getCertificateBody();
-            Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
-            msg = msg.replaceAll("\\{to_user\\}", candidateApplyJob.getName());
-            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+//            Subject = Subject.replaceAll("\\{name\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{name\\}", candidateApplyJob.getName());
+            msg = msg.replaceAll("\\{email_id\\}", candidateApplyJob.getEmailId());
+            msg = msg.replaceAll("\\{present_address\\}", candidateApplyJob.getPresentAddress());
+            msg = msg.replaceAll("\\{name_position\\}", vm.getName());
+            msg = msg.replaceAll("\\{date_of_birth\\}", sdf.format(cDate));
+
+//            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
             sendMail.sendMail(from, To, Subject, msg);
         } catch (Exception e) {
         }
@@ -339,8 +363,8 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         }
         mprApprovalHistory.setMprMaster(vm.getMprMaster());
         mprApprovalHistory.setStatus(14);
-        mprApprovalHistory.setComment("Send Offer Laters");
-        mprApprovalHistory.setStatusMessage("Send Offer Laters");
+        mprApprovalHistory.setComment("Send Offer Letter");
+        mprApprovalHistory.setStatusMessage("Send Offer Letter");
         mprApprovalHistory.setCreateDate(sdf.format(cDate));
         mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
         mprApprovalHistoryService.create(mprApprovalHistory);
@@ -353,7 +377,69 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateRequestList");
         request.setAttribute("successMessage",
-                "Information : The Offer Later Send successfully.");
+                "Information : The Offer Letter Sent successfully.");
+        return mv;
+    }
+    public ModelAndView appoitmentofferLater(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+        MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
+        String applicationId = request.getParameter("id");
+        String candidateId = request.getParameter("candidateId");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+        CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
+        VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
+        candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(candidateId));
+
+        try {
+            CertificateTemplate certificateTemplate = new CertificateTemplate();
+            certificateTemplate = certificateTemplateService.readById(10);
+            String from = employeeMaster.getOfficeEmailId();
+            String To = candidateApplyJob.getEmailId();
+            String Subject = "Offer Letter for the position of " + vm.getName();
+            String msg = certificateTemplate.getCertificateBody();
+//            Subject = Subject.replaceAll("\\{name\\}", employeeMaster.getEmployeeName());
+            msg = msg.replaceAll("\\{name\\}", candidateApplyJob.getName());
+            msg = msg.replaceAll("\\{email_id\\}", candidateApplyJob.getEmailId());
+            msg = msg.replaceAll("\\{present_address\\}", candidateApplyJob.getPresentAddress());
+            msg = msg.replaceAll("\\{name_position\\}", vm.getName());
+            msg = msg.replaceAll("\\{date_of_birth\\}", sdf.format(cDate));
+
+//            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+            sendMail.sendMail(from, To, Subject, msg);
+        } catch (Exception e) {
+        }
+
+        cja.setStatus(14);
+        candidateJobApplicationService.update(cja);
+
+        if (employeeMaster != null) {
+            mprApprovalHistory.setApprovalUserId(employeeMaster.getId());
+            mprApprovalHistory.setApprovalUserName(employeeMaster.getEmployeeName());
+            mprApprovalHistory.setCreatedBy(employeeMaster.getId());
+        }
+        mprApprovalHistory.setMprMaster(vm.getMprMaster());
+        mprApprovalHistory.setStatus(30);
+        mprApprovalHistory.setComment("Send Appointment Letter");
+        mprApprovalHistory.setStatusMessage("Send Appointment Letter");
+        mprApprovalHistory.setCreateDate(sdf.format(cDate));
+        mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
+        mprApprovalHistoryService.create(mprApprovalHistory);
+
+        List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
+
+        mv.getModelMap().put("list", candidateJobList);
+        questionList(request);
+        mv.getModelMap().put("onlineAssessment", onlineAssessment);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.setViewName("Recruitment/CandidateRequestList");
+        request.setAttribute("successMessage",
+                "Information : The Offer Letter Sent successfully.");
         return mv;
     }
 

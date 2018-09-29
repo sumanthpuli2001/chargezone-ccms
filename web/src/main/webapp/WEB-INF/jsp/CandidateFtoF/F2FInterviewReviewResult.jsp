@@ -9,16 +9,16 @@
 <!DOCTYPE html>
 
 <script>
-    function reviewClick(f2fRequestId) {
-        window.location = 'candidateF2FApproval.htm?act=openInterviewReviewPage&id=' + f2fRequestId;
+    function reviewClick(f2fRequestId, applicationId) {
+        window.location = 'candidateF2FApproval.htm?act=openInterviewReviewPage&id=' + f2fRequestId + '&applicationId=' + applicationId;
     }
-    function reviewAscommitteeAndHrClick(f2fRequestId) {
-        window.location = 'candidateF2FApproval.htm?act=reviewAscommitteeAndHrClick&id=' + f2fRequestId;
+    function reviewAscommitteeAndHrClick(f2fRequestId, applicationId) {
+        window.location = 'candidateF2FApproval.htm?act=reviewAscommitteeAndHrClick&id=' + f2fRequestId + '&applicationId=' + applicationId;
     }
 </script>
 <script>
-    function onlyView(f2fRequestId) {
-        window.location = 'candidateF2FApproval.htm?act=showViewClick&id=' + f2fRequestId;
+    function onlyView(f2fRequestId, applicationId) {
+        window.location = 'candidateF2FApproval.htm?act=showViewClick&id=' + f2fRequestId + '&applicationId=' + applicationId;
     }
 </script>
 
@@ -94,7 +94,11 @@
                                                             <td>${list[2]}</td>
                                                             <td>${list[3]}</td>
                                                             <td>
-                                                                <c:if test="${list[4] eq 0}">
+                                                                <%--<c:if test="${list[4] eq 0 }">--%>
+
+                                                                    <!--<span class="badge">Pending</span>-->    
+                                                                <%--</c:if>--%>
+                                                                <c:if test="${list[4] eq 5 && list[9] eq 0 || list[4] eq 0 || list[4] eq 4 && list[9] eq 0}">
 
                                                                     <span class="badge">Pending</span>    
                                                                 </c:if>
@@ -116,7 +120,7 @@
 
                                                                     </span>    
                                                                 </c:if>
-                                                                <c:if test="${list[4] eq 5}">
+                                                                <c:if test="${list[4] eq 5 && list[9] eq 1}">
 
                                                                     <span class="label label-success">
                                                                         Approved
@@ -130,7 +134,7 @@
 
                                                                     </span>    
                                                                 </c:if>
-                                                                <c:if test="${list[4] eq 4}">
+                                                                <c:if test="${list[4] eq 4 && list[9] eq 1}">
 
                                                                     <span class="label label-danger">Rejected</span>    
                                                                 </c:if>
@@ -141,7 +145,7 @@
                                                             <td>
 
                                                                 <div class="btn-group">
-                                                                    <button type="button" onclick="onlyView(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                    <button type="button" onclick="onlyView(${list[0]},${list[7]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                         &nbsp;&nbsp;View
                                                                     </button>
                                                                 </div>
@@ -149,14 +153,14 @@
 
                                                                 <c:if test="${list[4] eq 3 || list[4] eq 1}">
                                                                     <div class="btn-group">
-                                                                        <button type="button" onclick="reviewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                        <button type="button" onclick="reviewClick(${list[0]},${list[7]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;Approval
                                                                         </button>
                                                                     </div>
                                                                 </c:if>
-                                                                <c:if test="${list[4] eq 0}">
+                                                                <c:if test="${list[4] eq 5 && list[9] eq 0 || list[4] eq 0 || list[4] eq 4 && list[9] eq 0}">
                                                                     <div class="btn-group">
-                                                                        <button type="button" onclick="reviewAscommitteeAndHrClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                        <button type="button" onclick="reviewAscommitteeAndHrClick(${list[0]},${list[7]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;Approval
                                                                         </button>
                                                                     </div>

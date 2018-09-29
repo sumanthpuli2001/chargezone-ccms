@@ -22,7 +22,9 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-
+<div class="box-header" style="text-align: right;">
+                            <span><img src="StorageYard/Images/logo.png"  style="text-align: right;"/></span>
+                        </div>
 
         <section class="content">
             <div class="row">

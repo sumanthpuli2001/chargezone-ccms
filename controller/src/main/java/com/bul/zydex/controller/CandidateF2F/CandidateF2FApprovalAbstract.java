@@ -11,6 +11,7 @@ import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateApplyJob2;
 import com.bul.zydex.model.CandidateExperienceDetail;
 import com.bul.zydex.model.CandidateF2FApproval;
+import com.bul.zydex.model.CandidateF2FObservation;
 import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateFamilyBackground;
 import com.bul.zydex.model.CandidateJobApplication;
@@ -23,6 +24,7 @@ import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.VacancyApprovalHistory;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.CandidateF2FApproval.CandidateF2FApprovalService;
+import com.bul.zydex.service.CandidateF2FRequest.CandidateF2FObservationService;
 import com.bul.zydex.service.CandidateF2FRequest.CandidateF2FRequestService;
 import com.bul.zydex.service.CandidateJobApply.CandidateAcademicQualificationService;
 import com.bul.zydex.service.CandidateJobApply.CandidateApplyJob2Service;
@@ -61,6 +63,7 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
     protected CandidateFamilyBackgroundService<CandidateFamilyBackground> candidateFamilyBackgroundService;
     protected CandidateExperienceDetailService<CandidateExperienceDetail> candidateExperienceDetailService;
     protected CandidateOtherReferencesService<CandidateOtherReferences> candidateOtherReferencesService;
+    protected CandidateF2FObservationService<CandidateF2FObservation> candidateF2FObservationService;
 
     public RecruitmentService<RecruitmentMaster> getRecruitmentService() {
         return recruitmentService;
@@ -188,6 +191,14 @@ public class CandidateF2FApprovalAbstract extends CustomAbstract {
 
     public void setCandidateOtherReferencesService(CandidateOtherReferencesService<CandidateOtherReferences> candidateOtherReferencesService) {
         this.candidateOtherReferencesService = candidateOtherReferencesService;
+    }
+
+    public CandidateF2FObservationService<CandidateF2FObservation> getCandidateF2FObservationService() {
+        return candidateF2FObservationService;
+    }
+
+    public void setCandidateF2FObservationService(CandidateF2FObservationService<CandidateF2FObservation> candidateF2FObservationService) {
+        this.candidateF2FObservationService = candidateF2FObservationService;
     }
     
     

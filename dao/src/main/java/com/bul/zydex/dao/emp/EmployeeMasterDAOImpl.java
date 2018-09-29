@@ -924,10 +924,13 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.designationMaster c "
                 + " LEFT JOIN a.levelMaster d "
                 + " LEFT JOIN a.zydexLocationMaster e "
-                + " LEFT JOIN a.locationMaster f ";
+                + " LEFT JOIN a.locationMaster f "
+                + " where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) ";
+
         if (condition != "") {
 //            query += " Where 1=1 AND " + condition;
-            query += " Where  " + condition;
+            query += " and  " + condition;
         }
         return getHibernateTemplate().find(query);
     }
@@ -1886,7 +1889,9 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         String query = "";
 
         query += "SELECT a FROM EmployeeMaster a"
-                + " WHERE STR_TO_DATE(a.dateOfBirth,'%d/%m') = STR_TO_DATE('" + date + "','%d/%m')";
+                + " WHERE STR_TO_DATE(a.dateOfBirth,'%d/%m') = STR_TO_DATE('" + date + "','%d/%m')"
+                + " and ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) ";
 
         return getHibernateTemplate().find(query);
     }
@@ -2417,8 +2422,10 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         query += " select a.employeeId,a.employeeName,a.officeEmailId"
                 + " From EmployeeMaster a"
                 //                + " where DATE_FORMAT(STR_TO_DATE(dateOfBirth, '%d/%m/%Y'),'%d/%m')=DATE_FORMAT(STR_TO_DATE('01/" + employeeSalaryProcess.getMonth() + "/" + employeeSalaryProcess.getYear() + "', '%d/%m/%Y'),'%m/%Y')";
-                + " where DATE_FORMAT(STR_TO_DATE(dateOfBirth, '%d/%m/%Y'),'%d/%m')=DATE_FORMAT(STR_TO_DATE('" + dateBirth + "/" + year + "', '%d/%m/%Y'),'%d/%m')";
-//                + " Where 1=1" + condition;
+                + " where DATE_FORMAT(STR_TO_DATE(dateOfBirth, '%d/%m/%Y'),'%d/%m')=DATE_FORMAT(STR_TO_DATE('" + dateBirth + "/" + year + "', '%d/%m/%Y'),'%d/%m')"
+                + " and ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) ";
+
         return getHibernateTemplate().find(query);
     }
 

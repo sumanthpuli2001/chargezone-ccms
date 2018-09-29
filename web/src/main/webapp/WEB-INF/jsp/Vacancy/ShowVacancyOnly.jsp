@@ -10,6 +10,11 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <title>Edit Vacancy</title>
+        <style>
+            table,tr,td,th{
+                padding: 5px;
+            }
+        </style>
     </head>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -118,7 +123,7 @@
                         <div class="tab-content">
                             <label><h3>History</h3></label>
                             <div class="table table-bordered">
-                                <table border="1" style="width: 100%;" >
+                                <table border="1" style="width: 100%;">
                                     <c:choose>
                                         <c:when test="${empty list}">
                                             <tr>
@@ -132,7 +137,7 @@
                                                 <tr>
                                                     <th style="width: 50px;">Name</th>
                                                     <th style="width: 50px;">Date & Time</th>
-                                                    <th style="width: 50px;">Comment's</th>
+                                                    <th style="width: 50px;">Comment</th>
                                                     <th style="width: 50px;">Status</th>
                                                 </tr>
                                             </thead>

@@ -11,6 +11,7 @@ import com.bul.zydex.model.CandidateAcademicQualification;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateApplyJob2;
 import com.bul.zydex.model.CandidateExperienceDetail;
+import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateFamilyBackground;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.CandidateOtherReferences;
@@ -33,6 +34,7 @@ import com.bul.zydex.model.RecruitmentMppApproval;
 import com.bul.zydex.model.VacancyApprovalHistory;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.Approval.ApprovalUserService;
+import com.bul.zydex.service.CandidateF2FRequest.CandidateF2FRequestService;
 import com.bul.zydex.service.CandidateJobApply.CandidateAcademicQualificationService;
 import com.bul.zydex.service.CandidateJobApply.CandidateApplyJob2Service;
 import com.bul.zydex.service.CandidateJobApply.CandidateExperienceDetailService;
@@ -91,6 +93,7 @@ public class RecruitmentAbstract extends CustomAbstract {
     protected CandidateExperienceDetailService<CandidateExperienceDetail> candidateExperienceDetailService;
     protected CandidateOtherReferencesService<CandidateOtherReferences> candidateOtherReferencesService;
     protected VacancyApprovalHistoryService<VacancyApprovalHistory> vacancyApprovalHistoryService;
+    protected CandidateF2FRequestService<CandidateF2FRequest> candidateF2FRequestService;
 
     public CandidateApplyJob2Service<CandidateApplyJob2> getCandidateApplyJob2Service() {
         return candidateApplyJob2Service;
@@ -267,6 +270,15 @@ public class RecruitmentAbstract extends CustomAbstract {
     public void setVacancyApprovalHistoryService(VacancyApprovalHistoryService<VacancyApprovalHistory> vacancyApprovalHistoryService) {
         this.vacancyApprovalHistoryService = vacancyApprovalHistoryService;
     }
+
+    public CandidateF2FRequestService<CandidateF2FRequest> getCandidateF2FRequestService() {
+        return candidateF2FRequestService;
+    }
+
+    public void setCandidateF2FRequestService(CandidateF2FRequestService<CandidateF2FRequest> candidateF2FRequestService) {
+        this.candidateF2FRequestService = candidateF2FRequestService;
+    }
+    
     
 
     public void selectBudget(HttpServletRequest request,

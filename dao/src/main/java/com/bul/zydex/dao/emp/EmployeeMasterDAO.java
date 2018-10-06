@@ -190,4 +190,6 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readEmployeeDetailUserIdWiseShiftApplication(T object);
 
     public List<?> readEmployeeDetailUserIdWiseShiftRegurazation(T object);
+
+    public List<?> readEmployeeCodeAutoGenerate();
 }

@@ -12,6 +12,7 @@ import com.bul.zydex.model.CandidateF2FRequest;
 import com.bul.zydex.model.CandidateJobApplication;
 import com.bul.zydex.model.CertificateTemplate;
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.MprApprovalHistory;
 import com.bul.zydex.model.QuestionPaper;
 import com.bul.zydex.model.VacancyMaster;
@@ -23,6 +24,7 @@ import com.bul.zydex.service.Recruitment.CandidateJobApplicationService;
 import com.bul.zydex.service.RecruitmentApprovalHistory.MprApprovalHistoryService;
 import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
+import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.questionlibrary.QuestionPaperService;
 import java.util.HashMap;
 import java.util.List;
@@ -44,6 +46,7 @@ public class CandidateF2FRequestAbstract extends CustomAbstract{
     protected CertificateTemplateService<CertificateTemplate> certificateTemplateService;
     protected MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService;
      protected DesignationMasterService<DesignationMaster> designationMasterService;
+     protected LocationMasterService<LocationMaster> locationMasterService;
 
     public CandidateF2FRequestService<CandidateF2FRequest> getCandidateF2FRequestService() {
         return candidateF2FRequestService;
@@ -115,6 +118,15 @@ public class CandidateF2FRequestAbstract extends CustomAbstract{
     public DesignationMasterService<DesignationMaster> getDesignationMasterService() {
         return designationMasterService;
     }
+
+    public LocationMasterService<LocationMaster> getLocationMasterService() {
+        return locationMasterService;
+    }
+
+    public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
+        this.locationMasterService = locationMasterService;
+    }
+    
     
     
     

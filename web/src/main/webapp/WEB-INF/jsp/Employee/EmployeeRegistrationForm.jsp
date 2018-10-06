@@ -687,7 +687,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Employee No.:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="employeeId" class="form-control" onkeyup="userName1();"></form:input>
+                                                        <form:input path="employeeId" class="form-control" onkeyup="userName1();" readonly="true"></form:input>
                                                         <form:errors path="employeeId" cssClass="errorDiv"></form:errors>
                                                         </div>
 

@@ -111,18 +111,18 @@
                                             <tr>
                                                 <td><!--style="border:0px"-->
                                                     <b>Department</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster[0].departmentMaster.departmentName} </td>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster[0].departmentMaster.departmentName} </td>
                                                     <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster[0].designationMaster.designationName} </td>-->
                                                 <td><!--style="border:0px"-->
                                                     <b>Designation</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster[0].designationMaster.designationName}</td>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster[0].designationMaster.designationName}</td>
                                                     <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster[0].departmentMaster.departmentName}</td>-->
                                             </tr>
 
 
                                             <td><!--style="border:0px"-->
                                                 <b>DOJ</b>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster[0].dateOfJoining} </td>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster[0].dateOfJoining} </td>
                                             <td><!--style="border:0px"-->
                                                 <b>Bank A/C No</b>
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster[0].bankAccountNo} </td>
@@ -130,8 +130,8 @@
 
 
                                                 <td><!--style="border:0px"-->
-                                                    <b>P.F. A/C No</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster[0].pfNo} </td>
+                                                    <b>UAN No</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster[0].uanNo} </td>
 
                                                 <c:if test="${not empty employeeMaster[0].esicNo}">
                                                     <td><!--style="border:0px"-->
@@ -155,6 +155,8 @@
                                                             <th style="width: 150px;">P.Days</th>
                                                             <th style="width: 150px;">C.L</th>
                                                             <th style="width: 150px;">P.L</th>
+                                                            <th style="width: 150px;">S.L</th>
+                                                            <th style="width: 150px;">PAT</th>
                                                             <th style="width: 150px;">LWP</th>
                                                             <th style="width: 150px;">Absent</th>
                                                             <th style="width: 150px;">OT Hours</th>
@@ -180,6 +182,12 @@
 
                                                                 <td>
                                                                     ${employeeMaster[1][0].pleave}
+                                                                </td>
+                                                                <td>
+                                                                    ${employeeMaster[1][0].slleave}
+                                                                </td>
+                                                                <td>
+                                                                    ${employeeMaster[1][0].pllleave}
                                                                 </td>
                                                                 <td>
                                                                     ${employeeMaster[1][0].lwp}

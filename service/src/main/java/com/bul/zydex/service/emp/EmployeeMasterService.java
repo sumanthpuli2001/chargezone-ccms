@@ -188,4 +188,5 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
 
     public List<?> readEmployeeDetailUserIdWiseShiftRegurazation(T object);
 
+    public List<?> readEmployeeCodeAutoGenerate();
 }

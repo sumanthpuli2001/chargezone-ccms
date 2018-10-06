@@ -111,8 +111,8 @@
 
 
                                                 <td><!--style="border:0px"-->
-                                                    <b>P.F. A/C No&nbsp;</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.pfNo} </td>
+                                                    <b>UAN No&nbsp;</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.uanNo} </td>
 
                                                 <c:if test="${not empty employeeMaster.esicNo}">
                                                     <td><!--style="border:0px"-->
@@ -135,6 +135,8 @@
                                                             <th style="width: 150px;">P.Days</th>
                                                             <th style="width: 150px;">C.L</th>
                                                             <th style="width: 150px;">P.L</th>
+                                                            <th style="width: 150px;">S.L</th>
+                                                            <th style="width: 150px;">PAT</th>
                                                             <th style="width: 150px;">LWP</th>
                                                             <th style="width: 150px;">Absent</th>
                                                             <th style="width: 150px;">OT Hours</th>
@@ -160,6 +162,12 @@
 
                                                                     <td>
                                                                         ${employeeExcelRecordList.pleave}
+                                                                    </td>
+                                                                    <td>
+                                                                        ${employeeExcelRecordList.slleave}
+                                                                    </td>
+                                                                    <td>
+                                                                        ${employeeExcelRecordList.pllleave}
                                                                     </td>
                                                                     <td>
                                                                         ${employeeExcelRecordList.lwp}

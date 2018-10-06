@@ -754,12 +754,15 @@
                                                     <c:if test="${candidateJobApplication.status eq 1 || candidateJobApplication.status eq 14 || candidateJobApplication.status eq 0}">
                                                         <button type="button" class="btn btn-danger" onclick="return reject(${candidateJobApplication.id},${candidateApplyJob.id});" value="Reject">Reject</button>
                                                     </c:if>
+                                                    <%--<c:if test="${candidateJobApplication.status eq 21}">--%>
+                                                        <!--<button type="button" class="btn btn-primary" style="width:130px !important;" onclick="offerLate(${candidateJobApplication.id},${candidateApplyJob.id});">Offer Letter</button>-->
+                                                    <%--</c:if>--%>
                                                     <c:if test="${candidateJobApplication.status eq 21}">
-                                                        <button type="button" class="btn btn-primary" style="width:130px !important;" onclick="offerLate(${candidateJobApplication.id},${candidateApplyJob.id});">Offer Letter</button>
+                                                        <button type="button" class="btn btn-primary" style="width:130px !important;" onclick="offerLateFormatCertificate(${candidateJobApplication.id},${candidateApplyJob.id});">Offer Letter</button>
                                                     </c:if>
-                                                    <c:if test="${candidateJobApplication.status eq 21}">
-                                                        <button type="button" class="btn btn-primary" style="width:130px !important;" onclick="appoimentofferLate(${candidateJobApplication.id},${candidateApplyJob.id});">Appointment Letter</button>
-                                                    </c:if>
+                                                    <%--<c:if test="${candidateJobApplication.status eq 21}">--%>
+                                                        <!--<button type="button" class="btn btn-primary" style="width:130px !important;" onclick="appoimentofferLate(${candidateJobApplication.id},${candidateApplyJob.id});">Appointment Letter</button>-->
+                                                    <%--</c:if>--%>
                                                     <c:if test="${candidateJobApplication.status eq 1 || candidateJobApplication.status eq 0}">
                                                         <button type="button" class="btn btn-primary" onclick="shortlisted(${candidateJobApplication.id},${candidateApplyJob.id});">Shortlist</button>
                                                     </c:if>
@@ -1065,6 +1068,11 @@
 <script>
     function offerLate(applicationId, candidateId) {
         window.location = 'candidateF2FRequest.htm?act=offerLater&id=' + applicationId + '&candidateId=' + candidateId;
+    }
+</script>
+<script>
+    function offerLateFormatCertificate(applicationId, candidateId) {
+        window.location = 'candidateF2FRequest.htm?act=offerLaterEditable&id=' + applicationId + '&candidateId=' + candidateId;
     }
 </script>
 <script>

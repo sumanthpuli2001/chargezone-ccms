@@ -1228,6 +1228,7 @@
         <property name="certificateTemplateService" ref="certificateTemplateService1" />
         <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1" />
         <property name="designationMasterService" ref="designationMasterService1"></property>
+        <property name="locationMasterService" ref="locationMasterService1"></property>
     </bean>
     <bean id="candidateF2FApprovalController1" class="com.bul.zydex.controller.CandidateF2F.CandidateF2FApprovalController" parent="controllerConfig" >
         <property name="candidateF2FApprovalService" ref="candidateF2FApprovalService1"></property>

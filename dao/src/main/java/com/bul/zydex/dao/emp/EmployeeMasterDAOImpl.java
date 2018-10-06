@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.Query;
 
 /**
  *
@@ -2206,7 +2207,10 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     public List<?> getAllEmployeeId() {
         String query = "";
 
-        query += "SELECT a.id FROM EmployeeMaster a ORDER BY a.id ASC";
+        query += "SELECT a.id FROM EmployeeMaster a "
+                + " Where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) "
+                + " ORDER BY a.employeeId ASC ";
 
         return getHibernateTemplate().find(query);
     }
@@ -2454,6 +2458,21 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         query += " Select a.id,a.employeeId"
                 + " FROM EmployeeMaster a"
                 + " WHERE a.userMaster.id = " + employeeMaster.getUserMaster().getId();
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readEmployeeCodeAutoGenerate() {
+        String query = "";
+
+//        query += " select (select b.zydex_location_id from employee_master b where employee_id = max(a.employee_id)), "
+//                + " max(a.employee_id) from employee_master a where employee_id LIKE '" + locationcode + "%' ";
+//        query += " select max(a.id),a.autoGenerationCode "
+//                + " from employee_master a ";
+        query += " Select a.id,a.autoGenerationCode"
+                + " FROM EmployeeMaster a "
+                + " order by a.id desc";
 
         return getHibernateTemplate().find(query);
     }

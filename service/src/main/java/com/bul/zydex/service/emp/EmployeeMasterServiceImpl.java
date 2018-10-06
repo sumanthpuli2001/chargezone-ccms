@@ -457,4 +457,9 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> readEmployeeDetailUserIdWiseShiftRegurazation(T object) {
       return employeeMasterDAO.readEmployeeDetailUserIdWiseShiftRegurazation(object);
     }
+
+    @Override
+    public List<?> readEmployeeCodeAutoGenerate() {
+        return employeeMasterDAO.readEmployeeCodeAutoGenerate();
+    }
 }

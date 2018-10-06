@@ -39,6 +39,12 @@
         <property name="year" type="string">
             <column name="year" length="45" />
         </property>
+        <property name="slleave" type="java.lang.Float">
+            <column name="sl_leave" precision="12" scale="0" />
+        </property>
+        <property name="pllleave" type="java.lang.Float">
+            <column name="pll_leave" precision="12" scale="0" />
+        </property>
         <many-to-one name="employeeSalaryProcess" class="com.bul.zydex.model.EmployeeSalaryProcess" fetch="select">
             <column name="employee_salary_process_id" />
         </many-to-one>

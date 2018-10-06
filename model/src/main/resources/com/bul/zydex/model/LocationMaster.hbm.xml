@@ -11,6 +11,9 @@
         <property name="location" type="string">
             <column name="location" not-null="true" />
         </property>
+        <property name="locationCode" type="string">
+            <column name="location_code" />
+        </property>
         <set name="employeeMasters" inverse="true">
             <key>
                 <column name="company_location" />

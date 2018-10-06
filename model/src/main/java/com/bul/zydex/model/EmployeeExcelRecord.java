@@ -19,11 +19,13 @@ public class EmployeeExcelRecord implements java.io.Serializable {
     private String month;
     private String year;
     private Double lwp;
+    private Float pllleave;
+    private Float slleave;
 
     public EmployeeExcelRecord() {
     }
 
-    public EmployeeExcelRecord(EmployeeSalaryProcess employeeSalaryProcess, Float workingDays, Float presentDays, Float casuaLeave, Float sickLeave, Float pleave, Float otherLeave, Double otHours, Double otAmount, String month, String year,Double lwp) {
+    public EmployeeExcelRecord(EmployeeSalaryProcess employeeSalaryProcess, Float workingDays, Float presentDays, Float casuaLeave, Float sickLeave, Float pleave, Float otherLeave, Double otHours, Double otAmount, String month, String year,Double lwp,Float pllleave,Float slleave) {
         this.employeeSalaryProcess = employeeSalaryProcess;
         this.workingDays = workingDays;
         this.presentDays = presentDays;
@@ -35,6 +37,8 @@ public class EmployeeExcelRecord implements java.io.Serializable {
         this.month = month;
         this.year = year;
         this.lwp = lwp;
+        this.pllleave = pllleave;
+        this.slleave = slleave;
     }
 
     public Integer getId() {
@@ -139,6 +143,22 @@ public class EmployeeExcelRecord implements java.io.Serializable {
 
     public void setLwp(Double lwp) {
         this.lwp = lwp;
+    }
+
+    public Float getPllleave() {
+        return pllleave;
+    }
+
+    public void setPllleave(Float pllleave) {
+        this.pllleave = pllleave;
+    }
+
+    public Float getSlleave() {
+        return slleave;
+    }
+
+    public void setSlleave(Float slleave) {
+        this.slleave = slleave;
     }
 
     

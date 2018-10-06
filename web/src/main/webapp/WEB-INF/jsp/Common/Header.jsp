@@ -23,11 +23,11 @@
             <!--         wrapper will close in footer and comment is given there by me-->
             <header class="main-header">
                 <!-- Logo -->
-                <a href="userMaster.htm?act=goToDashboard" class="logo" style="background-color:#006fad;">
+                <a href="userMaster.htm?act=goToDashboard" class="logo" style="background-color: #ffffff;">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <!--<span class="logo-mini"><b>Z</b>ydex</span>-->
                     <!-- logo for regular state and mobile devices -->
-                    <span hight="50"class="logo-lg"><img src="StorageYard/Images/logo.png"  /></span>
+                    <span class="logo-lg"><img src="StorageYard/Images/logo.png"  style="height: 45px"/></span>
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation" style="background-color:#006fad;">

@@ -13,6 +13,7 @@ public class LocationMaster  implements java.io.Serializable {
 
      private Integer id;
      private String location;
+     private String locationCode;
      private Set employeeMasters = new HashSet(0);
      private Set holidayMasters = new HashSet(0);
      private Set employeeMasters_1 = new HashSet(0);
@@ -22,11 +23,13 @@ public class LocationMaster  implements java.io.Serializable {
     }
 
 	
-    public LocationMaster(String location) {
+    public LocationMaster(String location,String locationCode) {
         this.location = location;
+        this.locationCode = locationCode;
     }
-    public LocationMaster(String location, Set employeeMasters, Set holidayMasters, Set employeeMasters_1, Set holidayMasters_1) {
+    public LocationMaster(String location, Set employeeMasters, Set holidayMasters, Set employeeMasters_1, Set holidayMasters_1,String locationCode) {
        this.location = location;
+       this.locationCode = locationCode;
        this.employeeMasters = employeeMasters;
        this.holidayMasters = holidayMasters;
        this.employeeMasters_1 = employeeMasters_1;
@@ -74,6 +77,14 @@ public class LocationMaster  implements java.io.Serializable {
     
     public void setHolidayMasters_1(Set holidayMasters_1) {
         this.holidayMasters_1 = holidayMasters_1;
+    }
+
+    public String getLocationCode() {
+        return locationCode;
+    }
+
+    public void setLocationCode(String locationCode) {
+        this.locationCode = locationCode;
     }
 
 

@@ -12,7 +12,95 @@
     <head>
         <title>Employee Create</title>
     </head>
+    
+     <script>
+        $(document).ready(function () {
+            window.onload = changetotalButton();
+            window.onload = changetotalButtonCTC();
+        });
 
+    </script>
+    <script>
+        function changetotalButton() {
+//            alert("hii");
+            var total = 0;
+            var Ctctotal = 0;
+            var element = document.getElementById('amount1').value;
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("basicSalary").value);
+            if (parseInt(element) > 0) {
+                total = total + parseInt(element);
+            }
+//            if (parseInt(conyance) > 0) {
+//                total = total + parseInt(conyance);
+//            }
+            if (parseInt(basicSalary) > 0) {
+                total = total + parseInt(basicSalary);
+
+            }
+            document.getElementById("txtresult").value = total;
+            document.getElementById("txtresultCTC").value = total;
+
+
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+        function totalValueChange(ele, oldvalue) {
+
+            var element = document.getElementById('txtresult').value;
+            var element1 = document.getElementById('txtresultCTC').value;
+            document.getElementById('txtresult').value = '';
+            document.getElementById('txtresult').value = parseInt(ele.value) + parseInt(element) - oldvalue;
+            document.getElementById('txtresultCTC').value = '';
+            document.getElementById('txtresultCTC').value = parseInt(ele.value) + parseInt(element1) - oldvalue;
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+//        function totalValueChange1(ele) {
+//            alert(parseInt(ele.value));
+//            var element = document.getElementById('txtresult').value;
+//            alert(parseInt(element);
+//                    document.getElementById('txtresult').value = '';
+//            document.getElementById('txtresult').value = parseInt(element) - parseInt(ele.value);
+////            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+//        }
+    </script>
+    <script>
+        function changetotalButtonCTC() {
+            var total = 0;
+            var element = document.getElementById('ctcamount1').value;
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("txtresult").value);
+            if (parseInt(element) > 0) {
+                total = total + parseInt(element);
+            }
+//            if (parseInt(conyance) > 0) {
+//                total = total + parseInt(conyance);
+//            }
+            if (parseInt(basicSalary) > 0) {
+                total = total + parseInt(basicSalary);
+
+            }
+            document.getElementById("txtresultCTC").value = total;
+
+
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+        function totalValueChangeCTC(ele, oldvalue) {
+
+            var element = document.getElementById('txtresultCTC').value;
+            document.getElementById('txtresultCTC').value = '';
+            document.getElementById('txtresultCTC').value = parseInt(ele.value) + parseInt(element) - oldvalue;
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+//        function totalValueChange1(ele) {
+//            alert(parseInt(ele.value));
+//            var element = document.getElementById('txtresult').value;
+//            alert(parseInt(element);
+//                    document.getElementById('txtresult').value = '';
+//            document.getElementById('txtresult').value = parseInt(element) - parseInt(ele.value);
+////            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+//        }
+    </script>
+  
 
     <script>
         function buttonFun1() {
@@ -361,6 +449,117 @@
             selectsubtype(empTypeId);
         });
     </script>
+   <script>
+        var tempCount4 = 1;
+        $(function () {
+            $("#ctcCloneid").on("click", function () {
+                tempCount4++;
+                //                alert(tempCount3);
+                var clone = "<tr id='addmoreFile1" + tempCount4 + "' style='clear:both;'>"
+                        + "<td style=\"text-align: center\">" + tempCount4 + "</td>"
+                        + "<td id=\"ctcTd" + tempCount4 + "\"><div><select id='ctcId" + tempCount4 + "' name='ctcId" + tempCount4 + "' class=\"form-control\">"
+                        + "</select>"
+                        + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
+                        //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'   onFocus=\"(this.id=this.value)\" onchange=\"totalValueChangeCTC(this,this.id);\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount4 + "' id='taxable" + tempCount4 + "'</td>"
+                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
+                        + "<option value=\"\">--SELECT--</option>"
+                        + "<option value=\"01\">January</option>"
+                        + "<option value=\"02\">February</option>"
+                        + "<option value=\"03\">March</option>"
+                        + "<option value=\"04\">April</option>"
+                        + "<option value=\"05\">May</option>"
+                        + "<option value=\"06\">June</option>"
+                        + "<option value=\"07\">July</option>"
+                        + "<option value=\"08\">August</option>"
+                        + "<option value=\"09\">September</option>"
+                        + "<option value=\"10\">October</option>"
+                        + "<option value=\"11\">November</option>"
+                        + "<option value=\"12\">December</option></select>"
+                        + "</div></td>"
+                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='year" + tempCount4 + "' name='year" + tempCount4 + "' class=\"form-control\">"
+                        + "</div></td>"
+                        + "<td style=\"text-align: center\">"
+                        + "<span style='margin-top: 5px;'>"
+                        + "<input type=\"button\"value=\"-\"  onclick=\"removectc('addmoreFile1" + tempCount4 + "');\"/>"
+                        + "</span>"
+                        + "</td>"
+                        + "</tr>";
+                $("#ctcTable").append(clone);
+                document.getElementById('ctcCount').value = tempCount4;
+                //                var expenseType = document.getElementById('expenseType').value;
+                addActc(tempCount4);
+                window.onload = init;
+                function init() {
+                    document.form1.month.options[new Date().getMonth()].selected = true;
+                }
+                var start = new Date().getFullYear();
+                var end = 2050;
+                var options11 = "";
+//        var objSelect = document.getElementById("yearBase").value;
+                for (var year1 = start; year1 <= end; year1++) {
+                    options11 += "<option>" + year1 + "</option>";
+                }
+//                alert(tempCount4);
+                document.getElementById('year2').innerHTML = options11;
+                document.getElementById('year3').innerHTML = options11;
+                document.getElementById('year4').innerHTML = options11;
+                document.getElementById('year5').innerHTML = options11;
+                document.getElementById('year6').innerHTML = options11;
+                document.getElementById('year7').innerHTML = options11;
+
+            });
+        });
+
+        function addActc(id) {
+            //                alert(id);
+            var element2 = document.getElementById('ctcId1');
+            var obj2 = document.getElementById("ctcId" + id);
+            for (var i22 = 0; i22 < element2.options.length; i22++) {
+                var opt22 = document.createElement("option");
+                opt22.value = element2.options[i22].value;
+                opt22.text = element2.options[i22].text;
+                obj2.appendChild(opt22);
+            }
+        }
+
+        function removectc(ctcDiv1) {
+//            try {
+//                tempCount4--;
+//                var val = document.getElementById("ctcCount").value;
+//                val = val - 1;
+//                document.getElementById("ctcCount").value = val;
+//                var element1 = document.getElementById(ctcDiv1);
+//                element1.parentNode.removeChild(element1);
+//            } catch (e) {
+//
+//            }
+//            
+
+            try {
+                tempCount4--;
+
+                var val = document.getElementById("ctcCount").value;
+                var element = document.getElementById("ctcamount" + val).value;
+
+                val = val - 1;
+
+                var element2 = document.getElementById('txtresultCTC').value;
+                document.getElementById('txtresultCTC').value = '';
+                document.getElementById('txtresultCTC').value = parseInt(element2) - parseInt(element);
+
+                document.getElementById("ctcCount").value = val;
+                element1 = document.getElementById(ctcDiv1);
+
+                element1.parentNode.removeChild(element1);
+            } catch (e) {
+
+            }
+
+        }
+
+    </script>
     <script>
         var tempCount3 = 1;
         $(function () {
@@ -372,8 +571,9 @@
                         + "<td id=\"policyTd" + tempCount3 + "\"><div><select id='policyId" + tempCount3 + "' name='policyId" + tempCount3 + "' class=\"form-control\">"
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
-                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "'  min=\"0\" class=\"form-control\"></td>"
+//                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.id=this.value)\" onchange=\"totalValueChange(this,this.id);\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
                         + "<input type=\"button\"value=\"-\"  onclick=\"removePolicy('addmoreFile" + tempCount3 + "');\"/>"
@@ -401,12 +601,36 @@
         }
 
         function removePolicy(policyDiv) {
+
+//            try {
+//                tempCount3--;
+//                var val = document.getElementById("policyCount").value;
+//                val = val - 1;
+//                document.getElementById("policyCount").value = val;
+//                var element1 = document.getElementById(policyDiv);
+//                element1.parentNode.removeChild(element1);
+//            } catch (e) {
+//
+//            }
             try {
                 tempCount3--;
+
                 var val = document.getElementById("policyCount").value;
+
+                var element = document.getElementById("amount" + val).value;
+
                 val = val - 1;
+
+                var element2 = document.getElementById('txtresult').value;
+                document.getElementById('txtresult').value = '';
+                document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
+                var element21 = document.getElementById('txtresultCTC').value;
+                document.getElementById('txtresultCTC').value = '';
+                document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
+
                 document.getElementById("policyCount").value = val;
-                var element1 = document.getElementById(policyDiv);
+                element1 = document.getElementById(policyDiv);
+
                 element1.parentNode.removeChild(element1);
             } catch (e) {
 
@@ -414,7 +638,6 @@
         }
 
     </script>
-
 
     <script>
         function setDesignation() {
@@ -840,13 +1063,14 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Company:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="company" id="company" class="form-control ">
-                                                            <form:option value="">--SELECT--</form:option>
-                                                            <form:option value="SPC Lifesciences">SPC Lifesciences </form:option>
-                                                            <%--<form:option value="Zydex Industries Pvt. Ltd.">Zydex Industries Pvt. Ltd.</form:option>--%>
-                                                        </form:select>
-                                                        <form:errors path="company" cssClass="errorDiv"></form:errors>
+                                                            <label>Company:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:select path="company"  class="form-control ">
+                                                                <form:option label="-- Select --"  value="" ></form:option>
+                                                                <c:forEach var="comp" items="${company}" >
+                                                                    <form:option value="${comp.value}">${comp.value}</form:option>
+                                                                </c:forEach>
+                                                            </form:select>
+                                                            <form:errors path="company" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
                                                     <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
@@ -1034,59 +1258,71 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Conveys:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="conveysAmount" class="form-control"   placeholder="Enter Basic Conveys"/>
-                                                            <form:errors path="conveysAmount" cssClass="errorDiv"/>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>Employee Location Code:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="employeeLocation"  class="form-control"></form:input>
+                                                        <form:errors path="employeeLocation" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="esicNo" class="form-control"  placeholder="Enter ESIC No"/>
                                                             <form:errors path="esicNo" cssClass="errorDiv"/>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-
+                                                <div  class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>TDS Amount<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="tdsAmount" class="form-control"  placeholder="Enter TDS Amount"/>
-                                                            <form:errors path="tdsAmount" cssClass="errorDiv"/>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Company:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:select path="company"  class="form-control ">
-                                                                <form:option label="-- Select --"  value="" ></form:option>
-                                                                <c:forEach var="comp" items="${company}" >
-                                                                    <form:option value="${comp.value}">${comp.value}</form:option>
-                                                                </c:forEach>
-                                                            </form:select>
-                                                            <form:errors path="company" cssClass="errorDiv"></form:errors>
+                                                        <label>PF Amount(By Employee Basic Salary):</label>
+                                                        <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                        <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
                                                         </div>
-
-                                                    </div> 
+                                                        <div class="col-sm-6">
+                                                            <label>PF Amount(By Employer Basic Salary):</label>
+                                                        <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                        <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
-                                                        <div class="col-sm-3">
+                                                        <div class="col-sm-4">
                                                             <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
-                                                                <input type="radio" name="pf" id="pf" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <input type="radio" name="pf" id="pf" value="true">YES
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <fieldset>
-                                                                <input type="radio" name="pt" id="pt" value="false" checked>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <input type="radio" name="pt" id="pt" value="true">YES
-                                                            </fieldset>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
-                                                            <fieldset>
+                                                            <form:radiobutton path="pf"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="pf" value="true"/>YES
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <fieldset>
+                                                            <form:radiobutton path="pt"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="pt" value="true"/>YES
+                                                        </fieldset>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                        <fieldset>
                                                             <form:radiobutton path="esic" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <form:radiobutton path="esic" value="true"/>YES
                                                         </fieldset>
                                                         <form:errors path="esic" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-3">
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-4">
+                                                            <label>Salary Base:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <fieldset>
+                                                            <form:radiobutton path="salaryBase" value="false" checked="checked"/>Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="salaryBase" value="true"/>Day
+                                                        </fieldset>
+                                                        <form:errors path="salaryBase" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>OT:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <fieldset>
+                                                            <form:radiobutton path="ot" value="false" checked="checked"/>YES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="ot" value="true"/>NO
+                                                        </fieldset>
+                                                        <form:errors path="ot" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-4">
                                                             <label>Odd Punch Required:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
                                                             <form:radiobutton path="oddPunch" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1099,9 +1335,10 @@
                                                         <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                             <tr>
                                                                 <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                <th style="text-align: center; vertical-align: middle">Select Policy</th>
-                                                                <th style="text-align: center; vertical-align: middle">Policy Number</th>
+                                                                <th style="text-align: center; vertical-align: middle">Select Allowance</th>
+                                                                <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
                                                                 <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                <th style="text-align: center; vertical-align: middle">Taxable</th>
                                                                 <th style="text-align: center; vertical-align: middle">Add New</th>
                                                             <input type="hidden" name="policyCount" id="policyCount" value="1"/>
                                                             </tr>
@@ -1117,11 +1354,14 @@
                                                                     </div>
                                                                     <span id="policyError1" style="color: red;"></span>
                                                                 </td>
+                                                                <!--                                                                <td style="text-align: center">
+                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control">
+                                                                                                                                </td>-->
                                                                 <td style="text-align: center">
-                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control">
+                                                                    <input name="amount1" id="amount1" min="0" onchange="changetotalButton();"class="form-control" >
                                                                 </td>
                                                                 <td style="text-align: center">
-                                                                    <input type="number" name="amount1" id="amount1" min="0" class="form-control">
+                                                                    <input type="checkbox" name="taxable1" id="taxable1" >
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <span style='margin-top: 5px;'>
@@ -1131,6 +1371,109 @@
                                                             </tr>
                                                         </table>
                                                     </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                    </div>
+                                                    <div class="col-sm-2">
+
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>Gross Total:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <input  id="txtresult" name="txtresult" class="form-control" readonly="true"  />
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table id="ctcTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                            <tr>
+                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                <th style="text-align: center; vertical-align: middle">Select CTC Component</th>
+                                                                <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
+                                                                <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                <th style="text-align: center; vertical-align: middle">Taxable</th>
+                                                                <th style="text-align: center; vertical-align: middle">Month</th>
+                                                                <th style="text-align: center; vertical-align: middle">Year</th>
+                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                            <input type="hidden" name="ctcCount" id="ctcCount" value="1"/>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align: center">1</td>
+                                                                <td id="policyTd1"><div>
+                                                                        <select id="ctcId1"  name="ctcId1"  class="form-control">
+                                                                            <option value="">--SELECT--</option>
+                                                                            <c:forEach var="comp" items="${ctc}" varStatus = "status">
+                                                                                <option value="${comp.key}">${comp.value}</option>
+                                                                            </c:forEach>
+                                                                        </select>
+                                                                    </div>
+                                                                    <span id="ctcError1" style="color: red;"></span>
+                                                                </td>
+                                                                <!--                                                                <td style="text-align: center">
+                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control">
+                                                                                                                                </td>-->
+                                                                <td style="text-align: center">
+                                                                    <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" >
+                                                                </td>
+                                                                <td style="text-align: center">
+                                                                    <input type="checkbox" name="taxable1" id="taxable1" >
+                                                                </td>
+                                                                <td id="monthTd1"><div>
+                                                                        <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
+                                                                        <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
+                                                                        <select id="month1" name="month1"  class="form-control ">
+                                                                            <option value="">--Select--</option>
+                                                                            <option value="01">January</option>
+                                                                            <option value="02">February</option>
+                                                                            <option value="03">March </option>
+                                                                            <option value="04">April</option>
+                                                                            <option value="05">May</option>
+                                                                            <option value="06">June</option>
+                                                                            <option value="07">July</option>
+                                                                            <option value="08">August</option>
+                                                                            <option value="09">September</option>
+                                                                            <option value="10">October </option>
+                                                                            <option value="11">November </option>
+                                                                            <option value="12">December</option>
+
+                                                                        </select>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td style="text-align: center">
+
+                                                                    <select name="year1" id="year1" class="form-control ">
+
+                                                                    </select>
+                                                                </td>
+                                                                <td style="text-align: center">
+                                                                    <span style='margin-top: 5px;'>
+                                                                        <input type="button" value="+" id="ctcCloneid" />
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                    </div>
+                                                    <div class="col-sm-2">
+
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <label>CTC Total:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <input id="txtresultCTC" name="txtresultCTC" class="form-control" readonly="true"  />
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 col-sm-12">
+                                                    <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <form:textarea  path="jobDescription" id="editor"></form:textarea>
+                                                    <form:errors path="jobDescription" cssClass="errorDiv"/>
                                                 </div>
 
                                             </div><!-- /.col -->
@@ -1181,50 +1524,44 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>PF No.:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="pfNo" id="pfNo" class="form-control"></form:input>
-                                                        <form:errors path="pfNo" cssClass="errorDiv"></form:errors>
-                                                        </div> 
+                                                        <label>PF No.:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="pfNo" id="pfNo" class="form-control"></form:input>
+                                                            <%--<form:errors path="pfNo" cssClass="errorDiv"></form:errors>--%>
+                                                    </div> 
 
-                                                        <div class="col-sm-6">
-                                                            <label>UAN No.:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="uanNo" id="uanNo"  class="form-control"></form:input>
-                                                        <form:errors path="uanNo" cssClass="errorDiv"></form:errors>
-                                                        </div>  
+                                                    <div class="col-sm-6">
+                                                        <label>UAN No.:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="uanNo" id="uanNo"  class="form-control"></form:input>
+                                                            <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
                                                     </div>  
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>PF Amount:</label>
-                                                        <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
-                                                        <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
+                                                </div>  
 
-                                                </div>
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
-                                    <!--bank detail complete-->
-                                    <div class="box box-info collapsed-box" id="reporting_level_id">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Reporting Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+
                                             </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <!--<label class="col-sm-2 control-label" style="float: left;">Reporting Manager:</label>-->
-                                                        <!--                                                        <div class="col-sm-12">
-                                                                                                                    <label>Reporting Manager:</label>
-                                                                                                                </div>-->
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6" id="levelIdDiv1">
-                                                            <label>Reporting Manager:<span style="color: red;font-size: 12px;">*</span></label>
+                                        </div><!-- /.col -->
+                                    </div><!-- /.row -->
+                                </div><!-- /.box-body -->
+                                <!--bank detail complete-->
+                                <div class="box box-info collapsed-box" id="reporting_level_id">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Reporting Detail:</h3>
+                                        <div class="box-tools pull-right">
+                                            <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5();"><i class="fa fa-plus" id="minusId5" ></i></button>
+                                            <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                        </div>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <!--<label class="col-sm-2 control-label" style="float: left;">Reporting Manager:</label>-->
+                                                    <!--                                                        <div class="col-sm-12">
+                                                                                                                <label>Reporting Manager:</label>
+                                                                                                            </div>-->
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6" id="levelIdDiv1">
+                                                        <label>Reporting Manager:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="reportingManagerLevel1" class="form-control" onchange="reportingLevelSet();"></form:input>
                                                         <form:errors path="reportingManagerLevel1" cssClass="errorDiv"></form:errors>
                                                         </div>

@@ -1252,6 +1252,11 @@
                                                             <form:input path="esicNo" class="form-control"    placeholder="Enter ESIC No"/>
                                                             <form:errors path="esicNo" cssClass="errorDiv"/>
                                                     </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Auto Generate Code: <span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="autoGenerationCode" class="form-control"    placeholder="Enter Auto Generate Code "/>
+                                                            <form:errors path="autoGenerationCode" cssClass="errorDiv"/>
+                                                    </div>
                                                 </div>
 
 

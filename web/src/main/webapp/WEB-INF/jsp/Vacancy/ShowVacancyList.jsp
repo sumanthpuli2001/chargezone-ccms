@@ -3,12 +3,12 @@
     Created on : 16 Feb, 2018, 11:24:21 AM
     Author     : Vikas
 --%>
-
+<%@page contentType="text/html" pageEncoding="UTF-8" session="false"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%--<%@page contentType="text/html" pageEncoding="UTF-8"%>--%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -115,12 +115,7 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                <c:if test="${sessionScope.userRight.employeeManagement}">
-                                    <!--<button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>-->
-                                    <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'employeeMaster.htm?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
-
-                                    <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'vacancy.htm?act=newVacancyCreate'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
-                                </c:if>
+                              
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">
@@ -139,9 +134,7 @@
                                                         <c:otherwise>
                                                             <thead>
                                                                 <tr>
-                                                                    <c:if test="${sessionScope.userRight.employeeManagement}">
-                                                                        <!--<th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>-->
-                                                                    </c:if>
+                                                                   
                                                                     <!--                                                                    <th>sr.no</th>-->
                                                                     <th style="width: 142px;">Vacancy Name</th>
                                                                     <th style="width: 185px;">Number Of Position</th>
@@ -159,9 +152,7 @@
                                                     <tbody>
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
-                                                                <c:if test="${sessionScope.userRight.employeeManagement}">
-<!--                                                                    <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>-->
-                                                                </c:if>
+                                                                
                                                                 <!--                                                                <td>1</td>-->
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[2]}</td>

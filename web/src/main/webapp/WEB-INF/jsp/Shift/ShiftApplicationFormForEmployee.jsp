@@ -339,11 +339,11 @@
                                                                 </c:if>
                                                                 <c:if test="${shiftType eq 'ShiftBase'}">
                                                                     <option value="ShiftBase" selected="">Shift Base</option>
-                                                                    <option value="HourlyBase">Hourly Base</option>
+                                                                    <!--<option value="HourlyBase">Hourly Base</option>-->
                                                                 </c:if>
                                                                 <c:if test="${shiftType eq ''}">
                                                                     <option value="" label="-- Select --" ></option>
-                                                                    <option value="HourlyBase" label="Hourly Base"></option>
+                                                                    <!--<option value="HourlyBase" label="Hourly Base"></option>-->
                                                                     <option value="ShiftBase" label="Shift Base"></option>
                                                                 </c:if>
 

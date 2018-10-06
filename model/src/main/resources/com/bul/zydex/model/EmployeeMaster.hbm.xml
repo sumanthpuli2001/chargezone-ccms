@@ -163,6 +163,9 @@
         <property name="shiftRotationDate" type="string">
             <column name="shift_rotation_date" />
         </property>
+        <property name="autoGenerationCode" type="string">
+            <column name="auto_generation_code" />
+        </property>
         <property name="govLicenceName" type="string">
             <column name="gov_licenceName" length="45" />
         </property>

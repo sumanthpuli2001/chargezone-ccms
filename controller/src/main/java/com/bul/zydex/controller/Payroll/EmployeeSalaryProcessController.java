@@ -2212,17 +2212,20 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             casualLeave = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 5));
 //                            sickLeave = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 5));
                             privilegeLeave = "" + (null == row.getCell((short) 6) ? "" : row.getCell((short) 6));
-                            absent = "" + (null == row.getCell((short) 7) ? "" : row.getCell((short) 7));
-                            lwp = "" + (null == row.getCell((short) 8) ? "" : row.getCell((short) 8));
-                            OT = "" + (null == row.getCell((short) 9) ? "" : row.getCell((short) 9));
-                            otherDeduction = "" + (null == row.getCell((short) 10) ? "" : row.getCell((short) 10));
-                            tdsexcel = "" + (null == row.getCell((short) 11) ? "" : row.getCell((short) 11));
-                            incentiveExcel = "" + (null == row.getCell((short) 12) ? "" : row.getCell((short) 12));
-                            bonusExcel = "" + (null == row.getCell((short) 13) ? "" : row.getCell((short) 13));
+                            sickLeave = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 7));
+                            paternityLeave = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 8));
+                            absent = "" + (null == row.getCell((short) 7) ? "" : row.getCell((short) 9));
+                            lwp = "" + (null == row.getCell((short) 8) ? "" : row.getCell((short) 10));
+                            OT = "" + (null == row.getCell((short) 9) ? "" : row.getCell((short) 11));
+                            otherDeduction = "" + (null == row.getCell((short) 10) ? "" : row.getCell((short) 12));
+                            tdsexcel = "" + (null == row.getCell((short) 11) ? "" : row.getCell((short) 13));
+                            incentiveExcel = "" + (null == row.getCell((short) 12) ? "" : row.getCell((short) 14));
+                            bonusExcel = "" + (null == row.getCell((short) 13) ? "" : row.getCell((short) 15));
 
                             float cLeave = 0;
                             float sLeave = 0;
                             float pLeave = 0;
+                            float plLeave = 0;
                             float absent1 = 0;
                             double lwp1 = 0;
                             double OT1 = 0;
@@ -2249,6 +2252,12 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             }
                             if (!privilegeLeave.equals("")) {
                                 pLeave = Float.parseFloat(privilegeLeave);
+                            }
+                            if (!sickLeave.equals("")) {
+                                sLeave = Float.parseFloat(sickLeave);
+                            }
+                            if (!paternityLeave.equals("")) {
+                                plLeave = Float.parseFloat(paternityLeave);
                             }
                             if (!absent.equals("")) {
                                 absent1 = Float.parseFloat(absent);
@@ -2364,6 +2373,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 employeeExcelRecord.setLwp(lwp1);
                                 employeeExcelRecord.setOtAmount(Overtimepay);
                                 employeeExcelRecord.setMonth(month1);
+                                employeeExcelRecord.setPllleave(plLeave);
+                                employeeExcelRecord.setSlleave(sLeave);
                                 employeeExcelRecord.setYear(year11);
 
                                 employeeExcelRecordService.create(employeeExcelRecord);
@@ -2525,8 +2536,9 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             headerRow1.add("W.off");
                             headerRow1.add("P.Days");
                             headerRow1.add("C.L");
-//                        headerRow1.add("S.L");
                             headerRow1.add("P.L");
+                            headerRow1.add("S.L");
+                            headerRow1.add("PAT");
                             headerRow1.add("Absent");
                             headerRow1.add("L.W.P");
                             headerRow1.add("OT Hrs");
@@ -2559,7 +2571,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             double abcounter = 0;
                             double wo = 0;
                             double cl = 0;
-//                        double sl = 0;
+                            double sl = 0;
                             double pl = 0;
                             double ar = 0;
                             double lwp = 0;
@@ -2568,6 +2580,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             double tds = 0;
                             double incentive = 0;
                             double bonus = 0;
+                            double pat = 0;
+
 //                            Integer otMinuteCounter = 0;
                             String otHourFinal = "";
 
@@ -2672,15 +2686,15 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                             if (firstHalf.equals("Privilege Leave")) {
                                                 pl = pl + 1;
                                             }
-//                                    if (firstHalf.equals("Sick Leave")) {
-//                                        sl = sl + 1;
-//                                    }
+                                            if (firstHalf.equals("Sick Leave")) {
+                                                sl = sl + 1;
+                                            }
 //                                    if (firstHalf.equals("Maternity Leave")) {
 //                                        ml = ml + 1;
 //                                    }
-//                                    if (firstHalf.equals("Paternity Leave")) {
-//                                        pl = pl + 1;
-//                                    }
+                                            if (firstHalf.equals("Paternity Leave")) {
+                                                pat = pat + 1;
+                                            }
 //                                    if (firstHalf.equals("C Off Leave")) {
 //                                        col = col + 1;
 //                                    }
@@ -2806,6 +2820,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             firstHalfList.add("" + cl);
 //                        firstHalfList.add("" + sl);
                             firstHalfList.add("" + pl);
+                            firstHalfList.add("" + sl);
+                            firstHalfList.add("" + pat);
                             firstHalfList.add("" + (abcounter - wo));
                             firstHalfList.add("" + (abcounter - wo));//where lwp = ab
 

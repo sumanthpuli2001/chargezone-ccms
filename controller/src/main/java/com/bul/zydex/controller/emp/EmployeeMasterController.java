@@ -108,6 +108,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         ctcList(request);
         //master's data setting completed on request
 //        shiftList(request);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate = new Date();
+//        approvalMaster.setCreatedBy(approvalMaster1);
+        String CureentDate = sdf.format(cDate);
+        String[] endDateSplited = CureentDate.split("/");
+
         hoursBasisList(request);
         employeeMaster.setUserMaster(userMaster);
         employeeMaster.setLevelMaster(levelMaster);
@@ -146,6 +153,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         companyList(request);
         policyList(request);
         ctcList(request);
+
         //DeowpDown list//
 //        String reasonForLeaving = request.getParameter("password");
         String userName = request.getParameter("userName");
@@ -227,16 +235,15 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //            request.setAttribute("employeeMaster", employeeMaster);
             mv.getModelMap().put("employeeMaster", employeeMaster);
             mv.setViewName("Employee/EmployeeRegistrationForm");
-        } 
-//        else if (DOJ.before(DOB1)) {
-//            request.setAttribute("failureMessage",
-//                    "Error : Enter Valid Date of Joining");
-//
-//            selectEmployee(request, response);
-//            selectedEmployeeLevel1(request, employeeMaster);
-//            request.setAttribute("employeeMaster", employeeMaster);
-//            mv.setViewName("Employee/EmployeeRegistrationForm");
-//        }
+        } //        else if (DOJ.before(DOB1)) {
+        //            request.setAttribute("failureMessage",
+        //                    "Error : Enter Valid Date of Joining");
+        //
+        //            selectEmployee(request, response);
+        //            selectedEmployeeLevel1(request, employeeMaster);
+        //            request.setAttribute("employeeMaster", employeeMaster);
+        //            mv.setViewName("Employee/EmployeeRegistrationForm");
+        //        }
         else if (!userMasterService.isExist(userName) && !userName.equals("") && !"".equals(password)) {
 
 //            if (!password.equals("")) {
@@ -270,6 +277,30 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             if (employeeMaster.getPfAmount().equals("")) {
                 employeeMaster.setPfAmount("0");
             }
+
+            // employee Code automically Generate 
+            int employeeLoactionCode = employeeMaster.getLocationMaster().getId();
+            LocationMaster ltm = locationMasterService.readById(employeeLoactionCode);
+            String locationCode = ltm.getLocationCode();
+            String empCodeString = "";
+            SimpleDateFormat sdf11 = new SimpleDateFormat("dd/MM/yyyy");
+            Date cDate = new Date();
+//        approvalMaster.setCreatedBy(approvalMaster1);
+            String CureentDate = sdf11.format(cDate);
+            String[] endDateSplited = CureentDate.split("/");
+            String empFormat = "";
+            String month122 = endDateSplited[1];
+            String year122 = endDateSplited[2];
+
+            List<?> empCodeList = employeeMasterService.readEmployeeCodeAutoGenerate();
+            Object[] codeList = (Object[]) empCodeList.get(0);
+            String oldempCode = codeList[1].toString();
+            String[] oldempCodeSplited = oldempCode.split("/");
+            String oldempcodesplit = oldempCodeSplited[4];
+            empCodeString = "SPCLS" + "/" + year122 + "/" + month122 + "/" + locationCode + "/" + (Integer.parseInt(oldempcodesplit) + 1);
+
+            employeeMaster.setAutoGenerationCode(empCodeString);
+
             employeeMasterService.create(employeeMaster);
             //Code for Employee Policy Detail
             EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
@@ -945,6 +976,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         if (!competencyEvaluationId.equals("")) {
             employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
         }
+
         employeeMasterService.update(employeeMaster);
 
 //        if (!reportingManagerBeforeUpdate.equals(reportingManagerForChange)) {
@@ -4263,6 +4295,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeSubTypeList(request);
         companyList(request);
         policyList(request);
+        ctcList(request);
         //master's data setting completed on request
 //        shiftList(request);
         hoursBasisList(request);
@@ -4469,6 +4502,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             employeeMaster.setPanCard(String.valueOf(employeeMaster.getPanCard()).toUpperCase());//this is for store pan card in uppercase in database.
             userMaster.setFirstTime(true);
 //set firstTime is true for compulsory password change on first time login
+
             userMasterService.create(userMaster);
             if (employeeMaster.getPfAmount().equals("")) {
                 employeeMaster.setPfAmount("0");
@@ -4478,14 +4512,44 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //            ajum.setFirstTime(5);
             cja.setStatus(13);
             candidateJobApplicationService.update(cja);
+
+            // employee Code automically Generate 
+            int employeeLoactionCode = employeeMaster.getLocationMaster().getId();
+            LocationMaster ltm = locationMasterService.readById(employeeLoactionCode);
+            String locationCode = ltm.getLocationCode();
+            String empCodeString = "";
+            SimpleDateFormat sdf11 = new SimpleDateFormat("dd/MM/yyyy");
+            Date cDate11 = new Date();
+//        approvalMaster.setCreatedBy(approvalMaster1);
+            String CureentDate = sdf11.format(cDate11);
+            String[] endDateSplited = CureentDate.split("/");
+            String empFormat = "";
+            String month122 = endDateSplited[1];
+            String year122 = endDateSplited[2];
+
+            List<?> empCodeList = employeeMasterService.readEmployeeCodeAutoGenerate();
+            Object[] codeList = (Object[]) empCodeList.get(0);
+            String oldempCode = codeList[1].toString();
+            String[] oldempCodeSplited = oldempCode.split("/");
+            String oldempcodesplit = oldempCodeSplited[4];
+            empCodeString = "SPCLS" + "/" + year122 + "/" + month122 + "/" + locationCode + "/" + (Integer.parseInt(oldempcodesplit) + 1);
+
+            employeeMaster.setAutoGenerationCode(empCodeString);
+            if (employeeMaster.getPfAmount().equals("")) {
+                employeeMaster.setPfAmount("0");
+            }
             employeeMasterService.create(employeeMaster);
+            //Code for Employee Policy Detail
+//            userMasterService.create(userMaster);
+
+//            employeeMasterService.create(employeeMaster);
             //Code for Employee Policy Detail
             EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
             int otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
             for (int i = 1; i <= otherDetailCount; i++) {
                 PolicyMaster policyMaster = new PolicyMaster();
-                if (null != request.getParameter("policyId" + i) && null != request.getParameter("amount" + i) && null != request.getParameter("policyNumber" + i)) {
-                    if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("amount" + i).equals("") && !request.getParameter("policyNumber" + i).equals("")) {
+                if (null != request.getParameter("policyId" + i) && null != request.getParameter("amount" + i)) {
+                    if (!request.getParameter("policyId" + i).equals("") && !request.getParameter("amount" + i).equals("")) {
                         int policyId = Integer.parseInt(request.getParameter("policyId" + i));
                         policyMaster.setId(policyId);
                         Double amount = Double.valueOf(request.getParameter("amount" + i));
@@ -4494,7 +4558,40 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         employeePolicyDetail.setAmount(amount);
                         employeePolicyDetail.setPolicyMaster(policyMaster);
                         employeePolicyDetail.setPolicyNum(policyNumber);
+                        if (null != request.getParameter("taxable" + i)) {
+                            employeePolicyDetail.setStatus(1);
+                        } else {
+                            employeePolicyDetail.setStatus(0);
+                        }
                         employeePolicyDetailService.create(employeePolicyDetail);
+                    }
+                }
+            }
+
+            //Code for Employee ctc Detail
+            EmployeeCtcDetail employeeCtcDetail = new EmployeeCtcDetail();
+            int otherDetailCount1 = Integer.parseInt(request.getParameter("ctcCount"));
+            for (int i = 1; i <= otherDetailCount1; i++) {
+                CtcAllowance ctcAllowance = new CtcAllowance();
+                if (null != request.getParameter("ctcId" + i) && null != request.getParameter("ctcamount" + i)) {
+                    if (!request.getParameter("ctcId" + i).equals("") && !request.getParameter("ctcamount" + i).equals("")) {
+                        int ctcId = Integer.parseInt(request.getParameter("ctcId" + i));
+                        ctcAllowance.setId(ctcId);
+                        Double amount = Double.valueOf(request.getParameter("ctcamount" + i));
+                        String month = request.getParameter("month" + i);
+                        String year = request.getParameter("year" + i);
+//                        String policyNumber = request.getParameter("policyNumber" + i);
+                        employeeCtcDetail.setEmployeeMaster(employeeMaster);
+                        employeeCtcDetail.setAmount(amount);
+                        employeeCtcDetail.setCtcAllowance(ctcAllowance);
+                        if (null != request.getParameter("taxable" + i)) {
+                            employeeCtcDetail.setStatus(1);
+                        } else {
+                            employeeCtcDetail.setStatus(0);
+                        }
+                        employeeCtcDetail.setMonth(month);
+                        employeeCtcDetail.setYear(year);
+                        employeeCtcDetailService.create(employeeCtcDetail);
                     }
                 }
             }
@@ -4539,8 +4636,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
             }
             //End
-            
-            
+
             MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
             SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
             Date cDate = new Date();
@@ -4850,7 +4946,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
             }
-            mv.setViewName("forward:userRightMaster.htm?act=createClick&id=" + String.valueOf(userMasterId));
+            mv.setViewName("forward:userRightMaster.htm?act=createClickInduction&id=" + String.valueOf(userMasterId));
         } else {
             request.setAttribute("failureMessage",
                     "Error : User isExist.");

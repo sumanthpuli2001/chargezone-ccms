@@ -2313,4 +2313,25 @@ public class VacancyController extends VacancyAbstract {
         mv = vacancyShowByApprove(request, response);
         return mv;
     }
+
+    public ModelAndView vacancyDetailListPage(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
+        String uname = "xyz";
+//out.print("Welcome "+ uname);
+        session.setAttribute("sessname", uname);
+//        ModelAndView mv = new ModelAndView();
+        ModelAndView mv = new ModelAndView();
+        VacancyMaster vacancyMaster = new VacancyMaster();
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String date = sdf.format(d);
+//        List<?> vacancylist = vacancyMasterService.fetchVacancyDetail();
+        List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
+        mv.getModelMap().put("list", vacancylist);
+        mv.getModelMap().put("vacancyMaster", vacancyMaster);
+
+        mv.setViewName("Vacancy/VacancyDetailReportList1");
+        return mv;
+    }
 }

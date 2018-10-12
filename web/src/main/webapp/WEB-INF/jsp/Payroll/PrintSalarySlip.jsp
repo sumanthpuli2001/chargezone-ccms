@@ -150,15 +150,15 @@
                                                     <table border="1" style="width: 100%" name="leave" id="leave" cellspacing="0" cellpadding="0" align="center"  class="table table-bordered table-striped table-hover">
                                                         <tr>
 
-                                                            <th style="width: 150px;">W.Days</th>
+                                                            <th style="width: 150px;">Working Days</th>
                                                             <th style="width: 150px;">W.Off</th>
-                                                            <th style="width: 150px;">P.Days</th>
+                                                            <th style="width: 150px;">Present Days</th>
                                                             <th style="width: 150px;">C.L</th>
                                                             <th style="width: 150px;">P.L</th>
                                                             <th style="width: 150px;">S.L</th>
                                                             <th style="width: 150px;">PAT</th>
                                                             <th style="width: 150px;">LWP</th>
-                                                            <th style="width: 150px;">Absent</th>
+                                                            <th style="width: 150px;">Paid Days</th>
                                                             <th style="width: 150px;">OT Hours</th>
                                                         </tr>
                                                         <tr>
@@ -193,7 +193,7 @@
                                                                     ${employeeMaster[1][0].lwp}
                                                                 </td>
                                                                 <td>
-                                                                    ${employeeMaster[1][0].otherLeave}
+                                                                    ${days1-employeeMaster[1][0].lwp}
                                                                 </td>
                                                                 <td>
                                                                     ${employeeMaster[1][0].otHours}

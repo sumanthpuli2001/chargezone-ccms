@@ -348,7 +348,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
             String from = employeeMaster.getOfficeEmailId();
             String To = candidateApplyJob.getEmailId();
             String Subject = certificateTemplate.getCertificateName();
-            String msg = certificateTemplate.getCertificateBody();
+            String msg = certificateTemplate.getCertificateBody().replaceAll("&Acirc;", "");
 //            Subject = Subject.replaceAll("\\{name\\}", employeeMaster.getEmployeeName());
 //            msg = msg.replaceAll("\\{name\\}", candidateApplyJob.getName());
 //            msg = msg.replaceAll("\\{email_id\\}", candidateApplyJob.getEmailId());
@@ -573,7 +573,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
             String from = employeeMaster.getOfficeEmailId();
             String To = employeeMaster2.getOfficeEmailId();
             String Subject = certificateTemplate.getCertificateName();
-            String msg = certificateTemplate.getCertificateBody();
+              String msg = certificateTemplate.getCertificateBody().replaceAll("&Acirc;", "");
 //            Subject = Subject.replaceAll("\\{name\\}", employeeMaster.getEmployeeName());
 //            msg = msg.replaceAll("\\{name\\}", candidateApplyJob.getName());
 //            msg = msg.replaceAll("\\{email_id\\}", candidateApplyJob.getEmailId());

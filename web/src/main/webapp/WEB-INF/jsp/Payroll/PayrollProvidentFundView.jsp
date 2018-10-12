@@ -42,7 +42,7 @@
                                 <form:form class="form-horizontal" method="post"
                                            commandName="payrollProvidentFund" action="payrollProvidentFund.htm?act=editSubmit">
                                     <form:hidden path="id"></form:hidden>
-                                    <div class="form-group" style="pointer-events: none">
+                                        <div class="form-group" style="pointer-events: none">
                                             <div class="col-sm-6">
                                                 <label>Location:<span style="color: red;font-size: 12px;">*</span></label>
                                             <form:select path="zydexLocationMaster.id" class="form-control ">
@@ -50,11 +50,11 @@
                                                 <form:options items="${deptMap}"></form:options>
                                             </form:select>
                                             <%--<form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>--%>
-                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-6">
-                                                <label>PF Percentage (%):<span style="color: red;font-size: 12px;">*</span></label>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <label>PF Percentage (%):<span style="color: red;font-size: 12px;">*</span></label>
                                             <form:input path="pfPercentage" maxlength="4" placeholder="Enter PF Percentage (%)" class="form-control"></form:input>
                                             <form:errors path="pfPercentage" cssClass="errorDiv"></form:errors>
                                             </div>
@@ -74,6 +74,14 @@
                                                 <label>Apf Percentage (%):<span style="color: red;font-size: 12px;">*</span></label>
                                             <form:input path="apfPercentage"  maxlength="4"  placeholder=" Enter Apf Percentage (%)"  class="form-control"></form:input>
                                             <form:errors path="apfPercentage" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+
+                                            <div class="col-sm-6">
+                                                <label>Minimum Wages Amount:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <form:input path="miniBasicAmount" type="number"  min="0" max="10000000" placeholder="Enter Maximum Basic Amount" class="form-control"></form:input>
+                                            <form:errors path="miniBasicAmount" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
                                         <div class="form-group">

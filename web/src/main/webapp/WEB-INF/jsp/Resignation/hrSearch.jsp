@@ -29,15 +29,15 @@
     <script>
 
         function resign(id, empId) {
-              window.location = 'resignationMaster.htm?act=Hrview&id=' + id + '&EmpId=' + empId;
+            window.location = 'resignationMaster.htm?act=Hrview&id=' + id + '&EmpId=' + empId;
         }
         function exit(id, empId) {
-                 window.location = 'exitInterviewMaster.htm?act=createApproveOrReturn&id=' + id + '&empID=' + empId;
+            window.location = 'exitInterviewMaster.htm?act=createApproveOrReturn&id=' + id + '&empID=' + empId;
         }
         function nodue(id, empId) {
-              window.location = 'noDueMaster.htm?act=createNoDueApproval&id=' + id + '&empID=' + empId;
+            window.location = 'noDueMaster.htm?act=createNoDueApproval&id=' + id + '&empID=' + empId;
         }
-      </script>
+    </script>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -150,10 +150,10 @@
                                                                     <th>Employee Id</th>
                                                                     <th>Employee Name</th>
                                                                     <th>Resignation Status</th>
-                                                                    <c:if test="${sessionScope.userRight.exitInterview}">
-                                                                    <th>Exit Employee Status</th>
-                                                                    </c:if>
                                                                     <th>No Due Status</th>
+                                                                        <c:if test="${sessionScope.userRight.exitInterview}">
+                                                                        <th>Exit Employee Status</th>
+                                                                        </c:if>
                                                                 </tr>
                                                             </thead>
                                                         </c:otherwise>
@@ -177,28 +177,10 @@
                                                                     <c:if test="${list[2] == 7}"><span class="badge" onclick="resign('${list[6]}', '${list[5]}')">Withdraw Pending </span></c:if>
                                                                     <%--<c:if test="${list[2] == 8}"><span class="badge">Withdraw Pending</span></c:if>--%>   
                                                                     <c:if test="${list[2] == 9}"><span class="label label-warning" onclick="resign('${list[6]}', '${list[5]}')">Withdraw HR Approved</span></c:if>
-                                                                     <c:if test="${list[2] == 10}"><span class="label label-warning">Withdraw Rejected</span></c:if>
+                                                                    <c:if test="${list[2] == 10}"><span class="label label-warning">Withdraw Rejected</span></c:if>
                                                                     <c:if test="${list[2] == 11}"><span class="label label-success">Withdraw Rejected(Resignation Accepted)</span></c:if>
-                                                                </td>
-                                                                <c:if test="${sessionScope.userRight.exitInterview}">
-                                                                    
-                                                                    <td>
-                                                                       <c:if test="${list[3] == 0}"><span class="badge" onclick="exit('${list[7]}','${list[5]}')">Requested</span></c:if>
-                                                                       <c:if test="${list[3] == 1}"><span class="badge" onclick="exit('${list[7]}','${list[5]}')">Pending</span></c:if>
-                                                                       <c:if test="${list[3] == 2}"><span class="label label-success" onclick="exit('${list[7]}','${list[5]}')">HR Approved</span></c:if>
-                                                                
-                                                                    <%--<c:if test="${list[3] == 0}"><span class="badge">Pending</span></c:if>--%>
-                                                                    <%--<c:if test="${list[3] == 1}"><span class="label label-danger">Returned</span></c:if>--%>
-                                                                    <%--<c:if test="${list[3] == 2}"><span class="label label-success" onclick="exit('${list[7]}', '${list[5]}')">Approved  ${list[9]}</span></c:if>--%>
-                                                                    <%--<c:if test="${list[3] == 3}"><span class="badge">Pending</span></c:if>--%>
-                                                                    <%--<c:if test="${list[3] == 4}"><span class="label label-success" onclick="exit('${list[7]}', '${list[5]}')">Approved ${list[9]}</span></c:if>--%>
-
-                                                                    <%--<c:if test="${list[3] == 5}"><span class="badge">Withdraw Pending span></c:if>--%>
-                                                                        <%--<c:if test="${list[3] == 6}"><span class="label label-success" onclick="exit('${list[7]}', '${list[5]}')">Withdraw Manager Approved</span></c:if>--%>
-                                                                        <%--<c:if test="${list[3] == 7}"><span class="label label-success" onclick="exit('${list[7]}', '${list[5]}')">Withdraw HR Approved</span></c:if>--%>
                                                                     </td>
-                                                                </c:if>
-
+                                                       
                                                                     <td>
                                                                     <c:if test="${list[4] == 0}"><span class="badge" onclick="nodue('${list[8]}', '${list[5]}')">Requested</span></c:if>
                                                                     <c:if test="${list[4] == 1}"><span class="label label-danger">Returned</span></c:if>
@@ -210,8 +192,29 @@
                                                                     <c:if test="${list[4] == 6}"><span class="label label-success" onclick="nodue('${list[8]}', '${list[5]}')">Withdraw Approved</span></c:if>
                                                                     <c:if test="${list[4] == 7}"><span class="badge" onclick="nodue('${list[8]}', '${list[5]}')">Withdraw Pending</span></c:if>   
                                                                     </td>
+                                                                    
+                                                                <c:if test="${sessionScope.userRight.exitInterview}">
 
-                                                                </tr>
+                                                                    <td>
+                                                                        <c:if test="${list[3] == 0}"><span class="badge" onclick="exit('${list[7]}', '${list[5]}')">Requested</span></c:if>
+                                                                        <c:if test="${list[3] == 1}"><span class="badge" onclick="exit('${list[7]}', '${list[5]}')">Pending</span></c:if>
+                                                                        <c:if test="${list[3] == 2}"><span class="label label-success" onclick="exit('${list[7]}', '${list[5]}')">HR Approved</span></c:if>
+
+                                                                        <%--<c:if test="${list[3] == 0}"><span class="badge">Pending</span></c:if>--%>
+                                                                        <%--<c:if test="${list[3] == 1}"><span class="label label-danger">Returned</span></c:if>--%>
+                                                                        <%--<c:if test="${list[3] == 2}"><span class="label label-success" onclick="exit('${list[7]}', '${list[5]}')">Approved  ${list[9]}</span></c:if>--%>
+                                                                        <%--<c:if test="${list[3] == 3}"><span class="badge">Pending</span></c:if>--%>
+                                                                        <%--<c:if test="${list[3] == 4}"><span class="label label-success" onclick="exit('${list[7]}', '${list[5]}')">Approved ${list[9]}</span></c:if>--%>
+
+                                                                        <%--<c:if test="${list[3] == 5}"><span class="badge">Withdraw Pending span></c:if>--%>
+                                                                        <%--<c:if test="${list[3] == 6}"><span class="label label-success" onclick="exit('${list[7]}', '${list[5]}')">Withdraw Manager Approved</span></c:if>--%>
+                                                                        <%--<c:if test="${list[3] == 7}"><span class="label label-success" onclick="exit('${list[7]}', '${list[5]}')">Withdraw HR Approved</span></c:if>--%>
+                                                                    </td>
+                                                                </c:if>
+
+
+
+                                                            </tr>
                                                         </c:forEach>
                                                     </tbody>
                                                 </table>

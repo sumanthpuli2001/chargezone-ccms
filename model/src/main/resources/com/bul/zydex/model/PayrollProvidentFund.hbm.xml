@@ -23,5 +23,8 @@
         <property name="apfPercentage" type="string">
             <column name="apf_percentage" not-null="true" />
         </property>
+        <property name="miniBasicAmount" type="string">
+            <column name="mini_basic_amount" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

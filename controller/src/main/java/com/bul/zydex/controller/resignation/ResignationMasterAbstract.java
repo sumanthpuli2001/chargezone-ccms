@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.resignation;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.DisplaymorNotes;
 import com.bul.zydex.model.EmployeeCtcDetail;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeMaster;
@@ -17,6 +18,7 @@ import com.bul.zydex.model.NoDueMaster;
 import com.bul.zydex.model.ResignationMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.service.FormateFullNdFinalLetter.FormateFullNdFinalLetterService;
+import com.bul.zydex.service.Payroll.DisplaymorNotesService;
 import com.bul.zydex.service.Payroll.EmployeeDeductionAmountService;
 import com.bul.zydex.service.Payroll.EmployeeSalaryProcessService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
@@ -47,6 +49,7 @@ public abstract class ResignationMasterAbstract extends CustomAbstract {
     protected EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService; 
     protected EmployeeDeductionAmountService<EmployeeDeductionAmount> employeeDeductionAmountService; 
     protected FormateFullNdFinalLetterService<FormateFullNdFinalLetter> formateFullNdFinalLetterService; 
+    protected DisplaymorNotesService<DisplaymorNotes> displaymorNotesService; 
     protected Validator fullAndFinalSettlementValidator;
 
     public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
@@ -138,6 +141,15 @@ public abstract class ResignationMasterAbstract extends CustomAbstract {
     public void setFullAndFinalSettlementValidator(Validator fullAndFinalSettlementValidator) {
         this.fullAndFinalSettlementValidator = fullAndFinalSettlementValidator;
     }
+
+    public DisplaymorNotesService<DisplaymorNotes> getDisplaymorNotesService() {
+        return displaymorNotesService;
+    }
+
+    public void setDisplaymorNotesService(DisplaymorNotesService<DisplaymorNotes> displaymorNotesService) {
+        this.displaymorNotesService = displaymorNotesService;
+    }
+    
     
     
 

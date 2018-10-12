@@ -1270,7 +1270,7 @@
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Professional Tax:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <fieldset>
                                                             <form:radiobutton path="pt"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <form:radiobutton path="pt" value="true"/>YES

@@ -160,4 +160,5 @@
     <bean id="fullAndFinalSettlementValidator1" class="com.bul.zydex.validator.Recruitment.fullAndFinalSettlementValidator" />
     <bean id="urlMasterValidator1" class="com.bul.zydex.validator.UrlMasterValidator" />
     <bean id="shiftRegularizationValidator1" class="com.bul.zydex.validator.shift.ShiftRegularizationValidator" />
+    <bean id="coffRegularizationValidator1" class="com.bul.zydex.validator.shift.CoffRegularizationValidator" />
 </beans>

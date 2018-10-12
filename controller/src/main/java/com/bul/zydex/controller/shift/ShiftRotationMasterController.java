@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.shift;
 
 import com.bul.zydex.model.AttendanceRegularization;
+import com.bul.zydex.model.CoffRegularization;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
@@ -32,7 +33,6 @@ import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.WoffRegularization;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.util.DownloadFile;
-import static com.itextpdf.text.PageSize.A1;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -63,7 +63,6 @@ import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.Header;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -16790,8 +16789,16 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         BindException errors = new BindException(shiftRegularization, "shiftRegularization");
         bind(request, shiftRegularization);
         String newShift = request.getParameter("newShift");
-        String preciousShiftId = request.getParameter("preciousShiftId");
-        userMasterPrevious.setId(Integer.parseInt(preciousShiftId));
+
+        try {
+            String preciousShiftId = request.getParameter("preciousShiftId");
+            userMasterPrevious.setId(Integer.parseInt(preciousShiftId));
+
+        } catch (Exception e) {
+            userMasterPrevious.setId(1);
+
+        }
+
         userMasterCurrent.setId(Integer.parseInt(newShift));
 //        String firstShiftId2 = request.getParameter("firstShiftIdID");
 //        String rotationId = request.getParameter("rotationId");
@@ -16846,7 +16853,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 EmployeeMaster employeeMasterHr = new EmployeeMaster();
                 employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
                 // id 14 is for Attendence regularization apply....
-                emailTemplate = emailTemplateService.readById(14);
+                emailTemplate = emailTemplateService.readById(162);
                 String To = employeeMasterHr.getOfficeEmailId();
                 String from = employeeMasterModel.getOfficeEmailId();
                 String Subject = emailTemplate.getSubject();
@@ -16946,7 +16953,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 EmployeeMaster EmployeeHR = new EmployeeMaster();
                 EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
                 //id=14 is for attandence regularization Apply...
-                emailTemplate = emailTemplateService.readById(14);
+                emailTemplate = emailTemplateService.readById(164);
                 String EmpStr = request.getParameter("empid");
                 if (null != EmpStr && !"".equals(EmpStr)) {
                     int Empid = Integer.parseInt(EmpStr);
@@ -16963,7 +16970,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                         sendMail.sendMail(from, To, Subject, msg);
 
-                        String name = "Attendance";
+                        String name = "SHIFT REGULARIZATION ";
                         EmailAddMaster emailAddMaster = new EmailAddMaster();
                         emailAddMaster.setModuleName(name);
                         emailAddMaster.setDepartmentMaster(employeeMasterModel.getDepartmentMaster());
@@ -16987,24 +16994,24 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                             }
                         }
-                        List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
-                        if (!allDeptmailList.isEmpty()) {
-                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
-                            String emailId = emailAddMaster1.getEmailId();
-                            for (String emailId1 : emailId.split(",")) {
-                                if (!emailId1.equals("")) {
-                                    String To1 = emailId1;
-                                    String from1 = employeeMasterModel.getOfficeEmailId();
-                                    String subject1 = emailTemplate.getSubject();
-                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
-                                    String msg1 = emailTemplate.getBodytext();
-                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                                    sendMail.sendMail(from1, To1, subject1, msg1);
-                                }
-                            }
-                        }
+//                        List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+//                        if (!allDeptmailList.isEmpty()) {
+//                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+//                            String emailId = emailAddMaster1.getEmailId();
+//                            for (String emailId1 : emailId.split(",")) {
+//                                if (!emailId1.equals("")) {
+//                                    String To1 = emailId1;
+//                                    String from1 = employeeMasterModel.getOfficeEmailId();
+//                                    String subject1 = emailTemplate.getSubject();
+//                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+//                                    String msg1 = emailTemplate.getBodytext();
+//                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+//                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                                    sendMail.sendMail(from1, To1, subject1, msg1);
+//                                }
+//                            }
+//                        }
 
                     }
 
@@ -17024,7 +17031,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 EmployeeMaster EmployeeHR = new EmployeeMaster();
                 EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
                 //id=18 is for attandence regularization withdrow...
-                emailTemplate = emailTemplateService.readById(18);
+                emailTemplate = emailTemplateService.readById(164);
                 String EmpStr = request.getParameter("empid");
                 if (null != EmpStr && !"".equals(EmpStr)) {
                     int Empid = Integer.parseInt(EmpStr);
@@ -17139,6 +17146,39 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 }
 
             }
+            try {
+
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                UserMaster userMaster = new UserMaster();
+                userMaster.setId(shiftRegularization.getUserMasterId().getId());
+                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                employeeMaster2.setUserMaster(userMaster);
+                List list = employeeMasterService.readByUserName(employeeMaster2);
+                //id=17 is for attandence regularization reject...
+                emailTemplate = emailTemplateService.readById(163);
+//            String EmpStr = request.getParameter("empid");
+//            if (null != EmpStr && !"".equals(EmpStr)) {
+//                int Empid = Integer.parseInt(EmpStr);
+//                List list = employeeMasterService.readByEmployeeNo(Empid);
+                if (!list.isEmpty()) {
+                    employeeMaster2 = (EmployeeMaster) list.get(0);
+                    String To = employeeMaster2.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+
+//                }
+                }
+
+            } catch (Exception e) {
+            }
 
 //                   
         }
@@ -17214,7 +17254,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             employeeMaster1.setUserMaster(userMaster);
             List list = employeeMasterService.readByUserName(employeeMaster1);
             //id=17 is for attandence regularization reject...
-            emailTemplate = emailTemplateService.readById(17);
+            emailTemplate = emailTemplateService.readById(166);
 //            String EmpStr = request.getParameter("empid");
 //            if (null != EmpStr && !"".equals(EmpStr)) {
 //                int Empid = Integer.parseInt(EmpStr);
@@ -17263,7 +17303,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
             EmployeeMaster employeeMaster1 = new EmployeeMaster();
             //id=16 is for attandence regularization rework...
-            emailTemplate = emailTemplateService.readById(16);
+            emailTemplate = emailTemplateService.readById(165);
             UserMaster userMaster = new UserMaster();
             userMaster.setId(shiftRegularization.getUserMasterId().getId());
             employeeMaster1.setUserMaster(userMaster);
@@ -17427,7 +17467,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             EmployeeMaster employeeMasterHr = new EmployeeMaster();
             employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
             // id 14 is for Attendence regularization apply....
-            emailTemplate = emailTemplateService.readById(14);
+            emailTemplate = emailTemplateService.readById(167);
             String To = employeeMasterHr.getOfficeEmailId();
             String from = employeeMasterModel.getOfficeEmailId();
             String Subject = emailTemplate.getSubject();
@@ -17586,7 +17626,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             employeeMaster1.setUserMaster(userMaster);
             List list = employeeMasterService.readByUserName(employeeMaster1);
             //id=17 is for attandence regularization reject...
-            emailTemplate = emailTemplateService.readById(17);
+            emailTemplate = emailTemplateService.readById(168);
 //            String EmpStr = request.getParameter("empid");
 //            if (null != EmpStr && !"".equals(EmpStr)) {
 //                int Empid = Integer.parseInt(EmpStr);
@@ -17635,7 +17675,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
             EmployeeMaster employeeMaster1 = new EmployeeMaster();
             //id=16 is for attandence regularization rework...
-            emailTemplate = emailTemplateService.readById(16);
+            emailTemplate = emailTemplateService.readById(169);
             UserMaster userMaster = new UserMaster();
             userMaster.setId(woffRegularization.getUserMasterId().getId());
             employeeMaster1.setUserMaster(userMaster);
@@ -17727,11 +17767,516 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 }
 //
             }
+             try {
+
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            UserMaster userMaster = new UserMaster();
+            userMaster.setId(woffRegularization.getUserMasterId().getId());
+            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+            employeeMaster2.setUserMaster(userMaster);
+            List list = employeeMasterService.readByUserName(employeeMaster2);
+            //id=17 is for attandence regularization reject...
+            emailTemplate = emailTemplateService.readById(170);
+//            String EmpStr = request.getParameter("empid");
+//            if (null != EmpStr && !"".equals(EmpStr)) {
+//                int Empid = Integer.parseInt(EmpStr);
+//                List list = employeeMasterService.readByEmployeeNo(Empid);
+            if (!list.isEmpty()) {
+                employeeMaster2 = (EmployeeMaster) list.get(0);
+                String To = employeeMaster2.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+
+//                }
+            }
+
+        } catch (Exception e) {
+        }
 
 //                   
         }
 //        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
         mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitWoff");
+        return mv;
+    }
+
+    public ModelAndView searchSubmitShiftApplicationCoff(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        CoffRegularization coffRegularization = new CoffRegularization();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        int id = user.getId();
+        List<?> list = coffRegularizationService.userWiseCoffRegularizationList(id);
+        List<?> list1 = coffRegularizationService.userReportingManager(id);
+//        List<?> list = shiftRegularizationService.userWiseShiftRegularizationList(id);
+//        List<?> list1 = shiftRegularizationService.userReportingManager(id);
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        String managerName = "";
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        if (!list1.isEmpty()) {
+            employeeMaster = (EmployeeMaster) list1.get(0);
+//            List<?> reportingmanagerNameList = employeeMasterService.readByEmployeeLevel1Id(employeeMaster);
+
+            employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+//            if (!reportingmanagerNameList.isEmpty()) {
+//                Object[] o = (Object[]) reportingmanagerNameList.get(0);
+//                managerName = (String) o[2];
+//            }
+        }
+        mv.getModelMap().put("managerName", employeeMaster1.getEmployeeName());
+        mv.getModelMap().put("list", list);
+        mv.getModelMap().put("coffRegularization", coffRegularization);
+        mv.setViewName("Shift/CoffApplicationResult");
+        return mv;
+    }
+
+    public ModelAndView createClickWoffApplication(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+//        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        CoffRegularization coffRegularization = new CoffRegularization();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        EmployeeMaster employeeMaster2 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
+        shiftRotaionList(request);
+//        hoursBasisList(request);
+        shiftList(request);
+        int reportingId = 0;
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWiseShiftApplication(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            int emplid = (Integer) arrayOfObject[10];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+            employeeMaster2 = employeeMasterService.readById(emplid);
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+        }
+
+        mv.getModelMap().put("coffRegularization", coffRegularization);
+
+        mv.setViewName("Shift/CoffApplicationFormForEmployee");
+        return mv;
+    }
+
+    public ModelAndView createSubmitcoffRegurization(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        CoffRegularization coffRegularization = new CoffRegularization();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        UserMaster userMaster = new UserMaster();
+        ShiftMaster userMasterPrevious = new ShiftMaster();
+        ShiftMaster userMasterCurrent = new ShiftMaster();
+        int reportingId = 0;
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        int userMasterId = user.getId();
+        employeeMaster.setUserMaster(user);
+        BindException errors = new BindException(coffRegularization, "coffRegularization");
+        bind(request, coffRegularization);
+
+        coffRegularizationValidator.validate(coffRegularization, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+            List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+            if (!empDetailList.isEmpty()) {
+                request.setAttribute("employeeMaster", empDetailList.get(0));
+                Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+                String reportmanager = (String) arrayOfObject[6];
+                if (!reportmanager.equals("")) {
+                    reportingId = Integer.parseInt(reportmanager);
+                }
+
+                employeeMaster1.setId(reportingId);
+            }
+            List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+            if (!reportmanager1.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+                request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+            }
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+
+            mv.getModelMap().put("coffRegularization", coffRegularization);
+            mv.setViewName("Shift/CoffApplicationFormForEmployee");
+        } else {
+            coffRegularization.setUserMasterId(user);
+            coffRegularization.setStatus(0);
+            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String currentDate = dateFormat1.format(new Date());
+            coffRegularization.setDateOfSubmit(currentDate);
+
+            coffRegularizationService.createOrUpdate(coffRegularization);
+
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+
+            mv.setViewName("redirect:shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff");
+            try {
+//                mailSendArApply(request);
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                // id 14 is for Attendence regularization apply....
+                emailTemplate = emailTemplateService.readById(171);
+                String To = employeeMasterHr.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
+        }
+        return mv;
+    }
+
+    public ModelAndView editCoffClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        CoffRegularization coffRegularization = new CoffRegularization();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        String id = request.getParameter("id");
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
+        int reportingId = 0;
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+        }
+
+        coffRegularization = coffRegularizationService.readById(Integer.parseInt(id));
+        int status1 = coffRegularization.getStatus();
+        String status = Integer.toString(status1);
+        String remark = coffRegularization.getApprovalComment();
+
+//        shiftMaster.setId(shiftRegularization.getShiftMasterCurrent());
+        request.setAttribute("remark", remark);
+        request.setAttribute("status", status);
+
+        mv.getModelMap().put("coffRegularization", coffRegularization);
+        mv.setViewName("Shift/CoffRegularizationFormForEmployeeEdit");
+        return mv;
+    }
+
+    public ModelAndView editSubmitCoffRegurization(HttpServletRequest request, HttpServletResponse response, CoffRegularization coffRegularization) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        CoffRegularization coffRegularization = new CoffRegularization();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        RotationMaster rotationMaster = new RotationMaster();
+        BindException errors = new BindException(coffRegularization, "coffRegularization");
+        bind(request, coffRegularization);
+        coffRegularization.setId(Integer.parseInt(request.getParameter("id")));
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        coffRegularization.setStatus(0);
+        coffRegularization.setUserMasterId(user);
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String currentDate = dateFormat1.format(new Date());
+        coffRegularization.setDateOfSubmit(currentDate);
+        coffRegularizationValidator.validate(coffRegularization, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+            mv.addObject("coffRegularization", coffRegularization);
+//            mv.setViewName("Shift/ShiftRotationCreate");
+        } else {
+            coffRegularizationService.update(coffRegularization);
+//            int countId = Integer.parseInt(request.getParameter("countId"));
+
+            request.setAttribute("successMessage",
+                    "Information : The Information is updated Successfully.");
+            mv.setViewName("redirect:shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff");
+        }
+        return mv;
+    }
+
+    public ModelAndView approvalSubmitcoff(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        CoffRegularization coffRegularization = new CoffRegularization();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        int id = employeeMaster.getId();
+        List<?> list = coffRegularizationService.approvalLeval1WiseCoffRegularizationList(id);
+        List<?> list1 = coffRegularizationService.userReportingManager(id);
+        String managerName = "";
+        if (!list1.isEmpty()) {
+            employeeMaster = (EmployeeMaster) list1.get(0);
+            if (!employeeMaster.getReportingManagerLevel1().equals("")) {
+                List<?> reportingmanagerNameList = employeeMasterService.readByEmployeeLevel1Id(employeeMaster);
+                if (!reportingmanagerNameList.isEmpty()) {
+                    Object[] o = (Object[]) reportingmanagerNameList.get(0);
+                    managerName = (String) o[2];
+                }
+            }
+        }
+        mv.getModelMap().put("managerName", managerName);
+        mv.getModelMap().put("list", list);
+        mv.getModelMap().put("coffRegularization", coffRegularization);
+        mv.setViewName("Shift/coffRegularizationApprovalResult");
+        return mv;
+    }
+
+    public ModelAndView approvalcoffEditClickByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+//        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        CoffRegularization coffRegularization = new CoffRegularization();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        String id = request.getParameter("id");
+        coffRegularization = coffRegularizationService.readById(Integer.parseInt(id));
+        int status1 = coffRegularization.getStatus();
+        String status = Integer.toString(status1);
+        request.setAttribute("status", status);
+        String remarkNmame = coffRegularization.getApprovalComment();
+        request.setAttribute("remarkNmame", remarkNmame);
+        int userId = coffRegularization.getUserMasterId().getId();
+//        int cureentShift = shiftRegularization.getShiftMasterCurrent().getId();
+
+        UserMaster user = new UserMaster();
+        user.setId(userId);
+        employeeMaster.setUserMaster(user);
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+        }
+
+        mv.getModelMap().put("coffRegularization", coffRegularization);
+        mv.setViewName("Shift/coffRegularizationApprovalAdmin");
+        return mv;
+    }
+
+    public ModelAndView rejectSubmitByAdmincoff(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+//        ShiftRegularization shiftRegularization = new ShiftRegularization();
+        CoffRegularization coffRegularization = new CoffRegularization();
+        String id = request.getParameter("id");
+        String remark = "";
+        coffRegularization = coffRegularizationService.readById(Integer.parseInt(id));
+        coffRegularization.setStatus(3);
+        coffRegularization.setApprovalComment(remark);
+        EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String requestdate = sdf.format(new Date());
+        coffRegularization.setDateOfApproval(requestdate);
+        coffRegularization.setApproverId(approverName);
+        coffRegularizationService.createOrUpdate(coffRegularization);
+
+        try {
+
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            UserMaster userMaster = new UserMaster();
+            userMaster.setId(coffRegularization.getUserMasterId().getId());
+            EmployeeMaster employeeMaster1 = new EmployeeMaster();
+            employeeMaster1.setUserMaster(userMaster);
+            List list = employeeMasterService.readByUserName(employeeMaster1);
+            //id=17 is for attandence regularization reject...
+            emailTemplate = emailTemplateService.readById(174);
+//            String EmpStr = request.getParameter("empid");
+//            if (null != EmpStr && !"".equals(EmpStr)) {
+//                int Empid = Integer.parseInt(EmpStr);
+//                List list = employeeMasterService.readByEmployeeNo(Empid);
+            if (!list.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) list.get(0);
+                String To = employeeMaster1.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+
+//                }
+            }
+
+        } catch (Exception e) {
+        }
+
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitcoff");
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
+        return mv;
+    }
+
+    public ModelAndView reworkSubmitByAdminCoff(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String id = request.getParameter("id");
+        CoffRegularization coffRegularization = new CoffRegularization();
+        String remark = "";
+        coffRegularization = coffRegularizationService.readById(Integer.parseInt(id));
+        coffRegularization.setStatus(7);
+        coffRegularization.setApprovalComment(remark);
+        EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String requestdate = sdf.format(new Date());
+        coffRegularization.setDateOfApproval(requestdate);
+        coffRegularization.setApproverId(approverName);
+        coffRegularizationService.createOrUpdate(coffRegularization);
+        try {
+
+            EmailTemplate emailTemplate = new EmailTemplate();
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            EmployeeMaster employeeMaster1 = new EmployeeMaster();
+            //id=16 is for attandence regularization rework...
+            emailTemplate = emailTemplateService.readById(173);
+            UserMaster userMaster = new UserMaster();
+            userMaster.setId(coffRegularization.getUserMasterId().getId());
+            employeeMaster1.setUserMaster(userMaster);
+            List<?> list = employeeMasterService.readByUserName(employeeMaster1);
+//            String EmpStr = request.getParameter("empid");
+//            if (null != EmpStr && !"".equals(EmpStr)) {
+//                int Empid = Integer.parseInt(EmpStr);
+//                List list = employeeMasterService.readByEmployeeNo(Empid);
+            if (!list.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) list.get(0);
+                String To = employeeMaster1.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+
+            }
+
+        } catch (Exception e) {
+        }
+
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitcoff");
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
+        return mv;
+    }
+
+    public ModelAndView approvalEditCoffSubmitByAdmin(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        CoffRegularization coffRegularization = new CoffRegularization();
+        String id = "" + request.getParameter("id");
+//        String remark = "" + request.getParameter("remark");
+        String remark = "";
+        coffRegularization = coffRegularizationService.readById(Integer.parseInt(id));
+        coffRegularization.setStatus(1);
+        coffRegularization.setApprovalComment(remark);
+
+//        EmployeeMaster approverName = new EmployeeMaster();
+        EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String requestdate = sdf.format(new Date());
+        coffRegularization.setDateOfApproval(requestdate);
+        coffRegularization.setApproverId(approverName);
+        coffRegularizationService.createOrUpdate(coffRegularization);
+
+////        Employee Date Time Data
+        if (coffRegularization.getStatus() == 1) {
+            EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+            EmployeeMaster employeeMaster1 = new EmployeeMaster();
+            LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+            leaveTypeMaster.setId(11);
+            employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+
+            UserMaster userMaster = new UserMaster();
+            userMaster.setId(coffRegularization.getUserMasterId().getId());
+            employeeMaster1.setUserMaster(userMaster);
+            List<?> list = employeeMasterService.readByUserName(employeeMaster1);
+            if (!list.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) list.get(0);
+
+            }
+
+            employeeLeaveBalance.setEmployeeMaster(employeeMaster1);
+
+            if (coffRegularization.getCoffType().equals("Full Coff")) {
+                String time = "1.0";
+                List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                if (!empBalList.isEmpty()) {
+                    employeeLeaveBalance = (EmployeeLeaveBalance) empBalList.get(0);
+                    float time1 = employeeLeaveBalance.getNoOfLeaveRemain();
+                    time1 = time1 + Float.parseFloat(time);
+                    employeeLeaveBalance.setNoOfLeaveRemain(time1);
+                    employeeLeaveBalanceService.update(employeeLeaveBalance);
+                } else {
+                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                    employeeLeaveBalance.setEmployeeMaster(employeeMaster1);
+                    employeeLeaveBalance.setNoOfLeaveRemain(Float.parseFloat(time));
+
+                    employeeLeaveBalanceService.create(employeeLeaveBalance);
+                }
+
+            } else {
+
+                String time = "0.5";
+                List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+                if (!empBalList.isEmpty()) {
+                    employeeLeaveBalance = (EmployeeLeaveBalance) empBalList.get(0);
+                    float time1 = employeeLeaveBalance.getNoOfLeaveRemain();
+                    time1 = time1 + Float.parseFloat(time);
+                    employeeLeaveBalance.setNoOfLeaveRemain(time1);
+                    employeeLeaveBalanceService.update(employeeLeaveBalance);
+                } else {
+                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                    employeeLeaveBalance.setEmployeeMaster(employeeMaster1);
+                    employeeLeaveBalance.setNoOfLeaveRemain(Float.parseFloat(time));
+
+                    employeeLeaveBalanceService.create(employeeLeaveBalance);
+                }
+
+            }
+
+        }
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitcoff");
         return mv;
     }
 

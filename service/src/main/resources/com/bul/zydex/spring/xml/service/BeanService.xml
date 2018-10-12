@@ -756,4 +756,7 @@
      <bean id="candidateF2FObservationService1" class="com.bul.zydex.service.CandidateF2FRequest.CandidateF2FObservationServiceImpl">
         <property name="candidateF2FObservationDAO" ref="candidateF2FObservationDAO1" />
     </bean>
+    <bean id="coffRegularizationService1" class="com.bul.zydex.service.shift.CoffRegularizationServiceImpl">
+        <property name="coffRegularizationDAO" ref="coffRegularizationDAO1"/>
+    </bean>
 </beans>

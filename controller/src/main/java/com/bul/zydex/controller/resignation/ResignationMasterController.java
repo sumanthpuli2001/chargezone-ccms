@@ -9,6 +9,7 @@ import com.bul.zydex.model.ApprovalMaster;
 import com.bul.zydex.model.ApprovalUser;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.DisplaymorNotes;
 import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeCtcDetail;
@@ -1414,7 +1415,13 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         int department = employeeMaster.getDepartmentMaster().getId();
         departmentMaster = departmentMasterService.readById(department);
         String departmentName = departmentMaster.getDepartmentName();
+        DisplaymorNotes displaymorNotes = new DisplaymorNotes();
+        List list22 = displaymorNotesService.read();
+        for (Object o : list22) {
+            displaymorNotes = (DisplaymorNotes) o;
 
+        }
+        String notes = displaymorNotes.getPayrollNotes();
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("rm", rm);
 //        mv.getModelMap().put("esp", esp);
@@ -1441,6 +1448,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.getModelMap().put("designationName", designationName);
         mv.getModelMap().put("departmentName", departmentName);
         mv.getModelMap().put("fullAndFinalSettlement", fullAndFinalSettlement);
+         request.setAttribute("notes", notes);
         mv.setViewName("Resignation/FullAndFinaSettlementReportShow");
 
         return mv;

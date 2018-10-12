@@ -23,6 +23,7 @@ import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import static java.util.Collections.list;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -246,6 +247,9 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         String id = request.getParameter("id");
         String month = request.getParameter("month");
         String year = request.getParameter("year");
+        Calendar cal3 = Calendar.getInstance();
+        cal3.set(Calendar.MONTH, (Integer.parseInt(month) - 1));
+        int days1 = cal3.getActualMaximum(Calendar.DAY_OF_MONTH);
 
         DecimalFormat df = new DecimalFormat("####0.00");
         EmployeeMaster employeeMaster = employeeMasterService.readById(Integer.parseInt(id));
@@ -300,9 +304,9 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         int nettotal1 = (int) Math.round(nettotal);
         String n1 = df.format(nettotal1);
         List list = displaymorNotesService.read();
-       for (Object o : list) {
+        for (Object o : list) {
             displaymorNotes = (DisplaymorNotes) o;
-          
+
         }
         String notes = displaymorNotes.getPayrollNotes();
         mv.getModelMap().put("employeeSalaryProcessList", employeeSalaryProcessList);
@@ -319,6 +323,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         request.setAttribute("month", month);
         request.setAttribute("year", year);
         request.setAttribute("notes", notes);
+        request.setAttribute("days1", days1);
 
         mv.setViewName("Payroll/SalarySlipForm");
         return mv;
@@ -756,6 +761,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         double basicSalary = 0;
         String month = null;
         String year = null;
+        int days1 = 0;
         for (String empsalryid : checkId) {
             List Addfinallist = new ArrayList();
 
@@ -771,6 +777,10 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
                     employeeMasterID += (Integer) o[1];
                     month = (String) o[4];
                     year = (String) o[5];
+
+                    Calendar cal3 = Calendar.getInstance();
+                    cal3.set(Calendar.MONTH, (Integer.parseInt(month) - 1));
+                    days1 = cal3.getActualMaximum(Calendar.DAY_OF_MONTH);
 
                     employeeMaster = employeeMasterService.readById(employeeMasterID);
                     designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
@@ -841,6 +851,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 //                request.setAttribute("loanRemainigAmount", loanRemainigAmount);
         request.setAttribute("month", month);
         request.setAttribute("year", year);
+        request.setAttribute("days1", days1);
         mv.setViewName("Payroll/PrintSalarySlip");
 //            ;
 //            ;

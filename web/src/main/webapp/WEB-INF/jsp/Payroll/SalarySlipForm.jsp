@@ -103,7 +103,7 @@
                                             </tr>
                                             <td><!--style="border:0px"-->
                                                 <b>DOJ&nbsp;</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.dateOfJoining} </td>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.dateOfJoining} </td>
                                             <td><!--style="border:0px"-->
                                                 <b>Bank A/C No</b>
                                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.bankAccountNo} </td>
@@ -130,15 +130,15 @@
                                                     <table border="1" style="width: 100%" name="leave" id="leave" cellspacing="0" cellpadding="0" align="center"  class="table table-bordered table-striped table-hover">
                                                         <tr>
 
-                                                            <th style="width: 150px;">W.Days</th>
+                                                            <th style="width: 150px;">Working Days</th>
                                                             <th style="width: 150px;">W.Off</th>
-                                                            <th style="width: 150px;">P.Days</th>
+                                                            <th style="width: 150px;">Present Days</th>
                                                             <th style="width: 150px;">C.L</th>
                                                             <th style="width: 150px;">P.L</th>
                                                             <th style="width: 150px;">S.L</th>
                                                             <th style="width: 150px;">PAT</th>
                                                             <th style="width: 150px;">LWP</th>
-                                                            <th style="width: 150px;">Absent</th>
+                                                            <th style="width: 150px;">Paid Days</th>
                                                             <th style="width: 150px;">OT Hours</th>
                                                         </tr>
                                                         <tr>
@@ -173,7 +173,7 @@
                                                                         ${employeeExcelRecordList.lwp}
                                                                     </td>
                                                                     <td>
-                                                                        ${employeeExcelRecordList.otherLeave}
+                                                                        ${days1-employeeExcelRecordList.lwp}
                                                                     </td>
                                                                     <td>
                                                                         ${employeeExcelRecordList.otHours}

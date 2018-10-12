@@ -8,6 +8,7 @@ package com.bul.zydex.controller.shift;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.AttendanceRegularization;
 import com.bul.zydex.model.AttendanceRegularizationMaster;
+import com.bul.zydex.model.CoffRegularization;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailAddMaster;
@@ -40,6 +41,7 @@ import com.bul.zydex.service.leave.LeaveEmployeeDetailService;
 import com.bul.zydex.service.leave.LeaveTypeMasterService;
 import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.overTime.OverTimeMasterService;
+import com.bul.zydex.service.shift.CoffRegularizationService;
 import com.bul.zydex.service.shift.EmployeeDatetimeDataService;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
 import com.bul.zydex.service.shift.RotationMasterService;
@@ -86,6 +88,8 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
     protected ShiftRegularizationService<ShiftRegularization> shiftRegularizationService;
     protected Validator shiftRegularizationValidator;
     protected WoffRegularizationService<WoffRegularization> woffRegularizationService;
+    protected CoffRegularizationService<CoffRegularization> coffRegularizationService;
+     protected Validator coffRegularizationValidator;
 
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
         return timeAttandanceFlaxibleMasterService;
@@ -230,6 +234,15 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
     public void setShiftRotationInfoService(ShiftRotationInfoService<ShiftRotationInfo> shiftRotationInfoService) {
         this.shiftRotationInfoService = shiftRotationInfoService;
     }
+
+    public Validator getCoffRegularizationValidator() {
+        return coffRegularizationValidator;
+    }
+
+    public void setCoffRegularizationValidator(Validator coffRegularizationValidator) {
+        this.coffRegularizationValidator = coffRegularizationValidator;
+    }
+    
 
     protected void readShiftName(HttpServletRequest request) {
         List<?> list = shiftMasterService.read();
@@ -400,6 +413,15 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
     public void setWoffRegularizationService(WoffRegularizationService<WoffRegularization> woffRegularizationService) {
         this.woffRegularizationService = woffRegularizationService;
     }
+
+    public CoffRegularizationService<CoffRegularization> getCoffRegularizationService() {
+        return coffRegularizationService;
+    }
+
+    public void setCoffRegularizationService(CoffRegularizationService<CoffRegularization> coffRegularizationService) {
+        this.coffRegularizationService = coffRegularizationService;
+    }
+    
 
    
     

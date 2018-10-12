@@ -193,6 +193,8 @@
         <property name="shiftRegularizationService" ref="shiftRegularizationService1"/>
         <property name="shiftRegularizationValidator" ref="shiftRegularizationValidator1"/>
         <property name="woffRegularizationService" ref="woffRegularizationService1"/>
+        <property name="coffRegularizationService" ref="coffRegularizationService1"/>
+        <property name="coffRegularizationValidator" ref="coffRegularizationValidator1"/>
     </bean>
     <bean id="shiftRotationInfoController1" class="com.bul.zydex.controller.shift.ShiftRotationInfoController" parent="controllerConfig" >
         <property name="shiftRotationInfoService" ref="shiftRotationInfoService1" />
@@ -400,6 +402,7 @@
         <property name="employeeDeductionAmountService" ref="employeeDeductionAmountService1" />
         <property name="formateFullNdFinalLetterService" ref="formateFullNdFinalLetterService1" />
         <property name="fullAndFinalSettlementValidator" ref="fullAndFinalSettlementValidator1" />
+        <property name="displaymorNotesService" ref="displaymorNotesService1" />
 
     </bean>
     <!--ExitInterview-->

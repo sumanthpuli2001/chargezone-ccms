@@ -406,6 +406,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //         for (Object oPf : pfAmountList) {
                 double maxiAmount = 0;
                 double maxiAmountConbrutionEmployer = 0;
+                double basicSalarypf = 0;
 //                double edilimaxiAmountConbrutionEmployer = 0;
                 if (!pfAmountList.isEmpty()) {
                     PayrollProvidentFund payrollProvidentFund = (PayrollProvidentFund) pfAmountList.get(0);
@@ -414,6 +415,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                     double pfEmployeer = Double.parseDouble(payrollProvidentFund.getEpfPercentage());
                     double EDilpfEmployeer = Double.parseDouble(payrollProvidentFund.getApfPercentage());
                     double maxAmountfromPf = Double.parseDouble(payrollProvidentFund.getMaximumBasicAmount());
+                    double mimAmountfromPf = Double.parseDouble(payrollProvidentFund.getMiniBasicAmount());
+                    basicSalarypf = Double.parseDouble(employeeMaster.getBasicSalary());
                     maxiAmount = Double.parseDouble(employeeMaster.getPfAmount());
                     maxiAmountConbrutionEmployer = Double.parseDouble(employeeMaster.getPfAmountEmployer());
                     String dayofbirth = employeeMaster.getDateOfBirth();
@@ -425,9 +428,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                     List<?> retirementAgeList = retirementAgeService.read();
                     retirementAge = (RetirementAge) retirementAgeList.get(0);
                     String ages = retirementAge.getRetireAge();
+/// pf mannual 9126 calculation 
 
 //                    edilimaxiAmountConbrutionEmployer = Double.parseDouble(employeeMaster.get);
                     double taxpf = 0;
+                    double minitaxpf = 0;
                     double taxpfConbrutionEmployer = 0;
                     double taxpfConbrutionEmployerEdili = 0;
                     if (maxiAmount != 0) {
@@ -583,36 +588,80 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                            payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
                             payrollPfRecordService.create(payrollPfRecord);
                         } else {
-                            taxpf = basicSalary * pf / 100; /// 12%
 
-                            employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                            employeeDeductionAmount.setDeductionType("Provident Fund");
-                            employeeDeductionAmount.setDeductionAmount(taxpf);
-                            employeeDeductionAmountService.create(employeeDeductionAmount);
-                            // pf record table 
+                            if (mimAmountfromPf >= basicSalarypf) {
+
+                                Calendar cal3 = Calendar.getInstance();
+                                cal3.set(Calendar.MONTH, (Integer.parseInt(employeeSalaryProcess.getMonth()) - 1));
+                                int days1 = cal3.getActualMaximum(Calendar.DAY_OF_MONTH);
+                                double lwp = employeeSalaryProcess.getEmployeeLwp();
+                                minitaxpf = mimAmountfromPf * lwp / days1;
+                                minitaxpf = mimAmountfromPf - minitaxpf;
+
+                                taxpf = minitaxpf * pf / 100; /// 12%
+
+                                employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                employeeDeductionAmount.setDeductionType("Provident Fund");
+                                employeeDeductionAmount.setDeductionAmount(taxpf);
+                                employeeDeductionAmountService.create(employeeDeductionAmount);
+                                // pf record table 
 //                            taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
 
-                            payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
-                            payrollPfRecord.setEpfAmount(basicSalary);
+                                payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                payrollPfRecord.setEpfAmount(mimAmountfromPf);
 
-                            payrollPfRecord.setDiifepsEpfAmount(basicSalary);
-                            payrollPfRecord.setEmpContrubtionEpf(taxpf);
-                            if (Integer.parseInt(ages) >= diffYear) {
-                                payrollPfRecord.setEpsAmount(basicSalary);
-                                taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
-                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf    
-                                taxpfConbrutionEmployerEdili = (basicSalary * EDilpfEmployeer / 100);//3.67
-                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                                payrollPfRecord.setDiifepsEpfAmount(mimAmountfromPf);
+                                payrollPfRecord.setEmpContrubtionEpf(taxpf);
+                                if (Integer.parseInt(ages) >= diffYear) {
+                                    payrollPfRecord.setEpsAmount(mimAmountfromPf);
+                                    taxpfConbrutionEmployer = (mimAmountfromPf * pfEmployeer / 100);/// eps 8.33%
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf    
+                                    taxpfConbrutionEmployerEdili = (mimAmountfromPf * EDilpfEmployeer / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
 
-                            } else {
-                                payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
-                                payrollPfRecord.setEpsAmount(0.0);
-                                taxpfConbrutionEmployerEdili = (basicSalary * pf / 100);//3.67
-                                payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
-                            }
+                                } else {
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                                    payrollPfRecord.setEpsAmount(0.0);
+                                    taxpfConbrutionEmployerEdili = (mimAmountfromPf * pf / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                                }
 //                            payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
 
-                            payrollPfRecordService.create(payrollPfRecord);
+                                payrollPfRecordService.create(payrollPfRecord);
+
+                            } else {
+
+                                taxpf = basicSalary * pf / 100; /// 12%
+
+                                employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                employeeDeductionAmount.setDeductionType("Provident Fund");
+                                employeeDeductionAmount.setDeductionAmount(taxpf);
+                                employeeDeductionAmountService.create(employeeDeductionAmount);
+                                // pf record table 
+//                            taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
+
+                                payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                payrollPfRecord.setEpfAmount(basicSalary);
+
+                                payrollPfRecord.setDiifepsEpfAmount(basicSalary);
+                                payrollPfRecord.setEmpContrubtionEpf(taxpf);
+                                if (Integer.parseInt(ages) >= diffYear) {
+                                    payrollPfRecord.setEpsAmount(basicSalary);
+                                    taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf    
+                                    taxpfConbrutionEmployerEdili = (basicSalary * EDilpfEmployeer / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+
+                                } else {
+                                    payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+                                    payrollPfRecord.setEpsAmount(0.0);
+                                    taxpfConbrutionEmployerEdili = (basicSalary * pf / 100);//3.67
+                                    payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
+                                }
+//                            payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
+
+                                payrollPfRecordService.create(payrollPfRecord);
+                            }
                         }
 
                     }
@@ -2724,66 +2773,72 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                                     s = s + 2;
                                                 }
                                             }
-                                            if (!firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")
-                                                    && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                                                    && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
 
-                                                String[] userTimeInStr = firstHalf.split("`");
-                                                String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                                                String[] userTimeOutStr = firstHalf.split("!");
-                                                String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                                                Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
-                                                Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
-                                                Date userTimeOut1 = sdf1.parse("23:59");
-                                                String[] startHoursStr = firstHalf.split("%");
-                                                String[] firstStartHoursStr = startHoursStr[1].split("\\+");
-                                                String[] endHoursStr = firstHalf.split("&");
-                                                Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
-                                                Calendar cal1 = Calendar.getInstance();
-                                                cal1.setTime(firstStartHours);
-                                                cal1.add(Calendar.MINUTE, -earlyMinute);
-                                                String newTime1 = sdf1.format(cal1.getTime());
+                                            try {
+                                                if (!firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")
+                                                        && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+
+                                                    String[] userTimeInStr = firstHalf.split("`");
+                                                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                                    String[] userTimeOutStr = firstHalf.split("!");
+                                                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                                    Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
+                                                    Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                                    Date userTimeOut1 = sdf1.parse("23:59");
+                                                    String[] startHoursStr = firstHalf.split("%");
+                                                    String[] firstStartHoursStr = startHoursStr[1].split("\\+");
+                                                    String[] endHoursStr = firstHalf.split("&");
+                                                    Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
+                                                    Calendar cal1 = Calendar.getInstance();
+                                                    cal1.setTime(firstStartHours);
+                                                    cal1.add(Calendar.MINUTE, -earlyMinute);
+                                                    String newTime1 = sdf1.format(cal1.getTime());
 //                                        Date flexibleInTime = sdf1.parse(newTime1);
-                                                Date endHours = sdf1.parse(endHoursStr[1]);
-                                                long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
+                                                    Date endHours = sdf1.parse(endHoursStr[1]);
+                                                    long shiftTotalTime = endHours.getTime() - firstStartHours.getTime();
 //                                        shiftdiffMinutes = shiftTotalTime / (60 * 1000);
 
 //                                        long sumOfActualHours = firstStartHours.getTime()+endHours.getTime();
-                                                long sumOfHoursForOT = userTimeOut.getTime() - userTimeIn.getTime();
+                                                    long sumOfHoursForOT = userTimeOut.getTime() - userTimeIn.getTime();
 
-                                                long diff = Math.abs(sumOfHoursForOT) - Math.abs(shiftTotalTime);
+                                                    long diff = Math.abs(sumOfHoursForOT) - Math.abs(shiftTotalTime);
 
-                                                if (diff < 0 || diff == 0) {
-                                                } else {
-                                                    totalDayTime = diff / (60 * 1000);
-                                                    double empHour = (double) totalDayTime / 60;
-                                                    int hours = (int) empHour;
-                                                    int minutes = (int) (empHour * 60) % 60;
-
-                                                    String totalHour1 = "" + hours;
-                                                    String totalMinute1 = "" + minutes;
-
-                                                    int otMinuteCounter1 = ((Integer.parseInt(totalHour1) * 60) + Integer.parseInt(totalMinute1));
-
-                                                    int hours3 = (int) otMinuteCounter1 / 60;
-                                                    int minutes3 = (int) otMinuteCounter1 % 60;
-
-                                                    if (hours3 >= 1) {
-                                                        otMinuteCounter += (hours3 * 60);
+                                                    if (diff < 0 || diff == 0) {
                                                     } else {
-                                                        otMinuteCounter += 0;
-                                                    }
+                                                        totalDayTime = diff / (60 * 1000);
+                                                        double empHour = (double) totalDayTime / 60;
+                                                        int hours = (int) empHour;
+                                                        int minutes = (int) (empHour * 60) % 60;
 
-                                                    if (minutes3 >= 0 && minutes3 < 30) {
-                                                        otMinuteCounter += 0;
-                                                    } else if ((minutes3 > 30 && minutes3 < 60) && hours3 >= 1) {
-                                                        otMinuteCounter += 30;
-                                                    } else {
-                                                        otMinuteCounter += 0;
-                                                    }
+                                                        String totalHour1 = "" + hours;
+                                                        String totalMinute1 = "" + minutes;
 
+                                                        int otMinuteCounter1 = ((Integer.parseInt(totalHour1) * 60) + Integer.parseInt(totalMinute1));
+
+                                                        int hours3 = (int) otMinuteCounter1 / 60;
+                                                        int minutes3 = (int) otMinuteCounter1 % 60;
+
+                                                        if (hours3 >= 1) {
+                                                            otMinuteCounter += (hours3 * 60);
+                                                        } else {
+                                                            otMinuteCounter += 0;
+                                                        }
+
+                                                        if (minutes3 >= 0 && minutes3 < 30) {
+                                                            otMinuteCounter += 0;
+                                                        } else if ((minutes3 > 30 && minutes3 < 60) && hours3 >= 1) {
+                                                            otMinuteCounter += 30;
+                                                        } else {
+                                                            otMinuteCounter += 0;
+                                                        }
+
+                                                    }
                                                 }
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
                                             }
+
                                         } else {
                                             otMinuteCounter += 0;
                                         }

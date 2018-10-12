@@ -113,7 +113,8 @@
                                 <div>
                                     <hr style="clear:both;border: 0px;"/>
                                     <div class="col-sm-12"><a href="out.html?act=forgotPassword" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg1"></spring:message></a></div>
-                                    <div class="col-sm-12"><a href="<c:url value="vacancy.htm?act=showVacancyList" />" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg2"></spring:message></a></div>
+                                    <!--<div class="col-sm-12"><a href="vacancy.htm?act=showVacancyList" />" style="color:  #19b9e7;">-->
+                                    <div class="col-sm-12"><a href="vacancy.htm?act=vacancyDetailListPage" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg2"></spring:message></a></div>
                                     <div class="col-sm-12"><a href="trainerLogin.htm?act=Login" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg3"></spring:message></a></div>
                                     </div>
                                 </div>
@@ -151,7 +152,7 @@
             <img src="StorageYard/Images/footer.png" height="150px" width="100%"/>
         </div>
         <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
-        <!--<script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>-->
+        <!--<script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>
         <script src="StorageYard/JS/login/jquery.backstretch.min.js"></script>
         <script src="StorageYard/JS/login/retina-1.1.0.min.js"></script>
         <script src="StorageYard/JS/login/scripts.js"></script>

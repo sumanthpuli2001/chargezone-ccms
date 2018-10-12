@@ -78,7 +78,8 @@
                                                                     <th>Sr.No.</th>
                                                                     <th>Location</th>
                                                                     <th>Pf Percentage (%)</th>
-                                                                    <th>Maximum Basic Amount</th>
+                                                                    <th>Minimum Wages Amount</th>
+                                                                    <th>Maximum Wages Amount</th>
                                                                     <th>Epf Percentage (%)</th>
                                                                     <th>Apf Percentage (%)</th>
                                                                     <th>Action</th>
@@ -93,6 +94,7 @@
                                                                         <td>${status.count}</td>
                                                                         <td>${pfList.zydexLocationMaster.zydexLocation}</td>
                                                                         <td>${pfList.pfPercentage}</td>
+                                                                        <td>${pfList.miniBasicAmount}</td>
                                                                         <td>${pfList.maximumBasicAmount}</td>
                                                                         <td>${pfList.epfPercentage}</td>
                                                                         <td>${pfList.apfPercentage}</td>

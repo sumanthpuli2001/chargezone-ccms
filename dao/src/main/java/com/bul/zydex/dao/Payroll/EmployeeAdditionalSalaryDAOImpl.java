@@ -152,6 +152,47 @@ public class EmployeeAdditionalSalaryDAOImpl<T> extends GenericsDAOImpl<T> imple
         return getHibernateTemplate().find(query);
     }
 
-    
+    @Override
+    public List<?> readNotOTamountAdditionalAmountSPC(int employeeSalaryProcessId) {
+        String query = "";
+        query += "Select SUM(a.additionalAmount) "
+                + "From EmployeeAdditionalSalary a"
+                + " where a.employeeSalaryProcess.id=" + employeeSalaryProcessId
+                + "and a.payrollSalaryType not like 'OT Amount'"
+                //                + "and a.payrollSalaryType not like 'Conveyance'"
+                + " group by a.employeeSalaryProcess.id";
+        return getHibernateTemplate().find(query);
+    }
+
+    public List<?> readadditionalAllownaceName(String month, String year) {
+        String query = "";
+        String condition = "";
+
+        query += " Select a.payrollSalaryType"
+                + " From EmployeeAdditionalSalary a"
+                + " left join a.employeeSalaryProcess b"
+                + " where a.payrollSalaryType not like '%OT Amount%'"
+                + " and b.month='" + month + "'"
+                + " and b.year='" + year + "'"
+                + " Group by a.payrollSalaryType";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readadditionalAMountSalaryRegister(String allowanceName, String month, String year) {
+        String query = "";
+        String condition = "";
+
+        query += " Select Sum(a.additionalAmount)"
+                + " From EmployeeAdditionalSalary a"
+                + " left join a.employeeSalaryProcess b"
+                + " where a.payrollSalaryType not like '%OT Amount%'"
+                + " and b.month='" + month + "'"
+                + " and b.year='" + year + "'"
+                + " and a.payrollSalaryType='" + allowanceName + "'";
+
+        return getHibernateTemplate().find(query);
+    }
 
 }

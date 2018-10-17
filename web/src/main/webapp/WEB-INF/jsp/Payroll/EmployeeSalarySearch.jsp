@@ -23,6 +23,21 @@
         }
     </script>
     <script>
+        function onprintDiv() {
+            var month = document.getElementById('month1').value;
+            var year = document.getElementById('year').value;
+            var zydexlocationid = document.getElementById('zydexlocationid').value;
+            var typeofemployee = document.getElementById('typeofemployee').value;
+            var employeesubid = document.getElementById('employeesubid').value;
+            var paymenttype = document.getElementById('paymenttype').value;
+           
+            
+            window.location = 'employeeSalaryProcess.htm?act=searchSalaryDetailSubmitPrint&month=' + month + '&year=' + year +'&zydexlocationid='+zydexlocationid+'&typeofemployee='+typeofemployee+'&employeesubid='+employeesubid+'&paymenttype='+paymenttype;
+              
+//            window.location = 'employeeSalaryProcess.htm?act=searchSalaryDetailSubmitPrint&id=' + id;
+        }
+    </script>
+    <script>
         function saveSubmit11() {
             var flag3 = true;
 //            alert(document.getElementById("month").value);
@@ -172,8 +187,12 @@
         <form:form action="" method="post" commandName="employeeSalaryProcess"
                    name='form2'  class="form-horizontal" role="form">
             <c:if test="${search ne 'none'}">
-                <input type="hidden" name="month" value="${month}">
-                <input type="hidden" name="year" value="${year}">
+                <input type="hidden" id="month1" name="month1" value="${month}">
+                <input type="hidden" id="year" name="year" value="${year}">
+                <input type="hidden" id="zydexlocationid" name="zydexlocationid" value="${zydexlocationid}">
+                <input type="hidden" id="typeofemployee" name="typeofemployee" value="${typeofemployee}">
+                <input type="hidden" id="employeesubid" name="employeesubid" value="${employeesubid}">
+                <input type="hidden"id="paymenttype" name="paymenttype" value="${paymenttype}">
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">
@@ -182,8 +201,9 @@
                                     <c:choose>
                                         <c:when test="${!empty finalList}">
                                             <div class="box-header" style="text-align: right;">
-                                                <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="ExportToExcel('tableid')"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>
-                                                <input type="button" class="btn btn-facebook" style="width: 100px;" value="Print" onclick= "printDiv('printableArea')">
+                                                 <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="window.location = 'employeeSalaryProcess.htm?act=exportToExcelLeaveBalance'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
+                                                <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="ExportToExcel('tableid')"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
+                                                <input type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" value="Export" onclick= "onprintDiv();">
                                                 <!--<a href="" onclick="javascipt:window.open('/Payroll/report.pdf');" class="popup">Click to open.</a>-->
                                             </div>
                                         </c:when>
@@ -343,15 +363,28 @@
         window.print();
         document.body.innerHTML = originalContents;
     }
-    
+
 </script>
 <script type="text/javascript">
     function ExportToExcel(tableid) {
         var htmltable = document.getElementById('tableid');
         var html = htmltable.outerHTML;
         window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 //          window.open('data:application/vnd.pdf,' + encodeURIComponent(html));
     }
+    
+    
 </script>
 <style>
     tr,td,th{
@@ -361,7 +394,7 @@
     }
 </style>
 <script>
-   
+
 </script>
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

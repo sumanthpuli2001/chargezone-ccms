@@ -902,7 +902,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         lastYearPerformanceRatingsOfEmployee = (lastYearPerformanceRatingsOfEmployeeList.isEmpty()) ? lastYearPerformanceRatingsOfEmployee : String.valueOf(lastYearPerformanceRatingsOfEmployeeList.get(0));
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
-        String companyId = request.getParameter("companyId");
+        String companyId = request.getParameter("company");
         String employeeType = request.getParameter("employeeType");
         employeeMaster.setCompany(companyId);
         employeeMaster.setEmployeeType(employeeType);

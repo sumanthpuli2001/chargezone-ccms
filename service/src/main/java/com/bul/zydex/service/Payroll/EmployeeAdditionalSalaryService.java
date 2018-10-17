@@ -32,5 +32,9 @@ public interface EmployeeAdditionalSalaryService<T> extends GenericsService<T> {
 
     public List<?> readEmployeeAllowanceGrossTotalTaxable(int EmpSalaryProcessId);
 
-    
+    public List<?> readNotOTamountAdditionalAmountSPC(int employeeSalaryProcessId);
+
+    public List<?> readadditionalAllownaceName(String month, String year);
+     public List<?> readadditionalAMountSalaryRegister(String allowanceName, String month, String year);
+
 }

@@ -98,4 +98,14 @@ public class EmployeeDeductionAmountServiceImpl<T> extends GenericsServiceImpl<T
         return employeeDeductionAmountDAO.readEmployeeTdsAmountWithMonth(employeeMasterID, startDate, endate);
     }
 
+    @Override
+    public List<?> readadditionalAllownaceName(String month, String year) {
+      return employeeDeductionAmountDAO.readadditionalAllownaceName(month, year);
+    }
+
+    @Override
+    public List<?> readadditionalAMountSalaryRegister(String allowanceName, String month, String year) {
+      return employeeDeductionAmountDAO.readadditionalAMountSalaryRegister(allowanceName, month, year);
+    }
+
 }

@@ -435,11 +435,19 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                     double minitaxpf = 0;
                     double taxpfConbrutionEmployer = 0;
                     double taxpfConbrutionEmployerEdili = 0;
+
+                    Calendar cal4 = Calendar.getInstance();
+                    cal4.set(Calendar.MONTH, (Integer.parseInt(employeeSalaryProcess.getMonth()) - 1));
+                    int days2 = cal4.getActualMaximum(Calendar.DAY_OF_MONTH);
                     if (maxiAmount != 0) {
                         if (maxiAmount <= maxAmountfromPf) {
                             if (maxAmountfromPf <= basicSalary) {
 
-                                taxpf = (maxAmountfromPf * pf / 100);//12
+                                double lwp = employeeSalaryProcess.getEmployeeLwp();
+                                minitaxpf = maxAmountfromPf * lwp / days2;
+                                minitaxpf = maxAmountfromPf - minitaxpf;
+
+                                taxpf = (minitaxpf * pf / 100);//12
 
                                 employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                                 employeeDeductionAmount.setDeductionType("Provident Fund");
@@ -466,28 +474,32 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
                                 payrollPfRecordService.create(payrollPfRecord);
                             } else {
-                                taxpf = basicSalary * pf / 100; /// 12%
+                                double lwp = employeeSalaryProcess.getEmployeeLwp();
+                                minitaxpf = basicSalary * lwp / days2;
+                                minitaxpf = basicSalary - minitaxpf;
+
+                                taxpf = minitaxpf * pf / 100; /// 12%
 
                                 employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                                 employeeDeductionAmount.setDeductionType("Provident Fund");
                                 employeeDeductionAmount.setDeductionAmount(taxpf);
                                 employeeDeductionAmountService.create(employeeDeductionAmount);
                                 // pf record table 
-                                payrollPfRecord.setDiifepsEpfAmount(basicSalary);
+                                payrollPfRecord.setDiifepsEpfAmount(minitaxpf);
                                 payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
-                                payrollPfRecord.setEpfAmount(basicSalary);
+                                payrollPfRecord.setEpfAmount(minitaxpf);
                                 payrollPfRecord.setEmpContrubtionEpf(taxpf);
 
                                 if (Integer.parseInt(ages) >= diffYear) {
-                                    payrollPfRecord.setEpsAmount(basicSalary);
-                                    taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
+                                    payrollPfRecord.setEpsAmount(minitaxpf);
+                                    taxpfConbrutionEmployer = (minitaxpf * pfEmployeer / 100);/// eps 8.33%
                                     payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf 
-                                    taxpfConbrutionEmployerEdili = (basicSalary * EDilpfEmployeer / 100);//3.67
+                                    taxpfConbrutionEmployerEdili = (minitaxpf * EDilpfEmployeer / 100);//3.67
                                     payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
                                 } else {
                                     payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
                                     payrollPfRecord.setEpsAmount(0.0);
-                                    taxpfConbrutionEmployerEdili = (basicSalary * pf / 100);//3.67
+                                    taxpfConbrutionEmployerEdili = (minitaxpf * pf / 100);//3.67
                                     payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
                                 }
 
@@ -497,14 +509,18 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                         } else {
                             if (maxiAmount <= basicSalary) {
 
-                                taxpf = (maxiAmount * pf / 100);//12
+                                double lwp = employeeSalaryProcess.getEmployeeLwp();
+                                minitaxpf = maxiAmount * lwp / days2;
+                                minitaxpf = maxiAmount - minitaxpf;
+
+                                taxpf = (minitaxpf * pf / 100);//12
 
                                 employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                                 employeeDeductionAmount.setDeductionType("Provident Fund");
                                 employeeDeductionAmount.setDeductionAmount(taxpf);
                                 employeeDeductionAmountService.create(employeeDeductionAmount);
                                 payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
-                                payrollPfRecord.setEpfAmount(maxiAmount);
+                                payrollPfRecord.setEpfAmount(minitaxpf);
                                 payrollPfRecord.setDiifepsEpfAmount(maxiAmountConbrutionEmployer);
                                 payrollPfRecord.setEmpContrubtionEpf(taxpf);
 
@@ -524,28 +540,32 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
                                 payrollPfRecordService.create(payrollPfRecord);
                             } else {
-                                taxpf = basicSalary * pf / 100; /// 12%
+                                double lwp = employeeSalaryProcess.getEmployeeLwp();
+                                minitaxpf = basicSalary * lwp / days2;
+                                minitaxpf = basicSalary - minitaxpf;
+
+                                taxpf = minitaxpf * pf / 100; /// 12%
 
                                 employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                                 employeeDeductionAmount.setDeductionType("Provident Fund");
                                 employeeDeductionAmount.setDeductionAmount(taxpf);
                                 employeeDeductionAmountService.create(employeeDeductionAmount);
                                 // pf record table 
-                                payrollPfRecord.setDiifepsEpfAmount(basicSalary);
+                                payrollPfRecord.setDiifepsEpfAmount(minitaxpf);
                                 payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
-                                payrollPfRecord.setEpfAmount(basicSalary);
+                                payrollPfRecord.setEpfAmount(minitaxpf);
                                 payrollPfRecord.setEmpContrubtionEpf(taxpf);
 
                                 if (Integer.parseInt(ages) >= diffYear) {
-                                    payrollPfRecord.setEpsAmount(basicSalary);
-                                    taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
+                                    payrollPfRecord.setEpsAmount(minitaxpf);
+                                    taxpfConbrutionEmployer = (minitaxpf * pfEmployeer / 100);/// eps 8.33%
                                     payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf 
-                                    taxpfConbrutionEmployerEdili = (basicSalary * EDilpfEmployeer / 100);//3.67
+                                    taxpfConbrutionEmployerEdili = (minitaxpf * EDilpfEmployeer / 100);//3.67
                                     payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
                                 } else {
                                     payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
                                     payrollPfRecord.setEpsAmount(0.0);
-                                    taxpfConbrutionEmployerEdili = (basicSalary * pf / 100);//3.67
+                                    taxpfConbrutionEmployerEdili = (minitaxpf * pf / 100);//3.67
                                     payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
                                 }
 
@@ -558,29 +578,32 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                     } else {
 
                         if (maxAmountfromPf <= basicSalary) {
+                            double lwp = employeeSalaryProcess.getEmployeeLwp();
+                            minitaxpf = maxAmountfromPf * lwp / days2;
+                            minitaxpf = maxAmountfromPf - minitaxpf;
 
-                            taxpf = (maxAmountfromPf * pf / 100);//12
+                            taxpf = (minitaxpf * pf / 100);//12
 
                             employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                             employeeDeductionAmount.setDeductionType("Provident Fund");
                             employeeDeductionAmount.setDeductionAmount(taxpf);
                             employeeDeductionAmountService.create(employeeDeductionAmount);
                             payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
-                            payrollPfRecord.setEpfAmount(maxAmountfromPf);
+                            payrollPfRecord.setEpfAmount(minitaxpf);
 
-                            payrollPfRecord.setDiifepsEpfAmount(maxAmountfromPf);
+                            payrollPfRecord.setDiifepsEpfAmount(minitaxpf);
                             payrollPfRecord.setEmpContrubtionEpf(taxpf);
 
                             if (Integer.parseInt(ages) >= diffYear) {
-                                payrollPfRecord.setEpsAmount(maxAmountfromPf);
-                                taxpfConbrutionEmployer = (maxAmountfromPf * pfEmployeer / 100);//8.33
+                                payrollPfRecord.setEpsAmount(minitaxpf);
+                                taxpfConbrutionEmployer = (minitaxpf * pfEmployeer / 100);//8.33
                                 payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf  
-                                taxpfConbrutionEmployerEdili = (maxAmountfromPf * EDilpfEmployeer / 100);//3.67
+                                taxpfConbrutionEmployerEdili = (minitaxpf * EDilpfEmployeer / 100);//3.67
                                 payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
                             } else {
                                 payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
                                 payrollPfRecord.setEpsAmount(0.0);
-                                taxpfConbrutionEmployerEdili = (maxAmountfromPf * pf / 100);//3.67
+                                taxpfConbrutionEmployerEdili = (minitaxpf * pf / 100);//3.67
                                 payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
                             }
 
@@ -608,21 +631,21 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                            taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
 
                                 payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
-                                payrollPfRecord.setEpfAmount(mimAmountfromPf);
+                                payrollPfRecord.setEpfAmount(minitaxpf);
 
-                                payrollPfRecord.setDiifepsEpfAmount(mimAmountfromPf);
+                                payrollPfRecord.setDiifepsEpfAmount(minitaxpf);
                                 payrollPfRecord.setEmpContrubtionEpf(taxpf);
                                 if (Integer.parseInt(ages) >= diffYear) {
-                                    payrollPfRecord.setEpsAmount(mimAmountfromPf);
-                                    taxpfConbrutionEmployer = (mimAmountfromPf * pfEmployeer / 100);/// eps 8.33%
+                                    payrollPfRecord.setEpsAmount(minitaxpf);
+                                    taxpfConbrutionEmployer = (minitaxpf * pfEmployeer / 100);/// eps 8.33%
                                     payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf    
-                                    taxpfConbrutionEmployerEdili = (mimAmountfromPf * EDilpfEmployeer / 100);//3.67
+                                    taxpfConbrutionEmployerEdili = (minitaxpf * EDilpfEmployeer / 100);//3.67
                                     payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
 
                                 } else {
                                     payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
                                     payrollPfRecord.setEpsAmount(0.0);
-                                    taxpfConbrutionEmployerEdili = (mimAmountfromPf * pf / 100);//3.67
+                                    taxpfConbrutionEmployerEdili = (minitaxpf * pf / 100);//3.67
                                     payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
                                 }
 //                            payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
@@ -630,8 +653,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 payrollPfRecordService.create(payrollPfRecord);
 
                             } else {
+                                double lwp = employeeSalaryProcess.getEmployeeLwp();
+                                minitaxpf = basicSalary * lwp / days2;
+                                minitaxpf = basicSalary - minitaxpf;
 
-                                taxpf = basicSalary * pf / 100; /// 12%
+                                taxpf = minitaxpf * pf / 100; /// 12%
 
                                 employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                                 employeeDeductionAmount.setDeductionType("Provident Fund");
@@ -641,21 +667,21 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                            taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
 
                                 payrollPfRecord.setEmployeeSalaryProcess(employeeSalaryProcess);
-                                payrollPfRecord.setEpfAmount(basicSalary);
+                                payrollPfRecord.setEpfAmount(minitaxpf);
 
-                                payrollPfRecord.setDiifepsEpfAmount(basicSalary);
+                                payrollPfRecord.setDiifepsEpfAmount(minitaxpf);
                                 payrollPfRecord.setEmpContrubtionEpf(taxpf);
                                 if (Integer.parseInt(ages) >= diffYear) {
-                                    payrollPfRecord.setEpsAmount(basicSalary);
-                                    taxpfConbrutionEmployer = (basicSalary * pfEmployeer / 100);/// eps 8.33%
+                                    payrollPfRecord.setEpsAmount(minitaxpf);
+                                    taxpfConbrutionEmployer = (minitaxpf * pfEmployeer / 100);/// eps 8.33%
                                     payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);// epf wages calculate by 8.33 percentage of pf    
-                                    taxpfConbrutionEmployerEdili = (basicSalary * EDilpfEmployeer / 100);//3.67
+                                    taxpfConbrutionEmployerEdili = (minitaxpf * EDilpfEmployeer / 100);//3.67
                                     payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
 
                                 } else {
                                     payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
                                     payrollPfRecord.setEpsAmount(0.0);
-                                    taxpfConbrutionEmployerEdili = (basicSalary * pf / 100);//3.67
+                                    taxpfConbrutionEmployerEdili = (minitaxpf * pf / 100);//3.67
                                     payrollPfRecord.setDifferentEpsEpf(taxpfConbrutionEmployerEdili);
                                 }
 //                            payrollPfRecord.setCompContrubtionEps(taxpfConbrutionEmployer);
@@ -741,7 +767,15 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         ////////////////////// PT Ends Here ///////////////////////////
         /////////////////////ESIC Start Here///////////////////////
         double grossTotalEsic = 0.0;
-        grossTotalEsic = netSalary;
+        double additionalAmtwithoutOtAmount12 = 0;
+        List<?> additionalAmtwithoutOtAmount121 = employeeAdditionalSalaryService.readNotOTamountAdditionalAmountSPC(employeeSalaryProcess.getId());
+        if (!additionalAmtwithoutOtAmount121.isEmpty()) {
+            additionalAmtwithoutOtAmount12 = (Double) additionalAmtwithoutOtAmount121.get(0);
+        }
+
+        double netSalarywithOtamount1125 = (Double.parseDouble(employeeMaster.getBasicSalary()) + additionalAmtwithoutOtAmount12);
+
+        grossTotalEsic = netSalarywithOtamount1125;
         if (employeeMaster1.getEsic() == true) {
 
             double nettotalEsic = 0;
@@ -754,7 +788,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 nettotalEsic = netSalary * 1.75 / 100;
 //emp contrubtion of esic
                 emptotalEsic = netSalary * 1.75 / 100;
-//            comp contribution of esic
+//            comp contribution of netSalary
                 comptotalEsic = netSalary * 4.75 / 100;
 //            Ot Esic 
                 otEsic = OTAmt * 1.75 / 100;
@@ -1896,11 +1930,30 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //      
         request.setAttribute("headerList123", headerList);
         request.setAttribute("finalList", finalList);
+         session.setAttribute("employeeSalaryHeader", headerList);
+         session.setAttribute("sessionMapOfEmployeeSalary", finalList);
         request.setAttribute("month", month1);
         request.setAttribute("year", year11);
+        request.setAttribute("zydexlocationid", zydex_location_id);
+        request.setAttribute("typeofemployee", type_of_employee);
+        request.setAttribute("employeesubid", employee_sub_id);
+        request.setAttribute("paymenttype", payment_type);
+       
 
         mv.setViewName("Payroll/EmployeeSalarySearch");
 
+        return mv;
+    }
+    
+    public ModelAndView exportToExcelLeaveBalance(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        Map<Integer, LinkedList<?>> sessionMapOfLeaveBalance = (Map<Integer, LinkedList<?>>) request.getSession().getAttribute("sessionMapOfEmployeeSalary");
+        Map<Integer, LinkedList<?>> sessionMapOfLeaveBalance1 = (Map<Integer, LinkedList<?>>) request.getSession().getAttribute("employeeSalaryHeader");
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=EmployeeLeaveBalanceData.xls");
+        mv.addObject("sessionMapOfLeaveBalance1", sessionMapOfLeaveBalance1);
+        mv.addObject("sessionMapOfLeaveBalance", sessionMapOfLeaveBalance);
+        mv.setViewName("Leave/LeaveBalanceEmployeeWiseExportToExcel");
         return mv;
     }
 
@@ -2945,5 +2998,382 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         mv = salaryExcelUpload(request, response);
         return mv;
     }
+    @SuppressWarnings("unchecked")
+    public ModelAndView searchSalaryDetailSubmitPrint(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeSalaryProcess employeeSalaryProcess = new EmployeeSalaryProcess();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeType employeeType = new EmployeeType();
+        EmployeeSubType employeeSubType = new EmployeeSubType();
+
+        HttpSession session = request.getSession();
+        String zydex_location_id = request.getParameter("zydexlocationid");
+        String type_of_employee = request.getParameter("typeofemployee");
+        String employee_sub_id = request.getParameter("employeesubid");
+        String payment_type = request.getParameter("paymenttype");
+        String month1 = request.getParameter("month");
+        String year11 = request.getParameter("year");
+
+        if (!zydex_location_id.equals("")) {
+            employeeMaster.setAdharCard(zydex_location_id);
+        }
+
+        if (!type_of_employee.equals("")) {
+            employeeMaster.setEmployeeType(type_of_employee);
+        }
+        if (null != employee_sub_id && !employee_sub_id.equals("")) {
+            employeeMaster.setCompany(employee_sub_id);
+        }
+
+        if (!payment_type.equals("")) {
+            employeeMaster.setPaymentType(payment_type);
+
+        }
+        if (!month1.equals("")) {
+            employeeMaster.setBankName(month1);
+
+        }
+        if (!year11.equals("")) {
+            employeeMaster.setChild1(year11);
+
+        }
+
+//        if (!"".equals(month1)) {
+//            employeeSalaryProcess.setMonth(month1);
+//        }
+//        if (!"".equals(year11)) {
+//            employeeSalaryProcess.setYear(year11);
+//        }
+        DecimalFormat df = new DecimalFormat("####0.00");
+
+        List<String> headerList = new ArrayList<String>();
+        headerList.add("Emp Company Code");
+        headerList.add("Emp Id");
+        headerList.add("Emp Name");
+        headerList.add("P.Day");
+        headerList.add("Basic Salary");
+
+//        List<?> list1 = employeeSalaryProcessService.readSal(employeeMaster);
+        List<?> list1 = employeeSalaryProcessService.readsalSearch(employeeMaster);
+        for (Object o1 : list1) {
+            Object str[] = (Object[]) o1;
+            if (!headerList.contains("" + str[5]) && null != str[5]) {
+                headerList.add("" + str[5]);
+            }
+
+        }
+        headerList.add("Gross Salary");
+//        List<?> list2 = employeeSalaryProcessService.readsalDeduction(employeeMaster);
+        List<?> list2 = employeeSalaryProcessService.readsalDeductionSearch(employeeMaster);
+        for (Object o1 : list2) {
+            Object str1[] = (Object[]) o1;
+            if (!headerList.contains("" + str1[2]) && null != str1[2]) {
+                headerList.add("" + str1[2]);
+            }
+        }
+
+        headerList.add("Tot.Dedn");
+        headerList.add("Net Pay");
+        List<?> list6 = ctcAllowanceService.read();
+        CtcAllowance ctcAllowance = new CtcAllowance();
+//        Map<Integer, String> leaveTypemap = new HashMap();
+        for (Object o : list6) {
+            ctcAllowance = (CtcAllowance) o;
+            headerList.add("" + ctcAllowance.getCtcName());
+        }
+        headerList.add("Total");
+        headerList.add("CTCPerMonth");
+
+        List<EmployeeSalaryProcess> empList = (List<EmployeeSalaryProcess>) employeeSalaryProcessService.readEmpSalaryReport(employeeMaster);
+        List<Object> finalList = new LinkedList<Object>();
+        for (EmployeeSalaryProcess employeeSalaryProcess1 : empList) {
+            Map<String, String> empMap = new HashMap<String, String>();
+            double additionalAmount = 0.0;
+            double deductionAmount = 0.0;
+            double total = 0.0;
+            EmployeeExcelRecord employeeExcelRecord1 = new EmployeeExcelRecord();
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeSalaryProcess1.getEmployeeMaster().getId());
+            List<?> list = employeeExcelRecordService.readByEmployeExcelReportSearch(employeeSalaryProcess1);
+//            List tempList = (List) list.get(0);
+            empMap.put("Emp Company Code", "" + employeeMaster1.getEmployeeLocation());
+            empMap.put("Emp Id", "" + employeeMaster1.getEmployeeId());
+            empMap.put("Emp Name", employeeMaster1.getEmployeeName());
+            empMap.put("P.Day", "" + list.get(0));
+//            empMap.put("Basic Salary", "" + df.format(employeeSalaryProcess1.getEmployeeBasicSalary()));
+            empMap.put("Basic Salary", "" + df.format((int) Math.round(employeeSalaryProcess1.getEmployeeBasicSalary())));
+
+//            List addSalaryList = employeeAdditionalSalaryService.readEmployeeForSalaryAdditionalinfo(employeeSalaryProcess1);
+            List addSalaryList = employeeAdditionalSalaryService.readEmployeeForSalaryAdditionalinfoSearch(employeeSalaryProcess1);
+            for (Object addSalaryList1 : addSalaryList) {
+                Object[] o = (Object[]) addSalaryList1;
+//                empMap.put("" + o[0], "" + df.format(o[1]));
+                empMap.put("" + o[0], "" + df.format((int) Math.round((double) o[1])));
+//                additionalAmount += (Double) o[1];
+//                  int netpayable1 = (int) Math.round(additionalAmount);
+                additionalAmount += (Double) o[1];
+            }
+            additionalAmount += employeeSalaryProcess1.getEmployeeBasicSalary();
+//            empMap.put("Gross Salary", "" + df.format(additionalAmount));
+            empMap.put("Gross Salary", "" + df.format((int) Math.round(additionalAmount)));
+//            List dedSalaryList = employeeDeductionAmountService.readEmployeeForSalaryDeductioninfo(employeeSalaryProcess1);
+            List dedSalaryList = employeeDeductionAmountService.readEmployeeForSalaryDeductioninfoSearch(employeeSalaryProcess1);
+            for (Object dedSalaryList1 : dedSalaryList) {
+                Object[] o = (Object[]) dedSalaryList1;
+//                empMap.put("" + o[0], "" + df.format(o[1]));
+                empMap.put("" + o[0], "" + df.format((int) Math.round((double) o[1])));
+                deductionAmount += (Double) o[1];
+            }
+
+//            empMap.put("Deduction Amount", "" + df.format(deductionAmount));
+            empMap.put("Tot.Dedn", "" + df.format((int) Math.round(deductionAmount)));
+            empMap.put("Net Pay", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
+//            empMap.put("Net Amount", "" + df.format(additionalAmount - deductionAmount));
+            List ctcList = employeeCtcDetailService.fetchctcData(employeeSalaryProcess1.getEmployeeMaster().getId());
+            for (Object dedSalaryList2 : ctcList) {
+                Object[] o5 = (Object[]) dedSalaryList2;
+//                empMap.put("" + o[0], "" + df.format(o[1]));
+                empMap.put("" + o5[1], "" + df.format((int) Math.round((double) o5[2])));
+                total += (Double) o5[2];
+            }
+            empMap.put("Total", "" + df.format((int) Math.round(total)));
+            empMap.put("CTCPerMonth", "" + df.format((int) Math.round(total + (additionalAmount - deductionAmount))));
+            finalList.add(empMap);
+        }
+
+//      
+        request.setAttribute("headerList123", headerList);
+        request.setAttribute("finalList", finalList);
+        request.setAttribute("month", month1);
+        request.setAttribute("year", year11);
+        request.setAttribute("zydexlocationid", zydex_location_id);
+        request.setAttribute("typeofemployee", type_of_employee);
+        request.setAttribute("employeesubid", employee_sub_id);
+        request.setAttribute("paymenttype", payment_type);
+       
+
+        mv.setViewName("Payroll/EmployeeSalarySearchPrint");
+
+        return mv;
+    }
+     @SuppressWarnings("unchecked")
+    public ModelAndView searchSalaryDetailSubmit1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeSalaryProcess employeeSalaryProcess = new EmployeeSalaryProcess();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeExcelRecord employeeExcelRecord = new EmployeeExcelRecord();
+        EmployeeType employeeType = new EmployeeType();
+        EmployeeSubType employeeSubType = new EmployeeSubType();
+        Map<String, String> empMap1 = new HashMap<String, String>();
+        HttpSession session = request.getSession();
+        String zydex_location_id = request.getParameter("zydexLocationMasterId");
+        String type_of_employee = request.getParameter("employeeTypeMasterId");
+        String employee_sub_id = request.getParameter("subTypeId");
+        String payment_type = request.getParameter("paymentType");
+        String month1 = request.getParameter("month");
+        String year11 = request.getParameter("year11");
+        Double basicSalarytotal = 0.0;
+        Double additionaltotal = 0.0;
+        Double deductiontotal = 0.0;
+        Double netpaytotal = 0.0;
+        float totdayTotal = 0;
+        if (!zydex_location_id.equals("")) {
+            employeeMaster.setAdharCard(zydex_location_id);
+        }
+
+        if (!type_of_employee.equals("")) {
+            employeeMaster.setEmployeeType(type_of_employee);
+        }
+        if (null != employee_sub_id && !employee_sub_id.equals("")) {
+            employeeMaster.setCompany(employee_sub_id);
+        }
+
+        if (!payment_type.equals("")) {
+            employeeMaster.setPaymentType(payment_type);
+
+        }
+        if (!month1.equals("")) {
+            employeeMaster.setBankName(month1);
+
+        }
+        if (!year11.equals("")) {
+            employeeMaster.setChild1(year11);
+
+        }
+
+//        if (!"".equals(month1)) {
+//            employeeSalaryProcess.setMonth(month1);
+//        }
+//        if (!"".equals(year11)) {
+//            employeeSalaryProcess.setYear(year11);
+//        }
+        DecimalFormat df = new DecimalFormat("####0.00");
+
+        List<String> headerList = new ArrayList<String>();
+        List<String> headerList1 = new ArrayList<String>();
+        List<String> headerList2 = new ArrayList<String>();
+        List<String> headerList3 = new ArrayList<String>();
+        List<String> headerList4 = new ArrayList<String>();
+//        headerList.add("Emp Id");
+        headerList.add("Emp Name");
+        headerList.add("P.Day PH/Woff");
+        headerList.add("PL CL/SL");
+        headerList.add("TotDay");
+        headerList1.add("Basic Amt");
+        headerList.add("");
+
+//        List<?> list1 = employeeSalaryProcessService.readSal(employeeMaster);
+        List<?> list1 = employeeSalaryProcessService.readsalSearch(employeeMaster);
+        for (Object o1 : list1) {
+            Object str[] = (Object[]) o1;
+            if (!headerList1.contains("" + str[5]) && null != str[5]) {
+                headerList1.add("" + str[5]);
+            }
+
+        }
+//        List<?> list2 = employeeSalaryProcessService.readsalDeduction(employeeMaster);
+        List<?> list2 = employeeSalaryProcessService.readsalDeductionSearch(employeeMaster);
+        for (Object o1 : list2) {
+            Object str1[] = (Object[]) o1;
+            if (!headerList2.contains("" + str1[2]) && null != str1[2]) {
+                headerList2.add("" + str1[2]);
+            }
+        }
+
+        headerList3.add("Tot.Earn " + "<br>" + "<br>" + "<br>" + "Tot.Dedu");
+//        headerList3.add("Tot.Dedn");
+        headerList3.add("Net Pay");
+        headerList3.add("Signature");
+        List<EmployeeSalaryProcess> empList = (List<EmployeeSalaryProcess>) employeeSalaryProcessService.readEmpSalaryReport(employeeMaster);
+        List<Object> finalList = new LinkedList<Object>();
+        List<Object> finalList1 = new LinkedList<Object>();
+        for (EmployeeSalaryProcess employeeSalaryProcess1 : empList) {
+            Map<String, String> empMap = new HashMap<String, String>();
+
+            double additionalAmount = 0.0;
+            double deductionAmount = 0.0;
+
+            EmployeeExcelRecord employeeExcelRecord1 = new EmployeeExcelRecord();
+            EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeSalaryProcess1.getEmployeeMaster().getId());
+            float presentDays = 0;
+            float weekoff = 0;
+            float pl = 0;
+            float cl = 0;
+            float totday = 0;
+
+            List<?> list = employeeExcelRecordService.readByEmployeExcelReportSearch(employeeSalaryProcess1);
+            for (Object o : list) {
+                employeeExcelRecord = (EmployeeExcelRecord) o;
+//                presentDays = employeeExcelRecord.getPresentDays();
+//                weekoff = employeeExcelRecord.getSickLeave();
+//                pl = employeeExcelRecord.getPleave();
+//                cl = employeeExcelRecord.getCasuaLeave();
+//                totday = employeeExcelRecord.getWorkingDays();
+                totdayTotal += (float) totday;
+//                payrollPfRecordService.delete(payrollPfRecord.getId());
+            }
+            String Pfnum = "";
+            String employeeID = employeeMaster1.getEmployeeId();
+            Pfnum = employeeMaster1.getPfNo();
+            String employeeName = employeeMaster1.getEmployeeName();
+            String EmployeePfNAme = new String();
+            EmployeePfNAme = "Emp Code: " + employeeID + "<br>" + employeeName + "<br>" + "Pf NO: " + Pfnum;
+            String pday = new String();
+            pday = presentDays + "<br>" + weekoff;
+            String plday = new String();
+            plday = pl + "<br>" + cl;
+            String earnDec = new String();
+            earnDec = "Earn " + "<br>" + "<br>" + "Dedu";
+
+            empMap.put("Emp Name", EmployeePfNAme);
+//            empMap.put("Emp Name", employeeMaster1.getEmployeeId());
+            empMap.put("P.Day PH/Woff", "" + pday);
+            empMap.put("PL CL/SL", "" + plday);
+            empMap.put("TotDay", "" + totday);
+//            empMap.put("Basic Salary", "" + df.format(employeeSalaryProcess1.getEmployeeBasicSalary()));
+            empMap.put("Basic Amt", "" + df.format((int) Math.round(employeeSalaryProcess1.getEmployeeBasicSalary())));
+            basicSalarytotal += (Double) employeeSalaryProcess1.getEmployeeBasicSalary();
+            empMap.put("", "" + earnDec);
+
+//            List addSalaryList = employeeAdditionalSalaryService.readEmployeeForSalaryAdditionalinfo(employeeSalaryProcess1);
+            List addSalaryList = employeeAdditionalSalaryService.readEmployeeForSalaryAdditionalinfoSearch(employeeSalaryProcess1);
+            for (Object addSalaryList1 : addSalaryList) {
+                Object[] o = (Object[]) addSalaryList1;
+//                empMap.put("" + o[0], "" + df.format(o[1]));
+                empMap.put("" + o[0], "" + df.format((int) Math.round((double) o[1])));
+
+//                additionalAmount += (Double) o[1];
+//                  int netpayable1 = (int) Math.round(additionalAmount);
+                additionalAmount += (Double) o[1];
+
+            }
+//            List dedSalaryList = employeeDeductionAmountService.readEmployeeForSalaryDeductioninfo(employeeSalaryProcess1);
+            List dedSalaryList = employeeDeductionAmountService.readEmployeeForSalaryDeductioninfoSearch(employeeSalaryProcess1);
+            for (Object dedSalaryList1 : dedSalaryList) {
+                Object[] o = (Object[]) dedSalaryList1;
+//                empMap.put("" + o[0], "" + df.format(o[1]));
+                empMap.put("" + o[0], "" + df.format((int) Math.round((double) o[1])));
+                deductionAmount += (Double) o[1];
+            }
+            additionalAmount += employeeSalaryProcess1.getEmployeeBasicSalary();
+//            empMap.put("Gross Salary", "" + df.format(additionalAmount));
+
+            additionaltotal += additionalAmount;
+            deductiontotal += deductionAmount;
+            empMap.put("Tot.Earn " + "<br>" + "<br>" + "<br>" + "Tot.Dedu", "" + df.format((int) Math.round(additionalAmount)) + "<br>" + "<br>" + df.format((int) Math.round(deductionAmount)));
+//            empMap.put("Deduction Amount", "" + df.format(deductionAmount));
+//            empMap.put("Tot.Dedn", "" + df.format((int) Math.round(deductionAmount)));
+            empMap.put("Net Pay", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
+            netpaytotal += (additionalAmount - deductionAmount);
+            empMap.put("Signature", "" + "<br>" + "<br>" + "<br>");
+//            empMap.put("Net Amount", "" + df.format(additionalAmount - deductionAmount));
+            finalList.add(empMap);
+
+            /// total 
+        }
+
+//        empMap1.put("Emp Name", "Total :");
+        empMap1.put("Emp Name", "Total :");
+        empMap1.put("P.Day PH/Woff", "");
+        empMap1.put("PL CL/SL", "");
+        empMap1.put("TotDay", "" + totdayTotal);
+        empMap1.put("Basic Amt", "" + df.format((int) Math.round(basicSalarytotal)));
+        List<?> list152 = employeeAdditionalSalaryService.readadditionalAllownaceName(month1, year11);
+        for (Object o1 : list152) {
+            String str = (String) o1;
+            List<?> list1521 = employeeAdditionalSalaryService.readadditionalAMountSalaryRegister(str, month1, year11);
+            for (Object o11 : list1521) {
+                double str1 = (double) o11;
+                empMap1.put("" + str, "" + df.format((int) Math.round((double) str1)));
+            }
+        }
+        List<?> list15245 = employeeDeductionAmountService.readadditionalAllownaceName(month1, year11);
+        for (Object o1 : list15245) {
+            String str = (String) o1;
+            List<?> list1521425 = employeeDeductionAmountService.readadditionalAMountSalaryRegister(str, month1, year11);
+            for (Object o11 : list1521425) {
+                double str1 = (double) o11;
+                empMap1.put("" + str, "" + df.format((int) Math.round((double) str1)));
+            }
+        }
+        empMap1.put("Tot.Earn " + "<br>" + "<br>" + "<br>" + "Tot.Dedu", "" + df.format((int) Math.round(additionaltotal)) + "<br>" + "<br>" + df.format((int) Math.round(deductiontotal)));
+        empMap1.put("Net Pay", "" + df.format((int) Math.round(netpaytotal)));
+        empMap1.put("Signature", "" + "<br>" + "<br>" + "<br>");
+
+        finalList1.add(empMap1);
+//      }
+        request.setAttribute("headerList123", headerList);
+        request.setAttribute("headerList1234", headerList1);
+        request.setAttribute("headerList12345", headerList2);
+        request.setAttribute("headerList123456", headerList3);
+        request.setAttribute("finalList", finalList);
+        request.setAttribute("finalList1", finalList1);
+        request.setAttribute("month", month1);
+        request.setAttribute("year", year11);
+
+        mv.setViewName("Payroll/employeesalarySearchNewResiger");
+
+        return mv;
+    }
+
 
 }

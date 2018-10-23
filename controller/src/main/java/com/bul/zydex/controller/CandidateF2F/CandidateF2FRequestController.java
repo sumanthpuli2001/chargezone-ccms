@@ -585,12 +585,12 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
 //        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
 //        OnlineAssessment onlineAssessment = new OnlineAssessment();
-        String emplid = request.getParameter("emplid");
+//        String emplid1 = request.getParameter("id");
 //        String candidateId = request.getParameter("candidateId");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
         EmployeeMaster employeeMaster2 = new EmployeeMaster();
-        employeeMaster2 = employeeMasterService.readById(Integer.parseInt(emplid));
+        employeeMaster2 = employeeMasterService.readById(Integer.parseInt(certificateTemplate.getCertificateTitle()));
 //        CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
 //        VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
 //        candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(candidateId));
@@ -608,15 +608,38 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
             String To = employeeMaster2.getOfficeEmailId();
             String Subject = certificateTemplate.getCertificateName();
             String msg = certificateTemplate.getCertificateBody().replaceAll("&Acirc;", "");
-//            Subject = Subject.replaceAll("\\{name\\}", employeeMaster.getEmployeeName());
-//            msg = msg.replaceAll("\\{name\\}", candidateApplyJob.getName());
-//            msg = msg.replaceAll("\\{email_id\\}", candidateApplyJob.getEmailId());
-//            msg = msg.replaceAll("\\{present_address\\}", candidateApplyJob.getPresentAddress());
-//            msg = msg.replaceAll("\\{name_position\\}", vm.getName());
-//            msg = msg.replaceAll("\\{date_of_birth\\}", sdf.format(cDate));
-
-//            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
-            sendMail.sendMail(from, To, Subject, msg);
+            
+             String name = "Appointment Letter";
+            String path = getpdfAppoimentLetter(msg,employeeMaster2.getEmployeeName(), name);
+          
+            
+            String attachementFileLocationURL = getServletContext().getRealPath("/")
+                   + "StorageYard" + File.separator + "AppointmentLetter"
+                    + File.separator + employeeMaster2.getEmployeeName() + File.separator;
+            String attachementFileURL = "StorageYard" + File.separator + "AppointmentLetter"
+                    + File.separator + employeeMaster2.getEmployeeName() + File.separator;
+            List l = new ArrayList();
+            File[] files = new File(attachementFileLocationURL).listFiles();
+            for (File file : files) {
+                if (file.isFile()) {
+                    List l1 = new ArrayList();
+                    l1.add(attachementFileLocationURL + file.getName());
+                    l1.add(file.getName());
+                    l.add(l1);
+                }
+                
+            }
+           
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          sendMail.sendMailofferLetter(from, To, Subject, msg, name,employeeMaster2.getEmployeeName(),l);
         } catch (Exception e) {
         }
 
@@ -681,4 +704,39 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         return filePath;
     }
 
+    
+    
+     public String getpdfAppoimentLetter(String msg, String name, String certiName) throws FileNotFoundException, DocumentException, IOException, CssResolverException {
+
+        Document document = new Document(PageSize.A4, 0, 0, 0, 0);
+        String filePath = "StorageYard"
+                + File.separator + "AppointmentLetter" + File.separator + name;
+        String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "AppointmentLetter" + File.separator + name;
+        File Folder1 = new File(fileLocationURL);
+        if (!Folder1.exists()) {
+            Folder1.mkdirs();
+        }
+        String path = fileLocationURL + File.separator + certiName + ".pdf";
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(path));
+        document.setMargins(0, 0, 0, 0);
+        document.open();
+        CSSResolver cssResolver = XMLWorkerHelper.getInstance().getDefaultCssResolver(false);
+        cssResolver.addCss("div{margin:0 pt; padding: 20pt;}", true);
+        HtmlPipelineContext htmlContext = new HtmlPipelineContext(null);
+        htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
+        PdfWriterPipeline pdf = new PdfWriterPipeline(document, writer);
+        HtmlPipeline html = new HtmlPipeline(htmlContext, pdf);
+        CssResolverPipeline css = new CssResolverPipeline(cssResolver, html);
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div>");
+        sb.append(msg);
+        sb.append("</div>");
+        XMLWorker worker = new XMLWorker(css, true);
+        XMLParser p = new XMLParser(worker);
+        p.parse(new ByteArrayInputStream(sb.toString().getBytes()));
+        document.close();
+        return filePath;
+    }
 }

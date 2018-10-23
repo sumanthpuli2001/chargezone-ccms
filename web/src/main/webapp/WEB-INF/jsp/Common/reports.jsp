@@ -69,6 +69,11 @@
                                                         <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="shiftRotationMaster.htm?act=employeePresentSearch">Daily Present Report</a>
                                                     </c:if>
                                                 </div>
+                                                <div class="col-xs-4 col-sm-4 col-md-4">
+                                                    <c:if test="${sessionScope.userRight.dailyPresentReport}">
+                                                        <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="shiftRotationMaster.htm?act=getShiftForReport">Shift Report</a>
+                                                    </c:if>
+                                                </div>
                                             </c:otherwise>
                                         </c:choose>
                                     </div>

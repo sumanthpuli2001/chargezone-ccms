@@ -6,7 +6,6 @@
 package com.bul.zydex.dao.shift;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
-import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -15,7 +14,6 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
 /**
  *
@@ -1151,7 +1149,6 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
         Session s = getSessionFactory().openSession();
         Query query = s.createSQLQuery("update employee_shift_data set shift_master_id=1 where shift_master_id is null");
         int result = query.executeUpdate();
-
         s.close();
 
     }

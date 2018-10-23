@@ -20,6 +20,25 @@ import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMppApproval;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.VacancyMaster;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.tool.xml.XMLWorker;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
+import com.itextpdf.tool.xml.exceptions.CssResolverException;
+import com.itextpdf.tool.xml.html.Tags;
+import com.itextpdf.tool.xml.parser.XMLParser;
+import com.itextpdf.tool.xml.pipeline.css.CSSResolver;
+import com.itextpdf.tool.xml.pipeline.css.CssResolverPipeline;
+import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
+import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
+import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -335,7 +354,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
         VacancyMaster vm = vacancyMasterService.readById(cja.getVacancyMaster().getId());
         candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(candidateId));
-
+        String employeeName = candidateApplyJob.getName();
         try {
             String certificationName = request.getParameter("certificateName");
             String candidateBody = request.getParameter("certificateBody");
@@ -349,15 +368,29 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
             String To = candidateApplyJob.getEmailId();
             String Subject = certificateTemplate.getCertificateName();
             String msg = certificateTemplate.getCertificateBody().replaceAll("&Acirc;", "");
-//            Subject = Subject.replaceAll("\\{name\\}", employeeMaster.getEmployeeName());
-//            msg = msg.replaceAll("\\{name\\}", candidateApplyJob.getName());
-//            msg = msg.replaceAll("\\{email_id\\}", candidateApplyJob.getEmailId());
-//            msg = msg.replaceAll("\\{present_address\\}", candidateApplyJob.getPresentAddress());
-//            msg = msg.replaceAll("\\{name_position\\}", vm.getName());
-//            msg = msg.replaceAll("\\{date_of_birth\\}", sdf.format(cDate));
+            String name = "Offer Letter";
+            String path = getpdfOfferLetter(msg, candidateApplyJob.getName(), name);
+          
+            
+            String attachementFileLocationURL = getServletContext().getRealPath("/")
+                   + "StorageYard" + File.separator + "OfferLetter"
+                    + File.separator + employeeName + File.separator;
+            String attachementFileURL = "StorageYard" + File.separator + "OfferLetter"
+                    + File.separator + employeeName + File.separator;
+            List l = new ArrayList();
+            File[] files = new File(attachementFileLocationURL).listFiles();
+            for (File file : files) {
+                if (file.isFile()) {
+                    List l1 = new ArrayList();
+                    l1.add(attachementFileLocationURL + file.getName());
+                    l1.add(file.getName());
+                    l.add(l1);
+                }
+                
+            }
+           
 
-//            msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
-            sendMail.sendMail(from, To, Subject, msg);
+            sendMail.sendMailofferLetter(from, To, Subject, msg, name,employeeName,l);
         } catch (Exception e) {
         }
 
@@ -384,6 +417,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         mv.getModelMap().put("onlineAssessment", onlineAssessment);
         mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateRequestList");
+
         request.setAttribute("successMessage",
                 "Information : The Offer Letter Sent successfully.");
         return mv;
@@ -573,7 +607,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
             String from = employeeMaster.getOfficeEmailId();
             String To = employeeMaster2.getOfficeEmailId();
             String Subject = certificateTemplate.getCertificateName();
-              String msg = certificateTemplate.getCertificateBody().replaceAll("&Acirc;", "");
+            String msg = certificateTemplate.getCertificateBody().replaceAll("&Acirc;", "");
 //            Subject = Subject.replaceAll("\\{name\\}", employeeMaster.getEmployeeName());
 //            msg = msg.replaceAll("\\{name\\}", candidateApplyJob.getName());
 //            msg = msg.replaceAll("\\{email_id\\}", candidateApplyJob.getEmailId());
@@ -611,6 +645,40 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         request.setAttribute("successMessage",
                 "Information : The Appointment Letter Sent successfully.");
         return mv;
+    }
+
+    public String getpdfOfferLetter(String msg, String name, String certiName) throws FileNotFoundException, DocumentException, IOException, CssResolverException {
+
+        Document document = new Document(PageSize.A4, 0, 0, 0, 0);
+        String filePath = "StorageYard"
+                + File.separator + "OfferLetter" + File.separator + name;
+        String fileLocationURL = getServletContext().getRealPath("/")
+                + File.separator + "StorageYard"
+                + File.separator + "OfferLetter" + File.separator + name;
+        File Folder1 = new File(fileLocationURL);
+        if (!Folder1.exists()) {
+            Folder1.mkdirs();
+        }
+        String path = fileLocationURL + File.separator + certiName + ".pdf";
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(path));
+        document.setMargins(0, 0, 0, 0);
+        document.open();
+        CSSResolver cssResolver = XMLWorkerHelper.getInstance().getDefaultCssResolver(false);
+        cssResolver.addCss("div{margin:0 pt; padding: 20pt;}", true);
+        HtmlPipelineContext htmlContext = new HtmlPipelineContext(null);
+        htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
+        PdfWriterPipeline pdf = new PdfWriterPipeline(document, writer);
+        HtmlPipeline html = new HtmlPipeline(htmlContext, pdf);
+        CssResolverPipeline css = new CssResolverPipeline(cssResolver, html);
+        StringBuilder sb = new StringBuilder();
+        sb.append("<div>");
+        sb.append(msg);
+        sb.append("</div>");
+        XMLWorker worker = new XMLWorker(css, true);
+        XMLParser p = new XMLParser(worker);
+        p.parse(new ByteArrayInputStream(sb.toString().getBytes()));
+        document.close();
+        return filePath;
     }
 
 }

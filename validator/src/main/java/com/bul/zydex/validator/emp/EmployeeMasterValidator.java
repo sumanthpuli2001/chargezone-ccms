@@ -43,16 +43,16 @@ public class EmployeeMasterValidator implements Validator {
 
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailAddress", "field.error1", "None");
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contactNo1", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emergencyContactPerson", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emergencyContactNo", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emergencyContactPerson", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emergencyContactNo", "field.error1", "None");
 
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "panCard", "field.error1", "None");
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "adharCard", "field.error1", "None");
 
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "officeEmailId", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "highestEducationDetails", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experienceYearOnDoj", "field.error27", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experienceMonthOnDoj", "field.error27", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "highestEducationDetails", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experienceYearOnDoj", "field.error27", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "experienceMonthOnDoj", "field.error27", "None");
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "company", "field.error27", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "locationMaster.id", "field.error27", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "zydexLocationMaster.id", "field.error27", "None");

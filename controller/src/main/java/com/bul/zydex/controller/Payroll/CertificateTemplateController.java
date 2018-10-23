@@ -617,6 +617,8 @@ public class CertificateTemplateController extends CertificateTemplateAbstract {
             String path = getpdf1(msg, employeeMaster.getEmployeeName(), certificateTemplate.getCertificateTitle());
             request.setAttribute("path", path);
             request.setAttribute("msg", msg);
+            request.setAttribute("employeeName", employeeMaster.getEmployeeName());
+            request.setAttribute("certificateTemplateType", certificateTemplate.getCertificateTitle());
         }
         mv.setViewName("Payroll/CertificateAjax");
         return mv;

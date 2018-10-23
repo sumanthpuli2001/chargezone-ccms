@@ -277,6 +277,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             if (employeeMaster.getPfAmount().equals("")) {
                 employeeMaster.setPfAmount("0");
             }
+            if (employeeMaster.getPfAmountEmployer().equals("")) {
+                employeeMaster.setPfAmountEmployer("0");
+            }
+            if (employeeMaster.getPt().equals("")) {
+                employeeMaster.setPt(false);
+            }
+            if (employeeMaster.getTdsAmount().equals("")) {
+                employeeMaster.setTdsAmount("0");
+            }
+            if (employeeMaster.getPf().equals("")) {
+                employeeMaster.setPf(false);
+            }
 
             // employee Code automically Generate 
             int employeeLoactionCode = employeeMaster.getLocationMaster().getId();

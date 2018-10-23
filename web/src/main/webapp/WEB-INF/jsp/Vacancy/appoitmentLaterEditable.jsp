@@ -12,11 +12,13 @@
     <head>
         <title>view Format Appointment Letter</title>
     </head>
-    <script>
-        function offerLate(applicationId, candidateId) {
-            window.location = 'candidateF2FRequest.htm?act=offerLater&id=' + applicationId + '&candidateId=' + candidateId;
+<!--    <script>
+        function appointmentLate(employeeid) {
+            var employeeid1 = employeeid;
+            alert(employeeid);
+            window.location = 'candidateF2FRequest.htm?act=appointmentLater&id=' + employeeid1;
         }
-    </script>s
+    </script>s-->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -36,9 +38,9 @@
         <!-- Main content -->
         <form:form action="candidateF2FRequest.htm?act=appointmentLater" method="post" commandName="certificateTemplate" name='form1' class="form-horizontal" role="form">
 
-            <input type="hidden" id="id"  value="${certificateTemplate.id}">
-            <input type="hidden" id="emplid"  value="${employeeMaster.id}">
-            <%--<form:hidden path="id"></form:hidden>--%>
+            <!--<input type="hidden" id="id"  value="${certificateTemplate.id}">-->
+            <!--<input type="hidden" id="id"  value="${employeeMaster.id}">-->
+            <form:hidden path="certificateTitle" value="${employeeMaster.id}"></form:hidden>
             <!--<input type="hidden" id="applicationId" name="applicationId" value="${applicationId}">-->
             <!--<input type="hidden" id="candidateId" name="candidateId" value="${candidateId}">-->
             <section class="content">
@@ -60,8 +62,9 @@
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Subject :<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <label>Subject:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="certificateName" name="certificateName" class="form-control" placeholder="Company Name" ></form:input>
+                                                    <%--<form:input path="certificateTitle" name="certificateTitle" class="form-control" value="" ></form:input>--%>
                                                     <%--<form:errors path="numberOfPosition" cssClass="errorDiv"></form:errors>--%>
                                                 </div>
                                             </div>
@@ -75,7 +78,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6 col-sm-offset-5">
                                                         <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT" >
-                                                        <!--<input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT" onclick="offerLate(${applicationId},${candidateId});">-->
+                                                        <!--<input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT" onclick="appointmentLate(${employeeMaster.id});">-->
                                                 </div>
                                             </div>
                                         </div><!-- /.col -->

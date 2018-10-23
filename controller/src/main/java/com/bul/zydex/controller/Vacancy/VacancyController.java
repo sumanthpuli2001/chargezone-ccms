@@ -2316,10 +2316,7 @@ public class VacancyController extends VacancyAbstract {
 
     public ModelAndView vacancyDetailListPage(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-        HttpSession session = request.getSession();
-        String uname = "xyz";
-//out.print("Welcome "+ uname);
-        session.setAttribute("sessname", uname);
+     
 //        ModelAndView mv = new ModelAndView();
         ModelAndView mv = new ModelAndView();
         VacancyMaster vacancyMaster = new VacancyMaster();

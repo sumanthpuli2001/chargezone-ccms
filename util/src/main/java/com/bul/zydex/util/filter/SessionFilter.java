@@ -34,45 +34,18 @@ public class SessionFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException {
+
         logger.debug("SessionFilter doFilter() called");
 
         HttpServletRequest req = (HttpServletRequest) request;
-        HttpServletRequest req1 = (HttpServletRequest) request;
-        HttpServletRequest req2 = (HttpServletRequest) request;
         // HttpServletResponse res = (HttpServletResponse) response;
 
         HttpSession session = req.getSession(false);
-        HttpSession session1 = req1.getSession(true);
-        
-        
-        
-          UserMaster user = (UserMaster) req2.getSession().getAttribute("user");
-        session1.setAttribute("vacancy","vacancy");  
-        
-         String n=(String)session1.getAttribute("vacancy");  
-
-         if(null==user){
-         
-         if(n.equals("vacancy"))
-         {
-//            request.getRequestDispatcher("vacancy.htm?act=vacancyDetailListPage")
-//                    .forward(request, response);
-//
-//            return;
- 
-         }
-         else if (null == session) {
-
+        if (null == session) {
             request.getRequestDispatcher("out.html?act=redirectToSessionExp")
                     .forward(request, response);
-
             return;
-
         }
-         
-         
-         }
-         
 
         chain.doFilter(request, response);
     }

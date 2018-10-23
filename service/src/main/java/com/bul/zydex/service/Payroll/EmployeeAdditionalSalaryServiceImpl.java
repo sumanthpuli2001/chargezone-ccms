@@ -15,7 +15,8 @@ import java.util.List;
  *
  * @author Irfan <irfanbhindawala@gmail.com>
  */
-public class EmployeeAdditionalSalaryServiceImpl<T> extends GenericsServiceImpl<T> implements EmployeeAdditionalSalaryService<T>{
+public class EmployeeAdditionalSalaryServiceImpl<T> extends GenericsServiceImpl<T> implements EmployeeAdditionalSalaryService<T> {
+
     private EmployeeAdditionalSalaryDAO<T> employeeAdditionalSalaryDAO;
 
     public EmployeeAdditionalSalaryDAO<T> getEmployeeAdditionalSalaryDAO() {
@@ -29,12 +30,12 @@ public class EmployeeAdditionalSalaryServiceImpl<T> extends GenericsServiceImpl<
 
     @Override
     public List<?> readAdditionalAmount(int employeeSalaryProcessId) {
-       return employeeAdditionalSalaryDAO.readAdditionalAmount(employeeSalaryProcessId);
+        return employeeAdditionalSalaryDAO.readAdditionalAmount(employeeSalaryProcessId);
     }
 
     @Override
     public List<?> readEmployeeForSalaryAdditionalinfo(EmployeeSalaryProcess employeeSalaryProcess) {
-       return employeeAdditionalSalaryDAO.readEmployeeForSalaryAdditionalinfo(employeeSalaryProcess);
+        return employeeAdditionalSalaryDAO.readEmployeeForSalaryAdditionalinfo(employeeSalaryProcess);
     }
 
     @Override
@@ -44,12 +45,12 @@ public class EmployeeAdditionalSalaryServiceImpl<T> extends GenericsServiceImpl<
 
     @Override
     public List<?> readCheckAdditionalAmount(int empId, PayrollFinancialYear payrollFinancialYear) {
-       return employeeAdditionalSalaryDAO.readCheckAdditionalAmount(empId, payrollFinancialYear);
+        return employeeAdditionalSalaryDAO.readCheckAdditionalAmount(empId, payrollFinancialYear);
     }
 
     @Override
     public List<?> readByAdditionalSalaryAmount(EmployeeSalaryProcess employeeSalaryProcess) {
-       return employeeAdditionalSalaryDAO.readByAdditionalSalaryAmount(employeeSalaryProcess);
+        return employeeAdditionalSalaryDAO.readByAdditionalSalaryAmount(employeeSalaryProcess);
     }
 
     @Override
@@ -59,18 +60,27 @@ public class EmployeeAdditionalSalaryServiceImpl<T> extends GenericsServiceImpl<
 
     @Override
     public List<?> readEmployeeForSalaryAdditionalinfoSearch(EmployeeSalaryProcess employeeSalaryProcess) {
-      return employeeAdditionalSalaryDAO.readEmployeeForSalaryAdditionalinfoSearch(employeeSalaryProcess);
+        return employeeAdditionalSalaryDAO.readEmployeeForSalaryAdditionalinfoSearch(employeeSalaryProcess);
     }
 
     @Override
     public List<?> readEmployeeAllowanceGrossTotalTaxable(int EmpSalaryProcessId) {
-      return employeeAdditionalSalaryDAO.readEmployeeAllowanceGrossTotalTaxable(EmpSalaryProcessId);
+        return employeeAdditionalSalaryDAO.readEmployeeAllowanceGrossTotalTaxable(EmpSalaryProcessId);
     }
 
-   
+    @Override
+    public List<?> readNotOTamountAdditionalAmountSPC(int employeeSalaryProcessId) {
+        return employeeAdditionalSalaryDAO.readNotOTamountAdditionalAmountSPC(employeeSalaryProcessId);
+    }
 
-   
+    @Override
+    public List<?> readadditionalAllownaceName(String month, String year) {
+        return employeeAdditionalSalaryDAO.readadditionalAllownaceName(month, year);
+    }
 
-    
+    @Override
+    public List<?> readadditionalAMountSalaryRegister(String allowanceName, String month, String year) {
+        return employeeAdditionalSalaryDAO.readadditionalAMountSalaryRegister(allowanceName, month, year);
+    }
 
 }

@@ -349,4 +349,34 @@ public class EmployeeDeductionAmountDAOImpl<T> extends GenericsDAOImpl<T> implem
         return list;
 
     }
+
+    @Override
+    public List<?> readadditionalAllownaceName(String month, String year) {
+        String query = "";
+        String condition = "";
+
+        query += " Select a.deductionType"
+                + " From EmployeeDeductionAmount a"
+                + " left join a.employeeSalaryProcess b"
+                + " where b.month='" + month + "'"
+                + " and b.year='" + year + "'"
+                + " Group by a.deductionType";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readadditionalAMountSalaryRegister(String allowanceName, String month, String year) {
+      String query = "";
+        String condition = "";
+
+        query += " Select Sum(a.deductionAmount)"
+                + " From EmployeeDeductionAmount a"
+                + " left join a.employeeSalaryProcess b"
+                + " where b.month='" + month + "'"
+                + " and b.year='" + year + "'"
+                + " and a.deductionType='" + allowanceName + "'";
+
+        return getHibernateTemplate().find(query);  
+    }
 }

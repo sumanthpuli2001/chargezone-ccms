@@ -687,7 +687,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Employee No.:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="employeeId" class="form-control" onkeyup="userName1();" readonly="true"></form:input>
+                                                        <form:input path="employeeId" class="form-control" onkeyup="userName1();" ></form:input>
                                                         <form:errors path="employeeId" cssClass="errorDiv"></form:errors>
                                                         </div>
 
@@ -931,12 +931,12 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label >Emergency Contact Person:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label >Emergency Contact Person:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:input path="emergencyContactPerson" class="form-control"></form:input>
                                                         <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -960,7 +960,7 @@
 
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>PAN Card No:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>PAN Card No:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:input path="panCard" class="form-control"  style="text-transform: uppercase" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
                                                         <form:errors path="panCard" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -1033,7 +1033,7 @@
                                                         </div>
 
                                                         <div class="col-sm-6">
-                                                            <label>Highest Education Details:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Highest Education Details:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
                                                         <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -1041,7 +1041,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <div class="col-sm-6">
-                                                                <label>Experience On Date Of Joining: Year:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <label>Experience On Date Of Joining: Year:<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:select path="experienceYearOnDoj" class="form-control ">
                                                                 <c:forEach begin="0" end="50" var="counter">
                                                                     <form:option value="${counter}">${counter}</form:option>
@@ -1050,7 +1050,7 @@
                                                             <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <label>Experience On Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <label>Experience On Date Of Joining: Month:<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:select path="experienceMonthOnDoj" class="form-control ">
                                                                 <c:forEach begin="0" end="11" var="counter">
                                                                     <form:option value="${counter}">${counter}</form:option>

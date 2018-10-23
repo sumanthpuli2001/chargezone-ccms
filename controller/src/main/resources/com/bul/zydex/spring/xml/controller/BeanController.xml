@@ -69,6 +69,7 @@
         <property name="userInitPwdValidator" ref="userInitPwdValidator1" />
         <property name="forgotPwdValidator" ref="forgotPwdValidator1" />
         <property name="sendMail" ref="sendMail1" />
+        <property name="vacancyMasterService" ref="vacancyMasterService1" />
     </bean>
     <bean id="logOutController1" class="com.bul.zydex.controller.LogOutController" parent="controllerConfig" >
     </bean>

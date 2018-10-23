@@ -37,12 +37,16 @@ public interface EmployeeDeductionAmountDAO<T> extends GenericsDAO<T> {
     public List<?> readEmployeeloandelete(int empSalaryProcessid, String payrollLoanType);
 
     public List<?> readEmployeeForSalaryDeductioninfoSearch(EmployeeSalaryProcess employeeSalaryProcess);
-    
+
     public List<?> readByedaId(int edaId, String eftDate, String relivDate);
 
     public List<?> readEmployeeTdsAmount(int employeeMasterID, String startDate, String endate);
-    
+
     public List<?> readEmployeeTdsAmountWithMonth(int employeeMasterID, String startDate, String endate);
-    
+
     public List<?> fetchsalary(int edaId, String eftDate, String relivDate);
+
+    public List<?> readadditionalAllownaceName(String month, String year);
+
+    public List<?> readadditionalAMountSalaryRegister(String allowanceName, String month, String year);
 }

@@ -1443,6 +1443,7 @@
                                                                                     <c:if test="${!countVal.last}">
                                                                                         <span style='margin-top: 5px;'>
                                                                                             <input type="button" value="-" id="policyRemoveid" onclick="removePolicy12('${comp[5]}')"/>
+                                                                                            <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicy('${comp[5]}')"/>-->
                                                                                         </span>
                                                                                     </c:if>
                                                                                 </c:if>

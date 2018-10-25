@@ -7,14 +7,13 @@ package com.bul.zydex.dao.shift;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
-import com.bul.zydex.model.ShiftMaster;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.text.ParseException;
 import java.util.List;
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -166,16 +165,44 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
 
     @Override
     public List<?> employeeListReadByMonthWoff(int month, int year, int empID) {
-     String query = "";
+        String query = "";
         query += " Select a.id,b.employeeId,b.employeeName,b.id"
                 + " FROM ShiftGenerateMonthlySchedule a"
                 + " LEFT JOIN a.employeeMaster b"
                 + " Where a.shiftMonth = " + month
                 + " And a.shiftYear =" + year
                 + " And b.id =" + empID;
-        return getHibernateTemplate().find(query);   
+        return getHibernateTemplate().find(query);
     }
 
-   
+    @Override
+    public List<?> ReadEmployeeShiftByDayMonthYear(Integer empID, String date) {
+
+        String query = "";
+
+        try {
+            Date getDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(getDate);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            int month = cal.get(Calendar.MONTH);
+            int year = cal.get(Calendar.YEAR);
+            if (month != 12) {
+                month++;
+            }
+            query += " Select "
+                    + " (Select CASE WHEN a.day" + day + " > 0 THEN b.shiftName ELSE 'WO' END From ShiftMaster b where b.id = a.day" + day + ")"
+                    + " FROM ShiftGenerateMonthlySchedule a"
+                    + " LEFT JOIN a.employeeMaster b"
+                    + " Where b.id=" + empID
+                    + " And a.shiftMonth = " + month
+                    + " And a.shiftYear =" + year;
+
+        } catch (ParseException ex) {
+            ex.getStackTrace();
+        }
+        return getHibernateTemplate().find(query);
+
+    }
 
 }

@@ -74,9 +74,12 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
 
     @Override
     public List<?> employeeListReadByMonthWoff(int month, int year, int empID) {
-     return shiftGenerateMonthlyScheduleDAO.employeeListReadByMonthWoff(month, year, empID);
+        return shiftGenerateMonthlyScheduleDAO.employeeListReadByMonthWoff(month, year, empID);
     }
 
-   
+    @Override
+    public List<?> ReadEmployeeShiftByDayMonthYear(Integer empId, String date) {
+        return shiftGenerateMonthlyScheduleDAO.ReadEmployeeShiftByDayMonthYear(empId, date);
+    }
 
 }

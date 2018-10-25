@@ -833,6 +833,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             policyList.add(policyDetail[2]);
             policyList.add(policyDetail[3]);
             policyList.add(policyDetail[4]);
+            policyList.add(policyDetail[5]);
             finalPolicyList.add(policyList);
         }
         List finalctcList = new ArrayList();
@@ -847,6 +848,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             ctcList.add(policyDetail1[3]);
             ctcList.add(policyDetail1[4]);
             ctcList.add(policyDetail1[5]);
+            ctcList.add(policyDetail1[6]);
+           
 //            ctcList.add(policyDetail1[3]);
             finalctcList.add(ctcList);
         }
@@ -1147,7 +1150,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     employeeCtcDetail.setEmployeeMaster(employeeMaster);
                     employeeCtcDetail.setAmount(amount);
                     employeeCtcDetail.setCtcAllowance(ctcAllowance);
-                    if (null != request.getParameter("taxable" + i)) {
+                    if (null != request.getParameter("ctctaxable" + i)) {
                         employeeCtcDetail.setStatus(1);
                     } else {
                         employeeCtcDetail.setStatus(0);
@@ -5116,4 +5119,20 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         return mv;
     }
+    public void deletePolicy(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try {
+            int policyId = Integer.parseInt(request.getParameter("policyId"));
+            employeePolicyDetailService.delete(policyId);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+    }
+      public void deleteCtcId(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try {
+            int empCtcId = Integer.parseInt(request.getParameter("empCtcId"));
+            employeeCtcDetailService.delete(empCtcId);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+    } 
 }

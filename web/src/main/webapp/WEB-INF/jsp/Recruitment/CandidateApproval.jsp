@@ -751,9 +751,14 @@
 
                                             <div class="form-group">
                                                 <div class="col-md-12" style="text-align: right">
+                                                    <c:if test="${ candidateJobApplication.status eq 14}">
+                                                         <!--<a href="<%= request.getContextPath()%>/StorageYard/OfferLetter/${candidateApplyJob.name}/Offer Letter.pdf"> Offer Letter Download</a>-->
+                                                        <span>[ <a href="recruitment.htm?act=readOfferLetterpdfFile&amp;fileName=Offer Letter.pdf&empName=${candidateApplyJob.name}"> Offer Letter Download</a> ]</span>
+                                                    </c:if>
                                                     <c:if test="${candidateJobApplication.status eq 1 || candidateJobApplication.status eq 14 || candidateJobApplication.status eq 0}">
                                                         <button type="button" class="btn btn-danger" onclick="return reject(${candidateJobApplication.id},${candidateApplyJob.id});" value="Reject">Reject</button>
                                                     </c:if>
+                                                         
                                                     <%--<c:if test="${candidateJobApplication.status eq 21}">--%>
                                                         <!--<button type="button" class="btn btn-primary" style="width:130px !important;" onclick="offerLate(${candidateJobApplication.id},${candidateApplyJob.id});">Offer Letter</button>-->
                                                     <%--</c:if>--%>

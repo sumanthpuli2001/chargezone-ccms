@@ -539,7 +539,8 @@
                 tempCount4--;
 
                 var val = document.getElementById("ctcCount").value;
-                var element = document.getElementById("ctcamount" + val).value;
+                 var element = document.getElementsByName("ctcamount" + val)[0].value;
+//                var element = document.getElementById("ctcamount" + val).value;
 
                 val = val - 1;
 
@@ -614,8 +615,11 @@
                 tempCount3--;
 
                 var val = document.getElementById("policyCount").value;
+              
 
-                var element = document.getElementById("amount" + val).value;
+                var element = document.getElementsByName("amount"+val)[0].value;
+                
+//                    alert(document.getElementById("amount" + val).value);
 
                 val = val - 1;
 

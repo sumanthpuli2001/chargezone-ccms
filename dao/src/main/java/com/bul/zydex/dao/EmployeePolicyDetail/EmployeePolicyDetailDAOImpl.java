@@ -72,7 +72,7 @@ public class EmployeePolicyDetailDAOImpl<T> extends GenericsDAOImpl<T> implement
     @Override
     public List<?> fetchPolicyData(int empId) {
         String query = "";
-        query += " select b.id,b.policyName,a.policyNum,a.amount,a.status"
+        query += " select b.id,b.policyName,a.policyNum,a.amount,a.status,a.id"
                 + " FROM EmployeePolicyDetail a "
                 + " left join a.policyMaster b"
                 + " left join a.employeeMaster c"

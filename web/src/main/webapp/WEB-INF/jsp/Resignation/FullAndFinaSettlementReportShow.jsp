@@ -85,8 +85,8 @@
                                                             <c:if test="${ListBWw[2] == 10}"><td><b>OCT</b>'${ListBWw[3]}</td></c:if>
                                                             <c:if test="${ListBWw[2] == 11}"><td><b>NOV</b>'${ListBWw[3]}</td></c:if>
                                                             <c:if test="${ListBWw[2] == 12}"><td><b>DEC</b>'${ListBWw[3]}</td></c:if>
-                                                            <td>${ListBWw[1]}</td>
-                                                        </tr>
+                                                            <td><fmt:formatNumber maxFractionDigits="0" value="${ListBWw[1]}"></fmt:formatNumber>.00</td>
+                                                            </tr>
                                                     </c:forEach>
                                                     <c:forEach var="ctcDetail1" items="${ctcDetail}">
                                                         <tr>
@@ -108,12 +108,12 @@
                                                             <c:if test="${ctcDetail1[4] == 10}"><td><b>OCT</b>'${ctcDetail1[5]}</td></c:if>
                                                             <c:if test="${ctcDetail1[4] == 11}"><td><b>NOV</b>'${ctcDetail1[5]}</td></c:if>
                                                             <c:if test="${ctcDetail1[4] == 12}"><td><b>DEC</b>'${ctcDetail1[5]}</td></c:if>
-                                                            <c:if test="${ctcDetail1[1] == 2}"><td>${totalMonthlyAmount2}</td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 2}"><td><fmt:formatNumber maxFractionDigits="0" value="${totalMonthlyAmount2}"></fmt:formatNumber>.00</td></c:if>
                                                             <%--<c:if test="${ctcDetail1[1] == 3}"><td>${totalMonthlyAmount3}</td></c:if>--%>
-                                                            <c:if test="${ctcDetail1[1] == 4}"><td>${totalMonthlyAmount4}</td></c:if>
-                                                            <c:if test="${ctcDetail1[1] == 5}"><td>${totalMonthlyAmount5}</td></c:if>
-                                                            <c:if test="${ctcDetail1[1] == 6}"><td>${totalMonthlyAmount6}</td></c:if>
-                                                            </tr>
+                                                            <c:if test="${ctcDetail1[1] == 4}"><td><fmt:formatNumber maxFractionDigits="0" value="${totalMonthlyAmount4}"></fmt:formatNumber>.00</td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 5}"><td><fmt:formatNumber maxFractionDigits="0" value="${totalMonthlyAmount5}"></fmt:formatNumber>.00</td></c:if>
+                                                            <c:if test="${ctcDetail1[1] == 6}"><td><fmt:formatNumber maxFractionDigits="0" value="${totalMonthlyAmount6}"></fmt:formatNumber>.00</td></c:if>
+                                                                </tr>
                                                     </c:forEach>
                                                     <c:forEach var="Gratuiety1" items="${Gratuiety}">
                                                         <tr>
@@ -132,14 +132,14 @@
                                                             <c:if test="${Gratuiety1[3] == 10}"><td><b>OCT</b>'${Gratuiety1[4]}</td></c:if>
                                                             <c:if test="${Gratuiety1[3] == 11}"><td><b>NOV</b>'${Gratuiety1[4]}</td></c:if>
                                                             <c:if test="${Gratuiety1[3] == 12}"><td><b>DEC</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <td>${Gratuiety1[2]}</td>
-                                                        </tr>
+                                                            <td><fmt:formatNumber maxFractionDigits="0" value="${Gratuiety1[2]}"></fmt:formatNumber>.00</td>
+                                                            </tr>
                                                     </c:forEach>
 
                                                     <tr>
                                                         <th colspan="2"></th>
                                                         <th align="left">TOTAL PAYABLES</th>
-                                                        <th>${totalpayable}</th>
+                                                        <th><fmt:formatNumber maxFractionDigits="0" value="${totalpayable}"></fmt:formatNumber>.00</th>
                                                     </tr>
 
 
@@ -160,254 +160,254 @@
                                                                 <c:if test="${list[1] == 10}"><td><b>OCT</b>'${list[2]}</td></c:if>
                                                                 <c:if test="${list[1] == 11}"><td><b>NOV</b>'${list[2]}</td></c:if>
                                                                 <c:if test="${list[1] == 12}"><td><b>DEC</b>'${list[2]}</td></c:if>
-                                                                <td>${list[4]}</td>
+                                                                <td><fmt:formatNumber maxFractionDigits="0" value="${list[4]}"></fmt:formatNumber>.00</td>
                                                             </tr>
                                                         </c:forEach>
                                                         <tr>
                                                             <th colspan="2"></th>
                                                             <th align="left">TOTAL DEDUCTIONS</th>
-                                                            <th>${deductionAmount}</th>
+                                                            <th><fmt:formatNumber maxFractionDigits="0" value="${deductionAmount}"></fmt:formatNumber>.00</th>
                                                         </tr>
                                                         <tr>
                                                             <th  colspan="4" style="text-align: center;"> ( A - B ) TOTAL NET PAYABLE</th>
                                                         </tr>
                                                         <tr>
                                                             <th colspan="3" style="text-align: center;"></th>
-                                                            <th>${finaltotalBD}</th>
+                                                            <th><fmt:formatNumber maxFractionDigits="0" value="${finaltotalBD}"></fmt:formatNumber>.00</th>
                                                         </tr>
                                                     </tbody>
 
                                             </table>
 
-                                       
-                                        <div class="form-group">
-                                            <table style=" width: 100%; border: 0px;">
-                                                <tr>
-                                                    <td colspan="2"> Said amount of Rs <b>${finaltotalBD}</b> /- will be credited to his ICICI Bank Account No. ${employeeMaster.bankAccountNo} against full and final statement of his account.</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2"><b>${fNfList[1]}</b></td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">&nbsp;</td>
-                                                </tr>
-                                                
-                                              
-                                                <tr>
-                                                    <td> <span style="border-top: 1px black solid;">Prepared By:</span></td>
-                                                    <td> <span style="border-top: 1px black solid;">Forwarded By:</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Officer HR</td>
-                                                    <td>HR Head</td>
-                                                </tr>
-                                                
-                                                <tr>
-                                                    <td colspan="2">${fNfList[2]}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2" style="text-align: right;"><b>MR.&nbsp;${employeeMaster.employeeName}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2" style="text-align: right;">Receiver Signature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                </tr>
-                                            </table>
+
                                             <div class="form-group">
-                                                <table style=" width: 100%; height: 0px !important;" border="1">
-                                                    <tr><center><b><font size="3">EMPLOYEE DETAILS</font></b></center> </tr> 
-                                                    <!--<table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">-->
+                                                <table style=" width: 100%; border: 0px;">
                                                     <tr>
-                                                        <th align="left">Name Of Employee</th>
-                                                        <td>${employeeMaster.employeeName}</td>
-                                                        <th align="left">Notice Period</th>
-                                                        <td>${fullAndFinalSettlement.noticePeriod}</td>
+                                                        <td colspan="2"> Said amount of Rs <b><fmt:formatNumber maxFractionDigits="0" value="${finaltotalBD}"></fmt:formatNumber>.00</b> /- will be credited to his ICICI Bank Account No. ${employeeMaster.bankAccountNo} against full and final statement of his account.</td>
                                                     </tr>
                                                     <tr>
-                                                        <th align="left">Designation</th>
-                                                        <td>${designationName}</td>
-                                                        <th align="left">Given Notice</th>
-                                                        <td>${fullAndFinalSettlement.givenNotice}</td>
+                                                        <td colspan="2">&nbsp;</td>
                                                     </tr>
                                                     <tr>
-                                                        <th align="left">Department</th>
-                                                        <td>${departmentName}</td>
-                                                        <th align="left">Recoverable Days</th>
-                                                        <td>${fullAndFinalSettlement.recoveryDays}</td>
-                                                    </tr>
-                                                    <tr >
-                                                        <th align="left">Employee Code</th>
-                                                        <td>${employeeMaster.employeeId}</td>
-                                                       <th>&nbsp;</th>
-                                                       <td>&nbsp;</td>
-                                                        
+                                                        <td colspan="2"><b>${fNfList[0][1]}</b></td>
                                                     </tr>
                                                     <tr>
-                                                        <th align="left">Date of Joining</th>
-                                                        <td>${employeeMaster.dateOfJoining}</td>
-                                                        <th>&nbsp;</th>
-                                                       <td>&nbsp;</td>
+                                                        <td colspan="2">&nbsp;</td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td> <span style="border-top: 1px black solid;">Prepared By:</span></td>
+                                                        <td> <span style="border-top: 1px black solid;">Forwarded By:</span></td>
                                                     </tr>
                                                     <tr>
-                                                        <th align="left">Date of Resignation</th>
-                                                        <td>${rm.effectiveDatetime}</td>
-                                                        <th>&nbsp;</th>
-                                                       <td>&nbsp;</td>
+                                                        <td>Officer HR</td>
+                                                        <td>HR Head</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td colspan="2">${fNfList[0][3]}${employeeMaster.bankName} Bank Account No.${employeeMaster.bankAccountNo}</td>
                                                     </tr>
                                                     <tr>
-                                                        <th align="left">Date of Relieving</th>
-                                                        <td>${rm.relievingDate}</td>
-                                                        <th>&nbsp;</th>
-                                                       <td>&nbsp;</td>
+                                                        <td colspan="2" style="text-align: right;"><b>MR.&nbsp;${employeeMaster.employeeName}</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2" style="text-align: right;">Receiver Signature&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                     </tr>
                                                 </table>
-                                            </div>
-                                                        <br>
+                                                <div class="form-group">
                                                     <table style=" width: 100%; height: 0px !important;" border="1">
-                                            <!--<table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">-->
-                                                <tr>
-                                                    <th  colspan="4" style="text-align: center;">1. PAYABLE</th>
-                                                    <th colspan="4" style="text-align: center;" > 2. OTHER DEDUCTION</th>
-                                                </tr>
-                                                <tr>
-                                                    <th  colspan="4" style="text-align: left;">1.1 Earned Salary</th>
-                                                    <th colspan="4" style="text-align: center;" ></th>
-                                                </tr>
-                                                <td colspan="3" style="text-align: left;"  ><b>COMPONENTS</b></td>
-                                                <td>
-                                                <c:forEach var="salary" items="${salary}">
-                                                    <c:if test="${salary[1] == 01}"><b>JAN'01</b></c:if>
-                                                    <c:if test="${salary[1] == 02}"><b>FEB'02</b></c:if>
-                                                    <c:if test="${salary[1] == 03}"><b>MAR'03</b></c:if>
-                                                    <c:if test="${salary[1] == 04}"><b>APR'04</b></c:if>
-                                                    <c:if test="${salary[1] == 05}"><b>MAY'05</b></c:if>
-                                                    <c:if test="${salary[1] == 06}"><b>JUN'06</b></c:if>
-                                                    <c:if test="${salary[1] == 07}"><b>JUL'07</b></c:if>
-                                                    <c:if test="${salary[1] == 08}"><b>AUG'08</b></c:if>
-                                                    <c:if test="${salary[1] == 09}"><b>SEP'09</b></c:if>
-                                                    <c:if test="${salary[1] == 10}"><b>OCT'10</b></c:if>
-                                                    <c:if test="${salary[1] == 11}"><b>NOV'11</b></c:if>
-                                                    <c:if test="${salary[1] == 12}"><b>DEC'12</b></c:if>
-                                                </c:forEach>
-                                                    </td>
-                                                <th>2.1 Notice Period Recovery</th>
-                                                <td>${fullAndFinalSettlement.noticePeriodRecovery}</td>
-                                                <tr>
-                                                    <th colspan="3" style="text-align: left;"  ><b></b></th>
-                                                    <th></th>
-                                                    <th>2.2 Shoes Deduction</th>
-                                                    <td>${fullAndFinalSettlement.shoesDeduction}</td>
-                                                </tr>
-                                                <c:forEach var="salary" items="${salary}">
+                                                        <tr><center><b><font size="3">EMPLOYEE DETAILS</font></b></center> </tr> 
+                                                        <!--<table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">-->
+                                                        <tr>
+                                                            <th align="left">Name Of Employee</th>
+                                                            <td>${employeeMaster.employeeName}</td>
+                                                            <th align="left">Notice Period</th>
+                                                            <td>${fullAndFinalSettlement.noticePeriod}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th align="left">Designation</th>
+                                                            <td>${designationName}</td>
+                                                            <th align="left">Given Notice</th>
+                                                            <td>${fullAndFinalSettlement.givenNotice}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th align="left">Department</th>
+                                                            <td>${departmentName}</td>
+                                                            <th align="left">Recoverable Days</th>
+                                                            <td>${fullAndFinalSettlement.recoveryDays}</td>
+                                                        </tr>
+                                                        <tr >
+                                                            <th align="left">Employee Code</th>
+                                                            <td>${employeeMaster.employeeId}</td>
+                                                            <th>&nbsp;</th>
+                                                            <td>&nbsp;</td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <th align="left">Date of Joining</th>
+                                                            <td>${employeeMaster.dateOfJoining}</td>
+                                                            <th>&nbsp;</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th align="left">Date of Resignation</th>
+                                                            <td>${rm.effectiveDatetime}</td>
+                                                            <th>&nbsp;</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th align="left">Date of Relieving</th>
+                                                            <td>${rm.relievingDate}</td>
+                                                            <th>&nbsp;</th>
+                                                            <td>&nbsp;</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <br>
+                                                <table style=" width: 100%; height: 0px !important;" border="1">
+                                                    <!--<table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">-->
                                                     <tr>
-                                                        <th colspan="3" style="text-align: left;"  ><b>Gross</b></th>
-                                                        <th>${salary[6]}</th>
-                                                        <th>2.3 Uniform Deduction</th>
-                                                        <td>${fullAndFinalSettlement.uniformDeduction}</td>
+                                                        <th  colspan="4" style="text-align: center;">1. PAYABLE</th>
+                                                        <th colspan="4" style="text-align: center;" > 2. OTHER DEDUCTION</th>
                                                     </tr>
-                                                </c:forEach>
-                                                <tr>
-                                                    <th colspan="3" style="text-align: left;"  ><b>ESIC </b></th>
-                                                    <th>-</th>
-                                                    <th>2.4 Other Deduction</th>
-                                                    <td>${fullAndFinalSettlement.otherDeduction}</td>
-                                                </tr>
-                                                <c:forEach var="list" items="${list}">
                                                     <tr>
-                                                        <th colspan="3" style="text-align: left;"  ><b>${list[3]}</b></th>
-                                                        <th>${list[4]}</th>
+                                                        <th  colspan="4" style="text-align: left;">1.1 Earned Salary</th>
+                                                        <th colspan="4" style="text-align: center;" ></th>
                                                     </tr>
-                                                </c:forEach>
-                                                <tr>
-                                                    <th colspan="3" style="text-align: left;"  ><b>Reimbursment </b></th>
-                                                    <th>-</th>
-                                                    <th></th>
-                                                    <td></td>
-                                                </tr>
-                                                <c:forEach var="salary" items="${salary}">
-                                                    <tr>
-                                                        <th colspan="3" style="text-align: left;" ><b>Salary Net Pay</b></th>
-                                                        <th>${salary[5]}</th>
-                                                    </tr>
-                                                </c:forEach>
-                                                <tr>
-                                                    <th  colspan="4" style="text-align: left;">1.8 Leave Encashment</th>
-                                                    <th>TOTAL DEDUCTION</th>
-                                                    <td>${totaldeduction}</td>
-                                                </tr>
-                                                <tr>
-                                                <th colspan="3" style="text-align: left;"><b>Pl Calculation</b></th>
-                                                  <th>  
-                                                <c:forEach var="salary" items="${salary}">
-                                                   <b>YEAR'${salary[2]}</b
-                                                    </c:forEach>
-                                                    <th>
-                                                    <td></td>
-                                                   </tr>
-                                                <tr>
-                                                    <th colspan="3" style="text-align: left;">Basic</th>
-                                                     <td>
+                                                    <td colspan="3" style="text-align: left;"  ><b>COMPONENTS</b></td>
+                                                    <td>
                                                         <c:forEach var="salary" items="${salary}">
-                                                       <b>${salary[7]}</b>
-                                                    </c:forEach>
-                                                       </td>
-                                                       <td></td>
-                                                       <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <th colspan="3" style="text-align: left;">Leave Balance</th>
-                                                    <th>${leavedayscount}</th>
-                                                    <th></th>
-                                                    <td></td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <th colspan="3" style="text-align: left;" ><b>Pl Final Amt.</b></th>
-                                                    <th><b>${totalLyamountCount}</b></th>
-                                                    <th></th>
-                                                    <td></td>
-                                                </tr>
-                                            </table>
-                                                    <br>
-                                                  
-                                            <c:set var="count" value="0" scope="page" />
-                                            <table style=" width: 100%; height: 0px !important;" border="1">
-                                            <!--<table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">-->
-                                                <tr>
-                                                    <th  colspan="4" style="text-align: left;">1.4 Bonus</th>
-                                                </tr>
-                                                <td><b>MONTHS</b></td>
-                                                <td><b>Paid Days</b></td>
-                                                <td><b>Earned Basic</b></td>
-                                                <c:forEach var="daysfetch" items="${daysfetch}" varStatus="index" >
+                                                            <c:if test="${salary[1] == 01}"><b>JAN'01</b></c:if>
+                                                            <c:if test="${salary[1] == 02}"><b>FEB'02</b></c:if>
+                                                            <c:if test="${salary[1] == 03}"><b>MAR'03</b></c:if>
+                                                            <c:if test="${salary[1] == 04}"><b>APR'04</b></c:if>
+                                                            <c:if test="${salary[1] == 05}"><b>MAY'05</b></c:if>
+                                                            <c:if test="${salary[1] == 06}"><b>JUN'06</b></c:if>
+                                                            <c:if test="${salary[1] == 07}"><b>JUL'07</b></c:if>
+                                                            <c:if test="${salary[1] == 08}"><b>AUG'08</b></c:if>
+                                                            <c:if test="${salary[1] == 09}"><b>SEP'09</b></c:if>
+                                                            <c:if test="${salary[1] == 10}"><b>OCT'10</b></c:if>
+                                                            <c:if test="${salary[1] == 11}"><b>NOV'11</b></c:if>
+                                                            <c:if test="${salary[1] == 12}"><b>DEC'12</b></c:if>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <th>2.1 Notice Period Recovery</th>
+                                                    <td>${fullAndFinalSettlement.noticePeriodRecovery}</td>
                                                     <tr>
-                                                        <c:if test="${daysfetch[2] == 01}"><td><b>JAN</b></td></c:if>
-                                                        <c:if test="${daysfetch[2] == 02}"><td><b>FEB</b></td></c:if>
-                                                        <c:if test="${daysfetch[2] == 03}"><td><b>MAR</b></td></c:if>
-                                                        <c:if test="${daysfetch[2] == 04}"><td><b>APR</b></td></c:if>
-                                                        <c:if test="${daysfetch[2] == 05}"><td><b>MAY</b></td></c:if>
-                                                        <c:if test="${daysfetch[2] == 06}"><td><b>JUN</b></td></c:if>
-                                                        <c:if test="${daysfetch[2] == 07}"><td><b>JUL</b></td></c:if>
-                                                        <c:if test="${daysfetch[2] == 08}"><td><b>AUG</b></td></c:if>
-                                                        <c:if test="${daysfetch[2] == 09}"><td><b>SEP</b></td></c:if>
-                                                        <c:if test="${daysfetch[2] == 10}"><td><b>OCT</b></td></c:if>
-                                                        <c:if test="${daysfetch[2] == 11}"><td><b>NOV</b></td></c:if>
-                                                        <c:if test="${daysfetch[2] == 12}"><td><b>DEC</b></td></c:if>
-                                                        <td>${daysfetch[1]}</td>
-                                                        <td>${bonusFetch[count][1]}</td>
+                                                        <th colspan="3" style="text-align: left;"  ><b></b></th>
+                                                        <th></th>
+                                                        <th>2.2 Shoes Deduction</th>
+                                                        <td>${fullAndFinalSettlement.shoesDeduction}</td>
                                                     </tr>
-                                                    <c:set var="count" value="${count + 1}" scope="page"/>
-                                                </c:forEach>
-                                                <td><b>TOTAL</b></td>
-                                                <td><b>${leavedaysfetch}</b></td>
-                                                <td><b>${bounsdata}</b></td>
-                                            </table>
-                                            <div class="row" align="center"><b>Note:</b> ${notes}</div>
+                                                    <c:forEach var="salary" items="${salary}">
+                                                        <tr>
+                                                            <th colspan="3" style="text-align: left;"  ><b>Gross</b></th>
+                                                            <th><fmt:formatNumber maxFractionDigits="0" value="${salary[6]}"></fmt:formatNumber>.00</th>
+                                                            <th>2.3 Uniform Deduction</th>
+                                                            <td>${fullAndFinalSettlement.uniformDeduction}</td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;"  ><b>ESIC </b></th>
+                                                        <th>-</th>
+                                                        <th>2.4 Other Deduction</th>
+                                                        <td>${fullAndFinalSettlement.otherDeduction}</td>
+                                                    </tr>
+                                                    <c:forEach var="list" items="${list}">
+                                                        <tr>
+                                                            <th colspan="3" style="text-align: left;"  ><b>${list[3]}</b></th>
+                                                            <th><fmt:formatNumber maxFractionDigits="0" value="${list[4]}"></fmt:formatNumber>.00</th>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;"  ><b>Reimbursment </b></th>
+                                                        <th>-</th>
+                                                        <th></th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <c:forEach var="salary" items="${salary}">
+                                                        <tr>
+                                                            <th colspan="3" style="text-align: left;" ><b>Salary Net Pay</b></th>
+                                                            <th><fmt:formatNumber maxFractionDigits="0" value="${salary[5]}"></fmt:formatNumber>.00</th>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    <tr>
+                                                        <th  colspan="4" style="text-align: left;">1.8 Leave Encashment</th>
+                                                        <th>TOTAL DEDUCTION</th>
+                                                        <td><fmt:formatNumber maxFractionDigits="0" value="${totaldeduction}"></fmt:formatNumber>.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;"><b>Pl Calculation</b></th>
+                                                        <th>  
+                                                            <c:forEach var="salary" items="${salary}">
+                                                                <b>YEAR'${salary[2]}</b
+                                                            </c:forEach>
+                                                        <th>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;">Basic</th>
+                                                        <td>
+                                                            <c:forEach var="salary" items="${salary}">
+                                                                <b><fmt:formatNumber maxFractionDigits="0" value="${salary[7]}"></fmt:formatNumber>.00</b>
+                                                            </c:forEach>
+                                                        </td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;">Leave Balance</th>
+                                                        <th>${leavedayscount}</th>
+                                                        <th></th>
+                                                        <td></td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="3" style="text-align: left;" ><b>Pl Final Amt.</b></th>
+                                                        <th><b><fmt:formatNumber maxFractionDigits="0" value="${totalLyamountCount}"></fmt:formatNumber>.00</b></th>
+                                                        <th></th>
+                                                        <td></td>
+                                                    </tr>
+                                                </table>
+                                                <br>
+
+                                                <c:set var="count" value="0" scope="page" />
+                                                <table style=" width: 100%; height: 0px !important;" border="1">
+                                                    <!--<table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">-->
+                                                    <tr>
+                                                        <th  colspan="4" style="text-align: left;">1.4 Bonus</th>
+                                                    </tr>
+                                                    <td><b>MONTHS</b></td>
+                                                    <td><b>Paid Days</b></td>
+                                                    <td><b>Earned Basic</b></td>
+                                                    <c:forEach var="daysfetch" items="${daysfetch}" varStatus="index" >
+                                                        <tr>
+                                                            <c:if test="${daysfetch[2] == 01}"><td><b>JAN</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 02}"><td><b>FEB</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 03}"><td><b>MAR</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 04}"><td><b>APR</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 05}"><td><b>MAY</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 06}"><td><b>JUN</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 07}"><td><b>JUL</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 08}"><td><b>AUG</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 09}"><td><b>SEP</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 10}"><td><b>OCT</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 11}"><td><b>NOV</b></td></c:if>
+                                                            <c:if test="${daysfetch[2] == 12}"><td><b>DEC</b></td></c:if>
+                                                            <td>${daysfetch[1]}</td>
+                                                            <td><fmt:formatNumber maxFractionDigits="0" value="${bonusFetch[count][1]}"></fmt:formatNumber>.00</td>
+                                                        </tr>
+                                                        <c:set var="count" value="${count + 1}" scope="page"/>
+                                                    </c:forEach>
+                                                    <td><b>TOTAL</b></td>
+                                                    <td><b>${leavedaysfetch}</b></td>
+                                                    <td><b><fmt:formatNumber maxFractionDigits="0" value="${bounsdata}"></fmt:formatNumber>.00</b></td>
+                                                </table>
+                                                <div class="row" align="center"><b>Note:</b> ${notes}</div>
+                                            </div>
                                         </div>
-                                             </div>
-                                                  
+
                                     </div>
                                 </div>
                             </div>
@@ -438,9 +438,9 @@
 
 </script>
 <style>
-        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
-            padding: 0px;
-        }
-    </style>
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+        padding: 0px;
+    }
+</style>
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

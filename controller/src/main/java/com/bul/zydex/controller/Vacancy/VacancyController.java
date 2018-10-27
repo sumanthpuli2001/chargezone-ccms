@@ -1925,7 +1925,7 @@ public class VacancyController extends VacancyAbstract {
         JobtypeMaster jobtypeMaster = new JobtypeMaster();
         BindException errors = new BindException(vacancyMaster, "vacancyMaster");
         bind(request, vacancyMaster);
-        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(5);
+        List<ApprovalUser> approvalList = (List<ApprovalUser>) approvalUserService.readByApprovalId(8);
         String mprMasterid = request.getParameter("mprMasterid");
         MprMaster mm = mprMasterService.readById(Integer.parseInt(mprMasterid));
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

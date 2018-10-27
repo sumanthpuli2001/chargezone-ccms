@@ -12,96 +12,14 @@
     <head>
         <title>Employee Create</title>
     </head>
-    
-     <script>
+
+    <script>
         $(document).ready(function () {
             window.onload = changetotalButton();
             window.onload = changetotalButtonCTC();
         });
 
     </script>
-    <script>
-        function changetotalButton() {
-//            alert("hii");
-            var total = 0;
-            var Ctctotal = 0;
-            var element = document.getElementById('amount1').value;
-//            var conyance = parseInt(document.getElementById("conveysAmount").value);
-            var basicSalary = parseInt(document.getElementById("basicSalary").value);
-            if (parseInt(element) > 0) {
-                total = total + parseInt(element);
-            }
-//            if (parseInt(conyance) > 0) {
-//                total = total + parseInt(conyance);
-//            }
-            if (parseInt(basicSalary) > 0) {
-                total = total + parseInt(basicSalary);
-
-            }
-            document.getElementById("txtresult").value = total;
-            document.getElementById("txtresultCTC").value = total;
-
-
-//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
-        }
-        function totalValueChange(ele, oldvalue) {
-
-            var element = document.getElementById('txtresult').value;
-            var element1 = document.getElementById('txtresultCTC').value;
-            document.getElementById('txtresult').value = '';
-            document.getElementById('txtresult').value = parseInt(ele.value) + parseInt(element) - oldvalue;
-            document.getElementById('txtresultCTC').value = '';
-            document.getElementById('txtresultCTC').value = parseInt(ele.value) + parseInt(element1) - oldvalue;
-//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
-        }
-//        function totalValueChange1(ele) {
-//            alert(parseInt(ele.value));
-//            var element = document.getElementById('txtresult').value;
-//            alert(parseInt(element);
-//                    document.getElementById('txtresult').value = '';
-//            document.getElementById('txtresult').value = parseInt(element) - parseInt(ele.value);
-////            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
-//        }
-    </script>
-    <script>
-        function changetotalButtonCTC() {
-            var total = 0;
-            var element = document.getElementById('ctcamount1').value;
-//            var conyance = parseInt(document.getElementById("conveysAmount").value);
-            var basicSalary = parseInt(document.getElementById("txtresult").value);
-            if (parseInt(element) > 0) {
-                total = total + parseInt(element);
-            }
-//            if (parseInt(conyance) > 0) {
-//                total = total + parseInt(conyance);
-//            }
-            if (parseInt(basicSalary) > 0) {
-                total = total + parseInt(basicSalary);
-
-            }
-            document.getElementById("txtresultCTC").value = total;
-
-
-//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
-        }
-        function totalValueChangeCTC(ele, oldvalue) {
-
-            var element = document.getElementById('txtresultCTC').value;
-            document.getElementById('txtresultCTC').value = '';
-            document.getElementById('txtresultCTC').value = parseInt(ele.value) + parseInt(element) - oldvalue;
-//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
-        }
-//        function totalValueChange1(ele) {
-//            alert(parseInt(ele.value));
-//            var element = document.getElementById('txtresult').value;
-//            alert(parseInt(element);
-//                    document.getElementById('txtresult').value = '';
-//            document.getElementById('txtresult').value = parseInt(element) - parseInt(ele.value);
-////            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
-//        }
-    </script>
-  
-
     <script>
         function buttonFun1() {
             var className = $('#minusId1').attr('class');
@@ -333,6 +251,86 @@
 //        }
     </script>
     <script>
+        function changetotalButton() {
+//            alert("hii");
+            var total = 0;
+            var Ctctotal = 0;
+            var element = document.getElementById('amount1').value;
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("basicSalary").value);
+            if (parseInt(element) > 0) {
+                total = total + parseInt(element);
+            }
+//            if (parseInt(conyance) > 0) {
+//                total = total + parseInt(conyance);
+//            }
+            if (parseInt(basicSalary) > 0) {
+                total = total + parseInt(basicSalary);
+
+            }
+            document.getElementById("txtresult").value = total;
+            document.getElementById("txtresultCTC").value = total;
+
+
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+        function totalValueChange(ele, oldvalue) {
+
+            var element = document.getElementById('txtresult').value;
+            var element1 = document.getElementById('txtresultCTC').value;
+            document.getElementById('txtresult').value = '';
+            document.getElementById('txtresult').value = parseInt(ele.value) + parseInt(element) - oldvalue;
+            document.getElementById('txtresultCTC').value = '';
+            document.getElementById('txtresultCTC').value = parseInt(ele.value) + parseInt(element1) - oldvalue;
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+//        function totalValueChange1(ele) {
+//            alert(parseInt(ele.value));
+//            var element = document.getElementById('txtresult').value;
+//            alert(parseInt(element);
+//                    document.getElementById('txtresult').value = '';
+//            document.getElementById('txtresult').value = parseInt(element) - parseInt(ele.value);
+////            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+//        }
+    </script>
+    <script>
+        function changetotalButtonCTC() {
+            var total = 0;
+            var element = document.getElementById('ctcamount1').value;
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("txtresult").value);
+            if (parseInt(element) > 0) {
+                total = total + parseInt(element);
+            }
+//            if (parseInt(conyance) > 0) {
+//                total = total + parseInt(conyance);
+//            }
+            if (parseInt(basicSalary) > 0) {
+                total = total + parseInt(basicSalary);
+
+            }
+            document.getElementById("txtresultCTC").value = total;
+
+
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+        function totalValueChangeCTC(ele, oldvalue) {
+
+            var element = document.getElementById('txtresultCTC').value;
+            document.getElementById('txtresultCTC').value = '';
+            document.getElementById('txtresultCTC').value = parseInt(ele.value) + parseInt(element) - oldvalue;
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+//        function totalValueChange1(ele) {
+//            alert(parseInt(ele.value));
+//            var element = document.getElementById('txtresult').value;
+//            alert(parseInt(element);
+//                    document.getElementById('txtresult').value = '';
+//            document.getElementById('txtresult').value = parseInt(element) - parseInt(ele.value);
+////            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+//        }
+    </script>
+    <script>
         function selectShift(rotationId) {
 //            alert('Call Ajax');
             var shiftMasterId = document.getElementById("shiftName").value;
@@ -449,7 +447,7 @@
             selectsubtype(empTypeId);
         });
     </script>
-   <script>
+    <script>
         var tempCount4 = 1;
         $(function () {
             $("#ctcCloneid").on("click", function () {
@@ -461,7 +459,7 @@
                         + "</select>"
                         + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
                         //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'   onFocus=\"(this.id=this.value)\" onchange=\"totalValueChangeCTC(this,this.id);\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'   onFocus=\"(this.id=this.value)\" onchange=\"totalValueChangeCTC(this,this.id);\" min=\"0\" value=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount4 + "' id='taxable" + tempCount4 + "'</td>"
                         + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
                         + "<option value=\"\">--SELECT--</option>"
@@ -541,7 +539,8 @@
                 tempCount4--;
 
                 var val = document.getElementById("ctcCount").value;
-                var element = document.getElementById("ctcamount" + val).value;
+                var element = document.getElementsByName("ctcamount" + val)[0].value;
+//                var element = document.getElementById("ctcamount" + val).value;
 
                 val = val - 1;
 
@@ -572,7 +571,7 @@
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.id=this.value)\" onchange=\"totalValueChange(this,this.id);\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.id=this.value)\" onchange=\"totalValueChange(this,this.id);\" min=\"0\" value=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -617,7 +616,10 @@
 
                 var val = document.getElementById("policyCount").value;
 
-                var element = document.getElementById("amount" + val).value;
+
+                var element = document.getElementsByName("amount" + val)[0].value;
+
+//                    alert(document.getElementById("amount" + val).value);
 
                 val = val - 1;
 
@@ -639,6 +641,7 @@
 
     </script>
 
+
     <script>
         function setDesignation() {
 
@@ -651,10 +654,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Employee Induction Form:</h1>
+            <h1>EMPLOYEE REGISTRATION FORM</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Induction</li>
+                <li class="active">Employee Registration Form</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -690,7 +693,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Employee No.:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="employeeId" class="form-control" onkeyup="userName1();"></form:input>
+                                                        <form:input path="employeeId" class="form-control" onkeyup="userName1();" ></form:input>
                                                         <form:errors path="employeeId" cssClass="errorDiv"></form:errors>
                                                         </div>
 
@@ -934,14 +937,14 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label >Emergency Contact Person:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="emergencyContactPerson" class="form-control"></form:input>
-                                                        <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
+                                                            <label >Emergency Contact Person:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="emergencyContactPerson" class="form-control"></form:input>
+                                                            <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
+                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                            <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
                                                 </div><!-- /.col -->
@@ -963,9 +966,9 @@
 
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>PAN Card No:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="panCard" class="form-control"  style="text-transform: uppercase" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
-                                                        <form:errors path="panCard" cssClass="errorDiv"></form:errors>
+                                                            <label>PAN Card No:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="panCard" class="form-control"  style="text-transform: uppercase" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
+                                                            <form:errors path="panCard" cssClass="errorDiv"></form:errors>
                                                         </div>
 
                                                         <div class="col-sm-6">
@@ -1036,30 +1039,30 @@
                                                         </div>
 
                                                         <div class="col-sm-6">
-                                                            <label>Highest Education Details:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
-                                                        <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
+                                                            <label>Highest Education Details:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
+                                                            <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <div class="col-sm-6">
-                                                                <label>Experience On Date Of Joining: Year:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:select path="experienceYearOnDoj" class="form-control ">
-                                                                <c:forEach begin="0" end="50" var="counter">
-                                                                    <form:option value="${counter}">${counter}</form:option>
-                                                                </c:forEach>
-                                                            </form:select>
-                                                            <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
+                                                                <label>Experience On Date Of Joining: Year:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <form:select path="experienceYearOnDoj" class="form-control ">
+                                                                    <c:forEach begin="0" end="50" var="counter">
+                                                                        <form:option value="${counter}">${counter}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
+                                                                <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <label>Experience On Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:select path="experienceMonthOnDoj" class="form-control ">
-                                                                <c:forEach begin="0" end="11" var="counter">
-                                                                    <form:option value="${counter}">${counter}</form:option>
-                                                                </c:forEach>
-                                                            </form:select>
-                                                            <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
+                                                                <label>Experience On Date Of Joining: Month:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <form:select path="experienceMonthOnDoj" class="form-control ">
+                                                                    <c:forEach begin="0" end="11" var="counter">
+                                                                        <form:option value="${counter}">${counter}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
+                                                                <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
@@ -1076,13 +1079,21 @@
                                                     <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Employee Location Code:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="employeeLocation"  class="form-control"></form:input>
+                                                        <form:errors path="employeeLocation" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option>
                                                             <form:options items="${EmployeeTypeList}"></form:options>
                                                         </form:select>
                                                         <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6" id="employeeSubTypeId">
                                                             <label>Employee SubType:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
@@ -1093,8 +1104,6 @@
 
 
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="zydexLocationMaster.id" class="form-control ">
@@ -1103,6 +1112,9 @@
                                                         </form:select>
                                                         <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Work Location:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="locationMaster.id" class="form-control ">
@@ -1111,8 +1123,6 @@
                                                         </form:select>
                                                         <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
@@ -1121,6 +1131,9 @@
                                                         </form:select>
                                                         <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="departmentMaster.id" class="form-control">
@@ -1129,8 +1142,6 @@
                                                         </form:select>
                                                         <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="designationMasterByLevelId" id="designationMasterByLevelId" class="form-control" onchange="setDesignation()">
@@ -1140,12 +1151,13 @@
                                                         <form:hidden path="designationMaster.id" class="form-control"></form:hidden>
                                                         <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Role:</label>
                                                         <form:input path="role" class="form-control"></form:input>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -1160,6 +1172,9 @@
                                                                                                                     <label>Last Year's Performance Rating:</label>
                                                     <%--<form:input path="lastYearPerformanceRating" class="form-control"></form:input>--%>
                                                     </div>-->
+
+                                                </div>
+                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Employee Type:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeType" id="employeeType" class="form-control ">
@@ -1167,25 +1182,15 @@
                                                             <form:option value="Confirmed" label="Confirmed"></form:option>
                                                         </form:select>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label >Contact No.:</label>
                                                         <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="shiftType" class="form-control">
-                                                            <!--<option value="">--SELECT--</option>-->
-                                                            <form:option value="" label="-- Select --" ></form:option>
-                                                            <form:option value="HourlyBase" label="Hourly Base"></form:option>
-                                                            <form:option value="ShiftBase" label="Shift Base"></form:option>
-                                                        </form:select>
-                                                        <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
-                                                        </div>
+
                                                     </div>
                                                     <div class="form-group">
+
                                                         <div class="col-sm-6" id="hourlyBaseTitleDiv" style="display: none">
                                                             <label>Hourly Base Title:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="shiftHoursId" id="shiftHoursId" class="form-control">
@@ -1242,6 +1247,16 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
+                                                            <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="shiftType" class="form-control">
+                                                            <!--<option value="">--SELECT--</option>-->
+                                                            <form:option value="" label="-- Select --" ></form:option>
+                                                            <form:option value="HourlyBase" label="Hourly Base"></form:option>
+                                                            <form:option value="ShiftBase" label="Shift Base"></form:option>
+                                                        </form:select>
+                                                        <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
                                                             <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
                                                                 <option value="">--SELECT--</option>
@@ -1250,20 +1265,17 @@
                                                             </c:forEach>
                                                         </select>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary"/>
-                                                        <form:errors path="basicSalary" cssClass="errorDiv"/>
-                                                    </div>
+
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Employee Location Code:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="employeeLocation"  class="form-control"></form:input>
-                                                        <form:errors path="employeeLocation" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="basicSalary"  id="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();" />
+                                                        <form:errors path="basicSalary" cssClass="errorDiv"/>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="esicNo" class="form-control"  placeholder="Enter ESIC No"/>
                                                             <form:errors path="esicNo" cssClass="errorDiv"/>
                                                     </div>
@@ -1280,6 +1292,7 @@
                                                         <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
+
                                                     <div class="form-group">
                                                         <div class="col-sm-4">
                                                             <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
@@ -1289,7 +1302,7 @@
                                                         </fieldset>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <label>Provident Tax:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Professional Tax:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <fieldset>
                                                             <form:radiobutton path="pt"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <form:radiobutton path="pt" value="true"/>YES
@@ -1475,7 +1488,6 @@
                                                     <form:textarea  path="jobDescription" id="editor"></form:textarea>
                                                     <form:errors path="jobDescription" cssClass="errorDiv"/>
                                                 </div>
-
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
@@ -1674,7 +1686,7 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                 </div>
@@ -2304,6 +2316,20 @@
         initSample();
 
 
+    </script>
+    <script type="text/javascript">
+        window.onload = init;
+        function init() {
+            document.form1.month.options[new Date().getMonth()].selected = true;
+        }
+        var start = new Date().getFullYear();
+        var end = 2050;
+        var options11 = "";
+//        var objSelect = document.getElementById("yearBase").value;
+        for (var year1 = start; year1 <= end; year1++) {
+            options11 += "<option>" + year1 + "</option>";
+        }
+        document.getElementById('year1').innerHTML = options11;
     </script>
 
 </html>

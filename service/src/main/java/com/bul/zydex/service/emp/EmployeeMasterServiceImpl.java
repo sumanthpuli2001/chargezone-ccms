@@ -462,4 +462,9 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> readEmployeeCodeAutoGenerate() {
         return employeeMasterDAO.readEmployeeCodeAutoGenerate();
     }
+
+    @Override
+    public boolean isExistUSername(String employeeID) {
+        return employeeMasterDAO.isExistUSername(employeeID);
+    }
 }

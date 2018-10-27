@@ -459,8 +459,8 @@
                         + "</select>"
                         + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
                         //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'   onFocus=\"(this.id=this.value)\" onchange=\"totalValueChangeCTC(this,this.id);\" min=\"0\" class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount4 + "' id='taxable" + tempCount4 + "'</td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'   onFocus=\"(this.id=this.value)\" onchange=\"totalValueChangeCTC(this,this.id);\" min=\"0\" value=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='ctctaxable" + tempCount4 + "' id='ctctaxable" + tempCount4 + "'</td>"
                         + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
                         + "<option value=\"\">--SELECT--</option>"
                         + "<option value=\"01\">January</option>"
@@ -571,7 +571,7 @@
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.id=this.value)\" onchange=\"totalValueChange(this,this.id);\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.id=this.value)\" onchange=\"totalValueChange(this,this.id);\" min=\"0\" value=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -1429,7 +1429,7 @@
                                                                     <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" >
                                                                 </td>
                                                                 <td style="text-align: center">
-                                                                    <input type="checkbox" name="taxable1" id="taxable1" >
+                                                                    <input type="checkbox" name="ctctaxable1" id="ctctaxable1" >
                                                                 </td>
                                                                 <td id="monthTd1"><div>
                                                                         <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->

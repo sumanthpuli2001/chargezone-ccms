@@ -192,4 +192,6 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readEmployeeDetailUserIdWiseShiftRegurazation(T object);
 
     public List<?> readEmployeeCodeAutoGenerate();
+
+    public boolean isExistUSername(String employeeID);
 }

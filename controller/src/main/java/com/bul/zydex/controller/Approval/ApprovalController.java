@@ -187,6 +187,7 @@ public class ApprovalController extends ApprovalAbstract {
         EmployeeMaster employeeMaster = new EmployeeMaster();
         ApprovalUser approvalUser = new ApprovalUser();
         String approvalMasterId = request.getParameter("id");
+        approvalMaster = approvalMasterService.readById(Integer.parseInt(approvalMasterId));
         BindException errors = new BindException(approvalMaster, "approvalMaster");
         bind(request, approvalMaster);
         String policyId1 = request.getParameter("policyId1");

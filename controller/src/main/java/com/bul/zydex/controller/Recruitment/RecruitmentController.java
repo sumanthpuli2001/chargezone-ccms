@@ -32,6 +32,8 @@ import com.bul.zydex.model.RecruitmentMaster;
 import com.bul.zydex.model.RecruitmentMppApproval;
 import com.bul.zydex.model.VacancyMaster;
 import com.bul.zydex.service.Vacancy.VacancyApprovalHistoryService;
+import com.bul.zydex.util.DownloadFile;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 //import com.bul.zydex.model.RecruitmentMaster;
@@ -880,7 +882,7 @@ public class RecruitmentController extends RecruitmentAbstract {
         int candJobApplicationid = Integer.parseInt(id);
 
         CandidateJobApplication cja = candidateJobApplicationService.readById(candJobApplicationid);
-         
+
         candidateApplyJob = candidateJobApplyService.readById(cja.getCandidateApplyJob().getId());
         CandidateApplyJob2 candidateApplyJob2 = candidateApplyJob2Service.readByApplyJobId(candidateApplyJob.getId());
         List<?> candidateAcademicQualification = candidateAcademicQualificationService.readListByApplyJobId(candidateApplyJob.getId());
@@ -1521,7 +1523,8 @@ public class RecruitmentController extends RecruitmentAbstract {
 
         return mv;
     }
-      public ModelAndView CandidateViewClickPrint(HttpServletRequest request,
+
+    public ModelAndView CandidateViewClickPrint(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();
@@ -1673,6 +1676,43 @@ public class RecruitmentController extends RecruitmentAbstract {
         request.setAttribute("iduservancy", id);
         mv.setViewName("CandidateFtoF/ShowF2FInterviewPrint");
         return mv;
+    }
+
+    public void readOfferLetterpdfFile(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String fileName = request.getParameter("fileName");
+        String employeeName = request.getParameter("empName");
+
+        String filePath = File.separator + "StorageYard" + File.separator
+                + "OfferLetter" + File.separator + employeeName + File.separator
+                + fileName;
+
+        String appPath = request.getServletContext().getRealPath("");
+
+        String fullPath = appPath + filePath;
+
+        request.setAttribute("filePath", fullPath);
+
+        DownloadFile downloadFile = new DownloadFile();
+        downloadFile.doDownload(request, response);
+    }
+    public void readApoimentLetterpdfFile(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String fileName = request.getParameter("fileName");
+        String employeeName = request.getParameter("empName");
+
+        String filePath = File.separator + "StorageYard" + File.separator
+                + "AppointmentLetter" + File.separator + employeeName + File.separator
+                + fileName;
+
+        String appPath = request.getServletContext().getRealPath("");
+
+        String fullPath = appPath + filePath;
+
+        request.setAttribute("filePath", fullPath);
+
+        DownloadFile downloadFile = new DownloadFile();
+        downloadFile.doDownload(request, response);
     }
 
 }

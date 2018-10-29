@@ -2476,4 +2476,16 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public boolean isExistUSername(String employeeID) {
+        String query = "";
+        query += " FROM EmployeeMaster a"
+                + " WHERE a.employeeId='" + employeeID + "'";
+        List<?> list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
 }

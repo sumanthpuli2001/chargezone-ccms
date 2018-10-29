@@ -26,7 +26,7 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
     @Override
     public List<?> fetchctcData(int empId) {
         String query = "";
-        query += " select b.id,b.ctcName,a.amount,a.status,a.month,a.year"
+        query += " select b.id,b.ctcName,a.amount,a.status,a.month,a.year,a.id"
                 + " FROM EmployeeCtcDetail a "
                 + " left join a.ctcAllowance b"
                 + " left join a.employeeMaster c"

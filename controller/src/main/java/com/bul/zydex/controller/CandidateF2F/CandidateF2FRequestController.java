@@ -370,10 +370,9 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
             String msg = certificateTemplate.getCertificateBody().replaceAll("&Acirc;", "");
             String name = "Offer Letter";
             String path = getpdfOfferLetter(msg, candidateApplyJob.getName(), name);
-          
-            
+
             String attachementFileLocationURL = getServletContext().getRealPath("/")
-                   + "StorageYard" + File.separator + "OfferLetter"
+                    + "StorageYard" + File.separator + "OfferLetter"
                     + File.separator + employeeName + File.separator;
             String attachementFileURL = "StorageYard" + File.separator + "OfferLetter"
                     + File.separator + employeeName + File.separator;
@@ -386,11 +385,10 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
                     l1.add(file.getName());
                     l.add(l1);
                 }
-                
-            }
-           
 
-            sendMail.sendMailofferLetter(from, To, Subject, msg, name,employeeName,l);
+            }
+
+            sendMail.sendMailofferLetter(from, To, Subject, msg, name, employeeName, l);
         } catch (Exception e) {
         }
 
@@ -608,13 +606,12 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
             String To = employeeMaster2.getOfficeEmailId();
             String Subject = certificateTemplate.getCertificateName();
             String msg = certificateTemplate.getCertificateBody().replaceAll("&Acirc;", "");
-            
-             String name = "Appointment Letter";
-            String path = getpdfAppoimentLetter(msg,employeeMaster2.getEmployeeName(), name);
-          
-            
+
+            String name = "Appointment Letter";
+            String path = getpdfAppoimentLetter(msg, employeeMaster2.getEmployeeName(), name);
+
             String attachementFileLocationURL = getServletContext().getRealPath("/")
-                   + "StorageYard" + File.separator + "AppointmentLetter"
+                    + "StorageYard" + File.separator + "AppointmentLetter"
                     + File.separator + employeeMaster2.getEmployeeName() + File.separator;
             String attachementFileURL = "StorageYard" + File.separator + "AppointmentLetter"
                     + File.separator + employeeMaster2.getEmployeeName() + File.separator;
@@ -627,19 +624,10 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
                     l1.add(file.getName());
                     l.add(l1);
                 }
-                
+
             }
-           
-            
-            
-            
-            
-            
-            
-            
-            
-            
-          sendMail.sendMailofferLetter(from, To, Subject, msg, name,employeeMaster2.getEmployeeName(),l);
+
+            sendMail.sendMailofferLetter(from, To, Subject, msg, name, employeeMaster2.getEmployeeName(), l);
         } catch (Exception e) {
         }
 
@@ -659,11 +647,12 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
 //        mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
 //        mprApprovalHistoryService.create(mprApprovalHistory);
         List<?> candidateJobList = candidateJobApplicationService.readCandidateApplyForJob();
-
+        CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
+        OnlineAssessment onlineAssessment = new OnlineAssessment();
         mv.getModelMap().put("list", candidateJobList);
         questionList(request);
-//        mv.getModelMap().put("onlineAssessment", onlineAssessment);
-//        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
+        mv.getModelMap().put("onlineAssessment", onlineAssessment);
+        mv.getModelMap().put("candidateApplyJob", candidateApplyJob);
         mv.setViewName("Recruitment/CandidateRequestList");
         request.setAttribute("successMessage",
                 "Information : The Appointment Letter Sent successfully.");
@@ -704,9 +693,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         return filePath;
     }
 
-    
-    
-     public String getpdfAppoimentLetter(String msg, String name, String certiName) throws FileNotFoundException, DocumentException, IOException, CssResolverException {
+    public String getpdfAppoimentLetter(String msg, String name, String certiName) throws FileNotFoundException, DocumentException, IOException, CssResolverException {
 
         Document document = new Document(PageSize.A4, 0, 0, 0, 0);
         String filePath = "StorageYard"

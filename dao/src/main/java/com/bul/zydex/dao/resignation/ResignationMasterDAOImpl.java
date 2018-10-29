@@ -283,7 +283,7 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
 
     @Override
     public List<?> fetchBWdate(int empId, String eftDate, String relivDate) {
-          Session s = getSessionFactory().openSession();
+        Session s = getSessionFactory().openSession();
         String sqlString = "SELECT"
                 + "  b.id, b.gross_total, b.month, b.year"
                 + " FROM"
@@ -292,9 +292,10 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
                 + " hr_power_astral.employee_salary_process b"
                 + " ON a.emp_master_id = b.employee_master_id"
                 + " WHERE"
-                + " month BETWEEN DATE_FORMAT(STR_TO_DATE('"+eftDate+"' , '%d/%m/%Y - %H:%i'),'%m')"
-                + " AND DATE_FORMAT(STR_TO_DATE( '"+relivDate+"' , '%d/%m/%Y - %H:%i'),'%m')"
-                + " AND  b.employee_master_id =" + empId;
+                + " month BETWEEN DATE_FORMAT(STR_TO_DATE('" + eftDate + "' , '%d/%m/%Y - %H:%i'),'%m')"
+                + " AND DATE_FORMAT(STR_TO_DATE( '" + relivDate + "' , '%d/%m/%Y - %H:%i'),'%m')"
+                + " AND  b.employee_master_id =" + empId
+                + " group by b.id";
         SQLQuery query = s.createSQLQuery(sqlString);
         List<?> list = query.list();
         s.close();

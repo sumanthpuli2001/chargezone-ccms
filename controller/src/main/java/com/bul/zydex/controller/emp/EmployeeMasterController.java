@@ -208,6 +208,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //            mv.addAllObjects(errors.getModel());
 //            mv.setViewName("Employee/EmployeeRegistrationForm");
 //        }
+
+        if (!employeeMasterService.isExistUSername(userName)) {
+            if (userMasterService.isExist(userName)) {
+                userMaster.setUserName(userName);
+                List<?> tempList = userMasterService.read(userMaster);
+                UserMaster user2;
+                user2 = (UserMaster) tempList.get(0);
+                userMasterService.delete(user2.getId());
+
+            }
+        }
+
         employeeMasterValidator.validate(employeeMaster, errors);
         if (errors.hasErrors()) {
 
@@ -261,34 +273,6 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     employeeMaster.setShiftHoursId(Integer.parseInt(shfitId));
                 }
             }
-//            employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
-            // employeeMaster.setId(userMaster.getId());
-            employeeMaster.setUserMaster(userMaster);
-//                employeeMaster.setReportingManagerLevel1(reportingManagerLevel1);
-//                employeeMaster.setReportingManagerLevel2(reportingManagerLevel2);
-//                employeeMaster.setReportingManagerLevel3(reportingManagerLevel3);
-//                employeeMaster.setReportingManagerLevel4(reportingManagerLevel4);
-//                employeeMaster.setReportingManagerLevel5(reportingManagerLevel5);
-//                employeeMaster.setReportingManagerLevel6(reportingManagerLevel6);
-            employeeMaster.setPanCard(String.valueOf(employeeMaster.getPanCard()).toUpperCase());//this is for store pan card in uppercase in database.
-            userMaster.setFirstTime(true);
-//set firstTime is true for compulsory password change on first time login
-            userMasterService.create(userMaster);
-            if (employeeMaster.getPfAmount().equals("")) {
-                employeeMaster.setPfAmount("0");
-            }
-            if (employeeMaster.getPfAmountEmployer().equals("")) {
-                employeeMaster.setPfAmountEmployer("0");
-            }
-            if (employeeMaster.getPt().equals("")) {
-                employeeMaster.setPt(false);
-            }
-            if (employeeMaster.getTdsAmount().equals("")) {
-                employeeMaster.setTdsAmount("0");
-            }
-            if (employeeMaster.getPf().equals("")) {
-                employeeMaster.setPf(false);
-            }
 
             // employee Code automically Generate 
             int employeeLoactionCode = employeeMaster.getLocationMaster().getId();
@@ -312,6 +296,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             empCodeString = "SPCLS" + "/" + year122 + "/" + month122 + "/" + locationCode + "/" + (Integer.parseInt(oldempcodesplit) + 1);
 
             employeeMaster.setAutoGenerationCode(empCodeString);
+//            employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
+            // employeeMaster.setId(userMaster.getId());
+            employeeMaster.setUserMaster(userMaster);
+//                employeeMaster.setReportingManagerLevel1(reportingManagerLevel1);
+//                employeeMaster.setReportingManagerLevel2(reportingManagerLevel2);
+//                employeeMaster.setReportingManagerLevel3(reportingManagerLevel3);
+//                employeeMaster.setReportingManagerLevel4(reportingManagerLevel4);
+//                employeeMaster.setReportingManagerLevel5(reportingManagerLevel5);
+//                employeeMaster.setReportingManagerLevel6(reportingManagerLevel6);
+            employeeMaster.setPanCard(String.valueOf(employeeMaster.getPanCard()).toUpperCase());//this is for store pan card in uppercase in database.
+            userMaster.setFirstTime(true);
+//set firstTime is true for compulsory password change on first time login
+            userMasterService.create(userMaster);
 
             employeeMasterService.create(employeeMaster);
             //Code for Employee Policy Detail
@@ -707,6 +704,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         } else {
             request.setAttribute("failureMessage",
                     "Error : User isExist.");
+            selectEmployee(request, response);
+            selectedEmployeeLevel1(request, employeeMaster);
+            mv.getModelMap().put("employeeMaster", employeeMaster);
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Employee/EmployeeRegistrationForm");
 
@@ -833,6 +833,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             policyList.add(policyDetail[2]);
             policyList.add(policyDetail[3]);
             policyList.add(policyDetail[4]);
+            policyList.add(policyDetail[5]);
             finalPolicyList.add(policyList);
         }
         List finalctcList = new ArrayList();
@@ -847,6 +848,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             ctcList.add(policyDetail1[3]);
             ctcList.add(policyDetail1[4]);
             ctcList.add(policyDetail1[5]);
+            ctcList.add(policyDetail1[6]);
+
 //            ctcList.add(policyDetail1[3]);
             finalctcList.add(ctcList);
         }
@@ -1147,7 +1150,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     employeeCtcDetail.setEmployeeMaster(employeeMaster);
                     employeeCtcDetail.setAmount(amount);
                     employeeCtcDetail.setCtcAllowance(ctcAllowance);
-                    if (null != request.getParameter("taxable" + i)) {
+                    if (null != request.getParameter("ctctaxable" + i)) {
                         employeeCtcDetail.setStatus(1);
                     } else {
                         employeeCtcDetail.setStatus(0);
@@ -4450,6 +4453,47 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //            mv.addAllObjects(errors.getModel());
 //            mv.setViewName("Employee/EmployeeRegistrationForm");
 //        }
+
+        if (!employeeMasterService.isExistUSername(userName)) {
+            if (userMasterService.isExist(userName)) {
+                userMaster.setUserName(userName);
+                List<?> tempList = userMasterService.read(userMaster);
+                UserMaster user2;
+                user2 = (UserMaster) tempList.get(0);
+                userMasterService.delete(user2.getId());
+
+            }
+        }
+
+        // employee Code automically Generate 
+        int employeeLoactionCode = employeeMaster.getLocationMaster().getId();
+        LocationMaster ltm = locationMasterService.readById(employeeLoactionCode);
+        String locationCode = ltm.getLocationCode();
+        String empCodeString = "";
+        SimpleDateFormat sdf11 = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate11 = new Date();
+//        approvalMaster.setCreatedBy(approvalMaster1);
+        String CureentDate = sdf11.format(cDate11);
+        String[] endDateSplited = CureentDate.split("/");
+        String empFormat = "";
+        String month122 = endDateSplited[1];
+        String year122 = endDateSplited[2];
+
+        List<?> empCodeList = employeeMasterService.readEmployeeCodeAutoGenerate();
+        Object[] codeList = (Object[]) empCodeList.get(0);
+        String oldempCode = codeList[1].toString();
+        String[] oldempCodeSplited = oldempCode.split("/");
+        String oldempcodesplit = oldempCodeSplited[4];
+        empCodeString = "SPCLS" + "/" + year122 + "/" + month122 + "/" + locationCode + "/" + (Integer.parseInt(oldempcodesplit) + 1);
+
+        employeeMaster.setAutoGenerationCode(empCodeString);
+        if (employeeMaster.getPfAmount().equals("")) {
+            employeeMaster.setPfAmount("0");
+        }
+
+        if (employeeMaster.getPfAmount().equals("")) {
+            employeeMaster.setPfAmount("0");
+        }
         employeeMasterValidator.validate(employeeMaster, errors);
         if (errors.hasErrors()) {
 
@@ -4516,40 +4560,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //set firstTime is true for compulsory password change on first time login
 
             userMasterService.create(userMaster);
-            if (employeeMaster.getPfAmount().equals("")) {
-                employeeMaster.setPfAmount("0");
-            }
+
             CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
 //            ApplayJobUserMaster ajum = applayJobUserMasterService.readById(cja.getApplayJobUserMaster().getId());
 //            ajum.setFirstTime(5);
             cja.setStatus(13);
             candidateJobApplicationService.update(cja);
 
-            // employee Code automically Generate 
-            int employeeLoactionCode = employeeMaster.getLocationMaster().getId();
-            LocationMaster ltm = locationMasterService.readById(employeeLoactionCode);
-            String locationCode = ltm.getLocationCode();
-            String empCodeString = "";
-            SimpleDateFormat sdf11 = new SimpleDateFormat("dd/MM/yyyy");
-            Date cDate11 = new Date();
-//        approvalMaster.setCreatedBy(approvalMaster1);
-            String CureentDate = sdf11.format(cDate11);
-            String[] endDateSplited = CureentDate.split("/");
-            String empFormat = "";
-            String month122 = endDateSplited[1];
-            String year122 = endDateSplited[2];
-
-            List<?> empCodeList = employeeMasterService.readEmployeeCodeAutoGenerate();
-            Object[] codeList = (Object[]) empCodeList.get(0);
-            String oldempCode = codeList[1].toString();
-            String[] oldempCodeSplited = oldempCode.split("/");
-            String oldempcodesplit = oldempCodeSplited[4];
-            empCodeString = "SPCLS" + "/" + year122 + "/" + month122 + "/" + locationCode + "/" + (Integer.parseInt(oldempcodesplit) + 1);
-
-            employeeMaster.setAutoGenerationCode(empCodeString);
-            if (employeeMaster.getPfAmount().equals("")) {
-                employeeMaster.setPfAmount("0");
-            }
             employeeMasterService.create(employeeMaster);
             //Code for Employee Policy Detail
 //            userMasterService.create(userMaster);
@@ -4596,7 +4613,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         employeeCtcDetail.setEmployeeMaster(employeeMaster);
                         employeeCtcDetail.setAmount(amount);
                         employeeCtcDetail.setCtcAllowance(ctcAllowance);
-                        if (null != request.getParameter("taxable" + i)) {
+                        if (null != request.getParameter("ctctaxable" + i)) {
                             employeeCtcDetail.setStatus(1);
                         } else {
                             employeeCtcDetail.setStatus(0);
@@ -5115,5 +5132,23 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv = excelUploadAllowance(request, response);
 
         return mv;
+    }
+
+    public void deletePolicy(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try {
+            int policyId = Integer.parseInt(request.getParameter("policyId"));
+            employeePolicyDetailService.delete(policyId);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+    }
+
+    public void deleteCtcId(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        try {
+            int empCtcId = Integer.parseInt(request.getParameter("empCtcId"));
+            employeeCtcDetailService.delete(empCtcId);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
     }
 }

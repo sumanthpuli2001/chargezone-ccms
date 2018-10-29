@@ -162,6 +162,10 @@
                                                                         <button type="button" onclick="ViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
+                                                                        <c:if test="${list[8] eq 13}">
+                                                        <!--<a href="<%= request.getContextPath()%>/StorageYard/OfferLetter/${candidateApplyJob.name}/Offer Letter.pdf"> Offer Letter Download</a>-->
+                                                                            <span>[ <a href="recruitment.htm?act=readApoimentLetterpdfFile&amp;fileName=Appointment Letter.pdf&empName=${list[3]}"> Appointment Letter</a> ]</span>
+                                                                        </c:if>
                                                                     </div>
                                                                 </td>
                                                                 <%--</c:if>--%>

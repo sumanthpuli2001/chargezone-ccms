@@ -175,7 +175,7 @@
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.id=this.value)\" onchange=\"totalValueChange(this,this.id);\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.id=this.value)\" onchange=\"totalValueChange(this,this.id);\" min=\"0\" value=\"0\" class=\"form-control\"></td>"
                         + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -276,15 +276,20 @@
 //                
                 tempCount3--;
 //                alert(policyDiv);
-
+                var element2 = 0;
+                var element = 0;
+                var element21 = 0;
                 var val = document.getElementById("policyCount").value;
-//                alert(val);
-//                var obj2 = document.getElementById("policyId" + tempCount3).value;
-//                alert(policyDiv);
-                var element = document.getElementById("amount" + policyDiv).value;
+                
+//            
+                element = document.getElementsByName("amount" + val)[0].value;
+             
                 val = val - 1;
-                var element2 = document.getElementById('txtresult').value;
-                var element21 = document.getElementById('txtresultCTC').value;
+              
+                element2 = document.getElementById('txtresult').value;
+               
+                element21 = document.getElementById('txtresultCTC').value;
+              
 //                alert(element2);
                 document.getElementById('txtresult').value = '';
                 document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
@@ -299,23 +304,45 @@
 
             }
         }
+        function removePolicy12(policyId) {
+            var policyId1 = "" + policyId;
+            $.ajax({
+                type: "POST",
+                url: "employeeMaster.htm?act=deletePolicy&policyId=" + policyId1,
+//                    data: "selectedvalue=" + selectedVal,
+                data: {"selectedvalue": policyId},
+                dataType: "text",
+                success: function (responseTxt) {
+//                        alert(responseTxt);
+                    location.reload();
+
+                },
+                error: function () {
+                    ('Error occured');
+                }
+            });
+        }
 
     </script>
 
     <script>
+
         var tempCount4 = 1;
         $(function () {
+            tempCount4 = document.getElementById('ctcCount').value;
             $("#ctcCloneid").on("click", function () {
+
                 tempCount4++;
-                //                alert(tempCount3);
+
                 var clone = "<tr id='" + tempCount4 + "' style='clear:both;'>"
                         + "<td style=\"text-align: center\">" + tempCount4 + "</td>"
                         + "<td id=\"ctcTd" + tempCount4 + "\"><div><select id='ctcId" + tempCount4 + "' name='ctcId" + tempCount4 + "' class=\"form-control\">"
+                        + "<option value =\"\"> --SELECT-- </option>"
                         + "</select>"
                         + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
                         //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'   onFocus=\"(this.id=this.value)\" onchange=\"totalValueChangeCTC(this,this.id);\" min=\"0\" class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'   onFocus=\"(this.id=this.value)\" onchange=\"totalValueChangeCTC(this,this.id);\" min=\"0\" value=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='ctctaxable" + tempCount4 + "' id='ctctaxable" + tempCount4 + "'</td>"
                         + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
                         + "<option value=\"\">--SELECT--</option>"
                         + "<option value=\"01\">January</option>"
@@ -392,7 +419,7 @@
 //            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
         }
         function addActc(id) {
-            //                alert(id);
+
             var element2 = document.getElementById('ctcId1');
             var obj2 = document.getElementById("ctcId" + id);
             for (var i2 = 0; i2 < element2.options.length; i2++) {
@@ -424,7 +451,8 @@
 //                alert(val);
 //                var obj2 = document.getElementById("policyId" + tempCount3).value;
 //                alert(obj2);
-                element = document.getElementById("ctcamount" + policyDiv).value;
+                element = document.getElementsByName("ctcamount" + val)[0].value;
+//                element = document.getElementById("ctcamount" + policyDiv).value;
                 val = val - 1;
                 element2 = document.getElementById('txtresultCTC').value;
 //                alert(element2);
@@ -438,6 +466,24 @@
             } catch (e) {
 
             }
+        }
+        function removeCtc12(empCtcId) {
+            var empCtcId = "" + empCtcId;
+            $.ajax({
+                type: "POST",
+                url: "employeeMaster.htm?act=deleteCtcId&empCtcId=" + empCtcId,
+//                    data: "selectedvalue=" + selectedVal,
+                data: {"selectedvalue": empCtcId},
+                dataType: "text",
+                success: function (responseTxt) {
+//                        alert(responseTxt);
+                    location.reload();
+
+                },
+                error: function () {
+                    ('Error occured');
+                }
+            });
         }
 
     </script>
@@ -1338,7 +1384,7 @@
                                                                             <td style="text-align: center">${countVal.count}</td>
                                                                             <td><div>
                                                                                     <select id="policyId${countVal.count}"  name="policyId${countVal.count}"  class="form-control">
-                                                                                        <option value="">--SELECT-- ${comp[5]}</option>
+                                                                                        <!--<option value="">--SELECT-- </option>-->
                                                                                         <c:forEach var="policyData" items="${policy}" varStatus = "status">
                                                                                             <c:choose>
                                                                                                 <c:when test="${comp[1] == policyData.value}">
@@ -1390,6 +1436,14 @@
                                                                                     <c:if test="${countVal.last}">
                                                                                         <span style='margin-top: 5px;'>
                                                                                             <input type="button" value="+" id="policyCloneid" />
+                                                                                        </span>
+                                                                                    </c:if>
+                                                                                </c:if>
+                                                                                <c:if test="${!countVal.last}">
+                                                                                    <c:if test="${!countVal.last}">
+                                                                                        <span style='margin-top: 5px;'>
+                                                                                            <input type="button" value="-" id="policyRemoveid" onclick="removePolicy12('${comp[5]}')"/>
+                                                                                            <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicy('${comp[5]}')"/>-->
                                                                                         </span>
                                                                                     </c:if>
                                                                                 </c:if>
@@ -1502,18 +1556,19 @@
                                                                             <!--                                                                            <td style="text-align: center">
                                                                                                                                                             <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
                                                                                                                                                         </td>-->
+
                                                                             <td style="text-align: center">
                                                                                 <input type="number" name="ctcamount${countVal.count}" id="ctcamount${countVal.count}" min="0" onchange="changetotalButtonNewCTC(${countVal.count});" class="form-control" value="${comp[2]}">
                                                                             </td>
                                                                             <c:if test="${comp[3] eq 1}">
 
                                                                                 <td style="text-align: center">
-                                                                                    <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" checked="true">
+                                                                                    <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" checked="true">
                                                                                 </td>
                                                                             </c:if>
                                                                             <c:if test="${comp[3] ne 1}">
                                                                                 <td style="text-align: center">
-                                                                                    <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" >
+                                                                                    <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" >
                                                                                 </td>
                                                                             </c:if>
                                                                             <td ><div>
@@ -1779,6 +1834,13 @@
                                                                                         </span>
                                                                                     </c:if>
                                                                                 </c:if>
+                                                                                <c:if test="${!countVal.last}">
+                                                                                    <c:if test="${!countVal.last}">
+                                                                                        <span style='margin-top: 5px;'>
+                                                                                            <input type="button" value="-" id="ctcRemoveid" onclick="removeCtc12('${comp[6]}')"/>
+                                                                                        </span>
+                                                                                    </c:if>
+                                                                                </c:if>
                                                                             </td>
                                                                         </tr>
                                                                     </c:forEach>
@@ -1806,7 +1868,8 @@
                                                                             <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" value="">
                                                                         </td>
                                                                         <td style="text-align: center">
-                                                                            <input type="checkbox" name="taxable1" id="taxable1" >
+                                                                          
+                                                                            <input type="checkbox" name="ctctaxable1" id="ctctaxable1" >
                                                                         </td>
                                                                         <td id="monthTd1"><div>
                                                                                 <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->

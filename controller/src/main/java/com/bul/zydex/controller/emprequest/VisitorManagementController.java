@@ -7,10 +7,10 @@ package com.bul.zydex.controller.emprequest;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
-import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.VisitorManagement;
 import com.bul.zydex.model.VisitorVisitedLocation;
+import com.bul.zydex.model.ZydexLocationMaster;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -26,17 +26,45 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public class VisitorManagementController extends VisitorManagementAbstract {
 
+//    public ModelAndView searchSubmit(HttpServletRequest request,
+//            HttpServletResponse response) throws Exception {
+//        ModelAndView mv = new ModelAndView();
+//        VisitorManagement visitorManagement = new VisitorManagement();
+//        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//        visitorManagement.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+//        List<?> visitorlist = visitorManagementService.readByEmpId(visitorManagement);
+//        mv.getModelMap().put("visitorlist", visitorlist);
+//        mv.getModelMap().put("visitorManagement", visitorManagement);
+//        mv.getModelMap().put("employeeMaster", employeeMaster);
+//        mv.setViewName("VisitorManagement/VisitorResult");
+//        return mv;
+//    }
     public ModelAndView searchSubmit(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         VisitorManagement visitorManagement = new VisitorManagement();
-//         HttpSession session = request.getSession();
-//        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
-        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-        visitorManagement.setEmployeeMasterByEmployeeMasterId(employeeMaster);
-        List<?> visitorlist = visitorManagementService.readByEmpId(visitorManagement);
-        mv.getModelMap().put("visitorlist", visitorlist);
+        mv.getModelMap().put("visitorlist", null);
         mv.getModelMap().put("visitorManagement", visitorManagement);
+        mv.setViewName("VisitorManagement/VisitorResult");
+        return mv;
+    }
+
+    public ModelAndView searchEmpResult(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        VisitorManagement visitorManagement = new VisitorManagement();
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        String status = request.getParameter("status");
+        List<?> visitorlist = visitorManagementService.readSearchEmpRequestForSessionEmployee(employeeMaster.getId(), startDate, endDate, status);
+        mv.getModelMap().put("visitorManagement", visitorManagement);
+        mv.addObject("visitorlist", visitorlist);
+        if (visitorlist.size() > 0) {
+            request.setAttribute("startDate", startDate);
+            request.setAttribute("endDate", endDate);
+            request.setAttribute("status", status);
+        }
         mv.setViewName("VisitorManagement/VisitorResult");
         return mv;
     }
@@ -45,158 +73,514 @@ public class VisitorManagementController extends VisitorManagementAbstract {
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         VisitorManagement visitorManagement = new VisitorManagement();
-        VisitorVisitedLocation visitorVisitedLocation = new VisitorVisitedLocation();
-        HolidayMaster hm = new HolidayMaster();
         HttpSession session = request.getSession();
-        EmployeeMaster employeeMaster = new EmployeeMaster();
-        employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
-        employeeMaster.getReportingManagerLevel1();
-        List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
-        if (!list.isEmpty()) {
-            request.setAttribute("reportingLevel1", list.get(0));
+        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+        String type = request.getParameter("get");
+
+        if (employeeMaster.getEmployeeId().equals("admin")) {
+            request.setAttribute("failureMessage",
+                    "Error : Access Denied, Please Contact To Administrator");
+            if (type == null) {
+                mv.setViewName("VisitorManagement/VisitorResult");
+            } else {
+                mv.setViewName("VisitorManagement/SecurityResult");
+            }
+        } else {
+            employeeMaster.getReportingManagerLevel1();
+            List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
+            if (!list.isEmpty()) {
+                request.setAttribute("reportingLevel1", list.get(0));
+//                mv.setViewName("VisitorManagement/VisitorManagementCreate");
+            }
+            employeeMaster.setDepartmentMaster(departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId()));
+            employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
+            employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
+            employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
+            employeeMaster.setZydexLocationMaster(zydexLocationMasterService.readById(employeeMaster.getZydexLocationMaster().getId()));
+            visitorManagement.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+            if (type == null) {
+                mv.setViewName("VisitorManagement/VisitorManagementCreate");
+            } else {
+                mv.setViewName("VisitorManagement/VisitorCreateBySecurity");
+            }
         }
-        employeeMaster.setDepartmentMaster(departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId()));
-        employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
-        employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
-        employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
-        visitorManagement.setEmployeeMasterByEmployeeMasterId(employeeMaster);
-        visitorManagement.setVisitorVisitedLocation(visitorVisitedLocation);
-        readVisitedlocation(request, response);
+        visitorManagement.setVisitorVisitsToEmployeeId(new EmployeeMaster());
+        visitorManagement.setZydexLocationMaster(new ZydexLocationMaster());
+        zydexLocationList(request);
+        selectEmployee(request, response);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("visitorManagement", visitorManagement);
-        mv.setViewName("VisitorManagement/VisitorManagementCreate");
         return mv;
     }
 
     public ModelAndView createSubmit(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         VisitorManagement visitorManagement = new VisitorManagement();
-        VisitorVisitedLocation visitorVisitedLocation = new VisitorVisitedLocation();
-
-        LocationMaster locationMaster = new LocationMaster();
-        String location = request.getParameter("visitorVisitedLocation.id");
-        BindException errors = new BindException(visitorManagement, "visitorManagement");
-//        readlocation(request, response);
-        readVisitedlocation(request, response);
         bind(request, visitorManagement);
-        Integer empid = visitorManagement.getEmployeeMasterByEmployeeMasterId().getId();
+        String type = request.getParameter("get");
+        try {
+            BindException errors = new BindException(visitorManagement, "visitorManagement");
+            List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
+            if (!list.isEmpty()) {
+                request.setAttribute("reportingLevel1", list.get(0));
+            }
+            
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            
+            visitorManagementValidator.validate(visitorManagement, errors);
+            if (errors.hasErrors()) {
+                request.setAttribute("failureMessage",
+                        "Error : Mandatory Fields should not be blank.");
+                mv.addAllObjects(errors.getModel());
+                zydexLocationList(request);
+                selectEmployee(request, response);
+                if (type == null) {
+                    mv.setViewName("VisitorManagement/VisitorManagementCreate");
+                } else {
+                    mv.setViewName("VisitorManagement/VisitorCreateBySecurity");
+                }
+            } else {
+                if (type == null) {
+                    visitorManagement.setStatus(1);
+                    visitorManagement.setRequestDate(visitorManagement.getRequestDate());
+                    visitorManagementService.create(visitorManagement);
+                    mv = searchSubmit(request, response);
+                } else {
+                    visitorManagement.setStatus(2);
+                    visitorManagement.setRequestDate(sdf.format(new Date()));
+                    visitorManagement.setApproverDate(sdf.format(new Date()));
+                    visitorManagement.setEmployeeMasterBySecurityApproveId(employeeMaster);
+                    visitorManagementService.create(visitorManagement);
+                    mv.setViewName("forward:visitorManagement.htm?act=viewSecurityClick&id=" + visitorManagement.getId() + "&empId=" + employeeMaster.getId() + "&for=view");
+                }
+                request.setAttribute("successMessage",
+                        "Information : Request Successfully generated.");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("visitorManagement", visitorManagement);
+        return mv;
+    }
+
+    public ModelAndView viewClickByEmployee(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession();
         EmployeeMaster employeeMaster = new EmployeeMaster();
-        employeeMaster = employeeMasterService.readById(empid);
+        String id = request.getParameter("id");
+        VisitorManagement visitorManagement = visitorManagementService.readById(Integer.parseInt(id));
+        employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
         List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
         if (!list.isEmpty()) {
             request.setAttribute("reportingLevel1", list.get(0));
         }
+        try {
+            employeeMaster.setDepartmentMaster(departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId()));
+            employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
+            employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
+            employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
+            employeeMaster.setZydexLocationMaster(zydexLocationMasterService.readById(employeeMaster.getZydexLocationMaster().getId()));
+            visitorManagement.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+            ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(visitorManagement.getZydexLocationMaster().getId());
+            request.setAttribute("zydexLocation", zydexLocationMaster.getZydexLocation());
+            EmployeeMaster empMasterVisitsTo = employeeMasterService.readById(visitorManagement.getVisitorVisitsToEmployeeId().getId());
+            DesignationMaster desigVisitsTo = designationMasterService.readById(empMasterVisitsTo.getDesignationMaster().getId());
+            String empVisitsToString = "" + empMasterVisitsTo.getEmployeeId().toString() + " /" + empMasterVisitsTo.getEmployeeName().toString() + " /" + desigVisitsTo.getDesignationName().toString();
+            request.setAttribute("empVisitsToString", empVisitsToString);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("visitorManagement", visitorManagement);
+        mv.setViewName("VisitorManagement/VisitorView");
+        return mv;
+    }
 
-        visitorManagementValidator.validate(visitorManagement, errors);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        if (errors.hasErrors()) {
-            request.setAttribute("failureMessage",
-                    "Error : Mandatory Fields should not be blank.");
-            mv.addAllObjects(errors.getModel());
-            mv.setViewName("VisitorManagement/VisitorManagementCreate");
-        } else {
-            String requestdate = sdf.format(new Date());
-            visitorManagement.setRequestDate(requestdate);
-            visitorManagement.setStatus(1);
-            if (locationMaster.getId() == null && location == "") {
-                request.setAttribute("failureMessage", "Error :Select Visitor Visits To Location");
-                mv.getModelMap().put("visitorManagement", visitorManagement);
-                mv.setViewName("VisitorManagement/VisitorManagementCreate");
-            } else {
-                visitorVisitedLocation = visitorVisitedLocationService.readById(Integer.parseInt(location));
-                visitorManagement.setVisitorVisitedLocation(visitorVisitedLocation);
-                visitorManagementService.create(visitorManagement);
-                request.setAttribute("successMessage",
-                        "Information : Request Sent Successfully.");
-                //    Email Sent to Security
-                List<?> SecurityList = userRightMasterService.readSecurityList();
-                for (Object o : SecurityList) {
-                    Object[] o1 = (Object[]) o;
-                    int SecurityId = (int) o1[0];
-                    try {
-                        EmailTemplate emailTemplate = new EmailTemplate();
-                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                        DesignationMaster designationMaster = new DesignationMaster();
-                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
-                        employeeMasterHr = employeeMasterService.readById(SecurityId);
-                        // id 34 is for Visitor Management Apply
-                        emailTemplate = emailTemplateService.readById(34);
-                        String To = employeeMasterHr.getOfficeEmailId();
-                        String from = employeeMasterModel.getOfficeEmailId();
-                        String Subject = emailTemplate.getSubject();
-                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-                        String msg = emailTemplate.getBodytext();
-                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
-                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                        sendMail.sendMail(from, To, Subject, msg);
-                    } catch (Exception e) {
-
-                    }
-                }
-                mv.getModelMap().put("visitorManagement", visitorManagement);
-                mv = searchSubmit(request, response);
-            }
+    public ModelAndView adminAprrovewithdrawClick(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        VisitorManagement visitorManagement = new VisitorManagement();
+        bind(request, visitorManagement);
+        String get = request.getParameter("get");
+        try {
+            visitorManagement = visitorManagementService.readById(visitorManagement.getId());
+            visitorManagement.setStatus(8);
+            request.setAttribute("successMessage",
+                    "Information :Withdraw Request Successfully Submited !");
+            visitorManagementService.update(visitorManagement);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mv.getModelMap().put("visitorManagement", visitorManagement);
+        if(null == get){
+            mv = searchSubmit(request, response);
+        } else{
+            mv = securityApprove(request, response);
         }
         return mv;
     }
 
-    //    <---------Admin Approver---------->
+    public ModelAndView securityApprove(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        VisitorManagement visitorManagement = new VisitorManagement();
+        selectEmployee(request, response);
+        departmentList(request);
+        designationList(request);
+        mv.getModelMap().put("Approverlist", null);
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("visitorManagement", visitorManagement);
+        mv.setViewName("VisitorManagement/SecurityResult");
+        return mv;
+    }
+
     public ModelAndView securityApproveSubmit(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();
         VisitorManagement visitorManagement = new VisitorManagement();
-        EmployeeMaster employeeMaster = new EmployeeMaster();
-        String id = request.getParameter("id");
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+
         List<?> Approverlist = null;
+        String employeeId = request.getParameter("employeeId");
+        String departmentId = request.getParameter("departmentMaster");
+        String designationId = request.getParameter("designationMaster");
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        String status = request.getParameter("status");
+
         Object object = (Object) request.getAttribute("flag");
         if (object == null) {
-
-            Approverlist = visitorManagementService.readByapproverId(visitorManagement);
+            Approverlist = visitorManagementService.readByapproverId(employeeId, designationId, departmentId, startDate, endDate, status);
         } else {
             Approverlist = (List<?>) request.getAttribute("Approverlist");
         }
+
         selectEmployee(request, response);
         departmentList(request);
         designationList(request);
+
+        if (departmentId != null) {
+            request.setAttribute("dept", departmentId);
+        }
+
+        if (startDate != null && endDate != null) {
+            request.setAttribute("sd", startDate);
+            request.setAttribute("ed", endDate);
+        }
+
+        if (status != null) {
+            request.setAttribute("status", status);
+        }
+
         mv.getModelMap().put("Approverlist", Approverlist);
+        session.setAttribute("ApproverListForSession", Approverlist);
+
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("visitorManagement", visitorManagement);
-        session.setAttribute("Approverlist11", Approverlist);
         mv.setViewName("VisitorManagement/SecurityResult");
         return mv;
     }
 
     public ModelAndView viewSecurityClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
+
         ModelAndView mv = new ModelAndView();
-        VisitorManagement visitorManagement = new VisitorManagement();
-        EmployeeMaster employeeMaster = new EmployeeMaster();
         String id = request.getParameter("id");
         String empId = request.getParameter("empId");
-        readVisitedlocation(request, response);
-        employeeMaster = employeeMasterService.readById(Integer.parseInt(empId));
-        employeeMaster.getReportingManagerLevel1();
+        String type = request.getParameter("for");
+        EmployeeMaster empMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        EmployeeMaster employeeMaster = employeeMasterService.readById(Integer.parseInt(empId));
+//        employeeMaster.getReportingManagerLevel1();
+        VisitorManagement visitorManagement = visitorManagementService.readById(Integer.parseInt(id));
         List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
         if (!list.isEmpty()) {
             request.setAttribute("reportingLevel1", list.get(0));
         }
-        bind(request, visitorManagement);
-        visitorManagement = visitorManagementService.readById(Integer.parseInt(id));
-        employeeMaster.setDepartmentMaster(departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId()));
-        employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
-        employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
-        employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
-        visitorManagement.setVisitorVisitedLocation(visitorVisitedLocationService.readById(visitorManagement.getVisitorVisitedLocation().getId()));
+        try {
+            if (type.equals("view")) {
+                employeeMaster.setDepartmentMaster(departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId()));
+                employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
+                employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
+                employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
+                employeeMaster.setZydexLocationMaster(zydexLocationMasterService.readById(employeeMaster.getZydexLocationMaster().getId()));
+                visitorManagement.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+                ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(visitorManagement.getZydexLocationMaster().getId());
+                request.setAttribute("zydexLocation", zydexLocationMaster.getZydexLocation());
+                EmployeeMaster empMasterRequest = employeeMasterService.readById(visitorManagement.getEmployeeMasterByEmployeeMasterId().getId());
+                DesignationMaster desigRequest = designationMasterService.readById(empMasterRequest.getDesignationMaster().getId());
+                String empRequestString = "" + empMasterRequest.getEmployeeId().toString() + " /" + empMasterRequest.getEmployeeName().toString() + " /" + desigRequest.getDesignationName().toString();
+                EmployeeMaster empMasterVisitsTo = employeeMasterService.readById(visitorManagement.getVisitorVisitsToEmployeeId().getId());
+                DesignationMaster desigVisitsTo = designationMasterService.readById(empMasterVisitsTo.getDesignationMaster().getId());
+                String empVisitsToString = "" + empMasterVisitsTo.getEmployeeId().toString() + " /" + empMasterVisitsTo.getEmployeeName().toString() + " /" + desigVisitsTo.getDesignationName().toString();
+                request.setAttribute("empRequestString", empRequestString);
+                request.setAttribute("empVisitsToString", empVisitsToString);
+                mv.setViewName("VisitorManagement/VisitorRequestSecurityView");
+            } else {
+                VisitorManagement vm = visitorManagementService.readById(Integer.parseInt(id));
+                if (vm.getIncomingDateTime() == null || vm.getIncomingDateTime().equals("")) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
+                    Date date = new Date();
+                    vm.setIncomingDateTime(sdf.format(date));
+                    vm.setApproverDate(sdf.format(new Date()));
+                    vm.setStatus(2);
+                    vm.setEmployeeMasterBySecurityApproveId(empMaster);
+                    visitorManagementService.update(vm);
+                }
+                EmployeeMaster emp = employeeMasterService.readById(visitorManagement.getVisitorVisitsToEmployeeId().getId());
+                DesignationMaster design = designationMasterService.readById(emp.getDesignationMaster().getId());
+                ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(vm.getZydexLocationMaster().getId());
+                mv.getModelMap().put("designation", design);
+                request.setAttribute("zlm", zydexLocationMaster);
+                request.setAttribute("incomingTime", vm.getIncomingDateTime());
+                request.setAttribute("employeeVisitsTo", emp);
+                mv.setViewName("VisitorManagement/VisitorRequestSecurityViewPrint");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("visitorManagement", visitorManagement);
-        request.setAttribute("employeeMaster", employeeMaster);
-        mv.setViewName("VisitorManagement/VisitorRequestSecurityView");
         return mv;
     }
 
+    public void setOutMeet(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String id = request.getParameter("id");
+        String mod = request.getParameter("mod");
+        VisitorManagement visitorManagement = visitorManagementService.readById(Integer.parseInt(id));
+        if ((visitorManagement.getMeetingOffDate() == null || visitorManagement.getMeetingOffDate().equals("")) && (visitorManagement.getOutgoingDateTime() == null || visitorManagement.getOutgoingDateTime().equals(""))) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
+            visitorManagement.setMeetingOffDate(mod);
+            Date date = new Date();
+            visitorManagement.setOutgoingDateTime(sdf.format(date));
+            visitorManagementService.update(visitorManagement);
+        }
+    }
+        //    public ModelAndView createSubmit(HttpServletRequest request,
+    //            HttpServletResponse response) throws Exception {
+    //        ModelAndView mv = new ModelAndView();
+    //        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+    //        VisitorManagement visitorManagement = new VisitorManagement();
+    //        bind(request, visitorManagement);
+    //        String type = request.getParameter("get");
+    //        try {
+    //            List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
+    //            if (!list.isEmpty()) {
+    //                request.setAttribute("reportingLevel1", list.get(0));
+    //            }
+    //
+    //            if (visitorManagement.getVisitorVisitsToEmployeeId() == null || visitorManagement.getVisitorVisitedLocation() == null) {
+    //                request.setAttribute("failureMessage",
+    //                        "Error : Mendatory fields must be selected.");
+    //                zydexLocationList(request);
+    //                selectEmployee(request, response);
+    //                if (type == null) {
+    //                    mv.setViewName("VisitorManagement/VisitorManagementCreate");
+    //                } else {
+    //                    mv.setViewName("VisitorManagement/VisitorCreateBySecurity");
+    //                }
+    //            } else {
+    //                BindException errors = new BindException(visitorManagement, "visitorManagement");
+    //                visitorManagementValidator.validate(visitorManagement, errors);
+    //                if (errors.hasErrors()) {
+    //                    request.setAttribute("failureMessage",
+    //                            "Error : Mandatory Fields should not be blank.");
+    //                    mv.addAllObjects(errors.getModel());
+    //                    zydexLocationList(request);
+    //                    selectEmployee(request, response);
+    //                    if (type == null) {
+    //                        mv.setViewName("VisitorManagement/VisitorManagementCreate");
+    //                    } else {
+    //                        mv.setViewName("VisitorManagement/VisitorCreateBySecurity");
+    //                    }
+    //                } else {
+    //                    if (type == null) {
+    //                        visitorManagement.setCompany(new Company());
+    //                        visitorManagement.setStatus(1);
+    //                        visitorManagement.setRequestDate(visitorManagement.getRequestDate());
+    //                        visitorManagementService.create(visitorManagement);
+    //                        request.setAttribute("successMessage",
+    //                                "Information : Request Successfully generated.");
+    //                        mv = searchSubmit(request, response);
+    //                    } else {
+    //                        visitorManagement.setCompany(new Company());
+    //                        visitorManagement.setStatus(2);
+    //                        visitorManagement.setRequestDate(visitorManagement.getRequestDate());
+    //                        visitorManagementService.create(visitorManagement);
+    //                        request.setAttribute("successMessage",
+    //                                "Information : Request Successfully generated.");
+    //                        mv.setViewName("forward:visitorManagement.htm?act=viewSecurityClick&id=" + visitorManagement.getId() + "&empId=" + employeeMaster.getId() + "&for=view");
+    //                    }
+    //                }
+    //            }
+    //        } catch (Exception e) {
+    //            e.printStackTrace();
+    //        }
+    ////         
+    //        mv.getModelMap().put("employeeMaster", employeeMaster);
+    //        mv.getModelMap().put("visitorManagement", visitorManagement);
+    //        return mv;
+    //    }
+    //    public ModelAndView createClick(HttpServletRequest request,
+    //            HttpServletResponse response) throws Exception {
+    //        ModelAndView mv = new ModelAndView();
+    //        VisitorManagement visitorManagement = new VisitorManagement();
+    //        VisitorVisitedLocation visitorVisitedLocation = new VisitorVisitedLocation();
+    //        HolidayMaster hm = new HolidayMaster();
+    //        HttpSession session = request.getSession();
+    //        EmployeeMaster employeeMaster = new EmployeeMaster();
+    //        employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+    //        employeeMaster.getReportingManagerLevel1();
+    //        List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
+    //        if (!list.isEmpty()) {
+    //            request.setAttribute("reportingLevel1", list.get(0));
+    //        }
+    //        employeeMaster.setDepartmentMaster(departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId()));
+    //        employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
+    //        employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
+    //        employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
+    //        visitorManagement.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+    //        visitorManagement.setVisitorVisitedLocation(visitorVisitedLocation);
+    //        readVisitedlocation(request, response);
+    //        mv.getModelMap().put("employeeMaster", employeeMaster);
+    //        mv.getModelMap().put("visitorManagement", visitorManagement);
+    //        mv.setViewName("VisitorManagement/VisitorManagementCreate");
+    //        return mv;
+    //    }
+    //    public ModelAndView createSubmit(HttpServletRequest request,
+    //            HttpServletResponse response) throws Exception {
+    //        ModelAndView mv = new ModelAndView();
+    //        VisitorManagement visitorManagement = new VisitorManagement();
+    //        VisitorVisitedLocation visitorVisitedLocation = new VisitorVisitedLocation();
+    //
+    //        LocationMaster locationMaster = new LocationMaster();
+    //        String location = request.getParameter("visitorVisitedLocation.id");
+    //        BindException errors = new BindException(visitorManagement, "visitorManagement");
+    ////        readlocation(request, response);
+    //        readVisitedlocation(request, response);
+    //        bind(request, visitorManagement);
+    //        Integer empid = visitorManagement.getEmployeeMasterByEmployeeMasterId().getId();
+    //        EmployeeMaster employeeMaster = new EmployeeMaster();
+    //        employeeMaster = employeeMasterService.readById(empid);
+    //        List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
+    //        if (!list.isEmpty()) {
+    //            request.setAttribute("reportingLevel1", list.get(0));
+    //        }
+    //
+    //        visitorManagementValidator.validate(visitorManagement, errors);
+    //        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    //        if (errors.hasErrors()) {
+    //            request.setAttribute("failureMessage",
+    //                    "Error : Mandatory Fields should not be blank.");
+    //            mv.addAllObjects(errors.getModel());
+    //            mv.setViewName("VisitorManagement/VisitorManagementCreate");
+    //        } else {
+    //            String requestdate = sdf.format(new Date());
+    //            visitorManagement.setRequestDate(requestdate);
+    //            visitorManagement.setStatus(1);
+    //            if (locationMaster.getId() == null && location == "") {
+    //                request.setAttribute("failureMessage", "Error :Select Visitor Visits To Location");
+    //                mv.getModelMap().put("visitorManagement", visitorManagement);
+    //                mv.setViewName("VisitorManagement/VisitorManagementCreate");
+    //            } else {
+    //                visitorVisitedLocation = visitorVisitedLocationService.readById(Integer.parseInt(location));
+    //                visitorManagement.setVisitorVisitedLocation(visitorVisitedLocation);
+    //                visitorManagementService.create(visitorManagement);
+    //                request.setAttribute("successMessage",
+    //                        "Information : Request Sent Successfully.");
+    //                //    Email Sent to Security
+    //                List<?> SecurityList = userRightMasterService.readSecurityList();
+    //                for (Object o : SecurityList) {
+    //                    Object[] o1 = (Object[]) o;
+    //                    int SecurityId = (int) o1[0];
+    //                    try {
+    //                        EmailTemplate emailTemplate = new EmailTemplate();
+    //                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+    //                        DesignationMaster designationMaster = new DesignationMaster();
+    //                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+    //                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
+    //                        employeeMasterHr = employeeMasterService.readById(SecurityId);
+    //                        // id 34 is for Visitor Management Apply
+    //                        emailTemplate = emailTemplateService.readById(34);
+    //                        String To = employeeMasterHr.getOfficeEmailId();
+    //                        String from = employeeMasterModel.getOfficeEmailId();
+    //                        String Subject = emailTemplate.getSubject();
+    //                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+    //                        String msg = emailTemplate.getBodytext();
+    //                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+    //                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+    //                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+    //                        sendMail.sendMail(from, To, Subject, msg);
+    //                    } catch (Exception e) {
+    //
+    //                    }
+    //                }
+    //                mv.getModelMap().put("visitorManagement", visitorManagement);
+    //                mv = searchSubmit(request, response);
+    //            }
+    //        }
+    //        return mv;
+    //    }
+    //    <---------Admin Approver---------->
+
+//    public ModelAndView securityApproveSubmit(HttpServletRequest request,
+//            HttpServletResponse response) throws Exception {
+//        ModelAndView mv = new ModelAndView();
+//        HttpSession session = request.getSession();
+//        VisitorManagement visitorManagement = new VisitorManagement();
+//        EmployeeMaster employeeMaster = new EmployeeMaster();
+//        String id = request.getParameter("id");
+//        List<?> Approverlist = null;
+//        Object object = (Object) request.getAttribute("flag");
+//        if (object == null) {
+//
+//            Approverlist = visitorManagementService.readByapproverId(visitorManagement);
+//        } else {
+//            Approverlist = (List<?>) request.getAttribute("Approverlist");
+//        }
+//        selectEmployee(request, response);
+//        departmentList(request);
+//        designationList(request);
+//        mv.getModelMap().put("Approverlist", Approverlist);
+//        mv.getModelMap().put("employeeMaster", employeeMaster);
+//        mv.getModelMap().put("visitorManagement", visitorManagement);
+//        session.setAttribute("Approverlist11", Approverlist);
+//        mv.setViewName("VisitorManagement/SecurityResult");
+//        return mv;
+//    }
+//    public ModelAndView viewSecurityClick(HttpServletRequest request,
+//            HttpServletResponse response) throws Exception {
+//        ModelAndView mv = new ModelAndView();
+//        VisitorManagement visitorManagement = new VisitorManagement();
+//        EmployeeMaster employeeMaster = new EmployeeMaster();
+//        String id = request.getParameter("id");
+//        String empId = request.getParameter("empId");
+//        readVisitedlocation(request, response);
+//        employeeMaster = employeeMasterService.readById(Integer.parseInt(empId));
+//        employeeMaster.getReportingManagerLevel1();
+//        List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
+//        if (!list.isEmpty()) {
+//            request.setAttribute("reportingLevel1", list.get(0));
+//        }
+//        bind(request, visitorManagement);
+//        visitorManagement = visitorManagementService.readById(Integer.parseInt(id));
+//        employeeMaster.setDepartmentMaster(departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId()));
+//        employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
+//        employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
+//        employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
+//        visitorManagement.setVisitorVisitedLocation(visitorVisitedLocationService.readById(visitorManagement.getVisitorVisitedLocation().getId()));
+//        mv.getModelMap().put("visitorManagement", visitorManagement);
+//        request.setAttribute("employeeMaster", employeeMaster);
+//        mv.setViewName("VisitorManagement/VisitorRequestSecurityView");
+//        return mv;
+//    }
     public ModelAndView securityAprroveClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -375,38 +759,37 @@ public class VisitorManagementController extends VisitorManagementAbstract {
     }
 
     //    <---------Withdraw Cycle---------->
-    public ModelAndView adminAprrovewithdrawClick(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        ModelAndView mv = new ModelAndView();
-        VisitorManagement visitorManagement = new VisitorManagement();
-        String id = request.getParameter("id");
-        String statusType = request.getParameter("statusType");
-        String remark = request.getParameter("securityRemark");
-        bind(request, visitorManagement);
-        visitorManagement = visitorManagementService.readById(Integer.parseInt(id));
-        if (null != statusType) {
-            if (statusType.equals("7")) {
-                visitorManagement.setStatus(7);
-                visitorManagement.setSecurityRemark(remark);
-                request.setAttribute("successMessage",
-                        "Information :Withdraw Request Rejected Successfully.");
-            } else if (statusType.equals("9")) {
-                visitorManagement.setStatus(9);
-                visitorManagement.setSecurityRemark(remark);
-                request.setAttribute("successMessage",
-                        "Information :Withdraw Request Returned Successfully.");
-            }
-        } else {
-            visitorManagement.setStatus(8);
-            request.setAttribute("successMessage",
-                    "Information :Withdraw Request Approved Successfully.");
-        }
-        visitorManagementService.update(visitorManagement);
-        mv.getModelMap().put("visitorManagement", visitorManagement);
-        mv = securityApproveSubmit(request, response);
-        return mv;
-    }
-
+//    public ModelAndView adminAprrovewithdrawClick(HttpServletRequest request,
+//            HttpServletResponse response) throws Exception {
+//        ModelAndView mv = new ModelAndView();
+//        VisitorManagement visitorManagement = new VisitorManagement();
+//        String id = request.getParameter("id");
+//        String statusType = request.getParameter("statusType");
+//        String remark = request.getParameter("securityRemark");
+//        bind(request, visitorManagement);
+//        visitorManagement = visitorManagementService.readById(Integer.parseInt(id));
+//        if (null != statusType) {
+//            if (statusType.equals("7")) {
+//                visitorManagement.setStatus(7);
+//                visitorManagement.setSecurityRemark(remark);
+//                request.setAttribute("successMessage",
+//                        "Information :Withdraw Request Rejected Successfully.");
+//            } else if (statusType.equals("9")) {
+//                visitorManagement.setStatus(9);
+//                visitorManagement.setSecurityRemark(remark);
+//                request.setAttribute("successMessage",
+//                        "Information :Withdraw Request Returned Successfully.");
+//            }
+//        } else {
+//            visitorManagement.setStatus(8);
+//            request.setAttribute("successMessage",
+//                    "Information :Withdraw Request Approved Successfully.");
+//        }
+//        visitorManagementService.update(visitorManagement);
+//        mv.getModelMap().put("visitorManagement", visitorManagement);
+//        mv = securityApproveSubmit(request, response);
+//        return mv;
+//    }
     //    <---------Search---------->
     public ModelAndView searchEmpClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
@@ -421,38 +804,37 @@ public class VisitorManagementController extends VisitorManagementAbstract {
         return mv;
     }
 
-    public ModelAndView searchEmpResult(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        ModelAndView mv = new ModelAndView();
-        VisitorManagement visitorManagement = new VisitorManagement();
-
-        String startDate = request.getParameter("startDate");
-        String endDate = request.getParameter("endDate");
-        String status = request.getParameter("status");
-
-        HttpSession session = request.getSession();
-        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
-        String empId = employeeMaster.getId().toString();
-        if (!"".equals(empId)) {
-            employeeMaster.setId(Integer.parseInt(empId));
-        }
-        visitorManagement.setEmployeeMasterByEmployeeMasterId(employeeMaster);
-        if (!"".equals(status)) {
-            visitorManagement.setSecurityRemark(status);
-        }
-        if (!"".equals(startDate)) {
-            visitorManagement.setApproverDate(startDate);
-        }
-        if (!"".equals(endDate)) {
-            visitorManagement.setRequestDate(endDate);
-        }
-        List<?> visitorlist = visitorManagementService.readSearchEmpRequest(visitorManagement);
-        mv.getModelMap().put("visitorManagement", visitorManagement);
-        mv.addObject("visitorlist", visitorlist);
-        mv.setViewName("VisitorManagement/VisitorResult");
-        return mv;
-    }
-
+//    public ModelAndView searchEmpResult(HttpServletRequest request,
+//            HttpServletResponse response) throws Exception {
+//        ModelAndView mv = new ModelAndView();
+//        VisitorManagement visitorManagement = new VisitorManagement();
+//
+//        String startDate = request.getParameter("startDate");
+//        String endDate = request.getParameter("endDate");
+//        String status = request.getParameter("status");
+//
+//        HttpSession session = request.getSession();
+//        EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
+//        String empId = employeeMaster.getId().toString();
+//        if (!"".equals(empId)) {
+//            employeeMaster.setId(Integer.parseInt(empId));
+//        }
+//        visitorManagement.setEmployeeMasterByEmployeeMasterId(employeeMaster);
+//        if (!"".equals(status)) {
+//            visitorManagement.setSecurityRemark(status);
+//        }
+//        if (!"".equals(startDate)) {
+//            visitorManagement.setApproverDate(startDate);
+//        }
+//        if (!"".equals(endDate)) {
+//            visitorManagement.setRequestDate(endDate);
+//        }
+//        List<?> visitorlist = visitorManagementService.readSearchEmpRequest(visitorManagement);
+//        mv.getModelMap().put("visitorManagement", visitorManagement);
+//        mv.addObject("visitorlist", visitorlist);
+//        mv.setViewName("VisitorManagement/VisitorResult");
+//        return mv;
+//    }
     public ModelAndView searchAdminClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -561,12 +943,13 @@ public class VisitorManagementController extends VisitorManagementAbstract {
 //        departmentList(request);
 //        designationList(request);
 //        searchAdminResult(request, response);
-        List<?> Approverlist = (List<?>) request.getSession().getAttribute("Approverlist11");
+//        List<?> Approverlist = (List<?>) request.getSession().getAttribute("Approverlist11");
+        List<?> Approverlist = (List<?>) request.getSession().getAttribute("ApproverListForSession");
         response.setContentType("application/vnd.ms-excel");
 //        response.setHeader("Content-Disposition", "attachment; filename=LeaveRequest.xls");
         response.setHeader("Content-Disposition", "attachment; filename=VisitorDetails.xls");
-        mv.addObject("Approverlist", Approverlist);
         response.setContentType("application/vnd.ms-excel");
+        mv.addObject("Approverlist", Approverlist);
 //        mv.getModelMap().put("Approverlist", Approverlist);
 //        mv.getModelMap().put("employeeMaster", employeeMaster);
 //        mv.getModelMap().put("visitorManagement", visitorManagement);

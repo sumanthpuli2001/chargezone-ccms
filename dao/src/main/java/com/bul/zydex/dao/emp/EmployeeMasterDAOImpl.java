@@ -15,7 +15,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.hibernate.Query;
 
 /**
  *
@@ -78,8 +77,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.designationMaster b "
                 + " LEFT JOIN a.departmentMaster c "
                 + " LEFT JOIN a.userMaster d "
-                + " where (a.dateOfLeaving is null or a.dateOfLeaving = '') "
-                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
+                + " where a.employeeId != 'admin' and ((a.dateOfLeaving is null or a.dateOfLeaving = '') "
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
         List<?> list = getHibernateTemplate().find(query);
         return list;

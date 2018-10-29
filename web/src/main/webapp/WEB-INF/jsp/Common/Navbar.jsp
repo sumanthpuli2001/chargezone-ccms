@@ -165,7 +165,7 @@
                             <ul class="treeview-menu">
                                 <c:if test="${sessionScope.userRight.employee}">
                                     <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplication"><i class="fa fa-circle-o"></i>Shift Application</a></li>
-                                   
+
                                     <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff"><i class="fa fa-circle-o"></i>Woff Application</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff"><i class="fa fa-circle-o"></i>Coff Application</a></li>
                                         <c:if test="${sessionScope.checkReportingManager}">
@@ -183,7 +183,7 @@
 
                                     <li><a href="attendanceRegularizationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i>Subordinates Request</a></li>
                                     <li><a href="attendanceRegularizationMaster.htm?act=subOrdinateAttendanceView"><i class="fa fa-circle-o"></i>Subordinates Attendance View</a></li>
-                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
+                                    <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> W-off Subordinates Request</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmitcoff"><i class="fa fa-circle-o"></i> C-off Subordinates Request</a></li>
                                     <!--<li><a href="attendanceRegularizationMaster.htm?act=approvedList"><i class="fa fa-circle-o"></i>Approved Request</a></li>-->
@@ -204,10 +204,10 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     <c:if test="${sessionScope.userRight.hr or sessionScope.userRight.shiftManagement}">
-<!--                                        <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplication"><i class="fa fa-circle-o"></i>Shift Application</a></li>
-                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
-                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> Woff Subordinates Request</a></li>
-                                        <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff"><i class="fa fa-circle-o"></i>Woff Application</a></li>-->
+                                        <!--                                        <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplication"><i class="fa fa-circle-o"></i>Shift Application</a></li>
+                                                                                <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
+                                                                                <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> Woff Subordinates Request</a></li>
+                                                                                <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff"><i class="fa fa-circle-o"></i>Woff Application</a></li>-->
                                         <li><a href="shiftMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Shift</a></li>
 
                                         <li><a href="hoursBasis.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Hours </a></li>
@@ -357,6 +357,15 @@
                             </a>
                             <ul class="treeview-menu">
                                 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+                                <c:choose>
+                                    <c:when test="${sessionScope.userRight.security}">
+                                        <li><a href="visitorManagement.htm?act=securityApprove"><i class="fa fa-circle-o"></i>Visitor Management</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="visitorManagement.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Visitor Management</a></li>
+                                    </c:otherwise>
+                                </c:choose> 
+
                                 <c:if test="${!sessionScope.userRight.poolCarAdmin}">
                                     <c:if test="${sessionScope.checkReportingManager}">
 
@@ -376,27 +385,33 @@
                                     <li><a href="poolCarRequest.htm?act=adminApproveSubmit"><i class="fa fa-circle-o"></i>Pool Car Request Admin </a></li>
                                     <!--<li><a href="poolCarRequest.htm?act=searchAdminClick"><i class="fa fa-circle-o"></i>Search Pool Car Request(Admin)</a></li>-->
                                 </c:if>
-
-                                <c:if test="${!sessionScope.userRight.security}">
-                                    <c:if test="${sessionScope.checkReportingManager}">
-                                        <li><a href="visitorManagement.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Visitor Management System</a></li>
+                                
+                                <!--COMMENTED BY: AMAN THAKUR for Visitor management-->
+                                <%--<c:if test="${!sessionScope.userRight.security}">--%>
+                                    <%--<c:if test="${sessionScope.checkReportingManager}">--%>
+                                        <!--<li><a href="visitorManagement.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Visitor Management System</a></li>-->
                                         <!--<li><a href="visitorManagement.htm?act=searchEmpClick"><i class="fa fa-circle-o"></i>Search Visitor Request</a></li>-->
-                                    </c:if>
-                                </c:if>
+                                    <%--</c:if>--%>
+                                <%--</c:if>--%>
+                                
+                                <!--COMMENTED BY: AMAN THAKUR for Visitor management-->
                                 <%--<c:if test="${fn:length(reportingManagerList) > 0}">--%>
                                 <%--<c:if test="${sessionScope.isReportingManagerDataExist}">--%>
                                 <!--<li><a href="visitorManagement.htm?act=searchApproverSubmit"><i class="fa fa-circle-o"></i>Visitor Request Approve</a></li>-->
                                 <%--</c:if>--%>
-                                <c:if test="${sessionScope.userRight.security}">
-                                    <li><a href="visitorManagement.htm?act=securityApproveSubmit"><i class="fa fa-circle-o"></i>Visitor Security Approve</a></li>
+                                
+                                <%--<c:if test="${sessionScope.userRight.security}">--%>
+                                    <!--<li><a href="visitorManagement.htm?act=securityApproveSubmit"><i class="fa fa-circle-o"></i>Visitor Security Approve</a></li>-->
                                     <!--<li><a href="visitorManagement.htm?act=searchAdminClick"><i class="fa fa-circle-o"></i>Security Search Visitor Request</a></li>-->
-                                </c:if>
+                                <%--</c:if>--%>
+                                
                                 <c:if test="${!sessionScope.userRight.security}">
                                     <c:if test="${sessionScope.checkReportingManager}">
                                         <li><a href="gatePass.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Gate Pass Request</a></li>
                                         <!--<li><a href="gatePass.htm?act=searchEmpClick"><i class="fa fa-circle-o"></i>Search Gate Pass </a></li>-->
                                     </c:if>
                                 </c:if>
+                                        
                                 <%--<c:if test="${reportingManagerList ne null}">--%>
                                 <%--<c:if test="${fn:length(reportingManagerList) > 0}">--%>
                                 <c:if test="${sessionScope.isReportingManagerDataExist}">

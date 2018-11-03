@@ -45,6 +45,9 @@
                 height: 800px;
                 /*border: 1px solid black;*/
             }
+            form {
+                text-align: center;
+            }
 
         </style>
         <script>
@@ -63,7 +66,7 @@
     </head>
     <body>
         <section class="content-header">
-            <h1>sign up:</h1>
+            <h1>Sign up:</h1>
             <ol class="breadcrumb">
             </ol>
         </section>
@@ -86,33 +89,36 @@
                                 <div class="col-sm-3">
                                 </div>
                                 <div class="col-sm-1" style="text-align: center">
-                                      <input type="hidden" name="apjid" value="${applayJobUserMaster.id}"/>
-                                    <label>OTP:<span style="color: red;font-size: 12px;">*</span></label>
-                                </div>
-                                <div class="col-sm-3">
-                                    <input type="Text" name="otp" class="form-control" placeholder="OTP" />
-                                <%--<form:errors path="userName" cssClass="errorDiv"></form:errors>--%>
-                                </div>
+                                    <input type="hidden" name="apjid" value="${applayJobUserMaster.id}"/>
+                                <label>OTP:<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
+                            <div class="col-sm-3">
+                                <input type="Text" name="otp" class="form-control" placeholder="OTP" />
+                                <%--<form:errors path="userName" cssClass="errorDiv"></form:errors>--%>
+                            </div>
+
                         </div>
                     </div>
-                </section>
-                
-
-                <div class="form-group">
-                    <div class="col-sm-5">
-                    </div>
-                    <div class="col-sm-1" style="text-align: left" >
-                        <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT</button>
-                    </div>
                 </div>
+            </section>
 
-        </form:form>
-        <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
-        <script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>
-        <script src="StorageYard/JS/login/jquery.backstretch.min.js"></script>
-        <script src="StorageYard/JS/login/retina-1.1.0.min.js"></script>
-        <script src="StorageYard/JS/login/scripts.js"></script>
-        <script type="text/javascript" src="StorageYard/JS/JQuery/common.js"></script>
-    </body>
+
+
+            <div class="form-group">
+                <div class="col-sm-5">
+                </div>
+                <div class="col-sm-1" style="text-align: left" >
+                    <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT</button>
+                </div>
+            </div>
+            
+
+    </form:form>
+    <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
+    <script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>
+    <script src="StorageYard/JS/login/jquery.backstretch.min.js"></script>
+    <script src="StorageYard/JS/login/retina-1.1.0.min.js"></script>
+    <script src="StorageYard/JS/login/scripts.js"></script>
+    <script type="text/javascript" src="StorageYard/JS/JQuery/common.js"></script>
+</body>
 </html>

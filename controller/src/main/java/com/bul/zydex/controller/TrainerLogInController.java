@@ -97,12 +97,12 @@ public class TrainerLogInController extends TrainerLogInAbstract {
                 return mv;
             } else {
                 request.setAttribute("successMessage",
-                        "Error : Invalid UserName Or Password.");
+                        "Error : Invalid Username Or Password.");
                 mv = Login(request, response);
             }
         } else {
             request.setAttribute("successMessage",
-                    "Error : Invalid UserName Or Password.");
+                    "Error : Invalid Username Or Password.");
             mv = Login(request, response);
         }
 //        mv.getModelMap().put("trainerMaster", trainerMaster);

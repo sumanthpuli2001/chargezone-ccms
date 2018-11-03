@@ -80,7 +80,7 @@
     </head>
     <body>
         <section class="content-header">
-            <h1>sign up:</h1>
+            <h1>Sign Up:</h1>
             <ol class="breadcrumb">
             </ol>
         </section>
@@ -103,7 +103,7 @@
                                 <div class="col-sm-3">
                                 </div>
                                 <div class="col-sm-1" style="text-align: center">
-                                    <label>Email Id</label>
+                                    <label>Email Id :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">
                                 <form:input path="userName" class="form-control"  pattern="[^ @]*@[^ @]*" placeholder="abc@domain.com" onchange="otpOnchangeFunction('userNameError');"></form:input>
@@ -119,7 +119,7 @@
                                 <div class="col-sm-3">
                                 </div>
                                 <div class="col-sm-1" style="text-align: center" >
-                                    <label>Password</label>
+                                    <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">
                                 <form:password path="password" class="form-control" placeholder="password"></form:password>

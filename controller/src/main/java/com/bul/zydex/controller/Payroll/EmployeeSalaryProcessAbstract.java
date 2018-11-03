@@ -7,6 +7,7 @@ package com.bul.zydex.controller.Payroll;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.AdditionalAmountCheck;
+import com.bul.zydex.model.Company;
 import com.bul.zydex.model.CtcAllowance;
 import com.bul.zydex.model.EmployeeAdditionalSalary;
 import com.bul.zydex.model.EmployeeCtcDetail;
@@ -20,6 +21,7 @@ import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.EmployeeTypeWiseSalary;
+import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.PayrollAdditionalAmount;
 import com.bul.zydex.model.PayrollBonus;
 import com.bul.zydex.model.PayrollDeduction;
@@ -77,8 +79,10 @@ import com.bul.zydex.service.Payroll.PayrollTaxRateMasterService;
 import com.bul.zydex.service.Payroll.RetirementAgeService;
 import com.bul.zydex.service.Payroll.TaxDeductionDecarationSubmitService;
 import com.bul.zydex.service.Payroll.TaxSavingSubmitService;
+import com.bul.zydex.service.company.CompanyMasterService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
+import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.policy.CtcAllowanceService;
 import com.bul.zydex.service.policy.EmployeeCtcDetailService;
 import com.bul.zydex.service.policy.PolicyMasterService;
@@ -135,8 +139,9 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected PayrollPfRecordService<PayrollPfRecord> payrollPfRecordService;
     protected RetirementAgeService<RetirementAge> retirementAgeService;
     protected EmployeeDatetimeDataService<EmployeeDatetimeData> employeeDatetimeDataService;
+    protected CompanyMasterService<Company> companyMasterService;
+    protected LocationMasterService<LocationMaster> locationMasterService;
 
-    
     Validator employeeSalaryProcessValidator;
 
     public EmployeeDatetimeDataService<EmployeeDatetimeData> getEmployeeDatetimeDataService() {
@@ -146,7 +151,7 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     public void setEmployeeDatetimeDataService(EmployeeDatetimeDataService<EmployeeDatetimeData> employeeDatetimeDataService) {
         this.employeeDatetimeDataService = employeeDatetimeDataService;
     }
-    
+
     public EmployeeShiftDataService<EmployeeShiftData> getEmployeeShiftDataService() {
         return employeeShiftDataService;
     }
@@ -458,13 +463,6 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     public void setRetirementAgeService(RetirementAgeService<RetirementAge> retirementAgeService) {
         this.retirementAgeService = retirementAgeService;
     }
-    
-    
-    
-    
-    
-    
-    
 
     protected void EmployeeTypeList(HttpServletRequest request) {
         List<?> EmployeeTypeList = employeeTypeService.read();
@@ -485,5 +483,46 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
         }
         request.setAttribute("EmployeeSubTypeList", map);
     }
+
+    protected void companyList(HttpServletRequest request) {
+
+        Company company = new Company();
+        List<?> companyList = companyMasterService.read();
+        Map<Integer, String> dm = new HashMap<>();
+        for (Object o : companyList) {
+            company = (Company) o;
+            dm.put(company.getCompanyId(), company.getCompanyName());
+        }
+
+        request.setAttribute("companyList", dm);
+    }
+     protected void locationList(HttpServletRequest request) {
+        LocationMaster locationMaster = new LocationMaster();
+        List<?> location = locationMasterService.read();
+
+        Map<Integer, String> location1 = new HashMap<>();
+        for (Object o : location) {
+            locationMaster = (LocationMaster) o;
+            location1.put(locationMaster.getId(), locationMaster.getLocation());
+        }
+        request.setAttribute("location", location1);
+    }
+
+    public CompanyMasterService<Company> getCompanyMasterService() {
+        return companyMasterService;
+    }
+
+    public void setCompanyMasterService(CompanyMasterService<Company> companyMasterService) {
+        this.companyMasterService = companyMasterService;
+    }
+
+    public LocationMasterService<LocationMaster> getLocationMasterService() {
+        return locationMasterService;
+    }
+
+    public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
+        this.locationMasterService = locationMasterService;
+    }
+     
 
 }

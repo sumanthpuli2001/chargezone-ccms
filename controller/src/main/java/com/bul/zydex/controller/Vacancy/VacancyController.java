@@ -621,12 +621,12 @@ public class VacancyController extends VacancyAbstract {
         applayJobUserMasterValidator.validate(applayJobUserMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
-                    "Error : All Fields Are Mandatorys");
+                    "Error : All Fields Are Mandatory");
             mv = signUp(request, response);
 
         } else if (applayJobUserMasterSerivce.isExist(applayJobUserMaster)) {
             request.setAttribute("failureMessage",
-                    "Error : UserName is already used.");
+                    "Error : Username is already used.");
             mv = signUp(request, response);
         } else {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -649,7 +649,7 @@ public class VacancyController extends VacancyAbstract {
             candidateApplyJob2Service.create(caj2);
 
             request.setAttribute("successMessage",
-                    "Information : signUp Successfully.");
+                    "Information : Signup Successfully. Please Check Your Email For OTP. OTP Will Be Expired In 10 Minutes.");
             try {
                 EmailTemplate emailTemplate = new EmailTemplate();
                 emailTemplate = emailTemplateService.readById(159);
@@ -767,7 +767,7 @@ public class VacancyController extends VacancyAbstract {
 
                 } else {
                     request.setAttribute("failureMessage",
-                            "Error : Invalid UserName Or Password.");
+                            "Error : Invalid Username Or Password.");
                     mv = Login(request, response);
                 }
             } else {
@@ -777,7 +777,7 @@ public class VacancyController extends VacancyAbstract {
             }
         } else {
             request.setAttribute("failureMessage",
-                    "Error : Invalid UserName Or Password.");
+                    "Error : Invalid Username Or Password.");
             mv = Login(request, response);
         }
         mv.getModelMap().put("applayJobUserMaster", applayJobUserMaster);
@@ -2083,7 +2083,7 @@ public class VacancyController extends VacancyAbstract {
         long data = endDate.getTime() - startDate.getTime();
 
         if (applayJobUserMaster != null && !"".equals(applayJobUserMaster)) {
-            if (data < 300001) {
+            if (data < 600000) {
                 if (otp.equals(applayJobUserMaster.getOtp())) {
                     applayJobUserMaster.setStatusOtp(1);
                     applayJobUserMasterSerivce.update(applayJobUserMaster);

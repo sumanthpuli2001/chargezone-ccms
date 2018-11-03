@@ -654,8 +654,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
                             } else {
                                 double lwp = employeeSalaryProcess.getEmployeeLwp();
-                                minitaxpf = basicSalary * lwp / days2;
-                                minitaxpf = basicSalary - minitaxpf;
+                                 double basicSalaryMAster = Double.parseDouble(employeeMaster.getBasicSalary()); 
+                                
+                                
+                                minitaxpf = basicSalaryMAster * lwp / days2;
+                                minitaxpf = basicSalaryMAster - minitaxpf;
 
                                 taxpf = minitaxpf * pf / 100; /// 12%
 
@@ -1861,15 +1864,15 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
         headerList.add("Tot.Dedn");
         headerList.add("Net Pay");
-        List<?> list6 = ctcAllowanceService.read();
-        CtcAllowance ctcAllowance = new CtcAllowance();
-//        Map<Integer, String> leaveTypemap = new HashMap();
-        for (Object o : list6) {
-            ctcAllowance = (CtcAllowance) o;
-            headerList.add("" + ctcAllowance.getCtcName());
-        }
-        headerList.add("Total");
-        headerList.add("CTCPerMonth");
+//        List<?> list6 = ctcAllowanceService.read();
+//        CtcAllowance ctcAllowance = new CtcAllowance();
+////        Map<Integer, String> leaveTypemap = new HashMap();
+//        for (Object o : list6) {
+//            ctcAllowance = (CtcAllowance) o;
+//            headerList.add("" + ctcAllowance.getCtcName());
+//        }
+//        headerList.add("Total");
+//        headerList.add("CTCPerMonth");
 
         List<EmployeeSalaryProcess> empList = (List<EmployeeSalaryProcess>) employeeSalaryProcessService.readEmpSalaryReport(employeeMaster);
         List<Object> finalList = new LinkedList<Object>();
@@ -1915,15 +1918,15 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             empMap.put("Tot.Dedn", "" + df.format((int) Math.round(deductionAmount)));
             empMap.put("Net Pay", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
 //            empMap.put("Net Amount", "" + df.format(additionalAmount - deductionAmount));
-            List ctcList = employeeCtcDetailService.fetchctcData(employeeSalaryProcess1.getEmployeeMaster().getId());
-            for (Object dedSalaryList2 : ctcList) {
-                Object[] o5 = (Object[]) dedSalaryList2;
-//                empMap.put("" + o[0], "" + df.format(o[1]));
-                empMap.put("" + o5[1], "" + df.format((int) Math.round((double) o5[2])));
-                total += (Double) o5[2];
-            }
-            empMap.put("Total", "" + df.format((int) Math.round(total)));
-            empMap.put("CTCPerMonth", "" + df.format((int) Math.round(total + (additionalAmount - deductionAmount))));
+//            List ctcList = employeeCtcDetailService.fetchctcData(employeeSalaryProcess1.getEmployeeMaster().getId());
+//            for (Object dedSalaryList2 : ctcList) {
+//                Object[] o5 = (Object[]) dedSalaryList2;
+////                empMap.put("" + o[0], "" + df.format(o[1]));
+//                empMap.put("" + o5[1], "" + df.format((int) Math.round((double) o5[2])));
+//                total += (Double) o5[2];
+//            }
+//            empMap.put("Total", "" + df.format((int) Math.round(total)));
+//            empMap.put("CTCPerMonth", "" + df.format((int) Math.round(total + (additionalAmount - deductionAmount))));
             finalList.add(empMap);
         }
 

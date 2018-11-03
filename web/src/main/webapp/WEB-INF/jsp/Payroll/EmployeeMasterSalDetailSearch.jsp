@@ -216,7 +216,7 @@
                                                     <center>  <img src="StorageYard/Images/logo.png" style="width:15%;height: 15%;" BORDER="0"/> </center> 
 
                                                     <header>
-                                                        <center><b><font size="4">Employee Salary Yearly</font></b></center> 
+                                                        <center><b><font size="4">Employee CTC Master</font></b></center> 
                                                     </header>
                                                     <%
                                                         Date date = new Date();

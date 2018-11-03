@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.model.Company;
 import com.bul.zydex.model.CurrencyMaster;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
@@ -444,5 +445,6 @@ public abstract class CustomAbstract extends MultiActionController {
     public void setEmailAddMasterService(EmailAddMasterService<EmailAddMaster> emailAddMasterService) {
         this.emailAddMasterService = emailAddMasterService;
     }
+    
 
 }

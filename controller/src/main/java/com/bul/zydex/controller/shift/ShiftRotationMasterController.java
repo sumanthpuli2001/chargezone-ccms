@@ -18217,6 +18217,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         String requestdate = sdf.format(new Date());
         coffRegularization.setDateOfApproval(requestdate);
         coffRegularization.setApproverId(approverName);
+        coffRegularization.setApprovalComment(coffRegularization.getApprovalComment());
         coffRegularizationService.createOrUpdate(coffRegularization);
 
 ////        Employee Date Time Data

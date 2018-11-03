@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Coff Regularization Result</title>
+        <title>Coff Addition Result</title>
         <style>
             .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
                 background-color: white !important;
@@ -45,11 +45,11 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>COFF REGULARIZATION REQUESTED LIST </h1>
+            <h1>COFF ADDITION REQUESTED LIST </h1>
             <div style="float: right"></div>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">COFF Regularization Requested List</li>
+                <li class="active">COFF Addition Requested List</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">

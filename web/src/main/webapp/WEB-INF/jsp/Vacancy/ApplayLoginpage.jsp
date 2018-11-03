@@ -97,7 +97,7 @@
                                 <label>Email Id:<span style="color: red;font-size: 12px;">*</span></label>
                             </div>
                             <div class="col-sm-3">
-                                <form:input path="userName" class="form-control" placeholder="userName"></form:input>
+                                <form:input path="userName" class="form-control" placeholder="Email ID"></form:input>
                                 <form:errors path="userName" cssClass="errorDiv"></form:errors>
                                 </div>
 
@@ -106,7 +106,7 @@
                                     <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
                                 </div>
                                 <div class="col-sm-3">
-                                <form:password path="password" class="form-control" placeholder="password"></form:password>
+                                <form:password path="password" class="form-control" placeholder="Password"></form:password>
                                 <form:errors path="password" cssClass="errorDiv"></form:errors>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
 
                 <div class="form-group">
                     <div class=" col-sm-offset-0">
-                        <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >SUBMIT</button>
+                        <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >Submit</button>
                     <button type="button" class="btn btn-primary" style="float: center; width: 120px;" onclick="window.location = 'vacancy.htm?act=signUp&id=${vacid}'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button>
                     </div>
                 </div>

@@ -820,6 +820,8 @@
         <property name="payrollPfRecordService" ref="payrollPfRecordService1" />
         <property name="retirementAgeService" ref="retirementAgeService1" />
         <property name="employeeDatetimeDataService" ref="employeeDatetimeDataService1" />
+        <property name="companyMasterService" ref="companyMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
     </bean>
     <bean id="additionalAmountCheckController1" class="com.bul.zydex.controller.Payroll.AdditionalAmountCheckController" parent="controllerConfig" >
         <property name="additionalAmountCheckService" ref="additionalAmountCheckService1" />

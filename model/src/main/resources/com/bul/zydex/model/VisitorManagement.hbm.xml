@@ -9,17 +9,26 @@
             <generator class="identity" />
         </id>
         <many-to-one name="employeeMasterByEmployeeMasterId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
-            <column name="employee_master_id" not-null="true" />
+            <column name="requested_by_employee_id" not-null="true" />
         </many-to-one>
         <many-to-one name="employeeMasterByApproverId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
-            <column name="approver_id" />
+            <column name="approve_by_employee_id" />
         </many-to-one>
         <many-to-one name="visitorVisitedLocation" class="com.bul.zydex.model.VisitorVisitedLocation" fetch="select">
-            <column name="visit_location" not-null="true" />
+            <column name="visit_location_id"/>
         </many-to-one>
         <many-to-one name="employeeMasterBySecurityApproveId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
             <column name="security_approve_id" />
         </many-to-one>
+        <many-to-one name="visitorVisitsToEmployeeId" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="visitor_visits_to_employee_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="zydexLocationMaster" class="com.bul.zydex.model.ZydexLocationMaster" fetch="select">
+            <column name="zydex_location_master_id" not-null="true"/>
+        </many-to-one>
+<!--        <many-to-one name="company" class="com.bul.zydex.model.Company" fetch="select">
+            <column name="company_id" not-null="true"/>
+        </many-to-one>-->
         <property name="visitorName" type="string">
             <column name="visitor_name" not-null="true" />
         </property>
@@ -27,28 +36,34 @@
             <column name="visitor_organization" not-null="true" />
         </property>
         <property name="incomingDateTime" type="string">
-            <column name="incoming_date_time" length="45" not-null="true" />
+            <column name="incoming_date_time"/>
+        </property>
+        <property name="outgoingDateTime" type="string">
+            <column name="outgoing_date_time"/>
+        </property>
+        <property name="meetingOffDate" type="string">
+            <column name="meeting_off_date"/>
         </property>
         <property name="visitorComingFrom" type="string">
-            <column name="visitor_coming_from" length="16777215" not-null="true" />
+            <column name="visitor_coming_from" not-null="true" />
         </property>
         <property name="visitorContactDetail" type="string">
-            <column name="visitor_contact_detail" length="16777215" not-null="true" />
+            <column name="visitor_contact_detail" not-null="true" />
         </property>
         <property name="accesories" type="string">
-            <column name="accesories" />
+            <column name="accesories" not-null="true" />
         </property>
         <property name="reason" type="string">
-            <column name="reason" />
+            <column name="reason" not-null="true" />
         </property>
         <property name="requestDate" type="string">
-            <column name="request_date" length="45" />
+            <column name="request_date" not-null="true"/>
         </property>
         <property name="status" type="java.lang.Integer">
             <column name="status" />
         </property>
         <property name="approverDate" type="string">
-            <column name="approver_date" length="45" />
+            <column name="approver_date"/>
         </property>
         <property name="rejectRemark" type="string">
             <column name="reject_remark" />
@@ -56,5 +71,9 @@
         <property name="securityRemark" type="string">
             <column name="security_remark" />
         </property>
+        <property name="visitorPhotograph" type="string">
+            <column name="visitor_photograph" />
+        </property>
     </class>
 </hibernate-mapping>
+

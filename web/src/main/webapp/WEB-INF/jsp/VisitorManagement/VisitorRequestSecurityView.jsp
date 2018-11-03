@@ -13,11 +13,19 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Visitor Request</title>
         <script>
-            function approve(id) {
-                window.location = "visitorManagement.htm?act=securityAprroveClick&id=" + id;
-            }
+//            function approve(id,empId) {
+//                window.location = "visitorManagement.htm?act=viewSecurityClick&id=" + id+"&empId="+empId+"&for=confirm";
+////                window.location = "visitorManagement.htm?act=securityAprroveClick&id=" + id;
+//            }
             function withdrawapprove(id) {
-                window.location = "visitorManagement.htm?act=adminAprrovewithdrawClick&id=" + id;
+                window.location = "visitorManagement.htm?act=adminAprrovewithdrawClick&get=b&id=" + id;
+            }
+        </script>
+        <script>
+            function printDivRedirect() {
+                var id = document.getElementById("id").value;
+                var empId = document.getElementById("employeeId").value;
+                window.open("visitorManagement.htm?act=viewSecurityClick&for=print&id=" + id + "&empId=" + empId);
             }
         </script>
         <script>
@@ -82,15 +90,15 @@
                 <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
             </c:if>
             <section class="content">
-                <div class="row">
+                <div class="row" id="printableArea">
                     <div class="col-md-12">
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <form:form action="" method="post" commandName="visitorManagement"
                                            name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
-                                    <form:hidden path="employeeMasterByEmployeeMasterId.id"></form:hidden>
-                                    <form:hidden path="id"></form:hidden>
+                                    <form:hidden path="employeeMasterByEmployeeMasterId.id" name="employeeId" id="employeeId"></form:hidden>
+                                    <form:hidden path="id" name="id" id="id"></form:hidden>
                                         <!--Read only entries Starts here-->
                                         <div class="box box-info collapsed-box ">
                                             <div class="box-header">
@@ -107,49 +115,55 @@
                                                                 <label>Employee No.:</label>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                            <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.employeeId}" readonly="true"></form:input>
+                                                            <form:input path="employeeMasterByEmployeeMasterId.employeeId" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
-                                                            <div class=" col-sm-2">
+                                                            <div class="col-sm-2">
                                                                 <label>Employee Name:</label>
                                                             </div>
-                                                            <div class="col-sm-4">
-                                                            <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.employeeName}" readonly="true"></form:input>
+                                                            <div class="col-sm-4">   
+                                                            <form:input path="employeeMasterByEmployeeMasterId.employeeName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class=" col-sm-2">
+                                                            <div class="col-sm-2">
                                                                 <label>Department:</label>
                                                             </div>
-                                                            <div class="col-sm-4">
-                                                            <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.departmentMaster.departmentName}" readonly="true"></form:input>
+                                                            <div class="col-sm-4">   
+                                                            <form:input path="employeeMasterByEmployeeMasterId.departmentMaster.departmentName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 <label>Designation:</label>
                                                             </div>
-                                                            <div class="col-sm-4">
-                                                            <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.designationMaster.designationName}" readonly="true"></form:input>
+                                                            <div class="col-sm-4">   
+                                                            <form:input path="employeeMasterByEmployeeMasterId.designationMaster.designationName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                            <div class=" col-sm-2">
+                                                            <div class="col-sm-2">
                                                                 <label>Level:</label>
                                                             </div>
-                                                            <div class="col-sm-4">
-                                                            <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.levelMaster.level}" readonly="true"></form:input>
+                                                            <div class="col-sm-4">   
+                                                            <form:input path="employeeMasterByEmployeeMasterId.levelMaster.level" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 <label>Reporting Manager:</label>
                                                             </div>
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-4">   
                                                             <form:input path="" class="form-control" size="16" type="text" value="${reportingLevel1}" readonly="true"></form:input>
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <div class=" col-sm-2">
+                                                                <label>Location:</label>
+                                                            </div>
+                                                            <div class="col-sm-4">   
+                                                            <form:input path="employeeMasterByEmployeeMasterId.locationMaster.location" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                            </div>
+                                                            <div class=" col-sm-2">
                                                                 <label>Work Location:</label>
                                                             </div>
-                                                            <div class="col-sm-4">
-                                                            <form:input path="" class="form-control" size="16" type="text" value="${employeeMaster.locationMaster.location}" readonly="true"></form:input>
+                                                            <div class="col-sm-4">   
+                                                            <form:input path="employeeMasterByEmployeeMasterId.zydexLocationMaster.zydexLocation" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -166,74 +180,135 @@
                                             <div class="box-body no-padding">
                                                 <section class="content">
                                                     <div class="row">
-                                                        <div class="col-md-12 col-sm-12">
-                                                            <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Visitor's Name:</label>
-                                                                <div class="col-sm-7">
-                                                                <form:input path="visitorName" class="form-control" size="16" type="text" value=""  readonly="true" ></form:input>
+                                                        <div class="col-md-12 col-sm-12" style="text-align: center;">
+                                                        <c:if test="${visitorManagement.visitorPhotograph ne null and visitorManagement.visitorPhotograph ne ''}">
+                                                            <img id="newImageAtOld" src="<c:url value="${visitorManagement.visitorPhotograph}"/>"/>
+                                                        </c:if>
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12">
+                                                        </br>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Visitor Visits Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <div class="col-sm-7">
+                                                                <input type="text" name="zydexLocationId" id="zydexLocationId" class="form-control" readonly="true" value="${zydexLocation}"/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Visitor Visits Employee:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <div class="col-sm-7">
+                                                                <input type="text" name="visitorVisitsToEmployeeId" id="visitorVisitsToEmployeeId" class="form-control" readonly="true" value="${empVisitsToString}" />    
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Visitor's Full Name<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <div class="col-sm-7">
+                                                                <form:input path="visitorName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Visitor's Organization:</label>
+                                                                <label class="col-sm-3 control-label">Visitor's Organization:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <div class="col-sm-7">
-                                                                <form:input path="visitorOrganization" class="form-control" size="16" type="text" value=""  readonly="true"></form:input>
+                                                                <form:input path="visitorOrganization" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Incoming Date & Time:</label>
+                                                                <label class="col-sm-3 control-label">Visitor Requested By:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <div class="col-sm-7">
-                                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy hh:ii " data-link-field="dtp_input1">
-                                                                    <form:input path="incomingDateTime" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                    <input class="form-control" size="16" type="text" value="${empRequestString}" readonly="true"/>
+                                                            </div>
+                                                        </div>    
+                                                        <c:if test="${visitorManagement.requestDate ne null and visitorManagement.requestDate ne ''}"> 
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">Requested Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <div class="col-sm-7">
+                                                                    <form:input path="requestDate" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                        </c:if>    
+                                                        <c:if test="${visitorManagement.incomingDateTime ne null and visitorManagement.incomingDateTime ne ''}">    
                                                             <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Visitor Visits To:</label>
+                                                                <label class="col-sm-3 control-label">Incoming Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <div class="col-sm-7">
-                                                                <%--<form:input path="" class="form-control" size="16" type="text" value="${visitorManagement.locationMaster.location}" readonly="true"></form:input>--%>
-                                                                <form:input path="visitorVisitedLocation.location"  class="form-control" size="16" type="text" value=""  readonly="true"></form:input>
+                                                                    <form:input path="incomingDateTime" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                                    </div>
+                                                                </div>
+                                                        </c:if>
+                                                        <c:if test="${visitorManagement.meetingOffDate ne null and visitorManagement.meetingOffDate ne ''}">    
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">Meeting Off Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <div class="col-sm-7">
+                                                                    <form:input path="meetingOffDate" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                                    </div>
+                                                                </div>
+                                                        </c:if>
+                                                        <c:if test="${visitorManagement.outgoingDateTime ne null and visitorManagement.outgoingDateTime ne ''}">  
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">Outgoing Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <div class="col-sm-7">
+                                                                    <form:input path="outgoingDateTime" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                                    </div>
+                                                                </div>
+                                                        </c:if>
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Visitor's Contact Number:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <div class="col-sm-7">
+                                                                <form:input path="visitorContactDetail"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Visitor's Contact Detail:</label>
+                                                                <label class="col-sm-3 control-label">Visitor Coming From:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <div class="col-sm-7">
-                                                                <form:textarea path="visitorContactDetail"  class="form-control" size="16" type="text" value=""  readonly="true"></form:textarea>
+                                                                <form:input path="visitorComingFrom"  class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Visitor Coming From:</label>
+                                                                <label class="col-sm-3 control-label">Visitor's Accessories:</label>
                                                                 <div class="col-sm-7">
-                                                                <form:textarea path="visitorComingFrom"  class="form-control" size="16" type="text" value=""  readonly="true"></form:textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Accessories:</label>
-                                                                <div class="col-sm-7">
-                                                                <form:textarea path="accesories"  class="form-control" size="16" type="text" value=""  readonly="true"></form:textarea>
+                                                                <form:textarea path="accesories"  class="form-control" size="16" type="text" value="" readonly="true"></form:textarea>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                </section>
-                                            </div>
-                                        </div>
-                                        <div class="box box-info collapsed-box">
-                                            <div class="box-header">
-                                                <h3 class="box-title">Reason In Detail:</h3>
-                                                <div class="box-tools pull-right">
-                                                    <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                                                    <%--<c:if test="${visitorManagement.visitorPhotograph eq null or visitorManagement.visitorPhotograph eq ''}">--%>
+                                                    <!--                                                        <div class="col-md-12 col-sm-12" style="text-align: center;" id="getDivImageBoxButton">
+                                                                                                                <button type="button" class="btn btn-primary" id="getImageBoxButton" style="width: 100px;font-size: 10px;padding:2px;" data-original-title="" title="" >Add Photo</button>
+                                                                                                            </div>-->
+                                                    <%--</c:if>--%>
+                                                    <!--<div class="col-md-12 col-sm-12" style="text-align: center;" id="divGetImage">-->
+                                                    <%--<c:if test="${visitorManagement.visitorPhotograph eq null or visitorManagement.visitorPhotograph eq ''}">--%>
+                                                    <!--                                                            <div class="col-md-6 col-sm-6">
+                                                                                                                    <video id="video" width="400" height="400" autoplay style="margin: none;"></video>
+                                                                                                                </div>
+                                                                                                                <div class="col-md-6 col-sm-6">
+                                                                                                                    <canvas id="canvas" width="400" height="300" name="ImageFile1" id="ImageFile1" style="border:1px solid #d3d3d3;margin-top:50px;"></canvas> 
+                                                                                                                    <input type="hidden" name="ImageData" id="ImageData"/>
+                                                                                                                </div>
+                                                                                                                <div style="text-align: center;">
+                                                                                                                    <button type="button" class="btn btn-primary" id="snap" style="width: 100px;font-size: 10px;padding:2px;" data-original-title="" title="" >Capture Photo</button>
+                                                                                                                    <button type="button" id="submitImageButton" class="btn btn-primary" style="width: 100px;font-size: 10px;padding:2px;" data-original-title="" title="" onclick="setImageDataUsingAjax();">Submit</button>
+                                                                                                                </div>-->
+                                                    <%--</c:if>--%>        
+                                                    <!--</div>-->
                                                 </div>
-                                            </div><!-- /.box-header -->
-                                            <div class="box-body no-padding">
-                                                <section>
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <!-- Custom Tabs -->
-                                                            <div class="nav-tabs-custom">
-                                                                <div class="tab-content">
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-3 control-label">Reason:</label>
-                                                                        <div class="col-sm-7">
+                                            </section>
+                                        </div>
+                                    </div>
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Reason In Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <section>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <!-- Custom Tabs -->
+                                                        <div class="nav-tabs-custom">
+                                                            <div class="tab-content">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-3 control-label">Reason:</label>
+                                                                    <div class="col-sm-7">
                                                                         <form:textarea path="reason" rows="6" class="form-control" size="16" type="text" value=""  readonly="true"></form:textarea>
                                                                         </div>
                                                                     </div>
@@ -267,36 +342,39 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </div>  
                                                         </div>
                                                     </section>
                                                 </div> 
                                             </div>  
                                     </c:if>                                       
                                     <div class="form-group">
-                                        <div class="col-sm-offset-5 col-sm-4">
+                                        <div style="text-align: center">
                                             <%--<c:if test="${visitorManagement.status ne 10}">--%>
-                                            <c:if test="${visitorManagement.status eq 1}">
-                                                &nbsp;&nbsp;<button type="button" class="btn btn-primary" style="width: 110px !important;" onclick="approve(${visitorManagement.id}, 2);">CONFIRM VISIT</button>
-                                            </c:if>
-                                            <!--&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rejectRemark"  onclick="rejectClick('rejectRemark')">Reject</button>-->
-                                            <!--&nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#returnRemark" onclick="remarkClick('returnRemark')">Return</button>-->      
+                                            <%--<c:if test="${visitorManagement.status eq 1 and visitorManagement.status ne 8}">--%>
+<!--                                                &nbsp;&nbsp;<button type="button" class="btn btn-primary" style="width: 120px !important;padding:5px;font-size:12px;" onclick="approve(${visitorManagement.id},${visitorManagement.employeeMasterByEmployeeMasterId.id});">CONFIRM VISIT</button>
+                                                &nbsp;&nbsp;<button type="button" class="btn btn-primary" style="width: 120px !important;padding:5px;font-size:12px;" onclick="setImageDataUsingAjax();">CONFIRM VISIT</button>-->
                                             <%--</c:if>--%>
-                                            <%--<c:if test="${visitorManagement.status eq 6 || visitorManagement.status eq 10}">--%>
-                        <!--                    &nbsp;&nbsp;<button type="button" class="btn btn-primary" onclick="withdrawapprove(${visitorManagement.id},8);">Approve </button>
-                                            &nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#withdrawrejectRemark" >Reject </button>
-                                            &nbsp;&nbsp;<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#withdrawreturnRemark">Return </button>-->
-
-                                            <%--</c:if>--%>      
+                                            <c:if test="${(visitorManagement.status ne 8 and visitorManagement.status ne 2)and(visitorManagement.incomingDateTime eq null || visitorManagement.incomingDateTime eq '')}">
+                                                <button type="button" id="submitPrint" onclick="withdrawapprove(document.getElementById('id').value);" class="btn btn-warning" style="width: 120px !important;padding:5px;font-size:12px;">Withdraw</button>
+                                            </c:if>
+                                            <c:if test="${(visitorManagement.status ne 8)}">    
+                                                <button type="button" id="submitPrint" onclick="printDivRedirect();" class="btn btn-primary" style="width: 120px !important;padding:5px;font-size:12px;">Print</button>
+                                            </c:if>
+                                            <%--<c:if test="${visitorManagement.status eq 2}">--%>    
+                                            <!--<button type="button" id="submitPrint" onclick="printDivRedirect();" class="btn btn-primary" style="width: 120px !important;padding:5px;font-size:12px;">Print</button>-->
+                                            <%--</c:if>--%>
                                         </div>
                                     </div>
-                                </div>
-                            </form:form>
+                                </form:form>
+                            </div>
                         </div><!-- nav-tabs-custom -->
                     </div>
                 </div>
             </section>
+
         </div>
+
         <!--reject popup-->
         <div class="modal fade" id="rejectRemark" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -422,53 +500,135 @@
                 </div>
             </div>                   
 
-        </c:if>            
+        </c:if>
+
+        <!--        <script>
+                    $(document).ready(function () {
+                        $("#divGetImage").hide();
+                        $("#getImageBoxButton").click(function () {
+                            $("#getDivImageBoxButton").hide();
+                            $("#divGetImage").show();
+                        });
+                    });
+                </script> 
+                <script>
+                    function setImageDataUsingAjax() {
+                        var id = document.getElementById("id").value;
+                        var empId = document.getElementById("employeeId").value;
+                        var imageData = document.getElementById("ImageData").value;
+                        $.ajax({
+                            type: "POST",
+                            url: "visitorManagement.htm?act=pushData",
+                            data: {"id": id, "ImageData": imageData, "empId": empId,"for": "view"},
+                            dataType: "json",
+                            success: function (msg) {
+                                location.reload();
+                            },
+                            error: function (msg) {
+                                location.reload();
+                            }
+                        });
+                    }
+                </script>            -->
+        <!--        <script>
+                    $('#approveRemark').modal('hide');
+                    $('#returnRemark').modal('hide');
+                    $('#rejectRemark').modal('hide');
+                    $('#withdrawreturnRemark').modal('hide');
+                    $('#withdrawrejectRemark').modal('hide');
+                    function returnSubmit() {
+                        var flag = true;
+                        var securityRemark = document.getElementById('Remark0').value;
+                        if ('' === securityRemark) {
+                            flag = false;
+                            document.getElementById('errorRemark0').innerHTML = 'Please Enter Remark.';
+                        }
+                        return flag;
+                    }
+        
+                    function rejectSubmit() {
+                        var flag = true;
+                        var securityRemark = document.getElementById('Remark1').value;
+                        if ('' === securityRemark) {
+                            flag = false;
+                            document.getElementById('errorRemark1').innerHTML = 'Please Enter Remark.';
+                        }
+                        return flag;
+                    }
+                    function withdrawreturnSubmit() {
+                        var flag = true;
+                        var securityRemark = document.getElementById('Remark2').value;
+                        if ('' === securityRemark) {
+                            flag = false;
+                            document.getElementById('errorRemark2').innerHTML = 'Please Enter Remark.';
+                        }
+                        return flag;
+                    }
+        
+                    function withdrawrejectSubmit() {
+                        var flag = true;
+                        var securityRemark = document.getElementById('Remark3').value;
+                        if ('' === securityRemark) {
+                            flag = false;
+                            document.getElementById('errorRemark3').innerHTML = 'Please Enter Remark.';
+                        }
+                        return flag;
+                    }
+        
+                </script>
+                <script>
+                    // camera code
+                    // Put event listeners into place 
+                    window.addEventListener("DOMContentLoaded", function () {
+                        // Grab elements, create settings, etc. 
+                        var canvas = document.getElementById("canvas"),
+                                context = canvas.getContext("2d"),
+                                video = document.getElementById("video"),
+                                videoObj = {"video": true},
+                                errBack = function (error) {
+                                    console.log("Video capture error: ", error.code);
+                                };
+                        // Put video listeners into place 
+                        if (navigator.getUserMedia) { // Standard 
+                            navigator.getUserMedia(videoObj, function (stream) {
+                                video.src = window.URL.createObjectURL(stream);
+                                video.play();
+                            }, errBack);
+                        } else if (navigator.webkitGetUserMedia) { // WebKit-prefixed 
+                            navigator.webkitGetUserMedia(videoObj, function (stream) {
+                                video.src = window.webkitURL.createObjectURL(stream);
+                                video.play();
+                            }, errBack);
+                        } else if (navigator.mozGetUserMedia) { // WebKit-prefixed 
+                            navigator.mozGetUserMedia(videoObj, function (stream) {
+                                video.src = window.URL.createObjectURL(stream);
+                                video.play();
+                            }, errBack);
+                        }
+        
+                        // Trigger photo take 
+                        document.getElementById("snap").addEventListener("click", function () {
+                            //                    event.preventDefault();
+                            context.drawImage(video, 0, 0, 400, 300);
+                            document.getElementById('ImageData').value = canvas.toDataURL("image/png");
+                            document.getElementById('canvasImg').src = canvas.toDataURL("image/png");
+                            document.getElementById('newImageAtOld').src = canvas.toDataURL("image/png");
+                            document.getElementById('canvasImg').style.display = "none";
+                            //                    document.getElementById('video').style.display = "none"; // hide the live image video portin after click on take picture 
+                        });
+                    }
+                    , false);
+        
+                </script>-->
         <script>
-            $('#approveRemark').modal('hide');
-            $('#returnRemark').modal('hide');
-            $('#rejectRemark').modal('hide');
-            $('#withdrawreturnRemark').modal('hide');
-            $('#withdrawrejectRemark').modal('hide');
-
-            function returnSubmit() {
-                var flag = true;
-                var securityRemark = document.getElementById('Remark0').value;
-                if ('' === securityRemark) {
-                    flag = false;
-                    document.getElementById('errorRemark0').innerHTML = 'Please Enter Remark.';
-                }
-                return flag;
+            function printDivRedirect() {
+                var id = document.getElementById("id").value;
+                var empId = document.getElementById("employeeId").value;
+                window.open("visitorManagement.htm?act=viewSecurityClick&for=print&id=" + id + "&empId=" + empId);
+                window.setTimeout(function () {
+                    window.location = "visitorManagement.htm?act=securityApprove";
+                }, 2000);
             }
-
-            function rejectSubmit() {
-                var flag = true;
-                var securityRemark = document.getElementById('Remark1').value;
-                if ('' === securityRemark) {
-                    flag = false;
-                    document.getElementById('errorRemark1').innerHTML = 'Please Enter Remark.';
-                }
-                return flag;
-            }
-            function withdrawreturnSubmit() {
-                var flag = true;
-                var securityRemark = document.getElementById('Remark2').value;
-                if ('' === securityRemark) {
-                    flag = false;
-                    document.getElementById('errorRemark2').innerHTML = 'Please Enter Remark.';
-                }
-                return flag;
-            }
-
-            function withdrawrejectSubmit() {
-                var flag = true;
-                var securityRemark = document.getElementById('Remark3').value;
-                if ('' === securityRemark) {
-                    flag = false;
-                    document.getElementById('errorRemark3').innerHTML = 'Please Enter Remark.';
-                }
-                return flag;
-            }
-
         </script>
         <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     </body>

@@ -63,7 +63,7 @@
                 <h1>Visitor Management Form : </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Visitor Management System</li>
+                    <li class="active">Visitor Create:</li>
                 </ol>
             </section>
             <c:if test="${!empty successMessage}">
@@ -82,8 +82,10 @@
                                 <form:form action="visitorManagement.htm?act=createSubmit" method="post" commandName="visitorManagement"
                                            name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
                                     <form:hidden path="employeeMasterByEmployeeMasterId.id"></form:hidden>
+                                    <form:hidden path="incomingDateTime"></form:hidden>
+                                    <form:hidden path="id"></form:hidden>
                                         <!--Read only entries Starts here-->   
-                                         <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
+                                        <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
                                         <div class="box box-info collapsed-box ">
                                             <div class="box-header">
                                                 <h3 class="box-title">Employee Detail:</h3>
@@ -120,7 +122,6 @@
                                                             </div>
                                                             <div class="col-sm-4">   
                                                             <form:input path="employeeMasterByEmployeeMasterId.designationMaster.designationName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                                <!--employeeMasterByEmployeeMasterId.designationMaster.designationName-->
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
@@ -139,10 +140,16 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <div class=" col-sm-2">
-                                                                <label>Work Location:</label>
+                                                                <label>Location:</label>
                                                             </div>
                                                             <div class="col-sm-4">   
                                                             <form:input path="employeeMasterByEmployeeMasterId.locationMaster.location" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                            </div>
+                                                            <div class=" col-sm-2">
+                                                                <label>Work Location:</label>
+                                                            </div>
+                                                            <div class="col-sm-4">   
+                                                            <form:input path="employeeMasterByEmployeeMasterId.zydexLocationMaster.zydexLocation" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -161,7 +168,36 @@
                                                     <div class="row">
                                                         <div class="col-md-12 col-sm-12">
                                                             <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Visitor's Name<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <label class="col-sm-3 control-label">Visitor Visits Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <div class="col-sm-7">
+                                                                <form:select path="zydexLocationMaster.id" id="visitingLocationId" class="form-control">
+                                                                    <form:option value="">--Select--</form:option>
+                                                                    <form:options items="${deptMap}"></form:options>
+                                                                </form:select> 
+                                                                <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">Requested Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <div class="col-sm-7">
+                                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy hh:ii " data-link-field="dtp_input1">
+                                                                    <form:input path="requestDate" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                        <form:errors path="requestDate" cssClass="errorDiv"></form:errors>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">Visitor Visits Employee:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <div class="col-sm-7">
+                                                                <form:input path="visitorVisitsToEmployeeId.id" id="visitsToEmployeeId" class="form-control" size="16"></form:input>
+                                                                <form:errors path="visitorVisitsToEmployeeId.id" cssClass="errorDiv"></form:errors> 
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">Visitor's Full Name<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <div class="col-sm-7">
                                                                 <form:input path="visitorName" class="form-control" size="16" type="text" value="" ></form:input>
                                                                 <form:errors path="visitorName" cssClass="errorDiv"></form:errors>
@@ -175,44 +211,21 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Incoming Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <label class="col-sm-3 control-label">Visitor's Contact Number:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <div class="col-sm-7">
-                                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy hh:ii " data-link-field="dtp_input1">
-                                                                    <form:input path="incomingDateTime" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                                    <form:errors path="incomingDateTime" cssClass="errorDiv"></form:errors>
-                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Visitor Visits To:<span style="color: red;font-size: 12px;">*</span></label>
-                                                                <div class="col-sm-7">
-                                                                <form:select path="visitorVisitedLocation.id" class="form-control">
-                                                                    <form:option value="">--Select--</form:option>
-                                                                    <c:forEach var="visitedLocationMap" items="${visitedLocationMap}">
-                                                                        <form:option value="${visitedLocationMap.key}">${visitedLocationMap.value}</form:option>
-                                                                    </c:forEach>
-                                                                </form:select> 
-                                                                <form:errors path="visitorVisitedLocation.id" cssClass="errorDiv"></form:errors>
-                                                                <%--<form:errors path="visitorVisitedLocation.id" cssClass="errorDiv"></form:errors>--%>
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Visitor's Contact Detail:<span style="color: red;font-size: 12px;">*</span></label>
-                                                                <div class="col-sm-7">
-                                                                <form:textarea path="visitorContactDetail"  class="form-control" size="16" type="text" value=""></form:textarea>
+                                                                <form:input path="visitorContactDetail" maxlength="10" minlength="10" pattern="\d+" step="any" title="Contact number should have 10 inputs and digits only." class="form-control bfh-phone" value=""></form:input>
                                                                 <form:errors path="visitorContactDetail" cssClass="errorDiv"></form:errors>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label">Visitor Coming From:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <div class="col-sm-7">
-                                                                <form:textarea path="visitorComingFrom"  class="form-control" size="16" type="text" value=""></form:textarea>
+                                                                <form:input path="visitorComingFrom"  class="form-control" size="16" type="text" value=""></form:input>
                                                                 <form:errors path="visitorComingFrom" cssClass="errorDiv"></form:errors>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
-                                                                <label class="col-sm-3 control-label">Accessories:</label>
+                                                                <label class="col-sm-3 control-label">Visitor's Accessories:</label>
                                                                 <div class="col-sm-7">
                                                                 <form:textarea path="accesories"  class="form-control" size="16" type="text" value=""></form:textarea>
                                                                 <form:errors path="accesories" cssClass="errorDiv"></form:errors>
@@ -252,29 +265,39 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-offset-5 col-sm-4">
-                                                <button type="submit" class="btn btn-primary" id="saveSubmit1" style="width: 100px;text-align: center;font-size:16px ;">Submit</button>
-                                                <!--                <button type="submit" class="btn btn-primary"  >Withdraw</button>-->
+                                                <button type="submit" class="btn btn-primary" id="saveSubmit1" style="width: 120px !important;padding:5px;font-size:12px;">Submit</button>
                                             </div> 
                                         </div>
-                                    </div>
-                                </div>
+                                </form:form>
                             </div>
-
-                    </form:form>
+                        </div>
+                    </div>
+                </div>
             </section>
-
         </div>
         <script type="text/javascript">
             $('.form_datetime').datetimepicker({
                 //language:  'fr',
                 weekStart: 1,
-//                todayBtn: 1,
+                todayBtn: 1,
+                minuteStep: 2,
                 autoclose: 1,
                 todayHighlight: 1,
                 startView: 2,
                 forceParse: 0,
                 showMeridian: 1,
                 startDate: new Date()
+            });
+        </script>
+        <script>
+            jQuery.noConflict();
+            jQuery(document).ready(function () {
+                jQuery("#visitsToEmployeeId").tokenInput(${list}, {
+                    preventDuplicates: true,
+                    noResultsText: "No Result",
+                    tokenLimit: "1",
+                    searchingText: "Searching ......"
+                });
             });
         </script>
         <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

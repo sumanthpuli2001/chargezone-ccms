@@ -73,6 +73,16 @@ public class VisitorManagementServiceImpl<T> extends GenericsServiceImpl<T> impl
     public int countVisitorManagementApproverPendingRequest(T object) {
         return visitorManagementDAO.countVisitorManagementApproverPendingRequest(object);
     }
+
+    @Override
+    public List<?> readSearchEmpRequestForSessionEmployee(Integer id, String startDate, String endDate, String status) {
+        return visitorManagementDAO.readSearchEmpRequestForSessionEmployee(id, startDate, endDate, status);
+    }
+
+    @Override
+    public List<?> readByapproverId(String employeeId, String designationId, String departmentId, String startDate, String endDate, String status) {
+        return visitorManagementDAO.readByapproverId(employeeId, designationId, departmentId, startDate, endDate, status);
+    }
     
 
 }

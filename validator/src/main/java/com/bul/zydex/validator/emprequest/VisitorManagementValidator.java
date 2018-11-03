@@ -25,18 +25,21 @@ public class VisitorManagementValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "reason", "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "visitorName", "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "visitorOrganization", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "incomingDateTime", "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "requestDate", "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "visitorComingFrom", "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "visitorContactDetail", "field.error1", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "visitorVisitedLocation.id", "field.error27", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "zydexLocationMaster.id", "field.error27", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "visitorVisitsToEmployeeId.id", "field.error27", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "accesories", "field.error27", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "visitorPhotograph", "field.error27", "None");
         VisitorManagement visitorManagement = (VisitorManagement) o;
-        if (visitorManagement.getVisitorVisitedLocation().getId() != null) {
-            if (visitorManagement.getVisitorVisitedLocation().getId() == 0) {
-                errors.rejectValue("visitorVisitedLocation.id", "field.error27", "none");
-            } else {
-                ValidationUtils.rejectIfEmptyOrWhitespace(errors, "visitorVisitedLocation.id", "field.error1", "None");
-            }
-        }
+//        if (visitorManagement.getVisitorVisitedLocation().getId() != null) {
+//            if (visitorManagement.getVisitorVisitedLocation().getId() == 0) {
+//                errors.rejectValue("visitorVisitedLocation.id", "field.error27", "none");
+//            } else {
+//                ValidationUtils.rejectIfEmptyOrWhitespace(errors, "visitorVisitedLocation.id", "field.error1", "None");
+//            }
+//        }
     }
 
 }

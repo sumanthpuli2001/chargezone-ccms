@@ -24,12 +24,16 @@ public interface VisitorManagementDAO<T> extends GenericsDAO<T> {
     public List<?> readSearchRequest(T object);
 
     public List<?> readVisitorManagementPendingRequest(T object);
-    
+
     public List<?> readVisitorManagementApproverPendingRequest(T object);
-    
-     public List<?> readEmpIdFromTabId(int id);
-     
-     public int countVisitorManagementPendingRequest(T object);
-     
-     public int countVisitorManagementApproverPendingRequest(T object);
+
+    public List<?> readEmpIdFromTabId(int id);
+
+    public int countVisitorManagementPendingRequest(T object);
+
+    public int countVisitorManagementApproverPendingRequest(T object);
+
+    public List<?> readSearchEmpRequestForSessionEmployee(Integer id, String startDate, String endDate, String status);
+
+    public List<?> readByapproverId(String employeeId, String designationId, String departmentId, String startDate, String endDate, String status);
 }

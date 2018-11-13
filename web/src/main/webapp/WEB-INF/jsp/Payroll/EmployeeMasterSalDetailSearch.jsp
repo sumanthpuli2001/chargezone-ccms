@@ -93,49 +93,29 @@
                                 <div class="box-body no-padding">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
-                                            <div class="form-group">
+                                        
+                                              <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Location:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control " onchange="OnchangeFunction('zydexLocationMasterIdError');">
+                                                    <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
                                                         <option value="" label="-- Select --" ></option>
-                                                        <c:forEach var="deptName" items="${deptMap}">
+                                                        <c:forEach var="deptName" items="${location}">
                                                             <option value="${deptName.key}" label="${deptName.value}" ></option>
                                                         </c:forEach>
                                                     </select>
-                                                     <span style="font-size: 14px; color: #dd4b39;" id="zydexLocationMasterIdError"></span>
                                                 </div>
-
-                                                <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
                                                 <div class="col-sm-6">
-                                                    <label>Type of Employee :<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="employeeTypeMasterId" id="employeeTypeMasterId" onchange="selectsubtype(this.value);" class="form-control">
+                                                    <label>Company:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <select name="companyId" id="companyId" class="form-control ">
                                                         <option value="" label="-- Select --" ></option>
-                                                        <c:forEach var="EmpType" items="${EmployeeTypeList}">
-                                                            <option value="${EmpType.key}" label="${EmpType.value}" ></option>
+                                                        <c:forEach var="companyname" items="${companyList}">
+                                                            <option value="${companyname.value}" label="${companyname.value}" ></option>
                                                         </c:forEach>
                                                     </select>
-
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6" id="employeeSubTypeId">
-                                                    <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
-                                                        <option value="" label="-- Select --" ></option> 
+                                               
+                                                
 
-                                                    </select>
-                                                </div>
-
-
-                                                <div class="col-sm-6">
-                                                    <label>Payment Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="paymentType" id="paymentType" class="form-control ">
-                                                        <option value="">--Select--</option>
-                                                        <option value="0">Cheque</option>
-                                                        <option value="1">Cash</option>
-
-                                                    </select>
-                                                </div>
                                             </div>
                                             <!--                                            <div class="form-group">
                                                                                            <div class="col-sm-6">

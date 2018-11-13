@@ -156,7 +156,7 @@
 
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
-                                            <h3 class="box-title">Date & Time:</h3>
+                                            <h3 class="box-title">Date & Time:</h3> 
                                             <div class="box-tools pull-right">
                                                 <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2()"><i class="fa fa-plus" id="minusId2"></i></button>
                                             </div>
@@ -195,6 +195,13 @@
                                                                 <form:option value="Half Coff" label="Half Coff"></form:option>
                                                                 <form:option value="Full Coff" label="Full Coff"></form:option>
                                                             </form:select>
+                                                            <%--<form:errors path="shiftType" cssClass="errorDiv"></form:errors>--%>
+                                                        </div>
+                                                            <div class="col-sm-6">
+                                                                <label>Coff Balance:<span style="color: red;font-size: 12px;"></span></label>
+                                                          
+                                                                <form:input path="" class="form-control" value="${time1}" readonly="true"></form:input>
+                                                          
                                                             <%--<form:errors path="shiftType" cssClass="errorDiv"></form:errors>--%>
                                                         </div>
 

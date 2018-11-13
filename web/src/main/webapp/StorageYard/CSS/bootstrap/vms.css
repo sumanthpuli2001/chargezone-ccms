@@ -81,7 +81,7 @@ body{
 }
 .content-wrapper,.right-side{
     min-height:100%;
-    background-color:#ecf0f5;
+    background-color:#ECECDF;
     z-index:800
 }
 .main-footer{

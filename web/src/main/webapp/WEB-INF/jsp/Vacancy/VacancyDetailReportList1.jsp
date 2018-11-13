@@ -15,197 +15,203 @@
 <html lang="en">
 
     <head>
-    
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Job Vacancy List</title>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-    <link rel="stylesheet" href="StorageYard/CSS/bootstrap/bootstrap.min.css">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Job Vacancy List</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/font-awesome.min.css">-->
-    <link rel="stylesheet" href="StorageYard/CSS/login/form-elements.css">
-    <link rel="stylesheet" href="StorageYard/CSS/login/style.css">
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="StorageYard/CSS/bootstrap/bootstrap.min.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/font-awesome.min.css">-->
+        <link rel="stylesheet" href="StorageYard/CSS/login/form-elements.css">
+        <link rel="stylesheet" href="StorageYard/CSS/login/style.css">
 
-    <!-- Favicon and touch icons -->
-    <link rel="shortcut icon" href="../../dist/img/ico/logo.png">
-    <!--<link rel="shortcut icon" href="../../bootstrap/ico/favicon.png">-->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="StorageYard/Images/login/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="StorageYard/Images/login/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="StorageYard/Images/login/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="StorageYard/Images/login/apple-touch-icon-57-precomposed.png">
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-    <!--        <style>
-                .labelDiv {
-                    width: 120px;
-                }
-            </style>-->
-    <style>
-        #containers {
-            display: flex;              /* establish flex container */
-            flex-direction: column;
-            justify-content: center;    /* align items vertically, in this case */
-            align-items: center;        /* align items horizontally, in this case */
-            height: 800px;
-            /*border: 1px solid black;*/
-        }
+        <!-- Favicon and touch icons -->
+        <link rel="shortcut icon" href="../../dist/img/ico/logo.png">
+        <!--<link rel="shortcut icon" href="../../bootstrap/ico/favicon.png">-->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="StorageYard/Images/login/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="StorageYard/Images/login/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="StorageYard/Images/login/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="StorageYard/Images/login/apple-touch-icon-57-precomposed.png">
 
-    </style>
-    <!--        <style>
-                element.style {
-                    left: 0px !important;
-                    top: 0px !important;
-                    overflow: hidden !important;
-                    margin: 0px !important;
-                    padding: 0px !important;
-                    height: 442px !important;
-                    width: 1349px !important;
-                    z-index: -999999 !important;
-                    position: fixed !important;
-                    margin-top: -50px !important;
-                }
-            </style>-->
-    <script>
-        var flag3 = true;
-        function saveSubmit11() {
-            if (flag3) {
-                flag3 = false;
-                document.getElementById('saveSubmit1').innerHTML = 'Continuing ... .. .';
-                document.form1.submit();
-                return true;
-            } else {
-                return false;
+        <!--        <style>
+                    .labelDiv {
+                        width: 120px;
+                    }
+                </style>-->
+        <style>
+            #containers {
+                display: flex;              /* establish flex container */
+                flex-direction: column;
+                justify-content: center;    /* align items vertically, in this case */
+                align-items: center;        /* align items horizontally, in this case */
+                height: 800px;
+                /*border: 1px solid black;*/
             }
-        }
-    </script>
-</head>
-<body>
+
+        </style>
+        <!--        <style>
+                    element.style {
+                        left: 0px !important;
+                        top: 0px !important;
+                        overflow: hidden !important;
+                        margin: 0px !important;
+                        padding: 0px !important;
+                        height: 442px !important;
+                        width: 1349px !important;
+                        z-index: -999999 !important;
+                        position: fixed !important;
+                        margin-top: -50px !important;
+                    }
+                </style>-->
+        <script>
+            var flag3 = true;
+            function saveSubmit11() {
+                if (flag3) {
+                    flag3 = false;
+                    document.getElementById('saveSubmit1').innerHTML = 'Continuing ... .. .';
+                    document.form1.submit();
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        </script>
+    </head>
+    <body>
 
 
-    <section class="content-header" style="margin-top: 5%;">
-        <c:if test="${sessionScope.ApplayJobUserMaster ne null}">
-        <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=logout'"><i class="fa fa-sign-out"></i>&nbsp&nbsp&nbsp;Log Out</button>
-        <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=candidateProfile'"><i class="fa fa-Home"></i>&nbsp&nbsp&nbsp;My Profile</button>
-        </c:if>
-        <c:if test="${sessionScope.ApplayJobUserMaster eq null}">
-        <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-up"></i>&nbsp&nbsp&nbsp;Sign Up</button>
-        <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Login</button>
-        <!--<button type="button" class="btn btn-primary" style="float: left; width: 130px; margin-right: 2%;" onclick="window.location = 'logIn.html?act=loginClick'"><i class="fa fa-Home"></i>&nbsp&nbsp&nbsp;Main Home</button>-->
-        </c:if>
-        <h1>Job Vacancy List</h1>
-        <ol class="breadcrumb">
-        </ol>
-    </section>
-    <br/>
-    <br/>
-    <form:form action="vacancy.htm?act=clickDeleteVacancy" method="post" commandName="vacancyMaster"
-               name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
-        <section class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Custom Tabs -->
-                    <div class="nav-tabs-custom">
-                        <div class="tab-content">
+        <section class="content-header" style="margin-top: 5%;">
+            <c:if test="${sessionScope.ApplayJobUserMaster ne null}">
+                <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=logout'"><i class="fa fa-sign-out"></i>&nbsp&nbsp&nbsp;Log Out</button>
+                <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=candidateProfile'"><i class="fa fa-Home"></i>&nbsp&nbsp&nbsp;My Profile</button>
+            </c:if>
+            <c:if test="${sessionScope.ApplayJobUserMaster eq null}">
+                <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-up"></i>&nbsp&nbsp&nbsp;Sign Up</button>
+                <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Login</button>
+                <!--<button type="button" class="btn btn-primary" style="float: left; width: 130px; margin-right: 2%;" onclick="window.location = 'logIn.html?act=loginClick'"><i class="fa fa-Home"></i>&nbsp&nbsp&nbsp;Main Home</button>-->
+            </c:if>
+            <table>
 
-                            <div class="box-header">
-                            </div>
-                            <div class="box-body no-padding">
-                                <div class="row">
-                                    <div class="col-md-12 col-sm-12">
-                                        <div class="table table-bordered" style="width: 85%;margin-left: 7%;">
-                                            <table id="table_1" class="table table-bordered table-striped table-hover"  align="center"  >
-                                                <c:choose>
-                                                    <c:when test="${empty list}">
-                                                        <tr>
-                                                            <td align="center">
-                                                                <c:out value="There is no record found."></c:out>
-                                                                </td>
-                                                            </tr>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <thead>
+                <td style="text-align: left;">
+                    <span><img src="StorageYard/Images/logo.png"  style="width: 150px;float: left;margin-top: 5%;margin-left: 5%;"/></span> 
+                </td>
+            </table>
+            <center><h1>Job Vacancy List</h1></center>
+            <ol class="breadcrumb">
+            </ol>
+        </section>
+        <br/>
+        <br/>
+        <form:form action="vacancy.htm?act=clickDeleteVacancy" method="post" commandName="vacancyMaster"
+                   name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <div class="tab-content">
+
+                                <div class="box-header">
+                                </div>
+                                <div class="box-body no-padding">
+                                    <div class="row">
+                                        <div class="col-md-12 col-sm-12">
+                                            <div class="table table-bordered" style="width: 85%;margin-left: 7%;">
+                                                <table id="table_1" class="table table-bordered table-striped table-hover"  align="center"  >
+                                                    <c:choose>
+                                                        <c:when test="${empty list}">
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <c:out value="There is no record found."></c:out>
+                                                                    </td>
+                                                                </tr>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <thead>
+                                                                <tr>
+
+                                                                    <!--                                                                    <th>sr.no</th>-->
+                                                                    <th style="width: 142px;">Vacancy Name</th>
+                                                                    <th style="width: 185px;">Number Of Position</th>
+                                                                    <th style="width: 130px;">Experience</th>
+                                                                    <!--<th style="width: 105px;">Start Date</th>-->
+                                                                    <th style="width: 132px;">Vacancy Last Date</th>
+                                                                        <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                    <th style="width: 132px;">Action</th>
+                                                                        <%--</c:if>--%>
+
+                                                                </tr>
+                                                            </thead>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                    <tbody>
+                                                        <c:forEach var="list" items="${list}">
                                                             <tr>
 
-                                                                <!--                                                                    <th>sr.no</th>-->
-                                                                <th style="width: 142px;">Vacancy Name</th>
-                                                                <th style="width: 185px;">Number Of Position</th>
-                                                                <th style="width: 130px;">Experience</th>
-                                                                <!--<th style="width: 105px;">Start Date</th>-->
-                                                                <th style="width: 132px;">Vacancy Last Date</th>
-                                                                    <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                                <th style="width: 132px;">Action</th>
-                                                                    <%--</c:if>--%>
-
+                                                                <!--                                                                <td>1</td>-->
+                                                                <td>${list[1]}</td>
+                                                                <td>${list[2]}</td>
+                                                                <td>${list[4]}</td>
+                                                                <!--<td>${list[6]}</td>-->
+                                                                <td>${list[7]}</td>
+                                                                <!--<td>${list[2]}</td>-->
+                                                                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                                                                <td>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                            &nbsp;&nbsp;View
+                                                                        </button>
+                                                                    </div>
+                                                                </td>
+                                                                <%--</c:if>--%>
                                                             </tr>
-                                                        </thead>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                <tbody>
-                                                    <c:forEach var="list" items="${list}">
-                                                        <tr>
-
-                                                            <!--                                                                <td>1</td>-->
-                                                            <td>${list[1]}</td>
-                                                            <td>${list[2]}</td>
-                                                            <td>${list[4]}</td>
-                                                            <!--<td>${list[6]}</td>-->
-                                                            <td>${list[7]}</td>
-                                                            <!--<td>${list[2]}</td>-->
-                                                            <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-                                                            <td>
-                                                                <div class="btn-group">
-                                                                    <button type="button" onclick="editViewClick(${list[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                        &nbsp;&nbsp;View
-                                                                    </button>
-                                                                </div>
-                                                            </td>
-                                                            <%--</c:if>--%>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                        </c:forEach>
+                                                    </tbody>
+                                                </table>
+                                            </div>
 
 
-                                    </div><!-- /.col -->
-                                </div><!-- /.row -->
-                            </div>
-                        </div><!-- /.tab-content -->
-                    </div><!-- nav-tabs-custom -->
-                </div><!-- /.col -->
-            </div>
-        </section>
+                                        </div><!-- /.col -->
+                                    </div><!-- /.row -->
+                                </div>
+                            </div><!-- /.tab-content -->
+                        </div><!-- nav-tabs-custom -->
+                    </div><!-- /.col -->
+                </div>
+            </section>
 
-    </form:form>
-    <script>
-        function editViewClick(id) {
-            window.location = 'vacancy.htm?act=viewVacancy&id=' + id;
-        }
-    </script>
-    <!-- Javascript -->
-    <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
-    <script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>
-    <script src="StorageYard/JS/login/jquery.backstretch.min.js"></script>
-    <script src="StorageYard/JS/login/retina-1.1.0.min.js"></script>
-    <script src="StorageYard/JS/login/scripts.js"></script>
-    <script type="text/javascript" src="StorageYard/JS/JQuery/common.js"></script>
+        </form:form>
+        <script>
+            function editViewClick(id) {
+                window.location = 'vacancy.htm?act=viewVacancy&id=' + id;
+            }
+        </script>
+        <!-- Javascript -->
+        <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
+        <script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>
+        <script src="StorageYard/JS/login/jquery.backstretch.min.js"></script>
+        <script src="StorageYard/JS/login/retina-1.1.0.min.js"></script>
+        <script src="StorageYard/JS/login/scripts.js"></script>
+        <script type="text/javascript" src="StorageYard/JS/JQuery/common.js"></script>
 
-    <!--[if lt IE 10]>
-        <script src="assets/js/placeholder.js"></script>
-    <![endif]-->
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
 
-</body>
+    </body>
 
 </html>
 

@@ -30,10 +30,10 @@
             var typeofemployee = document.getElementById('typeofemployee').value;
             var employeesubid = document.getElementById('employeesubid').value;
             var paymenttype = document.getElementById('paymenttype').value;
-           
-            
-            window.location = 'employeeSalaryProcess.htm?act=searchSalaryDetailSubmitPrint&month=' + month + '&year=' + year +'&zydexlocationid='+zydexlocationid+'&typeofemployee='+typeofemployee+'&employeesubid='+employeesubid+'&paymenttype='+paymenttype;
-              
+
+
+            window.location = 'employeeSalaryProcess.htm?act=searchSalaryDetailSubmitPrint&month=' + month + '&year=' + year + '&zydexlocationid=' + zydexlocationid + '&typeofemployee=' + typeofemployee + '&employeesubid=' + employeesubid + '&paymenttype=' + paymenttype;
+
 //            window.location = 'employeeSalaryProcess.htm?act=searchSalaryDetailSubmitPrint&id=' + id;
         }
     </script>
@@ -99,44 +99,55 @@
                                                     <label>Location:<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
                                                         <option value="" label="-- Select --" ></option>
-                                                        <c:forEach var="deptName" items="${deptMap}">
+                                                        <c:forEach var="deptName" items="${location}">
                                                             <option value="${deptName.key}" label="${deptName.value}" ></option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
+                                                <div class="col-sm-6">
+                                                    <label>Company:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <select name="companyId" id="companyId" class="form-control ">
+                                                        <option value="" label="-- Select --" ></option>
+                                                        <c:forEach var="companyname" items="${companyList}">
+                                                            <option value="${companyname.value}" label="${companyname.value}" ></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                               
+                                                
 
-                                                <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
+<!--                                                <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
                                                 <div class="col-sm-6">
                                                     <label>Type of Employee :<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="employeeTypeMasterId" id="employeeTypeMasterId" onchange="selectsubtype(this.value);" class="form-control">
                                                         <option value="" label="-- Select --" ></option>
-                                                        <c:forEach var="EmpType" items="${EmployeeTypeList}">
-                                                            <option value="${EmpType.key}" label="${EmpType.value}" ></option>
-                                                        </c:forEach>
-                                                    </select>
+                                                <%--<c:forEach var="EmpType" items="${EmployeeTypeList}">--%>
+                                                    <option value="${EmpType.key}" label="${EmpType.value}" ></option>
+                                                <%--</c:forEach>--%>
+                                            </select>
 
-                                                </div>
+                                        </div>-->
                                             </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6" id="employeeSubTypeId">
-                                                    <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
-                                                        <option value="" label="-- Select --" ></option> 
-
-                                                    </select>
-                                                </div>
-
-
-                                                <div class="col-sm-6">
-                                                    <label>Payment Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                    <select name="paymentType" id="paymentType" class="form-control ">
-                                                        <option value="">--Select--</option>
-                                                        <option value="0">Cheque</option>
-                                                        <option value="1">Cash</option>
-
-                                                    </select>
-                                                </div>
-                                            </div>
+                                            <!--                                            <div class="form-group">
+                                                                                            <div class="col-sm-6" id="employeeSubTypeId">
+                                                                                                <label>Employee SubType:<span style="color: red;font-size: 12px;"></span></label>
+                                                                                                <select name="employeeSubTypeId" id="employeeSubTypeId" class="form-control">
+                                                                                                    <option value="" label="-- Select --" ></option> 
+                                            
+                                                                                                </select>
+                                                                                            </div>
+                                            
+                                            
+                                                                                            <div class="col-sm-6">
+                                                                                                <label>Payment Type:<span style="color: red;font-size: 12px;"></span></label>
+                                                                                                <select name="paymentType" id="paymentType" class="form-control ">
+                                                                                                    <option value="">--Select--</option>
+                                                                                                    <option value="0">Cheque</option>
+                                                                                                    <option value="1">Cash</option>
+                                            
+                                                                                                </select>
+                                                                                            </div>
+                                                                                        </div>-->
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Months:<span style="color: red;font-size: 12px;">*</span></label>
@@ -191,8 +202,8 @@
                 <input type="hidden" id="year" name="year" value="${year}">
                 <input type="hidden" id="zydexlocationid" name="zydexlocationid" value="${zydexlocationid}">
                 <input type="hidden" id="typeofemployee" name="typeofemployee" value="${typeofemployee}">
-                <input type="hidden" id="employeesubid" name="employeesubid" value="${employeesubid}">
-                <input type="hidden"id="paymenttype" name="paymenttype" value="${paymenttype}">
+<!--                <input type="hidden" id="employeesubid" name="employeesubid" value="${employeesubid}">
+                <input type="hidden"id="paymenttype" name="paymenttype" value="${paymenttype}">-->
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">
@@ -201,7 +212,7 @@
                                     <c:choose>
                                         <c:when test="${!empty finalList}">
                                             <div class="box-header" style="text-align: right;">
-                                                 <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="window.location = 'employeeSalaryProcess.htm?act=exportToExcelLeaveBalance'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
+                                                <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="window.location = 'employeeSalaryProcess.htm?act=exportToExcelLeaveBalance'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
                                                 <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" title="Export To Excel" onclick="ExportToExcel('tableid')"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
                                                 <input type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" value="Export" onclick= "onprintDiv();">
                                                 <!--<a href="" onclick="javascipt:window.open('/Payroll/report.pdf');" class="popup">Click to open.</a>-->
@@ -370,21 +381,21 @@
         var htmltable = document.getElementById('tableid');
         var html = htmltable.outerHTML;
         window.open('data:application/vnd.ms-excel,' + encodeURIComponent(html));
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
+
 //          window.open('data:application/vnd.pdf,' + encodeURIComponent(html));
     }
-    
-    
+
+
 </script>
 <style>
     tr,td,th{

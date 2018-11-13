@@ -564,7 +564,7 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     <!--<li><a href="payrollSavingType.htm?act=showResult"><i class="fa fa-circle-o"></i>Saving Type</a></li>-->
-                                    <li><a href="payrollSalaryType.htm?act=showResult"><i class="fa fa-circle-o"></i>Salary Type</a></li>
+                                    <!--<li><a href="payrollSalaryType.htm?act=showResult"><i class="fa fa-circle-o"></i>Salary Type</a></li>-->
                                     <!--<li><a href="payrollTaxRule.htm?act=showResult"><i class="fa fa-circle-o"></i>Tax Rule</a></li>-->
 
                                     <li><a href="payrollProfessionalTax.htm?act=showResult"><i class="fa fa-circle-o"></i>Professional Tax</a></li>
@@ -666,6 +666,7 @@
                                     <li><a href="employeeSalaryProcess.htm?act=salaryExcelUpload"><i class="fa fa-circle-o"></i> Salary Excel Upload</a></li>
                                 </ul>
                             </li>
+                            <c:if test="${sessionScope.userRight.hr}">
                             <li>
                                 <a href="#">
                                     <i class="fa fa-rupee fa-lg"></i>
@@ -677,6 +678,7 @@
 
                                 </ul>
                             </li>
+                            </c:if>
                             <!--                            <li>
                                                             <a href="#">
                                                                 <i class="fa fa-rupee fa-lg"></i>

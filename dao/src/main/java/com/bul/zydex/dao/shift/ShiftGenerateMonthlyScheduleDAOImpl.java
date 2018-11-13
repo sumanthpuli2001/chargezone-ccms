@@ -70,7 +70,9 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
                 + " FROM ShiftGenerateMonthlySchedule a"
                 + " LEFT JOIN a.employeeMaster b"
                 + " Where a.shiftMonth = " + month
-                + " And a.shiftYear =" + year;
+                + " And a.shiftYear =" + year
+                + " and b.employeeId != 'admin' and ((b.dateOfLeaving is null or b.dateOfLeaving = '') "
+                + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
         return getHibernateTemplate().find(query);
     }
 

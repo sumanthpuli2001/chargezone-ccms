@@ -54,31 +54,33 @@ public class PayrollPfRecordDAOImpl<T> extends GenericsDAOImpl<T> implements Pay
         String condition = "";
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
 
-//        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-//            condition += " where a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
-//        }
-//        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
-//            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
-//        }
+        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
+            condition += " AND a.locationMaster.id = " + employeeMaster.getAdharCard();
+        }
+        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+            condition += " AND a.company = '" + employeeMaster.getCompany() + "'";
+        }
 //        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
 //            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
 //        }
 //        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
 //            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
 //        }
-        if (!"".equals(employeeMaster.getBankAccountNo()) && null != employeeMaster.getBankAccountNo()) {
-            condition += " WHERE b.month = '" + employeeMaster.getBankAccountNo() + "'";
-        }
-        if (!"".equals(employeeMaster.getPanCard()) && null != employeeMaster.getPanCard()) {
-            condition += " AND b.year = '" + employeeMaster.getPanCard() + "'";
-        }
+//        if (!"".equals(employeeMaster.getBankAccountNo()) && null != employeeMaster.getBankAccountNo()) {
+//            condition += " WHERE b.month = '" + employeeMaster.getBankAccountNo() + "'";
+//        }
+//        if (!"".equals(employeeMaster.getPanCard()) && null != employeeMaster.getPanCard()) {
+//            condition += " AND b.year = '" + employeeMaster.getPanCard() + "'";
+//        }
         query += " Select a.employeeId,a.employeeName,j.empContrubtionEpf,j.compContrubtionEps,j.differentEpsEpf,"
                 + " a.id,b.id"
                 + " From PayrollPfRecord j"
                 + " left join j.employeeSalaryProcess b"
                 + " left join b.employeeMaster a"
                 + " where b.month  ='" + employeeMaster.getBankAccountNo() + "'"
-                + " and b.year  ='" + employeeMaster.getPanCard() + "'";
+                + " and b.year  ='" + employeeMaster.getPanCard() + "'"
+                + " and 1=1" + condition;
 
         return getHibernateTemplate().find(query);
     }

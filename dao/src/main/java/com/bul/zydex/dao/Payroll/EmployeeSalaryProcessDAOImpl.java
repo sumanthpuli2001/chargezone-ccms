@@ -177,17 +177,18 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
 
         if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
+            condition += " AND a.locationMaster.id = " + employeeMaster.getAdharCard();
         }
-        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
-            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+            condition += " AND a.company = '" + employeeMaster.getCompany() + "'";
         }
-        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
-            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
-        }
-        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
-            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
-        }
+//        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
+//            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
+//        }
+//        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
+//            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
+//        }
         if (!"".equals(employeeMaster.getBankAccountNo()) && null != employeeMaster.getBankAccountNo()) {
             condition += " AND b.month = '" + employeeMaster.getBankAccountNo() + "'";
         }
@@ -209,18 +210,19 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         String condition = "";
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
 
-        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
+       if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
+            condition += " AND a.locationMaster.id = " + employeeMaster.getAdharCard();
         }
-        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
-            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+            condition += " AND a.company = '" + employeeMaster.getCompany() + "'";
         }
-        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
-            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
-        }
-        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
-            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
-        }
+//        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
+//            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
+//        }
+//        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
+//            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
+//        }
         if (!"".equals(employeeMaster.getBankAccountNo()) && null != employeeMaster.getBankAccountNo()) {
             condition += " AND b.month = '" + employeeMaster.getBankAccountNo() + "'";
         }
@@ -360,17 +362,19 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         String condition = "";
 
         if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
+            condition += " AND a.locationMaster.id = " + employeeMaster.getAdharCard();
         }
-        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
-            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+            condition += " AND a.company = '" + employeeMaster.getCompany() + "'";
         }
-        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
-            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
-        }
-        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
-            condition += " AND a.paymentType = '" + employeeMaster.getPaymentType() + "'";
-        }
+//        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
+//            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
+//        }
+
+//        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
+//            condition += " AND a.paymentType = '" + employeeMaster.getPaymentType() + "'";
+//        }
         if (null != employeeMaster.getBankName() && !"".equals(employeeMaster.getBankName())) {
             condition += " AND b.month = '" + employeeMaster.getBankName() + "'";
         }
@@ -454,17 +458,18 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         String condition = "";
 
         if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
+            condition += " AND a.locationMaster.id = " + employeeMaster.getAdharCard();
         }
-        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
-            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+            condition += " AND a.company = '" + employeeMaster.getCompany() + "'";
         }
-        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
-            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
-        }
-        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
-            condition += " AND a.paymentType = '" + employeeMaster.getPaymentType() + "'";
-        }
+//        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
+//            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
+//        }
+//        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
+//            condition += " AND a.paymentType = '" + employeeMaster.getPaymentType() + "'";
+//        }
 
         query += "From EmployeeMaster a"
                 + " Where 1=1" + condition;
@@ -572,17 +577,18 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
 
         if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
+            condition += " AND a.locationMaster.id = " + employeeMaster.getAdharCard();
         }
-        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
-            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+            condition += " AND a.company = '" + employeeMaster.getCompany() + "'";
         }
-        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
-            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
-        }
-        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
-            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
-        }
+//        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
+//            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
+//        }
+//        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
+//            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
+//        }
         if (!"".equals(employeeMaster.getBankAccountNo()) && null != employeeMaster.getBankAccountNo()) {
             condition += " AND b.month = '" + employeeMaster.getBankAccountNo() + "'";
         }
@@ -605,17 +611,18 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
 
         if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
+            condition += " AND c.locationMaster.id = " + employeeMaster.getAdharCard();
         }
-        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
-            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+            condition += " AND c.company = '" + employeeMaster.getCompany() + "'";
         }
-        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
-            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
-        }
-        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
-            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
-        }
+//        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
+//            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
+//        }
+//        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
+//            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
+//        }
         if (!"".equals(employeeMaster.getBankAccountNo()) && null != employeeMaster.getBankAccountNo()) {
             condition += " AND b.month = '" + employeeMaster.getBankAccountNo() + "'";
         }
@@ -643,19 +650,19 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         String query = "";
         String condition = "";
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
-
         if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
+            condition += " AND c.locationMaster.id = " + employeeMaster.getAdharCard();
         }
-        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
-            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+            condition += " AND c.company = '" + employeeMaster.getCompany() + "'";
         }
-        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
-            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
-        }
-        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
-            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
-        }
+//        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
+//            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
+//        }
+//        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
+//            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
+//        }
         if (!"".equals(employeeMaster.getBankAccountNo()) && null != employeeMaster.getBankAccountNo()) {
             condition += " AND b.month = '" + employeeMaster.getBankAccountNo() + "'";
         }
@@ -701,15 +708,16 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         String condition = "";
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
 
-        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
+       if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
+            condition += " AND a.locationMaster.id = " + employeeMaster.getAdharCard();
         }
-        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
-            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+            condition += " AND a.company = '" + employeeMaster.getCompany() + "'";
         }
-        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
-            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
-        }
+//        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
+//            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
+//        }
 
         if (!"".equals(employeeMaster.getEmployeeName()) && null != employeeMaster.getEmployeeName()) {
             condition += " AND a.id = '" + employeeMaster.getEmployeeName() + "'";
@@ -808,17 +816,18 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         String condition = "";
 
         if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND b.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
-        }
-        if (null != employeeMaster.getEmployeeType() && !"".equals(employeeMaster.getEmployeeType())) {
-            condition += " AND b.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+            condition += " AND b.locationMaster.id = " + employeeMaster.getAdharCard();
         }
         if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
-            condition += " AND b.employeeSubType.id = " + employeeMaster.getCompany();
+//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+            condition += " AND b.company = '" + employeeMaster.getCompany() + "'";
         }
-        if (null != employeeMaster.getPaymentType() && !"".equals(employeeMaster.getPaymentType())) {
-            condition += " AND b.paymentType = '" + employeeMaster.getPaymentType() + "'";
-        }
+//        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+//            condition += " AND b.employeeSubType.id = " + employeeMaster.getCompany();
+//        }
+//        if (null != employeeMaster.getPaymentType() && !"".equals(employeeMaster.getPaymentType())) {
+//            condition += " AND b.paymentType = '" + employeeMaster.getPaymentType() + "'";
+//        }
         if (null != employeeMaster.getBankName() && !"".equals(employeeMaster.getBankName())) {
             condition += " AND a.month = '" + employeeMaster.getBankName() + "'";
         }
@@ -946,18 +955,18 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         String condition = "";
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
 
-        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
-        }
-        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
-            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
-        }
-        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
-            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
-        }
-        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
-            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
-        }
+//        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
+//            condition += " AND a.zydexLocationMaster.id = " + employeeMaster.getAdharCard();
+//        }
+//        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
+//            condition += " AND a.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+//        }
+//        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
+//            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
+//        }
+//        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
+//            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
+//        }
         if (!"".equals(employeeMaster.getBankAccountNo()) && null != employeeMaster.getBankAccountNo()) {
             condition += " AND b.month = '" + employeeMaster.getBankAccountNo() + "'";
         }

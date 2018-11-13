@@ -49,9 +49,11 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         EmployeeType employeeType = new EmployeeType();
         EmployeeSubType employeeSubType = new EmployeeSubType();
         List<?> list = (List<?>) request.getAttribute("employeelist");
-        zydexLocationList(request);
-        EmployeeTypeList(request);
-        EmployeeSubTypeList(request);
+//        zydexLocationList(request);
+//        EmployeeTypeList(request);
+//        EmployeeSubTypeList(request);
+        locationList(request);
+        companyList(request);
         request.setAttribute("search", request.getParameter("search"));
         List<?> list1 = (List<?>) request.getAttribute("SalaryList");
         mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
@@ -70,37 +72,16 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         EmployeeSubType employeeSubType = new EmployeeSubType();
 
         String zydex_location_id = request.getParameter("zydexLocationMasterId");
-        String type_of_employee = request.getParameter("employeeTypeMasterId");
-        String employee_sub_id = request.getParameter("subTypeId");
-        String Payment_Type = request.getParameter("paymentType");
+        String type_of_employee = request.getParameter("companyId");
+//        String employee_sub_id = request.getParameter("subTypeId");
+//        String Payment_Type = request.getParameter("paymentType");
         String month = request.getParameter("month");
         String year = request.getParameter("year11");
         Integer id = employeeMaster2.getId();
 
         HttpSession session = request.getSession();
 //       
-        if (!zydex_location_id.equals("")) {
-            employeeMaster.setAdharCard(zydex_location_id);
-        }
-
-        if (!type_of_employee.equals("")) {
-            employeeMaster.setEmployeeType(type_of_employee);
-        }
-        if (null != employee_sub_id && !employee_sub_id.equals("")) {
-            employeeMaster.setCompany(employee_sub_id);
-        }
-//
-        if (!Payment_Type.equals("")) {
-            employeeMaster.setPaymentType(Payment_Type);
-
-        }
-
-        if (!"".equals(month)) {
-            employeeMaster.setBankAccountNo(month);
-        }
-        if (!"".equals(year)) {
-            employeeMaster.setPanCard(year);
-        }
+        
 
         List listForMonthAndYear = new ArrayList();
         boolean emright = false;
@@ -118,6 +99,29 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         }
 
         if (emrightHR || emright) {
+            
+            if (!zydex_location_id.equals("")) {
+            employeeMaster.setAdharCard(zydex_location_id);
+        }
+
+        if (!type_of_employee.equals("")) {
+            employeeMaster.setCompany(type_of_employee);
+        }
+//        if (null != employee_sub_id && !employee_sub_id.equals("")) {
+//            employeeMaster.setCompany(employee_sub_id);
+//        }
+////
+//        if (!Payment_Type.equals("")) {
+//            employeeMaster.setPaymentType(Payment_Type);
+//
+//        }
+
+        if (!"".equals(month)) {
+            employeeMaster.setBankAccountNo(month);
+        }
+        if (!"".equals(year)) {
+            employeeMaster.setPanCard(year);
+        }
             List<?> list = employeeSalaryProcessService.readEmployeeForSlip(employeeMaster);
             if (!list.isEmpty()) {
 
@@ -167,10 +171,12 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
             }
 
         } else {
+//            String zydex_location_id1 = null;
+//            String type_of_employee1 = null;
 
-            if (!type_of_employee.equals("")) {
-                employeeMaster.setEmployeeType(type_of_employee);
-            }
+//            if (!type_of_employee1.equals("")) {
+//                employeeMaster.setEmployeeType(type_of_employee1);
+//            }
             if (!"".equals(month)) {
                 employeeMaster.setBankAccountNo(month);
             }
@@ -341,9 +347,11 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
         EmployeeSubType employeeSubType = new EmployeeSubType();
 
-        EmployeeTypeList(request);
-        EmployeeSubTypeList(request);
-        zydexLocationList(request);
+//        EmployeeTypeList(request);
+//        EmployeeSubTypeList(request);
+//        zydexLocationList(request);
+         locationList(request);
+        companyList(request);
         selectEmployee(request, response);
         request.setAttribute("search", request.getParameter("search"));
         mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
@@ -359,8 +367,8 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         EmployeeSubType employeeSubType = new EmployeeSubType();
 
         String zydex_location_id = request.getParameter("zydexLocationMasterId");
-        String type_of_employee = request.getParameter("employeeTypeMasterId");
-        String employee_sub_id = request.getParameter("subTypeId");
+        String type_of_employee = request.getParameter("companyId");
+//        String employee_sub_id = request.getParameter("subTypeId");
 //        String Financial_year = request.getParameter("fnyear");
         String Employee_Name = request.getParameter("employeeMasterId");
 
@@ -370,11 +378,11 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         }
 
         if (!type_of_employee.equals("")) {
-            employeeMaster.setEmployeeType(type_of_employee);
+            employeeMaster.setCompany(type_of_employee);
         }
-        if (null != employee_sub_id && !employee_sub_id.equals("")) {
-            employeeMaster.setCompany(employee_sub_id);
-        }
+//        if (null != employee_sub_id && !employee_sub_id.equals("")) {
+//            employeeMaster.setCompany(employee_sub_id);
+//        }
 //
 
         if (!Employee_Name.equals("")) {

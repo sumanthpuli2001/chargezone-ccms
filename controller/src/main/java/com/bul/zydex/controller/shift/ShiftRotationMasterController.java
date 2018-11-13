@@ -17452,7 +17452,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         employeeMaster.setUserMaster(user);
         woffRegularization.setUserMasterId(user);
         woffRegularization.setStatus(0);
-        woffRegularization.setDayWoff(dayNo);
+        String Woffday = dayNo + "/" + month1 + "/" + year1;
+        woffRegularization.setDayWoff(Woffday);
         woffRegularization.setShiftMasterPrevious(userMasterprecivous);
         woffRegularizationService.create(woffRegularization);
         request.setAttribute("successMessage",
@@ -17570,6 +17571,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         int status1 = woffRegularization.getStatus();
         String status = Integer.toString(status1);
         request.setAttribute("status", status);
+        String woffpastdate = woffRegularization.getDayWoff();
+         request.setAttribute("woffpastdate", woffpastdate);
         String remarkNmame = woffRegularization.getApprovalComment();
         request.setAttribute("remarkNmame", remarkNmame);
         int userId = woffRegularization.getUserMasterId().getId();
@@ -17847,6 +17850,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         EmployeeMaster employeeMaster2 = new EmployeeMaster();
+        float time1 = 0;
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
         UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
         shiftRotaionList(request);
@@ -17872,9 +17876,21 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
             request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
         }
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        EmployeeMaster employeeMaster3 = new EmployeeMaster();
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        leaveTypeMaster.setId(11);
+        employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+        employeeLeaveBalance.setEmployeeMaster(employeeMaster2);
+        List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+        if (!empBalList.isEmpty()) {
+            employeeLeaveBalance = (EmployeeLeaveBalance) empBalList.get(0);
+            time1 = employeeLeaveBalance.getNoOfLeaveRemain();
+
+        }
 
         mv.getModelMap().put("coffRegularization", coffRegularization);
-
+        request.setAttribute("time1", time1);
         mv.setViewName("Shift/CoffApplicationFormForEmployee");
         return mv;
     }
@@ -18482,9 +18498,9 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         String currentDate = "" + datesString.get(i);
                         List<?> list = shiftGenerateMonthlyScheduleService.ReadEmployeeShiftByDayMonthYear(id, currentDate);
                         if (list.size() > 0) {
-                            if(null == list.get(0)){
+                            if (null == list.get(0)) {
                                 employeeInfoList.add("WO");
-                            }else{    
+                            } else {
                                 employeeInfoList.add("" + list.get(0));
                             }
                         } else {

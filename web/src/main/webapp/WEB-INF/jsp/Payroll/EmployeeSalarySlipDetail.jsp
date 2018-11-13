@@ -120,10 +120,10 @@
                                 <div class="box-body no-padding">
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
-                                            <input type="hidden" name="zydexLocationMasterId" value=""/>
+<!--                                            <input type="hidden" name="zydexLocationMasterId" value=""/>
                                             <input type="hidden" name="employeeTypeMasterId" value=""/>
                                             <input type="hidden" name="employeeSubTypeId" value=""/>
-                                            <input type="hidden" name="paymentType" value=""/>
+                                            <input type="hidden" name="paymentType" value=""/>-->
                                             <!--                                            <div class="form-group">
                                                                                             <div class="col-sm-6">${list[4]}
                                                                                                 <label>Location:<span style="color: red;font-size: 12px;"></span></label>
@@ -167,6 +167,31 @@
                                         </select>
                                     </div>
                                 </div>-->
+                                            <c:if test="${sessionScope.userRight.payroll || sessionScope.userRight.hr}">
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Location:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
+                                                        <option value="" label="-- Select --" ></option>
+                                                        <c:forEach var="deptName" items="${location}">
+                                                            <option value="${deptName.key}" label="${deptName.value}" ></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label>Company:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <select name="companyId" id="companyId" class="form-control ">
+                                                        <option value="" label="-- Select --" ></option>
+                                                        <c:forEach var="companyname" items="${companyList}">
+                                                            <option value="${companyname.value}" label="${companyname.value}" ></option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                               
+                                                
+
+                                            </div>
+                                            </c:if>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Months:<span style="color: red;font-size: 12px;">*</span></label>

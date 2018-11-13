@@ -56,11 +56,12 @@ public class EmployeeExcelRecordDAOImpl<T> extends GenericsDAOImpl<T> implements
         String query = "";
         String condition = "";
 
-        if (!"".equals(employeeMaster.getEmployeeType()) && null != employeeMaster.getEmployeeType()) {
-            condition += " AND em.employeeTypeMaster.id = " + employeeMaster.getEmployeeType();
+        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
+            condition += " AND em.locationMaster.id = " + employeeMaster.getAdharCard();
         }
-        if (!"".equals(employeeMaster.getBankName()) && null != employeeMaster.getBankName()) {
-            condition += " AND em.employeeSubType.id = " + employeeMaster.getBankName();
+        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+            condition += " AND em.company = '" + employeeMaster.getCompany() + "'";
         }
         if (null != employeeMaster.getChild1() && !"".equals(employeeMaster.getChild1())) {
             condition += " AND esp.month = '" + employeeMaster.getChild1() + "'";

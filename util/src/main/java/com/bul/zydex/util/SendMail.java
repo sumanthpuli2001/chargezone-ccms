@@ -89,7 +89,7 @@ public class SendMail {
         helper.setFrom("myspc@spcls.co.in");
         helper.setTo(to);
         helper.setSubject(subject);
-        helper.setText(msg.replaceAll("\\<[^>]*>", "").replaceAll("&nbsp;", " ").replaceAll("&amp;", "&"));
+        helper.setText(msg.replaceAll("\\<[^>]*>", "").replaceAll("&nbsp;", " ").replaceAll("&amp;", "&").replaceAll("&#160", "&"));
 
         Object[] arrayOfObject;
 

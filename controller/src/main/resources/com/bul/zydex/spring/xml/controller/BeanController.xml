@@ -756,6 +756,7 @@
         <property name="payrollPfCheckValidator" ref="payrollPfCheckValidator1" />
         <property name="employeeTypeService" ref="employeeTypeService1" />
         <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+   
      
     </bean>
     <bean id="payrollPtCheckController1" class="com.bul.zydex.controller.Payroll.PayrollPtCheckController" parent="controllerConfig" >
@@ -882,6 +883,8 @@
         <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
         <property name="retirementAgeService" ref="retirementAgeService1" />
         <property name="payrollPfRecordService" ref="payrollPfRecordService1" />
+        <property name="companyMasterService" ref="companyMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
          
     </bean>
     <bean id="employeePtCheckController1" class="com.bul.zydex.controller.Payroll.EmployeePtCheckcontroller" parent="controllerConfig" >
@@ -901,6 +904,8 @@
         <property name="payrollProfessionalTaxService" ref="payrollProfessionalTaxService1" />
         <property name="payrollProvidentFundService" ref="payrollProvidentFundService1" />
         <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
+        <property name="companyMasterService" ref="companyMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
          
     </bean>
     <bean id="employeeSalarySlipController1" class="com.bul.zydex.controller.Payroll.EmployeeSalarySlipController" parent="controllerConfig" >
@@ -926,6 +931,8 @@
         <property name="payrollLoanTypeService" ref="payrollLoanTypeService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
         <property name="displaymorNotesService" ref="displaymorNotesService1" />
+        <property name="companyMasterService" ref="companyMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
     </bean>
     <bean id="certificateTemplateController1" class="com.bul.zydex.controller.Payroll.CertificateTemplateController" parent="controllerConfig" >
         <property name="certificateTemplateService" ref="certificateTemplateService1" />
@@ -975,6 +982,8 @@
         <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
         <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
         <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
+        <property name="companyMasterService" ref="companyMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
     </bean>
     <bean id="esicDeductionStatementController1" class="com.bul.zydex.controller.Payroll.EsicDeductionStatementController" parent="controllerConfig" >
         <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
@@ -995,6 +1004,8 @@
         <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
         <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
         <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
+        <property name="companyMasterService" ref="companyMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
     </bean>
     <bean id="overTimeController1" class="com.bul.zydex.controller.Payroll.OverTimeController" parent="controllerConfig" >
         <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
@@ -1015,6 +1026,8 @@
         <property name="payrollPfCheckService" ref="payrollPfCheckService1" />
         <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
         <property name="payrollLoanDetailService" ref="payrollLoanDetailService1" />
+        <property name="companyMasterService" ref="companyMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
     </bean>
     <bean id="pFChallenController1" class="com.bul.zydex.controller.Payroll.PFChallenController" parent="controllerConfig" >
         <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
@@ -1049,6 +1062,8 @@
         <property name="employeeTypeService" ref="employeeTypeService1" />
         <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
         <property name="employeeExcelRecordService" ref="employeeExcelRecordService1" />
+        <property name="companyMasterService" ref="companyMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
     </bean>
     <bean id="employeeIncentiveMonthWiseController1" class="com.bul.zydex.controller.Payroll.EmployeeIncentiveMonthWiseController" parent="controllerConfig" >
         <property name="employeeMasterService" ref="employeeMasterService1"></property>

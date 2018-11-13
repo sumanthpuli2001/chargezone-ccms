@@ -654,9 +654,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
                             } else {
                                 double lwp = employeeSalaryProcess.getEmployeeLwp();
-                                 double basicSalaryMAster = Double.parseDouble(employeeMaster.getBasicSalary()); 
-                                
-                                
+                                double basicSalaryMAster = Double.parseDouble(employeeMaster.getBasicSalary());
+
                                 minitaxpf = basicSalaryMAster * lwp / days2;
                                 minitaxpf = basicSalaryMAster - minitaxpf;
 
@@ -1776,9 +1775,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         EmployeeType employeeType = new EmployeeType();
         EmployeeSubType employeeSubType = new EmployeeSubType();
         List<?> list = (List<?>) request.getAttribute("employeelist");
-        zydexLocationList(request);
-        EmployeeTypeList(request);
-        EmployeeSubTypeList(request);
+//        zydexLocationList(request);
+        locationList(request);
+        companyList(request);
+//        EmployeeTypeList(request);
+//        EmployeeSubTypeList(request);
         request.setAttribute("search", request.getParameter("search"));
         List<?> list1 = (List<?>) request.getAttribute("SalaryList");
         mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
@@ -1798,9 +1799,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
         HttpSession session = request.getSession();
         String zydex_location_id = request.getParameter("zydexLocationMasterId");
-        String type_of_employee = request.getParameter("employeeTypeMasterId");
-        String employee_sub_id = request.getParameter("subTypeId");
-        String payment_type = request.getParameter("paymentType");
+        String type_of_employee = request.getParameter("companyId");
+
         String month1 = request.getParameter("month");
         String year11 = request.getParameter("year11");
 
@@ -1809,16 +1809,9 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         }
 
         if (!type_of_employee.equals("")) {
-            employeeMaster.setEmployeeType(type_of_employee);
-        }
-        if (null != employee_sub_id && !employee_sub_id.equals("")) {
-            employeeMaster.setCompany(employee_sub_id);
+            employeeMaster.setCompany(type_of_employee);
         }
 
-        if (!payment_type.equals("")) {
-            employeeMaster.setPaymentType(payment_type);
-
-        }
         if (!month1.equals("")) {
             employeeMaster.setBankName(month1);
 
@@ -1930,24 +1923,24 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             finalList.add(empMap);
         }
 
-//      
+        locationList(request);
+        companyList(request);
         request.setAttribute("headerList123", headerList);
         request.setAttribute("finalList", finalList);
-         session.setAttribute("employeeSalaryHeader", headerList);
-         session.setAttribute("sessionMapOfEmployeeSalary", finalList);
+        session.setAttribute("employeeSalaryHeader", headerList);
+        session.setAttribute("sessionMapOfEmployeeSalary", finalList);
         request.setAttribute("month", month1);
         request.setAttribute("year", year11);
         request.setAttribute("zydexlocationid", zydex_location_id);
         request.setAttribute("typeofemployee", type_of_employee);
-        request.setAttribute("employeesubid", employee_sub_id);
-        request.setAttribute("paymenttype", payment_type);
-       
+//        request.setAttribute("employeesubid", employee_sub_id);
+//        request.setAttribute("paymenttype", payment_type);
 
         mv.setViewName("Payroll/EmployeeSalarySearch");
 
         return mv;
     }
-    
+
     public ModelAndView exportToExcelLeaveBalance(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         Map<Integer, LinkedList<?>> sessionMapOfLeaveBalance = (Map<Integer, LinkedList<?>>) request.getSession().getAttribute("sessionMapOfEmployeeSalary");
@@ -1989,9 +1982,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         EmployeeType employeeType = new EmployeeType();
         EmployeeSubType employeeSubType = new EmployeeSubType();
         List<?> list = (List<?>) request.getAttribute("employeelist");
-        zydexLocationList(request);
-        EmployeeTypeList(request);
-        EmployeeSubTypeList(request);
+//        zydexLocationList(request);
+//        EmployeeTypeList(request);
+//        EmployeeSubTypeList(request);
+        locationList(request);
+        companyList(request);
         request.setAttribute("search", request.getParameter("search"));
         List<?> list1 = (List<?>) request.getAttribute("SalaryList");
         mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
@@ -2007,27 +2002,18 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeType employeeType = new EmployeeType();
         EmployeeSubType employeeSubType = new EmployeeSubType();
-
+        locationList(request);
+        companyList(request);
         HttpSession session = request.getSession();
         String zydex_location_id = request.getParameter("zydexLocationMasterId");
-        String type_of_employee = request.getParameter("employeeTypeMasterId");
-        String employee_sub_id = request.getParameter("subTypeId");
-        String payment_type = request.getParameter("paymentType");
+        String type_of_employee = request.getParameter("companyId");
 
         if (!zydex_location_id.equals("")) {
             employeeMaster.setAdharCard(zydex_location_id);
         }
 
         if (!type_of_employee.equals("")) {
-            employeeMaster.setEmployeeType(type_of_employee);
-        }
-        if (null != employee_sub_id && !employee_sub_id.equals("")) {
-            employeeMaster.setCompany(employee_sub_id);
-        }
-
-        if (!payment_type.equals("")) {
-            employeeMaster.setPaymentType(payment_type);
-
+            employeeMaster.setCompany(type_of_employee);
         }
 
         Map<Integer, List<Object>> empMap = new HashMap();
@@ -3001,6 +2987,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         mv = salaryExcelUpload(request, response);
         return mv;
     }
+
     @SuppressWarnings("unchecked")
     public ModelAndView searchSalaryDetailSubmitPrint(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -3152,13 +3139,13 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         request.setAttribute("typeofemployee", type_of_employee);
         request.setAttribute("employeesubid", employee_sub_id);
         request.setAttribute("paymenttype", payment_type);
-       
 
         mv.setViewName("Payroll/EmployeeSalarySearchPrint");
 
         return mv;
     }
-     @SuppressWarnings("unchecked")
+
+    @SuppressWarnings("unchecked")
     public ModelAndView searchSalaryDetailSubmit1(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeSalaryProcess employeeSalaryProcess = new EmployeeSalaryProcess();
@@ -3377,6 +3364,5 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
         return mv;
     }
-
 
 }

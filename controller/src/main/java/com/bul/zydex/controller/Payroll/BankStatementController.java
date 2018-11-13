@@ -31,9 +31,11 @@ public class BankStatementController extends BankStatementAbstract {
         EmployeeType employeeType = new EmployeeType();
         EmployeeSubType employeeSubType = new EmployeeSubType();
         List<?> list = (List<?>) request.getAttribute("employeelist");
-        zydexLocationList(request);
-        EmployeeTypeList(request);
-        EmployeeSubTypeList(request);
+//        zydexLocationList(request);
+//        EmployeeTypeList(request);
+//        EmployeeSubTypeList(request);
+        locationList(request);
+        companyList(request);
         request.setAttribute("search", request.getParameter("search"));
         List<?> list1 = (List<?>) request.getAttribute("SalaryList");
         mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
@@ -51,9 +53,9 @@ public class BankStatementController extends BankStatementAbstract {
         EmployeeSubType employeeSubType = new EmployeeSubType();
 
         String zydex_location_id = request.getParameter("zydexLocationMasterId");
-        String type_of_employee = request.getParameter("employeeTypeMasterId");
-        String employee_sub_id = request.getParameter("subTypeId");
-        String Payment_Type = request.getParameter("paymentType");
+        String type_of_employee = request.getParameter("companyId");
+//        String employee_sub_id = request.getParameter("subTypeId");
+//        String Payment_Type = request.getParameter("paymentType");
         String month = request.getParameter("month");
         String year = request.getParameter("year11");
 
@@ -64,16 +66,16 @@ public class BankStatementController extends BankStatementAbstract {
         }
 
         if (!type_of_employee.equals("")) {
-            employeeMaster.setEmployeeType(type_of_employee);
+            employeeMaster.setCompany(type_of_employee);
         }
-        if (null != employee_sub_id && !employee_sub_id.equals("")) {
-            employeeMaster.setCompany(employee_sub_id);
-        }
+//        if (null != employee_sub_id && !employee_sub_id.equals("")) {
+//            employeeMaster.setCompany(employee_sub_id);
+//        }
+////
+//        if (!Payment_Type.equals("")) {
+//            employeeMaster.setPaymentType(Payment_Type);
 //
-        if (!Payment_Type.equals("")) {
-            employeeMaster.setPaymentType(Payment_Type);
-
-        }
+//        }
 
         if (!"".equals(month)) {
             employeeMaster.setBankAccountNo(month);

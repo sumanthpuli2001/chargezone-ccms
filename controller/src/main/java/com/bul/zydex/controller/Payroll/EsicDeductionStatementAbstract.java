@@ -7,6 +7,7 @@ package com.bul.zydex.controller.Payroll;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.AdditionalAmountCheck;
+import com.bul.zydex.model.Company;
 import com.bul.zydex.model.EmployeeAdditionalSalary;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
@@ -14,6 +15,7 @@ import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.EmployeeTypeWiseSalary;
+import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.PayrollAdditionalAmount;
 import com.bul.zydex.model.PayrollDeduction;
 import com.bul.zydex.model.PayrollLoanDetail;
@@ -40,8 +42,10 @@ import com.bul.zydex.service.Payroll.PayrollPtCheckService;
 import com.bul.zydex.service.Payroll.PayrollRecurringAdditionalAmountService;
 import com.bul.zydex.service.Payroll.PayrollRecurringDeductionService;
 import com.bul.zydex.service.Payroll.PayrollSalaryTypeService;
+import com.bul.zydex.service.company.CompanyMasterService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
+import com.bul.zydex.service.location.LocationMasterService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +75,8 @@ public class EsicDeductionStatementAbstract extends CustomAbstract {
     protected PayrollProvidentFundService<PayrollProvidentFund> payrollProvidentFundService;
     protected EmployeeExcelRecordService<EmployeeExcelRecord> employeeExcelRecordService;
     protected PayrollLoanDetailService<PayrollLoanDetail> payrollLoanDetailService;
+     protected CompanyMasterService<Company> companyMasterService;
+    protected LocationMasterService<LocationMaster> locationMasterService;
 
     public EmployeeSalaryProcessService<EmployeeSalaryProcess> getEmployeeSalaryProcessService() {
         return employeeSalaryProcessService;
@@ -235,5 +241,46 @@ public class EsicDeductionStatementAbstract extends CustomAbstract {
         }
         request.setAttribute("EmployeeSubTypeList", map);
     }
+
+    public CompanyMasterService<Company> getCompanyMasterService() {
+        return companyMasterService;
+    }
+
+    public void setCompanyMasterService(CompanyMasterService<Company> companyMasterService) {
+        this.companyMasterService = companyMasterService;
+    }
+
+    public LocationMasterService<LocationMaster> getLocationMasterService() {
+        return locationMasterService;
+    }
+
+    public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
+        this.locationMasterService = locationMasterService;
+    }
+    protected void companyList(HttpServletRequest request) {
+
+        Company company = new Company();
+        List<?> companyList = companyMasterService.read();
+        Map<Integer, String> dm = new HashMap<>();
+        for (Object o : companyList) {
+            company = (Company) o;
+            dm.put(company.getCompanyId(), company.getCompanyName());
+        }
+
+        request.setAttribute("companyList", dm);
+    }
+
+    protected void locationList(HttpServletRequest request) {
+        LocationMaster locationMaster = new LocationMaster();
+        List<?> location = locationMasterService.read();
+
+        Map<Integer, String> location1 = new HashMap<>();
+        for (Object o : location) {
+            locationMaster = (LocationMaster) o;
+            location1.put(locationMaster.getId(), locationMaster.getLocation());
+        }
+        request.setAttribute("location", location1);
+    }
+
 
 }

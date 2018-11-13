@@ -22,8 +22,10 @@ public class AttendanceReportController extends AttendanceReportAbstract {
 
     public ModelAndView searchAttendanceData(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        EmployeeTypeList(request);
-        EmployeeSubTypeList(request);
+//        EmployeeTypeList(request);
+//        EmployeeSubTypeList(request);
+        locationList(request);
+        companyList(request);
         request.setAttribute("search", request.getParameter("search"));
         mv.setViewName("Payroll/AttendanceReport");
         return mv;
@@ -33,8 +35,11 @@ public class AttendanceReportController extends AttendanceReportAbstract {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeSubType employeeSubType = new EmployeeSubType();
-        String typeOfEmployee = request.getParameter("employeeTypeMasterId");
-        String employeeSubId = request.getParameter("employeeSubTypeId");
+//        String typeOfEmployee = request.getParameter("zydexLocationMasterId");
+//        String employeeSubId = request.getParameter("companyId");
+        
+         String zydex_location_id = request.getParameter("zydexLocationMasterId");
+        String type_of_employee = request.getParameter("companyId");
         String month = request.getParameter("month");
         String year = request.getParameter("year11");
         List finalAttendanceList = new ArrayList();
@@ -44,11 +49,11 @@ public class AttendanceReportController extends AttendanceReportAbstract {
         Float totalWorkingDays = 0.0F;
         Double totalOTHours = 0.0D;
 
-        if (!typeOfEmployee.equals("")) {
-            employeeMaster.setEmployeeType(typeOfEmployee);
+        if (!zydex_location_id.equals("")) {
+            employeeMaster.setAdharCard(zydex_location_id);
         }
-        if (null != employeeSubId && !employeeSubId.equals("")) {
-            employeeMaster.setBankName(employeeSubId);
+        if (null != type_of_employee && !type_of_employee.equals("")) {
+            employeeMaster.setCompany(type_of_employee);
         }
 
         if (!month.equals("")) {
@@ -78,7 +83,7 @@ public class AttendanceReportController extends AttendanceReportAbstract {
         List attendanceList = new ArrayList();
         for (int i = 0; i < finalAttendanceList.size(); i++) {
             List tempList = (List) finalAttendanceList.get(i);
-            
+
             totalPresentDays = totalPresentDays + (Float) tempList.get(3);
             totalOTHours = totalOTHours + (Double) tempList.get(9);
             totalWorkingDays = totalWorkingDays + (Float) tempList.get(2);

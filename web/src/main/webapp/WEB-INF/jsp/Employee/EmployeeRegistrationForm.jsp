@@ -539,7 +539,7 @@
                 tempCount4--;
 
                 var val = document.getElementById("ctcCount").value;
-                 var element = document.getElementsByName("ctcamount" + val)[0].value;
+                var element = document.getElementsByName("ctcamount" + val)[0].value;
 //                var element = document.getElementById("ctcamount" + val).value;
 
                 val = val - 1;
@@ -615,10 +615,10 @@
                 tempCount3--;
 
                 var val = document.getElementById("policyCount").value;
-              
 
-                var element = document.getElementsByName("amount"+val)[0].value;
-                
+
+                var element = document.getElementsByName("amount" + val)[0].value;
+
 //                    alert(document.getElementById("amount" + val).value);
 
                 val = val - 1;
@@ -936,13 +936,13 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label >Emergency Contact Person:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:input path="emergencyContactPerson" class="form-control"></form:input>
-                                                        <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
+                                                            <form:input path="emergencyContactPerson" class="form-control"></form:input>
+                                                            <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label>Emergency Contact No:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
+                                                            <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                            <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
                                                 </div><!-- /.col -->
@@ -965,8 +965,8 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>PAN Card No:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:input path="panCard" class="form-control"  style="text-transform: uppercase" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
-                                                        <form:errors path="panCard" cssClass="errorDiv"></form:errors>
+                                                            <form:input path="panCard" class="form-control"  style="text-transform: uppercase" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
+                                                            <form:errors path="panCard" cssClass="errorDiv"></form:errors>
                                                         </div>
 
                                                         <div class="col-sm-6">
@@ -1038,29 +1038,29 @@
 
                                                         <div class="col-sm-6">
                                                             <label>Highest Education Details:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
-                                                        <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
+                                                            <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
+                                                            <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <div class="col-sm-6">
                                                                 <label>Experience On Date Of Joining: Year:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:select path="experienceYearOnDoj" class="form-control ">
-                                                                <c:forEach begin="0" end="50" var="counter">
-                                                                    <form:option value="${counter}">${counter}</form:option>
-                                                                </c:forEach>
-                                                            </form:select>
-                                                            <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
+                                                                <form:select path="experienceYearOnDoj" class="form-control ">
+                                                                    <c:forEach begin="0" end="50" var="counter">
+                                                                        <form:option value="${counter}">${counter}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
+                                                                <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label>Experience On Date Of Joining: Month:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:select path="experienceMonthOnDoj" class="form-control ">
-                                                                <c:forEach begin="0" end="11" var="counter">
-                                                                    <form:option value="${counter}">${counter}</form:option>
-                                                                </c:forEach>
-                                                            </form:select>
-                                                            <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
+                                                                <form:select path="experienceMonthOnDoj" class="form-control ">
+                                                                    <c:forEach begin="0" end="11" var="counter">
+                                                                        <form:option value="${counter}">${counter}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
+                                                                <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-6">
@@ -1174,7 +1174,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Employee Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeType" id="employeeType" class="form-control ">
                                                             <form:option value="Probation" label="Probation"></form:option>
                                                             <form:option value="Confirmed" label="Confirmed"></form:option>
@@ -1255,29 +1255,22 @@
                                                         <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
-                                                                <option value="">--SELECT--</option>
-                                                            <c:forEach var="competencyMap" items="${competencyMap}">
-                                                                <option value="${competencyMap.key}">${competencyMap.value}</option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="basicSalary"  id="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();" />
                                                         <form:errors path="basicSalary" cssClass="errorDiv"/>
                                                     </div>
+                                                    <!--                                                        <div class="col-sm-6">
+                                                                                                                <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                                                                <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
+                                                                                                                    <option value="">--SELECT--</option>
+                                                    <%--<c:forEach var="competencyMap" items="${competencyMap}">--%>
+                                                        <option value="${competencyMap.key}">${competencyMap.value}</option>
+                                                    <%--</c:forEach>--%>
+                                                </select>
+                                            </div>-->
 
-                                                    <div class="col-sm-6">
-                                                        <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="esicNo" class="form-control"  placeholder="Enter ESIC No"/>
-                                                            <form:errors path="esicNo" cssClass="errorDiv"/>
-                                                    </div>
                                                 </div>
+                                              
                                                 <div  class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>PF Amount(By Employee Basic Salary):</label>
@@ -1290,6 +1283,15 @@
                                                         <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
+                                                          <div class="form-group">
+
+
+                                                    <div class="col-sm-6">
+                                                        <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="esicNo" class="form-control"  placeholder="Enter ESIC No"/>
+                                                            <form:errors path="esicNo" cssClass="errorDiv"/>
+                                                    </div>
+                                                </div>
 
                                                     <div class="form-group">
                                                         <div class="col-sm-4">
@@ -1340,6 +1342,18 @@
                                                             <form:radiobutton path="oddPunch" value="true"/>YES
                                                         </fieldset>
                                                     </div>
+                                                </div>
+                                                          <div class="form-group">
+                                                        <div class="col-sm-4">
+                                                            <label>Payroll:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <fieldset>
+                                                            <form:radiobutton path="payroll" value="false" checked="checked"/>No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="payroll" value="true"/>Yes
+                                                        </fieldset>
+                                                        <form:errors path="payroll" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        
+                                                        
                                                 </div>
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="table-responsive">

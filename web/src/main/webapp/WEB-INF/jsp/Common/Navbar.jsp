@@ -577,8 +577,8 @@
                                     <li><a href="employeeSubType.htm?act=showResult"><i class="fa fa-circle-o"></i>Employee SubType </a></li>
                                     <li><a href="payrollPfCheck.htm?act=showResult"><i class="fa fa-circle-o"></i>PF Check</a></li>
                                     <li><a href="payrollPtCheck.htm?act=showResult"><i class="fa fa-circle-o"></i>PT Check</a></li>
-                                    <li><a href="employeeTypeWiseSalary.htm?act=showResult"><i class="fa fa-circle-o"></i>Assign Salary</a></li>
-                                    <li><a href="additionalAmountCheck.htm?act=showResult"><i class="fa fa-circle-o"></i>Additional Amount Check</a></li>
+                                    <!--<li><a href="employeeTypeWiseSalary.htm?act=showResult"><i class="fa fa-circle-o"></i>Assign Salary</a></li>-->
+                                    <!--<li><a href="additionalAmountCheck.htm?act=showResult"><i class="fa fa-circle-o"></i>Additional Amount Check</a></li>-->
                                     <!--                                   <li><a href="payrollEmployeeFormSixteen.htm?act=redirectToFormEmployeeSaving&search=none"><i class="fa fa-circle-o"></i>Tax Declaration</a></li>-->
                                     <li>
                                         <a href="payrollTaxDeduction.htm?act=taxDeductionCreate"><i class="fa fa-circle-o"></i>Tax Deduction Master</a>
@@ -719,12 +719,12 @@
                     <li>
                         <a href="#">
                             <i class="fa fa-rupee fa-lg"></i>
-                            <span>Full & final Settlement</span>
+                            <span>Full & Final Settlement</span>
                             <i class="fa fa-angle-left pull-right"></i>
                         </a>
                         <ul class="treeview-menu">
                             <li>
-                                <a href="resignationMaster.htm?act=fullAndfinal"><i class="fa fa-circle-o"></i>Full & final Settlement</a>
+                                <a href="resignationMaster.htm?act=fullAndfinal"><i class="fa fa-circle-o"></i>Full & Final Settlement</a>
                             </li>
                         </ul>
                     </li>

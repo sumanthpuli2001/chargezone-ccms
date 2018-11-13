@@ -89,6 +89,7 @@ public class EmployeeMaster implements java.io.Serializable {
     private Boolean pf;
     private Boolean pt;
     private Boolean oddPunch;
+    private Boolean payroll;
     private String jobDescription;
     private String pfAmountEmployer;
     private String employeeLocation;
@@ -224,7 +225,7 @@ public class EmployeeMaster implements java.io.Serializable {
         this.shiftType = shiftType;
     }
 
-    public EmployeeMaster(LevelMaster levelMaster, DesignationMaster designationMaster, ZydexLocationMaster zydexLocationMaster, DepartmentMaster departmentMaster, LocationMaster locationMaster, UserMaster userMaster, String employeeId, String employeeName, String dateOfJoining, String role, String company, String emailAddress, String contactNo1, String contactNo2, String fatherName, String motherName, String dateOfBirth, Boolean gender, String maritalStatus, String spouseName, String emergencyContactPerson, String emergencyContactNo, String panCard, String passportNo, String passportIssueDate, String passportExpiryDate, String dateOfLeaving, String reasonForLeaving, String reportingManagerLevel1, String reportingManagerLevel2, String reportingManagerLevel3, String reportingManagerLevel4, String reportingManagerLevel5, String reportingManagerLevel6, String employeeType, String shiftType, Integer shiftHoursId, String officeEmailId, String child1, String child2, String highestEducationDetails, String experienceYearOnDoj, String permanentAddress, String presentAddress, String adharCard, String drivingLicence, String lastYearPerformanceRating, String bloodGroups, String shiftRotationDate, String govLicenceName, String maritalStatusOthers, String experienceMonthOnDoj, String bankName, String bankAccountNo, String bankIfscCode, String cityOfEmployee, String dateOfBirthOfEmpFather, String dateOfBirthOfEmpMother, String dateOfBirthOfEmpSpous, String dateOfBirthOfEmpChilld1, String dateOfBirthOfEmpChild2, String dateOfTransferOfEntity, Integer competencyEvaluationId, EmployeeTypeMaster employeeTypeMaster, EmployeeSubType employeeSubType, String basicSalary, String conveysAmount, String esicNo, String tdsAmount, String paymentType, String pfNo, String uanNo, Boolean esic, String pfAmount, Boolean salaryBase, Boolean ot,Boolean pf,Boolean pt, Boolean oddPunch,String jobDescription, Set payrollSavingAmounts, Set payrollRecurringDeductions, Set payrollAdditionalAmounts, Set payrollBonuses, Set employeeSalaryProcesses, Set payrollCommissions, Set payrollRecurringAdditionalAmounts, Set payrollDeductions, Set employeePolicyDetail,Set employeeCtcDetail,String pfAmountEmployer, String employeeLocation,Double grossTotal,Double ctcTotal , String confirmationDate,String autoGenerationCode) {
+    public EmployeeMaster(LevelMaster levelMaster, DesignationMaster designationMaster, ZydexLocationMaster zydexLocationMaster, DepartmentMaster departmentMaster, LocationMaster locationMaster, UserMaster userMaster, String employeeId, String employeeName, String dateOfJoining, String role, String company, String emailAddress, String contactNo1, String contactNo2, String fatherName, String motherName, String dateOfBirth, Boolean gender, String maritalStatus, String spouseName, String emergencyContactPerson, String emergencyContactNo, String panCard, String passportNo, String passportIssueDate, String passportExpiryDate, String dateOfLeaving, String reasonForLeaving, String reportingManagerLevel1, String reportingManagerLevel2, String reportingManagerLevel3, String reportingManagerLevel4, String reportingManagerLevel5, String reportingManagerLevel6, String employeeType, String shiftType, Integer shiftHoursId, String officeEmailId, String child1, String child2, String highestEducationDetails, String experienceYearOnDoj, String permanentAddress, String presentAddress, String adharCard, String drivingLicence, String lastYearPerformanceRating, String bloodGroups, String shiftRotationDate, String govLicenceName, String maritalStatusOthers, String experienceMonthOnDoj, String bankName, String bankAccountNo, String bankIfscCode, String cityOfEmployee, String dateOfBirthOfEmpFather, String dateOfBirthOfEmpMother, String dateOfBirthOfEmpSpous, String dateOfBirthOfEmpChilld1, String dateOfBirthOfEmpChild2, String dateOfTransferOfEntity, Integer competencyEvaluationId, EmployeeTypeMaster employeeTypeMaster, EmployeeSubType employeeSubType, String basicSalary, String conveysAmount, String esicNo, String tdsAmount, String paymentType, String pfNo, String uanNo, Boolean esic, String pfAmount, Boolean salaryBase, Boolean ot,Boolean pf,Boolean pt, Boolean oddPunch,String jobDescription, Set payrollSavingAmounts, Set payrollRecurringDeductions, Set payrollAdditionalAmounts, Set payrollBonuses, Set employeeSalaryProcesses, Set payrollCommissions, Set payrollRecurringAdditionalAmounts, Set payrollDeductions, Set employeePolicyDetail,Set employeeCtcDetail,String pfAmountEmployer, String employeeLocation,Double grossTotal,Double ctcTotal , String confirmationDate,String autoGenerationCode,Boolean payroll) {
         this.levelMaster = levelMaster;
         this.designationMaster = designationMaster;
         this.zydexLocationMaster = zydexLocationMaster;
@@ -321,6 +322,7 @@ public class EmployeeMaster implements java.io.Serializable {
         this.ctcTotal = ctcTotal;
         this.confirmationDate = confirmationDate;
         this.autoGenerationCode = autoGenerationCode;
+        this.payroll = payroll;
         
     }
 
@@ -1907,6 +1909,14 @@ public class EmployeeMaster implements java.io.Serializable {
 
     public void setAutoGenerationCode(String autoGenerationCode) {
         this.autoGenerationCode = autoGenerationCode;
+    }
+
+    public Boolean getPayroll() {
+        return payroll;
+    }
+
+    public void setPayroll(Boolean payroll) {
+        this.payroll = payroll;
     }
     
     

@@ -280,16 +280,16 @@
                 var element = 0;
                 var element21 = 0;
                 var val = document.getElementById("policyCount").value;
-                
+
 //            
                 element = document.getElementsByName("amount" + val)[0].value;
-             
+
                 val = val - 1;
-              
+
                 element2 = document.getElementById('txtresult').value;
-               
+
                 element21 = document.getElementById('txtresultCTC').value;
-              
+
 //                alert(element2);
                 document.getElementById('txtresult').value = '';
                 document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
@@ -1210,7 +1210,7 @@
                                                         </div>
                                                     </c:if>
                                                     <div class="col-sm-6">
-                                                        <label>Employee Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
 
                                                         <select name="employeeType" id="employeeType" class="form-control ">
                                                             <c:choose>
@@ -1260,20 +1260,10 @@
 
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
-                                                                <option value="">--SELECT--</option>
-                                                            <c:forEach var="competencyMap" items="${competencyMap}">
-                                                                <c:if test="${competencyMap.key eq employeeMaster.competencyEvaluationId}">
-                                                                    <option value="${competencyMap.key}" selected="">${competencyMap.value}</option>
-                                                                </c:if>
-                                                                <c:if test="${competencyMap.key ne employeeMaster.competencyEvaluationId}">
-                                                                    <option value="${competencyMap.key}" >${competencyMap.value}</option>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-
+                                                            <label>Auto Generate Code: <span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="autoGenerationCode" class="form-control"    placeholder="Enter Auto Generate Code "/>
+                                                            <form:errors path="autoGenerationCode" cssClass="errorDiv"/>
+                                                    </div>    
                                                     <div class="col-sm-6">
                                                         <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();"/>
@@ -1298,11 +1288,7 @@
                                                             <form:input path="esicNo" class="form-control"    placeholder="Enter ESIC No"/>
                                                             <form:errors path="esicNo" cssClass="errorDiv"/>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Auto Generate Code: <span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="autoGenerationCode" class="form-control"    placeholder="Enter Auto Generate Code "/>
-                                                            <form:errors path="autoGenerationCode" cssClass="errorDiv"/>
-                                                    </div>
+
                                                 </div>
 
 
@@ -1357,16 +1343,28 @@
                                                         </fieldset>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="table-responsive">
-                                                        <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                            <tr>
-                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                <th style="text-align: center; vertical-align: middle">Select Allowance</th>
-                                                                <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
-                                                                <th style="text-align: center; vertical-align: middle">Amount</th>
-                                                                <th style="text-align: center; vertical-align: middle">Taxable</th>
-                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                <div class="form-group">
+                                                    <div class="col-sm-4">
+                                                        <label>Payroll:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                        <fieldset>
+                                                            <form:radiobutton path="payroll" value="false" checked="checked"/>No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <form:radiobutton path="payroll" value="true"/>Yes
+                                                        </fieldset>
+                                                        <form:errors path="payroll" cssClass="errorDiv"></form:errors>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="table-responsive">
+                                                            <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                                <tr>
+                                                                    <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Select Allowance</th>
+                                                                    <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
+                                                                    <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Taxable</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Add New</th>
                                                                     <c:choose>
                                                                         <c:when test="${not empty finalPolicyList}">
                                                                     <input type="hidden" name="policyCount" id="policyCount"  value="${fn:length(finalPolicyList)}"/>
@@ -1868,7 +1866,7 @@
                                                                             <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" value="">
                                                                         </td>
                                                                         <td style="text-align: center">
-                                                                          
+
                                                                             <input type="checkbox" name="ctctaxable1" id="ctctaxable1" >
                                                                         </td>
                                                                         <td id="monthTd1"><div>

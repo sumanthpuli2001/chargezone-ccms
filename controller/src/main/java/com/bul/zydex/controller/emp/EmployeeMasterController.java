@@ -170,7 +170,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String dateOfJoining = request.getParameter("dateOfJoining");
         String dateOfBirth = request.getParameter("dateOfBirth");
         String shiftMasterId = request.getParameter("shiftMasterId");
-        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
+//        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
         userMaster.setUserName(userName);
         if (employeeMaster.getUserMaster() != null) {
             if (employeeMaster.getUserMaster().getPassword() != null) {
@@ -238,7 +238,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //            By Irfan
 //            **********************************************************************************
             request.setAttribute("shiftName", shiftMasterId1);
-            request.setAttribute("competencyEvaluationId", competencyEvaluationId);
+//            request.setAttribute("competencyEvaluationId", competencyEvaluationId);
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
             mv.addAllObjects(errors.getModel());
@@ -987,10 +987,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         userMaster1 = userMasterService.readById(employeeMaster.getUserMaster().getId());
         userMaster1.setUserName(employeeMaster.getEmployeeId());
         userMasterService.update(userMaster1);
-        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
-        if (!competencyEvaluationId.equals("")) {
-            employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
-        }
+//        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
+//        if (!competencyEvaluationId.equals("")) {
+//            employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
+//        }
 
         employeeMasterService.update(employeeMaster);
 
@@ -4415,7 +4415,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String dateOfJoining = request.getParameter("dateOfJoining");
         String dateOfBirth = request.getParameter("dateOfBirth");
         String shiftMasterId = request.getParameter("shiftMasterId");
-        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
+//        String competencyEvaluationId = request.getParameter("competencyEvaluationId");
         userMaster.setUserName(userName);
         if (employeeMaster.getUserMaster() != null) {
             if (employeeMaster.getUserMaster().getPassword() != null) {
@@ -4512,7 +4512,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //            By Irfan
 //            **********************************************************************************
             request.setAttribute("shiftName", shiftMasterId1);
-            request.setAttribute("competencyEvaluationId", competencyEvaluationId);
+//            request.setAttribute("competencyEvaluationId", competencyEvaluationId);
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
             mv.addAllObjects(errors.getModel());
@@ -4546,7 +4546,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     employeeMaster.setShiftHoursId(Integer.parseInt(shfitId));
                 }
             }
-            employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
+//            employeeMaster.setCompetencyEvaluationId(Integer.parseInt(competencyEvaluationId));
             // employeeMaster.setId(userMaster.getId());
             employeeMaster.setUserMaster(userMaster);
 //                employeeMaster.setReportingManagerLevel1(reportingManagerLevel1);

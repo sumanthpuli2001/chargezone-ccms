@@ -194,4 +194,6 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readEmployeeCodeAutoGenerate();
 
     public boolean isExistUSername(String employeeID);
+
+    public boolean isExistUnderGraudity(String joinDate, String currentDate);
 }

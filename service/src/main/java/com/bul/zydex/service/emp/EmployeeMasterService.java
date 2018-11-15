@@ -191,4 +191,6 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List<?> readEmployeeCodeAutoGenerate();
 
     public boolean isExistUSername(String employeeID);
+
+    public boolean isExistUnderGraudity(String joinDate, String currentDate);
 }

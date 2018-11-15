@@ -51,10 +51,10 @@
                                         <div class="col-sm-5">
                                             <label class="control-label">Resignation Employee :<span style="color: red;font-size: 12px;"></span></label>
                                             <!--<input type="text" name="empid" id="empid" class="form-control"/>-->
-                                            <form:input type="text" path="employeeMaster" name="policyId1" id="policyId1" class="form-control"/>
-                                            </div>
-                                            <div class="col-sm-5">
-                                                <label class="control-label">Notice Period :<span style="color: red;font-size: 12px;"></span></label>
+                                            <form:input type="text" path="employeeMaster" name="policyId1" id="policyId1" onchange="selectNoticeperiod(this.value);" class="form-control"/>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <label class="control-label">Notice Period :<span style="color: red;font-size: 12px;"></span></label>
                                                 <form:input type="text" path="noticePeriod" placeholder="noticePeriod" id="noticePeriod" class="form-control"/>
                                                 <form:errors path="noticePeriod" cssClass="errorDiv"></form:errors>
                                             </div>
@@ -71,7 +71,7 @@
                                                 <form:errors path="recoveryDays" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
-                                            <div colspan="4" style="text-align: left;"><b>OTHER DEDUCTION :</b></div>
+                                        <div colspan="4" style="text-align: left;"><b>OTHER DEDUCTION :</b></div>
                                         <div class="form-group">
                                             <div class="col-sm-4">
                                                 <label class="control-label">Shoes Deduction :<span style="color: red;font-size: 12px;"></span></label>
@@ -84,7 +84,7 @@
                                                 <form:errors path="uniformDeduction" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
-                                            <div class="form-group">
+                                        <div class="form-group">
                                             <div class="col-sm-4">
                                                 <label class="control-label">Other Deduction :<span style="color: red;font-size: 12px;"></span></label>
                                                 <form:input type="text" path="otherDeduction" name="otherDeduction" id="otherDeduction" value="0" class="form-control"/>
@@ -95,7 +95,7 @@
                                                 <form:input type="text" path="noticePeriodRecovery" name="noticePeriodRecovery" id="noticePeriodRecovery" value="0" class="form-control"/>
                                                 <form:errors path="noticePeriodRecovery" cssClass="errorDiv"></form:errors>
                                             </div>
-                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <div class="col-sm-6 col-sm-offset-5">
                                                 <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
@@ -113,7 +113,29 @@
             </div>
         </section><!-- /.content -->
     </div>
+    <script>
+        function selectNoticeperiod(typeId) {
+           
+//            var empSubTypeId = document.getElementById("subTypeId").value;
+   //            document.getElementById('EmployeeId').innerHTML = "Fetching ... .. .";
+            $.post("resignationMaster.htm?act=readPeriodAjx",
+                    {
+                        typeId: typeId,
+                    }, function (responseTxt, statusTxt, xhr) {
+                if (statusTxt === "success") {
+                    ("responseTxt" + responseTxt);
+                    document.getElementById('employeeSubTypeId').innerHTML = responseTxt;
+                }
+                if (statusTxt === "error")
+                    ("Error: " + xhr.status + ": " + xhr.statusText);
+            });
+        }
 
+   //        $(document).ready(function () {
+   //            var empTypeId = document.getElementById("employeeTypeMaster.id").value;
+   //            selectsubtype(empTypeId);
+   //        });
+    </script>
     <script>
         jQuery.noConflict();
         jQuery(document).ready(function () {

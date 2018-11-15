@@ -17,6 +17,7 @@ import com.bul.zydex.model.EmployeeCtcDetailSalary;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeSalaryProcess;
+import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.FormateFullNdFinalLetter;
 import com.bul.zydex.model.FullAndFinalSettlement;
 import com.bul.zydex.model.MprMaster;
@@ -25,8 +26,13 @@ import com.bul.zydex.model.ResignationMaster;
 import com.bul.zydex.model.UserMaster;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -1395,6 +1401,23 @@ public class ResignationMasterController extends ResignationMasterAbstract {
             deductionAmount += aaam.valueOf(aaam);
         }
 
+        /// graudaity
+        String joiningDate = employeeMaster.getDateOfJoining();
+        double gradudityamount1 = 0.0;
+        String birthyear = joiningDate.substring(6, 10);
+        Calendar cal = Calendar.getInstance();
+        int year2 = cal.get(cal.YEAR);
+        int diffYear = year2 - Integer.parseInt(birthyear);
+        if (diffYear >= 5) {
+
+            String basicSlary = employeeMaster.getBasicSalary();
+
+            double gradudityamount = Double.parseDouble(basicSlary) * 15 / 26;
+            gradudityamount1 = gradudityamount * diffYear;
+            monthAmountTotal += gradudityamount1;
+
+        }
+
 //        --------  (B) TOTAL PAYABLES ------------   //////
         Double totalpayable = mmmm + monthAmountTotal;
 //        ------  TOTAL NET PAYABLE ( A - B ) -----  ///////
@@ -1422,6 +1445,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
 
         }
         String notes = displaymorNotes.getPayrollNotes();
+
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("rm", rm);
 //        mv.getModelMap().put("esp", esp);
@@ -1448,7 +1472,8 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.getModelMap().put("designationName", designationName);
         mv.getModelMap().put("departmentName", departmentName);
         mv.getModelMap().put("fullAndFinalSettlement", fullAndFinalSettlement);
-         request.setAttribute("notes", notes);
+        request.setAttribute("notes", notes);
+        request.setAttribute("gradudityamount1", gradudityamount1);
         mv.setViewName("Resignation/FullAndFinaSettlementReportShow");
 
         return mv;
@@ -1597,6 +1622,55 @@ public class ResignationMasterController extends ResignationMasterAbstract {
             }
         }
         mv = fullandfcreateClick(request, response);
+        return mv;
+    }
+
+    public ModelAndView readPeriodAjx(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        String typeId = request.getParameter("typeId");
+
+        employeeMaster = employeeMasterService.readById(Integer.parseInt(typeId));
+        ResignationMaster rm = resignationMasterService.readByEmpId(Integer.parseInt(typeId));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        
+        String leavingdate = employeeMaster.getDateOfLeaving();
+         String leavingdateyear = leavingdate.substring(6, 10);
+         String leavingdatemonth = leavingdate.substring(3, 5);
+         String leavingdateDay = leavingdate.substring(1, 2);
+        
+        
+        
+        
+        
+        String relevingDate = rm.getRelievingDate();
+        
+        LocalDate dateBefore = LocalDate.parse(leavingdate);
+        
+//         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//            LocalDate Startdate = LocalDate.parse(employeeMaster.getDateOfLeaving(), formatter);
+
+//        LocalDateTime oldDate = LocalDateTime.of(leavingdate);
+//        LocalDateTime newDate = LocalDateTime.of(2016, Month.NOVEMBER, 9, 10, 21, 56);
+//            long numOfDaysBetween = ChronoUnit.DAYS.between(leavingdate, relevingDate);
+
+//        String employeeId = request.getParameter("employeeId");
+//
+//        String empSubTypeId = request.getParameter("empSubTypeId");
+//
+//        if (null == employeeId) {
+//        } else {
+//            employeeMaster = employeeMasterService.readById(Integer.parseInt(employeeId));
+//            request.setAttribute("employeeSubTypeId", employeeMaster.getEmployeeSubType().getId());
+//        }
+//        if (null == empSubTypeId) {
+//        } else {
+//            request.setAttribute("employeeSubTypeId", empSubTypeId);
+//        }
+//        List<?> employeeSubTypeList = employeeSubTypeService.readByEmployeeTypeId(typeId);
+//        request.setAttribute("employeeSubTypeList", employeeSubTypeList);
+//        mv.setViewName("Employee/EmployeeSubTypeAjax");
         return mv;
     }
 }

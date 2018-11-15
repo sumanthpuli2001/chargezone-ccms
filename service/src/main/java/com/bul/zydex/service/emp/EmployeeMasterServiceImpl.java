@@ -450,12 +450,12 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
 
     @Override
     public List<?> readEmployeeDetailUserIdWiseShiftApplication(T object) {
-      return employeeMasterDAO.readEmployeeDetailUserIdWiseShiftApplication(object);
+        return employeeMasterDAO.readEmployeeDetailUserIdWiseShiftApplication(object);
     }
 
     @Override
     public List<?> readEmployeeDetailUserIdWiseShiftRegurazation(T object) {
-      return employeeMasterDAO.readEmployeeDetailUserIdWiseShiftRegurazation(object);
+        return employeeMasterDAO.readEmployeeDetailUserIdWiseShiftRegurazation(object);
     }
 
     @Override
@@ -466,5 +466,10 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     @Override
     public boolean isExistUSername(String employeeID) {
         return employeeMasterDAO.isExistUSername(employeeID);
+    }
+
+    @Override
+    public boolean isExistUnderGraudity(String joinDate, String currentDate) {
+        return employeeMasterDAO.isExistUnderGraudity(joinDate, currentDate);
     }
 }

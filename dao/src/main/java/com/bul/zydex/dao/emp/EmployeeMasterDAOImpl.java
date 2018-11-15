@@ -2488,4 +2488,16 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return false;
     }
 
+    @Override
+    public boolean isExistUnderGraudity(String joinDate, String currentDate) {
+       String query = "";
+        query += " FROM EmployeeMaster a"
+                + " WHERE a.employeeId='" + joinDate + "'";
+        List<?> list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
 }

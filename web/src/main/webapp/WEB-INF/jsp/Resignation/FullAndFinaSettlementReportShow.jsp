@@ -115,26 +115,29 @@
                                                             <c:if test="${ctcDetail1[1] == 6}"><td><fmt:formatNumber maxFractionDigits="0" value="${totalMonthlyAmount6}"></fmt:formatNumber>.00</td></c:if>
                                                                 </tr>
                                                     </c:forEach>
-                                                    <c:forEach var="Gratuiety1" items="${Gratuiety}">
+                                                    <%--<c:forEach var="Gratuiety1" items="${Gratuiety}">--%>
+                                                    <%--<c:if test="${gradudityamount1 =! 0}">--%>
                                                         <tr>
                                                             <!--<td><b>${Gratuiety1[1]}</b></td>-->
-                                                            <c:if test="${Gratuiety1[1] == 3}"><td><b>Gratuiety</b></td></c:if>
+                                                            <td><b>Gratuiety</b></td>
                                                                 <th colspan="1"></th>
-                                                            <c:if test="${Gratuiety1[3] == 01}"><td><b>JAN</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <c:if test="${Gratuiety1[3] == 02}"><td><b>FEB</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <c:if test="${Gratuiety1[3] == 03}"><td><b>MAR</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <c:if test="${Gratuiety1[3] == 04}"><td><b>APR</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <c:if test="${Gratuiety1[3] == 05}"><td><b>MAY</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <c:if test="${Gratuiety1[3] == 06}"><td><b>JUN</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <c:if test="${Gratuiety1[3] == 07}"><td><b>JUL</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <c:if test="${Gratuiety1[3] == 08}"><td><b>AUG</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <c:if test="${Gratuiety1[3] == 09}"><td><b>SEP</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <c:if test="${Gratuiety1[3] == 10}"><td><b>OCT</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <c:if test="${Gratuiety1[3] == 11}"><td><b>NOV</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <c:if test="${Gratuiety1[3] == 12}"><td><b>DEC</b>'${Gratuiety1[4]}</td></c:if>
-                                                            <td><fmt:formatNumber maxFractionDigits="0" value="${Gratuiety1[2]}"></fmt:formatNumber>.00</td>
+                                                            <%--<c:if test="${Gratuiety1[3] == 01}"><td><b>JAN</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                            <%--<c:if test="${Gratuiety1[3] == 02}"><td><b>FEB</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                            <%--<c:if test="${Gratuiety1[3] == 03}"><td><b>MAR</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                            <%--<c:if test="${Gratuiety1[3] == 04}"><td><b>APR</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                            <%--<c:if test="${Gratuiety1[3] == 05}"><td><b>MAY</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                            <%--<c:if test="${Gratuiety1[3] == 06}"><td><b>JUN</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                            <%--<c:if test="${Gratuiety1[3] == 07}"><td><b>JUL</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                            <%--<c:if test="${Gratuiety1[3] == 08}"><td><b>AUG</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                            <%--<c:if test="${Gratuiety1[3] == 09}"><td><b>SEP</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                            <%--<c:if test="${Gratuiety1[3] == 10}"><td><b>OCT</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                            <%--<c:if test="${Gratuiety1[3] == 11}"><td><b>NOV</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                            <%--<c:if test="${Gratuiety1[3] == 12}"><td><b>DEC</b>'${Gratuiety1[4]}</td></c:if>--%>
+                                                                <td></td>
+                                                            <td><fmt:formatNumber maxFractionDigits="0" value="${gradudityamount1}"></fmt:formatNumber>.00</td>
                                                             </tr>
-                                                    </c:forEach>
+                                                            <%--</c:if>--%>
+                                                    <%--</c:forEach>--%>
 
                                                     <tr>
                                                         <th colspan="2"></th>

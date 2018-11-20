@@ -96,7 +96,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " LEFT JOIN a.userMaster d "
                 + " where ((a.dateOfLeaving is null or a.dateOfLeaving = '') "
                 + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())"
-                + " AND a.employeeId not in ('admin')";
+                + " AND a.employeeId not in ('admin')"
+                + " ORDER BY a.employeeId ASC ";
 //                + " or STR_TO_DATE(,'%d/%m/%Y - %h:%i') > now()";
 //                + " or a.dateOfLeaving > DATE_FORMAT(now(),'%d/%m/%Y - %h:%i')";
 //        STR_TO_DATE(,'%d/%m/%Y - %h:%i') < now()
@@ -2490,7 +2491,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
     @Override
     public boolean isExistUnderGraudity(String joinDate, String currentDate) {
-       String query = "";
+        String query = "";
         query += " FROM EmployeeMaster a"
                 + " WHERE a.employeeId='" + joinDate + "'";
         List<?> list = getHibernateTemplate().find(query);

@@ -25,7 +25,7 @@
         <property name="numberOfPosition" type="java.lang.Integer">
             <column name="number_of_position" />
         </property>
-        <property name="salaryRange" type="java.lang.Integer">
+        <property name="salaryRange" type="string">
             <column name="salary_range" />
         </property>
         <property name="experience" type="string">

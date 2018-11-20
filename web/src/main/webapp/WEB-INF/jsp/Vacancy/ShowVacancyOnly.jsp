@@ -97,6 +97,13 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Salary &nbsp;&nbsp;</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>
+                                                    <span >${vacancyMaster.salaryRange}</span>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="form-group">
                                                 <div class="col-sm-12">
                                                     <label>Description:</label> &nbsp;&nbsp;&nbsp;
                                                     <span>${vacancyMaster.description}</span>

@@ -17,7 +17,7 @@ public class VacancyMaster implements java.io.Serializable {
     private JobtypeMaster jobtypeMaster;
     private String name;
     private Integer numberOfPosition;
-    private Integer salaryRange;
+    private String salaryRange;
     private String experience;
     private String responsibility;
     private String skill;
@@ -38,7 +38,7 @@ public class VacancyMaster implements java.io.Serializable {
 
     }
 
-    public VacancyMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, Integer salaryRange, String experience, String responsibility, String skill, String fromDate, String toDate, String description, Integer status, DesignationMaster designationMasterm, MprMaster mprMaster, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer currentLevel, Integer totalLevel) {
+    public VacancyMaster(Integer id, LocationMaster locationMaster, DepartmentMaster departmentMaster, JobtypeMaster jobtypeMaster, String name, Integer numberOfPosition, String salaryRange, String experience, String responsibility, String skill, String fromDate, String toDate, String description, Integer status, DesignationMaster designationMasterm, MprMaster mprMaster, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer currentLevel, Integer totalLevel) {
         this.id = id;
         this.locationMaster = locationMaster;
         this.departmentMaster = departmentMaster;
@@ -111,11 +111,11 @@ public class VacancyMaster implements java.io.Serializable {
         this.numberOfPosition = numberOfPosition;
     }
 
-    public Integer getSalaryRange() {
+    public String getSalaryRange() {
         return salaryRange;
     }
 
-    public void setSalaryRange(Integer salaryRange) {
+    public void setSalaryRange(String salaryRange) {
         this.salaryRange = salaryRange;
     }
 

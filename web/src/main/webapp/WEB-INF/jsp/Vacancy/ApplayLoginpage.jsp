@@ -70,7 +70,13 @@
     </head>
     <body>
         <section class="content-header">
-            <h1>Login:</h1>
+             <table>
+
+                <td style="text-align: left;">
+                    <span><img src="StorageYard/Images/logo.png"  style="width: 150px;float: left;margin-top: 5%;margin-left: 5%;"/></span> 
+                </td>
+            </table>
+            <center><h1>Login:</h1></center>
             <ol class="breadcrumb">
             </ol>
         </section>

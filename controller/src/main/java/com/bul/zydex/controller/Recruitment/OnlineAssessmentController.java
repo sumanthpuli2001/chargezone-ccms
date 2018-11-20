@@ -170,7 +170,7 @@ public class OnlineAssessmentController extends OnlineAssessmentAbstract {
             String toDate = vm.getToDate();
             String description = vm.getDescription();
             String experiance = vm.getExperience();
-            int salaryRange = vm.getSalaryRange();
+            String salaryRange = vm.getSalaryRange();
             int position = vm.getNumberOfPosition();
 
             questionList(request);

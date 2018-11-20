@@ -210,7 +210,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         String condition = "";
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
 
-       if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
+        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
             condition += " AND a.locationMaster.id = " + employeeMaster.getAdharCard();
         }
         if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
@@ -472,7 +472,9 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
 //        }
 
         query += "From EmployeeMaster a"
-                + " Where 1=1" + condition;
+                + " where a.employeeId != 'admin' and ((a.dateOfLeaving is null or a.dateOfLeaving = '') "
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())"
+                + " and 1=1" + condition;
 
         return getHibernateTemplate().find(query);
     }
@@ -708,7 +710,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         String condition = "";
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
 
-       if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
+        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
             condition += " AND a.locationMaster.id = " + employeeMaster.getAdharCard();
         }
         if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {

@@ -14044,7 +14044,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 mv = employeeShiftChangeMonthly(request, response);
             }
             if (count > 0) {
-                request.setAttribute("failureMessage", "Information : " + countEmpId + " Rcecords Not Inserted Due To Employe No Is Not Correct");
+                request.setAttribute("failureMessage", "Information : " + countEmpId + " Records Not Inserted Due To Employe No Is Not Correct");
                 mv = employeeShiftChangeMonthly(request, response);
             } else {
                 mv = employeeShiftChangeMonthly(request, response);

@@ -183,7 +183,7 @@
                                                         <div class="col-sm-6" >
                                                             <!--<label>Woff Date:</label>-->
 
-                                                            <label> Woff change :<span style="color: red;font-size: 12px;"></span></label>
+                                                            <label> Actual Date :<span style="color: red;font-size: 12px;"></span></label>
 
                                                             <div class=""    data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
                                                                 <form:input path="dayWoff" class="form-control" size="16" value="" readonly="true" ></form:input>
@@ -197,7 +197,7 @@
                                                      <div class="col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <div class="col-sm-6" id="shiftRotationDateDiv">
-                                                        <label>Shift Rotation Date:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>Purpose Date:<span style="color: red;font-size: 12px;"></span></label>
 
                                                         <div class=""  name="shiftIdChange" id="shiftIdChange"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
                                                             <form:input path="rotationDate" class="form-control" size="16" value="" readonly="true" onchange="selectShiftChange(this.value)"></form:input>

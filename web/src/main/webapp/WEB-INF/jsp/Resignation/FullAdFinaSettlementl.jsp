@@ -42,10 +42,10 @@
                                 </c:if>
 
                                 <!--form--> 
-                                <form:form class="form-horizontal" method="post" onsubmit='return checkBlankField();'
+                                <form:form class="form-horizontal" method="post" 
                                            commandName="fullAndFinalSettlement" action="resignationMaster.htm?act=fullAndFinalSubmit">
 
-
+                                    <input type="hidden" name="shiftName" id="shiftName" value="${shiftName}">
 
                                     <div class="form-group">
                                         <div class="col-sm-5">
@@ -54,16 +54,20 @@
                                             <form:input type="text" path="employeeMaster" name="policyId1" id="policyId1" onchange="selectNoticeperiod(this.value);" class="form-control"/>
                                         </div>
                                         <div class="col-sm-5">
+
                                             <label class="control-label">Notice Period :<span style="color: red;font-size: 12px;"></span></label>
-                                                <form:input type="text" path="noticePeriod" placeholder="noticePeriod" id="noticePeriod" class="form-control"/>
+                                                <form:input type="text" path="noticePeriod" placeholder="noticePeriod" id="noticePeriod" onchange="noticeperiodCal();" class="form-control"/>
                                                 <form:errors path="noticePeriod" cssClass="errorDiv"></form:errors>
                                             </div>
+
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-5">
+                                                <!--<div  id="employeeSubTypeId">-->
                                                 <label class="control-label">Given Notice :<span style="color: red;font-size: 12px;"></span></label>
                                                 <form:input type="text" path="givenNotice" placeholder="givenNotice" id="givenNotice" class="form-control"/>
                                                 <form:errors path="givenNotice" cssClass="errorDiv"></form:errors>
+                                                <!--</div>-->
                                             </div>
                                             <div class="col-sm-5">
                                                 <label class="control-label">Recoverable Days :<span style="color: red;font-size: 12px;"></span></label>
@@ -98,7 +102,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-6 col-sm-offset-5">
-                                                <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                                <input type="button" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
                                             </div>
                                         </div>
                                     </div>
@@ -115,26 +119,44 @@
     </div>
     <script>
         function selectNoticeperiod(typeId) {
-           
-//            var empSubTypeId = document.getElementById("subTypeId").value;
-   //            document.getElementById('EmployeeId').innerHTML = "Fetching ... .. .";
+
+//            var empSub var shiftMasterId = document.getElementById("shiftName").value;TypeId = document.getElementById("subTypeId").value;
+            //            document.getElementById('EmployeeId').innerHTML = "Fetching ... .. .";
+
             $.post("resignationMaster.htm?act=readPeriodAjx",
                     {
                         typeId: typeId,
                     }, function (responseTxt, statusTxt, xhr) {
                 if (statusTxt === "success") {
+
                     ("responseTxt" + responseTxt);
-                    document.getElementById('employeeSubTypeId').innerHTML = responseTxt;
+                    var obj = JSON.parse(responseTxt);
+                    var noofdays = obj['noofdays'];
+
+
+//                    alert(noofdays);
+                    document.getElementById('givenNotice').value = noofdays;
                 }
                 if (statusTxt === "error")
                     ("Error: " + xhr.status + ": " + xhr.statusText);
             });
         }
+        function noticeperiodCal() {
+          
+            var total = 0;
 
-   //        $(document).ready(function () {
-   //            var empTypeId = document.getElementById("employeeTypeMaster.id").value;
-   //            selectsubtype(empTypeId);
-   //        });
+
+            var element = document.getElementById('givenNotice').value;
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("noticePeriod").value);
+            total = basicSalary - element;
+
+            document.getElementById("recoveryDays").value = total;
+//            document.getElementById("txtresultCTC").value = total;
+//          
+        }
+
+        //    
     </script>
     <script>
         jQuery.noConflict();

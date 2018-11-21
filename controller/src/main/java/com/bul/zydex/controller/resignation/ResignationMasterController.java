@@ -28,6 +28,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONObject;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -1625,7 +1627,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         return mv;
     }
 
-    public ModelAndView readPeriodAjx(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void readPeriodAjx(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -1634,43 +1636,46 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         employeeMaster = employeeMasterService.readById(Integer.parseInt(typeId));
         ResignationMaster rm = resignationMasterService.readByEmpId(Integer.parseInt(typeId));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        
+
         String leavingdate = employeeMaster.getDateOfLeaving();
-         String leavingdateyear = leavingdate.substring(6, 10);
-         String leavingdatemonth = leavingdate.substring(3, 5);
-         String leavingdateDay = leavingdate.substring(1, 2);
-        
-        
-        
-        
-        
+//        String leavingdateyear = leavingdate.substring(6, 10);
+//        String leavingdatemonth = leavingdate.substring(3, 5);
+//        String leavingdateDay = leavingdate.substring(0, 2);
+        int leavingdateyear = Integer.parseInt(leavingdate.substring(6, 10));
+        int leavingdatemonth = Integer.parseInt(leavingdate.substring(3, 5));
+        int leavingdateDay = Integer.parseInt(leavingdate.substring(0, 2));
+
+//        String emergedDate = leavingdateDay + "/" + leavingdatemonth + "/" + leavingdateyear;
         String relevingDate = rm.getRelievingDate();
-        
-        LocalDate dateBefore = LocalDate.parse(leavingdate);
-        
-//         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//            LocalDate Startdate = LocalDate.parse(employeeMaster.getDateOfLeaving(), formatter);
+//        String relevingyear1 = relevingDate.substring(6, 10);
+//        String relevingmonth1 = relevingDate.substring(3, 5);
+//        String relevingDay1 = relevingDate.substring(0, 2);
+        int relevingyear1 = Integer.parseInt(relevingDate.substring(6, 10));
+        int relevingmonth1 = Integer.parseInt(relevingDate.substring(3, 5));
+        int relevingDay1 = Integer.parseInt(relevingDate.substring(0, 2));
 
-//        LocalDateTime oldDate = LocalDateTime.of(leavingdate);
-//        LocalDateTime newDate = LocalDateTime.of(2016, Month.NOVEMBER, 9, 10, 21, 56);
-//            long numOfDaysBetween = ChronoUnit.DAYS.between(leavingdate, relevingDate);
+//        String emergedrelevingDate = relevingDay1 + "/" + relevingmonth1 + "/" + relevingyear1;
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+//        LocalDate Startdate = LocalDate.parse(emergedDate);
+//        LocalDate Enddate = LocalDate.parse(emergedrelevingDate, formatter);
+//        Period diff = Period.between(Startdate, Enddate);
+        Calendar c1 = Calendar.getInstance();
+        c1.set(leavingdateyear, leavingdatemonth, leavingdateDay);
+        Calendar c2 = Calendar.getInstance();
+        c2.set(relevingyear1, relevingmonth1, relevingDay1);
 
-//        String employeeId = request.getParameter("employeeId");
-//
-//        String empSubTypeId = request.getParameter("empSubTypeId");
-//
-//        if (null == employeeId) {
-//        } else {
-//            employeeMaster = employeeMasterService.readById(Integer.parseInt(employeeId));
-//            request.setAttribute("employeeSubTypeId", employeeMaster.getEmployeeSubType().getId());
-//        }
-//        if (null == empSubTypeId) {
-//        } else {
-//            request.setAttribute("employeeSubTypeId", empSubTypeId);
-//        }
-//        List<?> employeeSubTypeList = employeeSubTypeService.readByEmployeeTypeId(typeId);
-//        request.setAttribute("employeeSubTypeList", employeeSubTypeList);
-//        mv.setViewName("Employee/EmployeeSubTypeAjax");
-        return mv;
+        Date d1 = c1.getTime();
+        Date d2 = c2.getTime();
+        int noofdays = 0;
+        long diff = d2.getTime() - d1.getTime();
+        noofdays = (int) (diff / (1000 * 24 * 60 * 60));
+
+//       
+        JSONObject json = new JSONObject();
+        json.put("noofdays", noofdays);
+        PrintWriter out = response.getWriter();
+        out.print(json.toString());
+//        request.setAttribute("noofdays", noofdays);
+//        mv.setViewName("Employee/EmployeeDiffDayAjax");
     }
 }

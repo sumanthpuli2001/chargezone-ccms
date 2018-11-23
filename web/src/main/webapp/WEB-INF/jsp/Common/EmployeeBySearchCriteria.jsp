@@ -71,10 +71,7 @@
                                                 <div class="col-sm-12">
                                                     </br>
                                                     <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Employee Code:</label>
-                                                            <input type="text" name="employeeCode" class="form-control" size="16" placeholder="DD/MM/YYYY" />
-                                                        </div>
+
                                                         <div class="col-sm-6">
                                                             <label>Employee Name:</label>
                                                             <input type="text" id="employeeMasterId" name="employeeMasterId" class="form-control">
@@ -390,6 +387,21 @@
                                                                                                     <label>Date Of Leaving</label>
                                                                                                 </div>
                                                                                             </div>
+                                                                                            <div class="col-sm-12">
+                                                                                                <div class="col-sm-3">
+                                                                                                    <input type="checkbox"  class="checkbox1" value="true" name="basicSalary" />
+                                                                                                    <label>Basic Salary </label>
+                                                                                                </div>
+
+                                                                                                <c:forEach var="headerList" items="${headerList123}">
+                                                                                                    <div class="col-sm-3">
+                                                                                                        <input type="checkbox"  class="checkbox1" value="${headerList}" name="${headerList}" />
+                                                                                                        <label>${headerList}</label>
+                                                                                                    </div>
+                                                                                                </c:forEach>
+
+
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
                                                                                 </section>
@@ -476,7 +488,7 @@
                                                                 });
                                                             });
                                                         </script>
-                                                        
+
                                                         <script>
                                                             function getEmployeeDetails() {
                                                                 $("#trHeaderList").remove();

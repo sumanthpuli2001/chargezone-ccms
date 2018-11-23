@@ -34,6 +34,7 @@ public class CandidateApplyJob  implements java.io.Serializable{
     private String experianceDateJoiningYear;
     private String experianceDateJoiningMonth;
     private String certificateAttach;
+     private String middleName;
     private VacancyMaster vacancyId;
     private ApplayJobUserMaster applayJobUserMaster;
    
@@ -42,7 +43,7 @@ public class CandidateApplyJob  implements java.io.Serializable{
         
     }
 
-    public CandidateApplyJob(Integer id, String name, String fatherName, String motherName, String fatherDob, String motherDob, String sex, String martialStatus, String dob, String photograph, String presentAddress, String permanentAddress, String city, String bloodGroup, String emailId, String contactNo, String emergencyContactPerson, String emergencyContactNo, String highestEducationQualification, String experianceDateJoiningYear, String experianceDateJoiningMonth, String certificateAttach, VacancyMaster vacancyId,ApplayJobUserMaster applayJobUserMaster) {
+    public CandidateApplyJob(Integer id, String name, String fatherName, String motherName, String fatherDob, String motherDob, String sex, String martialStatus, String dob, String photograph, String presentAddress, String permanentAddress, String city, String bloodGroup, String emailId, String contactNo, String emergencyContactPerson, String emergencyContactNo, String highestEducationQualification, String experianceDateJoiningYear, String experianceDateJoiningMonth, String certificateAttach, VacancyMaster vacancyId,ApplayJobUserMaster applayJobUserMaster,String middleName) {
         this.id = id;
         this.name = name;
         this.fatherName = fatherName;
@@ -67,6 +68,7 @@ public class CandidateApplyJob  implements java.io.Serializable{
         this.certificateAttach = certificateAttach;
         this.vacancyId = vacancyId;
         this.applayJobUserMaster = applayJobUserMaster;
+        this.middleName = middleName;
         
     }
 
@@ -260,6 +262,14 @@ public class CandidateApplyJob  implements java.io.Serializable{
 
     public void setApplayJobUserMaster(ApplayJobUserMaster applayJobUserMaster) {
         this.applayJobUserMaster = applayJobUserMaster;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     

@@ -298,7 +298,7 @@
                                                                         </td>
                                                                         <td style="text-align: center;">
                                                                             <label>Middle Name:</label> &nbsp;&nbsp;
-                                                                            <span>${candidateApplyJob.fatherName}</span>
+                                                                            <span>${candidateApplyJob.middleName}</span>
                                                                         </td>
                                                                         <td style="text-align: center;">
                                                                             <label>Last Name:</label> &nbsp;&nbsp;

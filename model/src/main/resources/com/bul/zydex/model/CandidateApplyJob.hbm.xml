@@ -21,6 +21,9 @@
         <property name="motherDob" type="string">
             <column name="mother_dob" />
         </property>
+        <property name="middleName" type="string">
+            <column name="middle_name" />
+        </property>
         <property name="sex" type="string">
             <column name="sex" />
         </property>

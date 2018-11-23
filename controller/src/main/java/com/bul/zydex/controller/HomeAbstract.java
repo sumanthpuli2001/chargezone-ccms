@@ -10,12 +10,14 @@ import com.bul.zydex.model.Gallery;
 import com.bul.zydex.model.KaizenMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.PolicyMaster;
 import com.bul.zydex.model.RAndR;
 import com.bul.zydex.model.ThoughtMaster;
 import com.bul.zydex.service.CorporateVideo.CorporateVideoService;
 import com.bul.zydex.service.Kaizen.KaizenMasterService;
 import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
+import com.bul.zydex.service.policy.PolicyMasterService;
 import com.bul.zydex.service.thought.GalleryService;
 import com.bul.zydex.service.thought.RAndRService;
 import com.bul.zydex.service.thought.ThoughtMasterService;
@@ -33,6 +35,7 @@ public abstract class HomeAbstract extends CustomAbstract {
     protected CorporateVideoService<CorporateVideo> corporateVideoService;
     protected RAndRService<RAndR> rAndRService;
     protected KaizenMasterService<KaizenMaster> kaizenMasterService;
+    protected PolicyMasterService<PolicyMaster> policyMasterService;
     
     public LevelMasterService<LevelMaster> getLevelMasterService() {
         return levelMasterService;
@@ -88,6 +91,14 @@ public abstract class HomeAbstract extends CustomAbstract {
 
     public void setKaizenMasterService(KaizenMasterService<KaizenMaster> kaizenMasterService) {
         this.kaizenMasterService = kaizenMasterService;
+    }
+
+    public PolicyMasterService<PolicyMaster> getPolicyMasterService() {
+        return policyMasterService;
+    }
+
+    public void setPolicyMasterService(PolicyMasterService<PolicyMaster> policyMasterService) {
+        this.policyMasterService = policyMasterService;
     }
 
    

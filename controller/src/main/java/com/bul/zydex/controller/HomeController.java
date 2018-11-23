@@ -12,6 +12,7 @@ import com.bul.zydex.model.EmployeeInformation;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.PolicyMaster;
 import com.bul.zydex.model.ThoughtMaster;
 import com.bul.zydex.model.UserMaster;
 import com.google.gson.Gson;
@@ -283,9 +284,18 @@ public class HomeController extends HomeAbstract {
     }
 
     
-    public ModelAndView redirectToAllReports(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView redirectToAllReports(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HomeController homeController = new HomeController();
         ModelAndView mv = new ModelAndView();
+        selectEmployee(request, response);
+        Map<Integer, List<Object>> empMap = new HashMap();
+        List<String> headerList = new ArrayList<String>();
+         List<?> policyMasterList = policyMasterService.read();
+        for (Object o1 : policyMasterList) {
+            PolicyMaster policyMaster = (PolicyMaster) o1;
+            headerList.add(policyMaster.getPolicyName());
+        }
+         request.setAttribute("headerList123", headerList);
         mv.setViewName("Common/EmployeeBySearchCriteria");
         mv.getModelMap().put("homeController", homeController);
         return mv;
@@ -634,6 +644,11 @@ public class HomeController extends HomeAbstract {
         if(null != dateOfLeaving){
             employeeInformation.setDateOfLeaving(Boolean.TRUE);
             headerList.add("Date Of Leaving");
+        }
+        String allowance = request.getParameter("allowance");
+        if(null != allowance){
+            employeeInformation.setDateOfLeaving(Boolean.TRUE);
+            headerList.add(allowance);
         }
         
         //input criteria from here

@@ -388,7 +388,7 @@
                             <tbody>
                                 <tr>
                                     <td><form:input path="candidateApplyJob.name" class="form-control" placeholder="First Name" required="true"></form:input></td>
-                                    <td><form:input path="candidateApplyJob.fatherName" class="form-control" placeholder="Middle Name" required="true"></form:input></td>
+                                    <td><form:input path="candidateApplyJob.middleName" class="form-control" placeholder="Middle Name" required="true"></form:input></td>
                                     <td><form:input path="candidateApplyJob2.lastName" class="form-control" placeholder="Last Name" required="true"></form:input></td>
                                     </tr>
                                 </tbody>
@@ -423,6 +423,10 @@
                                 <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                     <td><form:input path="candidateApplyJob.fatherDob" id="datepicker45" class="form-control" size="16" placeholder="dd/MM/yyyy" readonly="true" required="true"></form:input>
                                 </div>
+                                </tr>
+                                <tr>
+                                    <th>Father Name<span style="color: red;font-size: 12px;"> *</span></th>
+                                    <td><form:input path="candidateApplyJob.fatherName" class="form-control" placeholder="Enter Father Name" required="true"></form:input></td>
                                 </tr>
                                 <tr>
                                     <th>Mother Name<span style="color: red;font-size: 12px;"> *</span></th>

@@ -2999,8 +2999,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         HttpSession session = request.getSession();
         String zydex_location_id = request.getParameter("zydexlocationid");
         String type_of_employee = request.getParameter("typeofemployee");
-        String employee_sub_id = request.getParameter("employeesubid");
-        String payment_type = request.getParameter("paymenttype");
+//        String employee_sub_id = request.getParameter("employeesubid");
+//        String payment_type = request.getParameter("paymenttype");
         String month1 = request.getParameter("month");
         String year11 = request.getParameter("year");
 
@@ -3011,14 +3011,14 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         if (!type_of_employee.equals("")) {
             employeeMaster.setEmployeeType(type_of_employee);
         }
-        if (null != employee_sub_id && !employee_sub_id.equals("")) {
-            employeeMaster.setCompany(employee_sub_id);
-        }
-
-        if (!payment_type.equals("")) {
-            employeeMaster.setPaymentType(payment_type);
-
-        }
+//        if (null != employee_sub_id && !employee_sub_id.equals("")) {
+//            employeeMaster.setCompany(employee_sub_id);
+//        }
+//
+//        if (!payment_type.equals("")) {
+//            employeeMaster.setPaymentType(payment_type);
+//
+//        }
         if (!month1.equals("")) {
             employeeMaster.setBankName(month1);
 
@@ -3137,8 +3137,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         request.setAttribute("year", year11);
         request.setAttribute("zydexlocationid", zydex_location_id);
         request.setAttribute("typeofemployee", type_of_employee);
-        request.setAttribute("employeesubid", employee_sub_id);
-        request.setAttribute("paymenttype", payment_type);
+//        request.setAttribute("employeesubid", employee_sub_id);
+//        request.setAttribute("paymenttype", payment_type);
 
         mv.setViewName("Payroll/EmployeeSalarySearchPrint");
 

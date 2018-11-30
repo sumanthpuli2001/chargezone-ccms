@@ -74,12 +74,15 @@ public class EmployeeInformation implements Serializable{
     private String dojEndDate;
     private String dolStartDate;
     private String dolEndDate;
+    private Boolean basicSalary;
+    private Boolean allowance;
+    private Boolean ctc;
 
 
     public EmployeeInformation() {
     }
 
-    public EmployeeInformation(Boolean employeeId, Boolean employeeName, Boolean dateOfJoining, Boolean role, Boolean company, Boolean emailAddress, Boolean contactNo1, Boolean contactNo2, Boolean fatherName, Boolean motherName, Boolean dateOfBirth, Boolean gender, Boolean bloodGroups, Boolean maritalStatus, Boolean spouseName, Boolean emergencyContactPerson, Boolean emergencyContactNo, Boolean panCard, Boolean adharCard, Boolean passportNo, Boolean passportIssueDate, Boolean passportExpiryDate, Boolean employeeType, Boolean officeEmailId, Boolean experienceYearOnDoj, Boolean experienceMonthOnDoj, Boolean permanentAddress, Boolean presentAddress, Boolean maritalStatusOthers, Boolean bankName, Boolean bankAccountNo, Boolean bankIfscCode, Boolean zydexLocation, Boolean workLocation, Boolean level, Boolean department, Boolean designation, Boolean workType, Boolean reportingManager, Boolean highestEducationDetails, Boolean cityOfEmployee, Boolean child1, Boolean child2, Boolean dateOfBirthOfEmpFather, Boolean dateOfBirthOfEmpMother, Boolean dateOfBirthOfEmpSpous, Boolean dateOfBirthOfEmpChilld1, Boolean dateOfBirthOfEmpChild2, Boolean dateOfTransferOfEntity, Boolean dateOfLeaving, String id, String employeeCode, String employeeMasterName, String zydexLocationId, String workLocationId, String levelID, String departmentId, String designationId, String dojStartDate, String dojEndDate, String dolStartDate, String dolEndDate) {
+    public EmployeeInformation(Boolean employeeId, Boolean employeeName, Boolean dateOfJoining, Boolean role, Boolean company, Boolean emailAddress, Boolean contactNo1, Boolean contactNo2, Boolean fatherName, Boolean motherName, Boolean dateOfBirth, Boolean gender, Boolean bloodGroups, Boolean maritalStatus, Boolean spouseName, Boolean emergencyContactPerson, Boolean emergencyContactNo, Boolean panCard, Boolean adharCard, Boolean passportNo, Boolean passportIssueDate, Boolean passportExpiryDate, Boolean employeeType, Boolean officeEmailId, Boolean experienceYearOnDoj, Boolean experienceMonthOnDoj, Boolean permanentAddress, Boolean presentAddress, Boolean maritalStatusOthers, Boolean bankName, Boolean bankAccountNo, Boolean bankIfscCode, Boolean zydexLocation, Boolean workLocation, Boolean level, Boolean department, Boolean designation, Boolean workType, Boolean reportingManager, Boolean highestEducationDetails, Boolean cityOfEmployee, Boolean child1, Boolean child2, Boolean dateOfBirthOfEmpFather, Boolean dateOfBirthOfEmpMother, Boolean dateOfBirthOfEmpSpous, Boolean dateOfBirthOfEmpChilld1, Boolean dateOfBirthOfEmpChild2, Boolean dateOfTransferOfEntity, Boolean dateOfLeaving, String id, String employeeCode, String employeeMasterName, String zydexLocationId, String workLocationId, String levelID, String departmentId, String designationId, String dojStartDate, String dojEndDate, String dolStartDate, String dolEndDate,Boolean basicSalary,Boolean allowance,Boolean ctc) {
         this.employeeId = employeeId;
         this.employeeName = employeeName;
         this.dateOfJoining = dateOfJoining;
@@ -142,6 +145,9 @@ public class EmployeeInformation implements Serializable{
         this.dojEndDate = dojEndDate;
         this.dolStartDate = dolStartDate;
         this.dolEndDate = dolEndDate;
+        this.basicSalary = basicSalary;
+        this.allowance = allowance;
+        this.ctc = ctc;
     }
 
     public String getId() {
@@ -639,5 +645,32 @@ public class EmployeeInformation implements Serializable{
     public void setDateOfLeaving(Boolean dateOfLeaving) {
         this.dateOfLeaving = dateOfLeaving;
     }
+
+    public Boolean getBasicSalary() {
+        return basicSalary;
+    }
+
+    public void setBasicSalary(Boolean basicSalary) {
+        this.basicSalary = basicSalary;
+    }
+
+    public Boolean getAllowance() {
+        return allowance;
+    }
+
+    public void setAllowance(Boolean allowance) {
+        this.allowance = allowance;
+    }
+
+    public Boolean getCtc() {
+        return ctc;
+    }
+
+    public void setCtc(Boolean ctc) {
+        this.ctc = ctc;
+    }
+
+    
+    
     
 }

@@ -24,15 +24,18 @@
     </script>
     <script>
         function onprintDiv() {
+           
             var month = document.getElementById('month1').value;
+           
             var year = document.getElementById('year').value;
+            
             var zydexlocationid = document.getElementById('zydexlocationid').value;
             var typeofemployee = document.getElementById('typeofemployee').value;
-            var employeesubid = document.getElementById('employeesubid').value;
-            var paymenttype = document.getElementById('paymenttype').value;
+//            var employeesubid = document.getElementById('employeesubid').value;
+//            var paymenttype = document.getElementById('paymenttype').value;
 
 
-            window.location = 'employeeSalaryProcess.htm?act=searchSalaryDetailSubmitPrint&month=' + month + '&year=' + year + '&zydexlocationid=' + zydexlocationid + '&typeofemployee=' + typeofemployee + '&employeesubid=' + employeesubid + '&paymenttype=' + paymenttype;
+            window.location = 'employeeSalaryProcess.htm?act=searchSalaryDetailSubmitPrint&month=' + month + '&year=' + year + '&zydexlocationid=' + zydexlocationid + '&typeofemployee=' + typeofemployee;
 
 //            window.location = 'employeeSalaryProcess.htm?act=searchSalaryDetailSubmitPrint&id=' + id;
         }

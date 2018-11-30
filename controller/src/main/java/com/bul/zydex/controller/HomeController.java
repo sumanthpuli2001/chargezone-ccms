@@ -288,14 +288,14 @@ public class HomeController extends HomeAbstract {
         HomeController homeController = new HomeController();
         ModelAndView mv = new ModelAndView();
         selectEmployee(request, response);
-        Map<Integer, List<Object>> empMap = new HashMap();
-        List<String> headerList = new ArrayList<String>();
-         List<?> policyMasterList = policyMasterService.read();
-        for (Object o1 : policyMasterList) {
-            PolicyMaster policyMaster = (PolicyMaster) o1;
-            headerList.add(policyMaster.getPolicyName());
-        }
-         request.setAttribute("headerList123", headerList);
+//        Map<Integer, List<Object>> empMap = new HashMap();
+//        List<String> headerList = new ArrayList<String>();
+//         List<?> policyMasterList = policyMasterService.read();
+//        for (Object o1 : policyMasterList) {
+//            PolicyMaster policyMaster = (PolicyMaster) o1;
+//            headerList.add(policyMaster.getPolicyName());
+//        }
+//         request.setAttribute("headerList123", headerList);
         mv.setViewName("Common/EmployeeBySearchCriteria");
         mv.getModelMap().put("homeController", homeController);
         return mv;
@@ -645,11 +645,21 @@ public class HomeController extends HomeAbstract {
             employeeInformation.setDateOfLeaving(Boolean.TRUE);
             headerList.add("Date Of Leaving");
         }
-        String allowance = request.getParameter("allowance");
-        if(null != allowance){
-            employeeInformation.setDateOfLeaving(Boolean.TRUE);
-            headerList.add(allowance);
+        String basic = request.getParameter("basicSalary");
+        if(null != basic){
+            employeeInformation.setBasicSalary(Boolean.TRUE);
+            headerList.add("Basic Salary");
         }
+//        String allowance = request.getParameter("allowance");
+//        if(null != allowance){
+//            employeeInformation.setAllowance(Boolean.TRUE);
+//            headerList.add(allowance);
+//        }
+//        String ctc = request.getParameter("ctc");
+//        if(null != ctc){
+//            employeeInformation.setCtc(Boolean.TRUE);
+//            headerList.add(ctc);
+//        }
         
         //input criteria from here
         String employeeCode = request.getParameter("employeeCode");
@@ -690,6 +700,7 @@ public class HomeController extends HomeAbstract {
         if(designationDropDown != null && !designationDropDown.equals("")){
             employeeInformation.setDesignationId(designationDropDown);
         }
+        
         
         List<?> employeeList = employeeMasterService.getEmployeeDetails(employeeInformation);
         

@@ -392,13 +392,16 @@
                                                                                                     <input type="checkbox"  class="checkbox1" value="true" name="basicSalary" />
                                                                                                     <label>Basic Salary </label>
                                                                                                 </div>
+                                                                                                <div class="col-sm-3">
+                                                                                                    <input type="checkbox"  class="checkbox1" value="true" name="allowance" />
+                                                                                                    <label>Allowance </label>
+                                                                                                </div>
+                                                                                                <div class="col-sm-3">
+                                                                                                    <input type="checkbox"  class="checkbox1" value="true" name="ctc" />
+                                                                                                    <label>CTC </label>
+                                                                                                </div>
 
-                                                                                                <c:forEach var="headerList" items="${headerList123}">
-                                                                                                    <div class="col-sm-3">
-                                                                                                        <input type="checkbox"  class="checkbox1" value="${headerList}" name="${headerList}" />
-                                                                                                        <label>${headerList}</label>
-                                                                                                    </div>
-                                                                                                </c:forEach>
+                                                                                                
 
 
                                                                                             </div>

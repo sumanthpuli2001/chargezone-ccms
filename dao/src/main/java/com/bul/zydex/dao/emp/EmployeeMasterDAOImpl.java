@@ -2318,17 +2318,17 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 }
             }
 
-            if (null != employeeInformation.getEmployeeCode() && !employeeInformation.getEmployeeCode().equals("")) {
-                condition += " and a.employeeId = '" + employeeInformation.getEmployeeCode() + "'";
-            } else {
-                condition += " and 1 = 1";
-            }
-
-            if (null != employeeInformation.getEmployeeMasterName() && !employeeInformation.getEmployeeMasterName().equals("")) {
-                condition += " and a.employeeName = '" + employeeInformation.getEmployeeMasterName() + "'";
-            } else {
-                condition += " and 1= 1 ";
-            }
+//            if (null != employeeInformation.getEmployeeCode() && !employeeInformation.getEmployeeCode().equals("")) {
+//                condition += " and a.employeeId = '" + employeeInformation.getEmployeeCode() + "'";
+//            } else {
+//                condition += " and 1 = 1";
+//            }
+//
+//            if (null != employeeInformation.getEmployeeMasterName() && !employeeInformation.getEmployeeMasterName().equals("")) {
+//                condition += " and a.employeeName = '" + employeeInformation.getEmployeeMasterName() + "'";
+//            } else {
+//                condition += " and 1= 1 ";
+//            }
 
             if (null != employeeInformation.getDepartmentId() && !employeeInformation.getDepartmentId().equals("")) {
                 condition += " and a.departmentMaster.id = " + employeeInformation.getDepartmentId();

@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Shift Rotation Create</title>
+        <title>Woff Create</title>
     </head>
 
 
@@ -26,10 +26,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Shift Assign Edit : </h1>
+            <h1>WO Edit : </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Shift Assign Edit</li>
+                <li class="active">Wo Edit</li>
             </ol>
         </section>
         <c:if test="${!empty suSUBccessMessage}">
@@ -66,7 +66,7 @@
                                                         <input type="text" name="dayNo" value="${dayNo}" class="form-control"  readonly="true">
                                                 </div>   
                                                   <div class="col-sm-6" >
-                                                      <label>Shift Rotation Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                      <label>WO Change Date:<span style="color: red;font-size: 12px;">*</span></label>
 
                                                             <div class="input-group date form_datetime"  name="shiftIdChange" id="shiftIdChange"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
                                                                 <form:input path="" name="rotationdate" id="rotationdate" class="form-control" size="16" value="" readonly="true" ></form:input>

@@ -3018,7 +3018,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         }
                     }
                 }
-                if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16")) {
+                if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
                     if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
                         if (!strDate.equals(enDate)) {
                             days--;
@@ -3026,39 +3026,39 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     }
                 }
 
-                if ((ZydexLocId == 1 || ZydexLocId == 6)) {
-                    if (dayOfWeek == 2 && c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                        if (!strDate.equals(enDate) && !eDateStatus.contains("FirstHalf")) {
-                            days = days - (float) 0.50;
-                        }
-                        if (strDate.equals(enDate) && !sDateStatus.contains("SecondHalf") && !sDateStatus.contains("FirstHalf")) {
-                            days = days - (float) 0.50;
-                        }
-//                          
-                    }
-                    if (dayOfWeek == 3 && c.get(Calendar.DAY_OF_WEEK) == 1) {
-                        if (!strDate.equals(enDate)) {
-                            days--;
-                        }
-                        if (!sDateStatus.contains("SecondHalf") && eDateStatus.contains("FirstHalf")) {
-                            days = days - (float) 0.50;
-                        }
-
-                    }
-                    if (dayOfWeek == 2 && c.get(Calendar.DAY_OF_WEEK) == 7) {
-                        if (coutnter != 0 && sDateStatus.contains("SecondHalf")) {
-                            if (!strDate.equals(enDate)) {
-                                days = days - (float) 0.50;
-                            }
-                        }
-                    }
-                    if (dayOfWeek == 2 && dayEnd == 7 && c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && eDateStatus.contains("FirstHalf")) {
-                        if (!strDate.equals(enDate)) {
-                            days = days + (float) 0.50;
-                        }
-                    }
-
-                }
+//                if ((ZydexLocId == 1 || ZydexLocId == 6)) {
+////                    if (dayOfWeek == 2 && c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+////                        if (!strDate.equals(enDate) && !eDateStatus.contains("FirstHalf")) {
+////                            days = days - (float) 0.50;
+////                        }
+////                        if (strDate.equals(enDate) && !sDateStatus.contains("SecondHalf") && !sDateStatus.contains("FirstHalf")) {
+////                            days = days - (float) 0.50;
+////                        }
+//////                          
+////                    }
+//                    if (dayOfWeek == 3 && c.get(Calendar.DAY_OF_WEEK) == 1) {
+//                        if (!strDate.equals(enDate)) {
+//                            days--;
+//                        }
+//                        if (!sDateStatus.contains("SecondHalf") && eDateStatus.contains("FirstHalf")) {
+//                            days = days - (float) 0.50;
+//                        }
+//
+//                    }
+//                    if (dayOfWeek == 2 && c.get(Calendar.DAY_OF_WEEK) == 7) {
+//                        if (coutnter != 0 && sDateStatus.contains("SecondHalf")) {
+//                            if (!strDate.equals(enDate)) {
+//                                days = days - (float) 0.50;
+//                            }
+//                        }
+//                    }
+//                    if (dayOfWeek == 2 && dayEnd == 7 && c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && eDateStatus.contains("FirstHalf")) {
+//                        if (!strDate.equals(enDate)) {
+//                            days = days + (float) 0.50;
+//                        }
+//                    }
+//
+//                }
 //                if (leavetype.equals("8")) {
 //                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
 //                        if (!strDate.equals(enDate)) {

@@ -1204,7 +1204,7 @@
                                                         <div class="col-sm-6">
                                                              
                                                              <label>Last Name:</label>
-                                                             <input tytpe="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
+                                                             <input type="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
                                                               
                                                            </div>
                                                         <div class="col-sm-6">
@@ -1345,6 +1345,18 @@
                                                         <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                            <label>Name of Previous company:</label>
+                                                            <input type="text" name="nameOfPreviousCompany" value="${list.nameOfPreviousCompany}" id="nameOfPreviousCompany" class="form-control">
+                                                            
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                            <label>Previous Company Location:</label>
+                                                            <input type="text" name="previousCompanyLocation" value="${list.previousCompanyLocation}" id="previousCompanyLocation" class="form-control">
+                                                            
+                                                            </div>
+                                                        </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <div class="col-sm-6">

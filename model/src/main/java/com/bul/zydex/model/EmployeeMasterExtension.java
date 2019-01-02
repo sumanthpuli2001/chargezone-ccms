@@ -35,12 +35,14 @@ public class EmployeeMasterExtension implements java.io.Serializable {
     private String electionCard;
     private String pfNoFlydocs;
     private String withdrawalDate;
+    private String nameOfPreviousCompany;
+    private String previousCompanyLocation;
     private EmployeeMaster employeeMaster;
 
     public EmployeeMasterExtension() {
     }
 
-    public EmployeeMasterExtension(String presentAddress2, String presentCity, String presentState, String presentPostalCode, String presentCountry, String permanentAddress2, String permanentCity, String permanentState, String permanentPostalCode, String permanentCountry, String religion, String disclosedHealthConcerns, String languagesKnown, String hobbies, Boolean childOneGender, Boolean childTwoGender, String flyDocsEmailId, String emergencyContactAddress, String RelationShip, String otherImpInfo, String nationality, String firstName, String middleName, String lastName, String countryOfIssue, String visaIssueCountry, String visaIssueDate, String visaValidTillDate, String drivingLicenceType, String electionCard, String pfNoFlydocs, String withdrawalDate, EmployeeMaster employeeMaster) {
+    public EmployeeMasterExtension(String presentAddress2, String presentCity, String presentState, String presentPostalCode, String presentCountry, String permanentAddress2, String permanentCity, String permanentState, String permanentPostalCode, String permanentCountry, String religion, String disclosedHealthConcerns, String languagesKnown, String hobbies, Boolean childOneGender, Boolean childTwoGender, String flyDocsEmailId, String emergencyContactAddress, String RelationShip, String otherImpInfo, String nationality, String firstName, String middleName, String lastName, String countryOfIssue, String visaIssueCountry, String visaIssueDate, String visaValidTillDate, String drivingLicenceType, String electionCard, String pfNoFlydocs, String withdrawalDate, String nameOfPreviousCompany, String previousCompanyLocation, EmployeeMaster employeeMaster) {
         this.presentAddress2 = presentAddress2;
         this.presentCity = presentCity;
         this.presentState = presentState;
@@ -73,8 +75,12 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.electionCard = electionCard;
         this.pfNoFlydocs = pfNoFlydocs;
         this.withdrawalDate = withdrawalDate;
+        this.nameOfPreviousCompany = nameOfPreviousCompany;
+        this.previousCompanyLocation = previousCompanyLocation;
         this.employeeMaster = employeeMaster;
     }
+
+    
 
     public int getId() {
         return id;
@@ -339,6 +345,25 @@ public class EmployeeMasterExtension implements java.io.Serializable {
     public void setWithdrawalDate(String withdrawalDate) {
         this.withdrawalDate = withdrawalDate;
     }
+
+    public String getNameOfPreviousCompany() {
+        return nameOfPreviousCompany;
+    }
+
+    public void setNameOfPreviousCompany(String nameOfPreviousCompany) {
+        this.nameOfPreviousCompany = nameOfPreviousCompany;
+    }
+
+    public String getPreviousCompanyLocation() {
+        return previousCompanyLocation;
+    }
+
+    public void setPreviousCompanyLocation(String previousCompanyLocation) {
+        this.previousCompanyLocation = previousCompanyLocation;
+    }
+    
+    
+    
 
     public EmployeeMaster getEmployeeMaster() {
         return employeeMaster;

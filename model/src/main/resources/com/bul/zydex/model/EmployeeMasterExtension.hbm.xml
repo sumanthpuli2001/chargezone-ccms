@@ -106,6 +106,12 @@
         <property name="withdrawalDate" type="string">
             <column name="pf_withdrawal_date" />
         </property>
+        <property name="nameOfPreviousCompany" type="string">
+            <column name="name_of_previous_company" />
+        </property>
+        <property name="previousCompanyLocation" type="string">
+            <column name="previous_company_location" />
+        </property>
         <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
             <column name="employee_id" />
         </many-to-one>

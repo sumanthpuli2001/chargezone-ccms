@@ -174,6 +174,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
          String electionCard=request.getParameter("electionCard");
          String pfNoFlydocs=request.getParameter("pfNoFlydocs");
          String withdrawalDate=request.getParameter("withdrawalDate");
+         String nameOfPreviousCompany=request.getParameter("nameOfPreviousCompany");
+         String previousCompanyLocation=request.getParameter("previousCompanyLocation");
          
         
         
@@ -388,6 +390,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 employeeMasterExtension.setElectionCard(electionCard);
                 employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
                 employeeMasterExtension.setWithdrawalDate(withdrawalDate);
+                employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
+                employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
                 employeeMasterExtension.setEmployeeMaster(employeeMaster);
                 employeeMasterServiceExtension.create(employeeMasterExtension);
             
@@ -1019,6 +1023,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
          String electionCard=request.getParameter("electionCard");
          String pfNoFlydocs=request.getParameter("pfNoFlydocs");
          String withdrawalDate=request.getParameter("withdrawalDate");
+         String nameOfPreviousCompany=request.getParameter("nameOfPreviousCompany");
+         String previousCompanyLocation=request.getParameter("previousCompanyLocation");        
+         
         
         
         bind(request, employeeMaster);
@@ -1162,6 +1169,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 employeeMasterExtension.setElectionCard(electionCard);
                 employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
                 employeeMasterExtension.setWithdrawalDate(withdrawalDate);
+                employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
+                employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
                 employeeMasterExtension.setEmployeeMaster(employeeMaster);
                 employeeMasterServiceExtension.update(employeeMasterExtension);
         
@@ -2743,18 +2752,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         ModelAndView mv = new ModelAndView();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartRequest.getFile("file1");
-        if (multipartFile.getSize() > 0) {
-            InputStream file = multipartFile.getInputStream();
-            Workbook workbook = WorkbookFactory.create(file);
-            Sheet sheet = workbook.getSheetAt(0);
-            
-            for (Row row : sheet) {
-                if (row.getRowNum() != 0) {
-                    Row firstHeaderRow = sheet.getRow(0);
-                    int count = firstHeaderRow.getPhysicalNumberOfCells();
-                }
-            }
-        }
+        
+        
         return mv;
     }
     

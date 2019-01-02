@@ -1156,7 +1156,7 @@
                                                              <div class="col-sm-6">
                                                              
                                                              <label>Last Name:</label>
-                                                             <input tytpe="text" name="lastName" id="lastName" placeholder="Last Name as per Passport" class="form-control">
+                                                             <input type="text" name="lastName" id="lastName" placeholder="Last Name as per Passport" class="form-control">
                                                               
                                                            </div>
                                                              <div class="col-sm-6">
@@ -1300,13 +1300,13 @@
                                                         <div class="form-group">
                                                             <div class="col-sm-6">
                                                             <label>Name of Previous company:</label>
-                                                            <form:input path="" id="" class="form-control"></form:input>
-                                                            <form:errors path="" cssClass="errorDiv"></form:errors>
+                                                            <input type="text" name="nameOfPreviousCompany" id="nameOfPreviousCompany" class="form-control">
+                                                            
                                                             </div>
                                                             <div class="col-sm-6">
                                                             <label>Previous Company Location:</label>
-                                                            <form:input path="" id="" class="form-control"></form:input>
-                                                            <form:errors path="" cssClass="errorDiv"></form:errors>
+                                                            <input type="text" name="previousCompanyLocation" id="previousCompanyLocation" class="form-control">
+                                                            
                                                             </div>
                                                         </div>
                                                     <div class="form-group">

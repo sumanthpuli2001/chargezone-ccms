@@ -97,7 +97,7 @@
                         </c:if>
                     </c:if>
                 </div>
-                
+
                 <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     <c:if test="${feedbackStatus eq true}">
                         <c:if test="${attendance eq true}">
@@ -105,6 +105,13 @@
                         </c:if>
                     </c:if>
                 </div>
+<!--                <div class ="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                    <%--<c:if test="${feedbackStatus eq true}">--%>
+                        <%--<c:if test="${attendance eq true}">--%>
+                            <button type="button" class="btn btn-default" id="btnType1" onclick="window.location = 'trainerLogin.htm?act=goToAns&id=${list[0]}&eventdate=${eventdate}&trainingMasterId=${trainingMasterId}'" name="btnType" value="AssessMent">Paper Submit</button>
+                        <%--</c:if>--%>
+                    <%--</c:if>--%>
+                </div>-->
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                     <c:if test="${finishStatus eq 0}">
                         <c:if test="${attendance eq true}">
@@ -127,8 +134,11 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <label>Training Title : </label>&nbsp;&nbsp;${trainingMaster.trainingTitle}
                                 </div>
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                     <label>Training Requester : </label>&nbsp;&nbsp;${trainingMaster.trainingOwner}
+                                </div>
+                                <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <label>Department : </label>&nbsp;&nbsp;${trainingMaster.departmentMaster.departmentName}
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -202,6 +212,7 @@
                                                 <th style="width: 50px;">Training</th>
                                                 <th style="width: 50px;">Attendance</th>
                                                 <th style="width: 50px;">Status</th>
+                                                <th style="width: 50px;"></th>
 
                                             </tr>
                                         </thead>
@@ -251,6 +262,12 @@
                                             <c:if test="${empty list[3] }">
                                                 <td>Assessment Not Submitted</td>
                                             </c:if>
+                                            <c:if test="${list[3] eq 1 || list[3] eq 0 }">
+                                                <td>
+                                                      <button type="button" class="btn btn-default" id="btnType1" onclick="window.location = 'trainerLogin.htm?act=goToAnsView&id=${list[0]}&eventdate=${eventdate}&trainingMasterId=${trainingMasterId}'" name="btnType" value="AssessMent">View Result</button>
+                                                </td>
+                                            </c:if>
+                                               
 
 <!--<td><a type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${list[0]},${trainingMasterId},${eventdate})" name="btnType" value="AssessMent">Training Assessment</a></td>-->
                                             <!--</td>-->
@@ -281,24 +298,24 @@
             //            alert('hello '+id);
             window.location = 'trainerLogin.htm?act=editClick&id=' + id;
         }
-        //        function deleteCheck11() {
-        ////            alert("Hi");
-        //            var checkboxes = "";
-        //            
-        //            checkboxes = document.getElementsByName('checkId');
-        //            for(int i=0;i<checkboxes.lengthi++)
-        //            {
-        //                alert(checkboxes[i]);
-        //            }
-        //            for (var i = 0, n = checkboxes.length; i < n; i++) {
-        //                if (checkboxes[i].checked) {
-        //                    return true;
-        //                }
-        //            }
-        //            alert("Please, Select one or more record(s).");
-        //            
-        //            return false;
-        //        }
+//                function deleteCheck11() {
+//        //            alert("Hi");
+//                    var checkboxes = "";
+//                    
+//                    checkboxes = document.getElementsByName('checkId');
+//                    for(int i=0;i<checkboxes.lengthi++)
+//                    {
+////                        alert(checkboxes[i]);
+//                    }
+//                    for (var i = 0, n = checkboxes.length; i < n; i++) {
+//                        if (checkboxes[i].checked) {
+//                            return true;
+//                        }
+//                    }
+//                    alert("Please, Select one or more record(s).");
+//                    
+//                    return false;
+//                }
 
         //        $("#checkId").live("click", function () {
         //        $("input:checkbox:unchecked").each(function () {

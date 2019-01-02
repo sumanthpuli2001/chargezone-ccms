@@ -839,20 +839,143 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                    <c:forEach var="list" items="${employeeMasterExtensionList}">
+                                                        
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Present Address 1:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:textarea path="presentAddress" class="form-control"></form:textarea>
                                                         <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
                                                         </div>
-
                                                         <div class="col-sm-6">
-                                                            <label>Permanent Address<span style="color: red;font-size: 12px;">*</span></label>
+                                                            
+                                                             <label>Present Address 2:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                            <textarea name="presentAddress2" id="presentAddress2" class="form-control">${list.presentAddress2}</textarea>
+                                                            
+                                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                           <div class="col-sm-6">
+                                                               
+                                                               <label>Present City:</label>
+                                                               <input type="text" name="presentCity" id="presentCity" value="${list.presentCity}" class="form-control">
+                                                               
+                                                           </div>
+                                                           <div class="col-sm-6">
+                                                               
+                                                               <label>Present State:</label>
+                                                               <input type="text" name="presentState" id="presentState" value="${list.presentState}" class="form-control">
+                                                              
+                                                           </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                           <div class="col-sm-6">
+                                                               
+                                                               <label>Present Postal Code:</label>
+                                                               <input type="text" name="presentPostalCode" id="presentPostalCode" value="${list.presentPostalCode}" class="form-control">
+                                                          
+                                                           </div>
+                                                           <div class="col-sm-6">
+                                                              
+                                                               <label>Present Country:</label>
+                                                              <input type="text" name="presentCountry" id="presentCountry" value="${list.presentCountry}" class="form-control">
+                                                             
+                                                           </div>
+                                                        </div>
+                                                        
+                                                <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Permanent Address 1:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:textarea path="permanentAddress" class="form-control"></form:textarea>
                                                         <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                        <div class="col-sm-6">
+                                                                
+                                                            <label>Permanent Address 2:<span style="color: red;font-size: 12px;">*</span></label>
+<!--                                                            <input type="textarea" name="permanentAddress2" id="permanentAddress2" class="form-control">-->
+                                                              <textarea name="permanentAddress2" id="permanentAddress2"  class="form-control">${list.permanentAddress2}</textarea>
+                                                               
+                                                        </div>
+                                                </div>
+                                                <div class="form-group">
+                                                           <div class="col-sm-6">
+                                                              
+                                                            <label>Permanent City:</label>
+                                                            <input type="text" name="permanentCity" id="permanentCity" value="${list.permanentCity}" class="form-control">
+                                                           
+                                                           </div>
+                                                           <div class="col-sm-6">
+                                                              
+                                                            <label>Permanent State:</label>
+                                                            <input type="text" name="permanentState" id="permanentState" value="${list.permanentState}" class="form-control">
+                                                           </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                           <div class="col-sm-6">
+                                                              
+                                                            <label>Permanent Postal Code:</label>
+                                                            <input type="text" name="permanentPostalCode" id="permanentPostalCode" value="${list.permanentState}" class="form-control">
+                                                          
+                                                           </div>
+                                                           <div class="col-sm-6">
+                                                              
+                                                            <label>Permanent Country:</label>
+                                                            <input type="text" name="permanentCountry" id="permanentCountry" value="${list.permanentCountry}" class="form-control">
+                                                           
+                                                           </div>
+                                                        </div>
+                                                        <div class="form-group">
+<!--                                                        <div class="col-sm-6">
+                                                            <label>City:</label>
+                                                   <%--     <form:input path="cityOfEmployee" class="form-control"></form:input>--%>
+                                                        </div>-->
+
+                                                        <div class="col-sm-6">
+                                                            <label>Blood Groups:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                        <form:select path="bloodGroups" id="bloodGroups" class="form-control" >
+                                                            <option value="">--Select--</option>
+                                                            <form:option value="A +ve">A +ve</form:option>
+                                                            <form:option value="A -ve">A -ve</form:option>
+                                                            <form:option value="B +ve">B +ve</form:option>
+                                                            <form:option value="B -ve">B -ve</form:option>
+                                                            <form:option value="AB +ve">AB +ve</form:option>
+                                                            <form:option value="AB -ve">AB -ve</form:option>
+                                                            <form:option value="O +ve">O +ve</form:option>
+                                                            <form:option value="O -ve">O -ve</form:option>
+                                                        </form:select>
+                                                        <%--<form:hidden path="bloodGroups"/>--%>
                                                     </div>
+                                                    <div class="col-sm-6">
+                                                     
+                                                            <label>Religion:</label>
+                                                            <input type="text" name="religion" id="religion" value="${list.religion}" class="form-control">
+                                                       
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                           
+                                                            <label>Disclosed Health Concerns:</label>
+                                                            <input type="text" name="disclosedHealthConcerns" id="disclosedHealthConcerns" value="${list.disclosedHealthConcerns}" class="form-control">
+                                                           
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                          
+                                                            <label>Languages known:</label>
+                                                            <input type="text" name="languagesKnown" id="languagesKnown" value="${list.languagesKnown}" class="form-control">
+                                                           
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                
+                                                            <label>Hobbies:</label>
+                                                            <input name="hobbies" id="hobbies"  value="${list.hobbies}" class="form-control">
+                                                             
+                                                            </div>
+                                                        </div>
 
                                                     <div class="form-group" id="hideInfo1" style="display: none;">
                                                         <div class="col-sm-6">
@@ -876,6 +999,22 @@
                                                             <form:input path="child1" class="form-control"></form:input>
                                                             </div>
                                                             <div class="col-sm-6">
+                                                               
+                                                               <label>Child1's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                <c:if test="${list.childOneGender eq 'false'}">
+                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
+                                                                    </c:if>
+                                                                    <c:if test="${list.childOneGender eq 'true'}">
+                                                                         <input type="radio" name="childOneGender"  id="childOneGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="true"/>Female
+                                                                    </c:if>
+                                                               
+                                                               
+                                                            </div>
+                                                        </div>
+                                                            <div class="form-group">
+                                                            <div class="col-sm-6">
                                                                 <label>Child1's Date Of Birth:</label>
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
@@ -884,11 +1023,31 @@
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label>Child Name2:</label>
                                                             <form:input path="child2" class="form-control"></form:input>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                            <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                
+                                                               <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                    <c:if test="${list.childTwoGender eq 'false'}">
+                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
+                                                                    </c:if>
+                                                                    <c:if test="${list.childTwoGender eq 'true'}">
+                                                                         <input type="radio" name="childTwoGender"  id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="true"/>Female
+                                                                    </c:if>
+                                                            
+                                                            
+                                                                
+                                                         
+                                                               
+                                                               
+                                                                
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label>Child2's Date Of Birth:</label>
@@ -901,35 +1060,20 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>City:</label>
-                                                        <form:input path="cityOfEmployee" class="form-control"></form:input>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label>Blood Groups:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                        <form:select path="bloodGroups" id="bloodGroups" class="form-control" >
-                                                            <option value="">--Select--</option>
-                                                            <form:option value="A +ve">A +ve</form:option>
-                                                            <form:option value="A -ve">A -ve</form:option>
-                                                            <form:option value="B +ve">B +ve</form:option>
-                                                            <form:option value="B -ve">B -ve</form:option>
-                                                            <form:option value="AB +ve">AB +ve</form:option>
-                                                            <form:option value="AB -ve">AB -ve</form:option>
-                                                            <form:option value="O +ve">O +ve</form:option>
-                                                            <form:option value="O -ve">O -ve</form:option>
-                                                        </form:select>
-                                                        <%--<form:hidden path="bloodGroups"/>--%>
-                                                    </div>
-                                                </div>
-
+                                                    
+                                                
 
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
                                 </div>
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    
+                                                                    
                                 <!--pesonal detail complete-->
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
@@ -944,29 +1088,62 @@
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label >Email Id:</label>
+                                                        <label >Personal Email Id:</label>
                                                         <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
                                                         <form:errors path="emailAddress" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                        <div class="col-sm-6">
+                                                            
+                                                            <label>FLYdocs Email Id:</label>
+                                                        <input type="text" name="flyDocsEmailId" id="flyDocsEmailId" value="${list.flyDocsEmailId}" class="form-control">
+
+                                                        
+                                                        </div>
+                                                </div>
+                                                        <div class="form-group">
 
                                                         <div class="col-sm-6">
                                                             <label >Contact No.1:</label>
                                                         <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
+                                                    
+                                                    
                                                         <div class="col-sm-6">
                                                             <label >Emergency Contact Person:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="emergencyContactPerson" class="form-control"></form:input>
                                                         <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                        </div>
+                                                        <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Emergency Contact No:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
+                                                        <div class="col-sm-6">
+                                                            
+                                                            <label>Emergency Contact Address:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="emergencyContactAddress" id="emergencyContactAddress" value="${list.emergencyContactAddress}"  maxlength="14" class="form-control">
+                                                        
+                                                        </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            
+                                                            <div class="col-sm-6">
+                                                                
+                                                            <label>Relationship:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="RelationShip" value="${list.relationShip}" id="RelationShip" class="form-control"/>
+                                                           
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                            
+                                                            <label>Other important information relating to your emergency contact:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="otherImpInfo" id="otherImpInfo" value="${list.otherImpInfo}" class="form-control"/>
+                                                            
+                                                            </div> 
+                                                        </div>
+                                                    
                                                 </div><!-- /.col -->
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
@@ -990,13 +1167,46 @@
                                                         <form:input path="panCard" style="text-transform:uppercase" id="pancard" class="form-control" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
                                                         <form:errors path="panCard" cssClass="errorDiv"></form:errors>
                                                         </div>
-
+                                                        <div class="col-sm-6">
+                                                            
+                                                            <label>Nationality:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="text" name="nationality" id="nationality"  style="text-transform:uppercase" value="${list.nationality}" class="form-control">
+                                                       
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label >Passport No.:</label>
                                                         <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
                                                         </div>
+                                                        <div class="col-sm-6">
+                                                            
+                                                            <label>Country Of Issue:</label>
+                                                        <input type="text" name="countryOfIssue" value="${list.countryOfIssue}" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
+                                                        
+                                                          </div>
                                                     </div>
                                                     <div class="form-group">
+                                                           <div class="col-sm-6">
+                                                             
+                                                             <label>First Name:</label>
+                                                             <input type="text" name="firstName" value="${list.firstName}" id="firstName" placeholder="First Name as per Passport" class="form-control">
+                                                               
+                                                        </div>
+                                                           <div class="col-sm-6">
+                                                              
+                                                             <label>Middle Name:</label>
+                                                             <input type="text" name="middleName" value="${list.middleName}" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
+                                                             
+                                                        </div>
+                                                         </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                             
+                                                             <label>Last Name:</label>
+                                                             <input tytpe="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
+                                                              
+                                                           </div>
                                                         <div class="col-sm-6">
                                                             <label>Passport Issue Date:</label>
                                                             <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -1006,6 +1216,8 @@
                                                             </div>
                                                         <form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                        </div>
+                                                        <div class="form-group">
 
                                                         <div class=" col-sm-6">
                                                             <label>Passport Expiry Date:</label>
@@ -1016,6 +1228,70 @@
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                         </div>
+                                                        <div class="col-sm-6">
+                                                            
+                                                            <label>Visa Issue Country:</label>
+                                                            <input name="visaIssueCountry" id="visaIssueCountry" value="${list.visaIssueCountry}" class="form-control">
+                                                        
+                                                            </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            
+                                                            <label>Visa Issue Date:</label>
+                                                            <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                
+                                                            <input type="text" name="visaIssueDate" value="${list.visaIssueDate}" id="visaIssueDate"  size="16" readonly="true" class="form-control">
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                               
+                                                        </div>
+                                                        
+                                                        </div>
+
+                                                        <div class=" col-sm-6">
+                                                            
+                                                            <label>Visa Valid till Date:</label>
+                                                            <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                            <input type="text" name="visaValidTillDate" value="${list.visaValidTillDate}" id="visaValidTillDate" class="form-control" size="16" readonly="true">
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            </div>
+                                                           
+                                                        </div>
+                                                    </div>
+                                                     <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            
+                                                            <label >Driving Licence No :</label>
+                                                        
+                                                            <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>
+                                                            
+                                                        
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            
+                                                            <label>Driving Licence Type:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <select name="drivingLicenceType" id="drivingLicenceType" class="form-control">
+                                                        <c:if test="${empty list.drivingLicenceType}">
+                                                            <option value="">-- Select --</option>
+                                                            <option value="2Wheeler">2Wheeler</option>
+                                                            <option value="4Wheeler">4Wheeler</option>
+                                                            <option value="both">Both</option>
+                                                            
+                                                        </c:if>
+                                                        <c:if test="${!empty list.drivingLicenceType}">
+                                                            
+                                                            <option <c:choose><c:when test="${list.drivingLicenceType eq '2Wheeler'}"> value="2Wheeler" selected="true"</c:when><c:otherwise>value="2Wheeler"</c:otherwise></c:choose>>2 Wheeler</option>
+                                                            <option <c:choose><c:when test="${list.drivingLicenceType eq '4Wheeler'}"> value="4Wheeler" selected="true"</c:when><c:otherwise>value="4Wheeler"</c:otherwise></c:choose>>4 Wheeler</option>
+                                                            <option <c:choose><c:when test="${list.drivingLicenceType eq 'both'}"> value="both" selected="true"</c:when><c:otherwise>value="both"</c:otherwise></c:choose>>Both</option>
+                                                        </c:if>
+                                                            
+                                                        </select>
+                                                        
+                                                       
+                                                        </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
@@ -1024,13 +1300,19 @@
                                                         <form:errors path="adharCard" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
+                                                       
+                                                        <label>Election Card:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="electionCard" value="${list.electionCard}" id="electionCard" class="form-control">
+                                                        
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
                                                             <label>Any Other Government Document Photo Id Proof:</label>
                                                             <div class="col-sm-6">
                                                             <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name"></form:input>
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                            <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>
-                                                            </div>
+                                                            
                                                         </div>
                                                     </div><!-- /.col -->
                                                 </div><!-- /.col -->
@@ -1976,10 +2258,28 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>PF No.:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>PF No(Previous):<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="pfNo" id="pfNo" class="form-control"></form:input>
                                                             <%--<form:errors path="pfNo" cssClass="errorDiv"></form:errors>--%>
                                                     </div> 
+                                                    <div class="col-sm-6">
+                                                        
+                                                        <label>PF No(FLYdocs):<span style="color: red;font-size: 12px;"></span></label>
+                                                        <input type="text" name="pfNoFlydocs" value="${list.pfNoFlydocs}" id="pfNoFlydocs" class="form-control">
+                                                               
+                                                    </div>
+                                                </div>   
+                                                    <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                            
+                                                            <label>PF Withdrawal Date:</label>
+                                                            <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                            <input type="text" name="withdrawalDate" value="${list.withdrawalDate}" id="withdrawalDate" size="16" readonly="true" class="form-control">
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            </div>
+                                                        
+                                                        </div>
 
                                                     <div class="col-sm-6">
                                                         <label>UAN No.:<span style="color: red;font-size: 12px;"></span></label>
@@ -1987,7 +2287,7 @@
                                                             <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
                                                     </div>  
                                                 </div>  
-
+</c:forEach>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->

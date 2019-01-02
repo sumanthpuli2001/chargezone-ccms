@@ -79,10 +79,18 @@
         </script>
     </head>
     <body style="width:95%;">
+        <section class="content-header" >
+            <table>
+
+                <td style="text-align: left;">
+                    <span><img src="StorageYard/Images/logo.png"  style="width: 150px;float: left;margin-top: 5%;margin-left: 5%;"/></span> 
+                </td>
+            </table>
+        </section>
         <section class="content-header" style='margin-top:5%; margin-left:5%;'>
-            <button type="button" class="btn btn-primary" style="float: left; width: 170px;" onclick="ApplayClick(${vacancyMaster.id});"><i class="fa fa-check"></i>&nbsp&nbsp&nbsp;Apply For Job</button>
+            <button type="button" class="btn btn-primary" style="float: left; width: 170px;" onclick="ApplayClick(${vacancyMaster.id});"><i class="fa fa-check"></i>&nbsp&nbsp&nbsp;Next</button>
             <button type="button" class="btn btn-primary" style="float: right; width: 120px;" onclick="window.location = 'vacancy.htm?act=backButton'"><i class="fa fa-backward"></i>&nbsp&nbsp&nbsp;Back</button>
-            <h1>View Vacancy Detail</h1>
+            <center><h1>View Vacancy Detail</h1> </center>
         </section>
         <br>  </br>
         <br></br>
@@ -90,7 +98,7 @@
                    commandName="vacancyMaster" action="vacancy.htm?act=vacancySubmitCreate">
             <section class="content">
                 <div class="row">
-                    <div class="col-md-12 col-sm-12" style="text-align: left; margin-left: 15%; width: 85%;">
+                    <div class="col-md-12 col-sm-12" style="text-align: left; margin-left: 15%; width: 100%;">
                         <p style='font-size:19px; font-weight:600; text-align: left;'>SPC Lifesciencess Pvt.Ltd</p>
                         <div class='col-md-4 col-sm-4 col-xs-12'>
 
@@ -154,16 +162,16 @@
                                 <label style=" font-weight: normal; font-size:14px; color: grey;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${vacancyMaster.salaryRange}</label>
                             </p>
                         </div>
-                        
+
                     </div>
-                            <div class="col-md-12 col-sm-12" style="text-align: left; margin-left: 15%; width: 85%;">
-                                 <div class="col-md-8 col-sm-12 col-xs-12" style="width: 65% !important;">
+                    <div class="col-md-12 col-sm-12" style="text-align: left; margin-left: 15%; width: 85%;">
+                        <div class="col-md-8 col-sm-12 col-xs-12" style="width: 65% !important;">
                             <p>
                                 <label style="font-weight: 500;">Description:</label>
                                 <label style='font-weight:normal;font-size:14px; color: grey;'>${vacancyMaster.description}</label>
                             </p>
                         </div>
-                            </div>
+                    </div>
                 </div>
 
             </section>

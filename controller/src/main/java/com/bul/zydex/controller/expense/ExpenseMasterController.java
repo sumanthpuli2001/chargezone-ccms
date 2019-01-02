@@ -818,6 +818,7 @@ public class ExpenseMasterController extends ExpenseMasterAbstract {
             if (reportingLevel != null) {
 
                 ListIterator it = reportingLevel.listIterator();
+              
                 while (it.hasNext()) {
                     Object[] next = (Object[]) it.next();
                     String expenseId = "" + next[0];

@@ -11,13 +11,15 @@ public class PolicyMaster implements java.io.Serializable {
 
     private Integer id;
     private String policyName;
+    private String countstatus;
     private Set employeePolicyDetail = new HashSet(0);
 
     public PolicyMaster() {
     }
 
-    public PolicyMaster(String policyName, Set employeePolicyDetail) {
+    public PolicyMaster(String policyName, Set employeePolicyDetail,String countstatus) {
         this.policyName = policyName;
+        this.countstatus = countstatus;
     }
 
     public Integer getId() {
@@ -43,6 +45,15 @@ public class PolicyMaster implements java.io.Serializable {
     public void setEmployeePolicyDetail(Set employeePolicyDetail) {
         this.employeePolicyDetail = employeePolicyDetail;
     }
+
+    public String getCountstatus() {
+        return countstatus;
+    }
+
+    public void setCountstatus(String countstatus) {
+        this.countstatus = countstatus;
+    }
+    
 
     @Override
     public String toString() {

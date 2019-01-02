@@ -53,8 +53,11 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <label>Training Title : </label>&nbsp;&nbsp;${trainingMaster.trainingTitle}
                                         </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <label>Training Requester : </label>&nbsp;&nbsp;${trainingMaster.trainingOwner}
+                                        </div>
+                                        <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <label>Department : </label>&nbsp;&nbsp;${trainingMaster.departmentMaster.departmentName}
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

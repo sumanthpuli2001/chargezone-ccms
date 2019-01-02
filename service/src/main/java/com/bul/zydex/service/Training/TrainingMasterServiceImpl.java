@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.bul.zydex.service.Training;
 
 import com.bul.zydex.dao.Training.TrainingMasterDAO;
@@ -34,27 +33,31 @@ public class TrainingMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
 
     @Override
     public List<?> readTrainingMasterList() {
-      return trainingMasterDAO.readTrainingMasterList();
+        return trainingMasterDAO.readTrainingMasterList();
     }
+
     public List<?> fetchtrainingMaster(String date) {
-      return  trainingMasterDAO.fetchtrainingMaster(date);
+        return trainingMasterDAO.fetchtrainingMaster(date);
     }
 
     @Override
     public List<?> fetchtTrainingforFeedback(int traininigId, int user) {
-        return  trainingMasterDAO.fetchtTrainingforFeedback(traininigId, user);
+        return trainingMasterDAO.fetchtTrainingforFeedback(traininigId, user);
     }
 
     @Override
     public List<?> fetchtTrainingforFeedback1(int traininigId, int user) {
-         return  trainingMasterDAO.fetchtTrainingforFeedback1(traininigId, user);
+        return trainingMasterDAO.fetchtTrainingforFeedback1(traininigId, user);
     }
 
     @Override
     public List<?> fetchtTrainingforFeedback2(int traininigId) {
-        return  trainingMasterDAO.fetchtTrainingforFeedback2(traininigId);
+        return trainingMasterDAO.fetchtTrainingforFeedback2(traininigId);
     }
 
+    @Override
+    public List<?> readTrainingMasterSummaryList() {
+        return trainingMasterDAO.readTrainingMasterSummaryList();
+    }
 
-   
 }

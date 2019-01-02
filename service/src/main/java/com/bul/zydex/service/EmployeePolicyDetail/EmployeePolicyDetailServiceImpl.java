@@ -72,6 +72,11 @@ public class EmployeePolicyDetailServiceImpl<T> extends GenericsServiceImpl<T> i
        return employeePolicyDetailDAO.readForMasterAdditionalAmount(empTypeId, policyMasterId);
     }
 
+    @Override
+    public void deleteByemployeeId(int id) {
+         employeePolicyDetailDAO.deleteByemployeeId(id);
+    }
+
   
     
 }

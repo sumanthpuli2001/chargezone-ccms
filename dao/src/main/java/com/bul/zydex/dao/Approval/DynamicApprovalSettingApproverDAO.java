@@ -20,5 +20,5 @@ public interface DynamicApprovalSettingApproverDAO<T> extends GenericsDAO<T> {
 
     public List<?> getByApproverId(int ApproverId);
 
-    public List<?> readByzyLocIdCompnameAndDesId(int zlocId, String ComName, int desId, String module);
+    public List<?> readByzyLocIdCompnameAndDesId(int desId, String module);
 }

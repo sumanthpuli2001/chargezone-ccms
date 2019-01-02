@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeFeedback;
@@ -252,9 +253,11 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         TrainingType trainingType = trainingTypeService.readById(trainingMaster1.getTrainingType().getId());
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster1.getTrainingSubType().getId());
         Trainer trainer = trainerService.readById(trainingMaster1.getTrainer().getId());
+        DepartmentMaster departmentMaster = departmentMasterService.readById(trainingMaster1.getDepartmentMaster().getId());
         trainingMaster1.setTrainingType(trainingType);
         trainingMaster1.setTrainingSubType(trainingSubType);
         trainingMaster1.setTrainer(trainer);
+        trainingMaster1.setDepartmentMaster(departmentMaster);
         List<?> trainingFeedbackList = trainingMasterService.fetchtTrainingforFeedback2(trainingMaster1.getId());
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -368,9 +371,11 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         TrainingType trainingType = trainingTypeService.readById(trainingMaster1.getTrainingType().getId());
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster1.getTrainingSubType().getId());
         Trainer trainer = trainerService.readById(trainingMaster1.getTrainer().getId());
+        DepartmentMaster departmentMaster = departmentMasterService.readById(trainingMaster1.getDepartmentMaster().getId());
         trainingMaster1.setTrainingType(trainingType);
         trainingMaster1.setTrainingSubType(trainingSubType);
         trainingMaster1.setTrainer(trainer);
+        trainingMaster1.setDepartmentMaster(departmentMaster);
         List<?> trainingFeedbackList = trainingMasterService.fetchtTrainingforFeedback2(trainingMaster1.getId());
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -751,4 +756,108 @@ public class TrainerLogInController extends TrainerLogInAbstract {
         mv.setViewName("Trainer/TrainingQuestionAnsCheck");
         return mv;
     }
+
+    public ModelAndView goToAnsView(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+        int empId = Integer.parseInt(request.getParameter("id"));
+        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
+        String eventdate = request.getParameter("eventdate");
+        List finalList1 = new LinkedList();
+//        TrainingAssessment trainingAssessment = new TrainingAssessment();
+//        Trainer trnMaster = (Trainer) session.getAttribute("trainerMaster");
+//        int trainingMasterId = Integer.parseInt(request.getParameter("trainingMasterId"));
+        List<?> OnList = trainingAssessmentService.readTrainingAssementList(trainingMasterId, empId);
+        Double passingPercentage = 0.0;
+        Double totalMarks = 0.0;
+        int assessmentId = 0;
+
+        if (!OnList.isEmpty()) {
+            for (Object o2 : OnList) {
+                Object str1[] = (Object[]) o2;
+                passingPercentage = (Double) str1[4];
+                totalMarks = (Double) str1[10];
+                assessmentId = (int) str1[0];
+
+            }
+        }
+
+        List<?> QuestionAnswerListIds = trainingQuestionAnswerSubmitService.readByTrainigAssessmentREsultViewId(assessmentId);
+        List listOfFinalList = new ArrayList();
+        for (Object o1 : QuestionAnswerListIds) {
+            Object str[] = (Object[]) o1;
+            List finalList = new ArrayList();
+            Integer qasid = (Integer) str[0];
+            Integer questionLibraryID = (Integer) str[2];
+            Integer selectedAns = (Integer) str[3];
+            Integer correctAns = (Integer) str[4];
+            String Description = (String) str[5];
+            Integer marks = (Integer) str[6];
+            Integer ansStatus = (Integer) str[8];
+            Double obtainMarks = (Double) str[9];
+            QuestionLibrary questionLibrary = new QuestionLibrary();
+            questionLibrary = questionLibraryService.readById(questionLibraryID);
+            Integer questionLibraryid = questionLibrary.getId();
+            String question = questionLibrary.getQuestion();
+            finalList.add(question);                // 0
+            Integer type = questionLibrary.getType();
+            finalList.add(type);                    // 1
+            finalList.add(questionLibraryid);       // 2
+            finalList.add(selectedAns);     //3
+            finalList.add(correctAns);      //4
+            finalList.add(marks);      //5
+            finalList.add(passingPercentage);  //6
+            finalList.add(totalMarks);  //7
+            finalList.add(qasid);  //8
+            finalList.add(assessmentId);  //9
+
+            List<?> list2 = questionAnsService.takeTestOnlineAssementCandidateAnswer(questionLibraryid);
+            if (!list2.isEmpty()) {
+                for (Object o2 : list2) {
+                    Object str1[] = (Object[]) o2;
+                    Integer questionAnsID = (Integer) str1[0];
+                    String answer = (String) str1[2];
+                    finalList.add(answer);
+                    finalList.add(questionAnsID);
+                }
+
+            } else {
+
+                finalList.add(Description);
+            }
+            finalList.add(ansStatus);  //10
+            finalList.add(obtainMarks);//11
+
+            listOfFinalList.add(finalList);
+
+        }
+        List<?> questionanswerResult = trainingResultStatusService.readByTrainigAssessmentResultId(assessmentId);
+        for (Object o11 : questionanswerResult) {
+            Object str1[] = (Object[]) o11;
+            Integer trainingResultStatus = (Integer) str1[0];
+            Integer trainingAssment = (Integer) str1[1];
+            Double obtainPercentage = (Double) str1[2];
+            Double obtainTotal = (Double) str1[3];
+            String resultStatus = (String) str1[4];
+            finalList1.add(obtainPercentage);
+            finalList1.add(obtainTotal);
+            finalList1.add(resultStatus);
+            finalList1.add(totalMarks);
+
+        }
+        TrainingAssessment trainingAssessment = trainingAssessmentService.readById(assessmentId);
+        int empid = trainingAssessment.getEmployeeMaster().getId();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        employeeMaster = employeeMasterService.readById(empid);
+
+        mv.getModelMap().put("list2", listOfFinalList);
+        mv.getModelMap().put("eventdate", eventdate);
+        mv.getModelMap().put("questionanswerResult", finalList1);
+        request.setAttribute("employeeName", employeeMaster.getEmployeeName());
+
+        mv.setViewName("Trainer/TrainingQuestionAnsCheckView");
+        return mv;
+    }
+
 }

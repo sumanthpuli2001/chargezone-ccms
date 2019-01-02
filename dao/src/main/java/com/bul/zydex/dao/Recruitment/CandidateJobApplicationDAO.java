@@ -30,4 +30,6 @@ public interface CandidateJobApplicationDAO<T> extends GenericsDAO<T> {
     public List<?> deleteVacancyId(String vacancyId);
 
     public List<?> readListByApplyJobId(Integer id);
+
+    public List<?> readListByApplyJobIdVanacyid(Integer id);
 }

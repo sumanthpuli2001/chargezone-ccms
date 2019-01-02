@@ -759,4 +759,8 @@
     <bean id="coffRegularizationService1" class="com.bul.zydex.service.shift.CoffRegularizationServiceImpl">
         <property name="coffRegularizationDAO" ref="coffRegularizationDAO1"/>
     </bean>
+    
+    <bean id="employeeMasterServiceExtension1" class="com.bul.zydex.service.emp.EmployeeMasterServiceImplExtension">
+        <property name="employeeMasterExtensionDAO" ref="employeeMasterExtensionDAO1"/>
+    </bean>
 </beans>

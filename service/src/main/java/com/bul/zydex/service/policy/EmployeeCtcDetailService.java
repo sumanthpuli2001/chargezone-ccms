@@ -36,4 +36,6 @@ public interface EmployeeCtcDetailService<T> extends GenericsService<T> {
 
     public List<?> bonusFetch(int employeeid);
 
+    public void deleteByemployeeId(int parseInt);
+
 }

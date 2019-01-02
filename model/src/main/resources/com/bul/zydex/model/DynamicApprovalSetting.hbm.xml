@@ -5,23 +5,19 @@
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-     <class name="com.bul.zydex.model.DynamicApprovalSetting" table="dynamic_approval_setting" catalog="hr_power_astral" optimistic-lock="version">
+     <class name="com.bul.zydex.model.DynamicApprovalSetting" table="dynamic_approval_setting" catalog="hr_power_astral">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="company" class="com.bul.zydex.model.Company" fetch="select">
-            <column name="company_id" not-null="true" />
-        </many-to-one>
-        <many-to-one name="designationMaster" class="com.bul.zydex.model.DesignationMaster" fetch="select">
-            <column name="designation_id" not-null="true" />
+       
+        <many-to-one name="departmentMaster" class="com.bul.zydex.model.DepartmentMaster" fetch="select">
+            <column name="department_id" not-null="true" />
         </many-to-one>
         <many-to-one name="modules" class="com.bul.zydex.model.Modules" fetch="select">
             <column name="module_id" not-null="true" />
         </many-to-one>
-        <many-to-one name="zydexLocationMaster" class="com.bul.zydex.model.ZydexLocationMaster" fetch="select">
-            <column name="location_id" not-null="true" />
-        </many-to-one>
+        
         <property name="projectName" type="java.lang.Integer">
             <column name="project_name"/>
         </property>

@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -1836,6 +1837,16 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         headerList.add("P.Day");
         headerList.add("Basic Salary");
 
+        List<?> list12 = policyMasterService.readPolicyName();
+//        List<?> policyMasterList = policyMasterService.read();
+        for (Object o1 : list12) {
+//            PolicyMaster policyMaster = (PolicyMaster) o1;
+            if (!headerList.contains("" + o1) && null != o1) {
+                headerList.add("" + o1);
+            }
+
+        }
+
 //        List<?> list1 = employeeSalaryProcessService.readSal(employeeMaster);
         List<?> list1 = employeeSalaryProcessService.readsalSearch(employeeMaster);
         for (Object o1 : list1) {
@@ -2027,10 +2038,10 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //            PayrollSalaryType payrollSalaryType = (PayrollSalaryType) o1;
 //            headerList.add(payrollSalaryType.getText());
 //        }
-        List<?> policyMasterList = policyMasterService.read();
+        List<?> policyMasterList = policyMasterService.readPolicyNameSalarySearch();
         for (Object o1 : policyMasterList) {
-            PolicyMaster policyMaster = (PolicyMaster) o1;
-            headerList.add(policyMaster.getPolicyName());
+//            PolicyMaster policyMaster = (PolicyMaster) o1;
+            headerList.add("" + o1);
         }
 
         headerList.add("PF");
@@ -3364,5 +3375,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
         return mv;
     }
+    
+    
 
 }

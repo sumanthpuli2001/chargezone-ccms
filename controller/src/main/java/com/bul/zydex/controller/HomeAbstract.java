@@ -6,6 +6,7 @@
 package com.bul.zydex.controller;
 
 import com.bul.zydex.model.CorporateVideo;
+import com.bul.zydex.model.EmployeePolicyDetail;
 import com.bul.zydex.model.Gallery;
 import com.bul.zydex.model.KaizenMaster;
 import com.bul.zydex.model.LevelMaster;
@@ -14,6 +15,7 @@ import com.bul.zydex.model.PolicyMaster;
 import com.bul.zydex.model.RAndR;
 import com.bul.zydex.model.ThoughtMaster;
 import com.bul.zydex.service.CorporateVideo.CorporateVideoService;
+import com.bul.zydex.service.EmployeePolicyDetail.EmployeePolicyDetailService;
 import com.bul.zydex.service.Kaizen.KaizenMasterService;
 import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
@@ -36,6 +38,7 @@ public abstract class HomeAbstract extends CustomAbstract {
     protected RAndRService<RAndR> rAndRService;
     protected KaizenMasterService<KaizenMaster> kaizenMasterService;
     protected PolicyMasterService<PolicyMaster> policyMasterService;
+    protected EmployeePolicyDetailService<EmployeePolicyDetail> employeePolicyDetailService;
     
     public LevelMasterService<LevelMaster> getLevelMasterService() {
         return levelMasterService;
@@ -99,6 +102,14 @@ public abstract class HomeAbstract extends CustomAbstract {
 
     public void setPolicyMasterService(PolicyMasterService<PolicyMaster> policyMasterService) {
         this.policyMasterService = policyMasterService;
+    }
+
+    public EmployeePolicyDetailService<EmployeePolicyDetail> getEmployeePolicyDetailService() {
+        return employeePolicyDetailService;
+    }
+
+    public void setEmployeePolicyDetailService(EmployeePolicyDetailService<EmployeePolicyDetail> employeePolicyDetailService) {
+        this.employeePolicyDetailService = employeePolicyDetailService;
     }
 
    

@@ -10,6 +10,7 @@ public class TrainingMaster implements java.io.Serializable {
     private Trainer trainer;
     private TrainingSubType trainingSubType;
     private TrainingType trainingType;
+    private DepartmentMaster departmentMaster;
     private String trainingTitle;
     private String trainingDescription;
     private String trainingOwner;
@@ -39,7 +40,7 @@ public class TrainingMaster implements java.io.Serializable {
         this.trainingType = trainingType;
     }
 
-    public TrainingMaster(Trainer trainer, TrainingSubType trainingSubType, TrainingType trainingType, String trainingTitle, String trainingDescription, String trainingOwner, String venue, String startDate, String endDate, String trainingTimeForm, String trainingTimeTo, String trainingSource, String cost, Integer reimbursable, String companySponsor, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer status, Integer assessmentResultStatus,Integer finishStatus) {
+    public TrainingMaster(Trainer trainer, TrainingSubType trainingSubType, TrainingType trainingType, String trainingTitle, String trainingDescription, String trainingOwner, String venue, String startDate, String endDate, String trainingTimeForm, String trainingTimeTo, String trainingSource, String cost, Integer reimbursable, String companySponsor, Integer createdBy, String createdDate, Integer updatedBy, String updatedDate, Integer status, Integer assessmentResultStatus,Integer finishStatus,DepartmentMaster departmentMaster) {
         this.trainer = trainer;
         this.trainingSubType = trainingSubType;
         this.trainingType = trainingType;
@@ -62,6 +63,7 @@ public class TrainingMaster implements java.io.Serializable {
         this.status = status;
         this.assessmentResultStatus = assessmentResultStatus;
         this.finishStatus = finishStatus;
+        this.departmentMaster = departmentMaster;
     }
 
     public Integer getId() {
@@ -246,6 +248,14 @@ public class TrainingMaster implements java.io.Serializable {
 
     public void setFinishStatus(Integer finishStatus) {
         this.finishStatus = finishStatus;
+    }
+
+    public DepartmentMaster getDepartmentMaster() {
+        return departmentMaster;
+    }
+
+    public void setDepartmentMaster(DepartmentMaster departmentMaster) {
+        this.departmentMaster = departmentMaster;
     }
     
 

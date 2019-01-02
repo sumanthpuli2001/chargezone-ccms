@@ -19,12 +19,15 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import java.io.File;
 import java.io.PrintWriter;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -209,6 +212,7 @@ public class HomeController extends HomeAbstract {
 
     public ModelAndView kaizen(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+        departmentList(request);
         List<?> kaizenlist = kaizenMasterService.readKaizenList();
         int inc = kaizenlist.size();
         int inc1 = inc + 1;
@@ -283,7 +287,6 @@ public class HomeController extends HomeAbstract {
         return mv;
     }
 
-    
     public ModelAndView redirectToAllReports(HttpServletRequest request, HttpServletResponse response) throws Exception {
         HomeController homeController = new HomeController();
         ModelAndView mv = new ModelAndView();
@@ -307,12 +310,11 @@ public class HomeController extends HomeAbstract {
         EmployeeMaster employeeMaster = new EmployeeMaster();
 
         String category = request.getParameter("category");
-        
+
         if (category.isEmpty() && category.equals("")) {
             request.setAttribute("faliureMessage",
                     "Error : Select Category to get Result.");
-        } 
-        else if (category.equals("employee")) {
+        } else if (category.equals("employee")) {
             DepartmentMaster departmentMaster = new DepartmentMaster();
             DesignationMaster designationMaster = new DesignationMaster();
             LocationMaster locationMaster = new LocationMaster();
@@ -334,7 +336,7 @@ public class HomeController extends HomeAbstract {
                 locationMaster = (LocationMaster) o;
                 zm.put(locationMaster.getId(), locationMaster.getLocation());
             }
-            
+
             Gson gson = new Gson();
             JsonElement jElement = gson.toJsonTree(dn);
             JSONObject jObject = new JSONObject();
@@ -345,368 +347,418 @@ public class HomeController extends HomeAbstract {
             out.println(jObject.toString());
         }
     }
-    
+
     public void onSearchClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
-       
+
 //        ModelAndView mv = new ModelAndView();
-        
 //        HomeController homeController = new HomeController();
         EmployeeInformation employeeInformation = new EmployeeInformation();
-        
+
         List<String> headerList = new ArrayList<String>();
+        List<String> headerList1 = new ArrayList<String>();
         String employeeId = request.getParameter("employeeId");
-        if(null != employeeId){
+        if (null != employeeId) {
             employeeInformation.setEmployeeId(Boolean.TRUE);
             headerList.add("Employee Code");
         }
-        
+
         String employeeName = request.getParameter("employeeName");
-        if(null != employeeName){
+        if (null != employeeName) {
             employeeInformation.setEmployeeName(Boolean.TRUE);
             headerList.add("Employee Name");
         }
-        
+
         String dateOfJoining = request.getParameter("dateOfJoining");
-        if(null != dateOfJoining){
+        if (null != dateOfJoining) {
             employeeInformation.setDateOfJoining(Boolean.TRUE);
             headerList.add("Joining Date");
         }
-        
+
         String role = request.getParameter("role");
-        if(null != role){
+        if (null != role) {
             employeeInformation.setRole(Boolean.TRUE);
             headerList.add("Role");
         }
-        
+
         String company = request.getParameter("company");
-        if(null != company){
+        if (null != company) {
             employeeInformation.setCompany(Boolean.TRUE);
             headerList.add("Company");
         }
-        
+
         String emailAddress = request.getParameter("emailAddress");
-        if(null != emailAddress){
+        if (null != emailAddress) {
             employeeInformation.setEmailAddress(Boolean.TRUE);
             headerList.add("Email Address");
         }
-        
+
         String contactNo1 = request.getParameter("contactNo1");
-        if(null != contactNo1){
+        if (null != contactNo1) {
             employeeInformation.setContactNo1(Boolean.TRUE);
             headerList.add("Contact No1");
         }
-        
+
         String contactNo2 = request.getParameter("contactNo2");
-        if(null != contactNo2){
+        if (null != contactNo2) {
             employeeInformation.setContactNo2(Boolean.TRUE);
             headerList.add("Contact No2");
         }
-        
+
         String fatherName = request.getParameter("fatherName");
-        if(null != fatherName){
+        if (null != fatherName) {
             employeeInformation.setFatherName(Boolean.TRUE);
             headerList.add("Father Name");
         }
-        
+
         String motherName = request.getParameter("motherName");
-        if(null != motherName){
+        if (null != motherName) {
             employeeInformation.setMotherName(Boolean.TRUE);
             headerList.add("Mother Name");
         }
-        
+
         String dateOfBirth = request.getParameter("dateOfBirth");
-        if(null != dateOfBirth){
+        if (null != dateOfBirth) {
             employeeInformation.setDateOfBirth(Boolean.TRUE);
             headerList.add("DOB");
         }
-        
+
         String gender = request.getParameter("gender");
-        if(null != gender){
+        if (null != gender) {
             employeeInformation.setGender(Boolean.TRUE);
             headerList.add("Gender");
         }
-        
+
         String bloodGroups = request.getParameter("bloodGroups");
-        if(null != bloodGroups){
+        if (null != bloodGroups) {
             employeeInformation.setBloodGroups(Boolean.TRUE);
             headerList.add("Blood Group");
         }
-        
+
         String maritalStatus = request.getParameter("maritalStatus");
-        if(null != maritalStatus){
+        if (null != maritalStatus) {
             employeeInformation.setMaritalStatus(Boolean.TRUE);
             headerList.add("Marital Status");
         }
-        
+
         String spouseName = request.getParameter("spouseName");
-        if(null != spouseName){
+        if (null != spouseName) {
             employeeInformation.setSpouseName(Boolean.TRUE);
             headerList.add("Spous/Husband Name");
         }
-        
+
         String emergencyContactPerson = request.getParameter("emergencyContactPerson");
-        if(null != emergencyContactPerson){
+        if (null != emergencyContactPerson) {
             employeeInformation.setEmergencyContactPerson(Boolean.TRUE);
             headerList.add("Emergency Contact Person");
         }
-        
+
         String emergencyContactNo = request.getParameter("emergencyContactNo");
-        if(null != emergencyContactNo){
+        if (null != emergencyContactNo) {
             employeeInformation.setEmergencyContactNo(Boolean.TRUE);
             headerList.add("Emergency Contact No");
         }
-        
+
         String panCard = request.getParameter("panCard");
-        if(null != panCard){
+        if (null != panCard) {
             employeeInformation.setPanCard(Boolean.TRUE);
             headerList.add("Pan Card");
         }
-        
+
         String adharCard = request.getParameter("adharCard");
-        if(null != adharCard){
+        if (null != adharCard) {
             employeeInformation.setAdharCard(Boolean.TRUE);
             headerList.add("Adhar Card");
         }
-                
+
         String passportNo = request.getParameter("passportNo");
-        if(null != passportNo){
+        if (null != passportNo) {
             employeeInformation.setPassportNo(Boolean.TRUE);
             headerList.add("Passport No");
         }
-        
+
         String passportIssueDate = request.getParameter("passportIssueDate");
-        if(null != passportIssueDate){
+        if (null != passportIssueDate) {
             employeeInformation.setPassportIssueDate(Boolean.TRUE);
             headerList.add("Passport Issue Date");
         }
-       
+
         String passportExpiryDate = request.getParameter("passportExpiryDate");
-        if(null != passportExpiryDate){
+        if (null != passportExpiryDate) {
             employeeInformation.setPassportExpiryDate(Boolean.TRUE);
             headerList.add("Passport Expiry Date");
         }
-        
+
         String employeeType = request.getParameter("employeeType");
-        if(null != employeeType){
+        if (null != employeeType) {
             employeeInformation.setEmployeeType(Boolean.TRUE);
             headerList.add("Employee Type");
         }
-        
+
         String officeEmailId = request.getParameter("officeEmailId");
-        if(null != officeEmailId){
+        if (null != officeEmailId) {
             employeeInformation.setOfficeEmailId(Boolean.TRUE);
             headerList.add("Office Email Id");
         }
-        
-         String experienceYearOnDoj = request.getParameter("experienceYearOnDoj");
-        if(null != experienceYearOnDoj){
+
+        String experienceYearOnDoj = request.getParameter("experienceYearOnDoj");
+        if (null != experienceYearOnDoj) {
             employeeInformation.setExperienceYearOnDoj(Boolean.TRUE);
             headerList.add("Experience Year On Joining");
         }
-        
+
         String experienceMonthOnDoj = request.getParameter("experienceMonthOnDoj");
-        if(null != experienceMonthOnDoj){
+        if (null != experienceMonthOnDoj) {
             employeeInformation.setExperienceMonthOnDoj(Boolean.TRUE);
             headerList.add("Experience Month On Joining");
         }
-        
+
         String permanentAddress = request.getParameter("permanentAddress");
-        if(null != permanentAddress){
+        if (null != permanentAddress) {
             employeeInformation.setPermanentAddress(Boolean.TRUE);
             headerList.add("Permanent Address");
         }
-        
+
         String presentAddress = request.getParameter("presentAddress");
-        if(null != presentAddress){
+        if (null != presentAddress) {
             employeeInformation.setPresentAddress(Boolean.TRUE);
             headerList.add("Present Address");
         }
-        
+
         //-- marital status other will be checked below from here if needed--
-         
-        
         String bankName = request.getParameter("bankName");
-        if(null != bankName){
+        if (null != bankName) {
             employeeInformation.setBankName(Boolean.TRUE);
             headerList.add("Bank Name");
         }
-        
+
         String bankAccountNo = request.getParameter("bankAccountNo");
-        if(null != bankAccountNo){
+        if (null != bankAccountNo) {
             employeeInformation.setBankAccountNo(Boolean.TRUE);
             headerList.add("Bank A/c No");
         }
-        
+
         String bankIfscCode = request.getParameter("bankIfscCode");
-        if(null != bankIfscCode){
+        if (null != bankIfscCode) {
             employeeInformation.setBankIfscCode(Boolean.TRUE);
             headerList.add("Bank IFSC");
-        }    
-        
+        }
+
         String zydexLocation = request.getParameter("zydexLocation");
-        if(null != zydexLocation){
+        if (null != zydexLocation) {
             employeeInformation.setZydexLocation(Boolean.TRUE);
             headerList.add("Location");
         }
-        
+
         String workLocation = request.getParameter("workLocation");
-        if(null != workLocation){
+        if (null != workLocation) {
             employeeInformation.setWorkLocation(Boolean.TRUE);
             headerList.add("Work Location");
-        }        
-                
+        }
+
         String level = request.getParameter("level");
-        if(null != level){
+        if (null != level) {
             employeeInformation.setLevel(Boolean.TRUE);
             headerList.add("Level");
         }
-        
+
         String department = request.getParameter("department");
-        if(null != department){
+        if (null != department) {
             employeeInformation.setDepartment(Boolean.TRUE);
             headerList.add("Department");
         }
-       
+
         String designation = request.getParameter("designation");
-        if(null != designation){
+        if (null != designation) {
             employeeInformation.setDesignation(Boolean.TRUE);
             headerList.add("Designation");
         }
-        
+
         String reportingManager = request.getParameter("reportingManager");
-        if(null != reportingManager){
+        if (null != reportingManager) {
             employeeInformation.setReportingManager(Boolean.TRUE);
             headerList.add("Reporting Manager");
         }
-        
+
         String highestEducationDetails = request.getParameter("highestEducationDetails");
-        if(null != highestEducationDetails){
+        if (null != highestEducationDetails) {
             employeeInformation.setHighestEducationDetails(Boolean.TRUE);
             headerList.add("Highest Education");
         }
-               
+
         String cityOfEmployee = request.getParameter("cityOfEmployee");
-        if(null != cityOfEmployee){
+        if (null != cityOfEmployee) {
             employeeInformation.setCityOfEmployee(Boolean.TRUE);
             headerList.add("Employee City");
         }
-        
-        
+
         String child1 = request.getParameter("child1");
-        if(null != child1){
+        if (null != child1) {
             employeeInformation.setChild1(Boolean.TRUE);
             headerList.add("Child Name");
         }
-        
+
         String child2 = request.getParameter("child2");
-        if(null != child2){
+        if (null != child2) {
             employeeInformation.setChild2(Boolean.TRUE);
             headerList.add("Child Name 2");
         }
-        
+
         String dateOfBirthOfEmpFather = request.getParameter("dateOfBirthOfEmpFather");
-        if(null != dateOfBirthOfEmpFather){
+        if (null != dateOfBirthOfEmpFather) {
             employeeInformation.setDateOfBirthOfEmpFather(Boolean.TRUE);
             headerList.add("DOB of Father");
         }
-        
+
         String dateOfBirthOfEmpMother = request.getParameter("dateOfBirthOfEmpMother");
-        if(null != dateOfBirthOfEmpMother){
+        if (null != dateOfBirthOfEmpMother) {
             employeeInformation.setDateOfBirthOfEmpMother(Boolean.TRUE);
             headerList.add("DOB of Mother");
         }
-        
+
         String dateOfBirthOfEmpSpous = request.getParameter("dateOfBirthOfEmpSpous");
-        if(null != dateOfBirthOfEmpSpous){
+        if (null != dateOfBirthOfEmpSpous) {
             employeeInformation.setDateOfBirthOfEmpSpous(Boolean.TRUE);
             headerList.add("DOB of Spous/Husband");
         }
-        
+
         String dateOfBirthOfEmpChilld1 = request.getParameter("dateOfBirthOfEmpChilld1");
-        if(null != dateOfBirthOfEmpChilld1){
+        if (null != dateOfBirthOfEmpChilld1) {
             employeeInformation.setDateOfBirthOfEmpChilld1(Boolean.TRUE);
             headerList.add("DOB of Child1");
         }
-        
+
         String dateOfBirthOfEmpChilld2 = request.getParameter("dateOfBirthOfEmpChilld2");
-        if(null != dateOfBirthOfEmpChilld2){
+        if (null != dateOfBirthOfEmpChilld2) {
             employeeInformation.setDateOfBirthOfEmpChild2(Boolean.TRUE);
             headerList.add("DOB of Child2");
         }
-        
+
         String dateOfTransferOfEntity = request.getParameter("dateOfTransferOfEntity");
-        if(null != dateOfTransferOfEntity){
+        if (null != dateOfTransferOfEntity) {
             employeeInformation.setDateOfTransferOfEntity(Boolean.TRUE);
             headerList.add("Date Of Transfer Entity");
         }
-        
+
         String dateOfLeaving = request.getParameter("dateOfLeaving");
-        if(null != dateOfLeaving){
+        if (null != dateOfLeaving) {
             employeeInformation.setDateOfLeaving(Boolean.TRUE);
             headerList.add("Date Of Leaving");
         }
         String basic = request.getParameter("basicSalary");
-        if(null != basic){
+        if (null != basic) {
             employeeInformation.setBasicSalary(Boolean.TRUE);
             headerList.add("Basic Salary");
         }
 //        String allowance = request.getParameter("allowance");
-//        if(null != allowance){
-//            employeeInformation.setAllowance(Boolean.TRUE);
-//            headerList.add(allowance);
+//        if (null != allowance) {
+////            employeeInformation.setAllowance(Boolean.TRUE);
+//
+//            List<?> list12 = policyMasterService.readPolicyName();
+////        List<?> policyMasterList = policyMasterService.read();
+//            for (Object o1 : list12) {
+////            PolicyMaster policyMaster = (PolicyMaster) o1;
+//                if (!headerList.contains("" + o1) && null != o1) {
+//                    headerList.add("" + o1);
+//                }
+//
+//            }
+////            headerList.add(allowance);
 //        }
 //        String ctc = request.getParameter("ctc");
 //        if(null != ctc){
 //            employeeInformation.setCtc(Boolean.TRUE);
 //            headerList.add(ctc);
 //        }
-        
+
         //input criteria from here
         String employeeCode = request.getParameter("employeeCode");
-        if(employeeCode != null && !employeeCode.equals("")){
+        if (employeeCode != null && !employeeCode.equals("")) {
             employeeInformation.setEmployeeCode(employeeCode);
         }
 
         String employeeMasterName = request.getParameter("employeeMasterId");
-        if(employeeMasterName != null && !employeeMasterName.equals("")){
+        if (employeeMasterName != null && !employeeMasterName.equals("")) {
             employeeInformation.setEmployeeMasterName(employeeMasterName);
         }
-        
+
         String joiningStartDate = request.getParameter("joiningStartDate");
         String joiningEndDate = request.getParameter("joiningEndDate");
-        if((null != joiningStartDate && !joiningStartDate.equals("")) && (null != joiningEndDate && !joiningEndDate.equals(""))){
+        if ((null != joiningStartDate && !joiningStartDate.equals("")) && (null != joiningEndDate && !joiningEndDate.equals(""))) {
             employeeInformation.setDojStartDate(joiningStartDate);
             employeeInformation.setDojEndDate(joiningEndDate);
         }
-        
+
         String exitStartDate = request.getParameter("exitStartDate");
         String exitEndDate = request.getParameter("exitEndDate");
-        if((exitStartDate != null && !exitStartDate.equals("")) && (null != exitEndDate && !exitEndDate.equals(""))){
+        if ((exitStartDate != null && !exitStartDate.equals("")) && (null != exitEndDate && !exitEndDate.equals(""))) {
             employeeInformation.setDolStartDate(exitStartDate);
             employeeInformation.setDolEndDate(exitEndDate);
         }
-        
+
         String locationDropDown = request.getParameter("locationDropDown");
-        if(locationDropDown != null && !locationDropDown.equals("")){
+        if (locationDropDown != null && !locationDropDown.equals("")) {
             employeeInformation.setWorkLocationId(locationDropDown);
         }
-        
+
         String departmentDropDown = request.getParameter("departmentDropDown");
-        if(departmentDropDown != null && !departmentDropDown.equals("")){
+        if (departmentDropDown != null && !departmentDropDown.equals("")) {
             employeeInformation.setDepartmentId(departmentDropDown);
         }
-        
+
         String designationDropDown = request.getParameter("designationDropDown");
-        if(designationDropDown != null && !designationDropDown.equals("")){
+        if (designationDropDown != null && !designationDropDown.equals("")) {
             employeeInformation.setDesignationId(designationDropDown);
         }
-        
-        
+//        Map<String, String> empMap = new HashMap<String, String>();
+//        List<Object> finalList = new LinkedList<Object>();
+//        DecimalFormat df = new DecimalFormat("#.##");
+//        EmployeeMaster employeeMaster = new EmployeeMaster();
         List<?> employeeList = employeeMasterService.getEmployeeDetails(employeeInformation);
-        
+//        
+//        for (Object o2 : employeeList) {
+//            Object[] o22 = (Object[]) o2;
+//            String employeeId2 = (String) o22[0];
+//            List<?> list1 = employeeMasterService.readByEmployeeNo1(employeeId2);
+//            if (!list1.isEmpty()) {
+//                employeeMaster = (EmployeeMaster) list1.get(0);
+//                int empId = employeeMaster.getId();
+//
+//                if (employeeId2.equals("admin")) {
+//
+//                } else {
+//
+//                    List<?> salaryTypeList1 = policyMasterService.read();
+//                    for (Object o1 : salaryTypeList1) {
+//                        PolicyMaster policyMaster = (PolicyMaster) o1;
+//
+//                        List<?> list = employeePolicyDetailService.readForMasterAdditionalAmount(empId, policyMaster.getId());
+//
+//                        if (!list.isEmpty()) {
+//                            Iterator itr = list.iterator();
+//                            if (itr.hasNext()) {
+//                                Object[] next = (Object[]) itr.next();
+//                                String amountType = next[0].toString();
+//                                double salaryAmount = (Double) next[1];
+////                        grossSalary += salaryAmount;
+////                                finalList.add(df.format(salaryAmount));
+//                                empMap.put("" + amountType, "" + df.format((int) Math.round((double) salaryAmount)));
+//
+//                            }
+//                        } else {
+//                            finalList.add("-");
+//                        }
+//                    }
+//                }
+//                finalList.add(empMap);
+//            }
+//
+//        }
+
         JSONObject jObject = new JSONObject();
         jObject.put("employeeList", employeeList);
         jObject.put("headerList", headerList);
+//        jObject.put("headerList1", headerList1);
+//        request.setAttribute("finalList", finalList);
         PrintWriter out = response.getWriter();
         out.println(jObject.toString());
 

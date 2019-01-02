@@ -67,4 +67,9 @@ public class CandidateJobApplicationServiceImpl<T> extends GenericsServiceImpl<T
     public List<?> readListByApplyJobId(Integer id) {
         return candidateJobApplicationDAO.readListByApplyJobId(id);
     }
+
+    @Override
+    public List<?> readListByApplyJobIdVanacyid(Integer id) {
+        return candidateJobApplicationDAO.readListByApplyJobIdVanacyid(id);
+    }
 }

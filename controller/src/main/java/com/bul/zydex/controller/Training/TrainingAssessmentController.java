@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.Training;
 
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
@@ -390,9 +391,12 @@ public class TrainingAssessmentController extends TrainingAssessmentAbstract {
             TrainingType trainingType = trainingTypeService.readById(trainingMaster1.getTrainingType().getId());
             TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster1.getTrainingSubType().getId());
             Trainer trainer = trainerService.readById(trainingMaster1.getTrainer().getId());
+            DepartmentMaster departmentMaster = departmentMasterService.readById(trainingMaster1.getDepartmentMaster().getId());
             trainingMaster1.setTrainingType(trainingType);
             trainingMaster1.setTrainingSubType(trainingSubType);
             trainingMaster1.setTrainer(trainer);
+            trainingMaster1.setDepartmentMaster(departmentMaster);
+
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Date cDate = new Date();
             String currentDate = sdf.format(cDate);

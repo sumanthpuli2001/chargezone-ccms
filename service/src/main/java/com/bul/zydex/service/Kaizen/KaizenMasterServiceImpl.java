@@ -14,8 +14,8 @@ import java.util.List;
  *
  * @author Aman
  */
-public class KaizenMasterServiceImpl<T>extends GenericsServiceImpl<T> implements KaizenMasterService<T>{
-    
+public class KaizenMasterServiceImpl<T> extends GenericsServiceImpl<T> implements KaizenMasterService<T> {
+
     private KaizenMasterDAO<T> kaizenMasterDAO;
 
     public KaizenMasterDAO<T> getKaizenMasterDAO() {
@@ -29,12 +29,12 @@ public class KaizenMasterServiceImpl<T>extends GenericsServiceImpl<T> implements
 
     @Override
     public List<?> readKaizenMaster() {
-       return kaizenMasterDAO.readKaizenMaster();
+        return kaizenMasterDAO.readKaizenMaster();
     }
 
     @Override
     public List<?> readKaizenMaster(Integer id) {
-         return kaizenMasterDAO.readKaizenMaster(id);
+        return kaizenMasterDAO.readKaizenMaster(id);
     }
 
     @Override
@@ -57,7 +57,9 @@ public class KaizenMasterServiceImpl<T>extends GenericsServiceImpl<T> implements
         return kaizenMasterDAO.readPastKaizenMaster();
     }
 
-
-
+    @Override
+    public List<?> readByDeptIdCompanyNameDesId(int deptid) {
+        return kaizenMasterDAO.readByDeptIdCompanyNameDesId(deptid);
+    }
 
 }

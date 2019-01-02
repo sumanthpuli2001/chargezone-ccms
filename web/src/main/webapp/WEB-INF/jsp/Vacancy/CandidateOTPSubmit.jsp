@@ -65,13 +65,26 @@
         </script>
     </head>
     <body>
-        <section class="content-header">
-            <h1>Sign up:</h1>
+         <section class="content-header">
+        <table>
+
+                <td style="text-align: left;">
+                    <span><img src="StorageYard/Images/logo.png"  style="width: 150px;float: left;margin-top: 5%;margin-left: 5%;"/></span> 
+                </td>
+            </table>
+         <center><h1>Sign Up:</h1></center>
             <ol class="breadcrumb">
             </ol>
+       
+<!--            <h1>Sign up:</h1>
+            <ol class="breadcrumb">
+            </ol>-->
         </section>
-        <c:if test="${!empty successMessage}">
-            <div class="alert alert-info" role="alert">${successMessage}</div>
+        <%--<c:if test="${!empty successMessage}">--%>
+            <!--<div class="alert alert-info" role="alert">${successMessage}</div>-->
+        <%--</c:if>--%>
+        <c:if test="${!empty successMessage1}">
+            <div style="background-color:lightblue">${successMessage1}</div>
         </c:if>
         <c:if test="${!empty failureMessage}">
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>

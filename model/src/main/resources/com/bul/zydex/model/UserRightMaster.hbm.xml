@@ -209,5 +209,8 @@
         <property name="vacancyApprove" type="java.lang.Boolean">
             <column name="vacancy_approve" />
         </property>
+        <property name="kaizenCommitee" type="java.lang.Boolean">
+            <column name="kaizen_commitee" />
+        </property>
     </class>
 </hibernate-mapping>

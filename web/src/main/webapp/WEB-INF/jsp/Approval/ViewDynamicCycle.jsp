@@ -87,10 +87,10 @@
                                                                 <th style="width: 1px;text-align: center;"><input type="checkbox" id="toggleId"/></th>
                                                             </c:if>
                                                             <!--<th>user id</th>-->
-                                                            <th style="width: 50px;">Module Name</th>
-                                                            <th style="width: 50px;">Location Name</th>
-                                                            <th style="width: 50px;">Designation Name</th>
-                                                            <th style="width: 50px;">Company Name</th>
+                                                           
+                                                            <!--<th style="width: 50px;">Location Name</th>-->
+                                                            <th style="width: 50px;">Department Name</th>
+                                                            <!--<th style="width: 50px;">Company Name</th>-->
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                             <th style="width: 50px;">Action</th>
                                                                 <%--</c:if>--%>
@@ -107,10 +107,10 @@
                                                             <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="checkId" value="${list.id}"/></td>
                                                         </c:if>
                                                         <!--<td>/</td>-->
-                                                        <td>${list.modules.moduleName}</td>
-                                                        <td>${list.zydexLocationMaster.zydexLocation}</td>
-                                                        <td>${list.designationMaster.designationName}</td>
-                                                        <td>${list.company.companyName}</td>
+                                                       
+                                                  
+                                                        <td>${list.departmentMaster.departmentName}</td>
+                                          
                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                         <td>
                                                             <a href="#"

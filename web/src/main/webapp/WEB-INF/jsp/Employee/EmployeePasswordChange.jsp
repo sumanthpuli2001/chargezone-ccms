@@ -106,12 +106,12 @@
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Employee Name:</label>
+                                                        <label>Employee Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="employeeName" class="form-control" readonly="true"></form:input>
                                                         </div>
-                                                    <div class="col-sm-6">
-                                                        <label>New Password:</label>
-                                                        <input type="text" class="form-control" id="password" name="password" placeholder="Enter New Password">
+                                                        <div class="col-sm-6">
+                                                            <label>New Password:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="text" class="form-control" id="password" name="password" placeholder="Enter New Password">
                                                         </div>
 
                                                     </div>

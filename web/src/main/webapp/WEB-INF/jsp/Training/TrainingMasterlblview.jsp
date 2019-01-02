@@ -16,7 +16,7 @@
     <script>
         function sendId() {
             var trainingId = document.getElementById("TrainingId").value;
-      
+
 //            window.location ="trainingIdentification.htm?act=showTrainingFeedbackList&val=" + val;
             window.location = 'trainingIdentification.htm?act=showTrainingFeedbackList&trainingId=' + trainingId;
         }
@@ -38,21 +38,21 @@
         </c:if>
         <!-- Main content -->
         <br>
-       &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />
+        &nbsp;&nbsp;&nbsp;&nbsp; <input type="button" class="btn btn-primary" value="Back" onclick="window.history.back();" />
         <c:if test="${ showFeedbackButton eq false}">
-        <button type="submit" style="width: 150px !important" class="btn btn-primary" title="" onclick="sendId();"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;Show Feedback</button>
+            <button type="submit" style="width: 150px !important" class="btn btn-primary" title="" onclick="sendId();"><i class="fa fa-file-text-o"></i>&nbsp;&nbsp;Show Feedback</button>
         </c:if>
         <button type="button" style="width: 150px !important" class="btn btn-primary" title="" onclick="window.location = 'trainingIdentification.htm?act=newAssignTraine&TrainingId=${trainingMaster.id}'"><i class="fa fa-try"></i>&nbsp;&nbsp;Assign Trainee</button>
         <form:form action="" method="post" 
                    name='form1' class="form-horizontal" role="form">
-            
+
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                
+
                                 <!--                                <button type="button" class="btn btn-primary" title="" style="float: right; width: 120px;" onclick="window.location = 'trainingMaster.htm?act=createClick'"><i class="fa fa-plus"></i>&nbsp;&nbsp;New</button>
                                                                 <button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>-->
                                 <div class="box-header">
@@ -64,8 +64,11 @@
                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                             <label>Training Title : </label>&nbsp;&nbsp;${trainingMaster.trainingTitle}
                                         </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <label>Training Requester : </label>&nbsp;&nbsp;${trainingMaster.trainingOwner}
+                                        </div>
+                                        <div class ="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                            <label>Department : </label>&nbsp;&nbsp;${trainingMaster.departmentMaster.departmentName}
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -84,6 +87,7 @@
                                             <label>Trainer : </label>&nbsp;&nbsp;${trainingMaster.trainer.trainerName}
                                         </div>
                                     </div>
+                                    
                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                         <div class ="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 
@@ -159,7 +163,7 @@
                                                 </c:choose>
                                             </table>
                                         </div>
-                                        
+
 
                                     </div><!-- /.col -->
 

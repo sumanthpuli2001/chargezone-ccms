@@ -12,8 +12,10 @@ import java.util.List;
  *
  * @author Aman
  */
-public interface TrainingQuestionAnswerSubmitDAO<T> extends GenericsDAO<T>{
-    
-     public List<?> readByTrainigAssessmentId(int assessmentId);
-    
+public interface TrainingQuestionAnswerSubmitDAO<T> extends GenericsDAO<T> {
+
+    public List<?> readByTrainigAssessmentId(int assessmentId);
+
+    public List<?> readByTrainigAssessmentREsultViewId(int assessmentId);
+
 }

@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Aman
  */
-public interface KaizenMasterDAO<T>extends GenericsDAO<T>{
+public interface KaizenMasterDAO<T> extends GenericsDAO<T> {
 
     public List<?> readKaizenMaster();
 
@@ -26,5 +26,7 @@ public interface KaizenMasterDAO<T>extends GenericsDAO<T>{
     public List<?> readKaizenMasterList(Integer id);
 
     public List<?> readPastKaizenMaster();
-    
+
+    public List<?> readByDeptIdCompanyNameDesId(int deptid);
+
 }

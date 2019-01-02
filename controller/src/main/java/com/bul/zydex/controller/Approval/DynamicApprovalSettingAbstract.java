@@ -7,10 +7,12 @@ package com.bul.zydex.controller.Approval;
 
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.Company;
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.DynamicApprovalSetting;
 import com.bul.zydex.model.DynamicApprovalSettingApprover;
 import com.bul.zydex.model.DynamicApprovalSettingEmail;
+import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.Modules;
 import com.bul.zydex.model.ProjectManagementMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
@@ -20,7 +22,9 @@ import com.bul.zydex.service.Approval.DynamicApprovalSettingService;
 import com.bul.zydex.service.ModulesService;
 import com.bul.zydex.service.ProjectManagement.ProjectManagementService;
 import com.bul.zydex.service.company.CompanyMasterService;
+import com.bul.zydex.service.emp.DepartmentMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
+import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.zydexLocation.ZydexLocationMasterService;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +46,8 @@ public class DynamicApprovalSettingAbstract extends CustomAbstract {
     protected ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
     protected DesignationMasterService<DesignationMaster> designationMasterService;
     protected ProjectManagementService<ProjectManagementMaster> projectManagementService;
+//    protected DepartmentMasterService<DepartmentMaster> departmentMasterService;
+    protected LocationMasterService<LocationMaster> locationMasterService;
 
     public DynamicApprovalSettingService<DynamicApprovalSetting> getDynamicApprovalSettingService() {
         return dynamicApprovalSettingService;
@@ -106,7 +112,15 @@ public class DynamicApprovalSettingAbstract extends CustomAbstract {
     public void setProjectManagementService(ProjectManagementService<ProjectManagementMaster> projectManagementService) {
         this.projectManagementService = projectManagementService;
     }
-    
+
+    public LocationMasterService<LocationMaster> getLocationMasterService() {
+        return locationMasterService;
+    }
+
+    public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
+        this.locationMasterService = locationMasterService;
+    }
+
     protected void mouleList(HttpServletRequest request) {
 
         Modules module = new Modules();
@@ -133,19 +147,18 @@ public class DynamicApprovalSettingAbstract extends CustomAbstract {
         request.setAttribute("companyList", dm);
     }
 
-    protected void locationList(HttpServletRequest request) {
-
-        ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
-        List<?> locationList = zydexLocationMasterService.read();
-        Map<Integer, String> zl = new HashMap<>();
-        for (Object o : locationList) {
-            zydexLocationMaster = (ZydexLocationMaster) o;
-            zl.put(zydexLocationMaster.getId(), zydexLocationMaster.getZydexLocation());
-        }
-
-        request.setAttribute("locationList", zl);
-    }
-
+//    protected void locationList(HttpServletRequest request) {
+//
+//        ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
+//        List<?> locationList = zydexLocationMasterService.read();
+//        Map<Integer, String> zl = new HashMap<>();
+//        for (Object o : locationList) {
+//            zydexLocationMaster = (ZydexLocationMaster) o;
+//            zl.put(zydexLocationMaster.getId(), zydexLocationMaster.getZydexLocation());
+//        }
+//
+//        request.setAttribute("locationList", zl);
+//    }
     protected void designationList(HttpServletRequest request) {
 
         DesignationMaster designationMaster = new DesignationMaster();
@@ -159,4 +172,27 @@ public class DynamicApprovalSettingAbstract extends CustomAbstract {
         request.setAttribute("designationList", dl);
     }
 
+    protected void locationList(HttpServletRequest request) {
+        LocationMaster locationMaster = new LocationMaster();
+        List<?> location = locationMasterService.read();
+
+        Map<Integer, String> location1 = new HashMap<>();
+        for (Object o : location) {
+            locationMaster = (LocationMaster) o;
+            location1.put(locationMaster.getId(), locationMaster.getLocation());
+        }
+        request.setAttribute("locationList", location1);
+    }
+
+    protected void departmentList(HttpServletRequest request) {
+        DepartmentMaster departmentMaster = new DepartmentMaster();
+        List<?> depttList = departmentMasterService.read();
+        Map<Integer, String> dm = new HashMap<>();
+        for (Object o : depttList) {
+            departmentMaster = (DepartmentMaster) o;
+            dm.put(departmentMaster.getId(), departmentMaster.getDepartmentName());
+        }
+
+        request.setAttribute("designationList", dm);
+    }
 }

@@ -77,4 +77,9 @@ public class EmployeeCtcDetailServiceImpl<T> extends GenericsServiceImpl<T> impl
           return employeeCtcDetailDAO.bonusFetch(employeeid);
     }
 
+    @Override
+    public void deleteByemployeeId(int id) {
+        employeeCtcDetailDAO.deleteByemployeeId(id);
+    }
+
 }

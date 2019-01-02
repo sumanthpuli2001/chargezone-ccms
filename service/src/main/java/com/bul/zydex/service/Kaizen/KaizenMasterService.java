@@ -27,4 +27,6 @@ public interface KaizenMasterService<T> extends GenericsService<T> {
 
     public List<?> readPastKaizenMaster();
 
+    public List<?> readByDeptIdCompanyNameDesId(int deptid);
+
 }

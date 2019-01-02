@@ -17,6 +17,7 @@ import com.bul.zydex.model.TrainingFeedback;
 import com.bul.zydex.model.TrainingIdentification;
 import com.bul.zydex.model.TrainingMaster;
 import com.bul.zydex.model.TrainingQuestionAnswerSubmit;
+import com.bul.zydex.model.TrainingResultStatus;
 import com.bul.zydex.model.TrainingSubType;
 import com.bul.zydex.model.TrainingType;
 import com.bul.zydex.model.UserMaster;
@@ -27,6 +28,7 @@ import com.bul.zydex.service.Training.TrainingAttendanceService;
 import com.bul.zydex.service.Training.TrainingIdentificationService;
 import com.bul.zydex.service.Training.TrainingMasterService;
 import com.bul.zydex.service.Training.TrainingQuestionAnswerSubmitService;
+import com.bul.zydex.service.Training.TrainingResultStatusService;
 import com.bul.zydex.service.Training.TrainingSubTypeService;
 import com.bul.zydex.service.Training.TrainingTypeService;
 import com.bul.zydex.service.emp.EmployeeMasterService;
@@ -68,6 +70,7 @@ public abstract class TrainerLogInAbstract extends CustomAbstract {
     protected QuestionPaperService<QuestionPaper> questionPaperService;
     protected TrainingAssessmentService<TrainingAssessment> trainingAssessmentService;
     protected EmployeeFeedbackService<EmployeeFeedback> employeeFeedbackService;
+    protected TrainingResultStatusService<TrainingResultStatus> trainingResultStatusService;
 
     public EmployeeFeedbackService<EmployeeFeedback> getEmployeeFeedbackService() {
         return employeeFeedbackService;
@@ -175,6 +178,15 @@ public abstract class TrainerLogInAbstract extends CustomAbstract {
     public void setQuestionAnsService(QuestionAnsService<QuestionAns> questionAnsService) {
         this.questionAnsService = questionAnsService;
     }
+
+    public TrainingResultStatusService<TrainingResultStatus> getTrainingResultStatusService() {
+        return trainingResultStatusService;
+    }
+
+    public void setTrainingResultStatusService(TrainingResultStatusService<TrainingResultStatus> trainingResultStatusService) {
+        this.trainingResultStatusService = trainingResultStatusService;
+    }
+    
 
 //    public Validator getForgotPwdValidator() {
 //        return forgotPwdValidator;

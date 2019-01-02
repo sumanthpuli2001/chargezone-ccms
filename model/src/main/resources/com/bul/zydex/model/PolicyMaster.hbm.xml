@@ -11,6 +11,9 @@
         <property name="policyName" type="string">
             <column name="policy_name" length="45" not-null="true" />
         </property>
+        <property name="countstatus" type="string">
+            <column name="countstatus" length="45"/>
+        </property>
         <set name="employeePolicyDetail" inverse="true">
             <key>
                 <column name="policy_master_id" />

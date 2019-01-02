@@ -64,13 +64,12 @@
             function deleteCheck11() {
                 var checkboxes = confirm("Are you sure you want to delete?");
                 if (checkboxes) {
-                    checkboxes = document.getElementsByName('checkId');
-        </script>
+                checkboxes = document.getElementsByName('checkId');</script>
 
     </head>
     <body>
         <section class="content-header">
-             <table>
+            <table>
 
                 <td style="text-align: left;">
                     <span><img src="StorageYard/Images/logo.png"  style="width: 150px;float: left;margin-top: 5%;margin-left: 5%;"/></span> 
@@ -91,7 +90,7 @@
         <form:form class="form-horizontal" role="form" method="post" name='form1'
                    commandName="applayJobUserMaster" onsubmit='return deleteCheck11();' action="vacancy.htm?act=loginCandidate&id=${vacid}">
             <form:hidden path="id"></form:hidden>
-               
+
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">
@@ -109,9 +108,9 @@
 
                                 <div class="col-sm-1" style="text-align: left" >
                                     <input type="hidden" name="vacid" value="${vacid}"/>
-                                    <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
-                                </div>
-                                <div class="col-sm-3">
+                                <label>Password :<span style="color: red;font-size: 12px;">*</span></label>
+                            </div>
+                            <div class="col-sm-3">
                                 <form:password path="password" class="form-control" placeholder="Password"></form:password>
                                 <form:errors path="password" cssClass="errorDiv"></form:errors>
                                 </div>
@@ -122,11 +121,16 @@
                 </br>
 
                 <div class="form-group">
-                    <div class=" col-sm-offset-0">
-                        <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >Submit</button>
-                    <button type="button" class="btn btn-primary" style="float: center; width: 120px;" onclick="window.location = 'vacancy.htm?act=signUp&id=${vacid}'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</button>
+                    <div>
+                        <center>
+                            <button type="submit" class="btn btn-primary" style="text-align: center; width: 100px;" data-original-title="" title="" >Login</button>
+                        </center>
+                        <div style="text-align: right !important; margin-right: 20%;">
+                            <p >If you are a New User:</p><label style="float: center; width: 120px;" onclick="window.location = 'vacancy.htm?act=signUp&id=${vacid}'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Sign Up</label>
                     </div>
+
                 </div>
+            </div>
 
         </form:form>
         <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>

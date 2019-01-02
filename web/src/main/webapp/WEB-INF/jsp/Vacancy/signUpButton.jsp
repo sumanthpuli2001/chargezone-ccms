@@ -101,7 +101,8 @@
         <form:form class="form-horizontal" method="post"
                    commandName="applayJobUserMaster" onsubmit='return saveSubmit11();' action="vacancy.htm?act=signUpCandidate&id=${vacid}">
             <form:hidden path="id"></form:hidden>
-                <!--<input type="hidden" name="lockCounter" value="0"/>-->
+            <%--<form:hidden path="id"></form:hidden>--%>
+                <!--<input type="text" name="lockCounter" value="${vacid}"/>-->
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12 col-sm-12">

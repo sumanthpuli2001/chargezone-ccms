@@ -54,22 +54,22 @@
                 document.getElementById('budgetRequirementError').innerHTML = '-It must not be empty or white space.';
                 flag = false;
             }
-            if ($('#improvementDescription').val() == '') {
-                document.getElementById('improvementDescriptionError').innerHTML = '-It must not be empty or white space.';
-                flag = false;
-            }
-            if ($('#tangibleBenefit').val() == '') {
-                document.getElementById('tangibleBenefitError').innerHTML = '-It must not be empty or white space.';
-                flag = false;
-            }
-            if ($('#intangibleBenefit').val() == '') {
-                document.getElementById('intangibleBenefitError').innerHTML = '-It must not be empty or white space.';
-                flag = false;
-            }
-            if ($('#horizontalDeployment').val() == '') {
-                document.getElementById('horizontalDeploymentError').innerHTML = '-It must not be empty or white space.';
-                flag = false;
-            }
+//            if ($('#improvementDescription').val() == '') {
+//                document.getElementById('improvementDescriptionError').innerHTML = '-It must not be empty or white space.';
+//                flag = false;
+//            }
+//            if ($('#tangibleBenefit').val() == '') {
+//                document.getElementById('tangibleBenefitError').innerHTML = '-It must not be empty or white space.';
+//                flag = false;
+//            }
+//            if ($('#intangibleBenefit').val() == '') {
+//                document.getElementById('intangibleBenefitError').innerHTML = '-It must not be empty or white space.';
+//                flag = false;
+//            }
+//            if ($('#horizontalDeployment').val() == '') {
+//                document.getElementById('horizontalDeploymentError').innerHTML = '-It must not be empty or white space.';
+//                flag = false;
+//            }
             return flag;
         }
 
@@ -103,7 +103,7 @@
                                     <table style="width:90%">
                                         <tr>
                                             <th colspan="3">Kaizen Sr. No.</th>
-                                            <th colspan="5"><input name="srNo" readonly="true" size="3px;" value="${randomNumber}"/></th>
+                                            <th colspan="5"><input name="srNo" size="3px;" value="${randomNumber}"/></th>
                                             <th colspan="2">Team Leader</th>
                                             <th colspan="2"><input name="teamLeader" id="teamLeader" type="text" onchange="kaizenOnchangeFunction('teamLeaderError');"><br>
                                                 <span style="font-size: 14px; color: #dd4b39;" id="teamLeaderError"></span></th>
@@ -120,7 +120,7 @@
                                             <th colspan="3">Department </th>
                                             <th colspan="5"><input name="department" id="department" type="text" size="20px;"onchange="kaizenOnchangeFunction('departmentError');"><br>
                                                 <span style="font-size: 14px; color: #dd4b39;" id="departmentError"></span></th>
-                                            <th colspan="2" rowspan="3">Team Member </th>
+                                            <th colspan="2" rowspan="3">Team Members </th>
                                             <th colspan="2" rowspan="3">
                                                 <textarea name="teamMember" id="teamMember" style="resize: none" rows="8" cols="23"onchange="kaizenOnchangeFunction('teamMemberError');"></textarea>
                                                 <span style="font-size: 14px; color: #dd4b39;" id="teamMemberError"></span></th>
@@ -147,20 +147,20 @@
                                             </th>
                                         </tr>
                                         <tr>
-                                            <th colspan="2">Tangible Benefit  </th>
+                                            <th colspan="2">Tangible Benefit(Amt)  </th>
                                             <th colspan="2">
                                                 <input type="text" name="tangibleBenefit" id="tangibleBenefit" type="text" onchange="kaizenOnchangeFunction('tangibleBenefitError');"/>
                                             </th>
                                         </tr>
                                         <tr>
-                                            <th colspan="2">Budget Requirement  </th>
+                                            <th colspan="2">Budget Requirement(Amt)  </th>
                                             <th colspan="2"><input name="budgetRequirement"id="budgetRequirement" type="text" onchange="kaizenOnchangeFunction('budgetRequirementError');"><br>
                                                 <span style="font-size: 14px; color: #dd4b39;" id="budgetRequirementError"></span>
                                             </th>
                                         </tr>
                                         <tr style="vertical-align: top;">
                                             <th colspan="3" rowspan="5">Improvement Description :<br>
-                                                <textarea name="improvementDescription" id="improvementDescription" style="resize: none" rows="12" cols="35" onchange="kaizenOnchangeFunction('improvementDescriptionError');"></textarea>
+                                                <textarea name="improvementDescription" id="improvementDescription" style="resize: none" rows="12" cols="35" ></textarea>
                                                 <br>  <span style="font-size: 14px; color: #dd4b39;" id="improvementDescriptionError"></span>
                                             </th>
                                             <th colspan="5" rowspan="5" style="text-align: center;">After Photo<br>
@@ -172,7 +172,7 @@
                                         <br>  <span style="font-size: 14px; color: #dd4b39;" id="tangibleBenefitError"></span></th>
                                         </tr>
                                         <tr>
-                                            <th colspan="2" rowspan="1">Intangible Benefit </th>
+                                            <th colspan="2" rowspan="1">Intangible Benefit(Amt) </th>
                                             <th colspan="2" rowspan="1"><input name="intangibleBenefit" id="intangibleBenefit" type="text"onchange="kaizenOnchangeFunction('intangibleBenefitError');">
                                                 <br>  <span style="font-size: 14px; color: #dd4b39;" id="intangibleBenefitError"></span></th>
                                         </tr>
@@ -234,11 +234,11 @@
                                 <div class="form-group">
                                     <br>
                                     <div class="col-sm-6" style="text-align: right">
-                                        <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                        <input type="submit" class="btn btn-primary" name="btnType"  style="width: 100px;"  title="" value="SUBMIT">
                                     </div>
-                                    <div class="col-sm-3" style="text-align: left">
-                                        <button type="submit" class="btn btn-facebook" id="btnType2"  class="btn btn-primary" name="btnType"  value="OnHold"  style="width: 100px"> &nbsp;&nbsp;On Hold</button>
-                                    </div>
+<!--                                    <div class="col-sm-3" style="text-align: left">
+                                        <button type="submit" class="btn btn-facebook"   class="btn btn-primary" name="btnType"  value="OnHold"  style="width: 100px"> &nbsp;&nbsp;On Hold</button>
+                                    </div>-->
                                 </div>
                             </div>
                         </div> <!--/tab-content -->

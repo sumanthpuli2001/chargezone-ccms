@@ -8,10 +8,14 @@ package com.bul.zydex.controller.Kaizen;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.ApprovalUser;
 import com.bul.zydex.model.DesignationMaster;
+import com.bul.zydex.model.DynamicApprovalSettingApprover;
+import com.bul.zydex.model.DynamicApprovalSettingEmail;
 import com.bul.zydex.model.KaizenApproval;
 import com.bul.zydex.model.KaizenApprovalHistory;
 import com.bul.zydex.model.KaizenMaster;
 import com.bul.zydex.service.Approval.ApprovalUserService;
+import com.bul.zydex.service.Approval.DynamicApprovalSettingApproverService;
+import com.bul.zydex.service.Approval.DynamicApprovalSettingEmailService;
 import com.bul.zydex.service.Kaizen.KaizenApprovalHistoryService;
 import com.bul.zydex.service.Kaizen.KaizenApprovalService;
 import com.bul.zydex.service.Kaizen.KaizenMasterService;
@@ -28,6 +32,8 @@ public class KaizenMasterAbstract extends CustomAbstract {
     protected KaizenApprovalService<KaizenApproval> kaizenApprovalService;
     protected DesignationMasterService<DesignationMaster> designationMasterService;
     protected KaizenApprovalHistoryService<KaizenApprovalHistory> kaizenApprovalHistoryService;
+    protected DynamicApprovalSettingApproverService<DynamicApprovalSettingApprover> dynamicApprovalSettingApproverService;
+    protected DynamicApprovalSettingEmailService<DynamicApprovalSettingEmail> dynamicApprovalSettingEmailService;
 
     public KaizenMasterService<KaizenMaster> getKaizenMasterService() {
         return kaizenMasterService;
@@ -67,6 +73,22 @@ public class KaizenMasterAbstract extends CustomAbstract {
 
     public void setKaizenApprovalHistoryService(KaizenApprovalHistoryService<KaizenApprovalHistory> kaizenApprovalHistoryService) {
         this.kaizenApprovalHistoryService = kaizenApprovalHistoryService;
+    }
+
+    public DynamicApprovalSettingApproverService<DynamicApprovalSettingApprover> getDynamicApprovalSettingApproverService() {
+        return dynamicApprovalSettingApproverService;
+    }
+
+    public void setDynamicApprovalSettingApproverService(DynamicApprovalSettingApproverService<DynamicApprovalSettingApprover> dynamicApprovalSettingApproverService) {
+        this.dynamicApprovalSettingApproverService = dynamicApprovalSettingApproverService;
+    }
+
+    public DynamicApprovalSettingEmailService<DynamicApprovalSettingEmail> getDynamicApprovalSettingEmailService() {
+        return dynamicApprovalSettingEmailService;
+    }
+
+    public void setDynamicApprovalSettingEmailService(DynamicApprovalSettingEmailService<DynamicApprovalSettingEmail> dynamicApprovalSettingEmailService) {
+        this.dynamicApprovalSettingEmailService = dynamicApprovalSettingEmailService;
     }
     
     

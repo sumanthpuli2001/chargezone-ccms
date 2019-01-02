@@ -116,7 +116,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         OnlineAssessment onlineAssessment = new OnlineAssessment();
         CandidateApplyJob candidateApplyJob = new CandidateApplyJob();
         MprApprovalHistory mprApprovalHistory = new MprApprovalHistory();
-//        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster2 = new EmployeeMaster();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(candidateF2FRequest, "candidateF2FRequest");
         bind(request, candidateF2FRequest);
@@ -158,14 +158,36 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
             if (null != request.getParameter("policyId" + i)) {
                 if (!request.getParameter("policyId" + i).equals("")) {
                     int policyId = Integer.parseInt(request.getParameter("policyId" + i));
-                    employeeMaster = employeeMasterService.readById(policyId);
+                    employeeMaster2 = employeeMasterService.readById(policyId);
 
-                    candidateF2FApproval.setEmployeeMaster(employeeMaster);
+                    candidateF2FApproval.setEmployeeMaster(employeeMaster2);
                     candidateF2FApproval.setCandidateF2FRequest(candidateF2FRequest);
                     candidateF2FApproval.setCreatedBy(employeeMaster.getId());
                     candidateF2FApproval.setCreatedDate(sdf.format(cDate));
                     candidateF2FApproval.setStatus(0);
                     candidateF2FApprovalService.create(candidateF2FApproval);
+
+                    try {
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeMaster2.getId());
+                        DesignationMaster designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
+                        // id ( Not created id 138) is for Face To Face Invitation User....
+                        emailTemplate = emailTemplateService.readById(162);
+                        String To = employeeMaster1.getOfficeEmailId();
+                        String from = "";
+                        String Subject = "Recruitment Panel Invitation for Position of" + vm.getName();
+                        String msg = emailTemplate.getBodytext();
+//                        Subject = Subject.replaceAll("\\{user\\}", employeeMaster.getEmployeeName());
+                        msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        msg = msg.replaceAll("\\{name_position\\}", vm.getName());
+//                        msg = msg.replaceAll("\\{date_of_birth\\}", sdf.format(cDate));
+                        msg = msg.replaceAll("\\{date_of_joining\\}", candidateF2FRequest.getDateOfInterview());
+                        msg = msg.replaceAll("\\{passport_no\\}", candidateF2FRequest.getLocation());
+                        sendMail.sendMail(from, To, Subject, msg);
+                    } catch (Exception e) {
+                    }
 
                 }
             }

@@ -36,4 +36,6 @@ public interface VisitorManagementDAO<T> extends GenericsDAO<T> {
     public List<?> readSearchEmpRequestForSessionEmployee(Integer id, String startDate, String endDate, String status);
 
     public List<?> readByapproverId(String employeeId, String designationId, String departmentId, String startDate, String endDate, String status);
+
+    public List<?> getDetailsByContactNo(String contactNo);
 }

@@ -142,7 +142,7 @@
             document.getElementById('startDateError').innerHTML = '-It must not be empty or white space.';
             flag = false;
         }
-         if ($('#endDate').val() == '') {
+        if ($('#endDate').val() == '') {
             document.getElementById('endDateError').innerHTML = '-It must not be empty or white space.';
             flag = false;
         }
@@ -209,7 +209,7 @@
                                     </div>
                                     <div class="col-sm-5">
                                         <label class="control-label">Description<span style="color: red;font-size: 12px;"></span></label>
-                                        <form:textarea path="trainingDescription" class="form-control"/>
+                                            <form:textarea path="trainingDescription" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -218,13 +218,13 @@
                                         <!--${list}-->
                                         <!--${employeeMaster.employeeName}-->
                                         <label class="control-label">Training Requester<span style="color: red;font-size: 12px;"></span></label>
-                                        <%--<form:input path="trainingOwner" value="${employeeMaster.employeeName}" class="form-control" disabled="true"/>--%>
+                                            <%--<form:input path="trainingOwner" value="${employeeMaster.employeeName}" class="form-control" disabled="true"/>--%>
                                         <!--<br>-->
                                         <%--<form:input path="trainingOwner" class="form-control" name="policyId1" id="policyId1"></form:input>--%>
                                         <form:input path="trainingOwner" class="form-control"></form:input>
-                                    </div>
-                                    <div class="col-sm-5">
-                                        <!--${trainingMaster.trainer.trainerName}-->
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <!--${trainingMaster.trainer.trainerName}-->
                                         <label class="control-label">Trainer<span style="color: red;font-size: 12px;">*</span></label>
                                         <form:select name="trainer" id="trainer" class="form-control" path="trainer.id" onchange="trainerOnchangeFunction('trainerError');" >
                                             <form:option value="" label="-- Select --" ></form:option>
@@ -268,13 +268,28 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-5">
+                                        <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
+                                        <form:select name="departmentMasterid"  id="departmentMasterid" path="departmentMaster.id" class="form-control">
+                                            <form:option value="" label="-- Select --" ></form:option>
+                                            <form:options items="${deptMap}"></form:options>
+                                        </form:select>
+                                        <%--<form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>--%>
+                                        </div>
+
+                                        <div class="col-sm-5">
+                                            <label class="control-label">Training Source<span style="color: red;font-size: 12px;">*</span></label>
+                                        <form:input path="trainingSource" class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-5">
                                         <label class="control-label">Venue<span style="color: red;font-size: 12px;">*</span></label>
                                         <form:input path="venue" class="form-control" id="venue" onchange="trainerOnchangeFunction('venueError');"/>
                                         <span style="font-size: 14px; color: #dd4b39;" id="venueError"></span>
                                     </div>
                                     <div class="col-sm-5">
                                         <label class="control-label">Cost<span style="color: red;font-size: 12px;"></span></label>
-                                        <form:input path="cost" class="form-control"/>
+                                            <form:input path="cost" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -319,28 +334,28 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-sm-5">
-                                            <label class="control-label">Training Source<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="trainingSource" class="form-control"/>
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <label class="control-label">Reimbursable<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:radiobutton path="reimbursable" value="1" required="required"/>Yes
-                                            <form:radiobutton path="reimbursable" value="0" required="required"/>No
-                                        </div>
+                                        <!--                                        <div class="col-sm-5">
+                                                                                    <label class="control-label">Training Source<span style="color: red;font-size: 12px;">*</span></label>
+                                    <%--<form:input path="trainingSource" class="form-control"/>--%>
+                                </div>-->
+                                    <div class="col-sm-5">
+                                        <label class="control-label">Reimbursable<span style="color: red;font-size: 12px;">*</span></label>
+                                        <form:radiobutton path="reimbursable" value="1" required="required"/>Yes
+                                        <form:radiobutton path="reimbursable" value="0" required="required"/>No
                                     </div>
-                                    <!--<div class="form-group">-->
-                                        <!--<div class="col-sm-5">-->
-                                            <!--<label class="control-label">Company Sponsor<span style="color: red;font-size: 12px;">*</span></label>-->
-                                            <%--<form:radiobutton path="companySponsor" value="1" required="required"/>Yes
-                                            <form:radiobutton path="companySponsor" value="0" required="required"/>No --%>
-                                        <!--</div>-->
-                                        <!--<div class="col-sm-5">-->
-                                            <!--<label class="control-label">Status<span style="color: red;font-size: 12px;">*</span></label>-->
-                                            <%--<form:radiobutton path="status" value="1" required="required"/>Active 
-                                            <form:radiobutton path="status" value="0" required="required"/>Inactive --%>
-                                        <!--</div>-->
-                                    <!--</div>-->
+                                </div>
+                                <!--<div class="form-group">-->
+                                <!--<div class="col-sm-5">-->
+                                <!--<label class="control-label">Company Sponsor<span style="color: red;font-size: 12px;">*</span></label>-->
+                                <%--<form:radiobutton path="companySponsor" value="1" required="required"/>Yes
+                                <form:radiobutton path="companySponsor" value="0" required="required"/>No --%>
+                                <!--</div>-->
+                                <!--<div class="col-sm-5">-->
+                                <!--<label class="control-label">Status<span style="color: red;font-size: 12px;">*</span></label>-->
+                                <%--<form:radiobutton path="status" value="1" required="required"/>Active 
+                                <form:radiobutton path="status" value="0" required="required"/>Inactive --%>
+                                <!--</div>-->
+                                <!--</div>-->
                                 <!--</div>-->
                                 <div class="form-group">
                                     <div class="col-sm-6 col-sm-offset-5">
@@ -398,7 +413,7 @@
                 });
             </script>
             <script type="text/javascript">
-    jQuery.noConflict();
+                jQuery.noConflict();
 //    jQuery(document).ready(function () {
 //
 //        jQuery("#policyId1").tokenInput(${list}, {
@@ -410,16 +425,16 @@
 //        });
 //    });
 
-jQuery(document).ready(function () {
-            jQuery("#trainingOwner").tokenInput(${list}, {
-                preventDuplicates: true,
-                noResultsText: "No Result",
-                tokenLimit: "1",
-                searchingText: "Searching ... .. .",
-                prePopulate: ${preList},
-            });
-        });
-</script>
+                jQuery(document).ready(function () {
+                    jQuery("#trainingOwner").tokenInput(${list}, {
+                        preventDuplicates: true,
+                        noResultsText: "No Result",
+                        tokenLimit: "1",
+                        searchingText: "Searching ... .. .",
+                        prePopulate: ${preList},
+                    });
+                });
+            </script>
             <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 
 

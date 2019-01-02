@@ -7,13 +7,15 @@ package com.bul.zydex.service.Kaizen;
 
 import com.bul.zydex.model.KaizenApproval;
 import com.bul.zydex.service.GenericsService;
+import java.util.List;
 
 /**
  *
  * @author Aman
  */
-public interface KaizenApprovalService<T> extends GenericsService<T>{
+public interface KaizenApprovalService<T> extends GenericsService<T> {
 
     public KaizenApproval readByIdAndEmp(int id, int empId);
-    
+
+    public List<?> readApprovalSteeringCommitteList(int empId);
 }

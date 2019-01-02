@@ -277,4 +277,10 @@ public class VisitorManagementDAOImpl<T> extends GenericsDAOImpl<T> implements V
 
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> getDetailsByContactNo(String contactNo) {
+         String sqlQuery = "SELECT v FROM VisitorManagement v where v.visitorContactDetail = '" + contactNo.trim() + "' order by id desc limit 1";
+        return getHibernateTemplate().find(sqlQuery);
+    }
 }

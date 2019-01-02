@@ -6,11 +6,13 @@
 package com.bul.zydex.controller.Approval;
 
 import com.bul.zydex.model.Company;
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.DynamicApprovalSetting;
 import com.bul.zydex.model.DynamicApprovalSettingApprover;
 import com.bul.zydex.model.DynamicApprovalSettingEmail;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.Modules;
 import com.bul.zydex.model.ProjectManagementMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
@@ -39,22 +41,22 @@ public class DynamicApprovalSettingController extends DynamicApprovalSettingAbst
         ModelAndView mv = new ModelAndView();
 
         Company company = new Company();
-        ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
-        DesignationMaster designationMaster = new DesignationMaster();
+        LocationMaster locationMaster = new LocationMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
         Modules modules = new Modules();
         List al = new ArrayList();
         List<DynamicApprovalSetting> dynamicCycleList = (List<DynamicApprovalSetting>) dynamicApprovalSettingService.read();
         for (DynamicApprovalSetting approvalSetting : dynamicCycleList) {
             DynamicApprovalSetting dynamicApprovalSetting = new DynamicApprovalSetting();
             List<DynamicApprovalSetting> arrayList = new ArrayList<DynamicApprovalSetting>();
-            company = companyMasterService.readById(approvalSetting.getCompany().getCompanyId());
-            zydexLocationMaster = zydexLocationMasterService.readById(approvalSetting.getZydexLocationMaster().getId());
+//            company = companyMasterService.readById(approvalSetting.getCompany().getCompanyId());
+//            locationMaster = locationMasterService.readById(approvalSetting.getLocationMaster().getId());
             modules = modulesService.readById(approvalSetting.getModules().getId());
-            designationMaster = designationMasterService.readById(approvalSetting.getDesignationMaster().getId());
-            dynamicApprovalSetting.setCompany(company);
+            departmentMaster = departmentMasterService.readById(approvalSetting.getDepartmentMaster().getId());
+//            dynamicApprovalSetting.setCompany(company);
             dynamicApprovalSetting.setModules(modules);
-            dynamicApprovalSetting.setDesignationMaster(designationMaster);
-            dynamicApprovalSetting.setZydexLocationMaster(zydexLocationMaster);
+            dynamicApprovalSetting.setDepartmentMaster(departmentMaster);
+//            dynamicApprovalSetting.setLocationMaster(locationMaster);
             dynamicApprovalSetting.setId(approvalSetting.getId());
 //            arrayList.add(dynamicApprovalSetting);
             al.add(dynamicApprovalSetting);
@@ -72,10 +74,10 @@ public class DynamicApprovalSettingController extends DynamicApprovalSettingAbst
         EmployeeMaster employeeMaster = new EmployeeMaster();
         BindException errors = new BindException(dynamicApprovalSettingSupport, "dynamicApprovalSettingSupport");
         bind(request, dynamicApprovalSettingSupport);
-        mouleList(request);
-        locationList(request);
-        designationList(request);
-        companyList(request);
+//        mouleList(request);
+//        locationList(request);
+        departmentList(request);
+//        companyList(request);
         selectEmployee(request, response);
         selectedEmployeeFor360Feedback(request, employeeMaster);
         mv.getModelMap().put("dynamicApprovalSettingSupport", dynamicApprovalSettingSupport);
@@ -105,12 +107,12 @@ public class DynamicApprovalSettingController extends DynamicApprovalSettingAbst
     public ModelAndView submitDynamicApproval(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         DynamicApprovalSetting dynamicApprovalSetting = new DynamicApprovalSetting();
-        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+         EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         int id = Integer.parseInt(request.getParameter("id"));
         int projectName;
-        int moduleId = Integer.parseInt(request.getParameter("moduleId"));
-        int companyId = Integer.parseInt(request.getParameter("companyId"));
-        int locationId = Integer.parseInt(request.getParameter("zydexLocationMasterId"));
+        int moduleId = 10;
+//        int companyId = Integer.parseInt(request.getParameter("companyId"));
+//        int locationId = Integer.parseInt(request.getParameter("zydexLocationMasterId"));
         int designationMasterId = Integer.parseInt(request.getParameter("designationMasterId"));
         if (request.getParameter("projectName") == null) {
             projectName = 0;
@@ -126,26 +128,28 @@ public class DynamicApprovalSettingController extends DynamicApprovalSettingAbst
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
 
-        Company company = companyMasterService.readById(companyId);
-        ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(locationId);
+//        Company company = companyMasterService.readById(companyId);
+//        ZydexLocationMaster zydexLocationMaster = zydexLocationMasterService.readById(locationId);
+//        LocationMaster locationMaster = locationMasterService.readById(locationId);
         Modules modules = modulesService.readById(moduleId);
-        DesignationMaster designationMaster = designationMasterService.readById(designationMasterId);
+//        DesignationMaster designationMaster = designationMasterService.readById(designationMasterId);
+        DepartmentMaster departmentMaster = departmentMasterService.readById(designationMasterId);
 
         if (0 != id) {
             dynamicApprovalSetting = dynamicApprovalSettingService.readById(id);
-            dynamicApprovalSetting.setCompany(company);
-            dynamicApprovalSetting.setDesignationMaster(designationMaster);
+//            dynamicApprovalSetting.setCompany(company);
+            dynamicApprovalSetting.setDepartmentMaster(departmentMaster);
             dynamicApprovalSetting.setModules(modules);
-            dynamicApprovalSetting.setZydexLocationMaster(zydexLocationMaster);
+//            dynamicApprovalSetting.setLocationMaster(locationMaster);
             dynamicApprovalSetting.setUpdatedBy(employeeMasterModel.getId());
             dynamicApprovalSetting.setUpdatedDate(sdf.format(date));
             dynamicApprovalSetting.setProjectName(projectName);
             dynamicApprovalSettingService.update(dynamicApprovalSetting);
         } else {
-            dynamicApprovalSetting.setCompany(company);
-            dynamicApprovalSetting.setDesignationMaster(designationMaster);
+//            dynamicApprovalSetting.setCompany(company);
+            dynamicApprovalSetting.setDepartmentMaster(departmentMaster);
             dynamicApprovalSetting.setModules(modules);
-            dynamicApprovalSetting.setZydexLocationMaster(zydexLocationMaster);
+//            dynamicApprovalSetting.setLocationMaster(locationMaster);
             dynamicApprovalSetting.setCreatedBy(employeeMasterModel.getId());
             dynamicApprovalSetting.setCreatedDate(sdf.format(date));
             dynamicApprovalSetting.setProjectName(projectName);
@@ -155,6 +159,10 @@ public class DynamicApprovalSettingController extends DynamicApprovalSettingAbst
         for (int i = 0; i < approverId.length; i++) {
             DynamicApprovalSettingApprover dynamicApprovalSettingApprover = new DynamicApprovalSettingApprover();
             if (!approverId[i].equals("")) {
+                List<DynamicApprovalSettingApprover> approversList = (List<DynamicApprovalSettingApprover>) dynamicApprovalSettingApproverService.readByDnamicApprovalSettingId(dynamicApprovalSetting.getId());
+                for (DynamicApprovalSettingApprover approver : approversList) {
+                    dynamicApprovalSettingApproverService.delete(approver.getId());
+                }
                 EmployeeMaster em = employeeMasterService.readById(Integer.parseInt(approverId[i]));
                 dynamicApprovalSettingApprover.setApproverName(em.getEmployeeName());
                 dynamicApprovalSettingApprover.setDynamicApprovalSettingId(dynamicApprovalSetting);
@@ -165,6 +173,10 @@ public class DynamicApprovalSettingController extends DynamicApprovalSettingAbst
         for (int i = 0; i < emailerId.length; i++) {
             DynamicApprovalSettingEmail dynamicApprovalSettingEmail = new DynamicApprovalSettingEmail();
             if (!emailerId[i].equals("")) {
+                 List<DynamicApprovalSettingEmail> dases = (List<DynamicApprovalSettingEmail>) dynamicApprovalSettingEmailService.readByDnamicApprovalSettingId(dynamicApprovalSetting.getId());
+                for (DynamicApprovalSettingEmail dase : dases) {
+                    dynamicApprovalSettingEmailService.delete(dase.getId());
+                }
                 EmployeeMaster employeeMaster1 = employeeMasterService.readById(Integer.parseInt(emailerId[i]));
                 dynamicApprovalSettingEmail.setApproverName(employeeMaster1.getEmployeeName());
                 dynamicApprovalSettingEmail.setEmailId(employeeMaster1.getEmailAddress());
@@ -222,13 +234,13 @@ public class DynamicApprovalSettingController extends DynamicApprovalSettingAbst
         List approverList = new ArrayList();
         List emailList = new ArrayList();
         dass.setId(id);
-        dass.setCompanyId(dynamicApprovalSetting.getCompany().getCompanyId());
+//        dass.setCompanyId(dynamicApprovalSetting.getCompany().getCompanyId());
         EmployeeMaster employeeMaster = new EmployeeMaster();
-        dass.setDesignationMasterId(dynamicApprovalSetting.getDesignationMaster().getId());
-        dass.setZydexLocationMasterId(dynamicApprovalSetting.getZydexLocationMaster().getId());
+        dass.setDesignationMasterId(dynamicApprovalSetting.getDepartmentMaster().getId());
+//        dass.setZydexLocationMasterId(dynamicApprovalSetting.getLocationMaster().getId());
         dass.setModuleId(dynamicApprovalSetting.getModules().getId());
         dass.setProjectId(dynamicApprovalSetting.getProjectName());
-        List<?> projectList = projectManagementService.read();
+//        List<?> projectList = projectManagementService.read();
         List<DynamicApprovalSettingApprover> list = (List<DynamicApprovalSettingApprover>) dynamicApprovalSettingApproverService.readByDnamicApprovalSettingId(id);
         for (DynamicApprovalSettingApprover settingApprover : list) {
             List appList = new ArrayList();
@@ -248,13 +260,13 @@ public class DynamicApprovalSettingController extends DynamicApprovalSettingAbst
 
         mouleList(request);
         locationList(request);
-        designationList(request);
+        departmentList(request);
         companyList(request);
         selectEmployee(request, response);
         selectedEmployeeFor360Feedback(request, employeeMaster);
         request.setAttribute("approverList", approverList);
         request.setAttribute("emailList", emailList);
-        request.setAttribute("projectList", projectList);
+//        request.setAttribute("projectList", projectList);
         mv.getModelMap().put("dynamicApprovalSettingSupport", dass);
         mv.setViewName("Approval/editDynamicApprovalCycle");
 //        List<DynamicApprovalSettingApprover>  approvers = (List<DynamicApprovalSettingApprover>) dynamicApprovalSettingApproverService.readByApproverId(id);

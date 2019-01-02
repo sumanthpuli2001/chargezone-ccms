@@ -74,5 +74,8 @@
         <property name="finishStatus" type="java.lang.Integer">
             <column name="finish_status" />
         </property>
+         <many-to-one name="departmentMaster" class="com.bul.zydex.model.DepartmentMaster" fetch="select">
+            <column name="department_id" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

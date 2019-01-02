@@ -334,7 +334,16 @@
                                                             <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].hrFtFApproval}">All Candidate F2F Request</label>
 
                                                     </div>
+                                                    
                                                 </div>
+                                                         <div class="form-group">
+                                                        <div class="col-sm-3">
+                                                        <form:checkbox path="kaizenCommitee"></form:checkbox>
+
+                                                            <label  style="font-weight: normal" data-toggle="tooltip" data-placement="bottom" title="${userDescription[0].kaizenCommitee}">Kaizen Steering Committee</label>
+
+                                                    </div>
+                                                    </div>
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div><!-- /.tab-content -->

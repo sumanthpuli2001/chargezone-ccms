@@ -42,8 +42,8 @@ public class DynamicApprovalSettingApproverServiceImpl<T> extends GenericsServic
     }
 
     @Override
-    public List<?> readByzyLocIdCompnameAndDesId(int zlocId, String ComName, int desId, String module) {
-        return dynamicApprovalSettingApproverDAO.readByzyLocIdCompnameAndDesId(zlocId, ComName, desId, module);
+    public List<?> readByzyLocIdCompnameAndDesId(int desId, String module) {
+        return dynamicApprovalSettingApproverDAO.readByzyLocIdCompnameAndDesId(desId, module);
     }
 
 }

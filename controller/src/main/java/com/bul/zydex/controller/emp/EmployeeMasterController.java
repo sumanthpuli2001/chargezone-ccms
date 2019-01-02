@@ -16,6 +16,7 @@ import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeCtcDetail;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeeMasterExtension;
 import com.bul.zydex.model.EmployeePolicyDetail;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeTypeMaster;
@@ -137,7 +138,50 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeSubType employeeSubType = new EmployeeSubType();
         BindException errors = new BindException(employeeMaster, "employeeMaster");
         UserMaster userMaster = new UserMaster();
-
+        EmployeeMasterExtension employeeMasterExtension = new EmployeeMasterExtension();
+        
+        //*************employee extension**************//
+        
+         String presentAddress2=request.getParameter("presentAddress2");
+         String presentCity=request.getParameter("presentCity");
+         String presentState=request.getParameter("presentState");
+         String presentPostalCode=request.getParameter("presentPostalCode");
+         String presentCountry=request.getParameter("presentCountry");
+         String permanentAddress2=request.getParameter("permanentAddress2");
+         String permanentCity=request.getParameter("permanentCity");
+         String permanentState=request.getParameter("permanentState");
+         String permanentPostalCode=request.getParameter("permanentPostalCode");
+         String permanentCountry=request.getParameter("permanentCountry");
+         String religion=request.getParameter("religion");
+         String disclosedHealthConcerns=request.getParameter("disclosedHealthConcerns");
+         String languagesKnown=request.getParameter("languagesKnown");
+         String hobbies=request.getParameter("hobbies");
+         String childOneGender=request.getParameter("childOneGender");
+         String childTwoGender=request.getParameter("childTwoGender");
+         String flyDocsEmailId=request.getParameter("flyDocsEmailId");
+         String emergencyContactAddress=request.getParameter("emergencyContactAddress");
+         String RelationShip=request.getParameter("RelationShip");
+         String otherImpInfo=request.getParameter("otherImpInfo");
+         String nationality=request.getParameter("nationality");
+         String firstName=request.getParameter("firstName");
+         String middleName=request.getParameter("middleName");
+         String lastName=request.getParameter("lastName");
+         String countryOfIssue=request.getParameter("countryOfIssue");
+         String visaIssueCountry=request.getParameter("visaIssueCountry");
+         String visaIssueDate=request.getParameter("visaIssueDate");
+         String visaValidTillDate=request.getParameter("visaValidTillDate");
+         String drivingLicenceType=request.getParameter("drivingLicenceType");
+         String electionCard=request.getParameter("electionCard");
+         String pfNoFlydocs=request.getParameter("pfNoFlydocs");
+         String withdrawalDate=request.getParameter("withdrawalDate");
+         String nameOfPreviousCompany=request.getParameter("nameOfPreviousCompany");
+         String previousCompanyLocation=request.getParameter("previousCompanyLocation");
+         
+        
+        
+        
+        
+        
         bind(request, employeeMaster);
         //Deopdown List//
         departmentList(request);
@@ -311,6 +355,47 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             userMasterService.create(userMaster);
 
             employeeMasterService.create(employeeMaster);
+            
+            //***********employeeextension create*****************//
+                
+                employeeMasterExtension.setChildOneGender(Boolean.valueOf(childOneGender));
+                employeeMasterExtension.setChildTwoGender(Boolean.valueOf(childTwoGender));
+                employeeMasterExtension.setPresentAddress2(presentAddress2);
+                employeeMasterExtension.setPresentCity(presentCity);
+                employeeMasterExtension.setPresentState(presentState);
+                employeeMasterExtension.setPresentPostalCode(presentPostalCode);
+                employeeMasterExtension.setPresentCountry(presentCountry);
+                employeeMasterExtension.setPermanentAddress2(permanentAddress2);
+                employeeMasterExtension.setPermanentCity(permanentCity);
+                employeeMasterExtension.setPermanentCountry(permanentCountry);
+                employeeMasterExtension.setPermanentPostalCode(permanentPostalCode);
+                employeeMasterExtension.setPermanentState(permanentState);
+                employeeMasterExtension.setReligion(religion);
+                employeeMasterExtension.setDisclosedHealthConcerns(disclosedHealthConcerns);
+                employeeMasterExtension.setLanguagesKnown(languagesKnown);
+                employeeMasterExtension.setHobbies(hobbies);
+                employeeMasterExtension.setFlyDocsEmailId(flyDocsEmailId);
+                employeeMasterExtension.setEmergencyContactAddress(emergencyContactAddress);
+                employeeMasterExtension.setOtherImpInfo(otherImpInfo);
+                employeeMasterExtension.setRelationShip(RelationShip);
+                employeeMasterExtension.setNationality(nationality);
+                employeeMasterExtension.setFirstName(firstName);
+                employeeMasterExtension.setMiddleName(middleName);
+                employeeMasterExtension.setLastName(lastName);
+                employeeMasterExtension.setCountryOfIssue(countryOfIssue);
+                employeeMasterExtension.setVisaIssueCountry(visaIssueCountry);
+                employeeMasterExtension.setVisaIssueDate(visaIssueDate);
+                employeeMasterExtension.setVisaValidTillDate(visaValidTillDate);
+                employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
+                employeeMasterExtension.setElectionCard(electionCard);
+                employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
+                employeeMasterExtension.setWithdrawalDate(withdrawalDate);
+                employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
+                employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
+                employeeMasterExtension.setEmployeeMaster(employeeMaster);
+                employeeMasterServiceExtension.create(employeeMasterExtension);
+            
+            
             //Code for Employee Policy Detail
             EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
             int otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
@@ -721,7 +806,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                mv.setViewName("Employee/EmployeeRegistrationForm");
 //            }
         mv.getModelMap().put("employeeMaster", employeeMaster);
+         // Employee master extension starts here
+         
+         
+         
+        //Employee master extension ends here
         return mv;
+
 
     }
 
@@ -749,9 +840,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        employeeMaster.setEmployeeId(id);
         //set Employee master id//
         EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+//        EmployeeMasterExtension employeeMasterExtension = new EmployeeMasterExtension();
         EmployeeSubType employeeSubType = new EmployeeSubType();
         UserMaster userMaster = new UserMaster();
+        // Employee Extension
         employeeMaster = employeeMasterService.readById(id);
+        List<?> employeeMasterExtensionList = employeeMasterServiceExtension.readByemployeeId(employeeMaster.getId()); 
         ///this code is for read file name and display it
 //        String userName = readUserName(request);
         String userName = request.getParameter("userid");
@@ -874,6 +968,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("certificatesList", certificatesList);
         request.setAttribute("finalPolicyList", finalPolicyList);
         request.setAttribute("finalctcList", finalctcList);
+        //Employee Master Extension
+        request.setAttribute("employeeMasterExtensionList", employeeMasterExtensionList);
+        
         mv.getModelMap().put("employeeMaster", employeeMaster);
         request.setAttribute("mriStatus", employeeMaster.getMaritalStatus());
         mv.setViewName("Employee/EditUserProfile");
@@ -891,6 +988,46 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String reportingManagerForChange = employeeMaster.getReportingManagerLevel1();
         UserMaster userMaster = new UserMaster();
         UserMaster userMaster1 = new UserMaster();
+        
+        //*************employee extension**************//
+        
+         String presentAddress2=request.getParameter("presentAddress2");
+         String presentCity=request.getParameter("presentCity");
+         String presentState=request.getParameter("presentState");
+         String presentPostalCode=request.getParameter("presentPostalCode");
+         String presentCountry=request.getParameter("presentCountry");
+         String permanentAddress2=request.getParameter("permanentAddress2");
+         String permanentCity=request.getParameter("permanentCity");
+         String permanentState=request.getParameter("permanentState");
+         String permanentPostalCode=request.getParameter("permanentPostalCode");
+         String permanentCountry=request.getParameter("permanentCountry");
+         String religion=request.getParameter("religion");
+         String disclosedHealthConcerns=request.getParameter("disclosedHealthConcerns");
+         String languagesKnown=request.getParameter("languagesKnown");
+         String hobbies=request.getParameter("hobbies");
+         String childOneGender=request.getParameter("childOneGender");
+         String childTwoGender=request.getParameter("childTwoGender");
+         String flyDocsEmailId=request.getParameter("flyDocsEmailId");
+         String emergencyContactAddress=request.getParameter("emergencyContactAddress");
+         String RelationShip=request.getParameter("RelationShip");
+         String otherImpInfo=request.getParameter("otherImpInfo");
+         String nationality=request.getParameter("nationality");
+         String firstName=request.getParameter("firstName");
+         String middleName=request.getParameter("middleName");
+         String lastName=request.getParameter("lastName");
+         String countryOfIssue=request.getParameter("countryOfIssue");
+         String visaIssueCountry=request.getParameter("visaIssueCountry");
+         String visaIssueDate=request.getParameter("visaIssueDate");
+         String visaValidTillDate=request.getParameter("visaValidTillDate");
+         String drivingLicenceType=request.getParameter("drivingLicenceType");
+         String electionCard=request.getParameter("electionCard");
+         String pfNoFlydocs=request.getParameter("pfNoFlydocs");
+         String withdrawalDate=request.getParameter("withdrawalDate");
+         String nameOfPreviousCompany=request.getParameter("nameOfPreviousCompany");
+         String previousCompanyLocation=request.getParameter("previousCompanyLocation");        
+         
+        
+        
         bind(request, employeeMaster);
         selectEmployee(request, response);
         departmentList(request);
@@ -993,6 +1130,51 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        }
 
         employeeMasterService.update(employeeMaster);
+        EmployeeMasterExtension employeeMasterExtension1 = new EmployeeMasterExtension();
+        List<?> employeeMasterExtensionlis = employeeMasterServiceExtension.readByemployeeId(employeeMaster.getId());
+        employeeMasterExtension1 = (EmployeeMasterExtension)employeeMasterExtensionlis.get(0);;
+
+//***********employeeextension create*****************//
+                EmployeeMasterExtension employeeMasterExtension = new EmployeeMasterExtension();
+                employeeMasterExtension.setId(employeeMasterExtension1.getId());
+                employeeMasterExtension.setChildOneGender(Boolean.valueOf(childOneGender));
+                employeeMasterExtension.setChildTwoGender(Boolean.valueOf(childTwoGender));
+                employeeMasterExtension.setPresentAddress2(presentAddress2);
+                employeeMasterExtension.setPresentCity(presentCity);
+                employeeMasterExtension.setPresentState(presentState);
+                employeeMasterExtension.setPresentPostalCode(presentPostalCode);
+                employeeMasterExtension.setPresentCountry(presentCountry);
+                employeeMasterExtension.setPermanentAddress2(permanentAddress2);
+                employeeMasterExtension.setPermanentCity(permanentCity);
+                employeeMasterExtension.setPermanentCountry(permanentCountry);
+                employeeMasterExtension.setPermanentPostalCode(permanentPostalCode);
+                employeeMasterExtension.setPermanentState(permanentState);
+                employeeMasterExtension.setReligion(religion);
+                employeeMasterExtension.setDisclosedHealthConcerns(disclosedHealthConcerns);
+                employeeMasterExtension.setLanguagesKnown(languagesKnown);
+                employeeMasterExtension.setHobbies(hobbies);
+                employeeMasterExtension.setFlyDocsEmailId(flyDocsEmailId);
+                employeeMasterExtension.setEmergencyContactAddress(emergencyContactAddress);
+                employeeMasterExtension.setOtherImpInfo(otherImpInfo);
+                employeeMasterExtension.setRelationShip(RelationShip);
+                employeeMasterExtension.setNationality(nationality);
+                employeeMasterExtension.setFirstName(firstName);
+                employeeMasterExtension.setMiddleName(middleName);
+                employeeMasterExtension.setLastName(lastName);
+                employeeMasterExtension.setCountryOfIssue(countryOfIssue);
+                employeeMasterExtension.setVisaIssueCountry(visaIssueCountry);
+                employeeMasterExtension.setVisaIssueDate(visaIssueDate);
+                employeeMasterExtension.setVisaValidTillDate(visaValidTillDate);
+                employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
+                employeeMasterExtension.setElectionCard(electionCard);
+                employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
+                employeeMasterExtension.setWithdrawalDate(withdrawalDate);
+                employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
+                employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
+                employeeMasterExtension.setEmployeeMaster(employeeMaster);
+                employeeMasterServiceExtension.update(employeeMasterExtension);
+        
+        
 
 //        if (!reportingManagerBeforeUpdate.equals(reportingManagerForChange)) {
         //code will execute only if reporting manager changed then it will reflect in all sub-ordinate.
@@ -1209,23 +1391,29 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String empId[] = request.getParameterValues("checkId");
         for (String z : empId) {
             try {
-                PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
-                List<?> list11 = pmpFormStatusMasterService.delete1(z);
-                for (Object pdf1 : list11) {
-                    pmpFormStatusMaster = (PmpFormStatusMaster) pdf1;
-//                 Object[] o1=(Object[]) pdf;
-
-                    pmpFormStatusMasterService.delete(pmpFormStatusMaster.getId());
-                }
-
-//                pmpFormStatusMasterService.delete1(z);
-                employeeMasterService.delete(Integer.parseInt(z));
+//                employeeMasterServiceExtension.deleteByemployeeId(Integer.parseInt(z));
+//                employeeCtcDetailService.deleteByemployeeId(Integer.parseInt(z));
+//                employeePolicyDetailService.deleteByemployeeId(Integer.parseInt(z));
+//                      
+//                employeeMasterService.delete(Integer.parseInt(z));
+                
+                
+//                PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
+//                List<?> list11 = pmpFormStatusMasterService.delete1(z);
+//                for (Object pdf1 : list11) {
+//                    pmpFormStatusMaster = (PmpFormStatusMaster) pdf1;
+////                 Object[] o1=(Object[]) pdf;
+//
+//                    pmpFormStatusMasterService.delete(pmpFormStatusMaster.getId());
+//                }
+                
+                
                 //userMasterService.delete (Integer.parseInt(z));
                 //userRightMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
                         "Info : One or more records are deleted successfully.");
             } catch (Exception e) {
-
+                e.getStackTrace();
             }
         }
         mv = searchSubmit(request, response);
@@ -2560,6 +2748,17 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         downloadFile.doDownload(request, response);
     }
 
+    public ModelAndView excelUploadRegistrationDataSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("file1");
+        
+        
+        return mv;
+    }
+    
+    
+    
     public ModelAndView excelUploadRegistrationSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;

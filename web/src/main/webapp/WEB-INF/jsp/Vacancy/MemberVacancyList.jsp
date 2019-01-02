@@ -76,7 +76,7 @@
     </head>
     <body>
         <section class="content-header">
-            <button type="button" class="btn btn-primary" style="float: right; width: 150px;" onclick="window.location = 'vacancy.htm?act=backToHomeVacancyList'"></i>Current Vacancies </button>
+            <!--<button type="button" class="btn btn-primary" style="float: right; width: 150px;" onclick="window.location = 'vacancy.htm?act=backToHomeVacancyList'"></i>Current Vacancies </button>-->
             <button type="button" class="btn btn-primary" style="float: left; width: 130px;" onclick="window.location = 'vacancy.htm?act=logout'"><i class="fa fa-long-arrow-left"></i>&nbsp&nbsp&nbsp;Log Out</button>
             <label>Candidate User Name&nbsp : &nbsp&nbsp${sessionScope.ApplayJobUserMaster.userName}</label>
         </section>
@@ -89,8 +89,9 @@
         <br/>
         <br/>
         <ul class="nav nav-tabs" style="text-align: center" >
-            <li class="active " ><a href="">My Application</a></li>
+            <li   class="active " ><a href="">My Application</a></li>
             <li ><a href="vacancy.htm?act=myProfileClick&id=${sessionScope.ApplayJobUserMaster.id}">My Profile</a></li>
+            <li ><a href="vacancy.htm?act=backToHomeVacancyListSessionUser&id=${sessionScope.ApplayJobUserMaster.id}">Current Vacancies</a></li>
               <!--<li ><a onclick="viewClick(${sessionScope.ApplayJobUserMaster.id});">Assessment</a></li>-->
         </ul>
         <br/>
@@ -142,7 +143,7 @@
 
                                                             </thead>
                                                             <thead>
-                                                                <c:forEach var="list" items="${list}">
+                                                                <c:forEach var="list" items="${list}" varStatus="myindex">
                                                                     <tr>
                                                                         <th>${list[3]}</th>
                                                                         <th>${list[4]}</th>
@@ -151,8 +152,10 @@
                                                                         <th>${list[7]}</th>
                                                                         <th style="width: 50px;">
                                                                             <c:if test="${list[8] eq 0}">
+                                                                                
                                                                                 <span>
-                                                                                    <a href="vacancy.htm?act=applyJobRegistration&id=${sessionScope.ApplayJobUserMaster.id}&vacancyId=${list[2]}">Apply</a>
+                                                                                    <!--<a href="vacancy.htm?act=applyJobRegistration&id=${sessionScope.ApplayJobUserMaster.id}&vacancyId=${list[2]}" id="chk${myindex.count}" onclick="checkconform(this.id)">Apply</a>-->
+                                                                                    <a href="vacancy.htm?act=applyJobRegistration&id=${sessionScope.ApplayJobUserMaster.id}&vacancyId=${list[2]}" id="chk${myindex.count}" onclick="return confirm('Are you Ready to Apply?')">Apply</a>
                                                                                 </span>
                                                                             </c:if>
                                                                             <c:if test="${list[8] ne 0}">
@@ -181,7 +184,13 @@
 
         </form:form>
 
-
+        <script>
+            function checkconform(id){
+               
+                confirm("Are you ready to apply this Job?");
+            }
+            </script>
+            
         <%--</form:form>--%>
         <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
         <script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>

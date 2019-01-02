@@ -360,11 +360,11 @@
                                 <c:choose>
                                     <c:when test="${sessionScope.userRight.security}">
                                         <li><a href="visitorManagement.htm?act=securityApprove"><i class="fa fa-circle-o"></i>Visitor Management</a></li>
-                                    </c:when>
-                                    <c:otherwise>
+                                        </c:when>
+                                        <c:otherwise>
                                         <li><a href="visitorManagement.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Visitor Management</a></li>
-                                    </c:otherwise>
-                                </c:choose> 
+                                        </c:otherwise>
+                                    </c:choose>
 
                                 <c:if test="${!sessionScope.userRight.poolCarAdmin}">
                                     <c:if test="${sessionScope.checkReportingManager}">
@@ -385,33 +385,33 @@
                                     <li><a href="poolCarRequest.htm?act=adminApproveSubmit"><i class="fa fa-circle-o"></i>Pool Car Request Admin </a></li>
                                     <!--<li><a href="poolCarRequest.htm?act=searchAdminClick"><i class="fa fa-circle-o"></i>Search Pool Car Request(Admin)</a></li>-->
                                 </c:if>
-                                
+
                                 <!--COMMENTED BY: AMAN THAKUR for Visitor management-->
                                 <%--<c:if test="${!sessionScope.userRight.security}">--%>
-                                    <%--<c:if test="${sessionScope.checkReportingManager}">--%>
-                                        <!--<li><a href="visitorManagement.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Visitor Management System</a></li>-->
-                                        <!--<li><a href="visitorManagement.htm?act=searchEmpClick"><i class="fa fa-circle-o"></i>Search Visitor Request</a></li>-->
-                                    <%--</c:if>--%>
+                                <%--<c:if test="${sessionScope.checkReportingManager}">--%>
+                                <!--<li><a href="visitorManagement.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Visitor Management System</a></li>-->
+                                <!--<li><a href="visitorManagement.htm?act=searchEmpClick"><i class="fa fa-circle-o"></i>Search Visitor Request</a></li>-->
                                 <%--</c:if>--%>
-                                
+                                <%--</c:if>--%>
+
                                 <!--COMMENTED BY: AMAN THAKUR for Visitor management-->
                                 <%--<c:if test="${fn:length(reportingManagerList) > 0}">--%>
                                 <%--<c:if test="${sessionScope.isReportingManagerDataExist}">--%>
                                 <!--<li><a href="visitorManagement.htm?act=searchApproverSubmit"><i class="fa fa-circle-o"></i>Visitor Request Approve</a></li>-->
                                 <%--</c:if>--%>
-                                
+
                                 <%--<c:if test="${sessionScope.userRight.security}">--%>
-                                    <!--<li><a href="visitorManagement.htm?act=securityApproveSubmit"><i class="fa fa-circle-o"></i>Visitor Security Approve</a></li>-->
-                                    <!--<li><a href="visitorManagement.htm?act=searchAdminClick"><i class="fa fa-circle-o"></i>Security Search Visitor Request</a></li>-->
+                                <!--<li><a href="visitorManagement.htm?act=securityApproveSubmit"><i class="fa fa-circle-o"></i>Visitor Security Approve</a></li>-->
+                                <!--<li><a href="visitorManagement.htm?act=searchAdminClick"><i class="fa fa-circle-o"></i>Security Search Visitor Request</a></li>-->
                                 <%--</c:if>--%>
-                                
+
                                 <c:if test="${!sessionScope.userRight.security}">
                                     <c:if test="${sessionScope.checkReportingManager}">
                                         <li><a href="gatePass.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Gate Pass Request</a></li>
                                         <!--<li><a href="gatePass.htm?act=searchEmpClick"><i class="fa fa-circle-o"></i>Search Gate Pass </a></li>-->
                                     </c:if>
                                 </c:if>
-                                        
+
                                 <%--<c:if test="${reportingManagerList ne null}">--%>
                                 <%--<c:if test="${fn:length(reportingManagerList) > 0}">--%>
                                 <c:if test="${sessionScope.isReportingManagerDataExist}">
@@ -667,17 +667,17 @@
                                 </ul>
                             </li>
                             <c:if test="${sessionScope.userRight.hr}">
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-rupee fa-lg"></i>
-                                    <span>Salary Lock</span>
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="payrollSalaryLock.htm?act=createClick"><i class="fa fa-circle-o"></i>Lock </a></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-rupee fa-lg"></i>
+                                        <span>Salary Lock</span>
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li><a href="payrollSalaryLock.htm?act=createClick"><i class="fa fa-circle-o"></i>Lock </a></li>
 
-                                </ul>
-                            </li>
+                                    </ul>
+                                </li>
                             </c:if>
                             <!--                            <li>
                                                             <a href="#">
@@ -742,11 +742,14 @@
                         <li>
                             <a href="#">
                                 <i class="fa fa-rupee fa-lg"></i>
-                                <span>Master</span>
+                                <span>Setting</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-
+                                <c:if test="${sessionScope.userRight.hr}">
+                                    <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>
+                                    <li><a href="questionLibrary.htm?act=questionPaperView"><i class="fa fa-circle-o"></i>Question Paper</a></li>
+                                    </c:if>
                                 <li><a href="trainingType.htm?act=newtraining"><i class="fa fa-circle-o"></i>Training Type</a></li>
                                 <li><a href="trainingType.htm?act=newsubtraining"><i class="fa fa-circle-o"></i>Training Sub Type</a></li>
                                 <li><a href="trainer.htm?act=createTrainerShow"><i class="fa fa-circle-o"></i>Trainer</a></li>
@@ -756,12 +759,14 @@
 
                             </ul>
                         </li>
-                        <li><a href="trainingType.htm?act=showcalendar"><i class="fa fa-circle-o"></i>calendar</a></li>
+                        <li><a href="trainingType.htm?act=showcalendar"><i class="fa fa-circle-o"></i>Calendar</a></li>
                         </c:if>
                     <li><a href="trainingIdentification.htm?act=showcalendar"><i class="fa fa-circle-o"></i>My Training List</a></li>
                     <!--<li><a href="trainingIdentification.htm?act=createTraineAssigne"><i class="fa fa-circle-o"></i>Assign Trainee</a></li>-->
                     <!--<li><a href="trainingIdentification.htm?act=showTrainingFeedbackList"><i class="fa fa-circle-o"></i>Training Feedback Details</a></li>-->
                     <li><a href="trainingAssessment.htm?act=clickassessment"><i class="fa fa-circle-o"></i>Training Assessment</a></li>
+                    <!--<li><a href="trainingAssessment.htm?act=clickassessment"><i class="fa fa-circle-o"></i>Training Assessment</a></li>-->
+                       <li><a href="trainingMaster.htm?act=pastTrainingMasterList"><i class="fa fa-circle-o"></i>Training Summary List</a></li>
 
 
                 </ul>
@@ -906,12 +911,20 @@
                 <ul class="treeview-menu">
 
                     <!--<li><a href="kaizen.htm?act=myKaizen"><i class="fa fa-circle-o"></i>My Kaizen</a></li>-->
-                    <li><a href="kaizen.htm?act=kaizenList"><i class="fa fa-circle-o"></i>Approver Kaizen List</a></li>
+                    <!--<li><a href="kaizen.htm?act=kaizenList"><i class="fa fa-circle-o"></i>Approver Kaizen List</a></li>-->
                     <li><a href="kaizen.htm?act=kaizenMasterList"><i class="fa fa-circle-o"></i>My Kaizen List</a></li>
                     <li><a href="kaizen.htm?act=pastKaizenMasterList"><i class="fa fa-circle-o"></i>Kaizen Summary List</a></li>
                         <c:if test="${sessionScope.userRight.kaizenApproval}">
-                        <li><a href="kaizen.htm?act=kaizenApproverList"><i class="fa fa-circle-o"></i>Kaizen Approver</a></li>
+                        <li><a href="kaizen.htm?act=kaizenApproverList"><i class="fa fa-circle-o"></i>Kaizen HOD Approval</a></li>
                         </c:if>
+                      <c:if test="${sessionScope.userRight.kaizenCommitee}">
+                        <li><a href="kaizen.htm?act=kaizenSteeringApproval"><i class="fa fa-circle-o"></i>Kaizen Steering Committee</a></li>
+                        </c:if>
+                    <li>
+                        <a href="dynamicApprovalSetting.htm?act=viewDynamicCycle">
+                            <i class="fa fa-circle-o"></i> <span>HOD Approval Setting</span>
+                        </a>
+                    </li>
                 </ul>
             </li>   
             <li class="active treeview">
@@ -997,11 +1010,8 @@
                         <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
                         <li><a href="payrollESIC.htm?act=showList"><i class="fa fa-circle-o"></i>ESIC Master</a></li>
                             <%--<c:if test="${!sessionScope.userRight.employeeManagement}">--%>
-                            <c:if test="${sessionScope.userRight.hr}">
-                            <li><a href="questionLibrary.htm?act=QuestionLibraryCreate"><i class="fa fa-circle-o"></i>Question Library</a></li>
-                            <li><a href="questionLibrary.htm?act=questionPaperView"><i class="fa fa-circle-o"></i>Question Paper</a></li>
-                            </c:if>
-                            <%--</c:if>--%>
+
+                        <%--</c:if>--%>
                         <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Homepage Setting</a></li>
                         <li><a href="classifiedBox.htm?act=showResult"><i class="fa fa-circle-o"></i>Classified Setting</a></li>
                         <li><a href="ctcAllowance.htm?act=showList"><i class="fa fa-circle-o"></i>CTC Master</a></li>
@@ -1031,11 +1041,7 @@
                                 <li><a href="certificateTemplate.htm?act=searchEmployeeDetail&search=none"><i class="fa fa-circle-o"></i> Assign Certificate</a></li>
                             </ul>
                         </li>
-                        <li class="active treeview">
-                            <a href="dynamicApprovalSetting.htm?act=viewDynamicCycle">
-                                <i class="fa fa-clock-o fa-lg"></i> <span>Approval Cycle</span>
-                            </a>
-                        </li>
+
                     </ul>
                 </li>
             </c:if>

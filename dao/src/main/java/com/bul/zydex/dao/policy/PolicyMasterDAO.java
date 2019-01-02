@@ -19,4 +19,6 @@ public interface PolicyMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readBySalaryTypeID(String salaryTpe);
 
     public List<?> readPolicyName();
+
+    public List<?> readPolicyNameSalarySearch();
 }

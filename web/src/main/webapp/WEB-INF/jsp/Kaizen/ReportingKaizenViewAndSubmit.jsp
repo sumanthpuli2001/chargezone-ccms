@@ -64,7 +64,7 @@
                                         <tr>
                                             <th colspan="3">Department </th>
                                             <th colspan="5">${list.department}</th>
-                                            <th colspan="2" rowspan="3">Team Member </th>
+                                            <th colspan="2" rowspan="3">Team Members </th>
                                             <th colspan="2" rowspan="3"> ${list.teamMember}</th>
                                         </tr>
                                         <tr style="vertical-align: top;">

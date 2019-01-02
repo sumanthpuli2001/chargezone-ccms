@@ -2,7 +2,6 @@
  * 
  * Author Vinita
  */
-
 package com.bul.zydex.service.emprequest;
 
 import com.bul.zydex.dao.emprequest.VisitorManagementDAO;
@@ -13,8 +12,8 @@ import java.util.List;
  *
  * @author Vinita
  */
-public class VisitorManagementServiceImpl<T> extends GenericsServiceImpl<T> implements VisitorManagementService<T>{
-    
+public class VisitorManagementServiceImpl<T> extends GenericsServiceImpl<T> implements VisitorManagementService<T> {
+
     private VisitorManagementDAO visitorManagementDAO;
 
     public VisitorManagementDAO getVisitorManagementDAO() {
@@ -48,20 +47,22 @@ public class VisitorManagementServiceImpl<T> extends GenericsServiceImpl<T> impl
 
     @Override
     public List<?> readSearchRequest(T object) {
-         return visitorManagementDAO.readSearchRequest(object);
+        return visitorManagementDAO.readSearchRequest(object);
     }
+
     @Override
     public List<?> readVisitorManagementPendingRequest(T object) {
-         return visitorManagementDAO.readVisitorManagementPendingRequest(object);
+        return visitorManagementDAO.readVisitorManagementPendingRequest(object);
     }
+
     @Override
     public List<?> readVisitorManagementApproverPendingRequest(T object) {
-         return visitorManagementDAO.readVisitorManagementApproverPendingRequest(object);
+        return visitorManagementDAO.readVisitorManagementApproverPendingRequest(object);
     }
 
     @Override
     public List<?> readEmpIdFromTabId(int id) {
-         return visitorManagementDAO.readEmpIdFromTabId(id);
+        return visitorManagementDAO.readEmpIdFromTabId(id);
     }
 
     @Override
@@ -83,6 +84,10 @@ public class VisitorManagementServiceImpl<T> extends GenericsServiceImpl<T> impl
     public List<?> readByapproverId(String employeeId, String designationId, String departmentId, String startDate, String endDate, String status) {
         return visitorManagementDAO.readByapproverId(employeeId, designationId, departmentId, startDate, endDate, status);
     }
-    
+
+    @Override
+    public List<?> getDetailsByContactNo(String contactNo) {
+        return visitorManagementDAO.getDetailsByContactNo(contactNo);
+    }
 
 }

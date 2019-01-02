@@ -34,4 +34,8 @@ public interface EmployeePolicyDetailDAO<T> extends GenericsDAO<T> {
 
     public List<?> readForMasterAdditionalAmount(int empTypeId,int policyMasterId);
 
+    public void deleteByemployeeId(int id);
+    
+    
+
 }

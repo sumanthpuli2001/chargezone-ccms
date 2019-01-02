@@ -33,4 +33,6 @@ public interface EmployeePolicyDetailService<T> extends GenericsService<T> {
 
     public List<?> readForMasterAdditionalAmount(int empTypeId, int policyMasterId);
 
+    public void deleteByemployeeId(int id);
+
 }

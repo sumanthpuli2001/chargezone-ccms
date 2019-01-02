@@ -33,12 +33,17 @@ public class PolicyMasterServiceImpl<T> extends GenericsServiceImpl<T> implement
 
     @Override
     public List<?> readBySalaryTypeID(String salaryTpe) {
-       return policyMasterDAO.readBySalaryTypeID(salaryTpe);
+        return policyMasterDAO.readBySalaryTypeID(salaryTpe);
     }
 
     @Override
     public List<?> readPolicyName() {
         return policyMasterDAO.readPolicyName();
+    }
+
+    @Override
+    public List<?> readPolicyNameSalarySearch() {
+        return policyMasterDAO.readPolicyNameSalarySearch();
     }
 
 }

@@ -63,27 +63,34 @@
                                                                     <td>${list1[4]}</td>
                                                                     <td>${list1[5]}</td>
                                                                     <c:if test="${list1[2] == 0}"><td><span class="badge">Pending</span></td></c:if>
-                                                                    <c:if test="${list1[2] == 1}"><td><span class="label label-success">Approved</span></td></c:if>
-                                                                    <c:if test="${list1[2] == 2}"><td><span class="label label-warning">Recycled</span></td></c:if>
-                                                                    <c:if test="${list1[2] == 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
-                                                                    <c:if test="${list1[2] == 4}"><td><span class="badge label-success">Approved</span></td></c:if>
-                                                                    <c:if test="${list1[2] == 5}"><td><span class="label label-success">Final Approved</span></td></c:if>
-                                                                    <c:if test="${list1[2] == 10}"><td><span class="label label-default">OnHold</span></td></c:if>
-                                                                    <c:if test="${list1[2] == 11}"><td><span class="label label-default">OnHold By Creator</span></td></c:if>
-                                                                        <td>
-                                                                            <div class="btn-group">
-                                                                                <button type="button" onclick="viewClick(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                    <c:if test="${list1[2] == 1}"><td><span class="label label-success">Final Approval Pending</span></td></c:if>
+                                                                    <c:if test="${list1[2] == 2 || list1[2] == 22}"><td><span class="label label-warning">Recycled</span></td></c:if>
+                                                                    <c:if test="${list1[2] == 3 || list1[2] == 23}"><td><span class="label label-danger">Rejected</span></td></c:if>
+                                                                    <%--<c:if test="${list1[2] == 4}"><td><span class="badge label-success">Approved</span></td></c:if>--%>
+                                                                    <c:if test="${list1[2] == 21}"><td><span class="label label-success">Close</span></td></c:if>
+                                                                    <%--<c:if test="${list1[2] == 10}"><td><span class="label label-default">OnHold</span></td></c:if>--%>
+                                                                    <%--<c:if test="${list1[2] == 11}"><td><span class="label label-default">OnHold By Creator</span></td></c:if>--%>
+                                                                    <td>
+                                                                        <div class="btn-group">
+                                                                            <button type="button" onclick="viewClick(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                 &nbsp;&nbsp;View
                                                                             </button>
                                                                         </div>
-                                                                        <c:if test="${list1[2] eq 0 || list1[2] eq 2 || list1[2] eq 10}">
+                                                                        <c:if test="${list1[2] eq 0 || list1[2] eq 2 || list1[2] eq 10 }">
                                                                             <div class="btn-group">
                                                                                 <button type="button" onclick="editClick(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                     &nbsp;&nbsp;Edit
                                                                                 </button>
                                                                             </div>
                                                                         </c:if>
-                                                                                <!-----------------User Only OnHold-------------->
+                                                                        <c:if test="${list1[2] eq 1}">
+                                                                            <div class="btn-group">
+                                                                                <button type="button" onclick="editClickafterApproval(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                                    &nbsp;&nbsp;Edit
+                                                                                </button>
+                                                                            </div>
+                                                                        </c:if>
+                                                                        <!-----------------User Only OnHold-------------->
                                                                         <c:if test="${list1[2] eq 11}">
                                                                             <div class="btn-group">
                                                                                 <button type="button" onclick="onhold(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
@@ -117,6 +124,9 @@
         }
         function editClick(id) {
             window.location = 'kaizen.htm?act=editKaizen&id=' + id;
+        }
+        function editClickafterApproval(id) {
+            window.location = 'kaizen.htm?act=editKaizenafterApproval&id=' + id;
         }
         function onhold(id) {
             window.location = 'kaizen.htm?act=onholdOpen&id=' + id;

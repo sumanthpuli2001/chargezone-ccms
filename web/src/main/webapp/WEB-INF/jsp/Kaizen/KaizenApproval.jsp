@@ -50,7 +50,7 @@
                                                     <thead>
 
                                                         <tr>
-                                                            <th style="width: 1px; text-align: center" ><input type="checkbox" id="toggleId" align="Center" ></th>
+                                                            <!--<th style="width: 1px; text-align: center" ><input type="checkbox" id="toggleId" align="Center" ></th>-->
                                                             <th style="width: 50px;">Sr.No</th>
                                                             <th style="width: 50px;">Team Name</th>
                                                             <th style="width: 50px;">Department Name</th>
@@ -61,39 +61,41 @@
                                                     <tbody>
                                                         <c:forEach  var="list1" items="${list}">
                                                             <tr>
-                                                                <td align="Center">
-                                                                    <input type="checkbox" name="checkId" id="checkId" value="${list[0]}">
-                                                                </td>
+                                                                <!--                                                                <td align="Center">
+                                                                                                                                    <input type="checkbox" name="checkId" id="checkId" value="${list[0]}">
+                                                                                                                                </td>-->
                                                                 <td>${list1[1]}</td>
                                                                 <td>${list1[2]}</td>
-                                                                <td>${list1[6]}</td>
-                                                                <c:if test="${list1[3] eq 1}"><td><span class="badge">Pending</span></td></c:if>
-                                                                <c:if test="${list1[3] eq 2}"><td><span class="badge">Recycled</span></td></c:if>
-                                                                <c:if test="${list1[3] eq 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
-                                                                <c:if test="${list1[3] eq 4 && list1[4] eq list1[5]}"><td><span class="badge">Pending</span></td></c:if>
-                                                                <c:if test="${list1[3] eq 4 && list1[4] ne list1[5]}"><td><span class="label label-success">Approved</span></td></c:if>
-                                                                <c:if test="${list1[3] eq 5}"><td><span class="label label-success">Final Approved</span></td></c:if>
-                                                                <c:if test="${list1[3] eq 10}"><td><span class="label label-default">OnHold</span></td></c:if>
-                                                                    <td>
-                                                                        <div class="btn-group">
-                                                                            <button type="button" onclick="viewClick(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
+                                                                <td>${list1[3]}</td>
+                                                                <c:if test="${list1[8] eq 0}"><td><span class="badge">Pending</span></td></c:if>
+                                                                <c:if test="${list1[8] eq 1}"><td><span class="badge">Approved</span></td></c:if>
+                                                                <c:if test="${list1[8] eq 2 || list1[8] eq 22 }"><td><span class="badge">Recycled</span></td></c:if>
+                                                                <c:if test="${list1[8] eq 3}"><td><span class="label label-danger">Rejected</span></td></c:if>
+                                                                <%--<c:if test="${list1[8] eq 4 && list1[8] eq list1[5]}"><td><span class="badge">Pending</span></td></c:if>--%>
+                                                                <%--<c:if test="${list1[8] eq 4 && list1[4] ne list1[5]}"><td><span class="label label-success">Approved</span></td></c:if>--%>
+                                                                <%--<c:if test="${list1[8] eq 5}"><td><span class="label label-success">Final Approved</span></td></c:if>--%>
+                                                                <%--<c:if test="${list1[8] eq 10}"><td><span class="label label-default">OnHold</span></td></c:if>--%>
+                                                                <td>
+                                                                    <div class="btn-group">
+                                                                        <button type="button" onclick="viewClick(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                             &nbsp;&nbsp;View
                                                                         </button>
                                                                     </div>
-                                                                    <c:if test="${list1[3] eq 1 || list1[3] eq 2 && list1[4] eq list1[5] || list1[3] eq 10 }">
+                                                                    <%--<c:if test="${list1[3] eq 0 || list1[8] eq 2 && list1[8] eq list1[8] || list1[8] eq 10 }">--%>
+                                                                    <c:if test="${list1[8] eq 0 || list1[8] eq 22}">
                                                                         <div class="btn-group">
                                                                             <button type="button" onclick="viewApprove(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
                                                                                 &nbsp;&nbsp;Approve
                                                                             </button>
                                                                         </div>
                                                                     </c:if>
-                                                                    <c:if test="${list1[3] eq 4 && list1[4] eq list1[5] }">
-                                                                        <div class="btn-group">
-                                                                            <button type="button" onclick="viewApprove(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">
-                                                                                &nbsp;&nbsp;Approve
-                                                                            </button>
-                                                                        </div>
-                                                                    </c:if>
+                                                                    <%--<c:if test="${list1[8] eq 4 && list1[8] eq list1[8] }">--%>
+                                                                        <!--<div class="btn-group">-->
+                                                                            <!--<button type="button" onclick="viewApprove(${list1[0]});" class="btn btn-default" aria-haspopup="true" aria-expanded="false">-->
+                                                                                <!--&nbsp;&nbsp;Approve-->
+                                                                            <!--</button>-->
+                                                                        <!--</div>-->
+                                                                    <%--</c:if>--%>
                                                                 </td>
                                                             </tr>
                                                         </c:forEach>

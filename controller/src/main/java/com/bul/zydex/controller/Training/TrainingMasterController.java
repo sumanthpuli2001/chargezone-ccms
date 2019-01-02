@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.Training;
 
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingIdentification;
@@ -61,6 +62,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         trainingtypeList(request);
         trainingSubtypeList(request);
         selectEmployee(request, response);
+        departmentList(request);
 
         selectedEmployeeFor360Feedback(request, employeeMaster);
         mv.getModelMap().put("employeeMaster", employeeMaster);
@@ -94,6 +96,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         trainerList(request);
         trainingtypeList(request);
         trainingSubtypeList(request);
+        departmentList(request);
 
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("trainingMaster", trainingMaster);
@@ -105,6 +108,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
         ModelAndView mv = new ModelAndView();
 //        int SubtypeBytrainingTypeId = Integer.parseInt(request.getParameter("SubtypeBytrainingTypeId"));
         TrainingMaster trainingMaster = new TrainingMaster();
+        DepartmentMaster departmentMaster = new DepartmentMaster();
 //        trainingMaster.setTrainingSubType(trainingSubTypeService.readById(SubtypeBytrainingTypeId));
         BindException errors = new BindException(trainingMaster, "trainingMaster");
         bind(request, trainingMaster);
@@ -127,6 +131,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             int trainerId = Integer.parseInt(request.getParameter("trainer"));
             int trainingType = Integer.parseInt(request.getParameter("trainingType"));
             int SubtypeBytrainingTypeId = Integer.parseInt(request.getParameter("SubtypeBytrainingTypeId"));
+            int departmentId = Integer.parseInt(request.getParameter("departmentMasterid"));
             String venue = request.getParameter("venue");
             String cost = request.getParameter("cost");
             String startDate = request.getParameter("startDate");
@@ -151,6 +156,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
             trainingMaster.setTrainer(trainerService.readById(trainerId));
             trainingMaster.setTrainingType(trainingTypeService.readById(trainingType));
             trainingMaster.setTrainingSubType(trainingSubTypeService.readById(SubtypeBytrainingTypeId));
+            trainingMaster.setDepartmentMaster(departmentMasterService.readById(departmentId));
             trainingMaster.setVenue(venue);
             trainingMaster.setCost(cost);
             trainingMaster.setStartDate(startDate);
@@ -334,7 +340,7 @@ public class TrainingMasterController extends TrainingMasterAbstract {
     }
 
     public ModelAndView deleteClick(HttpServletRequest request, HttpServletResponse response, TrainingMaster trainingMaster) throws Exception {
-        
+
         ModelAndView mv = new ModelAndView();
         String checkId[] = request.getParameterValues("checkId");
         for (String checkedValues : checkId) {
@@ -376,5 +382,63 @@ public class TrainingMasterController extends TrainingMasterAbstract {
 
     public Date convertToDateViaSqlDate(LocalDate dateToConvert) {
         return java.sql.Date.valueOf(dateToConvert);
+    }
+
+    public ModelAndView pastTrainingMasterList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        List<?> km = trainingMasterService.readTrainingMasterSummaryList();
+//        List<?> km1 = kaizenMasterService.readKaizenMasterapprovalList(employeeMaster.getId());
+        mv.getModelMap().put("list", km);
+        mv.setViewName("Training/TrainingMasterSummaryList");
+
+        return mv;
+    }
+
+    public ModelAndView VieweditClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String id = request.getParameter("id");
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        ModelAndView mv = new ModelAndView();
+        TrainingMaster trainingMaster = trainingMasterService.readById(Integer.parseInt(id));
+        Trainer trainer = trainerService.readById(trainingMaster.getTrainer().getId());
+        TrainingType trainingType = trainingTypeService.readById(trainingMaster.getTrainingType().getId());
+        TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster.getTrainingSubType().getId());
+        EmployeeMaster em = employeeMasterService.readById(Integer.parseInt(trainingMaster.getTrainingOwner()));
+        trainingSubType.setTrainingType(trainingType);
+
+        selectEmployee(request, response);
+
+        int employee = em.getId();
+        employeeMaster = (EmployeeMaster) employeeMasterService.readById(employee);
+        String employeeName = employeeMaster.getEmployeeName();
+
+        selectedEmployeeFor360Feedback(request, employeeMaster);
+        trainingMaster.setTrainer(trainer);
+        trainingMaster.setTrainingType(trainingType);
+        trainingMaster.setTrainingSubType(trainingSubType);
+        trainerList(request);
+        trainingtypeList(request);
+        trainingSubtypeList(request);
+        departmentList(request);
+
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.getModelMap().put("trainingMaster", trainingMaster);
+        mv.setViewName("Training/TrainingEditViewSummary");
+        return mv;
+    }
+
+    public ModelAndView exportToExcelTrainingSummary(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        List<?> km = trainingMasterService.readTrainingMasterSummaryList();
+//       
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment; filename=TrainingList.xls");
+        mv.getModelMap().put("list", km);
+//        mv.setViewName("Kaizen/ExportPastKaizen");
+         mv.setViewName("Training/TrainingMasterSummaryListExport");
+//        mv.setViewName("AttendanceRegularization/attendanceRegularizationViewResultExport");
+        return mv;
     }
 }

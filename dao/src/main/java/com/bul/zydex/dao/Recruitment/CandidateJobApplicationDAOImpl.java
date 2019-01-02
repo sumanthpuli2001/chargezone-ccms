@@ -140,4 +140,15 @@ public class CandidateJobApplicationDAOImpl<T> extends GenericsDAOImpl<T> implem
         return list;
     }
 
+    @Override
+    public List<?> readListByApplyJobIdVanacyid(Integer id) {
+       String query = " SELECT a.vacancyMaster.id"
+                + " FROM CandidateJobApplication a "
+                + " Where a.candidateApplyJob.id = " + id
+                + " order by a.id desc";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

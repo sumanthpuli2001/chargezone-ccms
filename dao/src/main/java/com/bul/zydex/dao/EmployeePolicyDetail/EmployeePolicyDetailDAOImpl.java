@@ -27,7 +27,8 @@ public class EmployeePolicyDetailDAOImpl<T> extends GenericsDAOImpl<T> implement
         query += "select a.amount,b.policyName"
                 + " FROM EmployeePolicyDetail a "
                 + " left join a.policyMaster b"
-                + " where a.employeeMaster.id=" + employeeid;
+                + " where a.employeeMaster.id=" + employeeid
+                + " order by b.countstatus asc";
 
         return getHibernateTemplate().find(query);
     }
@@ -125,7 +126,7 @@ public class EmployeePolicyDetailDAOImpl<T> extends GenericsDAOImpl<T> implement
     @Override
     public List<?> readBypolicyAmountWithTaxable(int empId) {
         String query = "";
-        
+
         query += " select SUM(a.amount)"
                 + " From EmployeePolicyDetail a "
                 + " where a.employeeMaster = " + empId
@@ -142,6 +143,15 @@ public class EmployeePolicyDetailDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " and c.id=" + policyMasterId;
 
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public void deleteByemployeeId(int id) {
+       String query = "";
+        query += " Delete from EmployeePolicyDetail d "
+                + " Where d.employeeMaster.id =" + id;
+
+        getHibernateTemplate().bulkUpdate(query);
     }
 
 }

@@ -4,7 +4,7 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://192.168.173:3306/hr_power_astral?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/hr_power_astral?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
     <mapping resource="com/bul/zydex/model/CafeteriaRequest.hbm.xml"/>
@@ -21,6 +21,7 @@
     <mapping resource="com/bul/zydex/model/TravelRequestMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/UpdateAppraisalPerformanceKra.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmployeeMaster.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/EmployeeMasterExtension.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/UserRightMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/CompetencyEvaluationTextmaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/Punch.hbm.xml"/>
@@ -187,5 +188,6 @@
     <mapping resource="com/bul/zydex/model/WoffRegularization.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/CandidateF2FObservation.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/CoffRegularization.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/EmployeeMasterExtension.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

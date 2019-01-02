@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author Aman
  */
-public class KaizenApprovalDAOImpl<T>  extends GenericsDAOImpl<T> implements KaizenApprovalDAO<T>{
+public class KaizenApprovalDAOImpl<T> extends GenericsDAOImpl<T> implements KaizenApprovalDAO<T> {
 
     @Override
     protected Class getDomainClass() {
@@ -35,8 +35,25 @@ public class KaizenApprovalDAOImpl<T>  extends GenericsDAOImpl<T> implements Kai
             kaizenApproval = null;
         }
         return kaizenApproval;
-        
-        
+
     }
-    
+
+    @Override
+    public List<?> readApprovalSteeringCommitteList(int empId) {
+        String query = "";
+        query += " "
+                + " SELECT mm.id, mm.srNo, mm.teamName, mm.department, mm.teamMember, ma.status, mm.currentLevel, "
+                + " ma.level "
+                + " FROM KaizenApproval ma "
+                + " Left Join ma.kaizenMaster mm "
+                //                + " Where  mm.currentLevel >= ma.level "
+                + " Where mm.status = " + 1
+                + " And ma.employeeMaster.id = " + empId
+                + " order by mm.id desc"
+                + " group by mm.id desc";
+
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

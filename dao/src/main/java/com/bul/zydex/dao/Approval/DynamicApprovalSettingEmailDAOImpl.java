@@ -24,7 +24,7 @@ public class DynamicApprovalSettingEmailDAOImpl<T> extends GenericsDAOImpl<T> im
     public List<?> readByApproverCycleId(int ApproverCycleId) {
         String query = "";
 
-        query += " Select d "
+        query += " Select d.employeeMaster.id,d.id"
                 + " from DynamicApprovalSettingEmail d "
                 + " left join d.dynamicApprovalSettingId da "
                 + " where d.dynamicApprovalSettingId.id = " + ApproverCycleId;

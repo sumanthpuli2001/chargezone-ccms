@@ -90,13 +90,42 @@ public class KaizenMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Kaizen
         String query = "";
 //                          0       1       2          3               4          5              
         query += " Select a.id, a.srNo,a.teamMember,a.department,a.startDate,a.ideaGenerator,"
-//                      6                   7               8           9
+                //                      6                   7               8           9
                 + "a.problemDescription,a.compiletionDate,a.status ,em.employeeName"
                 + " From KaizenMaster a , EmployeeMaster em "
                 + " Where a.createdBy = em.id";
-               
+
         List<?> list = getHibernateTemplate().find(query);
         return list;
+    }
+
+    @Override
+    public List<?> readByDeptIdCompanyNameDesId(int deptid) {
+        String query = "";
+//        query += " Select e.employeeName, b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, d.id"
+//                + " FROM LeaveEmployeeDetail a"
+//                + " LEFT JOIN a.leaveTypeMaster b"
+//                + " LEFT JOIN a.employeeMaster e"
+//                + " LEFT JOIN e.userMaster d"
+//                + " LEFT JOIN e.designationMaster dm"
+//                + " LEFT JOIN e.zydexLocationMaster l"
+//                + " LEFT JOIN e.departmentMaster dp"
+//                + " Where l.id =" + locId
+//                + " and dm.id =" + desId
+//                + " and e.company ='" + CompName + "'";
+//                           0       1       2          3               4          5              
+        query += " Select a.id, a.srNo,a.teamName,a.department,a.startDate,a.ideaGenerator,"
+                //                      6                   7               8           9
+                + "a.problemDescription,a.compiletionDate,a.status ,em.employeeName"
+                + " FROM KaizenMaster a, EmployeeMaster em "
+//                + " LEFT JOIN em.locationMaster l"
+                + " LEFT JOIN em.departmentMaster dp"
+                + " Where a.createdBy = em.id"
+//                + " and l.id =" + locId
+                + " and dp.id =" + deptid;
+//                + " and em.company ='" + CompName + "'";
+
+        return getHibernateTemplate().find(query);
     }
 
 }

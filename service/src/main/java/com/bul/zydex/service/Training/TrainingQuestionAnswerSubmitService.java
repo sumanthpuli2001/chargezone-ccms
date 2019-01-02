@@ -15,4 +15,6 @@ import java.util.List;
 public interface TrainingQuestionAnswerSubmitService<T> extends GenericsService<T> {
 
     public List<?> readByTrainigAssessmentId(int assessmentId);
+
+    public List<?> readByTrainigAssessmentREsultViewId(int assessmentId);
 }

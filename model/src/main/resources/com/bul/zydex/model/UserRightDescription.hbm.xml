@@ -214,5 +214,8 @@
         <property name="vacancyApprove" type="string">
             <column name="vacancy_approve" length="65535" />
         </property>
+        <property name="kaizenCommitee" type="string">
+            <column name="kaizen_commitee" length="65535" />
+        </property>
     </class>
 </hibernate-mapping>

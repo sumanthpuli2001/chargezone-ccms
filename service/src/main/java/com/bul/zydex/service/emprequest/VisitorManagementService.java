@@ -37,4 +37,5 @@ public interface VisitorManagementService<T> extends GenericsService<T> {
 
     public List<?> readByapproverId(String employeeId, String designationId, String departmentId, String startDate, String endDate, String status);
 
+    public List<?> getDetailsByContactNo(String contactNo);
 }

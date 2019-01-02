@@ -12,6 +12,7 @@ import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeeMasterExtension;
 import com.bul.zydex.model.MailMaster;
 import com.bul.zydex.model.SmsMaster;
 import com.bul.zydex.model.UserActivityLog;
@@ -29,6 +30,7 @@ import com.bul.zydex.service.UserMasterService;
 import com.bul.zydex.service.emp.DepartmentMasterService;
 import com.bul.zydex.service.emp.DesignationMasterService;
 import com.bul.zydex.service.emp.EmployeeMasterService;
+import com.bul.zydex.service.emp.EmployeeMasterServiceExtension;
 import com.bul.zydex.service.zydexLocation.ZydexLocationMasterService;
 import com.bul.zydex.util.SendMail;
 import java.text.DateFormat;
@@ -61,13 +63,21 @@ public abstract class CustomAbstract extends MultiActionController {
     protected MailMasterService<MailMaster> mailMasterService;
     protected SmsMasterService<SmsMaster> smsMasterService;
     protected CurrencyMasterService<CurrencyMaster> currencyMasterService;
-    protected DateFormat dateFormat = new SimpleDateFormat(
-            "MM/dd/yyyy HH:mm");
+    protected DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
     protected Header header;
     protected ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
     protected EmailTemplateService<EmailTemplate> emailTemplateService;
     protected SendMail sendMail;
     protected EmailAddMasterService<EmailAddMaster> emailAddMasterService;
+    protected EmployeeMasterServiceExtension<EmployeeMasterExtension> employeeMasterServiceExtension;
+
+    public EmployeeMasterServiceExtension<EmployeeMasterExtension> getEmployeeMasterServiceExtension() {
+        return employeeMasterServiceExtension;
+    }
+
+    public void setEmployeeMasterServiceExtension(EmployeeMasterServiceExtension<EmployeeMasterExtension> employeeMasterServiceExtension) {
+        this.employeeMasterServiceExtension = employeeMasterServiceExtension;
+    }
 
     public EmailTemplateService<EmailTemplate> getEmailTemplateService() {
         return emailTemplateService;
@@ -445,6 +455,5 @@ public abstract class CustomAbstract extends MultiActionController {
     public void setEmailAddMasterService(EmailAddMasterService<EmailAddMaster> emailAddMasterService) {
         this.emailAddMasterService = emailAddMasterService;
     }
-    
 
 }

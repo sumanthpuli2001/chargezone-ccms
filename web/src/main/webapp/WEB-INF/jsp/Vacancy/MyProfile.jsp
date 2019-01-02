@@ -81,9 +81,11 @@
             $('#datepicker').datepicker({
             changeMonth: true,
                     changeYear: true,
-//                    showButtonPanel: true,
+                    yearRange: '1900:' + new Date().getFullYear().toString(),
+                    showButtonPanel: true,
                     dateFormat: 'dd/mm/yy',
                     onClose: function(dateText, inst) {
+
                     var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
                             var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
                             var date = $("#ui-datepicker-div .ui-datepicker-date :selected").val();
@@ -94,6 +96,7 @@
                     $('#datepicker45').datepicker({
                     changeMonth: true,
                             changeYear: true,
+                            yearRange: '1900:' + new Date().getFullYear().toString(),
 //                            showButtonPanel: true,
                             dateFormat: 'dd/mm/yy',
                             onClose: function(dateText, inst) {
@@ -107,6 +110,7 @@
                     $('#datepicker46').datepicker({
                     changeMonth: true,
                             changeYear: true,
+                            yearRange: '1900:' + new Date().getFullYear().toString(),
 //                            showButtonPanel: true,
                             dateFormat: 'dd/mm/yy',
                             onClose: function(dateText, inst) {
@@ -343,30 +347,32 @@
                             </table>
                             </br>
                         </div>
-                        <div class="col-sm-7">
+<!--                        <div class="col-sm-7">
                             <table class="table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th style="text-align: left">Post Applied For<span style="color: red;font-size: 12px;"> *</span></th>
                                     </tr>
                                 </thead>
-                                <c:if test="${empty candidateJobApplyNAmeList}">
+                                <%--<c:if test="${empty candidateJobApplyNAmeList}">--%>
                                     <tbody>
                                         <tr>
-                                            <td><form:input path="candidateApplyJob2.postAppliedFor" class="form-control" placeholder="Enter Applied Post" required="true"></form:input></td>
+                                            <td>
+                                <%--<form:input path="candidateApplyJob2.postAppliedFor" class="form-control" placeholder="Enter Applied Post" required="true"></form:input>--%>
+</td>
                                             </tr>
                                         </tbody>
-                                </c:if>
-                                <c:if test="${!empty candidateJobApplyNAmeList}">
+                                <%--</c:if>--%>
+                                <%--<c:if test="${!empty candidateJobApplyNAmeList}">--%>
                                     <tbody>
                                         <tr>
                                             <td><input value="${jobprofileName}" class="form-control" placeholder="Enter Applied Post" required="true"></input></td>
                                         </tr>
                                     </tbody>
-                                </c:if>
+                                <%--</c:if>--%>
                             </table>
                             </br>
-                        </div>
+                        </div>-->
                     </div>
 
                     <div class="col-sm-12">
@@ -412,7 +418,8 @@
                                 </tr>
                                 <tr>
                                     <th>Your D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
-                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                            <div class="input-group form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                 <td>
                                     <form:input path="candidateApplyJob.dob" class="form-control" id="datepicker" placeholder="Select Your D.O.B" readonly="true" required="true"></form:input>
                                     </td>
@@ -671,7 +678,7 @@
                                         <td><form:input type="number" step="any" path="candidateApplyJob2.salaryBreakupTotal" class="form-control salaryTotal" id="salaryTotal" placeholder="Enter Total Salary"></form:input></td>                                      
                                     </tr>
                                     <tr>
-                                        <th>Salary Slip Attachment</th>
+                                        <th>Salary Slip Attachment<span style="color: red;font-size: 12px;"> *</span></th>
                                         <c:choose>
                                             <c:when test="${salarySlipAttachment eq '' or salarySlipAttachment eq null}">
                                             <td><input type="file" name="candidateApplyJob2.salarySlipAttachment" class="form-control" required="true"></td>                                      
@@ -1025,12 +1032,32 @@
 
         <div class="form-group">
             </br>
+
             <div class=" col-sm-12" style="text-align: center;">
-                <button type="submit" class="btn btn-primary" style="width: 100px;" data-original-title="" title="" >SUBMIT</button>
+                <button type="submit" class="btn btn-primary" style="width: 200px !important;" data-original-title="" title="" >Save</button>
             </div>
+<!--            <div class=" col-sm-6" style="text-align: center;">
+                <button type="button" class="btn btn-primary" style="width: 200px !important;" onclick="onapply(${sessionScope.ApplayJobUserMaster.id},${idvanacy});" data-original-title="" title="" >Apply</button>
+            </div>  
+            <div class="col-sm-12" style="text-align: center;">
+
+            </div>-->
+<!--            <div class="col-sm-12" style="text-align: right;">
+
+                <a href="vacancy.htm?act=applyJobRegistration&id=${sessionScope.ApplayJobUserMaster.id}&vacancyId=${idvanacy}"  onclick="return confirm('Are you Ready to Apply?')">Apply</a>
+            </div>-->
         </div>
 
     </form:form>
+    <script>
+                function onapply(appuserid, vanacyID)
+                {
+//                window.location = "vacancy.htm?act=applyJobRegistration&id=${sessionScope.ApplayJobUserMaster.id}&vacancyId=${idvanacy}";
+                window.location = 'vacancy.htm?act=applyJobRegistration&id=' + appuserid + '&vacancyId=' + vanacyID;
+                }
+
+    </script>
+
 
     <!-- Javascript -->
     <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
@@ -1046,18 +1073,18 @@
 
 </body>
 <script type="text/javascript">
-                        $('.form_datetime_dob').datetimepicker({
-                //language:  'fr',
-                weekStart: 1,
-                        todayBtn: 1,
-                        autoclose: 1,
-                        todayHighlight: 1,
-                        startView: 2,
-                        minView: 2,
-                        startDate: dt1,
-                        endDate: dt,
-                        forceParse: 0
-                });</script>
+                $('.form_datetime_dob').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+                todayBtn: 1,
+                autoclose: 1,
+                todayHighlight: 1,
+                startView: 2,
+                minView: 2,
+                startDate: dt1,
+                endDate: dt,
+                forceParse: 0
+        });</script>
 
 
 </script>
@@ -1144,6 +1171,23 @@
 
             }
 </script>
+<script type="text/javascript">
+    var dt = new Date();
+            dt.setFullYear(new Date().getFullYear() - 18);
+            var dt1 = new Date();
+            dt1.setFullYear(new Date().getFullYear() - 100);
+            $('.form_datetime_dob25').datetimepicker({
+    //language:  'fr',
+    weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            startDate: dt1,
+            endDate: dt,
+            forceParse: 0
+    });</script>
 
 <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
 <!--<script src="StorageYard/Plugins/jQuery/jQuery-2.1.4.min.js"></script>-->

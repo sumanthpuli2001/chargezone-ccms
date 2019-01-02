@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.Training;
 
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.Trainer;
 import com.bul.zydex.model.TrainingMaster;
@@ -276,9 +277,13 @@ public class TrainingTypeController extends TrainingTypeAbstract {
         Trainer trainer = trainerService.readById(trainingMaster.getTrainer().getId());
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster.getTrainingSubType().getId());
         TrainingType trainingType = trainingTypeService.readById(trainingMaster.getTrainingType().getId());
+        DepartmentMaster departmentMaster = departmentMasterService.readById(trainingMaster.getDepartmentMaster().getId());
+        
+        
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingSubType(trainingSubType);
         trainingMaster.setTrainingType(trainingType);
+        trainingMaster.setDepartmentMaster(departmentMaster);
         List attenlist = new LinkedList();
         attenlist = trainingAttendanceService.gettrainingattendance(eventdate, Integer.parseInt(id));
         boolean shosts = true;

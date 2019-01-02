@@ -19,4 +19,6 @@ public interface PolicyMasterService<T> extends GenericsService<T> {
     public List<?> readBySalaryTypeID(String salaryTpe);
 
     public List<?> readPolicyName();
+
+    public List<?> readPolicyNameSalarySearch();
 }

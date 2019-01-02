@@ -167,4 +167,13 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+
+    @Override
+    public void deleteByemployeeId(int id) {
+        String query = "";
+        query += " Delete from EmployeeCtcDetail d "
+                + " Where d.employeeMaster.id =" + id;
+
+        getHibernateTemplate().bulkUpdate(query);
+    }
 }

@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller.Training;
 
+import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeFeedback;
@@ -83,9 +84,11 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         Trainer trainer = trainerService.readById(trainingMaster.getTrainer().getId());
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster.getTrainingSubType().getId());
         TrainingType trainingType = trainingTypeService.readById(trainingMaster.getTrainingType().getId());
+        DepartmentMaster departmentMaster = departmentMasterService.readById(trainingMaster.getDepartmentMaster().getId());
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingSubType(trainingSubType);
         trainingMaster.setTrainingType(trainingType);
+        trainingMaster.setDepartmentMaster(departmentMaster);
 
         employeeFeedback.setTrainingFeedback(trainingFeedback);
         mv.getModelMap().put("employeeFeedback", employeeFeedback);
@@ -207,7 +210,7 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         request.setAttribute(
                 "successMessage",
                 "Information : The Information is saved Successfully.");
-         mv.setViewName("forward:trainingType.htm?act=showcalendar");
+        mv.setViewName("forward:trainingType.htm?act=showcalendar");
 //        mv = createTraineAssigne(request, response);
         return mv;
 
@@ -331,9 +334,11 @@ public class TrainingIdentificationController extends TrainingIdentificationAbst
         Trainer trainer = trainerService.readById(trainingMaster.getTrainer().getId());
         TrainingSubType trainingSubType = trainingSubTypeService.readById(trainingMaster.getTrainingSubType().getId());
         TrainingType trainingType = trainingTypeService.readById(trainingMaster.getTrainingType().getId());
+        DepartmentMaster departmentMaster = departmentMasterService.readById(trainingMaster.getDepartmentMaster().getId());
         trainingMaster.setTrainer(trainer);
         trainingMaster.setTrainingSubType(trainingSubType);
         trainingMaster.setTrainingType(trainingType);
+        trainingMaster.setDepartmentMaster(departmentMaster);
         List<?> list1 = trainingIdentificationService.readEmployeeAndTraining(Integer.parseInt(id), user.getId());
 //        mv.getModelMap().put("feedback", list);
 //        List attenlist=  new LinkedList();

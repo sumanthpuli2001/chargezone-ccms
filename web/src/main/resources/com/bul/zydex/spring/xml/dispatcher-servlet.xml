@@ -69,7 +69,6 @@
 
                 <!--Employee Management-->
                 <prop key="employeeMaster.htm">employeeMasterController1</prop>
-
                 <!--Travel Management-->
                 <prop key="travelRequestMaster.htm">travelRequestMasterController1</prop>
                 <prop key="travelDetail.htm">travelDetailController1</prop>

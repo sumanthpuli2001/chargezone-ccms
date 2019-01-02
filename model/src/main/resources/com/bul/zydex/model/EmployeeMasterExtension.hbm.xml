@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class catalog="hr_power_astral" name="com.bul.zydex.model.EmployeeMasterExtension" table="employee_master_extension">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="presentAddress2" type="string">
+            <column name="present_address_2" />
+        </property>
+        <property name="presentCity" type="string">
+            <column name="present_city" />
+        </property>
+        <property name="presentState" type="string">
+            <column name="present_state" />
+        </property>
+        <property name="presentPostalCode" type="string">
+            <column name="present_postal_code" />
+        </property>
+        <property name="presentCountry" type="string">
+            <column name="present_country" />
+        </property>
+        <property name="permanentAddress2" type="string">
+            <column name="permanent_address_2" />
+        </property>
+        <property name="permanentCity" type="string">
+            <column name="permanent_city" />
+        </property>
+        <property name="permanentState" type="string">
+            <column name="permanent_state" />
+        </property>
+        <property name="permanentPostalCode" type="string">
+            <column name="permanent_postal_card" />
+        </property>
+        <property name="permanentCountry" type="string">
+            <column name="permanent_country" />
+        </property>
+        <property name="religion" type="string">
+            <column name="religion" />
+        </property>
+        <property name="disclosedHealthConcerns" type="string">
+            <column name="disclosed_health_concerns" />
+        </property>
+        <property name="languagesKnown" type="string">
+            <column name="languages_known" />
+        </property>
+        <property name="hobbies" type="string">
+            <column name="hobbies" />
+        </property>
+        <property name="childOneGender" type="java.lang.Boolean">
+            <column name="child_1_gender" >
+                <comment>gender 0=Male,1=female</comment>
+            </column>
+        </property>
+        <property name="childTwoGender" type="java.lang.Boolean">
+            <column name="child_2_gender" >
+                <comment>gender 0=Male,1=female</comment>
+            </column>
+        </property>
+        <property name="flyDocsEmailId" type="string">
+            <column name="flydocs_emailid" />
+        </property>
+        <property name="emergencyContactAddress" type="string">
+            <column name="emergency_contact_address" />
+        </property>
+        <property name="RelationShip" type="string">
+            <column name="relationship" />
+        </property>
+        <property name="otherImpInfo" type="string">
+            <column name="other_info_of_emergency_contact" />
+        </property>
+        <property name="nationality" type="string">
+            <column name="nationality" />
+        </property>
+        <property name="firstName" type="string">
+            <column name="first_namel" />
+        </property>
+        <property name="middleName" type="string">
+            <column name="middle_name" />
+        </property>
+        <property name="lastName" type="string">
+            <column name="last_name" />
+        </property>
+        <property name="countryOfIssue" type="string">
+            <column name="passport_issue_country" />
+        </property>
+        <property name="visaIssueCountry" type="string">
+            <column name="visa_issue_country" />
+        </property>
+        <property name="visaIssueDate" type="string">
+            <column name="visa_issue_date" />
+        </property>
+        <property name="visaValidTillDate" type="string">
+            <column name="visa_valid_till_date" />
+        </property>
+        <property name="drivingLicenceType" type="string">
+            <column name="driving_licence_type" />
+        </property>
+        <property name="electionCard" type="string">
+            <column name="election_card" />
+        </property>
+        <property name="pfNoFlydocs" type="string">
+            <column name="pf_no_flydocs" />
+        </property>
+        <property name="withdrawalDate" type="string">
+            <column name="pf_withdrawal_date" />
+        </property>
+        <property name="nameOfPreviousCompany" type="string">
+            <column name="name_of_previous_company" />
+        </property>
+        <property name="previousCompanyLocation" type="string">
+            <column name="previous_company_location" />
+        </property>
+        <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
+            <column name="employee_id" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

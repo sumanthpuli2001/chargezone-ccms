@@ -31,4 +31,6 @@ public interface CandidateJobApplicationService<T> extends GenericsService<T> {
 
     public List<?> readListByApplyJobId(Integer id);
 
+    public List<?> readListByApplyJobIdVanacyid(Integer id);
+
 }

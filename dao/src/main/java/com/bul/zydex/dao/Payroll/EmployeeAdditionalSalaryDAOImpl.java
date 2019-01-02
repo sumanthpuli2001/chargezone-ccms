@@ -159,6 +159,13 @@ public class EmployeeAdditionalSalaryDAOImpl<T> extends GenericsDAOImpl<T> imple
                 + "From EmployeeAdditionalSalary a"
                 + " where a.employeeSalaryProcess.id=" + employeeSalaryProcessId
                 + "and a.payrollSalaryType not like 'OT Amount'"
+                + "and a.payrollSalaryType not like 'Bonus'"
+                + "and a.payrollSalaryType not like 'LTA'"
+                + "and a.payrollSalaryType not like 'PERFORMANCE PAY'"
+                + "and a.payrollSalaryType not like 'Gratuiety'"
+                + "and a.payrollSalaryType not like 'Variable'"
+                + "and a.payrollSalaryType not like 'Company PF Contribution'"
+                + "and a.payrollSalaryType not like 'Company ESIC Contribution'"
                 //                + "and a.payrollSalaryType not like 'Conveyance'"
                 + " group by a.employeeSalaryProcess.id";
         return getHibernateTemplate().find(query);

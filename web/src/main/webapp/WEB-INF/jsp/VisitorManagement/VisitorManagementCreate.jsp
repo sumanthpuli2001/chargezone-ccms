@@ -55,6 +55,22 @@
             }
 
         </script>
+        <script>
+            function checkForNumber() {
+               
+                var contact = document.getElementById('visitorContact').value;
+              
+                if (contact !== '') {
+                    $.post("visitorManagement.htm?act=getAutoCompleteDataByContact", {contact: contact}, function () {
+                    }).done(function (response) {
+                        var myObj = JSON.parse(response);
+                        $('#visitorName').val(myObj.name);
+                        $('#visitorOrganization').val(myObj.organization);
+                        $('#visitorComingFrom').val(myObj.visitorFrom);
+                    });
+                }
+            }
+        </script>
     </head>
     <body>
         <div class="content-wrapper">
@@ -213,7 +229,7 @@
                                                             <div class="form-group">
                                                                 <label class="col-sm-3 control-label">Visitor's Contact Number:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <div class="col-sm-7">
-                                                                <form:input path="visitorContactDetail" maxlength="10" minlength="10" pattern="\d+" step="any" title="Contact number should have 10 inputs and digits only." class="form-control bfh-phone" value=""></form:input>
+                                                                <form:input path="visitorContactDetail" id="visitorContact" maxlength="10" minlength="10" pattern="\d+" step="any" title="Contact number should have 10 inputs and digits only." class="form-control bfh-phone" placeholder="Add number to check is visitor exist?" onchange="checkForNumber();"></form:input>
                                                                 <form:errors path="visitorContactDetail" cssClass="errorDiv"></form:errors>
                                                                 </div>
                                                             </div>
@@ -275,6 +291,7 @@
                 </div>
             </section>
         </div>
+                    
         <script type="text/javascript">
             $('.form_datetime').datetimepicker({
                 //language:  'fr',

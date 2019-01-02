@@ -349,7 +349,23 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-5">
-                                        <label class="control-label">Venue<span style="color: red;font-size: 12px;">*</span></label>
+                                        <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
+                                        <select name="departmentMasterid"  id="departmentMasterid" class="form-control">
+                                            <option value="">--Select--</option>
+                                            <c:forEach items="${deptMap}" var="deptMap1">
+                                                <option value="${deptMap1.key}">${deptMap1.value}</option>
+                                            </c:forEach>
+                                        </select>
+                                        <%--<form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>--%>
+                                        </div>
+                                         <div class="col-sm-5">
+                                            <label class="control-label">Training Source<span style="color: red;font-size: 12px;">*</span></label>
+                                        <form:input path="trainingSource" class="form-control"/>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-5">
+                                            <label class="control-label">Venue<span style="color: red;font-size: 12px;">*</span></label>
                                         <form:input path="venue" class="form-control" id="venue" onchange="trainerOnchangeFunction('venueError');"/>
                                         <span style="font-size: 14px; color: #dd4b39;" id="venueError"></span>
                                         <%--<form:errors path="venue" cssClass="errorDiv"></form:errors>--%>
@@ -405,10 +421,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-sm-5">
-                                            <label class="control-label">Training Source<span style="color: red;font-size: 12px;">*</span></label>
-                                        <form:input path="trainingSource" class="form-control"/>
-                                    </div>
+                                       
                                     <div class="col-sm-5">
                                         <label class="control-label">Reimbursable<span style="color: red;font-size: 12px;">*</span></label>
                                         <form:radiobutton path="reimbursable" value="1" required="required"/>Yes
@@ -509,7 +522,7 @@
             tokenLimit: "1",
             searchingText: "Searching ... .. .",
             prePopulate: ${preList},
-            minChars : 3
+            minChars: 3
         });
     });
 </script>

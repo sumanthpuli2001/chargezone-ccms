@@ -43,53 +43,12 @@
                                            commandName="dynamicApprovalSettingSupport" action="dynamicApprovalSetting.htm?act=submitDynamicApproval"  >
                                     <form:hidden path="id"></form:hidden>
 
-                                        <div class="form-group">
-                                            <div class="col-sm-4">
-                                                <label>Module Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:select path="moduleId" class="form-control" onchange="getProjectName(this.value);">
-                                                <form:option value="" label="-- Select --"/>
-                                                <form:options items="${mouleList}" />
-                                            </form:select>
-                                            <span id="leaveTypeMasterError" style="color: red;"></span>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <label>Company Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:select path="companyId" class="form-control" >
-                                                <form:option value="" label="-- Select --"/>
-                                                <form:options items="${companyList}" />
-                                            </form:select>
-                                            <span id="leaveTypeMasterError" style="color: red;"></span>
-                                        </div>
-                                        <c:if test="${dynamicApprovalSettingSupport.projectId gt 0}">
-                                            <div class="col-sm-4" id="projectDiv1" >
-                                                <label>Project Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                <select class="form-control" name="projectName">
-                                                    <c:forEach var="projectList" items="${projectList}">
-                                                        <c:if test="${dynamicApprovalSettingSupport.projectId eq projectList.id}">
-                                                            <option value="${projectList.id}" selected="true">${projectList.name}</option>
-                                                        </c:if>
-                                                        <c:if test="${dynamicApprovalSettingSupport.projectId ne projectList.id}">
-                                                            <option value="${projectList.id}" >${projectList.name}</option>
-                                                        </c:if>
-                                                    </c:forEach>
-                                                </select>
-                                            </div>
-                                        </c:if>
-                                        <div class="col-sm-4" id="projectDiv">
-                                        </div>
-                                    </div>
+                                      
                                     <div class="form-group">
 
+                                        
                                         <div class="col-sm-6">
-                                            <label>Location:<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:select path="zydexLocationMasterId" class="form-control" >
-                                                <form:option value="" label="-- Select --"/>
-                                                <form:options items="${locationList}" />
-                                            </form:select>
-                                            <span id="leaveTypeMasterError" style="color: red;"></span>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Designation Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <label>Department Name:<span style="color: red;font-size: 12px;">*</span></label>
                                             <form:select path="designationMasterId" class="form-control" >
                                                 <form:option value="" label="-- Select --"/>
                                                 <form:options items="${designationList}" />
@@ -110,7 +69,7 @@
                                             <form:errors path="approverId" cssClass="errorDiv"></form:errors>
                                             </div>
                                             <div class="col-sm-6">
-                                                <label>Email Notification :<span style="color: red;font-size: 12px;">*</span></label>
+                                                <label>Email Notification :<span style="color: red;font-size: 12px;"></span></label>
                                             <form:input path="emailUserId" class="form-control"></form:input>
                                             <form:errors path="emailUserId" cssClass="errorDiv"></form:errors>
                                                 <!--                                                <div>
@@ -148,7 +107,7 @@
                                             <div class="table-responsive">
                                                 <table id="policyTable" class="table table-bordered table-striped table-hover" style="margin-top: 10px" align="Center"  >
                                                     <tr>
-                                                        <th style="text-align: center; vertical-align: middle">Approver Name</th>
+                                                        <th style="text-align: center; vertical-align: middle">Email Notification Name</th>
                                                         <th style="text-align: center; vertical-align: middle">Action</th>
                                                     <input type="hidden" name="policyCount" id="policyCount" value="1"/>
                                                     </tr>

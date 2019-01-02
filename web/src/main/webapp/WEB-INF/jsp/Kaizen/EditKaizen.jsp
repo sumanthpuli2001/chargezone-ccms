@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
 
     <head> 
-        <title>Training Type Master </title>
+        <title>Kaizen </title>
 
     </head>
     <style>
@@ -26,7 +26,7 @@
             background-color: black;
         }
     </style>
-    
+
     <script>
         function checkBlankField() {
             var flag = true;
@@ -94,7 +94,7 @@
             </ol>
         </section>
         <form:form action="kaizen.htm?act=editKaizenSubmit" method="post" commandName="kaizenMaster" enctype="multipart/form-data"
-                     onsubmit='return checkBlankField();' name='form1' class="form-horizontal" role="form">
+                   onsubmit='return checkBlankField();' name='form1' class="form-horizontal" role="form">
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -112,7 +112,7 @@
                                             <th colspan="5"><input type="text" size="3px;" readonly="" name="srNo" value="${list.srNo}"></th>
                                             <th colspan="2">Team Leader</th>
                                             <th colspan="2"><input name="teamLeader"  id="teamLeader" value="${list.teamLeader}" type="text"onchange="kaizenOnchangeFunction('teamLeaderError');"><br>
-                                                 <span style="font-size: 14px; color: #dd4b39;" id="teamLeaderError"></span></th>
+                                                <span style="font-size: 14px; color: #dd4b39;" id="teamLeaderError"></span></th>
                                         </tr>
                                         <tr>
                                             <th colspan="3">Team Name </th>
@@ -120,25 +120,25 @@
                                                 <span style="font-size: 14px; color: #dd4b39;" id="teamNameError"></span></th>
                                             <th colspan="2">Kaizen Idea Generator</th>
                                             <th colspan="2"><input name="ideaGenerator" id="ideaGenerator" value="${list.ideaGenerator}" type="text"onchange="kaizenOnchangeFunction('ideaGeneratorError');"><br>
-                                                 <span style="font-size: 14px; color: #dd4b39;" id="ideaGeneratorError"></span></th>
+                                                <span style="font-size: 14px; color: #dd4b39;" id="ideaGeneratorError"></span></th>
                                         </tr>
                                         <tr>
                                             <th colspan="3">Department </th>
                                             <th colspan="5"><input name="department"id="department"  value="${list.department}" type="text" size="50px;"onchange="kaizenOnchangeFunction('departmentError');"><br>
                                                 <span style="font-size: 14px; color: #dd4b39;" id="departmentError"></span></th>
-                                            <th colspan="2" rowspan="3">Team Member </th>
+                                            <th colspan="2" rowspan="3">Team Members </th>
                                             <th colspan="2" rowspan="3"><textarea name="teamMember"id="teamMember"  style="resize: none" value=""  rows="8" cols="23"onchange="kaizenOnchangeFunction('teamMemberError');">${list.teamMember}</textarea>
                                                 <br> <span style="font-size: 14px; color: #dd4b39;" id="teamMemberError"></span></th>
                                         </tr>
                                         <tr style="vertical-align: top;">
                                             <th colspan="3" rowspan="5">
                                                 Problem Description :   <br><br>
-                                                <textarea style="resize: none"  name="problemDescription"id="problemDescription" rows="12" cols="35"onchange="kaizenOnchangeFunction('problemDescriptionError');">${list.problemDescription}</textarea>
+                                                <textarea style="resize: none"  name="problemDescription"id="problemDescription" onchange="kaizenOnchangeFunction('problemDescriptionError');">${list.problemDescription}</textarea>
                                                 <br> <span style="font-size: 14px; color: #dd4b39;" id="problemDescriptionError"></span></th>
                                             <th colspan="5" rowspan="5" style="text-align: center;" >
                                                 Before Photo <br>
                                                 <input type="file" name="beforePhoto" class="form-control" id="beforePhoto"  accept="image/jpg,image/jpeg,image/png" onchange="checkFileSize();">
-                                                <img hight="300" width="400" src="StorageYard/Kaizen/beforePhoto/${list.beforePhoto}"  >
+                                                <img width="100%"  src="StorageYard/Kaizen/beforePhoto/${list.beforePhoto}"  >
                                             </th>
                                             <!--<th colspan="2"><input name="teamMember" type="text"></th>-->
                                         </tr>
@@ -157,25 +157,25 @@
                                             </th>
                                         </tr>
                                         <tr>
-                                            <th colspan="2">Budget Requirement  </th>
+                                            <th colspan="2">Budget Requirement(Amt)  </th>
                                             <th colspan="2"><input name="budgetRequirement" id="budgetRequirement"  value="${list.budgetRequirement}" type="text"onchange="kaizenOnchangeFunction('budgetRequirementError');"><br>
                                                 <span style="font-size: 14px; color: #dd4b39;" id="budgetRequirementError"></span>
                                         </tr>
                                         <tr style="vertical-align: top;">
                                             <th colspan="3" rowspan="5">Improvement Description :<br><br>
 
-                                                <textarea name="improvementDescription"id="improvementDescription" style="resize: none"  rows="12" cols="35"onchange="kaizenOnchangeFunction('improvementDescriptionError');">${list.improvementDescription}</textarea>
+                                                <textarea name="improvementDescription"id="improvementDescription" style="resize: none"  onchange="kaizenOnchangeFunction('improvementDescriptionError');">${list.improvementDescription}</textarea>
                                                 <br><br>  <span style="font-size: 14px; color: #dd4b39;" id="improvementDescriptionError"></span></th>
                                             <th colspan="5" rowspan="5" style="text-align: center;">After Photo<br>
                                                 <input type="file"   class="form-control" id="afterPhoto" name="afterPhoto" accept="image/jpg,image/jpeg,image/png" onchange="checkFileSize();">
-                                                <img hight="300" width="400" src="StorageYard/Kaizen/afterPhoto/${list.afterPhoto}">
+                                                <img width="100%"  src="StorageYard/Kaizen/afterPhoto/${list.afterPhoto}">
                                             </th>
-                                            <th colspan="2" rowspan="1">Tangible Benefit </th>
+                                            <th colspan="2" rowspan="1">Tangible Benefit(Amt) </th>
                                             <th colspan="2" rowspan="1"><input name="tangibleBenefit" id="tangibleBenefit" value="${list.tangibleBenefit}"type="text" onchange="kaizenOnchangeFunction('tangibleBenefitError');">
                                                 <br>  <span style="font-size: 14px; color: #dd4b39;" id="tangibleBenefitError"></span></th>
                                         </tr>
                                         <tr>
-                                            <th colspan="2" rowspan="1">Intangible Benefit </th>
+                                            <th colspan="2" rowspan="1">Intangible Benefit(Amt) </th>
                                             <th colspan="2" rowspan="1"><input name="intangibleBenefit" id="intangibleBenefit" value="${list.intangibleBenefit}" type="text" onchange="kaizenOnchangeFunction('intangibleBenefitError');">
                                                 <br>  <span style="font-size: 14px; color: #dd4b39;" id="intangibleBenefitError"></span></th>
                                         </tr>

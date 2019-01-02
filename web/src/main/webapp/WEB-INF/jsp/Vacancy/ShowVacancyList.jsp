@@ -92,11 +92,11 @@
             <div class="alert alert-info" role="alert">${successMessage}</div>
         </c:if>
         <section class="content-header" style="margin-top: 5%;">
-            <c:if test="${sessionScope.ApplayJobUserMaster ne null}">
+            <c:if test="${ApplayJobUserMaster ne null}">
                 <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=logout'"><i class="fa fa-sign-out"></i>&nbsp&nbsp&nbsp;Log Out</button>
                 <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=candidateProfile'"><i class="fa fa-Home"></i>&nbsp&nbsp&nbsp;My Profile</button>
             </c:if>
-            <c:if test="${sessionScope.ApplayJobUserMaster eq null}">
+            <c:if test="${ApplayJobUserMaster eq null}">
                 <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 1%;" onclick="window.location = 'vacancy.htm?act=signUp'"><i class="fa fa-sign-up"></i>&nbsp&nbsp&nbsp;Sign Up</button>
                 <button type="button" class="btn btn-primary" style="float: right; width: 130px; margin-right: 2%;" onclick="window.location = 'vacancy.htm?act=Login'"><i class="fa fa-sign-in"></i>&nbsp&nbsp&nbsp;Login</button>
                 <!--<button type="button" class="btn btn-primary" style="float: left; width: 130px; margin-right: 2%;" onclick="window.location = 'logIn.html?act=loginClick'"><i class="fa fa-Home"></i>&nbsp&nbsp&nbsp;Main Home</button>-->

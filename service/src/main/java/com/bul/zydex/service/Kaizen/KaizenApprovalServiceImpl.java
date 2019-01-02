@@ -8,13 +8,14 @@ package com.bul.zydex.service.Kaizen;
 import com.bul.zydex.dao.Kaizen.KaizenApprovalDAO;
 import com.bul.zydex.model.KaizenApproval;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.List;
 
 /**
  *
  * @author Aman
  */
-public class KaizenApprovalServiceImpl<T>extends GenericsServiceImpl<T> implements KaizenApprovalService<T>{
-    
+public class KaizenApprovalServiceImpl<T> extends GenericsServiceImpl<T> implements KaizenApprovalService<T> {
+
     private KaizenApprovalDAO<T> kaizenApprovalDAO;
 
     public KaizenApprovalDAO<T> getKaizenApprovalDAO() {
@@ -28,8 +29,12 @@ public class KaizenApprovalServiceImpl<T>extends GenericsServiceImpl<T> implemen
 
     @Override
     public KaizenApproval readByIdAndEmp(int id, int empId) {
-        return kaizenApprovalDAO.readByIdAndEmp(id,empId);
+        return kaizenApprovalDAO.readByIdAndEmp(id, empId);
     }
-    
-    
+
+    @Override
+    public List<?> readApprovalSteeringCommitteList(int empId) {
+        return kaizenApprovalDAO.readApprovalSteeringCommitteList(empId);
+    }
+
 }

@@ -46,8 +46,18 @@ public class PolicyMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Policy
         String query = "";
         query += " Select a.policyName "
                 + " FROM PolicyMaster a ";
-        List<?> list=getHibernateTemplate().find(query);
+        List<?> list = getHibernateTemplate().find(query);
         return list;
-        
+
+    }
+
+    @Override
+    public List<?> readPolicyNameSalarySearch() {
+        String query = "";
+        query += " Select a.policyName "
+                + " FROM PolicyMaster a "
+                + " order by a.id asc";
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
     }
 }

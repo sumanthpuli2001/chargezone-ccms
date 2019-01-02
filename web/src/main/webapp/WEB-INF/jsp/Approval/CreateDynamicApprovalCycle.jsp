@@ -49,41 +49,11 @@
                                            commandName="dynamicApprovalSettingSupport" action="dynamicApprovalSetting.htm?act=submitDynamicApproval"  >
                                     <form:hidden path="id"></form:hidden>
 
-                                        <div class="form-group">
-                                            <div class="col-sm-4">
-                                                <label>Module Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:select path="moduleId" class="form-control" onchange="getProjectName(this.value);" >
-                                                <form:option value="" label="-- Select --"/>
-                                                <form:options items="${mouleList}" />
-                                            </form:select>
-                                            <span id="leaveTypeMasterError" style="color: red;"></span>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <label>Company Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:select path="companyId" class="form-control" >
-                                                <form:option value="" label="-- Select --"/>
-                                                <form:options items="${companyList}" />
-                                            </form:select>
-                                            <span id="leaveTypeMasterError" style="color: red;"></span>
-                                        </div>
-                                        <div class="col-sm-4" id="projectDiv">
-
-                                        </div>
-
-                                    </div>
+                                        
                                     <div class="form-group">
 
                                         <div class="col-sm-6">
-                                            <label>Location:<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:select path="zydexLocationMasterId" class="form-control" >
-                                                <form:option value="" label="-- Select --"/>
-                                                <form:options items="${locationList}" />
-                                            </form:select>
-                                            <span id="leaveTypeMasterError" style="color: red;"></span>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Designation Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <label>Department Name:<span style="color: red;font-size: 12px;">*</span></label>
                                             <form:select path="designationMasterId" class="form-control" >
                                                 <form:option value="" label="-- Select --"/>
                                                 <form:options items="${designationList}" />
@@ -104,7 +74,7 @@
                                             <form:errors path="approverId" cssClass="errorDiv"></form:errors>
                                             </div>
                                             <div class="col-sm-6">
-                                                <label>Email Notification :<span style="color: red;font-size: 12px;">*</span></label>
+                                                <label>Email Notification :<span style="color: red;font-size: 12px;"></span></label>
                                             <form:input path="emailUserId" class="form-control"></form:input>
                                             <form:errors path="emailUserId" cssClass="errorDiv"></form:errors>
                                                 <!--                                                <div>

@@ -11,12 +11,17 @@ import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.VisitorManagement;
 import com.bul.zydex.model.VisitorVisitedLocation;
 import com.bul.zydex.model.ZydexLocationMaster;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -955,6 +960,27 @@ public class VisitorManagementController extends VisitorManagementAbstract {
 //        mv.getModelMap().put("visitorManagement", visitorManagement);
         mv.setViewName("VisitorManagement/ExportSecurityResult");
         return mv;
+    }
+     public void getAutoCompleteDataByContact(HttpServletRequest request, HttpServletResponse response) throws JSONException, IOException {
+        String contactNo = request.getParameter("contact");
+        Boolean gotError = true;
+        try {
+            BigInteger number = new BigInteger(contactNo);
+            gotError = false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (gotError.equals(false)) {
+            PrintWriter out = response.getWriter();
+            List<VisitorManagement> vm = (List<VisitorManagement>) visitorManagementService.getDetailsByContactNo(contactNo);
+            JSONObject jObject = new JSONObject();
+            jObject.put("name", vm.get(0).getVisitorName());
+            jObject.put("visitorFrom", vm.get(0).getVisitorComingFrom());
+            jObject.put("organization", vm.get(0).getVisitorOrganization());
+            
+            
+            out.println(jObject.toString());
+        }
     }
 
 }

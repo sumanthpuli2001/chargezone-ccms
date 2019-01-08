@@ -187,6 +187,15 @@
                                                                 <c:if test="${list[5] eq 5}">
                                                                     <td><span class="label label-info">WithDrawn By ${list[7]}</span></td>
                                                                 </c:if>
+                                                                    <c:if test="${list[5] eq 6}">
+                                                                    <td><span class="label label-success">Approved By ${list[7]}</span></td>
+                                                                </c:if>
+                                                                    <c:if test="${list[5] eq 7}">
+                                                                    <td><span class="label label-danger">Rejected By ${list[7]}</span></td>
+                                                                </c:if>
+                                                                    <c:if test="${list[5] eq 8}">
+                                                                    <td><span class="label label-warning">Reworked By ${list[7]}</span></td>
+                                                                </c:if>
                                                                 <!--<td>$//{list[5]}</td>-->
                                                                 <td>
                                                                     <div class="btn-group">

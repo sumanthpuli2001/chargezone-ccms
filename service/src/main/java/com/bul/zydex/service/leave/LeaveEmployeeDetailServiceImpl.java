@@ -190,4 +190,9 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
         return leaveEmployeeDetailDAO.getEmployeeLeaveDetailByDate(startDate, endDate, approverId);
     }
 
+    @Override
+    public List<?> viewEmpLeaveRequestForHR() {
+        return leaveEmployeeDetailDAO.viewEmpLeaveRequestForHR();
+    }
+
 }

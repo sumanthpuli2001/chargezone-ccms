@@ -20,6 +20,7 @@ import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeePolicyDetail;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeTypeMaster;
+import com.bul.zydex.model.EmployeeVisaDetails;
 import com.bul.zydex.model.HoursBasis;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
@@ -49,6 +50,7 @@ import com.bul.zydex.service.appraisalPerformance.CompetencyEvaluationMasterServ
 import com.bul.zydex.service.company.CompanyMasterService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
+import com.bul.zydex.service.emp.EmployeeVisaDetailsService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.leave.LeaveTypeMasterService;
 import com.bul.zydex.service.level.LevelMasterService;
@@ -104,7 +106,8 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     protected EmployeeCtcDetailService<EmployeeCtcDetail> employeeCtcDetailService;
     protected ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterService;
     protected MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService;
-
+    protected EmployeeVisaDetailsService<EmployeeVisaDetails> employeeVisaDetailsService;
+    
     public CompetencyEvaluationMasterService<CompetencyEvaluationMaster> getCompetencyEvaluationMasterService() {
         return competencyEvaluationMasterService;
     }
@@ -232,6 +235,17 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     public void setPayrollPtCheckService(PayrollPtCheckService<PayrollPtCheck> payrollPtCheckService) {
         this.payrollPtCheckService = payrollPtCheckService;
     }
+
+    public EmployeeVisaDetailsService<EmployeeVisaDetails> getEmployeeVisaDetailsService() {
+        return employeeVisaDetailsService;
+    }
+
+    public void setEmployeeVisaDetailsService(EmployeeVisaDetailsService<EmployeeVisaDetails> employeeVisaDetailsService) {
+        this.employeeVisaDetailsService = employeeVisaDetailsService;
+    }
+
+   
+    
 
     protected void departmentList(HttpServletRequest request) {
         DepartmentMaster departmentMaster = new DepartmentMaster();

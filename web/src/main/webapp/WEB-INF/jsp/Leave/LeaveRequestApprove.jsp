@@ -446,7 +446,7 @@
                                     </div><!-- /.box-body -->
                                 </div>
 
-                                <c:if test="${list[0][7] eq 0 || list[0][7] eq 4}">
+                                <c:if test="${list[0][7] eq 0 || list[0][7] eq 4 || list[0][7] eq 8}">
 
                                     <div class="form-group">
                                         <div class="col-sm-4" style="text-align: left">

@@ -282,4 +282,19 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
    
     }
 
+    @Override
+    public Boolean readEmployeeIfHR(Integer id) {
+        
+        String query = "";
+        query += ""
+                + " From UserRightMaster a "
+                + " WHERE a.userMaster.id = " + id + " AND a.hr = 1";
+
+        List list = getHibernateTemplate().find(query);
+        if (!list.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
 }

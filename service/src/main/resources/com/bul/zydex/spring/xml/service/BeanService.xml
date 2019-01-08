@@ -763,4 +763,7 @@
     <bean id="employeeMasterServiceExtension1" class="com.bul.zydex.service.emp.EmployeeMasterServiceImplExtension">
         <property name="employeeMasterExtensionDAO" ref="employeeMasterExtensionDAO1"/>
     </bean>
+    <bean id="employeeVisaDetailsService1" class="com.bul.zydex.service.emp.EmployeeVisaDetailsServiceImpl">
+        <property name="employeeVisaDetailsDAO" ref="employeeVisaDetailsDAO1"/>
+    </bean>
 </beans>

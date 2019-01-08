@@ -179,6 +179,15 @@
                                                             <c:if test="${list[6] eq 5}">
                                                                 <td><span class="badge">Withdrawn</span></td>
                                                             </c:if>
+                                                            <c:if test="${list[6] eq 6}">
+                                                                <td><span class="label label-success">Approved By HR</span></td>
+                                                            </c:if>
+                                                            <c:if test="${list[6] eq 7}">
+                                                                <td><span class="label label-danger">Rejected By HR</span></td>
+                                                            </c:if>
+                                                            <c:if test="${list[6] eq 8}">
+                                                                <td><span class="label label-warning">Reworked By HR</span></td>
+                                                            </c:if>    
                                                             <!--<td>$//{list[5]}</td>-->
                                                             <td>
                                                                 <div class="btn-group">

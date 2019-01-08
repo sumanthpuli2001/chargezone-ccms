@@ -935,6 +935,12 @@
             </key>
             <one-to-many class="com.bul.zydex.model.EmployeeCtcDetail" />
         </set>
+        <set name="employeeVisaDetails" inverse="true">
+            <key>
+                <column name="employee_id" />
+            </key>
+            <one-to-many class="com.bul.zydex.model.EmployeeVisaDetails" />
+        </set>
     
     </class>
 </hibernate-mapping>

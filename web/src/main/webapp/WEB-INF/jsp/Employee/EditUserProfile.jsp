@@ -12,6 +12,16 @@
     <head>
         <title>Employee Edit</title>
     </head>
+    <style>
+            #tabs{ margin: 20px -20px; border: none; }
+            #tabs, #ui-datepicker-div, .ui-datepicker{ font-size: 85%; }
+            .clear{ clear: both; }
+
+            /*.example-container{ background-color: #f4f4f4; border-bottom: solid 2px #777777; margin: 0 0 20px 40px; padding: 20px; }*/
+            /*.example-container input{ border: solid 1px #aaa; padding: 4px; width: 175px; }*/
+        </style>
+
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
     <script>
         $(document).ready(function () {
             window.onload = changetotalButtonNew();
@@ -628,6 +638,14 @@
                 document.getElementById('spanId7').innerHTML = 'Expand';
             }
         }
+        function buttonFun9() {
+            var className = $('#minusId9').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId9').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId9').innerHTML = 'Expand';
+            }
+        }
 
         //change profile picture.
         function changeButton() {
@@ -694,6 +712,67 @@
 
         }
     </script>
+     <script>
+        var tempCount = 1;
+        $(function () {
+            tempCount = document.getElementById('visaCount1').value;
+            $("#visaCloneid").on("click", function () {
+                tempCount++;
+                //                alert(tempCount3);
+                var clone = "<tr id='addmoreTR" + tempCount + "' style='clear:both;'>"
+                        + "<td style=\"text-align: center\">" + tempCount + "</td>"
+                        + "<td id=\"visaIssueCountry" + tempCount + "\"><input type =\"text\" name='visaIssueCountry" + tempCount + "' id='visaIssueCountry" + tempCount + "' class =\"form-control\" />"
+                        + "<td style=\"text-align: center\">"
+                        + "<input type=\"text\" name='visaIssueDate" + tempCount +"' id='visaIssueDate" + tempCount + "' size=\"16\"  class=\"form-control\">"
+                        + "</td>"
+                        + "<td style=\"text-align: center\">"
+                        + "<input type=\"text\" name='visaValidTillDate" + tempCount +"' id='visaValidTillDate" + tempCount +"' class=\"form-control\" size=\"16\">"
+                        + "</td>"
+                        + "<td style=\"text-align: center\">"
+                        + "<span style='margin-top: 5px;'>"
+                        + "<input type=\"button\"value=\"-\"  onclick=\"removevisadoc('addmoreTR" + tempCount + "');\"/>"
+                        + "</span>"
+                        + "</td>"
+                        + "</tr>";
+                $("#visaTable").append(clone);
+                document.getElementById('visaCount1').value = tempCount;
+                $("#visaIssueDate" + tempCount + "").datepicker({dateFormat: 'dd/mm/yy'});
+                $("#visaValidTillDate" + tempCount + "").datepicker({dateFormat: 'dd/mm/yy'});
+//                $("#ui-datepicker-div").css("z-index",2);
+//                window.onload = init;
+//                function init() {
+//                    document.form1.month.options[new Date().getMonth()].selected = true;
+//                }
+                
+
+            });
+        });
+        $(function () {
+            var cont = document.getElementById("visaCount1").value;
+            var id;
+            for (id = 1; id <= cont; id++) {
+                $("#visaIssueDate"+id).datepicker({dateFormat: 'dd/mm/yy'});
+            }
+            
+        });
+        $(function () {
+            var cont1 = document.getElementById("visaCount1").value;
+            var idd;
+            for (idd = 1; idd <= cont1; idd++) {
+                $("#visaValidTillDate"+idd).datepicker({dateFormat: 'dd/mm/yy'});
+            }
+            
+        });
+        </script>
+        <script>
+            function removevisadoc(addmoreTR){
+                --tempCount;
+                document.getElementById('visaCount1').value = tempCount;
+                var element1 = document.getElementById(addmoreTR);
+                element1.parentNode.removeChild(element1);
+            }
+            
+        </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -744,7 +823,7 @@
                                                         </div>
 
                                                         <div class="col-sm-6">
-                                                            <label>Employee Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Employee Name (First & Last Name only):<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="employeeName" class="readItOnly form-control"></form:input>
                                                         <form:errors path="employeeName" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -843,13 +922,13 @@
                                                         
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Present Address 1:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:textarea path="presentAddress" class="form-control"></form:textarea>
                                                         <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             
-                                                             <label>Present Address 2:<span style="color: red;font-size: 12px;">*</span></label>
+                                                             <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
 
                                                             <textarea name="presentAddress2" id="presentAddress2" class="form-control">${list.presentAddress2}</textarea>
                                                             
@@ -886,13 +965,13 @@
                                                         
                                                 <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Permanent Address 1:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Permanent Address:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:textarea path="permanentAddress" class="form-control"></form:textarea>
                                                         <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
                                                                 
-                                                            <label>Permanent Address 2:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
 <!--                                                            <input type="textarea" name="permanentAddress2" id="permanentAddress2" class="form-control">-->
                                                               <textarea name="permanentAddress2" id="permanentAddress2"  class="form-control">${list.permanentAddress2}</textarea>
                                                                
@@ -1092,20 +1171,25 @@
                                                         <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
                                                         <form:errors path="emailAddress" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-6">
+<!--                                                        <div class="col-sm-6">
                                                             
                                                             <label>FLYdocs Email Id:</label>
                                                         <input type="text" name="flyDocsEmailId" id="flyDocsEmailId" value="${list.flyDocsEmailId}" class="form-control">
 
                                                         
+                                                        </div>-->
+                                                        <div class="col-sm-6">
+                                                            <label >Contact No.1:</label>
+                                                        <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                        <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                 </div>
                                                         <div class="form-group">
 
                                                         <div class="col-sm-6">
-                                                            <label >Contact No.1:</label>
-                                                        <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
+                                                            <label >Contact No.2:</label>
+                                                        <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                        <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     
                                                     
@@ -1228,14 +1312,14 @@
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6">
+<!--                                                        <div class="col-sm-6">
                                                             
                                                             <label>Visa Issue Country:</label>
                                                             <input name="visaIssueCountry" id="visaIssueCountry" value="${list.visaIssueCountry}" class="form-control">
                                                         
-                                                            </div>
+                                                            </div>-->
                                                     </div>
-                                                    <div class="form-group">
+<!--                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             
                                                             <label>Visa Issue Date:</label>
@@ -1253,14 +1337,14 @@
                                                             
                                                             <label>Visa Valid till Date:</label>
                                                             <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                <input class="form-control" size="16" type="text" value="" readonly>
                                                             <input type="text" name="visaValidTillDate" value="${list.visaValidTillDate}" id="visaValidTillDate" class="form-control" size="16" readonly="true">
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                            
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                      <div class="form-group">
                                                         <div class="col-sm-6">
                                                             
@@ -1278,14 +1362,13 @@
                                                             <option value="">-- Select --</option>
                                                             <option value="2Wheeler">2Wheeler</option>
                                                             <option value="4Wheeler">4Wheeler</option>
-                                                            <option value="both">Both</option>
+                                                            <option value="Both">Both</option>
                                                             
                                                         </c:if>
                                                         <c:if test="${!empty list.drivingLicenceType}">
-                                                            
                                                             <option <c:choose><c:when test="${list.drivingLicenceType eq '2Wheeler'}"> value="2Wheeler" selected="true"</c:when><c:otherwise>value="2Wheeler"</c:otherwise></c:choose>>2 Wheeler</option>
                                                             <option <c:choose><c:when test="${list.drivingLicenceType eq '4Wheeler'}"> value="4Wheeler" selected="true"</c:when><c:otherwise>value="4Wheeler"</c:otherwise></c:choose>>4 Wheeler</option>
-                                                            <option <c:choose><c:when test="${list.drivingLicenceType eq 'both'}"> value="both" selected="true"</c:when><c:otherwise>value="both"</c:otherwise></c:choose>>Both</option>
+                                                            <option <c:choose><c:when test="${list.drivingLicenceType eq 'Both'}"> value="Both" selected="true"</c:when><c:otherwise>value="Both"</c:otherwise></c:choose>>Both</option>
                                                         </c:if>
                                                             
                                                         </select>
@@ -1320,6 +1403,89 @@
                                         </div><!-- /.box-body -->
                                     </div>
                                     <!--Document detail completes here-->
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Document Visa Detail:</h3>
+                                            <div class="box-tools pull-right">
+<!--                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <span id="spanId9">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun9();"><i class="fa fa-plus" id="minusId9" ></i></button>
+                                            </div>
+                                        </div> <!--/.box-header -->
+                                    <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table id="visaTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                            <tr>
+                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                <th style="text-align: center; vertical-align: middle">Visa Issue Country</th>
+                                                                <th style="text-align: center; vertical-align: middle">Visa Issue Date</th>
+                                                                <th style="text-align: center; vertical-align: middle">Visa Valid till Date</th>
+                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                                <c:choose>
+                                                                    <c:when test="${not empty employeeVisaDetailsList}">
+                                                                        <input type="hidden" name="visaCount" id="visaCount"  value="${fn:length(employeeVisaDetailsList)}"/>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <input type="hidden" name="visaCount" id="visaCount"  value="1"/>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </tr>
+                                                            
+                                                               <c:choose>
+                                                                    <c:when test="${not empty employeeVisaDetailsList}">
+                                                                        <input type="hidden" name="visaCount1" id="visaCount1" value="${fn:length(employeeVisaDetailsList)}"/>
+                                                                    <c:forEach var="employeeVisaDetailsList" items="${employeeVisaDetailsList}" varStatus = "visacountVal">
+                                                                    
+                                                                    <tr>
+                                                                        <td style="text-align: center">${visacountVal.count}</td> 
+                                                                        <td style="text-align: center">
+                                                                            <input name="visaIssueCountry${visacountVal.count}" id="visaIssueCountry${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueCountry}" class="form-control">
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <input type="text" name="visaIssueDate${visacountVal.count}" id="visaIssueDate${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueDate}" size="16"  class="form-control">
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <input type="text" name="visaValidTillDate${visacountVal.count}" id="visaValidTillDate${visacountVal.count}" value="${employeeVisaDetailsList.visaValidTillDate}" class="form-control" size="16" >
+                                                                        </td>
+                                                                        <c:if test="${visacountVal.last}">
+                                                                             <td style="text-align: center">
+                                                                            <span style='margin-top: 5px;'>
+                                                                                <input type="button" value="+" id="visaCloneid" />
+                                                                            </span>
+                                                                                 </td>
+                                                                        </c:if>
+                                                                    </tr>
+                                                                    </c:forEach>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <tr>
+                                                                            <td style="text-align: center">1</td>
+                                                                            <td style="text-align: center">
+                                                                                <input name="visaIssueCountry1" id="visaIssueCountry1" class="form-control">
+                                                                            </td>
+                                                                            <td style="text-align: center">
+                                                                              <input type="text" name="visaIssueDate1" id="visaIssueDate1"  size="16"  class="form-control">
+                                                                            </td>
+                                                                            <td style="text-align: center">
+                                                                               <input type="text" name="visaValidTillDate1" id="visaValidTillDate1" class="form-control" size="16" >
+                                                                            </td>
+                                                                            <td style="text-align: center">
+                                                                                <span style='margin-top: 5px;'>
+                                                                                    <input type="button" value="+" id="visaCloneid" />
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </c:otherwise>
+                                                            </c:choose>
+                                                            
+                                                        </table>
+                                                    </div>
+                                                </div> <!--/.col -->
+                                            </div> <!--/.row -->
+                                        </div> <!--/.box-body -->
+                                    </div>
+                                    <!--document visa detail completes here-->
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
                                             <h3 class="box-title">Organization Specific Detail:</h3>
@@ -1399,7 +1565,7 @@
                                                         <form:errors path="employeeLocation" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeTypeMaster.id"  onchange="selectsubtype(this.value);" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option>
                                                             <form:options items="${EmployeeTypeList}"></form:options>
@@ -1410,7 +1576,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6" id="employeeSubTypeId">
-                                                            <label>Employee SubType:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="subTypeId" id="subTypeId"class="form-control ">
                                                                 <option value="" label="-- Select --" ></option>
                                                             <%--<form:options items="${EmployeeSubTypeList}"></form:options>--%>
@@ -1537,7 +1703,7 @@
                                                 </div><!-- /.col -->
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label >Contact No.:</label>
+                                                        <label >Official Contact No:</label>
                                                         <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                         </div>

@@ -150,6 +150,7 @@
                                     <c:if    test="${sessionScope.userRight.hr or sessionScope.userRight.leaveManagement}">
                                     <li><a href="leaveEmployeeDetail.htm?act=searchEmpLeaveDetail"><i class="fa fa-circle-o"></i>Search Employee Leave Detail</a></li>
                                     <li><a href="leaveEmployeeDetail.htm?act=searchEmployeeLeaveBalance"><i class="fa fa-circle-o"></i>Search Employee Leave Balance</a></li>
+                                    <li><a href="leaveEmployeeDetail.htm?act=hremployeeleaveManagement"><i class="fa fa-circle-o"></i>HR Employee Leave Management</a></li>
                                     </c:if>
                                     <c:if test="${sessionScope.isReportingManagerDataExist}">
                                     <li><a href="leaveEmployeeDetail.htm?act=viewRequestAdminClick"><i class="fa fa-circle-o"></i>Leave Request Of Subordinates</a></li>

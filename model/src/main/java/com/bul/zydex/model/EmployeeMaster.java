@@ -209,6 +209,7 @@ public class EmployeeMaster implements java.io.Serializable {
     private Set payrollRecurringAdditionalAmounts = new HashSet(0);
     private Set payrollDeductions = new HashSet(0);
     private Set employeeCtcDetail = new HashSet(0);
+    private Set employeeVisaDetails = new HashSet(0);
 
     public EmployeeMaster() {
     }
@@ -1919,4 +1920,13 @@ public class EmployeeMaster implements java.io.Serializable {
         this.payroll = payroll;
     }
 
+    public Set getEmployeeVisaDetails() {
+        return employeeVisaDetails;
+    }
+
+    public void setEmployeeVisaDetails(Set employeeVisaDetails) {
+        this.employeeVisaDetails = employeeVisaDetails;
+    }
+
+    
 }

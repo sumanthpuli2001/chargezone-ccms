@@ -189,5 +189,6 @@
     <mapping resource="com/bul/zydex/model/CandidateF2FObservation.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/CoffRegularization.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmployeeMasterExtension.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/EmployeeVisaDetails.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

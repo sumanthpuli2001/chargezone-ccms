@@ -110,4 +110,9 @@ public class UserRightMasterServiceImpl<T> extends GenericsServiceImpl<T> implem
         return userRightMasterDAO.readByleaveRight();
     }
 
+    @Override
+    public Boolean readEmployeeIfHR(Integer id) {
+        return userRightMasterDAO.readEmployeeIfHR(id);
+    }
+
 }

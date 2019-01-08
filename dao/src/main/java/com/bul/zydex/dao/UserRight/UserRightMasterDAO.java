@@ -43,8 +43,11 @@ public interface UserRightMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readTravelAdmin();
 
     public List<?> readExpenseAdmin();
+    
     public List<?> readCashAdvanceViewAdmin();
     
-      public List<?> readByleaveRight();
+    public List<?> readByleaveRight();
+
+    public Boolean readEmployeeIfHR(Integer id);
 
 }

@@ -2177,7 +2177,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         EmployeeMaster employeeMasterFromSession = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         List<?> sameDateCheck = leaveEmployeeDetailService.getEmployeeLeaveDetailByDate(startDate, endDate, reportingId);
         List<?> approvalHistoryList = leaveEmployeeDetailsApprovalHistoryService.getByLeaveEmpDetailId(Integer.parseInt(id));
-
+        Boolean hrrit = userRightMasterService.readEmployeeIfHR(employeeMasterFromSession.getUserMaster().getId());
         request.setAttribute("sameDateCheck", sameDateCheck);
         request.setAttribute("approvalHistoryList", approvalHistoryList);
         request.setAttribute("listRemain", listRemain);
@@ -2185,7 +2185,12 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         request.setAttribute("totalDaysMap", totalDaysMap);
 
         mv.getModelMap().put("leaveEmployeeDetail", leaveEmployeeDetail);
-        mv.setViewName("Leave/LeaveRequestApprove");
+        if(hrrit == true){
+            mv.setViewName("Leave/HRLeaveRequestApprove");
+        }else{
+             mv.setViewName("Leave/LeaveRequestApprove");
+        }
+       
         return mv;
     }
 
@@ -2226,7 +2231,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 balanceDay = balanceDay + noOfDay;
                 employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
                 employeeLeaveBalanceService.update(employeeLeaveBalance);
-                leaveEmployeeDetail.setStatus(5);
+                leaveEmployeeDetail.setStatus(4);
                 Date date = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String approveDate = sdf.format(date);
@@ -4096,6 +4101,426 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
         PrintWriter out = response.getWriter();
         out.print(message);
+    }
+    
+    public ModelAndView hremployeeleaveManagement(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
+        List<?> list = new ArrayList();
+        Object flag = request.getAttribute("flag");
+        String flag1 = "";
+        if (flag != null) {
+            flag1 = flag.toString();
+        }
+        if (!flag1.equals("1")) {
+            list = leaveEmployeeDetailService.viewEmpLeaveRequestForHR();
+        } else {
+            list = (List<?>) request.getAttribute("list1");
+        }
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        List<?> empId = employeeMasterService.readByUserName(employeeMaster);
+        if (!empId.isEmpty()) {
+            employeeMaster = (EmployeeMaster) empId.get(0);
+        }
+        request.setAttribute("list1", list);
+        selectEmployeeForParticularManager(request, response);
+        readleaveType(request);
+        mv.getModelMap().put("employeeMaster", employeeMaster1);
+        mv.setViewName("Leave/HRLeaveEmployeeManagement");
+        return mv;
+    }
+    
+    public ModelAndView HRapproveRequestAdminClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        LeaveEmployeeDetailsApprovalHistory leaveEmployeeDetailsApprovalHistory = new LeaveEmployeeDetailsApprovalHistory();
+        Float balanceDay;
+        Float noOfDay;
+        String id = request.getParameter("id");
+        String hrRemark = request.getParameter("hrRemark");
+        String btnSubmit = request.getParameter("btnSubmit");
+        leaveEmployeeDetail = leaveEmployeeDetailService.readById(Integer.parseInt(id));
+        leaveEmployeeDetail.setHrRemark(hrRemark);
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        leaveEmployeeDetail.setApproverId(employeeMaster1.getId());
+        leaveTypeMaster.setId(leaveEmployeeDetail.getLeaveTypeMaster().getId());
+        employeeMaster.setId(leaveEmployeeDetail.getEmployeeMaster().getId());
+        employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+        employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+        Date date1 = new Date();
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        String submitDate = sdf1.format(date1);
+
+        List<?> balanceList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+        if (!balanceList.isEmpty()) {
+            employeeLeaveBalance = (EmployeeLeaveBalance) balanceList.get(0);
+        }
+
+        if (btnSubmit.equals("approve")) {
+
+//            if (leaveEmployeeDetail.getStatus() == 4) {
+//                balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
+//                noOfDay = leaveEmployeeDetail.getNoOfDays();
+//                balanceDay = balanceDay + noOfDay;
+//                employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
+//                employeeLeaveBalanceService.update(employeeLeaveBalance);
+//                leaveEmployeeDetail.setStatus(5);
+//                Date date = new Date();
+//                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//                String approveDate = sdf.format(date);
+//                leaveEmployeeDetail.setApproveDate(approveDate);
+//                leaveEmployeeDetailService.update(leaveEmployeeDetail);
+//                leaveEmployeeDetailsApprovalHistory.setApprovalId(employeeMaster1.getId());
+//                leaveEmployeeDetailsApprovalHistory.setApprovalName(employeeMaster1.getEmployeeName());
+//                leaveEmployeeDetailsApprovalHistory.setComment(hrRemark);
+//                leaveEmployeeDetailsApprovalHistory.setCreatedBy(employeeMaster1.getId());
+//                leaveEmployeeDetailsApprovalHistory.setCreatedDate(approveDate);
+//                leaveEmployeeDetailsApprovalHistory.setLeaveEmployeeDetail(leaveEmployeeDetail);
+//                leaveEmployeeDetailsApprovalHistory.setStatusMessage("Withdraw Approved");
+//                leaveEmployeeDetailsApprovalHistory.setStatus(4); //Withdraw Approved
+//                leaveEmployeeDetailsApprovalHistoryService.create(leaveEmployeeDetailsApprovalHistory);
+//                request.setAttribute("successMessage",
+//                        "Information : The Leave is Withdrawn successfully.");//enter approve witdrw template..
+//                try {
+//                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//                    DesignationMaster designationMaster = new DesignationMaster();
+//                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//                    String EmpIdStr = request.getParameter("empid");
+//                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+//                    EmailTemplate emailTemplate1 = new EmailTemplate();
+//                    // id =11 for approve leave withdraw request...
+//                    emailTemplate1 = emailTemplateService.readById(11);
+//                    if (null != EmpIdStr && !"".equals(EmpIdStr)) {
+//                        int empID = Integer.parseInt(EmpIdStr);
+//                        List list = employeeMasterService.readByEmployeeNo(empID);
+//                        if (!list.isEmpty()) {
+//                            employeeMaster2 = (EmployeeMaster) list.get(0);
+//                            String To = employeeMaster2.getOfficeEmailId();
+//                            String from = employeeMasterModel.getOfficeEmailId();
+//                            String subject = emailTemplate1.getSubject();
+//
+//                            subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+//                            String msg = emailTemplate1.getBodytext();
+//                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+//                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                            sendMail.sendMail(from, To, subject, msg);
+//
+//                        }
+//                    }
+//                } catch (Exception e) {
+//                }
+//
+//            } else {
+
+//                balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
+//                noOfDay = leaveEmployeeDetail.getNoOfDays();
+//                if (noOfDay <= balanceDay) {
+                int leaveTypeId = leaveEmployeeDetail.getLeaveTypeMaster().getId();
+                leaveEmployeeDetail.setStatus(6);
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String approveDate = sdf.format(date);
+                leaveEmployeeDetail.setApproveDate(approveDate);
+                leaveEmployeeDetailService.update(leaveEmployeeDetail);
+                leaveEmployeeDetailsApprovalHistory.setApprovalId(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setApprovalName(employeeMaster1.getEmployeeName());
+                leaveEmployeeDetailsApprovalHistory.setComment(hrRemark);
+                leaveEmployeeDetailsApprovalHistory.setCreatedBy(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setCreatedDate(approveDate);
+                leaveEmployeeDetailsApprovalHistory.setLeaveEmployeeDetail(leaveEmployeeDetail);
+                leaveEmployeeDetailsApprovalHistory.setStatusMessage("Approved By HR");
+                leaveEmployeeDetailsApprovalHistory.setStatus(6); //Approved
+                leaveEmployeeDetailsApprovalHistoryService.create(leaveEmployeeDetailsApprovalHistory);
+                request.setAttribute("successMessage",
+                        "Information : The Leave Approved successfully.");
+                try {
+                    String startdate = leaveEmployeeDetail.getStartDate();
+                    String enddate = leaveEmployeeDetail.getEndDate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    String EmpIdStr = request.getParameter("empid");
+                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                    EmailTemplate emailTemplate1 = new EmailTemplate();
+                    // id =7 for approve leave request...
+                    emailTemplate1 = emailTemplateService.readById(7);
+                    if (null != EmpIdStr && !"".equals(EmpIdStr)) {
+                        int empID = Integer.parseInt(EmpIdStr);
+                        List list = employeeMasterService.readByEmployeeNo(empID);
+                        if (!list.isEmpty()) {
+                            employeeMaster2 = (EmployeeMaster) list.get(0);
+                            String To = employeeMaster2.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String subject = emailTemplate1.getSubject();
+                            subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                            String msg = emailTemplate1.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                            msg = msg.replaceAll("\\{start_date\\}", startdate);
+                            msg = msg.replaceAll("\\{end_date\\}", enddate);
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, subject, msg);
+
+                            String name = "Leave";
+                            EmailAddMaster emailAddMaster = new EmailAddMaster();
+                            emailAddMaster.setModuleName(name);
+                            emailAddMaster.setDepartmentMaster(employeeMaster2.getDepartmentMaster());
+                            List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                            if (!emailSendList.isEmpty()) {
+                                EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                                String emailId = emailAddMaster1.getEmailId();
+                                for (String emailId1 : emailId.split(",")) {
+                                    if (!emailId1.equals("")) {
+                                        String To1 = emailId1;
+                                        String from1 = employeeMasterModel.getOfficeEmailId();
+                                        String subject1 = emailTemplate1.getSubject();
+                                        subject1 = subject1.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                        String msg1 = emailTemplate1.getBodytext();
+                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{start_date\\}", startdate);
+                                        msg1 = msg1.replaceAll("\\{end_date\\}", enddate);
+                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from1, To1, subject1, msg1);
+                                    }
+                                }
+                            }
+                            List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+                            if (!allDeptmailList.isEmpty()) {
+                                EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                                String emailId = emailAddMaster1.getEmailId();
+                                for (String emailId1 : emailId.split(",")) {
+                                    if (!emailId1.equals("")) {
+                                        String To1 = emailId1;
+                                        String from1 = employeeMasterModel.getOfficeEmailId();
+                                        String subject1 = emailTemplate1.getSubject();
+                                        subject1 = subject1.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                        String msg1 = emailTemplate1.getBodytext();
+                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{start_date\\}", startdate);
+                                        msg1 = msg1.replaceAll("\\{end_date\\}", enddate);
+                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from1, To1, subject1, msg1);
+                                    }
+                                }
+                            }
+
+                            List<?> gmOrStateHeadMailSend = employeeMasterService.readForSendMailToAll(employeeMaster2);
+                            if (!gmOrStateHeadMailSend.isEmpty()) {
+
+                                Object[] emaillist = (Object[]) gmOrStateHeadMailSend.get(0);
+                                for (int i = 0; i <= emaillist.length; i++) {
+                                    if (null != emaillist[i] && "" != emaillist[i]) {
+                                        String emailid = emaillist[i].toString();
+
+                                        String To3 = emailid;
+                                        String from3 = employeeMasterModel.getOfficeEmailId();
+                                        String subject3 = emailTemplate1.getSubject();
+
+                                        subject3 = subject3.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                        String msg3 = emailTemplate1.getBodytext();
+                                        msg3 = msg3.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                        msg3 = msg3.replaceAll("\\{start_date\\}", startdate);
+                                        msg3 = msg3.replaceAll("\\{end_date\\}", enddate);
+                                        msg3 = msg3.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg3 = msg3.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from3, To3, subject3, msg3);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                }
+
+//                } else {
+//                    request.setAttribute("failureMessage",
+//                            "Error : Employee Leave Balance is Less Than Applied Days. So Please Reject/Rework a Leave Request");
+//                }
+            
+
+        }
+        if (btnSubmit.equals("reject")) {
+
+//            if (leaveEmployeeDetail.getStatus() == 4) {
+//                leaveEmployeeDetailsApprovalHistory.setApprovalId(employeeMaster1.getId());
+//                leaveEmployeeDetailsApprovalHistory.setApprovalName(employeeMaster1.getEmployeeName());
+//                leaveEmployeeDetailsApprovalHistory.setComment(hrRemark);
+//                leaveEmployeeDetailsApprovalHistory.setCreatedBy(employeeMaster1.getId());
+//                leaveEmployeeDetailsApprovalHistory.setCreatedDate(submitDate);
+//                leaveEmployeeDetailsApprovalHistory.setLeaveEmployeeDetail(leaveEmployeeDetail);
+//                leaveEmployeeDetailsApprovalHistory.setStatusMessage("Withdraw Rejected");
+//                leaveEmployeeDetailsApprovalHistory.setStatus(4); //Withdraw Rejected
+//                leaveEmployeeDetailsApprovalHistoryService.create(leaveEmployeeDetailsApprovalHistory);
+//                request.setAttribute("successMessage",
+//                        "Information : The Withdraw Request Rejected successfully.");
+//                try {
+//                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//                    DesignationMaster designationMaster = new DesignationMaster();
+//                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//                    String EmpIdStr = request.getParameter("empid");
+//                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+//                    EmailTemplate emailTemplate1 = new EmailTemplate();
+//                    // id =9 for reject leave request...
+//                    emailTemplate1 = emailTemplateService.readById(9);
+//                    if (null != EmpIdStr && !"".equals(EmpIdStr)) {
+//                        int empID = Integer.parseInt(EmpIdStr);
+//                        List list = employeeMasterService.readByEmployeeNo(empID);
+//                        if (!list.isEmpty()) {
+//                            employeeMaster2 = (EmployeeMaster) list.get(0);
+//                            String To = employeeMaster2.getOfficeEmailId();
+//                            String from = employeeMasterModel.getOfficeEmailId();
+//                            String subject = emailTemplate1.getSubject();
+//                            subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+//                            String msg = emailTemplate1.getBodytext();
+//                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+//                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                            sendMail.sendMail(from, To, subject, msg);
+//
+//                        }
+//                    }
+//                } catch (Exception e) {
+//                }
+//
+//            } else {
+                balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
+                noOfDay = leaveEmployeeDetail.getNoOfDays();
+                String noOfHour = "";
+                EmployeeMaster employeeMasterModel1 = new EmployeeMaster();
+                employeeMasterModel1 = employeeMasterService.readById(leaveEmployeeDetail.getEmployeeMaster().getId());
+                COffLeaveMaster cOffLeaveMaster = new COffLeaveMaster();
+                cOffLeaveMaster.setZydexLocationMaster(employeeMasterModel1.getZydexLocationMaster());
+                List list1 = cOffLeaveMasterService.readByDept(cOffLeaveMaster);
+                try {
+                    cOffLeaveMaster = (COffLeaveMaster) list1.get(0);
+                    noOfHour = "0." + cOffLeaveMaster.getHoursNo();
+                } catch (Exception e) {
+                }
+                // 11 No Id Is C-Off Id*****************
+                if (leaveEmployeeDetail.getLeaveTypeMaster().getId().equals(11)) {
+                    noOfDay = Float.parseFloat(noOfHour);
+                }
+                // 11 No Id Is C-Off Id*****************
+                balanceDay = balanceDay + noOfDay;
+                employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
+                employeeLeaveBalanceService.update(employeeLeaveBalance);
+                leaveEmployeeDetailsApprovalHistory.setApprovalId(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setApprovalName(employeeMaster1.getEmployeeName());
+                leaveEmployeeDetailsApprovalHistory.setComment(hrRemark);
+                leaveEmployeeDetailsApprovalHistory.setCreatedBy(employeeMaster1.getId());
+                leaveEmployeeDetailsApprovalHistory.setCreatedDate(submitDate);
+                leaveEmployeeDetailsApprovalHistory.setLeaveEmployeeDetail(leaveEmployeeDetail);
+                leaveEmployeeDetailsApprovalHistory.setStatusMessage("Rejected By HR");
+                leaveEmployeeDetailsApprovalHistory.setStatus(7); //Rejected
+                leaveEmployeeDetailsApprovalHistoryService.create(leaveEmployeeDetailsApprovalHistory);
+                request.setAttribute("successMessage",
+                        "Information : The Leave Rejected successfully.");
+                try {
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    String EmpIdStr = request.getParameter("empid");
+                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                    EmailTemplate emailTemplate1 = new EmailTemplate();
+                    // id =9 for reject leave request...
+                    emailTemplate1 = emailTemplateService.readById(9);
+                    if (null != EmpIdStr && !"".equals(EmpIdStr)) {
+                        int empID = Integer.parseInt(EmpIdStr);
+                        List list = employeeMasterService.readByEmployeeNo(empID);
+                        if (!list.isEmpty()) {
+                            employeeMaster2 = (EmployeeMaster) list.get(0);
+                            String To = employeeMaster2.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String subject = emailTemplate1.getSubject();
+                            subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                            String msg = emailTemplate1.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, subject, msg);
+
+                        }
+                    }
+                } catch (Exception e) {
+                }
+            
+            leaveEmployeeDetail.setStatus(7);
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String approveDate = sdf.format(date);
+            leaveEmployeeDetail.setApproveDate(approveDate);
+            leaveEmployeeDetailService.update(leaveEmployeeDetail);
+
+        }
+        if (btnSubmit.equals("rework")) {
+
+//            if (leaveEmployeeDetail.getStatus() == 4) {
+//
+//            } else {
+                balanceDay = employeeLeaveBalance.getNoOfLeaveRemain();
+                noOfDay = leaveEmployeeDetail.getNoOfDays();
+                balanceDay = balanceDay + noOfDay;
+                employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
+                employeeLeaveBalanceService.update(employeeLeaveBalance);
+//            }
+            leaveEmployeeDetail.setStatus(8);
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String approveDate = sdf.format(date);
+            leaveEmployeeDetail.setApproveDate(approveDate);
+            leaveEmployeeDetailService.update(leaveEmployeeDetail);
+            leaveEmployeeDetailsApprovalHistory.setApprovalId(employeeMaster1.getId());
+            leaveEmployeeDetailsApprovalHistory.setApprovalName(employeeMaster1.getEmployeeName());
+            leaveEmployeeDetailsApprovalHistory.setComment(hrRemark);
+            leaveEmployeeDetailsApprovalHistory.setCreatedBy(employeeMaster1.getId());
+            leaveEmployeeDetailsApprovalHistory.setCreatedDate(submitDate);
+            leaveEmployeeDetailsApprovalHistory.setLeaveEmployeeDetail(leaveEmployeeDetail);
+            leaveEmployeeDetailsApprovalHistory.setStatusMessage("Reworked By HR");
+            leaveEmployeeDetailsApprovalHistory.setStatus(8); //Reworked
+            leaveEmployeeDetailsApprovalHistoryService.create(leaveEmployeeDetailsApprovalHistory);
+            request.setAttribute("successMessage",
+                    "Information : The Leave Reworked successfully.");
+            try {
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                String EmpIdStr = request.getParameter("empid");
+                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                EmailTemplate emailTemplate1 = new EmailTemplate();
+                // id =8 for rework leave request...
+                emailTemplate1 = emailTemplateService.readById(8);
+                if (null != EmpIdStr && !"".equals(EmpIdStr)) {
+                    int empID = Integer.parseInt(EmpIdStr);
+                    List list = employeeMasterService.readByEmployeeNo(empID);
+                    if (!list.isEmpty()) {
+                        employeeMaster2 = (EmployeeMaster) list.get(0);
+                        String To = employeeMaster2.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String subject = emailTemplate1.getSubject();
+                        subject = subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                        String msg = emailTemplate1.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, subject, msg);
+
+                    }
+                }
+            } catch (Exception e) {
+            }
+
+        }
+
+        mv = hremployeeleaveManagement(request, response);
+        return mv;
     }
 
 }

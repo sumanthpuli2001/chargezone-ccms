@@ -12,6 +12,16 @@
     <head>
         <title>Employee Create</title>
     </head>
+   <style>
+            #tabs{ margin: 20px -20px; border: none; }
+            #tabs, #ui-datepicker-div, .ui-datepicker{ font-size: 85%; }
+            .clear{ clear: both; }
+
+            /*.example-container{ background-color: #f4f4f4; border-bottom: solid 2px #777777; margin: 0 0 20px 40px; padding: 20px; }*/
+            /*.example-container input{ border: solid 1px #aaa; padding: 4px; width: 175px; }*/
+        </style>
+
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 
     <script>
         $(document).ready(function () {
@@ -83,6 +93,14 @@
                 document.getElementById('spanId8').innerHTML = 'Minimize';
             } else {
                 document.getElementById('spanId8').innerHTML = 'Expand';
+            }
+        }
+        function buttonFun9() {
+            var className = $('#minusId9').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId9').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId9').innerHTML = 'Expand';
             }
         }
 
@@ -650,6 +668,56 @@
             document.getElementById('designationMaster.id').value = designationMasterId;
         }
     </script>
+ <script>
+        var tempCount = 1;
+        $(function () {
+            $("#visaCloneid").on("click", function () {
+                tempCount++;
+                //                alert(tempCount3);
+                var clone = "<tr id='addmoreTR" + tempCount + "' style='clear:both;'>"
+                        + "<td style=\"text-align: center\">" + tempCount + "</td>"
+                        + "<td id=\"visaIssueCountry" + tempCount + "\"><input type =\"text\" name='visaIssueCountry" + tempCount + "' id='visaIssueCountry" + tempCount + "' class =\"form-control\" />"
+                        + "<td style=\"text-align: center\">"
+                        + "<input type=\"text\" name='visaIssueDate" + tempCount +"' id='visaIssueDate" + tempCount + "' size=\"16\"  class=\"form-control\">"
+                        + "</td>"
+                        + "<td style=\"text-align: center\">"
+                        + "<input type=\"text\" name='visaValidTillDate" + tempCount +"' id='visaValidTillDate" + tempCount +"' class=\"form-control\" size=\"16\">"
+                        + "</td>"
+                        + "<td style=\"text-align: center\">"
+                        + "<span style='margin-top: 5px;'>"
+                        + "<input type=\"button\"value=\"-\"  onclick=\"removevisadoc('addmoreTR" + tempCount + "');\"/>"
+                        + "</span>"
+                        + "</td>"
+                        + "</tr>";
+                $("#visaTable").append(clone);
+                document.getElementById('visaCount').value = tempCount;
+                $("#visaIssueDate" + tempCount + "").datepicker({dateFormat: 'dd/mm/yy'});
+                $("#visaValidTillDate" + tempCount + "").datepicker({dateFormat: 'dd/mm/yy'});
+//                $("#ui-datepicker-div").css("z-index",2);
+//                window.onload = init;
+//                function init() {
+//                    document.form1.month.options[new Date().getMonth()].selected = true;
+//                }
+                
+
+            });
+        });
+        $(function () {
+            $("#visaIssueDate1").datepicker({dateFormat: 'dd/mm/yy'});
+        });
+        $(function () {
+            $("#visaValidTillDate1").datepicker({dateFormat: 'dd/mm/yy'});
+        });
+        </script>
+        <script>
+            function removevisadoc(addmoreTR){
+                --tempCount;
+                document.getElementById('visaCount').value = tempCount;
+                var element1 = document.getElementById(addmoreTR);
+                element1.parentNode.removeChild(element1);
+            }
+            
+        </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -696,7 +764,7 @@
                                                         </div>
 
                                                         <div class="col-sm-6">
-                                                            <label>Employee Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Employee Name (First & Last Name only):<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="employeeName" class="form-control"></form:input>
                                                         <form:errors path="employeeName" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -807,14 +875,14 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Present Address 1:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:textarea path="presentAddress" class="form-control"></form:textarea>
                                                         <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
                                                         </div>
 
                                                         <div class="col-sm-6">
                                                             <!--<form>-->
-                                                             <label>Present Address 2:<span style="color: red;font-size: 12px;">*</span></label>
+                                                             <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
 
                                                             <textarea name="presentAddress2" id="presentAddress2" class="form-control"></textarea>
                                                             <!--</form>-->
@@ -851,13 +919,13 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="col-sm-6">
-                                                            <label>Permanent Address 1:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Permanent Address:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:textarea path="permanentAddress" class="form-control"></form:textarea>
                                                             <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 
-                                                            <label>Permanent Address 2:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
 <!--                                                            <input type="textarea" name="permanentAddress2" id="permanentAddress2" class="form-control">-->
                                                               <textarea name="permanentAddress2" id="permanentAddress2" class="form-control"></textarea>
                                                                
@@ -1046,19 +1114,24 @@
                                                         <%--<form:input path="emailAddress" class="form-control"></form:input>--%>
                                                         <form:errors path="emailAddress" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-6">
+<!--                                                        <div class="col-sm-6">
                                                             
                                                             <label>FLYdocs Email Id:</label>
                                                         <input type="text" name="flyDocsEmailId" id="flyDocsEmailId" pattern="[^ @]*@[^ @]*"  placeholder="abc@domain.com" required="" class="form-control">
 
                                                         
-                                                        </div>
-                                                </div>
-                                                      <div class="form-group">
+                                                        </div>-->
                                                         <div class="col-sm-6">
                                                             <label >Contact No.1:</label>
                                                         <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                </div>
+                                                      <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label >Contact No.2:</label>
+                                                        <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                        <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label >Emergency Contact Person:<span style="color: red;font-size: 12px;"></span></label>
@@ -1184,18 +1257,18 @@
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                         </div>
-                                                        <div class="col-sm-6">
+<!--                                                        <div class="col-sm-6">
                                                             
                                                             <label>Visa Issue Country:</label>
                                                             <input name="visaIssueCountry" id="visaIssueCountry" class="form-control">
                                                         
-                                                            </div>
+                                                            </div>-->
                                                     </div>
                                                     
                                                              
                                                     
                                                     <div class="form-group">
-                                                        <div class="col-sm-6">
+<!--                                                        <div class="col-sm-6">
                                                             
                                                             <label>Visa Issue Date:</label>
                                                             <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -1206,19 +1279,19 @@
                                                                
                                                         </div>
                                                         
-                                                        </div>
+                                                        </div>-->
 
-                                                        <div class=" col-sm-6">
+<!--                                                        <div class=" col-sm-6">
                                                             
                                                             <label>Visa Valid till Date:</label>
                                                             <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                <input class="form-control" size="16" type="text" value="" readonly>
                                                             <input type="text" name="visaValidTillDate" id="visaValidTillDate" class="form-control" size="16" readonly="true">
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                            
-                                                        </div>
+                                                        </div>-->
                                                     </div>
                                                         
                                    
@@ -1237,7 +1310,7 @@
                                                             <option value="">-- Select --</option>
                                                             <option value="2Wheeler">2 Wheeler</option>
                                                             <option value="4Wheeler">4 Wheeler</option>
-                                                            <option value="both">Both</option>
+                                                            <option value="Both">Both</option>
                                                         </select>
                                                         
                                                        
@@ -1272,6 +1345,51 @@
                                         </div><!-- /.box-body -->
                                     </div>
                                     <!--Document detail completes here-->
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Document Visa Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <span id="spanId9">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun9();"><i class="fa fa-plus" id="minusId9" ></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table id="visaTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                            <tr>
+                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                <th style="text-align: center; vertical-align: middle">Visa Issue Country</th>
+                                                                <th style="text-align: center; vertical-align: middle">Visa Issue Date</th>
+                                                                <th style="text-align: center; vertical-align: middle">Visa Valid till Date</th>
+                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                                <input type="hidden" name="visaCount" id="visaCount" value="1"/>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="text-align: center">1</td>
+                                                                <td style="text-align: center">
+                                                                    <input name="visaIssueCountry1" id="visaIssueCountry1" class="form-control">
+                                                                </td>
+                                                                <td style="text-align: center">
+                                                                  <input type="text" name="visaIssueDate1" id="visaIssueDate1"  size="16"  class="form-control">
+                                                                </td>
+                                                                <td style="text-align: center">
+                                                                   <input type="text" name="visaValidTillDate1" id="visaValidTillDate1" class="form-control" size="16" >
+                                                                </td>
+                                                                <td style="text-align: center">
+                                                                    <span style='margin-top: 5px;'>
+                                                                        <input type="button" value="+" id="visaCloneid" />
+                                                                    </span>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <!--document visa detail completes here-->
                                     <div class="box box-info collapsed-box" id="org_detail_id">
                                         <div class="box-header">
                                             <h3 class="box-title">Organization Specific Detail:</h3>
@@ -1349,7 +1467,7 @@
                                                         <form:errors path="employeeLocation" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Type of Employee :<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option>
                                                             <form:options items="${EmployeeTypeList}"></form:options>
@@ -1360,7 +1478,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6" id="employeeSubTypeId">
-                                                            <label>Employee SubType:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
                                                         <form:select path="employeeSubType.id" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option> 
@@ -1448,7 +1566,7 @@
                                                         </form:select>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label >Contact No.:</label>
+                                                        <label >Official Contact No.:</label>
                                                         <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                         </div>

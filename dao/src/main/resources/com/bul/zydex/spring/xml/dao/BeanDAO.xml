@@ -300,4 +300,5 @@
     <bean id="candidateF2FObservationDAO1" class="com.bul.zydex.dao.CandidateF2FRequest.CandidateF2FObservationDAOImpl" parent="sessionFactoryConfig" />
     <bean id="coffRegularizationDAO1" class="com.bul.zydex.dao.shift.CoffRegularizationDAOImpl" parent="sessionFactoryConfig" />
     <bean id="employeeVisaDetailsDAO1" class="com.bul.zydex.dao.emp.EmployeeVisaDetailsDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="employeeDateTimeDataDeatilDAO1" class="com.bul.zydex.dao.shift.EmployeeDateTimeDataDeatilDAOImpl" parent="sessionFactoryConfig" />
 </beans>

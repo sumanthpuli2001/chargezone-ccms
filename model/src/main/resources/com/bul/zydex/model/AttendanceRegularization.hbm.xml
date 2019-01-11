@@ -35,5 +35,17 @@
         <property name="dateOfSubmit" type="string">
             <column name="date_of_submit" length="45" />
         </property>
+        <property name="differentCompare" type="string">
+            <column name="diff_compare" length="45" />
+        </property>
+        <property name="arType" type="string">
+            <column name="ar_Type" length="45" />
+        </property>
+        <property name="startDateAr" type="string">
+            <column name="start_date_ar" length="45" />
+        </property>
+        <property name="endDateAr" type="string">
+            <column name="end_date_ar" length="45" />
+        </property>
     </class>
 </hibernate-mapping>

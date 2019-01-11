@@ -16,6 +16,10 @@ public class AttendanceRegularization  implements java.io.Serializable {
     private String managerRemark;
     private String approvedDate;
     private String dateOfSubmit;
+    private String differentCompare;
+    private String arType;
+    private String startDateAr;
+    private String endDateAr;
 
     public AttendanceRegularization() {
     }
@@ -25,7 +29,8 @@ public class AttendanceRegularization  implements java.io.Serializable {
         this.status = status;
     }
 
-    public AttendanceRegularization(EmployeeMaster employeeMaster, int userMasterId, String startDateTime, String endDateTime, String reason, int status, String managerRemark, String approvedDate, String dateOfSubmit) {
+    public AttendanceRegularization(Integer id, EmployeeMaster employeeMaster, int userMasterId, String startDateTime, String endDateTime, String reason, int status, String managerRemark, String approvedDate, String dateOfSubmit, String differentCompare, String arType, String startDateAr, String endDateAr) {
+        this.id = id;
         this.employeeMaster = employeeMaster;
         this.userMasterId = userMasterId;
         this.startDateTime = startDateTime;
@@ -35,7 +40,36 @@ public class AttendanceRegularization  implements java.io.Serializable {
         this.managerRemark = managerRemark;
         this.approvedDate = approvedDate;
         this.dateOfSubmit = dateOfSubmit;
+        this.differentCompare = differentCompare;
+        this.arType = arType;
+        this.startDateAr = startDateAr;
+        this.endDateAr = endDateAr;
     }
+
+    
+    
+    
+    
+
+//    public AttendanceRegularization() {
+//    }
+//
+//    public AttendanceRegularization(int userMasterId, int status) {
+//        this.userMasterId = userMasterId;
+//        this.status = status;
+//    }
+//
+//    public AttendanceRegularization(EmployeeMaster employeeMaster, int userMasterId, String startDateTime, String endDateTime, String reason, int status, String managerRemark, String approvedDate, String dateOfSubmit) {
+//        this.employeeMaster = employeeMaster;
+//        this.userMasterId = userMasterId;
+//        this.startDateTime = startDateTime;
+//        this.endDateTime = endDateTime;
+//        this.reason = reason;
+//        this.status = status;
+//        this.managerRemark = managerRemark;
+//        this.approvedDate = approvedDate;
+//        this.dateOfSubmit = dateOfSubmit;
+//    }
 
     public Integer getId() {
         return this.id;
@@ -108,6 +142,39 @@ public class AttendanceRegularization  implements java.io.Serializable {
     public void setDateOfSubmit(String dateOfSubmit) {
         this.dateOfSubmit = dateOfSubmit;
     }
+    
+    public String getDifferentCompare() {
+        return differentCompare;
+    }
+
+    public void setDifferentCompare(String differentCompare) {
+        this.differentCompare = differentCompare;
+    }
+
+    public String getArType() {
+        return arType;
+    }
+
+    public void setArType(String arType) {
+        this.arType = arType;
+    }
+
+    public String getStartDateAr() {
+        return startDateAr;
+    }
+
+    public void setStartDateAr(String startDateAr) {
+        this.startDateAr = startDateAr;
+    }
+
+    public String getEndDateAr() {
+        return endDateAr;
+    }
+
+    public void setEndDateAr(String endDateAr) {
+        this.endDateAr = endDateAr;
+    }
+    
     
 
 }

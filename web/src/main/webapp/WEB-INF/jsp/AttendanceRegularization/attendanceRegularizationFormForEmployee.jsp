@@ -100,7 +100,7 @@
             }
         }
     </script>
-    
+
     <script>
         function checkDateByAjax() {
             try {
@@ -236,11 +236,11 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group">
-                                                        <div class="col-sm-6">
+                                                        <div class="col-sm-3">
                                                             <label>Start Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="startDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                <form:input path="startDateTime" id="start_time" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
@@ -249,49 +249,92 @@
                                                                 <span id="woandHlerrorDiv1" style="color: red;"></span>
 
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            <div class="col-sm-3">
                                                                 <label>End Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="endDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                <form:input path="endDateTime"  id="end_time" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
                                                             <form:errors path="endDateTime" cssClass="errorDiv"></form:errors>
                                                                 <span id="endwoandHlerrorDiv" style="color: red;"></span>
                                                             </div>
-                                                        </div>
-                                                    </div><!-- /.col -->
-                                                </div><!-- /.row -->
-                                            </div><!-- /.box-body -->
-                                        </div>
-                                        <div class="box box-info collapsed-box">
-                                            <div class="box-header">
-                                                <h3 class="box-title">Reason In Detail:</h3>
-                                                <div class="box-tools pull-right">
-                                                    <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
-                                                </div>
-                                            </div><!-- /.box-header -->
-                                            <div class="box-body no-padding">
-                                                <div class="row">
-                                                    <div class="col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label">Reason for Request:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <div class="col-sm-7">
-                                                            <form:textarea  path="reason" class="form-control" rows="6"/>
-                                                            <form:errors path="reason" cssClass="errorDiv"></form:errors>
+                                                            <div class="col-sm-3">
+                                                                <label>Time Difference:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <input type="Text" name="differentCompare" id="setup_hours" class="form-control" value="" readonly>
                                                             </div>
+                                                            <div class="col-sm-3">
+                                                                <label>AR Type:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <select name="arType" id="purpose" class="form-control">
+                                                                    <option value="0">--Select--</option>
+                                                                    <option value="1">Official</option>
+                                                                    <option value="2">Compensan</option>
+                                                                </select>
+                                                            </div>
+
+
+
                                                         </div>
-                                                    </div><!-- /.col -->
-                                                </div><!-- /.row -->
-                                            </div><!-- /.box-body -->
-                                        </div>
-                                        <!--Reason In Detail completes Here-->
-                                        <div class="form-group">
-                                            <div class="col-sm-12" style="text-align: center;">
-                                                <button type="submit" class="btn btn-primary" data-original-title="" style="width: 100px;" title="">SUBMIT</button>
+                                                        <div class="form-group" id="business">
+                                                            <div id="1" class="group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Start Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
+                                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                    <form:input path="startDateAr"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                    </div>
+                                                                <form:errors path="startDateTime" cssClass="errorDiv"></form:errors>
+                                                                    <span id="woandHlerrorDiv" style="color: red;"></span>
+                                                                    <span id="woandHlerrorDiv1" style="color: red;"></span>
+
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>End Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
+                                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                    <form:input path="endDateAr"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                    </div>
+                                                                <form:errors path="endDateTime" cssClass="errorDiv"></form:errors>
+                                                                    <span id="endwoandHlerrorDiv" style="color: red;"></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>     
+                                                        <!-- /.col -->
+                                                    </div><!-- /.row -->
+                                                </div><!-- /.box-body -->
                                             </div>
-                                        </div>
+                                            <div class="box box-info collapsed-box">
+                                                <div class="box-header">
+                                                    <h3 class="box-title">Reason In Detail:</h3>
+                                                    <div class="box-tools pull-right">
+                                                        <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
+                                                    </div>
+                                                </div><!-- /.box-header -->
+                                                <div class="box-body no-padding">
+                                                    <div class="row">
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">Reason for Request:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <div class="col-sm-7">
+                                                                <form:textarea  path="reason" class="form-control" rows="6"/>
+                                                                <form:errors path="reason" cssClass="errorDiv"></form:errors>
+                                                                </div>
+                                                            </div>
+                                                        </div><!-- /.col -->
+                                                    </div><!-- /.row -->
+                                                </div><!-- /.box-body -->
+                                            </div>
+                                            <!--Reason In Detail completes Here-->
+                                            <div class="form-group">
+                                                <div class="col-sm-12" style="text-align: center;">
+                                                    <button type="submit" class="btn btn-primary" data-original-title="" style="width: 100px;" title="">SUBMIT</button>
+                                                </div>
+                                            </div>
                                     </form>
                                     <!--form horizontal ends here-->
                                     <div class="tab-pane" id="tab_3"></div><!-- /.tab-pane -->
@@ -303,6 +346,7 @@
         </form:form>
     </div><!-- /.content-wrapper -->
     <script type="text/javascript">
+        $('#business').hide();
         $('.form_datetime').datetimepicker({
             //language:  'fr',
             weekStart: 1,
@@ -312,8 +356,56 @@
             startView: 2,
             forceParse: 0,
             showMeridian: 1,
-            endDate: new Date()
+//            endDate: new Date()
         });
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#purpose').on('change', function () {
+                if (this.value == '2')
+                        //.....................^.......
+                        {
+                            $("#business").show();
+                        }
+                else
+                {
+                    $("#business").hide();
+                }
+            });
+        });
+    </script>
+
+
+  <script>
+        $('#start_time,#end_time').on('change', function ()
+        {
+            var start_time = 0;
+            var end_time = 0;
+            start_time = $('#start_time').val();
+            end_time = $('#end_time').val();
+
+            var diff = new Date(end_time) - new Date(start_time);
+            var num = isNaN(parseInt(diff)) ? 0 : parseInt(diff);
+
+
+
+//              var  diff_time = diff/(60*60*1000);______________________
+
+            var seconds = Math.floor(num / 1000); //______________ignore any left over units smaller than a second
+            var minutes = Math.floor(seconds / 60);
+            seconds = seconds % 60;
+            var hours = Math.floor(minutes / 60);
+            minutes = minutes % 60;
+
+
+//               alert("Diff = " + hours + ":" + minutes + ":" + seconds);______________________________
+
+            $('#setup_hours').val(+hours + ":" + minutes + ":" + seconds);
+
+        });
+
+    </script>
+
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

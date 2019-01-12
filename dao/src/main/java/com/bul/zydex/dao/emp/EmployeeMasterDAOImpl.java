@@ -1773,6 +1773,17 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + ")";
         return getHibernateTemplate().find(query);
     }
+    
+    @Override
+    public List<?> readAllEmployee(T object) {
+        EmployeeMaster employeeMaster = (EmployeeMaster) object;
+        String query = "";
+        query += " "
+                + " FROM EmployeeMaster a "
+                + " Where ((a.dateOfLeaving is null or a.dateOfLeaving = '')"
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()) ";
+        return getHibernateTemplate().find(query);
+    }
 
     @Override
     public List<?> readForSendMailToAll(T object) {

@@ -180,9 +180,14 @@
                                 <c:if test="${sessionScope.userRight.attendanceReport}">
                                     <li><a href="attendanceRegularizationMaster.htm?act=powerAdminApprovalList"><i class="fa fa-circle-o"></i>View All AR</a></li>
                                     </c:if>
+                                    <c:if test="${sessionScope.userRight.hr}">
+                                    
+                                     <li><a href="attendanceRegularizationMaster.htm?act=allEmployeeAttendanceView"><i class="fa fa-circle-o"></i>All Employee Attendance View</a></li>
+                                    </c:if>
                                     <c:if test="${sessionScope.isReportingManagerDataExist}">
 
                                     <li><a href="attendanceRegularizationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i>AR Subordinates Request</a></li>
+                                    <!--<li><a href="attendanceRegularizationMaster.htm?act=allEmployeeAttendanceView"><i class="fa fa-circle-o"></i>All Employee Attendance View</a></li>-->
                                     <li><a href="attendanceRegularizationMaster.htm?act=subOrdinateAttendanceView"><i class="fa fa-circle-o"></i>Subordinates Attendance View</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> W-off Subordinates Request</a></li>

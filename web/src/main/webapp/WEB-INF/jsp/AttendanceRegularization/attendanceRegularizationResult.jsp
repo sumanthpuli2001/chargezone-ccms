@@ -73,6 +73,10 @@
                                                                     <th>End Date & Time</th>
                                                                     <th>Reason</th>
                                                                     <th>Date of Submission</th>
+                                                                    <th>Time Difference</th>
+                                                                    <th>AR Type</th>
+                                                                    <th>Start Date & Time</th>
+                                                                    <th>End Date & Time</th>
                                                                     <th>Status</th>
                                                                     <th>Action</th>
                                                                 </tr>
@@ -86,6 +90,11 @@
                                                                 <td>${list.endDateTime}</td>
                                                                 <td>${list.reason}</td>
                                                                 <td>${list.dateOfSubmit}</td>
+                                                                 <td>${list.differentCompare}</td>
+                                                                  <td>${list.arType}</td>
+                                                                   <td>${list.startDateAr}</td>
+                                                                   <td>${list.endDateAr}</td>
+                                                                  
                                                                 <c:if test="${list.status eq 0}">
                                                                     <td><span class="label label-primary ">Pending</span></td>
                                                                 </c:if>

@@ -120,7 +120,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 Object[] next = (Object[]) it.next();
                 Float noOfDay = null;
                 Float totalMap = null;
-                Double zz = null;
+                Float zz = null;
                 String name = "" + next[0];
                 Float days = (float) next[1];
                 if (employeeSession.getGender() && name.equals("Paternity Leave")) {
@@ -137,8 +137,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 if (!listFirst.isEmpty()) {
                     if (listFirst.get(0) != null) {
                         Object xx = (Object) listFirst.get(0);
-                        zz = (double) xx;
-                        noOfDay = (float) zz.floatValue();
+                        zz = (float) xx;
+                        noOfDay = zz;
                     }
                 }
                 if (name.equals("Casual Leave")) {
@@ -1363,7 +1363,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 Object[] next = (Object[]) it.next();
                 Float noOfDay = null;
                 Float totalMap = null;
-                Double zz = null;
+                Float zz = null;
                 String name = "" + next[0];
                 Float days = (float) next[1];
                 String leave1 = "" + next[2];
@@ -1378,9 +1378,10 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 List<?> listFirst = leaveEmployeeDetailService.readLeaveDays(leaveEmployeeDetail);
                 if (!listFirst.isEmpty()) {
                     if (listFirst.get(0) != null) {
+                        
                         Object xx = (Object) listFirst.get(0);
-                        zz = (double) xx;
-                        noOfDay = (float) zz.floatValue();
+                        zz = (float) xx;
+                        noOfDay = zz;
                     }
                 }
                 //                Iterator it1 = listFirst.iterator();
@@ -1481,7 +1482,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 Object[] next = (Object[]) it.next();
                 Float noOfDay = null;
                 Float totalMap = null;
-                Double zz = null;
+                Float zz = null;
                 String name = "" + next[0];
                 Float days = (float) next[1];
                 String leave1 = "" + next[2];
@@ -1497,8 +1498,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 if (!listFirst.isEmpty()) {
                     if (listFirst.get(0) != null) {
                         Object xx = (Object) listFirst.get(0);
-                        zz = (double) xx;
-                        noOfDay = (float) zz.floatValue();
+                        zz = (float) xx;
+                        noOfDay = zz;
                     }
                 }
                 //                Iterator it1 = listFirst.iterator();
@@ -1926,7 +1927,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 mv.setViewName("forward:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
 
 //                mv = searchSubmit(request, response);
-            } else if (leaveEmployeeDetail.getStatus() == 3) {
+            } else if (leaveEmployeeDetail.getStatus() == 3 || leaveEmployeeDetail.getStatus() == 6) {
                 int leaveTypeid = leaveEmployeeDetail.getLeaveTypeMaster().getId();
                 LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(leaveTypeid);
                 if (leaveTypeMaster1.getLeaveType().contains("Short Leave")) {
@@ -2123,7 +2124,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 Object[] next = (Object[]) it.next();
                 Float noOfDay = null;
                 Float totalMap = null;
-                Double zz = null;
+                Float zz = null;
                 String name = "" + next[0];
                 Float days = (float) next[1];
 //                if (employeeSession.getGender() && name.equals("Paternity Leave")) {
@@ -2135,12 +2136,14 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 String leave1 = "" + next[2];
                 leaveTypeMaster.setId(Integer.parseInt(leave1));
                 leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster);
-                List<?> listFirst = leaveEmployeeDetailService.readLeaveDays(leaveEmployeeDetail);
+                List<?> listFirst = leaveEmployeeDetailService.readLeaveDaysAsApproved(leaveEmployeeDetail);
+                
+                
                 if (!listFirst.isEmpty()) {
                     if (listFirst.get(0) != null) {
                         Object xx = (Object) listFirst.get(0);
-                        zz = (double) xx;
-                        noOfDay = (float) zz.floatValue();
+                        zz = (float) xx;
+                        noOfDay = zz;
                     }
                 }
                 //                Iterator it1 = listFirst.iterator();
@@ -2231,7 +2234,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 balanceDay = balanceDay + noOfDay;
                 employeeLeaveBalance.setNoOfLeaveRemain(balanceDay);
                 employeeLeaveBalanceService.update(employeeLeaveBalance);
-                leaveEmployeeDetail.setStatus(4);
+                leaveEmployeeDetail.setStatus(5);
                 Date date = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String approveDate = sdf.format(date);
@@ -3190,7 +3193,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     weekOff = 5;
                 } else if (z.equals("friday")) {
                     weekOff = 6;
-                } else if (z.equals("saturdady")) {
+                } else if (z.equals("saturday")) {
                     weekOff = 7;
                 }
                 Date nDate = c.getTime();
@@ -4522,5 +4525,240 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         mv = hremployeeleaveManagement(request, response);
         return mv;
     }
+    
+     public void getActualDayByAjax1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String strDate = request.getParameter("strDate");
+        String enDate = request.getParameter("enDate");
+        String sDateStatus = request.getParameter("sDateStatus");
+        String eDateStatus = request.getParameter("eDateStatus");
+        String leavetype = request.getParameter("leaveType");
+        strDate = strDate.replaceAll(",", "/");
+        enDate = enDate.replaceAll(",", "/");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date sDate = sdf.parse(strDate);
+        Date eDate = sdf.parse(enDate);
 
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) session.getAttribute("employeeInfo");
+        ShiftMaster shiftMaster = new ShiftMaster();
+        HoursBasis hoursBasis = new HoursBasis();
+        ShiftRotationMaster shiftRotationMaster = new ShiftRotationMaster();
+        ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
+        int appId = employeeMaster1.getId();
+        String shiftType = employeeMaster1.getShiftType();
+        int ZydexLocId = employeeMaster1.getZydexLocationMaster().getId();
+        String weekOffDay = "";
+        if (shiftType.contains("ShiftBase")) {
+            shiftRotationMaster = shiftRotationMasterService.readById(employeeMaster1.getShiftHoursId());
+            String shiftId = shiftRotationInfoService.readFirstShfitId("" + employeeMaster1.getUserMaster().getId(), "" + shiftRotationMaster.getId());
+            shiftMaster = shiftMasterService.readById(Integer.parseInt(shiftId));
+            weekOffDay = shiftMaster.getWeekof();
+
+        } else if (shiftType.contains("HourlyBase")) {
+            hoursBasis = hoursBasisService.readById(employeeMaster1.getShiftHoursId());
+            weekOffDay = hoursBasis.getWeekof();
+
+        }
+        int coutnter = 0;
+        boolean sundayCheck = false;
+        Calendar c = Calendar.getInstance();
+        c.setTime(sDate);
+        List<String> list1 = new ArrayList<String>();
+        float days = 0;
+        while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
+
+            Calendar calForEnddate = Calendar.getInstance();
+            calForEnddate.setTime(eDate);
+            int dayEnd = calForEnddate.get(Calendar.DAY_OF_WEEK);
+
+//              
+////                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+            int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+            Date nDate = c.getTime();
+            String daString = sdf.format(nDate);
+            HolidayMaster holidayMaster = new HolidayMaster();
+            holidayMaster.setHolidayFromDate(daString);
+            List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
+            if (list.size() == 0) {
+                days++;
+            }
+            for (String z : weekOffDay.split(",")) {
+                int weekOff = 0;
+                if (!z.equals("")) {
+                    if (z.equals("sunday")) {
+                        weekOff = 1;
+                        sundayCheck = true;
+                    } else if (z.equals("monday")) {
+                        weekOff = 2;
+                    } else if (z.equals("tuesday")) {
+                        weekOff = 3;
+                    } else if (z.equals("wednesday")) {
+                        weekOff = 4;
+                    } else if (z.equals("thursday")) {
+                        weekOff = 5;
+                    } else if (z.equals("friday")) {
+                        weekOff = 6;
+                    } else if (z.equals("saturday")) {
+                        weekOff = 7;
+                    }
+                }
+                if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+                        if (sDateStatus.contains("SecondHalf")) {
+                            if (!strDate.equals(enDate)) {
+                                days--;
+                            }
+                        }
+                    }
+                }
+                if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+                        if (!strDate.equals(enDate)) {
+                            days--;
+                        }
+                    }
+                }
+                coutnter++;
+            }
+            c.add(Calendar.DATE, 1);
+
+        }
+
+        PrintWriter out = response.getWriter();
+        out.print(days);
+    }
+     
+     public void checkWeekOffOrHolidayForEDate1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String enDate = request.getParameter("enDate");
+        enDate = enDate.replaceAll(",", "/");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date eDate = sdf.parse(enDate);
+
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) session.getAttribute("employeeInfo");
+        ShiftMaster shiftMaster = new ShiftMaster();
+        HoursBasis hoursBasis = new HoursBasis();
+        ShiftRotationMaster shiftRotationMaster = new ShiftRotationMaster();
+        ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
+        int appId = employeeMaster1.getId();
+        String shiftType = employeeMaster1.getShiftType();
+        String weekOffDay = "";
+        if (shiftType.contains("ShiftBase")) {
+            shiftRotationMaster = shiftRotationMasterService.readById(employeeMaster1.getShiftHoursId());
+            String shiftId = shiftRotationInfoService.readFirstShfitId("" + employeeMaster1.getUserMaster().getId(), "" + shiftRotationMaster.getId());
+            shiftMaster = shiftMasterService.readById(Integer.parseInt(shiftId));
+            weekOffDay = shiftMaster.getWeekof();
+
+        }
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(eDate);
+        List<String> list1 = new ArrayList<String>();
+        String message = "";
+
+        for (String z : weekOffDay.split(",")) {
+            int weekOff = 0;
+            if (!z.equals("")) {
+//                if (z.equals("sunday")) {
+//                    weekOff = 1;
+//                } else 
+                    if (z.equals("monday")) {
+                    weekOff = 2;
+                } else if (z.equals("tuesday")) {
+                    weekOff = 3;
+                } else if (z.equals("wednesday")) {
+                    weekOff = 4;
+                } else if (z.equals("thursday")) {
+                    weekOff = 5;
+                } else if (z.equals("friday")) {
+                    weekOff = 6;
+                } else if (z.equals("saturdady")) {
+                    weekOff = 7;
+                }
+                Date nDate = c.getTime();
+                String daString = sdf.format(nDate);
+                HolidayMaster holidayMaster = new HolidayMaster();
+                holidayMaster.setHolidayFromDate(daString);
+//                List list = holidayMasterService.checkHoliday(enDate, "" + employeeMaster1.getLocationMaster().getId());
+
+//                if (c.get(Calendar.DAY_OF_WEEK) == weekOff || list.size() > 0) {
+//                    message = "Selected Date is Holiday/WeekOff.So You can't Apply Leave on this Day.";
+//                }
+
+            }
+        }
+        PrintWriter out = response.getWriter();
+        out.print(message);
+    }
+
+     public void checkWeekOffOrHolidayForSDate1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String strDate = request.getParameter("strDate");
+//        String enDate = request.getParameter("enDate");
+
+        strDate = strDate.replaceAll(",", "/");
+//        enDate = enDate.replaceAll(",", "/");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date sDate = sdf.parse(strDate);
+//        Date eDate = sdf.parse(enDate);
+
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) session.getAttribute("employeeInfo");
+        ShiftMaster shiftMaster = new ShiftMaster();
+        HoursBasis hoursBasis = new HoursBasis();
+        ShiftRotationMaster shiftRotationMaster = new ShiftRotationMaster();
+        ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
+        int appId = employeeMaster1.getId();
+        String shiftType = employeeMaster1.getShiftType();
+        String weekOffDay = "";
+        if (shiftType.contains("ShiftBase")) {
+            shiftRotationMaster = shiftRotationMasterService.readById(employeeMaster1.getShiftHoursId());
+            String shiftId = shiftRotationInfoService.readFirstShfitId("" + employeeMaster1.getUserMaster().getId(), "" + shiftRotationMaster.getId());
+            shiftMaster = shiftMasterService.readById(Integer.parseInt(shiftId));
+            weekOffDay = shiftMaster.getWeekof();
+
+        } else if (shiftType.contains("HourlyBase")) {
+            hoursBasis = hoursBasisService.readById(employeeMaster1.getShiftHoursId());
+            weekOffDay = hoursBasis.getWeekof();
+        }
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(sDate);
+        List<String> list1 = new ArrayList<String>();
+        String message = "";
+//        if (!weekOffDay.equals("sunday")) {
+
+        for (String z : weekOffDay.split(",")) {
+            int weekOff = 0;
+            if (!z.equals("")) {
+//                if (z.equals("sunday")) {
+//                    weekOff = 1;
+//                } else 
+                if (z.equals("monday")) {
+                    weekOff = 2;
+                } else if (z.equals("tuesday")) {
+                    weekOff = 3;
+                } else if (z.equals("wednesday")) {
+                    weekOff = 4;
+                } else if (z.equals("thursday")) {
+                    weekOff = 5;
+                } else if (z.equals("friday")) {
+                    weekOff = 6;
+                } else if (z.equals("saturday")) {
+                    weekOff = 7;
+                }
+                Date nDate = c.getTime();
+                String daString = sdf.format(nDate);
+                HolidayMaster holidayMaster = new HolidayMaster();
+                holidayMaster.setHolidayFromDate(daString);
+//                List list = holidayMasterService.checkHoliday(strDate, "" + employeeMaster1.getLocationMaster().getId());
+
+//                if (c.get(Calendar.DAY_OF_WEEK) == weekOff || list.size() > 0) {
+//                    message = "Selected Date is Holiday/WeekOff.So You can't Apply Leave on this Day.";
+//                }
+            }
+        }
+//        }
+        PrintWriter out = response.getWriter();
+        out.print(message);
+    }
 }

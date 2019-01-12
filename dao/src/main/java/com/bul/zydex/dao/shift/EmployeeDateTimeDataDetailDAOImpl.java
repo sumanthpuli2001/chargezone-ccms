@@ -12,7 +12,7 @@ import com.bul.zydex.model.EmployeeDateTimeDataDetail;
  *
  * @author Teja
  */
-public class EmployeeDateTimeDataDeatilDAOImpl<T> extends GenericsDAOImpl<T> implements EmployeeDateTimeDataDetailDAO<T> 
+public class EmployeeDateTimeDataDetailDAOImpl<T> extends GenericsDAOImpl<T> implements EmployeeDateTimeDataDetailDAO<T> 
 {
 
     @Override

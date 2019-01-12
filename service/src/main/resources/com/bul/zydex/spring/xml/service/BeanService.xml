@@ -767,6 +767,6 @@
         <property name="employeeVisaDetailsDAO" ref="employeeVisaDetailsDAO1"/>
     </bean>
     <bean id="employeeDateTimeDataDetailService1" class="com.bul.zydex.service.shift.EmployeeDateTimeDataDetailServiceImpl">
-        <property name="employeeDateTimeDataDeatilDAO" ref="employeeDateTimeDataDeatilDAO1"/>
+        <property name="employeeDateTimeDataDetailDAO" ref="employeeDateTimeDataDetailDAO1"/>
     </bean>
 </beans>

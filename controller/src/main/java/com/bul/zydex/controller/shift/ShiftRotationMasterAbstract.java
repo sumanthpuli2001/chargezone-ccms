@@ -8,6 +8,7 @@ package com.bul.zydex.controller.shift;
 import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.AttendanceRegularization;
 import com.bul.zydex.model.AttendanceRegularizationMaster;
+import com.bul.zydex.model.ClientDetailsMaster;
 import com.bul.zydex.model.CoffRegularization;
 import com.bul.zydex.model.DepartmentMaster;
 import com.bul.zydex.model.DesignationMaster;
@@ -21,6 +22,7 @@ import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.RotationMaster;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
@@ -34,6 +36,8 @@ import com.bul.zydex.model.TravelRequestMaster;
 import com.bul.zydex.model.WoffRegularization;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
+import com.bul.zydex.service.attendanceRegularization.ClientDetailsMasterService;
+import com.bul.zydex.service.attendanceRegularization.OTRegularizationService;
 import com.bul.zydex.service.attendanceRegularization.TimeAttandanceFlaxibleMasterService;
 import com.bul.zydex.service.holiday.HolidayMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
@@ -89,7 +93,10 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
     protected Validator shiftRegularizationValidator;
     protected WoffRegularizationService<WoffRegularization> woffRegularizationService;
     protected CoffRegularizationService<CoffRegularization> coffRegularizationService;
+    protected OTRegularizationService<OTRegularization> oTRegularizationService;
+    protected ClientDetailsMasterService<ClientDetailsMaster> clientDetailsMasterService;
      protected Validator coffRegularizationValidator;
+     protected Validator otRegularizationValidator;
 
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
         return timeAttandanceFlaxibleMasterService;
@@ -242,6 +249,24 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
     public void setCoffRegularizationValidator(Validator coffRegularizationValidator) {
         this.coffRegularizationValidator = coffRegularizationValidator;
     }
+
+    public OTRegularizationService<OTRegularization> getoTRegularizationService() {
+        return oTRegularizationService;
+    }
+
+    public void setoTRegularizationService(OTRegularizationService<OTRegularization> oTRegularizationService) {
+        this.oTRegularizationService = oTRegularizationService;
+    }
+
+    public ClientDetailsMasterService<ClientDetailsMaster> getClientDetailsMasterService() {
+        return clientDetailsMasterService;
+    }
+
+    public void setClientDetailsMasterService(ClientDetailsMasterService<ClientDetailsMaster> clientDetailsMasterService) {
+        this.clientDetailsMasterService = clientDetailsMasterService;
+    }
+    
+    
     
 
     protected void readShiftName(HttpServletRequest request) {
@@ -483,5 +508,25 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
         } catch (Exception e) {
         }
     }
+     protected void clientList(HttpServletRequest request) {
+        ClientDetailsMaster clientDetailsMaster = new ClientDetailsMaster();
+        List<?> clientDetailsMaster1 = clientDetailsMasterService.read();
+
+        Map<Integer, String> location1 = new HashMap<>();
+        for (Object o : clientDetailsMaster1) {
+            clientDetailsMaster = (ClientDetailsMaster) o;
+            location1.put(clientDetailsMaster.getId(), clientDetailsMaster.getClientName());
+        }
+        request.setAttribute("clientMaster", location1);
+    }
+
+    public Validator getOtRegularizationValidator() {
+        return otRegularizationValidator;
+    }
+
+    public void setOtRegularizationValidator(Validator otRegularizationValidator) {
+        this.otRegularizationValidator = otRegularizationValidator;
+    }
+     
 
 }

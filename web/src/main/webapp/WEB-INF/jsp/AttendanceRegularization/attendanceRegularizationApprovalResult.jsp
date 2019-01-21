@@ -107,8 +107,14 @@
                                                                 <c:if test="${list[5] eq 0}">
                                                                     <td><span  class="label label-primary" >Pending</span></td>
                                                                 </c:if>
+                                                                <c:if test="${list[5] eq 18}">
+                                                                    <td><span  class="label label-primary" >Pending</span></td>
+                                                                </c:if>
                                                                 <c:if test="${list[5] eq 1}">
                                                                     <td><span  class="label label-success">Approved</span></td>
+                                                                </c:if>
+                                                                <c:if test="${list[5] eq 11}">
+                                                                    <td><span  class="label label-success">Partially Approved</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list[5] eq 2}">
                                                                     <td><span class="label label-warning ">Withdrawn</span></td>
@@ -124,7 +130,7 @@
                                                                 </c:if>
                                                                 <td>
                                                                     <div class="col-sm-12">
-                                                                        <c:if test="${list[5] eq 0}"> 
+                                                                        <c:if test="${list[5] eq 0 || list[5] eq 18 || list[5] eq 11}"> 
                                                                             <div class="col-sm-3">
                                                                                 <button type="button" class="label label-success" style="font-size: 10px;" id="approveId"  onclick="approveClick(${list[0]});" title="Approve">APPROVE</button>
                                                                             </div>

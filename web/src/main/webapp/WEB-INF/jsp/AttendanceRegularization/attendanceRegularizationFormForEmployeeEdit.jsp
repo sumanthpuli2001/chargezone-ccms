@@ -168,42 +168,89 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Start Date & Time:</label>
-                                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii:ss" data-link-field="dtp_input1">
+                                                        <div class="col-sm-3">
+                                                            <label>Start Date & Time:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="startDateTime"  class="form-control"  size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                <form:input path="startDateTime" id="start_time" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
+                                                            <form:errors path="startDateTime" cssClass="errorDiv"></form:errors>
+                                                                <span id="woandHlerrorDiv" style="color: red;"></span>
+                                                                <span id="woandHlerrorDiv1" style="color: red;"></span>
+
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                                <label>End Date & Time:</label>
-                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii:ss" data-link-field="dtp_input1">
+                                                            <div class="col-sm-3">
+                                                                <label>End Date & Time:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="endDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                <form:input path="endDateTime"  id="end_time" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
+                                                            <form:errors path="endDateTime" cssClass="errorDiv"></form:errors>
+                                                                <span id="endwoandHlerrorDiv" style="color: red;"></span>
                                                             </div>
+                                                            <div class="col-sm-3">
+                                                                <label>Time Difference:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <form:input path="differentCompare" id="differentCompare" class="form-control"  readonly="true" ></form:input>
+                                                            </div>
+                                                            <div class="col-sm-3">
+                                                                <label>AR Type:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <form:input path="arType" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" ></form:input>
+                                                            </div>
+
+
+
                                                         </div>
-                                                    </div><!-- /.col -->
-                                                </div><!-- /.row -->
-                                            </div><!-- /.box-body -->
-                                        </div>
-                                        <div class="box box-info collapsed-box">
-                                            <div class="box-header">
-                                                <h3 class="box-title">Reason In Detail:</h3>
-                                                <div class="box-tools pull-right">
-                                                    <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
-                                                </div>
-                                            </div><!-- /.box-header -->
-                                            <div class="box-body no-padding">
-                                                <div class="row">
-                                                    <div class="col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label">Reason for Request:</label>
-                                                            <div class="col-sm-7">
+                                                    <c:if test="${attendanceRegularization.arType eq Compassion}">
+                                                        <div class="form-group" id="business">
+                                                            <div id="1" class="group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Start Date & Time:<span style="color: red;font-size: 12px;"></span></label>
+                                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
+                                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                        <form:input path="startDateAr"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                        </div>
+                                                                    <form:errors path="startDateTime" cssClass="errorDiv"></form:errors>
+                                                                        <span id="woandHlerrorDiv" style="color: red;"></span>
+                                                                        <span id="woandHlerrorDiv1" style="color: red;"></span>
+
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <label>End Date & Time:<span style="color: red;font-size: 12px;"></span></label>
+                                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
+                                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                        <form:input path="endDateAr"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                        </div>
+                                                                    <form:errors path="endDateTime" cssClass="errorDiv"></form:errors>
+                                                                        <span id="endwoandHlerrorDiv" style="color: red;"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>  
+                                                    </c:if>
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Reason In Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">Reason for Request:</label>
+                                                        <div class="col-sm-7">
                                                             <form:textarea  path="reason" class="form-control" rows="6"/>
                                                         </div>
                                                     </div>
@@ -246,6 +293,18 @@
 
                                     </c:if>
                                     <c:if test="${status eq 0}">
+                                        <!--                                                                                    <div class="col-sm-6">
+
+                                                                                                                                <button type="submit" class="btn btn-primary " data-original-title="" title="" style="width: 100px;text-align:center;">SUBMIT</button>
+                                                                                                                            </div>-->
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-offset-5">
+                                                <button type="submit" class="btn btn-warning" data-original-title="" title="" value="Withdraw" name="btnSubmit" id="btnSubmit" style="width: 100px;text-align:center;">WITHDRAW</button>
+                                            </div>
+                                        </div>
+
+                                    </c:if>
+                                    <c:if test="${status eq 18}">
                                         <!--                                                                                    <div class="col-sm-6">
 
                                                                                                                                 <button type="submit" class="btn btn-primary " data-original-title="" title="" style="width: 100px;text-align:center;">SUBMIT</button>
@@ -354,6 +413,21 @@
             </section><!-- /.content -->
         </form:form>
     </div><!-- /.content-wrapper -->
+    <script>
+        $(document).ready(function () {
+            $('#purpose').on('change', function () {
+                if (this.value == '2')
+                        //.....................^.......
+                        {
+                            $("#business").show();
+                        }
+                else
+                {
+                    $("#business").hide();
+                }
+            });
+        });
+    </script>
     <script type="text/javascript">
         $('.form_datetime').datetimepicker({
             //language:  'fr',

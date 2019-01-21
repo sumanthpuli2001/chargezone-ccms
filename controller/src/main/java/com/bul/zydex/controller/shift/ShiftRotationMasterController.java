@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.shift;
 
 import com.bul.zydex.model.AttendanceRegularization;
+import com.bul.zydex.model.ClientDetailsMaster;
 import com.bul.zydex.model.CoffRegularization;
 import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailAddMaster;
@@ -19,6 +20,7 @@ import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.RotationMaster;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
@@ -17572,7 +17574,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         String status = Integer.toString(status1);
         request.setAttribute("status", status);
         String woffpastdate = woffRegularization.getDayWoff();
-         request.setAttribute("woffpastdate", woffpastdate);
+        request.setAttribute("woffpastdate", woffpastdate);
         String remarkNmame = woffRegularization.getApprovalComment();
         request.setAttribute("remarkNmame", remarkNmame);
         int userId = woffRegularization.getUserMasterId().getId();
@@ -18551,5 +18553,507 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         }
         return mv;
     }
+
+    public ModelAndView searchSubmitOTRegularization(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        OTRegularization oTRegularization = new OTRegularization();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        int id = user.getId();
+        List<?> list = oTRegularizationService.userWiseOTRegularizationList(id);
+        List<?> list1 = oTRegularizationService.userReportingManager(id);
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        String managerName = "";
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        if (!list1.isEmpty()) {
+            employeeMaster = (EmployeeMaster) list1.get(0);
+//            List<?> reportingmanagerNameList = employeeMasterService.readByEmployeeLevel1Id(employeeMaster);
+
+            employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
+//            if (!reportingmanagerNameList.isEmpty()) {
+//                Object[] o = (Object[]) reportingmanagerNameList.get(0);
+//                managerName = (String) o[2];
+//            }
+        }
+        mv.getModelMap().put("managerName", employeeMaster1.getEmployeeName());
+        mv.getModelMap().put("list", list);
+        mv.getModelMap().put("oTRegularization", oTRegularization);
+        mv.setViewName("AttendanceRegularization/OtRegularizationResult");
+        return mv;
+    }
+
+    public ModelAndView createClickOTRegurization(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        OTRegularization otRegularization = new OTRegularization();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
+        int reportingId = 0;
+        user.getId();
+        clientList(request);
+        employeeMaster.setUserMaster(user);
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+        }
+
+        mv.getModelMap().put("otRegularization", new OTRegularization());
+        mv.setViewName("AttendanceRegularization/otRegularizationFormForEmployee");
+        return mv;
+    }
+
+    public ModelAndView createSubmitOtRegulirazation(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        OTRegularization otRegularization = new OTRegularization();
+        ClientDetailsMaster clientDetailsMaster = new ClientDetailsMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        int reportingId = 0;
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        int userMasterId = user.getId();
+        employeeMaster.setUserMaster(user);
+        String clientId = request.getParameter("clientDetailsMaster");
+        clientDetailsMaster.setId(Integer.parseInt(clientId));
+        otRegularization.setClientDetailsMaster(clientDetailsMaster);
+
+        BindException errors = new BindException(otRegularization, "otRegularization");
+        bind(request, otRegularization);
+        otRegularizationValidator.validate(otRegularization, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+            List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+            if (!empDetailList.isEmpty()) {
+                request.setAttribute("employeeMaster", empDetailList.get(0));
+                Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+                String reportmanager = (String) arrayOfObject[6];
+                if (!reportmanager.equals("")) {
+                    reportingId = Integer.parseInt(reportmanager);
+                }
+
+                employeeMaster1.setId(reportingId);
+            }
+            List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+            if (!reportmanager1.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+                request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+            }
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+
+            mv.getModelMap().put("otRegularization", new OTRegularization());
+            mv.setViewName("AttendanceRegularization/otRegularizationFormForEmployee");
+        } else {
+
+//            if (attendanceRegularization.getArType().equals("Compassion")) {
+//                attendanceRegularization.setUserMasterId(userMasterId);
+//                attendanceRegularization.setStatus(18);
+//                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+//                String currentDate = dateFormat1.format(new Date());
+//                attendanceRegularization.setDateOfSubmit(currentDate);
+//                attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
+//
+//                request.setAttribute("successMessage",
+//                        "Information : The Information is saved Successfully.");
+//
+//                mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=searchSubmit");
+//            }
+//            if (attendanceRegularization.getArType().equals("Official")) {
+            otRegularization.setUserMasterId(userMasterId);
+//            otRegularization.setUserMasterId(userMasterId);
+            otRegularization.setStatus(0);
+            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            String currentDate = dateFormat1.format(new Date());
+            otRegularization.setDateOfSubmit(currentDate);
+            oTRegularizationService.createOrUpdate(otRegularization);
+
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+
+            mv.setViewName("redirect:shiftRotationMaster.htm?act=searchSubmitOTRegularization");
+//            }
+
+//            try {
+//                mailSendArApply(request);
+//                EmailTemplate emailTemplate = new EmailTemplate();
+//                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//                DesignationMaster designationMaster = new DesignationMaster();
+//                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//                EmployeeMaster employeeMasterHr = new EmployeeMaster();
+//                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+//                // id 14 is for Attendence regularization apply....
+//                emailTemplate = emailTemplateService.readById(14);
+//                String To = employeeMasterHr.getOfficeEmailId();
+//                String from = employeeMasterModel.getOfficeEmailId();
+//                String Subject = emailTemplate.getSubject();
+//                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+//                String msg = emailTemplate.getBodytext();
+//                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                sendMail.sendMail(from, To, Subject, msg);
+//            } catch (Exception e) {
+//            }
+        }
+        return mv;
+    }
+
+    public ModelAndView editClickOtRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        OTRegularization otRegularization = new OTRegularization();
+        ClientDetailsMaster clientDetailsMaster = new ClientDetailsMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        String id = request.getParameter("id");
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
+        int reportingId = 0;
+        user.getId();
+        clientList(request);
+        employeeMaster.setUserMaster(user);
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+        }
+
+        otRegularization = oTRegularizationService.readById(Integer.parseInt(id));
+        clientDetailsMaster.setId(otRegularization.getClientDetailsMaster().getId());
+        otRegularization.setClientDetailsMaster(clientDetailsMaster);
+        int status1 = otRegularization.getStatus();
+        String status = Integer.toString(status1);
+        String remark = otRegularization.getManagerRemark();
+        request.setAttribute("remark", remark);
+        request.setAttribute("status", status);
+        mv.getModelMap().put("otRegularization", otRegularization);
+        mv.setViewName("AttendanceRegularization/OtRegularizationFormForEmployeeEdit");
+        return mv;
+    }
+
+    public ModelAndView editSubmitOtRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        OTRegularization otRegularization = new OTRegularization();
+        OTRegularization otRegularization1 = new OTRegularization();
+        bind(request, otRegularization);
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        String id = request.getParameter("id");
+        String btnSubmit = request.getParameter("btnSubmit");
+        otRegularization1 = oTRegularizationService.readById(Integer.parseInt(id));
+        if (btnSubmit.equals("Submit")) {
+
+            if (otRegularization1.getStatus() == 7) {
+                otRegularization1.setStatus(0);
+                otRegularization1.setManagerRemark(otRegularization1.getManagerRemark());
+                otRegularization1.setUserMasterId(otRegularization1.getUserMasterId());
+            }
+//        else {
+//            attendanceRegularization.setStatus(2);
+//            attendanceRegularization.setManagerRemark(attendanceRegularization1.getManagerRemark());
+//            attendanceRegularization.setUserMasterId(attendanceRegularization1.getUserMasterId());
+//        }
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+//            try {
+//
+//                EmailTemplate emailTemplate = new EmailTemplate();
+//                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//                DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//                EmployeeMaster employeeMaster1 = new EmployeeMaster();
+//                EmployeeMaster EmployeeHR = new EmployeeMaster();
+//                EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+//                //id=14 is for attandence regularization Apply...
+//                emailTemplate = emailTemplateService.readById(14);
+//                String EmpStr = request.getParameter("empid");
+//                if (null != EmpStr && !"".equals(EmpStr)) {
+//                    int Empid = Integer.parseInt(EmpStr);
+//                    List list = employeeMasterService.readByEmployeeNo(Empid);
+//                    if (!list.isEmpty()) {
+//                        employeeMaster1 = (EmployeeMaster) list.get(0);
+//                        String To = EmployeeHR.getOfficeEmailId();
+//                        String from = employeeMasterModel.getOfficeEmailId();
+//                        String Subject = emailTemplate.getSubject();
+//                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+//                        String msg = emailTemplate.getBodytext();
+//                        msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+//                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                        sendMail.sendMail(from, To, Subject, msg);
+//
+//                        String name = "Attendance";
+//                        EmailAddMaster emailAddMaster = new EmailAddMaster();
+//                        emailAddMaster.setModuleName(name);
+//                        emailAddMaster.setDepartmentMaster(employeeMasterModel.getDepartmentMaster());
+//                        List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+//                        if (!emailSendList.isEmpty()) {
+//                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+//                            String emailId = emailAddMaster1.getEmailId();
+//                            for (String emailId1 : emailId.split(",")) {
+//                                if (!emailId1.equals("")) {
+//                                    String To1 = emailId1;
+//                                    String from1 = employeeMasterModel.getOfficeEmailId();
+//                                    String subject1 = emailTemplate.getSubject();
+//                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+//                                    String msg1 = emailTemplate.getBodytext();
+//                                    msg1 = msg1.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+//                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                                    sendMail.sendMail(from1, To1, subject1, msg1);
+//
+//                                }
+//
+//                            }
+//                        }
+//                        List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+//                        if (!allDeptmailList.isEmpty()) {
+//                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+//                            String emailId = emailAddMaster1.getEmailId();
+//                            for (String emailId1 : emailId.split(",")) {
+//                                if (!emailId1.equals("")) {
+//                                    String To1 = emailId1;
+//                                    String from1 = employeeMasterModel.getOfficeEmailId();
+//                                    String subject1 = emailTemplate.getSubject();
+//                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+//                                    String msg1 = emailTemplate.getBodytext();
+//                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+//                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                                    sendMail.sendMail(from1, To1, subject1, msg1);
+//                                }
+//                            }
+//                        }
+//
+//                    }
+//
+//                }
+//
+//            } catch (Exception e) {
+//            }
+
+        } else if (btnSubmit.equals("Withdraw")) {
+            otRegularization.setStatus(2);
+            try {
+
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                EmployeeMaster EmployeeHR = new EmployeeMaster();
+                EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                //id=18 is for attandence regularization withdrow...
+                emailTemplate = emailTemplateService.readById(18);
+                String EmpStr = request.getParameter("empid");
+                if (null != EmpStr && !"".equals(EmpStr)) {
+                    int Empid = Integer.parseInt(EmpStr);
+                    List list = employeeMasterService.readByEmployeeNo(Empid);
+                    if (!list.isEmpty()) {
+                        employeeMaster1 = (EmployeeMaster) list.get(0);
+                        String To = EmployeeHR.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+
+                    }
+
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String currentDate = dateFormat1.format(new Date());
+        otRegularization.setDateOfSubmit(currentDate);
+        oTRegularizationService.createOrUpdate(otRegularization);
+//        mv = searchSubmit(request, response);
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=searchSubmitOTRegularization");
+        return mv;
+    }
+
+    public ModelAndView approvalSubmitOTregularization(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        OTRegularization otRegularization = new OTRegularization();
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        int id = employeeMaster.getId();
+        List<?> list = oTRegularizationService.approvalLeval1WiseOtRegularizationList(id);
+        List<?> list1 = oTRegularizationService.userReportingManager(id);
+        String managerName = "";
+        if (!list1.isEmpty()) {
+            employeeMaster = (EmployeeMaster) list1.get(0);
+            if (!employeeMaster.getReportingManagerLevel1().equals("")) {
+                List<?> reportingmanagerNameList = employeeMasterService.readByEmployeeLevel1Id(employeeMaster);
+                if (!reportingmanagerNameList.isEmpty()) {
+                    Object[] o = (Object[]) reportingmanagerNameList.get(0);
+                    managerName = (String) o[2];
+                }
+            }
+        }
+        mv.getModelMap().put("managerName", managerName);
+        mv.getModelMap().put("list", list);
+        mv.getModelMap().put("otRegularization", otRegularization);
+        mv.setViewName("AttendanceRegularization/OtRegularizationApprovalResult");
+        return mv;
+    }
+
+    public ModelAndView approvalEditClickByAdminOT(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        OTRegularization otRegularization = new OTRegularization();
+        ClientDetailsMaster clientDetailsMaster = new ClientDetailsMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        clientList(request);
+        String id = request.getParameter("id");
+        otRegularization = oTRegularizationService.readById(Integer.parseInt(id));
+        int status1 = otRegularization.getStatus();
+        String status = Integer.toString(status1);
+        request.setAttribute("status", status);
+        String remarkNmame = otRegularization.getManagerRemark();
+        request.setAttribute("remarkNmame", remarkNmame);
+        int userId = otRegularization.getUserMasterId();
+        UserMaster user = new UserMaster();
+        clientDetailsMaster.setId(otRegularization.getClientDetailsMaster().getId());
+        otRegularization.setClientDetailsMaster(clientDetailsMaster);
+        user.setId(userId);
+        employeeMaster.setUserMaster(user);
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+        }
+
+        mv.getModelMap().put("otRegularization", otRegularization);
+        mv.setViewName("AttendanceRegularization/OtRegularizationApprovalAdmin");
+        return mv;
+    }
+
+    public ModelAndView approvalEditSubmitByAdminOt(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        OTRegularization otRegularization = new OTRegularization();
+        String id = "" + request.getParameter("id");
+//        String remark = "" + request.getParameter("remark");
+        String remark = "";
+        otRegularization = oTRegularizationService.readById(Integer.parseInt(id));
+
+        otRegularization.setStatus(1);
+        otRegularization.setManagerRemark(remark);
+
+//        EmployeeMaster approverName = new EmployeeMaster();
+        EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String requestdate = sdf.format(new Date());
+        otRegularization.setApprovedDate(requestdate);
+        otRegularization.setEmployeeMaster(approverName);
+        oTRegularizationService.createOrUpdate(otRegularization);
+
+//        Employee Date Time Data
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=approvalSubmit");
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitOTregularization");
+        return mv;
+    }
+     public ModelAndView rejectSubmitByAdminOt(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        OTRegularization otRegularization = new OTRegularization();
+        String id = request.getParameter("id");
+        String remark = "";
+        otRegularization = oTRegularizationService.readById(Integer.parseInt(id));
+        otRegularization.setStatus(3);
+        otRegularization.setManagerRemark(remark);
+        EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String requestdate = sdf.format(new Date());
+        otRegularization.setApprovedDate(requestdate);
+        otRegularization.setEmployeeMaster(approverName);
+        oTRegularizationService.createOrUpdate(otRegularization);
+
+//        try {
+//
+//            EmailTemplate emailTemplate = new EmailTemplate();
+//            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//            DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+//            UserMaster userMaster = new UserMaster();
+//            userMaster.setId(attendanceRegularization.getUserMasterId());
+//            EmployeeMaster employeeMaster1 = new EmployeeMaster();
+//            employeeMaster1.setUserMaster(userMaster);
+//            List list = employeeMasterService.readByUserName(employeeMaster1);
+//            //id=17 is for attandence regularization reject...
+//            emailTemplate = emailTemplateService.readById(17);
+////            String EmpStr = request.getParameter("empid");
+////            if (null != EmpStr && !"".equals(EmpStr)) {
+////                int Empid = Integer.parseInt(EmpStr);
+////                List list = employeeMasterService.readByEmployeeNo(Empid);
+//            if (!list.isEmpty()) {
+//                employeeMaster1 = (EmployeeMaster) list.get(0);
+//                String To = employeeMaster1.getOfficeEmailId();
+//                String from = employeeMasterModel.getOfficeEmailId();
+//                String Subject = emailTemplate.getSubject();
+//                Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+//                String msg = emailTemplate.getBodytext();
+//                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+//                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                sendMail.sendMail(from, To, Subject, msg);
+//
+////                }
+//            }
+//
+//        } catch (Exception e) {
+//        }
+
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitOTregularization");
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
+        return mv;
+    }
+
+    public ModelAndView reworkSubmitByAdminOt(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        OTRegularization otRegularization = new OTRegularization();
+        String id = request.getParameter("id");
+        String remark = "";
+        otRegularization = oTRegularizationService.readById(Integer.parseInt(id));
+        otRegularization.setStatus(7);
+        otRegularization.setManagerRemark(remark);
+        EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String requestdate = sdf.format(new Date());
+        otRegularization.setApprovedDate(requestdate);
+        otRegularization.setEmployeeMaster(approverName);
+        oTRegularizationService.createOrUpdate(otRegularization);
+       
+
+         mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitOTregularization");
+//        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
+        return mv;
+    }
+
 
 }

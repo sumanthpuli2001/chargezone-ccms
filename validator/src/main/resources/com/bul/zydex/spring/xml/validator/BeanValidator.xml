@@ -161,4 +161,5 @@
     <bean id="urlMasterValidator1" class="com.bul.zydex.validator.UrlMasterValidator" />
     <bean id="shiftRegularizationValidator1" class="com.bul.zydex.validator.shift.ShiftRegularizationValidator" />
     <bean id="coffRegularizationValidator1" class="com.bul.zydex.validator.shift.CoffRegularizationValidator" />
+    <bean id="otRegularizationValidator1" class="com.bul.zydex.validator.attendanceRegularization.OtRegularizationValidator" />
 </beans>

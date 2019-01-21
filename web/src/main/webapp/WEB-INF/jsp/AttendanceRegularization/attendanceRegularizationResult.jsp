@@ -75,8 +75,7 @@
                                                                     <th>Date of Submission</th>
                                                                     <th>Time Difference</th>
                                                                     <th>AR Type</th>
-                                                                    <th>Start Date & Time</th>
-                                                                    <th>End Date & Time</th>
+                                                                    
                                                                     <th>Status</th>
                                                                     <th>Action</th>
                                                                 </tr>
@@ -92,14 +91,19 @@
                                                                 <td>${list.dateOfSubmit}</td>
                                                                  <td>${list.differentCompare}</td>
                                                                   <td>${list.arType}</td>
-                                                                   <td>${list.startDateAr}</td>
-                                                                   <td>${list.endDateAr}</td>
+                                                                   
                                                                   
                                                                 <c:if test="${list.status eq 0}">
                                                                     <td><span class="label label-primary ">Pending</span></td>
                                                                 </c:if>
+                                                                <c:if test="${list.status eq 18}">
+                                                                    <td><span class="label label-primary ">Pending</span></td>
+                                                                </c:if>
                                                                 <c:if test="${list.status eq 1}">
                                                                     <td><span class="label label-success">Approve by ${managerName}</span></td>
+                                                                </c:if>
+                                                                <c:if test="${list.status eq 11}">
+                                                                    <td><span class="label label-success">Partially Approved</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list.status eq 2}">
                                                                     <td><span class="label label-warning ">Withdraw</span></td>

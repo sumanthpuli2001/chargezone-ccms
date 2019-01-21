@@ -766,4 +766,10 @@
     <bean id="employeeVisaDetailsService1" class="com.bul.zydex.service.emp.EmployeeVisaDetailsServiceImpl">
         <property name="employeeVisaDetailsDAO" ref="employeeVisaDetailsDAO1"/>
     </bean>
+    <bean id="oTRegularizationService1" class="com.bul.zydex.service.attendanceRegularization.OTRegularizationServiceImpl">
+        <property name="oTRegularizationDAO" ref="oTRegularizationDAO1"/>
+    </bean>
+    <bean id="clientDetailsMasterService1" class="com.bul.zydex.service.attendanceRegularization.ClientDetailsMasterServiceImpl">
+        <property name="clientDetailsMasterDAO" ref="clientDetailsMasterDAO1"/>
+    </bean>
 </beans>

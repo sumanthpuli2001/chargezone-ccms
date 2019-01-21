@@ -117,17 +117,34 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             mv.getModelMap().put("attendanceRegularization", attendanceRegularization);
             mv.setViewName("AttendanceRegularization/attendanceRegularizationFormForEmployee");
         } else {
-            attendanceRegularization.setUserMasterId(userMasterId);
-            attendanceRegularization.setStatus(0);
-            SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            String currentDate = dateFormat1.format(new Date());
-            attendanceRegularization.setDateOfSubmit(currentDate);
-            attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
 
-            request.setAttribute("successMessage",
-                    "Information : The Information is saved Successfully.");
+            if (attendanceRegularization.getArType().equals("Compassion")) {
+                attendanceRegularization.setUserMasterId(userMasterId);
+                attendanceRegularization.setStatus(18);
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String currentDate = dateFormat1.format(new Date());
+                attendanceRegularization.setDateOfSubmit(currentDate);
+                attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
 
-            mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=searchSubmit");
+                request.setAttribute("successMessage",
+                        "Information : The Information is saved Successfully.");
+
+                mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=searchSubmit");
+            }
+            if (attendanceRegularization.getArType().equals("Official")) {
+                attendanceRegularization.setUserMasterId(userMasterId);
+                attendanceRegularization.setStatus(0);
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String currentDate = dateFormat1.format(new Date());
+                attendanceRegularization.setDateOfSubmit(currentDate);
+                attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
+
+                request.setAttribute("successMessage",
+                        "Information : The Information is saved Successfully.");
+
+                mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=searchSubmit");
+            }
+
             try {
                 mailSendArApply(request);
                 EmailTemplate emailTemplate = new EmailTemplate();
@@ -2076,50 +2093,207 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //        String remark = "" + request.getParameter("remark");
         String remark = "";
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
-        attendanceRegularization.setStatus(1);
-        attendanceRegularization.setManagerRemark(remark);
+
+        if (attendanceRegularization.getArType().equals("Official")) {
+            attendanceRegularization.setStatus(1);
+            attendanceRegularization.setManagerRemark(remark);
 
 //        EmployeeMaster approverName = new EmployeeMaster();
-        EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String requestdate = sdf.format(new Date());
-        attendanceRegularization.setApprovedDate(requestdate);
-        attendanceRegularization.setEmployeeMaster(approverName);
-        attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
+            EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String requestdate = sdf.format(new Date());
+            attendanceRegularization.setApprovedDate(requestdate);
+            attendanceRegularization.setEmployeeMaster(approverName);
+            attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
 
 //        Employee Date Time Data
-        if (attendanceRegularization.getStatus() == 1) {
-            int userId = attendanceRegularization.getUserMasterId();
-            UserMaster userMaster = new UserMaster();
-            userMaster.setId(userId);
-            EmployeeMaster employeeMaster = new EmployeeMaster();
-            employeeMaster.setUserMaster(userMaster);
-            List<?> l = employeeMasterService.readByEmployeeUserId(employeeMaster);
-            employeeMaster = (EmployeeMaster) l.get(0);
-            String startDate = attendanceRegularization.getStartDateTime();
-            String endDate = attendanceRegularization.getEndDateTime();
-            EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
-            EmployeeDatetimeData employeeDatetimeData1 = new EmployeeDatetimeData();
-            employeeDatetimeData.setEmployeeMaster(employeeMaster);
-            employeeDatetimeData.setDateTime(startDate);
-            employeeDatetimeData1.setEmployeeMaster(employeeMaster);
-            employeeDatetimeData1.setDateTime(endDate);
-            employeeDatetimeDataService.createOrUpdate(employeeDatetimeData);
-            employeeDatetimeDataService.createOrUpdate(employeeDatetimeData1);
+            if (attendanceRegularization.getStatus() == 1) {
+                int userId = attendanceRegularization.getUserMasterId();
+                UserMaster userMaster = new UserMaster();
+                userMaster.setId(userId);
+                EmployeeMaster employeeMaster = new EmployeeMaster();
+                employeeMaster.setUserMaster(userMaster);
+                List<?> l = employeeMasterService.readByEmployeeUserId(employeeMaster);
+                employeeMaster = (EmployeeMaster) l.get(0);
+                String startDate = attendanceRegularization.getStartDateTime();
+                String endDate = attendanceRegularization.getEndDateTime();
+                EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
+                EmployeeDatetimeData employeeDatetimeData1 = new EmployeeDatetimeData();
+                employeeDatetimeData.setEmployeeMaster(employeeMaster);
+                employeeDatetimeData.setDateTime(startDate);
+                employeeDatetimeData1.setEmployeeMaster(employeeMaster);
+                employeeDatetimeData1.setDateTime(endDate);
+                employeeDatetimeDataService.createOrUpdate(employeeDatetimeData);
+                employeeDatetimeDataService.createOrUpdate(employeeDatetimeData1);
 
-            EmployeeShiftData employeeShiftData = new EmployeeShiftData();
-            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
-            employeeShiftData.setInDateTime(startDate);
-            employeeShiftData.setEmployeeMaster(employeeMaster);
-            List<?> shift = employeeShiftDataService.attendanceRegularizationEntry(employeeShiftData);
-            if (!shift.isEmpty()) {
-                employeeShiftData1 = (EmployeeShiftData) shift.get(0);
-                employeeShiftData1.setInDateTime(startDate);
-                employeeShiftData1.setOutDateTime(endDate);
-                employeeShiftData1.setEmployeeMaster(employeeMaster);
-                employeeShiftData1.setShiftMaster(employeeShiftData1.getShiftMaster());
-                employeeShiftDataService.update(employeeShiftData1);
+                EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+                EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                employeeShiftData.setInDateTime(startDate);
+                employeeShiftData.setEmployeeMaster(employeeMaster);
+                List<?> shift = employeeShiftDataService.attendanceRegularizationEntry(employeeShiftData);
+                if (!shift.isEmpty()) {
+                    employeeShiftData1 = (EmployeeShiftData) shift.get(0);
+                    employeeShiftData1.setInDateTime(startDate);
+                    employeeShiftData1.setOutDateTime(endDate);
+                    employeeShiftData1.setEmployeeMaster(employeeMaster);
+                    employeeShiftData1.setShiftMaster(employeeShiftData1.getShiftMaster());
+                    employeeShiftDataService.update(employeeShiftData1);
+                }
+
+                // add c-off balance in employee leave balance when day is sunday
+//                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+//                    Date startDate1 = sdf1.parse(startDate);
+//                    Date endDate1 = sdf1.parse(endDate);
+//                    long diff = endDate1.getTime() - startDate1.getTime();
+//                    int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+//                    for (int i = 0; i <= days + 1; i++) {
+//                        String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(startDate1);
+//                        if (dayOfWeek.equals("Sunday")) {
+//                            String time = "0.8";
+//
+//                            OverTimeMaster overTimeMaster = new OverTimeMaster();
+//                            String overTimeDate = sdf1.format(startDate1);
+//                            overTimeMaster.setDate(overTimeDate);
+//                            overTimeMaster.setTime(time);
+//
+//                            overTimeMaster.setEmployeeMaster(employeeMaster);
+//
+//                            EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+//                            EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+//                            LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+//                            leaveTypeMaster.setId(11);
+//                            employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+//                            employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+//                            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+//                            employeeMaster2 = employeeMasterService.readById(employeeMaster.getId());
+//                            int levelId = employeeMaster.getLevelMaster().getId();
+//                            LevelMaster levelMaster1 = new LevelMaster();
+//                            levelMaster1 = levelMasterService.readById(levelId);
+//                            if (employeeMaster.getZydexLocationMaster().getId().equals(5) && levelMaster1.getLevel().contains("Level 4") || levelMaster1.getLevel().contains("Level 5")) {
+//                                List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+//                                if (!empBalList.isEmpty()) {
+//                                    employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+//                                    float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+//                                    time1 = time1 + Float.parseFloat(time);
+//                                    employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+//                                    employeeLeaveBalanceService.update(employeeLeaveBalance1);
+//                                } else {
+//                                    employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+//                                    employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+//                                    employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
+//                                    employeeLeaveBalanceService.create(employeeLeaveBalance1);
+//                                }
+//                                overTimeMasterService.create(overTimeMaster);
+//                            }
+//
+//                        }
+//                        Calendar c = Calendar.getInstance();
+//                        c.setTime(startDate1);
+//                        c.add(Calendar.DATE, 1);
+//                        startDate1 = c.getTime();
+//                    }
+                // add c-off balance in employee leave balance when day is sunday
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                    //id=69 is for attandence regularization approve to employee...
+                    emailTemplate = emailTemplateService.readById(69);
+                    EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                    UserMaster userMaster1 = new UserMaster();
+                    userMaster1.setId(attendanceRegularization.getUserMasterId());
+                    employeeMaster2.setUserMaster(userMaster1);
+                    List list1 = employeeMasterService.readByUserName(employeeMaster2);
+                    if (!list1.isEmpty()) {
+                        employeeMaster1 = (EmployeeMaster) list1.get(0);
+                        String To = employeeMaster1.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+
+                        String name = "Attendance";
+                        EmailAddMaster emailAddMaster = new EmailAddMaster();
+                        emailAddMaster.setModuleName(name);
+                        emailAddMaster.setDepartmentMaster(employeeMaster1.getDepartmentMaster());
+                        List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                        if (!emailSendList.isEmpty()) {
+                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                            String emailId = emailAddMaster1.getEmailId();
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMasterModel.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                }
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                }
+
             }
+
+        }
+        if (attendanceRegularization.getArType().equals("Compassion")) {
+            if (attendanceRegularization.getStatus() == 11) {
+
+                attendanceRegularization.setStatus(1);
+                attendanceRegularization.setManagerRemark(remark);
+
+//        EmployeeMaster approverName = new EmployeeMaster();
+                EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String requestdate = sdf.format(new Date());
+                attendanceRegularization.setApprovedDate(requestdate);
+                attendanceRegularization.setEmployeeMaster(approverName);
+                attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
+
+//        Employee Date Time Data
+                if (attendanceRegularization.getStatus() == 1) {
+                    int userId = attendanceRegularization.getUserMasterId();
+                    UserMaster userMaster = new UserMaster();
+                    userMaster.setId(userId);
+                    EmployeeMaster employeeMaster = new EmployeeMaster();
+                    employeeMaster.setUserMaster(userMaster);
+                    List<?> l = employeeMasterService.readByEmployeeUserId(employeeMaster);
+                    employeeMaster = (EmployeeMaster) l.get(0);
+                    String startDate = attendanceRegularization.getStartDateTime();
+                    String endDate = attendanceRegularization.getEndDateTime();
+                    EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
+                    EmployeeDatetimeData employeeDatetimeData1 = new EmployeeDatetimeData();
+                    employeeDatetimeData.setEmployeeMaster(employeeMaster);
+                    employeeDatetimeData.setDateTime(startDate);
+                    employeeDatetimeData1.setEmployeeMaster(employeeMaster);
+                    employeeDatetimeData1.setDateTime(endDate);
+                    employeeDatetimeDataService.createOrUpdate(employeeDatetimeData);
+                    employeeDatetimeDataService.createOrUpdate(employeeDatetimeData1);
+
+                    EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+                    EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                    employeeShiftData.setInDateTime(startDate);
+                    employeeShiftData.setEmployeeMaster(employeeMaster);
+                    List<?> shift = employeeShiftDataService.attendanceRegularizationEntry(employeeShiftData);
+                    if (!shift.isEmpty()) {
+                        employeeShiftData1 = (EmployeeShiftData) shift.get(0);
+                        employeeShiftData1.setInDateTime(startDate);
+                        employeeShiftData1.setOutDateTime(endDate);
+                        employeeShiftData1.setEmployeeMaster(employeeMaster);
+                        employeeShiftData1.setShiftMaster(employeeShiftData1.getShiftMaster());
+                        employeeShiftDataService.update(employeeShiftData1);
+                    }
 
                     // add c-off balance in employee leave balance when day is sunday
 //                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
@@ -2173,59 +2347,217 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //                        c.add(Calendar.DATE, 1);
 //                        startDate1 = c.getTime();
 //                    }
-            // add c-off balance in employee leave balance when day is sunday
-            try {
-                EmailTemplate emailTemplate = new EmailTemplate();
-                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                EmployeeMaster employeeMaster1 = new EmployeeMaster();
-                //id=69 is for attandence regularization approve to employee...
-                emailTemplate = emailTemplateService.readById(69);
-                EmployeeMaster employeeMaster2 = new EmployeeMaster();
-                UserMaster userMaster1 = new UserMaster();
-                userMaster1.setId(attendanceRegularization.getUserMasterId());
-                employeeMaster2.setUserMaster(userMaster1);
-                List list1 = employeeMasterService.readByUserName(employeeMaster2);
-                if (!list1.isEmpty()) {
-                    employeeMaster1 = (EmployeeMaster) list1.get(0);
-                    String To = employeeMaster1.getOfficeEmailId();
-                    String from = employeeMasterModel.getOfficeEmailId();
-                    String Subject = emailTemplate.getSubject();
-                    Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
-                    String msg = emailTemplate.getBodytext();
-                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                    sendMail.sendMail(from, To, Subject, msg);
+                    // add c-off balance in employee leave balance when day is sunday
+                    try {
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                        //id=69 is for attandence regularization approve to employee...
+                        emailTemplate = emailTemplateService.readById(69);
+                        EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                        UserMaster userMaster1 = new UserMaster();
+                        userMaster1.setId(attendanceRegularization.getUserMasterId());
+                        employeeMaster2.setUserMaster(userMaster1);
+                        List list1 = employeeMasterService.readByUserName(employeeMaster2);
+                        if (!list1.isEmpty()) {
+                            employeeMaster1 = (EmployeeMaster) list1.get(0);
+                            String To = employeeMaster1.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
 
-                    String name = "Attendance";
-                    EmailAddMaster emailAddMaster = new EmailAddMaster();
-                    emailAddMaster.setModuleName(name);
-                    emailAddMaster.setDepartmentMaster(employeeMaster1.getDepartmentMaster());
-                    List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
-                    if (!emailSendList.isEmpty()) {
-                        EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
-                        String emailId = emailAddMaster1.getEmailId();
-                        for (String emailId1 : emailId.split(",")) {
-                            if (!emailId1.equals("")) {
-                                String To1 = emailId1;
-                                String from1 = employeeMasterModel.getOfficeEmailId();
-                                String subject1 = emailTemplate.getSubject();
-                                subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
-                                String msg1 = emailTemplate.getBodytext();
-                                msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-                                msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                                msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                                sendMail.sendMail(from1, To1, subject1, msg1);
+                            String name = "Attendance";
+                            EmailAddMaster emailAddMaster = new EmailAddMaster();
+                            emailAddMaster.setModuleName(name);
+                            emailAddMaster.setDepartmentMaster(employeeMaster1.getDepartmentMaster());
+                            List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                            if (!emailSendList.isEmpty()) {
+                                EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                                String emailId = emailAddMaster1.getEmailId();
+                                for (String emailId1 : emailId.split(",")) {
+                                    if (!emailId1.equals("")) {
+                                        String To1 = emailId1;
+                                        String from1 = employeeMasterModel.getOfficeEmailId();
+                                        String subject1 = emailTemplate.getSubject();
+                                        subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                                        String msg1 = emailTemplate.getBodytext();
+                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from1, To1, subject1, msg1);
 
+                                    }
+                                }
                             }
                         }
+                    } catch (Exception e) {
                     }
+
                 }
-            } catch (Exception e) {
+
+            } else {
+
+                attendanceRegularization.setStatus(11);
+                attendanceRegularization.setManagerRemark(remark);
+
+//        EmployeeMaster approverName = new EmployeeMaster();
+                EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                String requestdate = sdf.format(new Date());
+                attendanceRegularization.setApprovedDate(requestdate);
+                attendanceRegularization.setEmployeeMaster(approverName);
+                attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
+
+//        Employee Date Time Data
+                if (attendanceRegularization.getStatus() == 11) {
+                    int userId = attendanceRegularization.getUserMasterId();
+                    UserMaster userMaster = new UserMaster();
+                    userMaster.setId(userId);
+                    EmployeeMaster employeeMaster = new EmployeeMaster();
+                    employeeMaster.setUserMaster(userMaster);
+                    List<?> l = employeeMasterService.readByEmployeeUserId(employeeMaster);
+                    employeeMaster = (EmployeeMaster) l.get(0);
+                    String startDate = attendanceRegularization.getStartDateTime();
+                    String endDate = attendanceRegularization.getEndDateTime();
+                    EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
+                    EmployeeDatetimeData employeeDatetimeData1 = new EmployeeDatetimeData();
+                    employeeDatetimeData.setEmployeeMaster(employeeMaster);
+                    employeeDatetimeData.setDateTime(startDate);
+                    employeeDatetimeData1.setEmployeeMaster(employeeMaster);
+                    employeeDatetimeData1.setDateTime(endDate);
+                    employeeDatetimeDataService.createOrUpdate(employeeDatetimeData);
+                    employeeDatetimeDataService.createOrUpdate(employeeDatetimeData1);
+
+                    EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+                    EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                    employeeShiftData.setInDateTime(startDate);
+                    employeeShiftData.setEmployeeMaster(employeeMaster);
+                    List<?> shift = employeeShiftDataService.attendanceRegularizationEntry(employeeShiftData);
+                    if (!shift.isEmpty()) {
+                        employeeShiftData1 = (EmployeeShiftData) shift.get(0);
+                        employeeShiftData1.setInDateTime(startDate);
+                        employeeShiftData1.setOutDateTime(endDate);
+                        employeeShiftData1.setEmployeeMaster(employeeMaster);
+                        employeeShiftData1.setShiftMaster(employeeShiftData1.getShiftMaster());
+                        employeeShiftDataService.update(employeeShiftData1);
+                    }
+
+                    // add c-off balance in employee leave balance when day is sunday
+//                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+//                    Date startDate1 = sdf1.parse(startDate);
+//                    Date endDate1 = sdf1.parse(endDate);
+//                    long diff = endDate1.getTime() - startDate1.getTime();
+//                    int days = (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+//                    for (int i = 0; i <= days + 1; i++) {
+//                        String dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(startDate1);
+//                        if (dayOfWeek.equals("Sunday")) {
+//                            String time = "0.8";
+//
+//                            OverTimeMaster overTimeMaster = new OverTimeMaster();
+//                            String overTimeDate = sdf1.format(startDate1);
+//                            overTimeMaster.setDate(overTimeDate);
+//                            overTimeMaster.setTime(time);
+//
+//                            overTimeMaster.setEmployeeMaster(employeeMaster);
+//
+//                            EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+//                            EmployeeLeaveBalance employeeLeaveBalance1 = new EmployeeLeaveBalance();
+//                            LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+//                            leaveTypeMaster.setId(11);
+//                            employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+//                            employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+//                            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+//                            employeeMaster2 = employeeMasterService.readById(employeeMaster.getId());
+//                            int levelId = employeeMaster.getLevelMaster().getId();
+//                            LevelMaster levelMaster1 = new LevelMaster();
+//                            levelMaster1 = levelMasterService.readById(levelId);
+//                            if (employeeMaster.getZydexLocationMaster().getId().equals(5) && levelMaster1.getLevel().contains("Level 4") || levelMaster1.getLevel().contains("Level 5")) {
+//                                List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
+//                                if (!empBalList.isEmpty()) {
+//                                    employeeLeaveBalance1 = (EmployeeLeaveBalance) empBalList.get(0);
+//                                    float time1 = employeeLeaveBalance1.getNoOfLeaveRemain();
+//                                    time1 = time1 + Float.parseFloat(time);
+//                                    employeeLeaveBalance1.setNoOfLeaveRemain(time1);
+//                                    employeeLeaveBalanceService.update(employeeLeaveBalance1);
+//                                } else {
+//                                    employeeLeaveBalance1.setLeaveTypeMaster(leaveTypeMaster);
+//                                    employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
+//                                    employeeLeaveBalance1.setNoOfLeaveRemain(Float.parseFloat(time));
+//                                    employeeLeaveBalanceService.create(employeeLeaveBalance1);
+//                                }
+//                                overTimeMasterService.create(overTimeMaster);
+//                            }
+//
+//                        }
+//                        Calendar c = Calendar.getInstance();
+//                        c.setTime(startDate1);
+//                        c.add(Calendar.DATE, 1);
+//                        startDate1 = c.getTime();
+//                    }
+                    // add c-off balance in employee leave balance when day is sunday
+                    try {
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                        //id=69 is for attandence regularization approve to employee...
+                        emailTemplate = emailTemplateService.readById(69);
+                        EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                        UserMaster userMaster1 = new UserMaster();
+                        userMaster1.setId(attendanceRegularization.getUserMasterId());
+                        employeeMaster2.setUserMaster(userMaster1);
+                        List list1 = employeeMasterService.readByUserName(employeeMaster2);
+                        if (!list1.isEmpty()) {
+                            employeeMaster1 = (EmployeeMaster) list1.get(0);
+                            String To = employeeMaster1.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+
+                            String name = "Attendance";
+                            EmailAddMaster emailAddMaster = new EmailAddMaster();
+                            emailAddMaster.setModuleName(name);
+                            emailAddMaster.setDepartmentMaster(employeeMaster1.getDepartmentMaster());
+                            List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                            if (!emailSendList.isEmpty()) {
+                                EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                                String emailId = emailAddMaster1.getEmailId();
+                                for (String emailId1 : emailId.split(",")) {
+                                    if (!emailId1.equals("")) {
+                                        String To1 = emailId1;
+                                        String from1 = employeeMasterModel.getOfficeEmailId();
+                                        String subject1 = emailTemplate.getSubject();
+                                        subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                                        String msg1 = emailTemplate.getBodytext();
+                                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                    }
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                    }
+
+                }
+
             }
 
         }
+
 //        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
         mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=approvalSubmit");
         return mv;
@@ -3669,6 +4001,31 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         request.setAttribute("successMessage", "Information : The Excel Uploaded Successfully.");
         mv = textReadModule(request, response);
         return mv;
+    }
+
+    public void differentForSDate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String strDate = request.getParameter("strDate");
+        String enDate = request.getParameter("enDate");
+
+//        strDate = strDate.replaceAll(",", "/");
+////        enDate = enDate.replaceAll(",", "/");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+//        Date sDate = sdf.parse(strDate);
+//        Date eDate = sdf.parse(enDate);
+        String message = "";
+        Date loginStartDate = sdf.parse(strDate);
+        Date loginEndDate = sdf.parse(enDate);
+        long diff = loginEndDate.getTime() - loginStartDate.getTime();
+        long diffMinutes = diff / (60 * 1000);
+        int minute = (int) (diffMinutes % 60);
+        int hour = (int) (diffMinutes / 60);
+        message = hour + ":" + minute;
+//        HttpSession session = request.getSession();
+//        EmployeeMaster employeeMaster1 = (EmployeeMaster) session.getAttribute("employeeInfo");
+
+//        }
+        PrintWriter out = response.getWriter();
+        out.print(message);
     }
 
 }

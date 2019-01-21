@@ -169,9 +169,10 @@
 
                                     <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff"><i class="fa fa-circle-o"></i>Woff Application</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff"><i class="fa fa-circle-o"></i>Coff Addition</a></li>
-                                        <c:if test="${sessionScope.checkReportingManager}">
+                                    <li><a href="shiftRotationMaster.htm?act=searchSubmitOTRegularization"><i class="fa fa-circle-o"></i>OT Request</a></li>
+                                        <%--<c:if test="${sessionScope.checkReportingManager}">--%>
                                         <li><a href="attendanceRegularizationMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>AR Application</a></li>
-                                        </c:if>
+                                        <%--</c:if>--%>
 
                                     <!--<li><a href="attendanceRegularizationMaster.htm?act=employyeAttendanceApproeList"><i class="fa fa-circle-o"></i>Approved</a></li>-->
                                     <li><a href="attendanceRegularizationMaster.htm?act=showOwnAttandance"><i class="fa fa-circle-o"></i>Show Attendance</a></li>
@@ -187,6 +188,7 @@
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> W-off Subordinates Request</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmitcoff"><i class="fa fa-circle-o"></i> C-off Subordinates Request</a></li>
+                                    <li><a href="shiftRotationMaster.htm?act=approvalSubmitOTregularization"><i class="fa fa-circle-o"></i> OT Subordinates Request</a></li>
                                     <!--<li><a href="attendanceRegularizationMaster.htm?act=approvedList"><i class="fa fa-circle-o"></i>Approved Request</a></li>-->
                                 </c:if>
                                 <c:if test="${sessionScope.userRight.departmentWiseAttendance}">

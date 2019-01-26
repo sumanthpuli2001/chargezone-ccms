@@ -2511,5 +2511,92 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         }
         return false;
     }
+    
+//    @Override
+//    public List<?> readEmployeeDataForexportToExcelFlyDoc(final String searchEmployeeString) {
+//        //                             0        1              2               3                                4                                       5   
+//        String hqlString = " SELECT a.id, a.employeeId, a.employeeName, a.dateOfJoining, CASE WHEN a.gender = 1 then 'Female' else 'Male' End, a.dateOfBirth,"
+//                //      6                   7               8               9               10
+//                + " etm.typeOfEmployee, est.subType,b.designationName, a.employeeType, a.reportingManagerLevel1,"
+//                //   11           12                     13         17              20
+//                + " lm.level, zlm.zydexLocation, a.role, a.passportNo, a.passportIssueDate,"
+//                //      21                          25              31                  37              38
+//                + " a.passportExpiryDate, a.presentAddress, a.permanentAddress, a.contactNo1, a.contactNo2,"
+//                //      39                  40              41              42              43
+//                + " a.officeEmailId, a.emailAddress, a.bankAccountNo, a.bankName, a.bankIfscCode,"
+//                //     45       48          49             50       51
+//                + " a.pfNo, a.panCard, a.adharCard, a.esicNo, a.uanNo,"
+//                //      52                 54               56              58                  59
+//                + " a.maritalStatus, a.bloodGroups, a.drivingLicence,a.fatherName, a.dateOfBirthOfEmpFather,"
+//                //          60              61                      62              63                  64
+//                + " a.motherName, a.dateOfBirthOfEmpMother,a.spouseName,a.dateOfBirthOfEmpSpous, a.child1,"
+//                //          66                      67              69                          70                      72
+//                + " a.dateOfBirthOfEmpChilld1, a.child1, a.dateOfBirthOfEmpChilld1, a.emergencyContactPerson, a.emergencyContactNo,"
+//                //          77                      78                      82          83                  86
+//                + " a.experienceYearOnDoj, a.experienceMonthOnDoj, a.shiftType, a.shiftHoursId, a.shiftRotationDate,"
+//                //      87              88              89              90
+//                + " a.paymentType, a.basicSalary, locm.location, c.departmentName "
+//                + " FROM EmployeeMaster a "
+//                + " LEFT JOIN a.designationMaster b "
+//                + " LEFT JOIN a.departmentMaster c "
+//                + " LEFT JOIN a.userMaster d "
+//                + " LEFT JOIN a.levelMaster lm "
+//                + " LEFT JOIN a.zydexLocationMaster zlm "
+//                + " LEFT JOIN a.locationMaster locm "
+//                + " LEFT JOIN a.employeeTypeMaster etm "
+//                + " LEFT JOIN a.employeeSubType est "
+//                + " where "
+//                + " (a.employeeName like '%" + searchEmployeeString + "%'"
+//                + " OR"
+//                + " b.designationName like '%" + searchEmployeeString + "%'"
+//                + " OR"
+//                + " c.departmentName like '%" + searchEmployeeString + "%'"
+//                + " OR"
+//                + " d.userName like '%" + searchEmployeeString + "%'"
+//                + " )"
+//                + " and (a.dateOfLeaving is null or a.dateOfLeaving = '') "
+//                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
+//
+//        return getHibernateTemplate().find(hqlString);
+//    }
+@Override
+    public List<?> readEmployeeDataForexportToExcelFlyDoc(final String searchEmployeeString) {
+        //                             0        1              2               3                                4                                       5   
+        String hqlString = " SELECT a "
+                + " FROM EmployeeMaster a "
+                + " LEFT JOIN a.designationMaster b "
+                + " LEFT JOIN a.departmentMaster c "
+                + " LEFT JOIN a.userMaster d "
+                + " LEFT JOIN a.levelMaster lm "
+                + " LEFT JOIN a.zydexLocationMaster zlm "
+                + " LEFT JOIN a.locationMaster locm "
+                + " LEFT JOIN a.employeeTypeMaster etm "
+                + " LEFT JOIN a.employeeSubType est "
+                + " where "
+                + " (a.employeeName like '%" + searchEmployeeString + "%'"
+                + " OR"
+                + " b.designationName like '%" + searchEmployeeString + "%'"
+                + " OR"
+                + " c.departmentName like '%" + searchEmployeeString + "%'"
+                + " OR"
+                + " d.userName like '%" + searchEmployeeString + "%'"
+                + " )"
+                + " and (a.dateOfLeaving is null or a.dateOfLeaving = '') "
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
+
+        return getHibernateTemplate().find(hqlString);
+    }
+
+    @Override
+    public List readByUserId(Integer id) {
+        
+        String query = "";
+
+        query += " Select a "
+                + " FROM EmployeeMaster a"
+                + " WHERE a.userMaster.id = " + id;
+
+        return getHibernateTemplate().find(query);
+    }
 
 }

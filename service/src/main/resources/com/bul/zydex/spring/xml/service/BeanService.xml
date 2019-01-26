@@ -769,4 +769,7 @@
     <bean id="employeeDateTimeDataDetailService1" class="com.bul.zydex.service.shift.EmployeeDateTimeDataDetailServiceImpl">
         <property name="employeeDateTimeDataDetailDAO" ref="employeeDateTimeDataDetailDAO1"/>
     </bean>
+     <bean id="onCallService1" class="com.bul.zydex.service.OnCall.OnCallServiceImpl">
+        <property name="onCallDAO" ref="onCallDAO1"/>
+    </bean>
 </beans>

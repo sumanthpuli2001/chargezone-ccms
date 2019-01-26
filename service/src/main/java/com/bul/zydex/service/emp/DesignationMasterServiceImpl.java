@@ -49,4 +49,9 @@ public class DesignationMasterServiceImpl<T> extends GenericsServiceImpl<T>
         return designationMasterDAO.readDesignationsOfLevel(levelMasterId);
     }
 
+    @Override
+    public List<?> readByID(int empdesig) {
+        return designationMasterDAO.readByID(empdesig);
+    }
+
 }

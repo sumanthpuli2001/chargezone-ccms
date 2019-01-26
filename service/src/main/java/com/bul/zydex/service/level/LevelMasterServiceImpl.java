@@ -33,5 +33,10 @@ public class LevelMasterServiceImpl<T> extends GenericsServiceImpl<T> implements
     public List<?> readByName(String name) {
         return levelMasterDAO.readByName(name);
     }
+
+    @Override
+    public List<?> readByID(int emplevel) {
+        return levelMasterDAO.readByID(emplevel);
+    }
   
 }

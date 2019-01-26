@@ -34,6 +34,11 @@ public class EmployeeMasterServiceImplExtension<T> extends GenericsServiceImpl<T
         employeeMasterExtensionDAO.deleteByemployeeId(id);
     }
 
+//    @Override
+//    public List<?> readByemployeeIdForExcel(Integer id) {
+//        return employeeMasterExtensionDAO.readByemployeeIdForExcel(id);
+//    }
+
    
   
 }

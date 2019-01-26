@@ -301,4 +301,5 @@
     <bean id="coffRegularizationDAO1" class="com.bul.zydex.dao.shift.CoffRegularizationDAOImpl" parent="sessionFactoryConfig" />
     <bean id="employeeVisaDetailsDAO1" class="com.bul.zydex.dao.emp.EmployeeVisaDetailsDAOImpl" parent="sessionFactoryConfig" />
     <bean id="employeeDateTimeDataDetailDAO1" class="com.bul.zydex.dao.shift.EmployeeDateTimeDataDetailDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="onCallDAO1" class="com.bul.zydex.dao.OnCall.OnCallDAOImpl" parent="sessionFactoryConfig" />
 </beans>

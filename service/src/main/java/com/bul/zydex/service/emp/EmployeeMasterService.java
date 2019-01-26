@@ -195,4 +195,8 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public boolean isExistUSername(String employeeID);
 
     public boolean isExistUnderGraudity(String joinDate, String currentDate);
+ 
+    public List<?> readEmployeeDataForexportToExcelFlyDoc(final String searchEmployeeString);
+
+    public List readByUserId(Integer id);
 }

@@ -39,4 +39,12 @@ public class EmployeeSubTypeDAOImpl<T> extends GenericsDAOImpl<T> implements Emp
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readByID(int empsubtypid) {
+         String query = "";
+        query += "From EmployeeSubType a "
+              + " Where a.id =" + empsubtypid ;
+        return getHibernateTemplate().find(query);
+    }
+
 }

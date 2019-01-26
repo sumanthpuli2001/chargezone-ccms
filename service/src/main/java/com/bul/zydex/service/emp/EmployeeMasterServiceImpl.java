@@ -477,4 +477,14 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public boolean isExistUnderGraudity(String joinDate, String currentDate) {
         return employeeMasterDAO.isExistUnderGraudity(joinDate, currentDate);
     }
+
+    @Override
+    public List<?> readEmployeeDataForexportToExcelFlyDoc(String searchEmployeeString) {
+        return employeeMasterDAO.readEmployeeDataForexportToExcelFlyDoc(searchEmployeeString);
+    }
+
+    @Override
+    public List readByUserId(Integer id) {
+        return employeeMasterDAO.readByUserId(id);
+    }
 }

@@ -36,4 +36,9 @@ public class ShiftRotationInfoServiceImpl<T> extends GenericsServiceImpl<T> impl
         return shiftRotationInfoDAO.readFirstShfitId(userId, roationId);
     }
 
+    @Override
+    public List<?> readByUserId(int usermasterid) {
+        return shiftRotationInfoDAO.readByUserId(usermasterid);
+    }
+
 }

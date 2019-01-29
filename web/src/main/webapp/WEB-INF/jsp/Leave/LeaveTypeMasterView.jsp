@@ -82,29 +82,33 @@
                                                     <form:input path="maxDayAllowedLeave" class="form-control" size="16" type="text" value=""></form:input>
                                                     <form:errors path="maxDayAllowedLeave" cssClass="errorDiv"></form:errors>
                                                     </div>
-
-                                                </div>
-                                                <div class="form-group">
                                                     <div class=" col-sm-6">
-                                                        <label>Carried Forward:</label>&nbsp;&nbsp;<form:checkbox path="carriedForwardStatus"></form:checkbox>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>SandWich Leave Apply:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
-                                                        <%--<form:select path="gender" id="gender" class="form-control">--%>
+                                                        <label>Use as a Sick Leave:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                        <fieldset id="group1">
+                                                        <form:radiobutton path="useAsSickLeave" value="true"/>Yes&nbsp;&nbsp;
+                                                        <form:radiobutton path="useAsSickLeave" value="false"/>No
+                                                    </fieldset>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>SandWich Leave Apply:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
                                                     <fieldset id="group1">
                                                         <form:radiobutton path="sandwichLeave" value="true"/>Yes&nbsp;&nbsp;
                                                         <form:radiobutton path="sandwichLeave" value="false"/>No
-                                                        <%--<form:option value="">--SELECT--</form:option>--%>
-                                                        <%--<form:option value="0">Male</form:option>--%>
-                                                        <%--<form:option value="1">Female</form:option>--%>
                                                     </fieldset>
-                                                    <%--</form:select>--%>
                                                     <form:errors path="" cssClass="errorDiv"></form:errors>
 
                                                     </div>
+                                                    <div class=" col-sm-6">
+                                                        <label>Carried Forward:</label>&nbsp;&nbsp;
+                                                    <form:checkbox path="carriedForwardStatus"></form:checkbox>
+                                                    </div>
+
 
                                                 </div>
-                                                
+
                                                 <div class="form-group" id="chechBoxDivId" style="display: none">
                                                     <div class=" col-sm-6">
                                                         <label>No Of Leave Carried Forward:</label>

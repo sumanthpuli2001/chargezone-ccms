@@ -82,7 +82,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Administrator
  */
 public class EmployeeMasterController extends EmployeeMasterAbstract {
-
+    
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -117,7 +117,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        approvalMaster.setCreatedBy(approvalMaster1);
         String CureentDate = sdf.format(cDate);
         String[] endDateSplited = CureentDate.split("/");
-
+        
         hoursBasisList(request);
         employeeMaster.setUserMaster(userMaster);
         employeeMaster.setLevelMaster(levelMaster);
@@ -131,7 +131,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("Employee/EmployeeRegistrationForm");
         return mv;
     }
-
+    
     public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -141,46 +141,40 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         BindException errors = new BindException(employeeMaster, "employeeMaster");
         UserMaster userMaster = new UserMaster();
         EmployeeMasterExtension employeeMasterExtension = new EmployeeMasterExtension();
-        
+
         //*************employee extension**************//
+        String presentAddress2 = request.getParameter("presentAddress2");
+        String presentCity = request.getParameter("presentCity");
+        String presentState = request.getParameter("presentState");
+        String presentPostalCode = request.getParameter("presentPostalCode");
+        String presentCountry = request.getParameter("presentCountry");
+        String permanentAddress2 = request.getParameter("permanentAddress2");
+        String permanentCity = request.getParameter("permanentCity");
+        String permanentState = request.getParameter("permanentState");
+        String permanentPostalCode = request.getParameter("permanentPostalCode");
+        String permanentCountry = request.getParameter("permanentCountry");
+        String religion = request.getParameter("religion");
+        String disclosedHealthConcerns = request.getParameter("disclosedHealthConcerns");
+        String languagesKnown = request.getParameter("languagesKnown");
+        String hobbies = request.getParameter("hobbies");
+        String childOneGender = request.getParameter("childOneGender");
+        String childTwoGender = request.getParameter("childTwoGender");
+        String flyDocsEmailId = request.getParameter("flyDocsEmailId");
+        String emergencyContactAddress = request.getParameter("emergencyContactAddress");
+        String RelationShip = request.getParameter("RelationShip");
+        String otherImpInfo = request.getParameter("otherImpInfo");
+        String nationality = request.getParameter("nationality");
+        String firstName = request.getParameter("firstName");
+        String middleName = request.getParameter("middleName");
+        String lastName = request.getParameter("lastName");
+        String countryOfIssue = request.getParameter("countryOfIssue");
         
-         String presentAddress2=request.getParameter("presentAddress2");
-         String presentCity=request.getParameter("presentCity");
-         String presentState=request.getParameter("presentState");
-         String presentPostalCode=request.getParameter("presentPostalCode");
-         String presentCountry=request.getParameter("presentCountry");
-         String permanentAddress2=request.getParameter("permanentAddress2");
-         String permanentCity=request.getParameter("permanentCity");
-         String permanentState=request.getParameter("permanentState");
-         String permanentPostalCode=request.getParameter("permanentPostalCode");
-         String permanentCountry=request.getParameter("permanentCountry");
-         String religion=request.getParameter("religion");
-         String disclosedHealthConcerns=request.getParameter("disclosedHealthConcerns");
-         String languagesKnown=request.getParameter("languagesKnown");
-         String hobbies=request.getParameter("hobbies");
-         String childOneGender=request.getParameter("childOneGender");
-         String childTwoGender=request.getParameter("childTwoGender");
-         String flyDocsEmailId=request.getParameter("flyDocsEmailId");
-         String emergencyContactAddress=request.getParameter("emergencyContactAddress");
-         String RelationShip=request.getParameter("RelationShip");
-         String otherImpInfo=request.getParameter("otherImpInfo");
-         String nationality=request.getParameter("nationality");
-         String firstName=request.getParameter("firstName");
-         String middleName=request.getParameter("middleName");
-         String lastName=request.getParameter("lastName");
-         String countryOfIssue=request.getParameter("countryOfIssue");
-         
-         String drivingLicenceType=request.getParameter("drivingLicenceType");
-         String electionCard=request.getParameter("electionCard");
-         String pfNoFlydocs=request.getParameter("pfNoFlydocs");
-         String withdrawalDate=request.getParameter("withdrawalDate");
-         String nameOfPreviousCompany=request.getParameter("nameOfPreviousCompany");
-         String previousCompanyLocation=request.getParameter("previousCompanyLocation");
-         
-        
-        
-        
-        
+        String drivingLicenceType = request.getParameter("drivingLicenceType");
+        String electionCard = request.getParameter("electionCard");
+        String pfNoFlydocs = request.getParameter("pfNoFlydocs");
+        String withdrawalDate = request.getParameter("withdrawalDate");
+        String nameOfPreviousCompany = request.getParameter("nameOfPreviousCompany");
+        String previousCompanyLocation = request.getParameter("previousCompanyLocation");
         
         bind(request, employeeMaster);
         //Deopdown List//
@@ -222,7 +216,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 //if we directly gettting 'employeeMaster.getUserMaster().getPassword()' its possibility for nullpointer exception.
             }
         }
-
+        
         userMaster.setPassword(password);
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
         Date DOB = new Date();
@@ -230,7 +224,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         Date DOB1 = new Date();
         if (!"".equals(dateOfJoining)) {
             DOJ = sd.parse(dateOfJoining);
-
+            
         }
         if (!"".equals(dateOfBirth)) {
             DOB = sd.parse(dateOfBirth);
@@ -260,13 +254,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 UserMaster user2;
                 user2 = (UserMaster) tempList.get(0);
                 userMasterService.delete(user2.getId());
-
+                
             }
         }
-
+        
         employeeMasterValidator.validate(employeeMaster, errors);
         if (errors.hasErrors()) {
-
+            
             String shiftId = request.getParameter("shiftId");
             String shiftMasterId1 = request.getParameter("shiftMasterId");
             String HoursTitle = request.getParameter("shiftHoursId");
@@ -353,64 +347,61 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             userMaster.setFirstTime(true);
 //set firstTime is true for compulsory password change on first time login
             userMasterService.create(userMaster);
-
-            employeeMasterService.create(employeeMaster);
             
+            employeeMasterService.create(employeeMaster);
+
             //***********employeeextension create*****************//
-                
-                employeeMasterExtension.setChildOneGender(Boolean.valueOf(childOneGender));
-                employeeMasterExtension.setChildTwoGender(Boolean.valueOf(childTwoGender));
-                employeeMasterExtension.setPresentAddress2(presentAddress2);
-                employeeMasterExtension.setPresentCity(presentCity);
-                employeeMasterExtension.setPresentState(presentState);
-                employeeMasterExtension.setPresentPostalCode(presentPostalCode);
-                employeeMasterExtension.setPresentCountry(presentCountry);
-                employeeMasterExtension.setPermanentAddress2(permanentAddress2);
-                employeeMasterExtension.setPermanentCity(permanentCity);
-                employeeMasterExtension.setPermanentCountry(permanentCountry);
-                employeeMasterExtension.setPermanentPostalCode(permanentPostalCode);
-                employeeMasterExtension.setPermanentState(permanentState);
-                employeeMasterExtension.setReligion(religion);
-                employeeMasterExtension.setDisclosedHealthConcerns(disclosedHealthConcerns);
-                employeeMasterExtension.setLanguagesKnown(languagesKnown);
-                employeeMasterExtension.setHobbies(hobbies);
-                employeeMasterExtension.setFlyDocsEmailId(flyDocsEmailId);
-                employeeMasterExtension.setEmergencyContactAddress(emergencyContactAddress);
-                employeeMasterExtension.setOtherImpInfo(otherImpInfo);
-                employeeMasterExtension.setRelationShip(RelationShip);
-                employeeMasterExtension.setNationality(nationality);
-                employeeMasterExtension.setFirstName(firstName);
-                employeeMasterExtension.setMiddleName(middleName);
-                employeeMasterExtension.setLastName(lastName);
-                employeeMasterExtension.setCountryOfIssue(countryOfIssue);
+            employeeMasterExtension.setChildOneGender(Boolean.valueOf(childOneGender));
+            employeeMasterExtension.setChildTwoGender(Boolean.valueOf(childTwoGender));
+            employeeMasterExtension.setPresentAddress2(presentAddress2);
+            employeeMasterExtension.setPresentCity(presentCity);
+            employeeMasterExtension.setPresentState(presentState);
+            employeeMasterExtension.setPresentPostalCode(presentPostalCode);
+            employeeMasterExtension.setPresentCountry(presentCountry);
+            employeeMasterExtension.setPermanentAddress2(permanentAddress2);
+            employeeMasterExtension.setPermanentCity(permanentCity);
+            employeeMasterExtension.setPermanentCountry(permanentCountry);
+            employeeMasterExtension.setPermanentPostalCode(permanentPostalCode);
+            employeeMasterExtension.setPermanentState(permanentState);
+            employeeMasterExtension.setReligion(religion);
+            employeeMasterExtension.setDisclosedHealthConcerns(disclosedHealthConcerns);
+            employeeMasterExtension.setLanguagesKnown(languagesKnown);
+            employeeMasterExtension.setHobbies(hobbies);
+            employeeMasterExtension.setFlyDocsEmailId(flyDocsEmailId);
+            employeeMasterExtension.setEmergencyContactAddress(emergencyContactAddress);
+            employeeMasterExtension.setOtherImpInfo(otherImpInfo);
+            employeeMasterExtension.setRelationShip(RelationShip);
+            employeeMasterExtension.setNationality(nationality);
+            employeeMasterExtension.setFirstName(firstName);
+            employeeMasterExtension.setMiddleName(middleName);
+            employeeMasterExtension.setLastName(lastName);
+            employeeMasterExtension.setCountryOfIssue(countryOfIssue);
 //                employeeMasterExtension.setVisaIssueCountry(visaIssueCountry);
 //                employeeMasterExtension.setVisaIssueDate(visaIssueDate);
 //                employeeMasterExtension.setVisaValidTillDate(visaValidTillDate);
-                employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
-                employeeMasterExtension.setElectionCard(electionCard);
-                employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
-                employeeMasterExtension.setWithdrawalDate(withdrawalDate);
-                employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
-                employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
-                employeeMasterExtension.setEmployeeMaster(employeeMaster);
-                employeeMasterServiceExtension.create(employeeMasterExtension);
-            
-                //***********employee visa doc create*****************//
-                
-                int visaCount=Integer.parseInt(request.getParameter("visaCount"));
-                EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
-                for(int i = 1;i<=visaCount;i++){
-                    String visaIssueCountry=request.getParameter("visaIssueCountry"+i);
-                    String visaIssueDate=request.getParameter("visaIssueDate"+i);
-                    String visaValidTillDate=request.getParameter("visaValidTillDate"+i);
-                    employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
-                    employeeVisaDetails.setVisaIssueDate(visaIssueDate);
-                    employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
-                    employeeVisaDetails.setEmployeeMaster(employeeMaster);
-                    employeeVisaDetailsService.create(employeeVisaDetails);
-                }
-                
-            
+            employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
+            employeeMasterExtension.setElectionCard(electionCard);
+            employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
+            employeeMasterExtension.setWithdrawalDate(withdrawalDate);
+            employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
+            employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
+            employeeMasterExtension.setEmployeeMaster(employeeMaster);
+            employeeMasterServiceExtension.create(employeeMasterExtension);
+
+            //***********employee visa doc create*****************//
+            int visaCount = Integer.parseInt(request.getParameter("visaCount"));
+            EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
+            for (int i = 1; i <= visaCount; i++) {
+                String visaIssueCountry = request.getParameter("visaIssueCountry" + i);
+                String visaIssueDate = request.getParameter("visaIssueDate" + i);
+                String visaValidTillDate = request.getParameter("visaValidTillDate" + i);
+                employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+                employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+                employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+                employeeVisaDetails.setEmployeeMaster(employeeMaster);
+                employeeVisaDetailsService.create(employeeVisaDetails);
+            }
+
             //Code for Employee Policy Detail
             EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
             int otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
@@ -543,7 +534,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     isLeapYear = true;
                 }
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
+                
                 Date date1 = sdf.parse(dateOfJoining);
                 Date date3 = new Date();
                 cal1.setTime(date1);
@@ -613,9 +604,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         employeeLeaveBalance.setNoOfLeaveRemain(LWP);
                     }
                 }
-
+                
                 employeeLeaveBalanceService.create(employeeLeaveBalance);
-
+                
             }
             ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
             ShiftRotationInfo shiftRotationInfo1 = new ShiftRotationInfo();
@@ -624,23 +615,23 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                UserMaster userMaster = (UserMaster) request.getAttribute("userMaster");
 //                String shiftMasterId = request.getAttribute("shiftMasterId").toString();
             if (null != shiftMasterId && !"".equals(shiftMasterId)) {
-
+                
                 shiftRotationInfo.setFirstShiftId(Integer.parseInt(shiftMasterId));
                 shiftRotationInfo.setUserMaster(userMaster);
-
+                
                 List<?> list = shiftRotationInfoService.readRotaionDetail(shiftRotationInfo);
                 if (!list.isEmpty()) {
-
+                    
                     shiftRotationInfo = (ShiftRotationInfo) list.get(0);
                 }
                 if (shiftRotationInfo.getId() == null) {
                     shiftRotationMaster.setId(employeeMaster.getShiftHoursId());
                     shiftRotationInfo.setShiftRotationMaster(shiftRotationMaster);
                     shiftRotationInfo.setRotationDate(employeeMaster.getShiftRotationDate());
-
+                    
                     shiftRotationInfoService.create(shiftRotationInfo);
                 }
-
+                
             }
 //        Code for Shift generate monthly Schedule(Start)
 //                if (employeeMaster.getShiftType().equals("ShiftBase")) {
@@ -669,7 +660,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 int day = c.getActualMaximum(Calendar.DAY_OF_MONTH);
                 RotationMaster rotationMaster = new RotationMaster();
                 rotationMaster.setShiftRotationMaster(shiftRotationMaster);
-
+                
                 if ("monthly".equals(duration) && day == 30) {
                     weeklyGenerate(rotationMaster, rd, shiftRotationMaster, 30, employeeMaster, shiftMasterId);
                 } else if ("weekly".equals(duration)) {
@@ -704,7 +695,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 File[] profilePictureArray = profilePictureFile.listFiles();
                 profilePictureArray[0].delete();//if file exist then delete it.
             }
-
+            
             if (!profilePictureFile.exists()) {
                 profilePictureFile.mkdir();//make directory for first time user creation.
             }
@@ -727,11 +718,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 //null if there is no photograph in form.
                 //this condition checking not required if photograph field is compulsary in form.
                 try {
-
+                    
                     File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", ""));
                     multipartFile.transferTo(file2);
                 } catch (Exception e) {
-
+                    
                 }
             }
 
@@ -760,16 +751,16 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         File file3 = new File(certificateFileLocationURL + multipartFile1.getOriginalFilename().replaceAll(" ", ""));
                         multipartFile1.transferTo(file3);
                     } catch (Exception e) {
-
+                        
                     }
                 }
-
+                
             }
 
 //            Certificate attach code
             //now setting default right as employee.
             setDefaultUserRights(request, employeeMaster);
-
+            
             request.setAttribute("successMessage",
                     "Information : The Information Is Saved Successfully."
                     + "<br/>"
@@ -809,7 +800,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             mv.getModelMap().put("employeeMaster", employeeMaster);
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Employee/EmployeeRegistrationForm");
-
+            
         }
 //            mv.getModelMap().put("userMaster", userMaster);
 //            mv.getModelMap().put("shiftMasterId", shiftMasterId);
@@ -822,15 +813,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //            }
         mv.getModelMap().put("employeeMaster", employeeMaster);
          // Employee master extension starts here
-         
-         
-         
+
         //Employee master extension ends here
         return mv;
-
-
+        
     }
-
+    
     public ModelAndView searchSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -840,10 +828,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         //dont rename "list" because same used on getEmployeeDetailsBySearchString method and employeeRegistrationResult.jsp
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/EmployeeRegistrationResult");
-
+        
         return mv;
     }
-
+    
     public ModelAndView viewClick(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         String lastYearPerformanceRatingsOfEmployee = "";
@@ -860,10 +848,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         UserMaster userMaster = new UserMaster();
         // Employee Extension
         employeeMaster = employeeMasterService.readById(id);
-        List<?> employeeMasterExtensionList = employeeMasterServiceExtension.readByemployeeId(employeeMaster.getId()); 
+        List<?> employeeMasterExtensionList = employeeMasterServiceExtension.readByemployeeId(employeeMaster.getId());
         List<?> employeeVisaDetailsList = employeeVisaDetailsService.readByemployeeId(employeeMaster.getId());
-        
-        
+
         ///this code is for read file name and display it
 //        String userName = readUserName(request);
         String userName = request.getParameter("userid");
@@ -903,7 +890,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         hoursBasisList(request);
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s
         List<?> lastYearPerformanceRatingsOfEmployeeList = employeeMasterService.getLastYearPerformanceRatingOfEmployee(id);
-
+        
         lastYearPerformanceRatingsOfEmployee = (lastYearPerformanceRatingsOfEmployeeList.isEmpty()) ? lastYearPerformanceRatingsOfEmployee : String.valueOf(lastYearPerformanceRatingsOfEmployeeList.get(0));
         //set user master id//
         String userid = request.getParameter("userid");
@@ -919,11 +906,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 + File.separator + userMaster1.getUserName() + File.separator;
         File certificateListFile = new File(certificateFileLocationURL);
         if (certificateListFile.listFiles() != null) {
-
+            
             for (File sss : certificateListFile.listFiles()) {
                 String aa = sss.getName();
                 certificatesList.add(aa);
-
+                
             }
             if (certificateListFile.exists() && certificateListFile.listFiles().length > 0) {
                 File[] certificateListFileArray = certificateListFile.listFiles();
@@ -995,9 +982,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("mriStatus", employeeMaster.getMaritalStatus());
         mv.setViewName("Employee/EditUserProfile");
         return mv;
-
+        
     }
-
+    
     public ModelAndView editSubmit(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         String lastYearPerformanceRatingsOfEmployee = "";
@@ -1008,43 +995,40 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String reportingManagerForChange = employeeMaster.getReportingManagerLevel1();
         UserMaster userMaster = new UserMaster();
         UserMaster userMaster1 = new UserMaster();
-        
+
         //*************employee extension**************//
+        String presentAddress2 = request.getParameter("presentAddress2");
+        String presentCity = request.getParameter("presentCity");
+        String presentState = request.getParameter("presentState");
+        String presentPostalCode = request.getParameter("presentPostalCode");
+        String presentCountry = request.getParameter("presentCountry");
+        String permanentAddress2 = request.getParameter("permanentAddress2");
+        String permanentCity = request.getParameter("permanentCity");
+        String permanentState = request.getParameter("permanentState");
+        String permanentPostalCode = request.getParameter("permanentPostalCode");
+        String permanentCountry = request.getParameter("permanentCountry");
+        String religion = request.getParameter("religion");
+        String disclosedHealthConcerns = request.getParameter("disclosedHealthConcerns");
+        String languagesKnown = request.getParameter("languagesKnown");
+        String hobbies = request.getParameter("hobbies");
+        String childOneGender = request.getParameter("childOneGender");
+        String childTwoGender = request.getParameter("childTwoGender");
+        String flyDocsEmailId = request.getParameter("flyDocsEmailId");
+        String emergencyContactAddress = request.getParameter("emergencyContactAddress");
+        String RelationShip = request.getParameter("RelationShip");
+        String otherImpInfo = request.getParameter("otherImpInfo");
+        String nationality = request.getParameter("nationality");
+        String firstName = request.getParameter("firstName");
+        String middleName = request.getParameter("middleName");
+        String lastName = request.getParameter("lastName");
+        String countryOfIssue = request.getParameter("countryOfIssue");
         
-         String presentAddress2=request.getParameter("presentAddress2");
-         String presentCity=request.getParameter("presentCity");
-         String presentState=request.getParameter("presentState");
-         String presentPostalCode=request.getParameter("presentPostalCode");
-         String presentCountry=request.getParameter("presentCountry");
-         String permanentAddress2=request.getParameter("permanentAddress2");
-         String permanentCity=request.getParameter("permanentCity");
-         String permanentState=request.getParameter("permanentState");
-         String permanentPostalCode=request.getParameter("permanentPostalCode");
-         String permanentCountry=request.getParameter("permanentCountry");
-         String religion=request.getParameter("religion");
-         String disclosedHealthConcerns=request.getParameter("disclosedHealthConcerns");
-         String languagesKnown=request.getParameter("languagesKnown");
-         String hobbies=request.getParameter("hobbies");
-         String childOneGender=request.getParameter("childOneGender");
-         String childTwoGender=request.getParameter("childTwoGender");
-         String flyDocsEmailId=request.getParameter("flyDocsEmailId");
-         String emergencyContactAddress=request.getParameter("emergencyContactAddress");
-         String RelationShip=request.getParameter("RelationShip");
-         String otherImpInfo=request.getParameter("otherImpInfo");
-         String nationality=request.getParameter("nationality");
-         String firstName=request.getParameter("firstName");
-         String middleName=request.getParameter("middleName");
-         String lastName=request.getParameter("lastName");
-         String countryOfIssue=request.getParameter("countryOfIssue");
-         
-         String drivingLicenceType=request.getParameter("drivingLicenceType");
-         String electionCard=request.getParameter("electionCard");
-         String pfNoFlydocs=request.getParameter("pfNoFlydocs");
-         String withdrawalDate=request.getParameter("withdrawalDate");
-         String nameOfPreviousCompany=request.getParameter("nameOfPreviousCompany");
-         String previousCompanyLocation=request.getParameter("previousCompanyLocation");        
-         
-        
+        String drivingLicenceType = request.getParameter("drivingLicenceType");
+        String electionCard = request.getParameter("electionCard");
+        String pfNoFlydocs = request.getParameter("pfNoFlydocs");
+        String withdrawalDate = request.getParameter("withdrawalDate");
+        String nameOfPreviousCompany = request.getParameter("nameOfPreviousCompany");
+        String previousCompanyLocation = request.getParameter("previousCompanyLocation");
         
         bind(request, employeeMaster);
         selectEmployee(request, response);
@@ -1069,7 +1053,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s
         List<?> lastYearPerformanceRatingsOfEmployeeList = employeeMasterService.getLastYearPerformanceRatingOfEmployee(employeeMaster.getId());
-
+        
         lastYearPerformanceRatingsOfEmployee = (lastYearPerformanceRatingsOfEmployeeList.isEmpty()) ? lastYearPerformanceRatingsOfEmployee : String.valueOf(lastYearPerformanceRatingsOfEmployeeList.get(0));
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
         String companyId = request.getParameter("company");
@@ -1129,7 +1113,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             employeeLeaveBalance.setEmployeeMaster(employeeMaster);
             List<?> empLeaveBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
             if (empLeaveBalList.size() > 0) {
-
+                
             } else {
                 employeeLeaveBalance1.setEmployeeMaster(employeeMaster);
                 employeeLeaveBalance1.setNoOfLeaveRemain(6);
@@ -1137,7 +1121,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 employeeLeaveBalanceService.create(employeeLeaveBalance1);
             }
         }
-
+        
         employeeMaster.setPanCard(String.valueOf(employeeMaster.getPanCard()).toUpperCase());//this is for store pan card in uppercase in database.
         userMaster1 = userMasterService.readById(employeeMaster.getUserMaster().getId());
         userMaster1.setUserName(employeeMaster.getEmployeeId());
@@ -1150,79 +1134,74 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         employeeMasterService.update(employeeMaster);
         EmployeeMasterExtension employeeMasterExtension1 = new EmployeeMasterExtension();
         List<?> employeeMasterExtensionlis = employeeMasterServiceExtension.readByemployeeId(employeeMaster.getId());
-        employeeMasterExtension1 = (EmployeeMasterExtension)employeeMasterExtensionlis.get(0);;
+        employeeMasterExtension1 = (EmployeeMasterExtension) employeeMasterExtensionlis.get(0);;
 
 //***********employeeextension create*****************//
-                EmployeeMasterExtension employeeMasterExtension = new EmployeeMasterExtension();
-                employeeMasterExtension.setId(employeeMasterExtension1.getId());
-                employeeMasterExtension.setChildOneGender(Boolean.valueOf(childOneGender));
-                employeeMasterExtension.setChildTwoGender(Boolean.valueOf(childTwoGender));
-                employeeMasterExtension.setPresentAddress2(presentAddress2);
-                employeeMasterExtension.setPresentCity(presentCity);
-                employeeMasterExtension.setPresentState(presentState);
-                employeeMasterExtension.setPresentPostalCode(presentPostalCode);
-                employeeMasterExtension.setPresentCountry(presentCountry);
-                employeeMasterExtension.setPermanentAddress2(permanentAddress2);
-                employeeMasterExtension.setPermanentCity(permanentCity);
-                employeeMasterExtension.setPermanentCountry(permanentCountry);
-                employeeMasterExtension.setPermanentPostalCode(permanentPostalCode);
-                employeeMasterExtension.setPermanentState(permanentState);
-                employeeMasterExtension.setReligion(religion);
-                employeeMasterExtension.setDisclosedHealthConcerns(disclosedHealthConcerns);
-                employeeMasterExtension.setLanguagesKnown(languagesKnown);
-                employeeMasterExtension.setHobbies(hobbies);
-                employeeMasterExtension.setFlyDocsEmailId(flyDocsEmailId);
-                employeeMasterExtension.setEmergencyContactAddress(emergencyContactAddress);
-                employeeMasterExtension.setOtherImpInfo(otherImpInfo);
-                employeeMasterExtension.setRelationShip(RelationShip);
-                employeeMasterExtension.setNationality(nationality);
-                employeeMasterExtension.setFirstName(firstName);
-                employeeMasterExtension.setMiddleName(middleName);
-                employeeMasterExtension.setLastName(lastName);
-                employeeMasterExtension.setCountryOfIssue(countryOfIssue);
+        EmployeeMasterExtension employeeMasterExtension = new EmployeeMasterExtension();
+        employeeMasterExtension.setId(employeeMasterExtension1.getId());
+        employeeMasterExtension.setChildOneGender(Boolean.valueOf(childOneGender));
+        employeeMasterExtension.setChildTwoGender(Boolean.valueOf(childTwoGender));
+        employeeMasterExtension.setPresentAddress2(presentAddress2);
+        employeeMasterExtension.setPresentCity(presentCity);
+        employeeMasterExtension.setPresentState(presentState);
+        employeeMasterExtension.setPresentPostalCode(presentPostalCode);
+        employeeMasterExtension.setPresentCountry(presentCountry);
+        employeeMasterExtension.setPermanentAddress2(permanentAddress2);
+        employeeMasterExtension.setPermanentCity(permanentCity);
+        employeeMasterExtension.setPermanentCountry(permanentCountry);
+        employeeMasterExtension.setPermanentPostalCode(permanentPostalCode);
+        employeeMasterExtension.setPermanentState(permanentState);
+        employeeMasterExtension.setReligion(religion);
+        employeeMasterExtension.setDisclosedHealthConcerns(disclosedHealthConcerns);
+        employeeMasterExtension.setLanguagesKnown(languagesKnown);
+        employeeMasterExtension.setHobbies(hobbies);
+        employeeMasterExtension.setFlyDocsEmailId(flyDocsEmailId);
+        employeeMasterExtension.setEmergencyContactAddress(emergencyContactAddress);
+        employeeMasterExtension.setOtherImpInfo(otherImpInfo);
+        employeeMasterExtension.setRelationShip(RelationShip);
+        employeeMasterExtension.setNationality(nationality);
+        employeeMasterExtension.setFirstName(firstName);
+        employeeMasterExtension.setMiddleName(middleName);
+        employeeMasterExtension.setLastName(lastName);
+        employeeMasterExtension.setCountryOfIssue(countryOfIssue);
 //                employeeMasterExtension.setVisaIssueCountry(visaIssueCountry);
 //                employeeMasterExtension.setVisaIssueDate(visaIssueDate);
 //                employeeMasterExtension.setVisaValidTillDate(visaValidTillDate);
-                employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
-                employeeMasterExtension.setElectionCard(electionCard);
-                employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
-                employeeMasterExtension.setWithdrawalDate(withdrawalDate);
-                employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
-                employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
-                employeeMasterExtension.setEmployeeMaster(employeeMaster);
-                employeeMasterServiceExtension.update(employeeMasterExtension);
-                
-                //*******employee visa details ********// 
-                
-                EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
-                boolean employeeexist = employeeVisaDetailsService.employeeVisadetailsexist(employeeMaster.getId());
-                if(employeeexist){
-                    employeeVisaDetailsService.deleteByemployeeId(employeeMaster.getId());
-                    int visaCount1 = Integer.parseInt(request.getParameter("visaCount1"));
-                    for(int i = 1;i<=visaCount1;i++){
-                        String visaIssueCountry=request.getParameter("visaIssueCountry"+i);
-                        String visaIssueDate=request.getParameter("visaIssueDate"+i);
-                        String visaValidTillDate=request.getParameter("visaValidTillDate"+i);
-                        employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
-                        employeeVisaDetails.setVisaIssueDate(visaIssueDate);
-                        employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
-                        employeeVisaDetails.setEmployeeMaster(employeeMaster);
-                        employeeVisaDetailsService.create(employeeVisaDetails);
-                    }
-                }else{
-                        String visaIssueCountry="";
-                        String visaIssueDate="";
-                        String visaValidTillDate="";
-                        employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
-                        employeeVisaDetails.setVisaIssueDate(visaIssueDate);
-                        employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
-                        employeeVisaDetails.setEmployeeMaster(employeeMaster);
-                        employeeVisaDetailsService.create(employeeVisaDetails);
-                }
-                
-                
-                
-        
+        employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
+        employeeMasterExtension.setElectionCard(electionCard);
+        employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
+        employeeMasterExtension.setWithdrawalDate(withdrawalDate);
+        employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
+        employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
+        employeeMasterExtension.setEmployeeMaster(employeeMaster);
+        employeeMasterServiceExtension.update(employeeMasterExtension);
+
+        //*******employee visa details ********// 
+        EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
+        boolean employeeexist = employeeVisaDetailsService.employeeVisadetailsexist(employeeMaster.getId());
+        if (employeeexist) {
+            employeeVisaDetailsService.deleteByemployeeId(employeeMaster.getId());
+            int visaCount1 = Integer.parseInt(request.getParameter("visaCount1"));
+            for (int i = 1; i <= visaCount1; i++) {
+                String visaIssueCountry = request.getParameter("visaIssueCountry" + i);
+                String visaIssueDate = request.getParameter("visaIssueDate" + i);
+                String visaValidTillDate = request.getParameter("visaValidTillDate" + i);
+                employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+                employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+                employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+                employeeVisaDetails.setEmployeeMaster(employeeMaster);
+                employeeVisaDetailsService.create(employeeVisaDetails);
+            }
+        } else {
+            String visaIssueCountry = "";
+            String visaIssueDate = "";
+            String visaValidTillDate = "";
+            employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+            employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+            employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+            employeeVisaDetails.setEmployeeMaster(employeeMaster);
+            employeeVisaDetailsService.create(employeeVisaDetails);
+        }
 
 //        if (!reportingManagerBeforeUpdate.equals(reportingManagerForChange)) {
         //code will execute only if reporting manager changed then it will reflect in all sub-ordinate.
@@ -1308,7 +1287,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     File file = new File(certificateFileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", "_"));
                     multipartFile.transferTo(file2);
                 } catch (Exception e) {
-
+                    
                 }
             }
         }
@@ -1331,7 +1310,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             employeePolicyDetail = (EmployeePolicyDetail) policyObject;
             employeePolicyDetailService.delete(employeePolicyDetail.getId());
         }
-
+        
         EmployeePolicyDetail employeePolicyDetailObject = new EmployeePolicyDetail();
 //        EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
         int otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
@@ -1356,7 +1335,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
             }
         }
-
+        
         EmployeeCtcDetail employeeCtcDetail = new EmployeeCtcDetail();
 //       Boolean check =  employeePolicyDetailService.deleteByEmployeeId(employeeMaster.getId());
         List<?> ctcDetail = employeeCtcDetailService.readctcRegistration(employeeMaster.getId());
@@ -1433,7 +1412,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        mv.setViewName("Employee/EditUserProfile");
         return mv;
     }
-
+    
     public ModelAndView deleteSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String empId[] = request.getParameterValues("checkId");
@@ -1444,8 +1423,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                employeePolicyDetailService.deleteByemployeeId(Integer.parseInt(z));
 //                      
 //                employeeMasterService.delete(Integer.parseInt(z));
-                
-                
+
 //                PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
 //                List<?> list11 = pmpFormStatusMasterService.delete1(z);
 //                for (Object pdf1 : list11) {
@@ -1454,8 +1432,6 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //
 //                    pmpFormStatusMasterService.delete(pmpFormStatusMaster.getId());
 //                }
-                
-                
                 //userMasterService.delete (Integer.parseInt(z));
                 //userRightMasterService.delete(Integer.parseInt(z));
                 request.setAttribute("successMessage",
@@ -1465,10 +1441,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             }
         }
         mv = searchSubmit(request, response);
-
+        
         return mv;
     }
-
+    
     public ModelAndView userDashboard(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -1478,7 +1454,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         DesignationMaster designationMaster = new DesignationMaster();
         LevelMaster levelMaster = new LevelMaster();
         LocationMaster locationMaster = new LocationMaster();
-
+        
         departmentMaster = departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId());
         designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
         levelMaster = levelMasterService.readById(employeeMaster.getLevelMaster().getId());
@@ -1487,7 +1463,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         try {
             employeeMasterReportManager = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
         } catch (Exception e) {
-
+            
         }
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         employeeMaster1 = employeeMasterService.readById(employeeMaster.getId());
@@ -1505,18 +1481,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("forward:appraisalPerformance.htm?act=userDashboard");
         return mv;
     }
-
+    
     private void weeklyGenerate(RotationMaster rotationMaster, Date rd, ShiftRotationMaster shiftRotationMaster, int days, EmployeeMaster employeeMaster, String shiftMasterId) throws Exception {
         ShiftMaster shiftMaster = new ShiftMaster();
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
-
+        
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
         Calendar c1 = Calendar.getInstance();
         c.setTime(rd);
         int day = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         List<Integer> rotationArray = new ArrayList<Integer>(day);
-
+        
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         LocalDate localDate = rd.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int year = localDate.getYear();
@@ -1557,7 +1533,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
                 if (flag1 == 1) {
                     for (i = currentDay; i <= day; i++) {
-
+                        
                         shiftMaster = shiftMasterService.readById(rotationMaster.getShiftMaster().getId());
                         try {
                             if (rotationArray.size() != day) {
@@ -1579,12 +1555,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         }
                         noOfDay = count;
                         count++;
-
+                        
                     }
                 }
-
+                
             }
-
+            
         }
         int totalNoOfDay = days - noOfDay;
         shiftGenerateMonthlySchedule.setNoOfDays(totalNoOfDay);
@@ -1593,7 +1569,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         shiftGenerateMonthlySchedule.setNextShiftId(shiftMaster.getId());
         shiftGenerateMonthlySchedule.setShiftRotationMaster(shiftRotationMaster);
         shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
-
+        
         try {
             shiftGenerateMonthlySchedule.setDay1(rotationArray.get(0));
             shiftGenerateMonthlySchedule.setDay2(rotationArray.get(1));
@@ -1635,9 +1611,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 shiftGenerateMonthlySchedule.setDay30(rotationArray.get(29));
                 shiftGenerateMonthlySchedule.setDay31(rotationArray.get(30));
             }
-
+            
             shiftGenerateMonthlyScheduleService.create(shiftGenerateMonthlySchedule);
-
+            
         } catch (Exception e) {
             System.out.println("Exception" + e);
         }
@@ -1645,12 +1621,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        System.out.println("lol");
 //    }
     }
-
+    
     public ModelAndView empChart(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMasterId = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-
+        
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getAttribute("employeeMaster");
         EmployeeMaster employeeMasterManager = null;
         EmployeeMaster employeeMasterSubordinate = new EmployeeMaster();
@@ -1666,7 +1642,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             for (Object o : subordinateList) {
                 Object[] o1 = (Object[]) o;
                 String employeeId = (String) o1[1];
-
+                
                 o1[5] = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 //                o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 
@@ -1696,36 +1672,36 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                employeeMasterManager = employeeMasterService.readById(Integer.parseInt(employeeMasterId.getReportingManagerLevel1()));
                     DepartmentMaster departmentMaster = new DepartmentMaster();
                     DesignationMaster designationMaster = new DesignationMaster();
-
+                    
                     departmentMaster = departmentMasterService.readById(employeeMasterManager.getDepartmentMaster().getId());
                     designationMaster = designationMasterService.readById(employeeMasterManager.getDesignationMaster().getId());
-
+                    
                     employeeMasterManager.setDepartmentMaster(departmentMaster);
                     employeeMasterManager.setDesignationMaster(designationMaster);
-
+                    
                     imageManager = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMasterManager.getEmployeeId();
-
+                    
                     if (new File(imageManager).exists()) {
                         for (File imgFilePath : new File(imageManager).listFiles()) {
                             imageManager = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMasterManager.getEmployeeId() + File.separator + imgFilePath.getName();
                             break;
-
+                            
                         }
                     } else {
                         imageManager = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
                     }
-
+                    
                     innerList.add(employeeMasterManager.getEmployeeId());
                     innerList.add(employeeMasterManager.getEmployeeName());
                     innerList.add(employeeMasterManager.getDepartmentMaster().getDepartmentName());
                     innerList.add(employeeMasterManager.getDesignationMaster().getDesignationName());
                     innerList.add(imageManager);
                     map.put(employeeMasterManager.getId(), innerList);
-
+                    
                 }
             }
             imageUser = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMaster.getEmployeeId();
-
+            
             if (new File(imageUser).exists()) {
                 for (File imgFilePath : new File(imageUser).listFiles()) {
                     imageUser = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMaster.getEmployeeId() + File.separator + imgFilePath.getName();
@@ -1736,19 +1712,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             }
         } catch (Exception e) {
         }
-
+        
         request.setAttribute("ceoMap", map);
         request.setAttribute("imageManager", imageManager);
         request.setAttribute("imageUser", imageUser);
         request.setAttribute("employeeMasterManager", employeeMasterManager);
         return mv;
     }
-
+    
     public ModelAndView empOwnChart(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMasterId = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-
+        
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getAttribute("employeeMaster");
         EmployeeMaster employeeMasterManager1 = null;
         EmployeeMaster employeeMasterSubordinate = new EmployeeMaster();
@@ -1762,7 +1738,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             for (Object o : subordinateList) {
                 Object[] o1 = (Object[]) o;
                 String employeeId = (String) o1[1];
-
+                
                 o1[5] = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 //                o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 
@@ -1786,32 +1762,32 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             request.setAttribute("subordinateAddiCount", subordinateAddiCount);
             request.setAttribute("logedInEmpId", employeeMasterId.getId());
             if (null != employeeMasterId.getReportingManagerLevel1() && !employeeMasterId.getReportingManagerLevel1().equals("")) {
-
+                
                 employeeMasterManager1 = employeeMasterService.readById(Integer.parseInt(employeeMasterId.getReportingManagerLevel1()));
                 DepartmentMaster departmentMaster = new DepartmentMaster();
                 DesignationMaster designationMaster = new DesignationMaster();
-
+                
                 departmentMaster = departmentMasterService.readById(employeeMasterManager1.getDepartmentMaster().getId());
                 designationMaster = designationMasterService.readById(employeeMasterManager1.getDesignationMaster().getId());
-
+                
                 employeeMasterManager1.setDepartmentMaster(departmentMaster);
                 employeeMasterManager1.setDesignationMaster(designationMaster);
-
+                
                 imageManager = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMasterManager1.getEmployeeId();
-
+                
                 if (new File(imageManager).exists()) {
                     for (File imgFilePath : new File(imageManager).listFiles()) {
                         imageManager = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMasterManager1.getEmployeeId() + File.separator + imgFilePath.getName();
                         break;
-
+                        
                     }
                 } else {
                     imageManager = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
                 }
-
+                
             }
             imageUser = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMaster.getEmployeeId();
-
+            
             if (new File(imageUser).exists()) {
                 for (File imgFilePath : new File(imageUser).listFiles()) {
                     imageUser = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeMaster.getEmployeeId() + File.separator + imgFilePath.getName();
@@ -1822,18 +1798,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             }
         } catch (Exception e) {
         }
-
+        
         request.setAttribute("imageManager", imageManager);
         request.setAttribute("imageUser", imageUser);
         request.setAttribute("employeeMasterManager1", employeeMasterManager1);
         return mv;
     }
-
+    
     public ModelAndView hrDashboard(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         Date today = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YY");
-
+        
         List attendanceList = employeeMasterService.readAttendanceData(sdf.format(today));
         Object[] attendanceData;
         StringBuilder sb = new StringBuilder();
@@ -1861,7 +1837,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 levelMaster = levelMasterService.readById(employeeMaster.getLevelMaster().getId());
                 employeeMasterReportManager = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
             } catch (Exception e) {
-
+                
             }
         }
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
@@ -1884,11 +1860,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("forward:locationMaster.htm?act=hrDashboard");
         return mv;
     }
-
+    
     public ModelAndView viewAllSubordinate(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-
+        
         EmployeeMaster employeeMasterMd = new EmployeeMaster();
         EmployeeMaster employeeMasterSubordinate = new EmployeeMaster();
         try {
@@ -1899,7 +1875,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 Object[] o1 = (Object[]) o;
                 id = (int) o1[0];
                 String employeeId = (String) o1[1];
-
+                
                 o1[5] = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 //                o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 
@@ -2001,15 +1977,15 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
         } catch (Exception e) {
         }
-
+        
         mv.setViewName("Dashboard/OrganogramForAllSubordinates");
         return mv;
     }
-
+    
     public ModelAndView viewEmployeeSubordinate(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-
+        
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeMaster employeeMasterSubordinate = new EmployeeMaster();
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
@@ -2019,24 +1995,24 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 employeeMaster.setId(Integer.parseInt(idStr));
                 employeeMaster = employeeMasterService.readById(employeeMaster.getId());
                 int id = 0;
-
+                
                 DepartmentMaster departmentMaster = new DepartmentMaster();
                 DesignationMaster designationMaster = new DesignationMaster();
-
+                
                 DepartmentMaster departmentMaster1 = new DepartmentMaster();
                 DesignationMaster designationMaster1 = new DesignationMaster();
-
+                
                 employeeMaster1 = employeeMasterService.readById(Integer.parseInt(idStr));
 //                employeeMaster1 = employeeMasterService.readById(Integer.parseInt(employeeMaster.getReportingManagerLevel1()));
                 departmentMaster = departmentMasterService.readById(employeeMaster.getDepartmentMaster().getId());
                 designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
-
+                
                 departmentMaster1 = departmentMasterService.readById(employeeMaster1.getDepartmentMaster().getId());
                 designationMaster1 = designationMasterService.readById(employeeMaster1.getDesignationMaster().getId());
-
+                
                 employeeMaster.setDepartmentMaster(departmentMaster);
                 employeeMaster.setDesignationMaster(designationMaster);
-
+                
                 employeeMaster1.setDepartmentMaster(departmentMaster1);
                 employeeMaster1.setDesignationMaster(designationMaster1);
                 String employeeStr = "";
@@ -2069,7 +2045,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     Object[] o1 = (Object[]) o;
                     id = (int) o1[0];
                     String employeeId = (String) o1[1];
-
+                    
                     o1[5] = getServletContext().getRealPath("/") + File.separator + "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 //                o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + employeeId;
 
@@ -2082,7 +2058,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         o1[5] = "StorageYard" + File.separator + "UserProfile" + File.separator + "User" + File.separator + "default.png";
                     }
                 }
-
+                
                 double count = subordinateValList.size();
                 count = count / 10;
                 if ((count - (int) count) != 0) {
@@ -2138,7 +2114,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         }
                     }
                     list.add(list1);
-
+                    
                 }
 
 //            request.setAttribute("subordinateValList", subordinateValList);
@@ -2153,10 +2129,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         } catch (Exception e) {
             mv = viewAllSubordinate(request, response);
         }
-
+        
         return mv;
     }
-
+    
     public String displayPicture(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String imgFile = "";
         String userName = request.getParameter("userName");
@@ -2182,10 +2158,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartHttpServletRequest.getFile("photographUpdate");
         try {
-
+            
             File updatedPicture = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", ""));
             multipartFile.transferTo(updatedPicture);
-
+            
             if (photoFile.exists() && photoFile.listFiles().length > 0) {
                 File[] updatedPictureFiles = photoFile.listFiles();
                 imgFile = "StorageYard" + File.separator + "UserProfile" + File.separator + userMaster.getUserName() + File.separator + updatedPictureFiles[0].getName().replaceAll(" ", "");
@@ -2204,14 +2180,14 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             if (employeeMaster.getEmployeeId().equals(userMaster.getUserName())) {
                 session.setAttribute("profilePicturePath", imgFile);
             }
-
+            
         } catch (Exception e) {
-
+            
         }
-
+        
         return imgFile;
     }
-
+    
     public void readReportingHierarchy(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String reportingManagerId = request.getParameter("id");
         PrintWriter out = null;
@@ -2223,7 +2199,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             for (int i = 0; i < reportingHierarchyArray.length; i++) {
                 reportingHierarchyString = reportingHierarchyString + ((reportingHierarchyArray[i] == null) ? "" : reportingHierarchyArray[i]) + "~";
             }
-
+            
             try {
                 out = response.getWriter();
                 out.print(reportingHierarchyString.substring(0, reportingHierarchyString.length() - 1));
@@ -2238,9 +2214,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 out.close();
             }
         }
-
+        
     }
-
+    
     public ModelAndView changeEmployeeShift(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -2260,7 +2236,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("Employee/EmployeeShiftChange");
         return mv;
     }
-
+    
     public ModelAndView changeEmployeeShiftSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -2271,7 +2247,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         UserMaster userMaster = new UserMaster();
         bind(request, employeeMaster);
         int id = employeeMaster.getId();
-
+        
         employeeMaster1 = employeeMasterService.readById(id);
         userMaster.setId(employeeMaster1.getUserMaster().getId());
         shiftRotationInfo.setUserMaster(userMaster);
@@ -2293,7 +2269,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 mv.getModelMap().put("employeeMaster", employeeMaster);
                 mv = changeEmployeeShift(request, response);
             } else {
-
+                
                 employeeMaster1.setShiftHoursId(Integer.parseInt(shfitId));
                 shiftRotationMaster.setId(Integer.parseInt(shfitId));
                 List<?> list = shiftRotationInfoService.readRotaionDetail(shiftRotationInfo);
@@ -2312,7 +2288,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     shiftRotationInfo1.setRotationDate(employeeMaster.getShiftRotationDate());
                     shiftRotationInfoService.create(shiftRotationInfo1);
                 }
-
+                
                 ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
                 shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
                 String shiftRotationDate = request.getParameter("shiftRotationDate");
@@ -2348,11 +2324,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 mv.setViewName("redirect:employeeMaster.htm?act=searchSubmit");
             }
         }
-
+        
         return mv;
-
+        
     }
-
+    
     private void shiftGenerateEdit(RotationMaster rotationMaster, Date rd, ShiftRotationMaster shiftRotationMaster, int days, EmployeeMaster employeeMaster, String firstShiftId) throws Exception {
         ShiftMaster shiftMaster = new ShiftMaster();
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
@@ -2375,7 +2351,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
         shiftGenerateMonthlySchedule.setShiftMonth(cmonth);
         shiftGenerateMonthlySchedule.setShiftYear(cyear);
-
+        
         List<?> list = shiftGenerateMonthlyScheduleService.readByCurrentDateWiseEmployeeShift(shiftGenerateMonthlySchedule);
         if (!list.isEmpty()) {
             shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) list.get(0);
@@ -2384,7 +2360,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         for (int i1 = 1; i1 < currentDay; i1++) {
             rotationArray.add(0);
         }
-
+        
         int count1 = 0;
         List sunday = new ArrayList();
         for (int day1 = 1; day1 <= day; day1++) {
@@ -2397,7 +2373,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         int count = 1;
         int noOfDay = 0;
         int i = 1;
-
+        
         int flag = 0;
         for (int j = 1; j <= 5; j++) {
             List<?> rotationList = rotationMasterService.readFromRotation(rotationMaster);
@@ -2412,10 +2388,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         flag = 1;
                     }
                 }
-
+                
                 if (flag == 1) {
                     for (i = currentDay; i <= day; i++) {
-
+                        
                         shiftMaster = shiftMasterService.readById(rotationMaster.getShiftMaster().getId());
                         try {
                             if (rotationArray.size() != day) {
@@ -2425,7 +2401,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     rotationArray.add(-1);
                                 }
                             }
-
+                            
                         } catch (Exception ex) {
                             System.out.println("Array Size Exception" + ex);
                         }
@@ -2438,11 +2414,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         }
                         noOfDay = count;
                         count++;
-
+                        
                     }
                 }
             }
-
+            
         }
         int totalNoOfDay = days - noOfDay;
         if (null != shiftGenerateMonthlySchedule.getId()) {
@@ -2453,7 +2429,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         shiftGenerateMonthlySchedule1.setShiftYear(cyear);
         shiftGenerateMonthlySchedule1.setShiftRotationMaster(shiftRotationMaster);
         shiftGenerateMonthlySchedule1.setEmployeeMaster(employeeMaster);
-
+        
         try {
             int i1 = 1;
             if (i1 >= dayofmonth) {
@@ -2645,12 +2621,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         } catch (Exception e) {
             System.out.println("Exception" + e);
         }
-
+        
         System.out.println("lol");
 
 //    }
     }
-
+    
     public ModelAndView getUserDetail(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -2746,7 +2722,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/UserDetail");
         return mv;
-
+        
     }
 
     //this method is created for search employee from searchbox given in header bar and shows result same as searchSubmit method of this controller.
@@ -2765,39 +2741,36 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("Employee/EmployeeContactDetailResult");
         return mv;
     }
-
+    
     public ModelAndView excelUploadRegistration(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("Employee/EmployeeRegistrationThroughUpload");
         return mv;
     }
-
+    
     public ModelAndView excelUploadAllowance(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("Employee/EmployeeAllowanceUpload");
         return mv;
     }
-
+    
     public void readEmployeeFile(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         String fileName = request.getParameter("fileName");
-
+        
         String filePath = File.separator + "StorageYard" + File.separator
                 + "Other" + File.separator + "UserDoc" + File.separator
                 + "Payroll" + File.separator + fileName;
-
+        
         String appPath = request.getServletContext().getRealPath("");
-
+        
         String fullPath = appPath + filePath;
-
+        
         request.setAttribute("filePath", fullPath);
-
+        
         DownloadFile downloadFile = new DownloadFile();
         downloadFile.doDownload(request, response);
     }
-
-   
-    
     
     public ModelAndView excelUploadRegistrationSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -2837,13 +2810,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String MiddleName = "";
         String LastName = "";
         //***employee extension END****//
-        
+
         String passportNo = "";
         //***employee extension****//
-        String nationality="";
-        String countryOfIssue="";
+        String nationality = "";
+        String countryOfIssue = "";
         //***employee extension END****//
-        
+
         String passportDateOfIssue = "";
         String passportExpiryDate = "";
         //***employee extension****//
@@ -2851,16 +2824,16 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String visaIssueDate = "";
         String visaValidTillDate = "";
         //***employee extension END****//
-        
+
         String presentAddress1 = "";
-         //***employee extension****//
+        //***employee extension****//
         String presentAddress2 = "";
         String presentCity = "";
         String presentState = "";
         String presentPostalCode = "";
         String presentCountry = "";
         //***employee extension END****//
-        
+
         String permanentAddress1 = "";
         //***employee extension****//
         String permanentAddress2 = "";
@@ -2868,14 +2841,14 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String permanentState = "";
         String permanentPostalCode = "";
         String permanentCountry = "";
-         //***employee extension END****//
-         
+        //***employee extension END****//
+
         String contactNo1resident = "";
         String contactNo2mobile = "";
         //***employee extension****//
         String flyDocsEmailId = "";
         //***employee extension END****//
-         
+
         String personalEmailId = "";
         String bankAccountNo = "";
         String bankName = "";
@@ -2883,33 +2856,32 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         //***employee extension****//
         String pfwithdrawalDate = "";
         //***employee extension END****//
-           
+
         String pfNo = ""; //pf 
         //***employee extension****//
         String pfNoFlydocs = "";
         String electionCard = "";
         //***employee extension END****//
-         
+
         String pan = "";
-        String aadharCard = "";   
+        String aadharCard = "";
         String esicNo = ""; //esic no
         String uanNo = ""; //uano
         String maritalStatus = "";
         //***employee extension****//
         String religion = "";
         //***employee extension END****//
-        
+
         String bloodGroup = "";
-         //***employee extension****//
+        //***employee extension****//
         String disclosedHealthConcerns = "";
         //***employee extension END****//
-        
+
         String drivinglicenceNo = "";
-         //***employee extension****//
+        //***employee extension****//
         String drivingLicenceType = "";
         //***employee extension END****//
-        
-        
+
         String fatherNamed1 = "";
         String fatherdob = "";
         String motherNamed2 = "";
@@ -2920,50 +2892,46 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         //***employee extension****//
         String childOneGender = "";
         //***employee extension END****//
-        
+
         String childdob1 = "";
         String childname2 = "";
-         //***employee extension****//
+        //***employee extension****//
         String childTwoGender = "";
         //***employee extension END****//
-        
+
         String childdob2 = "";
         String emergencyContactPerson = "";
-         //***employee extension****//
+        //***employee extension****//
         String RelationShip = "";
         //***employee extension END****//
-        
+
         String emergencyContactNo = "";
-         //***employee extension****//
+        //***employee extension****//
         String emergencyContactAddress = "";
         String otherImpInfo = "";
         String previouscompanyname = "";
         String previouscompanylocation = "";
         //***employee extension END****//
-        
+
         String companylocationCity = "";
         String employeeeEXPonJoiningYears = "";
         String employeeeEXPonJoiningMonths = "";
         String highestEducation = "";
-         //***employee extension****//
+        //***employee extension****//
         String languagesKnown = "";
         String hobbies = "";
         //***employee extension END****// 
-        
+
         String workType = "";//shift(base) or hours(base).
         String hours = "";//(eg...9Hours , 10Hours).
         String shiftName = "";//shift Name.
         String shiftRotation = "";//shift Rotation Name.
         String shiftRotationDate = "";//shift Rotation Name.
-        String paymentType = ""; 
-        String basicSalary = ""; 
+        String paymentType = "";
+        String basicSalary = "";
         String company = "";
         String department = "";
-        
-        
-        
-        
-        
+
 ////        String shiftRotationDate = "";//this field is filled as 1st date of month of DateOfJoining Date.
 //        
 //        
@@ -3013,9 +2981,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        String tdsAmount = ""; //tds
 //        String paymentType = ""; //payment type
 //        String pfNo = ""; //pf 
-        
-        
-        
+
         boolean gender1 = false;
         StringBuffer stringBuffer = new StringBuffer();
         StringBuffer stringBufferOfExceptions = new StringBuffer();
@@ -3037,20 +3003,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             
                             employeeFirstName = "" + (null == row.getCell((short) 2) ? "" : row.getCell((short) 2));
                             employeeLastName = "" + (null == row.getCell((short) 3) ? "" : row.getCell((short) 3));
-                            String employeefullname = employeeFirstName+" "+employeeLastName;
+                            String employeefullname = employeeFirstName + " " + employeeLastName;
                             dateOfJoiningNonFormated = "" + (null == row.getCell((short) 4) ? "" : row.getCell((short) 4));
 //                            SimpleDateFormat sdfSource = new SimpleDateFormat("dd/MM/yy");
 //                            Date date = sdfSource.parse(dateOfJoiningNonFormated);
 //                            String dateOfJoiningformated = String.valueOf(date);
-                            
+
                             SimpleDateFormat sdfDOJ = new SimpleDateFormat("dd-MMM-yyyy");
                             SimpleDateFormat sdfDOJ2 = new SimpleDateFormat("dd/MM/yyyy");
-
+                            
                             Date dateDOJ = sdfDOJ.parse(dateOfJoiningNonFormated);
                             String nDate = sdfDOJ.format(dateDOJ);
                             String dateOfJoining = sdfDOJ2.format(dateDOJ);
-                            
-                            
                             
                             gender = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 5));
                             dobNonFormated = "" + (null == row.getCell((short) 6) ? "" : row.getCell((short) 6));
@@ -3088,7 +3052,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             permanentPostalCode = permanentPostalCode.split("\\.", 2)[0];
                             permanentCountry = "" + (null == row.getCell((short) 39) ? "" : row.getCell((short) 39));
                             contactNo1resident = "" + (null == row.getCell((short) 41) ? "" : row.getCell((short) 41));
-                           String contactNo = "";
+                            String contactNo = "";
                             if (!contactNo1resident.equals("")) {
                                 BigDecimal bdContactNo = new BigDecimal(contactNo1resident);
                                 contactNo = "" + bdContactNo.longValue();
@@ -3135,13 +3099,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             bloodGroup = "" + (null == row.getCell((short) 60) ? "" : row.getCell((short) 60));
                             disclosedHealthConcerns = "" + (null == row.getCell((short) 61) ? "" : row.getCell((short) 61));
                             drivinglicenceNo = "" + (null == row.getCell((short) 63) ? "" : row.getCell((short) 63));
-                            String drilicNo = "";
-                            if (!drivinglicenceNo.equals("")) {
-                                BigDecimal bddrilicNo = new BigDecimal(drivinglicenceNo);
-                                drilicNo = "" + bddrilicNo.longValue();
-                            } else {
-                                drilicNo = "";
-                            }
+//                            String drilicNo = "";
+//                            if (!drivinglicenceNo.equals("")) {
+//                                BigDecimal bddrilicNo = new BigDecimal(drivinglicenceNo);
+//                                drilicNo = "" + bddrilicNo.longValue();
+//                            } else {
+//                                drilicNo = "";
+//                            }
                             drivingLicenceType = "" + (null == row.getCell((short) 64) ? "" : row.getCell((short) 64));
                             fatherNamed1 = "" + (null == row.getCell((short) 67) ? "" : row.getCell((short) 67));
                             fatherdob = "" + (null == row.getCell((short) 69) ? "" : row.getCell((short) 69));
@@ -3174,18 +3138,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeeEXPonJoiningMonths = "" + (null == row.getCell((short) 97) ? "" : row.getCell((short) 97));
                             highestEducation = "" + (null == row.getCell((short) 98) ? "" : row.getCell((short) 98));
                             languagesKnown = "" + (null == row.getCell((short) 99) ? "" : row.getCell((short) 99));
-                            hobbies = "" + (null == row.getCell((short) 100) ? "" : row.getCell((short) 100));        
-                            workType = "" + (null == row.getCell((short) 102) ? "" : row.getCell((short) 102));     
-                            hours = "" + (null == row.getCell((short) 103) ? "" : row.getCell((short) 103));       
-                            shiftName = "" + (null == row.getCell((short) 104) ? "" : row.getCell((short) 104));       
+                            hobbies = "" + (null == row.getCell((short) 100) ? "" : row.getCell((short) 100));
+                            workType = "" + (null == row.getCell((short) 102) ? "" : row.getCell((short) 102));
+                            hours = "" + (null == row.getCell((short) 103) ? "" : row.getCell((short) 103));
+                            shiftName = "" + (null == row.getCell((short) 104) ? "" : row.getCell((short) 104));
                             shiftRotation = "" + (null == row.getCell((short) 105) ? "" : row.getCell((short) 105));
-                            shiftRotationDate = "" + (null == row.getCell((short) 106) ? "" : row.getCell((short) 106));       
-                            paymentType = "" + (null == row.getCell((short) 107) ? "" : row.getCell((short) 107));       
-                            basicSalary = "" + (null == row.getCell((short) 108) ? "" : row.getCell((short) 108));       
+                            shiftRotationDate = "" + (null == row.getCell((short) 106) ? "" : row.getCell((short) 106));
+                            paymentType = "" + (null == row.getCell((short) 107) ? "" : row.getCell((short) 107));
+                            basicSalary = "" + (null == row.getCell((short) 108) ? "" : row.getCell((short) 108));
                             basicSalary = basicSalary.split("\\.", 2)[0];
-                            company = "" + (null == row.getCell((short) 109) ? "" : row.getCell((short) 109));         
-                            department = "" + (null == row.getCell((short) 110) ? "" : row.getCell((short) 110));        
-                             
+                            company = "" + (null == row.getCell((short) 109) ? "" : row.getCell((short) 109));
+                            department = "" + (null == row.getCell((short) 110) ? "" : row.getCell((short) 110));
+                            
                             employeeMaster.setPassportNo(passportNo);
                             employeeMaster.setPassportIssueDate(passportDateOfIssue);
                             employeeMaster.setPassportExpiryDate(passportExpiryDate);
@@ -3198,10 +3162,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMaster.setDateOfBirthOfEmpChilld1(childdob1);
                             employeeMaster.setDateOfBirthOfEmpChild2(childdob2);
                             employeeMaster.setCityOfEmployee(companylocationCity);
-                            employeeMaster.setDrivingLicence(drilicNo);
+                            employeeMaster.setDrivingLicence(drivinglicenceNo);
                             
-                            
-                           EmployeeMasterExtension employeeMasterExtension =new EmployeeMasterExtension();
+                            EmployeeMasterExtension employeeMasterExtension = new EmployeeMasterExtension();
                             employeeMasterExtension.setFirstName(FirstName);
                             employeeMasterExtension.setMiddleName(MiddleName);
                             employeeMasterExtension.setLastName(LastName);
@@ -3230,17 +3193,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
                             employeeMasterExtension.setPreviousCompanyLocation(previouscompanylocation);
                             employeeMasterExtension.setNameOfPreviousCompany(previouscompanyname);
+                            
                             Boolean g = false;
-                            if(childOneGender == "M"){
-                               employeeMasterExtension.setChildOneGender(g);
-                            }else{
-                                g=true;
+                            if (childOneGender == "M") {
+                                employeeMasterExtension.setChildOneGender(g);
+                            } else {
+                                g = true;
                                 employeeMasterExtension.setChildTwoGender(g);
                             }
-                            if(childTwoGender == "M"){
-                               employeeMasterExtension.setChildOneGender(g);
-                            }else{
-                                g=true;
+                            if (childTwoGender == "M") {
+                                employeeMasterExtension.setChildOneGender(g);
+                            } else {
+                                g = true;
                                 employeeMasterExtension.setChildTwoGender(g);
                             }
                             
@@ -3249,15 +3213,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMasterExtension.setOtherImpInfo(otherImpInfo);
                             employeeMasterExtension.setHobbies(hobbies);
                             employeeMasterExtension.setLanguagesKnown(languagesKnown);
-                            
-                            
+
 //                            SimpleDateFormat sdfDOJ = new SimpleDateFormat("dd-MMM-yyyy");
 //                            SimpleDateFormat sdfDOJ2 = new SimpleDateFormat("dd/MM/yyyy");
 ////here excell uploa
 //                            Date dateDOJ = sdfDOJ.parse(dateOfJoiningNonFormated);
 ////                            String nDate = sdfDOJ.format(dateDOJ);
 //                            dateOfJoining = sdfDOJ2.format(dateDOJ);
-
 //                            String dateOfJoiningNonFormatedToString = dateDOJ.toString();
 //                            Date dateDOJ2 = sdfDOJ2.parse(dateOfJoiningNonFormatedToString);
 ////                        dateOfJoining = dateDOJ2.toString();
@@ -3338,7 +3300,6 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //
 //                            conveysAmount = "" + (null == row.getCell((short) 44) ? "" : row.getCell((short) 44)); // Field Not Available
 //                            tdsAmount = "" + (null == row.getCell((short) 45) ? "" : row.getCell((short) 45));  // Field Not Available
-
                             employeeMaster.setEmployeeId(employeeNo);
                             employeeMaster.setEmployeeName(employeefullname);
 //                            employeeMaster.setDateOfJoining(dateOfJoiningNonFormated);
@@ -3350,17 +3311,17 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMaster.setPaymentType(paymentType);
                             employeeMaster.setPfNo(pfNo);
                             employeeMaster.setUanNo(uannNo);
-
-                            if (!typeofemployee.equals("")) {
-                                List<?> levelList11 = employeeTypeService.readByName(typeofemployee);
+                            
+                            if (!employeeType.equals("")) {
+                                List<?> levelList11 = employeeTypeService.readByName(employeeType);
                                 if (!levelList11.isEmpty()) {
                                     employeeType1 = (EmployeeTypeMaster) levelList11.get(0);
                                     employeeMaster.setEmployeeTypeMaster(employeeType1);
                                 } else {
-                                    employeeType1.setTypeOfEmployee(employeeType1.toString());
+                                    employeeType1.setTypeOfEmployee(employeeType);
                                     employeeTypeService.create(employeeType1);
                                     employeeMaster.setEmployeeTypeMaster(employeeType1);
-
+                                    
                                 }
                             } else {
                                 employeeMaster.setEmployeeTypeMaster(null);
@@ -3371,10 +3332,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     employeeSubType = (EmployeeSubType) levelList2.get(0);
                                     employeeMaster.setEmployeeSubType(employeeSubType);
                                 } else {
-                                    employeeSubType.setSubType(employeeSubType.toString());
+                                    employeeSubType.setSubType(employeeSubtype);
+                                    employeeSubType.setEmployeeTypeMaster(employeeType1);
                                     employeeSubTypeService.create(employeeSubType);
                                     employeeMaster.setEmployeeSubType(employeeSubType);
-
+                                    
                                 }
                             } else {
                                 employeeMaster.setEmployeeSubType(null);
@@ -3388,12 +3350,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     levelMaster.setLevel(level);
                                     levelMasterService.create(levelMaster);
                                     employeeMaster.setLevelMaster(levelMaster);
-
+                                    
                                 }
                             } else {
                                 employeeMaster.setLevelMaster(null);
                             }
-
+                            
                             if (!designation.equals("")) {
                                 List<?> departmentList = designationMasterService.readByName(designation.trim().toLowerCase());
                                 if (!departmentList.isEmpty()) {
@@ -3408,7 +3370,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 employeeMaster.setDesignationMaster(null);
                             }
-
+                            
                             if (!department.equals("")) {
                                 List<?> departmentList = departmentMasterService.readByName(department.trim().toLowerCase());
                                 if (!departmentList.isEmpty()) {
@@ -3436,7 +3398,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 employeeMaster.setZydexLocationMaster(null);
                             }
-
+                            
                             if (!workLocation.equals("")) {
                                 List<?> workLocationList = locationMasterService.readByName(workLocation.trim().toLowerCase());
                                 if (!workLocationList.isEmpty()) {
@@ -3450,7 +3412,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 employeeMaster.setLocationMaster(null);
                             }
-
+                            
                             employeeMaster.setCompany(company);
                             employeeMaster.setOfficeEmailId(personalEmailId);
                             employeeMaster.setContactNo1(contactNo);
@@ -3481,16 +3443,17 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMaster.setBankAccountNo(bNo);
                             employeeMaster.setBankIfscCode(ifscCode);
                             employeeMaster.setEmployeeType(employeeType);
-
+                            
                             if (!reportingManager.equals("")) {
                                 List<?> reportingManagerList = employeeMasterService.readByName(reportingManager);
                                 EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                                int reportingManagerLevel1 = 0;
                                 if (!reportingManagerList.isEmpty()) {
                                     employeeMaster1 = (EmployeeMaster) reportingManagerList.get(0);
-
+                                    reportingManagerLevel1 = employeeMaster1.getId();
+                                    employeeMaster.setReportingManagerLevel1("" + reportingManagerLevel1);
+                                    
                                 }
-                                int reportingManagerLevel1 = employeeMaster1.getId();
-                                employeeMaster.setReportingManagerLevel1("" + reportingManagerLevel1);
                                 List<?> reportingHierarchyList = employeeMasterService.readReportingHierarchyList(employeeMaster1.getId());
                                 Object[] reportingHierarchyArray;
                                 if (!reportingHierarchyList.isEmpty()) {
@@ -3526,7 +3489,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                             employeeMaster.setReportingManagerLevel6(reportingHierarchyStringSplitArray[5]);
                                         }
                                     }
-
+                                    
                                 }
                             }
                             UserMaster userMaster = new UserMaster();
@@ -3535,7 +3498,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             String workTypeTemp = "";
                             String shiftRotationTemp = "";
                             String shiftTemp = "";
-
+                            
                             if (!userMasterService.isExist(employeeNo)) {
                                 userMaster.setFirstTime(true);//this is for change password forcibly when user first time logsIn.
                                 userMasterService.create(userMaster);
@@ -3678,6 +3641,15 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 employeeMasterService.create(employeeMaster);
                                 employeeMasterExtension.setEmployeeMaster(employeeMaster);
                                 employeeMasterServiceExtension.create(employeeMasterExtension);
+                                
+                                if (!visaIssueCountry.equals("")) {
+                                    EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
+                                    employeeVisaDetails.setEmployeeMaster(employeeMaster);
+                                    employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+                                    employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+                                    employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+                                    employeeVisaDetailsService.create(employeeVisaDetails);
+                                }
 
                                 //        Code for Shift generate monthly Schedule(Start)
 //                if (employeeMaster.getShiftType().equals("ShiftBase")) {
@@ -3848,7 +3820,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                         isLeapYear = true;
                                     }
                                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
+                                    
                                     Date date1 = sdf.parse(dateOfJoiningNonFormated);
                                     Date date3 = new Date();
                                     cal1.setTime(date1);
@@ -3918,9 +3890,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                             employeeLeaveBalance.setNoOfLeaveRemain(LWP);
                                         }
                                     }
-
+                                    
                                     employeeLeaveBalanceService.create(employeeLeaveBalance);
-
+                                    
                                 }
 
                                 // ..............................to......................
@@ -3941,16 +3913,31 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 }
                                 employeeMaster.setShiftHoursId(shiftRotationMaster.getId());
                                 employeeMasterService.update(employeeMaster);
+                                
+                                EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
+                                List<?> emplVisaDetail = employeeVisaDetailsService.readByemployeeId(employeeMaster.getId());
+                                if (!emplVisaDetail.isEmpty()) {
+                                    for (Object o : emplVisaDetail) {
+                                        employeeVisaDetails = (EmployeeVisaDetails) o;
+                                        employeeVisaDetailsService.delete(employeeVisaDetails.getId());
+                                    }
+                                }
+                                if (!visaIssueCountry.equals("") && !visaIssueDate.equals("")) {
+                                    employeeVisaDetails.setEmployeeMaster(employeeMaster);
+                                    employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+                                    employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+                                    employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+                                    employeeVisaDetailsService.create(employeeVisaDetails);
+                                }
                                 stringBuffer.append(employeeNo);
                                 stringBuffer.append(" , ");
                                 counter++;
                             }
-
+                            
                         }
 //                        System.out.println("this is an error in excel upload......................................................................" + employeeNo);
 //                        System.out.println("this is an error in excel upload......................................................................" + employeeNo);
-                        
-                        
+
                     } catch (Exception e) {
                         stringBufferOfExceptions.append(employeeNo);
                         stringBufferOfExceptions.append(" , ");
@@ -3974,9 +3961,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         }
         return mv;
     }
-
+    
     public void getDesignationByLevel(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        
         int levelMasterId = Integer.valueOf(request.getParameter("levelMasterId"));
         Map<Integer, String> desigNationByLevelMap = new HashMap<Integer, String>();
         List designationsAtLevelList = designationMasterService.readDesignationsOfLevel(levelMasterId);
@@ -3992,12 +3979,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         try {
             out = response.getWriter();
             out.write(jsonOfdesigNationByLevelMap);
-
+            
         } finally {
             out.close();
         }
     }
-
+    
     public ModelAndView exportToExcel(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         String searchEmployeeString = "";
@@ -4011,7 +3998,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("DocumentView/EmployeeDataToExcel");
         return mv;
     }
-
+    
     public ModelAndView changePassWordClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         UserMaster userMaster = new UserMaster();
@@ -4023,7 +4010,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("User/NewPassword");
         return mv;
     }
-
+    
     public ModelAndView changePassWordSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         UserMaster userMaster = new UserMaster();
@@ -4036,7 +4023,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String newPas = request.getParameter("new_password");
         curPas = userMaster.getPassword();
         userMaster = userMasterService.readById(userMaster.getId());
-
+        
         List list = employeeMasterService.pswdExist(curPas, userMaster.getId().toString());
         if (!list.isEmpty()) {
             userMaster.setPassword(newPas);
@@ -4051,16 +4038,16 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             mv.setViewName("User/NewPassword");
 //            mv = changePassWordClick(request, response);
         }
-
+        
         return mv;
     }
-
+    
     private void weeklyGenerateShift(RotationMaster rotationMaster, Date rd, ShiftRotationMaster shiftRotationMaster, int days, EmployeeMaster employeeMaster, String shiftMasterId) throws Exception {
         ShiftMaster shiftMaster = new ShiftMaster();
         ShiftMaster shiftMasterForLastDayOfMonth = new ShiftMaster();
-
+        
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
-
+        
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Calendar c = Calendar.getInstance();
         Calendar c1 = Calendar.getInstance();
@@ -4068,13 +4055,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         c.setTime(rd);
         int day = c.getActualMaximum(Calendar.DAY_OF_MONTH);
         List<Integer> rotationArray = new ArrayList<Integer>(day);
-
+        
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
         LocalDate localDate = rd.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int year = localDate.getYear();
         int month = localDate.getMonthValue();
         int dayofmonth = localDate.getDayOfMonth();
-
+        
         Date today = new Date();
         String newDate = sdf.format(today);
         Date ss = sdf.parse(newDate);
@@ -4118,12 +4105,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
                 shiftMasterIdCheckTemp++;
             }
-
+            
             for (i = 1; i <= daysOfCuurentMOnth; i++) {
                 shiftMaster = shiftMasterService.readById(shiftMasterIdList.get(shiftMasterIdCheckCounter));
                 try {
                     if (rotationArray.size() != daysOfCuurentMOnth) {
-
+                        
                         Calendar cal = Calendar.getInstance();
                         SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
                         String newdate = i + "/" + currentMonth + "/" + currentYear;
@@ -4169,7 +4156,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 isLastDayOfMonthIsWeekOff = true;
                                 shiftMasterForLastDayOfMonth = shiftMasterService.readById(shiftMasterIdList.get(shiftMasterIdCheckCounter));
                             }
-
+                            
                         } else {
                             rotationArray.add(shiftMaster.getId());
                         }
@@ -4194,7 +4181,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                count++;
 
             }
-
+            
         }
 
 //        int totalNoOfDay = days - noOfDay;
@@ -4208,7 +4195,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         }
         shiftGenerateMonthlySchedule.setShiftRotationMaster(shiftRotationMaster);
         shiftGenerateMonthlySchedule.setEmployeeMaster(employeeMaster);
-
+        
         try {
             shiftGenerateMonthlySchedule.setDay1(rotationArray.get(0));
             shiftGenerateMonthlySchedule.setDay2(rotationArray.get(1));
@@ -4250,9 +4237,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 shiftGenerateMonthlySchedule.setDay30(rotationArray.get(29));
                 shiftGenerateMonthlySchedule.setDay31(rotationArray.get(30));
             }
-
+            
             shiftGenerateMonthlyScheduleService.create(shiftGenerateMonthlySchedule);
-
+            
         } catch (Exception e) {
             System.out.println("Exception" + e);
         }
@@ -4260,7 +4247,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //        System.out.println("lol");
 //    }
     }
-
+    
     private void shiftGenerateEditWeekly(RotationMaster rotationMaster, Date rd, ShiftRotationMaster shiftRotationMaster, int days, EmployeeMaster employeeMaster, String firstShiftId) throws Exception {
         ShiftMaster shiftMaster = new ShiftMaster();
         ShiftMaster shiftMasterForLastDayOfMonth = new ShiftMaster();
@@ -4281,7 +4268,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String cdayofmonth = "";
         String cmonth = "";
         String cyear = "";
-
+        
         cdayofmonth = "" + c.get(Calendar.DAY_OF_MONTH);
         cmonth = "" + (c.get(Calendar.MONTH) + 1);
         cyear = "" + c.get(Calendar.YEAR);
@@ -4295,7 +4282,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         List<?> list = shiftGenerateMonthlyScheduleService.readByCurrentDateWiseEmployeeShift(shiftGenerateMonthlySchedule);
         if (!list.isEmpty()) {
             shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) list.get(0);
-
+            
         }
         int currentDay = Integer.parseInt(cdayofmonth);
         for (int i1 = 1; i1 < currentDay; i1++) {
@@ -4331,13 +4318,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
                 shiftMasterIdCheckTemp++;
             }
-
+            
             for (int i = currentDay; i <= day; i++) {
-
+                
                 shiftMaster = shiftMasterService.readById(shiftMasterIdList.get(shiftMasterIdCheckCounter));
                 try {
                     if (rotationArray.size() != day) {
-
+                        
                         Calendar cal = Calendar.getInstance();
                         SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
                         String newdate = i + "/" + cmonth + "/" + cyear;
@@ -4383,7 +4370,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 isLastDayOfMonthIsWeekOff = true;
                                 shiftMasterForLastDayOfMonth = shiftMasterService.readById(shiftMasterIdList.get(shiftMasterIdCheckCounter));
                             }
-
+                            
                         } else {
                             rotationArray.add(shiftMaster.getId());
                         }
@@ -4426,10 +4413,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             }
             shiftGenerateMonthlySchedule1.setShiftRotationMaster(shiftRotationMaster);
             shiftGenerateMonthlySchedule1.setEmployeeMaster(employeeMaster);
-
+            
             try {
                 int i1 = 1;
-
+                
                 if (i1 >= dayofmonth) {
                     shiftGenerateMonthlySchedule1.setDay1(rotationArray.get(0));
                 } else {
@@ -4605,7 +4592,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         shiftGenerateMonthlySchedule1.setDay29(shiftGenerateMonthlySchedule.getDay29());
                     }
                 }
-
+                
                 if (day == 30) {
                     i1++;
                     if (i1 >= dayofmonth) {
@@ -4640,19 +4627,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         shiftGenerateMonthlySchedule1.setDay31(shiftGenerateMonthlySchedule.getDay31());
                     }
                 }
-
+                
                 shiftGenerateMonthlyScheduleService.createOrUpdate(shiftGenerateMonthlySchedule1);
             } catch (Exception e) {
                 System.out.println("Exception" + e);
             }
-
+            
             System.out.println("lol");
 
 //    }
         }
-
+        
     }
-
+    
     public ModelAndView formerEmployeeRecords(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -4661,10 +4648,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.getModelMap().put("list", employeeMasterList);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/PastEmployeeRecords");
-
+        
         return mv;
     }
-
+    
     public ModelAndView formalEmployeeExportToExcel(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<?> employeeMasterList = employeeMasterService.readFormerEmployeeDataForexportToExcel();
@@ -4674,7 +4661,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("DocumentView/FormerEmployeeDataToExcel");
         return mv;
     }
-
+    
     public ModelAndView viewOwnProfile(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         String lastYearPerformanceRatingsOfEmployee = "";
@@ -4721,7 +4708,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         hoursBasisList(request);
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s
         List<?> lastYearPerformanceRatingsOfEmployeeList = employeeMasterService.getLastYearPerformanceRatingOfEmployee(id);
-
+        
         lastYearPerformanceRatingsOfEmployee = (lastYearPerformanceRatingsOfEmployeeList.isEmpty()) ? lastYearPerformanceRatingsOfEmployee : String.valueOf(lastYearPerformanceRatingsOfEmployeeList.get(0));
         //set user master id//
         String userid = request.getParameter("userid");
@@ -4743,11 +4730,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 + File.separator + userMaster1.getUserName() + File.separator;
         File certificateListFile = new File(certificateFileLocationURL);
         if (certificateListFile.listFiles() != null) {
-
+            
             for (File sss : certificateListFile.listFiles()) {
                 String aa = sss.getName();
                 certificatesList.add(aa);
-
+                
             }
             if (certificateListFile.exists() && certificateListFile.listFiles().length > 0) {
                 File[] certificateListFileArray = certificateListFile.listFiles();
@@ -4763,30 +4750,30 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("employeeType", employeeMaster.getEmployeeType());
         request.setAttribute("shiftType", employeeMaster.getShiftType());
         request.setAttribute("certificatesList", certificatesList);
-
+        
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/EmployeesOwnProfile");
         return mv;
-
+        
     }
-
+    
     public void downloadEmployeeCertificates(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         String fileName = request.getParameter("fileName");
         String userId = request.getParameter("userId");
-
+        
         UserMaster userMaster = userMasterService.readById(Integer.parseInt(userId));
-
+        
         String certificateFileLocationURL = getServletContext().getRealPath("/")
                 + File.separator + "StorageYard" + File.separator + "UserCertificate"
                 + File.separator + userMaster.getUserName() + File.separator + fileName;
-
+        
         request.setAttribute("filePath", certificateFileLocationURL);
-
+        
         DownloadFile downloadFile = new DownloadFile();
         downloadFile.doDownload(request, response);
     }
-
+    
     public ModelAndView adminChangePassWordClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -4796,7 +4783,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("Employee/EmployeePasswordChange");
         return mv;
     }
-
+    
     public ModelAndView adminChangePassWordSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -4809,7 +4796,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("redirect:employeeMaster.htm?act=searchSubmit");
         return mv;
     }
-
+    
     public ModelAndView inActiveEmployeeClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -4818,10 +4805,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("empId", empId);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/EmployeeInActivePage");
-
+        
         return mv;
     }
-
+    
     public ModelAndView inActiveEmployeeSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -4834,16 +4821,16 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("redirect:employeeMaster.htm?act=searchSubmit");
         return mv;
     }
-
+    
     public ModelAndView readEmpTypeAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         String typeId = request.getParameter("typeId");
         String employeeId = request.getParameter("employeeId");
-
+        
         String empSubTypeId = request.getParameter("empSubTypeId");
-
+        
         if (null == employeeId) {
         } else {
             employeeMaster = employeeMasterService.readById(Integer.parseInt(employeeId));
@@ -4858,7 +4845,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.setViewName("Employee/EmployeeSubTypeAjax");
         return mv;
     }
-
+    
     public ModelAndView printemployeedescription(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -4877,10 +4864,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         mv.getModelMap().put("departmentMaster", departmentMaster);
         mv.getModelMap().put("levelMaster", levelMaster);
         mv.setViewName("Employee/printemployeedescription");
-
+        
         return mv;
     }
-
+    
     public ModelAndView inductionCreateClick(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -4925,25 +4912,25 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         //////////////////set the employee basic detail
         String applicationId = request.getParameter("id");
         String candidateId = request.getParameter("candidateId");
-
+        
         CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
         CandidateApplyJob candidateApplyJob = candidateJobApplyService.readById(Integer.parseInt(candidateId));
-
+        
         employeeMaster.setEmployeeName(candidateApplyJob.getName());
         employeeMaster.setFatherName(candidateApplyJob.getFatherName());
         employeeMaster.setMotherName(candidateApplyJob.getMotherName());
         employeeMaster.setDateOfBirthOfEmpFather(candidateApplyJob.getFatherDob());
         employeeMaster.setDateOfBirthOfEmpMother(candidateApplyJob.getMotherDob());
-
+        
         Boolean Gender = true;
         if ((candidateApplyJob.getSex()).equals("false")) {
             Gender = false;
         }
         employeeMaster.setGender(Gender);
-
+        
         employeeMaster.setMaritalStatus(candidateApplyJob.getMartialStatus());
         employeeMaster.setDateOfBirth(candidateApplyJob.getDob());
-
+        
         employeeMaster.setPresentAddress(candidateApplyJob.getPresentAddress());
         employeeMaster.setPermanentAddress(candidateApplyJob.getPermanentAddress());
         employeeMaster.setCityOfEmployee(candidateApplyJob.getCity());
@@ -4972,7 +4959,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                "Information : The Induction successfully.");
         return mv;
     }
-
+    
     public ModelAndView inductionSubmit(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -4983,7 +4970,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeSubType employeeSubType = new EmployeeSubType();
         BindException errors = new BindException(employeeMaster, "employeeMaster");
         UserMaster userMaster = new UserMaster();
-
+        
         bind(request, employeeMaster);
         //Deopdown List//
         departmentList(request);
@@ -5022,7 +5009,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 //if we directly gettting 'employeeMaster.getUserMaster().getPassword()' its possibility for nullpointer exception.
             }
         }
-
+        
         userMaster.setPassword(password);
         SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
         Date DOB = new Date();
@@ -5030,7 +5017,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         Date DOB1 = new Date();
         if (!"".equals(dateOfJoining)) {
             DOJ = sd.parse(dateOfJoining);
-
+            
         }
         if (!"".equals(dateOfBirth)) {
             DOB = sd.parse(dateOfBirth);
@@ -5060,7 +5047,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 UserMaster user2;
                 user2 = (UserMaster) tempList.get(0);
                 userMasterService.delete(user2.getId());
-
+                
             }
         }
 
@@ -5077,25 +5064,25 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String empFormat = "";
         String month122 = endDateSplited[1];
         String year122 = endDateSplited[2];
-
+        
         List<?> empCodeList = employeeMasterService.readEmployeeCodeAutoGenerate();
         Object[] codeList = (Object[]) empCodeList.get(0);
         String oldempCode = codeList[1].toString();
         String[] oldempCodeSplited = oldempCode.split("/");
         String oldempcodesplit = oldempCodeSplited[4];
         empCodeString = "SPCLS" + "/" + year122 + "/" + month122 + "/" + locationCode + "/" + (Integer.parseInt(oldempcodesplit) + 1);
-
+        
         employeeMaster.setAutoGenerationCode(empCodeString);
         if (employeeMaster.getPfAmount().equals("")) {
             employeeMaster.setPfAmount("0");
         }
-
+        
         if (employeeMaster.getPfAmount().equals("")) {
             employeeMaster.setPfAmount("0");
         }
         employeeMasterValidator.validate(employeeMaster, errors);
         if (errors.hasErrors()) {
-
+            
             String shiftId = request.getParameter("shiftId");
             String shiftMasterId1 = request.getParameter("shiftMasterId");
             String HoursTitle = request.getParameter("shiftHoursId");
@@ -5123,7 +5110,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         } else if (DOJ.before(DOB1)) {
             request.setAttribute("failureMessage",
                     "Error : Enter Valid Date of Joining");
-
+            
             selectEmployee(request, response);
             selectedEmployeeLevel1(request, employeeMaster);
             request.setAttribute("employeeMaster", employeeMaster);
@@ -5159,13 +5146,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //set firstTime is true for compulsory password change on first time login
 
             userMasterService.create(userMaster);
-
+            
             CandidateJobApplication cja = candidateJobApplicationService.readById(Integer.parseInt(applicationId));
 //            ApplayJobUserMaster ajum = applayJobUserMasterService.readById(cja.getApplayJobUserMaster().getId());
 //            ajum.setFirstTime(5);
             cja.setStatus(13);
             candidateJobApplicationService.update(cja);
-
+            
             employeeMasterService.create(employeeMaster);
             //Code for Employee Policy Detail
 //            userMasterService.create(userMaster);
@@ -5278,7 +5265,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             mprApprovalHistory.setCreatedBy(employeeMaster.getId());
             mprApprovalHistory.setApplicationId(Integer.parseInt(applicationId));
             mprApprovalHistoryService.create(mprApprovalHistory);
-
+            
             PmpFormStatusMaster pmpFormStatusMaster = new PmpFormStatusMaster();
             pmpFormStatusMaster.setEmployeeMaster(employeeMaster);
             pmpFormStatusMaster.setStartYearStatus(false);
@@ -5317,7 +5304,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     isLeapYear = true;
                 }
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
+                
                 Date date1 = sdf.parse(dateOfJoining);
                 Date date3 = new Date();
                 cal1.setTime(date1);
@@ -5387,9 +5374,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         employeeLeaveBalance.setNoOfLeaveRemain(LWP);
                     }
                 }
-
+                
                 employeeLeaveBalanceService.create(employeeLeaveBalance);
-
+                
             }
             ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
             ShiftRotationInfo shiftRotationInfo1 = new ShiftRotationInfo();
@@ -5398,23 +5385,23 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                UserMaster userMaster = (UserMaster) request.getAttribute("userMaster");
 //                String shiftMasterId = request.getAttribute("shiftMasterId").toString();
             if (null != shiftMasterId && !"".equals(shiftMasterId)) {
-
+                
                 shiftRotationInfo.setFirstShiftId(Integer.parseInt(shiftMasterId));
                 shiftRotationInfo.setUserMaster(userMaster);
-
+                
                 List<?> list = shiftRotationInfoService.readRotaionDetail(shiftRotationInfo);
                 if (!list.isEmpty()) {
-
+                    
                     shiftRotationInfo = (ShiftRotationInfo) list.get(0);
                 }
                 if (shiftRotationInfo.getId() == null) {
                     shiftRotationMaster.setId(employeeMaster.getShiftHoursId());
                     shiftRotationInfo.setShiftRotationMaster(shiftRotationMaster);
                     shiftRotationInfo.setRotationDate(employeeMaster.getShiftRotationDate());
-
+                    
                     shiftRotationInfoService.create(shiftRotationInfo);
                 }
-
+                
             }
 //        Code for Shift generate monthly Schedule(Start)
 //                if (employeeMaster.getShiftType().equals("ShiftBase")) {
@@ -5443,7 +5430,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 int day = c.getActualMaximum(Calendar.DAY_OF_MONTH);
                 RotationMaster rotationMaster = new RotationMaster();
                 rotationMaster.setShiftRotationMaster(shiftRotationMaster);
-
+                
                 if ("monthly".equals(duration) && day == 30) {
                     weeklyGenerate(rotationMaster, rd, shiftRotationMaster, 30, employeeMaster, shiftMasterId);
                 } else if ("weekly".equals(duration)) {
@@ -5478,7 +5465,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 File[] profilePictureArray = profilePictureFile.listFiles();
                 profilePictureArray[0].delete();//if file exist then delete it.
             }
-
+            
             if (!profilePictureFile.exists()) {
                 profilePictureFile.mkdir();//make directory for first time user creation.
             }
@@ -5501,11 +5488,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 //null if there is no photograph in form.
                 //this condition checking not required if photograph field is compulsary in form.
                 try {
-
+                    
                     File file2 = new File(fileLocationURL + multipartFile.getOriginalFilename().replaceAll(" ", ""));
                     multipartFile.transferTo(file2);
                 } catch (Exception e) {
-
+                    
                 }
             }
 
@@ -5534,16 +5521,16 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         File file3 = new File(certificateFileLocationURL + multipartFile1.getOriginalFilename().replaceAll(" ", ""));
                         multipartFile1.transferTo(file3);
                     } catch (Exception e) {
-
+                        
                     }
                 }
-
+                
             }
 
 //            Certificate attach code
             //now setting default right as employee.
             setDefaultUserRights(request, employeeMaster);
-
+            
             request.setAttribute("successMessage",
                     "Information : The Information Is Saved Successfully."
                     + "<br/>"
@@ -5580,7 +5567,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     "Error : User isExist.");
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Employee/EmployeeInductionForm");
-
+            
         }
 //            mv.getModelMap().put("userMaster", userMaster);
 //            mv.getModelMap().put("shiftMasterId", shiftMasterId);
@@ -5593,27 +5580,27 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //            }
         mv.getModelMap().put("employeeMaster", employeeMaster);
         return mv;
-
+        
     }
-
+    
     public ModelAndView excelUploadAllowanceSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartRequest.getFile("file1");
         PolicyMaster policyMaster = new PolicyMaster();
-
+        
         String employeeNo = "";
         String employeeName = "";
-
+        
         List<String> list = (List<String>) policyMasterService.readPolicyName();
-
+        
         if (multipartFile.getSize() > 0) {
             InputStream file = multipartFile.getInputStream();
             Workbook workbook = WorkbookFactory.create(file);
             Sheet sheet = workbook.getSheetAt(0);
             int totalCol = 2;
             for (Row row : sheet) {
-
+                
                 int i = 2;
                 if (row.getRowNum() == 0) {
                     try {
@@ -5623,7 +5610,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         employeeNo = "" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0));
                     }
                     employeeName = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
-
+                    
                     while (null != row.getCell(i) && " " != row.getCell(i).toString() && !row.getCell(i).toString().replace(" ", "").isEmpty()) {
                         XSSFCell cell = (XSSFCell) row.getCell(i);
                         XSSFCell cell1 = (XSSFCell) row.getCell(i + 1);
@@ -5635,61 +5622,61 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         totalCol += 2;
                     }
                 } else {
-
+                    
                     List<PolicyMaster> list1 = (List<PolicyMaster>) policyMasterService.read();
                     Map<String, Integer> result = list1.stream().collect(Collectors.toMap(PolicyMaster::getPolicyName, PolicyMaster::getId));
                     Map<String, Integer> result1 = result.entrySet().stream()
                             .collect(Collectors.toMap(entry -> entry.getKey().toUpperCase(), entry -> entry.getValue()));
                     Row firstHeaderRow = sheet.getRow(0);
-
+                    
                     EmployeeMaster empMaster = new EmployeeMaster();
-
+                    
                     if (null != row.getCell(0) && " " != row.getCell(0).toString() && !row.getCell(0).toString().replace(" ", "").isEmpty()) {
-
+                        
                         String empNo = row.getCell(0).toString();
-
+                        
                         XSSFCell empName = (XSSFCell) row.getCell(1);
-
+                        
                         UserMaster um = new UserMaster();
                         String[] abc = empNo.split("\\.");
                         um.setUserName(abc[0]);
-
+                        
                         List<?> empId = userMasterService.readByUserName(um);
-
+                        
                         if (!empId.isEmpty() && 0 != empId.size() && null != empId) {
-
+                            
                             um = (UserMaster) empId.get(0);
                             empMaster.setUserMaster(um);
                             List<?> emp = employeeMasterService.readByUserName(empMaster);
                             if (!emp.isEmpty() && 0 != emp.size() && null != emp) {
                                 empMaster = (EmployeeMaster) emp.get(0);
                             }
-
+                            
                         }
-
+                        
                         for (int y = 2; y < totalCol; y += 2) {
 
 //                        while (null != row.getCell(y) && " " != row.getCell(y).toString() && !row.getCell(y).toString().replace(" ", "").isEmpty()) {
                             EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
-
+                            
                             XSSFCell cell = (XSSFCell) row.getCell(y); // amount
                             XSSFCell cell1 = (XSSFCell) row.getCell(y + 1); // yes or no
 
                             if (null != row.getCell(y) && " " != row.getCell(y).toString() && !row.getCell(y).toString().replace(" ", "").isEmpty()) {
                                 employeePolicyDetail.setAmount(Double.parseDouble(cell.toString().replaceAll(",", "")));
-
+                                
                                 if (cell1.toString().equalsIgnoreCase("yes")) {
                                     employeePolicyDetail.setStatus(1);
                                 } else if (cell1.toString().equalsIgnoreCase("no")) {
                                     employeePolicyDetail.setStatus(0);
                                 } else {
-
+                                    
                                 }
                                 String policyName = (String) firstHeaderRow.getCell(y).toString();
                                 policyMaster.setId(result1.get(policyName.toUpperCase()));
                                 employeePolicyDetail.setPolicyMaster(policyMaster);
                                 employeePolicyDetail.setEmployeeMaster(empMaster);
-
+                                
                                 List<?> l = employeePolicyDetailService.readForMasterAdditionalAmount(empMaster.getId(), policyMaster.getId());
                                 Integer id = 0;
                                 if (!l.isEmpty() && 0 != l.size() && null != l) {
@@ -5707,7 +5694,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 policyMaster.setId(result1.get(policyName.toUpperCase()));
                                 employeePolicyDetail.setPolicyMaster(policyMaster);
                                 employeePolicyDetail.setEmployeeMaster(empMaster);
-
+                                
                                 List<?> l = employeePolicyDetailService.readForMasterAdditionalAmount(empMaster.getId(), policyMaster.getId());
                                 Integer id = 0;
                                 if (!l.isEmpty() && 0 != l.size() && null != l) {
@@ -5722,17 +5709,17 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                        }
                     }
                 }
-
+                
             }
         }
         request.setAttribute(
                 "successMessage",
                 "Information : The Information is saved Successfully.");
         mv = excelUploadAllowance(request, response);
-
+        
         return mv;
     }
-
+    
     public void deletePolicy(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             int policyId = Integer.parseInt(request.getParameter("policyId"));
@@ -5741,7 +5728,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             System.out.println("error");
         }
     }
-
+    
     public void deleteCtcId(HttpServletRequest request, HttpServletResponse response) throws Exception {
         try {
             int empCtcId = Integer.parseInt(request.getParameter("empCtcId"));

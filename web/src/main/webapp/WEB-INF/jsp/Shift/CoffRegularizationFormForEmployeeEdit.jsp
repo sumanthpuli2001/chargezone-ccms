@@ -59,10 +59,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>C-OFF REGULARIZATION FORM  </h1>
+            <h1>LIEU DAY REGULARIZATION FORM  </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">C-OFF Regularization</li>
+                <li class="active">Lieu Day Regularization</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -193,8 +193,8 @@
                                                             <form:select path="coffType" class="form-control">
                                                                 <!--<option value="">--SELECT--</option>-->
                                                                 <form:option value="" label="-- Select --" ></form:option>
-                                                                <form:option value="Half Coff" label="Half Coff"></form:option>
-                                                                <form:option value="Full Coff" label="Full Coff"></form:option>
+                                                                <form:option value="Half Lieu Day" label="Half Lieu Day"></form:option>
+                                                                <form:option value="Full Lieu Day" label="Full Lieu Day"></form:option>
                                                             </form:select>
                                                             <%--<form:errors path="shiftType" cssClass="errorDiv"></form:errors>--%>
                                                         </div>

@@ -69,7 +69,7 @@
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <input type="hidden" value="${leaveTypeMaster.departmentMaster.id}" name="DeptID">
-                                                      <%--<form:input path="departmentMaster" class="form-control" type="hidden"></form:input>--%>
+                                                    <%--<form:input path="departmentMaster" class="form-control" type="hidden"></form:input>--%>
                                                     <label>Leave Type:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <form:input path="leaveType" class="form-control" placeholder="Enter Leave Type"></form:input>
                                                     <form:errors path="leaveType" cssClass="errorDiv"></form:errors>
@@ -86,10 +86,16 @@
                                                     <form:input path="maxDayAllowedLeave" class="form-control" size="16" type="number" value="" min="0"></form:input>
                                                     <form:errors path="maxDayAllowedLeave" cssClass="errorDiv"></form:errors>
                                                     </div>
-
+                                                    <div class=" col-sm-6">
+                                                        <label>Use as a Sick Leave:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                        <fieldset id="group1">
+                                                        <form:radiobutton path="useAsSickLeave" value="true"/>Yes&nbsp;&nbsp;
+                                                        <form:radiobutton path="useAsSickLeave" value="false" checked="checked"/>No
+                                                    </fieldset>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <label>SandWich Leave Apply:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label>SandWich Leave Apply:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
                                                     <%--<form:select path="gender" id="gender" class="form-control">--%>
                                                 <fieldset id="group1">
                                                     <form:radiobutton path="sandwichLeave" value="true"/>Yes&nbsp;&nbsp;

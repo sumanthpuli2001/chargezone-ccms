@@ -15,6 +15,7 @@ import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeCtcDetail;
 import com.bul.zydex.model.EmployeeCtcDetailSalary;
 import com.bul.zydex.model.EmployeeDeductionAmount;
+import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.EmployeeTypeMaster;
@@ -49,7 +50,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author dhruv
  */
 public class ResignationMasterController extends ResignationMasterAbstract {
-
+    
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ResignationMaster resignationMaster = new ResignationMaster();
@@ -76,23 +77,23 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         request.setAttribute("currentDate", currentDate);
         mv.getModelMap().put("resignationMaster", resignationMaster);
         mv.setViewName("Resignation/ResignationCreate");
-
+        
         return mv;
     }
-
+    
     public void employeeAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        
         int empId = Integer.parseInt(request.getParameter("empId"));
         List<?> list = employeeMasterService.readEmployeeAjax(empId);
         String listString = "";
-
+        
         String tempStr = "";
         Object[] arrayOfObject;
-
+        
         boolean flag = false;
         for (Iterator<? extends Object> it = list.iterator(); it.hasNext();) {
             arrayOfObject = (Object[]) it.next();
-
+            
             if (flag) {
                 tempStr += ", ";
             }
@@ -105,12 +106,12 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                     + "/" + arrayOfObject[5]
                     + "/" + arrayOfObject[6] + "";
         }
-
+        
         PrintWriter out = response.getWriter();
         out.write(tempStr);
-
+        
     }
-
+    
     public ModelAndView submitResignation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         final Boolean RESIGNATION_GENERATED_FLAG = true;
         ModelAndView mv = new ModelAndView();
@@ -164,7 +165,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
                 request.setAttribute("successMessage",
                         "Information : The Information is saved Successfully.");
@@ -174,6 +175,15 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                         "Error :You Have Already Submit Your Resignation...");
                 mv.setViewName("forward:userMaster.htm?act=goToDashboard");
             }
+            
+            List<?> list1 = employeeLeaveBalanceService.readEmpId(id);
+            EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+            for (Object o : list1) {
+                employeeLeaveBalance = (EmployeeLeaveBalance) o;
+                employeeLeaveBalance.setNoOfLeaveRemain(0);
+                employeeLeaveBalanceService.update(employeeLeaveBalance);
+            }
+            
         }
         request.setAttribute("list", list);
         request.setAttribute("employeeMaster", employeeMaster1);
@@ -202,7 +212,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         int id = Integer.parseInt(request.getParameter("id"));
         int empid = Integer.parseInt(request.getParameter("EmpId"));
-
+        
         List<?> list = employeeMasterService.readEmployeeAjax(empid);
         resignationMaster = resignationMasterService.readById(id);
         employeeMaster = employeeMasterService.readById(empid);
@@ -271,7 +281,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
         }
         if ("SUBMIT".equals(ButtonType)) {
@@ -301,9 +311,9 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
-
+            
         }
 //        if ("WITHDRAWSUBMIT".equals(ButtonType)) {
 //            resignationMaster.setStatus(8);
@@ -337,7 +347,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         int id = Integer.parseInt(request.getParameter("id"));
         int empid = Integer.parseInt(request.getParameter("EmpId"));
-
+        
         List<?> list = employeeMasterService.readEmployeeAjax(empid);
         resignationMaster = resignationMasterService.readById(id);
         employeeMaster = employeeMasterService.readById(empid);
@@ -392,12 +402,12 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 String Subject = emailTemplate.getSubject();
                 Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
                 String msg = emailTemplate.getBodytext();
-
+                
                 msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
-
+                
                 String name = "Resignation";
                 EmailAddMaster emailAddMaster = new EmailAddMaster();
                 emailAddMaster.setModuleName(name);
@@ -417,18 +427,18 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                             msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                             msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                             sendMail.sendMail(from1, To1, subject1, msg1);
-
+                            
                             List<?> gmOrStateHeadMailSend = employeeMasterService.readForSendMailToAll(employeeRequestee);
                             if (!gmOrStateHeadMailSend.isEmpty()) {
                                 Object[] emaillist = (Object[]) gmOrStateHeadMailSend.get(0);
                                 for (int i = 0; i <= emaillist.length; i++) {
                                     if (null != emaillist[i] && "" != emaillist[i]) {
                                         String emailid = emaillist[i].toString();
-
+                                        
                                         String To3 = emailid;
                                         String from3 = employeeMasterModel.getOfficeEmailId();
                                         String subject3 = emailTemplate.getSubject();
-
+                                        
                                         subject3 = subject3.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
                                         String msg3 = emailTemplate.getBodytext();
                                         msg3 = msg3.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
@@ -441,9 +451,9 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                         }
                     }
                 }
-
+                
             } catch (Exception e) {
-
+                
             }
             //    Email Sent to HR(Having EmployeeExit Rights)
             List<?> ListforEmployeeExitRights = userRightMasterService.readEmployeeExitRightsList();
@@ -471,7 +481,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
             }
         }
@@ -501,7 +511,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
         }
         if ("APPROVEWITHDRAW".equals(ButtonType)) {
@@ -530,7 +540,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
             } else {
                 resignationMaster.setStatus(7);
@@ -557,7 +567,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
                 //    Email Sent to HR(Having EmployeeExit Rights)
                 List<?> ListforEmployeeExitRights = userRightMasterService.readEmployeeExitRightsList();
@@ -585,7 +595,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                         sendMail.sendMail(from, To, Subject, msg);
                     } catch (Exception e) {
-
+                        
                     }
                 }
             }
@@ -617,7 +627,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
                 //    Email Sent to HR(Having EmployeeExit Rights)
                 List<?> ListforEmployeeExitRights = userRightMasterService.readEmployeeExitRightsList();
@@ -645,7 +655,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                         sendMail.sendMail(from, To, Subject, msg);
                     } catch (Exception e) {
-
+                        
                     }
                 }
             } else {
@@ -673,7 +683,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
                 } catch (Exception e) {
-
+                    
                 }
                 //    Email Sent to HR(Having EmployeeExit Rights)
                 List<?> ListforEmployeeExitRights = userRightMasterService.readEmployeeExitRightsList();
@@ -701,7 +711,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                         sendMail.sendMail(from, To, Subject, msg);
                     } catch (Exception e) {
-
+                        
                     }
                 }
             }
@@ -721,7 +731,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("Resignation/HrResult");
         return mv;
     }
-
+    
     public ModelAndView Hrview(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ResignationMaster resignationMaster = new ResignationMaster();
@@ -729,7 +739,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         int id = Integer.parseInt(request.getParameter("id"));
         int empid = Integer.parseInt(request.getParameter("EmpId"));
-
+        
         List<?> list = employeeMasterService.readEmployeeAjax(empid);
         resignationMaster = resignationMasterService.readById(id);
         employeeMaster = employeeMasterService.readById(empid);
@@ -742,7 +752,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("Resignation/Hrview");
         return mv;
     }
-
+    
     public ModelAndView HRApprove(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ResignationMaster resignationMaster = new ResignationMaster();
@@ -771,7 +781,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
 //            mv = Hrview(request, response);
 //        }else{
             resignationMaster.setStatus(4);
-
+            
             resignationMasterService.update(resignationMaster);
             employeeMaster = employeeMasterService.readById(empId);
             employeeMaster.setDateOfLeaving(resignationMaster.getRelievingDate());
@@ -799,7 +809,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
-
+                
                 String name = "Resignation";
                 EmailAddMaster emailAddMaster = new EmailAddMaster();
                 emailAddMaster.setModuleName(name);
@@ -819,18 +829,18 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                             msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                             msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                             sendMail.sendMail(from1, To1, subject1, msg1);
-
+                            
                             List<?> gmOrStateHeadMailSend = employeeMasterService.readForSendMailToAll(employeeRequestee);
                             if (!gmOrStateHeadMailSend.isEmpty()) {
                                 Object[] emaillist = (Object[]) gmOrStateHeadMailSend.get(0);
                                 for (int i = 0; i <= emaillist.length; i++) {
                                     if (null != emaillist[i] && "" != emaillist[i]) {
                                         String emailid = emaillist[i].toString();
-
+                                        
                                         String To3 = emailid;
                                         String from3 = employeeMasterModel.getOfficeEmailId();
                                         String subject3 = emailTemplate.getSubject();
-
+                                        
                                         subject3 = subject3.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
                                         String msg3 = emailTemplate.getBodytext();
                                         msg3 = msg3.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
@@ -840,12 +850,12 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                                     }
                                 }
                             }
-
+                            
                         }
                     }
                 }
             } catch (Exception e) {
-
+                
             }
             //    Email Sent to ReportingManager1
             try {
@@ -869,16 +879,16 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
 
 //        }
         }
         if ("RETURN".equals(ButtonType)) {
             resignationMaster.setStatus(6);
-
+            
             resignationMasterService.update(resignationMaster);
-
+            
             request.setAttribute("successMessage",
                     "Information : Resignation Returned Successfully.");
             mv = HRResult(request, response);
@@ -902,7 +912,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
             //    Email Sent to ReportingManager1
             try {
@@ -926,7 +936,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
         }
         if ("WITHDRAWAPPROVE".equals(ButtonType)) {
@@ -970,7 +980,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
             //    Email Sent to ReportingManager1
             try {
@@ -994,9 +1004,9 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
-
+            
         }
         if ("WITHDRAWREJECT".equals(ButtonType)) {
             resignationMaster.setStatus(11);
@@ -1028,7 +1038,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
             //    Email Sent to ReportingManager1
             try {
@@ -1052,12 +1062,12 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
             } catch (Exception e) {
-
+                
             }
         }
         return mv;
     }
-
+    
     public ModelAndView userDashboardResignationPendingRequest(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -1071,7 +1081,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("forward:expenseMaster.htm?act=userDashboardExpensePendingRequest");
         return mv;
     }
-
+    
     public ModelAndView submitEmployeeWiseSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ResignationMaster resignationMaster = new ResignationMaster();
@@ -1093,14 +1103,14 @@ public class ResignationMasterController extends ResignationMasterAbstract {
             resignationMaster.setManagerComment(designationId);
         }
         List<?> SearchRequestResultList = resignationMasterService.readSearchRequest(resignationMaster);
-
+        
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.addObject("SearchRequestResultList", SearchRequestResultList);
 //        mv.setViewName("NoDues/EmployeeWiseExitSearch");
         mv.setViewName("Resignation/hrSearch");
         return mv;
     }
-
+    
     public ModelAndView searchresult(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         NoDueMaster noDueMaster = new NoDueMaster();
@@ -1128,19 +1138,19 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("Resignation/hrSearch");
         return mv;
     }
-
+    
     public ModelAndView managerSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ResignationMaster resignationMaster = new ResignationMaster();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         selectEmployee(request, response);
-
+        
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("NoDues/EmployeeWiseExitSearch");
         mv.setViewName("Resignation/managerSearch");
         return mv;
     }
-
+    
     public ModelAndView managerSearchResult(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ResignationMaster resignationMaster = new ResignationMaster();
@@ -1152,7 +1162,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("Resignation/managerSearchResult");
         return mv;
     }
-
+    
     public ModelAndView printClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         ResignationMaster resignationMaster = new ResignationMaster();
@@ -1160,7 +1170,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         int id = Integer.parseInt(request.getParameter("id"));
         int empid = Integer.parseInt(request.getParameter("empId"));
-
+        
         List<?> list = employeeMasterService.readEmployeeAjax(empid);
         resignationMaster = resignationMasterService.readById(id);
         employeeMaster = employeeMasterService.readById(empid);
@@ -1173,7 +1183,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("Resignation/PrintView");
         return mv;
     }
-
+    
     public ModelAndView exportToExcelResignation(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         List<?> resignationResultSessionList = (List<?>) request.getSession().getAttribute("resignationResultSessionList");
@@ -1183,9 +1193,9 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("Resignation/ResignationHrResultExcel");
         return mv;
     }
-
+    
     private synchronized void reportingManagerChangeCheck() throws Exception {
-
+        
         List<?> list = resignationMasterService.read();
         for (Object o : list) {
             ResignationMaster resignationMaster = (ResignationMaster) o;
@@ -1204,33 +1214,33 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                     }
                 }
             }
-
+            
         }
-
+        
     }
-
+    
     public ModelAndView fullAndfinal(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
-
+        
         FullAndFinalSettlement fullAndFinalSettlement = new FullAndFinalSettlement();
-
+        
         List<?> fullAndFinalSettlementList = fullAndFinalSettlementService.readFAndFData();
-
+        
         mv.getModelMap().put("list", fullAndFinalSettlementList);
         mv.getModelMap().put("fullAndFinalSettlement", fullAndFinalSettlement);
         mv.setViewName("Resignation/ListFullAndFinal");
         return mv;
     }
-
+    
     public ModelAndView fullAndfinalSettlement(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
         FullAndFinalSettlement fullAndFinalSettlement = new FullAndFinalSettlement();
         bind(request, fullAndFinalSettlement);
-
+        
         EmployeeMaster employeeMaster = new EmployeeMaster();
         selectResignedEmployee(request, response);
         selectedEmployeeFor360Feedback(request, employeeMaster);
@@ -1239,9 +1249,9 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("Resignation/FullAdFinaSettlementl");
         return mv;
     }
-
+    
     public ModelAndView fullAndFinalSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         FullAndFinalSettlement fullAndFinalSettlement = new FullAndFinalSettlement();
@@ -1254,26 +1264,26 @@ public class ResignationMasterController extends ResignationMasterAbstract {
             BindException errors = new BindException(fullAndFinalSettlement, "fullAndFinalSettlement");
             bind(request, fullAndFinalSettlement);
             departmentList(request);
-
+            
             fullAndFinalSettlementValidator.validate(fullAndFinalSettlement, errors);
             if (errors.hasErrors()) {
                 request.setAttribute("failureMessage",
                         " field are Required.Please Enter Valid data");
                 mv = fullAndfinalSettlement(request, response);
-
+                
             } else {
-
+                
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 Date cDate = new Date();
                 fullAndFinalSettlement.setEmployeeMaster(employeeMaster1);
                 fullAndFinalSettlement.setCreatedDate(sdf.format(cDate));
                 fullAndFinalSettlement.setCreatedBy(employeeMaster.getId());
                 fullAndFinalSettlement.setStatus(0);
-
+                
                 fullAndFinalSettlementService.create(fullAndFinalSettlement);
                 request.setAttribute("successMessage",
                         "Information : The Information is Updated Successfully.");
-
+                
                 mv = fullAndfinal(request, response);
                 return mv;
             }
@@ -1283,18 +1293,18 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv = fullAndfinalSettlement(request, response);
         return mv;
     }
-
+    
     public ModelAndView ViewfullAndfinalSettlement(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         FullAndFinalSettlement fullAndFinalSettlement = new FullAndFinalSettlement();
         DesignationMaster designationMaster = new DesignationMaster();
         DepartmentMaster departmentMaster = new DepartmentMaster();
-
+        
         String id = request.getParameter("id");
         fullAndFinalSettlement = fullAndFinalSettlementService.readById(Integer.parseInt(id));
-
+        
         employeeMaster = employeeMasterService.readById(fullAndFinalSettlement.getEmployeeMaster().getId());
         ResignationMaster rm = resignationMasterService.readByEmpId(fullAndFinalSettlement.getEmployeeMaster().getId());
         List<?> ListBW = resignationMasterService.fetchBWdate(rm.getEmployeeMaster().getId(), rm.getEffectiveDatetime(), rm.getRelievingDate());
@@ -1322,7 +1332,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         Double bounsdata = 0.0;
         Float leavedaysfetch = 0.0F;
         Float workingDays = 0.0F;
-
+        
         for (int i = 0; i < ctcDetail.size(); i++) {
             Object[] o = (Object[]) ctcDetail.get(i);
             if ((Integer.parseInt(o[1].toString()) == 2)) {
@@ -1346,13 +1356,13 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 totalMonthlyAmount6 += Double.valueOf(amount1);
             }
         }
-
+        
         for (int i = 0; i < ListBW.size(); i++) {
             Object[] o = (Object[]) ListBW.get(i);
             Double reafmowise = (Double) o[1];
             mmmm += Double.valueOf(reafmowise);
         }
-
+        
         for (int i = 0; i < Gratuiety.size(); i++) {
             Object[] o = (Object[]) Gratuiety.get(i);
             Double reafmowise1 = (Double) o[2];
@@ -1382,11 +1392,11 @@ public class ResignationMasterController extends ResignationMasterAbstract {
             Double workingdy = (Double) o[7];
             salaryamount += Double.valueOf(workingdy);
         }
-
+        
         Double amountCount = salaryamount / 30;
-
+        
         Float leavedayscount = workingDays - leavedaysfetch;
-
+        
         Double totalLyamountCount = amountCount * leavedayscount;
 
 //       ///// --------   For Salary For The Month of -------//////
@@ -1411,13 +1421,13 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         int year2 = cal.get(cal.YEAR);
         int diffYear = year2 - Integer.parseInt(birthyear);
         if (diffYear >= 5) {
-
+            
             String basicSlary = employeeMaster.getBasicSalary();
-
+            
             double gradudityamount = Double.parseDouble(basicSlary) * 15 / 26;
             gradudityamount1 = gradudityamount * diffYear;
             monthAmountTotal += gradudityamount1;
-
+            
         }
 
 //        --------  (B) TOTAL PAYABLES ------------   //////
@@ -1430,13 +1440,13 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         Integer uniformDeduction = fullAndFinalSettlement.getUniformDeduction();
         Integer otherDeduction = fullAndFinalSettlement.getOtherDeduction();
         Integer noticePeriodRecovery = fullAndFinalSettlement.getNoticePeriodRecovery();
-
+        
         Integer totaldeduction = noticePeriodRecovery + shoesDeduction + uniformDeduction + otherDeduction;
-
+        
         int designation = employeeMaster.getDesignationMaster().getId();
         designationMaster = designationMasterService.readById(designation);
         String designationName = designationMaster.getDesignationName();
-
+        
         int department = employeeMaster.getDepartmentMaster().getId();
         departmentMaster = departmentMasterService.readById(department);
         String departmentName = departmentMaster.getDepartmentName();
@@ -1444,10 +1454,10 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         List list22 = displaymorNotesService.read();
         for (Object o : list22) {
             displaymorNotes = (DisplaymorNotes) o;
-
+            
         }
         String notes = displaymorNotes.getPayrollNotes();
-
+        
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("rm", rm);
 //        mv.getModelMap().put("esp", esp);
@@ -1477,12 +1487,12 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         request.setAttribute("notes", notes);
         request.setAttribute("gradudityamount1", gradudityamount1);
         mv.setViewName("Resignation/FullAndFinaSettlementReportShow");
-
+        
         return mv;
     }
-
+    
     public ModelAndView fullandfcreateClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
         FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
         List<?> list = formateFullNdFinalLetterService.fetchFnFDate();
@@ -1491,9 +1501,9 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("FullAndFinal/FullAndFinalFetchList");
         return mv;
     }
-
+    
     public ModelAndView newFormatCreate(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
         FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
         EmployeeMaster employeeMaster = new EmployeeMaster();
@@ -1506,61 +1516,61 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         mv.setViewName("FullAndFinal/NewFormatCraeteFndF");
         return mv;
     }
-
+    
     public ModelAndView submitCraeteFormat(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
         FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(formateFullNdFinalLetter, "formateFullNdFinalLetter");
         bind(request, formateFullNdFinalLetter);
-
+        
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
-
+        
         formateFullNdFinalLetter.setCreateDate(sdf.format(cDate));
         formateFullNdFinalLetter.setCreatedBy(employeeMaster.getId());
         formateFullNdFinalLetter.setStatus(0);
         formateFullNdFinalLetterService.create(formateFullNdFinalLetter);
-
+        
         request.setAttribute("successMessage",
                 "Information: The Format Full And Final Settlement Create successfully");
-
+        
         List<?> list = formateFullNdFinalLetterService.fetchFnFDate();
         mv.getModelMap().put("list", list);
         mv.getModelMap().put("formateFullNdFinalLetter", formateFullNdFinalLetter);
         mv.setViewName("FullAndFinal/FullAndFinalFetchList");
-
+        
         return mv;
     }
-
+    
     public ModelAndView EditViewSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
         FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
         EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         BindException errors = new BindException(formateFullNdFinalLetter, "formateFullNdFinalLetter");
         bind(request, formateFullNdFinalLetter);
-
+        
         FormateFullNdFinalLetter ffnfl = formateFullNdFinalLetterService.readById(formateFullNdFinalLetter.getId());
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
-
+        
         formateFullNdFinalLetter.setUpdatedDate(sdf.format(cDate));
         formateFullNdFinalLetter.setUpdatedBy(employeeMaster.getId());
         formateFullNdFinalLetter.setCreatedBy(ffnfl.getCreatedBy());
         formateFullNdFinalLetter.setCreateDate(ffnfl.getCreateDate());
         formateFullNdFinalLetter.setStatus(1);
         formateFullNdFinalLetterService.update(formateFullNdFinalLetter);
-
+        
         request.setAttribute("successMessage",
                 "Information: The Format Full And Final Settlement updated successfully");
-
+        
         mv = fullandfcreateClick(request, response);
-
+        
         return mv;
     }
-
+    
     public ModelAndView resignationDeleteList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String empId[] = request.getParameterValues("checkId");
@@ -1570,47 +1580,47 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 request.setAttribute("successMessage",
                         "Info : One or more records are deleted successfully.");
             } catch (Exception e) {
-
+                
             }
         }
         mv = fullAndfinal(request, response);
         return mv;
     }
-
+    
     public ModelAndView viewFullndfinle(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
         FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         selectEmployee(request, response);
         selectedEmployeeFor360Feedback(request, employeeMaster);
-
+        
         String id = request.getParameter("id");
         formateFullNdFinalLetter = formateFullNdFinalLetterService.readById(Integer.parseInt(id));
-
+        
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("formateFullNdFinalLetter", formateFullNdFinalLetter);
         mv.setViewName("FullAndFinal/viewformatepage");
         return mv;
     }
-
+    
     public ModelAndView editView(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
+        
         ModelAndView mv = new ModelAndView();
         FormateFullNdFinalLetter formateFullNdFinalLetter = new FormateFullNdFinalLetter();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         selectEmployee(request, response);
         selectedEmployeeFor360Feedback(request, employeeMaster);
-
+        
         String id = request.getParameter("id");
         formateFullNdFinalLetter = formateFullNdFinalLetterService.readById(Integer.parseInt(id));
-
+        
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("formateFullNdFinalLetter", formateFullNdFinalLetter);
         mv.setViewName("FullAndFinal/EditViewFormatePage");
         return mv;
     }
-
+    
     public ModelAndView formateLetterDeleteList(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String[] empId = request.getParameterValues("checkId");
@@ -1620,23 +1630,23 @@ public class ResignationMasterController extends ResignationMasterAbstract {
                 request.setAttribute("successMessage",
                         "Info : One or more records are deleted successfully.");
             } catch (Exception e) {
-
+                
             }
         }
         mv = fullandfcreateClick(request, response);
         return mv;
     }
-
+    
     public void readPeriodAjx(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         String typeId = request.getParameter("typeId");
-
+        
         employeeMaster = employeeMasterService.readById(Integer.parseInt(typeId));
         ResignationMaster rm = resignationMasterService.readByEmpId(Integer.parseInt(typeId));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
+        
         String leavingdate = employeeMaster.getDateOfLeaving();
 //        String leavingdateyear = leavingdate.substring(6, 10);
 //        String leavingdatemonth = leavingdate.substring(3, 5);
@@ -1663,7 +1673,7 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         c1.set(leavingdateyear, leavingdatemonth, leavingdateDay);
         Calendar c2 = Calendar.getInstance();
         c2.set(relevingyear1, relevingmonth1, relevingDay1);
-
+        
         Date d1 = c1.getTime();
         Date d2 = c2.getTime();
         int noofdays = 0;

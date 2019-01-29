@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.leave;
 
 import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.LeaveEmployeeDetail;
 import java.util.List;
 
 /**
@@ -82,5 +83,8 @@ public interface LeaveEmployeeDetailDAO<T> extends GenericsDAO<T> {
 
     public List<?> viewEmpLeaveRequestForHR();
 
+    public List<?> readLeaveDaysAsApproved(LeaveEmployeeDetail leaveEmployeeDetail);
+
+    
     public Boolean readPreviousLeaveFriday(String fdate, int empId);
 }

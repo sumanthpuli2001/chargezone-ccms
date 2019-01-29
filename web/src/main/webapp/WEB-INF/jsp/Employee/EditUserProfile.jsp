@@ -13,15 +13,15 @@
         <title>Employee Edit</title>
     </head>
     <style>
-            #tabs{ margin: 20px -20px; border: none; }
-            #tabs, #ui-datepicker-div, .ui-datepicker{ font-size: 85%; }
-            .clear{ clear: both; }
+        #tabs{ margin: 20px -20px; border: none; }
+        #tabs, #ui-datepicker-div, .ui-datepicker{ font-size: 85%; }
+        .clear{ clear: both; }
 
-            /*.example-container{ background-color: #f4f4f4; border-bottom: solid 2px #777777; margin: 0 0 20px 40px; padding: 20px; }*/
-            /*.example-container input{ border: solid 1px #aaa; padding: 4px; width: 175px; }*/
-        </style>
+        /*.example-container{ background-color: #f4f4f4; border-bottom: solid 2px #777777; margin: 0 0 20px 40px; padding: 20px; }*/
+        /*.example-container input{ border: solid 1px #aaa; padding: 4px; width: 175px; }*/
+    </style>
 
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
     <script>
         $(document).ready(function () {
             window.onload = changetotalButtonNew();
@@ -646,6 +646,15 @@
                 document.getElementById('spanId9').innerHTML = 'Expand';
             }
         }
+        
+        function buttonFun10() {
+            var className = $('#minusId10').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId10').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId10').innerHTML = 'Expand';
+            }
+        }
 
         //change profile picture.
         function changeButton() {
@@ -712,21 +721,22 @@
 
         }
     </script>
-     <script>
+    <script>
         var tempCount = 1;
         $(function () {
             tempCount = document.getElementById('visaCount1').value;
             $("#visaCloneid").on("click", function () {
+//                alert("clicked");
                 tempCount++;
                 //                alert(tempCount3);
                 var clone = "<tr id='addmoreTR" + tempCount + "' style='clear:both;'>"
                         + "<td style=\"text-align: center\">" + tempCount + "</td>"
                         + "<td id=\"visaIssueCountry" + tempCount + "\"><input type =\"text\" name='visaIssueCountry" + tempCount + "' id='visaIssueCountry" + tempCount + "' class =\"form-control\" />"
                         + "<td style=\"text-align: center\">"
-                        + "<input type=\"text\" name='visaIssueDate" + tempCount +"' id='visaIssueDate" + tempCount + "' size=\"16\"  class=\"form-control\">"
+                        + "<input type=\"text\" name='visaIssueDate" + tempCount + "' id='visaIssueDate" + tempCount + "' size=\"16\"  class=\"form-control\">"
                         + "</td>"
                         + "<td style=\"text-align: center\">"
-                        + "<input type=\"text\" name='visaValidTillDate" + tempCount +"' id='visaValidTillDate" + tempCount +"' class=\"form-control\" size=\"16\">"
+                        + "<input type=\"text\" name='visaValidTillDate" + tempCount + "' id='visaValidTillDate" + tempCount + "' class=\"form-control\" size=\"16\">"
                         + "</td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -743,7 +753,7 @@
 //                function init() {
 //                    document.form1.month.options[new Date().getMonth()].selected = true;
 //                }
-                
+
 
             });
         });
@@ -751,28 +761,28 @@
             var cont = document.getElementById("visaCount1").value;
             var id;
             for (id = 1; id <= cont; id++) {
-                $("#visaIssueDate"+id).datepicker({dateFormat: 'dd/mm/yy'});
+                $("#visaIssueDate" + id).datepicker({dateFormat: 'dd/mm/yy'});
             }
-            
+
         });
         $(function () {
             var cont1 = document.getElementById("visaCount1").value;
             var idd;
             for (idd = 1; idd <= cont1; idd++) {
-                $("#visaValidTillDate"+idd).datepicker({dateFormat: 'dd/mm/yy'});
+                $("#visaValidTillDate" + idd).datepicker({dateFormat: 'dd/mm/yy'});
             }
-            
+
         });
-        </script>
-        <script>
-            function removevisadoc(addmoreTR){
-                --tempCount;
-                document.getElementById('visaCount1').value = tempCount;
-                var element1 = document.getElementById(addmoreTR);
-                element1.parentNode.removeChild(element1);
-            }
-            
-        </script>
+    </script>
+    <script>
+        function removevisadoc(addmoreTR) {
+            --tempCount;
+            document.getElementById('visaCount1').value = tempCount;
+            var element1 = document.getElementById(addmoreTR);
+            element1.parentNode.removeChild(element1);
+        }
+
+    </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -804,9 +814,11 @@
                                 <div class="tab-content">
                                     <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
                                     <!--form horizontal starts here-->
+                                    <!--pesonal detail starts-->
+                                    <c:forEach var="list" items="${employeeMasterExtensionList}">
                                     <div class="box box-info collapsed-box ">
                                         <div class="box-header">
-                                            <h3 class="box-title">Personal Detail:</h3>
+                                            <h3 class="box-title">Employee Official Details:</h3>
                                             <div class="box-tools pull-right">
                                                 <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1();"><i class="fa fa-plus" id="minusId1" ></i></button>
                                                 <!--                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
@@ -831,44 +843,67 @@
 
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Father's Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="fatherName" class=" form-control"></form:input>
-                                                        <form:errors path="fatherName" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label>Mother's Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="motherName" class=" form-control" ></form:input>
-                                                        <form:errors path="motherName" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Father's Date Of Birth:</label>
-                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpFather" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                            <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                            <form:input path="dateOfJoining" class="form-control" size="16" value="" readonly="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
-                                                        <form:errors path="dateOfBirthOfEmpFather" cssClass="errorDiv"></form:errors>
+                                                        <form:errors path="dateOfJoining" cssClass="errorDiv"></form:errors>
                                                         </div>
-
                                                         <div class="col-sm-6">
-                                                            <label>Mother's Date Of Birth:</label>
+                                                            <label>Date Of Birth:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpMother" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                            <form:input path="dateOfBirth" id="dob" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
-                                                        <form:errors path="dateOfBirthOfEmpMother" cssClass="errorDiv"></form:errors>
+                                                        <form:errors path="dateOfBirth" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
-
-                                                    <div class="form-group">
+                                                    <div class="form-group">    
                                                         <div class="col-sm-6">
-                                                            <label>Sex:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
+                                                            <form:option value="" label="-- Select --" ></form:option>
+                                                            <form:options items="${EmployeeTypeList}"></form:options>
+                                                        </form:select>
+                                                        <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6" id="employeeSubTypeId">
+                                                            <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
+                                                        <form:select path="employeeSubType.id" class="form-control">
+                                                            <form:option value="" label="-- Select --" ></form:option> 
+                                                        </form:select>
+                                                        <form:errors path="employeeSubType.id" cssClass="errorDiv"></form:errors>
+                                                        </div>    
+                                                    </div>
+                                                    <div class="form-group">   
+                                                        <div class="col-sm-6">
+                                                            <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <select name="designationMasterByLevelId" id="designationMasterByLevelId" class="form-control" onchange="setDesignation()">
+                                                            <c:forEach var="desn" items="${desigList}">
+                                                                <c:choose>
+                                                                    <c:when test="${desn.key eq employeeMaster.designationMaster.id }">
+                                                                        <option value="${desn.key}" selected="true">${desn.value}</option>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <option value="${desn.key}">${desn.value}</option>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+
+                                                            </c:forEach>
+                                                            <%--<form:options items="${desigList}"></form:options>--%>
+                                                        </select>
+                                                        <form:hidden path="designationMaster.id" class="form-control"></form:hidden>
+
+                                                        <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Gender:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                             <fieldset id="group1">
 
                                                             <form:radiobutton path="gender" value="false" />Male&nbsp;&nbsp;
@@ -877,6 +912,8 @@
                                                         </fieldset>
                                                         <form:errors path="gender" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                    </div>   
+                                                    <div class="form-group">  
                                                         <div class="col-sm-6">
                                                             <input type="hidden" name="mriStatus" id="mriStatus" value="${mriStatus}">
                                                         <label>Marital Status:<span style="color: red;font-size: 12px;">*</span></label>
@@ -892,20 +929,6 @@
                                                         </div>
 
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Date Of Birth:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                        <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirth" id="dob" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-
-                                                        <form:errors path="dateOfBirth" cssClass="errorDiv"></form:errors>
-                                                        </div>
                                                         <div class="col-sm-3">
                                                             <label>Photograph:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <img src="${imgFile}" id="photograph" name="photograph" width="150px" height="150px"/>
@@ -918,332 +941,56 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                    <c:forEach var="list" items="${employeeMasterExtensionList}">
-                                                        
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:textarea path="presentAddress" class="form-control"></form:textarea>
-                                                        <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            
-                                                             <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                            <textarea name="presentAddress2" id="presentAddress2" class="form-control">${list.presentAddress2}</textarea>
-                                                            
-                                                        </div>
-                                                </div>
-                                                <div class="form-group">
-                                                           <div class="col-sm-6">
-                                                               
-                                                               <label>Present City:</label>
-                                                               <input type="text" name="presentCity" id="presentCity" value="${list.presentCity}" class="form-control">
-                                                               
-                                                           </div>
-                                                           <div class="col-sm-6">
-                                                               
-                                                               <label>Present State:</label>
-                                                               <input type="text" name="presentState" id="presentState" value="${list.presentState}" class="form-control">
-                                                              
-                                                           </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                           <div class="col-sm-6">
-                                                               
-                                                               <label>Present Postal Code:</label>
-                                                               <input type="text" name="presentPostalCode" id="presentPostalCode" value="${list.presentPostalCode}" class="form-control">
-                                                          
-                                                           </div>
-                                                           <div class="col-sm-6">
-                                                              
-                                                               <label>Present Country:</label>
-                                                              <input type="text" name="presentCountry" id="presentCountry" value="${list.presentCountry}" class="form-control">
-                                                             
-                                                           </div>
-                                                        </div>
-                                                        
-                                                <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Permanent Address:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:textarea path="permanentAddress" class="form-control"></form:textarea>
-                                                        <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                                
-                                                            <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
-<!--                                                            <input type="textarea" name="permanentAddress2" id="permanentAddress2" class="form-control">-->
-                                                              <textarea name="permanentAddress2" id="permanentAddress2"  class="form-control">${list.permanentAddress2}</textarea>
-                                                               
-                                                        </div>
-                                                </div>
-                                                <div class="form-group">
-                                                           <div class="col-sm-6">
-                                                              
-                                                            <label>Permanent City:</label>
-                                                            <input type="text" name="permanentCity" id="permanentCity" value="${list.permanentCity}" class="form-control">
-                                                           
-                                                           </div>
-                                                           <div class="col-sm-6">
-                                                              
-                                                            <label>Permanent State:</label>
-                                                            <input type="text" name="permanentState" id="permanentState" value="${list.permanentState}" class="form-control">
-                                                           </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                           <div class="col-sm-6">
-                                                              
-                                                            <label>Permanent Postal Code:</label>
-                                                            <input type="text" name="permanentPostalCode" id="permanentPostalCode" value="${list.permanentState}" class="form-control">
-                                                          
-                                                           </div>
-                                                           <div class="col-sm-6">
-                                                              
-                                                            <label>Permanent Country:</label>
-                                                            <input type="text" name="permanentCountry" id="permanentCountry" value="${list.permanentCountry}" class="form-control">
-                                                           
-                                                           </div>
-                                                        </div>
-                                                        <div class="form-group">
-<!--                                                        <div class="col-sm-6">
-                                                            <label>City:</label>
-                                                   <%--     <form:input path="cityOfEmployee" class="form-control"></form:input>--%>
-                                                        </div>-->
-
-                                                        <div class="col-sm-6">
-                                                            <label>Blood Groups:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                        <form:select path="bloodGroups" id="bloodGroups" class="form-control" >
-                                                            <option value="">--Select--</option>
-                                                            <form:option value="A +ve">A +ve</form:option>
-                                                            <form:option value="A -ve">A -ve</form:option>
-                                                            <form:option value="B +ve">B +ve</form:option>
-                                                            <form:option value="B -ve">B -ve</form:option>
-                                                            <form:option value="AB +ve">AB +ve</form:option>
-                                                            <form:option value="AB -ve">AB -ve</form:option>
-                                                            <form:option value="O +ve">O +ve</form:option>
-                                                            <form:option value="O -ve">O -ve</form:option>
-                                                        </form:select>
-                                                        <%--<form:hidden path="bloodGroups"/>--%>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                     
-                                                            <label>Religion:</label>
-                                                            <input type="text" name="religion" id="religion" value="${list.religion}" class="form-control">
-                                                       
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                           
-                                                            <label>Disclosed Health Concerns:</label>
-                                                            <input type="text" name="disclosedHealthConcerns" id="disclosedHealthConcerns" value="${list.disclosedHealthConcerns}" class="form-control">
-                                                           
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                          
-                                                            <label>Languages known:</label>
-                                                            <input type="text" name="languagesKnown" id="languagesKnown" value="${list.languagesKnown}" class="form-control">
-                                                           
+                                                        <label>Official E - Mail ID:</label>
+                                                        <form:input path="officeEmailId" id="officeEmailId" class="form-control"></form:input>
+                                                        <form:errors path="officeEmailId" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                
-                                                            <label>Hobbies:</label>
-                                                            <input name="hobbies" id="hobbies"  value="${list.hobbies}" class="form-control">
-                                                             
-                                                            </div>
-                                                        </div>
 
-                                                    <div class="form-group" id="hideInfo1" style="display: none;">
-                                                        <div class="col-sm-6">
-                                                            <label>Spouse Name:</label>
-                                                        <form:input path="spouseName" class="form-control"></form:input>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Spouse's Date Of Birth:</label>
-                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpSpous" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div id="hideInfo2" style="display: none;">
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                <label>Child Name1:</label>
-                                                            <form:input path="child1" class="form-control"></form:input>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                               
-                                                               <label>Child1's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
-                                                                <c:if test="${list.childOneGender eq 'false'}">
-                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
-                                                                    </c:if>
-                                                                    <c:if test="${list.childOneGender eq 'true'}">
-                                                                         <input type="radio" name="childOneGender"  id="childOneGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="true"/>Female
-                                                                    </c:if>
-                                                               
-                                                               
-                                                            </div>
-                                                        </div>
-                                                            <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                <label>Child1's Date Of Birth:</label>
-                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="dateOfBirthOfEmpChilld1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label>Child Name2:</label>
-                                                            <form:input path="child2" class="form-control"></form:input>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                            <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                
-                                                               <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
-                                                                    <c:if test="${list.childTwoGender eq 'false'}">
-                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
-                                                                    </c:if>
-                                                                    <c:if test="${list.childTwoGender eq 'true'}">
-                                                                         <input type="radio" name="childTwoGender"  id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="true"/>Female
-                                                                    </c:if>
-                                                            
-                                                            
-                                                                
-                                                         
-                                                               
-                                                               
-                                                                
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label>Child2's Date Of Birth:</label>
-                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="dateOfBirthOfEmpChild2" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                
 
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
-                                </div>
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                <!--pesonal detail complete-->
-                                <div class="box box-info collapsed-box">
-                                    <div class="box-header">
-                                        <h3 class="box-title">Contact Detail:</h3>
-                                        <div class="box-tools pull-right">
-                                            <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
-                                            <!--<button  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                        </div>
-                                    </div><!-- /.box-header -->
-                                    <div class="box-body no-padding">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label >Personal Email Id:</label>
-                                                        <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
-                                                        <form:errors path="emailAddress" cssClass="errorDiv"></form:errors>
-                                                        </div>
-<!--                                                        <div class="col-sm-6">
-                                                            
-                                                            <label>FLYdocs Email Id:</label>
-                                                        <input type="text" name="flyDocsEmailId" id="flyDocsEmailId" value="${list.flyDocsEmailId}" class="form-control">
 
-                                                        
-                                                        </div>-->
-                                                        <div class="col-sm-6">
-                                                            <label >Contact No.1:</label>
-                                                        <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                </div>
-                                                        <div class="form-group">
 
-                                                        <div class="col-sm-6">
-                                                            <label >Contact No.2:</label>
-                                                        <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    
-                                                    
-                                                        <div class="col-sm-6">
-                                                            <label >Emergency Contact Person:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="emergencyContactPerson" class="form-control"></form:input>
-                                                        <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            
-                                                            <label>Emergency Contact Address:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="emergencyContactAddress" id="emergencyContactAddress" value="${list.emergencyContactAddress}"  maxlength="14" class="form-control">
-                                                        
-                                                        </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            
-                                                            <div class="col-sm-6">
-                                                                
-                                                            <label>Relationship:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="RelationShip" value="${list.relationShip}" id="RelationShip" class="form-control"/>
-                                                           
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                            
-                                                            <label>Other important information relating to your emergency contact:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="otherImpInfo" id="otherImpInfo" value="${list.otherImpInfo}" class="form-control"/>
-                                                            
-                                                            </div> 
-                                                        </div>
-                                                    
+
+
                                                 </div><!-- /.col -->
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
-                                    <!--contact detail completes here-->
+                                    <!--pesonal detail complete-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
-                                            <h3 class="box-title">Document Detail:</h3>
+                                            <h3 class="box-title">Legal Documents:</h3>
                                             <div class="box-tools pull-right">
-                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
+                                                <!--<button  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             </div>
                                         </div><!-- /.box-header -->
                                         <div class="box-body no-padding">
                                             <div class="row">
-                                                <div class="col-md-12 col-sm-12">
+                                                <div class="col-md-12">
 
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
@@ -1252,57 +999,72 @@
                                                         <form:errors path="panCard" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            
+
                                                             <label>Nationality:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="text" name="nationality" id="nationality"  style="text-transform:uppercase" value="${list.nationality}" class="form-control">
-                                                       
-                                                        </div>
+
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label >Passport No.:</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label >Passport No.:</label>
                                                         <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            
+
                                                             <label>Country Of Issue:</label>
-                                                        <input type="text" name="countryOfIssue" value="${list.countryOfIssue}" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
-                                                        
-                                                          </div>
+                                                            <input type="text" name="countryOfIssue" value="${list.countryOfIssue}" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
+
                                                     </div>
-                                                    <div class="form-group">
-                                                           <div class="col-sm-6">
-                                                             
-                                                             <label>First Name:</label>
-                                                             <input type="text" name="firstName" value="${list.firstName}" id="firstName" placeholder="First Name as per Passport" class="form-control">
-                                                               
-                                                        </div>
-                                                           <div class="col-sm-6">
-                                                              
-                                                             <label>Middle Name:</label>
-                                                             <input type="text" name="middleName" value="${list.middleName}" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
-                                                             
-                                                        </div>
-                                                         </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                             
-                                                             <label>Last Name:</label>
-                                                             <input type="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
-                                                              
-                                                           </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Passport Issue Date:</label>
-                                                            <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Select First , Middle & Last Name As per Passport or Aadhar card:<span style="color: red;font-size: 12px;">*</span></label><br>
+                                                                <c:if test="${list.nameStatus eq 'false'}">
+                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport;
+                                                                    <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard
+                                                                </c:if>
+                                                                <c:if test="${list.nameStatus eq 'true'}">
+                                                                    <input type="radio" name="nameStatus"  id="nameStatus" value="false"/>Passport&nbsp;&nbsp;
+                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="true"/>AadharCard
+                                                                </c:if>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                        <label>First Name:</label>
+                                                        <input type="text" name="firstName" value="${list.firstName}" id="firstName" placeholder="First Name as per Passport" class="form-control">
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+
+                                                        <label>Middle Name:</label>
+                                                        <input type="text" name="middleName" value="${list.middleName}" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
+
+                                                    </div>
+                                                </div>   
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                        <label>Last Name:</label>
+                                                        <input type="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Passport Issue Date:</label>
+                                                        <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                             <form:input path="passportIssueDate" class="form-control" size="16"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                         <form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        </div>
-                                                        <div class="form-group">
+                                                    </div>
 
+                                                    <div class="form-group">
                                                         <div class=" col-sm-6">
                                                             <label>Passport Expiry Date:</label>
                                                             <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -1311,107 +1073,77 @@
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
-                                                        </div>
-<!--                                                        <div class="col-sm-6">
-                                                            
-                                                            <label>Visa Issue Country:</label>
-                                                            <input name="visaIssueCountry" id="visaIssueCountry" value="${list.visaIssueCountry}" class="form-control">
-                                                        
-                                                            </div>-->
-                                                    </div>
-<!--                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            
-                                                            <label>Visa Issue Date:</label>
-                                                            <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                
-                                                            <input type="text" name="visaIssueDate" value="${list.visaIssueDate}" id="visaIssueDate"  size="16" readonly="true" class="form-control">
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                               
-                                                        </div>
-                                                        
-                                                        </div>
 
-                                                        <div class=" col-sm-6">
-                                                            
-                                                            <label>Visa Valid till Date:</label>
-                                                            <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <input class="form-control" size="16" type="text" value="" readonly>
-                                                            <input type="text" name="visaValidTillDate" value="${list.visaValidTillDate}" id="visaValidTillDate" class="form-control" size="16" readonly="true">
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                           
-                                                        </div>
-                                                    </div>-->
-                                                     <div class="form-group">
+                                                        </div>    
                                                         <div class="col-sm-6">
-                                                            
+
                                                             <label >Driving Licence No :</label>
-                                                        
-                                                            <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>
-                                                            
-                                                        
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            
-                                                            <label>Driving Licence Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <select name="drivingLicenceType" id="drivingLicenceType" class="form-control">
-                                                        <c:if test="${empty list.drivingLicenceType}">
-                                                            <option value="">-- Select --</option>
-                                                            <option value="2Wheeler">2Wheeler</option>
-                                                            <option value="4Wheeler">4Wheeler</option>
-                                                            <option value="Both">Both</option>
-                                                            
-                                                        </c:if>
-                                                        <c:if test="${!empty list.drivingLicenceType}">
-                                                            <option <c:choose><c:when test="${list.drivingLicenceType eq '2Wheeler'}"> value="2Wheeler" selected="true"</c:when><c:otherwise>value="2Wheeler"</c:otherwise></c:choose>>2 Wheeler</option>
-                                                            <option <c:choose><c:when test="${list.drivingLicenceType eq '4Wheeler'}"> value="4Wheeler" selected="true"</c:when><c:otherwise>value="4Wheeler"</c:otherwise></c:choose>>4 Wheeler</option>
-                                                            <option <c:choose><c:when test="${list.drivingLicenceType eq 'Both'}"> value="Both" selected="true"</c:when><c:otherwise>value="Both"</c:otherwise></c:choose>>Both</option>
-                                                        </c:if>
-                                                            
-                                                        </select>
-                                                        
-                                                       
-                                                        </div>
-                                                    </div>
+
+                                                        <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>
+
+
+                                                        </div>  
+                                                    </div>    
                                                     <div class="form-group">
+
                                                         <div class="col-sm-6">
-                                                            <label >Aadhar Card:</label>
+
+                                                            <label>Driving Licence Type:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <select name="drivingLicenceType" id="drivingLicenceType" class="form-control">
+                                                            <c:if test="${empty list.drivingLicenceType}">
+                                                                <option value="">-- Select --</option>
+                                                                <option value="2Wheeler">2Wheeler</option>
+                                                                <option value="4Wheeler">4Wheeler</option>
+                                                                <option value="Both">Both</option>
+
+                                                            </c:if>
+                                                            <c:if test="${!empty list.drivingLicenceType}">
+                                                                <option <c:choose><c:when test="${list.drivingLicenceType eq '2Wheeler'}"> value="2Wheeler" selected="true"</c:when><c:otherwise>value="2Wheeler"</c:otherwise></c:choose>>2 Wheeler</option>
+                                                                <option <c:choose><c:when test="${list.drivingLicenceType eq '4Wheeler'}"> value="4Wheeler" selected="true"</c:when><c:otherwise>value="4Wheeler"</c:otherwise></c:choose>>4 Wheeler</option>
+                                                                <option <c:choose><c:when test="${list.drivingLicenceType eq 'Both'}"> value="Both" selected="true"</c:when><c:otherwise>value="Both"</c:otherwise></c:choose>>Both</option>
+                                                            </c:if>
+
+                                                        </select>
+
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label >Aadhar Card:</label>
                                                         <form:input path="adharCard" class="form-control"></form:input>
                                                         <form:errors path="adharCard" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                       
-                                                        <label>Election Card:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="electionCard" value="${list.electionCard}" id="electionCard" class="form-control">
-                                                        
-                                                        </div>
-                                                    </div>
+                                                    </div> 
                                                     <div class="form-group">
+
                                                         <div class="col-sm-6">
-                                                            <label>Any Other Government Document Photo Id Proof:</label>
-                                                            <div class="col-sm-6">
+
+                                                            <label>Election Card:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="electionCard" value="${list.electionCard}" id="electionCard" class="form-control">
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Any Other Government Document Photo Id Proof:</label>
+                                                        <div class="col-sm-6">
                                                             <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name"></form:input>
                                                             </div>
-                                                            
+
                                                         </div>
-                                                    </div><!-- /.col -->
+                                                    </div>       
                                                 </div><!-- /.col -->
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
-                                    <!--Document detail completes here-->
+                                       <!--Legal Document detail completes here-->
+                                       <!--Document Visa detail starts here-->
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
-                                            <h3 class="box-title">Document Visa Detail:</h3>
+                                            <h3 class="box-title">Visa Details:</h3>
                                             <div class="box-tools pull-right">
-<!--                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <!--                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                                 <span id="spanId9">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun9();"><i class="fa fa-plus" id="minusId9" ></i></button>
                                             </div>
                                         </div> <!--/.box-header -->
-                                    <div class="box-body no-padding">
+                                        <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="table-responsive">
@@ -1422,70 +1154,443 @@
                                                                 <th style="text-align: center; vertical-align: middle">Visa Issue Date</th>
                                                                 <th style="text-align: center; vertical-align: middle">Visa Valid till Date</th>
                                                                 <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                                <c:choose>
-                                                                    <c:when test="${not empty employeeVisaDetailsList}">
-                                                                        <input type="hidden" name="visaCount" id="visaCount"  value="${fn:length(employeeVisaDetailsList)}"/>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <input type="hidden" name="visaCount" id="visaCount"  value="1"/>
-                                                                    </c:otherwise>
-                                                                </c:choose>
+                                                                    <c:choose>
+                                                                        <c:when test="${not empty employeeVisaDetailsList}">
+                                                                    <input type="hidden" name="visaCount" id="visaCount"  value="${fn:length(employeeVisaDetailsList)}"/>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <input type="hidden" name="visaCount" id="visaCount"  value="1"/>
+                                                                </c:otherwise>
+                                                            </c:choose>
                                                             </tr>
-                                                            
-                                                               <c:choose>
-                                                                    <c:when test="${not empty employeeVisaDetailsList}">
-                                                                        <input type="hidden" name="visaCount1" id="visaCount1" value="${fn:length(employeeVisaDetailsList)}"/>
+
+                                                            <c:choose>
+                                                                <c:when test="${not empty employeeVisaDetailsList}">
+                                                                    <input type="hidden" name="visaCount1" id="visaCount1" value="${fn:length(employeeVisaDetailsList)}"/>
                                                                     <c:forEach var="employeeVisaDetailsList" items="${employeeVisaDetailsList}" varStatus = "visacountVal">
-                                                                    
+
+                                                                        <tr>
+                                                                            <td style="text-align: center">${visacountVal.count}</td> 
+                                                                            <td style="text-align: center">
+                                                                                <input name="visaIssueCountry${visacountVal.count}" id="visaIssueCountry${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueCountry}" class="form-control">
+                                                                            </td>
+                                                                            <td style="text-align: center">
+                                                                                <input type="text" name="visaIssueDate${visacountVal.count}" id="visaIssueDate${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueDate}" size="16"  class="form-control">
+                                                                            </td>
+                                                                            <td style="text-align: center">
+                                                                                <input type="text" name="visaValidTillDate${visacountVal.count}" id="visaValidTillDate${visacountVal.count}" value="${employeeVisaDetailsList.visaValidTillDate}" class="form-control" size="16" >
+                                                                            </td>
+                                                                            <c:if test="${visacountVal.last}">
+                                                                                <td style="text-align: center">
+                                                                                    <span style='margin-top: 5px;'>
+                                                                                        <input type="button" value="+" id="visaCloneid" />
+                                                                                    </span>
+                                                                                </td>
+                                                                            </c:if>
+                                                                        </tr>
+                                                                    </c:forEach>
+                                                                </c:when>
+                                                                <c:otherwise>
                                                                     <tr>
-                                                                        <td style="text-align: center">${visacountVal.count}</td> 
+                                                                        <td style="text-align: center">1</td>
                                                                         <td style="text-align: center">
-                                                                            <input name="visaIssueCountry${visacountVal.count}" id="visaIssueCountry${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueCountry}" class="form-control">
+                                                                            <input name="visaIssueCountry1" id="visaIssueCountry1" class="form-control">
+                                                                            <input type="hidden" name="visaCount1" id="visaCount1" value="1"/>
                                                                         </td>
                                                                         <td style="text-align: center">
-                                                                            <input type="text" name="visaIssueDate${visacountVal.count}" id="visaIssueDate${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueDate}" size="16"  class="form-control">
+                                                                            <input type="text" name="visaIssueDate1" id="visaIssueDate1"  size="16"  class="form-control">
                                                                         </td>
                                                                         <td style="text-align: center">
-                                                                            <input type="text" name="visaValidTillDate${visacountVal.count}" id="visaValidTillDate${visacountVal.count}" value="${employeeVisaDetailsList.visaValidTillDate}" class="form-control" size="16" >
+                                                                            <input type="text" name="visaValidTillDate1" id="visaValidTillDate1" class="form-control" size="16" >
                                                                         </td>
-                                                                        <c:if test="${visacountVal.last}">
-                                                                             <td style="text-align: center">
+                                                                        <td style="text-align: center">
                                                                             <span style='margin-top: 5px;'>
                                                                                 <input type="button" value="+" id="visaCloneid" />
                                                                             </span>
-                                                                                 </td>
-                                                                        </c:if>
+                                                                        </td>
                                                                     </tr>
-                                                                    </c:forEach>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <tr>
-                                                                            <td style="text-align: center">1</td>
-                                                                            <td style="text-align: center">
-                                                                                <input name="visaIssueCountry1" id="visaIssueCountry1" class="form-control">
-                                                                            </td>
-                                                                            <td style="text-align: center">
-                                                                              <input type="text" name="visaIssueDate1" id="visaIssueDate1"  size="16"  class="form-control">
-                                                                            </td>
-                                                                            <td style="text-align: center">
-                                                                               <input type="text" name="visaValidTillDate1" id="visaValidTillDate1" class="form-control" size="16" >
-                                                                            </td>
-                                                                            <td style="text-align: center">
-                                                                                <span style='margin-top: 5px;'>
-                                                                                    <input type="button" value="+" id="visaCloneid" />
-                                                                                </span>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </c:otherwise>
+                                                                </c:otherwise>
                                                             </c:choose>
-                                                            
+
                                                         </table>
                                                     </div>
                                                 </div> <!--/.col -->
                                             </div> <!--/.row -->
                                         </div> <!--/.box-body -->
                                     </div>
-                                    <!--document visa detail completes here-->
+                                    <!--document visa detail completes here-->                     
+                                    <!--Personal Contact Detail starts here-->
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Personal Contact Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+
+                                                    <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label >Personal Email Id:</label>
+                                                            <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
+                                                            <form:errors path="emailAddress" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                           
+                                                        <div class="col-sm-6">
+                                                            <label >Contact No.1:</label>
+                                                            <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                            <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                        </div>
+                                                    <div class="form-group">
+
+                                                            <div class="col-sm-6">
+                                                                <label >Contact No.2:</label>
+                                                            <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                            <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                            <label>Blood Groups:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                            <form:select path="bloodGroups" id="bloodGroups" class="form-control" >
+                                                                <option value="">--Select--</option>
+                                                                <form:option value="A +ve">A +ve</form:option>
+                                                                <form:option value="A -ve">A -ve</form:option>
+                                                                <form:option value="B +ve">B +ve</form:option>
+                                                                <form:option value="B -ve">B -ve</form:option>
+                                                                <form:option value="AB +ve">AB +ve</form:option>
+                                                                <form:option value="AB -ve">AB -ve</form:option>
+                                                                <form:option value="O +ve">O +ve</form:option>
+                                                                <form:option value="O -ve">O -ve</form:option>
+                                                            </form:select>
+                                                            <%--<form:hidden path="bloodGroups"/>--%>
+                                                        </div>
+                                                    
+                                                    </div>
+                                                      <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Religion:</label>
+                                                            <input type="text" name="religion" id="religion" value="${list.religion}" class="form-control">
+
+                                                        </div>
+                                                            <div class="col-sm-6">
+
+                                                            <label>Languages known:</label>
+                                                            <input type="text" name="languagesKnown" id="languagesKnown" value="${list.languagesKnown}" class="form-control">
+
+                                                        </div>
+                                                    </div>      
+                                                        <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Disclosed Health Concerns:</label>
+                                                            <input type="text" name="disclosedHealthConcerns" id="disclosedHealthConcerns" value="${list.disclosedHealthConcerns}" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Hobbies:</label>
+                                                            <input name="hobbies" id="hobbies"  value="${list.hobbies}" class="form-control">
+
+                                                        </div>
+                                                    </div>     
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6"></div>
+
+                                                        <div class="col-sm-6">
+                                                            <label>Highest Education Details<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
+                                                            <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                        </div>    
+
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <!--Personal Contact Detail complete here-->
+                                    <!--Family Background Detail starts here-->
+                                    
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Family Background:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId10">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun10();"><i class="fa fa-plus" id="minusId10"></i></button>
+                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Father's Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="fatherName" class=" form-control"></form:input>
+                                                        <form:errors path="fatherName" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Father's Date Of Birth:</label>
+                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                            <form:input path="dateOfBirthOfEmpFather" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            </div>
+                                                        <form:errors path="dateOfBirthOfEmpFather" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Mother's Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="motherName" class=" form-control" ></form:input>
+                                                        <form:errors path="motherName" cssClass="errorDiv"></form:errors>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <label>Mother's Date Of Birth:</label>
+                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                            <form:input path="dateOfBirthOfEmpMother" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            </div>
+                                                        <form:errors path="dateOfBirthOfEmpMother" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                <div class="form-group" id="hideInfo1" style="display: none;">
+                                                    <div class="form-group">
+                                                      <div class="col-sm-6">
+                                                            <label>Spouse Name:</label>
+                                                            <form:input path="spouseName" class="form-control"></form:input>
+                                                            </div>  
+                                                            <div class="col-sm-6">
+
+                                                                <label>Spouse's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                 <c:if test="${list.spouseGender eq 'false'}">
+                                                                    <input type="radio" name="spouseGender" checked="" id="spouseGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="spouseGender" id="spouseGender" value="true"/>Female
+                                                                </c:if>
+                                                                <c:if test="${list.spouseGender eq 'true'}">
+                                                                    <input type="radio" name="spouseGender"  id="spouseGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="spouseGender" checked="" id="spouseGender" value="true"/>Female
+                                                                </c:if>
+                                                            </div>
+                                                        
+                                                </div>
+                                                     <div class="col-sm-6">
+                                                                <label>Spouse's Date Of Birth:</label>
+                                                                <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                <form:input path="dateOfBirthOfEmpSpous" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            </div>       
+                                                            </div>  
+                                                            <div id="hideInfo2" style="display: none;">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Child Name1:</label>
+                                                                <form:input path="child1" class="form-control"></form:input>
+                                                                </div>
+                                                                <div class="col-sm-6">
+
+                                                                    <label>Child1's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                    <c:if test="${list.childOneGender eq 'false'}">
+                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
+                                                                </c:if>
+                                                                <c:if test="${list.childOneGender eq 'true'}">
+                                                                    <input type="radio" name="childOneGender"  id="childOneGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="true"/>Female
+                                                                </c:if>
+
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Child1's Date Of Birth:</label>
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                    <form:input path="dateOfBirthOfEmpChilld1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Child Name2:</label>
+                                                                <form:input path="child2" class="form-control"></form:input>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+
+                                                                    <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                    <c:if test="${list.childTwoGender eq 'false'}">
+                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
+                                                                </c:if>
+                                                                <c:if test="${list.childTwoGender eq 'true'}">
+                                                                    <input type="radio" name="childTwoGender"  id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="true"/>Female
+                                                                </c:if>
+
+
+
+
+
+
+
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label>Child2's Date Of Birth:</label>
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                    <form:input path="dateOfBirthOfEmpChild2" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                         <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:textarea path="presentAddress" class="form-control"></form:textarea>
+                                                            <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-6">
+
+                                                                <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                                <textarea name="presentAddress2" id="presentAddress2" class="form-control">${list.presentAddress2}</textarea>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Present City:</label>
+                                                            <input type="text" name="presentCity" id="presentCity" value="${list.presentCity}" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Present State:</label>
+                                                            <input type="text" name="presentState" id="presentState" value="${list.presentState}" class="form-control">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Present Postal Code:</label>
+                                                            <input type="text" name="presentPostalCode" id="presentPostalCode" value="${list.presentPostalCode}" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Present Country:</label>
+                                                            <input type="text" name="presentCountry" id="presentCountry" value="${list.presentCountry}" class="form-control">
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Permanent Address:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:textarea path="permanentAddress" class="form-control"></form:textarea>
+                                                            <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-6">
+
+                                                                <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <!--                                                            <input type="textarea" name="permanentAddress2" id="permanentAddress2" class="form-control">-->
+                                                                <textarea name="permanentAddress2" id="permanentAddress2"  class="form-control">${list.permanentAddress2}</textarea>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent City:</label>
+                                                            <input type="text" name="permanentCity" id="permanentCity" value="${list.permanentCity}" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent State:</label>
+                                                            <input type="text" name="permanentState" id="permanentState" value="${list.permanentState}" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent Postal Code:</label>
+                                                            <input type="text" name="permanentPostalCode" id="permanentPostalCode" value="${list.permanentState}" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent Country:</label>
+                                                            <input type="text" name="permanentCountry" id="permanentCountry" value="${list.permanentCountry}" class="form-control">
+
+                                                        </div>
+                                                    </div>   
+                                                   <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Emergency Contact No:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                            <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label >Emergency Contact Person:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:input path="emergencyContactPerson" class="form-control"></form:input>
+                                                            <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            
+                                                    </div>         
+                                                     <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Relationship:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="RelationShip" value="${list.relationShip}" id="RelationShip" class="form-control"/>
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                                <label>Emergency Contact Address:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <input type="text" name="emergencyContactAddress" id="emergencyContactAddress" value="${list.emergencyContactAddress}"  maxlength="14" class="form-control">
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6"></div>
+                                                        
+                                                        <div class="col-sm-6">
+
+                                                            <label>Other important information relating to your emergency contact:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="otherImpInfo" id="otherImpInfo" value="${list.otherImpInfo}" class="form-control"/>
+
+                                                        </div> 
+                                                    </div>
+                                                </div><!-- /.row -->
+                                            </div><!-- /.box-body -->
+                                        </div>
+                                    </div>
+                                    <!--Family Background detail completes here-->
+                                    
+                                    
+                                    <!--Organization Specific Detail starts here-->
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
                                             <h3 class="box-title">Organization Specific Detail:</h3>
@@ -1497,975 +1602,902 @@
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Official E - Mail ID:</label>
-                                                        <form:input path="officeEmailId" id="officeEmailId" class="form-control"></form:input>
-                                                        <form:errors path="officeEmailId" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label>Highest Education Details<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
-                                                        <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
                                                     <div class="form-group">
                                                             <div class="col-sm-6">
-                                                            <label>Name of Previous company:</label>
-                                                            <input type="text" name="nameOfPreviousCompany" value="${list.nameOfPreviousCompany}" id="nameOfPreviousCompany" class="form-control">
-                                                            
-                                                            </div>
-                                                            <div class="col-sm-6">
+                                                                <label>Name of Previous company:</label>
+                                                                <input type="text" name="nameOfPreviousCompany" value="${list.nameOfPreviousCompany}" id="nameOfPreviousCompany" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
                                                             <label>Previous Company Location:</label>
                                                             <input type="text" name="previousCompanyLocation" value="${list.previousCompanyLocation}" id="previousCompanyLocation" class="form-control">
-                                                            
-                                                            </div>
+
                                                         </div>
+                                                    </div>
                                                     <div class="form-group">
-                                                        <div class="col-sm-6">
+                                                        
                                                             <div class="col-sm-6">
                                                                 <label>Exp. on Date Of Joining:  Year:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:select path="experienceYearOnDoj" class="form-control ">
-                                                                <c:forEach begin="0" end="50" var="counter">
-                                                                    <form:option value="${counter}">${counter}</form:option>
-                                                                </c:forEach>
+                                                                <form:select path="experienceYearOnDoj" class="form-control ">
+                                                                    <c:forEach begin="0" end="50" var="counter">
+                                                                        <form:option value="${counter}">${counter}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
+                                                                <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label>Exp. on Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <form:select path="experienceMonthOnDoj" class="form-control">
+                                                                    <c:forEach begin="0" end="11" var="counter">
+                                                                        <form:option value="${counter}">${counter}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
+                                                                <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
+                                                                </div>
+                                                            </div>
+
+<div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Company:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <form:select path="company"  class="form-control ">
+                                                                    <form:option label="-- Select --"  value="" ></form:option>
+                                                                    <c:forEach var="comp" items="${company}" >
+                                                                        <form:option value="${comp.value}">${comp.value}</form:option>
+                                                                    </c:forEach>
+                                                                </form:select>
+                                                                <form:errors path="company" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
+                                                    
+                                                        <div class="form-group">
+                                                            
+                                                        <div class="col-sm-6">
+                                                            <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                            <form:select path="zydexLocationMaster.id" class="form-control">
+                                                                <%--<form:option value="" label="-- Select --" ></form:option>--%>
+                                                                <form:options items="${zydexLocationMap}"></form:options>
                                                             </form:select>
-                                                            <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
+                                                            <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <label>Exp. on Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:select path="experienceMonthOnDoj" class="form-control">
-                                                                <c:forEach begin="0" end="11" var="counter">
-                                                                    <form:option value="${counter}">${counter}</form:option>
-                                                                </c:forEach>
+                                                                <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
+                                                                <form:options items="${level}" ></form:options>
                                                             </form:select>
-                                                            <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
+                                                            <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
                                                             </div>
+
                                                         </div>
-
-
-                                                        <div class="col-sm-6">
-                                                            <label>Company:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:select path="company"  class="form-control ">
-                                                                <form:option label="-- Select --"  value="" ></form:option>
-                                                                <c:forEach var="comp" items="${company}" >
-                                                                    <form:option value="${comp.value}">${comp.value}</form:option>
-                                                                </c:forEach>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Work Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:select path="locationMaster.id" class="form-control">
+                                                                <%--<form:option value="" label="-- Select --" ></form:option>--%>
+                                                                <form:options items="${location}"></form:options>
                                                             </form:select>
-                                                            <form:errors path="company" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                    <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Location Code:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="employeeLocation"  class="form-control"></form:input>
-                                                        <form:errors path="employeeLocation" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="employeeTypeMaster.id"  onchange="selectsubtype(this.value);" class="form-control">
-                                                            <form:option value="" label="-- Select --" ></form:option>
-                                                            <form:options items="${EmployeeTypeList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
-                                                        </div>
 
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6" id="employeeSubTypeId">
-                                                            <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <select name="subTypeId" id="subTypeId"class="form-control ">
-                                                                <option value="" label="-- Select --" ></option>
-                                                            <%--<form:options items="${EmployeeSubTypeList}"></form:options>--%>
-                                                        </select>
-
-
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                        <form:select path="zydexLocationMaster.id" class="form-control">
-                                                            <%--<form:option value="" label="-- Select --" ></form:option>--%>
-                                                            <form:options items="${zydexLocationMap}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Work Location:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="locationMaster.id" class="form-control">
-                                                            <%--<form:option value="" label="-- Select --" ></form:option>--%>
-                                                            <form:options items="${location}"></form:options>
-                                                        </form:select>
-
-                                                        <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
-                                                            <form:options items="${level}" ></form:options>
-                                                        </form:select>
-                                                        <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="departmentMaster.id" class="form-control">
-                                                            <%--<form:option value="" label="-- Select --" ></form:option>--%>
-                                                            <form:options items="${deptMap}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
-
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <select name="designationMasterByLevelId" id="designationMasterByLevelId" class="form-control" onchange="setDesignation()">
-                                                            <c:forEach var="desn" items="${desigList}">
-                                                                <c:if test="${desn['key'] eq employeeMaster.designationMaster.id}">
-                                                                    <option value="${desn['key']}" label="${desn['value']}" selected="true"></option>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                            <%--<form:options items="${desigList}"></form:options>--%>
-                                                        </select>
-                                                        <form:hidden path="designationMaster.id" class="form-control"></form:hidden>
-
-                                                        <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
-
-                                                        </div>
-
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Role:</label>
-                                                        <form:input path="role" class="form-control"></form:input>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <form:input path="dateOfJoining" class="form-control" size="16" value="" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                                             </div>
-                                                        <form:errors path="dateOfJoining" cssClass="errorDiv"></form:errors>
+                                                            
+<div class="col-sm-6">
+                                                                <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:select path="departmentMaster.id" class="form-control">
+                                                                <%--<form:option value="" label="-- Select --" ></form:option>--%>
+                                                                <form:options items="${deptMap}"></form:options>
+                                                            </form:select>
+                                                            <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
+
+                                                            </div>
+
                                                         </div>
 
-                                                    </div>
-                                                    <div class="form-group">
-                                                    <c:if test="${sessionScope.userRight.hr == true}" >
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                            <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                            <select name="employeeType" id="employeeType" class="form-control ">
+                                                                <c:choose>
+                                                                    <c:when test="${employeeType.contains('Probation')}">
+
+                                                                        <option value="Probation" selected="">Probation</option>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+
+                                                                        <option value="Probation">Probation</option>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <c:choose>
+                                                                    <c:when test="${employeeType.contains('Confirmed')}">
+
+                                                                        <option value="Confirmed" selected="">Confirmed</option>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+
+                                                                        <option value="Confirmed">Confirmed</option>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </select>
+
+                                                            <!--<option value="">--SELECT--</option>-->
+
+
+                                                        </div>
+<div class="col-sm-6">
+                                                                <label>Role:</label>
+                                                            <form:input path="role" class="form-control"></form:input>
+                                                            </div>
+
+
+                                                        </div>
+                                                           <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Last Year's Performance Rating:</label>
-                                                            <input type="text" class="form-control" value="${lastYearPerformanceRatingsOfEmployee}" readonly="true">
-                                                            <%--<form:hidden path="lastYearPerformanceRating" class="form-control"></form:input>--%>
-                                                        </div>
-                                                    </c:if>
-                                                    <div class="col-sm-6">
-                                                        <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Sub Team Transfer Date:</label>
+                                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
 
-                                                        <select name="employeeType" id="employeeType" class="form-control ">
-                                                            <c:choose>
-                                                                <c:when test="${employeeType.contains('Probation')}">
-
-                                                                    <option value="Probation" selected="">Probation</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <option value="Probation">Probation</option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                            <c:choose>
-                                                                <c:when test="${employeeType.contains('Confirmed')}">
-
-                                                                    <option value="Confirmed" selected="">Confirmed</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <option value="Confirmed">Confirmed</option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </select>
-
-                                                        <!--<option value="">--SELECT--</option>-->
-
-
-                                                    </div>
-
-                                                </div><!-- /.col -->
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label >Official Contact No:</label>
-                                                        <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Date Of Transfer Of Entity:</label>
-                                                            <div class="input-group date date_of_transfer"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <form:input path="dateOfTransferOfEntity" class="form-control" size="16" value="" readonly="true"></form:input>
+                                                                <input type="text" name="subteamTransferDate" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"/>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                         </div>
 
-                                                    </div><!-- /.col -->
-
+                                                    </div> 
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Auto Generate Code: <span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="autoGenerationCode" class="form-control"    placeholder="Enter Auto Generate Code "/>
-                                                            <form:errors path="autoGenerationCode" cssClass="errorDiv"/>
-                                                    </div>    
-                                                    <div class="col-sm-6">
-                                                        <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();"/>
-                                                        <form:errors path="basicSalary" cssClass="errorDiv"/>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>PF Contribution(By Employee Basic Salary):</label>
-                                                        <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
-                                                        <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
-                                                        </div>
+                                                            <label >Official Contact No:</label>
+                                                            <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                            <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                         </div>  
+
+                                                       
+
+                                                        <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>PF Contribution(By Employer Basic Salary):</label>
-                                                        <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
-                                                        <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
+                                                            <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();"/>
+                                                            <form:errors path="basicSalary" cssClass="errorDiv"/>
+                                                        </div>
+                                                         <div class="col-sm-6">
+                                                                <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
+                                                                <form:input path="esicNo" class="form-control"    placeholder="Enter ESIC No"/>
+                                                                <form:errors path="esicNo" cssClass="errorDiv"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="esicNo" class="form-control"    placeholder="Enter ESIC No"/>
-                                                            <form:errors path="esicNo" cssClass="errorDiv"/>
-                                                    </div>
-
-                                                </div>
-
-
-                                                <!--</div>-->
-                                                <div class="form-group">
-                                                    <div class="col-sm-4">
-                                                        <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <fieldset>
-                                                            <form:radiobutton path="pf"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <form:radiobutton path="pf" value="true"/>YES
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <label>Professional Tax:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <fieldset>
-                                                            <form:radiobutton path="pt"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <form:radiobutton path="pt" value="true"/>YES
-                                                        </fieldset>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
-                                                        <fieldset>
-                                                            <form:radiobutton path="esic" value="false"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <form:radiobutton path="esic" value="true"/>YES
-                                                        </fieldset>
-                                                        <form:errors path="esic" cssClass="errorDiv"></form:errors>
+                                                            <label>PF Contribution(By Employee Basic Salary):</label>
+                                                            <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                            <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label>PF Contribution(By Employer Basic Salary):</label>
+                                                            <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                            <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
+                                                            </div>
                                                         </div>
+                                                        
 
+
+                                                    
+                                                    <div class="form-group">
+                                                        <div class="col-sm-4">
+                                                            <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <fieldset>
+                                                                <form:radiobutton path="pf"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="pf" value="true"/>YES
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>Professional Tax:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <fieldset>
+                                                                <form:radiobutton path="pt"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="pt" value="true"/>YES
+                                                            </fieldset>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <fieldset>
+                                                                <form:radiobutton path="esic" value="false"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="esic" value="true"/>YES
+                                                            </fieldset>
+                                                            <form:errors path="esic" cssClass="errorDiv"></form:errors>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <label>Salary Base:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                                <fieldset>
+                                                                <form:radiobutton path="salaryBase" value="false" checked="checked"/>Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="salaryBase" value="true"/>Day
+                                                            </fieldset>
+                                                            <form:errors path="salaryBase" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label>OT:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                                <fieldset>
+                                                                <form:radiobutton path="ot" value="false" checked="checked"/>YES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="ot" value="true"/>NO
+                                                            </fieldset>
+                                                            <form:errors path="ot" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <label>Odd Punch Required:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <fieldset>
+                                                                <form:radiobutton path="oddPunch" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="oddPunch" value="true"/>YES
+                                                            </fieldset>
+                                                        </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-4">
-                                                            <label>Salary Base:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <label>Payroll:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                             <fieldset>
-                                                            <form:radiobutton path="salaryBase" value="false" checked="checked"/>Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <form:radiobutton path="salaryBase" value="true"/>Day
-                                                        </fieldset>
-                                                        <form:errors path="salaryBase" cssClass="errorDiv"></form:errors>
+                                                                <form:radiobutton path="payroll" value="false" checked="checked"/>No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="payroll" value="true"/>Yes
+                                                            </fieldset>
+                                                            <form:errors path="payroll" cssClass="errorDiv"></form:errors>
+                                                            </div>
+
+
                                                         </div>
-                                                        <div class="col-sm-4">
-                                                            <label>OT:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
-                                                            <fieldset>
-                                                            <form:radiobutton path="ot" value="false" checked="checked"/>YES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <form:radiobutton path="ot" value="true"/>NO
-                                                        </fieldset>
-                                                        <form:errors path="ot" cssClass="errorDiv"></form:errors>
+                                                        <div class="col-md-12 col-sm-12">
+                                                            <div class="table-responsive">
+                                                                <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                                    <tr>
+                                                                        <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                        <th style="text-align: center; vertical-align: middle">Select Allowance</th>
+                                                                        <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
+                                                                        <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                        <th style="text-align: center; vertical-align: middle">Taxable</th>
+                                                                        <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                                        <c:choose>
+                                                                            <c:when test="${not empty finalPolicyList}">
+                                                                        <input type="hidden" name="policyCount" id="policyCount"  value="${fn:length(finalPolicyList)}"/>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <input type="hidden" name="policyCount" id="policyCount"  value="1"/>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                </tr>
+                                                                <c:choose>
+                                                                    <c:when test="${not empty finalPolicyList}">
+                                                                        <c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">
+                                                                            <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>
+                                                                            <tr>
+                                                                                <td style="text-align: center">${countVal.count}</td>
+                                                                                <td><div>
+                                                                                        <select id="policyId${countVal.count}"  name="policyId${countVal.count}"  class="form-control">
+                                                                                            <!--<option value="">--SELECT-- </option>-->
+                                                                                            <c:forEach var="policyData" items="${policy}" varStatus = "status">
+                                                                                                <c:choose>
+                                                                                                    <c:when test="${comp[1] == policyData.value}">
+                                                                                                        <option value="${policyData.key}" selected="selected">${comp[1]}</option>
+                                                                                                    </c:when>
+                                                                                                    <c:otherwise>
+                                                                                                        <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                                    </c:otherwise>
+                                                                                                </c:choose>
+                                                                                            </c:forEach>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <span id="policyError${countVal.count}" style="color: red;"></span>
+                                                                                </td>
+                                                                                <!--</td>-->
+                                                                                <!--                                                                            <td style="text-align: center">
+                                                                                                                                                                <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
+                                                                                                                                                            </td>-->
+                                                                                <td style="text-align: center">
+                                                                                    <input type="number" name="amount${countVal.count}" id="amount${countVal.count}" min="0"  onchange="changetotalButtonNew(${countVal.count});" class="form-control" value="${comp[3]}">
+                                                                                </td>
+
+                                                                                <c:if test="${comp[4] eq 1}">
+
+                                                                                    <td style="text-align: center">
+                                                                                        <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" checked="true">
+                                                                                    </td>
+                                                                                </c:if>
+                                                                                <c:if test="${comp[4] ne 1}">
+                                                                                    <td style="text-align: center">
+                                                                                        <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" >
+                                                                                    </td>
+                                                                                </c:if>
+                                                                                <td style="text-align: center">
+                                                                                    <%--<c:choose>--%>
+                                                                                    <%--<c:when test="${countVal.first}">--%>
+                                                                                    <!--<span style='margin-top: 5px;'>-->
+                                                                                    <!--<input type="button" value="+" id="policyCloneid" />-->
+                                                                                    <!--</span>-->
+                                                                                    <%--</c:if>--%>
+                                                                                    <%--</c:when>--%>
+                                                                                    <%--<c:otherwise>--%>
+                                                                                    <!--                                                                                <span style='margin-top: 5px;'>
+                                                                                                                                                                    <input type="button" value="-" id="policyRemoveid" onclick="removeForEdit()"/>
+                                                                                                                                                                    </span>-->
+                                                                                    <%--</c:otherwise>--%>
+                                                                                    <%--</c:choose>--%>
+                                                                                    <c:if test="${countVal.last}">
+                                                                                        <c:if test="${countVal.last}">
+                                                                                            <span style='margin-top: 5px;'>
+                                                                                                <input type="button" value="+" id="policyCloneid" />
+                                                                                            </span>
+                                                                                        </c:if>
+                                                                                    </c:if>
+                                                                                    <c:if test="${!countVal.last}">
+                                                                                        <c:if test="${!countVal.last}">
+                                                                                            <span style='margin-top: 5px;'>
+                                                                                                <input type="button" value="-" id="policyRemoveid" onclick="removePolicy12('${comp[5]}')"/>
+                                                                                                <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicy('${comp[5]}')"/>-->
+                                                                                            </span>
+                                                                                        </c:if>
+                                                                                    </c:if>
+                                                                                    <%--<c:if test="${!countVal.last}">--%>
+                                                                                    <%--<c:if test="${!countVal.last}">--%>
+                                                                                    <!--<span style='margin-top: 5px;'>-->
+                                                                                    <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicyEdit(tempCount3)"/>-->
+                                                                                    <!--</span>-->
+                                                                                    <%--</c:if>--%>
+                                                                                    <%--</c:if>--%>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </c:forEach>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+
+                                                                        <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
+        <!--                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
+                                                                        <tr>
+                                                                            <td style="text-align: center">1</td>
+                                                                            <td><div>
+                                                                                    <select id="policyId1"  name="policyId1"  class="form-control">
+                                                                                        <option value="">--SELECT--</option>
+                                                                                        <c:forEach var="policyData" items="${policy}" varStatus = "status">
+                                                                                            <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                        </c:forEach>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <span id="policyError1" style="color: red;"></span>
+                                                                            </td>
+                                                                            <!--                                                                        <td style="text-align: center">
+                                                                                                                                                        <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
+                                                                                                                                                    </td>-->
+                                                                            <td style="text-align: center">
+                                                                                <input type="number" name="amount1" id="amount1" min="0" onchange="changetotalButton();"class="form-control" value="">
+                                                                            </td>
+                                                                            <td style="text-align: center">
+                                                                                <input type="checkbox" name="taxable1" id="taxable1" >
+                                                                            </td>
+                                                                            <td style="text-align: center">
+                                                                                <span style='margin-top: 5px;'>
+                                                                                    <input type="button" value="+" id="policyCloneid" />
+                                                                                </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </table>
                                                         </div>
-                                                        <div class="col-sm-4">
-                                                            <label>Odd Punch Required:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <fieldset>
-                                                            <form:radiobutton path="oddPunch" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <form:radiobutton path="oddPunch" value="true"/>YES
-                                                        </fieldset>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-4">
-                                                        <label>Payroll:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
-                                                        <fieldset>
-                                                            <form:radiobutton path="payroll" value="false" checked="checked"/>No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <form:radiobutton path="payroll" value="true"/>Yes
-                                                        </fieldset>
-                                                        <form:errors path="payroll" cssClass="errorDiv"></form:errors>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <!--<label>Total:<span style="color: red;font-size: 12px;"></span></label>-->
+                                                            <%--<form:input path="tdsAmount" class="form-control"  placeholder="Enter TDS Amount"/>--%>
+                                                            <%--<form:errors path="tdsAmount" cssClass="errorDiv"/>--%>
                                                         </div>
+                                                        <div class="col-sm-2">
 
-
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>Gross Total:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <form:input path="grossTotal"  id="txtresult" class="form-control" readonly="true" />
+                                                        </div>
                                                     </div>
                                                     <div class="col-md-12 col-sm-12">
                                                         <div class="table-responsive">
-                                                            <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                            <table id="ctcTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                                 <tr>
                                                                     <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Select Allowance</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Select CTC Component</th>
                                                                     <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
                                                                     <th style="text-align: center; vertical-align: middle">Amount</th>
                                                                     <th style="text-align: center; vertical-align: middle">Taxable</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Month</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Year</th>
                                                                     <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                                    <c:choose>
-                                                                        <c:when test="${not empty finalPolicyList}">
-                                                                    <input type="hidden" name="policyCount" id="policyCount"  value="${fn:length(finalPolicyList)}"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <input type="hidden" name="policyCount" id="policyCount"  value="1"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                            </tr>
-                                                            <c:choose>
-                                                                <c:when test="${not empty finalPolicyList}">
-                                                                    <c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">
-                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>
-                                                                        <tr>
-                                                                            <td style="text-align: center">${countVal.count}</td>
-                                                                            <td><div>
-                                                                                    <select id="policyId${countVal.count}"  name="policyId${countVal.count}"  class="form-control">
-                                                                                        <!--<option value="">--SELECT-- </option>-->
-                                                                                        <c:forEach var="policyData" items="${policy}" varStatus = "status">
+                                                                        <c:choose>
+                                                                            <c:when test="${not empty finalPolicyList}">
+                                                                        <input type="hidden" name="ctcCount" id="ctcCount"  value="${fn:length(finalctcList)}"/>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <input type="hidden" name="ctcCount" id="ctcCount"  value="1"/>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                </tr>
+                                                                <c:choose>
+                                                                    <c:when test="${not empty finalctcList}">
+                                                                        <c:forEach var="comp" items="${finalctcList}" varStatus = "countVal">
+                                                                            <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalctcList)}"/>
+                                                                            <tr>
+                                                                                <td style="text-align: center">${countVal.count}</td>
+                                                                                <td><div>
+                                                                                        <select id="ctcId${countVal.count}"  name="ctcId${countVal.count}"  class="form-control">
+                                                                                            <option value="">--SELECT--</option>
+                                                                                            <c:forEach var="policyData" items="${ctc}" varStatus = "status">
+                                                                                                <c:choose>
+                                                                                                    <c:when test="${comp[1] == policyData.value}">
+                                                                                                        <option value="${policyData.key}" selected="selected">${comp[1]}</option>
+                                                                                                    </c:when>
+                                                                                                    <c:otherwise>
+                                                                                                        <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                                    </c:otherwise>
+                                                                                                </c:choose>
+                                                                                            </c:forEach>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <span id="ctcError${countVal.count}" style="color: red;"></span>
+                                                                                </td>
+                                                                                <!--</td>-->
+                                                                                <!--                                                                            <td style="text-align: center">
+                                                                                                                                                                <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
+                                                                                                                                                            </td>-->
+
+                                                                                <td style="text-align: center">
+                                                                                    <input type="number" name="ctcamount${countVal.count}" id="ctcamount${countVal.count}" min="0" onchange="changetotalButtonNewCTC(${countVal.count});" class="form-control" value="${comp[2]}">
+                                                                                </td>
+                                                                                <c:if test="${comp[3] eq 1}">
+
+                                                                                    <td style="text-align: center">
+                                                                                        <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" checked="true">
+                                                                                    </td>
+                                                                                </c:if>
+                                                                                <c:if test="${comp[3] ne 1}">
+                                                                                    <td style="text-align: center">
+                                                                                        <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" >
+                                                                                    </td>
+                                                                                </c:if>
+                                                                                <td ><div>
+                                                                                        <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
+                                                                                        <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
+                                                                                        <select id="month${countVal.count}" name="month${countVal.count}"  class="form-control ">
+
                                                                                             <c:choose>
-                                                                                                <c:when test="${comp[1] == policyData.value}">
-                                                                                                    <option value="${policyData.key}" selected="selected">${comp[1]}</option>
+
+                                                                                                <c:when test="${comp[4] eq 01}">
+                                                                                                    <!--<option value="01" selected="selected">January</option>-->
+                                                                                                    <option value="01" selected="selected">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${comp[4] eq 02}">
+                                                                                                    <!--<option value="02" selected="selected">February</option>-->
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02" selected="selected">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${comp[4] eq 03}">
+                                                                                                    <!--<option value="03" selected="selected">March</option>-->
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03" selected="selected">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${comp[4] eq 04}">
+                                                                                                    <!--<option value="04" selected="selected">April</option>-->
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04" selected="selected">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${comp[4] eq 05}">
+                                                                                                    <!--<option value="05" selected="selected">May</option>-->
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05" selected="selected">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${comp[4] eq 06}">
+                                                                                                    <!--<option value="06" selected="selected">June</option>-->
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06" selected="selected">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${comp[4] eq 07}">
+                                                                                                    <!--<option value="07" selected="selected">July</option>-->
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07" selected="selected">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${comp[4] eq 08}">
+                                                                                                    <!--<option value="08" selected="selected">August</option>-->
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08" selected="selected">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${comp[4] eq 09}">
+                                                                                                    <!--<option value="09" selected="selected">September</option>-->
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09" selected="selected">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${comp[4] eq 10}">
+                                                                                                    <!--<option value="10" selected="selected">October</option>-->
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10" selected="selected">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${comp[4] eq 11}">
+                                                                                                    <!--<option value="11" selected="selected">November</option>-->
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11" selected="selected">November </option>
+                                                                                                    <option value="12">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${comp[4] eq 12}">
+                                                                                                    <!--<option value="12" selected="selected">December</option>-->
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12" selected="selected">December</option>
+                                                                                                </c:when>
+                                                                                                <c:when test="${empty comp[4] }">
+                                                                                                    <option value="">--Select--</option>
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
                                                                                                 </c:when>
                                                                                                 <c:otherwise>
-                                                                                                    <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                                    <option value="">--Select--</option>
+                                                                                                    <option value="01">January</option>
+                                                                                                    <option value="02">February</option>
+                                                                                                    <option value="03">March </option>
+                                                                                                    <option value="04">April</option>
+                                                                                                    <option value="05">May</option>
+                                                                                                    <option value="06">June</option>
+                                                                                                    <option value="07">July</option>
+                                                                                                    <option value="08">August</option>
+                                                                                                    <option value="09">September</option>
+                                                                                                    <option value="10">October </option>
+                                                                                                    <option value="11">November </option>
+                                                                                                    <option value="12">December</option>
                                                                                                 </c:otherwise>
                                                                                             </c:choose>
-                                                                                        </c:forEach>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <span id="policyError${countVal.count}" style="color: red;"></span>
-                                                                            </td>
-                                                                            <!--</td>-->
-                                                                            <!--                                                                            <td style="text-align: center">
-                                                                                                                                                            <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
-                                                                                                                                                        </td>-->
-                                                                            <td style="text-align: center">
-                                                                                <input type="number" name="amount${countVal.count}" id="amount${countVal.count}" min="0"  onchange="changetotalButtonNew(${countVal.count});" class="form-control" value="${comp[3]}">
-                                                                            </td>
 
-                                                                            <c:if test="${comp[4] eq 1}">
 
-                                                                                <td style="text-align: center">
-                                                                                    <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" checked="true">
+                                                                                        </select>
+                                                                                    </div>
                                                                                 </td>
-                                                                            </c:if>
-                                                                            <c:if test="${comp[4] ne 1}">
-                                                                                <td style="text-align: center">
-                                                                                    <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" >
+                                                                                <td ><div>
+                                                                                        <!--<td style="text-align: center">-->
+                                                                                        <input  type="hidden" class="form-control" id="yearBase" value="${comp[5]}">
+                                                                                        <select name="year${countVal.count}" id="year${countVal.count}"  class="form-control" >
+                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="${comp[5]}">${comp[5]}</option> 
+                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2018">2018</option> 
+                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2019">2019</option> 
+                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2020">2020</option> 
+                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2021">2021</option> 
+                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2022">2022</option> 
+                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2023">2023</option> 
+                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2024">2024</option> 
+                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2025">2025</option> 
+                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2026">2026</option> 
+                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2027">2027</option> 
+
+                                                                                        </select> 
+                                                                                    </div>
                                                                                 </td>
-                                                                            </c:if>
-                                                                            <td style="text-align: center">
-                                                                                <%--<c:choose>--%>
-                                                                                <%--<c:when test="${countVal.first}">--%>
-                                                                                <!--<span style='margin-top: 5px;'>-->
-                                                                                <!--<input type="button" value="+" id="policyCloneid" />-->
-                                                                                <!--</span>-->
-                                                                                <%--</c:if>--%>
-                                                                                <%--</c:when>--%>
-                                                                                <%--<c:otherwise>--%>
-                                                                                <!--                                                                                <span style='margin-top: 5px;'>
-                                                                                                                                                                <input type="button" value="-" id="policyRemoveid" onclick="removeForEdit()"/>
-                                                                                                                                                                </span>-->
-                                                                                <%--</c:otherwise>--%>
-                                                                                <%--</c:choose>--%>
-                                                                                <c:if test="${countVal.last}">
+                                                                                <td style="text-align: center">
+                                                                                    <%--<c:choose>--%>
+                                                                                    <%--<c:when test="${countVal.first}">--%>
+                                                                                    <!--<span style='margin-top: 5px;'>-->
+                                                                                    <!--<input type="button" value="+" id="policyCloneid" />-->
+                                                                                    <!--</span>-->
+                                                                                    <%--</c:if>--%>
+                                                                                    <%--</c:when>--%>
+                                                                                    <%--<c:otherwise>--%>
+                                                                                    <!--<span style='margin-top: 5px;'>-->
+                                                                                    <!--<input type="button" value="-" id="policyRemoveid" onclick="removeForEdit()"/>-->
+                                                                                    <!--</span>-->
+                                                                                    <%--</c:otherwise>--%>
+                                                                                    <%--</c:choose>--%>
                                                                                     <c:if test="${countVal.last}">
-                                                                                        <span style='margin-top: 5px;'>
-                                                                                            <input type="button" value="+" id="policyCloneid" />
-                                                                                        </span>
+                                                                                        <c:if test="${countVal.last}">
+                                                                                            <span style='margin-top: 5px;'>
+                                                                                                <input type="button" value="+" id="ctcCloneid" />
+                                                                                            </span>
+                                                                                        </c:if>
                                                                                     </c:if>
-                                                                                </c:if>
-                                                                                <c:if test="${!countVal.last}">
                                                                                     <c:if test="${!countVal.last}">
-                                                                                        <span style='margin-top: 5px;'>
-                                                                                            <input type="button" value="-" id="policyRemoveid" onclick="removePolicy12('${comp[5]}')"/>
-                                                                                            <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicy('${comp[5]}')"/>-->
-                                                                                        </span>
+                                                                                        <c:if test="${!countVal.last}">
+                                                                                            <span style='margin-top: 5px;'>
+                                                                                                <input type="button" value="-" id="ctcRemoveid" onclick="removeCtc12('${comp[6]}')"/>
+                                                                                            </span>
+                                                                                        </c:if>
                                                                                     </c:if>
-                                                                                </c:if>
-                                                                                <%--<c:if test="${!countVal.last}">--%>
-                                                                                <%--<c:if test="${!countVal.last}">--%>
-                                                                                <!--<span style='margin-top: 5px;'>-->
-                                                                                <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicyEdit(tempCount3)"/>-->
-                                                                                <!--</span>-->
-                                                                                <%--</c:if>--%>
-                                                                                <%--</c:if>--%>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </c:forEach>
-                                                                </c:when>
-                                                                <c:otherwise>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </c:forEach>
+                                                                    </c:when>
+                                                                    <c:otherwise>
 
-                                                                    <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
-    <!--                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
-                                                                    <tr>
-                                                                        <td style="text-align: center">1</td>
-                                                                        <td><div>
-                                                                                <select id="policyId1"  name="policyId1"  class="form-control">
-                                                                                    <option value="">--SELECT--</option>
-                                                                                    <c:forEach var="policyData" items="${policy}" varStatus = "status">
-                                                                                        <option value="${policyData.key}" >${policyData.value}</option>
-                                                                                    </c:forEach>
-                                                                                </select>
-                                                                            </div>
-                                                                            <span id="policyError1" style="color: red;"></span>
-                                                                        </td>
-                                                                        <!--                                                                        <td style="text-align: center">
-                                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
-                                                                                                                                                </td>-->
-                                                                        <td style="text-align: center">
-                                                                            <input type="number" name="amount1" id="amount1" min="0" onchange="changetotalButton();"class="form-control" value="">
-                                                                        </td>
-                                                                        <td style="text-align: center">
-                                                                            <input type="checkbox" name="taxable1" id="taxable1" >
-                                                                        </td>
-                                                                        <td style="text-align: center">
-                                                                            <span style='margin-top: 5px;'>
-                                                                                <input type="button" value="+" id="policyCloneid" />
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <!--<label>Total:<span style="color: red;font-size: 12px;"></span></label>-->
-                                                        <%--<form:input path="tdsAmount" class="form-control"  placeholder="Enter TDS Amount"/>--%>
-                                                        <%--<form:errors path="tdsAmount" cssClass="errorDiv"/>--%>
-                                                    </div>
-                                                    <div class="col-sm-2">
-
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <label>Gross Total:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="grossTotal"  id="txtresult" class="form-control" readonly="true" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="table-responsive">
-                                                        <table id="ctcTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                            <tr>
-                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                <th style="text-align: center; vertical-align: middle">Select CTC Component</th>
-                                                                <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
-                                                                <th style="text-align: center; vertical-align: middle">Amount</th>
-                                                                <th style="text-align: center; vertical-align: middle">Taxable</th>
-                                                                <th style="text-align: center; vertical-align: middle">Month</th>
-                                                                <th style="text-align: center; vertical-align: middle">Year</th>
-                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                                    <c:choose>
-                                                                        <c:when test="${not empty finalPolicyList}">
-                                                                    <input type="hidden" name="ctcCount" id="ctcCount"  value="${fn:length(finalctcList)}"/>
-                                                                </c:when>
-                                                                <c:otherwise>
-                                                                    <input type="hidden" name="ctcCount" id="ctcCount"  value="1"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                            </tr>
-                                                            <c:choose>
-                                                                <c:when test="${not empty finalctcList}">
-                                                                    <c:forEach var="comp" items="${finalctcList}" varStatus = "countVal">
-                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalctcList)}"/>
+                                                                        <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
+                                                                                <!--<input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
                                                                         <tr>
-                                                                            <td style="text-align: center">${countVal.count}</td>
+                                                                            <td style="text-align: center">1</td>
                                                                             <td><div>
-                                                                                    <select id="ctcId${countVal.count}"  name="ctcId${countVal.count}"  class="form-control">
+                                                                                    <select id="ctcId1"  name="ctcId1"  class="form-control">
                                                                                         <option value="">--SELECT--</option>
                                                                                         <c:forEach var="policyData" items="${ctc}" varStatus = "status">
-                                                                                            <c:choose>
-                                                                                                <c:when test="${comp[1] == policyData.value}">
-                                                                                                    <option value="${policyData.key}" selected="selected">${comp[1]}</option>
-                                                                                                </c:when>
-                                                                                                <c:otherwise>
-                                                                                                    <option value="${policyData.key}" >${policyData.value}</option>
-                                                                                                </c:otherwise>
-                                                                                            </c:choose>
+                                                                                            <option value="${policyData.key}" >${policyData.value}</option>
                                                                                         </c:forEach>
                                                                                     </select>
                                                                                 </div>
-                                                                                <span id="ctcError${countVal.count}" style="color: red;"></span>
+                                                                                <span id="ctcError1" style="color: red;"></span>
                                                                             </td>
-                                                                            <!--</td>-->
-                                                                            <!--                                                                            <td style="text-align: center">
-                                                                                                                                                            <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
-                                                                                                                                                        </td>-->
-
+                                                                            <!--                                                                        <td style="text-align: center">
+                                                                                                                                                        <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
+                                                                                                                                                    </td>-->
                                                                             <td style="text-align: center">
-                                                                                <input type="number" name="ctcamount${countVal.count}" id="ctcamount${countVal.count}" min="0" onchange="changetotalButtonNewCTC(${countVal.count});" class="form-control" value="${comp[2]}">
+                                                                                <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" value="">
                                                                             </td>
-                                                                            <c:if test="${comp[3] eq 1}">
+                                                                            <td style="text-align: center">
 
-                                                                                <td style="text-align: center">
-                                                                                    <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" checked="true">
-                                                                                </td>
-                                                                            </c:if>
-                                                                            <c:if test="${comp[3] ne 1}">
-                                                                                <td style="text-align: center">
-                                                                                    <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" >
-                                                                                </td>
-                                                                            </c:if>
-                                                                            <td ><div>
+                                                                                <input type="checkbox" name="ctctaxable1" id="ctctaxable1" >
+                                                                            </td>
+                                                                            <td id="monthTd1"><div>
                                                                                     <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
                                                                                     <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
-                                                                                    <select id="month${countVal.count}" name="month${countVal.count}"  class="form-control ">
-
-                                                                                        <c:choose>
-
-                                                                                            <c:when test="${comp[4] eq 01}">
-                                                                                                <!--<option value="01" selected="selected">January</option>-->
-                                                                                                <option value="01" selected="selected">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${comp[4] eq 02}">
-                                                                                                <!--<option value="02" selected="selected">February</option>-->
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02" selected="selected">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${comp[4] eq 03}">
-                                                                                                <!--<option value="03" selected="selected">March</option>-->
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03" selected="selected">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${comp[4] eq 04}">
-                                                                                                <!--<option value="04" selected="selected">April</option>-->
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04" selected="selected">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${comp[4] eq 05}">
-                                                                                                <!--<option value="05" selected="selected">May</option>-->
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05" selected="selected">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${comp[4] eq 06}">
-                                                                                                <!--<option value="06" selected="selected">June</option>-->
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06" selected="selected">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${comp[4] eq 07}">
-                                                                                                <!--<option value="07" selected="selected">July</option>-->
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07" selected="selected">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${comp[4] eq 08}">
-                                                                                                <!--<option value="08" selected="selected">August</option>-->
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08" selected="selected">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${comp[4] eq 09}">
-                                                                                                <!--<option value="09" selected="selected">September</option>-->
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09" selected="selected">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${comp[4] eq 10}">
-                                                                                                <!--<option value="10" selected="selected">October</option>-->
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10" selected="selected">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${comp[4] eq 11}">
-                                                                                                <!--<option value="11" selected="selected">November</option>-->
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11" selected="selected">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${comp[4] eq 12}">
-                                                                                                <!--<option value="12" selected="selected">December</option>-->
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12" selected="selected">December</option>
-                                                                                            </c:when>
-                                                                                            <c:when test="${empty comp[4] }">
-                                                                                                <option value="">--Select--</option>
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:when>
-                                                                                            <c:otherwise>
-                                                                                                <option value="">--Select--</option>
-                                                                                                <option value="01">January</option>
-                                                                                                <option value="02">February</option>
-                                                                                                <option value="03">March </option>
-                                                                                                <option value="04">April</option>
-                                                                                                <option value="05">May</option>
-                                                                                                <option value="06">June</option>
-                                                                                                <option value="07">July</option>
-                                                                                                <option value="08">August</option>
-                                                                                                <option value="09">September</option>
-                                                                                                <option value="10">October </option>
-                                                                                                <option value="11">November </option>
-                                                                                                <option value="12">December</option>
-                                                                                            </c:otherwise>
-                                                                                        </c:choose>
-
+                                                                                    <select id="month1" name="month1"  class="form-control ">
+                                                                                        <option value="">--Select--</option>
+                                                                                        <option value="01">January</option>
+                                                                                        <option value="02">February</option>
+                                                                                        <option value="03">March </option>
+                                                                                        <option value="04">April</option>
+                                                                                        <option value="05">May</option>
+                                                                                        <option value="06">June</option>
+                                                                                        <option value="07">July</option>
+                                                                                        <option value="08">August</option>
+                                                                                        <option value="09">September</option>
+                                                                                        <option value="10">October </option>
+                                                                                        <option value="11">November </option>
+                                                                                        <option value="12">December</option>
 
                                                                                     </select>
                                                                                 </div>
                                                                             </td>
-                                                                            <td ><div>
-                                                                                    <!--<td style="text-align: center">-->
-                                                                                    <input  type="hidden" class="form-control" id="yearBase" value="${comp[5]}">
-                                                                                    <select name="year${countVal.count}" id="year${countVal.count}"  class="form-control" >
-                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="${comp[5]}">${comp[5]}</option> 
-                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2018">2018</option> 
-                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2019">2019</option> 
-                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2020">2020</option> 
-                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2021">2021</option> 
-                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2022">2022</option> 
-                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2023">2023</option> 
-                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2024">2024</option> 
-                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2025">2025</option> 
-                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2026">2026</option> 
-                                                                                        <option  name="year${countVal.count}" id="year${countVal.count}"  value="2027">2027</option> 
+                                                                            <td style="text-align: center">
 
-                                                                                    </select> 
-                                                                                </div>
+                                                                                <select name="year1" id="year1" class="form-control ">
+
+                                                                                </select>
                                                                             </td>
                                                                             <td style="text-align: center">
-                                                                                <%--<c:choose>--%>
-                                                                                <%--<c:when test="${countVal.first}">--%>
-                                                                                <!--<span style='margin-top: 5px;'>-->
-                                                                                <!--<input type="button" value="+" id="policyCloneid" />-->
-                                                                                <!--</span>-->
-                                                                                <%--</c:if>--%>
-                                                                                <%--</c:when>--%>
-                                                                                <%--<c:otherwise>--%>
-                                                                                <!--<span style='margin-top: 5px;'>-->
-                                                                                <!--<input type="button" value="-" id="policyRemoveid" onclick="removeForEdit()"/>-->
-                                                                                <!--</span>-->
-                                                                                <%--</c:otherwise>--%>
-                                                                                <%--</c:choose>--%>
-                                                                                <c:if test="${countVal.last}">
-                                                                                    <c:if test="${countVal.last}">
-                                                                                        <span style='margin-top: 5px;'>
-                                                                                            <input type="button" value="+" id="ctcCloneid" />
-                                                                                        </span>
-                                                                                    </c:if>
-                                                                                </c:if>
-                                                                                <c:if test="${!countVal.last}">
-                                                                                    <c:if test="${!countVal.last}">
-                                                                                        <span style='margin-top: 5px;'>
-                                                                                            <input type="button" value="-" id="ctcRemoveid" onclick="removeCtc12('${comp[6]}')"/>
-                                                                                        </span>
-                                                                                    </c:if>
-                                                                                </c:if>
+                                                                                <span style='margin-top: 5px;'>
+                                                                                    <input type="button" value="+" id="ctcCloneid" />
+                                                                                </span>
                                                                             </td>
                                                                         </tr>
-                                                                    </c:forEach>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
-                                                                            <!--<input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
-                                                                    <tr>
-                                                                        <td style="text-align: center">1</td>
-                                                                        <td><div>
-                                                                                <select id="ctcId1"  name="ctcId1"  class="form-control">
-                                                                                    <option value="">--SELECT--</option>
-                                                                                    <c:forEach var="policyData" items="${ctc}" varStatus = "status">
-                                                                                        <option value="${policyData.key}" >${policyData.value}</option>
-                                                                                    </c:forEach>
-                                                                                </select>
-                                                                            </div>
-                                                                            <span id="ctcError1" style="color: red;"></span>
-                                                                        </td>
-                                                                        <!--                                                                        <td style="text-align: center">
-                                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
-                                                                                                                                                </td>-->
-                                                                        <td style="text-align: center">
-                                                                            <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" value="">
-                                                                        </td>
-                                                                        <td style="text-align: center">
-
-                                                                            <input type="checkbox" name="ctctaxable1" id="ctctaxable1" >
-                                                                        </td>
-                                                                        <td id="monthTd1"><div>
-                                                                                <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
-                                                                                <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
-                                                                                <select id="month1" name="month1"  class="form-control ">
-                                                                                    <option value="">--Select--</option>
-                                                                                    <option value="01">January</option>
-                                                                                    <option value="02">February</option>
-                                                                                    <option value="03">March </option>
-                                                                                    <option value="04">April</option>
-                                                                                    <option value="05">May</option>
-                                                                                    <option value="06">June</option>
-                                                                                    <option value="07">July</option>
-                                                                                    <option value="08">August</option>
-                                                                                    <option value="09">September</option>
-                                                                                    <option value="10">October </option>
-                                                                                    <option value="11">November </option>
-                                                                                    <option value="12">December</option>
-
-                                                                                </select>
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="text-align: center">
-
-                                                                            <select name="year1" id="year1" class="form-control ">
-
-                                                                            </select>
-                                                                        </td>
-                                                                        <td style="text-align: center">
-                                                                            <span style='margin-top: 5px;'>
-                                                                                <input type="button" value="+" id="ctcCloneid" />
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </table>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </table>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
 
+                                                        </div>
+                                                        <div class="col-sm-2">
+
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <label>CTC Total:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <form:input path="ctcTotal"  id="txtresultCTC" name="txtresultCTC" class="form-control" readonly="true"  />
+
+                                                        </div>
                                                     </div>
-                                                    <div class="col-sm-2">
 
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:textarea  path="jobDescription" id="editor"></form:textarea>
+                                                        <form:errors path="jobDescription" cssClass="errorDiv"/>
                                                     </div>
-                                                    <div class="col-sm-4">
-                                                        <label>CTC Total:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="ctcTotal"  id="txtresultCTC" name="txtresultCTC" class="form-control" readonly="true"  />
 
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-12 col-sm-12">
-                                                    <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <form:textarea  path="jobDescription" id="editor"></form:textarea>
-                                                    <form:errors path="jobDescription" cssClass="errorDiv"/>
-                                                </div>
-
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                </div>
-                                <!--organization detail completes here-->
-                                <div class="box box-info collapsed-box" id="empInfo_id">
-                                    <div class="box-header">
-                                        <h3 class="box-title">Employee's Bank Account Detail:</h3>
-                                        <div class="box-tools pull-right">
-                                            <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                            <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7"></i></button>
+                                                </div><!-- /.row -->
+                                            </div><!-- /.box-body -->
                                         </div>
                                     </div>
-                                    <div class="box-body no-padding">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Bank Name:</label>
-                                                        <form:input path="bankName" class="form-control"></form:input>
-                                                        <form:errors path="bankName" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label>Bank Account No.:</label>
-                                                        <form:input path="bankAccountNo" class="form-control"></form:input>
-                                                        <form:errors path="bankAccountNo" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    <div class="box box-info collapsed-box" id="empInfo_id">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Employee's Bank Account Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <span id="spanId7">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun7();"><i class="fa fa-plus" id="minusId7"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>IFSC Code:</label>
-                                                        <form:input path="bankIfscCode" class="form-control" placeholder="(1-4: alphabets, 5th: reserved as 0, 6-11: digits) Example: SBIN0898965"></form:input>
-                                                        <form:errors path="bankIfscCode" cssClass="errorDiv"></form:errors>
+                                                            <label>Bank Name:</label>
+                                                            <form:input path="bankName" class="form-control"></form:input>
+                                                            <form:errors path="bankName" cssClass="errorDiv"></form:errors>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <label>Bank Account No.:</label>
+                                                            <form:input path="bankAccountNo" class="form-control"></form:input>
+                                                            <form:errors path="bankAccountNo" cssClass="errorDiv"></form:errors>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Payment Type:</label>
-                                                        <form:select path="paymentType"  class="form-control ">
 
-                                                            <option value="">--Select--</option>
-                                                            <form:option value="0">Cheque</form:option>
-                                                            <form:option value="1">Cash</form:option>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>IFSC Code:</label>
+                                                            <form:input path="bankIfscCode" class="form-control" placeholder="(1-4: alphabets, 5th: reserved as 0, 6-11: digits) Example: SBIN0898965"></form:input>
+                                                            <form:errors path="bankIfscCode" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label>Payment Type:</label>
+                                                            <form:select path="paymentType"  class="form-control ">
 
-                                                        </form:select>
+                                                                <option value="">--Select--</option>
+                                                                <form:option value="Bank">Bank</form:option>
+                                                                <form:option value="Check">Check</form:option>
+
+                                                            </form:select>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>PF No(Previous):<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="pfNo" id="pfNo" class="form-control"></form:input>
-                                                            <%--<form:errors path="pfNo" cssClass="errorDiv"></form:errors>--%>
-                                                    </div> 
-                                                    <div class="col-sm-6">
-                                                        
-                                                        <label>PF No(FLYdocs):<span style="color: red;font-size: 12px;"></span></label>
-                                                        <input type="text" name="pfNoFlydocs" value="${list.pfNoFlydocs}" id="pfNoFlydocs" class="form-control">
-                                                               
-                                                    </div>
-                                                </div>   
                                                     <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                            
+                                                        <div class="col-sm-6">
+                                                            <label>PF No(Previous):<span style="color: red;font-size: 12px;"></span></label>
+                                                                <form:input path="pfNo" id="pfNo" class="form-control"></form:input>
+                                                                <%--<form:errors path="pfNo" cssClass="errorDiv"></form:errors>--%>
+                                                        </div> 
+                                                        <div class="col-sm-6">
+
+                                                            <label>PF No(FLYdocs):<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="pfNoFlydocs" value="${list.pfNoFlydocs}" id="pfNoFlydocs" class="form-control">
+
+                                                        </div>
+                                                    </div>   
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
                                                             <label>PF Withdrawal Date:</label>
                                                             <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <input type="text" name="withdrawalDate" value="${list.withdrawalDate}" id="withdrawalDate" size="16" readonly="true" class="form-control">
+                                                                <input type="text" name="withdrawalDate" value="${list.withdrawalDate}" id="withdrawalDate" size="16" readonly="true" class="form-control">
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
-                                                        
+
                                                         </div>
 
-                                                    <div class="col-sm-6">
-                                                        <label>UAN No.:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="uanNo" id="uanNo"  class="form-control"></form:input>
-                                                            <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
+                                                        <div class="col-sm-6">
+                                                            <label>UAN No.:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <form:input path="uanNo" id="uanNo"  class="form-control"></form:input>
+                                                                <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
+                                                        </div>  
                                                     </div>  
-                                                </div>  
-</c:forEach>
+                                                </c:forEach>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
@@ -2600,8 +2632,9 @@
 
                         <div class="tab-pane" id="tab_3"></div>
                     </div>
-                    <!--                        </div>
-                                        </div>-->
+                </div>
+                <!--                        </div>
+                                    </div>-->
             </section>
         </form:form>
     </div>
@@ -2695,7 +2728,7 @@
         });
         jQuery(document).ready(function () {
             reportingLevelSet();
-            if ($('#mriStatus').val() === "Married") {
+            if ($('#mriStatus').val() == 'Married') {
                 $("#hideInfo1").show(500);
                 $("#hideInfo2").show(500);
                 $("#otherMaritalStatusId").hide(500);
@@ -2941,36 +2974,36 @@
                         {
                             levelMasterId: levelMasterId
                         },
-                function (responseJson) {
-                    ////                    $(".result").html(data);
-                    //                    alert("response     " + responseJson);
-                    //                    var tempjson = JSON.parse(responseJson);
-                    //                    alert("jsosnsnssnsn    "+tempjson[0]);
-                    var $select = $('#designationMasterByLevelId'); // Locate HTML DOM element with ID "someselect".
-                    //                    alert("this is my select    " + select);
-                    if (setOptionRemoveFlag) {
-                        $select.find("option").remove(); // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
-                        alert("I have been called   " + setOptionRemoveFlag + " times");
-                    }
-                    $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
-                        //                        alert(key + '     ' + value);
-                        if (!setOptionRemoveFlag && $("#designationMasterByLevelId option:first").val() != key) {
-                            //this conditions check will remove duplicates from list.
-                            $('#designationMasterByLevelId')
-                                    .append($("<option></option>")
-                                            .attr("value", key)
-                                            .text(value));
-                        }
-                        if (setOptionRemoveFlag) {
-                            $('#designationMasterByLevelId')
-                                    .append($("<option></option>")
-                                            .attr("value", key)
-                                            .text(value));
-                        }
-                    });
-                    setDesignation();
-                    setOptionRemoveFlag = true; //this is setted again to true for option remove function call on onchange() event.
-                });
+                        function (responseJson) {
+                            ////                    $(".result").html(data);
+                            //                    alert("response     " + responseJson);
+                            //                    var tempjson = JSON.parse(responseJson);
+                            //                    alert("jsosnsnssnsn    "+tempjson[0]);
+                            var $select = $('#designationMasterByLevelId'); // Locate HTML DOM element with ID "someselect".
+                            //                    alert("this is my select    " + select);
+                            if (setOptionRemoveFlag) {
+                                $select.find("option").remove(); // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
+                                alert("I have been called   " + setOptionRemoveFlag + " times");
+                            }
+                            $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
+                                //                        alert(key + '     ' + value);
+                                if (!setOptionRemoveFlag && $("#designationMasterByLevelId option:first").val() != key) {
+                                    //this conditions check will remove duplicates from list.
+                                    $('#designationMasterByLevelId')
+                                            .append($("<option></option>")
+                                                    .attr("value", key)
+                                                    .text(value));
+                                }
+                                if (setOptionRemoveFlag) {
+                                    $('#designationMasterByLevelId')
+                                            .append($("<option></option>")
+                                                    .attr("value", key)
+                                                    .text(value));
+                                }
+                            });
+                            setDesignation();
+                            setOptionRemoveFlag = true; //this is setted again to true for option remove function call on onchange() event.
+                        });
                 ////                alert("response     " + responseJson);
                 //            }
             }

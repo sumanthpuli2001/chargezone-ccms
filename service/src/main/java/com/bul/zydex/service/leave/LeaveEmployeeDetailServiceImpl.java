@@ -6,6 +6,7 @@
 package com.bul.zydex.service.leave;
 
 import com.bul.zydex.dao.leave.LeaveEmployeeDetailDAO;
+import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.service.GenericsServiceImpl;
 import java.util.List;
 
@@ -196,8 +197,8 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
     }
 
     @Override
-    public Boolean readPreviousLeaveFriday(String fdate, int empId) {
-        return leaveEmployeeDetailDAO.readPreviousLeaveFriday(fdate, empId);
+    public List<?> readLeaveDaysAsApproved(LeaveEmployeeDetail leaveEmployeeDetail) {
+        return leaveEmployeeDetailDAO.readLeaveDaysAsApproved(leaveEmployeeDetail);
     }
 
 }

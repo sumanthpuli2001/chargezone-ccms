@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.leave;
 
+import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -82,6 +83,7 @@ public interface LeaveEmployeeDetailService<T> extends GenericsService<T> {
 
     public List<?> viewEmpLeaveRequestForHR();
 
+    public List<?> readLeaveDaysAsApproved(LeaveEmployeeDetail leaveEmployeeDetail);
     public Boolean readPreviousLeaveFriday(String fdate, int empId);
 
 }

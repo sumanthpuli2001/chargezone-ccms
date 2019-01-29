@@ -180,9 +180,14 @@
                                 <c:if test="${sessionScope.userRight.attendanceReport}">
                                     <li><a href="attendanceRegularizationMaster.htm?act=powerAdminApprovalList"><i class="fa fa-circle-o"></i>View All AR</a></li>
                                     </c:if>
+                                    <c:if test="${sessionScope.userRight.hr}">
+                                    
+                                     <li><a href="attendanceRegularizationMaster.htm?act=allEmployeeAttendanceView"><i class="fa fa-circle-o"></i>All Employee Attendance View</a></li>
+                                    </c:if>
                                     <c:if test="${sessionScope.isReportingManagerDataExist}">
 
                                     <li><a href="attendanceRegularizationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i>AR Subordinates Request</a></li>
+                                    <!--<li><a href="attendanceRegularizationMaster.htm?act=allEmployeeAttendanceView"><i class="fa fa-circle-o"></i>All Employee Attendance View</a></li>-->
                                     <li><a href="attendanceRegularizationMaster.htm?act=subOrdinateAttendanceView"><i class="fa fa-circle-o"></i>Subordinates Attendance View</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> W-off Subordinates Request</a></li>
@@ -194,6 +199,7 @@
 
                                 </c:if>
                                 <li><a href="employeeDatetimeData.htm?act=searchOddPunch"><i class="fa fa-circle-o"></i>Odd Punch Report</a></li>
+                                <li><a href="oncall.htm?act=view"><i class="fa fa-circle-o"></i>On Call Support Request</a></li>
                             </ul>
                         </li>
                         <c:if test="${sessionScope.userRight.hr or sessionScope.userRight.shiftManagement or sessionScope.userRight.temporaryShiftAssign}">
@@ -1042,7 +1048,7 @@
                                 <li><a href="certificateTemplate.htm?act=searchEmployeeDetail&search=none"><i class="fa fa-circle-o"></i> Assign Certificate</a></li>
                             </ul>
                         </li>
-
+                        
                     </ul>
                 </li>
             </c:if>

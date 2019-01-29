@@ -48,6 +48,11 @@ public class EmployeeTypeServiceImpl<T> extends GenericsServiceImpl<T> implement
     public List<?> readByName(String name) {
        return employeeTypeDAO.readByName(name);
     }
+
+    @Override
+    public List<?> readByID(int readByID) {
+        return employeeTypeDAO.readByID(readByID);
+    }
     }
 
    

@@ -50,4 +50,6 @@ public interface UserRightMasterDAO<T> extends GenericsDAO<T> {
 
     public Boolean readEmployeeIfHR(Integer id);
 
+    public List<?> readallHRList();
+
 }

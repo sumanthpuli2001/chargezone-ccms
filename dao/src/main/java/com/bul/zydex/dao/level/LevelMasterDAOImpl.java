@@ -39,4 +39,12 @@ public class LevelMasterDAOImpl<T> extends GenericsDAOImpl<T> implements LevelMa
        return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readByID(int emplevel) {
+        String query = "";
+        query += "From LevelMaster a "
+              + " Where a.id =" + emplevel ;
+        return getHibernateTemplate().find(query);
+    }
+
 }

@@ -53,4 +53,12 @@ public class DesignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find("From DesignationMaster dgm where dgm.levelMaster=" + levelMasterId);
     }
 
+    @Override
+    public List<?> readByID(int empdesig) {
+        String query = "";
+        query += "From DesignationMaster a "
+              + " Where a.id =" + empdesig ;
+        return getHibernateTemplate().find(query);
+    }
+
 }

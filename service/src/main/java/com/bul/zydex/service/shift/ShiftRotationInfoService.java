@@ -20,4 +20,6 @@ public interface ShiftRotationInfoService<T> extends GenericsService<T> {
 
 //    public List<?> checkByUserId(final int userId);
 
+    public List<?> readByUserId(int usermasterid);
+    
 }

@@ -192,5 +192,7 @@
     <mapping resource="com/bul/zydex/model/EmployeeVisaDetails.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/EmployeeDatetimeDataDetail.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/OnCall.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/OTRegularization.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/ClientDetailsMaster.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

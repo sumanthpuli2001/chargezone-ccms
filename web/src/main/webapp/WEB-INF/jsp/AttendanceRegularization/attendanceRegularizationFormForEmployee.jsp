@@ -53,45 +53,50 @@
     </script>
     <script>
         function calculateDayByAjax() {
+//            alert("hii");
             try {
                 var strDate = document.getElementById("startDateTime").value;
                 var enDate = document.getElementById("endDateTime").value;
+//                alert(strDate);
+//                alert(enDate);
                 if (strDate != '') {
                     $.ajax({
                         type: "POST",
-                        url: "leaveEmployeeDetail.htm?act=checkWeekOffOrHolidayForSDate&strDate=" + strDate,
+                        url: "attendanceRegularizationMaster.htm?act=differentForSDate&strDate=" + strDate + "&enDate=" + enDate,
                         data: {},
                         dataType: "text",
                         success: function (responseTxt) {
-                            document.getElementById("woandHlerrorDiv").innerHTML = responseTxt;
-                            if (responseTxt != '') {
-                                document.getElementById("startDateTime").value = "";
-                                document.getElementById("endDateTime").value = "";
-                            }
+//                            alert(responseTxt);
+                            document.getElementById("differentCompare").value = responseTxt;
+                            
+//                            if (responseTxt != '') {
+//                                document.getElementById("startDateTime").value = "";
+//                                document.getElementById("endDateTime").value = "";
+//                            }
                         },
                         error: function () {
 
                         }
                     });
                 }
-                if (enDate != '') {
-                    $.ajax({
-                        type: "POST",
-                        url: "leaveEmployeeDetail.htm?act=checkWeekOffOrHolidayForEDate&enDate=" + enDate,
-                        data: {},
-                        dataType: "text",
-                        success: function (responseTxt) {
-                            document.getElementById("endwoandHlerrorDiv").innerHTML = responseTxt;
-                            if (responseTxt != '') {
-                                document.getElementById("startDateTime").value = "";
-                                document.getElementById("endDateTime").value = "";
-                            }
-                        },
-                        error: function () {
-//                            alert('Error occured');
-                        }
-                    });
-                }
+//                if (enDate != '') {
+//                    $.ajax({
+//                        type: "POST",
+//                        url: "leaveEmployeeDetail.htm?act=checkWeekOffOrHolidayForEDate&enDate=" + enDate,
+//                        data: {},
+//                        dataType: "text",
+//                        success: function (responseTxt) {
+//                            document.getElementById("endwoandHlerrorDiv").innerHTML = responseTxt;
+//                            if (responseTxt != '') {
+//                                document.getElementById("startDateTime").value = "";
+//                                document.getElementById("endDateTime").value = "";
+//                            }
+//                        },
+//                        error: function () {
+////                            alert('Error occured');
+//                        }
+//                    });
+//                }
 //                && sDateStatus != '' && eDateStatus != ''
 
 
@@ -101,32 +106,8 @@
         }
     </script>
 
-    <script>
-        function checkDateByAjax() {
-            try {
-                var strDate = document.getElementById("startDateTime").value;
-                if (strDate != '') {
-                    $.ajax({
-                        type: "POST",
-                        url: "attendanceRegularizationMaster.htm?act=checkPunchtime&strDate=" + strDate,
-                        data: {},
-                        dataType: "text",
-                        success: function (responseTxt) {
-                            document.getElementById("woandHlerrorDiv1").innerHTML = responseTxt;
-                            if (responseTxt != '') {
-                                document.getElementById("startDateTime").value = "";
-                            }
-                        },
-                        error: function () {
 
-                        }
-                    });
-                }
-            } catch (e) {
 
-            }
-        }
-    </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -240,7 +221,7 @@
                                                             <label>Start Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="startDateTime" id="start_time" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                <form:input path="startDateTime" id="startDateTime" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
@@ -253,7 +234,7 @@
                                                                 <label>End Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="endDateTime"  id="end_time" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                <form:input path="endDateTime"  id="endDateTime" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
@@ -261,15 +242,16 @@
                                                                 <span id="endwoandHlerrorDiv" style="color: red;"></span>
                                                             </div>
                                                             <div class="col-sm-3">
-                                                                <label>Time Difference:<span style="color: red;font-size: 12px;">*</span></label>
-                                                                <input type="Text" name="differentCompare" id="setup_hours" class="form-control" value="" readonly>
+                                                                <label>Time Difference(HH:MM):<span style="color: red;font-size: 12px;"></span></label>
+                                                                 <form:input path="differentCompare" id="differentCompare" class="form-control"  readonly="true" ></form:input>
+                                                                <!--<input type="Text" name="differentCompare" id="endwoandHlerrorDivvvvv" class="form-control" value="" readonly>-->
                                                             </div>
                                                             <div class="col-sm-3">
                                                                 <label>AR Type:<span style="color: red;font-size: 12px;"></span></label>
                                                                 <select name="arType" id="purpose" class="form-control">
                                                                     <option value="0">--Select--</option>
-                                                                    <option value="1">Official</option>
-                                                                    <option value="2">Compensan</option>
+                                                                    <option value="Official">Official</option>
+                                                                    <option value="Compassion">Compassion</option>
                                                                 </select>
                                                             </div>
 
@@ -279,28 +261,28 @@
                                                         <div class="form-group" id="business">
                                                             <div id="1" class="group">
                                                                 <div class="col-sm-6">
-                                                                    <label>Start Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                    <label>Start Date & Time:<span style="color: red;font-size: 12px;"></span></label>
                                                                     <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                         <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                                     <form:input path="startDateAr"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                     </div>
-                                                                <form:errors path="startDateTime" cssClass="errorDiv"></form:errors>
-                                                                    <span id="woandHlerrorDiv" style="color: red;"></span>
-                                                                    <span id="woandHlerrorDiv1" style="color: red;"></span>
+                                                                <form:errors path="startDateAr" cssClass="errorDiv"></form:errors>
+<!--                                                                    <span id="woandHlerrorDiv" style="color: red;"></span>
+                                                                    <span id="woandHlerrorDiv1" style="color: red;"></span>-->
 
                                                                 </div>
                                                                 <div class="col-sm-6">
-                                                                    <label>End Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                    <label>End Date & Time:<span style="color: red;font-size: 12px;"></span></label>
                                                                     <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                         <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                                     <form:input path="endDateAr"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                     </div>
-                                                                <form:errors path="endDateTime" cssClass="errorDiv"></form:errors>
-                                                                    <span id="endwoandHlerrorDiv" style="color: red;"></span>
+                                                                <form:errors path="endDateAr" cssClass="errorDiv"></form:errors>
+                                                                    <!--<span id="endwoandHlerrorDiv" style="color: red;"></span>-->
                                                                 </div>
                                                             </div>
                                                         </div>     
@@ -363,7 +345,7 @@
     <script>
         $(document).ready(function () {
             $('#purpose').on('change', function () {
-                if (this.value == '2')
+                if (this.value == 'Compassion')
                         //.....................^.......
                         {
                             $("#business").show();
@@ -377,35 +359,35 @@
     </script>
 
 
-  <script>
-        $('#start_time,#end_time').on('change', function ()
-        {
-            var start_time = 0;
-            var end_time = 0;
-            start_time = $('#start_time').val();
-            end_time = $('#end_time').val();
-
-            var diff = new Date(end_time) - new Date(start_time);
-            var num = isNaN(parseInt(diff)) ? 0 : parseInt(diff);
-
-
-
-//              var  diff_time = diff/(60*60*1000);______________________
-
-            var seconds = Math.floor(num / 1000); //______________ignore any left over units smaller than a second
-            var minutes = Math.floor(seconds / 60);
-            seconds = seconds % 60;
-            var hours = Math.floor(minutes / 60);
-            minutes = minutes % 60;
-
-
-//               alert("Diff = " + hours + ":" + minutes + ":" + seconds);______________________________
-
-            $('#setup_hours').val(+hours + ":" + minutes + ":" + seconds);
-
-        });
-
-    </script>
+    <!--    <script>
+            $('#start_time,#end_time').on('change', function ()
+            {
+                //            var start_time = 0;
+                //            var end_time = 0;
+                var start_time = $('#start_time').val();
+                var end_time = $('#end_time').val();
+    
+                var diff = new Date(end_time) - new Date(start_time);
+                var num = isNaN(parseInt(diff)) ? 0 : parseInt(diff);
+    
+    
+    
+                //              var  diff_time = diff/(60*60*1000);______________________
+    
+                var seconds = Math.floor(diff / 1000); //______________ignore any left over units smaller than a second
+                var minutes = Math.floor(seconds / 60);
+                seconds = seconds % 60;
+                var hours = Math.floor(minutes / 60);
+                minutes = minutes % 60;
+    
+    
+                //               alert("Diff = " + hours + ":" + minutes + ":" + seconds);______________________________
+    
+                $('#setup_hours').val(+hours + ":" + minutes + ":" + seconds);
+    
+            });
+    
+        </script>-->
 
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

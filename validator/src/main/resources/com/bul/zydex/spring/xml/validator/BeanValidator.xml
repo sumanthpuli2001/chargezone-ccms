@@ -162,4 +162,5 @@
     <bean id="shiftRegularizationValidator1" class="com.bul.zydex.validator.shift.ShiftRegularizationValidator" />
     <bean id="coffRegularizationValidator1" class="com.bul.zydex.validator.shift.CoffRegularizationValidator" />
     <bean id="onCallValidator1" class="com.bul.zydex.validator.OnCall.OnCallValidator" />
+    <bean id="otRegularizationValidator1" class="com.bul.zydex.validator.attendanceRegularization.OtRegularizationValidator" />
 </beans>

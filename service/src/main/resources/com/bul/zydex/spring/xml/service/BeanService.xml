@@ -771,5 +771,11 @@
     </bean>
      <bean id="onCallService1" class="com.bul.zydex.service.OnCall.OnCallServiceImpl">
         <property name="onCallDAO" ref="onCallDAO1"/>
+     </bean>
+    <bean id="oTRegularizationService1" class="com.bul.zydex.service.attendanceRegularization.OTRegularizationServiceImpl">
+        <property name="oTRegularizationDAO" ref="oTRegularizationDAO1"/>
+    </bean>
+    <bean id="clientDetailsMasterService1" class="com.bul.zydex.service.attendanceRegularization.ClientDetailsMasterServiceImpl">
+        <property name="clientDetailsMasterDAO" ref="clientDetailsMasterDAO1"/>
     </bean>
 </beans>

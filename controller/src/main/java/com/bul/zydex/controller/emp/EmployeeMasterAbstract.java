@@ -9,6 +9,7 @@ import com.bul.zydex.controller.CustomAbstract;
 import com.bul.zydex.model.ApplayJobUserMaster;
 import com.bul.zydex.model.CandidateApplyJob;
 import com.bul.zydex.model.CandidateJobApplication;
+import com.bul.zydex.model.ClientDetailsMaster;
 import com.bul.zydex.model.Company;
 import com.bul.zydex.model.CompetencyEvaluationMaster;
 import com.bul.zydex.model.CtcAllowance;
@@ -775,5 +776,6 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
         }
         request.setAttribute("ctc", ctc);
     }
+    
 
 }

@@ -819,5 +819,18 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
     }
 
-   
+    @Override
+    public Boolean readPreviousLeaveFriday(String fdate, int empId) {
+        Boolean flag = false;
+        String query = " Select a From LeaveEmployeeDetail a"
+                + " Where STR_TO_DATE(a.startDate, '%d/%m/%Y') = STR_TO_DATE('" + fdate + "', '%d/%m/%Y')"
+                + " and a.startDateStatus = 'Fullday'"
+                + " and a.employeeMaster=" + empId;
+        List<?> list = getHibernateTemplate().find(query);
+        if (list.size() > 0) {
+            flag = true;
+        }
+        return flag;
+    }
+
 }

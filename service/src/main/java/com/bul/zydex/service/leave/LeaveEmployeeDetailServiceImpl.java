@@ -201,4 +201,9 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
         return leaveEmployeeDetailDAO.readLeaveDaysAsApproved(leaveEmployeeDetail);
     }
 
+    @Override
+    public Boolean readPreviousLeaveFriday(String fdate, int empId) {
+        return leaveEmployeeDetailDAO.readPreviousLeaveFriday(fdate, empId);
+    }
+
 }

@@ -1383,7 +1383,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 List<?> listFirst = leaveEmployeeDetailService.readLeaveDays(leaveEmployeeDetail);
                 if (!listFirst.isEmpty()) {
                     if (listFirst.get(0) != null) {
-                        
+
                         Object xx = (Object) listFirst.get(0);
                         zz = (float) xx;
                         noOfDay = zz;
@@ -2142,8 +2142,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 leaveTypeMaster.setId(Integer.parseInt(leave1));
                 leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster);
                 List<?> listFirst = leaveEmployeeDetailService.readLeaveDaysAsApproved(leaveEmployeeDetail);
-                
-                
+
                 if (!listFirst.isEmpty()) {
                     if (listFirst.get(0) != null) {
                         Object xx = (Object) listFirst.get(0);
@@ -6497,8 +6496,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         mv = hremployeeleaveManagement(request, response);
         return mv;
     }
-    
-     public void getActualDayByAjax1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public void getActualDayByAjax1(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String strDate = request.getParameter("strDate");
         String enDate = request.getParameter("enDate");
         String sDateStatus = request.getParameter("sDateStatus");
@@ -6599,8 +6598,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         PrintWriter out = response.getWriter();
         out.print(days);
     }
-     
-     public void checkWeekOffOrHolidayForEDate1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public void checkWeekOffOrHolidayForEDate1(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String enDate = request.getParameter("enDate");
         enDate = enDate.replaceAll(",", "/");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -6634,7 +6633,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //                if (z.equals("sunday")) {
 //                    weekOff = 1;
 //                } else 
-                    if (z.equals("monday")) {
+                if (z.equals("monday")) {
                     weekOff = 2;
                 } else if (z.equals("tuesday")) {
                     weekOff = 3;
@@ -6656,14 +6655,13 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //                if (c.get(Calendar.DAY_OF_WEEK) == weekOff || list.size() > 0) {
 //                    message = "Selected Date is Holiday/WeekOff.So You can't Apply Leave on this Day.";
 //                }
-
             }
         }
         PrintWriter out = response.getWriter();
         out.print(message);
     }
 
-     public void checkWeekOffOrHolidayForSDate1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void checkWeekOffOrHolidayForSDate1(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String strDate = request.getParameter("strDate");
 //        String enDate = request.getParameter("enDate");
 
@@ -6732,5 +6730,33 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //        }
         PrintWriter out = response.getWriter();
         out.print(message);
+    }
+
+    public void readleaveTypeMaster(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        PrintWriter out = response.getWriter();
+        JSONObject json = new JSONObject();
+        if (!request.getParameter("id").equals("")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(id);
+            if (leaveTypeMaster1.getLeaveType().equals("Privilege Leave") || leaveTypeMaster1.getLeaveType().equals("Casual Leave")) {
+                List<?> list = leaveTypeMasterService.readByUsBySickLeave(id, employeeMaster.getId());
+                if (list.size() != 0) {
+                    EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+                    employeeLeaveBalance = (EmployeeLeaveBalance) list.get(0);
+                    int id12 = employeeLeaveBalance.getId();
+                    json.put("useSickLeave", 0);
+                    out.println(json.toString());
+                }
+            } else {
+                if (leaveTypeMaster1.isUseAsSickLeave()) {
+                    json.put("useSickLeave", 1);
+                    out.println(json.toString());
+                } else {
+                    json.put("useSickLeave", 2);
+                    out.println(json.toString());
+                }
+            }
+        }
     }
 }

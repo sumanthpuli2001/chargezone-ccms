@@ -180,6 +180,8 @@
                                     <li><a href="attendanceRegularizationMaster.htm?act=showOwnAttandance"><i class="fa fa-circle-o"></i>Show Attendance</a></li>
 
                                 </c:if>
+                                <%--</c:if>--%>
+                                    
                                 <c:if test="${sessionScope.userRight.attendanceReport}">
                                     <li><a href="attendanceRegularizationMaster.htm?act=powerAdminApprovalList"><i class="fa fa-circle-o"></i>View All AR</a></li>
                                     </c:if>
@@ -207,6 +209,7 @@
                                 <li><a href="oncall.htm?act=view"><i class="fa fa-circle-o"></i>On Call Support Request</a></li>
                             </ul>
                         </li>
+                        </c:if>
                         <c:if test="${sessionScope.userRight.hr or sessionScope.userRight.shiftManagement or sessionScope.userRight.temporaryShiftAssign}">
                             <li class="treeview" style="color: #585858;">
                                 <a href="#">

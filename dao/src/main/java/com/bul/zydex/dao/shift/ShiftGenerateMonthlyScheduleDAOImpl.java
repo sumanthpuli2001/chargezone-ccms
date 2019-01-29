@@ -7,11 +7,17 @@ package com.bul.zydex.dao.shift;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -204,6 +210,44 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
             ex.getStackTrace();
         }
         return getHibernateTemplate().find(query);
+
+    }
+
+    @Override
+    public List<?> readByEmpMonthYear(Integer id) {
+        Date d = new Date();
+        LocalDate localDate = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        String query = " Select a from ShiftGenerateMonthlySchedule a "
+                + " Where a.employeeMaster=" + id
+                + " And a.shiftMonth=" + localDate.getMonthValue()
+                + " And a.shiftYear=" + localDate.getYear();
+        ArrayList arrayList = new ArrayList();
+        List<?> list = getHibernateTemplate().find(query);
+        if (list.size() > 0) {
+            for (Object o : list) {
+                ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
+                shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) o;
+                Field[] fields = shiftGenerateMonthlySchedule.getClass().getDeclaredFields();
+                for (int j = 0; j < fields.length; j++) {
+                    String s = fields[j].getName();
+                    String s1 = fields[j].getName();
+                    if (s.contains("day")) {
+                        try {
+                            s1 = s.substring(0, 1).toUpperCase() + s.substring(1);
+                            Method m = shiftGenerateMonthlySchedule.getClass().getMethod("get" + s1);
+                            String value = (String) ("" + m.invoke(shiftGenerateMonthlySchedule));
+                            if (value.equals("-1")) {
+                                arrayList.add(s1.substring(3));
+                            }
+                        } catch (Exception e) {
+                            e.getMessage();
+                        }
+                    }
+                }
+            }
+        }
+
+        return arrayList;
 
     }
 

@@ -24,4 +24,6 @@ public interface DesignationMasterService<T> extends GenericsService<T> {
 
     public List<?> readDesignationsOfLevel(final int levelMasterId);
 
+    public List<?> readByID(int empdesig);
+
 }

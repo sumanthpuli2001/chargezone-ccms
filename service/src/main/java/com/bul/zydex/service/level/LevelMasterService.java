@@ -17,4 +17,6 @@ public interface LevelMasterService<T> extends GenericsService<T> {
     public boolean isExist(T object);
     
     public List<?> readByName(String name);
+
+    public List<?> readByID(int emplevel);
 }

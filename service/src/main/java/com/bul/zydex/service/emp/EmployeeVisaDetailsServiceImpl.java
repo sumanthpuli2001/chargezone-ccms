@@ -39,6 +39,11 @@ public class EmployeeVisaDetailsServiceImpl<T> extends GenericsServiceImpl<T> im
     public boolean employeeVisadetailsexist(Integer id) {
         return employeeVisaDetailsDAO.employeeVisadetailsexist(id);
     }
+
+    @Override
+    public List<?> readBySingleemployeeId(Integer id) {
+        return employeeVisaDetailsDAO.readBySingleemployeeId(id);
+    }
     
     
 }

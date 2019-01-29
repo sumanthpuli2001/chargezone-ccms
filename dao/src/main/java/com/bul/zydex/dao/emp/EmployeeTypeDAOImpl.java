@@ -29,4 +29,12 @@ public class EmployeeTypeDAOImpl<T> extends GenericsDAOImpl<T> implements Employ
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readByID(int readByID) {
+        String query = "";
+        query += "From EmployeeTypeMaster a "
+              + " Where a.id =" + readByID ;
+        return getHibernateTemplate().find(query);
+    }
+
 }

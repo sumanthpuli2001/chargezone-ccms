@@ -402,6 +402,7 @@
         leaveEndDate = new Date(leaveEndDate[2], leaveEndDate[1], leaveEndDate[0]);
         var leaveDays = document.getElementById("hiddenDays").value;
         var days = document.getElementById("noOfDays").value = leaveDays;
+//        alert(days);
         if (selectedText == 'Leave Without Pay') {
  //                if (days > 60) {
  //                    $("#leaveWithoutPayLeaveDiv").show();
@@ -423,6 +424,7 @@
 
         $("#NoshortLeave").hide();
         $("#shortLeave").show();
+//        alert("count");
         document.getElementById('Sick Leave').innerHTML = "0";
         document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
         document.getElementById('Casual Leave').innerHTML = "0";
@@ -430,6 +432,7 @@
         document.getElementById('Privilege Leave').innerHTML = "0";
         document.getElementById('Privilege Leave2').innerHTML = document.getElementById('Privilege Leave1').innerHTML;
         } else {
+//            alert("in");
         $("#NoshortLeave").show();
         $("#shortLeave").hide();
         var now = new Date();
@@ -1371,7 +1374,7 @@
         if (strDate != '') {
         $.ajax({
         type: "POST",
-                url: "leaveEmployeeDetail.htm?act=checkWeekOffOrHolidayForSDate&strDate=" + strDate,
+                url: "leaveEmployeeDetail.htm?act=checkWeekOffOrHolidayForSDate1&strDate=" + strDate,
                 data: {},
                 dataType: "text",
                 success: function (responseTxt) {
@@ -1389,7 +1392,7 @@
         if (enDate != '') {
         $.ajax({
         type: "POST",
-                url: "leaveEmployeeDetail.htm?act=checkWeekOffOrHolidayForEDate&enDate=" + enDate,
+                url: "leaveEmployeeDetail.htm?act=checkWeekOffOrHolidayForEDate1&enDate=" + enDate,
                 data: {},
                 dataType: "text",
                 success: function (responseTxt) {
@@ -1410,11 +1413,18 @@
         //                    alert("sDateStatus" + sDateStatus);
         $.ajax({
         type: "POST",
-                url: "leaveEmployeeDetail.htm?act=getActualDayByAjax&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus + "&leaveType=" + leaveTypeMaster,
+                url: "leaveEmployeeDetail.htm?act=getActualDayByAjax1&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus + "&leaveType=" + leaveTypeMaster,
                 data: {},
                 dataType: "text",
                 success: function (responseTxt) {
                 document.getElementById("hiddenDays").value = responseTxt;
+//                var curbal = document.getElementById("Casual Leave1").value;
+//                var usebal = responseTxt;
+//                alert("kk"+usebal);
+//                alert(curbal);
+//                var probbal = parseInt(curbal) + parseInt(usebal);
+//                alert("d"+probbal);
+//                document.getElementById("Casual Leave2").value = probbal;
                 daysCount();
                 },
                 error: function () {
@@ -1736,7 +1746,8 @@
                                                             <!--<input value="${leaveEmployeeDetail.noOfDays}" type="number" class="form-control" readonly="true"/>-->
                                                             <form:input path="noOfDays" type="number" class="form-control" readonly="true"></form:input>
                                                             <%--<form:input path="noOfDays" type="number" class="form-control" readonly="true"></form:input>--%>
-                                                                <input type="hidden" name="hiddenDays" id="hiddenDays" value="">
+                                                            Aaa    
+                                                            <input type="text" name="hiddenDays" id="hiddenDays" value="">
                                                             </div>
                                                             <div  id="calsualLeaveDiv" name="calsualLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Casual Leave You Apply Max. 3 days.If you wan't to apply More Days of leave Then Apply For PL.</div>
                                                             <div  id="sickLeaveDiv" name="sickLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Sick Leave You Apply Max. 3 days.If you wan't to apply More Days of Leave Then Doctor's Certificate</div>
@@ -1854,7 +1865,7 @@
                                                             <td>Current Available Balance</td>
                                                             <c:forEach var="remain" items="${listRemain}">
                                                                 <td id="${remain.key}1">${remain.value}</td>
-
+<!--                                                            <input type="text" id="${remain.key}1" value="${remain.value}">-->
                                                             </c:forEach>
                                                         </tr>
                                                         <tr>
@@ -1862,13 +1873,14 @@
                                                             <c:forEach var="remain" items="${listRemain}">
                                                                 <td id="${remain.key}">0</td>
                                                             </c:forEach>
-
+                                                        
                                                         </tr>
                                                         <tr>
                                                             <th>Projected Balance After This Application Approval</th>
 
                                                             <c:forEach var="remain" items="${listRemain}">
                                                                 <th id="${remain.key}2">0</th>
+<!--                                                               <input type="text" id="${remain.key}2" value="">-->
                                                                 </c:forEach>
                                                         </tr>
                                                     </table>

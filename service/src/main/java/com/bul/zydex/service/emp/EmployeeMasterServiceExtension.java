@@ -13,7 +13,7 @@ public interface EmployeeMasterServiceExtension<T> extends GenericsService<T>
 
     public void deleteByemployeeId(int id);
 
-   
+//   public List<?> readByemployeeIdForExcel(Integer id);
 
     
    

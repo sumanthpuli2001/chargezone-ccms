@@ -39,6 +39,14 @@ public class ZydexLocationMasterDAOImpl<T> extends GenericsDAOImpl<T>implements 
                 + " Where lower(trim(a.zydexLocation)) ='" + zydexLocation + "'";
        return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readByID(int empzyxlocation) {
+        String query = "";
+        query += "From ZydexLocationMaster a "
+              + " Where a.id =" + empzyxlocation ;
+        return getHibernateTemplate().find(query);
+    }
     
     
     

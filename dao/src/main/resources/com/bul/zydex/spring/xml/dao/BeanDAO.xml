@@ -300,6 +300,8 @@
     <bean id="candidateF2FObservationDAO1" class="com.bul.zydex.dao.CandidateF2FRequest.CandidateF2FObservationDAOImpl" parent="sessionFactoryConfig" />
     <bean id="coffRegularizationDAO1" class="com.bul.zydex.dao.shift.CoffRegularizationDAOImpl" parent="sessionFactoryConfig" />
     <bean id="employeeVisaDetailsDAO1" class="com.bul.zydex.dao.emp.EmployeeVisaDetailsDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="employeeDateTimeDataDetailDAO1" class="com.bul.zydex.dao.shift.EmployeeDateTimeDataDetailDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="onCallDAO1" class="com.bul.zydex.dao.OnCall.OnCallDAOImpl" parent="sessionFactoryConfig" />
     <bean id="oTRegularizationDAO1" class="com.bul.zydex.dao.attendanceRegularization.OTRegularizationDAOImpl" parent="sessionFactoryConfig" />
     <bean id="clientDetailsMasterDAO1" class="com.bul.zydex.dao.attendanceRegularization.ClientDetailsMasterDAOImpl" parent="sessionFactoryConfig" />
 </beans>

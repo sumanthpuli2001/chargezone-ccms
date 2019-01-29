@@ -20,4 +20,6 @@ public interface ShiftRotationInfoDAO<T> extends GenericsDAO<T> {
 
 //    public List<?> checkByUserId(final int userId);
 
+    public List<?> readByUserId(int usermasterid);
+
 }

@@ -32,12 +32,12 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         Calendar now = Calendar.getInstance();
         int year = now.get(Calendar.YEAR);
 
-        query += " Select SUM(a.noOfDays)"
+        query += " Select a.noOfDays"
                 + " FROM LeaveEmployeeDetail a"
                 + " LEFT JOIN a.leaveTypeMaster b"
                 + " WHERE a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
                 + " AND a.leaveTypeMaster = " + leaveEmployeeDetail.getLeaveTypeMaster().getId()
-                + " AND a.status=3"
+                + " AND a.status=0"
                 + " AND YEAR(STR_TO_DATE(a.startDate,'%d/%m/%Y'))=" + year;
 
         return getHibernateTemplate().find(query);
@@ -786,10 +786,10 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         return getHibernateTemplate().find(query);
     }
-    
+
     @Override
     public List<?> viewEmpLeaveRequestForHR() {
-         String query = "";
+        String query = "";
 
         query += " Select c.employeeName, b.leaveType, a.startDate, a.endDate, a.noOfDays, a.id, a.status, d.id, a.dateOfSubmit,a.empRemark "
                 + " FROM LeaveEmployeeDetail a"
@@ -802,5 +802,35 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
     }
 
-   
+    @Override
+    public List<?> readLeaveDaysAsApproved(LeaveEmployeeDetail leaveEmployeeDetail) {
+        String query = "";
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+
+        query += " Select a.noOfDays"
+                + " FROM LeaveEmployeeDetail a"
+                + " LEFT JOIN a.leaveTypeMaster b"
+                + " WHERE a.employeeMaster = " + leaveEmployeeDetail.getEmployeeMaster().getId()
+                + " AND a.leaveTypeMaster = " + leaveEmployeeDetail.getLeaveTypeMaster().getId()
+                + " AND a.status In (6,3,4,1,2,0,7,8)"
+                + " AND YEAR(STR_TO_DATE(a.startDate,'%d/%m/%Y'))=" + year;
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public Boolean readPreviousLeaveFriday(String fdate, int empId) {
+        Boolean flag = false;
+        String query = " Select a From LeaveEmployeeDetail a"
+                + " Where STR_TO_DATE(a.startDate, '%d/%m/%Y') = STR_TO_DATE('" + fdate + "', '%d/%m/%Y')"
+                + " and a.startDateStatus = 'Fullday'"
+                + " and a.employeeMaster=" + empId;
+        List<?> list = getHibernateTemplate().find(query);
+        if (list.size() > 0) {
+            flag = true;
+        }
+        return flag;
+    }
+
 }

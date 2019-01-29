@@ -18,4 +18,6 @@ public interface ZydexLocationMasterService<T> extends GenericsService<T> {
     
     public List<?> readByName(String zydexLocation);
 
+    public List<?> readByID(int empzyxlocation);
+
 }

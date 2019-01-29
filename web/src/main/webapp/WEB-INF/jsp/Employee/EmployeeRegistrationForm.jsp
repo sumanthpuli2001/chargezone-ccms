@@ -12,16 +12,16 @@
     <head>
         <title>Employee Create</title>
     </head>
-   <style>
-            #tabs{ margin: 20px -20px; border: none; }
-            #tabs, #ui-datepicker-div, .ui-datepicker{ font-size: 85%; }
-            .clear{ clear: both; }
+    <style>
+        #tabs{ margin: 20px -20px; border: none; }
+        #tabs, #ui-datepicker-div, .ui-datepicker{ font-size: 85%; }
+        .clear{ clear: both; }
 
-            /*.example-container{ background-color: #f4f4f4; border-bottom: solid 2px #777777; margin: 0 0 20px 40px; padding: 20px; }*/
-            /*.example-container input{ border: solid 1px #aaa; padding: 4px; width: 175px; }*/
-        </style>
+        /*.example-container{ background-color: #f4f4f4; border-bottom: solid 2px #777777; margin: 0 0 20px 40px; padding: 20px; }*/
+        /*.example-container input{ border: solid 1px #aaa; padding: 4px; width: 175px; }*/
+    </style>
 
-        <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 
     <script>
         $(document).ready(function () {
@@ -104,6 +104,15 @@
             }
         }
 
+        function buttonFun10() {
+            var className = $('#minusId10').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId10').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId10').innerHTML = 'Expand';
+            }
+        }
+
     </script>
     <script>
         var i1 = 1;
@@ -153,16 +162,14 @@
                     $('#shiftRotationDate').val("");
                     $('#shiftMasterId').val("");
                     //blanks another values on changes
-                }
-                else if (selectedValue == "ShiftBase") {
+                } else if (selectedValue == "ShiftBase") {
                     $('#shiftNameDiv').show();
                     $('#shiftRotationNameDiv').show();
                     $('#shiftRotationDateDiv').show();
                     $('#hourlyBaseTitleDiv').hide();
                     $('#shiftHoursId').val("");
                     //blanks another values on changes
-                }
-                else {
+                } else {
                     $('#hourlyBaseTitleDiv').hide();
                     $('#shiftNameDiv').hide();
                     $('#shiftRotationNameDiv').hide();
@@ -408,21 +415,21 @@
                         {
                             levelMasterId: levelMasterId
                         },
-                function (responseJson) {
+                        function (responseJson) {
 ////                    $(".result").html(data);
 //                    alert("response     " + responseJson);
 //                    var tempjson = JSON.parse(responseJson);
 //                    alert("jsosnsnssnsn    "+tempjson[0]);
-                    var $select = $('#designationMasterByLevelId'); // Locate HTML DOM element with ID "someselect".
+                            var $select = $('#designationMasterByLevelId'); // Locate HTML DOM element with ID "someselect".
 //                    alert("this is my select    " + select);
-                    $select.find("option").remove(); // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
-                    $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
+                            $select.find("option").remove(); // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
+                            $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
 //                        alert(key + '     ' + value);
 
-                        $('#designationMasterByLevelId')
-                                .append($("<option></option>")
-                                        .attr("value", key)
-                                        .text(value));
+                                $('#designationMasterByLevelId')
+                                        .append($("<option></option>")
+                                                .attr("value", key)
+                                                .text(value));
 
 //                        var opt = document.createElement('option');
 //                        opt.value = key;
@@ -431,9 +438,9 @@
 ////                        $("<option>").val(key).text(value).appendTo($select);
 
 //                        alert("Load was performed.");
-                    });
-                    setDesignation();
-                });
+                            });
+                            setDesignation();
+                        });
 ////                alert("response     " + responseJson);
 //            }
             }
@@ -668,7 +675,7 @@
             document.getElementById('designationMaster.id').value = designationMasterId;
         }
     </script>
- <script>
+    <script>
         var tempCount = 1;
         $(function () {
             $("#visaCloneid").on("click", function () {
@@ -678,10 +685,10 @@
                         + "<td style=\"text-align: center\">" + tempCount + "</td>"
                         + "<td id=\"visaIssueCountry" + tempCount + "\"><input type =\"text\" name='visaIssueCountry" + tempCount + "' id='visaIssueCountry" + tempCount + "' class =\"form-control\" />"
                         + "<td style=\"text-align: center\">"
-                        + "<input type=\"text\" name='visaIssueDate" + tempCount +"' id='visaIssueDate" + tempCount + "' size=\"16\"  class=\"form-control\">"
+                        + "<input type=\"text\" name='visaIssueDate" + tempCount + "' id='visaIssueDate" + tempCount + "' size=\"16\"  class=\"form-control\">"
                         + "</td>"
                         + "<td style=\"text-align: center\">"
-                        + "<input type=\"text\" name='visaValidTillDate" + tempCount +"' id='visaValidTillDate" + tempCount +"' class=\"form-control\" size=\"16\">"
+                        + "<input type=\"text\" name='visaValidTillDate" + tempCount + "' id='visaValidTillDate" + tempCount + "' class=\"form-control\" size=\"16\">"
                         + "</td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
@@ -693,12 +700,12 @@
                 document.getElementById('visaCount').value = tempCount;
                 $("#visaIssueDate" + tempCount + "").datepicker({dateFormat: 'dd/mm/yy'});
                 $("#visaValidTillDate" + tempCount + "").datepicker({dateFormat: 'dd/mm/yy'});
-//                $("#ui-datepicker-div").css("z-index",2);
-//                window.onload = init;
-//                function init() {
-//                    document.form1.month.options[new Date().getMonth()].selected = true;
-//                }
-                
+                //                $("#ui-datepicker-div").css("z-index",2);
+                //                window.onload = init;
+                //                function init() {
+                //                    document.form1.month.options[new Date().getMonth()].selected = true;
+                //                }
+
 
             });
         });
@@ -708,16 +715,16 @@
         $(function () {
             $("#visaValidTillDate1").datepicker({dateFormat: 'dd/mm/yy'});
         });
-        </script>
-        <script>
-            function removevisadoc(addmoreTR){
-                --tempCount;
-                document.getElementById('visaCount').value = tempCount;
-                var element1 = document.getElementById(addmoreTR);
-                element1.parentNode.removeChild(element1);
-            }
-            
-        </script>
+    </script>
+    <script>
+        function removevisadoc(addmoreTR) {
+            --tempCount;
+            document.getElementById('visaCount').value = tempCount;
+            var element1 = document.getElementById(addmoreTR);
+            element1.parentNode.removeChild(element1);
+        }
+
+    </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -747,7 +754,7 @@
                                 <!--form horizontal starts here-->
                                 <div class="box box-info collapsed-box" id="empInfo_id">
                                     <div class="box-header">
-                                        <h3 class="box-title">Personal Detail:</h3>
+                                        <h3 class="box-title">Employee Official Details:</h3>
                                         <div class="box-tools pull-right">
                                             <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                             <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1();"><i class="fa fa-plus" id="minusId1" ></i></button>
@@ -769,47 +776,57 @@
                                                         <form:errors path="employeeName" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
-
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                           <label>Father's Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="fatherName" class="form-control"></form:input>
-                                                        <form:errors path="fatherName" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label>Mother's Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="motherName" class="form-control"></form:input>
-                                                        <form:errors path="motherName" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Father's Date Of Birth:</label>
-                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpFather" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                            <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                            <form:input path="dateOfJoining" class="form-control" size="16" value="" readonly="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
-                                                        <form:errors path="dateOfBirthOfEmpFather" cssClass="errorDiv"></form:errors>
+                                                        <form:errors path="dateOfJoining" cssClass="errorDiv"></form:errors>
                                                         </div>
-
                                                         <div class="col-sm-6">
-                                                            <label>Mother's Date Of Birth:</label>
+                                                            <label>Date Of Birth:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpMother" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                            <form:input path="dateOfBirth" id="dob" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
-                                                        <form:errors path="dateOfBirthOfEmpMother" cssClass="errorDiv"></form:errors>
+                                                        <form:errors path="dateOfBirth" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
-
-                                                    <div class="form-group">
+                                                    <div class="form-group">    
                                                         <div class="col-sm-6">
-                                                            <label>Sex:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
+                                                            <form:option value="" label="-- Select --" ></form:option>
+                                                            <form:options items="${EmployeeTypeList}"></form:options>
+                                                        </form:select>
+                                                        <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6" id="employeeSubTypeId">
+                                                            <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
+                                                        <form:select path="employeeSubType.id" class="form-control">
+                                                            <form:option value="" label="-- Select --" ></form:option> 
+                                                        </form:select>
+                                                        <form:errors path="employeeSubType.id" cssClass="errorDiv"></form:errors>
+                                                        </div>    
+                                                    </div>
+                                                    <div class="form-group">   
+                                                        <div class="col-sm-6">
+                                                            <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <select name="designationMasterByLevelId" id="designationMasterByLevelId" class="form-control" onchange="setDesignation()">
+                                                                <option value="" label="-- Select --" ></option>
+                                                            <%--<form:options items="${desigList}"></form:options>--%>
+                                                        </select>
+                                                        <form:hidden path="designationMaster.id" class="form-control"></form:hidden>
+                                                        <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Gender:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                         <%--<form:select path="gender" id="gender" class="form-control">--%>
                                                         <fieldset id="group1">
                                                             <form:radiobutton path="gender" value="false"/>Male&nbsp;&nbsp;
@@ -820,9 +837,11 @@
                                                         </fieldset>
                                                         <%--</form:select>--%>
                                                         <form:errors path="gender" cssClass="errorDiv"></form:errors>
-
                                                         </div>
+                                                    </div>
 
+
+                                                    <div class="form-group">  
                                                         <div class="col-sm-6">
                                                             <label>Marital Status:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset id="group2">
@@ -837,21 +856,6 @@
                                                         </div>
                                                         <form:errors path="maritalStatus" cssClass="errorDiv"></form:errors>
                                                         </div>
-
-                                                    </div>
-
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Date Of Birth:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirth" id="dob" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                        <form:errors path="dateOfBirth" cssClass="errorDiv"></form:errors>
-                                                        </div>
                                                         <div class="col-sm-6">
                                                             <label>Photograph:</label>
 
@@ -859,326 +863,27 @@
                                                             <span style="font-size: 14px; color: red;" id="photographError"></span>
 
                                                         </div>
-
-
-                                                        <!--                                                        <div class="col-sm-6">
-                                                                                                                    <label>Sex:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <%--<form:select path="gender" id="gender" class="form-control">--%>
-                                                    <%--<form:option value="">--SELECT--</form:option>--%>
-                                                    <%--<form:option value="0">Male</form:option>--%>
-                                                    <%--<form:option value="1">Female</form:option>--%>
-
-                                                    <%--</form:select>--%>
-                                                    <%--<form:errors path="gender" cssClass="errorDiv"></form:errors>--%>
-
-                                                    </div>-->
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:textarea path="presentAddress" class="form-control"></form:textarea>
-                                                        <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <!--<form>-->
-                                                             <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                            <textarea name="presentAddress2" id="presentAddress2" class="form-control"></textarea>
-                                                            <!--</form>-->
-                                                          <%--  <form:errors path="" cssClass="errorDiv"></form:errors>--%>
-                                                        </div>
-                                                    </div>
-                                                        <div class="form-group">
-                                                           <div class="col-sm-6">
-                                                               
-                                                               <label>Present City:</label>
-                                                               <input type="text" name="presentCity" id="presentCity" class="form-control">
-                                                               
-                                                           </div>
-                                                           <div class="col-sm-6">
-                                                               
-                                                               <label>Present State:</label>
-                                                               <input type="text" name="presentState" id="presentState" class="form-control">
-                                                              
-                                                           </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                           <div class="col-sm-6">
-                                                               
-                                                               <label>Present Postal Code:</label>
-                                                               <input type="text" name="presentPostalCode" id="presentPostalCode" class="form-control">
-                                                          
-                                                           </div>
-                                                           <div class="col-sm-6">
-                                                              
-                                                               <label>Present Country:</label>
-                                                              <input type="text" name="presentCountry" id="presentCountry" class="form-control">
-                                                             
-                                                           </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                            <label>Permanent Address:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:textarea path="permanentAddress" class="form-control"></form:textarea>
-                                                            <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                
-                                                            <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
-<!--                                                            <input type="textarea" name="permanentAddress2" id="permanentAddress2" class="form-control">-->
-                                                              <textarea name="permanentAddress2" id="permanentAddress2" class="form-control"></textarea>
-                                                               
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                           <div class="col-sm-6">
-                                                              
-                                                            <label>Permanent City:</label>
-                                                            <input type="text" name="permanentCity" id="permanentCity" class="form-control">
-                                                           
-                                                           </div>
-                                                           <div class="col-sm-6">
-                                                              
-                                                            <label>Permanent State:</label>
-                                                            <input type="text" name="permanentState" id="permanentState" class="form-control">
-                                                           </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                           <div class="col-sm-6">
-                                                              
-                                                            <label>Permanent Postal Code:</label>
-                                                            <input type="text" name="permanentPostalCode" id="permanentPostalCode" class="form-control">
-                                                          
-                                                           </div>
-                                                           <div class="col-sm-6">
-                                                              
-                                                            <label>Permanent Country:</label>
-                                                            <input type="text" name="permanentCountry" id="permanentCountry" class="form-control">
-                                                           
-                                                           </div>
-                                                        </div>
-                                                    <div class="form-group">
-                                                        
-
-                                                        <div class="col-sm-6">
-                                                            <label>Blood Groups:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
-                                                        <form:select path="bloodGroups" id="bloodGroups" class="form-control ">
-                                                            <option value="">--Select--</option>
-                                                            <form:option value="A +ve">A +ve</form:option>
-                                                            <form:option value="A -ve">A -ve</form:option>
-                                                            <form:option value="B +ve">B +ve</form:option>
-                                                            <form:option value="B -ve">B -ve</form:option>
-                                                            <form:option value="AB +ve">AB +ve</form:option>
-                                                            <form:option value="AB -ve">AB -ve</form:option>
-                                                            <form:option value="O +ve">O +ve</form:option>
-                                                            <form:option value="O -ve">O -ve</form:option>
-                                                        </form:select>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                     
-                                                            <label>Religion:</label>
-                                                            <input type="text" name="religion" id="religion" class="form-control">
-                                                       
                                                     </div>
 
-                                                </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                           
-                                                            <label>Disclosed Health Concerns:</label>
-                                                            <input type="text" name="disclosedHealthConcerns" id="disclosedHealthConcerns" class="form-control">
-                                                           
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                          
-                                                            <label>Languages known:</label>
-                                                            <input type="text" name="languagesKnown" id="languagesKnown" class="form-control">
-                                                           
+                                                            <label>Official E - Mail ID:</label>
+                                                        <form:input path="officeEmailId" id="officeEmailId" class="form-control"></form:input>
+                                                        <form:errors path="officeEmailId" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                
-                                                            <label>Hobbies:</label>
-                                                            <input name="hobbies" id="hobbies" class="form-control">
-                                                             
-                                                            </div>
-                                                        </div>
-                                                <!--<div class="form-group">-->
-
-                                                <!--<div class="col-sm-6">-->
-                                                <!--<label>Marital Status:<span style="color: red;font-size: 12px;">*</span></label>-->
-                                                <%--<form:select path="maritalStatus" id="maritalStatus" class="form-control" onchange="showTxt(this.value)">--%>
-                                                <%--<form:option value="">--SELECT--</form:option>--%>
-                                                <%--<form:option value="UnMarried">UnMarried</form:option>--%>
-                                                <%--<form:option value="Married">Married</form:option>--%>
-                                                <%--</form:select>--%>
-                                                <!--</div>-->
-                                                <!--</div>-->
-
-
-                                                <div class="form-group" id="hideInfo1" style="display: none;">
-                                                <div class="form-group" id="">
-                                                    <div class="col-sm-6">
-                                                        <label>Spouse Name:</label>
-                                                        <form:input path="spouseName" class="form-control"></form:input>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Spouse's Date Of Birth:</label>
-                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpSpous" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                        </div>
                                                 </div>
-                                                </div>            
-                                                    <div id="hideInfo2" style="display: none;">
-                                                    <div id="">
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                <label>Child Name1:</label>
-                                                            <form:input path="child1" class="form-control"></form:input>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                               
-                                                               <label>Child1's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
-                                                               <fieldset id="group6">
-                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
-                                                               </fieldset>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                <label>Child1's Date Of Birth:</label>
-                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="dateOfBirthOfEmpChilld1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label>Child Name2:</label>
-                                                            <form:input path="child2" class="form-control"></form:input>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            
-                                                            <div class="col-sm-6">
-                                                                
-                                                               <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
-                                                               <fieldset id="group6">
-                                                               <input type="radio" name="childTwoGender" id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
-                                                               <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
-                                                                </fieldset>
-                                                            </div>
-                                                       
-                                                            <div class="col-sm-6">
-                                                                <label>Child2's Date Of Birth:</label>
-                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="dateOfBirthOfEmpChild2" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                    <!--Employee Official Details starts here-->
 
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <!--pesonal detail complete-->
                                     <div class="box box-info collapsed-box" id="personal_Detail_id">
                                         <div class="box-header">
-                                            <h3 class="box-title">Personal Contact Detail:</h3>
+                                            <h3 class="box-title">Legal Documents:</h3>
                                             <div class="box-tools pull-right">
                                                 <!--<button  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                                 <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Personal Email Id:</label>
-                                                        <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
-
-                                                        <%--<form:input path="emailAddress" class="form-control"></form:input>--%>
-                                                        <form:errors path="emailAddress" cssClass="errorDiv"></form:errors>
-                                                        </div>
-<!--                                                        <div class="col-sm-6">
-                                                            
-                                                            <label>FLYdocs Email Id:</label>
-                                                        <input type="text" name="flyDocsEmailId" id="flyDocsEmailId" pattern="[^ @]*@[^ @]*"  placeholder="abc@domain.com" required="" class="form-control">
-
-                                                        
-                                                        </div>-->
-                                                        <div class="col-sm-6">
-                                                            <label >Contact No.1:</label>
-                                                        <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                </div>
-                                                      <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label >Contact No.2:</label>
-                                                        <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label >Emergency Contact Person:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="emergencyContactPerson" class="form-control"></form:input>
-                                                            <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                      </div>
-                                                    <div class="form-group">
-                                                        
-                                                        <div class="col-sm-6">
-                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                            <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            
-                                                            <label>Emergency Contact Address:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="emergencyContactAddress" id="emergencyContactAddress"  maxlength="14" class="form-control">
-                                                        
-                                                            </div>
-                                                    </div>
-                                                        <div class="form-group">
-                                                            
-                                                            <div class="col-sm-6">
-                                                                
-                                                            <label>Relationship:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="RelationShip" id="RelationShip"  maxlength="14" class="form-control" >
-                                                           
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                            
-                                                            <label>Other important information relating to your emergency contact:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="otherImpInfo" id="otherImpInfo" class="form-control">
-                                                            
-                                                            </div> 
-                                                        </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <!--contact detail completes here-->
-                                    <div class="box box-info collapsed-box" id="document_detail_id">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Document Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
                                             </div>
                                         </div><!-- /.box-header -->
                                         <div class="box-body no-padding">
@@ -1188,51 +893,62 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>PAN Card No:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:input path="panCard" class="form-control"  style="text-transform: uppercase" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
-                                                            <form:errors path="panCard" cssClass="errorDiv"></form:errors>
+                                                        <form:input path="panCard" class="form-control"  style="text-transform: uppercase" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
+                                                        <form:errors path="panCard" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            
+
                                                             <label>Nationality:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="text" name="nationality" id="nationality"  style="text-transform:uppercase" class="form-control">
-                                                       
+
                                                         </div>
-                                                        
-                                                    </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                            <label>Passport No.:</label>
-                                                          <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
+
+                                                    </div>  
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Passport No:</label>
+                                                        <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            
+
                                                             <label>Country Of Issue:</label>
-                                                        <input type="text" name="countryOfIssue" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
-                                                        
-                                                          </div>
+                                                            <input type="text" name="countryOfIssue" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
+
                                                         </div>
-                                                        <div class="form-group">
-                                                           <div class="col-sm-6">
-                                                             
-                                                             <label>First Name:</label>
-                                                             <input type="text" name="firstName" id="firstName" placeholder="First Name as per Passport" class="form-control">
-                                                               
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Select First , Middle & Last Name As per Passport or Aadhar card:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <fieldset id="group11">
+                                                                <input type="radio" name="nameStatus" checked="true" value="false"/>Passport
+                                                                <input type="radio" name="nameStatus" value="true"/>AadharCard
+                                                            </fieldset>
                                                         </div>
-                                                           <div class="col-sm-6">
-                                                              
-                                                             <label>Middle Name:</label>
-                                                             <input type="text" name="middleName" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
-                                                             
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>First Name:</label>
+                                                            <input type="text" name="firstName" id="firstName" placeholder="First Name as per Passport" class="form-control">
+
                                                         </div>
-                                                         </div>
-                                                           <div class="form-group">
-                                                             <div class="col-sm-6">
-                                                             
-                                                             <label>Last Name:</label>
-                                                             <input type="text" name="lastName" id="lastName" placeholder="Last Name as per Passport" class="form-control">
-                                                              
-                                                           </div>
-                                                             <div class="col-sm-6">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Middle Name:</label>
+                                                            <input type="text" name="middleName" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Last Name:</label>
+                                                            <input type="text" name="lastName" id="lastName" placeholder="Last Name as per Passport" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
                                                             <label>Passport Issue Date:</label>
                                                             <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                             <form:input path="passportIssueDate" class="form-control" size="16" readonly="true"></form:input>
@@ -1241,13 +957,8 @@
                                                             </div>
                                                         <form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                          </div>
-                                                    
-                                                        
-                                                    
+                                                    </div>
                                                     <div class="form-group">
-                                                        
-
                                                         <div class=" col-sm-6">
                                                             <label>Passport Expiry Date:</label>
                                                             <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -1257,80 +968,41 @@
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                         </div>
-<!--                                                        <div class="col-sm-6">
-                                                            
-                                                            <label>Visa Issue Country:</label>
-                                                            <input name="visaIssueCountry" id="visaIssueCountry" class="form-control">
-                                                        
-                                                            </div>-->
-                                                    </div>
-                                                    
-                                                             
-                                                    
-                                                    <div class="form-group">
-<!--                                                        <div class="col-sm-6">
-                                                            
-                                                            <label>Visa Issue Date:</label>
-                                                            <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                
-                                                            <input type="text" name="visaIssueDate" id="visaIssueDate"  size="16" readonly="true" class="form-control">
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                               
-                                                        </div>
-                                                        
-                                                        </div>-->
+                                                        <div class="col-sm-6">
 
-<!--                                                        <div class=" col-sm-6">
-                                                            
-                                                            <label>Visa Valid till Date:</label>
-                                                            <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <input class="form-control" size="16" type="text" value="" readonly>
-                                                            <input type="text" name="visaValidTillDate" id="visaValidTillDate" class="form-control" size="16" readonly="true">
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                           
-                                                        </div>-->
+                                                            <label >Driving Licence No:</label>
+                                                            <input type="text" name="drivingLicence" id="drivingLicence" class="form-control" >
+
+                                                        </div>
                                                     </div>
-                                                        
-                                   
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            
-                                                            <label >Driving Licence No :</label>
-                                                        <input type="text" name="drivingLicence" id="drivingLicence" class="form-control" >
-                                                        
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            
                                                             <label>Driving Licence Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <select name="drivingLicenceType" id="drivingLicenceType" class="form-control">
-                                                           
-                                                            <option value="">-- Select --</option>
-                                                            <option value="2Wheeler">2 Wheeler</option>
-                                                            <option value="4Wheeler">4 Wheeler</option>
-                                                            <option value="Both">Both</option>
-                                                        </select>
-                                                        
-                                                       
+                                                            <select name="drivingLicenceType" id="drivingLicenceType" class="form-control">
+                                                                <option value="">-- Select --</option>
+                                                                <option value="2Wheeler">2 Wheeler</option>
+                                                                <option value="4Wheeler">4 Wheeler</option>
+                                                                <option value="Both">Both</option>
+                                                            </select>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                       <div class="col-sm-6">
+                                                        <div class="col-sm-6">
                                                             <label >Aadhar Card:</label>
                                                         <form:input path="adharCard" class="form-control"></form:input>
                                                         <form:errors path="adharCard" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                       
-                                                        <label>Election Card:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="electionCard" id="electionCard" class="form-control">
-                                                        
-                                                        </div>
                                                     </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
+
+                                                    <div class="form-group">
+
+                                                        <div class="col-sm-6">
+
+                                                            <label>Election Card:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="electionCard" id="electionCard" class="form-control">
+
+                                                        </div>
+
+
+                                                        <div class="col-sm-6">
                                                             <label>Any Other Government Document Photo Id Proof:</label>
                                                             <div class="col-sm-6">
                                                             <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name"></form:input>
@@ -1339,15 +1011,16 @@
                                                             <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>
                                                             </div>
                                                         </div>
-                                                        </div>
+                                                    </div>
                                                 </div><!-- /.col -->
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
-                                    <!--Document detail completes here-->
+                                    <!--Employee Official Details completes here-->    
+                                    <!--Document visa detail starts here--> 
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
-                                            <h3 class="box-title">Document Visa Detail:</h3>
+                                            <h3 class="box-title">Visa Details:</h3>
                                             <div class="box-tools pull-right">
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                                 <span id="spanId9">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun9();"><i class="fa fa-plus" id="minusId9" ></i></button>
@@ -1364,7 +1037,7 @@
                                                                 <th style="text-align: center; vertical-align: middle">Visa Issue Date</th>
                                                                 <th style="text-align: center; vertical-align: middle">Visa Valid till Date</th>
                                                                 <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                                <input type="hidden" name="visaCount" id="visaCount" value="1"/>
+                                                            <input type="hidden" name="visaCount" id="visaCount" value="1"/>
                                                             </tr>
                                                             <tr>
                                                                 <td style="text-align: center">1</td>
@@ -1372,10 +1045,10 @@
                                                                     <input name="visaIssueCountry1" id="visaIssueCountry1" class="form-control">
                                                                 </td>
                                                                 <td style="text-align: center">
-                                                                  <input type="text" name="visaIssueDate1" id="visaIssueDate1"  size="16"  class="form-control">
+                                                                    <input type="text" name="visaIssueDate1" id="visaIssueDate1"  size="16"  class="form-control">
                                                                 </td>
                                                                 <td style="text-align: center">
-                                                                   <input type="text" name="visaValidTillDate1" id="visaValidTillDate1" class="form-control" size="16" >
+                                                                    <input type="text" name="visaValidTillDate1" id="visaValidTillDate1" class="form-control" size="16" >
                                                                 </td>
                                                                 <td style="text-align: center">
                                                                     <span style='margin-top: 5px;'>
@@ -1389,7 +1062,370 @@
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
-                                    <!--document visa detail completes here-->
+                                    <!--Document visa detail completes here-->                    
+                                    <!--Personal Contact Detail starts here-->        
+                                    <div class="box box-info collapsed-box" id="personal_Detail_id">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Personal Contact Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <!--<button  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <span id="spanId10">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun10();"><i class="fa fa-plus" id="minusId10" ></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Personal Email Id:</label>
+                                                        <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
+
+                                                        <%--<form:input path="emailAddress" class="form-control"></form:input>--%>
+                                                        <form:errors path="emailAddress" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <!--                                                        <div class="col-sm-6">
+                                                                                                                    
+                                                                                                                    <label>FLYdocs Email Id:</label>
+                                                                                                                <input type="text" name="flyDocsEmailId" id="flyDocsEmailId" pattern="[^ @]*@[^ @]*"  placeholder="abc@domain.com" required="" class="form-control">
+                                                        
+                                                                                                                
+                                                                                                                </div>-->
+                                                        <div class="col-sm-6">
+                                                            <label >Contact No.1:</label>
+                                                        <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                        <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label >Contact No.2:</label>
+                                                        <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                        <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Blood Groups:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
+                                                        <form:select path="bloodGroups" id="bloodGroups" class="form-control ">
+                                                            <option value="">--Select--</option>
+                                                            <form:option value="A +ve">A +ve</form:option>
+                                                            <form:option value="A -ve">A -ve</form:option>
+                                                            <form:option value="B +ve">B +ve</form:option>
+                                                            <form:option value="B -ve">B -ve</form:option>
+                                                            <form:option value="AB +ve">AB +ve</form:option>
+                                                            <form:option value="AB -ve">AB -ve</form:option>
+                                                            <form:option value="O +ve">O +ve</form:option>
+                                                            <form:option value="O -ve">O -ve</form:option>
+                                                        </form:select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                        <label>Religion:</label>
+                                                        <input type="text" name="religion" id="religion" class="form-control">
+                                                    </div>
+                                                    <div class="col-sm-6">
+
+                                                        <label>Languages known:</label>
+                                                        <input type="text" name="languagesKnown" id="languagesKnown" class="form-control">
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                        <label>Disclosed Health Concerns:</label>
+                                                        <input type="text" name="disclosedHealthConcerns" id="disclosedHealthConcerns" class="form-control">
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+
+                                                        <label>Hobbies:</label>
+                                                        <input name="hobbies" id="hobbies" class="form-control">
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6"></div>
+
+                                                    <div class="col-sm-6">
+                                                        <label>Highest Education Details:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
+                                                            <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <!--Personal Contact Detail completes here--> 
+                                    <!--Family Background starts here-->
+                                    <div class="box box-info collapsed-box" id="document_detail_id">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Family Background:</h3>
+                                            <div class="box-tools pull-right">
+                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Father's Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="fatherName" class="form-control"></form:input>
+                                                        <form:errors path="fatherName" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Father's Date Of Birth:</label>
+                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                                                            <form:input path="dateOfBirthOfEmpFather" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            </div>
+                                                        <form:errors path="dateOfBirthOfEmpFather" cssClass="errorDiv"></form:errors>
+                                                        </div>
+
+
+
+                                                    </div>
+                                                    <div class="form-group"> 
+                                                        <div class="col-sm-6">
+                                                            <label>Mother's Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="motherName" class="form-control"></form:input>
+                                                        <form:errors path="motherName" cssClass="errorDiv"></form:errors>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <label>Mother's Date Of Birth:</label>
+                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                                                            <form:input path="dateOfBirthOfEmpMother" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            </div>
+                                                        <form:errors path="dateOfBirthOfEmpMother" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group" id="hideInfo1" style="display: none;margin-left: 2px;">
+                                                        <div class="form-group" id="">
+                                                            <div class="col-sm-6">
+                                                                <label>Spouse Name:</label>
+                                                            <form:input path="spouseName" class="form-control"></form:input>
+                                                            </div>
+                                                            <div class="col-sm-6">
+
+                                                                <label>Spouse's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                <fieldset id="group10">
+                                                                    <input type="radio" name="SpouseGender" id="SpouseGender" checked="true" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="SpouseGender" id="SpouseGender" value="true"/>Female
+                                                                </fieldset>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Spouse's Date Of Birth:</label>
+                                                                <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                                                                <form:input path="dateOfBirthOfEmpSpous" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>  
+
+                                                    <div class="form-group" id="hideInfo2" style="display: none;margin-left: 2px;">
+                                                        <div class="form-group" id="">
+
+                                                            <div class="col-sm-6">
+                                                                <label>Child Name1:</label>
+                                                            <form:input path="child1" class="form-control"></form:input>
+                                                            </div>
+                                                            <div class="col-sm-6">
+
+                                                                <label>Child1's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                <fieldset id="group6">
+                                                                    <input type="radio" name="childOneGender" id="childOneGender" checked="true" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
+                                                                </fieldset>
+                                                            </div> 
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Child1's Date Of Birth:</label>
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                                                                <form:input path="dateOfBirthOfEmpChilld1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Child Name2:</label>
+                                                            <form:input path="child2" class="form-control"></form:input>
+                                                            </div>
+                                                            <div class="col-sm-6">
+
+                                                                <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                <fieldset id="group6">
+                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" checked="true" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
+                                                                </fieldset>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Child2's Date Of Birth:</label>
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                                                                <form:input path="dateOfBirthOfEmpChild2" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:textarea path="presentAddress" class="form-control"></form:textarea>
+                                                        <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <form>
+                                                                <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                                <textarea name="presentAddress2" id="presentAddress2" class="form-control"></textarea>
+                                                            </form>
+                                                        <%--  <form:errors path="" cssClass="errorDiv"></form:errors>--%>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                        <label>Present City:</label>
+                                                        <input type="text" name="presentCity" id="presentCity" class="form-control">
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+
+                                                        <label>Present State:</label>
+                                                        <input type="text" name="presentState" id="presentState" class="form-control">
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                        <label>Present Postal Code:</label>
+                                                        <input type="text" name="presentPostalCode" id="presentPostalCode" class="form-control">
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+
+                                                        <label>Present Country:</label>
+                                                        <input type="text" name="presentCountry" id="presentCountry" class="form-control">
+
+                                                    </div>
+                                                </div>             
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Permanent Address:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:textarea path="permanentAddress" class="form-control"></form:textarea>
+                                                        <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <!--                                                            <input type="textarea" name="permanentAddress2" id="permanentAddress2" class="form-control">-->
+                                                            <textarea name="permanentAddress2" id="permanentAddress2" class="form-control"></textarea>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent City:</label>
+                                                            <input type="text" name="permanentCity" id="permanentCity" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent State:</label>
+                                                            <input type="text" name="permanentState" id="permanentState" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent Postal Code:</label>
+                                                            <input type="text" name="permanentPostalCode" id="permanentPostalCode" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent Country:</label>
+                                                            <input type="text" name="permanentCountry" id="permanentCountry" class="form-control">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                        <div class="col-sm-6">
+                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                            <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label >Emergency Contact Person:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="emergencyContactPerson" class="form-control"></form:input>
+                                                            <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Relationship:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="RelationShip" id="RelationShip"  maxlength="14" class="form-control" >
+
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+
+                                                            <label>Emergency Contact Address:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="emergencyContactAddress" id="emergencyContactAddress"  maxlength="14" class="form-control">
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6"></div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Other important information relating to your emergency contact:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="otherImpInfo" id="otherImpInfo" class="form-control">
+
+                                                        </div> 
+                                                    </div>
+
+
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                    <!--Family Background completes here-->
+                                    <!--Organization Specific Detail starts here-->
                                     <div class="box box-info collapsed-box" id="org_detail_id">
                                         <div class="box-header">
                                             <h3 class="box-title">Organization Specific Detail:</h3>
@@ -1401,53 +1437,41 @@
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
-
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Official E - Mail ID:</label>
-                                                        <form:input path="officeEmailId" id="officeEmailId" class="form-control"></form:input>
-                                                        <form:errors path="officeEmailId" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label>Highest Education Details:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
-                                                            <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
                                                             <label>Name of Previous company:</label>
                                                             <input type="text" name="nameOfPreviousCompany" id="nameOfPreviousCompany" class="form-control">
-                                                            
-                                                            </div>
-                                                            <div class="col-sm-6">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
                                                             <label>Previous Company Location:</label>
                                                             <input type="text" name="previousCompanyLocation" id="previousCompanyLocation" class="form-control">
-                                                            
-                                                            </div>
+
                                                         </div>
+                                                    </div>
                                                     <div class="form-group">
+
                                                         <div class="col-sm-6">
-                                                            <div class="col-sm-6">
-                                                                <label>Experience On Date Of Joining: Year:<span style="color: red;font-size: 12px;"></span></label>
-                                                                <form:select path="experienceYearOnDoj" class="form-control ">
-                                                                    <c:forEach begin="0" end="50" var="counter">
-                                                                        <form:option value="${counter}">${counter}</form:option>
-                                                                    </c:forEach>
-                                                                </form:select>
-                                                                <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label>Experience On Date Of Joining: Month:<span style="color: red;font-size: 12px;"></span></label>
-                                                                <form:select path="experienceMonthOnDoj" class="form-control ">
-                                                                    <c:forEach begin="0" end="11" var="counter">
-                                                                        <form:option value="${counter}">${counter}</form:option>
-                                                                    </c:forEach>
-                                                                </form:select>
-                                                                <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
-                                                            </div>
+                                                            <label>Experience On Date Of Joining: Year:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:select path="experienceYearOnDoj" class="form-control ">
+                                                                <c:forEach begin="0" end="50" var="counter">
+                                                                    <form:option value="${counter}">${counter}</form:option>
+                                                                </c:forEach>
+                                                            </form:select>
+                                                            <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Experience On Date Of Joining: Month:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:select path="experienceMonthOnDoj" class="form-control ">
+                                                                <c:forEach begin="0" end="11" var="counter">
+                                                                    <form:option value="${counter}">${counter}</form:option>
+                                                                </c:forEach>
+                                                            </form:select>
+                                                            <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Company:<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:select path="company"  class="form-control ">
@@ -1458,44 +1482,26 @@
                                                             </form:select>
                                                             <form:errors path="company" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                    <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
+                                                        <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
+                                                </div>
+
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Employee Location Code:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="employeeLocation"  class="form-control"></form:input>
-                                                        <form:errors path="employeeLocation" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
-                                                            <form:option value="" label="-- Select --" ></form:option>
-                                                            <form:options items="${EmployeeTypeList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6" id="employeeSubTypeId">
-                                                            <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
-                                                        <form:select path="employeeSubType.id" class="form-control">
-                                                            <form:option value="" label="-- Select --" ></form:option> 
-                                                        </form:select>
-                                                        <form:errors path="employeeSubType.id" cssClass="errorDiv"></form:errors>
-
-
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="zydexLocationMaster.id" class="form-control ">
                                                             <form:option value="" label="-- Select --" ></form:option>
                                                             <form:options items="${zydexLocationMap}"></form:options>
                                                         </form:select>
                                                         <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
-
+                                                        <div class="col-sm-6">
+                                                            <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
+                                                            <form:option value="" label="-- Select --" ></form:option>
+                                                            <form:options items="${level}"></form:options>
+                                                        </form:select>
+                                                        <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
+                                                        </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
@@ -1507,17 +1513,6 @@
                                                         <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
-                                                            <form:option value="" label="-- Select --" ></form:option>
-                                                            <form:options items="${level}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
                                                             <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="departmentMaster.id" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option>
@@ -1525,52 +1520,53 @@
                                                         </form:select>
                                                         <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <select name="designationMasterByLevelId" id="designationMasterByLevelId" class="form-control" onchange="setDesignation()">
-                                                                <option value="" label="-- Select --" ></option>
-                                                            <%--<form:options items="${desigList}"></form:options>--%>
-                                                        </select>
-                                                        <form:hidden path="designationMaster.id" class="form-control"></form:hidden>
-                                                        <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
-                                                        </div>
 
                                                     </div>
                                                     <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Role:</label>
-                                                        <form:input path="role" class="form-control"></form:input>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <form:input path="dateOfJoining" class="form-control" size="16" value="" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                        <form:errors path="dateOfJoining" cssClass="errorDiv"></form:errors>
-                                                        </div>
 
-                                                        <!--                                                        <div class="col-sm-6">
-                                                                                                                    <label>Last Year's Performance Rating:</label>
-                                                    <%--<form:input path="lastYearPerformanceRating" class="form-control"></form:input>--%>
-                                                    </div>-->
-
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <div class="col-sm-6">
+                                                            <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeType" id="employeeType" class="form-control ">
                                                             <form:option value="Probation" label="Probation"></form:option>
                                                             <form:option value="Confirmed" label="Confirmed"></form:option>
                                                         </form:select>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label >Official Contact No.:</label>
+                                                        <label>Role:</label>
+                                                        <form:input path="role" class="form-control"></form:input>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Sub Team Transfer Date:</label>
+                                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                                                                <input type="text" name="subteamTransferDate" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"/>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                        <div class="col-sm-6">
+                                                            <label >Official Contact No.:</label>
                                                         <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                         </div>
-
+                                                        <div class="col-sm-6">
+                                                            <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="shiftType" class="form-control">
+                                                            <!--<option value="">--SELECT--</option>-->
+                                                            <form:option value="" label="-- Select --" ></form:option>
+                                                            <form:option value="HourlyBase" label="Hourly Base"></form:option>
+                                                            <form:option value="ShiftBase" label="Shift Base"></form:option>
+                                                        </form:select>
+                                                        <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
+                                                        </div>
                                                     </div>
                                                     <div class="form-group">
 
@@ -1627,35 +1623,25 @@
                                                                 <span style="font-size: 14px; color: #dd4b39;" id="shiftMasterIdError"></span>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> 
+
+
                                                     <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="shiftType" class="form-control">
-                                                            <!--<option value="">--SELECT--</option>-->
-                                                            <form:option value="" label="-- Select --" ></form:option>
-                                                            <form:option value="HourlyBase" label="Hourly Base"></form:option>
-                                                            <form:option value="ShiftBase" label="Shift Base"></form:option>
-                                                        </form:select>
-                                                        <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
-                                                        </div>
+
                                                         <div class="col-sm-6">
                                                             <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="basicSalary"  id="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();" />
                                                         <form:errors path="basicSalary" cssClass="errorDiv"/>
                                                     </div>
-                                                    <!--                                                        <div class="col-sm-6">
-                                                                                                                <label>Competency Evaluation:<span style="color: red;font-size: 12px;">*</span></label>
-                                                                                                                <select name="competencyEvaluationId" id="competencyEvaluationId" class="form-control">
-                                                                                                                    <option value="">--SELECT--</option>
-                                                    <%--<c:forEach var="competencyMap" items="${competencyMap}">--%>
-                                                        <option value="${competencyMap.key}">${competencyMap.value}</option>
-                                                    <%--</c:forEach>--%>
-                                                </select>
-                                            </div>-->
+
+                                                    <div class="col-sm-6">
+                                                        <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="esicNo" class="form-control"  placeholder="Enter ESIC No"/>
+                                                            <form:errors path="esicNo" cssClass="errorDiv"/>
+                                                    </div>
+
 
                                                 </div>
-                                              
                                                 <div  class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>PF Amount(By Employee Basic Salary):</label>
@@ -1667,17 +1653,7 @@
                                                         <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
                                                         <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                          <div class="form-group">
-
-
-                                                    <div class="col-sm-6">
-                                                        <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:input path="esicNo" class="form-control"  placeholder="Enter ESIC No"/>
-                                                            <form:errors path="esicNo" cssClass="errorDiv"/>
-                                                    </div>
-                                                </div>
-
+                                                    </div>    
                                                     <div class="form-group">
                                                         <div class="col-sm-4">
                                                             <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
@@ -1728,35 +1704,35 @@
                                                         </fieldset>
                                                     </div>
                                                 </div>
-                                                          <div class="form-group">
-                                                        <div class="col-sm-4">
-                                                            <label>Payroll:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
-                                                            <fieldset>
+                                                <div class="form-group">
+                                                    <div class="col-sm-4">
+                                                        <label>Payroll:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                        <fieldset>
                                                             <form:radiobutton path="payroll" value="false" checked="checked"/>No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                             <form:radiobutton path="payroll" value="true"/>Yes
                                                         </fieldset>
                                                         <form:errors path="payroll" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        
-                                                        
-                                                </div>
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="table-responsive">
-                                                        <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                            <tr>
-                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                <th style="text-align: center; vertical-align: middle">Select Allowance</th>
-                                                                <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
-                                                                <th style="text-align: center; vertical-align: middle">Amount</th>
-                                                                <th style="text-align: center; vertical-align: middle">Taxable</th>
-                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                            <input type="hidden" name="policyCount" id="policyCount" value="1"/>
-                                                            </tr>
-                                                            <tr>
-                                                                <td style="text-align: center">1</td>
-                                                                <td id="policyTd1"><div>
-                                                                        <select id="policyId1"  name="policyId1"  class="form-control">
-                                                                            <option value="">--SELECT--</option>
+
+
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="table-responsive">
+                                                            <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                                <tr>
+                                                                    <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Select Allowance</th>
+                                                                    <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
+                                                                    <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Taxable</th>
+                                                                    <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                                <input type="hidden" name="policyCount" id="policyCount" value="1"/>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: center">1</td>
+                                                                    <td id="policyTd1"><div>
+                                                                            <select id="policyId1"  name="policyId1"  class="form-control">
+                                                                                <option value="">--SELECT--</option>
                                                                             <c:forEach var="comp" items="${policy}" varStatus = "status">
                                                                                 <option value="${comp.key}">${comp.value}</option>
                                                                             </c:forEach>
@@ -1890,6 +1866,9 @@
                                     </div><!-- /.box-body -->
                                 </div>
                                 <!--organization detail completes here-->
+
+
+
                                 <div class="box box-info collapsed-box" id="empInfo_id">
                                     <div class="box-header">
                                         <h3 class="box-title">Employee's Bank Account Detail:</h3>
@@ -1925,8 +1904,8 @@
                                                             <label>Payment Type:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="paymentType" id="paymentType" class="form-control ">
                                                             <option value="">--Select--</option>
-                                                            <form:option value="0">Bank</form:option>
-                                                            <form:option value="1">Cash</form:option>
+                                                            <form:option value="Bank">Bank</form:option>
+                                                            <form:option value="Check">Check</form:option>
 
                                                         </form:select>
                                                     </div>
@@ -1938,30 +1917,30 @@
                                                             <%--<form:errors path="pfNo" cssClass="errorDiv"></form:errors>--%>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        
+
                                                         <label>PF No(FLYdocs):<span style="color: red;font-size: 12px;"></span></label>
                                                         <input type="text" name="pfNoFlydocs" id="pfNoFlydocs" class="form-control">
-                                                               
+
                                                     </div>  
                                                 </div>  
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            
-                                                            <label>PF Withdrawal Date:</label>
-                                                            <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                        <label>PF Withdrawal Date:</label>
+                                                        <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                             <input type="text" name="withdrawalDate" id="withdrawalDate" size="16" readonly="true" class="form-control">
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                        
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                         </div>
-                                                        <div class="col-sm-6">
+
+                                                    </div>
+                                                    <div class="col-sm-6">
                                                         <label>UAN No:<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="uanNo" id="uanNo"  class="form-control"></form:input>
                                                             <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
-                                                      </div> 
-                                                        
-                                                    </div>
+                                                    </div> 
+
+                                                </div>
                                             </div>
                                         </div><!-- /.col -->
                                     </div><!-- /.row -->
@@ -2114,266 +2093,316 @@
                         </div>
                     </div>
                 </div>
-            </section>
-        </form:form>
+        </div>
     </div>
+</section>
+</form:form>
+</div>
 
-    <script type="text/javascript">
-        $('.form_datetime').datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0
-        });</script>
-    <script type="text/javascript">
-        $('.form_datetime_shift_rotation').datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            forceParse: 0,
-            startDate: new Date()
-        });</script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+    });</script>
+<script type="text/javascript">
+    $('.form_datetime_shift_rotation').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        startDate: new Date()
+    });</script>
 
-    <script type="text/javascript">
-        var dt = new Date();
-        dt.setFullYear(new Date().getFullYear() - 18);
-        var dt1 = new Date();
-        dt1.setFullYear(new Date().getFullYear() - 100);
-        $('.form_datetime_dob').datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            startDate: dt1,
-            endDate: dt,
-            forceParse: 0
-        });</script>
+<script type="text/javascript">
+    var dt = new Date();
+    dt.setFullYear(new Date().getFullYear() - 18);
+    var dt1 = new Date();
+    dt1.setFullYear(new Date().getFullYear() - 100);
+    $('.form_datetime_dob').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        startDate: dt1,
+        endDate: dt,
+        forceParse: 0
+    });</script>
 
-    <script type="text/javascript">
-        var dt = new Date();
-        dt.setFullYear(new Date().getFullYear() - 10);
-        var dt1 = new Date();
-        dt1.setFullYear(new Date().getFullYear() + 10);
-        $('.form_datetime_passport_issue').datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            startDate: dt,
-            endDate: dt1,
-            forceParse: 0
-        });</script>
+<script type="text/javascript">
+    var dt = new Date();
+    dt.setFullYear(new Date().getFullYear() - 10);
+    var dt1 = new Date();
+    dt1.setFullYear(new Date().getFullYear() + 10);
+    $('.form_datetime_passport_issue').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        startDate: dt,
+        endDate: dt1,
+        forceParse: 0
+    });</script>
 
-    <script type="text/javascript">
-        var dt = new Date();
-        var dt1 = new Date();
-        dt1.setFullYear(new Date().getFullYear() + 10);
-        $('.form_datetime_passport_expiry').datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
-            todayBtn: 1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2,
-            startDate: dt,
-            endDate: dt1,
-            forceParse: 0
-        });</script>
+<script type="text/javascript">
+    var dt = new Date();
+    var dt1 = new Date();
+    dt1.setFullYear(new Date().getFullYear() + 10);
+    $('.form_datetime_passport_expiry').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        startDate: dt,
+        endDate: dt1,
+        forceParse: 0
+    });</script>
 
-    <script>
-        jQuery.noConflict();
-        jQuery(document).ready(function () {
-            jQuery("#reportingManagerLevel1").tokenInput(${list}, {
-                preventDuplicates: true,
-                noResultsText: "No Result",
-                tokenLimit: "1",
-                searchingText: "Searching ......",
-                prePopulate: ${preList}
+<script>
+    jQuery.noConflict();
+    jQuery(document).ready(function () {
+        jQuery("#reportingManagerLevel1").tokenInput(${list}, {
+            preventDuplicates: true,
+            noResultsText: "No Result",
+            tokenLimit: "1",
+            searchingText: "Searching ......",
+            prePopulate: ${preList}
 
-            });
         });
-        jQuery(document).ready(function () {
-            reportingLevelSet();
-        });
-        function reportingLevelSet() {
-            var level = document.getElementById("reportingManagerLevel1").value;
-            if (level != null && level != '') {
-                $.ajax({
-                    url: 'employeeMaster.htm?act=readReportingHierarchy&id=' + level,
-                    type: 'GET',
-                    success: function (result) {
-                        //                        alert("this is result String    " + result);
-                        var array = result.split("~");
-                        //blank whole fields before put new data
-                        document.getElementById("reportingManagerLevel2").value = '';
-                        document.getElementById("reportingManagerLevel3").value = '';
-                        document.getElementById("reportingManagerLevel4").value = '';
-                        document.getElementById("reportingManagerLevel5").value = '';
-                        document.getElementById("reportingManagerLevel6").value = '';
-                        document.getElementById("reportingManagerLevel2Name").value = '';
-                        document.getElementById("reportingManagerLevel3Name").value = '';
-                        document.getElementById("reportingManagerLevel4Name").value = '';
-                        document.getElementById("reportingManagerLevel5Name").value = '';
-                        document.getElementById("reportingManagerLevel6Name").value = '';
-                        document.getElementById("reportingManagerLevel2").value = array[0];
-                        document.getElementById("reportingManagerLevel3").value = array[1];
-                        document.getElementById("reportingManagerLevel4").value = array[2];
-                        //this conditions checks for level 5 and level 6 if these are empty then set conditional values(for id in databese)
-                        if ((array[4] == "" || array[4] == null) && (array[5] == "" || array[5] == null)) {
-                            if (array[2] == "" || array[2] == null) {
-                                document.getElementById("reportingManagerLevel6").value = level;
-                            } else {
-                                document.getElementById("reportingManagerLevel5").value = level;
-                                document.getElementById("reportingManagerLevel6").value = array[2];
-                            }
+    });
+    jQuery(document).ready(function () {
+        reportingLevelSet();
+    });
+    function reportingLevelSet() {
+        var level = document.getElementById("reportingManagerLevel1").value;
+        if (level != null && level != '') {
+            $.ajax({
+                url: 'employeeMaster.htm?act=readReportingHierarchy&id=' + level,
+                type: 'GET',
+                success: function (result) {
+                    //                        alert("this is result String    " + result);
+                    var array = result.split("~");
+                    //blank whole fields before put new data
+                    document.getElementById("reportingManagerLevel2").value = '';
+                    document.getElementById("reportingManagerLevel3").value = '';
+                    document.getElementById("reportingManagerLevel4").value = '';
+                    document.getElementById("reportingManagerLevel5").value = '';
+                    document.getElementById("reportingManagerLevel6").value = '';
+                    document.getElementById("reportingManagerLevel2Name").value = '';
+                    document.getElementById("reportingManagerLevel3Name").value = '';
+                    document.getElementById("reportingManagerLevel4Name").value = '';
+                    document.getElementById("reportingManagerLevel5Name").value = '';
+                    document.getElementById("reportingManagerLevel6Name").value = '';
+                    document.getElementById("reportingManagerLevel2").value = array[0];
+                    document.getElementById("reportingManagerLevel3").value = array[1];
+                    document.getElementById("reportingManagerLevel4").value = array[2];
+                    //this conditions checks for level 5 and level 6 if these are empty then set conditional values(for id in databese)
+                    if ((array[4] == "" || array[4] == null) && (array[5] == "" || array[5] == null)) {
+                        if (array[2] == "" || array[2] == null) {
+                            document.getElementById("reportingManagerLevel6").value = level;
                         } else {
-                            //                            document.getElementById("reportingManagerLevel5").value = level;
-                            if (array[4] == "" || array[4] == null) {
-                                document.getElementById("reportingManagerLevel5").value = level;
-
-                            } else {
-                                document.getElementById("reportingManagerLevel5").value = array[4];
-                            }
-                            document.getElementById("reportingManagerLevel6").value = array[5];
-                            //                            if (array[4] != "" || array[4] != null) {
-
-                            //                            }
-
+                            document.getElementById("reportingManagerLevel5").value = level;
+                            document.getElementById("reportingManagerLevel6").value = array[2];
                         }
-                        document.getElementById("reportingManagerLevel2Name").value = array[6];
-                        document.getElementById("reportingManagerLevel3Name").value = array[7];
-                        document.getElementById("reportingManagerLevel4Name").value = array[8];
-                        //this conditions checks for level 5 and level 6 if these are empty then set conditional values(for values display on jsp)
-                        if ((array[10] == "" || array[10] == null) && (array[11] == "" || array[11] == null)) {
-                            if (array[6] == "" || array[6] == null) {
-                                document.getElementById("reportingManagerLevel6Name").value = array[12];
-                                //array[12] is for employee name od reporting manager.
-                            } else {
-                                document.getElementById("reportingManagerLevel5Name").value = array[12];
-                                document.getElementById("reportingManagerLevel6Name").value = array[6];
-                            }
+                    } else {
+                        //                            document.getElementById("reportingManagerLevel5").value = level;
+                        if (array[4] == "" || array[4] == null) {
+                            document.getElementById("reportingManagerLevel5").value = level;
+
                         } else {
-                            if (array[10] == "" || array[10] == null) {
-                                document.getElementById("reportingManagerLevel5Name").value = array[12];
-
-                            } else {
-                                document.getElementById("reportingManagerLevel5Name").value = array[10];
-                            }
-                            document.getElementById("reportingManagerLevel6Name").value = array[11];
+                            document.getElementById("reportingManagerLevel5").value = array[4];
                         }
+                        document.getElementById("reportingManagerLevel6").value = array[5];
+                        //                            if (array[4] != "" || array[4] != null) {
+
+                        //                            }
+
                     }
-                });
-            }
+                    document.getElementById("reportingManagerLevel2Name").value = array[6];
+                    document.getElementById("reportingManagerLevel3Name").value = array[7];
+                    document.getElementById("reportingManagerLevel4Name").value = array[8];
+                    //this conditions checks for level 5 and level 6 if these are empty then set conditional values(for values display on jsp)
+                    if ((array[10] == "" || array[10] == null) && (array[11] == "" || array[11] == null)) {
+                        if (array[6] == "" || array[6] == null) {
+                            document.getElementById("reportingManagerLevel6Name").value = array[12];
+                            //array[12] is for employee name od reporting manager.
+                        } else {
+                            document.getElementById("reportingManagerLevel5Name").value = array[12];
+                            document.getElementById("reportingManagerLevel6Name").value = array[6];
+                        }
+                    } else {
+                        if (array[10] == "" || array[10] == null) {
+                            document.getElementById("reportingManagerLevel5Name").value = array[12];
+
+                        } else {
+                            document.getElementById("reportingManagerLevel5Name").value = array[10];
+                        }
+                        document.getElementById("reportingManagerLevel6Name").value = array[11];
+                    }
+                }
+            });
+        }
+    }
+
+    //        jQuery(document).ready(function () {
+    //            jQuery("#reportingManagerLevel2").tokenInput(${list}, {
+    //                preventDuplicates: true,
+    //                noResultsText: "No Result",
+    //                tokenLimit: "1",
+    //                searchingText: "Searching ... .. .",
+    //            });
+    //        });
+    //        jQuery(document).ready(function () {
+    //            jQuery("#reportingManagerLevel3").tokenInput(${list}, {
+    //                preventDuplicates: true,
+    //                noResultsText: "No Result",
+    //                tokenLimit: "1",
+    //                searchingText: "Searching ... .. .",
+    //            });
+    //        });
+    //        jQuery(document).ready(function () {
+    //            jQuery("#reportingManagerLevel4").tokenInput(${list}, {
+    //                preventDuplicates: true,
+    //                noResultsText: "No Result",
+    //                tokenLimit: "1",
+    //                searchingText: "Searching ... .. .",
+    //            });
+    //        });
+    //        jQuery(document).ready(function () {
+    //            jQuery("#reportingManagerLevel5").tokenInput(${list}, {
+    //                preventDuplicates: true,
+    //                noResultsText: "No Result",
+    //                tokenLimit: "1",
+    //                searchingText: "Searching ... .. .",
+    //            });
+    //        });
+    //        jQuery(document).ready(function () {
+    //            jQuery("#reportingManagerLevel6").tokenInput(${list}, {
+    //                preventDuplicates: true,
+    //                noResultsText: "No Result",
+    //                tokenLimit: "1",
+    //                searchingText: "Searching ... .. .",
+    //            });
+    //        });
+    $("#levelMasterId").on('change', function () {
+        var textVal = $("#levelMasterId option:selected").text();
+        //            alert(textVal);
+        if (textVal == "Level 0") {
+            //$('#levelIdDiv1').show();
+            $('#levelIdDiv1').hide();
+            $('#levelIdDiv2').hide();
+            $('#levelIdDiv3').hide();
+            $('#levelIdDiv4').hide();
+            $('#levelIdDiv5').hide();
+            $('#levelIdDiv6').hide();
+        } else if (textVal == "Level 1") {
+            $('#levelIdDiv1').show();
+            $('#levelIdDiv2').hide();
+            $('#levelIdDiv3').hide();
+            $('#levelIdDiv4').hide();
+            $('#levelIdDiv5').hide();
+            $('#levelIdDiv6').hide();
+        } else if (textVal == "Level 2") {
+            $('#levelIdDiv1').show();
+            $('#levelIdDiv2').show();
+            $('#levelIdDiv3').hide();
+            $('#levelIdDiv4').hide();
+            $('#levelIdDiv5').hide();
+            $('#levelIdDiv6').hide();
+        } else if (textVal == "Level 3") {
+            $('#levelIdDiv1').show();
+            $('#levelIdDiv2').show();
+            $('#levelIdDiv3').show();
+            $('#levelIdDiv4').hide();
+            $('#levelIdDiv5').hide();
+            $('#levelIdDiv6').hide();
+        } else if (textVal == "Level 4") {
+            $('#levelIdDiv1').show();
+            $('#levelIdDiv2').show();
+            $('#levelIdDiv3').show();
+            $('#levelIdDiv4').show();
+            $('#levelIdDiv5').hide();
+            $('#levelIdDiv6').hide();
+        } else if (textVal == "Level 5") {
+            $('#levelIdDiv1').show();
+            $('#levelIdDiv2').show();
+            $('#levelIdDiv3').show();
+            $('#levelIdDiv4').show();
+            $('#levelIdDiv5').show();
+            $('#levelIdDiv6').hide();
+        } else if (textVal == "Level 6") {
+            $('#levelIdDiv1').show();
+            $('#levelIdDiv2').show();
+            $('#levelIdDiv3').show();
+            $('#levelIdDiv4').show();
+            $('#levelIdDiv5').show();
+            $('#levelIdDiv6').show();
         }
 
-        //        jQuery(document).ready(function () {
-        //            jQuery("#reportingManagerLevel2").tokenInput(${list}, {
-        //                preventDuplicates: true,
-        //                noResultsText: "No Result",
-        //                tokenLimit: "1",
-        //                searchingText: "Searching ... .. .",
-        //            });
-        //        });
-        //        jQuery(document).ready(function () {
-        //            jQuery("#reportingManagerLevel3").tokenInput(${list}, {
-        //                preventDuplicates: true,
-        //                noResultsText: "No Result",
-        //                tokenLimit: "1",
-        //                searchingText: "Searching ... .. .",
-        //            });
-        //        });
-        //        jQuery(document).ready(function () {
-        //            jQuery("#reportingManagerLevel4").tokenInput(${list}, {
-        //                preventDuplicates: true,
-        //                noResultsText: "No Result",
-        //                tokenLimit: "1",
-        //                searchingText: "Searching ... .. .",
-        //            });
-        //        });
-        //        jQuery(document).ready(function () {
-        //            jQuery("#reportingManagerLevel5").tokenInput(${list}, {
-        //                preventDuplicates: true,
-        //                noResultsText: "No Result",
-        //                tokenLimit: "1",
-        //                searchingText: "Searching ... .. .",
-        //            });
-        //        });
-        //        jQuery(document).ready(function () {
-        //            jQuery("#reportingManagerLevel6").tokenInput(${list}, {
-        //                preventDuplicates: true,
-        //                noResultsText: "No Result",
-        //                tokenLimit: "1",
-        //                searchingText: "Searching ... .. .",
-        //            });
-        //        });
+    });</script>
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+<!--    <script>
+        $(document).ready(function () {
+            showHide();
+        });
         $("#levelMasterId").on('change', function () {
+            showHide();
+        });
+        $("#WorkTypeSelectId").on("change", function () {
+            shift();
+        });
+        function showHide() {
             var textVal = $("#levelMasterId option:selected").text();
-            //            alert(textVal);
-            if (textVal == "Level 0") {
-                //$('#levelIdDiv1').show();
-                $('#levelIdDiv1').hide();
-                $('#levelIdDiv2').hide();
-                $('#levelIdDiv3').hide();
-                $('#levelIdDiv4').hide();
-                $('#levelIdDiv5').hide();
-                $('#levelIdDiv6').hide();
-            }
-            else if (textVal == "Level 1") {
+            $('#levelIdDiv1').hide();
+            $('#levelIdDiv2').hide();
+            $('#levelIdDiv3').hide();
+            $('#levelIdDiv4').hide();
+            $('#levelIdDiv5').hide();
+            $('#levelIdDiv6').hide();
+            if (textVal === "Level 1") {
                 $('#levelIdDiv1').show();
-                $('#levelIdDiv2').hide();
-                $('#levelIdDiv3').hide();
-                $('#levelIdDiv4').hide();
-                $('#levelIdDiv5').hide();
-                $('#levelIdDiv6').hide();
-            }
-            else if (textVal == "Level 2") {
+
+            } else if (textVal === "Level 2") {
                 $('#levelIdDiv1').show();
                 $('#levelIdDiv2').show();
-                $('#levelIdDiv3').hide();
-                $('#levelIdDiv4').hide();
-                $('#levelIdDiv5').hide();
-                $('#levelIdDiv6').hide();
-            }
-            else if (textVal == "Level 3") {
+
+            } else if (textVal === "Level 3") {
                 $('#levelIdDiv1').show();
                 $('#levelIdDiv2').show();
                 $('#levelIdDiv3').show();
-                $('#levelIdDiv4').hide();
-                $('#levelIdDiv5').hide();
-                $('#levelIdDiv6').hide();
-            }
-            else if (textVal == "Level 4") {
+
+            } else if (textVal === "Level 4") {
                 $('#levelIdDiv1').show();
                 $('#levelIdDiv2').show();
                 $('#levelIdDiv3').show();
                 $('#levelIdDiv4').show();
-                $('#levelIdDiv5').hide();
-                $('#levelIdDiv6').hide();
-            }
-            else if (textVal == "Level 5") {
+
+            } else if (textVal === "Level 5") {
                 $('#levelIdDiv1').show();
                 $('#levelIdDiv2').show();
                 $('#levelIdDiv3').show();
                 $('#levelIdDiv4').show();
                 $('#levelIdDiv5').show();
-                $('#levelIdDiv6').hide();
-            }
-            else if (textVal == "Level 6") {
+
+            } else if (textVal === "Level 6") {
                 $('#levelIdDiv1').show();
                 $('#levelIdDiv2').show();
                 $('#levelIdDiv3').show();
@@ -2381,120 +2410,14 @@
                 $('#levelIdDiv5').show();
                 $('#levelIdDiv6').show();
             }
+        }
 
-        });</script>
-        <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-    <!--    <script>
-            $(document).ready(function () {
-                showHide();
-            });
-            $("#levelMasterId").on('change', function () {
-                showHide();
-            });
-            $("#WorkTypeSelectId").on("change", function () {
-                shift();
-            });
-            function showHide() {
-                var textVal = $("#levelMasterId option:selected").text();
-                $('#levelIdDiv1').hide();
-                $('#levelIdDiv2').hide();
-                $('#levelIdDiv3').hide();
-                $('#levelIdDiv4').hide();
-                $('#levelIdDiv5').hide();
-                $('#levelIdDiv6').hide();
-                if (textVal === "Level 1") {
-                    $('#levelIdDiv1').show();
-    
-                } else if (textVal === "Level 2") {
-                    $('#levelIdDiv1').show();
-                    $('#levelIdDiv2').show();
-    
-                } else if (textVal === "Level 3") {
-                    $('#levelIdDiv1').show();
-                    $('#levelIdDiv2').show();
-                    $('#levelIdDiv3').show();
-    
-                } else if (textVal === "Level 4") {
-                    $('#levelIdDiv1').show();
-                    $('#levelIdDiv2').show();
-                    $('#levelIdDiv3').show();
-                    $('#levelIdDiv4').show();
-    
-                } else if (textVal === "Level 5") {
-                    $('#levelIdDiv1').show();
-                    $('#levelIdDiv2').show();
-                    $('#levelIdDiv3').show();
-                    $('#levelIdDiv4').show();
-                    $('#levelIdDiv5').show();
-    
-                } else if (textVal === "Level 6") {
-                    $('#levelIdDiv1').show();
-                    $('#levelIdDiv2').show();
-                    $('#levelIdDiv3').show();
-                    $('#levelIdDiv4').show();
-                    $('#levelIdDiv5').show();
-                    $('#levelIdDiv6').show();
-                }
-            }
-    
-        </script>-->
-    <script>
-        $(document).ready(function () {
+    </script>-->
+<script>
+    $(document).ready(function () {
 
-            if ($('.checked input[name=maritalStatus]')) {
-                if ($('.checked input[name=maritalStatus]').val() === "Married") {
-                    $("#hideInfo1").show(500);
-                    $("#hideInfo2").show(500);
-                    $("#otherMaritalStatusId").hide(500);
-                } else {
-
-                    $("#hideInfo1").hide(500);
-                    $("#hideInfo2").hide(500);
-                    $("#otherMaritalStatusId").hide(500);
-                }
-                if ($('.checked input[name=maritalStatus]').val() === "Other") {
-                    $("#hideInfo1").hide(500);
-                    $("#hideInfo2").hide(500);
-                    $("#otherMaritalStatusId").show(500);
-                }
-            }
-
-            if ($('#shiftType').find("option:selected")) {
-                if ($('#shiftType').find("option:selected").val() == "HourlyBase") {
-                    $('#hourlyBaseTitleDiv').show();
-                    $('#shiftNameDiv').hide();
-                    $('#shiftRotationNameDiv').hide();
-                    $('#shiftRotationDateDiv').hide();
-                    $('#shiftId').val("");
-                    $('#shiftRotationDate').val("");
-                    $('#shiftMasterId').val("");
-                    //blanks another values on changes
-                }
-                else if ($('#shiftType').find("option:selected").val() == "ShiftBase") {
-                    $('#shiftNameDiv').show();
-                    $('#shiftRotationNameDiv').show();
-                    $('#shiftRotationDateDiv').show();
-                    $('#hourlyBaseTitleDiv').hide();
-                    $('#shiftHoursId').val("");
-                    //blanks another values on changes
-                }
-                else {
-                    $('#hourlyBaseTitleDiv').hide();
-                    $('#shiftNameDiv').hide();
-                    $('#shiftRotationNameDiv').hide();
-                    $('#shiftRotationDateDiv').hide();
-                    $('#shiftId').val("");
-                    $('#shiftRotationDate').val("");
-                    $('#shiftMasterId').val("");
-                    $('#shiftHoursId').val("");
-                    //blanks all values on changes as not selected yet.
-                }
-            }
-            //            });
-
-        });
-        $('input[name=maritalStatus]').on('ifChecked', function (event) {
-            if (this.value === "Married") {
+        if ($('.checked input[name=maritalStatus]')) {
+            if ($('.checked input[name=maritalStatus]').val() === "Married") {
                 $("#hideInfo1").show(500);
                 $("#hideInfo2").show(500);
                 $("#otherMaritalStatusId").hide(500);
@@ -2504,246 +2427,296 @@
                 $("#hideInfo2").hide(500);
                 $("#otherMaritalStatusId").hide(500);
             }
-            if (this.value === "Other") {
+            if ($('.checked input[name=maritalStatus]').val() === "Other") {
                 $("#hideInfo1").hide(500);
                 $("#hideInfo2").hide(500);
                 $("#otherMaritalStatusId").show(500);
             }
-
-
-        });</script>
-
-    <script>
-        jQuery(document).ready(function () {
-            errorDivOpen();
-        });
-        function errorDivOpen() {
-            if (document.getElementById('employeeId.errors').innerHTML) {
-                var name = $('#empInfo_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#empInfo_id").attr('class', 'box box-info');
-                    document.getElementById('spanId1').innerHTML = 'Minimize';
-                    $('#minusId1').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('employeeName.errors').innerHTML) {
-                var name = $('#empInfo_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#empInfo_id").attr('class', 'box box-info');
-                    document.getElementById('spanId1').innerHTML = 'Minimize';
-                    $('#minusId1').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('fatherName.errors').innerHTML) {
-                var name = $('#empInfo_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#empInfo_id").attr('class', 'box box-info');
-                    document.getElementById('spanId1').innerHTML = 'Minimize';
-                    $('#minusId1').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('motherName.errors').innerHTML) {
-                var name = $('#empInfo_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#empInfo_id").attr('class', 'box box-info');
-                    document.getElementById('spanId1').innerHTML = 'Minimize';
-                    $('#minusId1').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('gender.errors').innerHTML) {
-                var name = $('#empInfo_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#empInfo_id").attr('class', 'box box-info');
-                    document.getElementById('spanId1').innerHTML = 'Minimize';
-                    $('#minusId1').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('maritalStatus.errors').innerHTML) {
-                var name = $('#empInfo_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#empInfo_id").attr('class', 'box box-info');
-                    document.getElementById('spanId1').innerHTML = 'Minimize';
-                    $('#minusId1').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('dateOfBirth.errors').innerHTML) {
-                var name = $('#empInfo_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#empInfo_id").attr('class', 'box box-info');
-                    document.getElementById('spanId1').innerHTML = 'Minimize';
-                    $('#minusId1').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('presentAddress.errors').innerHTML) {
-                var name = $('#empInfo_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#empInfo_id").attr('class', 'box box-info');
-                    document.getElementById('spanId1').innerHTML = 'Minimize';
-                    $('#minusId1').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('permanentAddress.errors').innerHTML) {
-                var name = $('#empInfo_id').attr('class');
-                if (name == 'box box-info collapsed-box ') {
-                    $("#empInfo_id").attr('class', 'box box-info');
-                    document.getElementById('spanId1').innerHTML = 'Minimize';
-                    $('#minusId1').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('emailAddress.errors').innerHTML) {
-                var name = $('#personal_Detail_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#personal_Detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId2').innerHTML = 'Minimize';
-                    $('#minusId2').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('contactNo1.errors').innerHTML) {
-                var name = $('#personal_Detail_id').attr('class');
-                if (name == 'box box-info collapsed-box ') {
-                    $("#personal_Detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId2').innerHTML = 'Minimize';
-                    $('#minusId2').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('emergencyContactPerson.errors').innerHTML) {
-                var name = $('#personal_Detail_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#personal_Detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId2').innerHTML = 'Minimize';
-                    $('#minusId2').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('panCard.errors').innerHTML) {
-                var name = $('#document_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box ') {
-                    $("#document_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId3').innerHTML = 'Minimize';
-                    $('#minusId3').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('adharCard.errors').innerHTML) {
-                var name = $('#document_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#document_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId3').innerHTML = 'Minimize';
-                    $('#minusId3').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('officeEmailId.errors').innerHTML) {
-                var name = $('#org_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box ') {
-                    $("#org_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId4').innerHTML = 'Minimize';
-                    $('#minusId4').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('highestEducationDetails.errors').innerHTML) {
-                var name = $('#org_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#org_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId4').innerHTML = 'Minimize';
-                    $('#minusId4').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('company.errors').innerHTML) {
-                var name = $('#org_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box ') {
-                    $("#org_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId4').innerHTML = 'Minimize';
-                    $('#minusId4').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('zydexLocationMaster.errors').innerHTML) {
-                var name = $('#org_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#org_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId4').innerHTML = 'Minimize';
-                    $('#minusId4').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('locationMaster.id.errors').innerHTML) {
-                var name = $('#org_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box ') {
-                    $("#org_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId4').innerHTML = 'Minimize';
-                    $('#minusId4').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('levelMaster.id.errors').innerHTML) {
-                var name = $('#org_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#org_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId4').innerHTML = 'Minimize';
-                    $('#minusId4').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('departmentMaster.id.errors').innerHTML) {
-                var name = $('#org_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box ') {
-                    $("#org_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId4').innerHTML = 'Minimize';
-                    $('#minusId4').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('designationMaster.id.errors').innerHTML) {
-                var name = $('#org_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#org_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId4').innerHTML = 'Minimize';
-                    $('#minusId4').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('dateOfJoining.errors').innerHTML) {
-                var name = $('#org_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box ') {
-                    $("#org_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId4').innerHTML = 'Minimize';
-                    $('#minusId4').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('reportingManagerLevel1.errors').innerHTML) {
-                var name = $('#reporting_level_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#reporting_level_id").attr('class', 'box box-info');
-                    document.getElementById('spanId5').innerHTML = 'Minimize';
-                    $('#minusId5').attr('class', 'fa fa-minus');
-                }
-            }
-            if (document.getElementById('userMaster.password.errors').innerHTML) {
-                var name = $('#login_detail_id').attr('class');
-                if (name == 'box box-info collapsed-box') {
-                    $("#login_detail_id").attr('class', 'box box-info');
-                    document.getElementById('spanId6').innerHTML = 'Minimize';
-                    $('#minusId6').attr('class', 'fa fa-minus');
-                }
-            }
-        }</script>
-
-
-    <script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
-    <script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
-    <!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
-    <link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
-    <script>
-        initSample();
-
-
-    </script>
-    <script type="text/javascript">
-        window.onload = init;
-        function init() {
-            document.form1.month.options[new Date().getMonth()].selected = true;
         }
-        var start = new Date().getFullYear();
-        var end = 2050;
-        var options11 = "";
+
+        if ($('#shiftType').find("option:selected")) {
+            if ($('#shiftType').find("option:selected").val() == "HourlyBase") {
+                $('#hourlyBaseTitleDiv').show();
+                $('#shiftNameDiv').hide();
+                $('#shiftRotationNameDiv').hide();
+                $('#shiftRotationDateDiv').hide();
+                $('#shiftId').val("");
+                $('#shiftRotationDate').val("");
+                $('#shiftMasterId').val("");
+                //blanks another values on changes
+            } else if ($('#shiftType').find("option:selected").val() == "ShiftBase") {
+                $('#shiftNameDiv').show();
+                $('#shiftRotationNameDiv').show();
+                $('#shiftRotationDateDiv').show();
+                $('#hourlyBaseTitleDiv').hide();
+                $('#shiftHoursId').val("");
+                //blanks another values on changes
+            } else {
+                $('#hourlyBaseTitleDiv').hide();
+                $('#shiftNameDiv').hide();
+                $('#shiftRotationNameDiv').hide();
+                $('#shiftRotationDateDiv').hide();
+                $('#shiftId').val("");
+                $('#shiftRotationDate').val("");
+                $('#shiftMasterId').val("");
+                $('#shiftHoursId').val("");
+                //blanks all values on changes as not selected yet.
+            }
+        }
+        //            });
+
+    });
+    $('input[name=maritalStatus]').on('ifChecked', function (event) {
+        if (this.value === "Married") {
+            $("#hideInfo1").show(500);
+            $("#hideInfo2").show(500);
+            $("#otherMaritalStatusId").hide(500);
+        } else {
+
+            $("#hideInfo1").hide(500);
+            $("#hideInfo2").hide(500);
+            $("#otherMaritalStatusId").hide(500);
+        }
+        if (this.value === "Other") {
+            $("#hideInfo1").hide(500);
+            $("#hideInfo2").hide(500);
+            $("#otherMaritalStatusId").show(500);
+        }
+
+
+    });</script>
+
+<script>
+    jQuery(document).ready(function () {
+        errorDivOpen();
+    });
+    function errorDivOpen() {
+        if (document.getElementById('employeeId.errors').innerHTML) {
+            var name = $('#empInfo_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#empInfo_id").attr('class', 'box box-info');
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+                $('#minusId1').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('employeeName.errors').innerHTML) {
+            var name = $('#empInfo_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#empInfo_id").attr('class', 'box box-info');
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+                $('#minusId1').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('fatherName.errors').innerHTML) {
+            var name = $('#document_detail_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#document_detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+                $('#minusId3').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('motherName.errors').innerHTML) {
+            var name = $('#document_detail_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#document_detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+                $('#minusId3').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('gender.errors').innerHTML) {
+            var name = $('#empInfo_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#empInfo_id").attr('class', 'box box-info');
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+                $('#minusId1').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('maritalStatus.errors').innerHTML) {
+            var name = $('#empInfo_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#empInfo_id").attr('class', 'box box-info');
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+                $('#minusId1').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('dateOfBirth.errors').innerHTML) {
+            var name = $('#empInfo_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#empInfo_id").attr('class', 'box box-info');
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+                $('#minusId1').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('presentAddress.errors').innerHTML) {
+            var name = $('#document_detail_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#document_detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+                $('#minusId3').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('permanentAddress.errors').innerHTML) {
+            var name = $('#document_detail_id').attr('class');
+            if (name == 'box box-info collapsed-box ') {
+                $("#document_detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId1').innerHTML = 'Minimize';
+                $('#minusId3').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('emailAddress.errors').innerHTML) {
+            var name = $('#personal_Detail_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#personal_Detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId2').innerHTML = 'Minimize';
+                $('#minusId2').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('contactNo1.errors').innerHTML) {
+            var name = $('#personal_Detail_id').attr('class');
+            if (name == 'box box-info collapsed-box ') {
+                $("#personal_Detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId2').innerHTML = 'Minimize';
+                $('#minusId2').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('emergencyContactPerson.errors').innerHTML) {
+            var name = $('#document_detail_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#document_detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId2').innerHTML = 'Minimize';
+                $('#minusId3').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('panCard.errors').innerHTML) {
+            var name = $('#personal_Detail_id').attr('class');
+            if (name == 'box box-info collapsed-box ') {
+                $("#personal_Detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId3').innerHTML = 'Minimize';
+                $('#minusId2').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('adharCard.errors').innerHTML) {
+            var name = $('#personal_Detail_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#personal_Detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId3').innerHTML = 'Minimize';
+                $('#minusId2').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('officeEmailId.errors').innerHTML) {
+            var name = $('#empInfo_id').attr('class');
+            if (name == 'box box-info collapsed-box ') {
+                $("#empInfo_id").attr('class', 'box box-info');
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+                $('#minusId1').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('highestEducationDetails.errors').innerHTML) {
+            var name = $('#personal_Detail_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#personal_Detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+                $('#minusId2').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('company.errors').innerHTML) {
+            var name = $('#org_detail_id').attr('class');
+            if (name == 'box box-info collapsed-box ') {
+                $("#org_detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+                $('#minusId4').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('zydexLocationMaster.errors').innerHTML) {
+            var name = $('#org_detail_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#org_detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+                $('#minusId4').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('locationMaster.id.errors').innerHTML) {
+            var name = $('#org_detail_id').attr('class');
+            if (name == 'box box-info collapsed-box ') {
+                $("#org_detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+                $('#minusId4').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('levelMaster.id.errors').innerHTML) {
+            var name = $('#org_detail_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#org_detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+                $('#minusId4').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('departmentMaster.id.errors').innerHTML) {
+            var name = $('#org_detail_id').attr('class');
+            if (name == 'box box-info collapsed-box ') {
+                $("#org_detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+                $('#minusId4').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('designationMaster.id.errors').innerHTML) {
+            var name = $('#empInfo_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#empInfo_id").attr('class', 'box box-info');
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+                $('#minusId1').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('dateOfJoining.errors').innerHTML) {
+            var name = $('#empInfo_id').attr('class');
+            if (name == 'box box-info collapsed-box ') {
+                $("#empInfo_id").attr('class', 'box box-info');
+                document.getElementById('spanId4').innerHTML = 'Minimize';
+                $('#minusId1').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('reportingManagerLevel1.errors').innerHTML) {
+            var name = $('#reporting_level_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#reporting_level_id").attr('class', 'box box-info');
+                document.getElementById('spanId5').innerHTML = 'Minimize';
+                $('#minusId5').attr('class', 'fa fa-minus');
+            }
+        }
+        if (document.getElementById('userMaster.password.errors').innerHTML) {
+            var name = $('#login_detail_id').attr('class');
+            if (name == 'box box-info collapsed-box') {
+                $("#login_detail_id").attr('class', 'box box-info');
+                document.getElementById('spanId6').innerHTML = 'Minimize';
+                $('#minusId6').attr('class', 'fa fa-minus');
+            }
+        }
+    }</script>
+
+
+<script src="StorageYard/Plugins/ckeditor/ckeditor.js"></script>
+<script src="StorageYard/Plugins/ckeditor/samples/js/sample.js"></script>
+<!--<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/css/samples.css">-->
+<link rel="stylesheet" href="StorageYard/Plugins/ckeditor/samples/toolbarconfigurator/lib/codemirror/neo.css">
+<script>
+    initSample();
+
+
+</script>
+<script type="text/javascript">
+    window.onload = init;
+    function init() {
+        document.form1.month.options[new Date().getMonth()].selected = true;
+    }
+    var start = new Date().getFullYear();
+    var end = 2050;
+    var options11 = "";
 //        var objSelect = document.getElementById("yearBase").value;
-        for (var year1 = start; year1 <= end; year1++) {
-            options11 += "<option>" + year1 + "</option>";
-        }
-        document.getElementById('year1').innerHTML = options11;
-    </script>
+    for (var year1 = start; year1 <= end; year1++) {
+        options11 += "<option>" + year1 + "</option>";
+    }
+    document.getElementById('year1').innerHTML = options11;
+</script>
 
 </html>
 

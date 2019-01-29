@@ -18257,7 +18257,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
             employeeLeaveBalance.setEmployeeMaster(employeeMaster1);
 
-            if (coffRegularization.getCoffType().equals("Full Coff")) {
+            if (coffRegularization.getCoffType().equals("Full Lieu Day")) {
                 String time = "1.0";
                 List<?> empBalList = employeeLeaveBalanceService.readleaveWiseBalance(employeeLeaveBalance);
                 if (!empBalList.isEmpty()) {

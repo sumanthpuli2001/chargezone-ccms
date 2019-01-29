@@ -34,4 +34,14 @@ public class EmployeeMasterExtensionDAOImpl<T> extends GenericsDAOImpl<T> implem
         getHibernateTemplate().bulkUpdate(query);
     }
 
+//    @Override
+//    public List<?> readByemployeeIdForExcel(Integer id) {
+//        String query = "";
+//        query += " select a.id,     b.ctcName,a.amount,a.status,a.month,a.year,a.id"
+//                + " FROM EmployeeMasterExtension a "
+//                + " where c.employeeMaster.id=" + id;
+//
+//        return getHibernateTemplate().find(query);
+//    }
+
 }

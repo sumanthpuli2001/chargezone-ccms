@@ -19,6 +19,7 @@ import com.bul.zydex.model.HoursBasis;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveEmployeeDetailsApprovalHistory;
 import com.bul.zydex.model.LeaveTypeMaster;
+import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
 import com.bul.zydex.model.ShiftMaster;
 import com.bul.zydex.model.ShiftRotationInfo;
 import com.bul.zydex.model.ShiftRotationMaster;
@@ -36,6 +37,7 @@ import com.bul.zydex.service.leave.LeaveTypeMasterService;
 import com.bul.zydex.service.leave.ShortLeaveService;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
 import com.bul.zydex.service.shift.HoursBasisService;
+import com.bul.zydex.service.shift.ShiftGenerateMonthlyScheduleService;
 import com.bul.zydex.service.shift.ShiftMasterService;
 import com.bul.zydex.service.shift.ShiftRotationInfoService;
 import com.bul.zydex.service.shift.ShiftRotationMasterService;
@@ -69,6 +71,7 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
     protected EmployeeShiftDataService<EmployeeShiftData> employeeShiftDataService;
     protected UserRightMasterService<UserRightMaster> userRightMasterService;
     protected LeaveEmployeeDetailsApprovalHistoryService<LeaveEmployeeDetailsApprovalHistory> leaveEmployeeDetailsApprovalHistoryService;
+    protected ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService;
 
     public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
         return userRightMasterService;
@@ -180,6 +183,14 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
 
     public void setLeaveEmployeeDetailsApprovalHistoryService(LeaveEmployeeDetailsApprovalHistoryService<LeaveEmployeeDetailsApprovalHistory> leaveEmployeeDetailsApprovalHistoryService) {
         this.leaveEmployeeDetailsApprovalHistoryService = leaveEmployeeDetailsApprovalHistoryService;
+    }
+
+    public ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> getShiftGenerateMonthlyScheduleService() {
+        return shiftGenerateMonthlyScheduleService;
+    }
+
+    public void setShiftGenerateMonthlyScheduleService(ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService) {
+        this.shiftGenerateMonthlyScheduleService = shiftGenerateMonthlyScheduleService;
     }
 
     protected void addleaveType(HttpServletRequest request) {

@@ -297,4 +297,13 @@ public class UserRightMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Use
         return false;
     }
 
+    @Override
+    public List<?> readallHRList() {
+        String query = "";
+        query += " select a "
+                + " From UserRightMaster a "
+                + " WHERE a.hr = 1";
+        return getHibernateTemplate().find(query);
+    }
+
 }

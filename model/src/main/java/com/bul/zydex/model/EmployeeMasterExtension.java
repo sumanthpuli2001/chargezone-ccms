@@ -38,11 +38,16 @@ public class EmployeeMasterExtension implements java.io.Serializable {
     private String nameOfPreviousCompany;
     private String previousCompanyLocation;
     private EmployeeMaster employeeMaster;
+    private Boolean nameStatus;
+    private Boolean spouseGender;
+//    private String subteamTransferDate;
 
     public EmployeeMasterExtension() {
     }
 
-    public EmployeeMasterExtension(String presentAddress2, String presentCity, String presentState, String presentPostalCode, String presentCountry, String permanentAddress2, String permanentCity, String permanentState, String permanentPostalCode, String permanentCountry, String religion, String disclosedHealthConcerns, String languagesKnown, String hobbies, Boolean childOneGender, Boolean childTwoGender, String flyDocsEmailId, String emergencyContactAddress, String RelationShip, String otherImpInfo, String nationality, String firstName, String middleName, String lastName, String countryOfIssue, String visaIssueCountry, String visaIssueDate, String visaValidTillDate, String drivingLicenceType, String electionCard, String pfNoFlydocs, String withdrawalDate, String nameOfPreviousCompany, String previousCompanyLocation, EmployeeMaster employeeMaster) {
+   
+
+    public EmployeeMasterExtension(String presentAddress2, String presentCity, String presentState, String presentPostalCode, String presentCountry, String permanentAddress2, String permanentCity, String permanentState, String permanentPostalCode, String permanentCountry, String religion, String disclosedHealthConcerns, String languagesKnown, String hobbies, Boolean childOneGender, Boolean childTwoGender, String flyDocsEmailId, String emergencyContactAddress, String RelationShip, String otherImpInfo, String nationality, String firstName, String middleName, String lastName, String countryOfIssue, String visaIssueCountry, String visaIssueDate, String visaValidTillDate, String drivingLicenceType, String electionCard, String pfNoFlydocs, String withdrawalDate, String nameOfPreviousCompany, String previousCompanyLocation, EmployeeMaster employeeMaster,Boolean nameStatus, Boolean spouseGender) {
         this.presentAddress2 = presentAddress2;
         this.presentCity = presentCity;
         this.presentState = presentState;
@@ -78,6 +83,8 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.nameOfPreviousCompany = nameOfPreviousCompany;
         this.previousCompanyLocation = previousCompanyLocation;
         this.employeeMaster = employeeMaster;
+         this.nameStatus = nameStatus;
+        this.spouseGender = spouseGender;
     }
 
     
@@ -373,4 +380,21 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.employeeMaster = employeeMaster;
     }
 
+    public Boolean getNameStatus() {
+        return nameStatus;
+    }
+
+    public void setNameStatus(Boolean nameStatus) {
+        this.nameStatus = nameStatus;
+    }
+
+    public Boolean getSpouseGender() {
+        return spouseGender;
+    }
+
+    public void setSpouseGender(Boolean SpouseGender) {
+        this.spouseGender = SpouseGender;
+    }
+
+    
 }

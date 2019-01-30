@@ -1422,6 +1422,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         }
         request.setAttribute("oldLeaveId", leaveEmployeeDetail.getLeaveTypeMaster().getId());
         request.setAttribute("oldLeaveDays", leaveEmployeeDetail.getNoOfDays());
+        request.setAttribute("oldLeaveDays1", leaveEmployeeDetail.getNoOfDays());
         request.setAttribute("flag", leaveEmployeeDetail.getStatus());
         request.setAttribute("currentdate", leaveEmployeeDetail.getDateOfSubmit());
         mv.getModelMap().put("leaveEmployeeDetail", leaveEmployeeDetail);
@@ -2982,7 +2983,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //        }
         List<?> listShiftGenerateMonthy = shiftGenerateMonthlyScheduleService.readByEmpMonthYear(employeeMaster1.getId());
         SimpleDateFormat sm = new SimpleDateFormat("dd/MM/yyyy");;
-        Date dt1 = null, dt2 = null, dt3 = null, dt4 = null;
+        Date dt1 = null, dt2 = null, dt3 = null, dt4 = null, dt5 = null, dt6 = null, dt7 = null, dt8 = null;
         if (listShiftGenerateMonthy.size() > 0) {
             Date d = new Date();
             LocalDate localDate = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -2990,15 +2991,25 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             String wdate2 = (String) listShiftGenerateMonthy.get(1) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
             String wdate3 = (String) listShiftGenerateMonthy.get(2) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
             String wdate4 = (String) listShiftGenerateMonthy.get(3) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+            String wdate5 = (String) listShiftGenerateMonthy.get(4) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+            String wdate6 = (String) listShiftGenerateMonthy.get(5) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+            String wdate7 = (String) listShiftGenerateMonthy.get(6) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+            String wdate8 = (String) listShiftGenerateMonthy.get(7) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
             dt1 = sm.parse(wdate1);
             dt2 = sm.parse(wdate2);
             dt3 = sm.parse(wdate3);
             dt4 = sm.parse(wdate4);
+            dt5 = sm.parse(wdate5);
+            dt6 = sm.parse(wdate6);
+            dt7 = sm.parse(wdate7);
+            dt8 = sm.parse(wdate8);
             sm = new SimpleDateFormat("EEEE"); // the day of the week spelled out completely
             if (sm.format(dt1).equals(sm.format(dt3)) && sm.format(dt2).equals(sm.format(dt4))) {
                 weekOffDay = sm.format(dt1) + "," + sm.format(dt2);
             }
-
+            if (sm.format(dt5).equals(sm.format(dt7)) && sm.format(dt6).equals(sm.format(dt8))) {
+                weekOffDay = sm.format(dt5) + "," + sm.format(dt6);
+            }
         }
 
         int coutnter = 0;
@@ -6595,7 +6606,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
         }
 
-        PrintWriter out = response.getWriter();
+            PrintWriter out = response.getWriter();
         out.print(days);
     }
 

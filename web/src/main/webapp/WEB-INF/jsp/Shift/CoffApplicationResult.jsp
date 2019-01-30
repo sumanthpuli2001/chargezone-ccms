@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>C off Addition Result</title>
+        <title>Lieu day Addition Result</title>
         <style>
             .dataTables_wrapper .dataTables_paginate .paginate_button:hover{
                 background-color: white !important;
@@ -28,11 +28,11 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>C off Addition Result: </h1>
+            <h1>Lieu day Addition Result: </h1>
             <div style="float: right"></div>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">C off Addition Result</li>
+                <li class="active">Lieu day Addition Result</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -83,7 +83,7 @@
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
                                                                 <td>${list.startDateCoff}</td>
-                                                             
+
                                                                 <td>${list.endDateCoff}</td>
                                                                 <td>${list.dateOfSubmit}</td>
                                                                 <c:if test="${list.status eq 0}">

@@ -19,4 +19,6 @@ public interface LeaveTypeMasterService<T> extends GenericsService<T> {
     public List<?> readLeaveType(String type);
 
     public List<?> readLeaveTypeEditRegistration(String type);
+
+    public List<?> readByUsBySickLeave(int id,int empId);
 }

@@ -36,4 +36,6 @@ public interface ShiftGenerateMonthlyScheduleDAO<T> extends GenericsDAO<T> {
 
     public List<?> ReadEmployeeShiftByDayMonthYear(Integer empId, String date);
 
+    public List<?> readByEmpMonthYear(Integer id);
+
 }

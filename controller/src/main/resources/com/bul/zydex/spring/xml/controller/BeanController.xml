@@ -201,6 +201,9 @@
         <property name="woffRegularizationService" ref="woffRegularizationService1"/>
         <property name="coffRegularizationService" ref="coffRegularizationService1"/>
         <property name="coffRegularizationValidator" ref="coffRegularizationValidator1"/>
+        <property name="oTRegularizationService" ref="oTRegularizationService1"/>
+        <property name="clientDetailsMasterService" ref="clientDetailsMasterService1"/>
+        <property name="otRegularizationValidator" ref="otRegularizationValidator1"/>
     </bean>
     <bean id="shiftRotationInfoController1" class="com.bul.zydex.controller.shift.ShiftRotationInfoController" parent="controllerConfig" >
         <property name="shiftRotationInfoService" ref="shiftRotationInfoService1" />
@@ -236,6 +239,7 @@
         <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
         <property name="leaveEmployeeDetailsApprovalHistoryService" ref="leaveEmployeeDetailsApprovalHistoryService1" />
+        <property name="shiftGenerateMonthlyScheduleService" ref="shiftGenerateMonthlyScheduleService1" />
     </bean>
     <bean id="employeeLeaveBalanceController1" class="com.bul.zydex.controller.leave.EmployeeLeaveBalanceController" parent="controllerConfig" >
         <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
@@ -409,7 +413,7 @@
         <property name="formateFullNdFinalLetterService" ref="formateFullNdFinalLetterService1" />
         <property name="fullAndFinalSettlementValidator" ref="fullAndFinalSettlementValidator1" />
         <property name="displaymorNotesService" ref="displaymorNotesService1" />
-
+        <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
     </bean>
     <!--ExitInterview-->
     <bean id="exitInterviewMasterController1" class="com.bul.zydex.controller.exitInterview.ExitInterviewMasterController" parent="controllerConfig" >

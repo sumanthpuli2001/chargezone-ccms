@@ -30,13 +30,19 @@ public class LeaveTypeMasterServiceImpl<T> extends GenericsServiceImpl<T> implem
     public List<?> readCarriedForwardLeave() {
         return leaveTypeMasterDAO.readCarriedForwardLeave();
     }
+
     @Override
-   public List<?> readLeaveType(String type) {
+    public List<?> readLeaveType(String type) {
         return leaveTypeMasterDAO.readLeaveType(type);
     }
 
     @Override
     public List<?> readLeaveTypeEditRegistration(String type) {
-       return leaveTypeMasterDAO.readLeaveTypeEditRegistration(type);
+        return leaveTypeMasterDAO.readLeaveTypeEditRegistration(type);
+    }
+
+    @Override
+    public List<?> readByUsBySickLeave(int id, int empId) {
+        return leaveTypeMasterDAO.readByUsBySickLeave(id, empId);
     }
 }

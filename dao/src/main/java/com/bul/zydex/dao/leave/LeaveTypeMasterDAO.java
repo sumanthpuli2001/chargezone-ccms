@@ -19,4 +19,6 @@ public interface LeaveTypeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readLeaveType(String type);
 
     public List<?> readLeaveTypeEditRegistration(String type);
+
+    public List<?> readByUsBySickLeave(int id, int empId);
 }

@@ -47,5 +47,8 @@
         <property name="dateOfSubmit" type="string">
             <column name="date_of_submit" length="45" />
         </property>
+        <property name="useAsSickLeave" type="java.lang.Boolean">
+            <column name="use_as_sick_leave"/>
+        </property>
     </class>
 </hibernate-mapping>

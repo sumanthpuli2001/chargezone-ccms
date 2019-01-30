@@ -167,7 +167,7 @@
                                                                     <th>Privilege Leave</th>
                                                                     <th>Paternity Leave</th>
                                                                     <th>Short Leave</th>
-                                                                    <th>C.OFF</th>
+                                                                    <th>Lieu Day</th>
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
@@ -229,7 +229,7 @@
                                                                                 <li>
                                                                                     <a href="#" data-toggle="modal" data-target="#myModal"
                                                                                        onclick="viewClick(${employeeBalanceMap.key},${leaveType[5]});">
-                                                                                        &nbsp;&nbsp;C.OFF
+                                                                                        &nbsp;&nbsp;Lieu Day
                                                                                     </a>
                                                                                 </li>
                                                                             <%--</c:if>--%>

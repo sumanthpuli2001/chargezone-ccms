@@ -50,4 +50,14 @@ public class LeaveTypeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Lea
         List<?> list = getHibernateTemplate().find(query);
         return list;
     }
+
+    @Override
+    public List<?> readByUsBySickLeave(int id, int empId) {
+        String query = "";
+        
+        query = " Select a from EmployeeLeaveBalance a Right Join a.leaveTypeMaster b"
+                + " where b.leaveType = 'Sick Leave' and a.noOfLeaveRemain <= 0 and a.employeeMaster.id = " + empId;
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
 }

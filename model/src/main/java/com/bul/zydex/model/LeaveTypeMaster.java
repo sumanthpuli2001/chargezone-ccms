@@ -18,6 +18,7 @@ public class LeaveTypeMaster implements java.io.Serializable {
     private boolean sandwichLeave;
     private DepartmentMaster departmentMaster;
     private String employeeType;
+    private boolean useAsSickLeave;
 //    private Set employeeLeaveBalances = new HashSet(0);
 //    private Set leaveEncashments = new HashSet(0);
 //    private Set leaveEncashments_1 = new HashSet(0);
@@ -32,7 +33,7 @@ public class LeaveTypeMaster implements java.io.Serializable {
         this.carriedForwardStatus = carriedForwardStatus;
     }
 
-    public LeaveTypeMaster(String leaveType, String noOfLeave, String maxDayAllowedLeave, boolean carriedForwardStatus, String noOfCarriedForwardLeave, boolean sandwichLeave, DepartmentMaster departmentMaster, String employeeType) {
+    public LeaveTypeMaster(String leaveType, String noOfLeave, String maxDayAllowedLeave, boolean carriedForwardStatus, String noOfCarriedForwardLeave, boolean sandwichLeave, DepartmentMaster departmentMaster, String employeeType, boolean useAsSickLeave) {
         this.leaveType = leaveType;
         this.noOfLeave = noOfLeave;
         this.maxDayAllowedLeave = maxDayAllowedLeave;
@@ -41,6 +42,7 @@ public class LeaveTypeMaster implements java.io.Serializable {
         this.sandwichLeave = sandwichLeave;
         this.departmentMaster = departmentMaster;
         this.employeeType = employeeType;
+        this.useAsSickLeave = useAsSickLeave;
 //        this.employeeLeaveBalances = employeeLeaveBalances;
 //        this.leaveEncashments = leaveEncashments;
 //        this.leaveEncashments_1 = leaveEncashments_1;
@@ -144,7 +146,6 @@ public class LeaveTypeMaster implements java.io.Serializable {
 //    public void setLeaveEmployeeDetails_1(Set leaveEmployeeDetails_1) {
 //        this.leaveEmployeeDetails_1 = leaveEmployeeDetails_1;
 //    }
-
     public boolean isSandwichLeave() {
         return sandwichLeave;
     }
@@ -167,6 +168,14 @@ public class LeaveTypeMaster implements java.io.Serializable {
 
     public void setEmployeeType(String employeeType) {
         this.employeeType = employeeType;
+    }
+
+    public boolean isUseAsSickLeave() {
+        return useAsSickLeave;
+    }
+
+    public void setUseAsSickLeave(boolean useAsSickLeave) {
+        this.useAsSickLeave = useAsSickLeave;
     }
 
 }

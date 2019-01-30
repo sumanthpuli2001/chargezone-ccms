@@ -187,7 +187,7 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
     }
 
     @Override
-    public List<?> getEmployeeLeaveDetailByDate(String startDate,String endDate, int approverId) {
+    public List<?> getEmployeeLeaveDetailByDate(String startDate, String endDate, int approverId) {
         return leaveEmployeeDetailDAO.getEmployeeLeaveDetailByDate(startDate, endDate, approverId);
     }
 
@@ -199,6 +199,11 @@ public class LeaveEmployeeDetailServiceImpl<T> extends GenericsServiceImpl<T> im
     @Override
     public List<?> readLeaveDaysAsApproved(LeaveEmployeeDetail leaveEmployeeDetail) {
         return leaveEmployeeDetailDAO.readLeaveDaysAsApproved(leaveEmployeeDetail);
+    }
+
+    @Override
+    public Boolean readPreviousLeaveFriday(String fdate, int empId) {
+        return leaveEmployeeDetailDAO.readPreviousLeaveFriday(fdate, empId);
     }
 
 }

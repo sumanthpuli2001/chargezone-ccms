@@ -125,5 +125,14 @@
                 <comment>gender 0=Male,1=female</comment>
             </column>
         </property>
+         <property name="documentIdNo" type="string">
+            <column name="officail_documentno" />
+        </property>
+         <property name="subteamTransferDate" type="string">
+            <column name="subteamTransfer_date" />
+        </property>
+         <property name="officialContactNumber" type="string">
+            <column name="official_contact" />
+        </property>
     </class>
 </hibernate-mapping>

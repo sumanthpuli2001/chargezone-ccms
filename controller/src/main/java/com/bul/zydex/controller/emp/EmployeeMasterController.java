@@ -178,7 +178,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
          String previousCompanyLocation=request.getParameter("previousCompanyLocation");
          String namestatus = request.getParameter("nameStatus");
          String spousegender = request.getParameter("SpouseGender");
-         
+         String documentIdNo = request.getParameter("documentIdNo");
+         String subteamTransferDate = request.getParameter("subteamTransferDate");
+         String officialContactNumber = request.getParameter("officialContactNumber");
         
         
         
@@ -398,6 +400,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 employeeMasterExtension.setWithdrawalDate(withdrawalDate);
                 employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
                 employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
+                employeeMasterExtension.setDocumentIdNo(documentIdNo);
+                employeeMasterExtension.setOfficialContactNumber(officialContactNumber);
+                employeeMasterExtension.setSubteamTransferDate(subteamTransferDate);
                 employeeMasterExtension.setEmployeeMaster(employeeMaster);
                 employeeMasterServiceExtension.create(employeeMasterExtension);
             
@@ -1052,7 +1057,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
          
          String namestatus=request.getParameter("nameStatus");  
          String spousegender=request.getParameter("spouseGender");  
-         
+         String documentIdNo = request.getParameter("documentIdNo");
+         String subteamTransferDate = request.getParameter("subteamTransferDate");
+         String officialContactNumber = request.getParameter("officialContactNumber");
         
         
         bind(request, employeeMaster);
@@ -1200,6 +1207,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 employeeMasterExtension.setWithdrawalDate(withdrawalDate);
                 employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
                 employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
+                employeeMasterExtension.setDocumentIdNo(documentIdNo);
+                employeeMasterExtension.setOfficialContactNumber(officialContactNumber);
+                employeeMasterExtension.setSubteamTransferDate(subteamTransferDate);
                 employeeMasterExtension.setEmployeeMaster(employeeMaster);
                 employeeMasterServiceExtension.update(employeeMasterExtension);
                 
@@ -3097,8 +3107,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     try {
                         if (row.getRowNum() != 0 && row.getRowNum() != 1 && row.getRowNum() != 2) {
                             try {
-                                employeeNo = new BigDecimal("" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1))).toPlainString();
-                                employeeNo = employeeNo.split("\\.", 2)[0];
+                                employeeNo = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
+//                                employeeNo = employeeNo.split("\\.", 2)[0];
                             } catch (Exception e) {
                                 employeeNo = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
                             }
@@ -3535,7 +3545,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 employeeMaster.setEmployeeTypeMaster(null);
                             }
                             if (!employeeSubtype.equals("")) {
-                                List<?> levelList2 = employeeSubTypeService.readByName(employeeSubtype);
+                                int emptypid = employeeMaster.getEmployeeTypeMaster().getId();
+                                
+                                List<?> levelList2 = employeeSubTypeService.readByEmployeeTypeIdANDSubTypeName(emptypid,employeeSubtype);
                                 if (!levelList2.isEmpty()) {
                                     employeeSubType = (EmployeeSubType) levelList2.get(0);
                                     employeeMaster.setEmployeeSubType(employeeSubType);

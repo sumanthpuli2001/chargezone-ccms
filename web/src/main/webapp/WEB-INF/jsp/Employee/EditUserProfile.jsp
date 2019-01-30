@@ -1126,7 +1126,9 @@
                                                         <div class="col-sm-6">
                                                             <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name"></form:input>
                                                             </div>
-
+                                                            <div class="col-sm-6">
+                                                           <input type="text" name="documentIdNo" id="documentIdNo" value="${list.documentIdNo}" class="form-control">
+                                                            </div>
                                                         </div>
                                                     </div>       
                                                 </div><!-- /.col -->
@@ -1736,7 +1738,7 @@
                                                             <label>Sub Team Transfer Date:</label>
                                                             <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
 
-                                                                <input type="text" name="subteamTransferDate" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"/>
+                                                                <input type="text" name="subteamTransferDate" class="form-control" size="16" value="${list.subteamTransferDate}" placeholder="DD/MM/YYYY" readonly="true"/>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
@@ -1746,8 +1748,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label >Official Contact No:</label>
-                                                            <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                            <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
+                                                            <input type="text" name="officialContactNumber" id="officialContactNumber" value="${list.officialContactNumber}" class="form-control">
                                                             </div>
                                                          </div>  
 

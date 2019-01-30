@@ -162,21 +162,7 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group">
-                                                        
-                                                        <div class="col-sm-4">
-                                                            <label>Start Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <div class="input-group date datepicker" data-date-format="mm-yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="fromDate" id="start_time" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
-                                                                     
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                </div>
-                                                            <form:errors path="fromDate" cssClass="errorDiv"></form:errors>
-                                                                
-
-                                                            </div>
-                                                        <div class="col-sm-4">
+                                                       <div class="col-sm-6">
                                                             <label>Start Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
@@ -188,7 +174,7 @@
                                                                 
 
                                                             </div>
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-6">
                                                                 <label>End Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
@@ -271,12 +257,6 @@
 //            endDate: new Date()
         });
     </script>
-    <script>
-        $(".datepicker").datepicker( {
-    format: "mm-yyyy",
-    startView: "months", 
-    minViewMode: "months"
-});
-        </script>
+    
 <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

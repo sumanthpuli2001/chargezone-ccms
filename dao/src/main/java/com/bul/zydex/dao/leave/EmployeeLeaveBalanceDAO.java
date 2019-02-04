@@ -24,4 +24,6 @@ public interface EmployeeLeaveBalanceDAO<T> extends GenericsDAO<T> {
 
     public List<?> readEmpId(int empId);
 
+    public List<?> readByLeave(Integer empId, int leaveId);
+
 }

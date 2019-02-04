@@ -246,6 +246,20 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
         request.setAttribute("leaveTypemap", leaveTypemap);
     }
 
+    protected void addleaveType1(HttpServletRequest request, int leaveId, Float noOfDays) {
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+        List<?> list = employeeLeaveBalanceService.readByLeave(employeeMaster.getId(), leaveId);
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        LeaveTypeMaster leaveTypeMaster = leaveTypeMasterService.readById(leaveId);
+        Map<Integer, String> leaveTypemap = new HashMap();
+        if (list.size() > 0) {
+            employeeLeaveBalance = (EmployeeLeaveBalance) list.get(0);
+            String NoOfLeaveRemain = (Float.toString(employeeLeaveBalance.getNoOfLeaveRemain() + noOfDays));
+            leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + NoOfLeaveRemain + ")");
+        }
+        request.setAttribute("leaveTypemap", leaveTypemap);
+    }
+
     protected void readleaveType(HttpServletRequest request) {
         List list = leaveTypeMasterService.read();
         LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();

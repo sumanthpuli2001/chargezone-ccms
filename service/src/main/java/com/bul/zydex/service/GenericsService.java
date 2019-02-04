@@ -12,7 +12,8 @@ import java.util.List;
  * @author dhruv
  */
 public interface GenericsService<T> {
-         public int count();
+
+    public int count();
 
     public void create(T object);
 
@@ -24,5 +25,5 @@ public interface GenericsService<T> {
 
     public T readById(final Integer id);
 
-    public void update(T object);          
+    public void update(T object);
 }

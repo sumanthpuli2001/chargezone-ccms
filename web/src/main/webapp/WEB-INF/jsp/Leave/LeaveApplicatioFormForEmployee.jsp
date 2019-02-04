@@ -235,6 +235,7 @@
 
 //        $(function () {
         function leaveSetting() {
+//            alert("2Aman");
             var leaveStartDate = document.getElementById("startDate").value;
             var leaveStartDate_SelectFullOrHalf = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
 //            alert("flagco" + flagco);
@@ -414,6 +415,7 @@
 
 
         function leaveTypecheck() {
+//            alert("3Aman");
             var leaveType = document.getElementById("leaveTypeMaster.id");
             var selectedText = leaveType.options[leaveType.selectedIndex].text;
             var selectedTextArray = selectedText.split('(');
@@ -442,6 +444,7 @@
         }
 
         function daysCount() {
+//            alert("4Aman");
             var skillsSelect = document.getElementById("leaveTypeMaster.id");
             var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
             var selectedTextArray = selectedText.split('(');
@@ -784,7 +787,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                         alert("3hussain");
+                                        alert("3hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -921,7 +924,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                         alert("4hussain");
+                                        alert("4hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -1041,7 +1044,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                         alert("5hussain");
+                                        alert("5hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -1165,7 +1168,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                         alert("6hussain");
+                                        alert("6hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -1285,7 +1288,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                         alert("7hussain");
+                                        alert("7hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -1419,7 +1422,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                         alert("8hussain");
+                                        alert("8hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -1746,6 +1749,7 @@
             }
         }
         function checkStartDateFun() {
+//            alert("1Aman");
             document.getElementById("noOfDays").value = "";
             document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
             document.getElementById("endDateSelectFullOrHalfError").innerHTML = "";

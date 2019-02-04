@@ -3088,7 +3088,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         if (row.getRowNum() != 0 && row.getRowNum() != 1 && row.getRowNum() != 2) {
                             try {
                                 employeeNo = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
-//                                employeeNo = employeeNo.split("\\.", 2)[0];
+                                employeeNo = employeeNo.split("\\.", 2)[0];
                             } catch (Exception e) {
                                 employeeNo = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
                             }

@@ -535,6 +535,23 @@
         var flag3 = true;
         function saveSubmit11() {
 //            alert("vxcvxcvjk");
+            
+//            var selectBox = document.getElementById('sell');
+//             var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+//            alert(selectedValue);
+//            
+//            
+//            var flag12 = true;
+//            var vval = document.getElementById('sell').value;
+//            alert(vval);
+//            if (vval.valueOf() == "NA") {
+//                
+//                document.getElementById("subtypeError").innerHTML = "- It must be selected.";
+//                flag12 = false;
+//            } else {
+//                document.getElementById("subtypeError").innerHTML = '';
+//            }
+            
             if (flag3) {
                 flag3 = false;
                 if (passwordVal()) {
@@ -547,6 +564,8 @@
             } else {
                 return false;
             }
+            
+            
         }
         function passwordVal() {
             var pass = document.getElementById('password').value;
@@ -557,6 +576,9 @@
                 return true;
             }
         }
+        
+        
+        
     </script>
     <script>
         function userName1(val) {
@@ -873,11 +895,11 @@
                                                         </div>
                                                         <div class="col-sm-6" id="employeeSubTypeId">
                                                             <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
-                                                        <form:select path="employeeSubType.id" class="form-control">
+                                                            <input type="hidden" name="subell" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
+                                                        <form:select path="employeeSubType.id" id="sell" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option> 
                                                         </form:select>
-                                                        <form:errors path="employeeSubType.id" cssClass="errorDiv"></form:errors>
+                                                        <span id="subtypeError" style="color: red;"></span>
                                                         </div>    
                                                     </div>
                                                     <div class="form-group">   

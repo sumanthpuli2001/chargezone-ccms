@@ -112,7 +112,7 @@ public class OnCallController extends OnCallAbstract {
                 designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
                 EmployeeMaster employeeMasterHr = new EmployeeMaster();
                 employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-                // id 14 is for On Call apply....
+                // id 163 is for On Call apply....
                 emailTemplate = emailTemplateService.readById(163);
                 String To = employeeMasterHr.getOfficeEmailId();
                 String from = employeeMasterModel.getOfficeEmailId();
@@ -264,7 +264,9 @@ public class OnCallController extends OnCallAbstract {
             } else {
                 onCall.setStatus(0);
                 onCall.setUserMasterId(onCall1.getUserMasterId());
-                try {
+                
+            }
+            try {
 
                     EmailTemplate emailTemplate = new EmailTemplate();
                     EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -340,7 +342,6 @@ public class OnCallController extends OnCallAbstract {
                 } catch (Exception e) {
                     System.out.println(e);
                 }
-            }
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
 
@@ -466,6 +467,70 @@ public class OnCallController extends OnCallAbstract {
                 }
             } else if (status == 4) {
                 onCall.setStatus(5);
+                 try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMaster1 = new EmployeeMaster();
+
+                    List<?> allhrlist = userRightMasterService.readallHRList();
+
+                    if (!allhrlist.isEmpty()) {
+
+                        for (Object obj : allhrlist) {
+                            UserRightMaster userRightMaster = new UserRightMaster();
+                            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                            userRightMaster = (UserRightMaster) obj;
+                            List list = employeeMasterService.readByUserId(userRightMaster.getUserMaster().getId());
+                            if (!list.isEmpty()) {
+
+                                for (Object obj1 : list) {
+                                    employeeMaster2 = (EmployeeMaster) obj1;
+                                    emailTemplate = emailTemplateService.readById(167);
+
+                                    String To = employeeMaster2.getOfficeEmailId();
+                                    String from = employeeMasterModel.getOfficeEmailId();
+                                    String Subject = emailTemplate.getSubject();
+                                    Subject = Subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                    String msg = emailTemplate.getBodytext();
+                                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from, To, Subject, msg);
+                                }
+
+                            }
+
+                        }
+                    }
+                    //id=69 is for attandence regularization approve to employee...
+                    emailTemplate = emailTemplateService.readById(167);
+                    String EmpStr = request.getParameter("empid");
+                    if (null != EmpStr && !"".equals(EmpStr)) {
+                        int Empid = Integer.parseInt(EmpStr);
+                        List list = employeeMasterService.readByEmployeeNo(Empid);
+                        if (!list.isEmpty()) {
+                            employeeMaster1 = (EmployeeMaster) list.get(0);
+                            String To = employeeMaster1.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+
+                        }
+
+                    }
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
+                
+                
+                
             }
         } else if (btnSubmit.equals("REJECT")) {
             onCall.setStatus(1);

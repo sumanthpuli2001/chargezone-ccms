@@ -99,6 +99,8 @@
                                                 <form:option value="No Due" label="No Due" ></form:option>
                                                 <form:option value="Exit Employee" label="Exit Employee" ></form:option>
                                                 <form:option value="On Call" label="On Call" ></form:option>
+                                                <form:option value="OT" label="OT" ></form:option>
+                                                <form:option value="Shift Applicatoin" label="Shift Applicatoin" ></form:option>
                                             </form:select>
                                         </div>
                                     </div>

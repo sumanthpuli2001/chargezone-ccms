@@ -21,11 +21,12 @@ public class ShiftRotationMaster  implements java.io.Serializable {
      private Set shiftRotationInfos = new HashSet(0);
      private Set shiftRotationInfos_1 = new HashSet(0);
      private Set rotationMasters_1 = new HashSet(0);
+     private String monthYear;
 
     public ShiftRotationMaster() {
     }
 
-    public ShiftRotationMaster(String title, String duration, String remark, Set shiftGenerateMonthlySchedules, Set shiftGenerateMonthlySchedules_1, Set rotationMasters, Set shiftRotationInfos, Set shiftRotationInfos_1, Set rotationMasters_1) {
+    public ShiftRotationMaster(String title, String duration, String remark, Set shiftGenerateMonthlySchedules, Set shiftGenerateMonthlySchedules_1, Set rotationMasters, Set shiftRotationInfos, Set shiftRotationInfos_1, Set rotationMasters_1,String monthYear) {
        this.title = title;
        this.duration = duration;
        this.remark = remark;
@@ -35,6 +36,7 @@ public class ShiftRotationMaster  implements java.io.Serializable {
        this.shiftRotationInfos = shiftRotationInfos;
        this.shiftRotationInfos_1 = shiftRotationInfos_1;
        this.rotationMasters_1 = rotationMasters_1;
+       this.monthYear =  monthYear;
     }
    
     public Integer getId() {
@@ -106,6 +108,14 @@ public class ShiftRotationMaster  implements java.io.Serializable {
     
     public void setRotationMasters_1(Set rotationMasters_1) {
         this.rotationMasters_1 = rotationMasters_1;
+    }
+
+    public String getMonthYear() {
+        return monthYear;
+    }
+
+    public void setMonthYear(String monthYear) {
+        this.monthYear = monthYear;
     }
 
 

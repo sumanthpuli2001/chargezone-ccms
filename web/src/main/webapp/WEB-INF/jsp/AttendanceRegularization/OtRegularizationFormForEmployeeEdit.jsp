@@ -127,7 +127,7 @@
         <!-- Main content -->
         <form:form class="form-horizontal" role="form" action="shiftRotationMaster.htm?act=editSubmitOtRequest" commandName="otRegularization" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
 
-
+            <form:hidden path="id"></form:hidden>
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">

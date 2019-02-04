@@ -387,11 +387,11 @@
 
                                                                                         <button type="submit" class="btn btn-primary " data-original-title="" title="" style="width: 100px;text-align:center;">SUBMIT</button>
                                                                                     </div>-->
-                                        <div class="row">
+<!--                                        <div class="row">
                                             <div class="col-sm-6 col-sm-offset-5">
                                                 <button type="submit" class="btn btn-warning" data-original-title="" title="" value="Withdraw" name="btnSubmit" id="btnSubmit" style="width: 100px;text-align:center;">WITHDRAW</button>
                                             </div>
-                                        </div>
+                                        </div>-->
 
                                         <!--                                            <div class="col-sm-6">
 

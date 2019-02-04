@@ -102,7 +102,7 @@
                                                                     <td><span  class="label label-success">Rejected</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list[5] eq 2}">
-                                                                    <td><span class="label label-warning ">Rework</span></td>
+                                                                    <td><span class="label label-warning ">Reworked</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list[5] eq 3}">
                                                                     <td><span class="label label-danger">Approved</span></td>

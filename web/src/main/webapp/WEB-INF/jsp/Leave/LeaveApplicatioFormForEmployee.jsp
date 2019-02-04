@@ -235,6 +235,7 @@
 
         //        $(function () {
         function leaveSetting() {
+//            alert("2Aman");
             var leaveStartDate = document.getElementById("startDate").value;
             var leaveStartDate_SelectFullOrHalf = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
 //            alert("flagco" + flagco);
@@ -414,6 +415,7 @@
 
 
         function leaveTypecheck() {
+//            alert("3Aman");
             var leaveType = document.getElementById("leaveTypeMaster.id");
             var selectedText = leaveType.options[leaveType.selectedIndex].text;
             var selectedTextArray = selectedText.split('(');
@@ -442,6 +444,7 @@
         }
 
         function daysCount() {
+//            alert("4Aman");
             var skillsSelect = document.getElementById("leaveTypeMaster.id");
             var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
             var selectedTextArray = selectedText.split('(');
@@ -1746,6 +1749,7 @@
             }
         }
         function checkStartDateFun() {
+//            alert("1Aman");
             document.getElementById("noOfDays").value = "";
             document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
             document.getElementById("endDateSelectFullOrHalfError").innerHTML = "";

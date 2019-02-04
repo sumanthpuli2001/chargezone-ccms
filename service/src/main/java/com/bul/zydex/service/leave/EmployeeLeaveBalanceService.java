@@ -26,4 +26,6 @@ public interface EmployeeLeaveBalanceService<T> extends GenericsService<T> {
     
     public boolean readByEmpeIdAndLeaveTypeId(int empid, int leaveid);
 
+    public List<?> readByLeave(Integer empId, int leaveId);
+
 }

@@ -26,7 +26,7 @@
             bootbox.dialog({
                 title: "<h1>Important Policy Notes</h1>",
                 size: 'large',
-//            message: "Oh ! Your Weightage Score is Not Valid…",
+                //            message: "Oh ! Your Weightage Score is Not Valid…",
                 message: '<b>You should be legally married for availing this benefit\
                     <br>  You can avail PT Leave benefit only for a maximum of two times during your employment\
                     <br>You can avail a maximum of 3 Leaves at once before or after the delivery of your child\
@@ -146,16 +146,16 @@
 
 
 
-//             if (document.getElementById("empRemark").value == '') {
-//                    document.getElementById("empRemarkError").innerHTML = "- It must not be empty or whitespace";
-//                    setTimeout(function () {
-//                        $("#empRemarkError").fadeOut();
-//                    }, 10000);
-//                    flag3 = false;
-//                } else {
-//                    document.getElementById("empRemarkError").innerHTML = "";
-//                }
-//            }
+            //             if (document.getElementById("empRemark").value == '') {
+            //                    document.getElementById("empRemarkError").innerHTML = "- It must not be empty or whitespace";
+            //                    setTimeout(function () {
+            //                        $("#empRemarkError").fadeOut();
+            //                    }, 10000);
+            //                    flag3 = false;
+            //                } else {
+            //                    document.getElementById("empRemarkError").innerHTML = "";
+            //                }
+            //            }
 
 //            if (document.getElementById("noOfDays").value == '') {
 //                document.getElementById("noOfDaysError").innerHTML = "You Cannot Apply Leave on Week Off or Holiday";
@@ -215,25 +215,25 @@
                 var strUser1 = previous.split('(');
                 strUser = strUser1[0]
 
-//                alert('ajay11zzzzzzzzz' + strUser1[0]);
-//                alert('xxxxxxxxxxxx' + document.getElementById(strUser).innerHTML);
+                //                alert('ajay11zzzzzzzzz' + strUser1[0]);
+                //                alert('xxxxxxxxxxxx' + document.getElementById(strUser).innerHTML);
                 document.getElementById(strUser).innerHTML = 0;
                 document.getElementById(strUser + "2").innerHTML = 0;
             }).change(function () {
 
             })
         })();
-//        $(document).ready(function () {
-//            $('#leaveTypeMaster.id').on('focus', 'select', function () {
-//                var previous = $(this).children('option').filter(':selected').val();
-//                alert('ajay' + previous);
-//            });
-//        });
+        //        $(document).ready(function () {
+        //            $('#leaveTypeMaster.id').on('focus', 'select', function () {
+        //                var previous = $(this).children('option').filter(':selected').val();
+        //                alert('ajay' + previous);
+        //            });
+        //        });
 
 
 
 
-//        $(function () {
+        //        $(function () {
         function leaveSetting() {
 //            alert("2Aman");
             var leaveStartDate = document.getElementById("startDate").value;
@@ -395,10 +395,10 @@
                 }
             }
 
-//                }
-//            catch (e) {
-//            }
-//            daysCount();
+            //                }
+            //            catch (e) {
+            //            }
+            //            daysCount();
         }
 
         function modelopenpopup() {
@@ -665,7 +665,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                        alert("2hussain");
+//                                        alert("2hussaalertin");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -685,27 +685,27 @@
                                 document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                             }
 
-//        if (strUser == "Leave Without Pay") {
-//        if (parseFloat(document.getElementById("noOfDays").value) > 60) {
-//        $("#leaveWithoutPayLeaveDiv").show();
-//        document.getElementById("endDate").value = '';
-//        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-//        setTimeout(function () {
-//        $("#leaveWithoutPayLeaveDiv").fadeOut();
-//        }, 5000);
-//        }
-//        if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
-//        $("#balanceDiv").show();
-//        setTimeout(function () {
-//        $("#balanceDiv").fadeOut();
-//        }, 5000);
-//        document.getElementById("noOfDays").value = "";
-//        document.getElementById("startDate").value = "";
-//        document.getElementById("endDate").value = "";
-//        document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-//        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-//        }
-//        }
+                            //        if (strUser == "Leave Without Pay") {
+                            //        if (parseFloat(document.getElementById("noOfDays").value) > 60) {
+                            //        $("#leaveWithoutPayLeaveDiv").show();
+                            //        document.getElementById("endDate").value = '';
+                            //        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+                            //        setTimeout(function () {
+                            //        $("#leaveWithoutPayLeaveDiv").fadeOut();
+                            //        }, 5000);
+                            //        }
+                            //        if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
+                            //        $("#balanceDiv").show();
+                            //        setTimeout(function () {
+                            //        $("#balanceDiv").fadeOut();
+                            //        }, 5000);
+                            //        document.getElementById("noOfDays").value = "";
+                            //        document.getElementById("startDate").value = "";
+                            //        document.getElementById("endDate").value = "";
+                            //        document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                            //        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+                            //        }
+                            //        }
 
 
                             if (strUser == "Paternity Leave") {
@@ -787,7 +787,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                        alert("3hussain");
+//                                         alert("3hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -924,7 +924,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                        alert("4hussain");
+//                                         alert("4hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -1044,7 +1044,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                        alert("5hussain");
+//                                         alert("5hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -1064,27 +1064,27 @@
                                 document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                             }
 
-//        if (strUser == "Leave Without Pay") {
-//        if (parseFloat(document.getElementById("noOfDays").value) > 60) {
-//        $("#leaveWithoutPayLeaveDiv").show();
-//        document.getElementById("endDate").value = '';
-//        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-//        setTimeout(function () {
-//        $("#leaveWithoutPayLeaveDiv").fadeOut();
-//        }, 5000);
-//        }
-//        if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
-//        $("#balanceDiv").show();
-//        setTimeout(function () {
-//        $("#balanceDiv").fadeOut();
-//        }, 5000);
-//        document.getElementById("noOfDays").value = "";
-//        document.getElementById("startDate").value = "";
-//        document.getElementById("endDate").value = "";
-//        document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-//        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-//        }
-//        }
+                            //        if (strUser == "Leave Without Pay") {
+                            //        if (parseFloat(document.getElementById("noOfDays").value) > 60) {
+                            //        $("#leaveWithoutPayLeaveDiv").show();
+                            //        document.getElementById("endDate").value = '';
+                            //        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+                            //        setTimeout(function () {
+                            //        $("#leaveWithoutPayLeaveDiv").fadeOut();
+                            //        }, 5000);
+                            //        }
+                            //        if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
+                            //        $("#balanceDiv").show();
+                            //        setTimeout(function () {
+                            //        $("#balanceDiv").fadeOut();
+                            //        }, 5000);
+                            //        document.getElementById("noOfDays").value = "";
+                            //        document.getElementById("startDate").value = "";
+                            //        document.getElementById("endDate").value = "";
+                            //        document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                            //        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+                            //        }
+                            //        }
 
                             if (strUser == "Paternity Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -1168,7 +1168,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                        alert("6hussain");
+//                                         alert("6hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -1188,27 +1188,27 @@
                                 document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                             }
 
-//        if (strUser == "Leave Without Pay") {
-//        if (parseFloat(document.getElementById("noOfDays").value) > 60) {
-//        $("#leaveWithoutPayLeaveDiv").show();
-//        document.getElementById("endDate").value = '';
-//        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-//        setTimeout(function () {
-//        $("#leaveWithoutPayLeaveDiv").fadeOut();
-//        }, 5000);
-//        }
-//        if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
-//        $("#balanceDiv").show();
-//        setTimeout(function () {
-//        $("#balanceDiv").fadeOut();
-//        }, 5000);
-//        document.getElementById("noOfDays").value = "";
-//        document.getElementById("startDate").value = "";
-//        document.getElementById("endDate").value = "";
-//        document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-//        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-//        }
-//        }
+                            //        if (strUser == "Leave Without Pay") {
+                            //        if (parseFloat(document.getElementById("noOfDays").value) > 60) {
+                            //        $("#leaveWithoutPayLeaveDiv").show();
+                            //        document.getElementById("endDate").value = '';
+                            //        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+                            //        setTimeout(function () {
+                            //        $("#leaveWithoutPayLeaveDiv").fadeOut();
+                            //        }, 5000);
+                            //        }
+                            //        if (parseFloat(leaveDays1) > parseFloat(leaveBalance)) {
+                            //        $("#balanceDiv").show();
+                            //        setTimeout(function () {
+                            //        $("#balanceDiv").fadeOut();
+                            //        }, 5000);
+                            //        document.getElementById("noOfDays").value = "";
+                            //        document.getElementById("startDate").value = "";
+                            //        document.getElementById("endDate").value = "";
+                            //        document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                            //        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+                            //        }
+                            //        }
 
                             if (strUser == "Paternity Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -1288,7 +1288,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                        alert("7hussain");
+//                                         alert("7hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -1422,7 +1422,7 @@
                                 var plBalFlag = ${plBalCheck};
                                 if (document.getElementById('Sick Leave1').innerHTML > 0 && plBalFlag == true) {
                                     if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                        alert("8hussain");
+//                                         alert("8hussain");
                                         $("#plDiv").show();
                                         setTimeout(function () {
                                             $("#plDiv").fadeOut();
@@ -1838,42 +1838,42 @@
         }
     </script>
     <script>
-//        function calculateSecondSatByAjax() {
-//        try {
-//
-//        var strDate = document.getElementById("startDate").value;
-//        var enDate = document.getElementById("endDate").value;
-//        //                && sDateStatus != '' && eDateStatus != ''
-//
-//        if (strDate != '' && enDate != '') {
-//        //                    alert("wwww" + strDate);
-//        //                    alert("sDateStatus" + sDateStatus);
-//        $.ajax({
-//        type: "POST",
-//                url: "leaveEmployeeDetail.htm?act=getSecondSatDayByAjax&strDate=" + strDate + "&enDate=" + enDate,
-//                data: {},
-//                dataType: "text",
-//                success: function (responseTxt) {
-//                if (responseTxt == '0'){
-//                $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").hide();
-//                $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
-//                $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
-//                }
-//                if (responseTxt == '1'){
-//                $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").hide();
-//                $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
-//                $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
-//                }
-//
-//                },
-//                error: function () {
-//                }
-//        });
-//        }
-//        } catch (e) {
-//
-//        }
-//        }
+        //        function calculateSecondSatByAjax() {
+        //        try {
+        //
+        //        var strDate = document.getElementById("startDate").value;
+        //        var enDate = document.getElementById("endDate").value;
+        //        //                && sDateStatus != '' && eDateStatus != ''
+        //
+        //        if (strDate != '' && enDate != '') {
+        //        //                    alert("wwww" + strDate);
+        //        //                    alert("sDateStatus" + sDateStatus);
+        //        $.ajax({
+        //        type: "POST",
+        //                url: "leaveEmployeeDetail.htm?act=getSecondSatDayByAjax&strDate=" + strDate + "&enDate=" + enDate,
+        //                data: {},
+        //                dataType: "text",
+        //                success: function (responseTxt) {
+        //                if (responseTxt == '0'){
+        //                $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").hide();
+        //                $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+        //                $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+        //                }
+        //                if (responseTxt == '1'){
+        //                $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").hide();
+        //                $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+        //                $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+        //                }
+        //
+        //                },
+        //                error: function () {
+        //                }
+        //        });
+        //        }
+        //        } catch (e) {
+        //
+        //        }
+        //        }
 
     </script>
 

@@ -23,4 +23,6 @@ public interface EmployeeSubTypeService<T> extends GenericsService<T> {
 
     public List<?> readByID(int empsubtypid);
 
+    public List<?> readByEmployeeTypeIdANDSubTypeName(int emptypid, String employeeSubtype);
+
 }

@@ -1008,7 +1008,7 @@
                                                             <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name"></form:input>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                            <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>
+                                                           <input type="text" name="documentIdNo" id="documentIdNo" class="form-control">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1554,8 +1554,7 @@
 
                                                         <div class="col-sm-6">
                                                             <label >Official Contact No.:</label>
-                                                        <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
+                                                        <input type="text" name="officialContactNumber" id="officialContactNumber" class="form-control">
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>

@@ -40,14 +40,16 @@ public class EmployeeMasterExtension implements java.io.Serializable {
     private EmployeeMaster employeeMaster;
     private Boolean nameStatus;
     private Boolean spouseGender;
-//    private String subteamTransferDate;
+    private String documentIdNo;
+    private String subteamTransferDate;
+    private String officialContactNumber;
 
     public EmployeeMasterExtension() {
     }
 
    
 
-    public EmployeeMasterExtension(String presentAddress2, String presentCity, String presentState, String presentPostalCode, String presentCountry, String permanentAddress2, String permanentCity, String permanentState, String permanentPostalCode, String permanentCountry, String religion, String disclosedHealthConcerns, String languagesKnown, String hobbies, Boolean childOneGender, Boolean childTwoGender, String flyDocsEmailId, String emergencyContactAddress, String RelationShip, String otherImpInfo, String nationality, String firstName, String middleName, String lastName, String countryOfIssue, String visaIssueCountry, String visaIssueDate, String visaValidTillDate, String drivingLicenceType, String electionCard, String pfNoFlydocs, String withdrawalDate, String nameOfPreviousCompany, String previousCompanyLocation, EmployeeMaster employeeMaster,Boolean nameStatus, Boolean spouseGender) {
+    public EmployeeMasterExtension(String presentAddress2, String presentCity, String presentState, String presentPostalCode, String presentCountry, String permanentAddress2, String permanentCity, String permanentState, String permanentPostalCode, String permanentCountry, String religion, String disclosedHealthConcerns, String languagesKnown, String hobbies, Boolean childOneGender, Boolean childTwoGender, String flyDocsEmailId, String emergencyContactAddress, String RelationShip, String otherImpInfo, String nationality, String firstName, String middleName, String lastName, String countryOfIssue, String visaIssueCountry, String visaIssueDate, String visaValidTillDate, String drivingLicenceType, String electionCard, String pfNoFlydocs, String withdrawalDate, String nameOfPreviousCompany, String previousCompanyLocation, EmployeeMaster employeeMaster,Boolean nameStatus, Boolean spouseGender,String documentIdNo,String subteamTransferDate,String officialContactNumber) {
         this.presentAddress2 = presentAddress2;
         this.presentCity = presentCity;
         this.presentState = presentState;
@@ -83,8 +85,11 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.nameOfPreviousCompany = nameOfPreviousCompany;
         this.previousCompanyLocation = previousCompanyLocation;
         this.employeeMaster = employeeMaster;
-         this.nameStatus = nameStatus;
+        this.nameStatus = nameStatus;
         this.spouseGender = spouseGender;
+        this.documentIdNo = documentIdNo;
+        this.subteamTransferDate = subteamTransferDate;
+        this.officialContactNumber =officialContactNumber;
     }
 
     
@@ -394,6 +399,30 @@ public class EmployeeMasterExtension implements java.io.Serializable {
 
     public void setSpouseGender(Boolean SpouseGender) {
         this.spouseGender = SpouseGender;
+    }
+
+    public String getDocumentIdNo() {
+        return documentIdNo;
+    }
+
+    public void setDocumentIdNo(String documentIdNo) {
+        this.documentIdNo = documentIdNo;
+    }
+
+    public String getSubteamTransferDate() {
+        return subteamTransferDate;
+    }
+
+    public void setSubteamTransferDate(String subteamTransferDate) {
+        this.subteamTransferDate = subteamTransferDate;
+    }
+
+    public String getOfficialContactNumber() {
+        return officialContactNumber;
+    }
+
+    public void setOfficialContactNumber(String officialContactNumber) {
+        this.officialContactNumber = officialContactNumber;
     }
 
     

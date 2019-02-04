@@ -143,41 +143,49 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         EmployeeMasterExtension employeeMasterExtension = new EmployeeMasterExtension();
 
         //*************employee extension**************//
-        String presentAddress2 = request.getParameter("presentAddress2");
-        String presentCity = request.getParameter("presentCity");
-        String presentState = request.getParameter("presentState");
-        String presentPostalCode = request.getParameter("presentPostalCode");
-        String presentCountry = request.getParameter("presentCountry");
-        String permanentAddress2 = request.getParameter("permanentAddress2");
-        String permanentCity = request.getParameter("permanentCity");
-        String permanentState = request.getParameter("permanentState");
-        String permanentPostalCode = request.getParameter("permanentPostalCode");
-        String permanentCountry = request.getParameter("permanentCountry");
-        String religion = request.getParameter("religion");
-        String disclosedHealthConcerns = request.getParameter("disclosedHealthConcerns");
-        String languagesKnown = request.getParameter("languagesKnown");
-        String hobbies = request.getParameter("hobbies");
-        String childOneGender = request.getParameter("childOneGender");
-        String childTwoGender = request.getParameter("childTwoGender");
-        String flyDocsEmailId = request.getParameter("flyDocsEmailId");
-        String emergencyContactAddress = request.getParameter("emergencyContactAddress");
-        String RelationShip = request.getParameter("RelationShip");
-        String otherImpInfo = request.getParameter("otherImpInfo");
-        String nationality = request.getParameter("nationality");
-        String firstName = request.getParameter("firstName");
-        String middleName = request.getParameter("middleName");
-        String lastName = request.getParameter("lastName");
-        String countryOfIssue = request.getParameter("countryOfIssue");
-
-        String drivingLicenceType = request.getParameter("drivingLicenceType");
-        String electionCard = request.getParameter("electionCard");
-        String pfNoFlydocs = request.getParameter("pfNoFlydocs");
-        String withdrawalDate = request.getParameter("withdrawalDate");
-        String nameOfPreviousCompany = request.getParameter("nameOfPreviousCompany");
-        String previousCompanyLocation = request.getParameter("previousCompanyLocation");
-        String namestatus = request.getParameter("nameStatus");
-        String spousegender = request.getParameter("SpouseGender");
-
+        
+         String presentAddress2=request.getParameter("presentAddress2");
+         String presentCity=request.getParameter("presentCity");
+         String presentState=request.getParameter("presentState");
+         String presentPostalCode=request.getParameter("presentPostalCode");
+         String presentCountry=request.getParameter("presentCountry");
+         String permanentAddress2=request.getParameter("permanentAddress2");
+         String permanentCity=request.getParameter("permanentCity");
+         String permanentState=request.getParameter("permanentState");
+         String permanentPostalCode=request.getParameter("permanentPostalCode");
+         String permanentCountry=request.getParameter("permanentCountry");
+         String religion=request.getParameter("religion");
+         String disclosedHealthConcerns=request.getParameter("disclosedHealthConcerns");
+         String languagesKnown=request.getParameter("languagesKnown");
+         String hobbies=request.getParameter("hobbies");
+         String childOneGender=request.getParameter("childOneGender");
+         String childTwoGender=request.getParameter("childTwoGender");
+         String flyDocsEmailId=request.getParameter("flyDocsEmailId");
+         String emergencyContactAddress=request.getParameter("emergencyContactAddress");
+         String RelationShip=request.getParameter("RelationShip");
+         String otherImpInfo=request.getParameter("otherImpInfo");
+         String nationality=request.getParameter("nationality");
+         String firstName=request.getParameter("firstName");
+         String middleName=request.getParameter("middleName");
+         String lastName=request.getParameter("lastName");
+         String countryOfIssue=request.getParameter("countryOfIssue");
+         
+         String drivingLicenceType=request.getParameter("drivingLicenceType");
+         String electionCard=request.getParameter("electionCard");
+         String pfNoFlydocs=request.getParameter("pfNoFlydocs");
+         String withdrawalDate=request.getParameter("withdrawalDate");
+         String nameOfPreviousCompany=request.getParameter("nameOfPreviousCompany");
+         String previousCompanyLocation=request.getParameter("previousCompanyLocation");
+         String namestatus = request.getParameter("nameStatus");
+         String spousegender = request.getParameter("SpouseGender");
+         String documentIdNo = request.getParameter("documentIdNo");
+         String subteamTransferDate = request.getParameter("subteamTransferDate");
+         String officialContactNumber = request.getParameter("officialContactNumber");
+        
+        
+        
+        
+        
         bind(request, employeeMaster);
         //Deopdown List//
         departmentList(request);
@@ -384,29 +392,34 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                employeeMasterExtension.setVisaIssueCountry(visaIssueCountry);
 //                employeeMasterExtension.setVisaIssueDate(visaIssueDate);
 //                employeeMasterExtension.setVisaValidTillDate(visaValidTillDate);
-            employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
-            employeeMasterExtension.setElectionCard(electionCard);
-            employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
-            employeeMasterExtension.setWithdrawalDate(withdrawalDate);
-            employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
-            employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
-            employeeMasterExtension.setEmployeeMaster(employeeMaster);
-            employeeMasterServiceExtension.create(employeeMasterExtension);
-
-            //***********employee visa doc create*****************//
-            int visaCount = Integer.parseInt(request.getParameter("visaCount"));
-            EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
-            for (int i = 1; i <= visaCount; i++) {
-                String visaIssueCountry = request.getParameter("visaIssueCountry" + i);
-                String visaIssueDate = request.getParameter("visaIssueDate" + i);
-                String visaValidTillDate = request.getParameter("visaValidTillDate" + i);
-                employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
-                employeeVisaDetails.setVisaIssueDate(visaIssueDate);
-                employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
-                employeeVisaDetails.setEmployeeMaster(employeeMaster);
-                employeeVisaDetailsService.create(employeeVisaDetails);
-            }
-
+                employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
+                employeeMasterExtension.setElectionCard(electionCard);
+                employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
+                employeeMasterExtension.setWithdrawalDate(withdrawalDate);
+                employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
+                employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
+                employeeMasterExtension.setDocumentIdNo(documentIdNo);
+                employeeMasterExtension.setOfficialContactNumber(officialContactNumber);
+                employeeMasterExtension.setSubteamTransferDate(subteamTransferDate);
+                employeeMasterExtension.setEmployeeMaster(employeeMaster);
+                employeeMasterServiceExtension.create(employeeMasterExtension);
+            
+                //***********employee visa doc create*****************//
+                
+                int visaCount=Integer.parseInt(request.getParameter("visaCount"));
+                EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
+                for(int i = 1;i<=visaCount;i++){
+                    String visaIssueCountry=request.getParameter("visaIssueCountry"+i);
+                    String visaIssueDate=request.getParameter("visaIssueDate"+i);
+                    String visaValidTillDate=request.getParameter("visaValidTillDate"+i);
+                    employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+                    employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+                    employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+                    employeeVisaDetails.setEmployeeMaster(employeeMaster);
+                    employeeVisaDetailsService.create(employeeVisaDetails);
+                }
+                
+            
             //Code for Employee Policy Detail
             EmployeePolicyDetail employeePolicyDetail = new EmployeePolicyDetail();
             int otherDetailCount = Integer.parseInt(request.getParameter("policyCount"));
@@ -1002,42 +1015,47 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         UserMaster userMaster1 = new UserMaster();
 
         //*************employee extension**************//
-        String presentAddress2 = request.getParameter("presentAddress2");
-        String presentCity = request.getParameter("presentCity");
-        String presentState = request.getParameter("presentState");
-        String presentPostalCode = request.getParameter("presentPostalCode");
-        String presentCountry = request.getParameter("presentCountry");
-        String permanentAddress2 = request.getParameter("permanentAddress2");
-        String permanentCity = request.getParameter("permanentCity");
-        String permanentState = request.getParameter("permanentState");
-        String permanentPostalCode = request.getParameter("permanentPostalCode");
-        String permanentCountry = request.getParameter("permanentCountry");
-        String religion = request.getParameter("religion");
-        String disclosedHealthConcerns = request.getParameter("disclosedHealthConcerns");
-        String languagesKnown = request.getParameter("languagesKnown");
-        String hobbies = request.getParameter("hobbies");
-        String childOneGender = request.getParameter("childOneGender");
-        String childTwoGender = request.getParameter("childTwoGender");
-        String flyDocsEmailId = request.getParameter("flyDocsEmailId");
-        String emergencyContactAddress = request.getParameter("emergencyContactAddress");
-        String RelationShip = request.getParameter("RelationShip");
-        String otherImpInfo = request.getParameter("otherImpInfo");
-        String nationality = request.getParameter("nationality");
-        String firstName = request.getParameter("firstName");
-        String middleName = request.getParameter("middleName");
-        String lastName = request.getParameter("lastName");
-        String countryOfIssue = request.getParameter("countryOfIssue");
-
-        String drivingLicenceType = request.getParameter("drivingLicenceType");
-        String electionCard = request.getParameter("electionCard");
-        String pfNoFlydocs = request.getParameter("pfNoFlydocs");
-        String withdrawalDate = request.getParameter("withdrawalDate");
-        String nameOfPreviousCompany = request.getParameter("nameOfPreviousCompany");
-        String previousCompanyLocation = request.getParameter("previousCompanyLocation");
-
-        String namestatus = request.getParameter("nameStatus");
-        String spousegender = request.getParameter("spouseGender");
-
+        
+         String presentAddress2=request.getParameter("presentAddress2");
+         String presentCity=request.getParameter("presentCity");
+         String presentState=request.getParameter("presentState");
+         String presentPostalCode=request.getParameter("presentPostalCode");
+         String presentCountry=request.getParameter("presentCountry");
+         String permanentAddress2=request.getParameter("permanentAddress2");
+         String permanentCity=request.getParameter("permanentCity");
+         String permanentState=request.getParameter("permanentState");
+         String permanentPostalCode=request.getParameter("permanentPostalCode");
+         String permanentCountry=request.getParameter("permanentCountry");
+         String religion=request.getParameter("religion");
+         String disclosedHealthConcerns=request.getParameter("disclosedHealthConcerns");
+         String languagesKnown=request.getParameter("languagesKnown");
+         String hobbies=request.getParameter("hobbies");
+         String childOneGender=request.getParameter("childOneGender");
+         String childTwoGender=request.getParameter("childTwoGender");
+         String flyDocsEmailId=request.getParameter("flyDocsEmailId");
+         String emergencyContactAddress=request.getParameter("emergencyContactAddress");
+         String RelationShip=request.getParameter("RelationShip");
+         String otherImpInfo=request.getParameter("otherImpInfo");
+         String nationality=request.getParameter("nationality");
+         String firstName=request.getParameter("firstName");
+         String middleName=request.getParameter("middleName");
+         String lastName=request.getParameter("lastName");
+         String countryOfIssue=request.getParameter("countryOfIssue");
+         
+         String drivingLicenceType=request.getParameter("drivingLicenceType");
+         String electionCard=request.getParameter("electionCard");
+         String pfNoFlydocs=request.getParameter("pfNoFlydocs");
+         String withdrawalDate=request.getParameter("withdrawalDate");
+         String nameOfPreviousCompany=request.getParameter("nameOfPreviousCompany");
+         String previousCompanyLocation=request.getParameter("previousCompanyLocation");    
+         
+         String namestatus=request.getParameter("nameStatus");  
+         String spousegender=request.getParameter("spouseGender");  
+         String documentIdNo = request.getParameter("documentIdNo");
+         String subteamTransferDate = request.getParameter("subteamTransferDate");
+         String officialContactNumber = request.getParameter("officialContactNumber");
+        
+        
         bind(request, employeeMaster);
         selectEmployee(request, response);
         departmentList(request);
@@ -1177,41 +1195,49 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                employeeMasterExtension.setVisaIssueCountry(visaIssueCountry);
 //                employeeMasterExtension.setVisaIssueDate(visaIssueDate);
 //                employeeMasterExtension.setVisaValidTillDate(visaValidTillDate);
-        employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
-        employeeMasterExtension.setElectionCard(electionCard);
-        employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
-        employeeMasterExtension.setWithdrawalDate(withdrawalDate);
-        employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
-        employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
-        employeeMasterExtension.setEmployeeMaster(employeeMaster);
-        employeeMasterServiceExtension.update(employeeMasterExtension);
-
-        //*******employee visa details ********// 
-        EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
-        boolean employeeexist = employeeVisaDetailsService.employeeVisadetailsexist(employeeMaster.getId());
-        if (employeeexist) {
-            employeeVisaDetailsService.deleteByemployeeId(employeeMaster.getId());
-            int visaCount1 = Integer.parseInt(request.getParameter("visaCount1"));
-            for (int i = 1; i <= visaCount1; i++) {
-                String visaIssueCountry = request.getParameter("visaIssueCountry" + i);
-                String visaIssueDate = request.getParameter("visaIssueDate" + i);
-                String visaValidTillDate = request.getParameter("visaValidTillDate" + i);
-                employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
-                employeeVisaDetails.setVisaIssueDate(visaIssueDate);
-                employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
-                employeeVisaDetails.setEmployeeMaster(employeeMaster);
-                employeeVisaDetailsService.create(employeeVisaDetails);
-            }
-        } else {
-            String visaIssueCountry = "";
-            String visaIssueDate = "";
-            String visaValidTillDate = "";
-            employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
-            employeeVisaDetails.setVisaIssueDate(visaIssueDate);
-            employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
-            employeeVisaDetails.setEmployeeMaster(employeeMaster);
-            employeeVisaDetailsService.create(employeeVisaDetails);
-        }
+                employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
+                employeeMasterExtension.setElectionCard(electionCard);
+                employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
+                employeeMasterExtension.setWithdrawalDate(withdrawalDate);
+                employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
+                employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
+                employeeMasterExtension.setDocumentIdNo(documentIdNo);
+                employeeMasterExtension.setOfficialContactNumber(officialContactNumber);
+                employeeMasterExtension.setSubteamTransferDate(subteamTransferDate);
+                employeeMasterExtension.setEmployeeMaster(employeeMaster);
+                employeeMasterServiceExtension.update(employeeMasterExtension);
+                
+                //*******employee visa details ********// 
+                
+                EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
+                boolean employeeexist = employeeVisaDetailsService.employeeVisadetailsexist(employeeMaster.getId());
+                if(employeeexist){
+                    employeeVisaDetailsService.deleteByemployeeId(employeeMaster.getId());
+                    int visaCount1 = Integer.parseInt(request.getParameter("visaCount1"));
+                    for(int i = 1;i<=visaCount1;i++){
+                        String visaIssueCountry=request.getParameter("visaIssueCountry"+i);
+                        String visaIssueDate=request.getParameter("visaIssueDate"+i);
+                        String visaValidTillDate=request.getParameter("visaValidTillDate"+i);
+                        employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+                        employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+                        employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+                        employeeVisaDetails.setEmployeeMaster(employeeMaster);
+                        employeeVisaDetailsService.create(employeeVisaDetails);
+                    }
+                }else{
+                        String visaIssueCountry="";
+                        String visaIssueDate="";
+                        String visaValidTillDate="";
+                        employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+                        employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+                        employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+                        employeeVisaDetails.setEmployeeMaster(employeeMaster);
+                        employeeVisaDetailsService.create(employeeVisaDetails);
+                }
+                
+                
+                
+        
 
 //        if (!reportingManagerBeforeUpdate.equals(reportingManagerForChange)) {
         //code will execute only if reporting manager changed then it will reflect in all sub-ordinate.
@@ -3061,8 +3087,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     try {
                         if (row.getRowNum() != 0 && row.getRowNum() != 1 && row.getRowNum() != 2) {
                             try {
-                                employeeNo = new BigDecimal("" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1))).toPlainString();
-                                employeeNo = employeeNo.split("\\.", 2)[0];
+                                employeeNo = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
+//                                employeeNo = employeeNo.split("\\.", 2)[0];
                             } catch (Exception e) {
                                 employeeNo = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
                             }
@@ -3495,7 +3521,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 employeeMaster.setEmployeeTypeMaster(null);
                             }
                             if (!employeeSubtype.equals("")) {
-                                List<?> levelList2 = employeeSubTypeService.readByName(employeeSubtype);
+                                int emptypid = employeeMaster.getEmployeeTypeMaster().getId();
+                                
+                                List<?> levelList2 = employeeSubTypeService.readByEmployeeTypeIdANDSubTypeName(emptypid,employeeSubtype);
                                 if (!levelList2.isEmpty()) {
                                     employeeSubType = (EmployeeSubType) levelList2.get(0);
                                     employeeMaster.setEmployeeSubType(employeeSubType);

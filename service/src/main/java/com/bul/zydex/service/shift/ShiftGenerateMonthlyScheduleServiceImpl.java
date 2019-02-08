@@ -40,12 +40,12 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
 
     @Override
     public List<?> readByDayWiseEmployeeShiftData(T object, int day) {
-        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftData(object,day);
+        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftData(object, day);
     }
-    
+
     @Override
-    public List<?> readByDayWiseEmployeeShiftData1(int day,int month1,int year1,int id2) {
-        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftData1(day,month1,year1,id2);
+    public List<?> readByDayWiseEmployeeShiftData1(int day, int month1, int year1, int id2) {
+        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftData1(day, month1, year1, id2);
     }
 
     @Override
@@ -89,8 +89,8 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
     }
 
     @Override
-    public List readByDayWiseEmployeeShiftDataForDayNo(int monthNo, int yearNo,int id2,int dayNo) {
-        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftDataForDayNo(monthNo,yearNo,id2, dayNo);
+    public List readByDayWiseEmployeeShiftDataForDayNo(int monthNo, int yearNo, int id2, int dayNo) {
+        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftDataForDayNo(monthNo, yearNo, id2, dayNo);
     }
 
     @Override
@@ -99,8 +99,8 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
     }
 
     @Override
-    public String readShiftData(int monthValue, int year,int id2) {
-        return shiftGenerateMonthlyScheduleDAO.readShiftData(monthValue,year,id2);
+    public String readShiftData(int monthValue, int year, int id2) {
+        return shiftGenerateMonthlyScheduleDAO.readShiftData(monthValue, year, id2);
     }
 
     @Override
@@ -114,8 +114,8 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
     }
 
     @Override
-    public List readByDayWiseEmployeeShiftDataForDayNext(int dayNext,int id2,int month1,int year1) {
-        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftDataForDayNext(dayNext,id2,month1,year1);
+    public List readByDayWiseEmployeeShiftDataForDayNext(int dayNext, int id2, int month1, int year1) {
+        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftDataForDayNext(dayNext, id2, month1, year1);
     }
 
     @Override
@@ -129,8 +129,8 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
     }
 
     @Override
-    public List readNoOfMonths(int id2, int yearNo,int monthNo) {
-        return shiftGenerateMonthlyScheduleDAO.readNoOfMonths(id2, yearNo,monthNo);
+    public List readNoOfMonths(int id2, int yearNo, int monthNo) {
+        return shiftGenerateMonthlyScheduleDAO.readNoOfMonths(id2, yearNo, monthNo);
     }
 
     @Override
@@ -154,8 +154,8 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
     }
 
     @Override
-    public List readByDayWiseEmployeeShiftDataForDayNextMonthEnd(int id2,int monthNoNext, int yearNo) {
-        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftDataForDayNextMonthEnd(id2, monthNoNext,yearNo);
+    public List readByDayWiseEmployeeShiftDataForDayNextMonthEnd(int id2, int monthNoNext, int yearNo) {
+        return shiftGenerateMonthlyScheduleDAO.readByDayWiseEmployeeShiftDataForDayNextMonthEnd(id2, monthNoNext, yearNo);
     }
 
     @Override
@@ -185,7 +185,7 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
 
     @Override
     public List readNoOfMonthsSubmit(int id2, int year, int monthValue) {
-        return shiftGenerateMonthlyScheduleDAO.readNoOfMonthsSubmit(id2, year,monthValue);
+        return shiftGenerateMonthlyScheduleDAO.readNoOfMonthsSubmit(id2, year, monthValue);
     }
 
     @Override
@@ -195,7 +195,12 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
 
     @Override
     public List<?> readDayShiftValue(T object, int day) {
-        return shiftGenerateMonthlyScheduleDAO.readDayShiftValue(object,day);
+        return shiftGenerateMonthlyScheduleDAO.readDayShiftValue(object, day);
+    }
+
+    @Override
+    public List<?> readByEmpMonthYear(Integer id) {
+        return shiftGenerateMonthlyScheduleDAO.readByEmpMonthYear(id);
     }
 
 }

@@ -2501,4 +2501,38 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return false;
     }
 
+    @Override
+    public List<?> readEmployeeAll() {
+        String query = "";
+        query += " "
+                + " SELECT a"
+                + " FROM EmployeeMaster a "
+                + " where ((a.dateOfLeaving is null or a.dateOfLeaving = '') "
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())"
+                + " ORDER BY a.employeeId ASC ";
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+//    @Override
+//    public List readByHrRights() {
+//        String query = "";
+//
+//        query += "Select a.officeEmailId FROM EmployeeMaster a"
+//                + " LEFT JOIN a.userMaster b"
+//                + " LEFT JOIN b.UserRightMaster c Where c.hr=1";
+//
+//        return getHibernateTemplate().find(query);
+//    }
+    @Override
+    public List readByHrRights() {
+        String query = "";
+
+        query += "Select a.officeEmailId FROM EmployeeMaster a,UserMaster b,UserRightMaster c"
+                + " Where a.userMaster.id=b.id and b.id=c.userMaster.id and c.hr=1";
+
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

@@ -12,8 +12,11 @@ import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
@@ -50,6 +53,33 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readByDayWiseEmployeeShiftData1(int day,int month1,int year1,int id2) {
+        String query = "";
+
+        query += "SELECT concat(day_" + day + ") FROM ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster=" + id2
+                + " and a.shiftMonth=" + month1
+                + " and a.shiftYear=" + year1;
+
+        return getHibernateTemplate().find(query);
+    }
+    
+    @Override
+    public List<?> readDayShiftValue(T object, int day) {
+        ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) object;
+        String query = "";
+
+        query += "SELECT a.shiftName FROM ShiftMaster a Where a.id=("
+                +"SELECT concat(day_" + day + ") FROM ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster=" + shiftGenerateMonthlySchedule.getEmployeeMaster().getId()
+                + " and a.shiftMonth=" + Integer.parseInt(shiftGenerateMonthlySchedule.getShiftMonth())
+                + " and a.shiftYear=" + Integer.parseInt(shiftGenerateMonthlySchedule.getShiftYear())
+                + ")";
+
+        return getHibernateTemplate().find(query);
+    }
+    
     @Override
     public List<?> readByDayWiseEmployeeShiftData(T object, int day) {
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) object;
@@ -207,4 +237,338 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
 
     }
 
+    @Override
+    public List readByDayWiseEmployeeShiftDataForDayNo(int monthNo, int yearNo,int id2,int dayNo) {
+        
+        String query = "";
+
+        query += "SELECT concat(day_" + dayNo + ") FROM ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster=" + id2
+                + " and a.shiftMonth=" + monthNo
+                + " and a.shiftYear=" + yearNo;
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public void updateDays(String data) {
+        String a[] = data.split(":");
+        String query = "";
+        Session s = getSessionFactory().openSession();
+
+        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+                + " Set a.day_"+a[0]+"="+a[2]+","
+                + " a.day_"+a[6]+"="+a[8]+","
+                + " a.day_"+a[1]+"="+a[3]+","
+                + " a.day_"+a[5]+"="+a[3]
+                + " Where a.id="+a[4];
+
+        SQLQuery sqlQuery = s.createSQLQuery(query);
+        sqlQuery.executeUpdate();
+        s.close();
+    }
+
+    @Override
+    public String readShiftData(int monthValue, int year,int id2) {
+        String query = "";
+
+        query += "SELECT a.id FROM ShiftGenerateMonthlySchedule a"
+                + " Where a.shiftMonth="+monthValue
+                + " And a.shiftYear="+year
+                + " And a.employeeMaster.id="+id2;
+    List<?> list = getHibernateTemplate().find(query);
+            String list1 = list.get(0).toString();
+            return list1;
+
+}
+
+    @Override
+    public String readThreeDaysList(String data1) {
+        String a[] = data1.split(":");
+        String query = "";
+        query += " Select a.day"+a[2]
+                + " FROM ShiftGenerateMonthlySchedule a"
+                + " Where a.id="+a[3];
+        List<?> list = getHibernateTemplate().find(query);
+        String beforeDate = ((Integer)list.get(0)).toString();
+        query = "";
+        query += " Select a.day"+a[0]
+                + " FROM ShiftGenerateMonthlySchedule a"
+                + " Where a.id="+a[3];
+        list = getHibernateTemplate().find(query);
+        String presentDate = ((Integer)list.get(0)).toString();
+        query = "";
+        query += " Select a.day"+a[1]
+                + " FROM ShiftGenerateMonthlySchedule a"
+                + " Where a.id="+a[3];
+        list = getHibernateTemplate().find(query);
+        String afterDate = ((Integer)list.get(0)).toString();
+        return beforeDate+"&"+presentDate+"&"+afterDate;
+    }
+
+    @Override
+    public void updateDaysCase(String data) {
+        String a[] = data.split(":");
+        String query = "";
+        Session s = getSessionFactory().openSession();
+
+        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+                + " Set a.day_"+a[0]+"="+a[2]+","
+                + " a.day_"+a[7]+"="+a[8]+","
+                + " a.day_"+a[1]+"="+a[3]+","
+                + " a.day_"+a[5]+"="+a[3]
+                + " Where a.id="+a[4];
+
+        SQLQuery sqlQuery = s.createSQLQuery(query);
+        sqlQuery.executeUpdate();
+        s.close();
+    }
+
+    @Override
+    public List readByDayWiseEmployeeShiftDataForDayNext(int dayNext,int id2,int month1,int year1) {
+        String query = "";
+
+        query += "SELECT concat(day_" + dayNext + ") FROM ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster=" + id2
+                + " and a.shiftMonth=" + month1
+                + " and a.shiftYear=" + year1;
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List readShiftMonths(int id2, int year, int month) {
+        String query = "";
+        HashMap<Integer,List<Integer>> hm = new HashMap<>();
+        query += "From ShiftGenerateMonthlySchedule a "
+                + "Where a.employeeMaster.id=" + id2
+                + " and a.shiftYear='" + year
+                + "' a.shiftMonth >='"+ month+"'";
+        List<?> list = getHibernateTemplate().find(query);
+        Iterator<?> itr = list.iterator();
+        while(itr.hasNext()){
+            List<?> l = (List) itr.next();
+            List<Integer> lis = new ArrayList<>();
+            lis.add((Integer)l.get(0));
+            for(int i=4;i<l.size()-2;i++){
+                lis.add((Integer)l.get(i));
+            }
+            hm.put((Integer)l.get(3) , lis);
+        }
+        List<HashMap> l = new ArrayList<>();
+        l.add(hm);
+        return l;
+    }
+    
+    @Override
+    public void updateNewShift(String data) {
+        String query = "";
+        HashMap<Integer,List<Integer>> hm = new HashMap<>();
+        query +="update hr_power_astral.shift_generate_monthly_schedule a set a.day_"+data.split(",")[0]
+                +" ="+data.split(",")[1]
+                +" , a.day_"+data.split(",")[2]
+                +" where id = "+data.split(",")[3];
+        Session s = getSessionFactory().openSession();
+        SQLQuery sqlQuery = s.createSQLQuery(query);
+        sqlQuery.executeUpdate();
+        s.close();
+    }
+
+    @Override
+    public List readNoOfMonths(int id2, int yearNo,int monthNo) {
+        String query = "";
+
+        query += "SELECT a.shiftMonth FROM ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster=" + id2
+                + " and a.shiftYear=" + yearNo
+                + " and a.shiftMonth>="+monthNo;
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public void updateDays1(String data) {
+        String a[] = data.split(":");
+        String query = "";
+        Session s = getSessionFactory().openSession();
+
+        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+                + " Set a.day_"+a[0]+"="+a[2]+","
+                + " a.day_"+a[6]+"="+a[8]
+                + " Where a.shift_month="+a[15]
+                + " and a.shift_year="+a[16]
+                + " and a.employee_master_id="+a[12];
+                
+        SQLQuery sqlQuery = s.createSQLQuery(query);
+        sqlQuery.executeUpdate();
+        s.close();
+    }
+
+    @Override
+    public void updateDays2(String data) {
+        String a[] = data.split(":");
+        String query = "";
+        Session s = getSessionFactory().openSession();
+
+        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+                + " Set a.day_"+a[1]+"="+a[3]+","
+                + " a.day_"+a[5]+"="+a[3]
+                + " Where a.shift_month="+a[9]
+                + " and a.shift_year="+a[10]
+                + " and a.employee_master_id="+a[12];
+        
+        SQLQuery sqlQuery = s.createSQLQuery(query);
+        sqlQuery.executeUpdate();
+        s.close();
+    }
+
+    @Override
+    public void updateDaysCase1(String data) {
+        String a[] = data.split(":");
+        String query = "";
+        Session s = getSessionFactory().openSession();
+
+        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+                + " Set a.day_"+a[0]+"="+a[2]+","
+                + " a.day_"+a[7]+"="+a[8]
+                + " Where a.shift_month="+a[15]
+                + " and a.shift_year="+a[16]
+                + " and a.employee_master_id="+a[12];
+
+        SQLQuery sqlQuery = s.createSQLQuery(query);
+        sqlQuery.executeUpdate();
+        s.close();
+    }
+
+    @Override
+    public void updateDaysCase2(String data) {
+        String a[] = data.split(":");
+        String query = "";
+        Session s = getSessionFactory().openSession();
+
+        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+                + " Set a.day_"+a[1]+"="+a[3]+","
+                + " a.day_"+a[5]+"="+a[3]
+                + " Where a.shift_month="+a[9]
+                + " and a.shift_year="+a[10]
+                + " and a.employee_master_id="+a[12];
+
+        SQLQuery sqlQuery = s.createSQLQuery(query);
+        sqlQuery.executeUpdate();
+        s.close();
+    }
+
+    @Override
+    public List readByDayWiseEmployeeShiftDataForDayNextMonthEnd(int id2,int monthNoNext, int yearNo) {
+        String query = "";
+
+        query += "SELECT a.day1 FROM ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster=" + id2
+                + " and a.shiftMonth=" + monthNoNext
+                + " and a.shiftYear=" + yearNo;
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public void updateDaysMonthEnd(String data) {
+        String a[] = data.split(":");
+        String query = "";
+        Session s = getSessionFactory().openSession();
+
+        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+                + " Set a.day_"+a[0]+"="+a[2]+","
+                + " a.day_"+a[6]+"="+a[13]+","
+                + " a.day_"+a[1]+"="+a[3]
+                + " Where a.shift_month="+a[15]
+                + " and a.shift_year="+a[16]
+                + " and a.employee_master_id="+a[12];
+
+        SQLQuery sqlQuery = s.createSQLQuery(query);
+        sqlQuery.executeUpdate();
+        s.close();
+    }
+    @Override
+    public void updateDaysMonthEnd1(String data) {
+        String a[] = data.split(":");
+        String query = "";
+        Session s = getSessionFactory().openSession();
+
+        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+                + " Set a.day_1="+a[3]
+                + " Where a.shift_month="+a[17]
+                + " and a.shift_year="+a[10]
+                + " and a.employee_master_id="+a[12];
+
+        SQLQuery sqlQuery = s.createSQLQuery(query);
+        sqlQuery.executeUpdate();
+        s.close();
+    }
+
+    @Override
+    public void updateDaysCaseMonthEnd(String data) {
+        String a[] = data.split(":");
+        String query = "";
+        Session s = getSessionFactory().openSession();
+
+        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+                + " Set a.day_"+a[0]+"="+a[2]+","
+                + " a.day_"+a[7]+"="+a[13]+","
+                + " a.day_"+a[1]+"="+a[3]
+                + " Where a.shift_month="+a[15]
+                + " and a.shift_year="+a[16]
+                + " and a.employee_master_id="+a[12];
+
+        SQLQuery sqlQuery = s.createSQLQuery(query);
+        sqlQuery.executeUpdate();
+        s.close();
+    }
+
+    @Override
+    public void updateDaysCaseMonthEnd1(String data) {
+        String a[] = data.split(":");
+        String query = "";
+        Session s = getSessionFactory().openSession();
+
+        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+                + " Set a.day_1="+a[3]
+                + " Where a.shift_month="+a[17]
+                + " and a.shift_year="+a[10]
+                + " and a.employee_master_id="+a[12];
+
+        SQLQuery sqlQuery = s.createSQLQuery(query);
+        sqlQuery.executeUpdate();
+        s.close();
+    }
+
+    @Override
+    public String readEmployeeId(int userId) {
+        String query = "";
+        query += " Select a.id"
+                + " FROM EmployeeMaster a"
+                + " Where a.userMaster="+userId;
+        List<?> list = getHibernateTemplate().find(query);
+        String list1 = ((Integer)list.get(0)).toString();
+        return list1;
+    }
+
+    @Override
+    public List readNoOfMonthsSubmit(int id2, int year, int monthValue) {
+        String query = "";
+
+        query += "SELECT a.shiftMonth FROM ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster=" + id2
+                + " and a.shiftYear=" + year
+                + " and a.shiftMonth>="+monthValue;
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List readRotationDate(int id3) {
+        String query = "";
+
+        query += "SELECT a.rotationDate FROM WoffRegularization a"
+                + " Where a.userMasterId=" + id3
+                + " and a.status=1";
+        return getHibernateTemplate().find(query);
+    }
 }

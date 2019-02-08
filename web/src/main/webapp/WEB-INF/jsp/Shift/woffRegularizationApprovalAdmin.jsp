@@ -28,17 +28,19 @@
     <script>
         function rejectClick() {
             var id = document.getElementById("id").value;
+            var approvalComment= document.getElementById("approvalComment").value;
 //            alert(id);
 //            var remark = document.getElementById("remark").value;
 //              alert(remark);
-            window.location = 'shiftRotationMaster.htm?act=rejectSubmitByAdminWoff&id=' + id;
+            window.location = 'shiftRotationMaster.htm?act=rejectSubmitByAdminWoff&id=' + id+'&approvalComment='+approvalComment;
         }
     </script>
     <script>
         function reworkClick() {
             var id = document.getElementById("id").value;
+            var approvalComment= document.getElementById("approvalComment").value;
 //            var remark = document.getElementById("remark").value;
-            window.location = 'shiftRotationMaster.htm?act=reworkSubmitByAdminWoff&id=' + id;
+            window.location = 'shiftRotationMaster.htm?act=reworkSubmitByAdminWoff&id=' + id+'&approvalComment='+approvalComment;
         }
     </script>
     <script>
@@ -206,12 +208,41 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">Reason For Woff:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <div class="col-sm-7">
+                                                            <form:textarea path="reasonForWoff" name="reasonForWoff" id="reasonForWoff" class="form-control" rows="6" readonly="true"></form:textarea>
+                                                                <!--<span id="" style="color: red;"></span>-->
+                                                        </div>
+                                                    </div>
+                                                    
 
                                                 </div>
                                             </div>
 
                                             </div>
                                         </div>
+                                     <div class="box box-info collapsed-box">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Manager Remarks:</h3>
+                                        <div class="box-tools pull-right">
+                                            <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
+                                        </div>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body no-padding">
+                                        <div class="row">
+                                            <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">Approval Comment:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <div class="col-sm-7">
+                                                            <textarea name="approvalComment" id="approvalComment" class="form-control" rows="6">${approvalComment}</textarea>
+                                                                <!--<span id="" style="color: red;"></span>-->
+                                                        </div>
+                                                    </div>
+                                                  </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div>
                                 </div>
 
 
@@ -235,14 +266,14 @@
                 </div> /.row 
             </div> /.box-body 
         </div>-->
-                            <c:if test="${status eq 3}">
-                                <div class="box box-info collapsed-box">
+                            <%--<c:if test="${status eq 3}">--%>
+<!--                                <div class="box box-info collapsed-box">
                                     <div class="box-header">
                                         <h3 class="box-title">Manager Remarks:</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
                                         </div>
-                                    </div><!-- /.box-header -->
+                                    </div> /.box-header 
                                     <div class="box-body no-padding">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
@@ -252,11 +283,11 @@
                                                         <textarea class="form-control" rows="6" id="remark" name="remark" placeholder="Enter Remark" disabled="true">${remarkNmame}</textarea>
                                                     </div>
                                                 </div>
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
-                                </div>
-                            </c:if>
+                                            </div> /.col 
+                                        </div> /.row 
+                                    </div> /.box-body 
+                                </div>-->
+                            <%--</c:if>--%>
                             <!--Reason In Detail completes Here-->
                             <c:if test="${status eq 0}">
                                 <!--                                        <div class="box box-info collapsed-box">

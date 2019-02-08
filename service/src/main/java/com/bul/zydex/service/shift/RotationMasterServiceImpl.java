@@ -41,4 +41,9 @@ public class RotationMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
         return rotationMasterDAO.isRotationExist(object);
     }
 
+    @Override
+    public List<?> readForShiftValue(int shiftId1) {
+        return rotationMasterDAO.readForShiftValue(shiftId1);
+    }
+
 }

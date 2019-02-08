@@ -11,6 +11,7 @@ import com.bul.zydex.dao.GenericsDAO;
  *
  * @author Success
  */
-public interface ClientDetailsMasterDAO<T> extends GenericsDAO<T> {
-    
+public interface ClientDetailsMasterDAO<T> extends GenericsDAO<T> 
+{
+    public boolean isExist(T object);
 }

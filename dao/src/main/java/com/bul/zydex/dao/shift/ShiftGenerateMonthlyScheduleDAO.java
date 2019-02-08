@@ -19,6 +19,10 @@ public interface ShiftGenerateMonthlyScheduleDAO<T> extends GenericsDAO<T> {
     public List<?> readByCurrentDateWiseEmployeeShift(T object);
 
     public List<?> readByDayWiseEmployeeShiftData(T object, int day);
+    
+    public List<?> readDayShiftValue(T object, int day);
+    
+    public List<?> readByDayWiseEmployeeShiftData1(int day,int month1,int year1,int id2);
 
     public List<?> employeeListReadByMonth(int month, int year);
 
@@ -35,5 +39,47 @@ public interface ShiftGenerateMonthlyScheduleDAO<T> extends GenericsDAO<T> {
     public List<?> employeeListReadByMonthWoff(int month, int year, int empID);
 
     public List<?> ReadEmployeeShiftByDayMonthYear(Integer empId, String date);
+    
+    public List readByDayWiseEmployeeShiftDataForDayNo(int monthNo, int yearNo,int id2,int dayNo);
+    
+    public void updateDays(String data);
+    
+    public String readShiftData(int monthValue, int year,int id2);
+    
+    public String readThreeDaysList(String data1);
+    
+    public void updateDaysCase(String data);
+    
+    public List readByDayWiseEmployeeShiftDataForDayNext(int dayNext,int id2,int month1,int year1);
+    
+    public List readShiftMonths(int id2, int year, int month);
+    
+    public void updateNewShift(String data);
+    
+    public List readNoOfMonths(int id2, int yearNo,int monthNo);
+    
+    public void updateDays1(String data);
+    
+    public void updateDays2(String data);
+    
+    public void updateDaysCase1(String data);
+    
+    public void updateDaysCase2(String data);
+    
+    public List readByDayWiseEmployeeShiftDataForDayNextMonthEnd(int id2,int monthNoNext, int yearNo);
+    
+    public void updateDaysMonthEnd(String data);
+    
+    public void updateDaysMonthEnd1(String data);
+    
+    public void updateDaysCaseMonthEnd(String data);
+    
+    public void updateDaysCaseMonthEnd1(String data);
+    
+    public String readEmployeeId(int userId);
+    
+    public List readNoOfMonthsSubmit(int id2, int year, int monthValue);
+    
+    public List readRotationDate(int id3);
 
 }

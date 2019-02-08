@@ -39,6 +39,8 @@
                 <prop key="levelMaster.htm">levelMasterController1</prop>
                 <!--Location Master-->
                 <prop key="locationMaster.htm">locationMasterController1</prop>
+                <!--Client Master-->
+                <prop key="clientDetailsMaster.htm">clientDetailsMasterController1</prop>
                 <!--Holiday Master -->
                 <prop key="holidayMaster.htm">holidayMasterController1</prop>
                 <!--Employee Referral -->

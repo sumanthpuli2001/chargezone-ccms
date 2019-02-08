@@ -30,7 +30,7 @@
         }
 
         function approveClick(arId) {
-            window.location = 'shiftRotationMaster.htm?act=approvalEditSubmitByAdmin&id=' + arId;
+            window.location = 'shiftRotationMaster.htm?act=approvalEditSubmitByAdminWoFF&id=' + arId;
         }
 
         function rejectClick(arId) {
@@ -45,7 +45,7 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>SHIFT REGULARIZATION REQUESTED LIST </h1>
+            <h1>WOFF CHANGE REQUESTED LIST </h1>
             <div style="float: right"></div>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -120,7 +120,7 @@
                                                                 <!--<td>Apply For Withdraw</td>-->
                                                                 <%--</c:if>--%>
                                                                 <c:if test="${list[5] eq 7}">
-                                                                    <td><span class="label label-info">Rework</span></td>
+                                                                    <td><span class="label label-info">Reworked</span></td>
                                                                 </c:if>
                                                                 <td>
                                                                     <div class="col-sm-12">

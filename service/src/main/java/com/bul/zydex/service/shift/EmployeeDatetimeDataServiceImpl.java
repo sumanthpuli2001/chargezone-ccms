@@ -7,6 +7,7 @@ package com.bul.zydex.service.shift;
 
 import com.bul.zydex.dao.shift.EmployeeDatetimeDataDAO;
 import com.bul.zydex.service.GenericsServiceImpl;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -94,6 +95,21 @@ public class EmployeeDatetimeDataServiceImpl<T> extends GenericsServiceImpl<T> i
     @Override
     public List<?> readOddPunchedEmployeeData(String date) {
         return employeeDatetimeDataDAO.readOddPunchedEmployeeData(date);
+    }
+
+    @Override
+    public List<?> readEmployeePunchData(String empId) {
+        return employeeDatetimeDataDAO.readEmployeePunchData(empId);
+    }
+
+    @Override
+    public String getShiftsTime(String empId) {
+        return employeeDatetimeDataDAO.getShiftsTime(empId);
+    }
+
+    @Override
+    public String getEmailAddress(String empId) {
+        return employeeDatetimeDataDAO.getEmailAddress(empId);
     }
 
 }

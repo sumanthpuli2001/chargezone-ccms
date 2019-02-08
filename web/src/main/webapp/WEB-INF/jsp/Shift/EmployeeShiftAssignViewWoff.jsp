@@ -119,11 +119,13 @@
                                                                     <!--</button>-->
                                                                     <%--</c:if>--%>
 
-
+                                                                    <%--<c:if test='${list[i]eq"WO"}'>--%>
                                                                     <div class="btn-group">
+                                                                        
                                                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                                             Action <span class="caret"></span>
                                                                         </button>
+                                                                        
                                                                         <ul class="dropdown-menu" style="width: 100px;" >
                                                                             <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
 
@@ -139,6 +141,7 @@
                                                                             </c:if>
                                                                         </ul>
                                                                     </div>
+                                                                    <%--</c:if>--%>
                                                                 </td>
 
 
@@ -172,15 +175,18 @@
     </div>
 
     <script type="text/javascript">
+//        var start_date = new Date();
+//        dt1.setFullYear(new Date().getFullYear());
         $('.form_datetime').datetimepicker({
             //            language: 'fr',
             weekStart: 1,
-            //            todayBtn: 1,
+//            todayBtn: 1,
             autoclose: 1,
             todayHighlight: 1,
             startView: 1,
             minView: 0,
             maxView: 1,
+//            startDate: dt1,
             forceParse: 0
         });
     </script>

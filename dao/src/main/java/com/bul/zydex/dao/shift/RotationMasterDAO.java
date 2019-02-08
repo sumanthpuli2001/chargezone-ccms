@@ -19,5 +19,7 @@ public interface RotationMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readForShift(int object);
 
     public List<?> isRotationExist(T object);
+    
+    public List<?> readForShiftValue(int shiftId1);
 
 }

@@ -10,6 +10,7 @@ import com.bul.zydex.model.EmployeeDatetimeData;
 import java.text.Format;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -219,5 +220,67 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
 
     }
 
+//    @Override
+//    public List<?> readEmployeePunchData(String data) {
+//        String query = "";
+//        query += " "
+//                + " SELECT a.dateTime"
+//                + " FROM EmployeeDatetimeData a"
+//                + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y') IN (STR_TO_DATE('" + data.split(":")[1] + "','%d/%m/%Y')) "
+//                + " And a.employeeMaster.id=" + data.split(":")[0] ;
+//            return getHibernateTemplate().find(query);
+//    }
+
+    @Override
+    public List<?> readEmployeePunchData(String data) {
+        String query = "";
+        query += " "
+                + " SELECT a.dateTime"
+                + " FROM EmployeeDatetimeData a"
+                + " Where STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i') > (STR_TO_DATE('" + data.split("&")[1].trim() + "','%d/%m/%Y %H:%i')) "
+                + " And a.employeeMaster.id=" + data.split("&")[0].trim() ;
+            return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public String getShiftsTime(String data) {
+        String a[] = data.split(":");
+        String query = "";
+        query += "SELECT a.startTime FROM ShiftMaster a Where a.id = ("
+                + "SELECT b.day"+a[3]
+                + " FROM ShiftGenerateMonthlySchedule b Where b.employeeMaster.id = '"+a[0]
+                + "' AND b.shiftYear = '"+a[1]
+                + "' AND b.shiftMonth='"+a[2]
+                +"')";
+        
+        List<?> list = getHibernateTemplate().find(query);
+        String startTime = (String) list.get(0);
+        query = "";
+        query += "SELECT a.endTime FROM ShiftMaster a Where a.id = ("
+                + "SELECT b.day"+a[3]
+                + " FROM ShiftGenerateMonthlySchedule b Where b.employeeMaster.id = '"+a[0]
+                + "' AND b.shiftYear = '"+a[1]
+                + "' AND b.shiftMonth='"+a[2]
+                +"')";
+        list = getHibernateTemplate().find(query);
+        String endTime = (String) list.get(0);
+        return startTime+"&"+endTime;
+//                return (String) ((ArrayList) list.get(0)).get(0)+" "+(String) ((ArrayList) list.get(0)).get(1);
+
+    }
+
+    @Override
+    public String getEmailAddress(String empId) {
+        String query = "";
+        query += " "
+                + "SELECT a.emailAddress FROM EmployeeMaster a Where a.id = ("
+                + "SELECT b.reportingManagerLevel1 FROM EmployeeMaster b Where b.id= "+empId
+                + ")";
+               
+            List<?> list = getHibernateTemplate().find(query);
+            list = getHibernateTemplate().find(query);
+            String list1 = (String) list.get(0);
+            return list1;
+    }
 
 }

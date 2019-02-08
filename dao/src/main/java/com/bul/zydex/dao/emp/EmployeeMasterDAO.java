@@ -196,4 +196,8 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public boolean isExistUSername(String employeeID);
 
     public boolean isExistUnderGraudity(String joinDate, String currentDate);
+    
+    public List<?> readEmployeeAll();
+    
+    public List readByHrRights();
 }

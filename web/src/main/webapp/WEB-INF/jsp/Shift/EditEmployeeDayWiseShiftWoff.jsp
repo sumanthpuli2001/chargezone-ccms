@@ -14,15 +14,6 @@
         <title>Woff Create</title>
     </head>
 
-
-
-
-    <!--    <script>
-            function ShiftAssignSubmit(id, dayNo) {
-    
-                window.location = 'shiftRotationMaster.htm?act=submitEmployeeShiftAssign&id=' + id + '&dayNo=' + dayNo;
-            }
-        </script>-->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -32,7 +23,7 @@
                 <li class="active">Wo Edit</li>
             </ol>
         </section>
-        <c:if test="${!empty suSUBccessMessage}">
+        <c:if test="${!empty successMessage}">
             <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
         </c:if>
         <c:if test="${!empty failureMessage}">
@@ -68,12 +59,12 @@
                                                   <div class="col-sm-6" >
                                                       <label>WO Change Date:<span style="color: red;font-size: 12px;">*</span></label>
 
-                                                            <div class="input-group date form_datetime"  name="shiftIdChange" id="shiftIdChange"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
-                                                                <form:input path="" name="rotationdate" id="rotationdate" class="form-control" size="16" value="" readonly="true" ></form:input>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                </div>
-                                                            </div>
+                                                        <div class="input-group date form_datetime"  name="shiftIdChange" id="shiftIdChange"  data-date-format="d/m/yyyy" data-link-field="dtp_input1" >
+                                                            <form:input path="" name="rotationdate" id="rotationdate" class="form-control" size="16" value="${rotationdate}" readonly="true" ></form:input>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+                                                  </div>
 
 <!--                                                <div class="col-sm-6">
                                                     <label>Shift Name:<span style="color: red;font-size: 12px;">*</span></label>
@@ -83,6 +74,13 @@
                                                     <%--</form:select>--%>
                                                     <%--<form:select path="" id="poolCarRequestSelectId" class="form-control ">--%>
                                                 </div>-->
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-3 control-label">Reason For Woff:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <div class="col-sm-7">
+                                                    <textarea path="" name="reasonForWoff" id="reasonForWoff" value="" class="form-control" rows="6">${reasonForWoff}</textarea>
+                                                        <!--<span id="" style="color: red;"></span>-->
+                                                </div>
                                             </div>
 
                                         </div><!-- /.col -->
@@ -104,6 +102,7 @@
         <!-- /.content -->
     </div>
     <script type="text/javascript">
+        var start_date = new Date();
         $('.form_datetime').datetimepicker({
             //language:  'fr',
             weekStart: 1,
@@ -111,8 +110,10 @@
             autoclose: 1,
             todayHighlight: 1,
             startView: 2,
-            forceParse: 0,
-            showMeridian: 1,
+            minView: 2,
+            startDate: start_date,
+            forceParse: 0
+//            showMeridian: 1,
         });
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

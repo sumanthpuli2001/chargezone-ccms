@@ -17,4 +17,6 @@ public interface LevelMasterDAO<T> extends GenericsDAO<T> {
     public boolean isExist(T object);
     
     public List<?> readByName(String name);
+
+    public List<?> readByID(int emplevel);
 }

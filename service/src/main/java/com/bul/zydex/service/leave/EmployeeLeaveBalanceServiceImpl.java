@@ -46,4 +46,14 @@ public class EmployeeLeaveBalanceServiceImpl<T> extends GenericsServiceImpl<T> i
         return employeeLeaveBalanceDAO.readByEmpIdAndLeaveTypeId(empId, levtyId);
     }
 
+    @Override
+    public List<?> readEmpId(int empId) {
+        return employeeLeaveBalanceDAO.readEmpId(empId);
+    }
+
+    @Override
+    public List<?> readByLeave(Integer empId, int leaveId) {
+        return employeeLeaveBalanceDAO.readByLeave(empId, leaveId);
+    }
+
 }

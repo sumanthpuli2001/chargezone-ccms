@@ -23,4 +23,6 @@ public interface DesignationMasterDAO<T> extends GenericsDAO<T> {
     
     public List<?> readDesignationsOfLevel(final int levelMasterId);
 
+    public List<?> readByID(int empdesig);
+
 }

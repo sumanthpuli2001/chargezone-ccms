@@ -49,4 +49,12 @@ public class ShiftRotationInfoDAOImpl<T> extends GenericsDAOImpl<T> implements S
         }
     }
 
+    @Override
+    public List<?> readByUserId(int usermasterid) {
+        String query = "";
+        query += "From ShiftRotationInfo a "
+              + " Where a.userMaster.id =" + usermasterid ;
+        return getHibernateTemplate().find(query);
+    }
+
 }

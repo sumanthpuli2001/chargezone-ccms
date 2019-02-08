@@ -82,4 +82,6 @@ public interface ShiftGenerateMonthlyScheduleDAO<T> extends GenericsDAO<T> {
     
     public List readRotationDate(int id3);
 
+    public List<?> readByEmpMonthYear(Integer id);
+
 }

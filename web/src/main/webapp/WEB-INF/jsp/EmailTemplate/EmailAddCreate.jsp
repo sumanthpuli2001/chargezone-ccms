@@ -98,6 +98,7 @@
                                                 <form:option value="Resignation" label="Resignation" ></form:option>
                                                 <form:option value="No Due" label="No Due" ></form:option>
                                                 <form:option value="Exit Employee" label="Exit Employee" ></form:option>
+                                                <form:option value="On Call" label="On Call" ></form:option>
                                             </form:select>
                                         </div>
                                     </div>

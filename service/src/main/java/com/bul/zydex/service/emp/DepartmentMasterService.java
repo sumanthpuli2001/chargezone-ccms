@@ -27,4 +27,5 @@ public interface DepartmentMasterService<T> extends GenericsService<T> {
 
     public List<?> readByName(String departmentName);
 
+    
 }

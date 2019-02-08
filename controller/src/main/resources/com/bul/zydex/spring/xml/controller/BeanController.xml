@@ -242,6 +242,7 @@
         <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />
         <property name="leaveEmployeeDetailsApprovalHistoryService" ref="leaveEmployeeDetailsApprovalHistoryService1" />
+        <property name="shiftGenerateMonthlyScheduleService" ref="shiftGenerateMonthlyScheduleService1" />
     </bean>
     <bean id="employeeLeaveBalanceController1" class="com.bul.zydex.controller.leave.EmployeeLeaveBalanceController" parent="controllerConfig" >
         <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
@@ -415,7 +416,7 @@
         <property name="formateFullNdFinalLetterService" ref="formateFullNdFinalLetterService1" />
         <property name="fullAndFinalSettlementValidator" ref="fullAndFinalSettlementValidator1" />
         <property name="displaymorNotesService" ref="displaymorNotesService1" />
-
+        <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
     </bean>
     <!--ExitInterview-->
     <bean id="exitInterviewMasterController1" class="com.bul.zydex.controller.exitInterview.ExitInterviewMasterController" parent="controllerConfig" >
@@ -1381,5 +1382,16 @@
     <bean id="payrollESICController1" class="com.bul.zydex.controller.Payroll.PayrollESICController" parent="controllerConfig">
         <property name="eSICMasterService" ref="eSICMasterService1" />
     </bean>
+    <bean id="OnCallController1" class="com.bul.zydex.controller.OnCall.OnCallController" parent="controllerConfig">
+        <property name="onCallService" ref="onCallService1" />
+        <property name="employeeMasterService" ref="employeeMasterService1" />
+        <property name="onCallValidator" ref="onCallValidator1" />
+        <property name="employeeShiftDataService" ref="employeeShiftDataService1" />
+        <property name="employeeDatetimeDataService" ref="employeeDatetimeDataService1" />
+        <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="emailTemplateService" ref="emailTemplateService1" />
+    </bean>
+    
 </beans>
  

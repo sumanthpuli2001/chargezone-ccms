@@ -55,6 +55,16 @@ return employeeSubTypeDAO.readByEmployeeTypeId(typeId);
     public List<?> readByName(String name) {
         return employeeSubTypeDAO.readByName(name);
     }
+
+    @Override
+    public List<?> readByID(int empsubtypid) {
+       return employeeSubTypeDAO.readByID(empsubtypid);
+    }
+
+    @Override
+    public List<?> readByEmployeeTypeIdANDSubTypeName(int emptypid, String employeeSubtype) {
+         return employeeSubTypeDAO.readByEmployeeTypeIdANDSubTypeName(emptypid,employeeSubtype);
+    }
     }
     
    

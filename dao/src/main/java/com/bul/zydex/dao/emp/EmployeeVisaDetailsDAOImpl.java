@@ -50,5 +50,15 @@ public class EmployeeVisaDetailsDAOImpl<T> extends GenericsDAOImpl<T> implements
         }
         return false;
     }
+
+    @Override
+    public List<?> readBySingleemployeeId(Integer id) {
+         String query = "";
+        query += "select a"
+                + " FROM EmployeeVisaDetails a"
+                + " where a.employeeMaster.id=" + id
+                + " GROUP BY a.employeeMaster.id";
+        return getHibernateTemplate().find(query);
+    }
     
 }

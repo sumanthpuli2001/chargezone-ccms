@@ -19,4 +19,6 @@ public interface EmployeeTypeService<T> extends GenericsService<T> {
 
     public List<?> readByName(String name);
 
+    public List<?> readByID(int emptypid);
+
 }

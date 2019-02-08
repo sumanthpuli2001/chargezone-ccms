@@ -115,4 +115,9 @@ public class UserRightMasterServiceImpl<T> extends GenericsServiceImpl<T> implem
         return userRightMasterDAO.readEmployeeIfHR(id);
     }
 
+    @Override
+    public List<?> readallHRList() {
+        return userRightMasterDAO.readallHRList();
+    }
+
 }

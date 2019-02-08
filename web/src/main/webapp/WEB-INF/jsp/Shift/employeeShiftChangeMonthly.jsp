@@ -84,6 +84,12 @@
                                             <input type="hidden" id="fileName" name="fileName" value=""/>
                                             <span>[ <a href="shiftRotationMaster.htm?act=readShiftUploadFile&amp;fileName=EmployeeMonthlyShiftData.xls">Sample Excel</a> ]</span>
                                         </div>
+                                        <div class="col-sm-6">
+                                        <div class="input-append date" id="datepicker1" data-date="02-2012" data-date-format="mm-yyyy">
+                                         <input  type="text" readonly="readonly" name="date1" >	  
+                                         <span class="add-on"><i class="icon-th"></i></span>	  
+                                        </div>	 
+                                        </div>	
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-6 col-sm-offset-5" id="uploadDiv" name="uploadDiv" style="display: none">
@@ -103,6 +109,20 @@
         </form:form>
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-
+    <script>
+$("#datepicker1").datepicker( {
+	    format: "mm-yyyy",
+	    viewMode: "months", 
+	    minViewMode: "months"
+	});
+        </script>
+        <script type="text/javascript">
+       
+        $('.datepicker1').datepicker({
+            format: "mm-yyyy",
+	    viewMode: "months", 
+	    minViewMode: "months"
+        });
+    </script>
 </html>
 

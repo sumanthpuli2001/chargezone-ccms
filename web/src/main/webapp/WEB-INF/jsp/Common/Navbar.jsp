@@ -137,7 +137,7 @@
                                 <c:if test="${sessionScope.userRight.leaveManagement}">
                                     <li><a href="leaveTypeMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Leave Type</a></li>
                                     <li><a href="shortLeave.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Short Leave Setting</a></li>
-                                    <li><a href="coffMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>C-Off Leave Setting</a></li>
+                                    <li><a href="coffMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Lieu Day Leave Setting</a></li>
                                     <li><a href="leaveTypeMaster.htm?act=leaveExcelUpload"><i class="fa fa-circle-o"></i>Leave Excel Upload</a></li>
                                     <li><a href="leaveEncashment.htm?act=approveNRejectResult"><i class="fa fa-circle-o"></i>Leave Encashment Request</a></li>
                                     <li><a href="leaveEmployeeDetail.htm?act=employeeLeaveApplication"><i class="fa fa-circle-o"></i>Employee Leave Application</a></li>
@@ -168,6 +168,8 @@
                                     <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplication"><i class="fa fa-circle-o"></i>Shift Application</a></li>
 
                                     <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff"><i class="fa fa-circle-o"></i>Woff Application</a></li>
+                                    <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff"><i class="fa fa-circle-o"></i>Lieu day</a></li>
+                                        <c:if test="${sessionScope.checkReportingManager}">
                                     <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff"><i class="fa fa-circle-o"></i>Coff Addition</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=searchSubmitOTRegularization"><i class="fa fa-circle-o"></i>OT Request</a></li>
                                         <%--<c:if test="${sessionScope.checkReportingManager}">--%>
@@ -178,17 +180,25 @@
                                     <li><a href="attendanceRegularizationMaster.htm?act=showOwnAttandance"><i class="fa fa-circle-o"></i>Show Attendance</a></li>
 
                                 </c:if>
+                                <%--</c:if>--%>
+                                    
                                 <c:if test="${sessionScope.userRight.attendanceReport}">
                                     <li><a href="attendanceRegularizationMaster.htm?act=powerAdminApprovalList"><i class="fa fa-circle-o"></i>View All AR</a></li>
+                                    </c:if>
+                                    <c:if test="${sessionScope.userRight.hr}">
+                                    
+                                     <li><a href="attendanceRegularizationMaster.htm?act=allEmployeeAttendanceView"><i class="fa fa-circle-o"></i>All Employee Attendance View</a></li>
                                     </c:if>
                                     <c:if test="${sessionScope.isReportingManagerDataExist}">
 
                                     <li><a href="attendanceRegularizationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i>AR Subordinates Request</a></li>
+                                    <!--<li><a href="attendanceRegularizationMaster.htm?act=allEmployeeAttendanceView"><i class="fa fa-circle-o"></i>All Employee Attendance View</a></li>-->
                                     <li><a href="attendanceRegularizationMaster.htm?act=subOrdinateAttendanceView"><i class="fa fa-circle-o"></i>Subordinates Attendance View</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> W-off Subordinates Request</a></li>
-                                    <li><a href="shiftRotationMaster.htm?act=approvalSubmitcoff"><i class="fa fa-circle-o"></i> C-off Subordinates Request</a></li>
+                                    <!--<li><a href="shiftRotationMaster.htm?act=approvalSubmitcoff"><i class="fa fa-circle-o"></i> C-off Subordinates Request</a></li>-->
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmitOTregularization"><i class="fa fa-circle-o"></i> OT Subordinates Request</a></li>
+                                    <li><a href="shiftRotationMaster.htm?act=approvalSubmitcoff"><i class="fa fa-circle-o"></i> Lieu day Subordinates Request</a></li>
                                     <!--<li><a href="attendanceRegularizationMaster.htm?act=approvedList"><i class="fa fa-circle-o"></i>Approved Request</a></li>-->
                                 </c:if>
                                 <c:if test="${sessionScope.userRight.departmentWiseAttendance}">
@@ -196,8 +206,10 @@
 
                                 </c:if>
                                 <li><a href="employeeDatetimeData.htm?act=searchOddPunch"><i class="fa fa-circle-o"></i>Odd Punch Report</a></li>
+                                <li><a href="oncall.htm?act=view"><i class="fa fa-circle-o"></i>On Call Support Request</a></li>
                             </ul>
                         </li>
+                        </c:if>
                         <c:if test="${sessionScope.userRight.hr or sessionScope.userRight.shiftManagement or sessionScope.userRight.temporaryShiftAssign}">
                             <li class="treeview" style="color: #585858;">
                                 <a href="#">
@@ -1045,7 +1057,7 @@
                                 <li><a href="certificateTemplate.htm?act=searchEmployeeDetail&search=none"><i class="fa fa-circle-o"></i> Assign Certificate</a></li>
                             </ul>
                         </li>
-
+                        
                     </ul>
                 </li>
             </c:if>

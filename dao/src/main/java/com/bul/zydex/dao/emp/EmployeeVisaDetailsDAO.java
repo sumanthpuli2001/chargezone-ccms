@@ -18,4 +18,6 @@ public interface EmployeeVisaDetailsDAO<T> extends GenericsDAO<T> {
      public void deleteByemployeeId(Integer id);
 
     public boolean employeeVisadetailsexist(Integer id);
+
+    public List<?> readBySingleemployeeId(Integer id);
 }

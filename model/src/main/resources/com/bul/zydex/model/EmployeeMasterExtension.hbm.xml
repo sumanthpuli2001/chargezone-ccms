@@ -115,5 +115,24 @@
         <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
             <column name="employee_id" />
         </many-to-one>
+        <property name="nameStatus" type="java.lang.Boolean">
+            <column name="name_status" >
+                <comment>gender 0=Male,1=female</comment>
+            </column>
+        </property>
+        <property name="SpouseGender" type="java.lang.Boolean">
+            <column name="spouse_gender" >
+                <comment>gender 0=Male,1=female</comment>
+            </column>
+        </property>
+         <property name="documentIdNo" type="string">
+            <column name="officail_documentno" />
+        </property>
+         <property name="subteamTransferDate" type="string">
+            <column name="subteamTransfer_date" />
+        </property>
+         <property name="officialContactNumber" type="string">
+            <column name="official_contact" />
+        </property>
     </class>
 </hibernate-mapping>

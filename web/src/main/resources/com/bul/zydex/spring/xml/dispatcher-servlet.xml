@@ -231,6 +231,7 @@
                 <prop key="projectManagement.htm">projectManagementController1</prop>
                 <prop key="dynamicApprovalSetting.htm">dynamicApprovalSettingController1</prop>
                 <prop key="payrollESIC.htm">payrollESICController1</prop>
+                <prop key="oncall.htm">OnCallController1</prop>
             </props>
         </property>
         <property name="order" value="0" />     

@@ -82,4 +82,5 @@ public interface ShiftGenerateMonthlyScheduleService<T> extends GenericsService<
     public List readNoOfMonthsSubmit(int id2, int year, int monthValue);
 
     public List readRotationDate(int id3);
+    public List<?> readByEmpMonthYear(Integer id);
 }

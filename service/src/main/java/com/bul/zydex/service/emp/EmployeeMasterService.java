@@ -135,6 +135,8 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List<?> readEmpUserIdWise(T object);
 
     public List<?> readAllSubordinate(T object);
+    
+    public List<?> readAllEmployee(T object);
 
     public List<?> readForSendMailToAll(T object);
 
@@ -193,6 +195,10 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public boolean isExistUSername(String employeeID);
 
     public boolean isExistUnderGraudity(String joinDate, String currentDate);
+ 
+    public List<?> readEmployeeDataForexportToExcelFlyDoc(final String searchEmployeeString);
+
+    public List readByUserId(Integer id);
 
     public List<?> readEmployeeAll();
 

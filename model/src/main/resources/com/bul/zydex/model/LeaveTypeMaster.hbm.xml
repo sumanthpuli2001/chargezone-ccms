@@ -26,14 +26,17 @@
         <property name="sandwichLeave" type="boolean">
             <column name="sandwich_leave" not-null="true" />
         </property>
-         <property name="employeeType" type="string">
+        <property name="employeeType" type="string">
             <column name="employee_type"  />
             <!--<column name="employee_type" not-null="true" />-->
         </property>
-          <many-to-one name="departmentMaster" class="com.bul.zydex.model.DepartmentMaster" fetch="select">
+        <many-to-one name="departmentMaster" class="com.bul.zydex.model.DepartmentMaster" fetch="select">
             <column name="department_id" not-null="true" />
         </many-to-one>
-<!--        <set name="leaveEncashments" inverse="true">
+        <property name="useAsSickLeave" type="boolean">
+            <column name="use_as_sick_leave"/>
+        </property>
+        <!--        <set name="leaveEncashments" inverse="true">
             <key>
                 <column name="leave_type_master_id" not-null="true" />
             </key>

@@ -18,4 +18,6 @@ public interface ZydexLocationMasterDAO<T> extends GenericsDAO<T> {
     
     public List<?> readByName(String zydexLocation);
 
+    public List<?> readByID(int empzyxlocation);
+
 }

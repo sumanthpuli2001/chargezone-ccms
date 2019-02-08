@@ -36,4 +36,9 @@ public class ZydexLocationMasterServiceImpl<T> extends GenericsServiceImpl<T> im
         return zydexLocationMasterDAO.readByName(zydexLocation);
     }
 
+    @Override
+    public List<?> readByID(int empzyxlocation) {
+        return zydexLocationMasterDAO.readByID(empzyxlocation);
+    }
+
 }

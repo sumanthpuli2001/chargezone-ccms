@@ -1,6 +1,8 @@
 package com.bul.zydex.service.shift;
 
 import com.bul.zydex.service.GenericsService;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public interface EmployeeDatetimeDataService<T> extends GenericsService<T> {
@@ -35,6 +37,12 @@ public interface EmployeeDatetimeDataService<T> extends GenericsService<T> {
     
     public List<?> readOddPunchedEmployeeData(String date);
 
+    public List<?> readEmployeePunchData(String empId);
+
+    public String getShiftsTime(String empId);
+
+    public String getEmailAddress(String empId);
+    
     public List readAllPuchDataDateWise(String tdate, int id);
    
 }

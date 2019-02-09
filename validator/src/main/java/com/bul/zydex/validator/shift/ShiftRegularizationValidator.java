@@ -29,6 +29,10 @@ public class ShiftRegularizationValidator implements Validator{
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "rotationDate",
                 "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "shiftId",
+//                "field.error1", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "newShift",
+//                "field.error1", "None");
     }
     
 }

@@ -250,6 +250,38 @@
                                         </div>
 
                                     </c:if>
+                                    <c:if test="${status eq 3}">
+                                        <div class="box box-info collapsed-box">
+                                            <div class="box-header">
+                                                <h3 class="box-title">Manager Remarks:</h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4()"><i class="fa fa-plus" id="minusId4"></i></button>
+                                                </div>
+                                            </div><!-- /.box-header -->
+                                            <div class="box-body no-padding">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Manager Remarks:</label>
+                                                            <div class="col-sm-7">
+                                                                <textarea class="form-control" rows="6" id="remark" name="remark" disabled="true">${remark}</textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- /.col -->
+                                                </div><!-- /.row -->
+                                            </div><!-- /.box-body -->
+                                        </div>
+                                        <div class="row">
+<!--                                            <div class="col-sm-6">
+
+                                                <button type="submit" class="btn btn-primary " data-original-title="" title="" value="Submit" name="btnSubmit" id="btnSubmit" style="width: 100px;text-align:center;">SUBMIT</button>
+                                            </div>
+                                            <div class="col-sm-6 ">
+                                                <button type="submit" class="btn btn-warning" data-original-title="" title="" value="Withdraw" name="btnSubmit" id="btnSubmit" style="width: 100px;text-align:center;float: right;">WITHDRAW</button>
+                                            </div>
+                                        </div>-->
+
+                                    </c:if>
                                     <c:if test="${status eq 0}">
                                         <!--                                                                                    <div class="col-sm-6">
 

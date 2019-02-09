@@ -29,16 +29,16 @@
         function rejectClick() {
             var id = document.getElementById("id").value;
 //            alert(id);
-//            var remark = document.getElementById("remark").value;
+            var remark = document.getElementById("remark").value;
 //              alert(remark);
-            window.location = 'shiftRotationMaster.htm?act=rejectSubmitByAdmin&id=' + id;
+            window.location = 'shiftRotationMaster.htm?act=rejectSubmitByAdmin&id=' + id+'&remark='+remark;
         }
     </script>
     <script>
         function reworkClick() {
             var id = document.getElementById("id").value;
-//            var remark = document.getElementById("remark").value;
-            window.location = 'shiftRotationMaster.htm?act=reworkSubmitByAdmin&id=' + id;
+            var remark = document.getElementById("remark").value;
+            window.location = 'shiftRotationMaster.htm?act=reworkSubmitByAdmin&id=' + id+'&remark='+remark;
         }
     </script>
     <script>
@@ -194,7 +194,7 @@
                                                             <input type="hidden" name="preciousShiftId" id="preciousShiftId"/>
                                                             <div class="col-sm-6" >
 
-                                                                <label>Shift Name:</label>
+                                                                <label>Shift Rotation Name:</label>
 
 
                                                                 <input type="Text" class="form-control" value="${shiftNAme}" readonly>
@@ -228,7 +228,7 @@
                                                 </div><!-- /.row -->
                                             </div><!-- /.box-body -->
                                         </div>
-                                    <c:if test="${status eq 3}">
+                                    <%--<c:if test="${status eq 3}">--%>
                                         <div class="box box-info collapsed-box">
                                             <div class="box-header">
                                                 <h3 class="box-title">Manager Remarks:</h3>
@@ -242,14 +242,14 @@
                                                         <div class="form-group">
                                                             <label class="col-sm-3 control-label">Manager Remark:</label>
                                                             <div class="col-sm-7">
-                                                                <textarea class="form-control" rows="6" id="remark" name="remark" placeholder="Enter Remark" disabled="true">${remarkNmame}</textarea>
+                                                                <textarea class="form-control" rows="6" id="remark" name="remark" placeholder="Enter Remark">${remarkNmame}</textarea>
                                                             </div>
                                                         </div>
                                                     </div><!-- /.col -->
                                                 </div><!-- /.row -->
                                             </div><!-- /.box-body -->
                                         </div>
-                                    </c:if>
+                                    <%--</c:if>--%>
                                     <!--Reason In Detail completes Here-->
                                     <c:if test="${status eq 0}">
                                         <!--                                        <div class="box box-info collapsed-box">

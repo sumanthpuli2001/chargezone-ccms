@@ -67,4 +67,14 @@ public class RotationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements Rota
 
     }
 
+    @Override
+    public List<?> readForShiftValue(int shiftId1) {
+        String query = "";
+        query += " Select a.id, a.shiftName "
+                + "From ShiftMaster a "
+                + " Where a.id =" + shiftId1;
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

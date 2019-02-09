@@ -27,7 +27,19 @@ import org.springframework.mail.javamail.MimeMessageHelper;
  * @author Jayesh
  */
 public class SendMail {
+    List toS;
+    String toList = "";
+    public List getToS() {
+        return toS;
+    }
 
+    public void setToS(List toS) {
+        this.toS = toS;
+        Iterator itr = toS.iterator();
+        while(itr.hasNext()){
+            toList +=","+itr.next();
+        }
+    }
     private JavaMailSender mailSender;
 
     public void sendMail(String from, String to, String subject, String msg) throws MessagingException {
@@ -39,11 +51,17 @@ public class SendMail {
 //        if(to.contains("spcls.co.in")){
 //        helper.setFrom(from);
         helper.setFrom("myspc@spcls.co.in");
-        helper.setTo(to);
+        if(toList!=""){
+            helper.setTo(toList.substring(1));
+        }
+        else{
+            helper.setTo(to);
+        }
         helper.setSubject(subject);
         helper.setText(msg, true);
 
         try {
+            
             mailSender.send(mimeMessage);
 
         } catch (Exception e) {

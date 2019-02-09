@@ -1012,6 +1012,7 @@
                         <li><a href="designationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Designation List</a></li>
                         <li><a href="levelMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Level Master</a></li>
                         <li><a href="locationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Location Master</a></li>
+                        <li><a href="clientDetailsMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Client Master</a></li>
                         <li><a href="holidayMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Holiday Master</a></li>
                         <li><a href="holidayMaster.htm?act=holidayExcelUpload"><i class="fa fa-circle-o"></i>Holiday Excel Import</a></li>
                         <li><a href="policyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Allowance</a></li>

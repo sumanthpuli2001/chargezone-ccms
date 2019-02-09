@@ -6,7 +6,9 @@
 package com.bul.zydex.controller.shift;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.ShiftMaster;
+import com.bul.zydex.service.shift.EmployeeDatetimeDataService;
 import com.bul.zydex.service.shift.ShiftMasterService;
 import org.springframework.validation.Validator;
 
@@ -17,6 +19,7 @@ import org.springframework.validation.Validator;
 public class ShiftMasterAbstract extends CustomAbstract {
 
     protected ShiftMasterService<ShiftMaster> shiftMasterService;
+    protected EmployeeDatetimeDataService<EmployeeDatetimeData> employeeDatetimeDataService;
     protected Validator shiftMasterValidator;
 
     public ShiftMasterService<ShiftMaster> getShiftMasterService() {
@@ -34,5 +37,15 @@ public class ShiftMasterAbstract extends CustomAbstract {
     public void setShiftMasterValidator(Validator shiftMasterValidator) {
         this.shiftMasterValidator = shiftMasterValidator;
     }
+
+    public EmployeeDatetimeDataService<EmployeeDatetimeData> getEmployeeDatetimeDataService() {
+        return employeeDatetimeDataService;
+    }
+
+    public void setEmployeeDatetimeDataService(EmployeeDatetimeDataService<EmployeeDatetimeData> employeeDatetimeDataService) {
+        this.employeeDatetimeDataService = employeeDatetimeDataService;
+    }
+    
+    
 
 }

@@ -6,6 +6,7 @@
 package com.bul.zydex.dao.shift;
 
 import com.bul.zydex.dao.GenericsDAO;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,8 +44,12 @@ public interface EmployeeDatetimeDataDAO<T> extends GenericsDAO<T> {
     public List<?> readEmployeeByDatevise(String date);
 
     public List<?> readOddPunchedEmployeeData(String date);
-
+    
+    public List<?> readEmployeePunchData(String empId);
+    
+    public String getShiftsTime(String empId);
+    
+    public String getEmailAddress(String empId);
+    
     public List readAllPuchDataDateWise(String tdate, int id);
-
-
 }

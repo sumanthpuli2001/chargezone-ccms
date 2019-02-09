@@ -7,6 +7,8 @@ package com.bul.zydex.dao.attendanceRegularization;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.ClientDetailsMaster;
+import com.bul.zydex.model.LocationMaster;
+import java.util.List;
 
 /**
  *
@@ -17,6 +19,17 @@ public class ClientDetailsMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     @Override
     protected Class getDomainClass() {
           return ClientDetailsMaster.class;
+    }
+
+    @Override
+    public boolean isExist(T object) {
+        boolean flag = false;
+        ClientDetailsMaster clientDetailsMaster = (ClientDetailsMaster) object;
+        List<?> list = getHibernateTemplate().find("from ClientDetailsMaster  where clientName ='" + clientDetailsMaster.getClientName() + "'");
+        if (list.isEmpty()) {
+            flag = true;
+        }
+        return flag;
     }
     
 }

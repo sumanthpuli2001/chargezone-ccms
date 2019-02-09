@@ -69,19 +69,19 @@
         function selectShiftChange(date) {
 //----------------------------------------//
            
-            var shiftId = document.getElementById("shiftId").value;
+//            var shiftId = document.getElementById("shiftId").value;
            
             $("#newShift option").remove();
             $.ajax({
 //                 date: date, rotationId: shiftId,
                 type: "POST",
-                data: {"date": date, 'rotationId': shiftId},
+                data: {"date": date, 'shiftId': " "},
                 url: "shiftRotationMaster.htm?act=readRotationAjaxShiftCHange",
                 success: function (content)
                 {
                     var obj = JSON.parse(content);
                     var count = Object.keys(obj['shiftAjaxMap']).length;
-                    var data = "<option>-- Select --</option>";
+                    var data = "";
                     var desigJSON = obj['shiftAjaxMap'];
                     var desigJSONKey = Object.keys(obj['shiftAjaxMap']);
                     for (var i = 0; i < count; i++) {
@@ -95,7 +95,10 @@
                         }
 //                        data += "<option value=" + desigJSONKey[i] + " >" + desigJSON[desigJSONKey[i]] + "</option>";
                     }
+//                    console.log(obj)
+//                    var data = obj['firstShiftId'];
                     $(data).appendTo('#newShift');
+//                        $('#newShift').val(data);
                  
                 }
             });
@@ -349,23 +352,6 @@
 
                                                             </select>
                                                         </div>
-                                                        <div class="col-sm-6" >
-                                                            <label>Shift Rotation Name:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                            <select name="shiftId" id="shiftId" class="form-control" onchange="selectShift(this.value)">
-                                                                <option value="" label="-- Select --" ></option>
-                                                                <c:forEach var="shift1" items="${rotationMap}">
-                                                                    <c:if test="${shift1.key eq shiftHoursId}">
-                                                                        <option value="${shift1.key}" selected="">${shift1.value}</option>
-                                                                    </c:if>
-                                                                    <c:if test="${shift1.key ne shiftHoursId}">
-                                                                        <option value="${shift1.key}" >${shift1.value}</option>
-                                                                    </c:if>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6" id="shiftRotationDateDiv">
                                                             <label>Shift Rotation Date:<span style="color: red;font-size: 12px;">*</span></label>
 
@@ -376,13 +362,30 @@
                                                                 </div>
                                                             </div>
                                                             <input type="hidden" name="preciousShiftId" id="preciousShiftId"/>
+                                                        
+<!--                                                        <div class="col-sm-6" >
+                                                            <label>Shift Rotation Name:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                            <select name="shiftName1" id="shiftName1" value="{shiftList}" class="form-control" onclick="rotationNameOFShift(this.value)" >
+                                                                <option value="" label="-- Select --" ></option>
+                                                            </select>
+                                                        </div>-->
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6" id="shiftMasterId">
                                                             <label>Shift Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <select name="newShift" id="newShift" class="form-control">
-
-                                                            </select>
-
+                                                            <select readonly="true" name="newShift" id="newShift" class="form-control"></select>
                                                         </div> 
+                                                        <div class="col-sm-6" >
+                                                            <label>Shift Rotation Name:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                            <select  name="shiftId" id="shiftId"  class="form-control">
+                                                                <option value="" label="-- Select --" ><option>
+                                                                <c:forEach var="shift1" items="${shift}">
+                                                                        <option value="${shift1.key}" >${shift1.value}</option>
+                                                                </c:forEach>
+                                                            <select>
+                                                        </div>
                                                     </div>
 
 
@@ -435,8 +438,9 @@
             autoclose: 1,
             todayHighlight: 1,
             startView: 2,
-            forceParse: 0,
-            showMeridian: 1,
+            minView: 2,
+//            maxView: 1,
+            forceParse: 0
         });
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>

@@ -20,4 +20,6 @@ public interface RotationMasterService<T> extends GenericsService<T> {
     
     public List<?> isRotationExist(T object);
 
+    public List<?> readForShiftValue(int shiftId1);
+
 }

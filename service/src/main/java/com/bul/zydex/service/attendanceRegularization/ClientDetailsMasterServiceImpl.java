@@ -24,5 +24,10 @@ public class ClientDetailsMasterServiceImpl<T> extends GenericsServiceImpl<T> im
         this.clientDetailsMasterDAO = clientDetailsMasterDAO;
         setGenericsDAO(clientDetailsMasterDAO);
     }
+
+    @Override
+    public boolean isExist(T object) {
+        return clientDetailsMasterDAO.isExist(object);
+    }
     
 }

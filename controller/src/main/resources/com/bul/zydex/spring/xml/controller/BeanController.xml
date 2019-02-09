@@ -177,6 +177,9 @@
     <bean id="timeAttendanceMasterController1" class="com.bul.zydex.controller.shift.TimeAttendanceMasterController" parent="controllerConfig" >
         <property name="timeAttendanceMasterService" ref="timeAttendanceMasterService1" />
     </bean>
+    <bean id="clientDetailsMasterController1" class="com.bul.zydex.controller.attendanceRegularization.ClientDetailsMasterController" parent="controllerConfig" >
+        <property name="clientDetailsMasterService" ref="clientDetailsMasterService1" />
+    </bean>
     <bean id="shiftRotationMasterController1" class="com.bul.zydex.controller.shift.ShiftRotationMasterController" parent="controllerConfig" >
         <property name="shiftRotationMasterService" ref="shiftRotationMasterService1" />
         <property name="shiftRotationMasterValidator" ref="shiftRotationMasterValidator1" />

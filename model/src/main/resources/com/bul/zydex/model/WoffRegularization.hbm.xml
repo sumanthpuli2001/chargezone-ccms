@@ -21,8 +21,9 @@
         </many-to-one>
         
        
-        
-      
+        <property name="reasonForWoff" type="string">
+            <column name="reason_for_woff" />
+        </property>
         
         <property name="status" type="int">
             <column name="status" />

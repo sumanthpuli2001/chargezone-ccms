@@ -30,6 +30,7 @@ import com.bul.zydex.model.ShiftRotationInfo;
 import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.TempShiftAssignMaster;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
+import com.bul.zydex.model.TimeStamp;
 import com.bul.zydex.model.TravelRequestMaster;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
@@ -44,10 +45,18 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.*;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -519,6 +528,148 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             shiftGenerateMonthlyScheduleService.create(shiftGenerateMonthlySchedule);
         } catch (Exception e) {
             System.out.println("Exception" + e);
+        }
+    }
+
+    private synchronized void checkTimeEntryDaily() throws Exception {
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
+        // List<?> list = employeeDatetimeDataService.readEmployeeInParticularTime();
+        System.out.println("Started Service Checking %^&%^&%^&$%");
+        List<?> empList = employeeMasterService.read();
+//        List<EmployeeMaster> empList = new ArrayList<EmployeeMaster>();
+//        employeeMaster.setId(1601);
+//        employeeMaster.setEmployeeId("1002");
+//        empList.add(employeeMaster);
+        for (Object zzz : empList) {
+            try {
+                employeeMaster = (EmployeeMaster) zzz;
+                System.out.println("Processed " + employeeMaster.getId());
+//                if(employeeMaster.getId()==1601){
+                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                LocalDateTime ldt = LocalDateTime.now();
+                String empId = employeeMaster.getId().toString();
+                String employeeCompanyId = employeeMaster.getEmployeeId();
+                String data = empId + ":" + ldt.getYear() + ":" + ldt.getMonthValue() + ":" + ldt.getDayOfMonth();
+                String shiftList = employeeDatetimeDataService.getShiftsTime(data);
+                String emailList = employeeDatetimeDataService.getEmailAddress(empId);
+//                String shiftList = "19:00 & 06:00";
+                List<?> punchList;
+                if (Integer.parseInt(shiftList.split("&")[0].split(":")[0].trim()) > 12 && Integer.parseInt(shiftList.split("&")[1].split(":")[0].trim()) < 12) {
+                    punchList = employeeDatetimeDataService.readEmployeePunchData(empId + "&" + ldt.minusDays(1).getDayOfMonth() + "/" + ldt.minusDays(1).getMonthValue() + "/" + ldt.minusDays(1).getYear() + " " + (Integer.parseInt(shiftList.split("&")[0].split(":")[0].trim()) - 2) + ":" + Integer.parseInt(shiftList.split("&")[0].split(":")[1].trim()));
+                } else {
+                    punchList = employeeDatetimeDataService.readEmployeePunchData(empId + "&" + ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "/" + ldt.getYear() + " " + (Integer.parseInt(shiftList.split("&")[0].split(":")[0].trim()) - 2) + ":" + Integer.parseInt(shiftList.split("&")[0].split(":")[1].trim()));
+                }
+                Map<Integer, String> sendMsgMap = new HashMap<>();
+                for (int i = 1; i < punchList.size(); i += 2) {
+                    if (i + 1 == punchList.size()) {
+                        TimeStamp tsOut = new TimeStamp();
+                        tsOut.setTimeStamp((String) punchList.get(i));
+                        TimeStamp endTime = new TimeStamp();
+                        tsOut.setShifts(shiftList.split("&")[0], shiftList.split("&")[1]);
+                        sendMsgMap.put(tsOut.getHours(), tsOut.checkShiftBound());
+                    } else {
+                        TimeStamp tsOut = new TimeStamp();
+                        tsOut.setTimeStamp((String) punchList.get(i));
+                        TimeStamp tsIn = new TimeStamp();
+                        tsIn.setTimeStamp((String) punchList.get(i + 1));
+                        if (tsIn.getMinDiff(tsOut) > 60) {
+                            sendMsgMap.put(tsIn.getHours(), tsIn.getErrorText());
+                        }
+                    }
+
+                }
+                Iterator itr = sendMsgMap.keySet().iterator();
+                String sendMailMsg = "";
+                while (itr.hasNext()) {
+                    Integer a = (Integer) itr.next();
+                    if (a > ldt.getHour() - 1) {
+                        sendMailMsg += sendMsgMap.get(a).trim() + "\n";
+                    }
+                }
+//               if(sendMailMsg!=""){
+//                   TriggerMail trm = new TriggerMail();
+//                   trm.setEmail(emailList);
+//                   trm.setMailBody("Employee "+employeeCompanyId+" is "+sendMailMsg);
+//                   trm.sendMail();
+//               }
+                if (sendMailMsg != "") {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    //EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    emailTemplate = emailTemplateService.readById(169);
+                    String To = emailList;
+                    String from = "myspc@spcls.co.in";
+                    String Subject = emailTemplate.getSubject();
+                    // Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{data\\}", "Employee " + employeeCompanyId + " is " + sendMailMsg);
+//                   msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+//                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterHr.getEmployeeName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                }
+
+//            }
+            } catch (Exception e) {
+                System.out.println("Exception" + e.getMessage());
+            }
+        }
+    }
+
+    private synchronized void checkOddPunch() throws Exception {
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
+        System.out.println("Started Service Checking %^&%^&%^&$%");
+        List<?> empList = employeeMasterService.read();
+//        List<EmployeeMaster> empList = new ArrayList<EmployeeMaster>();
+//        employeeMaster.setId(1601);
+//        employeeMaster.setEmployeeId("1002");
+//        empList.add(employeeMaster);
+        for (Object zzz : empList) {
+            try {
+                employeeMaster = (EmployeeMaster) zzz;
+                System.out.println("Processed " + employeeMaster.getId());
+//                if (employeeMaster.getId() == 1601) {
+                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//                    LocalDateTime ldt = LocalDateTime.now();
+                    LocalDateTime ldt = LocalDateTime.now().minus(1, ChronoUnit.DAYS);
+                    String empId = employeeMaster.getId().toString();
+                    String employeeCompanyId = employeeMaster.getEmployeeId();
+                    String data = empId + ":" + ldt.getYear() + ":" + ldt.getMonthValue() + ":" + ldt.getDayOfMonth();
+                    String shiftList = employeeDatetimeDataService.getShiftsTime(data);
+                    String emailList = employeeDatetimeDataService.getEmailAddress(empId);
+//                String shiftList = "19:00 & 06:00";
+                    List<?> punchList;
+                    if (Integer.parseInt(shiftList.split("&")[0].split(":")[0].trim()) > 12 && Integer.parseInt(shiftList.split("&")[1].split(":")[0].trim()) < 12) {
+                        punchList = employeeDatetimeDataService.readEmployeePunchData(empId + "&" + ldt.minusDays(1).getDayOfMonth() + "/" + ldt.minusDays(1).getMonthValue() + "/" + ldt.minusDays(1).getYear() + " " + (Integer.parseInt(shiftList.split("&")[0].split(":")[0].trim()) - 2) + ":" + Integer.parseInt(shiftList.split("&")[0].split(":")[1].trim()));
+                    } else {
+                        punchList = employeeDatetimeDataService.readEmployeePunchData(empId + "&" + ldt.getDayOfMonth() + "/" + ldt.getMonthValue() + "/" + ldt.getYear() + " " + (Integer.parseInt(shiftList.split("&")[0].split(":")[0].trim()) - 2) + ":" + Integer.parseInt(shiftList.split("&")[0].split(":")[1].trim()));
+                    }
+                    String sendMailMsg = "";
+                    if (punchList.size() % 2 == 0) {
+                        System.out.println("The Employee is having Even punch");
+                    } else {
+                        for (Object punchList1 : punchList) {
+                            sendMailMsg += "<li>" + punchList1 + "</li>";
+                        }
+                    }
+                    if (sendMailMsg != "") {
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                        emailTemplate = emailTemplateService.readById(170);
+                        String To = emailList;
+                        String from = "myspc@spcls.co.in";
+                        String Subject = emailTemplate.getSubject();
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{data\\}", "Employee " + employeeCompanyId + " is having Odd punch today" + "\n");
+                        msg = msg.replaceAll("\\{data1\\}", "The Punch List is");
+                        msg = msg.replaceAll("\\{punchlist\\}", sendMailMsg);
+                        sendMail.sendMail(from, To, Subject, msg);
+                    }
+//                }
+            } catch (Exception e) {
+                System.out.println("Exception" + e.getMessage());
+            }
         }
     }
 
@@ -16797,6 +16948,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         String year1 = endDateSplited[2];
         String day = endDateSplited[0];
         String shiftId = "";
+        String shiftValue = "";
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
         shiftGenerateMonthlySchedule.setEmployeeMaster(employee);
         shiftGenerateMonthlySchedule.setShiftMonth(month1);
@@ -16810,14 +16962,37 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         } catch (Exception e) {
             e.printStackTrace();
         }
+//        List empShiftValue = shiftGenerateMonthlyScheduleService.readDayShiftValue(shiftGenerateMonthlySchedule, Integer.parseInt(day));
+//        try {
+//            if (!empShiftList.isEmpty()) {
+//                shiftValue = "" + empShiftValue.get(0);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 //        String userId = request.getParameter("userId");
 //        shiftAjaxmap(request, rotationId);
+//        Map<Integer, String> shiftMap = new HashMap();
+//        List<?> list = null;
+//        if (!"".equals(rotationId)) {
+//
+//            int rotationId1 = Integer.parseInt(rotationId);
+//            list = rotationMasterService.readForShift(rotationId1);
+//            Iterator it = list.iterator();
+//            while (it.hasNext()) {
+//                Object next[] = (Object[]) it.next();
+//                int newShiftId = (int) next[0];
+//                String shiftName = (String) next[1];
+//                shiftMap.put(newShiftId, shiftName);
+//            }
+//        }
+        
         Map<Integer, String> shiftMap = new HashMap();
         List<?> list = null;
-        if (!"".equals(rotationId)) {
+        if (!"".equals(shiftId)) {
 
-            int rotationId1 = Integer.parseInt(rotationId);
-            list = rotationMasterService.readForShift(rotationId1);
+            int shiftId1 = Integer.parseInt(shiftId);
+            list = rotationMasterService.readForShiftValue(shiftId1);
             Iterator it = list.iterator();
             while (it.hasNext()) {
                 Object next[] = (Object[]) it.next();
@@ -16836,7 +17011,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         JSONObject json = new JSONObject();
         json.put("shiftAjaxMap", shiftMap);
         json.put("firstShiftId", shiftId);
-        json.put("firstShiftId2", shiftId);
+//        json.put("firstShiftId2", shiftId);
         PrintWriter out = response.getWriter();
         out.println(json.toString());
 //        mv.setViewName("Shift/ShiftRotationAjax");
@@ -16852,6 +17027,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         UserMaster userMaster = new UserMaster();
         ShiftMaster userMasterPrevious = new ShiftMaster();
         ShiftMaster userMasterCurrent = new ShiftMaster();
+        String rotationDate = request.getParameter("rotationDate");
         int reportingId = 0;
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
         int userMasterId = user.getId();
@@ -16861,15 +17037,15 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         String newShift = request.getParameter("newShift");
 
         try {
-            String preciousShiftId = request.getParameter("preciousShiftId");
-            userMasterPrevious.setId(Integer.parseInt(preciousShiftId));
+            String newShiftId = request.getParameter("shiftId");
+            userMasterCurrent.setId(Integer.parseInt(newShiftId));
 
         } catch (Exception e) {
             userMasterPrevious.setId(1);
 
         }
 
-        userMasterCurrent.setId(Integer.parseInt(newShift));
+        userMasterPrevious.setId(Integer.parseInt(newShift));
 //        String firstShiftId2 = request.getParameter("firstShiftIdID");
 //        String rotationId = request.getParameter("rotationId");
 //        String shiftMasterId = request.getParameter("shiftMasterId");
@@ -16897,7 +17073,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             }
             request.setAttribute("employeeMaster", empDetailList.get(0));
             request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
-
+            request.setAttribute("rotationDate", rotationDate);
+//            request.setAttribute("comment", comment);
             mv.getModelMap().put("shiftRegularization", shiftRegularization);
             mv.setViewName("Shift/ShiftApplicationFormForEmployee");
         } else {
@@ -16912,8 +17089,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
-
-            mv.setViewName("redirect:shiftRotationMaster.htm?act=searchSubmitShiftApplication");
+            mv = searchSubmitShiftApplication(request, response);
             try {
 //                mailSendArApply(request);
                 EmailTemplate emailTemplate = new EmailTemplate();
@@ -16930,6 +17106,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
                 String msg = emailTemplate.getBodytext();
                 msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                msg = msg.replaceAll("\\{rotationdate\\}", rotationDate);
                 msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                 sendMail.sendMail(from, To, Subject, msg);
@@ -17167,7 +17344,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         ShiftRegularization shiftRegularization = new ShiftRegularization();
         String id = "" + request.getParameter("id");
 //        String remark = "" + request.getParameter("remark");
-        String remark = "";
+        String remark = request.getParameter("remark");
         shiftRegularization = shiftRegularizationService.readById(Integer.parseInt(id));
         shiftRegularization.setStatus(1);
         shiftRegularization.setApprovalComment(remark);
@@ -17302,7 +17479,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         ShiftRegularization shiftRegularization = new ShiftRegularization();
         String id = request.getParameter("id");
-        String remark = "";
+        String remark = request.getParameter("remark");
         shiftRegularization = shiftRegularizationService.readById(Integer.parseInt(id));
         shiftRegularization.setStatus(3);
         shiftRegularization.setApprovalComment(remark);
@@ -17356,7 +17533,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         ModelAndView mv = new ModelAndView();
         String id = request.getParameter("id");
         ShiftRegularization shiftRegularization = new ShiftRegularization();
-        String remark = "";
+        String remark = request.getParameter("remark");
         shiftRegularization = shiftRegularizationService.readById(Integer.parseInt(id));
         shiftRegularization.setStatus(7);
         shiftRegularization.setApprovalComment(remark);
@@ -17471,28 +17648,28 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         mv.setViewName("Shift/EditEmployeeDayWiseShiftWoff");
         return mv;
     }
-
+    
     public ModelAndView submitEmployeeShiftAssignWoff(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+        LocalDateTime ldt=LocalDateTime.now();
         String id1 = request.getParameter("id");
         String dayNo = request.getParameter("dayNo");
         String rotationdate = request.getParameter("rotationdate");
+        String reasonForWoff = request.getParameter("reasonForWoff");
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
         WoffRegularization woffRegularization = new WoffRegularization();
         EmployeeMaster employeeMaster = new EmployeeMaster();
-
         BindException errors = new BindException(shiftGenerateMonthlySchedule, "shiftGenerateMonthlySchedule");
         bind(request, shiftGenerateMonthlySchedule);
         int id = shiftGenerateMonthlySchedule.getId();
         int ChangeDayShiftId = 0;
         ShiftGenerateMonthlySchedule monthlySchedule = shiftGenerateMonthlyScheduleService.readById(id);
-        SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("d/M/yyyy HH:mm");
         String currentDate = dateFormat1.format(new Date());
-
-//        woffRegularization.setStatus(id);
         HttpSession session = request.getSession();
         EmployeeMaster employee = (EmployeeMaster) session.getAttribute("employeeInfo");
         int id2 = employee.getId();
+        int id3 = employee.getUserMaster().getId();
         employee.setId(id2);
         String[] endDateSplited = rotationdate.split("/");
         String month1 = endDateSplited[1];
@@ -17500,6 +17677,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         String day = endDateSplited[0];
         String shiftId = "";
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule1 = new ShiftGenerateMonthlySchedule();
+       
         shiftGenerateMonthlySchedule1.setEmployeeMaster(employee);
         shiftGenerateMonthlySchedule1.setShiftMonth(month1);
         shiftGenerateMonthlySchedule1.setShiftYear(year1);
@@ -17512,24 +17690,30 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        List empShiftMonths =shiftGenerateMonthlyScheduleService.readNoOfMonthsSubmit(id2, ldt.getYear(),ldt.getMonthValue());
+        List readRotationDate =shiftGenerateMonthlyScheduleService.readRotationDate(id3);
+
         ShiftMaster userMasterprecivous = new ShiftMaster();
         userMasterprecivous.setId(Integer.parseInt(shiftId));
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
         int userMasterId = user.getId();
         woffRegularization.setRotationDate(rotationdate);
         woffRegularization.setDateOfSubmit(currentDate);
+        woffRegularization.setReasonForWoff(reasonForWoff);
         employeeMaster.setUserMaster(user);
         woffRegularization.setUserMasterId(user);
         woffRegularization.setStatus(0);
-        String Woffday = dayNo + "/" + month1 + "/" + year1;
+        String Woffday = dayNo + "/" + ldt.getMonthValue() + "/" + ldt.getYear();
         woffRegularization.setDayWoff(Woffday);
         woffRegularization.setShiftMasterPrevious(userMasterprecivous);
-        woffRegularizationService.create(woffRegularization);
-        request.setAttribute("successMessage",
-                "Information : The Information is saved Successfully.");
-
-        mv.setViewName("redirect:shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff");
-        try {
+        
+        
+        
+        if(empShiftMonths.contains(month1) && !readRotationDate.contains(rotationdate))
+        {
+            woffRegularizationService.create(woffRegularization);
+            
+            try {
 //                mailSendArApply(request);
             EmailTemplate emailTemplate = new EmailTemplate();
             EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -17538,26 +17722,40 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             EmployeeMaster employeeMasterHr = new EmployeeMaster();
             employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
             // id 14 is for Attendence regularization apply....
-            emailTemplate = emailTemplateService.readById(167);
+            emailTemplate = emailTemplateService.readById(181);
             String To = employeeMasterHr.getOfficeEmailId();
             String from = employeeMasterModel.getOfficeEmailId();
             String Subject = emailTemplate.getSubject();
             Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
             String msg = emailTemplate.getBodytext();
             msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+            msg = msg.replaceAll("\\{rotationdate\\}", rotationdate);
             msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
             msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
             sendMail.sendMail(from, To, Subject, msg);
         } catch (Exception e) {
         }
+        request.setAttribute("successMessage",
+                "Information : The Information is saved Successfully.");
 
-//     
-// shiftGenerateMonthlyScheduleService.updateDayWiseShift(shiftID, Integer.parseInt(day), cureentshift144);
-//        shiftGenerateMonthlyScheduleService.updateDayWiseShift(tabId, dayOfMonth, ShiftId);
-//        mv.setViewName("redirect:shiftRotationMaster.htm?act=EmployeeShiftAssignDetail");
+        mv = EmployeeShiftAssignDetailWoff(request, response);
+        }
+        else
+        {
+            request.setAttribute("failureMessage",
+                "Information : Shift not generated or rotation already selected.");
+       mv.getModelMap().put("shiftGenerateMonthlySchedule", shiftGenerateMonthlySchedule);
+       request.setAttribute("dayNo",dayNo);
+       request.setAttribute("rotationdate",rotationdate);
+       request.setAttribute("reasonForWoff",reasonForWoff);
+       mv.addAllObjects(errors.getModel());
+        mv.setViewName("Shift/EditEmployeeDayWiseShiftWoff");
+        }
+        
         return mv;
     }
 
+    
     public ModelAndView approvalSubmitWoff(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -17644,6 +17842,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         request.setAttribute("woffpastdate", woffpastdate);
         String remarkNmame = woffRegularization.getApprovalComment();
         request.setAttribute("remarkNmame", remarkNmame);
+        String approvalComment = woffRegularization.getApprovalComment();
+        request.setAttribute("approvalComment", approvalComment);
         int userId = woffRegularization.getUserMasterId().getId();
 //        int cureentShift = shiftRegularization.getShiftMasterCurrent().getId();
         int PastShift = woffRegularization.getShiftMasterPrevious().getId();
@@ -17667,6 +17867,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         mv.getModelMap().put("woffRegularization", woffRegularization);
 //        request.setAttribute("shiftNAme", shiftNAme);
         request.setAttribute("PastShift1", PastShift1);
+        request.setAttribute("remarkNmame", remarkNmame);
         mv.setViewName("Shift/woffRegularizationApprovalAdmin");
         return mv;
     }
@@ -17677,6 +17878,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //        ShiftRegularization shiftRegularization = new ShiftRegularization();
         WoffRegularization woffRegularization = new WoffRegularization();
         String id = request.getParameter("id");
+        String approvalComment1=request.getParameter("approvalComment");
         String remark = "";
         woffRegularization = woffRegularizationService.readById(Integer.parseInt(id));
         woffRegularization.setStatus(3);
@@ -17686,6 +17888,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         String requestdate = sdf.format(new Date());
         woffRegularization.setDateOfApproval(requestdate);
         woffRegularization.setApproverId(approverName);
+        woffRegularization.setApprovalComment(approvalComment1);
         woffRegularizationService.createOrUpdate(woffRegularization);
 
         try {
@@ -17699,7 +17902,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             employeeMaster1.setUserMaster(userMaster);
             List list = employeeMasterService.readByUserName(employeeMaster1);
             //id=17 is for attandence regularization reject...
-            emailTemplate = emailTemplateService.readById(168);
+            emailTemplate = emailTemplateService.readById(183);
 //            String EmpStr = request.getParameter("empid");
 //            if (null != EmpStr && !"".equals(EmpStr)) {
 //                int Empid = Integer.parseInt(EmpStr);
@@ -17733,6 +17936,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         WoffRegularization woffRegularization = new WoffRegularization();
         String remark = "";
         woffRegularization = woffRegularizationService.readById(Integer.parseInt(id));
+        String approvalComment = request.getParameter("approvalComment");
+        request.setAttribute("approvalComment", approvalComment);
         woffRegularization.setStatus(7);
         woffRegularization.setApprovalComment(remark);
         EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
@@ -17740,6 +17945,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         String requestdate = sdf.format(new Date());
         woffRegularization.setDateOfApproval(requestdate);
         woffRegularization.setApproverId(approverName);
+        woffRegularization.setApprovalComment(approvalComment);
         woffRegularizationService.createOrUpdate(woffRegularization);
         try {
 
@@ -17748,7 +17954,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
             EmployeeMaster employeeMaster1 = new EmployeeMaster();
             //id=16 is for attandence regularization rework...
-            emailTemplate = emailTemplateService.readById(169);
+            emailTemplate = emailTemplateService.readById(184);
             UserMaster userMaster = new UserMaster();
             userMaster.setId(woffRegularization.getUserMasterId().getId());
             employeeMaster1.setUserMaster(userMaster);
@@ -17781,6 +17987,9 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
     public ModelAndView approvalEditSubmitByAdminWoFF(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+        LocalDateTime ldt = LocalDateTime.now();
+        SimpleDateFormat dateFormat1 = new SimpleDateFormat("d/M/yyyy HH:mm");
+        HttpSession session = request.getSession();
 //        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
 //        ShiftRegularization shiftRegularization = new ShiftRegularization();
         WoffRegularization woffRegularization = new WoffRegularization();
@@ -17790,13 +17999,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         woffRegularization = woffRegularizationService.readById(Integer.parseInt(id));
         woffRegularization.setStatus(1);
         woffRegularization.setApprovalComment(remark);
-
+        int getUserId = woffRegularization.getUserMasterId().getId();
+        String getUserId1 =woffRegularization.getUserMasterId().getId().toString();
+        String rotationdate1 =woffRegularization.getRotationDate();
+        String approvalComment=request.getParameter("approvalComment");
+        
 //        EmployeeMaster approverName = new EmployeeMaster();
         EmployeeMaster approverName = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String requestdate = sdf.format(new Date());
         woffRegularization.setDateOfApproval(requestdate);
         woffRegularization.setApproverId(approverName);
+        woffRegularization.setApprovalComment(approvalComment);
         woffRegularizationService.createOrUpdate(woffRegularization);
 
 ////        Employee Date Time Data
@@ -17822,22 +18036,108 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 ShiftMaster shiftMaster = new ShiftMaster();
                 shiftMaster.setId(shiftprecoious);
 //                Integer cureentshift144 = woffRegularization.getShiftMasterCurrent().getId();
+                String id2=shiftGenerateMonthlyScheduleService.readEmployeeId(getUserId);
+                String[] dayNOSplited = dayWoff.split("/");
+                String dayNo = dayNOSplited[0];
+                String monthNo =dayNOSplited[1];
+                String yearNo =dayNOSplited[2];
                 String[] endDateSplited = rotationDate1.split("/");
                 String month1 = endDateSplited[1];
                 String year1 = endDateSplited[2];
                 String day = endDateSplited[0];
                 shiftGenerateMonthlySchedule.setShiftMonth(month1);
                 shiftGenerateMonthlySchedule.setShiftYear(year1);
-                List<?> empShiftList = shiftGenerateMonthlyScheduleService.ReadEmployeeShiftByMonthYear(emmpld, Integer.parseInt(month1), Integer.parseInt(year1));
-                int remainingDays = 0;
+                int dayNext=Integer.parseInt(day)+1;
+                int dayNoNext=Integer.parseInt(dayNo)+1;
+                int dayNoBefore=Integer.parseInt(dayNo)-1;
+                int monthNoNext=Integer.parseInt(monthNo)+1;
                 String shiftId = "";
-                int flag = 0;
-                if (empShiftList.size() > 0) {
-                    shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) empShiftList.get(0);
-                    Integer shiftID = shiftGenerateMonthlySchedule.getId();
-                    shiftGenerateMonthlyScheduleService.updateDayWiseShift(shiftID, Integer.parseInt(day), -1);
-                    shiftGenerateMonthlyScheduleService.updateDayWiseShift(shiftID, Integer.parseInt(dayWoff), shiftprecoious);
+                String shiftId1 = "";
+                String shiftId2 = "";
+                String shiftId3 = "";
+                String shiftId4 = "";
+//                ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule1 = new ShiftGenerateMonthlySchedule();
+                List empShiftList = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftData1(Integer.parseInt(day),Integer.parseInt(month1),Integer.parseInt(year1),Integer.parseInt(id2));
+                List empShiftListForDayNext = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftDataForDayNext(dayNext,Integer.parseInt(id2),Integer.parseInt(month1),Integer.parseInt(year1));
+                List empShiftListForDayNextMonthEnd = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftDataForDayNextMonthEnd(Integer.parseInt(id2),monthNoNext,Integer.parseInt(yearNo));
+                List empShiftListForDayNo = shiftGenerateMonthlyScheduleService.readByDayWiseEmployeeShiftDataForDayNo(Integer.parseInt(monthNo),Integer.parseInt(yearNo),Integer.parseInt(id2),Integer.parseInt(dayNo));
+                List empShiftMonths =shiftGenerateMonthlyScheduleService.readNoOfMonths(Integer.parseInt(id2), Integer.parseInt(yearNo),Integer.parseInt(monthNo));
+                try {
+                    if (!empShiftList.isEmpty()) {
+                        shiftId = "" + empShiftList.get(0);
+
+                    }
+                    if (!empShiftList.isEmpty()) {
+                        shiftId1 = "" + empShiftList.get(0);
+
+                    }
+                    if (!empShiftListForDayNo.isEmpty()) {
+                        shiftId2 = "" + empShiftListForDayNo.get(0);
+
+                    }
+                    if (!empShiftListForDayNext.isEmpty()) {
+                        shiftId3 = "" + empShiftListForDayNext.get(0);
+
+                    }
+                    if (!empShiftListForDayNextMonthEnd.isEmpty()) {
+                        shiftId4 = "" + empShiftListForDayNextMonthEnd.get(0);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+                String shiftRead = shiftGenerateMonthlyScheduleService.readShiftData(ldt.getMonthValue(),ldt.getYear(),Integer.parseInt(id2));
+                String data1 = dayNo + ":" + String.valueOf(dayNoNext) + ":" + String.valueOf(dayNoBefore) +":" + shiftRead;
+                String threeDaysList = shiftGenerateMonthlyScheduleService.readThreeDaysList(data1);
+                String data = dayNo + ":" + day + ":" + shiftId1 + ":" + shiftId2 + ":" +shiftRead+ ":" +String.valueOf(dayNext)+ ":" +String.valueOf(dayNoBefore)+ ":" +String.valueOf(dayNoNext)+ ":" +shiftId3+":" +month1+":"+ldt.getYear()+":"+ldt.getMonthValue()+":"+id2+":"+shiftId4+":"+ldt.plusMonths(1).getMonthValue()+":"+monthNo+":"+yearNo+":"+monthNoNext;
+                if(Integer.parseInt(month1)==ldt.getMonthValue() && Integer.parseInt(day)!=ldt.with(TemporalAdjusters.lastDayOfMonth()).getDayOfMonth())
+                {
+                    if(Integer.parseInt(threeDaysList.split("&")[0].split(":")[0].trim())==-1)
+                       {
+                           shiftGenerateMonthlyScheduleService.updateDays(data);
+                       } 
+                   else
+                       {
+                           shiftGenerateMonthlyScheduleService.updateDaysCase(data);
+                       }
+                }
+                if(Integer.parseInt(month1)!=ldt.getMonthValue())
+                    {
+                        if(Integer.parseInt(threeDaysList.split("&")[0].split(":")[0].trim())==-1)
+                         {
+                             shiftGenerateMonthlyScheduleService.updateDays1(data);
+                             shiftGenerateMonthlyScheduleService.updateDays2(data);
+                         } 
+                     else
+                         {
+                             shiftGenerateMonthlyScheduleService.updateDaysCase1(data);
+                             shiftGenerateMonthlyScheduleService.updateDaysCase2(data);
+                         }
+
+                    }
+                if(Integer.parseInt(day)==ldt.with(TemporalAdjusters.lastDayOfMonth()).getDayOfMonth())
+                 {
+                     if(Integer.parseInt(threeDaysList.split("&")[0].split(":")[0].trim())==-1)
+                         {
+                             shiftGenerateMonthlyScheduleService.updateDaysMonthEnd(data);
+                             shiftGenerateMonthlyScheduleService.updateDaysMonthEnd1(data);
+                         } 
+                     else
+                         {
+                             shiftGenerateMonthlyScheduleService.updateDaysCaseMonthEnd(data);
+                             shiftGenerateMonthlyScheduleService.updateDaysCaseMonthEnd1(data);
+                         }
+                 }
+//                List<?> empShiftList = shiftGenerateMonthlyScheduleService.ReadEmployeeShiftByMonthYear(emmpld, Integer.parseInt(month1), Integer.parseInt(year1));
+                int remainingDays = 0;
+//                String shiftId = "";
+                int flag = 0;
+//                if (empShiftList.size() > 0) {
+//                    shiftGenerateMonthlySchedule = (ShiftGenerateMonthlySchedule) empShiftList.get(0);
+//                    Integer shiftID = shiftGenerateMonthlySchedule.getId();
+//                    shiftGenerateMonthlyScheduleService.updateDayWiseShift(shiftID, Integer.parseInt(day), -1);
+//                    shiftGenerateMonthlyScheduleService.updateDayWiseShift(shiftID, Integer.parseInt(dayWoff), shiftprecoious);
+//                }
 //
             }
             try {
@@ -17851,7 +18151,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 employeeMaster2.setUserMaster(userMaster);
                 List list = employeeMasterService.readByUserName(employeeMaster2);
                 //id=17 is for attandence regularization reject...
-                emailTemplate = emailTemplateService.readById(170);
+                emailTemplate = emailTemplateService.readById(182);
 //            String EmpStr = request.getParameter("empid");
 //            if (null != EmpStr && !"".equals(EmpStr)) {
 //                int Empid = Integer.parseInt(EmpStr);
@@ -17867,6 +18167,43 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
                     msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
                     sendMail.sendMail(from, To, Subject, msg);
+
+//                }
+                }
+
+            } catch (Exception e) {
+            }
+            
+            try {
+
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                UserMaster userMaster = new UserMaster();
+                userMaster.setId(woffRegularization.getUserMasterId().getId());
+                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                employeeMaster2.setUserMaster(userMaster);
+                List list = employeeMasterService.readByUserName(employeeMaster2);
+                List hrEmailList= employeeMasterService.readByHrRights();
+                emailTemplate = emailTemplateService.readById(185);
+                if (!list.isEmpty()) {
+                    employeeMaster2 = (EmployeeMaster) list.get(0);
+//                    String To = ;
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+//                    Subject = Subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+//                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                    msg = msg.replaceAll("\\{person\\}", getUserId1);
+                    msg = msg.replaceAll("\\{rotationdate\\}", rotationdate1);
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+//                    sendMail.setToS(hrEmailList);
+                    for(Object hr:hrEmailList)
+                    {
+                        String To = hr.toString();
+                    sendMail.sendMail(from, To, Subject, msg);
+                    }
 
 //                }
                 }
@@ -19133,7 +19470,8 @@ try {
         mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitOTregularization");
         return mv;
     }
-     public ModelAndView rejectSubmitByAdminOt(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public ModelAndView rejectSubmitByAdminOt(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         OTRegularization otRegularization = new OTRegularization();
         String id = request.getParameter("id");
@@ -19234,10 +19572,9 @@ try {
 
             }
 
-         mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitOTregularization");
+        mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitOTregularization");
 //        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
         return mv;
     }
-
 
 }

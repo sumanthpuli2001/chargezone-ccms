@@ -327,12 +327,12 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> readAllSubordinate(T object) {
         return employeeMasterDAO.readAllSubordinate(object);
     }
-    
+
     @Override
     public List<?> readAllEmployee(T object) {
         return employeeMasterDAO.readAllEmployee(object);
     }
-    
+
     @Override
     public List<?> readForSendMailToAll(T object) {
         return employeeMasterDAO.readForSendMailToAll(object);
@@ -479,6 +479,16 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     }
 
     @Override
+    public List<?> readEmployeeAll() {
+        return employeeMasterDAO.readEmployeeAll();
+    }
+
+    @Override
+    public List readByHrRights() {
+        return employeeMasterDAO.readByHrRights();
+    }
+
+    @Override
     public List<?> readEmployeeDataForexportToExcelFlyDoc(String searchEmployeeString) {
         return employeeMasterDAO.readEmployeeDataForexportToExcelFlyDoc(searchEmployeeString);
     }
@@ -487,4 +497,5 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List readByUserId(Integer id) {
         return employeeMasterDAO.readByUserId(id);
     }
+
 }

@@ -11,6 +11,7 @@ import com.bul.zydex.service.GenericsService;
  *
  * @author Success
  */
-public interface ClientDetailsMasterService<T> extends GenericsService<T> {
-    
+public interface ClientDetailsMasterService<T> extends GenericsService<T> 
+{
+    public boolean isExist(T object);
 }

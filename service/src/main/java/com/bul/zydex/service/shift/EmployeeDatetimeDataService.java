@@ -34,5 +34,7 @@ public interface EmployeeDatetimeDataService<T> extends GenericsService<T> {
     public List<?> readEmployeeByDatevise(String date);
     
     public List<?> readOddPunchedEmployeeData(String date);
+
+    public List readAllPuchDataDateWise(String tdate, int id);
    
 }

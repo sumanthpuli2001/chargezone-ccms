@@ -94,6 +94,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         bind(request, attendanceRegularization);
         attendanceRegularizationValidator.validate(attendanceRegularization, errors);
         if (errors.hasErrors()) {
+            request.setAttribute("arType", attendanceRegularization.getArType());
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
             mv.addAllObjects(errors.getModel());
@@ -556,7 +557,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         String id = request.getParameter("id");
-        String remark = "" + request.getParameter("remark");
+        String remark = request.getParameter("remark");
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
         attendanceRegularization.setStatus(3);
         attendanceRegularization.setManagerRemark(remark);
@@ -2093,7 +2094,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         String id = "" + request.getParameter("id");
 //        String remark = "" + request.getParameter("remark");
-        String remark = "";
+        String remark = request.getParameter("managerRemark");
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
 
         if (attendanceRegularization.getArType().equals("Official")) {
@@ -2580,7 +2581,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         String id = request.getParameter("id");
-        String remark = "";
+       
+        String remark = request.getParameter("remark");
+        
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
         attendanceRegularization.setStatus(3);
         attendanceRegularization.setManagerRemark(remark);
@@ -2634,7 +2637,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         String id = request.getParameter("id");
-        String remark = "";
+        String remark = request.getParameter("remark");
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
         attendanceRegularization.setStatus(7);
         attendanceRegularization.setManagerRemark(remark);
@@ -3011,7 +3014,69 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     String dayName = format.format(date);
 
                     if (firstHalf.contains("fullday")) {
-                        newList.add("PR");
+                        List alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                            int listLen = alllistPunch.size();
+                            boolean isMisPunch;
+                            if(listLen % 2 == 0)
+                                isMisPunch = false;
+                            else
+                                isMisPunch = true;
+                            
+                                boolean inBool = true;
+                                boolean outBool = false;
+                                String inTime1 = null;
+                                String outTime1= null;
+                                SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss");  
+                              
+                                Date d1 = null;
+                                Date d2 = null;
+                                String []inTime1val;
+                                String []outTime1val;
+                                String outTime1val1;
+                                String inTime1val1;
+                                long timecount = 0;
+                                int cnt =0;
+                            for (Object o : alllistPunch) {
+                                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                                cnt++;
+                                if(isMisPunch && (listLen == cnt)){
+                                    break;
+                                }else if(inBool){
+                                    inTime1 = employeeDatetimeData.getDateTime();                                    
+                                    inTime1val = inTime1.split(" ");
+                                    inTime1val1 = inTime1val[1];
+                                    try {
+                                        d1 = format1.parse(inTime1val1);
+//                                        d2 = format.parse(dateStop);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }    
+                                    inBool = false;
+                                    outBool = true;
+                                } else if(outBool){
+                                    outTime1 = employeeDatetimeData.getDateTime();
+                                    outTime1val = outTime1.split(" ");
+                                    outTime1val1 = outTime1val[1];
+                                    inBool = true;
+                                    outBool = false;
+                                     try {
+                                        d2 = format1.parse(outTime1val1);
+//                                        d2 = format.parse(dateStop);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }    
+                                    long difff = d2.getTime() - d1.getTime();        
+                                    long diffMinutes = difff / (60 * 1000);  
+                                    timecount += diffMinutes;
+                                    
+                                }
+                            }
+                            if(timecount > 270){
+                                newList.add("PR");
+                            }else{
+                                newList.add("AB");
+                            }
+                        
                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
@@ -3043,6 +3108,16 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         Date flexibleStartTime = sdf2.parse(newTime1);
                         long diff = endHours.getTime() - firstStartHours.getTime();
                         long diffMinutes = diff / (60 * 1000);
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         long diff1 = 0;
                         if (userTimeIn.after(flexibleStartTime) || userTimeIn.equals(flexibleStartTime)) {
                             diff1 = endHours.getTime() - userTimeIn.getTime();
@@ -3433,6 +3508,16 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         } else {
                             diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                         }
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         long diffMinutes1 = diff1 / (60 * 1000);
 
                         if (userTimeIn != null) {
@@ -3727,8 +3812,65 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             totalDayTime1 = diff2 / (60 * 1000);
 
                             totalDayTime = totalDayTime + totalDayTime1 + ARTime;
-
-                            double empHour = (double) totalDayTime / 60;
+                            
+                            List alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                            int listLen = alllistPunch.size();
+                            boolean isMisPunch;
+                            if(listLen % 2 == 0)
+                                isMisPunch = false;
+                            else
+                                isMisPunch = true;
+                            
+                                boolean inBool = true;
+                                boolean outBool = false;
+                                String inTime1 = null;
+                                String outTime1= null;
+                                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");  
+                              
+                                Date d1 = null;
+                                Date d2 = null;
+                                String []inTime1val;
+                                String []outTime1val;
+                                String outTime1val1;
+                                String inTime1val1;
+                                long timecount = 0;
+                                int cnt =0;
+                            for (Object o : alllistPunch) {
+                                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                                cnt++;
+                                if(isMisPunch && (listLen == cnt)){
+                                    break;
+                                }else if(inBool){
+                                    inTime1 = employeeDatetimeData.getDateTime();                                    
+                                    inTime1val = inTime1.split(" ");
+                                    inTime1val1 = inTime1val[1];
+                                    try {
+                                        d1 = format.parse(inTime1val1);
+//                                        d2 = format.parse(dateStop);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }    
+                                    inBool = false;
+                                    outBool = true;
+                                } else if(outBool){
+                                    outTime1 = employeeDatetimeData.getDateTime();
+                                    outTime1val = outTime1.split(" ");
+                                    outTime1val1 = outTime1val[1];
+                                    inBool = true;
+                                    outBool = false;
+                                     try {
+                                        d2 = format.parse(outTime1val1);
+//                                        d2 = format.parse(dateStop);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }    
+                                    long difff = d2.getTime() - d1.getTime();        
+                                    long diffMinutes = difff / (60 * 1000);  
+                                    timecount += diffMinutes;
+                                    
+                                }
+                            }
+                            double empHour = (double) timecount / 60;
                             int hours = (int) empHour;
                             int minutes = (int) (empHour * 60) % 60;
                             String hour = "" + hours;
@@ -3738,9 +3880,21 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             } else if (minutes < 0) {
                                 minute = "00";
                             }
-
                             String workingHours = hour + ":" + minute;
                             workingHour.add(workingHours);
+                            
+//                            double empHour = (double) totalDayTime / 60;
+//                            int hours = (int) empHour;
+//                            int minutes = (int) (empHour * 60) % 60;
+//                            String hour = "" + hours;
+//                            String minute = "" + minutes;
+//                            if (minutes < 10 && minutes > 0) {
+//                                minute = "0" + minute;
+//                            } else if (minutes < 0) {
+//                                minute = "00";
+//                            }
+//                            String workingHours = hour + ":" + minute;
+//                            workingHour.add(workingHours);
 
                         }
 

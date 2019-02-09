@@ -18692,6 +18692,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         int userMasterId = user.getId();
         employeeMaster.setUserMaster(user);
         String clientId = request.getParameter("clientDetailsMaster");
+        if(!clientId.isEmpty()){
+            clientDetailsMaster =  clientDetailsMasterService.readById(Integer.parseInt(clientId));
+            otRegularization.setClientDetailsMaster(clientDetailsMaster);
+        }
+        
         BindException errors = new BindException(otRegularization, "otRegularization");
         bind(request, otRegularization);
         otRegularizationValidator.validate(otRegularization, errors);
@@ -18717,7 +18722,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             }
             request.setAttribute("employeeMaster", empDetailList.get(0));
             request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
-
+            clientList(request);
             mv.getModelMap().put("otRegularization", new OTRegularization());
             mv.setViewName("AttendanceRegularization/otRegularizationFormForEmployee");
         } else {
@@ -18736,8 +18741,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=searchSubmit");
 //            }
 //            if (attendanceRegularization.getArType().equals("Official")) {
-            clientDetailsMaster.setId(Integer.parseInt(clientId));
-            otRegularization.setClientDetailsMaster(clientDetailsMaster);
+//            clientDetailsMaster.setId(Integer.parseInt(clientId));
+//            otRegularization.setClientDetailsMaster(clientDetailsMaster);
             otRegularization.setUserMasterId(userMasterId);
 //            otRegularization.setUserMasterId(userMasterId);
             otRegularization.setStatus(0);
@@ -19048,7 +19053,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         OTRegularization otRegularization = new OTRegularization();
         String id = "" + request.getParameter("id");
 //        String remark = "" + request.getParameter("remark");
-        String remark = "";
+        String remark = request.getParameter("remark");
         otRegularization = oTRegularizationService.readById(Integer.parseInt(id));
 
         otRegularization.setStatus(1);

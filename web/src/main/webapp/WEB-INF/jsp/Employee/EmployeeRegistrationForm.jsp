@@ -191,66 +191,125 @@
             });
         });</script>
 
-    <script>
+   
+    
+        <script>
         var flag3 = true;
         function saveSubmit11() {
 //            alert("vxcvxcvjk");
             if (flag3) {
-//                alert("this is submit form  " + document.getElementById('shiftHoursId').value);
-                if ($('#shiftType').find("option:selected").val() == "HourlyBase" && $('#shiftHoursId').val() == "") {
-                    document.getElementById('shiftHoursIdError').innerHTML = '-It must not be empty.';
-                    return false;
-                }
-                if ($('#shiftType').find("option:selected").val() == "ShiftBase" && (($('#shiftId').val() == '') || ($('#shiftRotationDate').val() == '') || ($('#shiftMasterId').val() == ''))) {
-                    if ($('#shiftId').val() == '') {
-                        document.getElementById('shiftIdError').innerHTML = '-It must not be empty.';
-//                        return false;
+                var radioValue = $("input[name='nameStatus']:checked").val();
+                    if(radioValue == "false"){
+//                       alert("passportttttt");
+                        if (document.getElementById("passportNo").value == ""){
+                            document.getElementById('passportNoError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                            $("#errormsg").delay(3200).fadeOut(300);
+                            $("#passportNoError").delay(0).fadeIn(0);
+                            $("#passportNoError").delay(3200).fadeOut(300);
+                            return false;
+                        }
+                        else if (document.getElementById("countryOfIssue").value == ""){
+                            document.getElementById('countryOfIssueError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                            $("#errormsg").delay(3200).fadeOut(300);
+                            $("#countryOfIssueError").delay(0).fadeIn(0);
+                            $("#countryOfIssueError").delay(3200).fadeOut(300);
+                             return false;
+                        }
+                        else if (document.getElementById("firstName").value == ""){
+                            document.getElementById('firstNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                            $("#errormsg").delay(3200).fadeOut(300);
+                            $("#firstNameError").delay(0).fadeIn(0);
+                            $("#firstNameError").delay(3200).fadeOut(300);
+                             return false;
+                        }
+                        else if (document.getElementById("middleName").value == ""){
+                            document.getElementById('middleNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#middleNameError").delay(0).fadeIn(0);
+                            $("#middleNameError").delay(3200).fadeOut(300);
+                             return false;
+                        }
+                        else if (document.getElementById("lastName").value == ""){
+                            document.getElementById('lastNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#lastNameError").delay(0).fadeIn(0);
+                            $("#lastNameError").delay(3200).fadeOut(300);
+                             return false;
+                        }
+                        else if (document.getElementById("passportIssueDate").value == ""){
+                            document.getElementById('passportIssueDateError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#passportIssueDateError").delay(0).fadeIn(0);
+                            $("#passportIssueDateError").delay(3200).fadeOut(300);
+                            
+                             return false;
+                        }
+                        else if (document.getElementById("passportExpiryDate").value == ""){
+                            document.getElementById('passportExpiryDateError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#passportExpiryDateError").delay(0).fadeIn(0);
+                            $("#passportExpiryDateError").delay(3200).fadeOut(300);
+                             return false;
+                        }
+
                     }
-                    if ($('#shiftRotationDate').val() == '') {
-                        document.getElementById('shiftRotationDateError').innerHTML = '-It must not be empty.';
-//                        return false;
-                    }
-                    if ($('#shiftMasterId').val() == '') {
-                        document.getElementById('shiftMasterIdError').innerHTML = '-It must not be empty.';
-//                        return false;
-                    }
-                    return false;
-                }
-//                else {
-//                    document.getElementById('saveSubmit1').innerHTML = 'Saving ... .. .';
-//                    document.form1.submit();
-//                    return true;
-//                }
-//                var photograph = document.getElementById('photograph').value;
-////                var password = document.getElementById('password').value;
-//                if (photograph == '') {
-//                    flag3 = false;
-//                    sessionStorage.setItem("photographErrorStorage", "- It must not be empty or whitespace");
-//                    document.getElementById('photographError').innerHTML = sessionStorage.getItem("photographErrorStorage");
-//                }
-////                if (password == '') {
-////                    flag3 = false;
-////                    sessionStorage.setItem("passErrorStorage", "<p style='color: red'>It must not be empty or whitespace</p>");
-////                    document.getElementById('passError').innerHTML = sessionStorage.getItem("passErrorStorage");
-////                }
-//                else {
-//                }
-            } else {
-                return false;
+                    else if(radioValue == "true"){
+//                       alert("aadhar");
+                       if (document.getElementById("adharCard").value == ""){
+                            document.getElementById('adharCardError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter Aadhar Card details.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#adharCardError").delay(0).fadeIn(0);
+                            $("#adharCardError").delay(3200).fadeOut(300);
+                            return false;
+                        }else if (document.getElementById("firstName").value == ""){
+                            document.getElementById('firstNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
+                             $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#firstNameError").delay(0).fadeIn(0);
+                            $("#firstNameError").delay(3200).fadeOut(300);
+                            return false;
+                        }
+                        else if (document.getElementById("middleName").value == ""){
+                            document.getElementById('middleNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
+                             $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#middleNameError").delay(0).fadeIn(0);
+                            $("#middleNameError").delay(3200).fadeOut(300);
+                            return false;
+                        }
+                        else if (document.getElementById("lastName").value == ""){
+                            document.getElementById('lastNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
+                             $("#errormsg").delay(0).fadeIn(0);
+                            $("#errormsg").delay(3200).fadeOut(300);
+                            $("#lastNameError").delay(0).fadeIn(0);
+                             $("#lastNameError").delay(3200).fadeOut(300);
+                            return false;
+                        }
+                    } 
             }
         }
 
-//        function passwordVal() {
-//            alert("hjhgfjhgjh");
-//            var pass = document.getElementById('password').value;
-//            if (pass === "") {
-//                document.getElementById('passError').innerHTML = "- It must not be empty or whitespace";
-//                return false;
-//            } else {
-//                return true;
-//            }
-//        }
     </script>
+    
     <script>
         $(document).ready(function () {
             userName1();
@@ -738,6 +797,7 @@
         <c:if test="${!empty successMessage}">
             <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
         </c:if>
+        
         <c:if test="${!empty failureMessage}">
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
@@ -889,6 +949,18 @@
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
+                                                    
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Select First , Middle & Last Name As per Passport or Aadhar card:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <fieldset id="group11">
+                                                                <input type="radio" name="nameStatus" id="nameStatus" checked="true" value="false"/>Passport
+                                                                <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard
+                                                            </fieldset>
+                                                            <span style="font-size: 14px; color: red;" id="errormsg"></span>
+                                                        </div>
+                                                        
+                                                    </div>
 
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
@@ -909,53 +981,47 @@
                                                         <div class="col-sm-6">
                                                             <label>Passport No:</label>
                                                         <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
+                                                        <span style="font-size: 14px; color: red;" id="passportNoError"></span>
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                             <label>Country Of Issue:</label>
                                                             <input type="text" name="countryOfIssue" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
-
+                                                             <span style="font-size: 14px; color: red;" id="countryOfIssueError"></span>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Select First , Middle & Last Name As per Passport or Aadhar card:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <fieldset id="group11">
-                                                                <input type="radio" name="nameStatus" checked="true" value="false"/>Passport
-                                                                <input type="radio" name="nameStatus" value="true"/>AadharCard
-                                                            </fieldset>
-                                                        </div>
-                                                    </div>
+                                                    
 
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
 
                                                             <label>First Name:</label>
-                                                            <input type="text" name="firstName" id="firstName" placeholder="First Name as per Passport" class="form-control">
-
+                                                            <input type="text" name="firstName" id="firstName"  class="form-control">
+                                                            <span style="font-size: 14px; color: red;" id="firstNameError"></span>
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                             <label>Middle Name:</label>
-                                                            <input type="text" name="middleName" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
-
+                                                            <input type="text" name="middleName" id="middleName"  class="form-control">
+                                                            <span style="font-size: 14px; color: red;" id="middleNameError"></span>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
 
                                                             <label>Last Name:</label>
-                                                            <input type="text" name="lastName" id="lastName" placeholder="Last Name as per Passport" class="form-control">
-
+                                                            <input type="text" name="lastName" id="lastName"  class="form-control">
+                                                            <span style="font-size: 14px; color: red;" id="lastNameError"></span>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label>Passport Issue Date:</label>
                                                             <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <form:input path="passportIssueDate" class="form-control" size="16" readonly="true"></form:input>
+                                                            <form:input path="passportIssueDate" id="passportIssueDate" class="form-control" size="16" readonly="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
-                                                        <form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>
+                                                                <span style="font-size: 14px; color: red;" id="passportIssueDateError"></span>
+                                                        <!--<form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>-->
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -963,10 +1029,12 @@
                                                             <label>Passport Expiry Date:</label>
                                                             <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="passportExpiryDate" class="form-control" size="16" readonly="true"></form:input>
+                                                            <form:input path="passportExpiryDate" id="passportExpiryDate"  class="form-control" size="16" readonly="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                
                                                             </div>
+                                                                <span style="font-size: 14px; color: red;" id="passportExpiryDateError"></span>
                                                         </div>
                                                         <div class="col-sm-6">
 
@@ -987,9 +1055,11 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label >Aadhar Card:</label>
-                                                        <form:input path="adharCard" class="form-control"></form:input>
-                                                        <form:errors path="adharCard" cssClass="errorDiv"></form:errors>
+                                                        <form:input path="adharCard" id="adharCard" class="form-control"></form:input>
+                                                        <form:errors path="adharCard"  cssClass="errorDiv"></form:errors>
+                                                        <span style="font-size: 14px; color: red;" id="adharCardError"></span>
                                                         </div>
+                                                        
                                                     </div>
 
                                                     <div class="form-group">
@@ -1066,7 +1136,7 @@
                                     <!--Personal Contact Detail starts here-->        
                                     <div class="box box-info collapsed-box" id="personal_Detail_id">
                                         <div class="box-header">
-                                            <h3 class="box-title">Personal Contact Detail:</h3>
+                                            <h3 class="box-title">Personal Contact Details:</h3>
                                             <div class="box-tools pull-right">
                                                 <!--<button  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                                 <span id="spanId10">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun10();"><i class="fa fa-plus" id="minusId10" ></i></button>
@@ -1103,7 +1173,7 @@
                                                         <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Blood Groups:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Blood Group:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
                                                         <form:select path="bloodGroups" id="bloodGroups" class="form-control ">
                                                             <option value="">--Select--</option>
@@ -1213,22 +1283,12 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group" id="hideInfo1" style="display: none;margin-left: 2px;">
+                                                    <div id="hideInfo1" style="display: none;margin-left: 2px;">
                                                         <div class="form-group" id="">
                                                             <div class="col-sm-6">
                                                                 <label>Spouse Name:</label>
                                                             <form:input path="spouseName" class="form-control"></form:input>
                                                             </div>
-                                                            <div class="col-sm-6">
-
-                                                                <label>Spouse's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
-                                                                <fieldset id="group10">
-                                                                    <input type="radio" name="SpouseGender" id="SpouseGender" checked="true" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="SpouseGender" id="SpouseGender" value="true"/>Female
-                                                                </fieldset>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label>Spouse's Date Of Birth:</label>
                                                                 <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -1239,25 +1299,26 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+
+                                                                <label>Spouse's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                <fieldset id="group10">
+                                                                    <input type="radio" name="SpouseGender" id="SpouseGender" checked="true" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="SpouseGender" id="SpouseGender" value="true"/>Female
+                                                                </fieldset>
+                                                            </div>
+                                                            
+                                                        </div>
                                                     </div>  
 
-                                                    <div class="form-group" id="hideInfo2" style="display: none;margin-left: 2px;">
+                                                    <div id="hideInfo2" style="display: none;margin-left: 2px;">
                                                         <div class="form-group" id="">
 
                                                             <div class="col-sm-6">
                                                                 <label>Child Name1:</label>
                                                             <form:input path="child1" class="form-control"></form:input>
                                                             </div>
-                                                            <div class="col-sm-6">
-
-                                                                <label>Child1's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
-                                                                <fieldset id="group6">
-                                                                    <input type="radio" name="childOneGender" id="childOneGender" checked="true" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
-                                                                </fieldset>
-                                                            </div> 
-                                                        </div>
-                                                        <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label>Child1's Date Of Birth:</label>
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -1270,19 +1331,20 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="col-sm-6">
+
+                                                                <label>Child1's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                <fieldset id="group6">
+                                                                    <input type="radio" name="childOneGender" id="childOneGender" checked="true" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
+                                                                </fieldset>
+                                                            </div> 
+                                                            
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
                                                                 <label>Child Name2:</label>
                                                             <form:input path="child2" class="form-control"></form:input>
                                                             </div>
-                                                            <div class="col-sm-6">
-
-                                                                <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
-                                                                <fieldset id="group6">
-                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" checked="true" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
-                                                                </fieldset>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label>Child2's Date Of Birth:</label>
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -1292,6 +1354,18 @@
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
                                                             </div>
+                                                            
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+
+                                                                <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                <fieldset id="group6">
+                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" checked="true" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
+                                                                </fieldset>
+                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -1538,7 +1612,7 @@
                                                     </div>
 
 
-                                                    <div class="form-group">
+<!--                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Sub Team Transfer Date:</label>
                                                             <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -1549,7 +1623,7 @@
                                                             </div>
                                                         </div>
 
-                                                    </div>
+                                                    </div>-->
                                                     <div class="form-group">
 
                                                         <div class="col-sm-6">

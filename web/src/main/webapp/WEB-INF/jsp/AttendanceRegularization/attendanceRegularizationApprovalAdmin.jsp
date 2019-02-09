@@ -30,8 +30,8 @@
 //            alert("hi");
             var id = document.getElementById("id").value;
 //            alert(id);
-            var remark = document.getElementById("remark").value;
-//            alert(remark);
+            var remark = document.getElementById("managerRemark").value;
+            alert(remark);
             window.location = 'attendanceRegularizationMaster.htm?act=rejectSubmitByAdmin&id=' + id + '&remark=' + remark;
         }
     </script>
@@ -40,8 +40,8 @@
 //            alert("hiii");
             var id = document.getElementById("id").value;
 //            alert(id);
-            var remark = document.getElementById("remark").value;
-//            alert(remark);
+            var remark = document.getElementById("managerRemark").value;
+            alert(remark);
             window.location = 'attendanceRegularizationMaster.htm?act=reworkSubmitByAdmin&id=' + id + '&remark=' + remark;
         }
     </script>
@@ -270,28 +270,7 @@
                                                 </div><!-- /.row -->
                                             </div><!-- /.box-body -->
                                         </div>
-                                    <c:if test="${status eq 3}">
-                                        <div class="box box-info collapsed-box">
-                                            <div class="box-header">
-                                                <h3 class="box-title">Manager Remarks:</h3>
-                                                <div class="box-tools pull-right">
-                                                    <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3()"><i class="fa fa-plus" id="minusId3"></i></button>
-                                                </div>
-                                            </div><!-- /.box-header -->
-                                            <div class="box-body no-padding">
-                                                <div class="row">
-                                                    <div class="col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label class="col-sm-3 control-label">Manager Remark:</label>
-                                                            <div class="col-sm-7">
-                                                                <textarea class="form-control" rows="6" id="remark" name="remark" placeholder="Enter Remark" disabled="true">${remarkNmame}</textarea>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- /.col -->
-                                                </div><!-- /.row -->
-                                            </div><!-- /.box-body -->
-                                        </div>
-                                    </c:if>
+                                    
                                     <!--Reason In Detail completes Here-->
                                     <c:if test="${status eq 18 || status eq 0}">
                                                                                <div class="box box-info collapsed-box">
@@ -307,7 +286,8 @@
                                                                                                 <div class="form-group">
                                                                                                     <label class="col-sm-3 control-label">Manager Remark:</label>
                                                                                                     <div class="col-sm-7">
-                                                                                                        <textarea class="form-control" rows="6" id="remark" name="remark" placeholder="Enter Remark" ></textarea>
+                                                                                                       
+                                                                                                        <textarea class="form-control" rows="6" id="managerRemark" name="managerRemark" placeholder="Enter Remark" ></textarea>
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div> 
@@ -326,6 +306,68 @@
                                             </div>
                                         </div>
                                     </c:if>
+                                    <c:if test="${status eq 11}">
+                                                                               <div class="box box-info collapsed-box">
+                                                                                    <div class="box-header">
+                                                                                        <h3 class="box-title">Manager Remarks:</h3>
+                                                                                        <div class="box-tools pull-right">
+                                                                                            <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4()"><i class="fa fa-plus" id="minusId4"></i></button>
+                                                                                        </div>
+                                                                                    </div> 
+                                                                                    <div class="box-body no-padding">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-12 col-sm-12">
+                                                                                                <div class="form-group">
+                                                                                                    <label class="col-sm-3 control-label">Manager Remark:</label>
+                                                                                                    <div class="col-sm-7">
+<!--                                                                                                        <textarea class="form-control" rows="6" id="remark" name="remark" placeholder="Enter Remark" ></textarea>-->
+                                                                                                            <form:textarea  path="managerRemark" class="form-control" rows="6"/>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div> 
+                                                                                        </div> 
+                                                                                    </div> 
+                                                                                </div>
+                                        <div class="form-group" id="sub_btn">
+                                            <div class="col-sm-5  ">
+                                                <button type="submit" class="btn btn-success" style="width: 100px;" data-original-title="" title="">APPROVE</button>
+                                            </div>
+                                            <div class="col-sm-3 ">
+                                                <button type="button" class="btn btn-danger" style="width: 100px;" onclick="rejectClick();" data-original-title="">REJECT</button>
+                                            </div>
+                                            <div class="col-sm-4 ">
+                                                <button type="button" class="btn btn-warning" style="width: 100px;float: right;" onclick="reworkClick();" data-original-title="">REWORK</button>
+                                            </div>
+                                        </div>
+                                        
+                                    </c:if>
+                                   
+                                    
+                                        <c:if test="${status eq 1 || status eq 3 || status eq 7 || status eq 2}">
+                                                                               <div class="box box-info collapsed-box">
+                                                                                    <div class="box-header">
+                                                                                        <h3 class="box-title">Manager Remarks:</h3>
+                                                                                        <div class="box-tools pull-right">
+                                                                                            <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4()"><i class="fa fa-plus" id="minusId4"></i></button>
+                                                                                        </div>
+                                                                                    </div> 
+                                                                                    <div class="box-body no-padding">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-12 col-sm-12">
+                                                                                                <div class="form-group">
+                                                                                                    <label class="col-sm-3 control-label">Manager Remark:</label>
+                                                                                                    <div class="col-sm-7">
+                                                                                                        <form:textarea  path="managerRemark" readonly="true" class="form-control" rows="6"/>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div> 
+                                                                                        </div> 
+                                                                                    </div> 
+                                                                                </div>
+                                        
+                                    </c:if>
+                                   
+                                    
                                     <%--<c:if test="${status eq 1}">--%>
                                     <!--                                        <div class="form-group" id="sub_btn">
                                                                                 <div class="col-sm-5  ">

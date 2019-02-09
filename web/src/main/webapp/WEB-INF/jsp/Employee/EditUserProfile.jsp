@@ -532,52 +532,119 @@
     </script>
 
     <script>
-        var flag3 = true;
+         var flag3 = true;
         function saveSubmit11() {
 //            alert("vxcvxcvjk");
-            
-//            var selectBox = document.getElementById('sell');
-//             var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-//            alert(selectedValue);
-//            
-//            
-//            var flag12 = true;
-//            var vval = document.getElementById('sell').value;
-//            alert(vval);
-//            if (vval.valueOf() == "NA") {
-//                
-//                document.getElementById("subtypeError").innerHTML = "- It must be selected.";
-//                flag12 = false;
-//            } else {
-//                document.getElementById("subtypeError").innerHTML = '';
-//            }
-            
             if (flag3) {
-                flag3 = false;
-                if (passwordVal()) {
-                    document.getElementById('saveSubmit1').innerHTML = 'Saving ... .. .';
-                    document.form1.submit();
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
+                var radioValue = $("input[name='nameStatus']:checked").val();
+                    if(radioValue == "false"){
+//                       alert("passportttttt");
+                        if (document.getElementById("passportNo").value == ""){
+                            document.getElementById('passportNoError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                            $("#errormsg").delay(3200).fadeOut(300);
+                            $("#passportNoError").delay(0).fadeIn(0);
+                            $("#passportNoError").delay(3200).fadeOut(300);
+                            return false;
+                        }
+                        else if (document.getElementById("countryOfIssue").value == ""){
+                            document.getElementById('countryOfIssueError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                            $("#errormsg").delay(3200).fadeOut(300);
+                            $("#countryOfIssueError").delay(0).fadeIn(0);
+                            $("#countryOfIssueError").delay(3200).fadeOut(300);
+                             return false;
+                        }
+                        else if (document.getElementById("firstName").value == ""){
+                            document.getElementById('firstNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                            $("#errormsg").delay(3200).fadeOut(300);
+                            $("#firstNameError").delay(0).fadeIn(0);
+                            $("#firstNameError").delay(3200).fadeOut(300);
+                             return false;
+                        }
+                        else if (document.getElementById("middleName").value == ""){
+                            document.getElementById('middleNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#middleNameError").delay(0).fadeIn(0);
+                            $("#middleNameError").delay(3200).fadeOut(300);
+                             return false;
+                        }
+                        else if (document.getElementById("lastName").value == ""){
+                            document.getElementById('lastNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#lastNameError").delay(0).fadeIn(0);
+                            $("#lastNameError").delay(3200).fadeOut(300);
+                             return false;
+                        }
+                        else if (document.getElementById("passportIssueDate").value == ""){
+                            document.getElementById('passportIssueDateError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#passportIssueDateError").delay(0).fadeIn(0);
+                            $("#passportIssueDateError").delay(3200).fadeOut(300);
+                            
+                             return false;
+                        }
+                        else if (document.getElementById("passportExpiryDate").value == ""){
+                            document.getElementById('passportExpiryDateError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#passportExpiryDateError").delay(0).fadeIn(0);
+                            $("#passportExpiryDateError").delay(3200).fadeOut(300);
+                             return false;
+                        }
+
+                    }
+                    else if(radioValue == "true"){
+//                       alert("aadhar");
+                       if (document.getElementById("adharCard").value == ""){
+                            document.getElementById('adharCardError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter Aadhar Card details.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#adharCardError").delay(0).fadeIn(0);
+                            $("#adharCardError").delay(3200).fadeOut(300);
+                            return false;
+                        }else if (document.getElementById("firstName").value == ""){
+                            document.getElementById('firstNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
+                             $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#firstNameError").delay(0).fadeIn(0);
+                            $("#firstNameError").delay(3200).fadeOut(300);
+                            return false;
+                        }
+                        else if (document.getElementById("middleName").value == ""){
+                            document.getElementById('middleNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
+                             $("#errormsg").delay(0).fadeIn(0);
+                             $("#errormsg").delay(3200).fadeOut(300);
+                             $("#middleNameError").delay(0).fadeIn(0);
+                            $("#middleNameError").delay(3200).fadeOut(300);
+                            return false;
+                        }
+                        else if (document.getElementById("lastName").value == ""){
+                            document.getElementById('lastNameError').innerHTML = '-It must not be empty.';
+                            document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
+                             $("#errormsg").delay(0).fadeIn(0);
+                            $("#errormsg").delay(3200).fadeOut(300);
+                            $("#lastNameError").delay(0).fadeIn(0);
+                             $("#lastNameError").delay(3200).fadeOut(300);
+                            return false;
+                        }
+                    } 
             }
-            
-            
         }
-        function passwordVal() {
-            var pass = document.getElementById('password').value;
-            if (pass === "") {
-                document.getElementById('passError').innerHTML = "- It must not be empty or whitespace";
-                return false;
-            } else {
-                return true;
-            }
-        }
-        
-        
         
     </script>
     <script>
@@ -1013,7 +1080,20 @@
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12">
-
+                                                    <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Select First , Middle & Last Name As per Passport or Aadhar card:<span style="color: red;font-size: 12px;">*</span></label><br>
+                                                                <c:if test="${list.nameStatus eq 'false'}">
+                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport;
+                                                                    <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard
+                                                                </c:if>
+                                                                <c:if test="${list.nameStatus eq 'true'}">
+                                                                    <input type="radio" name="nameStatus"  id="nameStatus" value="false"/>Passport&nbsp;&nbsp;
+                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="true"/>AadharCard
+                                                                </c:if>
+                                                        <span style="font-size: 14px; color: red;" id="errormsg"></span>
+                                                    </div>
+                                                </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>PAN Card No.:<span style="color: red;font-size: 12px;">*</span></label>
@@ -1029,43 +1109,31 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label >Passport No.:</label>
+                                                        <label >Passport No:</label>
                                                         <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
-                                                        </div>
+                                                         <span style="font-size: 14px; color: red;" id="passportNoError"></span>
+                                                    </div>
                                                         <div class="col-sm-6">
 
                                                             <label>Country Of Issue:</label>
                                                             <input type="text" name="countryOfIssue" value="${list.countryOfIssue}" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
-
+                                                            <span style="font-size: 14px; color: red;" id="countryOfIssueError"></span>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Select First , Middle & Last Name As per Passport or Aadhar card:<span style="color: red;font-size: 12px;">*</span></label><br>
-                                                                <c:if test="${list.nameStatus eq 'false'}">
-                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport;
-                                                                    <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard
-                                                                </c:if>
-                                                                <c:if test="${list.nameStatus eq 'true'}">
-                                                                    <input type="radio" name="nameStatus"  id="nameStatus" value="false"/>Passport&nbsp;&nbsp;
-                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="true"/>AadharCard
-                                                                </c:if>
-                                                        
-                                                    </div>
-                                                </div>
+                                                
 
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
 
                                                         <label>First Name:</label>
                                                         <input type="text" name="firstName" value="${list.firstName}" id="firstName" placeholder="First Name as per Passport" class="form-control">
-
+                                                    <span style="font-size: 14px; color: red;" id="firstNameError"></span>
                                                     </div>
                                                     <div class="col-sm-6">
 
                                                         <label>Middle Name:</label>
                                                         <input type="text" name="middleName" value="${list.middleName}" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
-
+                                                    <span style="font-size: 14px; color: red;" id="middleNameError"></span>
                                                     </div>
                                                 </div>   
                                                 <div class="form-group">
@@ -1073,7 +1141,7 @@
 
                                                         <label>Last Name:</label>
                                                         <input type="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
-
+                                                    <span style="font-size: 14px; color: red;" id="lastNameError"></span>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Passport Issue Date:</label>
@@ -1082,6 +1150,7 @@
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
+                                                                <span style="font-size: 14px; color: red;" id="passportIssueDateError"></span>
                                                         <form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
@@ -1095,7 +1164,7 @@
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
-
+                                                            <span style="font-size: 14px; color: red;" id="passportExpiryDateError"></span>
                                                         </div>    
                                                         <div class="col-sm-6">
 
@@ -1133,6 +1202,7 @@
                                                         <label >Aadhar Card:</label>
                                                         <form:input path="adharCard" class="form-control"></form:input>
                                                         <form:errors path="adharCard" cssClass="errorDiv"></form:errors>
+                                                        <span style="font-size: 14px; color: red;" id="adharCardError"></span>
                                                         </div>
                                                     </div> 
                                                     <div class="form-group">
@@ -1246,7 +1316,7 @@
                                     <!--Personal Contact Detail starts here-->
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
-                                            <h3 class="box-title">Personal Contact Detail:</h3>
+                                            <h3 class="box-title">Personal Contact Details:</h3>
                                             <div class="box-tools pull-right">
                                                 <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
                                                 <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
@@ -1277,7 +1347,7 @@
                                                             <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                            <label>Blood Groups:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Blood Group:<span style="color: red;font-size: 12px;">*</span></label>
 
                                                             <form:select path="bloodGroups" id="bloodGroups" class="form-control" >
                                                                 <option value="">--Select--</option>
@@ -1387,35 +1457,42 @@
                                                         <form:errors path="dateOfBirthOfEmpMother" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
-                                                <div class="form-group" id="hideInfo1" style="display: none;">
+                                                <div id="hideInfo1" style="display: none;">
                                                     <div class="form-group">
                                                       <div class="col-sm-6">
                                                             <label>Spouse Name:</label>
                                                             <form:input path="spouseName" class="form-control"></form:input>
                                                             </div>  
                                                             <div class="col-sm-6">
+                                                                    <label>Spouse's Date Of Birth:</label>
+                                                                    <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                    <form:input path="dateOfBirthOfEmpSpous" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                    </div>
+                                                                </div> 
+                                                        </div>
+                                               
+                                                           <div class="form-group">
+                                                               <div class="col-sm-6">
 
                                                                 <label>Spouse's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
                                                                  <c:if test="${list.spouseGender eq 'false'}">
+                                                                 <fieldset id="group6">
                                                                     <input type="radio" name="spouseGender" checked="" id="spouseGender" value="false"/>Male&nbsp;&nbsp;
                                                                     <input type="radio" name="spouseGender" id="spouseGender" value="true"/>Female
-                                                                </c:if>
+                                                               </fieldset>
+                                                                 </c:if>
                                                                 <c:if test="${list.spouseGender eq 'true'}">
+                                                                <fieldset id="group6">
                                                                     <input type="radio" name="spouseGender"  id="spouseGender" value="false"/>Male&nbsp;&nbsp;
                                                                     <input type="radio" name="spouseGender" checked="" id="spouseGender" value="true"/>Female
-                                                                </c:if>
+                                                               </fieldset>
+                                                            </c:if>
                                                             </div>
-                                                        
-                                                </div>
-                                                     <div class="col-sm-6">
-                                                                <label>Spouse's Date Of Birth:</label>
-                                                                <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="dateOfBirthOfEmpSpous" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                </div>
-                                                            </div>       
+                                                                
+                                                            </div> 
                                                             </div>  
                                                             <div id="hideInfo2" style="display: none;">
                                                             <div class="form-group">
@@ -1424,22 +1501,6 @@
                                                                 <form:input path="child1" class="form-control"></form:input>
                                                                 </div>
                                                                 <div class="col-sm-6">
-
-                                                                    <label>Child1's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
-                                                                    <c:if test="${list.childOneGender eq 'false'}">
-                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
-                                                                </c:if>
-                                                                <c:if test="${list.childOneGender eq 'true'}">
-                                                                    <input type="radio" name="childOneGender"  id="childOneGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="true"/>Female
-                                                                </c:if>
-
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
                                                                 <label>Child1's Date Of Birth:</label>
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
@@ -1448,33 +1509,36 @@
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-6">
-                                                                    <label>Child Name2:</label>
-                                                                <form:input path="child2" class="form-control"></form:input>
-                                                                </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+
+                                                                    <label>Child1's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                    <c:if test="${list.childOneGender eq 'false'}">
+                                                                    <fieldset id="group6">
+                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
+                                                                    </fieldset>
+                                                                </c:if>
+                                                                <c:if test="${list.childOneGender eq 'true'}">
+                                                                <fieldset id="group6">
+                                                                    <input type="radio" name="childOneGender"  id="childOneGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="true"/>Female
+                                                                    </fieldset>
+                                                                </c:if>
+
+
+                                                            </div>
+                                                            
+                                                                
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <div class="col-sm-6">
-
-                                                                    <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
-                                                                    <c:if test="${list.childTwoGender eq 'false'}">
-                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
-                                                                </c:if>
-                                                                <c:if test="${list.childTwoGender eq 'true'}">
-                                                                    <input type="radio" name="childTwoGender"  id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="true"/>Female
-                                                                </c:if>
-
-
-
-
-
-
-
-                                                            </div>
-                                                            <div class="col-sm-6">
+                                                                    <label>Child Name2:</label>
+                                                                <form:input path="child2" class="form-control"></form:input>
+                                                                </div>
+                                                                <div class="col-sm-6">
                                                                 <label>Child2's Date Of Birth:</label>
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
@@ -1483,6 +1547,24 @@
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                     </div>
                                                                 </div>
+                                                        </div>
+                                                         <div class="form-group">
+                                                             <div class="col-sm-6">
+                                                                   <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                    <c:if test="${list.childTwoGender eq 'false'}">
+                                                                    <fieldset id="group6">
+                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
+                                                                   <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
+                                                                </fieldset>
+                                                                </c:if>
+                                                                <c:if test="${list.childTwoGender eq 'true'}">
+                                                                    <fieldset id="group6">
+                                                                    <input type="radio" name="childTwoGender"  id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="true"/>Female
+                                                                </fieldset>
+                                                                    </c:if>
+                                                            </div>
+                                                            
                                                             </div>
                                                         </div>
                                                          <div class="form-group">
@@ -1755,7 +1837,7 @@
 
 
                                                         </div>
-                                                           <div class="form-group">
+<!--                                                           <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Sub Team Transfer Date:</label>
                                                             <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
@@ -1766,7 +1848,7 @@
                                                             </div>
                                                         </div>
 
-                                                    </div> 
+                                                    </div> -->
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label >Official Contact No:</label>
@@ -2524,6 +2606,7 @@
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
+                                    </div>
                                     <!--bank detail complete-->
                                     <div class="box box-info collapsed-box collapsed-box">
                                         <div class="box-header">
@@ -2583,7 +2666,7 @@
                                                 </div>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
+                                    <!-- /.box-body -->
                                     <div class="box box-info collapsed-box" id="login_detail_id">
                                         <div class="box-header">
                                             <h3 class="box-title">Employee Certificate Attachments</h3>

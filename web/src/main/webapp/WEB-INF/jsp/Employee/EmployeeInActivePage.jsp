@@ -118,7 +118,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                    <div class="form-group">
+                                                         <label class="col-sm-3 control-label">Reason for Request:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <div class="col-sm-7">
+                                                                <form:textarea  path="reasonForLeaving" class="form-control" rows="6"/>
+                                                                <form:errors path="reasonForLeaving" cssClass="errorDiv"></form:errors>
+                                                                </div>            
+                                                    </div>
 
                                                 </div>
                                             </div>

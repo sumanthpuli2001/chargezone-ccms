@@ -248,7 +248,7 @@
                                                 </div><!-- /.row -->
                                             </div><!-- /.box-body -->
                                         </div>
-                                    <c:if test="${status eq 3}">
+                                    <c:if test="${status eq 1 || status eq 2 || status eq 3 || status eq 7}">
                                         <div class="box box-info collapsed-box">
                                             <div class="box-header">
                                                 <h3 class="box-title">Manager Remarks:</h3>

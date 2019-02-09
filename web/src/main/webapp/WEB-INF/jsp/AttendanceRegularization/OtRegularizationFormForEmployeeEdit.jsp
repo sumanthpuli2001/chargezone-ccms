@@ -294,7 +294,7 @@
                                                 </div><!-- /.box-body -->
                                             </div>
                                             <!--Reason In Detail completes Here-->
-                                        <c:if test="${status eq 7}">
+                                        <c:if test="${status eq 7 || status eq 3}">
                                             <div class="box box-info collapsed-box">
                                                 <div class="box-header">
                                                     <h3 class="box-title">Manager Remarks:</h3>

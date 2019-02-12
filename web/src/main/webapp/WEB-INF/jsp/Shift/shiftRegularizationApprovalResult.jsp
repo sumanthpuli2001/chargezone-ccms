@@ -120,7 +120,7 @@
                                                                 <!--<td>Apply For Withdraw</td>-->
                                                                 <%--</c:if>--%>
                                                                 <c:if test="${list[5] eq 7}">
-                                                                    <td><span class="label label-info">Rework</span></td>
+                                                                    <td><span class="label label-info">Reworked</span></td>
                                                                 </c:if>
                                                                 <td>
                                                                     <div class="col-sm-12">

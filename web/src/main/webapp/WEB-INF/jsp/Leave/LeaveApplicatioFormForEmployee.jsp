@@ -1725,6 +1725,7 @@
                         data: {},
                         dataType: "text",
                         success: function (responseTxt) {
+                            console.log(responseTxt);
                             if (responseTxt == 0.0 && leaveTypeMaster == 7) {
                                 $("#futureDateSelect").show();
                                 setTimeout(function () {
@@ -1874,7 +1875,6 @@
         //
         //        }
         //        }
-
     </script>
 
     <!-- Content Wrapper. Contains page content -->
@@ -2023,6 +2023,7 @@
                                                                 <%--<form:input path="leaveStartDateId" class="form-control" size="16" type="text" value="" onchange="leaveSetting(); daysCount();" readonly="true"></form:input>--%>
                                                                 <form:input path="startDate" class="form-control" size="16" type="text" value="" onchange="checkStartDateFun();leaveSetting();leaveTypecheck();
                                                                             daysCount();calculateSecondSatByAjax();" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
                                                                 <span id="startDateError" style="color: red;"></span>
@@ -2073,6 +2074,7 @@
                                                                 <%--<form:input id="leaveEndDateId" class="form-control" size="16" type="text" value="" onchange="leaveSetting(); daysCount();" readonly="true"></form:input>--%>
                                                                 <form:input path="endDate" class="form-control" onchange="checkEndDateFun();leaveSetting();leaveTypecheck();
                                                                             daysCount();calculateSecondSatByAjax();" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
                                                                 <span id="endDateError" style="color: red;"></span>
@@ -2125,7 +2127,7 @@
                                                             <form:input path="noOfDays" type="number" class="form-control" readonly="true"></form:input>
                                                                 <input type="hidden" name="hiddenDays" id="hiddenDays" value="">
                                                                 <span id="noOfDaysError" style="color: red;"></span>
-                                                            </div>
+                                                        </div>
                                                             <div  id="calsualLeaveDiv" name="calsualLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Case If You want to Apply Leave For More than 2 Days for Casual/Personal/Any Other except for Sickness.Please Apply PL.</div>
                                                             <!--<div  id="calsualLeaveDiv" name="calsualLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Casual Leave You Apply Max. 3 days.If you wan't to apply More Days of leave Then Apply For PL.</div>-->
                                                             <div  id="sickLeaveDiv" name="sickLeaveDiv" style="color: red; display: none; margin-left: 20px;">You taken More than 3 of days sick leave. So for that doctor's authorize certificate submit when come at office. </div>
@@ -2331,6 +2333,7 @@
     </style>    
     <script>
         function getUseAsSickLevave(id) {
+            alert(id);
             $.post("leaveEmployeeDetail.htm?act=readleaveTypeMaster",
                     {
                         id: id,

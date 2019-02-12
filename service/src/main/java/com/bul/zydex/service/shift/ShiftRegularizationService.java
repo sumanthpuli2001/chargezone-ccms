@@ -19,4 +19,6 @@ public interface ShiftRegularizationService<T> extends GenericsService<T> {
     public List<?> userReportingManager(int id);
 
     public List<?> approvalLeval1WiseShiftRegularizationList(int id);
+
+    public String getShiftById(String shiftMasterCurrent);
 }

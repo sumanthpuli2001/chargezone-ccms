@@ -26,8 +26,8 @@
     </head>
     <script>
         function viewClick(monthlyShiftId) {
-           
-            window.location = "shiftRotationMaster.htm?act=viewClickEmployeeShiftAssignWoffAssign&id=" + monthlyShiftId;
+           var monthSelect = document.getElementById("monthSelect").value;
+            window.location = "shiftRotationMaster.htm?act=viewClickEmployeeShiftAssignWoffAssign&id=" + monthlyShiftId+"&monthSelect="+monthSelect;
         }
 
 //        function approveClick(arId) {

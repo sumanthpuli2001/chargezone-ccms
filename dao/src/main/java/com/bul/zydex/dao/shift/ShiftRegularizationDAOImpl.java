@@ -51,5 +51,17 @@ public class ShiftRegularizationDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public String getShiftById(String shiftMasterCurrent) {
+        String query = "";
+        query += " SELECT a.shiftName"
+                + " FROM ShiftMaster a"
+                + " Where a.id="+shiftMasterCurrent;
+
+        List<?> list = (List)getHibernateTemplate().find(query);
+        String list1 = (list.get(0)).toString();
+        return list1;
+    }
     
 }

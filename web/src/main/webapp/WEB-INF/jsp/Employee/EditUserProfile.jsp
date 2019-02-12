@@ -2802,6 +2802,7 @@
             startDate: dt,
             endDate: dt1,
             forceParse: 0
+            
         });</script>
 
     <script type="text/javascript">

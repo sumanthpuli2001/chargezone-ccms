@@ -10,7 +10,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Employee Edit</title>
+        <title>Former Employee Details</title>
     </head>
     <style>
             #tabs{ margin: 20px -20px; border: none; }
@@ -777,10 +777,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>EMPLOYEE REGISTRATION FORM</h1>
+            <h1>FORMER EMPLOYEE DETAILS</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Employee Registration Form</li>
+                <li class="active">Former Employee Details</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -1738,12 +1738,13 @@
                                                         <div class="form-group">
                                                             <div class="col-sm-6">
                                                             <label>Date of Leaving:</label>
-                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfLeaving" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
+                                                          
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
+                                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                    <form:input path="dateOfLeaving"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                    </div>
                                                         <form:errors path="dateOfLeaving" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
@@ -2662,21 +2663,20 @@
     </script>
     <script type="text/javascript">
         $('.form_datetime').datetimepicker({
-            //language:  'fr',
-            weekStart: 1,
+           weekStart: 1,
             todayBtn: 1,
             autoclose: 1,
             todayHighlight: 1,
             startView: 2,
-            minView: 2,
-            forceParse: 0
+            forceParse: 0,
+            showMeridian: 1,
         });</script>
 
     <script type="text/javascript">
-        var dt = new Date();
-        dt.setFullYear(new Date().getFullYear() - 18);
-        var dt1 = new Date();
-        dt1.setFullYear(new Date().getFullYear() - 100);
+//        var dt = new Date();
+//        dt.setFullYear(new Date().getFullYear() - 18);
+//        var dt1 = new Date();
+//        dt1.setFullYear(new Date().getFullYear() - 100);
         $('.form_datetime_dob').datetimepicker({
             //language:  'fr',
             weekStart: 1,
@@ -2685,16 +2685,34 @@
             todayHighlight: 1,
             startView: 2,
             minView: 2,
-            startDate: dt1,
-            endDate: dt,
+//            startDate: dt1,
+//            endDate: dt,
             forceParse: 0
         });</script>
+    <script type="text/javascript">
+//        var dt = new Date();
+//        dt.setFullYear(new Date().getFullYear() - 18);
+//        var dt1 = new Date();
+//        dt1.setFullYear(new Date().getFullYear() - 100);
+        $('.form_datetime_leavedate').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+//            startDate: dt1,
+//            endDate: dt,
+            forceParse: 0
+        });</script>
+    
 
     <script type="text/javascript">
-        var dt = new Date();
-        dt.setFullYear(new Date().getFullYear() - 10);
-        var dt1 = new Date();
-        dt1.setFullYear(new Date().getFullYear() + 10);
+//        var dt = new Date();
+//        dt.setFullYear(new Date().getFullYear() - 10);
+//        var dt1 = new Date();
+//        dt1.setFullYear(new Date().getFullYear() + 10);
         $('.form_datetime_passport_issue').datetimepicker({
             //language:  'fr',
             weekStart: 1,
@@ -2703,15 +2721,15 @@
             todayHighlight: 1,
             startView: 2,
             minView: 2,
-            startDate: dt,
-            endDate: dt1,
+//            startDate: dt,
+//            endDate: dt1,
             forceParse: 0
         });</script>
 
     <script type="text/javascript">
-        var dt = new Date();
-        var dt1 = new Date();
-        dt1.setFullYear(new Date().getFullYear() + 10);
+//        var dt = new Date();
+//        var dt1 = new Date();
+//        dt1.setFullYear(new Date().getFullYear() + 10);
         $('.form_datetime_passport_expiry').datetimepicker({
             //language:  'fr',
             weekStart: 1,
@@ -2720,11 +2738,24 @@
             todayHighlight: 1,
             startView: 2,
             minView: 2,
-            startDate: dt,
-            endDate: dt1,
+//            startDate: dt,
+//            endDate: dt1,
             forceParse: 0
         });</script>
-
+<script type="text/javascript">
+        
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1,
+//            endDate: new Date()
+        });
+    </script>
     <script>
         jQuery.noConflict();
         jQuery(document).ready(function () {

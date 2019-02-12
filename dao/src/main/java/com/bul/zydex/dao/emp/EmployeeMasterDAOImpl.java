@@ -56,13 +56,15 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
         String query = "";
 
-        query += " Select a.employeeId, a.employeeName, b.designationName, d.level, c.departmentName, lm.location ,a.reportingManagerLevel1, a.company, a.contactNo2,zl.zydexLocation "
+        query += " Select a.employeeId, a.employeeName, b.designationName, d.level, c.departmentName, lm.location ,a.reportingManagerLevel1, a.company, a.contactNo2,zl.zydexLocation ,et.typeOfEmployee ,sb.subType "
                 + "FROM EmployeeMaster a"
                 + " LEFT JOIN a.designationMaster b"
                 + " LEFT JOIN a.departmentMaster c"
                 + " LEFT JOIN a.levelMaster d"
                 + " LEFT JOIN a.locationMaster lm"
                 + " LEFT JOIN a.zydexLocationMaster zl"
+                + " LEFT JOIN a.employeeTypeMaster et "
+                + " LEFT JOIN a.employeeSubType sb "
                 + " WHERE a.userMaster.id = " + employeeMaster.getUserMaster().getId();
 
         return getHibernateTemplate().find(query);
@@ -89,10 +91,10 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     public List<?> readEmployeesDetail() {
         String query = "";
         query += " "
-                + " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role, d.id"
+                + " SELECT a.id, a.employeeId, a.employeeName,b.typeOfEmployee,c.subType,  a.role, d.id"
                 + " FROM EmployeeMaster a "
-                + " LEFT JOIN a.designationMaster b "
-                + " LEFT JOIN a.departmentMaster c "
+                + " LEFT JOIN a.employeeTypeMaster b "
+                + " LEFT JOIN a.employeeSubType c "
                 + " LEFT JOIN a.userMaster d "
                 + " where ((a.dateOfLeaving is null or a.dateOfLeaving = '') "
                 + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())"

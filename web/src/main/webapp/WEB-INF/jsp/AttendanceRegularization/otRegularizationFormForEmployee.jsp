@@ -259,6 +259,7 @@
                                                         <div class="col-sm-4">
                                                             <label>UK Manager Name:<span style="color: red;font-size: 12px;"></span></label>
                                                                 <form:input path="arType"  class="form-control"   ></form:input> 
+                                                                <form:errors path="arType" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                           <div class="col-sm-6">
                                                             <label>Client:<span style="color: red;font-size: 12px;">*</span></label>
@@ -266,7 +267,7 @@
                                                             <form:option value="" label="-- Select --" ></form:option>
                                                             <form:options items="${clientMaster}"></form:options>
                                                         </form:select>
-                                                        <%--<form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>--%>
+                                                        <form:errors path="clientDetailsMaster" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         </div>
                                                         </div>

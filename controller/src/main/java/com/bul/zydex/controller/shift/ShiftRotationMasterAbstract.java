@@ -33,8 +33,11 @@ import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.TempShiftAssignMaster;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.model.TravelRequestMaster;
+import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.WoffRegularization;
 import com.bul.zydex.model.ZydexLocationMaster;
+import com.bul.zydex.service.EmailTemplateService;
+import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
 import com.bul.zydex.service.attendanceRegularization.ClientDetailsMasterService;
 import com.bul.zydex.service.attendanceRegularization.OTRegularizationService;
@@ -97,7 +100,8 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
     protected ClientDetailsMasterService<ClientDetailsMaster> clientDetailsMasterService;
      protected Validator coffRegularizationValidator;
      protected Validator otRegularizationValidator;
-
+      protected EmailTemplateService<EmailTemplate> emailTemplateService;
+    protected UserRightMasterService<UserRightMaster> userRightMasterService;
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
         return timeAttandanceFlaxibleMasterService;
     }
@@ -264,6 +268,22 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
 
     public void setClientDetailsMasterService(ClientDetailsMasterService<ClientDetailsMaster> clientDetailsMasterService) {
         this.clientDetailsMasterService = clientDetailsMasterService;
+    }
+
+    public EmailTemplateService<EmailTemplate> getEmailTemplateService() {
+        return emailTemplateService;
+    }
+
+    public void setEmailTemplateService(EmailTemplateService<EmailTemplate> emailTemplateService) {
+        this.emailTemplateService = emailTemplateService;
+    }
+
+    public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
+        return userRightMasterService;
+    }
+
+    public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
+        this.userRightMasterService = userRightMasterService;
     }
     
     
@@ -528,5 +548,62 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
         this.otRegularizationValidator = otRegularizationValidator;
     }
      
+    public void mailSendOnCallApply(HttpServletRequest request) throws Exception {
+
+        try {
+            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+            EmployeeMaster employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+            DesignationMaster designationMaster = new DesignationMaster();
+            designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+            EmailTemplate emailTemplate1 = new EmailTemplate();
+            // id =7 for approve leave request...
+            emailTemplate1 = emailTemplateService.readById(171);
+            int empID = employeeMasterModel.getId();
+            employeeMaster2 = employeeMasterService.readById(empID);
+
+            String name = "OT";
+            EmailAddMaster emailAddMaster = new EmailAddMaster();
+            emailAddMaster.setModuleName(name);
+            emailAddMaster.setDepartmentMaster(employeeMaster2.getDepartmentMaster());
+            List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+            if (!emailSendList.isEmpty()) {
+                EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                String emailId = emailAddMaster1.getEmailId();
+                for (String emailId1 : emailId.split(",")) {
+                    if (!emailId1.equals("")) {
+                        String To1 = emailId1;
+                        String from1 = employeeMasterModel.getOfficeEmailId();
+                        String subject1 = emailTemplate1.getSubject();
+                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg1 = emailTemplate1.getBodytext();
+                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from1, To1, subject1, msg1);
+                    }
+                }
+            }
+            List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+            if (!allDeptmailList.isEmpty()) {
+                EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                String emailId = emailAddMaster1.getEmailId();
+                for (String emailId1 : emailId.split(",")) {
+                    if (!emailId1.equals("")) {
+                        String To1 = emailId1;
+                        String from1 = employeeMasterModel.getOfficeEmailId();
+                        String subject1 = emailTemplate1.getSubject();
+                        subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg1 = emailTemplate1.getBodytext();
+                        msg1 = msg1.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from1, To1, subject1, msg1);
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
+    }
 
 }

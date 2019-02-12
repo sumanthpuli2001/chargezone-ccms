@@ -19,6 +19,8 @@ import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
+import com.bul.zydex.model.UserRightMaster;
+import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
 import com.bul.zydex.service.attendanceRegularization.TimeAttandanceFlaxibleMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
@@ -48,6 +50,7 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
     protected Validator attendanceRegularizationValidator;
     protected EmployeePunchForMobileAppService<EmployeePunchForMobileApp> employeePunchForMobileAppService;
     protected LeaveEmployeeDetailService<LeaveEmployeeDetail> leaveEmployeeDetailService;
+     protected UserRightMasterService<UserRightMaster> userRightMasterService;
 
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
         return timeAttandanceFlaxibleMasterService;
@@ -127,6 +130,14 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
 
     public void setLeaveEmployeeDetailService(LeaveEmployeeDetailService<LeaveEmployeeDetail> leaveEmployeeDetailService) {
         this.leaveEmployeeDetailService = leaveEmployeeDetailService;
+    }
+
+    public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
+        return userRightMasterService;
+    }
+
+    public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
+        this.userRightMasterService = userRightMasterService;
     }
 
     public void mailSendArApply(HttpServletRequest request) throws Exception {

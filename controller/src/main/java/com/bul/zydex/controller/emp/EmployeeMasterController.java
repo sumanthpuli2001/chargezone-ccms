@@ -3088,7 +3088,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         if (row.getRowNum() != 0 && row.getRowNum() != 1 && row.getRowNum() != 2) {
                             try {
                                 employeeNo = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
-//                                employeeNo = employeeNo.split("\\.", 2)[0];
+                                employeeNo = employeeNo.split("\\.", 2)[0];
                             } catch (Exception e) {
                                 employeeNo = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
                             }
@@ -4191,7 +4191,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         for (Object empDataObject : employeeMasterList) {
             List empList = new ArrayList();
             EmployeeMaster employeeMaster1 = (EmployeeMaster) empDataObject;
-            empList.add(employeeMaster1.getId());
+            empList.add(employeeMaster1.getEmployeeId());
             empList.add(employeeMaster1.getEmployeeName());
             empList.add(employeeMaster1.getDateOfJoining());
             empList.add(employeeMaster1.getGender());
@@ -4212,7 +4212,15 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             String designationname = designationMaster.getDesignationName();
             empList.add(designationname);
             empList.add(employeeMaster1.getEmployeeType());
-            empList.add(employeeMaster1.getReportingManagerLevel1());//9//
+            String repId = employeeMaster1.getReportingManagerLevel1();
+            if(!repId.isEmpty()){
+                EmployeeMaster employeerepMaster  = new EmployeeMaster();
+                employeerepMaster = employeeMasterService.readById(Integer.parseInt(repId));
+                empList.add(employeerepMaster.getEmployeeName());//9//
+            }else{
+                empList.add(" ");//9//
+            }
+            
             int emplevel = employeeMaster1.getLevelMaster().getId();
             List<?> employeelevelList = levelMasterService.readByID(emplevel);
             levelMaster = (LevelMaster) employeelevelList.get(0);
@@ -4246,7 +4254,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
             empList.add(employeeMaster1.getPanCard());
             empList.add(employeeMaster1.getAdharCard());
-            empList.add(employeeMaster1.getEsicNo());
+            empList.add(Double.valueOf(employeeMaster1.getEsicNo()));
             empList.add(employeeMaster1.getUanNo());
             empList.add(employeeMaster1.getMaritalStatus());
 
@@ -5202,6 +5210,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String empId = request.getParameter("empId");
         employeeMaster1 = employeeMasterService.readById(Integer.parseInt(empId));
         employeeMaster1.setDateOfLeaving(employeeMaster.getDateOfLeaving());
+        employeeMaster1.setReasonForLeaving(employeeMaster.getReasonForLeaving());
         employeeMasterService.update(employeeMaster1);
         mv.setViewName("redirect:employeeMaster.htm?act=searchSubmit");
         return mv;

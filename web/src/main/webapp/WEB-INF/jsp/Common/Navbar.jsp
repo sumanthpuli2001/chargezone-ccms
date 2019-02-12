@@ -198,6 +198,7 @@
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> W-off Subordinates Request</a></li>
                                     <!--<li><a href="shiftRotationMaster.htm?act=approvalSubmitcoff"><i class="fa fa-circle-o"></i> C-off Subordinates Request</a></li>-->
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmitOTregularization"><i class="fa fa-circle-o"></i> OT Subordinates Request</a></li>
+                                    <li><a href="oncall.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i>On Call Subordinates Request</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=approvalSubmitcoff"><i class="fa fa-circle-o"></i> Lieu day Subordinates Request</a></li>
                                     <!--<li><a href="attendanceRegularizationMaster.htm?act=approvedList"><i class="fa fa-circle-o"></i>Approved Request</a></li>-->
                                 </c:if>

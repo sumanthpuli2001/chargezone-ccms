@@ -77,6 +77,21 @@ public class EmployeeLeaveBalanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " and (b.leaveType = 'Casual Leave' or b.leaveType = 'Sick Leave')";
         return getHibernateTemplate().find(query);
     }
+    
+    @Override
+    public boolean readByEmpeIdAndLeaveTypeId(int empid, int leaveid) {
+        boolean flag = false;
+        String query = "";
+        query += ""
+                + " From EmployeeLeaveBalance a "
+                + " WHERE a.leaveTypeMaster.id = " + leaveid 
+                + " and a.employeeMaster.id = " + empid;
+        List list = getHibernateTemplate().find(query);
+        if (list.isEmpty()) {
+            flag = true;
+        }
+        return flag;
+    }
 
     @Override
     public List<?> readByLeave(Integer empId, int leaveId) {

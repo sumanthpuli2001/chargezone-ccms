@@ -42,5 +42,7 @@ public interface EmployeeDatetimeDataService<T> extends GenericsService<T> {
     public String getShiftsTime(String empId);
 
     public String getEmailAddress(String empId);
+    
+    public List readAllPuchDataDateWise(String tdate, int id);
    
 }

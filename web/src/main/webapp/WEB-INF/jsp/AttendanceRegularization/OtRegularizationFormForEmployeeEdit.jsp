@@ -127,7 +127,7 @@
         <!-- Main content -->
         <form:form class="form-horizontal" role="form" action="shiftRotationMaster.htm?act=editSubmitOtRequest" commandName="otRegularization" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
 
-
+            <form:hidden path="id"></form:hidden>
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -294,7 +294,7 @@
                                                 </div><!-- /.box-body -->
                                             </div>
                                             <!--Reason In Detail completes Here-->
-                                        <c:if test="${status eq 7}">
+                                        <c:if test="${status eq 7 || status eq 3}">
                                             <div class="box box-info collapsed-box">
                                                 <div class="box-header">
                                                     <h3 class="box-title">Manager Remarks:</h3>

@@ -207,6 +207,8 @@
         <property name="oTRegularizationService" ref="oTRegularizationService1"/>
         <property name="clientDetailsMasterService" ref="clientDetailsMasterService1"/>
         <property name="otRegularizationValidator" ref="otRegularizationValidator1"/>
+        <property name="userRightMasterService" ref="userRightMasterService1" />
+        <property name="emailTemplateService" ref="emailTemplateService1" />
     </bean>
     <bean id="shiftRotationInfoController1" class="com.bul.zydex.controller.shift.ShiftRotationInfoController" parent="controllerConfig" >
         <property name="shiftRotationInfoService" ref="shiftRotationInfoService1" />
@@ -502,6 +504,7 @@
         <property name="levelMasterService" ref="levelMasterService1" />
         <property name="employeePunchForMobileAppService" ref="employeePunchForMobileAppService1" />
         <property name="leaveEmployeeDetailService" ref="leaveEmployeeDetailService1" />
+        <property name="userRightMasterService" ref="userRightMasterService1" />
     </bean>
     <bean id="timeAttandanceFlaxibleMasterController1" class="com.bul.zydex.controller.attendanceRegularization.TimeAttandanceFlaxibleMasterController" parent="controllerConfig" >
         <property name="timeAttandanceFlaxibleMasterService" ref="timeAttandanceFlaxibleMasterService1" />

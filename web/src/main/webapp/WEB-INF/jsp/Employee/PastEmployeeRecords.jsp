@@ -72,8 +72,8 @@
                                                                     <!--<th>user id</th>-->
                                                                     <th>Employee ID</th>
                                                                     <th>Employee Name</th>
-                                                                    <th>Department</th>
-                                                                    <th>Designation</th>
+                                                                    <th>Team</th>
+                                                                    <th>Sub Team</th>
                                                                     <th>Date of Leaving</th>
                                                                         <c:if test="${sessionScope.userRight.hr}">
                                                                         <th>Action</th>

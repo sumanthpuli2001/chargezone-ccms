@@ -24,12 +24,19 @@ public class OtRegularizationValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
        OTRegularization otRegularization = (OTRegularization) o;
+       
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startDateTime",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "endDateTime",
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "reason",
                 "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "arType",
+                "field.error1", "None");
+        if (otRegularization.getClientDetailsMaster() == null){
+            ValidationUtils.rejectIfEmpty(errors, "clientDetailsMaster", "field.error27", "None");
+        }
+        
     }
     
 }

@@ -65,7 +65,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form class="form-horizontal" role="form" action="leaveTypeMaster.htm?act=leaveExcelUploadSubmit" commandName="employeeMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
+        <form:form class="form-horizontal" role="form" action="leaveTypeMaster.htm?act=leaveExcelUploadSubmitData" commandName="employeeMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
             <section class="content">
 
                 <div class="row">

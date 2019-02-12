@@ -156,6 +156,85 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
         downloadFile.doDownload(request, response);
     }
 
+    public ModelAndView leaveExcelUploadSubmitData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("file1");
+        String employeeNo = "";
+        
+//        int comId = Integer.parseInt(request.getParameter("companyId"));
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        List<LeaveTypeMaster> list1 = (List<LeaveTypeMaster>) leaveTypeMasterService.read();
+
+        if (multipartFile.getSize() > 0) {
+            InputStream file = multipartFile.getInputStream();
+            Workbook workbook = WorkbookFactory.create(file);
+            Sheet sheet = workbook.getSheetAt(0);
+
+            for (Row row : sheet) {
+                if (row.getRowNum() != 0) {
+                    Row firstHeaderRow = sheet.getRow(0);
+                    int count = firstHeaderRow.getPhysicalNumberOfCells();
+                    employeeNo = "" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0));
+                    employeeNo = employeeNo.split("\\.", 2)[0];
+                    List<?> employeeMasterlist = employeeMasterService.readByEmployeeNo(Integer.parseInt(employeeNo));
+                    for (Object emp : employeeMasterlist) {
+                        employeeMaster = (EmployeeMaster) emp;
+                        
+                            for (Object leave : list1) {
+                                leaveTypeMaster = (LeaveTypeMaster) leave;
+                                int empid = employeeMaster.getId();
+                                int leaveid = leaveTypeMaster.getId();
+                                for(int i = 1;i<=count-1;i++){
+                                    String leaveTypeName = (String) firstHeaderRow.getCell(i).toString();
+                                    if(leaveTypeName.equalsIgnoreCase(leaveTypeMaster.getLeaveType())){
+                                        String noOfLeaves = row.getCell(i).toString();
+                                        noOfLeaves = noOfLeaves.split("\\.", 2)[0];
+                                        boolean employeeLeaveBalancevalue1 = employeeLeaveBalanceService.readByEmpeIdAndLeaveTypeId(empid, leaveid);
+                                        if(employeeLeaveBalancevalue1){
+                                            employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+                                            employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                                            employeeLeaveBalance.setNoOfLeaveRemain(Float.parseFloat(noOfLeaves));
+                                            employeeLeaveBalanceService.create(employeeLeaveBalance);
+                                        }else{
+                                            List<?> employeeLeaveBalancevaluedata = employeeLeaveBalanceService.readByEmpIdAndLeaveTypeId(empid, leaveid);
+                                            for (Object leaveidlist : employeeLeaveBalancevaluedata) {
+                                                employeeLeaveBalance = (EmployeeLeaveBalance) leaveidlist;
+                                                int leaveBalanceID = employeeLeaveBalance.getId();
+                                                employeeLeaveBalance.setId(leaveBalanceID);
+                                                employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+                                                employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                                                employeeLeaveBalance.setNoOfLeaveRemain(Float.parseFloat(noOfLeaves));
+                                                employeeLeaveBalanceService.update(employeeLeaveBalance);
+                                            }
+                                        }
+                                    }
+                                   
+                                }
+                            }
+                        
+  
+                    }
+                    if(employeeMasterlist.isEmpty()){
+                        request.setAttribute("failureMessage", "Information : The Excel Not Upload Successfully. Please Check Employee ID in Excel Data.");
+                    }
+                }
+                
+            }
+        }else{
+            request.setAttribute("failureMessage", "Information : The Excel Not Upload Successfully. Please Check Excel Data.");
+        }
+        request.setAttribute("successMessage", "Information : The Excel Uploaded Successfully.");
+        employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//        companyListEmp(request, employeeMaster.getId());
+        mv.setViewName("Leave/LeaveExcelUpload");
+    return mv ;
+}
+    
+    
     public ModelAndView leaveExcelUploadSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;

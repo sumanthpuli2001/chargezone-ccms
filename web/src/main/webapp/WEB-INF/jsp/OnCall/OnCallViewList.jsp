@@ -92,7 +92,7 @@
                                                                     <td><span class="label label-primary ">Pending</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list.status eq 3}">
-                                                                    <td><span class="label label-success">Approve by ${managerName}</span></td>
+                                                                    <td><span class="label label-success">Approved by ${managerName}</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list.status eq 4}">
                                                                     <td><span class="label label-warning ">Withdraw</span></td>
@@ -101,7 +101,7 @@
                                                                     <td><span class="label label-danger">Rejected by ${managerName}</span></td>
                                                                 </c:if>
                                                                 <c:if test="${list.status eq 2}">
-                                                                    <td><span class="label label-info">Rework by ${managerName}</span></td>
+                                                                    <td><span class="label label-info">Reworked by ${managerName}</span></td>
                                                                 </c:if>
                                                                     <c:if test="${list.status eq 5}">
                                                                     <td><span class="label label-warning ">Withdrawn by ${managerName} </span></td>

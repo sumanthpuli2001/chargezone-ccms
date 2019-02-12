@@ -248,7 +248,7 @@
                                                 </div><!-- /.row -->
                                             </div><!-- /.box-body -->
                                         </div>
-                                    <c:if test="${status eq 3}">
+                                    <c:if test="${status eq 1 || status eq 2 || status eq 3 || status eq 7}">
                                         <div class="box box-info collapsed-box">
                                             <div class="box-header">
                                                 <h3 class="box-title">Manager Remarks:</h3>
@@ -271,14 +271,14 @@
                                         </div>
                                     </c:if>
                                     <!--Reason In Detail completes Here-->
-                                    <c:if test="${status eq 0 || status eq 18 || status eq 11}">
-                                        <!--                                        <div class="box box-info collapsed-box">
+                                    <c:if test="${status eq 0}">
+                                                                                <div class="box box-info collapsed-box">
                                                                                     <div class="box-header">
                                                                                         <h3 class="box-title">Manager Remarks:</h3>
                                                                                         <div class="box-tools pull-right">
                                                                                             <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4()"><i class="fa fa-plus" id="minusId4"></i></button>
                                                                                         </div>
-                                                                                    </div> /.box-header 
+                                                                                    </div> 
                                                                                     <div class="box-body no-padding">
                                                                                         <div class="row">
                                                                                             <div class="col-md-12 col-sm-12">
@@ -288,10 +288,10 @@
                                                                                                         <textarea class="form-control" rows="6" id="remark" name="remark" placeholder="Enter Remark" ></textarea>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                            </div> /.col 
-                                                                                        </div> /.row 
-                                                                                    </div> /.box-body 
-                                                                                </div>-->
+                                                                                            </div> 
+                                                                                        </div>  
+                                                                                    </div> 
+                                                                                </div>
                                         <div class="form-group" id="sub_btn">
                                             <div class="col-sm-5  ">
                                                 <button type="submit" class="btn btn-success" style="width: 100px;" data-original-title="" title="">APPROVE</button>

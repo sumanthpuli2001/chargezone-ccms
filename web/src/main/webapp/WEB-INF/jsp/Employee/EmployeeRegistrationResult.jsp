@@ -106,8 +106,8 @@
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Employee ID</th>
                                                                     <th style="width: 50px;">Employee Name</th>
-                                                                    <th style="width: 50px;">Department</th>
-                                                                    <th style="width: 50px;">Designation</th>
+                                                                    <th style="width: 50px;">Team</th>
+                                                                    <th style="width: 50px;">Sub Team</th>
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>

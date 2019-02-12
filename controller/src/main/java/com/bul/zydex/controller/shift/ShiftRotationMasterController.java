@@ -63,7 +63,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import javassist.compiler.TokenId;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13963,6 +13965,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
     public ModelAndView employeeShiftChangeMonthly(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+        ShiftRotationMaster shiftRotationMaster = new ShiftRotationMaster();
+        mv.getModelMap().put("shiftRotationMaster",shiftRotationMaster);
         mv.setViewName("Shift/employeeShiftChangeMonthly");
         return mv;
     }
@@ -13971,7 +13975,63 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         ModelAndView mv = new ModelAndView();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile multipartFile = multipartRequest.getFile("file1");
-
+        int year = 0;
+        int month = 0;
+        String getmonth = "";
+        String getyear = "";
+        String monthandyear = request.getParameter("monthYear");
+        
+        if(!monthandyear.isEmpty()){
+            
+        String[] splitStr = monthandyear.split("\\s+");
+        getmonth = splitStr[0];
+        getyear = splitStr[1];
+        
+        if(getmonth.equalsIgnoreCase("January")){
+            month = 1;
+        }
+        else if(getmonth.equalsIgnoreCase("February")){
+            month = 2;
+        }
+        else if(getmonth.equalsIgnoreCase("March")){
+            month = 3;
+        }
+        else if(getmonth.equalsIgnoreCase("April")){
+            month = 4;
+        }
+        else if(getmonth.equalsIgnoreCase("May")){
+            month = 5;
+        }
+        else if(getmonth.equalsIgnoreCase("June")){
+            month = 6;
+        }
+        else if(getmonth.equalsIgnoreCase("July")){
+            month = 7;
+        }
+        else if(getmonth.equalsIgnoreCase("August")){
+            month = 8;
+        }
+        else if(getmonth.equalsIgnoreCase("September")){
+            month = 9;
+        }
+        else if(getmonth.equalsIgnoreCase("October")){
+            month = 10;
+        }
+        else if(getmonth.equalsIgnoreCase("November")){
+            month = 11;
+        }
+        else if(getmonth.equalsIgnoreCase("December")){
+            month = 12;
+        }
+        }
+        else{
+            month = 0;
+        }
+        
+        
+        
+        
+        
         String employeeNo = "";
         String shiftRotationName = "";
         int shiftRotationId = 0;
@@ -14018,14 +14078,15 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 Workbook workbook = WorkbookFactory.create(file);
                 Sheet sheet = workbook.getSheetAt(0);
                 for (Row row : sheet) {
-                    if (row.getRowNum() != 0) {
+                    if (row.getRowNum() != 0 && row.getRowNum() != 1) {
                         try {
-                            employeeNo = new BigDecimal("" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0))).toPlainString();
+                            employeeNo = "" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0));
                             employeeNo = employeeNo.split("\\.", 2)[0];
                         } catch (Exception e) {
                             employeeNo = "" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0));
                         }
                         shiftRotationName = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
+                        shiftRotationName = shiftRotationName.trim();
                         if (shiftRotationName.equals("General Fixed Shift")) {
                             shiftRotationId = 46;
                         } else if (shiftRotationName.equals("First - Night - Second")) {
@@ -14054,7 +14115,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         for (int i = 1; i <= 31; i++) {
 
                             String dayValue = "" + (null == row.getCell((short) (i + 1)) ? "" : row.getCell((short) (i + 1)));
-
+                            dayValue = dayValue.trim();
                             if (dayValue.equals("General")) {
                                 day[i] = 1;
                             } else if (dayValue.equals("First")) {
@@ -14075,6 +14136,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                      
 
                         NextShiftName = "" + (null == row.getCell((short) 33) ? "" : row.getCell((short) 33));
+                        NextShiftName = NextShiftName.trim();
                         if (NextShiftName.equals("General")) {
                             NextShiftId = 1;
                         } else if (NextShiftName.equals("First")) {
@@ -14098,9 +14160,14 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             employeeMaster = (EmployeeMaster) list.get(0);
 //                            int month = 7;
 //                            int year = 2017;
-                            Calendar cal = Calendar.getInstance();
-                            int year = cal.get(Calendar.YEAR);
-                            int month = cal.get(Calendar.MONTH) + 1;
+                            if(month == 0){
+                                Calendar cal = Calendar.getInstance();
+                                year = cal.get(Calendar.YEAR);
+                                month = cal.get(Calendar.MONTH) + 1;
+                            }else{
+                                year = Integer.parseInt(getyear);
+                            }
+                            
                             int empID = employeeMaster.getId();
                             List<?> shiftList = shiftGenerateMonthlyScheduleService.ReadEmployeeShiftByMonthYear(empID, month, year);
                             if (!shiftList.isEmpty()) {
@@ -17065,7 +17132,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 EmployeeMaster employeeMasterHr = new EmployeeMaster();
                 employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
                 // id 14 is for Attendence regularization apply....
-                emailTemplate = emailTemplateService.readById(186);
+                emailTemplate = emailTemplateService.readById(176);
                 String To = employeeMasterHr.getOfficeEmailId();
                 String from = employeeMasterModel.getOfficeEmailId();
                 String Subject = emailTemplate.getSubject();
@@ -17166,7 +17233,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 EmployeeMaster EmployeeHR = new EmployeeMaster();
                 EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
                 //id=14 is for attandence regularization Apply...
-                emailTemplate = emailTemplateService.readById(164);
+                emailTemplate = emailTemplateService.readById(176);
                 String EmpStr = request.getParameter("empid");
                 if (null != EmpStr && !"".equals(EmpStr)) {
                     int Empid = Integer.parseInt(EmpStr);
@@ -17370,7 +17437,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 employeeMaster2.setUserMaster(userMaster);
                 List list = employeeMasterService.readByUserName(employeeMaster2);
                 //id=17 is for attandence regularization reject...
-                emailTemplate = emailTemplateService.readById(187);
+                emailTemplate = emailTemplateService.readById(177);
 //            String EmpStr = request.getParameter("empid");
 //            if (null != EmpStr && !"".equals(EmpStr)) {
 //                int Empid = Integer.parseInt(EmpStr);
@@ -17503,7 +17570,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             employeeMaster1.setUserMaster(userMaster);
             List list = employeeMasterService.readByUserName(employeeMaster1);
             //id=17 is for attandence regularization reject...
-            emailTemplate = emailTemplateService.readById(188);
+            emailTemplate = emailTemplateService.readById(179);
 //            String EmpStr = request.getParameter("empid");
 //            if (null != EmpStr && !"".equals(EmpStr)) {
 //                int Empid = Integer.parseInt(EmpStr);
@@ -17552,7 +17619,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
             EmployeeMaster employeeMaster1 = new EmployeeMaster();
             //id=16 is for attandence regularization rework...
-            emailTemplate = emailTemplateService.readById(189);
+            emailTemplate = emailTemplateService.readById(178);
             UserMaster userMaster = new UserMaster();
             userMaster.setId(shiftRegularization.getUserMasterId().getId());
             employeeMaster1.setUserMaster(userMaster);
@@ -19070,9 +19137,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         int userMasterId = user.getId();
         employeeMaster.setUserMaster(user);
         String clientId = request.getParameter("clientDetailsMaster");
-        clientDetailsMaster.setId(Integer.parseInt(clientId));
-        otRegularization.setClientDetailsMaster(clientDetailsMaster);
-
+        if(!clientId.isEmpty()){
+            clientDetailsMaster =  clientDetailsMasterService.readById(Integer.parseInt(clientId));
+            otRegularization.setClientDetailsMaster(clientDetailsMaster);
+        }
+        
         BindException errors = new BindException(otRegularization, "otRegularization");
         bind(request, otRegularization);
         otRegularizationValidator.validate(otRegularization, errors);
@@ -19098,7 +19167,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             }
             request.setAttribute("employeeMaster", empDetailList.get(0));
             request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
-
+            clientList(request);
             mv.getModelMap().put("otRegularization", new OTRegularization());
             mv.setViewName("AttendanceRegularization/otRegularizationFormForEmployee");
         } else {
@@ -19117,6 +19186,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=searchSubmit");
 //            }
 //            if (attendanceRegularization.getArType().equals("Official")) {
+//            clientDetailsMaster.setId(Integer.parseInt(clientId));
+//            otRegularization.setClientDetailsMaster(clientDetailsMaster);
             otRegularization.setUserMasterId(userMasterId);
 //            otRegularization.setUserMasterId(userMasterId);
             otRegularization.setStatus(0);
@@ -19127,6 +19198,27 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
+            try {
+                mailSendOnCallApply(request);
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                employeeMasterHr = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                // id 163 is for On Call apply....
+                emailTemplate = emailTemplateService.readById(171);
+                String To = employeeMasterHr.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+            }
 
             mv.setViewName("redirect:shiftRotationMaster.htm?act=searchSubmitOTRegularization");
 //            }
@@ -19222,81 +19314,81 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //        }
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
-//            try {
-//
-//                EmailTemplate emailTemplate = new EmailTemplate();
-//                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-//                DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-//                EmployeeMaster employeeMaster1 = new EmployeeMaster();
-//                EmployeeMaster EmployeeHR = new EmployeeMaster();
-//                EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
-//                //id=14 is for attandence regularization Apply...
-//                emailTemplate = emailTemplateService.readById(14);
-//                String EmpStr = request.getParameter("empid");
-//                if (null != EmpStr && !"".equals(EmpStr)) {
-//                    int Empid = Integer.parseInt(EmpStr);
-//                    List list = employeeMasterService.readByEmployeeNo(Empid);
-//                    if (!list.isEmpty()) {
-//                        employeeMaster1 = (EmployeeMaster) list.get(0);
-//                        String To = EmployeeHR.getOfficeEmailId();
-//                        String from = employeeMasterModel.getOfficeEmailId();
-//                        String Subject = emailTemplate.getSubject();
-//                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-//                        String msg = emailTemplate.getBodytext();
-//                        msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
-//                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                        sendMail.sendMail(from, To, Subject, msg);
-//
-//                        String name = "Attendance";
-//                        EmailAddMaster emailAddMaster = new EmailAddMaster();
-//                        emailAddMaster.setModuleName(name);
-//                        emailAddMaster.setDepartmentMaster(employeeMasterModel.getDepartmentMaster());
-//                        List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
-//                        if (!emailSendList.isEmpty()) {
-//                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
-//                            String emailId = emailAddMaster1.getEmailId();
-//                            for (String emailId1 : emailId.split(",")) {
-//                                if (!emailId1.equals("")) {
-//                                    String To1 = emailId1;
-//                                    String from1 = employeeMasterModel.getOfficeEmailId();
-//                                    String subject1 = emailTemplate.getSubject();
-//                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
-//                                    String msg1 = emailTemplate.getBodytext();
-//                                    msg1 = msg1.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
-//                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                                    sendMail.sendMail(from1, To1, subject1, msg1);
-//
-//                                }
-//
-//                            }
-//                        }
-//                        List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
-//                        if (!allDeptmailList.isEmpty()) {
-//                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
-//                            String emailId = emailAddMaster1.getEmailId();
-//                            for (String emailId1 : emailId.split(",")) {
-//                                if (!emailId1.equals("")) {
-//                                    String To1 = emailId1;
-//                                    String from1 = employeeMasterModel.getOfficeEmailId();
-//                                    String subject1 = emailTemplate.getSubject();
-//                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
-//                                    String msg1 = emailTemplate.getBodytext();
-//                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-//                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                                    sendMail.sendMail(from1, To1, subject1, msg1);
-//                                }
-//                            }
-//                        }
-//
-//                    }
-//
-//                }
-//
-//            } catch (Exception e) {
-//            }
+            try {
+
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                EmployeeMaster EmployeeHR = new EmployeeMaster();
+                EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
+                //id=14 is for attandence regularization Apply...
+                emailTemplate = emailTemplateService.readById(171);
+                String EmpStr = request.getParameter("empid");
+                if (null != EmpStr && !"".equals(EmpStr)) {
+                    int Empid = Integer.parseInt(EmpStr);
+                    List list = employeeMasterService.readByEmployeeNo(Empid);
+                    if (!list.isEmpty()) {
+                        employeeMaster1 = (EmployeeMaster) list.get(0);
+                        String To = EmployeeHR.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+
+                        String name = "Attendance";
+                        EmailAddMaster emailAddMaster = new EmailAddMaster();
+                        emailAddMaster.setModuleName(name);
+                        emailAddMaster.setDepartmentMaster(employeeMasterModel.getDepartmentMaster());
+                        List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                        if (!emailSendList.isEmpty()) {
+                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                            String emailId = emailAddMaster1.getEmailId();
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMasterModel.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", EmployeeHR.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+
+                                }
+
+                            }
+                        }
+                        List<?> allDeptmailList = emailAddMasterService.readAllDept(name);
+                        if (!allDeptmailList.isEmpty()) {
+                            EmailAddMaster emailAddMaster1 = (EmailAddMaster) allDeptmailList.get(0);
+                            String emailId = emailAddMaster1.getEmailId();
+                            for (String emailId1 : emailId.split(",")) {
+                                if (!emailId1.equals("")) {
+                                    String To1 = emailId1;
+                                    String from1 = employeeMasterModel.getOfficeEmailId();
+                                    String subject1 = emailTemplate.getSubject();
+                                    subject1 = subject1.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                                    String msg1 = emailTemplate.getBodytext();
+                                    msg1 = msg1.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                    msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from1, To1, subject1, msg1);
+                                }
+                            }
+                        }
+
+                    }
+
+                }
+
+            } catch (Exception e) {
+            }
 
         } else if (btnSubmit.equals("Withdraw")) {
             otRegularization.setStatus(2);
@@ -19309,7 +19401,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 EmployeeMaster EmployeeHR = new EmployeeMaster();
                 EmployeeHR = employeeMasterService.readById(Integer.parseInt(employeeMasterModel.getReportingManagerLevel1()));
                 //id=18 is for attandence regularization withdrow...
-                emailTemplate = emailTemplateService.readById(18);
+                emailTemplate = emailTemplateService.readById(175);
                 String EmpStr = request.getParameter("empid");
                 if (null != EmpStr && !"".equals(EmpStr)) {
                     int Empid = Integer.parseInt(EmpStr);
@@ -19337,7 +19429,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         String currentDate = dateFormat1.format(new Date());
         otRegularization.setDateOfSubmit(currentDate);
-        oTRegularizationService.createOrUpdate(otRegularization);
+        otRegularization.setUserMasterId(otRegularization1.getUserMasterId());
+        oTRegularizationService.update(otRegularization);
 //        mv = searchSubmit(request, response);
         mv.setViewName("redirect:shiftRotationMaster.htm?act=searchSubmitOTRegularization");
         return mv;
@@ -19405,7 +19498,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         OTRegularization otRegularization = new OTRegularization();
         String id = "" + request.getParameter("id");
 //        String remark = "" + request.getParameter("remark");
-        String remark = "";
+        String remark = request.getParameter("remark");
         otRegularization = oTRegularizationService.readById(Integer.parseInt(id));
 
         otRegularization.setStatus(1);
@@ -19418,7 +19511,67 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         otRegularization.setApprovedDate(requestdate);
         otRegularization.setEmployeeMaster(approverName);
         oTRegularizationService.createOrUpdate(otRegularization);
+try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMaster1 = new EmployeeMaster();
 
+                    List<?> allhrlist = userRightMasterService.readallHRList();
+
+                    if (!allhrlist.isEmpty()) {
+
+                        for (Object obj : allhrlist) {
+                            UserRightMaster userRightMaster = new UserRightMaster();
+                            EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                            userRightMaster = (UserRightMaster) obj;
+                            List list = employeeMasterService.readByUserId(userRightMaster.getUserMaster().getId());
+                            if (!list.isEmpty()) {
+
+                                for (Object obj1 : list) {
+                                    employeeMaster2 = (EmployeeMaster) obj1;
+                                    emailTemplate = emailTemplateService.readById(172);
+
+                                    String To = employeeMaster2.getOfficeEmailId();
+                                    String from = employeeMasterModel.getOfficeEmailId();
+                                    String Subject = emailTemplate.getSubject();
+                                    Subject = Subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                    String msg = emailTemplate.getBodytext();
+                                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                    sendMail.sendMail(from, To, Subject, msg);
+                                }
+
+                            }
+
+                        }
+                    }
+                    //id=69 is for attandence regularization approve to employee...
+                    emailTemplate = emailTemplateService.readById(172);
+                    String EmpStr = request.getParameter("empid");
+                    if (null != EmpStr && !"".equals(EmpStr)) {
+                        int Empid = Integer.parseInt(EmpStr);
+                        List list = employeeMasterService.readByEmployeeNo(Empid);
+                        if (!list.isEmpty()) {
+                            employeeMaster1 = (EmployeeMaster) list.get(0);
+                            String To = employeeMaster1.getOfficeEmailId();
+                            String from = employeeMasterModel.getOfficeEmailId();
+                            String Subject = emailTemplate.getSubject();
+                            Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                            String msg = emailTemplate.getBodytext();
+                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from, To, Subject, msg);
+
+                        }
+
+                    }
+
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
 //        Employee Date Time Data
 //        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
 //        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=approvalSubmit");
@@ -19441,39 +19594,39 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         otRegularization.setEmployeeMaster(approverName);
         oTRegularizationService.createOrUpdate(otRegularization);
 
-//        try {
-//
-//            EmailTemplate emailTemplate = new EmailTemplate();
-//            EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-//            DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-//            UserMaster userMaster = new UserMaster();
-//            userMaster.setId(attendanceRegularization.getUserMasterId());
-//            EmployeeMaster employeeMaster1 = new EmployeeMaster();
-//            employeeMaster1.setUserMaster(userMaster);
-//            List list = employeeMasterService.readByUserName(employeeMaster1);
-//            //id=17 is for attandence regularization reject...
-//            emailTemplate = emailTemplateService.readById(17);
-////            String EmpStr = request.getParameter("empid");
-////            if (null != EmpStr && !"".equals(EmpStr)) {
-////                int Empid = Integer.parseInt(EmpStr);
-////                List list = employeeMasterService.readByEmployeeNo(Empid);
-//            if (!list.isEmpty()) {
-//                employeeMaster1 = (EmployeeMaster) list.get(0);
-//                String To = employeeMaster1.getOfficeEmailId();
-//                String from = employeeMasterModel.getOfficeEmailId();
-//                String Subject = emailTemplate.getSubject();
-//                Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
-//                String msg = emailTemplate.getBodytext();
-//                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-//                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-//                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-//                sendMail.sendMail(from, To, Subject, msg);
-//
-////                }
-//            }
-//
-//        } catch (Exception e) {
-//        }
+        try {
+
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                UserMaster userMaster = new UserMaster();
+                userMaster.setId(otRegularization.getUserMasterId());
+                EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                employeeMaster1.setUserMaster(userMaster);
+                List list = employeeMasterService.readByUserName(employeeMaster1);
+                //id=17 is for attandence regularization reject...
+                emailTemplate = emailTemplateService.readById(174);
+//            String EmpStr = request.getParameter("empid");
+//            if (null != EmpStr && !"".equals(EmpStr)) {
+//                int Empid = Integer.parseInt(EmpStr);
+//                List list = employeeMasterService.readByEmployeeNo(Empid);
+                if (!list.isEmpty()) {
+                    employeeMaster1 = (EmployeeMaster) list.get(0);
+                    String To = employeeMaster1.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+
+//                }
+                }
+
+            } catch (Exception e) {
+            }
         mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitOTregularization");
 //        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");
         return mv;
@@ -19493,6 +19646,39 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         otRegularization.setApprovedDate(requestdate);
         otRegularization.setEmployeeMaster(approverName);
         oTRegularizationService.createOrUpdate(otRegularization);
+       try {
+
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                //id=16 is for attandence regularization rework...
+                emailTemplate = emailTemplateService.readById(173);
+                UserMaster userMaster = new UserMaster();
+                userMaster.setId(otRegularization.getUserMasterId());
+                employeeMaster1.setUserMaster(userMaster);
+                List<?> list = employeeMasterService.readByUserName(employeeMaster1);
+//            String EmpStr = request.getParameter("empid");
+//            if (null != EmpStr && !"".equals(EmpStr)) {
+//                int Empid = Integer.parseInt(EmpStr);
+//                List list = employeeMasterService.readByEmployeeNo(Empid);
+                if (!list.isEmpty()) {
+                    employeeMaster1 = (EmployeeMaster) list.get(0);
+                    String To = employeeMaster1.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+
+                }
+
+            } catch (Exception e) {
+
+            }
 
         mv.setViewName("redirect:shiftRotationMaster.htm?act=approvalSubmitOTregularization");
 //        mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=powerAdminApprovalList");

@@ -50,4 +50,6 @@ public interface EmployeeDatetimeDataDAO<T> extends GenericsDAO<T> {
     public String getShiftsTime(String empId);
     
     public String getEmailAddress(String empId);
+    
+    public List readAllPuchDataDateWise(String tdate, int id);
 }

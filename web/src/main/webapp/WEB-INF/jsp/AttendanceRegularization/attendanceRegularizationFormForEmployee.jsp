@@ -248,15 +248,19 @@
                                                             </div>
                                                             <div class="col-sm-3">
                                                                 <label>AR Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                                <select name="arType" id="purpose" class="form-control">
+<!--                                                                <select name="arType" id="purpose" class="form-control">
                                                                     <option value="0">--Select--</option>
                                                                     <option value="Official">Official</option>
                                                                     <option value="Compassion">Compassion</option>
-                                                                </select>
-                                                            </div>
-
-
-
+                                                                </select>-->
+                                                            
+                                                                <form:select path="arType" id="purpose" class="form-control ">
+                                                                    <form:option value="" label="-- Select --" ></form:option>
+                                                                    <form:option value="Official" label="Official" ></form:option>
+                                                                    <form:option value="Compassion" label="Compassion" ></form:option>
+                                                                </form:select>
+                                                                <form:errors path="arType" cssClass="errorDiv"></form:errors>
+</div>
                                                         </div>
                                                         <div class="form-group" id="business">
                                                             <div id="1" class="group">

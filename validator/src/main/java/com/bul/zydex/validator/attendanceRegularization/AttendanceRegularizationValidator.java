@@ -30,7 +30,15 @@ public class AttendanceRegularizationValidator implements Validator {
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "reason",
                 "field.error1", "None");
-
+        if (attendanceRegularization.getArType() == null || attendanceRegularization.getArType().isEmpty()){
+            ValidationUtils.rejectIfEmpty(errors, "arType", "field.error27", "None");
+        }
+        if(attendanceRegularization.getArType().equalsIgnoreCase("Compassion")){
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startDateAr",
+                "field.error1", "None");
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "endDateAr",
+                "field.error1", "None");
+        }
     }
 
 }

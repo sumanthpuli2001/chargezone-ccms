@@ -12,6 +12,19 @@
     <head>
         <title>Monthly Employee Shift Assign Excel Upload</title>
     </head>
+    <style>
+        #tabs{ margin: 20px -20px; border: none; }
+        #tabs, #ui-datepicker-div, .ui-datepicker{ font-size: 85%; }
+        .clear{ clear: both; }
+        .ui-datepicker-calendar {
+        display: none;
+    }
+        /*.example-container{ background-color: #f4f4f4; border-bottom: solid 2px #777777; margin: 0 0 20px 40px; padding: 20px; }*/
+        /*.example-container input{ border: solid 1px #aaa; padding: 4px; width: 175px; }*/
+    </style>
+
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+
     <script>
         var flag3 = true;
         function saveSubmit11() {
@@ -64,7 +77,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form class="form-horizontal" role="form" action="shiftRotationMaster.htm?act=monthlyShiftAssignExcelUploadSubmit" commandName="employeeMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
+        <form:form class="form-horizontal" role="form" action="shiftRotationMaster.htm?act=monthlyShiftAssignExcelUploadSubmit" commandName="shiftRotationMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
             <section class="content">
 
                 <div class="row">
@@ -79,17 +92,19 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <div class="col-sm-6" id="excelDiv">
+                                        <div class="col-sm-4" id="excelDiv">
                                             <input type="file" name="file1" id="file11" value="" onchange="checkfile(this);"/>
                                             <input type="hidden" id="fileName" name="fileName" value=""/>
                                             <span>[ <a href="shiftRotationMaster.htm?act=readShiftUploadFile&amp;fileName=EmployeeMonthlyShiftData.xls">Sample Excel</a> ]</span>
                                         </div>
-                                        <div class="col-sm-6">
-                                        <div class="input-append date" id="datepicker1" data-date="02-2012" data-date-format="mm-yyyy">
-                                         <input  type="text" readonly="readonly" name="date1" >	  
-                                         <span class="add-on"><i class="icon-th"></i></span>	  
-                                        </div>	 
-                                        </div>	
+                                        	
+                                        <div class="col-sm-2">
+                                            <div class="input-group date">
+                                                <label for="startDate">Select Month & Year:</label>  
+                                                <input name="monthYear" id="monthYear" class="date-picker" placeholder="Optional"/> 
+                                            </div>                 
+                                        </div>
+                                        
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-6 col-sm-offset-5" id="uploadDiv" name="uploadDiv" style="display: none">
@@ -109,20 +124,20 @@
         </form:form>
     </div>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-    <script>
-$("#datepicker1").datepicker( {
-	    format: "mm-yyyy",
-	    viewMode: "months", 
-	    minViewMode: "months"
-	});
-        </script>
-        <script type="text/javascript">
-       
-        $('.datepicker1').datepicker({
-            format: "mm-yyyy",
-	    viewMode: "months", 
-	    minViewMode: "months"
-        });
+     <script type="text/javascript">
+      
+$(function() {
+    $('.date-picker').datepicker( {
+        changeMonth: true,
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'MM yy',
+        onClose: function(dateText, inst) { 
+            $(this).datepicker('setDate', new Date(inst.selectedYear, inst.selectedMonth, 1));
+        }
+    });
+});
     </script>
+      
 </html>
 

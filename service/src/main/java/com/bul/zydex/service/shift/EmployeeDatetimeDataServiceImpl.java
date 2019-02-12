@@ -117,4 +117,8 @@ public class EmployeeDatetimeDataServiceImpl<T> extends GenericsServiceImpl<T> i
         return employeeDatetimeDataDAO.getEmailAddress(empId);
     }
 
+    @Override
+    public List readAllPuchDataDateWise(String tdate, int id) {
+        return employeeDatetimeDataDAO.readAllPuchDataDateWise(tdate,id);
+    }
 }

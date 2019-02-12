@@ -56,4 +56,9 @@ public class EmployeeLeaveBalanceServiceImpl<T> extends GenericsServiceImpl<T> i
         return employeeLeaveBalanceDAO.readByLeave(empId, leaveId);
     }
 
+    @Override
+    public boolean readByEmpeIdAndLeaveTypeId(int empid, int leaveid) {
+        return employeeLeaveBalanceDAO.readByEmpeIdAndLeaveTypeId(empid, leaveid);
+    }
+
 }

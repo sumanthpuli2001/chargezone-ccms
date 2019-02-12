@@ -94,7 +94,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         bind(request, attendanceRegularization);
         attendanceRegularizationValidator.validate(attendanceRegularization, errors);
         if (errors.hasErrors()) {
-            request.setAttribute("arType", attendanceRegularization.getArType());
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
             mv.addAllObjects(errors.getModel());
@@ -557,7 +556,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         String id = request.getParameter("id");
-        String remark = request.getParameter("remark");
+        String remark = "" + request.getParameter("remark");
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
         attendanceRegularization.setStatus(3);
         attendanceRegularization.setManagerRemark(remark);
@@ -2094,7 +2093,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         String id = "" + request.getParameter("id");
 //        String remark = "" + request.getParameter("remark");
-        String remark = request.getParameter("managerRemark");
+        String remark = "";
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
 
         if (attendanceRegularization.getArType().equals("Official")) {
@@ -2581,9 +2580,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         String id = request.getParameter("id");
-       
-        String remark = request.getParameter("remark");
-        
+        String remark = "";
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
         attendanceRegularization.setStatus(3);
         attendanceRegularization.setManagerRemark(remark);
@@ -2637,7 +2634,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
         String id = request.getParameter("id");
-        String remark = request.getParameter("remark");
+        String remark = "";
         attendanceRegularization = attendanceRegularizationMasterService.readById(Integer.parseInt(id));
         attendanceRegularization.setStatus(7);
         attendanceRegularization.setManagerRemark(remark);
@@ -3013,8 +3010,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     SimpleDateFormat format = new SimpleDateFormat("EEEE");
                     String dayName = format.format(date);
 
-                    if (firstHalf.contains("fullday")) {
-                        List alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                    
+                    
+                     List alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
                             int listLen = alllistPunch.size();
                             boolean isMisPunch;
                             if(listLen % 2 == 0)
@@ -3071,6 +3069,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     
                                 }
                             }
+                    if (firstHalf.contains("fullday")) {
+                       
                             if(timecount > 270){
                                 newList.add("PR");
                             }else{
@@ -3127,7 +3127,10 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         long diffMinutes1 = diff1 / (60 * 1000);
                         if (dayName.equals("Saturday") && dayOfWeek == 2 && diffMinutes1 >= 240) {
                             newList.add("PR");
-                        } else if (diffMinutes1 >= diffMinutes) {
+                        } else if (timecount < 270) {
+                            newList.add("AB");
+                        }
+                        else if (diffMinutes1 >= diffMinutes) {
                             newList.add("PR");
                         } else if (userTimeIn != null) {
                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
@@ -3451,7 +3454,73 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR") && !secondHalf.contains("Short Leave")) {
                         secondHalfList.add("AB");
                     } else if (secondHalf.contains("fullday")) {
-                        secondHalfList.add("PR");;
+                        
+                         List alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                            int listLen = alllistPunch.size();
+                            boolean isMisPunch;
+                            if(listLen % 2 == 0)
+                                isMisPunch = false;
+                            else
+                                isMisPunch = true;
+                            
+                                boolean inBool = true;
+                                boolean outBool = false;
+                                String inTime1 = null;
+                                String outTime1= null;
+                                SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss");  
+                              
+                                Date d1 = null;
+                                Date d2 = null;
+                                String []inTime1val;
+                                String []outTime1val;
+                                String outTime1val1;
+                                String inTime1val1;
+                                long timecount = 0;
+                                int cnt =0;
+                            for (Object o : alllistPunch) {
+                                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                                cnt++;
+                                if(isMisPunch && (listLen == cnt)){
+                                    break;
+                                }else if(inBool){
+                                    inTime1 = employeeDatetimeData.getDateTime();                                    
+                                    inTime1val = inTime1.split(" ");
+                                    inTime1val1 = inTime1val[1];
+                                    try {
+                                        d1 = format1.parse(inTime1val1);
+//                                        d2 = format.parse(dateStop);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }    
+                                    inBool = false;
+                                    outBool = true;
+                                } else if(outBool){
+                                    outTime1 = employeeDatetimeData.getDateTime();
+                                    outTime1val = outTime1.split(" ");
+                                    outTime1val1 = outTime1val[1];
+                                    inBool = true;
+                                    outBool = false;
+                                     try {
+                                        d2 = format1.parse(outTime1val1);
+//                                        d2 = format.parse(dateStop);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }    
+                                    long difff = d2.getTime() - d1.getTime();        
+                                    long diffMinutes = difff / (60 * 1000);  
+                                    timecount += diffMinutes;
+                                    
+                                }
+                            }
+                            if(timecount > 270 && timecount >= 540){
+                                secondHalfList.add("PR");
+                            }else{
+                                secondHalfList.add("AB");
+                            }
+                        
+                        
+                        
+                        
 
                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
                             && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")

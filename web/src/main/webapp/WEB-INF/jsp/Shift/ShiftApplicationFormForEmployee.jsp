@@ -87,7 +87,7 @@
                     for (var i = 0; i < count; i++) {
                        
                         if (desigJSONKey[i] === obj['firstShiftId']) {
-                               document.getElementById('preciousShiftId').value = obj['firstShiftId'];
+                               document.getElementById('newShift').value = obj['firstShiftId'];
                             data += "<option selected value=" + desigJSONKey[i] + ">" + desigJSON[desigJSONKey[i]] + "</option>";
                         } else {
 //                            data += "<option value=" + year + ">" + year + "</option>";
@@ -335,7 +335,7 @@
                                                     <div class="form-group" >
                                                         <div class="col-sm-6">
                                                             <label>Work Type:</label>
-                                                            <select name="shiftType" id="WorkTypeSelectId" class="form-control" onchange="shift();" >
+                                                            <select name="shiftType" id="shiftType" class="form-control" onchange="shift();" >
                                                                 <c:if test="${shiftType eq 'HourlyBase'}">
                                                                     <option value="HourlyBase" selected="">Hourly Base</option>
                                                                     <option value="ShiftBase">Shift Base</option>
@@ -361,7 +361,7 @@
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
                                                             </div>
-                                                            <input type="hidden" name="preciousShiftId" id="preciousShiftId"/>
+                                                            <!--<input type="hidden" name="preciousShiftId" id="preciousShiftId"/>-->
                                                         
 <!--                                                        <div class="col-sm-6" >
                                                             <label>Shift Rotation Name:<span style="color: red;font-size: 12px;">*</span></label>
@@ -373,17 +373,19 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6" id="shiftMasterId">
-                                                            <label>Shift Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <select readonly="true" name="newShift" id="newShift" class="form-control"></select>
+                                                            <label>Shift Name:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <select readonly="true" name="newShift"  id="newShift" class="form-control">
+                                                              <option value="" >${newShift}</option>
+                                                           </select>
                                                         </div> 
                                                         <div class="col-sm-6" >
                                                             <label>Shift Rotation Name:<span style="color: red;font-size: 12px;">*</span></label>
 
-                                                            <select  name="shiftId" id="shiftId"  class="form-control">
-                                                                <option value="" label="-- Select --" ><option>
-                                                                <c:forEach var="shift1" items="${shift}">
-                                                                        <option value="${shift1.key}" >${shift1.value}</option>
-                                                                </c:forEach>
+                                                            <select  name="shiftMasterCurrent" id="shiftMasterCurrent" value="${shiftMasterCurrent}" class="form-control">
+                                                                <option value="" label="-- Select --" ></option>
+                                                                    <c:forEach var="shift1" items="${shift}">
+                                                                    <option value="${shift1.key}" >${shift1.value}</option>
+                                                                    </c:forEach>    
                                                             <select>
                                                         </div>
                                                     </div>

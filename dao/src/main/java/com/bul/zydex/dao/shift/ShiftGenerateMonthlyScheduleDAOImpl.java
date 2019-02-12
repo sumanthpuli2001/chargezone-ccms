@@ -111,6 +111,20 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
                 + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
         return getHibernateTemplate().find(query);
     }
+    
+    @Override
+    public List<?> employeeListReadByMonth1(int month, int year,int empId) {
+        String query = "";
+        query += " Select a.id,b.employeeId,b.employeeName,b.id"
+                + " FROM ShiftGenerateMonthlySchedule a"
+                + " LEFT JOIN a.employeeMaster b"
+                + " Where a.shiftMonth = " + month
+                + " And a.shiftYear =" + year
+                + " and a.employeeMaster.id="+empId
+                + " and b.employeeId != 'admin' and ((b.dateOfLeaving is null or b.dateOfLeaving = '') "
+                + " or STR_TO_DATE(b.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
+        return getHibernateTemplate().find(query);
+    }
 
     @Override
     public List<?> employeeMonthlyShiftDetail(int id) {

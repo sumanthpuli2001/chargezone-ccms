@@ -19,6 +19,8 @@ public interface ShiftRegularizationDAO<T> extends GenericsDAO<T> {
     public List<?> userReportingManager(int id);
 
     public List<?> approvalLeval1WiseShiftRegularizationList(int id);
+    
+    public String getShiftById(String shiftMasterCurrent);
 
    
 }

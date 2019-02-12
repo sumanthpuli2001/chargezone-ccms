@@ -184,7 +184,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         mv.setViewName("Leave/LeaveApplicatioFormForEmployee");
         return mv;
     }
-
+    
     public ModelAndView applySubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
@@ -2736,7 +2736,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         c.setTime(sDate);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         List<String> list1 = new ArrayList<String>();
-        float days = 0;
+//        float days = 0;
+        float days = leaveEmployeeDetail.getNoOfDays();
         while (c.getTime().before(eDate)) {
             if (c.get(Calendar.DAY_OF_WEEK) != c.get(Calendar.SUNDAY)) {
                 Date nDate = c.getTime();
@@ -2745,9 +2746,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 holidayMaster.setHolidayFromDate(daString);
                 List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster.getLocationMaster().getId());
                 if (list.size() == 0) {
-                    days++;
+//                    days++;
+                    days=days;
                 }
-
             }
             c.add(Calendar.DATE, 1);
 

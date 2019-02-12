@@ -40,5 +40,10 @@ public class ShiftRegularizationServiceImpl<T> extends GenericsServiceImpl<T> im
     public List<?> approvalLeval1WiseShiftRegularizationList(int id) {
          return shiftRegularizationDAO.approvalLeval1WiseShiftRegularizationList(id);
     }
+
+    @Override
+    public String getShiftById(String shiftMasterCurrent) {
+        return shiftRegularizationDAO.getShiftById(shiftMasterCurrent);
+    }
     
 }

@@ -26,6 +26,8 @@ public interface ShiftGenerateMonthlyScheduleService<T> extends GenericsService<
     public List<?> readByDayWiseEmployeeShiftData1(int day, int month1, int year1, int id2);
 
     public List<?> employeeListReadByMonth(int month, int year);
+    
+    public List<?> employeeListReadByMonth1(int month, int year,int empId);
 
     public List<?> employeeMonthlyShiftDetail(int id);
 

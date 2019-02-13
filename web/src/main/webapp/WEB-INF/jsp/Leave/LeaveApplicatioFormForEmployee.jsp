@@ -2325,7 +2325,6 @@
     </style>    
     <script>
         function getUseAsSickLevave(id) {
-            alert(id);
             $.post("leaveEmployeeDetail.htm?act=readleaveTypeMaster",
                     {
                         id: id,

@@ -17725,7 +17725,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //        ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
         String id = request.getParameter("id");
         String dayNo = request.getParameter("dayNo");
-
+        String monthSelect = request.getParameter("monthSelect");
         String shiftId = "";
         List<?> empShiftList = shiftGenerateMonthlyScheduleService.readDayWiseShift(Integer.parseInt(id), Integer.parseInt(dayNo));
         if (!empShiftList.isEmpty()) {
@@ -17739,6 +17739,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         mv.getModelMap().put("shiftGenerateMonthlySchedule", shiftGenerateMonthlySchedule);
         request.setAttribute("dayNo", dayNo);
         request.setAttribute("id", id);
+        request.setAttribute("monthSelect", monthSelect);
         mv.setViewName("Shift/EditEmployeeDayWiseShiftWoff");
         return mv;
     }
@@ -17748,6 +17749,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         LocalDateTime ldt=LocalDateTime.now();
         String id1 = request.getParameter("id");
         String dayNo = request.getParameter("dayNo");
+        String month = request.getParameter("monthSelect");
         String rotationdate = request.getParameter("rotationdate");
         String reasonForWoff = request.getParameter("reasonForWoff");
         ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
@@ -17799,7 +17801,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         employeeMaster.setUserMaster(user);
         woffRegularization.setUserMasterId(user);
         woffRegularization.setStatus(0);
-        String Woffday = dayNo + "/" + ldt.getMonthValue() + "/" + ldt.getYear();
+        String Woffday = dayNo + "/" + month + "/" + ldt.getYear();
         woffRegularization.setDayWoff(Woffday);
         woffRegularization.setShiftMasterPrevious(userMasterprecivous);
         
@@ -17842,6 +17844,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 "Error : Shift not generated or rotation already selected.");
        mv.getModelMap().put("shiftGenerateMonthlySchedule", shiftGenerateMonthlySchedule);
        request.setAttribute("dayNo",dayNo);
+       request.setAttribute("monthSelect",month);
        request.setAttribute("rotationdate",rotationdate);
        request.setAttribute("reasonForWoff",reasonForWoff);
        mv.addAllObjects(errors.getModel());

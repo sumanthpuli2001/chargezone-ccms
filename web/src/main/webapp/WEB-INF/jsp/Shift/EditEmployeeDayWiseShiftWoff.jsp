@@ -34,7 +34,7 @@
                    name='form1' class="form-horizontal" role="form">
             <form:hidden path="id"></form:hidden>
             <form:hidden path="noOfDays"></form:hidden>
-
+            <input type="hidden" id="monthSelect" name="monthSelect" value="${monthSelect}">
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">

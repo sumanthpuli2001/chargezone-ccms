@@ -25,11 +25,13 @@
         </style>
     </head>
     <script>
-        function viewClick(id, dayNo) {
-
-
-            window.location = 'shiftRotationMaster.htm?act=EditEmployeeShiftAssignWoff&id=' + id + '&dayNo=' + dayNo;
+        function viewClick(id, dayNo,monthSelect) {
+            window.location = 'shiftRotationMaster.htm?act=EditEmployeeShiftAssignWoff&id=' + id + '&dayNo=' + dayNo + '&monthSelect=' + monthSelect;
         }
+//        function viewClick1() {
+//            String monthSelect = request.getParameter("monthSelect").value;
+//            window.location = 'shiftRotationMaster.htm?act=EditEmployeeShiftAssignWoff&monthSelect=' + monthSelect;
+//        }
 
 //        function approveClick(arId) {
 //            window.location = 'attendanceRegularizationMaster.htm?act=approvalEditSubmitByAdmin&id=' + arId;
@@ -66,6 +68,7 @@
         <form:form 
             name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
             <input type="hidden" id="empId" name="empId" value="${monthlySchedule.employeeMaster.id}">
+            <input type="hidden" id="monthSelect" name="monthSelect" value="${monthlySchedule.shiftMonth}">
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -134,7 +137,7 @@
                                                                              <c:if test='${list[i]eq"WO"}'>
                                                                                 <li>
 
-                                                                                    <a href="#"  onclick="viewClick(${monthlySchedule.id},${i+1});" >
+                                                                                    <a href="#"  onclick="viewClick(${monthlySchedule.id},${i+1},${monthlySchedule.shiftMonth});" >
                                                                                         Change Woff
                                                                                     </a> 
                                                                                 </li>

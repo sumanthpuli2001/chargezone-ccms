@@ -63,7 +63,7 @@
                                 <!--form horizontal starts here-->
 
                                 <div class="box-header">
-                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'leaveEmployeeDetail.htm?act=applyClick'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
+                                    <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'leaveEmployeeDetail.htm?act=applyClick'">&nbsp&nbsp;APPLY</button>
                                 </div>
                                 <div class="box-body no-padding">
                                     <div class="row">

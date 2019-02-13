@@ -519,6 +519,7 @@
                     }, function (responseTxt, statusTxt, xhr) {
                 if (statusTxt === "success") {
                     ("responseTxt" + responseTxt);
+//                    alert(responseTxt);
                     document.getElementById('employeeSubTypeId').innerHTML = responseTxt;
                 }
                 if (statusTxt === "error")

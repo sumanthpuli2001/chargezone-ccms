@@ -3371,7 +3371,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMasterExtension.setPermanentCountry(permanentCountry);
                             employeeMasterExtension.setPermanentPostalCode(permanentPostalCode);
                             employeeMasterExtension.setPermanentState(permanentState);
-                            employeeMasterExtension.setFlyDocsEmailId(flyDocsEmailId);
+//                            employeeMasterExtension.setFlyDocsEmailId(flyDocsEmailId);
                             employeeMasterExtension.setWithdrawalDate(pfwithdrawalDate);
                             employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
                             employeeMasterExtension.setElectionCard(electionCard);
@@ -3610,7 +3610,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             }
 
                             employeeMaster.setCompany(company);
-                            employeeMaster.setOfficeEmailId(personalEmailId);
+                            employeeMaster.setOfficeEmailId(flyDocsEmailId);
                             employeeMaster.setContactNo1(contactNo);
                             employeeMaster.setContactNo2(contactNo2);
                             employeeMaster.setFatherName(fatherNamed1);
@@ -4254,7 +4254,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
             empList.add(employeeMaster1.getPanCard());
             empList.add(employeeMaster1.getAdharCard());
-            empList.add(Double.valueOf(employeeMaster1.getEsicNo()));
+            empList.add(employeeMaster1.getEsicNo());
             empList.add(employeeMaster1.getUanNo());
             empList.add(employeeMaster1.getMaritalStatus());
 

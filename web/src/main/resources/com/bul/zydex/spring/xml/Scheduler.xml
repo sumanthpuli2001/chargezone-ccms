@@ -159,7 +159,7 @@
     <bean id="cronTrigger9"
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="probationToConfirmationCreateCheck" />
-        <property name="cronExpression" value="0 0/1 * * * ?" />0 0 10 * * ?
+        <property name="cronExpression" value="0 0/1 * * * ?" />
         <property name="cronExpression" value="0 0 10 * * ?" />
         <property name="cronExpression" value="0 0/3 * * * ?" />
     </bean>-->

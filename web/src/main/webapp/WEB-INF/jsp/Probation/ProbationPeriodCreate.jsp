@@ -62,7 +62,7 @@
                                         <div class="col-sm-6">
                                             <form:select path="period" class="form-control">
                                                 <form:option value="" label="-- Select --" />
-                                                <form:option value="6">6 Month</form:option>
+                                                <form:option value="3">3 Month</form:option>
                                                 <form:option value="12">1 Year</form:option>
                                             </form:select>
                                             <form:errors path="period" cssClass="errorDiv"></form:errors>

@@ -105,7 +105,7 @@
                                                                 <!--<td><span class="label label-success">Withdraw Approve</span></td>-->
                                                                 <%--</c:if>--%>
                                                                 <c:if test="${list.status eq 7}">
-                                                                    <td><span class="label label-info">Rework by ${managerName}</span></td>
+                                                                    <td><span class="label label-info">Reworked by ${managerName}</span></td>
                                                                 </c:if>
 
                                                                 <td>  <button type="button" class="btn btn-default" onclick="editClick(${list.id});">View</button></td>

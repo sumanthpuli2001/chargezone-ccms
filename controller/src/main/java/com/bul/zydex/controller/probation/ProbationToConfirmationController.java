@@ -702,7 +702,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 } else {
                     Integer designationid = (Integer) o1[4];
                     List list = probationPeriodService.readbyDesignation(designationid);
-                    int probationPeriod = 6;
+                    int probationPeriod = 3;
                     if (!list.isEmpty()) {
                         probationPeriod = (int) list.get(0);
                     }

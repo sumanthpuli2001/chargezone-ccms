@@ -52,11 +52,15 @@
 
 
             window.location = "shiftRotationMaster.htm?act=MonthlyEmployeeShiftAssignData&selectedMonth=" + month;
-
-
-
-
         }
+//       function monthwiseData1() {
+//
+//            var month = document.getElementById("monthSelect").value;
+//
+//
+//            window.location = "shiftRotationMaster.htm?act=EditEmployeeShiftAssignWoff&selectedMonth=" + month;
+//
+//        }
     </script>
     <script>
         function  monthData() {

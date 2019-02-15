@@ -622,6 +622,14 @@
                 document.getElementById('spanId4').innerHTML = 'Expand';
             }
         }
+         function buttonFun11() {
+            var className = $('#minusId11').attr('class');
+            if (className == 'fa fa-plus') {
+                document.getElementById('spanId11').innerHTML = 'Minimize';
+            } else {
+                document.getElementById('spanId11').innerHTML = 'Expand';
+            }
+        }
         function buttonFun5() {
             var className = $('#minusId5').attr('class');
             if (className == 'fa fa-plus') {
@@ -1735,27 +1743,7 @@
 
 
                                                         </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                            <label>Date of Leaving:</label>
-                                                          
-                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
-                                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                    <form:input path="dateOfLeaving"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
-                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                    </div>
-                                                        <form:errors path="dateOfLeaving" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                         <label>Reason for Leaving:<span style="color: red;font-size: 12px;">*</span></label>
-                                                                
-                                                                <form:textarea  path="reasonForLeaving" class="form-control" rows="3"/>
-                                                                <form:errors path="reasonForLeaving" cssClass="errorDiv"></form:errors>
-                                                                          
-                                                    </div>
-
-                                                    </div> 
+                                                        
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label >Official Contact No:</label>
@@ -2433,8 +2421,43 @@
                                     </div>
                                     
                                     
-                                    
-                                    
+                                    <!--Former Employee Detail starts here-->
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Former Employee Specific Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId11">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun11();"><i class="fa fa-plus" id="minusId11"></i></button>
+                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                            <label>Date of Leaving:</label>
+                                                          
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
+                                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                    <form:input path="dateOfLeaving"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                    </div>
+                                                        <form:errors path="dateOfLeaving" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                         <label>Reason for Leaving:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                
+                                                                <form:textarea  path="reasonForLeaving" class="form-control" rows="3"/>
+                                                                <form:errors path="reasonForLeaving" cssClass="errorDiv"></form:errors>
+                                                                          
+                                                    </div>
+
+                                                    </div> 
+                                               </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     
                                     <div class="box box-info collapsed-box" id="empInfo_id">
                                         <div class="box-header">

@@ -43,8 +43,12 @@ import com.bul.zydex.util.DownloadFile;
 import com.bul.zydex.validator.PasswordValidator;
 import com.google.gson.Gson;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -67,11 +71,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.validation.BindException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -4172,7 +4181,327 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         }
     }
 
-    public ModelAndView exportToExcel(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
+    
+    public void exportToExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+        EmployeeSubType employeeSubType = new EmployeeSubType();
+        DesignationMaster designationMaster = new DesignationMaster();
+        LevelMaster levelMaster = new LevelMaster();
+        ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
+        ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
+        String searchEmployeeString = "";
+        String searchString = request.getParameter("searchString");
+        searchEmployeeString = (searchString == null || searchString == "") ? searchEmployeeString : (searchEmployeeString + searchString);
+        String[] columns = {"Sr No.","Employee ID","Employee Name", "Date of Joining", "Gender","Date Of Birth", "Team","Sub-Team","Designation","Employee Type","Line Manager","Level"
+                ,"Work Location","Role","Name As Per","First Name","Middle Name","Last Name","Passport No"
+                ,"Nationality","Country of Issue","Passport Issue Date","Passport Expiry Date","Visa issue country"
+                ,"Visa issue Date","Visa valid till date","Local Address1","Local Address2","City/Town","State","Post Code","Country"
+                ,"Permanent Address1","Permanent Address2","City/Town","State","Post Code","Country","Resident Contact"
+                ,"Mobile No","FLYdocs Email Address","Personal Email Address","Bank A/c No.","Bank Name","IFSC Code"
+                ,"PF withdrawal Date","PF No (Previous)","PF No.(FLYdocs)","Election Card","PAN Card","Aadhar Card","ESI No","UAN"
+                ,"Marital Status","Religion","Blood Group","Disclosed Health Concerns","Driving Licence No.","2 wheeler / 4 wheeler / Both"
+                ,"Dependent 1 Name","Dependent 1 DOB","Dependent 2 Name","Dependent 2 DOB","Dependent 3 Name","Dependent 3 Gender"
+                ,"Dependent 3 DOB","Dependent 4 Name","Dependent 4 Gender","Dependent 4 DOB","Dependent 5 Name","Dependent 5 Gender"
+                ,"Dependent 5 DOB","Emergency Contact Name","Relationship","Contact Number","Emergency Contact Address"
+                ,"Other important information relating to your emergency contact","Name of Previous company","Company Location"
+                ,"Employees Exp. on date of Joining FIPL (Year)","Employees Exp. on date of Joining FIPL (Month)","Highest Education Details"
+                ,"Language known","Hobbies","Work Type","Payment Type","Basic Salary","Company","Department"};
+       
+        Workbook workbook = new XSSFWorkbook(); 
+
+        CreationHelper createHelper = workbook.getCreationHelper();
+        Sheet sheet = workbook.createSheet("EmployeeData");
+        Font headerFont = workbook.createFont();
+        headerFont.setBoldweight((short)5);
+        headerFont.setFontHeightInPoints((short) 14);
+        headerFont.setColor(IndexedColors.BLACK.getIndex());
+
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        headerCellStyle.setFont(headerFont);
+
+        Row headerRow = sheet.createRow(0);
+
+        for(int i = 0; i < columns.length; i++) {
+            org.apache.poi.ss.usermodel.Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns[i]);
+            cell.setCellStyle(headerCellStyle);
+        }
+        
+        CellStyle dateCellStyle = workbook.createCellStyle();
+        dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd-MM-yyyy"));
+        
+        int rowNum = 1;
+        List<?> employeeMasterList = employeeMasterService.readEmployeeDataForexportToExcelFlyDoc(searchEmployeeString);
+        int count = 0;
+        for (Object empDataObject : employeeMasterList) {
+            EmployeeMaster employeeMaster1 = (EmployeeMaster) empDataObject;
+            Row row = sheet.createRow(rowNum++);
+            count++;
+            row.createCell(0).setCellValue(count);
+            row.createCell(1).setCellValue(employeeMaster1.getEmployeeId());
+            row.createCell(2).setCellValue(employeeMaster1.getEmployeeName());
+            org.apache.poi.ss.usermodel.Cell dateOfjoining = row.createCell(3);
+            dateOfjoining.setCellValue(employeeMaster1.getDateOfJoining());
+            dateOfjoining.setCellStyle(dateCellStyle);
+            Boolean gen = employeeMaster1.getGender();
+            String gender;
+            if(gen == false){
+                gender = "Male";
+            }else if(gen == true){
+                gender = "Female";
+            }else{
+                gender = "";
+            }
+            row.createCell(4).setCellValue(gender);
+            org.apache.poi.ss.usermodel.Cell dateOfbirth = row.createCell(5);
+            dateOfbirth.setCellValue(employeeMaster1.getDateOfBirth());
+            dateOfbirth.setCellStyle(dateCellStyle);
+            int emptypid = employeeMaster1.getEmployeeTypeMaster().getId();
+            List<?> employeeTypeMasterList = employeeTypeService.readByID(emptypid);
+            employeeTypeMaster = (EmployeeTypeMaster) employeeTypeMasterList.get(0);
+            String employeetypename = employeeTypeMaster.getTypeOfEmployee();
+            row.createCell(6).setCellValue(employeetypename);
+            int empsubtypid = employeeMaster1.getEmployeeSubType().getId();
+            List<?> employeeSubTypeMasterList = employeeSubTypeService.readByID(empsubtypid);
+            employeeSubType = (EmployeeSubType) employeeSubTypeMasterList.get(0);
+            String employeesubtypename = employeeSubType.getSubType();
+            row.createCell(7).setCellValue(employeesubtypename);
+            int empdesig = employeeMaster1.getDesignationMaster().getId();
+            List<?> employeedesigList = designationMasterService.readByID(empdesig);
+            designationMaster = (DesignationMaster) employeedesigList.get(0);
+            String designationname = designationMaster.getDesignationName();
+            row.createCell(8).setCellValue(designationname);
+            row.createCell(9).setCellValue(employeeMaster1.getEmployeeType());
+            String repId = employeeMaster1.getReportingManagerLevel1();
+            if(!repId.isEmpty()){
+                EmployeeMaster employeerepMaster  = new EmployeeMaster();
+                employeerepMaster = employeeMasterService.readById(Integer.parseInt(repId));
+                row.createCell(10).setCellValue(employeerepMaster.getEmployeeName());
+            }else{
+               row.createCell(10).setCellValue(" ");
+            }
+            int emplevel = employeeMaster1.getLevelMaster().getId();
+            List<?> employeelevelList = levelMasterService.readByID(emplevel);
+            levelMaster = (LevelMaster) employeelevelList.get(0);
+            String levelMastername = levelMaster.getLevel();
+            row.createCell(11).setCellValue(levelMastername);
+            int empzyxlocation = employeeMaster1.getZydexLocationMaster().getId();
+            List<?> employeezydxlocationList = zydexLocationMasterService.readByID(empzyxlocation);
+            zydexLocationMaster = (ZydexLocationMaster) employeezydxlocationList.get(0);
+            String zydxlocationname = zydexLocationMaster.getZydexLocation();
+            row.createCell(12).setCellValue(zydxlocationname);
+            row.createCell(13).setCellValue(employeeMaster1.getRole());
+            row.createCell(18).setCellValue(employeeMaster1.getPassportNo());
+            row.createCell(21).setCellValue(employeeMaster1.getPassportIssueDate());
+            row.createCell(22).setCellValue(employeeMaster1.getPassportExpiryDate());
+            row.createCell(26).setCellValue(employeeMaster1.getPresentAddress());
+            row.createCell(32).setCellValue(employeeMaster1.getPermanentAddress());
+            row.createCell(38).setCellValue(employeeMaster1.getContactNo1());
+            row.createCell(39).setCellValue(employeeMaster1.getContactNo2());
+            row.createCell(40).setCellValue(employeeMaster1.getOfficeEmailId());
+            row.createCell(41).setCellValue(employeeMaster1.getEmailAddress());
+            row.createCell(42).setCellValue(employeeMaster1.getBankAccountNo());
+            row.createCell(43).setCellValue(employeeMaster1.getBankName());
+            row.createCell(44).setCellValue(employeeMaster1.getBankIfscCode());
+            row.createCell(46).setCellValue(employeeMaster1.getPfNo());
+            row.createCell(49).setCellValue(employeeMaster1.getPanCard());
+            row.createCell(50).setCellValue(employeeMaster1.getAdharCard());
+            row.createCell(51).setCellValue(employeeMaster1.getEsicNo());
+            row.createCell(52).setCellValue(employeeMaster1.getUanNo());
+            row.createCell(53).setCellValue(employeeMaster1.getMaritalStatus());
+            row.createCell(55).setCellValue(employeeMaster1.getBloodGroups());
+            row.createCell(57).setCellValue(employeeMaster1.getDrivingLicence());
+            row.createCell(59).setCellValue(employeeMaster1.getFatherName());
+            org.apache.poi.ss.usermodel.Cell dateOfbirthfather = row.createCell(60);
+            dateOfbirthfather.setCellValue(employeeMaster1.getDateOfBirthOfEmpFather());
+            dateOfbirthfather.setCellStyle(dateCellStyle);
+            row.createCell(61).setCellValue(employeeMaster1.getMotherName());
+            org.apache.poi.ss.usermodel.Cell dateOfbirthmother = row.createCell(62);
+            dateOfbirthmother.setCellValue(employeeMaster1.getDateOfBirthOfEmpMother());
+            dateOfbirthmother.setCellStyle(dateCellStyle);
+            row.createCell(63).setCellValue(employeeMaster1.getSpouseName());
+            org.apache.poi.ss.usermodel.Cell dateOfbirthspous = row.createCell(65);
+            dateOfbirthspous.setCellValue(employeeMaster1.getDateOfBirthOfEmpSpous());
+            dateOfbirthspous.setCellStyle(dateCellStyle);
+            row.createCell(66).setCellValue(employeeMaster1.getChild1());
+            org.apache.poi.ss.usermodel.Cell dateOfbirthchild1 = row.createCell(68);
+            dateOfbirthchild1.setCellValue(employeeMaster1.getDateOfBirthOfEmpChilld1());
+            dateOfbirthchild1.setCellStyle(dateCellStyle);
+            row.createCell(69).setCellValue(employeeMaster1.getChild2());
+            org.apache.poi.ss.usermodel.Cell dateOfbirthchild2 = row.createCell(71);
+            dateOfbirthchild2.setCellValue(employeeMaster1.getDateOfBirthOfEmpChild2());
+            dateOfbirthchild2.setCellStyle(dateCellStyle);
+            row.createCell(72).setCellValue(employeeMaster1.getEmergencyContactPerson());
+            row.createCell(74).setCellValue(employeeMaster1.getEmergencyContactNo());
+            row.createCell(79).setCellValue(employeeMaster1.getExperienceYearOnDoj());
+            row.createCell(80).setCellValue(employeeMaster1.getExperienceMonthOnDoj());
+            row.createCell(81).setCellValue(employeeMaster1.getHighestEducationDetails());
+            row.createCell(84).setCellValue(employeeMaster1.getShiftType());
+            row.createCell(85).setCellValue(employeeMaster1.getPaymentType());
+            row.createCell(86).setCellValue(employeeMaster1.getBasicSalary());
+            int comlocation = employeeMaster1.getLocationMaster().getId();
+            LocationMaster locationMaster = (LocationMaster) locationMasterService.readById(comlocation);
+            String locationMastername = locationMaster.getLocation();
+            row.createCell(87).setCellValue(locationMastername);
+            int empdept = employeeMaster1.getDepartmentMaster().getId();
+            DepartmentMaster departmentMaster = (DepartmentMaster) departmentMasterService.readById(empdept);
+            String departmentMastername = departmentMaster.getDepartmentName();
+            row.createCell(88).setCellValue(departmentMastername);
+            
+            List<?> employeeMasterextensionList = employeeMasterServiceExtension.readByemployeeId(employeeMaster1.getId());
+                for (Object empextDataObject : employeeMasterextensionList) {
+                EmployeeMasterExtension employeeMasterext1 = (EmployeeMasterExtension) empextDataObject;
+                
+                Boolean namstat = employeeMasterext1.getNameStatus();
+                if(namstat != null){
+                    String stat = "";
+                    if(namstat == false){
+                        stat = "Passport";
+                    }else if(namstat == true){
+                        stat = "AadharCard";
+                    }else{
+                        stat = "";
+                    }
+                        row.createCell(14).setCellValue(stat);
+                }else{
+                    row.createCell(14).setCellValue(" ");
+                }
+                
+                row.createCell(15).setCellValue(employeeMasterext1.getFirstName());
+                row.createCell(16).setCellValue(employeeMasterext1.getMiddleName());
+                row.createCell(17).setCellValue(employeeMasterext1.getLastName());
+                row.createCell(19).setCellValue(employeeMasterext1.getNationality());
+                row.createCell(20).setCellValue(employeeMasterext1.getCountryOfIssue());
+                row.createCell(27).setCellValue(employeeMasterext1.getPresentAddress2());
+                row.createCell(28).setCellValue(employeeMasterext1.getPresentCity());
+                row.createCell(29).setCellValue(employeeMasterext1.getPresentState());
+                row.createCell(30).setCellValue(employeeMasterext1.getPresentPostalCode());
+                row.createCell(31).setCellValue(employeeMasterext1.getPresentCountry());
+                row.createCell(33).setCellValue(employeeMasterext1.getPermanentAddress2());
+                row.createCell(34).setCellValue(employeeMasterext1.getPermanentCity());
+                row.createCell(35).setCellValue(employeeMasterext1.getPermanentState());
+                row.createCell(36).setCellValue(employeeMasterext1.getPermanentPostalCode());
+                row.createCell(37).setCellValue(employeeMasterext1.getPermanentCountry());
+                row.createCell(45).setCellValue(employeeMasterext1.getWithdrawalDate());
+                row.createCell(47).setCellValue(employeeMasterext1.getPfNoFlydocs());
+                row.createCell(48).setCellValue(employeeMasterext1.getElectionCard());
+                row.createCell(54).setCellValue(employeeMasterext1.getReligion());
+                row.createCell(56).setCellValue(employeeMasterext1.getDisclosedHealthConcerns());
+                row.createCell(58).setCellValue(employeeMasterext1.getDrivingLicenceType());
+                Boolean sgen = employeeMasterext1.getSpouseGender();
+                if(sgen != null){
+                    String spousgen = "";
+                    if(sgen == false){
+                        spousgen = "Male";
+                    }else if(sgen == true){
+                        spousgen = "Female";
+                    }else{
+                        spousgen = "";
+                    }
+                    row.createCell(67).setCellValue(spousgen);
+                }else{
+                    row.createCell(67).setCellValue(" ");
+                }
+                
+                Boolean cgen = employeeMasterext1.getChildOneGender();
+                if(cgen != null){
+                    String chilgen = "";
+                    if(cgen == false){
+                        chilgen = "Male";
+                    }else if(cgen == true){
+                        chilgen = "Female";
+                    }else{
+                        chilgen = "";
+                }
+                row.createCell(67).setCellValue(chilgen);
+                }else{
+                    row.createCell(67).setCellValue(" ");
+                }
+                
+                Boolean c2gen = employeeMasterext1.getChildTwoGender();
+                    if(c2gen != null){
+                        String chil2gen = "";
+                    if(c2gen == false){
+                        chil2gen = "Male";
+                    }else if(c2gen == true){
+                        chil2gen = "Female";
+                    }else{
+                        chil2gen = "";
+                    }
+                    row.createCell(70).setCellValue(chil2gen);
+                }else{
+                    row.createCell(70).setCellValue(" ");
+                }
+                    
+                
+                row.createCell(73).setCellValue(employeeMasterext1.getRelationShip());
+                row.createCell(75).setCellValue(employeeMasterext1.getEmergencyContactAddress());
+                row.createCell(76).setCellValue(employeeMasterext1.getOtherImpInfo());
+                row.createCell(77).setCellValue(employeeMasterext1.getNameOfPreviousCompany());
+                row.createCell(78).setCellValue(employeeMasterext1.getPreviousCompanyLocation());
+                row.createCell(82).setCellValue(employeeMasterext1.getLanguagesKnown());
+                row.createCell(83).setCellValue(employeeMasterext1.getHobbies());
+               
+            }
+                
+            int preid = 0;
+            List<?> employeeMastervisaList = employeeVisaDetailsService.readByemployeeId(employeeMaster1.getId());
+            for (Object empvisaDataObject : employeeMastervisaList) {
+                EmployeeVisaDetails employeeVisaDetails = (EmployeeVisaDetails) empvisaDataObject;
+                int newid = employeeVisaDetails.getEmployeeMaster().getId();
+                if (preid != newid) {
+                    preid = newid;
+                    row.createCell(23).setCellValue(employeeVisaDetails.getVisaIssueCountry());
+                    row.createCell(24).setCellValue(employeeVisaDetails.getVisaIssueDate());
+                    row.createCell(25).setCellValue(employeeVisaDetails.getVisaValidTillDate());
+                } 
+            }
+        }
+        
+        for(int i = 0; i < columns.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+        
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try{
+            workbook.write(bos);
+        }finally{
+            bos.close();
+        }
+        String fileName = "EmployeeData.xlsx";
+        String contentType = null;
+
+        if (fileName.endsWith("xlsx")) {
+            contentType = "application/octet-stream";
+        } else if (fileName.endsWith("pdf")) {
+            contentType = "application/pdf";
+        } else {
+            throw new RuntimeException("File type not found");
+        }
+
+        byte[] file = bos.toByteArray();
+
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+        response.setHeader("charset", "iso-8859-1");
+        response.setContentType(contentType);
+        response.setContentLength(file.length);
+        response.setStatus(HttpServletResponse.SC_OK);
+        OutputStream outputStream = null;
+        try {
+            outputStream = response.getOutputStream();
+            outputStream.write(file, 0, file.length);
+            outputStream.flush();
+            outputStream.close();
+            response.flushBuffer();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    
+    
+    
+    public ModelAndView exportToExcel1(HttpServletRequest request, HttpServletResponse response, EmployeeMaster employeeMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
         String searchEmployeeString = "";
         String searchString = request.getParameter("searchString");

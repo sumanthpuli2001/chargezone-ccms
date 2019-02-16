@@ -3340,6 +3340,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             basicSalary = basicSalary.split("\\.", 2)[0];
                             company = "" + (null == row.getCell((short) 109) ? "" : row.getCell((short) 109));
                             department = "" + (null == row.getCell((short) 110) ? "" : row.getCell((short) 110));
+                            
+                            
+                            employeeMaster.setEmployeeType(typeofemployee);
 
                             employeeMaster.setPassportNo(passportNo);
                             employeeMaster.setPassportIssueDate(passportDateOfIssueformated);
@@ -3392,23 +3395,32 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
                             Boolean g = false;
                             employeeMasterExtension.setNameStatus(g);
-                            if (childOneGender == "M") {
+                            if (childOneGender.contains("M")) {
                                 employeeMasterExtension.setChildOneGender(g);
-                            } else {
-                                g = true;
+                            }else if(childOneGender.contains("F")){ 
+                                 g = true;
                                 employeeMasterExtension.setChildOneGender(g);
+                            }else {
+                                
+                                employeeMasterExtension.setChildOneGender(null);
                             }
-                            if (childTwoGender == "M") {
-                                employeeMasterExtension.setChildOneGender(g);
-                            } else {
-                                g = true;
+                            
+                            if (childTwoGender.contains("M")) {
                                 employeeMasterExtension.setChildTwoGender(g);
+                            } else if(childTwoGender.contains("F")){ 
+                                  g = true;
+                                employeeMasterExtension.setChildTwoGender(g);
+                            }else {
+                               employeeMasterExtension.setChildTwoGender(null);
                             }
-                            if (spouseGender3 == "M") {
+                            
+                            if (spouseGender3.contains("M")) {
                                 employeeMasterExtension.setSpouseGender(g);
-                            } else {
-                                g = true;
+                            } else if(spouseGender3.contains("F")){ 
+                                  g = true;
                                 employeeMasterExtension.setSpouseGender(g);
+                            }else {
+                                employeeMasterExtension.setSpouseGender(null);
                             }
                             employeeMasterExtension.setRelationShip(RelationShip);
                             employeeMasterExtension.setEmergencyContactAddress(emergencyContactAddress);
@@ -3513,7 +3525,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMaster.setPaymentType(paymentType);
                             employeeMaster.setPfNo(pfNo);
                             employeeMaster.setUanNo(uannNo);
-
+                            
+                            
+                            
+                            
                             if (!employeeType.equals("")) {
                                 List<?> levelList11 = employeeTypeService.readByName(employeeType);
                                 if (!levelList11.isEmpty()) {
@@ -3647,7 +3662,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMaster.setBankName(bankName);
                             employeeMaster.setBankAccountNo(bNo);
                             employeeMaster.setBankIfscCode(ifscCode);
-                            employeeMaster.setEmployeeType(employeeType);
+                           
 
                             if (!reportingManager.equals("")) {
                                 List<?> reportingManagerList = employeeMasterService.readByName(reportingManager);
@@ -4339,10 +4354,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             row.createCell(84).setCellValue(employeeMaster1.getShiftType());
             row.createCell(85).setCellValue(employeeMaster1.getPaymentType());
             row.createCell(86).setCellValue(employeeMaster1.getBasicSalary());
-            int comlocation = employeeMaster1.getLocationMaster().getId();
-            LocationMaster locationMaster = (LocationMaster) locationMasterService.readById(comlocation);
-            String locationMastername = locationMaster.getLocation();
-            row.createCell(87).setCellValue(locationMastername);
+//            int comlocation = employeeMaster1.getLocationMaster().getId();
+//            LocationMaster locationMaster = (LocationMaster) locationMasterService.readById(comlocation);
+//            String locationMastername = locationMaster.getLocation();
+            row.createCell(87).setCellValue(employeeMaster1.getCompany());
             int empdept = employeeMaster1.getDepartmentMaster().getId();
             DepartmentMaster departmentMaster = (DepartmentMaster) departmentMasterService.readById(empdept);
             String departmentMastername = departmentMaster.getDepartmentName();
@@ -4395,12 +4410,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         spousgen = "Male";
                     }else if(sgen == true){
                         spousgen = "Female";
-                    }else{
-                        spousgen = "";
+                    }else if(sgen == null){
+                        spousgen = "N/A";
                     }
-                    row.createCell(67).setCellValue(spousgen);
+                    row.createCell(64).setCellValue(spousgen);
                 }else{
-                    row.createCell(67).setCellValue(" ");
+                    row.createCell(64).setCellValue("N/A");
                 }
                 
                 Boolean cgen = employeeMasterext1.getChildOneGender();
@@ -4410,12 +4425,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         chilgen = "Male";
                     }else if(cgen == true){
                         chilgen = "Female";
-                    }else{
-                        chilgen = "";
+                    }else if(cgen == null){
+                        chilgen = "N/A";
                 }
                 row.createCell(67).setCellValue(chilgen);
                 }else{
-                    row.createCell(67).setCellValue(" ");
+                    row.createCell(67).setCellValue("N/A");
                 }
                 
                 Boolean c2gen = employeeMasterext1.getChildTwoGender();
@@ -4425,12 +4440,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                         chil2gen = "Male";
                     }else if(c2gen == true){
                         chil2gen = "Female";
-                    }else{
-                        chil2gen = "";
+                    }else if(c2gen == null){
+                        chil2gen = "N/A";
                     }
                     row.createCell(70).setCellValue(chil2gen);
                 }else{
-                    row.createCell(70).setCellValue(" ");
+                    row.createCell(70).setCellValue("N/A");
                 }
                     
                 

@@ -8,6 +8,7 @@ import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailAddMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.ProbationToConfirmation;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -198,6 +199,13 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
         employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
         employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
+        employeeMaster.setEmployeeSubType(employeeSubTypeService.readById(employeeMaster.getEmployeeSubType().getId()));
+//        int empSubType = employeeMaster.getEmployeeSubType().getId();
+//        List<?> employeeSubType = employeeSubTypeService.readByID(empSubType);
+//        if(!employeeSubType.isEmpty()){
+//            employeeMaster.setEmployeeSubType((EmployeeSubType) employeeSubType.get(0));
+//        }
+//        
         ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
         List<?> l1 = probationToConfirmationService.readForRepeatedId(ptc);
         if (!l1.isEmpty()) {
@@ -295,16 +303,31 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     ptc1.setJobHandled(ptc.getJobHandled());
                     ptc1.setPerformanceRating(ptc.getPerformanceRating());
                     ptc1.setRecommendationSelect(ptc.getRecommendationSelect());
-                    ptc1.setConcentration(ptc.getConcentration());
-                    ptc1.setConsistency(ptc.getConsistency());
-                    ptc1.setCooperation(ptc.getCooperation());
-                    ptc1.setKnowledge(ptc.getKnowledge());
-                    ptc1.setDiscipline(ptc.getDiscipline());
-                    ptc1.setLeadership(ptc.getLeadership());
-                    ptc1.setCommunication(ptc.getCommunication());
-                    ptc1.setSafety(ptc.getSafety());
-                    ptc1.setTeam(ptc.getTeam());
-                    ptc1.setIntegrity(ptc.getIntegrity());
+                    ptc1.setJobKnowledge1(ptc.getJobKnowledge1());
+                    ptc1.setJobKnowledge2(ptc.getJobKnowledge2());
+                    ptc1.setJobKnowledge3(ptc.getJobKnowledge3());
+                    ptc1.setJobKnowledge4(ptc.getJobKnowledge4());
+                    ptc1.setJobKnowledge5(ptc.getJobKnowledge5());
+                    ptc1.setQuality1(ptc.getQuality1());
+                    ptc1.setQuality2(ptc.getQuality2());
+                    ptc1.setQuality3(ptc.getQuality3());
+                    ptc1.setQuality4(ptc.getQuality4());
+                    ptc1.setQuality5(ptc.getQuality5());
+                    ptc1.setLearning1(ptc.getLearning1());
+                    ptc1.setLearning2(ptc.getLearning2());
+                    ptc1.setLearning3(ptc.getLearning3());
+                    ptc1.setLearning4(ptc.getLearning4());
+                    ptc1.setLearning5(ptc.getLearning5());
+                    ptc1.setGeneral1(ptc.getGeneral1());
+                    ptc1.setGeneral2(ptc.getGeneral2());
+                    ptc1.setGeneral3(ptc.getGeneral3());
+                    ptc1.setGeneral4(ptc.getGeneral4());
+                    ptc1.setGeneral5(ptc.getGeneral5());
+                    ptc1.setEmployeeFullfill(ptc.getEmployeeFullfill());
+                    ptc1.setEmployeeStrengths(ptc.getEmployeeStrengths());
+                    ptc1.setEmployeeImprove(ptc.getEmployeeImprove());
+                    ptc1.setEmployeeTrainingAttend(ptc.getEmployeeTrainingAttend());
+                    
                     if (ptc.getRecommendationSelect().equals("No")) {
                         ptc1.setRecommendationRemark(ptc.getRecommendationRemark());
                     } else if (ptc.getRecommendationSelect().equals("Extend")) {
@@ -312,7 +335,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         ptc1.setRecommendationRemark(ptc.getRecommendationRemark());
                     }
                     ptc1.setManagerJustification(ptc.getManagerJustification());
-                    probationToConfirmationService.update(ptc1);
+                    probationToConfirmationService.createOrUpdate(ptc1);
                     request.setAttribute("successMessage",
                             "Information : Successfully Submited to Functional head for Confirmation.");
                     mv = searchSubmit(request, response);
@@ -740,6 +763,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
         employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
         employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
+        employeeMaster.setEmployeeSubType(employeeSubTypeService.readById(employeeMaster.getEmployeeSubType().getId()));
         employeeMaster.getReportingManagerLevel1();
         List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
         if (!list.isEmpty()) {
@@ -1398,17 +1422,17 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             for (Object o : empList) {
                 EmployeeMaster employeeMaster = new EmployeeMaster();
                 employeeMaster = (EmployeeMaster) o;
-                
+//                if(employeeMaster.getId()==1767){
                 DesignationMaster designationMaster = new DesignationMaster();
                 designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 Integer desgnId = designationMaster.getId();
                 List list = probationPeriodService.readbyDesignation(desgnId);
-                int probationPeriod = 6;
+                int probationPeriod = 3;
                 if (!list.isEmpty()) {
                     probationPeriod = (int) list.get(0);
                 }
                 int pp = probationPeriod - 1;
-                
+//                double pp = probationPeriod - 0.5;
                 String dojstring = employeeMaster.getDateOfJoining();
                 Date dojdate = null;
                 try {
@@ -1418,7 +1442,9 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 }
                 Calendar c = Calendar.getInstance();
                 c.setTime(dojdate);
+//                c.add(Calendar.MONTH, pp);
                 c.add(Calendar.MONTH, pp);
+                c.add(Calendar.DATE, 14);
                 Date dateAfterPP = c.getTime();
                 String checkdateString = sdf.format(dateAfterPP);
                 if (DateUtils.isSameDay(tDate, dateAfterPP)) {
@@ -1427,7 +1453,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 if (tDate.after(dateAfterPP)) {
                     extendedprobationList.add(employeeMaster);
                 }
-                
+//            }
             }
             System.out.println("---------------------" + finalprobationList);
             if (!finalprobationList.isEmpty()) {
@@ -1450,7 +1476,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                         Integer desgnId = designationMaster.getId();
                         List list = probationPeriodService.readbyDesignation(desgnId);
-                        int probationPeriod = 6;
+                        int probationPeriod = 3;
                         if (!list.isEmpty()) {
                             probationPeriod = (int) list.get(0);
                         }
@@ -1461,14 +1487,14 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         String dateAddedstring = sdf.format(dateAdded);
 
 //                        Boolean flag1 = employeeMasterService.checkLevel1AndLevel6FunctionheadByEmployeeMasterId(employeeMaster.getId());
-                        Boolean flag = employeeMasterService.checkLevel1AndLevel5FunctionheadByEmployeeMasterId(Integer.parseInt(employeeMaster.getReportingManagerLevel5()));
+//                        Boolean flag = employeeMasterService.checkLevel1AndLevel5FunctionheadByEmployeeMasterId(Integer.parseInt(employeeMaster.getReportingManagerLevel5()));
                         
-                        if (flag) {
-                            ptc.setStatus(1);
-                            ptc.setManagerJustification("Same person has both the Reporting Manager and Funtional Head permission");
-                        } else {
+//                        if (flag) {
+//                            ptc.setStatus(1);
+//                            ptc.setManagerJustification("Same person has both the Reporting Manager and Funtional Head permission");
+//                        } else {
                             ptc.setStatus(0);
-                        }
+//                        }
                         ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
                         ptc.setAssessmentFromDate(doj);
                         ptc.setAssessmentToDate(dateAddedstring);
@@ -1708,43 +1734,43 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         String CheckDate = sdf.format(checkDate);
         ProbationToConfirmation probationToConfirmation = new ProbationToConfirmation();
         List<?> empList = probationToConfirmationService.readByAssessmentToDate(CheckDate);
-        if (!empList.isEmpty()) {
-            for (Object o : empList) {
-                probationToConfirmation = (ProbationToConfirmation) o;
-                int eid1 = probationToConfirmation.getEmployeeMasterByEmployeeMasterId().getId();
-                EmployeeMaster employee = employeeMasterService.readById(eid1);
-                String managerId = employee.getReportingManagerLevel1();
-                EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
-
-//             
-                EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
-                String emailId = employee.getEmailAddress();
-                String managerMailId = manager.getEmailAddress();
-                for (String emailId1 : emailId.split(",")) {
-                    if (!emailId1.equals("")) {
-                        String To1 = emailId1;
-                        String from1 = fromEmp.getOfficeEmailId();
-                        String subject1 = emailTemplate.getSubject();
-//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
-                        String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{no_days\\}", "30");
-                        sendMail.sendMail(from1, To1, subject1, msg1);
-                    }
-                }
-                for (String managerMailId1 : managerMailId.split(",")) {
-                    if (!managerMailId1.equals("")) {
-                        String To2 = managerMailId1;
-                        String from2 = fromEmp.getOfficeEmailId();
-                        String subject1 = emailTemplate.getSubject();
-//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
-                        String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{no_days\\}", "30");
-                        sendMail.sendMail(from2, To2, subject1, msg1);
-                    }
-                }
+//        if (!empList.isEmpty()) {
+//            for (Object o : empList) {
+//                probationToConfirmation = (ProbationToConfirmation) o;
+//                int eid1 = probationToConfirmation.getEmployeeMasterByEmployeeMasterId().getId();
+//                EmployeeMaster employee = employeeMasterService.readById(eid1);
+//                String managerId = employee.getReportingManagerLevel1();
+//                EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
+//
+////             
+//                EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
+//                String emailId = employee.getEmailAddress();
+//                String managerMailId = manager.getEmailAddress();
+//                for (String emailId1 : emailId.split(",")) {
+//                    if (!emailId1.equals("")) {
+//                        String To1 = emailId1;
+//                        String from1 = fromEmp.getOfficeEmailId();
+//                        String subject1 = emailTemplate.getSubject();
+////                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        String msg1 = emailTemplate.getBodytext();
+//                        msg1 = msg1.replaceAll("\\{no_days\\}", "30");
+//                        sendMail.sendMail(from1, To1, subject1, msg1);
+//                    }
 //                }
-            }
-        }
+//                for (String managerMailId1 : managerMailId.split(",")) {
+//                    if (!managerMailId1.equals("")) {
+//                        String To2 = managerMailId1;
+//                        String from2 = fromEmp.getOfficeEmailId();
+//                        String subject1 = emailTemplate.getSubject();
+////                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        String msg1 = emailTemplate.getBodytext();
+//                        msg1 = msg1.replaceAll("\\{no_days\\}", "30");
+//                        sendMail.sendMail(from2, To2, subject1, msg1);
+//                    }
+//                }
+////                }
+//            }
+//        }
         
         Calendar cal1 = Calendar.getInstance();
         cal1.setTime(d);
@@ -1752,43 +1778,43 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         Date checkDate1 = cal1.getTime();
         String CheckDate1 = sdf.format(checkDate1);
         List<?> empList1 = probationToConfirmationService.readByAssessmentToDate(CheckDate1);
-        if (!empList1.isEmpty()) {
-            for (Object o : empList1) {
-                probationToConfirmation = (ProbationToConfirmation) o;
-                int eid1 = probationToConfirmation.getEmployeeMasterByEmployeeMasterId().getId();
-                EmployeeMaster employee = employeeMasterService.readById(eid1);
-                String managerId = employee.getReportingManagerLevel1();
-                EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
-
-//             
-                EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
-                String emailId = employee.getEmailAddress();
-                String managerMailId = manager.getEmailAddress();
-                for (String emailId1 : emailId.split(",")) {
-                    if (!emailId1.equals("")) {
-                        String To1 = emailId1;
-                        String from1 = fromEmp.getOfficeEmailId();
-                        String subject1 = emailTemplate.getSubject();
-//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
-                        String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{no_days\\}", "15");
-                        sendMail.sendMail(from1, To1, subject1, msg1);
-                    }
-                }
-                for (String managerMailId1 : managerMailId.split(",")) {
-                    if (!managerMailId1.equals("")) {
-                        String To2 = managerMailId1;
-                        String from2 = fromEmp.getOfficeEmailId();
-                        String subject1 = emailTemplate.getSubject();
-//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
-                        String msg1 = emailTemplate.getBodytext();
-                        msg1 = msg1.replaceAll("\\{no_days\\}", "15");
-                        sendMail.sendMail(from2, To2, subject1, msg1);
-                    }
-                }
+//        if (!empList1.isEmpty()) {
+//            for (Object o : empList1) {
+//                probationToConfirmation = (ProbationToConfirmation) o;
+//                int eid1 = probationToConfirmation.getEmployeeMasterByEmployeeMasterId().getId();
+//                EmployeeMaster employee = employeeMasterService.readById(eid1);
+//                String managerId = employee.getReportingManagerLevel1();
+//                EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
+//
+////             
+//                EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
+//                String emailId = employee.getEmailAddress();
+//                String managerMailId = manager.getEmailAddress();
+//                for (String emailId1 : emailId.split(",")) {
+//                    if (!emailId1.equals("")) {
+//                        String To1 = emailId1;
+//                        String from1 = fromEmp.getOfficeEmailId();
+//                        String subject1 = emailTemplate.getSubject();
+////                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        String msg1 = emailTemplate.getBodytext();
+//                        msg1 = msg1.replaceAll("\\{no_days\\}", "15");
+//                        sendMail.sendMail(from1, To1, subject1, msg1);
+//                    }
 //                }
-            }
-        }
+//                for (String managerMailId1 : managerMailId.split(",")) {
+//                    if (!managerMailId1.equals("")) {
+//                        String To2 = managerMailId1;
+//                        String from2 = fromEmp.getOfficeEmailId();
+//                        String subject1 = emailTemplate.getSubject();
+////                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        String msg1 = emailTemplate.getBodytext();
+//                        msg1 = msg1.replaceAll("\\{no_days\\}", "15");
+//                        sendMail.sendMail(from2, To2, subject1, msg1);
+//                    }
+//                }
+////                }
+//            }
+//        }
         Calendar cal2 = Calendar.getInstance();
         cal2.setTime(d);
         cal2.add(Calendar.DAY_OF_MONTH, 7);
@@ -1802,19 +1828,22 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 EmployeeMaster employee = employeeMasterService.readById(eid1);
                 String managerId = employee.getReportingManagerLevel1();
                 EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
-
-//             
+                String hrId = employee.getReportingManagerLevel2();
+                EmployeeMaster hr = employeeMasterService.readById(Integer.parseInt(hrId));
                 EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
+                String hrMailId = hr.getEmailAddress();
                 String emailId = employee.getEmailAddress();
                 String managerMailId = manager.getEmailAddress();
-                for (String emailId1 : emailId.split(",")) {
-                    if (!emailId1.equals("")) {
-                        String To1 = emailId1;
+                for (String hrMailId1 : hrMailId.split(",")) {
+                    if (!hrMailId1.equals("")) {
+                        String To1 = hrMailId1;
                         String from1 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", hr.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
                         msg1 = msg1.replaceAll("\\{no_days\\}", "7");
+                        msg1 = msg1.replaceAll("\\{user\\}", hr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{employee\\}", employee.getEmployeeName());
                         sendMail.sendMail(from1, To1, subject1, msg1);
                     }
                 }
@@ -1823,9 +1852,11 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         String To2 = managerMailId1;
                         String from2 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", manager.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
                         msg1 = msg1.replaceAll("\\{no_days\\}", "7");
+                        msg1 = msg1.replaceAll("\\{user\\}", manager.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{employee\\}", employee.getEmployeeName());
                         sendMail.sendMail(from2, To2, subject1, msg1);
                     }
                 }
@@ -1845,19 +1876,22 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 EmployeeMaster employee = employeeMasterService.readById(eid1);
                 String managerId = employee.getReportingManagerLevel1();
                 EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
-
-//             
+                String hrId = employee.getReportingManagerLevel2();
+                EmployeeMaster hr = employeeMasterService.readById(Integer.parseInt(hrId));
+                String hrMailId = hr.getEmailAddress();
                 EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
                 String emailId = employee.getEmailAddress();
                 String managerMailId = manager.getEmailAddress();
-                for (String emailId1 : emailId.split(",")) {
-                    if (!emailId1.equals("")) {
-                        String To1 = emailId1;
+                for (String hrMailId1 : hrMailId.split(",")) {
+                    if (!hrMailId1.equals("")) {
+                        String To1 = hrMailId1;
                         String from1 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", hr.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
                         msg1 = msg1.replaceAll("\\{no_days\\}", "3");
+                        msg1 = msg1.replaceAll("\\{user\\}", hr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{employee\\}", employee.getEmployeeName());
                         sendMail.sendMail(from1, To1, subject1, msg1);
                     }
                 }
@@ -1866,9 +1900,11 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         String To2 = managerMailId1;
                         String from2 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", manager.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
                         msg1 = msg1.replaceAll("\\{no_days\\}", "3");
+                        msg1 = msg1.replaceAll("\\{user\\}", manager.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{employee\\}", employee.getEmployeeName());
                         sendMail.sendMail(from2, To2, subject1, msg1);
                     }
                 }
@@ -1888,19 +1924,23 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 EmployeeMaster employee = employeeMasterService.readById(eid1);
                 String managerId = employee.getReportingManagerLevel1();
                 EmployeeMaster manager = employeeMasterService.readById(Integer.parseInt(managerId));
-
+                String hrId = employee.getReportingManagerLevel2();
+                EmployeeMaster hr = employeeMasterService.readById(Integer.parseInt(hrId));
+                String hrMailId = hr.getEmailAddress();
 //             
                 EmailTemplate emailTemplate = emailTemplateService.readById(141); ///////141 template for probation to confirm
                 String emailId = employee.getEmailAddress();
                 String managerMailId = manager.getEmailAddress();
-                for (String emailId1 : emailId.split(",")) {
-                    if (!emailId1.equals("")) {
-                        String To1 = emailId1;
+                for (String hrMailId1 : hrMailId.split(",")) {
+                    if (!hrMailId1.equals("")) {
+                        String To1 = hrMailId1;
                         String from1 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", hr.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
                         msg1 = msg1.replaceAll("\\{no_days\\}", "1");
+                        msg1 = msg1.replaceAll("\\{user\\}", hr.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{employee\\}", employee.getEmployeeName());
                         sendMail.sendMail(from1, To1, subject1, msg1);
                     }
                 }
@@ -1909,9 +1949,11 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         String To2 = managerMailId1;
                         String from2 = fromEmp.getOfficeEmailId();
                         String subject1 = emailTemplate.getSubject();
-//                        subject1 = subject1.replaceAll("\\{user\\}", employee.getEmployeeName());
+//                        subject1 = subject1.replaceAll("\\{user\\}", manager.getEmployeeName());
                         String msg1 = emailTemplate.getBodytext();
                         msg1 = msg1.replaceAll("\\{no_days\\}", "1");
+                        msg1 = msg1.replaceAll("\\{user\\}", manager.getEmployeeName());
+                        msg1 = msg1.replaceAll("\\{employee\\}", employee.getEmployeeName());
                         sendMail.sendMail(from2, To2, subject1, msg1);
                     }
                 }

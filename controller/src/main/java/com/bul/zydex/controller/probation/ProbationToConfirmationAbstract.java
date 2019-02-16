@@ -5,12 +5,14 @@
 package com.bul.zydex.controller.probation;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.ProbationPeriod;
 import com.bul.zydex.model.ProbationToConfirmation;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
+import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.probation.ProbationPeriodService;
@@ -26,6 +28,7 @@ public abstract class ProbationToConfirmationAbstract extends CustomAbstract {
     public ProbationToConfirmationService<ProbationToConfirmation> probationToConfirmationService;
     public LevelMasterService<LevelMaster> levelMasterService;
     public LocationMasterService<LocationMaster> locationMasterService;
+    public EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService;
     public Validator probationtoConfirmationValidator;
     protected UserRightMasterService<UserRightMaster> userRightMasterService;
     protected ProbationPeriodService<ProbationPeriod> probationPeriodService;
@@ -78,4 +81,12 @@ public abstract class ProbationToConfirmationAbstract extends CustomAbstract {
         this.probationPeriodService = probationPeriodService;
     }
 
+    public EmployeeSubTypeService<EmployeeSubType> getEmployeeSubTypeService() {
+        return employeeSubTypeService;
+    }
+
+    public void setEmployeeSubTypeService(EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService) {
+        this.employeeSubTypeService = employeeSubTypeService;
+    }
+        
 }

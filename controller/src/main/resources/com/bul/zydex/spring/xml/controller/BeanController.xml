@@ -269,6 +269,7 @@
     <bean id="probationToConfirmationController1" class="com.bul.zydex.controller.probation.ProbationToConfirmationController" parent="controllerConfig" >
         <property name="probationToConfirmationService" ref="probationToConfirmationService1" />
         <property name="levelMasterService" ref="levelMasterService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="probationtoConfirmationValidator" ref="probationtoConfirmationValidator1" />
         <property name="userRightMasterService" ref="userRightMasterService1" />

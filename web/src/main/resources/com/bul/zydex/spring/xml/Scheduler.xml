@@ -160,8 +160,6 @@
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="probationToConfirmationCreateCheck" />
         <property name="cronExpression" value="0 0/1 * * * ?" />
-        <property name="cronExpression" value="0 0 10 * * ?" />
-        <property name="cronExpression" value="0 0/3 * * * ?" />
     </bean>-->
 
     <!--    <bean id="travelEscalationId"
@@ -211,12 +209,6 @@
     </bean>-->
 <!--    <bean id="daysLeftProbationToConfirmation"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="probationToConfirmationController1" />
-        <property name="targetMethod" value="mailSendForProbationToConfirmationLeft" />
-    </bean>
-    
-    <bean id="daysLeftProbationToConfirmation"
-                 class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="probationToConfirmationController1" />
         <property name="targetMethod" value="mailSendForProbationToConfirmationLeft" />
     </bean>

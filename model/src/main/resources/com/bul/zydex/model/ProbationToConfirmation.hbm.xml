@@ -86,35 +86,77 @@
         <property name="hrAdditionalRemark" type="string">
             <column name="hr_additional_remark" length="16777215" />
         </property>
-        <property name="concentration" type="java.lang.Boolean">
-            <column name="concentration" />
+        <property name="jobKnowledge1" type="java.lang.Integer">
+            <column name="job_knowledge_1" />
         </property>
-        <property name="consistency" type="java.lang.Boolean">
-            <column name="consistency" />
+        <property name="jobKnowledge2" type="java.lang.Integer">
+            <column name="job_knowledge_2" />
         </property>
-        <property name="cooperation" type="java.lang.Boolean">
-            <column name="cooperation" />
+        <property name="jobKnowledge3" type="java.lang.Integer">
+            <column name="job_knowledge_3" />
         </property>
-        <property name="knowledge" type="java.lang.Boolean">
-            <column name="knowledge" />
+        <property name="jobKnowledge4" type="java.lang.Integer">
+            <column name="job_knowledge_4" />
         </property>
-        <property name="discipline" type="java.lang.Boolean">
-            <column name="discipline" />
+        <property name="jobKnowledge5" type="java.lang.Integer">
+            <column name="job_knowledge_5" />
         </property>
-        <property name="leadership" type="java.lang.Boolean">
-            <column name="leadership" />
+        <property name="quality1" type="java.lang.Integer">
+            <column name="quality_1" />
         </property>
-        <property name="communication" type="java.lang.Boolean">
-            <column name="communication" />
+        <property name="quality2" type="java.lang.Integer">
+            <column name="quality_2" />
         </property>
-        <property name="safety" type="java.lang.Boolean">
-            <column name="safety" />
+        <property name="quality3" type="java.lang.Integer">
+            <column name="quality_3" />
         </property>
-        <property name="team" type="java.lang.Boolean">
-            <column name="team" />
+        <property name="quality4" type="java.lang.Integer">
+            <column name="quality_4" />
         </property>
-        <property name="integrity" type="java.lang.Boolean">
-            <column name="integrity" />
+        <property name="quality5" type="java.lang.Integer">
+            <column name="quality_5" />
+        </property>
+        <property name="learning1" type="java.lang.Integer">
+            <column name="learning_1" />
+        </property>
+        <property name="learning2" type="java.lang.Integer">
+            <column name="learning_2" />
+        </property>
+        <property name="learning3" type="java.lang.Integer">
+            <column name="learning_3" />
+        </property>
+        <property name="learning4" type="java.lang.Integer">
+            <column name="learning_4" />
+        </property>
+        <property name="learning5" type="java.lang.Integer">
+            <column name="learning_5" />
+        </property>
+        <property name="general1" type="java.lang.Integer">
+            <column name="general_1" />
+        </property>
+        <property name="general2" type="java.lang.Integer">
+            <column name="general_2" />
+        </property>
+        <property name="general3" type="java.lang.Integer">
+            <column name="general_3" />
+        </property>
+        <property name="general4" type="java.lang.Integer">
+            <column name="general_4" />
+        </property>
+        <property name="general5" type="java.lang.Integer">
+            <column name="general_5" />
+        </property>
+        <property name="employeeFullfill" type="string">
+            <column name="employee_fullfill" />
+        </property>
+        <property name="employeeStrengths" type="string">
+            <column name="employee_strengths" />
+        </property>
+        <property name="employeeImprove" type="string">
+            <column name="employee_improve" />
+        </property>
+        <property name="employeeTrainingAttend" type="string">
+            <column name="employee_training_attend" />
         </property>
     </class>
 </hibernate-mapping>

@@ -180,19 +180,25 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="col-sm-2">
+                                                                <label>Sub Team:</label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                            <form:input path="employeeMasterByEmployeeMasterId.employeeSubType.subType" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                            </div>
+                                                            <div class="col-sm-2">
                                                                 <label>Level:</label>
                                                             </div>
                                                             <div class="col-sm-4">
                                                             <form:input path="employeeMasterByEmployeeMasterId.levelMaster.level" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
+                                                        </div>
+                                                        <div class="form-group">
                                                             <div class="col-sm-2">
                                                                 <label>Reporting Manager:</label>
                                                             </div>
                                                             <div class="col-sm-4">
                                                             <form:input path="reportingManagerId" class="form-control" size="16" type="text" value="${reportingLevel1}" readonly="true"></form:input>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-group">
                                                             <div class=" col-sm-2">
                                                                 <label>Work Location:</label>
                                                             </div>
@@ -216,6 +222,16 @@
                                             <div class="box-body no-padding">
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-3 control-label">Form Issue Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <div class=" col-sm-7">
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy hh:ii " data-link-field="dtp_input1">
+                                                                <form:input path="" class="form-control" size="16" type="text" value=""  readonly="true"></form:input>
+                                                                <%--<form:errors path="" cssClass="errorDiv"></form:errors>--%>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                         <div class="form-group">
                                                             <label class="col-sm-3 control-label">From Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class=" col-sm-7">
@@ -242,7 +258,7 @@
                                         </div>
                                         <div class="box box-info collapsed-box">
                                             <div class="box-header">
-                                                <h3 class="box-title">What are the jobs being handled by the employee?</h3><span style="color: red;font-size: 12px;">*</span>
+                                                <h3 class="box-title">General</h3><span style="color: red;font-size: 12px;">*</span>
                                                 <div class="box-tools pull-right">
                                                     <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                                     <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
@@ -251,7 +267,7 @@
                                             <div class="box-body no-padding">
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12">
-
+                                                                <label>Brief description of role handled by Employee:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <div class="form-group">
                                                             <div class="col-sm-12">
                                                             <form:textarea path="jobHandled" class="form-control" size="16" type="text" value=""></form:textarea>
@@ -259,143 +275,275 @@
                                                             </div>
                                                         </div>
                                                     </div><!-- /.col -->
+                                                    <div class="col-md-12 col-sm-12">
+                                                                <label>Describe the extent to which Employee has fulfilled the requirement of role:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                            <form:textarea path="employeeFullfill" class="form-control" size="16" type="text" value=""></form:textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12">
+                                                                <label>Describe areas of Employee’s strengths:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                            <form:textarea path="employeeStrengths" class="form-control" size="16" type="text" value=""></form:textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12">
+                                                                <label>Describe areas where Employee can improve upon:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                            <form:textarea path="employeeImprove" class="form-control" size="16" type="text" value=""></form:textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 col-sm-12">
+                                                                <label>Training programs attended by Employee during probation period:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                            <form:textarea path="employeeTrainingAttend" class="form-control" size="16" type="text" value=""></form:textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div><!-- /.row -->
                                             </div><!-- /.box-body -->
                                         </div>
-                                        <div class="box box-info collapsed-box">
-                                            <div class="box-header">
-                                                <h3 class="box-title">3 C  Behaviours (Each 3C carries 10 Marks i.e. 30 Marks Total)</h3><span style="color: red;font-size: 12px;">*</span>
-                                                <div class="box-tools pull-right">
-                                                    <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                                    <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
-                                                </div>
-                                            </div><!-- /.box-header -->
+    <div class="box box-info collapsed-box">
+        <div class="box-header">
+            <h3 class="box-title">Competency Assessment </h3><span style="color: red;font-size: 12px;">*</span>
+            <div class="box-tools pull-right">
+                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4" ></i></button>
+            </div>
+        </div><!-- /.box-header -->
 
-                                            <div class="box-body no-padding">
-                                                <div class="row">
-                                                    <div class="col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <div class="col-md-3 col-sm-3">
-                                                            </div>
-                                                            <div class="table" style="margin-left: 2%;">
-                                                                <table style="width:95%; ">
-                                                                    <tr >
-                                                                        <th colspan="8" style="text-align: center">Behaviours</th>
-                                                                        <th colspan="2" style="text-align: center">Satisfactory</th>
-                                                                        <th colspan="2" style="text-align: center">Not-Satisfactory</th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th colspan="8">C 1: Concentration</th>
-                                                                        <th colspan="2" rowspan="7"><form:radiobutton path="concentration" name="concentration" value="1" required="" /> Yes</th>
-                                                                    <th colspan="2" rowspan="7"><form:radiobutton path="concentration" name="concentration"  value="0" required="" /> No</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td  colspan="8">Concentration on the work</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td  colspan="8">Attention in detailing of work</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td  colspan="8">targeting the highest standard of excellence</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td  colspan="8">doing better than yesterday</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td  colspan="8">Respect every employee</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td  colspan="8">concentrtaion on performance achievement and individual development</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="8">C 2: Consistency</th>
-                                                                    <th colspan="2" rowspan="3"><form:radiobutton path="consistency" name="consistency"  value="1"  /> Yes
-                                                                    <th colspan="2" rowspan="3"><form:radiobutton path="consistency" name="consistency"  value="0" required="" /> No
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="8">Consistency in building system and for organizations betterment</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="8">to maintain consistency in respect with organization's future, mission and vision, safety and security of employees</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="8">C 3: Cooperation</th>
-                                                                    <th colspan="2" rowspan="3"><form:radiobutton path="cooperation" name="cooperation"  value="1" required="" /> Yes
-                                                                    <th colspan="2" rowspan="3"><form:radiobutton path="cooperation" name="cooperation"  value="0" required="" /> No
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="8">Conduct of the highest ethical standard, intellectual , financial and moral . </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="8">Conduct which builds and maintains teamwork</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="12" style="text-align: center;">Job Knowledge & Working Standards</th>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="8">1. Job Knowledge</th>
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="knowledge" name="knowledge"  value="1" required="" /> Yes
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="knowledge" name="knowledge"  value="0" required="" /> No
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="8">Knowledge to perform the task</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="8">2. Discipline</th>
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="discipline" name="discipline"  value="1" required="" /> Yes
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="discipline" name="discipline"  value="0" required="" /> No
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="8">Way of thinking, belief or opinion of approval and disapproval towards the organization decision and action. The way in which one acts or conducts oneself, especially towards others, respects for others, Eagerness to help others.</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="8">3. Leadership Quality</th>
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="leadership" name="leadership"  value="1" required="" /> Yes
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="leadership" name="leadership"  value="0" required="" /> No
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="8">Deliver result on time, build relationship & develop others & possess good decision making skills</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="8">4. Communication </th>
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="communication" name="communication"  value="1" required="" /> Yes
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="communication" name="communication"  value="0" required="" /> No
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="8">Express ideas and concerns clearly Proficient and confident in presentation Flexible and effective writing skills </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="8">5. 5S and Safety Norms </th>
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="safety" name="safety"  value="1" required="" /> Yes
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="safety" name="safety"  value="0" required="" /> No
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="8">Cleanliness of own self, work premises, retrieval of data, safe working practice, safety knowledge</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="8">6. Team Work </th>
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="team" name="team"  value="1" required="" /> Yes
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="team" name="team"  value="0" required="" /> No
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="8">The extent to which the employee successfully collaborates with others to accomplish departmental and Organizational goals. Target achieved through team work.</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th colspan="8">7. Integrity/Ethics </th>
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="integrity" name="integrity"  value="1" required="" /> Yes
-                                                                    <th colspan="2" rowspan="2"><form:radiobutton path="integrity" name="integrity"  value="0" required="" /> No
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="8">Practices excellent work ethics. Properly handles confidential information. Avoids situations and actions considered inappropriate or which present a conflict of interest. Demonstrates integrity in all work. Has a strong sense of right and wrong and consistently strives to do what is right.</td>
-                                                                </tr>
+        <div class="box-body no-padding">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <div class="col-md-3 col-sm-3">
+                        </div>
+                        <div class="table" style="margin-left: 2%;">
+                            <label>Rate the Employee’s performance during their probation period. Based on the Team Leader’s evaluation and observations during the probation period, evaluate the Employee on a 5-point scale where 5 is an indicator of excellence and 1 signifies poor performance.</label>
+                            <table style="width:95%; ">
+                                <tr>
+                                    <th colspan="7" style="text-align: center" rowspan = "2">Competency</th>
+                                    <th colspan="5" style="text-align: center">Rating (click radio button at appropriate place)</th>
+                                </tr>        
+                                <tr>
+                                    <th colspan="1" style="text-align: center">1</th>
+                                    <th colspan="1" style="text-align: center">2</th>
+                                    <th colspan="1" style="text-align: center">3</th>
+                                    <th colspan="1" style="text-align: center">4</th>
+                                    <th colspan="1" style="text-align: center">5</th>
+                                </tr>
+                                <tr>
+                                    <th colspan="12" style="text-align: center">Job Knowledge</th>
 
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Understanding of job requirements</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge1" name="jobKnowledge1" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge1" name="jobKnowledge1"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge1" name="jobKnowledge1"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge1" name="jobKnowledge1"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge1" name="jobKnowledge1"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Demonstrated a desire to learn and accepted role</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge2" name="jobKnowledge2" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge2" name="jobKnowledge2"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge2" name="jobKnowledge2"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge2" name="jobKnowledge2"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge2" name="jobKnowledge2"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Desire to acquire knowledge of key aspect of job</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge3" name="jobKnowledge3" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge3" name="jobKnowledge3"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge3" name="jobKnowledge3"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge3" name="jobKnowledge3"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge3" name="jobKnowledge3"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Understanding the need to complete the job smoothly and efficiently</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge4" name="jobKnowledge4" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge4" name="jobKnowledge4"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge4" name="jobKnowledge4"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge4" name="jobKnowledge4"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge4" name="jobKnowledge4"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Understanding of co-ordination and effective working between teams</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge5" name="jobKnowledge5" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge5" name="jobKnowledge5"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge5" name="jobKnowledge5"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge5" name="jobKnowledge5"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="jobKnowledge5" name="jobKnowledge5"  value="5" required="" /> </th>
+                            </tr>
+                                <tr>
+                                    <th colspan="12" style="text-align: center">Quality</th>
+
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Understanding of quality parameters of the job</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality1" name="quality1" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality1" name="quality1"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality1" name="quality1"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality1" name="quality1"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality1" name="quality1"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Work accurate and deadlines achieved</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality2" name="quality2" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality2" name="quality2"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality2" name="quality2"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality2" name="quality2"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality2" name="quality2"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Correct use of resources available</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality3" name="quality3" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality3" name="quality3"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality3" name="quality3"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality3" name="quality3"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality3" name="quality3"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Establishing work standards for self and department</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality4" name="quality4" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality4" name="quality4"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality4" name="quality4"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality4" name="quality4"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality4" name="quality4"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Accurate and legible documentation</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality5" name="quality5" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality5" name="quality5"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality5" name="quality5"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality5" name="quality5"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="quality5" name="quality5"  value="5" required="" /> </th>
+                            </tr>
+                                <tr>
+                                    <th colspan="12" style="text-align: center">Learning </th>
+
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Desire to learn new projects</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning1" name="learning1" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning1" name="learning1"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning1" name="learning1"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning1" name="learning1"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning1" name="learning1"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Asks questions & gives feedback</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning2" name="learning2" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning2" name="learning2"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning2" name="learning2"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning2" name="learning2"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning2" name="learning2"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Tries to explore new ideas</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning3" name="learning3" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning3" name="learning3"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning3" name="learning3"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning3" name="learning3"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning3" name="learning3"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Learns from past experiences </td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning4" name="learning4" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning4" name="learning4"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning4" name="learning4"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning4" name="learning4"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning4" name="learning4"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Looks for continual improvement</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning5" name="learning5" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning5" name="learning5"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning5" name="learning5"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning5" name="learning5"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="learning5" name="learning5"  value="5" required="" /> </th>
+                            </tr>
+                                <tr>
+                                    <th colspan="12" style="text-align: center">General </th>
+
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Co-operative and approachable </td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general1" name="general1" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general1" name="general1"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general1" name="general1"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general1" name="general1"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general1" name="general1"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Reliable and trustworthy </td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general2" name="general2" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general2" name="general2"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general2" name="general2"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general2" name="general2"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general2" name="general2"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Ability to work within a team</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general3" name="general3" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general3" name="general3"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general3" name="general3"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general3" name="general3"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general3" name="general3"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Reliable and punctual</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general4" name="general4" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general4" name="general4"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general4" name="general4"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general4" name="general4"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general4" name="general4"  value="5" required="" /> </th>
+                            </tr>
+                            <tr>
+                                <td  colspan="7">Communication skills</td>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general5" name="general5" value="1" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general5" name="general5"  value="2" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general5" name="general5"  value="3" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general5" name="general5"  value="4" required="" /> </th>
+                                <th colspan="1" rowspan=""><form:radiobutton path="general5" name="general5"  value="5" required="" /> </th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <div class="box box-info collapsed-box">
+                    <div class="box-header">
+                        <h3 class="box-title">Overall Comments and Review by Team Leader</h3><span style="color: red;font-size: 12px;">*</span>
+                        <div class="box-tools pull-right">
+                            <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                            <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                        </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                        <label>Comments about overall performance of Employee during probation period:<span style="color: red;font-size: 12px;">*</span></label>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                    <form:textarea path="jobHandled" class="form-control" size="16" type="text" value=""></form:textarea>
+                                    <form:errors path="jobHandled" cssClass="errorDiv"></form:errors>
                                     </div>
+                                </div>
+                            </div>
+                        </div><!-- /.row -->
+                    </div><!-- /.box-body -->
+                </div>
 
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
@@ -462,7 +610,7 @@
                                                                         <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px">Average
                                                                     </label>
                                                                     <label class="radio-inline">
-                                                                        <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px">Needs Improvement
+                                                                        <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px">Poor
                                                                     </label>
                                                                 </c:if>
                                                             </div>

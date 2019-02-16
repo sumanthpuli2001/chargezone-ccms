@@ -980,13 +980,13 @@
 
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Passport No:</label>
+                                                            <label>Passport No:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
                                                         <span style="font-size: 14px; color: red;" id="passportNoError"></span>
                                                         </div>
                                                         <div class="col-sm-6">
 
-                                                            <label>Country Of Issue:</label>
+                                                            <label>Country Of Issue:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="text" name="countryOfIssue" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
                                                              <span style="font-size: 14px; color: red;" id="countryOfIssueError"></span>
                                                         </div>
@@ -996,13 +996,13 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
 
-                                                            <label>First Name:</label>
+                                                            <label>First Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="text" name="firstName" id="firstName"  class="form-control">
                                                             <span style="font-size: 14px; color: red;" id="firstNameError"></span>
                                                         </div>
                                                         <div class="col-sm-6">
 
-                                                            <label>Middle Name:</label>
+                                                            <label>Middle Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="text" name="middleName" id="middleName"  class="form-control">
                                                             <span style="font-size: 14px; color: red;" id="middleNameError"></span>
                                                         </div>
@@ -1010,12 +1010,12 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
 
-                                                            <label>Last Name:</label>
+                                                            <label>Last Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="text" name="lastName" id="lastName"  class="form-control">
                                                             <span style="font-size: 14px; color: red;" id="lastNameError"></span>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label>Passport Issue Date:</label>
+                                                            <label>Passport Issue Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                             <form:input path="passportIssueDate" id="passportIssueDate" class="form-control" size="16" readonly="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
@@ -1027,7 +1027,7 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class=" col-sm-6">
-                                                            <label>Passport Expiry Date:</label>
+                                                            <label>Passport Expiry Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                             <form:input path="passportExpiryDate" id="passportExpiryDate"  class="form-control" size="16" readonly="true"></form:input>
@@ -1055,7 +1055,7 @@
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            <label >Aadhar Card:</label>
+                                                            <label >Aadhar Card:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="adharCard" id="adharCard" class="form-control"></form:input>
                                                         <form:errors path="adharCard"  cssClass="errorDiv"></form:errors>
                                                         <span style="font-size: 14px; color: red;" id="adharCardError"></span>

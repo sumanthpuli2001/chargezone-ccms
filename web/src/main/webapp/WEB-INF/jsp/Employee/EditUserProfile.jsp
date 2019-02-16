@@ -1084,7 +1084,7 @@
                                                     <div class="col-sm-6">
                                                         <label>Select First , Middle & Last Name As per Passport or Aadhar card:<span style="color: red;font-size: 12px;">*</span></label><br>
                                                                 <c:if test="${list.nameStatus eq 'false'}">
-                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport;
+                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport
                                                                     <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard
                                                                 </c:if>
                                                                 <c:if test="${list.nameStatus eq 'true'}">
@@ -1096,7 +1096,7 @@
                                                 </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>PAN Card No.:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>PAN Card No:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="panCard" style="text-transform:uppercase" id="pancard" class="form-control" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
                                                         <form:errors path="panCard" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -1109,13 +1109,13 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label >Passport No:</label>
+                                                        <label >Passport No:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
                                                          <span style="font-size: 14px; color: red;" id="passportNoError"></span>
                                                     </div>
                                                         <div class="col-sm-6">
 
-                                                            <label>Country Of Issue:</label>
+                                                            <label>Country Of Issue:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="text" name="countryOfIssue" value="${list.countryOfIssue}" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
                                                             <span style="font-size: 14px; color: red;" id="countryOfIssueError"></span>
                                                     </div>
@@ -1125,13 +1125,13 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
 
-                                                        <label>First Name:</label>
+                                                        <label>First Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <input type="text" name="firstName" value="${list.firstName}" id="firstName" placeholder="First Name as per Passport" class="form-control">
                                                     <span style="font-size: 14px; color: red;" id="firstNameError"></span>
                                                     </div>
                                                     <div class="col-sm-6">
 
-                                                        <label>Middle Name:</label>
+                                                        <label>Middle Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <input type="text" name="middleName" value="${list.middleName}" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
                                                     <span style="font-size: 14px; color: red;" id="middleNameError"></span>
                                                     </div>
@@ -1139,12 +1139,12 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
 
-                                                        <label>Last Name:</label>
+                                                        <label>Last Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <input type="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
                                                     <span style="font-size: 14px; color: red;" id="lastNameError"></span>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Passport Issue Date:</label>
+                                                        <label>Passport Issue Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                             <form:input path="passportIssueDate" class="form-control" size="16"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
@@ -1157,7 +1157,7 @@
 
                                                     <div class="form-group">
                                                         <div class=" col-sm-6">
-                                                            <label>Passport Expiry Date:</label>
+                                                            <label>Passport Expiry Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                             <form:input path="passportExpiryDate" class="form-control" size="16"></form:input>
@@ -1199,7 +1199,7 @@
 
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label >Aadhar Card:</label>
+                                                        <label >Aadhar Card:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="adharCard" class="form-control"></form:input>
                                                         <form:errors path="adharCard" cssClass="errorDiv"></form:errors>
                                                         <span style="font-size: 14px; color: red;" id="adharCardError"></span>

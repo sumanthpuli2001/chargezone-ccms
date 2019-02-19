@@ -156,20 +156,7 @@
                                                         <div class="col-sm-4">
                                                             <form:input path="employeeMasterByEmployeeMasterId.employeeId" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
-                                                            <div class="col-sm-2">
-                                                                <label>Employee Name:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                            <form:input path="employeeMasterByEmployeeMasterId.employeeName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-2">
-                                                                <label>Department:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                            <form:input path="employeeMasterByEmployeeMasterId.departmentMaster.departmentName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                            </div>
+                                                            <input type="hidden" id="empId" name="empId" value="${empid}" />
                                                             <div class="col-sm-2">
                                                                 <label>Designation:</label>
                                                             </div>
@@ -180,10 +167,10 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="col-sm-2">
-                                                                <label>Sub Team:</label>
+                                                                <label>Employee Name:</label>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                            <form:input path="employeeMasterByEmployeeMasterId.employeeSubType.subType" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                            <form:input path="employeeMasterByEmployeeMasterId.employeeName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 <label>Level:</label>
@@ -191,6 +178,22 @@
                                                             <div class="col-sm-4">
                                                             <form:input path="employeeMasterByEmployeeMasterId.levelMaster.level" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
+                                                            
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-2">
+                                                                <label>Department:</label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                            <form:input path="employeeMasterByEmployeeMasterId.departmentMaster.departmentName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <label>Sub Team:</label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                            <form:input path="employeeMasterByEmployeeMasterId.employeeSubType.subType" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                            </div>
+                                                            
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="col-sm-2">
@@ -226,7 +229,7 @@
                                                             <label class="col-sm-3 control-label">Form Issue Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class=" col-sm-7">
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy hh:ii " data-link-field="dtp_input1">
-                                                                <form:input path="" class="form-control" size="16" type="text" value=""  readonly="true"></form:input>
+                                                                <form:input path="" name="formIssueDate" class="form-control" size="16" type="text" value="${ptc.formIssueDate}"  readonly="true"></form:input>
                                                                 <%--<form:errors path="" cssClass="errorDiv"></form:errors>--%>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
@@ -536,8 +539,8 @@
                                         <label>Comments about overall performance of Employee during probation period:<span style="color: red;font-size: 12px;">*</span></label>
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                    <form:textarea path="jobHandled" class="form-control" size="16" type="text" value=""></form:textarea>
-                                    <form:errors path="jobHandled" cssClass="errorDiv"></form:errors>
+                                    <form:textarea path="overallPerformance" class="form-control" size="16" type="text" value=""></form:textarea>
+                                    <%--<form:errors path="" cssClass="errorDiv"></form:errors>--%>
                                     </div>
                                 </div>
                             </div>
@@ -566,51 +569,51 @@
                                                                     <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
                                                                     <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
                                                                     <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" >Average
-                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" >Needs Improvement
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="Poor" style="width: 15px;height: 15px" >Poor
                                                                 </c:if>
                                                                 <c:if test="${ptc.performanceRating eq 'Very Good'}">
                                                                     <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
                                                                     <input type="radio" name="performanceRating" id="Very Good" value="Very Good" checked style="width: 15px;height: 15px"> Very Good
                                                                     <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
                                                                     <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" >Average
-                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" >Needs Improvement
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="Poor" style="width: 15px;height: 15px" >Poor
                                                                 </c:if>
                                                                 <c:if test="${ptc.performanceRating eq 'Good'}">
                                                                     <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
                                                                     <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
                                                                     <input type="radio" name="performanceRating" id="Good"  value="Good" checked style="width: 15px;height: 15px">Good
                                                                     <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px" >Average
-                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px">Needs Improvement
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="Poor" style="width: 15px;height: 15px">Poor
                                                                 </c:if>
                                                                 <c:if test="${ptc.performanceRating eq 'Average'}">
                                                                     <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
                                                                     <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
                                                                     <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
                                                                     <input type="radio" name="performanceRating" id="Average" value="Average" checked style="width: 15px;height: 15px">Average
-                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px" >Needs Improvement
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" value="Poor" style="width: 15px;height: 15px" >Poor
                                                                 </c:if>
-                                                                <c:if test="${ptc.performanceRating eq 'NeedsImprovement'}">
+                                                                <c:if test="${ptc.performanceRating eq 'Poor'}">
                                                                     <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px" > Excellent
                                                                     <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px" > Very Good
                                                                     <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px" >Good
                                                                     <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px">Average
-                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" checked value="NeedsImprovement" style="width: 15px;height: 15px">Needs Improvement
+                                                                    <input type="radio" name="performanceRating" id="NeedsImprovement" checked value="Poor" style="width: 15px;height: 15px">Poor
                                                                 </c:if>
                                                                 <c:if test="${ptc.performanceRating eq null || ptc.performanceRating eq ''}">
                                                                     <label class="radio-inline">
-                                                                        <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px"> Excellent
-                                                                    </label>
-                                                                    <label class="radio-inline">
-                                                                        <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px"> Very Good
-                                                                    </label>
-                                                                    <label class="radio-inline">
-                                                                        <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px">Good
+                                                                        <input type="radio" name="performanceRating" id="NeedsImprovement" value="Poor" style="width: 15px;height: 15px">Poor
                                                                     </label>
                                                                     <label class="radio-inline">
                                                                         <input type="radio" name="performanceRating" id="Average" value="Average" style="width: 15px;height: 15px">Average
                                                                     </label>
                                                                     <label class="radio-inline">
-                                                                        <input type="radio" name="performanceRating" id="NeedsImprovement" value="NeedsImprovement" style="width: 15px;height: 15px">Poor
+                                                                        <input type="radio" name="performanceRating" id="Good"  value="Good" style="width: 15px;height: 15px">Good
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="performanceRating" id="Very Good" value="Very Good" style="width: 15px;height: 15px"> Very Good
+                                                                    </label>
+                                                                    <label class="radio-inline">
+                                                                        <input type="radio" name="performanceRating" id="Excellent" value="Excellent"  style="width: 15px;height: 15px"> Excellent
                                                                     </label>
                                                                 </c:if>
                                                             </div>

@@ -76,4 +76,14 @@ public class ProbationToConfirmationServiceImpl<T> extends GenericsServiceImpl<T
         return probationToConfirmationDAO.readByAssessmentToDate(date);
     }
 
+    @Override
+    public String getEmpId(String empNO) {
+        return probationToConfirmationDAO.getEmpId(empNO);
+    }
+
+    @Override
+    public String getPtcId(String empId) {
+        return probationToConfirmationDAO.getPtcId(empId);
+    }
+
 }

@@ -34,4 +34,8 @@ public interface ProbationToConfirmationService<T> extends GenericsService<T> {
 
     public List<?> readByAssessmentToDate(String date);
 
+    public String getEmpId(String empNO);
+
+    public String getPtcId(String empId);
+
 }

@@ -491,9 +491,9 @@
                                     <li><a href="probationToConfirmation.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Subordinates Probation To <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Confirmation</a></li>
                                         </c:if>
                                         <%--<c:if test="${fn:length(FunctionalheadList) > 0}">--%>
-                                        <c:if test="${sessionScope.isFunctionalheadDataExist}">
-                                    <li><a href="probationToConfirmation.htm?act=functionalheadResultClick"><i class="fa fa-circle-o"></i>Approve Confirmation</a></li>
-                                    </c:if>
+                                        <%--<c:if test="${sessionScope.isFunctionalheadDataExist}">--%>
+                                    <!--<li><a href="probationToConfirmation.htm?act=functionalheadResultClick"><i class="fa fa-circle-o"></i>Approve Confirmation</a></li>-->
+                                    <%--</c:if>--%>
                                     <c:if test="${sessionScope.userRight.probationToConfirmation}">
                                     <li><a href="probationPeriod.htm?act=showResult"><i class="fa fa-circle-o"></i>Probation Period</a></li>
                                     <li><a href="probationToConfirmation.htm?act=hrResultClick"><i class="fa fa-circle-o"></i>HR Approve Confirmation</a></li>

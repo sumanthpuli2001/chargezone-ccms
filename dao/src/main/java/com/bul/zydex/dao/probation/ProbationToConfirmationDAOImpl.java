@@ -157,4 +157,28 @@ public class ProbationToConfirmationDAOImpl<T> extends GenericsDAOImpl<T> implem
         return getHibernateTemplate().find(query);
 
     }
+
+    @Override
+    public String getEmpId(String empNO) {
+        String query = "";
+        query += "Select a.id"
+                + " From EmployeeMaster a "
+                + " Where a.employeeId="+empNO;
+        List<?> list = getHibernateTemplate().find(query);
+            list = getHibernateTemplate().find(query);
+            String list1 = (String) list.get(0);
+            return list1;
+    }
+
+    @Override
+    public String getPtcId(String empId) {
+        String query = "";
+        query += "Select a.id"
+                + " From ProbationToConfirmation a "
+                + " Where a.employeeMasterByEmployeeMasterId.id="+empId;
+        List<?> list = getHibernateTemplate().find(query);
+            list = getHibernateTemplate().find(query);
+            String list1 =  list.get(0).toString();
+            return list1;
+    }
 }

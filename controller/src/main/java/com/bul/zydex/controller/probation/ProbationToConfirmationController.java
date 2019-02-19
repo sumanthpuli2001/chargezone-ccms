@@ -12,6 +12,7 @@ import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.ProbationToConfirmation;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -211,6 +212,8 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         if (!l1.isEmpty()) {
             ProbationToConfirmation pt;
             pt = (ProbationToConfirmation) l1.get(0);
+            String formIssuedate = pt.getFormIssueDate();
+            ptc.setFormIssueDate(formIssuedate);
             if (pt.getStatus().equals(4)) {
                 ptc.setAssessmentFromDate(pt.getAssessmentFromDate());
                 ptc.setAssessmentToDate(pt.getAssessmentToDate());
@@ -241,6 +244,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         } else {
             
         }
+        request.setAttribute("empid", empid);
         mv.getModelMap().put("ptc", ptc);
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Probation/Probationlevel1");
@@ -252,19 +256,27 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         ModelAndView mv = new ModelAndView();
         ProbationToConfirmation ptc = new ProbationToConfirmation();
         ProbationToConfirmation ptc1 = new ProbationToConfirmation();
+        ProbationToConfirmation ptc2 = new ProbationToConfirmation();
         BindException errors = new BindException(ptc, "ptc");
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         bind(request, ptc);
-        
+        String empId=request.getParameter("empId");
+        String ptcId = probationToConfirmationService.getPtcId(empId);
+        Integer ptcId1 = Integer.parseInt(ptcId);
+                ptc2 = probationToConfirmationService.readById(ptcId1);
         probationtoConfirmationValidator.validate(ptc, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : Mandatory Fields should not be blank.");
+            request.setAttribute("ptc", ptc2);
+            request.setAttribute("empid", empId);
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Probation/Probationlevel1");
         } else if (ptc.getManagerJustification().equals("")) {
             request.setAttribute("failureMessage",
                     "Error : Mandatory Fields should not be blank.");
+            request.setAttribute("ptc", ptc2);
+            request.setAttribute("empId", empId);
             mv.addAllObjects(errors.getModel());
             mv.setViewName("Probation/Probationlevel1");
         } else {
@@ -327,7 +339,9 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                     ptc1.setEmployeeStrengths(ptc.getEmployeeStrengths());
                     ptc1.setEmployeeImprove(ptc.getEmployeeImprove());
                     ptc1.setEmployeeTrainingAttend(ptc.getEmployeeTrainingAttend());
-                    
+                    ptc1.setOverallPerformance(ptc.getOverallPerformance());
+                    String today = sdf.format(new Date());
+                    ptc1.setReportingManagerSubmitDate(today);
                     if (ptc.getRecommendationSelect().equals("No")) {
                         ptc1.setRecommendationRemark(ptc.getRecommendationRemark());
                     } else if (ptc.getRecommendationSelect().equals("Extend")) {
@@ -444,6 +458,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             }
             mv = searchSubmit(request, response);
         }
+        request.setAttribute("empId", empId);
         return mv;
     }
 
@@ -1422,7 +1437,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
             for (Object o : empList) {
                 EmployeeMaster employeeMaster = new EmployeeMaster();
                 employeeMaster = (EmployeeMaster) o;
-//                if(employeeMaster.getId()==1767){
+//                if(employeeMaster.getId()==1799){
                 DesignationMaster designationMaster = new DesignationMaster();
                 designationMaster = designationMasterService.readById(employeeMaster.getDesignationMaster().getId());
                 Integer desgnId = designationMaster.getId();
@@ -1498,6 +1513,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                         ptc.setEmployeeMasterByEmployeeMasterId(employeeMaster);
                         ptc.setAssessmentFromDate(doj);
                         ptc.setAssessmentToDate(dateAddedstring);
+                        ptc.setFormIssueDate(today);
                         probationToConfirmationService.create(ptc);
                         //      Email Sent to ReportingManager1
                         try {
@@ -1586,6 +1602,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
         employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
         employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
+        employeeMaster.setEmployeeSubType(employeeSubTypeService.readById(employeeMaster.getEmployeeSubType().getId()));
         employeeMaster.getReportingManagerLevel1();
         List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
         if (!list.isEmpty()) {
@@ -1622,6 +1639,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
         employeeMaster.setDesignationMaster(designationMasterService.readById(employeeMaster.getDesignationMaster().getId()));
         employeeMaster.setLevelMaster(levelMasterService.readById(employeeMaster.getLevelMaster().getId()));
         employeeMaster.setLocationMaster(locationMasterService.readById(employeeMaster.getLocationMaster().getId()));
+        employeeMaster.setEmployeeSubType(employeeSubTypeService.readById(employeeMaster.getEmployeeSubType().getId()));
         employeeMaster.getReportingManagerLevel1();
         List<?> list = employeeMasterService.readManagerLevel1(employeeMaster);
         if (!list.isEmpty()) {

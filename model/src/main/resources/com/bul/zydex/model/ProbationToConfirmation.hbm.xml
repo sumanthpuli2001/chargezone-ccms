@@ -158,5 +158,11 @@
         <property name="employeeTrainingAttend" type="string">
             <column name="employee_training_attend" />
         </property>
+        <property name="overallPerformance" type="string">
+            <column name="overall_performance" />
+        </property>
+        <property name="formIssueDate" type="string">
+            <column name="form_issue_date" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -498,4 +498,9 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
         return employeeMasterDAO.readByUserId(id);
     }
 
+    @Override
+    public String getByEmployeeNo1(String employeeId) {
+        return employeeMasterDAO.getByEmployeeNo1(employeeId);
+    }
+
 }

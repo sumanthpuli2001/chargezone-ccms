@@ -241,7 +241,7 @@ public abstract class CustomAbstract extends MultiActionController {
             tempStr += "{id: \"" + arrayOfObject[0]
                     + "\", name: \"" + arrayOfObject[1]
                     + "  /" + arrayOfObject[2]
-                    + "  /" + arrayOfObject[3] + "\"}";
+                    + "  /" + arrayOfObject[7] + "\"}";
 //                    + "  /" + arrayOfObject[4]
 //                    + "  /" + arrayOfObject[5] 
 

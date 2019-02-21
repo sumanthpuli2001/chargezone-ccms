@@ -3512,7 +3512,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     
                                 }
                             }
-                            if(timecount > 270 && timecount >= 540){
+                            if(timecount > 270 && timecount >= 510){
                                 secondHalfList.add("PR");
                             }else{
                                 secondHalfList.add("AB");

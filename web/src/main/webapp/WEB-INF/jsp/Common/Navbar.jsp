@@ -13,6 +13,7 @@
                 </script>-->
 
     </head>
+    
 
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
@@ -589,8 +590,7 @@
                                     <li><a href="payrollFinancialYear.htm?act=showResult"><i class="fa fa-circle-o"></i>Financial Year </a></li>
                                     <!--<li><a href="payrollStationWiseSavingTax.htm?act=showResult"><i class="fa fa-circle-o"></i>Saving Duration</a></li>-->
                                     <li><a href="payrollFormSixteenMaster.htm?act=showResult"><i class="fa fa-circle-o"></i>Form Sixteen Master </a></li>
-                                    <li><a href="employeeType.htm?act=showResult"><i class="fa fa-circle-o"></i>Employee Type </a></li>
-                                    <li><a href="employeeSubType.htm?act=showResult"><i class="fa fa-circle-o"></i>Employee SubType </a></li>
+                                    
                                     <li><a href="payrollPfCheck.htm?act=showResult"><i class="fa fa-circle-o"></i>PF Check</a></li>
                                     <li><a href="payrollPtCheck.htm?act=showResult"><i class="fa fa-circle-o"></i>PT Check</a></li>
                                     <!--<li><a href="employeeTypeWiseSalary.htm?act=showResult"><i class="fa fa-circle-o"></i>Assign Salary</a></li>-->
@@ -1003,11 +1003,13 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="resignationMaster.htm?act=fullandfcreateClick"><i class="fa fa-circle-o"></i>F&F Settlement Letter Formate</a></li>
+                        <li class="ow-break-word"><a href="resignationMaster.htm?act=fullandfcreateClick"><i class="fa fa-circle-o"></i>F&F Settlement Letter Formate</a></li>
                         <!--<li><a href="modulesMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Modules Master</a></li>-->
                         <!--<li><a href="componentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Component Master</a></li>-->
                         <li><a href="approval.htm?act=approvalList"><i class="fa fa-circle-o"></i>Approval Setting</a></li>
                         <li><a href="deviceMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Device Management</a></li>
+                        <li><a href="employeeType.htm?act=showResult"><i class="fa fa-circle-o"></i>Team List</a></li>
+                        <li><a href="employeeSubType.htm?act=showResult"><i class="fa fa-circle-o"></i>Sub-Team List </a></li>
                         <li><a href="departmentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Department List</a></li>
                         <li><a href="designationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Designation List</a></li>
                         <li><a href="levelMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Level Master</a></li>
@@ -1078,4 +1080,6 @@
     {
         background-color: #fff;
     }
+    
+   
 </style>

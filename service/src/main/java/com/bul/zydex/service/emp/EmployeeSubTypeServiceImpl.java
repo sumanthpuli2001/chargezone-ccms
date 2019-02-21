@@ -65,6 +65,11 @@ return employeeSubTypeDAO.readByEmployeeTypeId(typeId);
     public List<?> readByEmployeeTypeIdANDSubTypeName(int emptypid, String employeeSubtype) {
          return employeeSubTypeDAO.readByEmployeeTypeIdANDSubTypeName(emptypid,employeeSubtype);
     }
+
+    @Override
+    public List<?> readOrderNameWise() {
+        return employeeSubTypeDAO.readOrderNameWise();
+    }
     }
     
    

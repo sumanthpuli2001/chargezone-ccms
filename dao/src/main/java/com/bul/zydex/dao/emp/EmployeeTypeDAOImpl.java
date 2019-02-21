@@ -37,4 +37,12 @@ public class EmployeeTypeDAOImpl<T> extends GenericsDAOImpl<T> implements Employ
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readOrderNameWise() {
+         String query = "";
+        query += "From EmployeeTypeMaster a"
+                + " ORDER BY a.typeOfEmployee ASC ";
+        return getHibernateTemplate().find(query);
+    }
+
 }

@@ -523,6 +523,7 @@
                     document.getElementById('employeeSubTypeId').innerHTML = responseTxt;
                 }
                 if (statusTxt === "error")
+//                    alert(";;"+statusTxt);
                     ("Error: " + xhr.status + ": " + xhr.statusText);
             });
         }
@@ -862,7 +863,7 @@
                                                         <div class="col-sm-6">
                                                             <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
-                                                            <form:option value="" label="-- Select --" ></form:option>
+                                                            <form:option value="None" label="-- Select --" ></form:option>
                                                             <form:options items="${EmployeeTypeList}"></form:options>
                                                         </form:select>
                                                         <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
@@ -953,7 +954,7 @@
                                                     
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Select First , Middle & Last Name As per Passport or Aadhar card:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Employee Name (First Name, Middle Name, Last Name as per Passport or Aadhar card)<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset id="group11">
                                                                 <input type="radio" name="nameStatus" id="nameStatus" checked="true" value="false"/>Passport
                                                                 <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard

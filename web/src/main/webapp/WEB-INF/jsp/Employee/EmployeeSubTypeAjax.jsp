@@ -20,19 +20,20 @@
         <div id="shiftName">
              <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
             <c:choose>
-                <c:when test="${empty employeeSubTypeList}">
+                <c:when test="${empty employeeSubTypeList || val eq 'None'}">
                     <select id="subTypeId" name="subTypeId" class="form-control">
                         <option value="">-- Select --</option>
                     </select>
                 </c:when>
                 <c:otherwise>
                     <select id="subTypeId" name="subTypeId" class="form-control">
-                        <option value="">-- Select --</option>
+                        
                         <c:forEach items="${employeeSubTypeList}" var="ele">
                             <c:choose>
                                 <c:when test="${employeeSubTypeId == ele.id}">
                                 <option value="${ele.id}" selected>${ele.subType}</option>
                                 </c:when>
+                               
                                 <c:otherwise>
                                 <option value="${ele.id}" >${ele.subType}</option>
                                     

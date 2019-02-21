@@ -17,4 +17,6 @@ public interface EmployeeTypeDAO<T> extends GenericsDAO<T> {
     public List<?> readByName(String name);
 
     public List<?> readByID(int readByID);
+
+    public List<?> readOrderNameWise();
 }

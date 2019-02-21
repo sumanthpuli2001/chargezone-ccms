@@ -10,13 +10,13 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Employee Sub Type Create</title>
+        <title>Employee Sub Team Create</title>
     </head>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>ADD NEW EMPLOYEE SUB TYPE</h1>
+            <h1>ADD NEW EMPLOYEE SUB TEAM</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
                 <li class="active">Create</li>
@@ -43,7 +43,7 @@
                                     <form:hidden path="id"></form:hidden>
                                         <div class="form-group">
                                             <div class="col-sm-6">
-                                                <label>Employee Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
                                             <form:select path="employeeTypeMaster.id" class="form-control ">
                                                 <form:option value="" label="-- Select --" ></form:option>
                                                 <form:options items="${EmployeeTypeList}"></form:options>
@@ -54,8 +54,8 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-6">
-                                                <label>Sub Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                            <form:input path="subType" class="form-control" maxlength="30"  placeholder="Enter Sub Type"/>
+                                                <label>Sub Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <form:input path="subType" class="form-control" maxlength="30"  placeholder="Enter Sub Team"/>
                                             <form:errors path="subType" cssClass="errorDiv"/>
 
 

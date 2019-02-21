@@ -44,5 +44,7 @@ public interface EmployeeDatetimeDataService<T> extends GenericsService<T> {
     public String getEmailAddress(String empId);
     
     public List readAllPuchDataDateWise(String tdate, int id);
+
+    public List readALLPuchOnlyDataDateWise(String startDate, int id);
    
 }

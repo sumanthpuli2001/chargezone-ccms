@@ -11,16 +11,16 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Employee Type Create</title>
+        <title>Employee Team Create</title>
     </head>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>ADD NEW EMPLOYEE TYPE</h1>
+            <h1>ADD NEW TEAM TYPE</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Add New Employee Type</li>
+                <li class="active">Add New Team Type</li>
             </ol>
         </section>
 
@@ -45,10 +45,10 @@
 
                                         <div class="form-group">
                                             <div class="col-sm-3">
-                                                <label class="control-label">Enter Employee Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <label class="control-label">Enter Team Type:<span style="color: red;font-size: 12px;">*</span></label>
                                             </div>
                                             <div class="col-sm-7">
-                                            <form:input path="typeOfEmployee" class="form-control"  placeholder="Enter Employee Type"  maxlength="30"/>
+                                            <form:input path="typeOfEmployee" class="form-control"  placeholder="Enter Team Type"  maxlength="30"/>
                                             <form:errors path="typeOfEmployee" cssClass="errorDiv"/>
                                         </div>
                                     </div>

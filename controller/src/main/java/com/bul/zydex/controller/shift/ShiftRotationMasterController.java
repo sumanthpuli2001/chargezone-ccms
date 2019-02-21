@@ -17833,13 +17833,24 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         UserMaster user = new UserMaster();
         user.setId(userId);
         employeeMaster.setUserMaster(user);
+        int reportingId = 0;
         List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
         if (!empDetailList.isEmpty()) {
             request.setAttribute("employeeMaster", empDetailList.get(0));
             Object[] arrayOfObject = (Object[]) empDetailList.get(0);
             String reportmanager = (String) arrayOfObject[6];
-        }
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
 
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+
+        }
         mv.getModelMap().put("shiftRegularization", shiftRegularization);
         request.setAttribute("shiftNAme", shiftNAme);
         request.setAttribute("PastShift1", PastShift1);
@@ -18026,6 +18037,9 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
     public ModelAndView EditEmployeeShiftAssignWoff(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         WoffRegularization woffRegularization = new WoffRegularization();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
 //        ShiftGenerateMonthlySchedule shiftGenerateMonthlySchedule = new ShiftGenerateMonthlySchedule();
         String id = request.getParameter("id");
         String dayNo = request.getParameter("dayNo");
@@ -18034,6 +18048,28 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         List<?> empShiftList = shiftGenerateMonthlyScheduleService.readDayWiseShift(Integer.parseInt(id), Integer.parseInt(dayNo));
         if (!empShiftList.isEmpty()) {
             shiftId = "" + empShiftList.get(0);
+        }
+        user.getId();
+        employeeMaster.setUserMaster(user);
+        employeeMaster.setUserMaster(user);
+        int reportingId = 0;
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+
         }
 //        ShiftMaster shiftMaster = shiftMasterService.readById(Integer.parseInt(shiftId));
 //        readShiftName(request);
@@ -18272,13 +18308,24 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         UserMaster user = new UserMaster();
         user.setId(userId);
         employeeMaster.setUserMaster(user);
+        int reportingId = 0;
         List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
         if (!empDetailList.isEmpty()) {
             request.setAttribute("employeeMaster", empDetailList.get(0));
             Object[] arrayOfObject = (Object[]) empDetailList.get(0);
             String reportmanager = (String) arrayOfObject[6];
-        }
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
 
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+
+        }
         mv.getModelMap().put("woffRegularization", woffRegularization);
 //        request.setAttribute("shiftNAme", shiftNAme);
         request.setAttribute("PastShift1", PastShift1);
@@ -18917,13 +18964,24 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         UserMaster user = new UserMaster();
         user.setId(userId);
         employeeMaster.setUserMaster(user);
+        int reportingId = 0;
         List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
         if (!empDetailList.isEmpty()) {
             request.setAttribute("employeeMaster", empDetailList.get(0));
             Object[] arrayOfObject = (Object[]) empDetailList.get(0);
             String reportmanager = (String) arrayOfObject[6];
-        }
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
 
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+
+        }
         mv.getModelMap().put("coffRegularization", coffRegularization);
         mv.setViewName("Shift/coffRegularizationApprovalAdmin");
         return mv;
@@ -19788,11 +19846,23 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         otRegularization.setClientDetailsMaster(clientDetailsMaster);
         user.setId(userId);
         employeeMaster.setUserMaster(user);
+        int reportingId = 0;
         List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
         if (!empDetailList.isEmpty()) {
             request.setAttribute("employeeMaster", empDetailList.get(0));
             Object[] arrayOfObject = (Object[]) empDetailList.get(0);
             String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+
         }
 
         mv.getModelMap().put("otRegularization", otRegularization);

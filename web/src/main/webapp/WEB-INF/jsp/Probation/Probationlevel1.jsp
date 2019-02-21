@@ -156,28 +156,13 @@
                                                         <div class="col-sm-4">
                                                             <form:input path="employeeMasterByEmployeeMasterId.employeeId" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
-                                                            <input type="hidden" id="empId" name="empId" value="${empid}" />
-                                                            <div class="col-sm-2">
-                                                                <label>Designation:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                            <form:input path="employeeMasterByEmployeeMasterId.designationMaster.designationName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                                <!--employeeMasterByEmployeeMasterId.designationMaster.designationName-->
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
                                                             <div class="col-sm-2">
                                                                 <label>Employee Name:</label>
                                                             </div>
                                                             <div class="col-sm-4">
                                                             <form:input path="employeeMasterByEmployeeMasterId.employeeName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
-                                                            <div class="col-sm-2">
-                                                                <label>Level:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                            <form:input path="employeeMasterByEmployeeMasterId.levelMaster.level" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                            </div>
+                                                            <input type="hidden" id="empId" name="empId" value="${empid}" />
                                                             
                                                         </div>
                                                         <div class="form-group">
@@ -194,20 +179,38 @@
                                                             <form:input path="employeeMasterByEmployeeMasterId.employeeSubType.subType" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
                                                             
+                                                            
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="col-sm-2">
-                                                                <label>Reporting Manager:</label>
+                                                                <label>Designation:</label>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                            <form:input path="reportingManagerId" class="form-control" size="16" type="text" value="${reportingLevel1}" readonly="true"></form:input>
+                                                            <form:input path="employeeMasterByEmployeeMasterId.designationMaster.designationName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                                <!--employeeMasterByEmployeeMasterId.designationMaster.designationName-->
                                                             </div>
+                                                            
+                                                            <div class="col-sm-2">
+                                                                <label>Level:</label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                            <form:input path="employeeMasterByEmployeeMasterId.levelMaster.level" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
                                                             <div class=" col-sm-2">
                                                                 <label>Work Location:</label>
                                                             </div>
                                                             <div class="col-sm-4">
                                                             <form:input path="employeeMasterByEmployeeMasterId.locationMaster.location" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
                                                             </div>
+                                                            <div class="col-sm-2">
+                                                                <label>Reporting Manager:</label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                            <form:input path="reportingManagerId" class="form-control" size="16" type="text" value="${reportingLevel1}" readonly="true"></form:input>
+                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>

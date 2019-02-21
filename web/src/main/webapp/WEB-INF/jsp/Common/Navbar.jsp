@@ -170,7 +170,7 @@
                                     <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff"><i class="fa fa-circle-o"></i>Woff Application</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff"><i class="fa fa-circle-o"></i>Lieu day</a></li>
                                         <c:if test="${sessionScope.checkReportingManager}">
-                                    <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff"><i class="fa fa-circle-o"></i>Coff Addition</a></li>
+                                    <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff"><i class="fa fa-circle-o"></i>Lieu Addition</a></li>
                                     <li><a href="shiftRotationMaster.htm?act=searchSubmitOTRegularization"><i class="fa fa-circle-o"></i>OT Request</a></li>
                                         <%--<c:if test="${sessionScope.checkReportingManager}">--%>
                                         <li><a href="attendanceRegularizationMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>AR Application</a></li>

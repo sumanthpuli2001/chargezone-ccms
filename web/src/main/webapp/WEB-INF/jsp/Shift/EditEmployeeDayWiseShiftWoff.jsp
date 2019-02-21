@@ -41,9 +41,86 @@
                             <!-- Custom Tabs -->
                             <div class="nav-tabs-custom">
                                 <div class="tab-content">
-                                    <div class="box-header">
-
+                                    <form class="form-horizontal" role="form">
+                                        <div class="box box-info collapsed-box ">
+                                            <div class="box-header">
+                                                <h3 class="box-title">Employee Detail:</h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                                </div>
+                                            </div><!-- /.box-header -->
+                                            <div class="box-body no-padding">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-2">
+                                                                <label>Employee No.:</label>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <input type="Text" class="form-control" value="${employeeMaster[0]}" readonly>
+                                                            <input type="hidden" class="form-control" id="empid" name="empid" value="${employeeMaster[0]}">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label>Employee Name:</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="Text" class="form-control" value="${employeeMaster[1]}" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-2">
+                                                            <label>Team:</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="Text"  class="form-control" value="${employeeMaster[10]}" readonly>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label>Sub-Team:</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="Text" class="form-control" value="${employeeMaster[11]}" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-2">
+                                                            <label>Designation:</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="Text" class="form-control" value="${employeeMaster[2]}" readonly>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label>Level:</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="Text" class="form-control" value="${employeeMaster[3]}" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-2">
+                                                            <label>Work Location:</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="Text" class="form-control"  value="${employeeMaster[5]}" readonly>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label>Reporting Manager:</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="Text" class="form-control" value="${reportingManager}" readonly>
+                                                        </div>
+                                                    </div>
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
                                     </div>
+                                        <!--Read only entries Starts here-->
+                                        <div class="box box-info collapsed-box ">
+                                            <div class="box-header">
+                                                <h3 class="box-title">Woff Change:</h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1()"><i class="fa fa-plus" id="minusId1"></i></button>
+                                                </div>
+                                            </div> 
                                     <div class="box-body no-padding">
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">
@@ -86,11 +163,16 @@
                                         </div><!-- /.col -->
                                     </div><!-- /.row -->
                                     <div>&nbsp;</div>
-                                    <div class=" col-sm-12" style="text-align: center;">
-                                        <button type="submit" class="btn btn-primary" id="saveSubmit1" style="width: 100px;">SUBMIT</button>
-                                    </div>      
+                                          
 
                                 </div><!-- /.box-body -->
+                                <div class="form-group" id="">
+                                    <div class=" col-sm-12" style="text-align: center;">
+                                            <button type="submit" class="btn btn-primary" id="saveSubmit1" style="width: 100px;">SUBMIT</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                             </div><!-- /.tab-content -->
                         </div><!-- nav-tabs-custom -->
                     </div><!-- /.col -->

@@ -117,6 +117,20 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-2">
+                                                            <label>Team:</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="Text"  class="form-control" value="${employeeMaster[10]}" readonly>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <label>Sub-Team:</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <input type="Text" class="form-control" value="${employeeMaster[11]}" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-2">
                                                             <label>Designation:</label>
                                                         </div>
                                                         <div class="col-sm-4">
@@ -131,20 +145,11 @@
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-2">
-                                                            <label>Department:</label>
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <input type="Text" class="form-control"  value="${employeeMaster[4]}" readonly>
-                                                        </div>
-
-                                                        <div class="col-sm-2">
                                                             <label>Work Location:</label>
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <input type="Text" class="form-control"  value="${employeeMaster[5]}" readonly>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-2">
                                                             <label>Reporting Manager:</label>
                                                         </div>

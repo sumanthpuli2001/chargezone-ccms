@@ -2076,13 +2076,24 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         UserMaster user = new UserMaster();
         user.setId(userId);
         employeeMaster.setUserMaster(user);
+        int reportingId = 0;
         List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster);
         if (!empDetailList.isEmpty()) {
             request.setAttribute("employeeMaster", empDetailList.get(0));
             Object[] arrayOfObject = (Object[]) empDetailList.get(0);
             String reportmanager = (String) arrayOfObject[6];
-        }
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
 
+            employeeMaster1.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster1);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster1 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster1.getEmployeeName());
+
+        }
         mv.getModelMap().put("attendanceRegularization", attendanceRegularization);
         mv.setViewName("AttendanceRegularization/attendanceRegularizationApprovalAdmin");
         return mv;

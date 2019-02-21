@@ -139,10 +139,10 @@
                                                            
                                                             <tr>
                                                                 <th>Employee Name</th>
-                                                                <th>Leave Type</th>
+                                                                <th>Sub Team</th>
+                                                                <th>Type Of Leave</th>
                                                                 <th>Start Date</th>
                                                                 <th>End Date</th>
-                                                                <th>Reason</th>
                                                                 <th>No Of Days</th>
                                                                 <th>Date of Submission</th>
                                                                 <th>Status</th>
@@ -155,10 +155,10 @@
                                                     <c:forEach var="list" items="${list1}">
                                                         <tr>
                                                             <td>${list[0]}</td>
+                                                            <td>${list[10]}</td>
                                                             <td>${list[1]}</td>
                                                             <td>${list[2]}</td>
                                                             <td>${list[3]}</td>
-                                                            <td>${list[9]}</td>
                                                             <td>${list[4]}</td>
                                                             <td>${list[8]}</td>
                                                             <c:if test="${list[6] eq 0}">

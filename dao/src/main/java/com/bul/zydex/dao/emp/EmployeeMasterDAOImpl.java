@@ -74,11 +74,12 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
     public List<?> readForAliveEmployeesNew() {
         String query = "";
         query += " "
-                + " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role, d.id"
+                + " SELECT a.id, a.employeeId, a.employeeName, c.departmentName, b.designationName, a.role, d.id, e.subType"
                 + " FROM EmployeeMaster a "
                 + " LEFT JOIN a.designationMaster b "
                 + " LEFT JOIN a.departmentMaster c "
                 + " LEFT JOIN a.userMaster d "
+                + " LEFT JOIN a.employeeSubType e "
                 + " where a.employeeId != 'admin' and ((a.dateOfLeaving is null or a.dateOfLeaving = '') "
                 + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())";
 
@@ -2451,11 +2452,13 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
         String query = "";
 
-        query += " Select a.employeeId, a.employeeName, b.designationName, d.level, c.departmentName, lm.location ,a.reportingManagerLevel1, a.company, a.contactNo2,zl.zydexLocation,a.id "
+        query += " Select a.employeeId, a.employeeName, b.designationName, d.level, c.departmentName, lm.location ,a.reportingManagerLevel1, a.company, a.contactNo2,zl.zydexLocation,a.id,e.typeOfEmployee,f.subType "
                 + "FROM EmployeeMaster a"
                 + " LEFT JOIN a.designationMaster b"
                 + " LEFT JOIN a.departmentMaster c"
                 + " LEFT JOIN a.levelMaster d"
+                + " LEFT JOIN a.employeeTypeMaster e"
+                + " LEFT JOIN a.employeeSubType f"
                 + " LEFT JOIN a.locationMaster lm"
                 + " LEFT JOIN a.zydexLocationMaster zl"
                 + " WHERE a.userMaster.id = " + employeeMaster.getUserMaster().getId();
@@ -2633,6 +2636,17 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
 
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public String getByEmployeeNo1(String employeeId) {
+        String query = "";
+
+        query += "Select a.id FROM EmployeeMaster a"
+                + " Where a.employeeId="+employeeId;
+        List<?> list = getHibernateTemplate().find(query);
+        String list1 = list.get(0).toString();
+        return list1;
     }
 
 }

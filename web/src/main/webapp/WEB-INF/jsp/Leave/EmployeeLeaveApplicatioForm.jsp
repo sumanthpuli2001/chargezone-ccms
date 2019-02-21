@@ -10,6 +10,12 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <script>
+        $(function () {
+            $('#uAsSickId').hide();
+        });
+
+    </script>
+    <script>
         function pat() {
 
         bootbox.dialog({
@@ -1284,6 +1290,9 @@
 //                alert("enDate" + enDate);
                 var sDateStatus = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
                 var eDateStatus = document.getElementById("leaveEndDate_SelectFullOrHalfId").value;
+                var useSickLeave = $("input[name='useAsSickLeave']:checked").val();
+                var leaveTypeMaster = document.getElementById("leaveTypeMaster.id").value;
+                var employeeId = document.getElementById("employeeId").value;
                 if (strDate != '') {
         $.ajax({
         type: "POST",
@@ -1321,17 +1330,26 @@
         }
         //                && sDateStatus != '' && eDateStatus != ''
 
-        if (strDate != '' && enDate != '') {
+        if (strDate != '' && enDate != '' && sDateStatus != '' && leaveTypeMaster != "" && useSickLeave != "") {
         //                    alert("wwww" + strDate);
         //                    alert("sDateStatus" + sDateStatus);
         $.ajax({
         type: "POST",
-                url: "leaveEmployeeDetail.htm?act=getActualDayByAjax&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus,
+                url: "leaveEmployeeDetail.htm?act=getActualDayByAjax2&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus + "&leaveType=" + leaveTypeMaster + "&useSickLeave=" + useSickLeave + "&employeeId="+employeeId,
                 data: {},
                 dataType: "text",
                 success: function (responseTxt) {
+                    if (responseTxt == 0.0 && leaveTypeMaster == 7) {
+                                $("#futureDateSelect").show();
+                                setTimeout(function () {
+                                    $("#futureDateSelect").fadeOut();
+                                }, 5000);
+                            }
+                            else{
                 document.getElementById("hiddenDays").value = responseTxt;
-                        daysCount();
+                        
+                            }
+                            daysCount();
                 },
                 error: function () {
                 }
@@ -1485,6 +1503,20 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-2">
+                                                        <label>Team:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" value="${employeeMaster[10]}" readonly>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Sub Team:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" value="${employeeMaster[11]}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
                                                         <label>Designation:</label>
                                                     </div>
                                                     <div class="col-sm-4">
@@ -1498,12 +1530,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="col-sm-2">
-                                                        <label>Department:</label>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <input type="Text" class="form-control"  value="${employeeMaster[4]}" readonly>
-                                                    </div>
 
                                                     <div class="col-sm-2">
                                                         <label>Work Location:</label>
@@ -1511,8 +1537,6 @@
                                                     <div class="col-sm-4">
                                                         <input type="Text" class="form-control"  value="${employeeMaster[5]}" readonly>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
                                                     <div class="col-sm-2">
                                                         <label>Reporting Manager:</label>
                                                     </div>
@@ -1541,12 +1565,23 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-12">
                                                         <label>Leave Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="leaveTypeMaster.id" class="form-control" onchange="modelopenpopup();leaveSetting(); daysCount();">
+                                                        <form:select path="leaveTypeMaster.id" class="form-control" onchange="modelopenpopup();leaveSetting(); daysCount();getUseAsSickLevave(this.value);">
                                                             <form:option value="" label="-- Select --"/>
                                                             <form:options items="${empleaveTypemap}" />
                                                         </form:select>
                                                         <span id="leaveTypeMasterError" style="color: red;"></span>
                                                         <%--<form:errors path="leaveTypeMaster" cssClass="errorDiv"></form:errors>--%>
+                                                    </div>
+                                                </div>
+                                                <div id="uAsSickId">
+                                                    <div class="col-sm-12">
+                                                        <label>Use As a Sick Leave:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <fieldset id="group1">
+                                                            <form:radiobutton path="useAsSickLeave" id="useAsSickLeave" onclick="checkDaysValidation(this.value);" value="true"/>Yes&nbsp;&nbsp;
+                                                            <form:radiobutton path="useAsSickLeave" id="useAsSickLeave" onclick="checkDaysValidation(this.value);" value="false" checked="checked"/>No
+                                                            <!--                                                            <input type="radio" name="useAsSickLeave" value="true" > Yes
+                                                                                                                        <input type="radio" name="useAsSickLeave" value="false" checked> No-->
+                                                        </fieldset>
                                                     </div>
                                                 </div>
                                                 <div id="NoshortLeave">
@@ -1556,9 +1591,10 @@
                                                             <label>Leave Start Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <%--<form:input path="leaveStartDateId" class="form-control" size="16" type="text" value="" onchange="leaveSetting(); daysCount();" readonly="true"></form:input>--%>
-                                                                <form:input path="startDate" class="form-control" size="16" type="text" value="" onchange="checkStartDateFun();calculateDayByAjax();leaveSetting();leaveTypecheck();
-                                                                            daysCount();" readonly="true"></form:input>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                <form:input path="startDate" class="form-control" size="16" type="text" value="" onchange="checkStartDateFun();leaveSetting();leaveTypecheck();
+                                                                            daysCount();calculateSecondSatByAjax();" readonly="true"></form:input>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>    
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
                                                                 <span id="startDateError" style="color: red;"></span>
                                                                 <span id="sDateHolidayError" style="color: red;"></span>
@@ -1606,9 +1642,10 @@
                                                             <label>Leave End Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <%--<form:input id="leaveEndDateId" class="form-control" size="16" type="text" value="" onchange="leaveSetting(); daysCount();" readonly="true"></form:input>--%>
-                                                                <form:input path="endDate" class="form-control" onchange="checkEndDateFun();calculateDayByAjax();leaveSetting();leaveTypecheck();
-                                                                            daysCount();" readonly="true"></form:input>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                <form:input path="endDate" class="form-control" onchange="checkEndDateFun();leaveSetting();leaveTypecheck();
+                                                                            daysCount();calculateSecondSatByAjax();" readonly="true"></form:input>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>    
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
                                                                 <span id="endDateError" style="color: red;"></span>
                                                                 <span id="eDateHolidayError" style="color: red;"></span>
@@ -1845,6 +1882,38 @@
                 forceParse: 0,
                 showMeridian: 1
         });</script>
+    <script>
+        function getUseAsSickLevave(id) {
+            var employeeId = document.getElementById("employeeId").value;
+            $.post("leaveEmployeeDetail.htm?act=readleaveTypeMaster1&employeeId="+employeeId,
+                    {
+                        id: id,
+                    }, function (responseTxt, statusTxt, xhr) {
+                if (statusTxt === "success") {
+                    ("responseTxt" + responseTxt);
+                    var obj1 = JSON.parse(responseTxt);
+                    var desigJSON1 = obj1['useSickLeave'];
+//                    alert("desigJSON1  " + desigJSON1)
+//                    var desigJSONKey1 = Object.keys(obj1['useSickLeave']);
+//                    alert("desigJSONKey1  " + desigJSONKey1);
+                    if (desigJSON1 == "0") {
+//                        alert('in');
+                        $('#uAsSickId').show();
+                    } else if (desigJSON1 == "1") {
+//                        alert('out');
+                        $('#uAsSickId').show();
+                    } else {
+//                        alert('Final out');
+                        $('#uAsSickId').hide();
+                    }
+                }
+                if (statusTxt === "error")
+                    ("Error: " + xhr.status + ": " + xhr.statusText);
+            });
+        }
+
+
+    </script>
 
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     <style>

@@ -206,4 +206,6 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readEmployeeDataForexportToExcelFlyDoc(final String searchEmployeeString);
 
     public List readByUserId(Integer id);
+    
+    public String getByEmployeeNo1(String employeeId);
 }

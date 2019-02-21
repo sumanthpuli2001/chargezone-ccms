@@ -59,6 +59,8 @@ public class ProbationToConfirmation  implements java.io.Serializable {
      private String employeeStrengths;
      private String employeeImprove;
      private String employeeTrainingAttend;
+     private String overallPerformance;
+     private String formIssueDate;
 
     public ProbationToConfirmation() {
     }
@@ -68,7 +70,7 @@ public class ProbationToConfirmation  implements java.io.Serializable {
         this.employeeMasterByEmployeeMasterId = employeeMasterByEmployeeMasterId;
     }
 
-    public ProbationToConfirmation(EmployeeMaster employeeMasterByHrId, String assessmentFromDate, String assessmentToDate, String jobHandled, String performanceRating, String recommendationSelect, String recommendationExtendPeriod, String recommendationRemark, String approvalSelect, String approvalExtendPeriod, String approvalRemark, String improvementComment, String recomendationByHr, Integer status, String reportingManagerId, String reportingManagerSubmitDate, String functionalHeadId, String functionalHeadSubmitDate, String hrSubmitDate, String hrSelect, String hrExtendPeriod, String hrApprovalRemark, String managerJustification, String hrAdditionalRemark, Integer jobKnowledge1, Integer jobKnowledge2, Integer jobKnowledge3, Integer jobKnowledge4, Integer jobKnowledge5, Integer quality1, Integer quality2, Integer quality3, Integer quality4, Integer quality5, Integer learning1, Integer learning2, Integer learning3, Integer learning4, Integer learning5, Integer general1, Integer general2, Integer general3, Integer general4, Integer general5, String employeeFullfill, String employeeStrengths, String employeeImprove, String employeeTrainingAttend) {
+    public ProbationToConfirmation(EmployeeMaster employeeMasterByHrId, String assessmentFromDate, String assessmentToDate, String jobHandled, String performanceRating, String recommendationSelect, String recommendationExtendPeriod, String recommendationRemark, String approvalSelect, String approvalExtendPeriod, String approvalRemark, String improvementComment, String recomendationByHr, Integer status, String reportingManagerId, String reportingManagerSubmitDate, String functionalHeadId, String functionalHeadSubmitDate, String hrSubmitDate, String hrSelect, String hrExtendPeriod, String hrApprovalRemark, String managerJustification, String hrAdditionalRemark, Integer jobKnowledge1, Integer jobKnowledge2, Integer jobKnowledge3, Integer jobKnowledge4, Integer jobKnowledge5, Integer quality1, Integer quality2, Integer quality3, Integer quality4, Integer quality5, Integer learning1, Integer learning2, Integer learning3, Integer learning4, Integer learning5, Integer general1, Integer general2, Integer general3, Integer general4, Integer general5, String employeeFullfill, String employeeStrengths, String employeeImprove, String employeeTrainingAttend, String overallPerformance, String formIssueDate) {
         this.employeeMasterByHrId = employeeMasterByHrId;
         this.assessmentFromDate = assessmentFromDate;
         this.assessmentToDate = assessmentToDate;
@@ -117,6 +119,8 @@ public class ProbationToConfirmation  implements java.io.Serializable {
         this.employeeStrengths = employeeStrengths;
         this.employeeImprove = employeeImprove;
         this.employeeTrainingAttend = employeeTrainingAttend;
+        this.overallPerformance = overallPerformance;
+        this.formIssueDate = formIssueDate;
     }
 
     public Integer getId() {
@@ -519,8 +523,23 @@ public class ProbationToConfirmation  implements java.io.Serializable {
         this.employeeTrainingAttend = employeeTrainingAttend;
     }
 
+    public String getOverallPerformance() {
+        return overallPerformance;
+    }
+
+    public void setOverallPerformance(String overallPerformance) {
+        this.overallPerformance = overallPerformance;
+    }
+
+    public String getFormIssueDate() {
+        return formIssueDate;
+    }
+
+    public void setFormIssueDate(String formIssueDate) {
+        this.formIssueDate = formIssueDate;
+    }
     
-          
+              
 }
 
 

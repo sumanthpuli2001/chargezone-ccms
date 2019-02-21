@@ -75,7 +75,15 @@
                                                                     <td>${list[0][0].employeeName}</td>
                                                                     <td>${list[0][0].dateOfJoining}</td>
 
-                                                                    <td><c:if test="${list[0][1].status eq 10}">Reworked</c:if></td>
+                                                                    <td>
+                                                                        <c:if test="${list[0][1].status eq 10}">Reworked</c:if>
+                                                                        <c:if test="${list[0][1].status eq 0}"><span class="badge">Pending for Manager</span></c:if>
+                                                                        <c:if test="${list[0][1].status eq 1}"><span class="label label-success">Submitted by manager</span></c:if>
+                                                                        <c:if test="${list[0][1].status eq 2}"><span class="badge">Submitted by functional head</span></c:if>
+                                                                        <c:if test="${list[0][1].status eq 3}"><span class="label label-danger">Rejected</span></c:if>
+                                                                        <c:if test="${list[0][1].status eq 4}"><span class="label label-warning">Extended</span></c:if>
+                                                                        <c:if test="${list[0][1].status eq 5}"><span class="label label-success">Submitted by HR</span></c:if>
+                                                                    </td>
                                                                         <td>
                                                                             <div class="btn-group">
                                                                                 <button type="button" class="btn btn-default dropdown-toggle"  onclick="viewClick(${list[0][0].id});" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

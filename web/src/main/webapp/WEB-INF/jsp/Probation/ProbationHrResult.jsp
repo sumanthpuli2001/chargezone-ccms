@@ -86,10 +86,11 @@
                                                                     <td>
                                                                         <c:if test="${list[6] eq null}"><span class="badge">In probation</span></c:if>
                                                                         <c:if test="${list[6] eq 0}"><span class="badge">Pending for Manager</span></c:if>
-                                                                        <c:if test="${list[6] eq 1}"><span class="label label-success">Submited by manager</span></c:if>
-                                                                        <c:if test="${list[6] eq 2}"><span class="badge">Submited by functional head</span></c:if>
+                                                                        <c:if test="${list[6] eq 1}"><span class="label label-success">Submitted by manager</span></c:if>
+                                                                        <c:if test="${list[6] eq 2}"><span class="badge">Submitted by functional head</span></c:if>
                                                                         <c:if test="${list[6] eq 3}"><span class="label label-danger">Rejected</span></c:if>
                                                                         <c:if test="${list[6] eq 4}"><span class="label label-warning">Extended</span></c:if>
+                                                                        <c:if test="${list[6] eq 5}"><span class="label label-success">Submitted by HR</span></c:if>
                                                                         </td>
                                                                         <td>
 

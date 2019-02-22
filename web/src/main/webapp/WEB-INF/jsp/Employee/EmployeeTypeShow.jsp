@@ -88,7 +88,7 @@
                                                                 <tr>
                                                                     <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
                                                                     <th>Sr.No.</th>
-                                                                    <th>Team Type</th>
+                                                                    <th>Team</th>
 <!--                                                                    <th>Action</th>-->
                                                                 </tr>
                                                             </thead>

@@ -3063,6 +3063,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 for (Row row : sheet) {
                     try {
                         if (row.getRowNum() != 0 && row.getRowNum() != 1 && row.getRowNum() != 2) {
+                            if(row.getCell(1) != null){
                             try {
                                 employeeNo = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
                                 employeeNo = employeeNo.split("\\.", 2)[0];
@@ -3489,7 +3490,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 employeeMasterExtension.setChildOneGender(g);
                             }else {
                                 
-                                employeeMasterExtension.setChildOneGender(null);
+                                employeeMasterExtension.setChildOneGender(g);
                             }
                             
                             if (childTwoGender.contains("M")) {
@@ -3498,7 +3499,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                   g = true;
                                 employeeMasterExtension.setChildTwoGender(g);
                             }else {
-                               employeeMasterExtension.setChildTwoGender(null);
+                               employeeMasterExtension.setChildTwoGender(g);
                             }
                             
                             if (spouseGender3.contains("M")) {
@@ -3507,7 +3508,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                   g = true;
                                 employeeMasterExtension.setSpouseGender(g);
                             }else {
-                                employeeMasterExtension.setSpouseGender(null);
+                                employeeMasterExtension.setSpouseGender(g);
                             }
                             employeeMasterExtension.setRelationShip(RelationShip);
                             employeeMasterExtension.setEmergencyContactAddress(emergencyContactAddress);
@@ -3515,92 +3516,6 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMasterExtension.setHobbies(hobbies);
                             employeeMasterExtension.setLanguagesKnown(languagesKnown);
 
-//                            SimpleDateFormat sdfDOJ = new SimpleDateFormat("dd-MMM-yyyy");
-//                            SimpleDateFormat sdfDOJ2 = new SimpleDateFormat("dd/MM/yyyy");
-////here excell uploa
-//                            Date dateDOJ = sdfDOJ.parse(dateOfJoiningNonFormated);
-////                            String nDate = sdfDOJ.format(dateDOJ);
-//                            dateOfJoining = sdfDOJ2.format(dateDOJ);
-//                            String dateOfJoiningNonFormatedToString = dateDOJ.toString();
-//                            Date dateDOJ2 = sdfDOJ2.parse(dateOfJoiningNonFormatedToString);
-////                        dateOfJoining = dateDOJ2.toString();
-//                            dateOfJoining = "" + sdfDOJ.format(dateOfJoiningNonFormated);
-//                            company = "" + (null == row.getCell((short) 3) ? "" : row.getCell((short) 3));
-//                            zydexLocation = "" + (null == row.getCell((short) 4) ? "" : row.getCell((short) 4));
-//                            
-//                            
-//                            
-//                            
-//                            
-//                            
-//                            department = "" + (null == row.getCell((short) 12) ? "" : row.getCell((short) 12));
-//                            officialEmailId = "" + (null == row.getCell((short) 13) ? "" : row.getCell((short) 13));
-//                            contactNoExpo = "" + (null == row.getCell((short) 14) ? "" : row.getCell((short) 14));
-//                            if (!contactNoExpo.equals("")) {
-//                                BigDecimal bdContactNo = new BigDecimal(contactNoExpo);
-//                                contactNo = "" + bdContactNo.longValue();
-//                            } else {
-//                                contactNo = "";
-//                            }
-//                            
-//                            fatherName = "" + (null == row.getCell((short) 16) ? "" : row.getCell((short) 16));
-//                            motherName = "" + (null == row.getCell((short) 17) ? "" : row.getCell((short) 17));
-//                            dobNonFormated = "" + (null == row.getCell((short) 18) ? "" : row.getCell((short) 18));
-//
-////DOB formatting before employee creation.
-////                        Date dateDOB = sdfDOJ.parse(dobNonFormated);
-////                        dob = "" + sdfDOJ2.format(dateDOB);
-//                            gender = "" + (null == row.getCell((short) 19) ? "" : row.getCell((short) 19));
-//                            maritalStatus = "" + (null == row.getCell((short) 20) ? "" : row.getCell((short) 20));
-//                            spouseName = "" + (null == row.getCell((short) 21) ? "" : row.getCell((short) 21));
-//                            permenantAddress = "" + (null == row.getCell((short) 22) ? "" : row.getCell((short) 22));
-//                            bloodGroup = "" + (null == row.getCell((short) 23) ? "" : row.getCell((short) 23));
-//                            
-//                            emergencyContactPerson = "" + (null == row.getCell((short) 25) ? "" : row.getCell((short) 25));
-//                            emergencyContactNoExpo = "" + (null == row.getCell((short) 26) ? "" : row.getCell((short) 26));
-//                            if (!emergencyContactNoExpo.equals("")) {
-//
-//                                BigDecimal bdEmergencyContactNo = new BigDecimal(emergencyContactNoExpo);
-//                                emergencyContactNo = "" + bdEmergencyContactNo.longValue();
-//                            } else {
-//                                emergencyContactNo = "";
-//                            }
-//                            pan = "" + (null == row.getCell((short) 27) ? "" : row.getCell((short) 27));
-//                            aadharCardExpo = "" + (null == row.getCell((short) 28) ? "" : row.getCell((short) 28));
-//                            if (!aadharCardExpo.equals("")) {
-//
-//                                BigDecimal bdAadharCard = new BigDecimal(aadharCardExpo);
-//                                aadharCard = "" + bdAadharCard.longValue();
-//                            } else {
-//                                aadharCard = "";
-//                            }
-//                            highestEducation = "" + (null == row.getCell((short) 29) ? "" : row.getCell((short) 29));
-//                            experienceOnDateOfJoiningYear = "" + (null == row.getCell((short) 30) ? "" : row.getCell((short) 30));
-//                            experienceOnDateOfJoiningMonth = "" + (null == row.getCell((short) 31) ? "" : row.getCell((short) 31));
-//                            
-//                            bankAccountNoExpo = "" + (null == row.getCell((short) 33) ? "" : row.getCell((short) 33));
-//                            if (!bankAccountNoExpo.equals("")) {
-//                                BigDecimal bdBankAccountNo = new BigDecimal(bankAccountNoExpo);
-//                                bankAccountNo = "" + bdBankAccountNo.longValue();
-//                            } else {
-//                                bankAccountNo = "";
-//                            }
-//                            ifscCode = "" + (null == row.getCell((short) 34) ? "" : row.getCell((short) 34));
-//
-//                            workType = "" + (null == row.getCell((short) 35) ? "" : row.getCell((short) 35));
-//                            hours = "" + (null == row.getCell((short) 36) ? "" : row.getCell((short) 36));
-//                            shiftRotation = "" + (null == row.getCell((short) 37) ? "" : row.getCell((short) 37));
-//                            shift = "" + (null == row.getCell((short) 38) ? "" : row.getCell((short) 38));
-//
-//                            basicSalary = "" + (null == row.getCell((short) 39) ? "" : row.getCell((short) 39));
-//
-//                            paymentType = "" + (null == row.getCell((short) 40) ? "" : row.getCell((short) 40));
-//                            esicNo = "" + (null == row.getCell((short) 41) ? "" : row.getCell((short) 41));
-//                            pfNo = "" + (null == row.getCell((short) 42) ? "" : row.getCell((short) 42));
-//                            uanNo = "" + (null == row.getCell((short) 43) ? "" : row.getCell((short) 43));
-//
-//                            conveysAmount = "" + (null == row.getCell((short) 44) ? "" : row.getCell((short) 44)); // Field Not Available
-//                            tdsAmount = "" + (null == row.getCell((short) 45) ? "" : row.getCell((short) 45));  // Field Not Available
                             employeeMaster.setEmployeeId(employeeNo);
                             employeeMaster.setEmployeeName(employeefullname);
 //                            employeeMaster.setDateOfJoining(dateOfJoiningNonFormated);
@@ -3733,7 +3648,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 gender1 = true;
                             }
                             employeeMaster.setGender(gender1);
-                            employeeMaster.setMaritalStatus(maritalStatus);
+                            if(maritalStatus.contains("Unmarried")){
+                                String marstatus = "UnMarried";
+                                employeeMaster.setMaritalStatus(marstatus);
+                            }else if(maritalStatus.contains("unmarried")){
+                                String marstatus = "UnMarried";
+                                employeeMaster.setMaritalStatus(marstatus);
+                            }else if(maritalStatus.contains("married")){
+                                String marstatus = "Married";
+                                employeeMaster.setMaritalStatus(marstatus);
+                            }else{
+                                employeeMaster.setMaritalStatus(maritalStatus);
+                            }
+                            
                             employeeMaster.setSpouseName(spouseNamed3);
                             employeeMaster.setPanCard(pan.toUpperCase());
                             employeeMaster.setPermanentAddress(permanentAddress1);
@@ -4233,6 +4160,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             }
 
                         }
+                    }
 //                        System.out.println("this is an error in excel upload......................................................................" + employeeNo);
 //                        System.out.println("this is an error in excel upload......................................................................" + employeeNo);
 

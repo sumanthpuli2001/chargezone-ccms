@@ -37,7 +37,7 @@
                     </a>
                     <ul class="nav navbar-left">
                         <li class="hidden-xs">
-                            <font style="font-size: 30px;color: white;"><b>&nbsp&nbsp&nbsp&nbsp&nbsp My SPC</b></font>
+                            <font style="font-size: 30px;color: white;"><b>&nbsp&nbsp&nbsp&nbsp&nbsp Hr Power</b></font>
                         </li>
                     </ul>
                     <!-- Navbar Right Menu -->

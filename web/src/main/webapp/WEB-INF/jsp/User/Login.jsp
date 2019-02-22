@@ -148,9 +148,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12">
-            <img src="StorageYard/Images/footer.png" height="150px" width="100%"/>
-        </div>
+      
         <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
         <!--<script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>
         <script src="StorageYard/JS/login/jquery.backstretch.min.js"></script>

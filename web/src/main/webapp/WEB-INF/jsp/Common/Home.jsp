@@ -376,18 +376,12 @@
                                             <a style="font-size: 14px;text-align: left;color: #2c3e50;"  href="hrServiceRequest.htm?act=searchSubmit">
                                                 <i class="fa fa-envelope"></i>&nbsp;HR Help Desk
                                             </a>
-                                            <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="homeController.htm?act=kaizen">
-                                                <i class="fa fa-twitch"></i>&nbsp;Kaizen
-                                            </a>
+                                          
                                             <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="emergencyContact.htm?act=viewContact">
                                                 <i class="fa fa-book"></i>&nbsp;Emergency Contact
                                             </a>
-                                            <a style="font-size: 14px;text-align: left;color: #2c3e50;"  href="http://www.spcls.co.in/csr.aspx" target="_blank">
-                                                <i class="fa fa-pencil-square-o"></i>&nbsp;CSR
-                                            </a>
-                                            <a style="font-size: 14px;text-align: left;color: #2c3e50;"  href="http://www.spcls.co.in/news-events.aspx" target="_blank">
-                                                <i class="fa fa-newspaper-o"></i>&nbsp;News & Event
-                                            </a>
+                                            
+                                            
                                             <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="holidayMaster.htm?act=viewHolidaysLocationWise">
                                                 <i class="fa fa-twitch"></i>&nbsp;Holiday List
                                             </a>
@@ -400,7 +394,7 @@
                                     <div class="col-md-9">
                                         <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
                                             <div class="box-header" style="background-color: #006fad !important;text-align: center;">
-                                                <h3 class="box-title" style="font-size: 30px;color: white;font-weight:700;font-size:16px; ">LIFE @ SPC</h3>
+                                                <h3 class="box-title" style="font-size: 30px;color: white;font-weight:700;font-size:16px; ">LIFE @ Hr Power</h3>
                                             </div>
                                         </div>
                                         <div class="col-md-3">&nbsp;

@@ -51,5 +51,18 @@ public class OTRegularizationDAOImpl<T> extends GenericsDAOImpl<T> implements OT
 
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> readOTDateWise(String date, int id) {
+        String query = "";
+        query += " select a"
+                + " From OTRegularization a "
+                + " Where a.userMasterId=" + id
+                + " and status = 1"
+                + " and DATE_FORMAT(STR_TO_DATE(a.startDateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + date + "','%d/%m/%Y'),'%d/%m/%Y') "
+                + " GROUP BY STR_TO_DATE(a.startDateTime,'%d/%m/%Y %H:%i')"
+                + " ORDER BY STR_TO_DATE(a.startDateTime,'%d/%m/%Y %H:%i:%s') ASC";
+        return getHibernateTemplate().find(query);
+    }
     
 }

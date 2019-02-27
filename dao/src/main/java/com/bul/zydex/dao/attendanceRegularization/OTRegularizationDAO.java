@@ -20,4 +20,6 @@ public interface OTRegularizationDAO<T> extends GenericsDAO<T> {
 
     public List<?> approvalLeval1WiseOtRegularizationList(int id);
 
+    public List<?> readOTDateWise(String date, int id);
+
 }

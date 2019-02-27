@@ -51,4 +51,6 @@ public interface EmployeeShiftDataDAO<T> extends GenericsDAO<T> {
     
     public void updateNullShiftId();
 
+    public List<?> readByEmployeeIdAndDate(EmployeeShiftData object, String date);
+
 }

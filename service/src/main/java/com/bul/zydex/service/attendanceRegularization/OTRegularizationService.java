@@ -19,4 +19,6 @@ public interface OTRegularizationService<T> extends GenericsService<T> {
     public List<?> userReportingManager(int id);
 
     public List<?> approvalLeval1WiseOtRegularizationList(int id);
+
+    public List<?> readOTDateWise(String date, int id);
 }

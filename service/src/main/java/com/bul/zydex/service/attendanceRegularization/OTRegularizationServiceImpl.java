@@ -41,4 +41,9 @@ public class OTRegularizationServiceImpl<T> extends GenericsServiceImpl<T> imple
      return oTRegularizationDAO.approvalLeval1WiseOtRegularizationList(id);
     }
 
+    @Override
+    public List<?> readOTDateWise(String date, int id) {
+        return oTRegularizationDAO.readOTDateWise(date,id);
+    }
+
 }

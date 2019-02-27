@@ -446,99 +446,116 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <c:if test="${present ne 0}">
-                                                                            <th style="color: green;text-align: center;">PR</th>
+                                                                            <th style="color: green;text-align: center;padding:0px 20px 0px 20px;">PR</th>
                                                                             </c:if>
                                                                             <c:if test="${absent ne 0}">
-                                                                            <th style="color: red;text-align: center;">AB</th>
+                                                                            <th style="color: red;text-align: center;padding:0px 20px 0px 20px;">AB</th>
                                                                             </c:if>
                                                                             <c:if test="${wo ne 0}">
-                                                                            <th style="text-align: center;">WO</th>
+                                                                            <th style="text-align: center;padding:0px 20px 0px 20px;">WO</th>
                                                                             </c:if>
                                                                             <c:if test="${holiday ne 0}">
-                                                                            <th style="text-align: center;">Holiday</th>
+                                                                            <th style="text-align: center;padding:0px 20px 0px 20px;">Holiday</th>
                                                                             </c:if>
                                                                             <c:if test="${cl ne 0}">
-                                                                            <th style="text-align: center;">CL</th>
+                                                                            <th style="text-align: center;padding:0px 20px 0px 20px;">CL</th>
                                                                             </c:if>
                                                                             <c:if test="${sl ne 0}">
-                                                                            <th style="text-align: center;">SL</th>
+                                                                            <th style="text-align: center;padding:0px 20px 0px 20px;">SL</th>
                                                                             </c:if>
                                                                             <c:if test="${pl ne 0}">
-                                                                            <th style="text-align: center;">PL</th>
+                                                                            <th style="text-align: center;padding:0px 20px 0px 20px;">PL</th>
                                                                             </c:if>
                                                                             <c:if test="${shl ne 0}">
-                                                                            <th style="color: green;text-align: center;">SHL/P</th>
+                                                                            <th style="color: green;text-align: center;padding:0px 20px 0px 20px;">SHL/P</th>
                                                                             </c:if>
                                                                             <c:if test="${shlA ne 0}">
-                                                                            <th style="color: red;text-align: center;">SHL/A</th>
+                                                                            <th style="color: red;text-align: center;padding:0px 20px 0px 20px;">SHL/A</th>
                                                                             </c:if>
                                                                             <c:if test="${ar ne 0}">
-                                                                            <th style="color: blue;text-align: center;">AR/P</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">AR/P</th>
                                                                             </c:if>
                                                                             <c:if test="${tr ne 0}">
-                                                                            <th style="color: blue;text-align: center;">TR</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">TR</th>
                                                                             </c:if>
                                                                             <c:if test="${coff ne 0}">
-                                                                            <th style="color: blue;text-align: center;">C-OFF</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">C-OFF</th>
                                                                             </c:if>
                                                                             <c:if test="${ptl ne 0}">
-                                                                            <th style="color: blue;text-align: center;">PTL</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">PTL</th>
                                                                             </c:if>
                                                                             <c:if test="${mtl ne 0}">
-                                                                            <th style="color: blue;text-align: center;">MTL</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">MTL</th>
                                                                             </c:if>
                                                                             <c:if test="${lwp ne 0}">
-                                                                            <th style="color: blue;text-align: center;">LWP</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">LWP</th>
+                                                                            </c:if>
+                                                                            <c:if test="${countLateEntry ge 1}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Penalty Hours</th>
+                                                                            </c:if>
+                                                                            <c:if test="${!empty totalPaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">OT Hours</th>
+                                                                            </c:if>
+                                                                            <c:if test="${!empty totalUnpaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Unpaid OT Hours</th>
                                                                             </c:if>
                                                                     </tr>
                                                                     <tr>
                                                                         <c:set var="shortL" value="${shl/2}"/>
                                                                         <c:if test="${present ne 0}">
-                                                                            <td style="color: green;text-align: center;" >${present-shortL}</td>
+                                                                            <td style="color: green;text-align: center;padding:0px 20px 0px 20px;">${present-shortL}</td>
                                                                         </c:if>
                                                                         <c:if test="${absent ne 0}">
-                                                                            <td style="color: red;text-align: center;" >${absent}</td>
+                                                                            <td style="color: red;text-align: center;padding:0px 20px 0px 20px;" >${absent}</td>
                                                                         </c:if>
                                                                         <c:if test="${wo ne 0}">
-                                                                            <td style="text-align: center;">${wo}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${wo}</td>
                                                                         </c:if>
                                                                         <c:if test="${holiday ne 0}">
-                                                                            <td style="text-align: center;">${holiday}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${holiday}</td>
                                                                         </c:if>
                                                                         <c:if test="${cl ne 0}">
-                                                                            <td style="text-align: center;">${cl}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${cl}</td>
                                                                         </c:if>
                                                                         <c:if test="${sl ne 0}">
-                                                                            <td style="text-align: center;">${sl}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${sl}</td>
                                                                         </c:if>
                                                                         <c:if test="${pl ne 0}">
-                                                                            <td style="text-align: center;">${pl}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${pl}</td>
                                                                         </c:if>
                                                                         <c:if test="${shl ne 0}">
-                                                                            <td style="text-align: center;">${shl}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${shl}</td>
                                                                         </c:if>
                                                                         <c:if test="${shlA ne 0}">
-                                                                            <td style="text-align: center;">${shlA}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${shlA}</td>
                                                                         </c:if>
                                                                         <c:if test="${ar ne 0}">
-                                                                            <td style="text-align: center;">${ar}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${ar}</td>
                                                                         </c:if>
                                                                         <c:if test="${tr ne 0}">
-                                                                            <td style="text-align: center;">${tr}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${tr}</td>
                                                                         </c:if>
                                                                         <c:if test="${coff ne 0}">
-                                                                            <th style="color: blue;text-align: center;">${coff}</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${coff}</th>
                                                                             </c:if>
                                                                             <c:if test="${ptl ne 0}">
-                                                                            <th style="color: blue;text-align: center;">${ptl}</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${ptl}</th>
                                                                             </c:if>
                                                                             <c:if test="${mtl ne 0}">
-                                                                            <th style="color: blue;text-align: center;">${mtl}</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${mtl}</th>
                                                                             </c:if>
                                                                             <c:if test="${lwp ne 0}">
-                                                                            <th style="color: blue;text-align: center;">${lwp}</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${lwp}</th>
                                                                             </c:if>
-
+                                                                            <c:if test="${!empty totalPenaltyHours && countLateEntry ge 1}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalPenaltyHours}</th>
+                                                                            </c:if> totalPaidOverTime 
+                                                                            <c:if test="${!empty totalPaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalPaidOverTime}</th>
+                                                                            </c:if>  
+                                                                            <c:if test="${!empty totalUnpaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalUnpaidOverTime}</th>
+                                                                            </c:if>  
                                                                     </tr>
                                                                     <tr  >
                                                                     </tr>

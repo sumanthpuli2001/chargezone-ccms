@@ -1153,4 +1153,18 @@ public class EmployeeShiftDataDAOImpl<T> extends GenericsDAOImpl<T> implements E
 
     }
 
+    @Override
+    public List<?> readByEmployeeIdAndDate(EmployeeShiftData object, String date) {
+        
+       
+        EmployeeShiftData employeeShiftData = (EmployeeShiftData) object;
+        String query = " From EmployeeShiftData a "
+                + " Where a.employeeMaster.id = '" + employeeShiftData.getEmployeeMaster().getId() + "'"
+                + " and DATE_FORMAT(STR_TO_DATE(a.inDateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + date + "','%d/%m/%Y'),'%d/%m/%Y') "
+                + " GROUP BY STR_TO_DATE(a.inDateTime,'%d/%m/%Y %H:%i')"
+                + " ORDER BY STR_TO_DATE(a.inDateTime,'%d/%m/%Y %H:%i:%s') ASC";
+        return getHibernateTemplate().find(query);
+        
+    }
+
 }

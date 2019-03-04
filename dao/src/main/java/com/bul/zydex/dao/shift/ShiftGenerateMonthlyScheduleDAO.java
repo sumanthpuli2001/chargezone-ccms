@@ -85,5 +85,31 @@ public interface ShiftGenerateMonthlyScheduleDAO<T> extends GenericsDAO<T> {
     public List readRotationDate(int id3);
 
     public List<?> readByEmpMonthYear(Integer id);
+    
+    public List<?> getShiftsBetween(String data);
+    
+    public List<?> getbeforesDate(String data);
+    
+    public List<?> getaftereDate(String data);
+    
+    public List<?> getbeforesDate1(String data);
+    
+    public List<?> getaftereDate1(String data);
+    
+    public List<?> getshiftsList(String data);
+    
+    public List<?> getshiftsList1(String data);
+    
+    public String getBeforeDayList(String data);
+    
+    public String getAfterDayList(String data);
+    
+    public List<?> getbeforeWoffDayList(String data1);
+    
+     public List<?> getafterWoffDayList(String data1);
+     
+     public List<?> getDayAfterOfstrDate(String data);
+     
+     public List<?> getDayBeforeOfenDate(String data);
 
 }

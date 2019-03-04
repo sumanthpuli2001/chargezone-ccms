@@ -14,6 +14,8 @@ import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.EmployeeSubType;
+import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.HoursBasis;
 import com.bul.zydex.model.LeaveEmployeeDetail;
@@ -28,6 +30,8 @@ import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
+import com.bul.zydex.service.emp.EmployeeSubTypeService;
+import com.bul.zydex.service.emp.EmployeeTypeService;
 import com.bul.zydex.service.holiday.HolidayMasterService;
 import com.bul.zydex.service.leave.COffLeaveMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
@@ -72,6 +76,8 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
     protected UserRightMasterService<UserRightMaster> userRightMasterService;
     protected LeaveEmployeeDetailsApprovalHistoryService<LeaveEmployeeDetailsApprovalHistory> leaveEmployeeDetailsApprovalHistoryService;
     protected ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService;
+    protected EmployeeTypeService<EmployeeTypeMaster> employeeTypeService;
+    protected EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService;
 
     public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
         return userRightMasterService;
@@ -192,6 +198,24 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
     public void setShiftGenerateMonthlyScheduleService(ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService) {
         this.shiftGenerateMonthlyScheduleService = shiftGenerateMonthlyScheduleService;
     }
+
+    public EmployeeTypeService<EmployeeTypeMaster> getEmployeeTypeService() {
+        return employeeTypeService;
+    }
+
+    public void setEmployeeTypeService(EmployeeTypeService<EmployeeTypeMaster> employeeTypeService) {
+        this.employeeTypeService = employeeTypeService;
+    }
+
+    public EmployeeSubTypeService<EmployeeSubType> getEmployeeSubTypeService() {
+        return employeeSubTypeService;
+    }
+
+    public void setEmployeeSubTypeService(EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService) {
+        this.employeeSubTypeService = employeeSubTypeService;
+    }
+    
+    
 
     protected void addleaveType(HttpServletRequest request) {
         List list = leaveTypeMasterService.read();
@@ -411,6 +435,27 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
             }
         } catch (Exception e) {
         }
+    }
+    
+    protected void EmployeeTypeList(HttpServletRequest request) {
+        EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+        List<?> EmployeeTypeList = employeeTypeService.read();
+        Map<Integer, String> map = new HashMap();
+        for (Object obj : EmployeeTypeList) {
+            employeeTypeMaster = (EmployeeTypeMaster) obj;
+            map.put(employeeTypeMaster.getId(), employeeTypeMaster.getTypeOfEmployee());
+        }
+        request.setAttribute("EmployeeTypeList", map);
+    }
+
+    protected void EmployeeSubTypeList(HttpServletRequest request) {
+        List<?> EmployeeSubTypeList = employeeSubTypeService.read();
+        Map<Integer, String> map = new HashMap();
+        for (Object obj : EmployeeSubTypeList) {
+            EmployeeSubType employeeSubType = (EmployeeSubType) obj;
+            map.put(employeeSubType.getId(), employeeSubType.getSubType());
+        }
+        request.setAttribute("EmployeeSubTypeList", map);
     }
 
 }

@@ -631,4 +631,174 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
 
     }
 
+    @Override
+    public List<?> getShiftsBetween(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.startDate from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.status=3"
+                + " and a.leaveTypeMaster.id=17"
+                + " and STR_TO_DATE(a.startDate,'%d/%m/%Y') BETWEEN"
+                + " STR_TO_DATE('" +a[1]+ "','%d/%m/%Y') AND STR_TO_DATE('" +a[2]+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getbeforesDate(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.startDate from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.status=3"
+                + " and a.leaveTypeMaster.id=7"
+                + " and STR_TO_DATE(a.endDate,'%d/%m/%Y') = STR_TO_DATE('" +a[1]+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getaftereDate(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.startDate from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.status=3"
+                + " and a.leaveTypeMaster.id=7"
+                + " and STR_TO_DATE(a.startDate,'%d/%m/%Y') = STR_TO_DATE('" +a[2]+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getbeforesDate1(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.startDate from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.status=3"
+                + " and a.leaveTypeMaster.id=6"
+                + " and STR_TO_DATE(a.endDate,'%d/%m/%Y') = STR_TO_DATE('" +a[1]+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getaftereDate1(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.startDate from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.status=3"
+                + " and a.leaveTypeMaster.id=6"
+                + " and STR_TO_DATE(a.startDate,'%d/%m/%Y') = STR_TO_DATE('" +a[2]+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getshiftsList(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.id from ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.shiftMonth="+a[1]
+                + " and a.shiftYear="+a[2];
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getshiftsList1(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.id from ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.shiftMonth="+a[3]
+                + " and a.shiftYear="+a[4];
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public String getBeforeDayList(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.day"+a[1]+" from ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.shiftMonth="+a[2]
+                + " and a.shiftYear="+a[3];
+        
+        List<?> list = getHibernateTemplate().find(query);
+        String list1 = list.get(0).toString();
+        return list1;
+    }
+
+    @Override
+    public String getAfterDayList(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.day"+a[4]+" from ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.shiftMonth="+a[5]
+                + " and a.shiftYear="+a[6];
+        
+        List<?> list = getHibernateTemplate().find(query);
+        String list1 = list.get(0).toString();
+        return list1;
+    }
+
+    @Override
+    public List<?> getbeforeWoffDayList(String data1) {
+        String a[] = data1.split(":");
+        String query = "";
+
+        query += "Select a.startDate from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.status=3"
+                + " and STR_TO_DATE(a.endDate,'%d/%m/%Y') = STR_TO_DATE('" +a[1]+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getafterWoffDayList(String data1) {
+        String a[] = data1.split(":");
+        String query = "";
+
+        query += "Select a.startDate from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.status=3"
+                + " and STR_TO_DATE(a.startDate,'%d/%m/%Y') = STR_TO_DATE('" +a[2]+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getDayAfterOfstrDate(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.day"+a[1]+" from ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.shiftMonth="+a[2]
+                + " and a.shiftYear="+a[3];
+        
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> getDayBeforeOfenDate(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.day"+a[4]+" from ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.shiftMonth="+a[5]
+                + " and a.shiftYear="+a[6];
+        
+        return getHibernateTemplate().find(query);
+    }
+
 }

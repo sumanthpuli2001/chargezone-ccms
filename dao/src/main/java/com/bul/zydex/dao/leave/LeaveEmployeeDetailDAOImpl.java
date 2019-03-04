@@ -136,13 +136,24 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         if (!"".equals(leaveEmployeeDetail.getEndDateStatus()) && null != leaveEmployeeDetail.getEndDateStatus()) {
             condition += " AND d.id = " + leaveEmployeeDetail.getEndDateStatus();
         }
+        if (!"".equals(leaveEmployeeDetail.getHrRemark()) && null != leaveEmployeeDetail.getHrRemark()) {
+            condition += " AND g.id = " + leaveEmployeeDetail.getHrRemark();
+        }
+        if (!"".equals(leaveEmployeeDetail.getEmpRemark()) && null != leaveEmployeeDetail.getEmpRemark()) {
+            condition += " AND f.id = " + leaveEmployeeDetail.getEmpRemark();
+        }
+        if (!"".equals(leaveEmployeeDetail.getUseAsSickLeave()) && null != leaveEmployeeDetail.getUseAsSickLeave()) {
+            condition += " AND a.useAsSickLeave = " + leaveEmployeeDetail.getUseAsSickLeave();
+        }
 
-        query += " Select b.employeeId, b.employeeName, c.departmentName, d.designationName, e.leaveType, a.startDate, a.endDate,a.status, a.noOfDays, a.dateOfSubmit "
+        query += " Select b.employeeId, b.employeeName, c.departmentName, d.designationName, e.leaveType, a.startDate, a.endDate,a.status, a.noOfDays, a.dateOfSubmit,g.typeOfEmployee,f.subType,a.useAsSickLeave "
                 + " From LeaveEmployeeDetail a "
                 + " LEFT JOIN a.employeeMaster b "
                 + " LEFT JOIN b.departmentMaster c "
                 + " LEFT JOIN b.designationMaster d "
                 + " LEFT JOIN a.leaveTypeMaster e "
+                + " LEFT JOIN b.employeeSubType f "
+                + " LEFT JOIN f.employeeTypeMaster g "
                 + " Where 1=1" + condition
                 + " Order By a.id desc";
 

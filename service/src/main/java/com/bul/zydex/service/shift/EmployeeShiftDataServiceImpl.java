@@ -117,4 +117,10 @@ public class EmployeeShiftDataServiceImpl<T> extends GenericsServiceImpl<T> impl
     public void updateNullShiftId() {
          employeeShiftDataDAO.updateNullShiftId();
     }
+
+    @Override
+    public List<?> readByEmployeeIdAndDate(EmployeeShiftData object, String date) {
+        return employeeShiftDataDAO.readByEmployeeIdAndDate(object,date);
+    }
 }
+ 

@@ -68,8 +68,11 @@ import com.bul.zydex.service.shift.ShiftRotationMasterService;
 import com.bul.zydex.service.zydexLocation.ZydexLocationMasterService;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import static java.util.Map.Entry.comparingByValue;
+import static java.util.stream.Collectors.*;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.validation.Validator;
 
@@ -699,23 +702,38 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
 
     protected void EmployeeTypeList(HttpServletRequest request) {
         EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
-        List<?> EmployeeTypeList = employeeTypeService.read();
+        List<?> EmployeeTypeList = employeeTypeService.readOrderNameWise();
         Map<Integer, String> map = new HashMap();
         for (Object obj : EmployeeTypeList) {
             employeeTypeMaster = (EmployeeTypeMaster) obj;
             map.put(employeeTypeMaster.getId(), employeeTypeMaster.getTypeOfEmployee());
         }
-        request.setAttribute("EmployeeTypeList", map);
+        
+         Map<Integer,String> sorted = map
+        .entrySet()
+        .stream()
+        .sorted(comparingByValue())
+        .collect(
+            toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
+                LinkedHashMap::new));
+        request.setAttribute("EmployeeTypeList", sorted);
     }
 
     protected void EmployeeSubTypeList(HttpServletRequest request) {
-        List<?> EmployeeSubTypeList = employeeSubTypeService.read();
+        List<?> EmployeeSubTypeList = employeeSubTypeService.readOrderNameWise();
         Map<Integer, String> map = new HashMap();
         for (Object obj : EmployeeSubTypeList) {
             EmployeeSubType employeeSubType = (EmployeeSubType) obj;
             map.put(employeeSubType.getId(), employeeSubType.getSubType());
         }
-        request.setAttribute("EmployeeSubTypeList", map);
+        Map<Integer,String> sorted = map
+        .entrySet()
+        .stream()
+        .sorted(comparingByValue())
+        .collect(
+            toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
+                LinkedHashMap::new));
+        request.setAttribute("EmployeeSubTypeList", sorted);
     }
 
     protected void EmpTypeAjaxmap(HttpServletRequest request, String empId) {

@@ -955,7 +955,7 @@
                                                         <div class="col-sm-6">
                                                             <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
-                                                            <form:option value="" label="-- Select --" ></form:option>
+                                                            <form:option value="None" label="-- Select --" ></form:option>
                                                             <form:options items="${EmployeeTypeList}"></form:options>
                                                         </form:select>
                                                         <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
@@ -1082,7 +1082,8 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Select First , Middle & Last Name As per Passport or Aadhar card:<span style="color: red;font-size: 12px;">*</span></label><br>
+                                                        <label>Employee Name (First Name, Middle Name, Last Name as per Passport or Aadhar card.)
+<span style="color: red;font-size: 12px;">*</span></label><br>
                                                                 <c:if test="${list.nameStatus eq 'false'}">
                                                                     <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport
                                                                     <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard

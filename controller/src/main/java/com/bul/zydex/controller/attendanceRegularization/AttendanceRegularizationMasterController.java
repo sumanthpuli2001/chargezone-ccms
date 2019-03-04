@@ -12,12 +12,15 @@ import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.PayrollProfessionalTax;
+import com.bul.zydex.model.ShiftMaster;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
+import com.bul.zydex.service.shift.ShiftMasterService;
 import com.bul.zydex.util.ActionType;
 import java.io.BufferedReader;
 import java.io.File;
@@ -2730,7 +2733,10 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         String startDate = request.getParameter("inDateTime");
         String endDate = request.getParameter("outDateTime");
         bind(request, employeeAdvanceSearch);
-
+        long totalLateTime = 0;
+        int countLateEntry = 0;
+        long TotalOtTime = 0;
+        long upOtTime = 0;
         String id = request.getParameter("id");
         employeeAdvanceSearch.setId(id);
         employeeAdvanceSearch.setZydexLocationId(null);
@@ -2860,6 +2866,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         boolean flexible = false;
         int earlyMinute = 0;
         int lateMinute = 0;
+        
+        
         List<?> timeAttFlexibleList = timeAttandanceFlaxibleMasterService.read();
         if (!timeAttFlexibleList.isEmpty()) {
             for (Object flexiObject : timeAttFlexibleList) {
@@ -3075,11 +3083,131 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                         e.printStackTrace();
                                     }    
                                     long difff = d2.getTime() - d1.getTime();        
-                                    long diffMinutes = difff / (60 * 1000);  
-                                    timecount += diffMinutes;
+                                    long diffMinutesss = difff / (60 * 1000);  
+                                    timecount += diffMinutesss;
                                     
                                 }
                             }
+                            
+                            if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                                String[] userTimeInStr = firstHalf.split("`");
+                                String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                String[] userTimeOutStr = firstHalf.split("!");
+                                String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                String[] leave = firstHalf.split("@");
+                                String[] leave1 = leave[1].split("#");
+                                String[] LateHoursStr = firstHalf.split("\\$");
+                                String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                                String[] endHoursStr = firstHalf.split("%");
+                                String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                                String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                                String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
+
+                                Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                                Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                                Date endHours = sdf2.parse(endHoursStr1[0]);
+                                Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                                Date secondEndHour = sdf2.parse(secondEndHoursStr[1]);
+                                Calendar cal = Calendar.getInstance();
+                                Calendar cal1 = Calendar.getInstance();
+                                cal.setTime(firstStartHours);
+                                cal1.setTime(firstStartHours);
+                                cal1.add(Calendar.MINUTE, -earlyMinute);
+                                cal.add(Calendar.MINUTE, lateMinute);
+                                String newTime = sdf2.format(cal.getTime());
+                                Date flexibleEndTime = sdf2.parse(newTime);
+                                Date LateHours = sdf2.parse(LateHoursStr1[0]);
+                                String newTime1 = sdf2.format(cal1.getTime());
+                                Date flexibleStartTime = sdf2.parse(newTime1);
+                                long diff = endHours.getTime() - firstStartHours.getTime();
+                                long diffMinutes = diff / (60 * 1000);
+                            
+//                            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+//                            employeeShiftData1.setEmployeeMaster(employeeMaster1);
+//                            List<?> employeeshift = employeeShiftDataService.readByEmployeeIdAndDate(employeeShiftData1,"" + next[0]);
+//                            if(employeeshift.size() > 0){
+//                                EmployeeShiftData employeeShiftData2  = (EmployeeShiftData) employeeshift.get(0);
+//                                int sid = employeeShiftData2.getShiftMaster().getId();
+//                                 ShiftMaster shiftMaster =  shiftMasterService.readById(sid);
+//                                if(shiftMaster != null){
+//                                    Date startHour = sdf2.parse(shiftMaster.getStartTime());
+//                                    Date endHour = sdf2.parse(shiftMaster.getEndTime());
+                                     long beforeinTime = firstStartHours.getTime()-userTimeIn.getTime();
+                                                beforeinTime = TimeUnit.MILLISECONDS.toMinutes(beforeinTime);
+                                            
+                                    List<?> otlist =  oTRegularizationService.readOTDateWise("" + next[0], employeeMaster1.getUserMaster().getId());
+                                    if(otlist.size() > 0){
+                                        for (Object o1 : otlist) {
+                                            long timdiffot = 0;
+                                            long totalIntime = 0;
+                                            OTRegularization oTRegularization = (OTRegularization) o1;
+                                            String otstartDateTime = oTRegularization.getStartDateTime();
+                                            String[] otstartDateTimeinStr = otstartDateTime.split(" ");
+                                            Date startDateOT = sdf.parse(otstartDateTimeinStr[0]);
+                                            Date startTimeOT = sdf2.parse(otstartDateTimeinStr[2]);
+                                            String otendDateTime = oTRegularization.getEndDateTime();
+                                            String[] otendDateTimeinStr = otendDateTime.split(" ");
+                                            Date endDateOT = sdf.parse(otendDateTimeinStr[0]);
+                                            Date endTimeOT = sdf2.parse(otendDateTimeinStr[2]);
+                                            timdiffot = endTimeOT.getTime() -  startTimeOT.getTime();
+//                                            totalIntime = timecount+timdiffot;
+                                            long intimeintomilisec = TimeUnit.MINUTES.toMillis(510);
+                                            
+                                            totalIntime=intimeintomilisec+timdiffot;
+                                            long totalIntime1 = TimeUnit.MILLISECONDS.toMinutes(totalIntime);
+                                           
+                                            if(startDateOT.equals(endDateOT)){
+                                                if(timecount > 510 && totalIntime1 > 510){
+                                                    if(startTimeOT.before(firstStartHours) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))){
+                                                        if((startTimeOT.after(userTimeIn) || startTimeOT.equals(userTimeIn)) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))){
+                                                            TotalOtTime += timdiffot;
+                                                        }
+                                                        
+                                                    }else if((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && endTimeOT.after(secondEndHour)){
+                                                        if((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && (endTimeOT.before(userTimeOut) || endTimeOT.equals(userTimeOut))){
+                                                            TotalOtTime += timdiffot;
+                                                        }
+                                                    }
+                                                    if(beforeinTime > 0){
+                                                        long xtratime = (timecount-totalIntime1)- beforeinTime;
+                                                    xtratime = xtratime-60;
+                                                    if(xtratime > 0){
+                                                        upOtTime += xtratime;
+                                                    }
+                                                    }
+                                                    
+                                                }
+                                            }
+                                        } 
+                                    }else{
+                                        if(timecount > 510){
+                                            if(!userTimeIn.after(firstStartHours)){
+                                                if(userTimeIn.before(firstStartHours)){
+                                                if(beforeinTime > 0){
+                                                    long xtratime = (timecount - 510) - beforeinTime;
+                                                    xtratime = xtratime-60;
+                                                    if(xtratime > 0){
+                                                        upOtTime += xtratime;
+                                                    }
+                                                }
+                                                
+                                                
+                                                }
+                                                }
+                                            
+                                        }
+                                    }
+                                    
+                                }
+//                                }
+//                                
+//                            }
+                            
+                            
+                            
+                            
                     if (firstHalf.contains("fullday")) {
                        
                             if(timecount > 270){
@@ -3091,36 +3219,39 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                        
+                        
                         String[] userTimeInStr = firstHalf.split("`");
-                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                        String[] userTimeOutStr = firstHalf.split("!");
-                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                        String[] leave = firstHalf.split("@");
-                        String[] leave1 = leave[1].split("#");
-                        String[] LateHoursStr = firstHalf.split("\\$");
-                        String[] LateHoursStr1 = LateHoursStr[1].split("%");
-                        String[] endHoursStr = firstHalf.split("%");
-                        String[] endHoursStr1 = endHoursStr[1].split("\\^");
-                        String[] firstStartHoursStr = endHoursStr[1].split("\\+");
-                        Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
-                        Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                        Date endHours = sdf2.parse(endHoursStr1[0]);
-                        Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
-                        Calendar cal = Calendar.getInstance();
-                        Calendar cal1 = Calendar.getInstance();
-                        cal.setTime(firstStartHours);
-                        cal1.setTime(firstStartHours);
-                        cal1.add(Calendar.MINUTE, -earlyMinute);
-                        cal.add(Calendar.MINUTE, lateMinute);
-                        String newTime = sdf2.format(cal.getTime());
-                        Date flexibleEndTime = sdf2.parse(newTime);
-                        Date LateHours = sdf2.parse(LateHoursStr1[0]);
-                        String newTime1 = sdf2.format(cal1.getTime());
-                        Date flexibleStartTime = sdf2.parse(newTime1);
-                        long diff = endHours.getTime() - firstStartHours.getTime();
-                        long diffMinutes = diff / (60 * 1000);
-                        
-                        
+                            String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                            String[] userTimeOutStr = firstHalf.split("!");
+                            String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                            String[] leave = firstHalf.split("@");
+                            String[] leave1 = leave[1].split("#");
+                            String[] LateHoursStr = firstHalf.split("\\$");
+                            String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                            String[] endHoursStr = firstHalf.split("%");
+                            String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                            String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                            String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
+                            
+                            Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                            Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                            Date endHours = sdf2.parse(endHoursStr1[0]);
+                            Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                            Date secondEndHour = sdf2.parse(secondEndHoursStr[1]);
+                            Calendar cal = Calendar.getInstance();
+                            Calendar cal1 = Calendar.getInstance();
+                            cal.setTime(firstStartHours);
+                            cal1.setTime(firstStartHours);
+                            cal1.add(Calendar.MINUTE, -earlyMinute);
+                            cal.add(Calendar.MINUTE, lateMinute);
+                            String newTime = sdf2.format(cal.getTime());
+                            Date flexibleEndTime = sdf2.parse(newTime);
+                            Date LateHours = sdf2.parse(LateHoursStr1[0]);
+                            String newTime1 = sdf2.format(cal1.getTime());
+                            Date flexibleStartTime = sdf2.parse(newTime1);
+                            long diff = endHours.getTime() - firstStartHours.getTime();
+                            long diffMinutes = diff / (60 * 1000);
                         
                         
                         
@@ -3152,7 +3283,20 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                     newList.add("PR");
                                 } else if (leave1[0].contains("AB")) {
-                                    newList.add("AB");
+                                    if(alllistPunch.size() >=2 && userTimeIn.after(LateHours)){
+                                        if(countLateEntry > 1){
+                                            newList.add("AB");
+                                             long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
+                                             totalLateTime +=lateTimeDuff;
+                                        }else{
+                                            countLateEntry++;
+                                            newList.add("PR");
+                                            long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
+                                            totalLateTime +=lateTimeDuff;
+                                        }
+                                       
+                                    }
+                                    
                                 } else if (leave1[0].contains("AR")) {
                                     newList.add("AR/P");
                                 } else {
@@ -3523,7 +3667,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     
                                 }
                             }
-                            if(timecount > 270 && timecount >= 540){
+                            if(timecount > 270 && timecount >= 510){
                                 secondHalfList.add("PR");
                             }else{
                                 secondHalfList.add("AB");
@@ -3950,6 +4094,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     
                                 }
                             }
+                            
+                            timecount = timecount - 30;
                             double empHour = (double) timecount / 60;
                             int hours = (int) empHour;
                             int minutes = (int) (empHour * 60) % 60;
@@ -4086,12 +4232,29 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             }
 
         }
-
+                            
+        String totalPenaltyHours = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(totalLateTime),
+                     TimeUnit.MILLISECONDS.toMinutes(totalLateTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(totalLateTime)),
+                     TimeUnit.MILLISECONDS.toSeconds(totalLateTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totalLateTime)));
+        
+        String totalPaidOverTime = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(TotalOtTime),
+                     TimeUnit.MILLISECONDS.toMinutes(TotalOtTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TotalOtTime)),
+                     TimeUnit.MILLISECONDS.toSeconds(TotalOtTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(TotalOtTime)));
+        long upotinmilsec = TimeUnit.MINUTES.toMillis(upOtTime);
+        String totalUnpaidOverTime = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(upotinmilsec),
+                     TimeUnit.MILLISECONDS.toMinutes(upotinmilsec) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(upotinmilsec)),
+                     TimeUnit.MILLISECONDS.toSeconds(upotinmilsec) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(upotinmilsec)));
+                                   
 //        List<?> attendanceDateList =
 //        List<?> l1 = null;
 //        if (("".equals(startDate) || null == startDate) || ("".equals(endDate) || null == endDate)) {
 //            empDetail = l1;
 //        }
+
+        request.setAttribute("countLateEntry", countLateEntry);
+        request.setAttribute("totalPenaltyHours", totalPenaltyHours);
+        request.setAttribute("totalPaidOverTime", totalPaidOverTime);
+        request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime);
         mv.getModelMap()
                 .put("firstHalfList", newList);
         mv.getModelMap()
@@ -5284,6 +5447,10 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //        if (("".equals(startDate) || null == startDate) || ("".equals(endDate) || null == endDate)) {
 //            empDetail = l1;
 //        }
+
+
+
+                            
         mv.getModelMap()
                 .put("firstHalfList", newList);
         mv.getModelMap()

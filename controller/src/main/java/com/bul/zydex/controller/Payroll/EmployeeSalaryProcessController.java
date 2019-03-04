@@ -9,6 +9,7 @@ import com.bul.zydex.model.CtcAllowance;
 import com.bul.zydex.model.EmployeeAdditionalSalary;
 import com.bul.zydex.model.EmployeeAdvanceSearch;
 import com.bul.zydex.model.EmployeeCtcDetailSalary;
+import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
 import com.bul.zydex.model.EmployeeMaster;
@@ -2699,7 +2700,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                     String firstHalf = "" + next2[1];
                                     int firstHalfVal = 0;
                                     int counter = 0;
-
+                                    String startdate = (String) next2[0];
                                     Date date = sdf.parse("" + next2[0]);
                                     Calendar c = Calendar.getInstance();
                                     c.setTime(date);
@@ -2721,10 +2722,70 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                     int d = 1;
                                     int s = 2;
                                     if (!firstHalf.equals("null") && firstHalf != null) {
+                                        List alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise(startdate, id);
+                                        int listLen = alllistPunch.size();
+                                        boolean isMisPunch;
+                                        if(listLen % 2 == 0)
+                                            isMisPunch = false;
+                                        else
+                                            isMisPunch = true;
 
+                                            boolean inBool = true;
+                                            boolean outBool = false;
+                                            String inTime1 = null;
+                                            String outTime1= null;
+                                            SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss");  
+
+                                            Date d1 = null;
+                                            Date d2 = null;
+                                            String []inTime1val;
+                                            String []outTime1val;
+                                            String outTime1val1;
+                                            String inTime1val1;
+                                            long timecount = 0;
+                                            int cnt =0;
+                                        for (Object o : alllistPunch) {
+                                            EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                                            cnt++;
+                                            if(isMisPunch && (listLen == cnt)){
+                                                break;
+                                            }else if(inBool){
+                                                inTime1 = employeeDatetimeData.getDateTime();                                    
+                                                inTime1val = inTime1.split(" ");
+                                                inTime1val1 = inTime1val[1];
+                                                try {
+                                                    d1 = format1.parse(inTime1val1);
+            //                                        d2 = format.parse(dateStop);
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }    
+                                                inBool = false;
+                                                outBool = true;
+                                            } else if(outBool){
+                                                outTime1 = employeeDatetimeData.getDateTime();
+                                                outTime1val = outTime1.split(" ");
+                                                outTime1val1 = outTime1val[1];
+                                                inBool = true;
+                                                outBool = false;
+                                                 try {
+                                                    d2 = format1.parse(outTime1val1);
+            //                                        d2 = format.parse(dateStop);
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }    
+                                                long difff = d2.getTime() - d1.getTime();        
+                                                long diffMinutes = difff / (60 * 1000);  
+                                                timecount += diffMinutes;
+
+                                            }
+                                        }
                                         if (firstHalf.contains("fullday")) {
-//                                       firstHalfList.add("PR");
-                                            prcounter = prcounter + 1;
+                                            if(timecount > 1 && timecount <= 270){
+                                                 prcounter = prcounter + 0.5;
+                                            }else if(timecount >= 510){
+                                                 prcounter = prcounter + 1;
+                                            }  
+                                           
 
                                         } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                                                 && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
@@ -2779,8 +2840,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                    firstHalfList.add("AR/P");
                                             ar = ar + 1;
                                         } else if (firstHalf.equals("AB")) {
-//                                    firstHalfList.add("AB");
-                                            abcounter = abcounter + 1;
+                                            if(timecount > 270){
+                                                 abcounter = abcounter + 0.5;
+                                             }else{
+                                                abcounter = abcounter + 1;
+                                             }
                                         } else {
                                             if (firstHalf.equals("Casual Leave")) {
                                                 cl = cl + 1;
@@ -2924,14 +2988,14 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
                             firstHalfList.add("" + (list.size() - wo));
                             firstHalfList.add("" + wo);
-                            firstHalfList.add("" + (list.size() - abcounter));
+                            firstHalfList.add("" + prcounter);//present
                             firstHalfList.add("" + cl);
 //                        firstHalfList.add("" + sl);
                             firstHalfList.add("" + pl);
                             firstHalfList.add("" + sl);
                             firstHalfList.add("" + pat);
-                            firstHalfList.add("" + (abcounter - wo));
-                            firstHalfList.add("" + (abcounter - wo));//where lwp = ab
+                            firstHalfList.add("" + abcounter);//absent
+                            firstHalfList.add("" + lwp);//where lwp = ab
 
                             firstHalfList.add(otHourFinal);
 

@@ -311,4 +311,18 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List readALLPuchOnlyDataDateWise(String startDate, int id) {
+        String query = "";
+        query += " select a"
+                + " From EmployeeDatetimeData a "
+                + " left join a.deviceMaster b"
+                + " left join b.zydexLocationMaster c"
+                + " where a.employeeMaster.id = " + id
+                + " and DATE_FORMAT(STR_TO_DATE(a.dateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + startDate + "','%d/%m/%Y'),'%d/%m/%Y') "
+                + " GROUP BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i')"
+                + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
+        return getHibernateTemplate().find(query);
+    }
+
 }

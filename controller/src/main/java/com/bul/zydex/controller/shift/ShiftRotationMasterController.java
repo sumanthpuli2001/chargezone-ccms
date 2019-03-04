@@ -5198,7 +5198,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
     }
 
     
-        public ModelAndView employeePresentSearchSubmit1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        public ModelAndView employeePresentSearchSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
          ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         if ("" != request.getParameter("inDateTime")) {
@@ -5258,11 +5258,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             employeeAdvanceSearch.setDateOfBirthOfEmpChilld1(Boolean.FALSE);
             employeeAdvanceSearch.setDateOfBirthOfEmpChild2(Boolean.FALSE);
             employeeAdvanceSearch.setDateOfTransferOfEntity(Boolean.FALSE);
-
-            int rownum = 0;
+            int rowhead = 0;
+            int rownum = 1;
             HSSFWorkbook firstFWorkbook = new HSSFWorkbook();
             HSSFSheet firstSheet = firstFWorkbook.createSheet("FIRST SHEET");
-            Row headerRow = firstSheet.createRow(rownum);
+            Row headerRow = firstSheet.createRow(rowhead);
             headerRow.setHeightInPoints(40);
             HSSFFont redFont = firstFWorkbook.createFont();
             redFont.setColor(HSSFColor.RED.index);
@@ -5285,26 +5285,28 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             styleBold.setFont(boldFont);
             List<List<String>> recordToAdd = new ArrayList();
             List<List<String>> recordToAdd1 = new ArrayList();
+            List<List<String>> recordToAdd2 = new ArrayList();
             List<String> headerRow1 = new ArrayList();
             List<String> headerRow2 = new ArrayList();
+            List<String> headerRow3 = new ArrayList();
             headerRow1.add("Employee ID");
             headerRow1.add("Employee Name");
             headerRow1.add("Shift Name");
-            headerRow1.add("In Punch");
-            headerRow1.add("Out Punch");
-            headerRow1.add("In Punch");
-            headerRow1.add("Out Punch");
             headerRow1.add("First Half");
             headerRow1.add("Second Half");
             headerRow1.add("Working Hour");
-            recordToAdd.add(headerRow1);
+//            headerRow1.add("Punch In");
+//            headerRow1.add("Punch Out");
+
             List<?> empDetail = employeeMasterService.empOrDateWiseSearchforActive(employeeAdvanceSearch);
             Iterator it = empDetail.iterator();
-            int presentCounter = 0;
+            float presentCounter = 0;
+            int maxlistLen = 0;
             try {
                 while (it.hasNext()) {
                     EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
                     List<String> employeeInfoList = new ArrayList();
+                    List<String> employeeInfoListpunch = new ArrayList();
                     Object[] next = (Object[]) it.next();
                     int id = (int) next[48];
                     EmployeeMaster employeeMaster1 = new EmployeeMaster();
@@ -5323,8 +5325,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     ShiftMaster shiftMaster1 = new ShiftMaster();
                     String shiftName = "";
                     String shiftFirstHalfEndTime = "";
+                    String shiftFirstHalfStartTime = "";
                     String shiftEndTime = "";
                     String empEndTime = "";
+                    String FirstHalfEndTime = "";
+                    String[] FirstHalfEndTime1 = null;
                     String[] empEndTime1 = null;
                     SimpleDateFormat sdf3 = new SimpleDateFormat("HH:mm");
                     if (!empShiftList.isEmpty()) {
@@ -5334,105 +5339,136 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                         shiftMaster.setId(Integer.parseInt(shiftId));
                         shiftMaster1 = shiftMasterService.readById(shiftMaster.getId());
                         shiftName = shiftMaster1.getShiftName();
+                        shiftFirstHalfStartTime = shiftMaster1.getHalfStartTime1();
                         shiftFirstHalfEndTime = shiftMaster1.getHalfEndTime1();
                         shiftEndTime = shiftMaster1.getEndTime();
                     }
                     employeeInfoList.add("" + next[0]);
                     employeeInfoList.add("" + next[1]);
                     employeeInfoList.add(shiftName);
-                    List listPunch = employeeDatetimeDataService.readPuchDataDateWise(startDate, id);
+//                    List listPunch = employeeDatetimeDataService.readPuchDataDateWise(startDate, id);
+                    List listPunch = employeeDatetimeDataService.readALLPuchOnlyDataDateWise(startDate, id);
+                    if (listPunch.isEmpty() || listPunch.size() == 1) {
+                        employeeInfoList.add("AB");
+                        employeeInfoList.add("AB");
+                    }
+
+                    if (listPunch.size() >= 2) {
+                       
+                            int listLen = listPunch.size();
+                           
+//                            boolean isMisPunch;
+//                            if(listLen % 2 == 0)
+//                                isMisPunch = false;
+//                            else
+//                                isMisPunch = true;
+                            
+                                boolean inBool = true;
+                                boolean outBool = false;
+                                String inTime1 = null;
+                                String outTime1= null;
+                                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");  
+                              
+                                Date d1 = null;
+                                Date d2 = null;
+                                String []inTime1val;
+                                String []outTime1val;
+                                String outTime1val1;
+                                String inTime1val1;
+                                long timecount = 0;
+                                int cnt =0;
+                        for (Object o : listPunch) {
+                                EmployeeDatetimeData employeeDatetimeData1 = (EmployeeDatetimeData) o;
+                                cnt++;
+//                                if(isMisPunch && (listLen == cnt)){
+//                                    break;
+//                                }else if
+                                    if(inBool){
+                                    inTime1 = employeeDatetimeData1.getDateTime();                                    
+                                    inTime1val = inTime1.split(" ");
+                                    inTime1val1 = inTime1val[1];
+                                    try {
+                                        d1 = format.parse(inTime1val1);
+                                        employeeInfoListpunch.add(inTime1val1);
+                                        if(maxlistLen < listLen){
+                                            headerRow3.add("In Punch");
+                                            maxlistLen++;
+                                        }
+                                        
+                                      
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }    
+                                    inBool = false;
+                                    outBool = true;
+                                } else if(outBool){
+                                    outTime1 = employeeDatetimeData1.getDateTime();
+                                    outTime1val = outTime1.split(" ");
+                                    outTime1val1 = outTime1val[1];
+                                    inBool = true;
+                                    outBool = false;
+                                     try {
+                                        d2 = format.parse(outTime1val1);
+                                        employeeInfoListpunch.add(outTime1val1);
+                                        if(maxlistLen < listLen){
+                                            headerRow3.add("Out Punch");
+                                            maxlistLen++;
+                                        }
+                                        
+//                                        d2 = format.parse(dateStop);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }    
+                                    long difff = d2.getTime() - d1.getTime();        
+                                    long diffMinutes = difff / (60 * 1000);  
+                                    timecount += diffMinutes;
+                                    
+                                }
+                            }
+                            double empHour = (double) timecount / 60;
+                            int hours = (int) empHour;
+                            int minutes = (int) (empHour * 60) % 60;
+                            String hour = "" + hours;
+                            String minute = "" + minutes;
+                            if (minutes < 10 && minutes > 0) {
+                                minute = "0" + minute;
+                            } else if (minutes < 0) {
+                                minute = "00";
+                            }
+                            
+                            //First Half
+                            if(timecount > 270){
+                                employeeInfoList.add("PR");
+                                presentCounter+=0.5;
+                            }else{
+                                employeeInfoList.add("AB");
+                            }
+                            //Second Half
+                            if(timecount > 270 && timecount >= 510){
+                                employeeInfoList.add("PR");
+                                presentCounter+=0.5;
+                            }else{
+                                employeeInfoList.add("AB");
+                            }
+                          
+                            String workingHours = hour + ":" + minute;
+                            employeeInfoList.add(workingHours);
+                        
+                    }
+                    
 //                    Iterator it1 = listPunch.iterator();
-//                    Iterator it2 = listPunch.iterator();
-//                    int numAttempts = 0;
-//                    while (it1.hasNext() && numAttempts < 4) {
+//                    while (it1.hasNext()) {
 //                        Object[] next1 = (Object[]) it1.next();
 //                        String str = "" + next1[0];
 //                        String[] str1 = str.split(" ");
 //                        employeeInfoList.add("" + str1[1]);
-//                        numAttempts++;
+//                       
 //                    }
-
-                    while (listPunch.size() >= 2) {
-//                        Object[] startTimeFirstHalfListEnd = (Object[]) listPunch.get(0);
-                        Object[] startTimeListEnd = (Object[]) listPunch.get(listPunch.size() - 1);
-
-                        empEndTime = (String) startTimeListEnd[0];
-                        empEndTime1 = empEndTime.split(" ");
-                        break;
-
-                    }
-
-                    if (listPunch.isEmpty() || listPunch.size() == 1) {
-                        employeeInfoList.add("");
-                        employeeInfoList.add("");
-                        employeeInfoList.add("");
-                        employeeInfoList.add("");
-                        employeeInfoList.add("AB");
-                        employeeInfoList.add("AB");
-                    }
-//                    if (listPunch.size() == 1) {
-//                        employeeInfoList.add("");
-//                        employeeInfoList.add("");
-//                        employeeInfoList.add("");
-//                        employeeInfoList.add("PR");
-//                        employeeInfoList.add("PR");
-//                        presentCounter++;
-//                    }
-                    if (listPunch.size() >= 2) {
-                        employeeInfoList.add("");
-                        employeeInfoList.add("");
-                        employeeInfoList.add("PR");
-                        Date empEndDate = sdf3.parse(empEndTime1[1]);
-                        Date shiftEndDate = null;
-                        if (!shiftEndTime.isEmpty() && !shiftEndTime.equals("")) {
-                            shiftEndDate = sdf3.parse(shiftEndTime);
-                            if (empEndDate.before(shiftEndDate)) {
-                                employeeInfoList.add("AB");
-                            } else {
-                                employeeInfoList.add("PR");
-                                presentCounter++;
-                            }
-                        }
-                    }
-                    if (listPunch.size() == 3) {
-                        employeeInfoList.add("");
-                        employeeInfoList.add("PR");
-                        Date empEndDate = sdf3.parse(empEndTime1[1]);
-                        Date shiftEndDate = sdf3.parse(shiftEndTime);
-                        if (empEndDate.before(shiftEndDate)) {
-                            employeeInfoList.add("AB");
-                        } else {
-                            employeeInfoList.add("PR");
-                            presentCounter++;
-                        }
-                    }
-                    if (listPunch.size() > 3) {
-                        employeeInfoList.add("PR");
-                        Date empEndDate = sdf3.parse(empEndTime1[1]);
-                        Date shiftEndDate = sdf3.parse(shiftEndTime);
-                        if (empEndDate.before(shiftEndDate)) {
-                            employeeInfoList.add("AB");
-                        } else {
-                            employeeInfoList.add("PR");
-                            presentCounter++;
-                        }
-                    }
-                    while (listPunch.size() >= 2) {
-                        Object[] startTimeListStart = (Object[]) listPunch.get(0);
-                        Object[] startTimeListEnd = (Object[]) listPunch.get(listPunch.size() - 1);
-                        String startTime = (String) startTimeListStart[0];
-                        String endTime = (String) startTimeListEnd[0];
-                        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                        Date strDate = sdf2.parse(startTime);
-                        Date endDate = sdf2.parse(endTime);
-                        long diff = endDate.getTime() - strDate.getTime();
-                        long diffHours = diff / (60 * 1000);
-                        double empHour = (double) diffHours / 60;
-                        employeeInfoList.add("" + new DecimalFormat("##.##").format(empHour));
-                        break;
-                    }
-
+//                    headerRow1.addAll(headerRow3);
+                    
+                    employeeInfoList.addAll(employeeInfoListpunch);
                     recordToAdd.add(employeeInfoList);
+//                    recordToAdd.add(employeeInfoListpunch);
 
                 }
             } catch (Exception e) {
@@ -5443,15 +5479,31 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             headerRow2.add("" + presentCounter);
             recordToAdd1.add(headerRow2);
 
+            headerRow1.addAll(headerRow3);
+            recordToAdd2.add(headerRow1);
+            
+             for (int j = 0; j < recordToAdd2.size(); j++) {
+                List<String> l2 = recordToAdd2.get(j);
+                Row row = firstSheet.createRow(rowhead);
+                for (int k = 0; k < l2.size(); k++) {
+                    Cell cell = row.createCell(k);
+                    cell.setCellValue(l2.get(k));
+                    cell.setCellStyle(styleBold);
+               
+                }
+                
+            }
+            
+            
             for (int j = 0; j < recordToAdd.size(); j++) {
                 List<String> l2 = recordToAdd.get(j);
                 Row row = firstSheet.createRow(rownum);
                 for (int k = 0; k < l2.size(); k++) {
                     Cell cell = row.createCell(k);
                     cell.setCellValue(l2.get(k));
-                    if (j == 0) {
-                        cell.setCellStyle(styleBold);
-                    }
+//                    if (j == 0) {
+//                        cell.setCellStyle(styleBold);
+//                    }
                 }
                 rownum++;
             }
@@ -5462,6 +5514,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 Cell cell = row.createCell(l);
                 cell.setCellValue(l2.get(l));
                 cell.setCellStyle(styleBold);
+            }
+            
+            for(int i = 0; i < recordToAdd.size(); i++) {
+                firstSheet.autoSizeColumn(i);
             }
             String appPath = request.getServletContext().getRealPath("");
             try {
@@ -5498,7 +5554,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         }
     }
     
-    public ModelAndView employeePresentSearchSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView employeePresentSearchSubmit1(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         if ("" != request.getParameter("inDateTime")) {
@@ -5653,7 +5709,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     }
 
                     while (listPunch.size() >= 2) {
-//                        Object[] startTimeFirstHalfListEnd = (Object[]) listPunch.get(0);
+                        Object[] startTimeFirstHalfListEnd = (Object[]) listPunch.get(0);
                         Object[] startTimeListEnd = (Object[]) listPunch.get(listPunch.size() - 1);
 
                         empEndTime = (String) startTimeListEnd[0];

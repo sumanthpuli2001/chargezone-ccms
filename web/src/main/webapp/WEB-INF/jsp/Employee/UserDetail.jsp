@@ -989,7 +989,20 @@
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12">
-
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Employee Name (First Name, Middle Name, Last Name as per Passport or Aadhar card.) <span style="color: red;font-size: 12px;">*</span></label><br>
+                                                                <c:if test="${list.nameStatus eq 'false'}">
+                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport;
+                                                                    <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard
+                                                                </c:if>
+                                                                <c:if test="${list.nameStatus eq 'true'}">
+                                                                    <input type="radio" name="nameStatus"  id="nameStatus" value="false"/>Passport&nbsp;&nbsp;
+                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="true"/>AadharCard
+                                                                </c:if>
+                                                        
+                                                    </div>
+                                                </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>PAN Card No.:<span style="color: red;font-size: 12px;">*</span></label>
@@ -1015,20 +1028,7 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Select First , Middle & Last Name As per Passport or Aadhar card:<span style="color: red;font-size: 12px;">*</span></label><br>
-                                                                <c:if test="${list.nameStatus eq 'false'}">
-                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport;
-                                                                    <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard
-                                                                </c:if>
-                                                                <c:if test="${list.nameStatus eq 'true'}">
-                                                                    <input type="radio" name="nameStatus"  id="nameStatus" value="false"/>Passport&nbsp;&nbsp;
-                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="true"/>AadharCard
-                                                                </c:if>
-                                                        
-                                                    </div>
-                                                </div>
+                                                
 
                                                 <div class="form-group">
                                                     <div class="col-sm-6">

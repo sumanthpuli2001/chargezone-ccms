@@ -10,7 +10,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Employee Sub Type List</title>
+        <title>Employee Sub Team List</title>
     </head>
     <script>
         function viewClick(id) {
@@ -44,10 +44,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>EMPLOYEE SUB TYPE LIST</h1>
+            <h1>EMPLOYEE SUB TEAM LIST</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Employee Sub Type List</li>
+                <li class="active">Employee Sub Team List</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -88,8 +88,8 @@
                                                                 <tr>
                                                                     <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
                                                                     <th>Sr.No.</th>
-                                                                    <th>Employee Type</th>
-                                                                    <th>SubType</th>
+                                                                    <th>Team</th>
+                                                                    <th>Sub-Team</th>
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>

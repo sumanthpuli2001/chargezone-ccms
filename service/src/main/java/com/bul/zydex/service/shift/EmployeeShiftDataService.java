@@ -41,4 +41,6 @@ public interface EmployeeShiftDataService<T> extends GenericsService<T> {
     public List<?> getShiftDayOff(EmployeeShiftData employeeShiftData);
 
     public void updateNullShiftId();
+
+    public List<?> readByEmployeeIdAndDate(EmployeeShiftData object, String date);
 }

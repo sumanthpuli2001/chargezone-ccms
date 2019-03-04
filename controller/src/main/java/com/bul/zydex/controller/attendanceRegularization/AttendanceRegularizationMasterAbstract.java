@@ -17,11 +17,14 @@ import com.bul.zydex.model.EmployeePunchForMobileApp;
 import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.model.OverTimeMaster;
+import com.bul.zydex.model.ShiftMaster;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
+import com.bul.zydex.service.attendanceRegularization.OTRegularizationService;
 import com.bul.zydex.service.attendanceRegularization.TimeAttandanceFlaxibleMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.leave.LeaveEmployeeDetailService;
@@ -30,6 +33,7 @@ import com.bul.zydex.service.mobileapp.EmployeePunchForMobileAppService;
 import com.bul.zydex.service.overTime.OverTimeMasterService;
 import com.bul.zydex.service.shift.EmployeeDatetimeDataService;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
+import com.bul.zydex.service.shift.ShiftMasterService;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.validation.Validator;
@@ -50,8 +54,10 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
     protected Validator attendanceRegularizationValidator;
     protected EmployeePunchForMobileAppService<EmployeePunchForMobileApp> employeePunchForMobileAppService;
     protected LeaveEmployeeDetailService<LeaveEmployeeDetail> leaveEmployeeDetailService;
-     protected UserRightMasterService<UserRightMaster> userRightMasterService;
-
+    protected UserRightMasterService<UserRightMaster> userRightMasterService;
+    protected OTRegularizationService<OTRegularization> oTRegularizationService;
+    protected ShiftMasterService<ShiftMaster> shiftMasterService;
+    
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
         return timeAttandanceFlaxibleMasterService;
     }
@@ -140,6 +146,23 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
         this.userRightMasterService = userRightMasterService;
     }
 
+    public OTRegularizationService<OTRegularization> getoTRegularizationService() {
+        return oTRegularizationService;
+    }
+
+    public void setoTRegularizationService(OTRegularizationService<OTRegularization> oTRegularizationService) {
+        this.oTRegularizationService = oTRegularizationService;
+    }
+
+    public ShiftMasterService<ShiftMaster> getShiftMasterService() {
+        return shiftMasterService;
+    }
+
+    public void setShiftMasterService(ShiftMasterService<ShiftMaster> shiftMasterService) {
+        this.shiftMasterService = shiftMasterService;
+    }
+
+    
     public void mailSendArApply(HttpServletRequest request) throws Exception {
 
         try {

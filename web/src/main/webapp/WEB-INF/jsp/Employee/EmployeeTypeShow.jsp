@@ -44,10 +44,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>ALL EMPLOYEE TYPE LIST</h1>
+            <h1>ALL EMPLOYEE TEAM LIST</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Employee Type List</li>
+                <li class="active">Team List</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -88,7 +88,7 @@
                                                                 <tr>
                                                                     <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
                                                                     <th>Sr.No.</th>
-                                                                    <th>Employee Type</th>
+                                                                    <th>Team</th>
 <!--                                                                    <th>Action</th>-->
                                                                 </tr>
                                                             </thead>

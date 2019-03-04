@@ -25,4 +25,6 @@ public interface EmployeeSubTypeService<T> extends GenericsService<T> {
 
     public List<?> readByEmployeeTypeIdANDSubTypeName(int emptypid, String employeeSubtype);
 
+    public List<?> readOrderNameWise();
+
 }

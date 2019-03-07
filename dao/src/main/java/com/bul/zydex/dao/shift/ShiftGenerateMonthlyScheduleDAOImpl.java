@@ -801,4 +801,135 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> shiftValueInsDate(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.day"+a[1]+" from ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.shiftMonth="+a[2]
+                + " and a.shiftYear="+a[3];
+        
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> beforesDateCasualLeave(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.startDate from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.status=3"
+                + " and a.leaveTypeMaster.id=6"
+                + " and STR_TO_DATE(a.endDate,'%d/%m/%Y') = STR_TO_DATE('" +a[1]+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> aftereDateCasualLeave(String data) {
+        String a[] = data.split(":");
+        String query = "";
+
+        query += "Select a.startDate from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.status=3"
+                + " and a.leaveTypeMaster.id=6"
+                + " and STR_TO_DATE(a.startDate,'%d/%m/%Y') = STR_TO_DATE('" +a[2]+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public String noOfDaysForYear(Integer id, String dateofpreYear,String leave1) {
+        String query = "";
+
+        query += "Select SUM(a.noOfDays) from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+id
+                + " and a.status=6 "
+                + " and a.leaveTypeMaster.id ="+leave1
+                + " and STR_TO_DATE(a.startDate,'%d/%m/%Y') > STR_TO_DATE('" +dateofpreYear+ "','%d/%m/%Y')";
+        List<?> list=getHibernateTemplate().find(query);
+        String list1="";
+        if(list.contains(null))
+        {
+            list1 = "0.0";
+        }
+        else
+        {
+            list1= list.get(0).toString();
+        }
+        return list1;
+            
+    }
+    
+    @Override
+    public String noOfDaysForYear1(Integer id, String dateofpreYear,String leave1) {
+        String query = "";
+
+        query += "Select SUM(a.noOfDays) from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+id
+                + " and a.status=0 "
+                + " and a.leaveTypeMaster.id ="+leave1
+                + " and STR_TO_DATE(a.startDate,'%d/%m/%Y') > STR_TO_DATE('" +dateofpreYear+ "','%d/%m/%Y')";
+        List<?> list=getHibernateTemplate().find(query);
+        String list1="";
+        if(list.contains(null))
+        {
+            list1 = "0.0";
+        }
+        else
+        {
+            list1= list.get(0).toString();
+        }
+        return list1;
+            
+    }
+    
+    @Override
+    public String noOfDaysForYear2(Integer id, String dateofpreYear,String leave1) {
+        String query = "";
+
+        query += "Select SUM(a.noOfDays) from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+id
+                + " and a.status=3 "
+                + " and a.leaveTypeMaster.id ="+leave1
+                + " and STR_TO_DATE(a.startDate,'%d/%m/%Y') > STR_TO_DATE('" +dateofpreYear+ "','%d/%m/%Y')";
+        List<?> list=getHibernateTemplate().find(query);
+        String list1="";
+        if(list.contains(null))
+        {
+            list1 = "0.0";
+        }
+        else
+        {
+            list1= list.get(0).toString();
+        }
+        return list1;
+            
+    }
+    
+    @Override
+    public String noOfDaysForYear3(Integer id, String dateofpreYear,String leave1) {
+        String query = "";
+
+        query += "Select SUM(a.noOfDays) from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+id
+                + " and a.status=4 "
+                + " and a.leaveTypeMaster.id ="+leave1
+                + " and STR_TO_DATE(a.startDate,'%d/%m/%Y') > STR_TO_DATE('" +dateofpreYear+ "','%d/%m/%Y')";
+        List<?> list=getHibernateTemplate().find(query);
+        String list1="";
+        if(list.contains(null))
+        {
+            list1 = "0.0";
+        }
+        else
+        {
+            list1= list.get(0).toString();
+        }
+        return list1;
+            
+    }
+
 }

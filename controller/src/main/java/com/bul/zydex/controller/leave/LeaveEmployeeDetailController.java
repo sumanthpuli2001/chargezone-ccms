@@ -157,9 +157,18 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 //                Iterator it1 = listFirst.iterator();
                 //                if (it1.hasNext()) {
                 //                }
-                if (noOfDay == null) {
-                    noOfDay = (float) 0;
-                }
+                LocalDate ld =LocalDate.now();
+                Integer year = ld.getYear();
+                Integer year1 = year-1;
+                String dateofpreYear = "31/12/"+year1;
+                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(),dateofpreYear,leave1);
+//                if (noOfDay == null) {
+//                    noOfDay = (float) 0;
+                    noOfDay = Float.parseFloat(noOfDaysForYear)+Float.parseFloat(noOfDaysForYear1)+Float.parseFloat(noOfDaysForYear2)+Float.parseFloat(noOfDaysForYear3);
+//                }
                 totalMap = days + noOfDay;
                 if ("C Off Leave".equals(name) || "Short Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                     continue;
@@ -206,7 +215,6 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         if (!empId.isEmpty()) {
             employeeMaster = (EmployeeMaster) empId.get(0);
         }
-
 //        leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster);
         String sDate = request.getParameter("startDate");
         String eDate = request.getParameter("endDate");
@@ -216,7 +224,39 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         leaveEmployeeDetail.setStartDateStatus(strDateStatus);
         leaveEmployeeDetail.setEndDateStatus(endDateStatus);
         leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
-        
+        SimpleDateFormat format1 = new SimpleDateFormat("d/M/yyyy");
+        Date date11 = format1.parse(sDate);
+        String ssDate = format1.format(date11);
+        Date date12 = format1.parse(eDate);
+        String eeDate = format1.format(date12);
+        String sDay = ssDate.split("/")[0];
+        String sMonth = ssDate.split("/")[1];
+        String sYear = ssDate.split("/")[2];
+        String eDay = eeDate.split("/")[0];
+        String eMonth = eeDate.split("/")[1];
+        String eYear = eeDate.split("/")[2];
+        List<?> shiftValueInsDate = new ArrayList<>();
+        List<?> shiftValueIneDate = new ArrayList<>();
+        String data1 = employeeMaster.getId()+":"+sDay+":"+sMonth+":"+sYear;
+        String data2 = employeeMaster.getId()+":"+eDay+":"+eMonth+":"+eYear;
+        if(!sDate.isEmpty())
+        {
+            shiftValueInsDate=shiftGenerateMonthlyScheduleService.shiftValueInsDate(data1);
+        }
+        if(!eDate.isEmpty())
+        {
+            shiftValueIneDate=shiftGenerateMonthlyScheduleService.shiftValueInsDate(data2);
+        }
+        String shiftValueInsDate1 = "";
+        String shiftValueIneDate1 = "";
+        if(!shiftValueInsDate.isEmpty())
+        {
+             shiftValueInsDate1=shiftValueInsDate.get(0).toString();
+        }
+        if(!shiftValueIneDate.isEmpty())
+        {
+            shiftValueIneDate1= shiftValueIneDate.get(0).toString();
+        }
         Date date;
         Date oneDayBefore;
         String dateBeforeOfsDate="";
@@ -240,6 +280,13 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             dateAfterOfeDate = format.format(tomorrow);
         }
         String data = employeeMaster.getId()+":"+dateBeforeOfsDate+":"+dateAfterOfeDate;
+        List<?> beforesDateCasualLeave = new ArrayList<>();
+        List<?> aftereDateCasualLeave = new ArrayList<>();
+        if(!dateBeforeOfsDate.isEmpty() && !dateAfterOfeDate.isEmpty())
+        {
+            beforesDateCasualLeave=shiftGenerateMonthlyScheduleService.beforesDateCasualLeave(data);
+            aftereDateCasualLeave=shiftGenerateMonthlyScheduleService.aftereDateCasualLeave(data);
+        }
         List<?> beforesDate = new ArrayList<>();
         List<?> aftereDate = new ArrayList<>();
         List<?> beforesDate1= new ArrayList<>();
@@ -283,6 +330,20 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         {
                 request.setAttribute("failureMessage",
                     "Error : Casual Leave and Privilege Leave cannot combine.");
+                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                mv = applyClick(request, response);
+        }
+        else if(shiftValueInsDate1.equals("-1") || shiftValueIneDate1.equals("-1"))
+        {
+                request.setAttribute("failureMessage",
+                    "Error : You Cannot Apply Leave on Woff Day.");
+                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+                mv = applyClick(request, response);
+        }
+        else if(!beforesDateCasualLeave.isEmpty() || !aftereDateCasualLeave.isEmpty())
+        {
+                request.setAttribute("failureMessage",
+                    "Error : You Cannot Apply Casual Leave consecutively.");
                 request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                 mv = applyClick(request, response);
         }
@@ -1431,6 +1492,20 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         Integer lieu=null;
         Integer sick=null;
         Integer national=null;
+        String casualDiff="";
+        String privilegeDiff="";
+        String paternityDiff="";
+        String maternityDiff="";
+        String ShortDiff="";
+        String lieuDiff="";
+        String sickDiff="";
+        String nationalDiff="";
+        String diff = "";
+        Iterator itr1 = empLeaveBalanceList1.iterator();
+        while(itr1.hasNext()){
+            Object[] aa = (Object[]) itr1.next();
+            diff = aa[1].toString();
+        }
 //        ArrayList aa = new ArrayList();
         Iterator itr = empLeaveBalanceList.iterator();
         while(itr.hasNext()){
@@ -1438,27 +1513,35 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             Object[] aa = (Object[]) itr.next();
             if(aa[0].equals("Casual Leave")){
                 casual = i;
+                casualDiff =aa[1].toString();
             }
             if(aa[0].equals("Privilege Leave")){
                 privilege = i;
+                privilegeDiff =aa[1].toString();
             }
             if(aa[0].equals("Paternity Leave")){
                 paternity = i;
+                paternityDiff =aa[1].toString();
             }
             if(aa[0].equals("Maternity Leave")){
                 maternity = i;
+                maternityDiff =aa[1].toString();
             }
             if(aa[0].equals("Short Leave")){
                 Short = i;
+                ShortDiff =aa[1].toString();
             }
             if(aa[0].equals("Lieu Day Leave")){
                 lieu = i;
+                lieuDiff =aa[1].toString();
             }
             if(aa[0].equals("Sick Leave")){
                 sick = i;
+                sickDiff =aa[1].toString();
             }
             if(aa[0].equals("National Holiday")){
                 national = i;
+                nationalDiff =aa[1].toString();
             }
             i++;
         }
@@ -1502,6 +1585,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             while (it.hasNext()) {
                 Object[] next = (Object[]) it.next();
                 Float noOfDay = null;
+                Float noOfDay1 = (float) 0;
                 Float totalMap = null;
                 Float zz = null;
                 String name = "" + next[0];
@@ -1522,22 +1606,70 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
                         Object xx = (Object) listFirst.get(0);
                         zz = (float) xx;
-                        noOfDay = zz;
+                        noOfDay1 = zz;
                     }
                 }
                 //                Iterator it1 = listFirst.iterator();
                 //                if (it1.hasNext()) {
                 //                }
-                if (noOfDay == null) {
-                    noOfDay = (float) 0;
+                LocalDate ld =LocalDate.now();
+                Integer year = ld.getYear();
+                Integer year1 = year-1;
+                String dateofpreYear = "31/12/"+year1;
+                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(),dateofpreYear,leave1);
+                noOfDay = Float.parseFloat(noOfDaysForYear)+Float.parseFloat(noOfDaysForYear1)+Float.parseFloat(noOfDaysForYear2)+Float.parseFloat(noOfDaysForYear3);
+                totalMap = Float.parseFloat(days) + noOfDay;
+                if(leaveTypeMaster1.getLeaveType().equals(name))
+                {
+                    if(leaveTypeMaster1.getLeaveType().equals("Casual Leave"))
+                    {
+                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(casualDiff)))) + noOfDay;
+                    }
+                    if(leaveTypeMaster1.getLeaveType().equals("Privilege Leave"))
+                    {
+                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(privilegeDiff)))) + noOfDay;
+                    }
+                    if(leaveTypeMaster1.getLeaveType().equals("Paternity Leave"))
+                    {
+                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(paternityDiff)))) + noOfDay;
+                    }
+                    if(leaveTypeMaster1.getLeaveType().equals("Maternity Leave"))
+                    {
+                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(maternityDiff)))) + noOfDay;
+                    }
+                    if(leaveTypeMaster1.getLeaveType().equals("Short Leave"))
+                    {
+                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(ShortDiff)))) + noOfDay;
+                    }
+                    if(leaveTypeMaster1.getLeaveType().equals("Lieu Day Leave"))
+                    {
+                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(lieuDiff)))) + noOfDay;
+                    }
+                    if(leaveTypeMaster1.getLeaveType().equals("Sick Leave"))
+                    {
+                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(sickDiff)))) + noOfDay;
+                    }
+                    if(leaveTypeMaster1.getLeaveType().equals("National Holiday"))
+                    {
+                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(nationalDiff)))) + noOfDay;
+                    }
                 }
-//                totalMap = Float.parseFloat(days) + noOfDay;
-                totalMap = Float.parseFloat(days);
+//                if(noOfDay1!=0.0)
+//                {
+//                    noOfDay1=noOfDay1+noOfDay;
+//                }
+//                else
+//                {
+                    noOfDay1=noOfDay;
+//                }
                 if ("Short Leave".equals(name) || "Paternity Leave".equals(name) || "C Off Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                     continue;
                 } else {
                     listRemain.put(name, Float.parseFloat(days));
-                    empReqMap.put(name, noOfDay);
+                    empReqMap.put(name, noOfDay1);
                     totalDaysMap.put(name, totalMap);
                 }
             }
@@ -1561,7 +1693,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         request.setAttribute("oldLeaveDays", leaveEmployeeDetail.getNoOfDays());
 
         addleaveType1(request, leaveEmployeeDetail.getLeaveTypeMaster().getId(), leaveEmployeeDetail.getNoOfDays());
-
+        String sick1 = String.valueOf(leaveEmployeeDetail.getUseAsSickLeave());
         if (leaveEmployeeDetail.getUseAsSickLeave() == true) {
             request.setAttribute("useAsSickLeaveBoolean", leaveEmployeeDetail.getUseAsSickLeave());
         }
@@ -1654,9 +1786,20 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 //                Iterator it1 = listFirst.iterator();
                 //                if (it1.hasNext()) {
                 //                }
-                if (noOfDay == null) {
-                    noOfDay = (float) 0;
-                }
+//                if (noOfDay == null) {
+//                    noOfDay = (float) 0;
+//                }
+                LocalDate ld =LocalDate.now();
+                Integer year = ld.getYear();
+                Integer year1 = year-1;
+                String dateofpreYear = "31/12/"+year1;
+                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(),dateofpreYear,leave1);
+//                if (noOfDay == null) {
+//                    noOfDay = (float) 0;
+                noOfDay = Float.parseFloat(noOfDaysForYear)+Float.parseFloat(noOfDaysForYear1)+Float.parseFloat(noOfDaysForYear2)+Float.parseFloat(noOfDaysForYear3);
                 totalMap = days + noOfDay;
                 if ("Short Leave".equals(name) || "Paternity Leave".equals(name) || "C Off Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                     continue;
@@ -2130,6 +2273,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                 String currentDate = dateFormat1.format(new Date());
                 leaveEmployeeDetail.setDateOfSubmit(currentDate);
+                LeaveEmployeeDetail leaveEmployeeDetail1 = leaveEmployeeDetailService.readById(Integer.parseInt(id));
+                Boolean sick = leaveEmployeeDetail1.getUseAsSickLeave();
+                leaveEmployeeDetail.setUseAsSickLeave(sick);
                 leaveEmployeeDetailService.update(leaveEmployeeDetail);
                 request.setAttribute("successMessage",
                         "Information : Withdraw Leave Request sent Successfully.");
@@ -2154,7 +2300,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 } catch (Exception e) {
                 }
 
-                mv = viewLeaveRequest(request, response);
+                mv = searchOwnLeaveDetail(request, response);
 
             }
         }
@@ -2267,6 +2413,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
         addleaveType(request);
         String id = request.getParameter("id");
+        LeaveEmployeeDetail leaveEmployeeDetail1 = leaveEmployeeDetailService.readById(Integer.parseInt(id));
+        Integer leave = leaveEmployeeDetail1.getLeaveTypeMaster().getId();
+        LeaveTypeMaster leaveTypeMaster1 = leaveTypeMasterService.readById(leave);
         String userId = request.getParameter("userId");
         leaveEmployeeDetail.setId(Integer.parseInt(id));
         user.setId(Integer.parseInt(userId));
@@ -2330,9 +2479,18 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 //                Iterator it1 = listFirst.iterator();
                 //                if (it1.hasNext()) {
                 //                }
-                if (noOfDay == null) {
-                    noOfDay = (float) 0;
-                }
+//                if (noOfDay == null) {
+//                    noOfDay = (float) 0;
+//                }
+                LocalDate ld =LocalDate.now();
+                Integer year = ld.getYear();
+                Integer year1 = year-1;
+                String dateofpreYear = "31/12/"+year1;
+                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(),dateofpreYear,leave1);
+                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(),dateofpreYear,leave1);
+                noOfDay = Float.parseFloat(noOfDaysForYear)+Float.parseFloat(noOfDaysForYear1)+Float.parseFloat(noOfDaysForYear2)+Float.parseFloat(noOfDaysForYear3);
                 totalMap = days + noOfDay;
                 if ("C Off Leave".equals(name) || "Short Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                     continue;
@@ -2367,6 +2525,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         request.setAttribute("listRemain", listRemain);
         request.setAttribute("empReqMap", empReqMap);
         request.setAttribute("totalDaysMap", totalDaysMap);
+        request.setAttribute("leaveType", leaveTypeMaster1.getLeaveType());
+        request.setAttribute("leaveEmployeeDetail1", leaveEmployeeDetail1.getNoOfDays());
 
         mv.getModelMap().put("leaveEmployeeDetail", leaveEmployeeDetail);
         if (hrrit == true) {
@@ -8402,9 +8562,18 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     //                Iterator it1 = listFirst.iterator();
                     //                if (it1.hasNext()) {
                     //                }
-                    if (noOfDay == null) {
-                        noOfDay = (float) 0;
-                    }
+//                    if (noOfDay == null) {
+//                        noOfDay = (float) 0;
+//                    }
+                    LocalDate ld =LocalDate.now();
+                    Integer year = ld.getYear();
+                    Integer year1 = year-1;
+                    String dateofpreYear = "31/12/"+year1;
+                    String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(),dateofpreYear,leave1);
+                    String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(),dateofpreYear,leave1);
+                    String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(),dateofpreYear,leave1);
+                    String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(),dateofpreYear,leave1);
+                    noOfDay = Float.parseFloat(noOfDaysForYear)+Float.parseFloat(noOfDaysForYear1)+Float.parseFloat(noOfDaysForYear2)+Float.parseFloat(noOfDaysForYear3);
                     totalMap = days + noOfDay;
                     if ("Short Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                         continue;

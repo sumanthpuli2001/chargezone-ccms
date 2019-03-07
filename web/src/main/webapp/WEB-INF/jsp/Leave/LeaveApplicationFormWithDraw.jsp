@@ -1117,7 +1117,14 @@
                                                         <tr>
                                                             <td>No. Of Leaves Applied In This Application</td>
                                                             <c:forEach var="remain" items="${listRemain}">
-                                                                <td id="${remain.key}">0</td>
+                                                                <c:choose>
+                                                                    <c:when test="${(remain.key eq leaveType)}">
+                                                                        <td id="${remain.key}">${leaveEmployeeDetail.noOfDays}</td>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                      <td id="${remain.key}">0</td>
+                                                                    </c:otherwise>
+                                                                  </c:choose>
                                                             </c:forEach>
 
                                                         </tr>
@@ -1125,7 +1132,14 @@
                                                             <th>Projected Balance After This Application Approval</th>
 
                                                             <c:forEach var="remain" items="${listRemain}">
-                                                                <th id="${remain.key}2">0</th>
+                                                                <c:choose>
+                                                                    <c:when test="${(remain.key eq leaveType)}">
+                                                                        <td id="${remain.key}2"><b>${remain.value - leaveEmployeeDetail.noOfDays}</b></td>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                            <th id="${remain.key}2"><b>${remain.value}</b></th>
+                                                                    </c:otherwise>
+                                                                  </c:choose>
                                                                 </c:forEach>
                                                         </tr>
                                                     </table>

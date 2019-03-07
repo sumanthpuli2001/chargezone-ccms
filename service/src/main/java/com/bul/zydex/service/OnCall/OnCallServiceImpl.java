@@ -40,6 +40,11 @@ public class OnCallServiceImpl<T> extends GenericsServiceImpl<T> implements OnCa
     public List<?> approvalmanagerWiseOnCallList(int id) {
         return onCallDAO.approvalmanagerWiseOnCallList(id);
     }
+
+    @Override
+    public List<?> readOnCallRequestDateAndIdWise(String startdate, Integer id) {
+        return onCallDAO.approvalmanagerWiseOnCallList(startdate,id);
+    }
     
     
 }

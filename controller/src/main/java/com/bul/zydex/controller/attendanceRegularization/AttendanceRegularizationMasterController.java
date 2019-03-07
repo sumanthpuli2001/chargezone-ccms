@@ -31,6 +31,8 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -3029,9 +3031,23 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     SimpleDateFormat format = new SimpleDateFormat("EEEE");
                     String dayName = format.format(date);
 
+                    List alllistPunch = new ArrayList();
+                    if(firstHalf.contains("Night")){
+                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));  
+                        c.setTime(datenex);
+                        c.add(Calendar.DAY_OF_YEAR, 1); 
+                        Date tomorrow = c.getTime();
+                        String pattern = "dd/MM/YYYY";
+                        SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                        String nextdate = simpleDateFormatpp.format(tomorrow);
+                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0],nextdate, Integer.parseInt(id));
+                    }
+                    else{
+                        alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                    }
                     
                     
-                     List alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                     
                             int listLen = alllistPunch.size();
                             boolean isMisPunch;
                             if(listLen % 2 == 0)
@@ -3043,14 +3059,17 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 boolean outBool = false;
                                 String inTime1 = null;
                                 String outTime1= null;
-                                SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss");  
-                              
+//                                SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss");  
+//                                SimpleDateFormat formatshift = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");  
+//                                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                                 Date d1 = null;
                                 Date d2 = null;
                                 String []inTime1val;
                                 String []outTime1val;
                                 String outTime1val1;
                                 String inTime1val1;
+                                LocalDateTime dateTime1 = null;
+                                LocalDateTime dateTime2 = null;
                                 long timecount = 0;
                                 int cnt =0;
                             for (Object o : alllistPunch) {
@@ -3063,8 +3082,11 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     inTime1val = inTime1.split(" ");
                                     inTime1val1 = inTime1val[1];
                                     try {
-                                        d1 = format1.parse(inTime1val1);
-//                                        d2 = format.parse(dateStop);
+                                         Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1); 
+                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+                                         String strDate = dateFormat.format(datesif); 
+                                        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                        dateTime1= LocalDateTime.parse(strDate, formatter1);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }    
@@ -3077,15 +3099,18 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     inBool = true;
                                     outBool = false;
                                      try {
-                                        d2 = format1.parse(outTime1val1);
-//                                        d2 = format.parse(dateStop);
+                                         Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1); 
+                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+                                         String strDate = dateFormat.format(datesiff); 
+                                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                         dateTime2= LocalDateTime.parse(strDate, formatter1);
+
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }    
-                                    long difff = d2.getTime() - d1.getTime();        
-                                    long diffMinutesss = difff / (60 * 1000);  
-                                    timecount += diffMinutesss;
-                                    
+                                    long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
+                                    long diffMinutes = diffInMilli / (60 * 1000);
+                                    timecount += diffMinutes;
                                 }
                             }
                             
@@ -3209,12 +3234,20 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             
                             
                     if (firstHalf.contains("fullday")) {
-                       
+                        if(firstHalf.contains("General")){
                             if(timecount > 270){
                                 newList.add("PR");
                             }else{
                                 newList.add("AB");
                             }
+                        }else{
+                            if(timecount > 210){
+                                newList.add("PR");
+                            }else{
+                                newList.add("AB");
+                            }
+                        }
+                            
                         
                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
@@ -3269,7 +3302,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         long diffMinutes1 = diff1 / (60 * 1000);
                         if (dayName.equals("Saturday") && dayOfWeek == 2 && diffMinutes1 >= 240) {
                             newList.add("PR");
-                        } else if (timecount < 270) {
+                            
+                        }else if(firstHalf.contains("General") && timecount < 270){
+                            
+                                newList.add("AB");
+                          
+                        } else if (timecount < 210) {
                             newList.add("AB");
                         }
                         else if (diffMinutes1 >= diffMinutes) {
@@ -3285,6 +3323,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 } else if (leave1[0].contains("AB")) {
                                     if(alllistPunch.size() >=2 && userTimeIn.after(LateHours)){
                                         if(countLateEntry > 1){
+                                            countLateEntry++;
                                             newList.add("AB");
                                              long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
                                              totalLateTime +=lateTimeDuff;
@@ -3610,7 +3649,23 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         secondHalfList.add("AB");
                     } else if (secondHalf.contains("fullday")) {
                         
-                         List alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                        List alllistPunch = new ArrayList();
+                    if(secondHalf.contains("Night")){
+                        Calendar c = Calendar.getInstance();
+                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));  
+                        c.setTime(datenex);
+                        c.add(Calendar.DAY_OF_YEAR, 1); 
+                        Date tomorrow = c.getTime();
+                        String pattern = "dd/MM/YYYY";
+                        SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                        String nextdate = simpleDateFormatpp.format(tomorrow);
+                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0],nextdate, Integer.parseInt(id));
+                    }
+                    else{
+                        alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                    }
+                        
+                         
                             int listLen = alllistPunch.size();
                             boolean isMisPunch;
                             if(listLen % 2 == 0)
@@ -3630,6 +3685,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 String []outTime1val;
                                 String outTime1val1;
                                 String inTime1val1;
+                                LocalDateTime dateTime1 = null;
+                                LocalDateTime dateTime2 = null;
                                 long timecount = 0;
                                 int cnt =0;
                             for (Object o : alllistPunch) {
@@ -3642,8 +3699,11 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     inTime1val = inTime1.split(" ");
                                     inTime1val1 = inTime1val[1];
                                     try {
-                                        d1 = format1.parse(inTime1val1);
-//                                        d2 = format.parse(dateStop);
+                                         Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1); 
+                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+                                         String strDate = dateFormat.format(datesif); 
+                                        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                        dateTime1= LocalDateTime.parse(strDate, formatter1);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }    
@@ -3656,22 +3716,35 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     inBool = true;
                                     outBool = false;
                                      try {
-                                        d2 = format1.parse(outTime1val1);
-//                                        d2 = format.parse(dateStop);
+                                         Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1); 
+                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+                                         String strDate = dateFormat.format(datesiff); 
+                                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                         dateTime2= LocalDateTime.parse(strDate, formatter1);
+
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }    
-                                    long difff = d2.getTime() - d1.getTime();        
-                                    long diffMinutes = difff / (60 * 1000);  
+                                    long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
+                                    long diffMinutes = diffInMilli / (60 * 1000);
                                     timecount += diffMinutes;
-                                    
                                 }
                             }
+                            
+                            if(secondHalf.contains("General")){
                             if(timecount > 270 && timecount >= 510){
                                 secondHalfList.add("PR");
                             }else{
                                 secondHalfList.add("AB");
                             }
+                        }else{
+                            if(timecount > 210 && timecount >= 450){
+                                secondHalfList.add("PR");
+                            }else{
+                                secondHalfList.add("AB");
+                            }
+                        }
+                            
                         
                         
                         
@@ -4037,7 +4110,21 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                             totalDayTime = totalDayTime + totalDayTime1 + ARTime;
                             
-                            List alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                           List alllistPunch = new ArrayList();
+                    if(secondHalf.contains("Night")){
+                        Calendar c = Calendar.getInstance();
+                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));  
+                        c.setTime(datenex);
+                        c.add(Calendar.DAY_OF_YEAR, 1); 
+                        Date tomorrow = c.getTime();
+                        String pattern = "dd/MM/YYYY";
+                        SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                        String nextdate = simpleDateFormatpp.format(tomorrow);
+                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0],nextdate, Integer.parseInt(id));
+                    }
+                    else{
+                        alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                    }
                             int listLen = alllistPunch.size();
                             boolean isMisPunch;
                             if(listLen % 2 == 0)
@@ -4057,6 +4144,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 String []outTime1val;
                                 String outTime1val1;
                                 String inTime1val1;
+                                LocalDateTime dateTime1 = null;
+                                LocalDateTime dateTime2 = null;
                                 long timecount = 0;
                                 int cnt =0;
                             for (Object o : alllistPunch) {
@@ -4069,8 +4158,11 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     inTime1val = inTime1.split(" ");
                                     inTime1val1 = inTime1val[1];
                                     try {
-                                        d1 = format.parse(inTime1val1);
-//                                        d2 = format.parse(dateStop);
+                                         Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1); 
+                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+                                         String strDate = dateFormat.format(datesif); 
+                                        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                        dateTime1= LocalDateTime.parse(strDate, formatter1);
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }    
@@ -4083,15 +4175,18 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     inBool = true;
                                     outBool = false;
                                      try {
-                                        d2 = format.parse(outTime1val1);
-//                                        d2 = format.parse(dateStop);
+                                         Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1); 
+                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+                                         String strDate = dateFormat.format(datesiff); 
+                                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                         dateTime2= LocalDateTime.parse(strDate, formatter1);
+
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }    
-                                    long difff = d2.getTime() - d1.getTime();        
-                                    long diffMinutes = difff / (60 * 1000);  
+                                    long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
+                                    long diffMinutes = diffInMilli / (60 * 1000);
                                     timecount += diffMinutes;
-                                    
                                 }
                             }
                             
@@ -5519,13 +5614,34 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         ModelAndView mv = new ModelAndView();
         String date = request.getParameter("date");
         String empId = request.getParameter("id");
-        List<?> punchList = employeeDatetimeDataService.readPuchDataDateWise(date, Integer.parseInt(empId));
+        List punchList = new ArrayList();
+        List allpunchList = new ArrayList();
+        String punchdetails2 = request.getParameter("shiftname");
+        if(punchdetails2.contains("Night") && punchdetails2 != null){
+                        Calendar c = Calendar.getInstance(); 
+                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date));  
+                        c.setTime(datenex);
+                        c.add(Calendar.DAY_OF_YEAR, 1); 
+                        Date tomorrow = c.getTime();
+                        String pattern = "dd/MM/YYYY";
+                        SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                        String nextdate = simpleDateFormatpp.format(tomorrow);
+                        punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date,nextdate, Integer.parseInt(empId));
+        }else{
+            punchList = employeeDatetimeDataService.readAllPuchDataDateWise(date, Integer.parseInt(empId));
+        }
+
         if (punchList.isEmpty()) {
             List<?> MobPunchList = employeePunchForMobileAppService.readPuchDataDateWise(date, Integer.parseInt(empId));
             mv.getModelMap().put("punchList", MobPunchList);
         } else {
-            mv.getModelMap().put("punchList", punchList);
-
+            
+            for(Object o:punchList){
+                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData)o;
+                allpunchList.add(employeeDatetimeData.getDateTime());
+//                allpunchList.add(employeeDatetimeData.getDeviceMaster().getId());
+            }
+            mv.getModelMap().put("punchList", allpunchList);
         }
         mv.setViewName("Shift/ShowIndividualPuchData");
 

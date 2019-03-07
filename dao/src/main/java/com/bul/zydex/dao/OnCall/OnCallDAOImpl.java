@@ -52,6 +52,17 @@ public class OnCallDAOImpl<T> extends GenericsDAOImpl<T> implements OnCallDAO<T>
 
         return getHibernateTemplate().find(query);
     }
+
+    @Override
+    public List<?> approvalmanagerWiseOnCallList(String startdate, Integer id) {
+        String query = "";
+        query += " select a"
+                + " From OnCall a "
+                + " Where a.userMasterId=" + id
+                + " and status = 3"
+                + " and DATE_FORMAT(STR_TO_DATE(a.fromDate,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + startdate + "','%d/%m/%Y'),'%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
     
     
 }

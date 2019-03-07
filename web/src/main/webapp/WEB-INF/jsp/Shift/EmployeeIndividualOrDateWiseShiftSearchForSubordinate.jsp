@@ -32,8 +32,18 @@
         }
     </script>
     <script>
-        function showPunchData(date, id) {
-            var path = 'attendanceRegularizationMaster.htm?act=showDateWisePunchDataOfSubordinate&date=' + date + '&id=' + id;
+        function showPunchData(id,date,punchshift) {
+//            alert(punchshift);
+            var array = punchshift.split("#");
+            var datetime = array[0];
+//            alert(datetime);
+            var shiftname = array[1];
+            var arraya = shiftname.split("$");
+            var shiftname1 = arraya[0];
+//            alert(arraya[0]);
+//            alert(array[0]);
+//            alert(array[1]);
+            var path = 'attendanceRegularizationMaster.htm?act=showDateWisePunchDataOfSubordinate&id='+id+'&date='+date+'&shiftname='+shiftname1;
             popupWindow = window.open(path, 'popUpWindow', 'height=300,width=500,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')
 
 //             window.location = 'attendanceRegularizationMaster.htm?act=showDateWisePunchData&date=' + date;
@@ -158,6 +168,7 @@
                                                                     <tr>
                                                                         <th>Shift Name</th>
                                                                             <c:forEach var="list" items="${map[employeeMasterList[48]]}">
+                                                                            
                                                                                 <c:if test="${fn:contains(list[1], ' # ')}">
                                                                                     <c:set var="string1" value="${fn:split(list[1], '#')}"/>
                                                                                     <c:set var="string1" value="${fn:split(string1[1], '$')}"/>
@@ -273,7 +284,7 @@
                                                                             <c:forEach var="list" items="${map[employeeMasterList[48]]}">
 
                                                                             <%--<c:set var="string5" value="${fn:join(list[1], 'To ')}"/>--%>
-
+<!--<input type="text" value="${list[1]}">-->
                                                                             <c:if test="${fn:contains(list[1], '!')}">
                                                                                 <c:set var="string2" value="${fn:split(list[1], '`')}"/>
                                                                                 <c:set var="string2" value="${fn:split(string2[1], '!')}"/>
@@ -281,6 +292,8 @@
                                                                                 <c:set var="string5" value="${fn:split(string4[1], '@')}"/>
                                                                                 <fmt:parseDate value="${string5[0]}" var="lout" pattern="HH:mm" />
                                                                                 <fmt:parseDate value="${string2[0]}" var="fin" pattern="HH:mm" />
+<!--                                                                    <input type="text" value="${string5[0]}">
+                                                                    <input type="text" value="${string2[0]}">-->
                                                                                 <c:choose>
                                                                                     <c:when test="${lout eq fin}">
                                                                                         <th style="text-align: center;">-</th>
@@ -428,8 +441,8 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <th>View All Punch</th>
-                                                                            <c:forEach var="list" items="${map[employeeMasterList[48]]}">
-                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}', '${employeeMasterList[48]}');">View</a>
+                                                                            <c:forEach var="listnn" items="${map[employeeMasterList[48]]}">
+                                                                            <th style="text-align: center;"><a onclick="showPunchData('${employeeMasterList[48]}','${listnn[0]}','${listnn[1]}');">View</a>
                                                                             </th>
 
                                                                         </c:forEach>
@@ -490,7 +503,7 @@
                                                                             <c:if test="${lwp ne 0}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">LWP</th>
                                                                             </c:if>
-                                                                            <c:if test="${countLateEntry ge 1}">
+                                                                            <c:if test="${countLateEntry gt 2}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Penalty Hours</th>
                                                                             </c:if>
                                                                             <c:if test="${!empty totalPaidOverTime}">
@@ -547,9 +560,9 @@
                                                                             <c:if test="${lwp ne 0}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${lwp}</th>
                                                                             </c:if>
-                                                                            <c:if test="${!empty totalPenaltyHours && countLateEntry ge 1}">
+                                                                            <c:if test="${!empty totalPenaltyHours && countLateEntry gt 2}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalPenaltyHours}</th>
-                                                                            </c:if> totalPaidOverTime 
+                                                                            </c:if>
                                                                             <c:if test="${!empty totalPaidOverTime}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalPaidOverTime}</th>
                                                                             </c:if>  

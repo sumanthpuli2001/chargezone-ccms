@@ -47,8 +47,8 @@
                                                         <tbody>
                                                             <c:forEach var="list" items="${punchList}">
                                                             <tr>
-                                                                <td>${list[0]}</td>
-                                                                <td>${list[1]}</td>
+                                                                <td>${list}</td>
+
                                                             </tr>
                                                             </c:forEach>
                                                              </tbody>

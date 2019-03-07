@@ -22,6 +22,8 @@ import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.EmployeeTypeWiseSalary;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.OTRegularization;
+import com.bul.zydex.model.OnCall;
 import com.bul.zydex.model.PayrollAdditionalAmount;
 import com.bul.zydex.model.PayrollBonus;
 import com.bul.zydex.model.PayrollDeduction;
@@ -45,10 +47,12 @@ import com.bul.zydex.model.PayrollTaxDeductionMaster;
 import com.bul.zydex.model.PayrollTaxRateMaster;
 import com.bul.zydex.model.PolicyMaster;
 import com.bul.zydex.model.RetirementAge;
+import com.bul.zydex.model.ShiftMaster;
 import com.bul.zydex.model.TaxDeductionDecarationSubmit;
 import com.bul.zydex.model.TaxSavingSubmit;
 import com.bul.zydex.service.EmployeeCtcDetailSalary.EmployeeCtcDetailSalaryService;
 import com.bul.zydex.service.EmployeePolicyDetail.EmployeePolicyDetailService;
+import com.bul.zydex.service.OnCall.OnCallService;
 import com.bul.zydex.service.Payroll.AdditionalAmountCheckService;
 import com.bul.zydex.service.Payroll.EmployeeAdditionalSalaryService;
 import com.bul.zydex.service.Payroll.EmployeeDeductionAmountService;
@@ -79,6 +83,7 @@ import com.bul.zydex.service.Payroll.PayrollTaxRateMasterService;
 import com.bul.zydex.service.Payroll.RetirementAgeService;
 import com.bul.zydex.service.Payroll.TaxDeductionDecarationSubmitService;
 import com.bul.zydex.service.Payroll.TaxSavingSubmitService;
+import com.bul.zydex.service.attendanceRegularization.OTRegularizationService;
 import com.bul.zydex.service.company.CompanyMasterService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
@@ -88,6 +93,7 @@ import com.bul.zydex.service.policy.EmployeeCtcDetailService;
 import com.bul.zydex.service.policy.PolicyMasterService;
 import com.bul.zydex.service.shift.EmployeeDatetimeDataService;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
+import com.bul.zydex.service.shift.ShiftMasterService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -141,6 +147,9 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected EmployeeDatetimeDataService<EmployeeDatetimeData> employeeDatetimeDataService;
     protected CompanyMasterService<Company> companyMasterService;
     protected LocationMasterService<LocationMaster> locationMasterService;
+    protected OTRegularizationService<OTRegularization> oTRegularizationService;
+    protected ShiftMasterService<ShiftMaster> shiftMasterService;
+    protected OnCallService<OnCall> OnCallService;  
 
     Validator employeeSalaryProcessValidator;
 
@@ -463,6 +472,34 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     public void setRetirementAgeService(RetirementAgeService<RetirementAge> retirementAgeService) {
         this.retirementAgeService = retirementAgeService;
     }
+
+    public OTRegularizationService<OTRegularization> getoTRegularizationService() {
+        return oTRegularizationService;
+    }
+
+    public void setoTRegularizationService(OTRegularizationService<OTRegularization> oTRegularizationService) {
+        this.oTRegularizationService = oTRegularizationService;
+    }
+
+    public ShiftMasterService<ShiftMaster> getShiftMasterService() {
+        return shiftMasterService;
+    }
+
+    public void setShiftMasterService(ShiftMasterService<ShiftMaster> shiftMasterService) {
+        this.shiftMasterService = shiftMasterService;
+    }
+
+    public OnCallService<OnCall> getOnCallService() {
+        return OnCallService;
+    }
+
+    public void setOnCallService(OnCallService<OnCall> OnCallService) {
+        this.OnCallService = OnCallService;
+    }
+    
+    
+    
+    
 
     protected void EmployeeTypeList(HttpServletRequest request) {
         List<?> EmployeeTypeList = employeeTypeService.read();

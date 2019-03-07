@@ -305,9 +305,7 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " left join a.deviceMaster b"
                 + " left join b.zydexLocationMaster c"
                 + " where a.employeeMaster.id = " + id
-                + " and DATE_FORMAT(STR_TO_DATE(a.dateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + tdate + "','%d/%m/%Y'),'%d/%m/%Y') "
-                + " GROUP BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i')"
-                + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
+                + " and DATE_FORMAT(STR_TO_DATE(a.dateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + tdate + "','%d/%m/%Y'),'%d/%m/%Y')";
         return getHibernateTemplate().find(query);
     }
 
@@ -322,6 +320,20 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " and DATE_FORMAT(STR_TO_DATE(a.dateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + startDate + "','%d/%m/%Y'),'%d/%m/%Y') "
                 + " GROUP BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i')"
                 + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List readAllNightShiftPuchDataDateWise(String startdate, String nextdate, int id) {
+        String query = "";
+        query += " select a"
+                + " From EmployeeDatetimeData a "
+                + " left join a.deviceMaster b"
+                + " left join b.zydexLocationMaster c"
+                + " where employee_master_id = " + id 
+                + " and (DATE_FORMAT(STR_TO_DATE(a.dateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('"+ startdate +"','%d/%m/%Y'),'%d/%m/%Y')"
+                + " or"
+                + " DATE_FORMAT(STR_TO_DATE(a.dateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('"+ nextdate +"','%d/%m/%Y'),'%d/%m/%Y'))";
         return getHibernateTemplate().find(query);
     }
 

@@ -19,5 +19,7 @@ public interface OnCallDAO<T> extends GenericsDAO<T> {
     public List<?> userReportingManager(int id);
 
     public List<?> approvalmanagerWiseOnCallList(int id);
+
+    public List<?> approvalmanagerWiseOnCallList(String startdate, Integer id);
     
 }

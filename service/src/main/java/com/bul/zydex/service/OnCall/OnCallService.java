@@ -19,5 +19,7 @@ public interface OnCallService<T> extends GenericsService<T> {
     public List<?> userReportingManager(int id);
 
     public List<?> approvalmanagerWiseOnCallList(int id);
+
+    public List<?> readOnCallRequestDateAndIdWise(String startdate, Integer id);
     
 }

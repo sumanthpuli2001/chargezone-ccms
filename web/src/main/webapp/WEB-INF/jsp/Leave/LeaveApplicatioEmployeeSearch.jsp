@@ -49,10 +49,7 @@
                                                         <label>Employee Name:</label>
                                                         <input type="text" id="employeeMasterId" name="employeeMasterId" class="form-control">
                                                     </div>
-
                                                 </div>
-
-
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div>

@@ -28,4 +28,6 @@ public interface EmployeeLeaveBalanceService<T> extends GenericsService<T> {
 
     public List<?> readByLeave(Integer empId, int leaveId);
 
+    public List<?> readByEmpId1(Integer id, Float empNoOfDays,Integer leaveType);
+
 }

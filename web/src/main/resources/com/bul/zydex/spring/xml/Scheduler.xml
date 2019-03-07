@@ -93,7 +93,7 @@
     <!--
 
     -->
-    <!--    <bean id="carryForwardLeave"
+<!--        <bean id="carryForwardLeave"
               class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
             <property name="targetObject" ref="leaveEmployeeDetailController1" />
             <property name="targetMethod" value="yearlyLeaveCountScheduler" />
@@ -102,8 +102,8 @@
               class="org.springframework.scheduling.quartz.CronTriggerBean">
             <property name="jobDetail" ref="carryForwardLeave" />
             <property name="cronExpression" value="0 59 23 31 12 ? *" />
-        </bean>
-    -->
+        </bean>-->
+    
 <!--  <bean id="deviceId"
               class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
             <property name="targetObject" ref="deviceMasterController1" />
@@ -239,7 +239,7 @@
                 <!--<ref bean="dailyTimeEntryId" />-->
                 <!--<ref bean="overTimeEntryId" />-->
                 <!--<ref bean="birthdaywishId" />-->
-                <!--                <ref bean="carryForwardLeave" />-->
+                    <!--<ref bean="carryForwardLeave" />-->
                 <!--<ref bean="deviceId" />-->
                 <!--<ref bean="coffDeleteId" />-->
                 <!--<ref bean="shortLeveId" />-->
@@ -261,7 +261,7 @@
                 <!--<ref bean="cronTrigger1" />-->
                 <!--<ref bean="cronTrigger2" />-->
                 <!--<ref bean="cronTrigger16" />-->
-                <!--                <ref bean="cronTrigger4" />-->
+                    <!--<ref bean="cronTrigger4" />-->
                 <!--<ref bean="cronTrigger5" />-->
                 <!--<ref bean="cronTrigger6" />-->
                 <!--<ref bean="cronTrigger7" />-->

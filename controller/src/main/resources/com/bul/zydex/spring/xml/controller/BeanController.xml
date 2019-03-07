@@ -247,6 +247,8 @@
         <property name="userRightMasterService" ref="userRightMasterService1" />
         <property name="leaveEmployeeDetailsApprovalHistoryService" ref="leaveEmployeeDetailsApprovalHistoryService1" />
         <property name="shiftGenerateMonthlyScheduleService" ref="shiftGenerateMonthlyScheduleService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
+        <property name="employeeTypeService" ref="employeeTypeService1" />
     </bean>
     <bean id="employeeLeaveBalanceController1" class="com.bul.zydex.controller.leave.EmployeeLeaveBalanceController" parent="controllerConfig" >
         <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />

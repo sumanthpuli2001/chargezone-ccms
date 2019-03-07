@@ -103,4 +103,17 @@ public class EmployeeLeaveBalanceDAOImpl<T> extends GenericsDAOImpl<T> implement
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readByEmpId1(Integer id, Float empNoOfDays,Integer leaveType) {
+        String query = "";
+
+        query += " Select b.leaveType, sum(a.noOfLeaveRemain+"+empNoOfDays+"), b.id"
+                + " FROM EmployeeLeaveBalance a"
+                + " LEFT JOIN a.leaveTypeMaster b"
+                + " WHERE a.employeeMaster = " + id
+                + " and a.leaveTypeMaster.id="+leaveType;
+
+        return getHibernateTemplate().find(query);
+    }
+
 }

@@ -28,6 +28,45 @@
             }
         }
     </script>
+    <script>
+        function selectsubtype(typeId) {
+
+            var empSubTypeId = document.getElementById("subTypeId").value;
+//            document.getElementById('EmployeeId').innerHTML = "Fetching ... .. .";
+            $.post("employeeMaster.htm?act=readEmpTypeAjax",
+                    {
+                        typeId: typeId,
+                        empSubTypeId: empSubTypeId
+                    }, function (responseTxt, statusTxt, xhr) {
+                if (statusTxt === "success") {
+                    ("responseTxt" + responseTxt);
+//                    alert(responseTxt);
+                    document.getElementById('employeeSubTypeId').innerHTML = responseTxt;
+                }
+                if (statusTxt === "error")
+                    ("Error: " + xhr.status + ": " + xhr.statusText);
+            });
+        }
+
+        $(document).ready(function () {
+            var empTypeId = document.getElementById("employeeTypeMaster.id").value;
+            selectsubtype(empTypeId);
+        });
+    </script>
+    <script>
+        function showDiv(element)
+        {
+            if (element == 7)
+            {
+                document.getElementById("uAsSickId").style.display = 'block';
+            }
+            else
+            {
+                document.getElementById("uAsSickId").style.display = 'none';
+            }
+        }
+
+    </script>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -46,7 +85,7 @@
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form class="form-horizontal" role="form" action="leaveEmployeeDetail.htm?act=searchEmpLeaveDetailSubmit" commandName="employeeMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
+        <form:form class="form-horizontal" role="form" action="leaveEmployeeDetail.htm?act=searchEmpLeaveDetailSubmit" commandName="employeeMaster" enctype="multipart/form-data"  method="post" name='form' onsubmit='return saveSubmit11();'>
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -57,11 +96,10 @@
                                 <!--form horizontal starts here-->
 
                                 <div class="box-header">
-
                                 </div>
                                 <div class="box-body no-padding">
                                     <div class="row">
-                                        <div class="col-md-12 col-sm-12">
+                                        <div class="col-md-12 col-sm-12">                                          
                                             <div class="form-group">
                                                 <div class="col-sm-6"><span style="color: red;font-size: 12px;"></span>
                                                     <label>Employee Name:<span style="color: red;font-size: 12px;"></span></label>
@@ -91,7 +129,7 @@
 
                                                     <div class="col-sm-6">
                                                         <label>Leave Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                        <select name="leaveType" id="leaveType" class="form-control">
+                                                        <select name="leaveType" id="leaveType" onchange="showDiv(this.value);" class="form-control">
                                                             <option value="">--Select--</option>
                                                         <c:forEach var="map" items="${leaveTypemap11}">
                                                             <option value="${map.key}">${map.value}</option>
@@ -99,7 +137,35 @@
                                                     </select>
                                                 </div>
                                             </div>
-
+                                            <div id="uAsSickId" style="display: none;margin-left: 2px;">
+                                                <div class="form-group">
+                                                    <div class="col-sm-12">
+                                                        <label>Use As a Sick Leave:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <fieldset id="group1">
+                                                            <input type="radio" name="useAsSickLeave" value="1" > Yes
+                                                            <input type="radio" name="useAsSickLeave" value="0" checked> No
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label>Team:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <select name="employeeTypeMaster" id="employeeTypeMaster" onchange="selectsubtype(this.value);" class="form-control">
+                                                        <option value="">--Select--</option>
+                                                        <c:forEach var="map" items="${EmployeeTypeList}">
+                                                            <option value="${map.key}">${map.value}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-6" id="employeeSubTypeId">
+                                                    <label>Sub-Team:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
+                                                    <select name="employeeSubType" id="employeeSubType" class="form-control">
+                                                        <option value="" label="-- Select --" ></option> 
+                                                    </select>
+                                                </div>    
+                                            </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Start Date:<span style="color: red;font-size: 12px;"></span></label>
@@ -154,7 +220,7 @@
                                             <div class="table table-bordered">
                                                 <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
                                                     <c:choose>
-                                                        <c:when test="${empty list}">
+                                                        <c:when test="${empty list11}">
                                                             <tr>
                                                                 <td align="center">
                                                                     <c:out value="There is no record found."></c:out>
@@ -168,7 +234,10 @@
                                                                     <th>Employee Name</th>
                                                                     <th>Department</th>
                                                                     <th>Designation</th>
+                                                                    <th>Team</th>
+                                                                    <th>Sub Team</th>
                                                                     <th>Leave Type</th>
+                                                                    <th>Use As Sick Leave</th>
                                                                     <th>Start Date</th>
                                                                     <th>End Date</th>
                                                                     <th>Date of Submission</th>
@@ -179,33 +248,36 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                     <tbody>
-                                                        <c:forEach var="list" items="${list11}">
+                                                        <c:forEach var="list11" items="${list11}">
                                                             <tr>
-                                                                <td>${list[0]}</td>
-                                                                <td>${list[1]}</td>
-                                                                <td>${list[2]}</td>
-                                                                <td>${list[3]}</td>
-                                                                <td>${list[4]}</td>
-                                                                <td>${list[5]}</td>
-                                                                <td>${list[6]}</td>
-                                                                <td>${list[9]}</td>
-                                                                <td>${list[8]}</td>
-                                                                <c:if test="${list[7] eq 0}">
+                                                                <td>${list11[0]}</td>
+                                                                <td>${list11[1]}</td>
+                                                                <td>${list11[2]}</td>
+                                                                <td>${list11[3]}</td>
+                                                                <td>${list11[10]}</td>
+                                                                <td>${list11[11]}</td>
+                                                                <td>${list11[4]}</td>
+                                                                <td>${list11[12]}</td>
+                                                                <td>${list11[5]}</td>
+                                                                <td>${list11[6]}</td>
+                                                                <td>${list11[9]}</td>
+                                                                <td>${list11[8]}</td>
+                                                                <c:if test="${list11[7] eq 0}">
                                                                     <td><span class="badge">Pending</span></td>
                                                                 </c:if>
-                                                                <c:if test="${list[7] eq 3}">
+                                                                <c:if test="${list11[7] eq 3}">
                                                                     <td><span class="label label-success">Approved</span></td>
                                                                 </c:if>
-                                                                <c:if test="${list[7] eq 2}">
+                                                                <c:if test="${list11[7] eq 2}">
                                                                     <td> <span class="label label-danger">Rejected</span></td>
                                                                 </c:if>
-                                                                <c:if test="${list[7] eq 1}">
+                                                                <c:if test="${list11[7] eq 1}">
                                                                     <td><span class="label label-warning">Reworked</span></td>
                                                                 </c:if>
-                                                                <c:if test="${list[7] eq 4}">
+                                                                <c:if test="${list11[7] eq 4}">
                                                                     <td><span class="label label-info">WithDraw Request</span></td>
                                                                 </c:if>
-                                                                <c:if test="${list[7] eq 5}">
+                                                                <c:if test="${list11[7] eq 5}">
                                                                     <td><span class="label label-info">WithDrawn</span></td>
                                                                 </c:if>
 
@@ -228,7 +300,17 @@
 
         </form:form>
     </div>
-
+    <script>
+        jQuery.noConflict();
+        jQuery(document).ready(function () {
+            jQuery("#employeeName").tokenInput(${list}, {
+                preventDuplicates: true,
+                noResultsText: "No Result",
+                tokenLimit: "1",
+                searchingText: "Searching ... .. .",
+            });
+        });
+    </script>
     <script type="text/javascript">
         $('.form_datetime').datetimepicker({
             //language:  'fr',
@@ -240,19 +322,6 @@
             minView: 2,
             forceParse: 0
         });
-    </script>
-
-    <script>
-        jQuery.noConflict();
-        jQuery(document).ready(function () {
-            jQuery("#employeeName").tokenInput(${list}, {
-                preventDuplicates: true,
-                noResultsText: "No Result",
-                tokenLimit: "1",
-                searchingText: "Searching ... .. .",
-            });
-        });
-
     </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>

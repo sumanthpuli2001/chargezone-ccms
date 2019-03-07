@@ -28,6 +28,12 @@ public class LeaveEmployeeDetailValidator implements Validator {
                 "field.error1", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "leaveTypeMaster",
                 "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startDate",
+                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "endDate",
+                "field.error1", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "noOfDays",
+                "field.error1", "None");
       
     }
 

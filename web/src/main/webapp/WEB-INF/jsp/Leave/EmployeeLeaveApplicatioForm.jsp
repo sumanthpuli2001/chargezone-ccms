@@ -195,14 +195,14 @@
 //                }
 //            }
 //alert("flag3"+flag3);
-                if (flag3) {
-                flag3 = false;
-                        document.getElementById('saveSubmit1').innerHTML = 'Saving ... .. .';
-                        document.form1.submit();
-                        return true;
-                } else {
-                return false;
-                }
+//                if (flag3) {
+//                flag3 = false;
+//                        document.getElementById('saveSubmit1').innerHTML = 'Saving ... .. .';
+//                        document.form1.submit();
+//                        return true;
+//                } else {
+//                return false;
+//                }
                 }
 
         $(function () {
@@ -264,21 +264,21 @@
                 $("#leaveStartDate_SelectFullOrHalfId option[value='Fullday']").show();
                         $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
                         $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
-                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
-                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").show();
                 } else if (leaveEndDate == "") {
                 $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").show();
-                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
                         $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
-                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
-                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").show();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").show();
                 }
                 else {
                 $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").show();
-                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
                         $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
                         $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
-                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").show();
                 }
                 } else {
                 if (leaveEndDate == leaveStartDate) {
@@ -1493,6 +1493,7 @@
                                                     <div class="col-sm-4">
                                                         <input type="Text"  class="form-control" value="${employeeMaster[0]}" readonly>
                                                         <input type="hidden" name="employeeId" id="employeeId"  value="${employeeMaster[0]}" readonly>
+                                                        <input type="hidden" name="employeeMasterId" id="employeeMasterId"  value="${employeeMaster[12]}" readonly>
                                                     </div>
                                                     <div class="col-sm-2">
                                                         <label>Employee Name:</label>

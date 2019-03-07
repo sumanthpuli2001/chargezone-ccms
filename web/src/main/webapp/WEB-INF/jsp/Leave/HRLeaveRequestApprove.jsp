@@ -447,7 +447,7 @@
                                 </div>
 
                                 
-                                <c:if test="${list[0][7] eq 3}">
+                                <c:if test="${list[0][7] eq 3 || list[0][7] eq 0 || list[0][7] eq 8}">
                                     <div class="form-group">
                                         <div class="col-sm-4" style="text-align: left">
                                             <button type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-success" style="width: 100px" data-original-title="" title="" value="approve">APPROVE</button>

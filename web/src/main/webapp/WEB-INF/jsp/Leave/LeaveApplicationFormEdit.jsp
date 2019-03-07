@@ -66,8 +66,7 @@
     </head>
     <script>
 
-
-
+        
         var flag3 = true;
         var flagco = true;
         function saveSubmit11() {
@@ -239,7 +238,7 @@
         function leaveSetting() {
             var leaveStartDate = document.getElementById("startDate").value;
             var leaveStartDate_SelectFullOrHalf = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
-            //            alert("flagco" + flagco);
+//                        alert("flagco" + flagco);
 
             if (flagco) {
                 if (document.getElementById("startDate").value !== '' && document.getElementById("endDate").value == '') {
@@ -327,10 +326,10 @@
                         $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").show();
                     } else {
                         $("#leaveEndDate_SelectFullOrHalfId option[value='Fullday']").show();
-                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
+                        $("#leaveEndDate_SelectFullOrHalfId option[value='FirstHalf']").show();
                         $("#leaveEndDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
                         $("#leaveStartDate_SelectFullOrHalfId option[value='FirstHalf']").hide();
-                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").hide();
+                        $("#leaveStartDate_SelectFullOrHalfId option[value='SecondHalf']").show();
                     }
 
                 }
@@ -426,7 +425,6 @@
             }
             calculateDayByAjax();
         }
-
         function daysCount() {
             var skillsSelect = document.getElementById("leaveTypeMaster.id");
             var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
@@ -465,6 +463,7 @@
                 leaveEndDate = new Date(leaveEndDate[2], leaveEndDate[1], leaveEndDate[0]);
                 var leaveDays = ((leaveEndDate - leaveStartDate) / (1000 * 60 * 60 * 24)) + 1;
                 var leaveDays1 = document.getElementById("hiddenDays").value;
+//                alert("selected="+leaveDays1);
                 var strUser;
                 var strUser1;
                 var leaveTypes = document.getElementById("leaveTypeMaster.id");
@@ -474,6 +473,7 @@
                 var strUser2 = strUser1[1];
                 strUser2 = strUser2.split(')');
                 var leaveBalance = strUser2[0];
+//                alert("Actual Balance"+leaveBalance);
                 if (leaveBalance != 0) {
 
 
@@ -527,17 +527,17 @@
                                 }
                                 if (strUser == "Privilege Leave") {
                                     if (document.getElementById('Sick Leave1').innerHTML > 0) {
-                                        if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                            $("#plDiv").show();
-                                            setTimeout(function () {
-                                                $("#plDiv").fadeOut();
-                                            }, 5000);
-                                            document.getElementById("noOfDays").value = "";
-                                            document.getElementById("startDate").value = "";
-                                            document.getElementById("endDate").value = "";
-                                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                        }
+//                                        if (parseFloat(document.getElementById("noOfDays").value) < 3) {
+//                                            $("#plDiv").show();
+//                                            setTimeout(function () {
+//                                                $("#plDiv").fadeOut();
+//                                            }, 5000);
+//                                            document.getElementById("noOfDays").value = "";
+//                                            document.getElementById("startDate").value = "";
+//                                            document.getElementById("endDate").value = "";
+//                                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+//                                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+//                                        }
 
                                     }
                                     document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
@@ -591,7 +591,9 @@
                                 } else {
 
                                     if (parseFloat(document.getElementById(strUser).innerHTML) > parseFloat(document.getElementById(strUser + "1").innerHTML)) {
-                                        $("#balanceDiv").show();
+//                                    alert(parseFloat(document.getElementById(strUser).value))
+//                                    alert(parseFloat(document.getElementById(strUser+"1").value))
+                                    $("#balanceDiv").show();
                                         setTimeout(function () {
                                             $("#balanceDiv").fadeOut();
                                         }, 5000);
@@ -872,17 +874,17 @@
                                 }
                                 if (strUser == "Privilege Leave") {
                                     if (document.getElementById('Sick Leave1').innerHTML > 0) {
-                                        if (parseFloat(document.getElementById("noOfDays").value) < 3) {
-                                            $("#plDiv").show();
-                                            setTimeout(function () {
-                                                $("#plDiv").fadeOut();
-                                            }, 5000);
-                                            document.getElementById("noOfDays").value = "";
-                                            document.getElementById("startDate").value = "";
-                                            document.getElementById("endDate").value = "";
-                                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                        }
+//                                        if (parseFloat(document.getElementById("noOfDays").value) < 3) {
+//                                            $("#plDiv").show();
+//                                            setTimeout(function () {
+//                                                $("#plDiv").fadeOut();
+//                                            }, 5000);
+//                                            document.getElementById("noOfDays").value = "";
+//                                            document.getElementById("startDate").value = "";
+//                                            document.getElementById("endDate").value = "";
+//                                            document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+//                                            document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+//                                        }
 
                                     }
                                     document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
@@ -1384,6 +1386,7 @@
                 var eDateStatus = document.getElementById("leaveEndDate_SelectFullOrHalfId").value;
                 var leaveTypeMaster = document.getElementById("leaveTypeMaster.id").value;
                 var useSickLeave = $("input[name='useAsSickLeave']:checked").val();
+                var employeeId = document.getElementById("employeeId").value;
                 if (strDate != '') {
                     $.ajax({
                         type: "POST",
@@ -1426,11 +1429,12 @@
                     //                    alert("sDateStatus" + sDateStatus);
                     $.ajax({
                         type: "POST",
-                        url: "leaveEmployeeDetail.htm?act=getActualDayByAjax1&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus + "&leaveType=" + leaveTypeMaster + "&useSickLeave=" + useSickLeave,
+                        url: "leaveEmployeeDetail.htm?act=getActualDayByAjax1&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus + "&leaveType=" + leaveTypeMaster + "&useSickLeave=" + useSickLeave+"&employeeId="+employeeId,
                         data: {},
                         dataType: "text",
                         success: function (responseTxt) {
                             document.getElementById("hiddenDays").value = responseTxt;
+                            
 //                var curbal = document.getElementById("Casual Leave1").value;
 //                var usebal = responseTxt;
 //                alert("kk"+usebal);
@@ -1587,6 +1591,7 @@
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <input type="Text" class="form-control" value="${employeeMaster[0]}" readonly>
+                                                        <input type="hidden" name="employeeId" id="employeeId"  value="${employeeMaster[0]}" readonly>
                                                     </div>
                                                     <div class="col-sm-2">
                                                         <label>Employee Name:</label>
@@ -1653,7 +1658,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-12">
                                                         <label>Leave Type:<span style="color: red;font-size: 12px;">* This Leave Balance is Available with addition of Number of Days Leave Apply </span></label>
-                                                        <form:select path="leaveTypeMaster.id" class="form-control" onchange="modelopenpopup(); leaveSetting(); daysCount(); calculateDayByAjax();getUseAsSickLevave(this.value);blankAllField();" style="pointer-events: none; cursor: default;">
+                                                        <form:select path="leaveTypeMaster.id" class="form-control" onchange="modelopenpopup();  daysCount(); leaveSetting(); calculateDayByAjax();getUseAsSickLevave(this.value); blankAllField();" style="pointer-events: none; cursor: default;" >
                                                             <%--<form:option value="" label="-- Select --" />--%>
                                                             <form:options items="${leaveTypemap}" />
                                                         </form:select>
@@ -1684,10 +1689,12 @@
                                                             <label>Leave Start Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <%--<form:input path="leaveStartDateId" class="form-control" size="16" type="text" value="" onchange="leaveSetting(); daysCount();" readonly="true"></form:input>--%>
-                                                                <form:input path="startDate" class="form-control" size="16" type="text" value="" onchange="checkStartDateFun();calculateDayByAjax();leaveSetting();leaveTypecheck();
-                                                                            daysCount();" readonly="true"></form:input>
+                                                                <form:input path="startDate" class="form-control" size="16" type="text" value="" onchange="checkStartDateFun(); leaveSetting(); leaveTypecheck(); daysCount(); calculateDayByAjax();" readonly="true"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
+                                                                <span id="startDateError" style="color: red;"></span>
+                                                                <span id="sDateHolidayError" style="color: red;"></span>
+                                                                <span id="presetErrorDiv" style="color: red;"></span>
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 <label></label>
@@ -1720,15 +1727,19 @@
                                                                     </c:otherwise>
                                                                 </c:choose>
                                                             </select>
+                                                                <span id="startDateSelectFullOrHalfError" style="color: red;"></span>
                                                         </div>
                                                         <div class=" col-sm-4">
                                                             <label>Leave End Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <%--<form:input id="leaveEndDateId" class="form-control" size="16" type="text" value="" onchange="leaveSetting(); daysCount();" readonly="true"></form:input>--%>
-                                                                <form:input path="endDate" class="form-control" size="16" type="text" value="" onchange="checkEndDateFun();calculateDayByAjax();leaveSetting();leaveTypecheck();
-                                                                            daysCount();" readonly="true"></form:input>
+                                                                <form:input path="endDate" class="form-control" size="16" type="text" value="" onchange="checkEndDateFun();leaveSetting();leaveTypecheck();daysCount();calculateDayByAjax();
+                                                                            " readonly="true"></form:input>
                                                                     <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 </div>
+                                                                <span id="endDateError" style="color: red;"></span>
+                                                                <span id="eDateHolidayError" style="color: red;"></span>
+                                                                <span id="endpresetErrorDiv" style="color: red;"></span>
                                                             </div>
                                                             <div class="col-sm-2">
                                                                 <label></label>
@@ -1763,14 +1774,16 @@
                                                                 <!--<option value="FirstHalf">First Half</option>-->
                                                                 <!--<option style="display: none" value="SecondHalf">Second Half</option>-->
                                                             </select>
+                                                                <span id="endDateSelectFullOrHalfError" style="color: red;"></span>
                                                         </div>
+                                                                
 
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
                                                             <label>Number Of Days:</label>
 
-
+                                                             
                                                             <%--<form:input path="leaveDays" type="number" class="form-control" readonly="true"></form:input>--%>
                                                             <!--<input value="${leaveEmployeeDetail.noOfDays}" type="number" class="form-control" readonly="true"/>-->
                                                             <form:input path="noOfDays" type="number" class="form-control" readonly="true"></form:input>
@@ -1782,7 +1795,7 @@
                                                         <div  id="paternityLeaveDiv" name="paternityLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Paternity Leave You Apply Max. 3 days.</div>
                                                         <div  id="leaveWithoutPayLeaveDiv" name="leaveWithoutPayLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Leave Without Pay Only Apply When All leave is not in balance. And Max OF 60 Days.</div>
                                                         <div  id="balanceDiv" name="balanceDiv" style="color: red; display: none; margin-left: 20px;">Please enter days less or equal current available Balance</div>
-                                                        <div  id="plDiv" name="plDiv" style="color: red; display: none; margin-left: 20px;">SL Balance is available so in that case u can't apply PL less than 3 Days</div>
+                                                        <!--<div  id="plDiv" name="plDiv" style="color: red; display: none; margin-left: 20px;">SL Balance is available so in that case u can't apply PL less than 3 Days</div>-->
                                                     </div>
                                                 </div>
                                                 <div id="shortLeave" style="display: none;">
@@ -1858,7 +1871,7 @@
                                 <!--Reason For Leave In Detail completes Here-->
                                 <div class="box box-info collapsed-box">
                                     <div class="box-header">
-                                        <h3 class="box-title">Leave Balance Sheet In Detail:</h3>
+                                        <h3 class="box-title">Leave Balance Sheet In Detail:</h3>${leaveTypeMaster.id}
                                         <div class="box-tools pull-right">
                                             <span id="spanId5">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun5()"><i class="fa fa-plus" id="minusId5"></i></button>
                                         </div>
@@ -1898,8 +1911,16 @@
                                                         </tr>
                                                         <tr>
                                                             <td>No. Of Leaves Applied In This Application</td>
+                                                            
                                                             <c:forEach var="remain" items="${listRemain}">
-                                                                <td id="${remain.key}">0</td>
+                                                                <c:choose>
+                                                                    <c:when test="${(remain.key eq leaveType)}">
+                                                                        <td id="${remain.key}">${leaveEmployeeDetail.noOfDays}</td>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                      <td id="${remain.key}">0</td>
+                                                                    </c:otherwise>
+                                                                  </c:choose>
                                                             </c:forEach>
 
                                                         </tr>
@@ -1907,7 +1928,14 @@
                                                             <th>Projected Balance After This Application Approval</th>
 
                                                             <c:forEach var="remain" items="${listRemain}">
-                                                                <th id="${remain.key}2">0</th>
+                                                                <c:choose>
+                                                                    <c:when test="${(remain.key eq leaveType)}">
+                                                                        <td id="${remain.key}2"><b>${remain.value - leaveEmployeeDetail.noOfDays}</b></td>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                            <th id="${remain.key}2"><b>${remain.value}</b></th>
+                                                                    </c:otherwise>
+                                                                  </c:choose>
 <!--                                                               <input type="text" id="${remain.key}2" value="">-->
                                                             </c:forEach>
                                                         </tr>

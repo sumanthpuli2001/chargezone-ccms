@@ -208,4 +208,69 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
         return shiftGenerateMonthlyScheduleDAO.readByEmpMonthYear(id);
     }
 
+    @Override
+    public List<?> getShiftsBetween(String data) {
+        return shiftGenerateMonthlyScheduleDAO.getShiftsBetween(data);
+    }
+
+    @Override
+    public List<?> getbeforesDate(String data) {
+        return shiftGenerateMonthlyScheduleDAO.getbeforesDate(data);
+    }
+
+    @Override
+    public List<?> getaftereDate(String data) {
+        return shiftGenerateMonthlyScheduleDAO.getaftereDate(data);
+    }
+
+    @Override
+    public List<?> getbeforesDate1(String data) {
+        return shiftGenerateMonthlyScheduleDAO.getbeforesDate1(data);
+    }
+
+    @Override
+    public List<?> getaftereDate1(String data) {
+        return shiftGenerateMonthlyScheduleDAO.getaftereDate1(data);
+    }
+
+    @Override
+    public List<?> getshiftsList(String data) {
+        return shiftGenerateMonthlyScheduleDAO.getshiftsList(data);
+    }
+
+    @Override
+    public List<?> getshiftsList1(String data) {
+        return shiftGenerateMonthlyScheduleDAO.getshiftsList1(data);
+    }
+
+    @Override
+    public String getBeforeDayList(String data) {
+        return shiftGenerateMonthlyScheduleDAO.getBeforeDayList(data);
+    }
+
+    @Override
+    public String getAfterDayList(String data) {
+        return shiftGenerateMonthlyScheduleDAO.getAfterDayList(data);
+    }
+
+    @Override
+    public List<?> getbeforeWoffDayList(String data1) {
+        return shiftGenerateMonthlyScheduleDAO.getbeforeWoffDayList(data1);
+    }
+
+    @Override
+    public List<?> getafterWoffDayList(String data1) {
+        return shiftGenerateMonthlyScheduleDAO.getafterWoffDayList(data1);
+    }
+
+    @Override
+    public List<?> getDayAfterOfstrDate(String data) {
+        return shiftGenerateMonthlyScheduleDAO.getDayAfterOfstrDate(data);
+    }
+
+    @Override
+    public List<?> getDayBeforeOfenDate(String data) {
+        return shiftGenerateMonthlyScheduleDAO.getDayBeforeOfenDate(data);
+    }
+
 }

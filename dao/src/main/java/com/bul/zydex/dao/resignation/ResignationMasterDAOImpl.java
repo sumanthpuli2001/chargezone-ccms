@@ -95,7 +95,7 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
     public List<?> readforHR(T object) {
         ResignationMaster resignationMaster = (ResignationMaster) object;
         String query = "";
-        query += " Select a.id,a.effectiveDatetime,a.status, b.id, b.employeeId,b.employeeName, a.attrition"
+        query += " Select a.id,a.effectiveDatetime,a.status, b.id, b.employeeId,b.employeeName, a.attrition,b.employeeTypeMaster.typeOfEmployee,b.employeeSubType.subType"
                 + " FROM ResignationMaster a"
                 + " left join a.employeeMaster b"
                 + " WHERE a.status in (2,7,10,4)"
@@ -299,6 +299,19 @@ public class ResignationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements R
         SQLQuery query = s.createSQLQuery(sqlString);
         List<?> list = query.list();
         s.close();
+        return list;
+    }
+
+    @Override
+    public List<?> readByApprovedEmpID(Integer id) {
+        String query = "";
+        query += "Select a"
+                + " FROM ResignationMaster a "
+                + " left join a.employeeMaster b "
+                + " WHERE b.id=" + id + " "
+                + " and a.status = 4";
+
+        List<?> list = getHibernateTemplate().find(query);
         return list;
     }
 }

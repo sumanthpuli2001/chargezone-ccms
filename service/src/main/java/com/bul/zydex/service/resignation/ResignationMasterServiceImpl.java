@@ -111,4 +111,9 @@ public class ResignationMasterServiceImpl<T> extends GenericsServiceImpl<T> impl
     public List<?> fetchBWdate(int empId, String eftDate, String relivDate) {
          return resignationMasterDAO.fetchBWdate(empId, eftDate, relivDate);
     }
+
+    @Override
+    public List<?> readByApprovedEmpID(Integer id) {
+       return resignationMasterDAO.readByApprovedEmpID(id);
+    }
 }

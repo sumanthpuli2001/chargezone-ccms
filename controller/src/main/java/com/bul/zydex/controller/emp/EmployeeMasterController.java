@@ -30,6 +30,7 @@ import com.bul.zydex.model.PayrollPfCheck;
 import com.bul.zydex.model.PayrollPtCheck;
 import com.bul.zydex.model.PmpFormStatusMaster;
 import com.bul.zydex.model.PolicyMaster;
+import com.bul.zydex.model.ResignationMaster;
 import com.bul.zydex.model.RotationMaster;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
 import com.bul.zydex.model.ShiftMaster;
@@ -39,6 +40,7 @@ import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.emp.EmployeeVisaDetailsService;
+import com.bul.zydex.service.resignation.ResignationMasterService;
 import com.bul.zydex.util.DownloadFile;
 import com.bul.zydex.validator.PasswordValidator;
 import com.google.gson.Gson;
@@ -2692,6 +2694,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         employeeMaster = employeeMasterService.readById(id);
         List<?> employeeMasterExtensionList = employeeMasterServiceExtension.readByemployeeId(employeeMaster.getId());
         List<?> employeeVisaDetailsList = employeeVisaDetailsService.readByemployeeId(employeeMaster.getId());
+        List<?> employeeresignationdetail = resignationMasterService.readByApprovedEmpID(employeeMaster.getId());
 
         ///this code is for read file name and display it
 //        String userName = readUserName(request);
@@ -2808,6 +2811,21 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             request.setAttribute("checkPf", checkPf);
             request.setAttribute("checkPt", checkPt);
         }
+        String officialdate="";
+        String physicaldate="";
+        if(!employeeresignationdetail.isEmpty()){
+            ResignationMaster resignationMaster = (ResignationMaster)employeeresignationdetail.get(0);
+            officialdate = resignationMaster.getRelievingDate();
+            physicaldate = resignationMaster.getRelievingDatephysical();
+        }
+        
+        
+        
+        
+        
+        request.setAttribute("officialdate", officialdate);
+        request.setAttribute("physicaldate", physicaldate);
+        
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
 //        request.setAttribute("company", employeeMaster.getCompany());
 
@@ -3532,7 +3550,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             
                             
                             if (!employeeType.equals("")) {
-                                List<?> levelList11 = employeeTypeService.readByName(employeeType);
+                                List<?> levelList11 = employeeTypeService.readByName(employeeType.trim());
                                 if (!levelList11.isEmpty()) {
                                     employeeType1 = (EmployeeTypeMaster) levelList11.get(0);
                                     employeeMaster.setEmployeeTypeMaster(employeeType1);
@@ -3549,7 +3567,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             if (!employeeSubtype.equals("")) {
                                 int emptypid = employeeMaster.getEmployeeTypeMaster().getId();
                                 
-                                List<?> levelList2 = employeeSubTypeService.readByEmployeeTypeIdANDSubTypeName(emptypid,employeeSubtype);
+                                List<?> levelList2 = employeeSubTypeService.readByEmployeeTypeIdANDSubTypeName(emptypid,employeeSubtype.trim());
                                 if (!levelList2.isEmpty()) {
                                     employeeSubType = (EmployeeSubType) levelList2.get(0);
                                     employeeMaster.setEmployeeSubType(employeeSubType);
@@ -6504,5 +6522,38 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         } catch (Exception e) {
             System.out.println("error");
         }
+    }
+    
+    public void readFormerEmployeeDetailsByAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    
+        String empId = request.getParameter("empId");
+        String officialdate = request.getParameter("officialdate");
+        String physicaldate = request.getParameter("physicaldate");
+        String reason = request.getParameter("reason");
+       
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+
+        employeeMaster = employeeMasterService.readById(Integer.parseInt(empId));
+        if(employeeMaster != null){
+            employeeMaster.setDateOfLeaving(officialdate);
+            employeeMaster.setReasonForLeaving(reason);
+            employeeMasterService.update(employeeMaster);
+        }
+        
+        
+        ResignationMaster resignationMaster = new ResignationMaster();
+        List<?> resignationdetails = resignationMasterService.readByApprovedEmpID(Integer.parseInt(empId));
+        if(resignationdetails.size() > 0){
+        resignationMaster = (ResignationMaster) resignationdetails.get(0);
+        resignationMaster.setRelievingDate(officialdate);
+        resignationMaster.setRelievingDatephysical(physicaldate);
+        resignationMasterService.update(resignationMaster);
+        }
+        
+        PrintWriter out = response.getWriter();
+        out.print(employeeMaster.getDateOfLeaving()+ "~" + employeeMaster.getReasonForLeaving()+ "~" + resignationMaster.getRelievingDatephysical());
+        
+       
+      
     }
 }

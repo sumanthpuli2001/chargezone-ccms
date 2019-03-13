@@ -94,7 +94,7 @@
             else {
 //                alert(relivingDateRadioValue);
                 document.getElementById("relivingDateRadioError").innerHTML = '';
-                if (relivingDateRadioValue == 'relivingDateShow') {
+                if (relivingDateRadioValue == '0') {
                     if (document.getElementById("relievingDate").value == '') {
                         document.getElementById("RelieveDateError").innerHTML = 'It must be Selected.'
                         flag = false;
@@ -233,7 +233,7 @@
                                                     <label class="col-sm-3 control-label">Resignation Effective Date & Time:</label>
                                                     <div class=" col-sm-7">
                                                         <div class="input-group date "   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
-                                                            <form:input class="form-control" path="effectiveDatetime"  readonly='true'></form:input>
+                                                            <form:input class="form-control" path="effectiveDatetime" id="regDate" readonly='true'></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <div style="color: red"><form:errors path="effectiveDatetime" cssClass="errorDiv"></form:errors></div>
@@ -247,25 +247,39 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">Reliving Date:</label>
                                                     <div class="col-sm-1">
-                                                        <input type="radio" name="relivingDateRadio" id="relivingDateShow_id" value="relivingDateShow">
+                                                        <form:radiobutton class="form-control" path="relivingDateRadio" id="relivingDateShow_id" value="0"></form:radiobutton>
+<!--                                                        <input type="radio" name="relivingDateRadio" id="relivingDateShow_id" value="relivingDateShow">-->
                                                     </div>
                                                     <label class="col-sm-3 control-label">As Per Employment Rule:</label>
                                                     <div class="col-sm-1">
-                                                        <input type="radio" name="relivingDateRadio" id="relivingDateHide_id" value="relivingDateHide">
+                                                        <form:radiobutton class="form-control" path="relivingDateRadio" id="relivingDateHide" value="1"></form:radiobutton>
+<!--                                                        <input type="radio" name="relivingDateRadio" id="relivingDateHide_id" value="relivingDateHide">-->
                                                     </div>
                                                     <span id="relivingDateRadioError" style="color: red;"></span>
                                                 </div>
-                                                <div class="form-group" style="display: none;" id="reliving_date_id">
-                                                    <label class="col-sm-3 control-label">Relieving Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <div class="form-group reliving_date_id" style="display: none;" >
+                                                    <label class="col-sm-3 control-label">Officially Last Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
                                                     <div class=" col-sm-7">
                                                         <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
-                                                            <form:input class="form-control" path="relievingDate" readonly='true'></form:input>
+                                                            <form:input class="form-control" path="relievingDate" id = "nexdat" readonly='true'></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                             </div>
                                                             <span id="RelieveDateError" style="color: red;"></span>
                                                         </div>
                                                     </div>
+                                                    <div class="form-group reliving_date_id" style="display: none;" >
+                                                    <label class="col-sm-3 control-label">Physically  Last Date & Time:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <div class=" col-sm-7">
+                                                        <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy - hh:ii " data-link-field="dtp_input1">
+                                                            <form:input class="form-control" path="relievingDatephysical" id = "nexdatphy" readonly='true'></form:input>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                            </div>
+                                                            <span id="RelieveDateError" style="color: red;"></span>
+                                                        </div>
+                                                    </div>
+                                                                
                                                     <div class="form-group">
                                                         <label class="col-sm-3 control-label" rel="tooltip" data-html="true" data-toggle="tooltip"  data-placement="right"
                                                                data-title="<div style='text-align: left;'>1) Termination Letter given by the Company<br>2) Company demanding Resignation to avoid giving termination letter to save his/her career<br>3) Employee Absconding from duties
@@ -429,10 +443,48 @@
         var relivingDateRadioValue = "";
         $('input[name=relivingDateRadio]').on('ifChecked', function (event) {
             relivingDateRadioValue = this.value;
-            if (this.value == 'relivingDateShow') {
-                $("#reliving_date_id").show();
+            var date = document.getElementById("regDate").value;
+            var array = date.split("-");
+//            alert(array[1]);
+            var dateParts = array[0].split("/");
+            // month is 0-based, that's why we need dataParts[1] - 1
+            var dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]); 
+        
+           
+//            var date_test = new Date(date.replace(/-/g,"/",/-/," "));
+//            alert(date_test);
+            dateObject.setDate( dateObject.getDate() + 90 );
+            var dd = dateObject.getDate();
+//            alert(dd);
+            var mm = dateObject.getMonth()+1; 
+//           alert(mm);
+            var yyyy = dateObject.getFullYear();
+            
+//            alert(yyyy);
+            
+            if(dd<10) 
+            {
+                dd='0'+dd;
+            } 
+
+            if(mm<10) 
+            {
+                mm='0'+mm;
+            } 
+            
+
+            today = dd+'/'+mm+'/'+yyyy+" - "+array[1];
+//            alert(today);
+
+            if (this.value == '0') {
+                $(".reliving_date_id").show();
+                document.getElementById("nexdat").value = "";
+                document.getElementById("nexdatphy").value = "";
+              
             } else {
-                $("#reliving_date_id").hide();
+                $(".reliving_date_id").show();
+                document.getElementById("nexdat").value = today;
+                document.getElementById("nexdatphy").value = today;
             }
         });
         var attritionvalue = "";

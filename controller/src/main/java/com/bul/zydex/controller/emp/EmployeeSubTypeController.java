@@ -55,7 +55,10 @@ public class EmployeeSubTypeController extends EmployeeSubTypeAbstract {
         EmployeeSubType employeeSubType = new EmployeeSubType();
         BindException errors = new BindException(employeeSubType, "employeeSubType");
         bind(request, employeeSubType);
+        String formatvalue = employeeSubType.getSubType();
+        employeeSubType.setSubType(formatvalue.trim());
         EmployeeTypeList(request);
+        
         employeeSubTypeValidator.validate(employeeSubType, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",

@@ -1825,6 +1825,16 @@
                                                                         <option value="Confirmed">Confirmed</option>
                                                                     </c:otherwise>
                                                                 </c:choose>
+                                                                         <c:choose>
+                                                                    <c:when test="${employeeType.contains('Interns')}">
+
+                                                                        <option value="Interns" selected="">Interns</option>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+
+                                                                        <option value="Interns">Interns</option>
+                                                                    </c:otherwise>
+                                                                </c:choose>
                                                             </select>
 
                                                             <!--<option value="">--SELECT--</option>-->

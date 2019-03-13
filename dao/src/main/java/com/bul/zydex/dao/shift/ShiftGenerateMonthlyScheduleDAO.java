@@ -111,5 +111,19 @@ public interface ShiftGenerateMonthlyScheduleDAO<T> extends GenericsDAO<T> {
      public List<?> getDayAfterOfstrDate(String data);
      
      public List<?> getDayBeforeOfenDate(String data);
+     
+     public List<?> shiftValueInsDate(String data);
+     
+     public List<?> beforesDateCasualLeave(String data);
+     
+     public List<?> aftereDateCasualLeave(String data);
+     
+     public String noOfDaysForYear(Integer id, String dateofpreYear,String leave1);
+     
+     public String noOfDaysForYear1(Integer id, String dateofpreYear,String leave1);
+     
+     public String noOfDaysForYear2(Integer id, String dateofpreYear,String leave1);
+     
+     public String noOfDaysForYear3(Integer id, String dateofpreYear,String leave1);
 
 }

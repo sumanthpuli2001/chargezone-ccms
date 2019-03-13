@@ -19,7 +19,7 @@
             var leaveType1 = document.getElementById("leaveType").value;
             var leaveType = document.getElementById(leaveType1).innerHTML = noOfDay;
 //            document.getElementById(leaveType1 + "2").innerHTML = document.getElementById(leaveType1 + "1").innerHTML - document.getElementById(leaveType1).innerHTML;
-            document.getElementById(leaveType1 + "2").innerHTML = document.getElementById(leaveType1 + "1").innerHTML;
+//            document.getElementById(leaveType1 + "2").innerHTML = document.getElementById(leaveType1 + "1").innerHTML;
         });
 
 
@@ -312,9 +312,17 @@
                                                         </tr>
                                                         <tr>
                                                             <th>Projected Balance After This Application Approval</th>
-
+                                                            
                                                             <c:forEach var="remain" items="${listRemain}">
-                                                                <th id="${remain.key}2">0</th>
+                                                                <!--<th id="${remain.key}2">0</th>-->
+                                                                <c:choose>
+                                                                    <c:when test="${(remain.key eq leaveType)}">
+                                                                        <td id="${remain.key}2"><b>${remain.value-leaveEmployeeDetail1}</b></td>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                            <th id="${remain.key}2"><b>${remain.value}</b></th>
+                                                                    </c:otherwise>
+                                                                  </c:choose>
                                                                 </c:forEach>
                                                         </tr>
                                                     </table>

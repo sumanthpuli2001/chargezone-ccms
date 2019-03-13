@@ -161,7 +161,7 @@ public class LeaveEmployeeDetail implements java.io.Serializable {
     }
 
     public Boolean getUseAsSickLeave() {
-        return useAsSickLeave;
+          return useAsSickLeave;
     }
 
     public void setUseAsSickLeave(Boolean useAsSickLeave) {

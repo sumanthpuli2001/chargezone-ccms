@@ -309,7 +309,7 @@
                                                             <th>Projected Balance After This Application Approval</th>
 
                                                             <c:forEach var="remain" items="${listRemain}">
-                                                                <th id="${remain.key}2">0</th>
+                                                                <th id="${remain.key}2">${remain.value}</th>
                                                                 </c:forEach>
                                                         </tr>
                                                     </table>

@@ -381,11 +381,11 @@
         $("#NoshortLeave").hide();
                 $("#shortLeave").show();
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         } else {
         $("#NoshortLeave").show();
                 $("#shortLeave").hide();
@@ -418,11 +418,11 @@
                 var leaveBalance = strUser2[0];
                 if (strUser == 'Short Leave' || strUser == 'Paternity Leave' || strUser == 'C Off Leave' || strUser == 'Leave Without Pay' || strUser == 'Maternity Leave') {
         document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (document.getElementById("startDate").value != "" && document.getElementById("endDate").value != "") {
 
@@ -445,9 +445,9 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Casual Leave") {
         if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -460,16 +460,16 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Privilege Leave") {
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
         }
         if (strUser == "Leave Without Pay") {
         if (parseFloat(document.getElementById("noOfDays").value) > 60) {
@@ -548,9 +548,9 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Casual Leave") {
 
@@ -564,16 +564,16 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Privilege Leave") {
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
         }
 
         if (strUser == "Leave Without Pay") {
@@ -656,9 +656,9 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Casual Leave") {
         if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -670,16 +670,16 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Privilege Leave") {
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
         }
         if (strUser == "Leave Without Pay") {
         if (parseFloat(document.getElementById("noOfDays").value) > 60) {
@@ -776,9 +776,9 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Casual Leave") {
         if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -791,16 +791,16 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Privilege Leave") {
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
         }
         if (strUser == "Leave Without Pay") {
         if (parseFloat(document.getElementById("noOfDays").value) > 60) {
@@ -880,9 +880,9 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Casual Leave") {
         if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -895,16 +895,16 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Privilege Leave") {
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
         }
 
         if (strUser == "Leave Without Pay") {
@@ -986,9 +986,9 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Casual Leave") {
 
@@ -1003,16 +1003,16 @@
 
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Privilege Leave") {
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
         }
 
         if (strUser == "Leave Without Pay") {
@@ -1092,9 +1092,9 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Casual Leave") {
         if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -1107,16 +1107,16 @@
         }
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
                 document.getElementById('Privilege Leave').innerHTML = "0";
-                document.getElementById('Privilege Leave2').innerHTML = "0";
+//                document.getElementById('Privilege Leave2').innerHTML = "0";
         }
         if (strUser == "Privilege Leave") {
         document.getElementById(strUser).innerHTML = document.getElementById("noOfDays").value;
                 document.getElementById('Casual Leave').innerHTML = "0";
-                document.getElementById('Casual Leave2').innerHTML = "0";
+//                document.getElementById('Casual Leave2').innerHTML = "0";
                 document.getElementById('Sick Leave').innerHTML = "0";
-                document.getElementById('Sick Leave2').innerHTML = "0";
+//                document.getElementById('Sick Leave2').innerHTML = "0";
         }
 
         if (strUser == "Leave Without Pay") {
@@ -1810,7 +1810,7 @@
                                                             <th>Projected Balance After This Application Approval</th>
 
                                                             <c:forEach var="remain" items="${listRemain}">
-                                                                <th id="${remain.key}2" style="text-align: center;">0</th>
+                                                                <th id="${remain.key}2" style="text-align: center;">${remain.value}</th>
                                                                 </c:forEach>
                                                         </tr>
                                                     </table>

@@ -273,4 +273,39 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
         return shiftGenerateMonthlyScheduleDAO.getDayBeforeOfenDate(data);
     }
 
+    @Override
+    public List<?> shiftValueInsDate(String data) {
+        return shiftGenerateMonthlyScheduleDAO.shiftValueInsDate(data);
+    }
+
+    @Override
+    public List<?> beforesDateCasualLeave(String data) {
+        return shiftGenerateMonthlyScheduleDAO.beforesDateCasualLeave(data);
+    }
+
+    @Override
+    public List<?> aftereDateCasualLeave(String data) {
+        return shiftGenerateMonthlyScheduleDAO.aftereDateCasualLeave(data);
+    }
+
+    @Override
+    public String noOfDaysForYear(Integer id, String dateofpreYearint, String leave1) {
+        return shiftGenerateMonthlyScheduleDAO.noOfDaysForYear(id,dateofpreYearint,leave1);
+    }
+    
+    @Override
+    public String noOfDaysForYear1(Integer id, String dateofpreYearint, String leave1) {
+        return shiftGenerateMonthlyScheduleDAO.noOfDaysForYear1(id,dateofpreYearint,leave1);
+    }
+    
+    @Override
+    public String noOfDaysForYear2(Integer id, String dateofpreYearint, String leave1) {
+        return shiftGenerateMonthlyScheduleDAO.noOfDaysForYear2(id,dateofpreYearint,leave1);
+    }
+    
+    @Override
+    public String noOfDaysForYear3(Integer id, String dateofpreYearint, String leave1) {
+        return shiftGenerateMonthlyScheduleDAO.noOfDaysForYear3(id,dateofpreYearint,leave1);
+    }
+
 }

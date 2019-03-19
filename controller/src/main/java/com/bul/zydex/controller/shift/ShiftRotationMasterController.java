@@ -18200,9 +18200,35 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         String Woffday = dayNo + "/" + month + "/" + ldt.getYear();
         woffRegularization.setDayWoff(Woffday);
         woffRegularization.setShiftMasterPrevious(userMasterprecivous);
-        
-        
-        
+        SimpleDateFormat format1 = new SimpleDateFormat("d/M/yyyy");
+        Date date3 = format1.parse(Woffday);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date3);
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date afterChange = calendar.getTime();
+        String woffDayNext = format1.format(afterChange);
+        String woffDayNextDay = woffDayNext.split("/")[0];
+        String woffNextMonth = woffDayNext.split("/")[1];
+        String woffNextYear = woffDayNext.split("/")[2];
+        Date date4 = format1.parse(Woffday);
+        calendar.setTime(date4);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        Date afterChange1 = calendar.getTime();
+        String woffDayBefore = format1.format(afterChange1);
+        String woffDayBeforeDay = woffDayBefore.split("/")[0];
+        String woffBeforeMonth = woffDayBefore.split("/")[1];
+        String woffBeforeYear = woffDayBefore.split("/")[2];
+        String data = id2+"&"+woffDayNextDay+"&"+woffNextMonth+"&"+woffNextYear+"&"+woffDayBeforeDay+"&"+woffBeforeMonth+"&"+woffBeforeYear;
+        String woffDayNextValue = shiftGenerateMonthlyScheduleService.woffDayNextValue(data);
+        String woffDayBeforeValue = shiftGenerateMonthlyScheduleService.woffDayBeforeValue(data);
+        if(woffDayNextValue.equals("-1"))
+        {
+            woffRegularization.setDayWoff1(woffDayNext);
+        }
+        if(woffDayBeforeValue.equals("-1"))
+        {
+            woffRegularization.setDayWoff1(woffDayBefore);
+        }
         if(empShiftMonths.contains(month1) && !readRotationDate.contains(rotationdate))
         {
             woffRegularizationService.create(woffRegularization);
@@ -18603,7 +18629,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                String shiftRead = shiftGenerateMonthlyScheduleService.readShiftData(ldt.getMonthValue(),ldt.getYear(),Integer.parseInt(id2));
+                String shiftRead = shiftGenerateMonthlyScheduleService.readShiftData(Integer.parseInt(monthNo),Integer.parseInt(yearNo),Integer.parseInt(id2));
                 String data1 = dayNo + ":" + String.valueOf(dayNoNext) + ":" + String.valueOf(dayNoBefore) +":" + shiftRead;
                 String threeDaysList = shiftGenerateMonthlyScheduleService.readThreeDaysList(data1);
                 String data = dayNo + ":" + day + ":" + shiftId1 + ":" + shiftId2 + ":" +shiftRead+ ":" +String.valueOf(dayNext)+ ":" +String.valueOf(dayNoBefore)+ ":" +String.valueOf(dayNoNext)+ ":" +shiftId3+":" +month1+":"+ldt.getYear()+":"+ldt.getMonthValue()+":"+id2+":"+shiftId4+":"+ldt.plusMonths(1).getMonthValue()+":"+monthNo+":"+yearNo+":"+monthNoNext;

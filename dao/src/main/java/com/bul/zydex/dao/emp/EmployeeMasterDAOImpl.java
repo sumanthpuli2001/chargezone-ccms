@@ -2643,7 +2643,7 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         String query = "";
 
         query += "Select a.id FROM EmployeeMaster a"
-                + " Where a.employeeId="+employeeId;
+                + " Where a.employeeId = '" + employeeId + "'";
         List<?> list = getHibernateTemplate().find(query);
         String list1 = list.get(0).toString();
         return list1;

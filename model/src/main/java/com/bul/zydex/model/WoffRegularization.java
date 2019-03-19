@@ -20,14 +20,14 @@ public class WoffRegularization implements java.io.Serializable {
     private EmployeeMaster approverId;
     private UserMaster userMasterId;
     private ShiftMaster shiftMasterPrevious;
-
     private Integer status;
-     private String dayWoff;
+    private String dayWoff;
+    private String dayWoff1;
 
     public WoffRegularization() {
     }
 
-    public WoffRegularization(String rotationDate,String reasonForWoff, String approvalComment, String dateOfSubmit, String dateOfApproval, EmployeeMaster approverId, UserMaster userMasterId, ShiftMaster shiftMasterPrevious, Integer status,String dayWoff) {
+    public WoffRegularization(String rotationDate,String reasonForWoff, String approvalComment, String dateOfSubmit, String dateOfApproval, EmployeeMaster approverId, UserMaster userMasterId, ShiftMaster shiftMasterPrevious, Integer status,String dayWoff,String dayWoff1) {
         this.rotationDate = rotationDate;
         this.reasonForWoff = reasonForWoff;
         this.approvalComment = approvalComment;
@@ -39,6 +39,7 @@ public class WoffRegularization implements java.io.Serializable {
 
         this.status = status;
         this.dayWoff = dayWoff;
+        this.dayWoff1 = dayWoff1;
     }
 
     public Integer getId() {
@@ -127,6 +128,14 @@ public class WoffRegularization implements java.io.Serializable {
 
     public void setDayWoff(String dayWoff) {
         this.dayWoff = dayWoff;
+    }
+
+    public String getDayWoff1() {
+        return dayWoff1;
+    }
+
+    public void setDayWoff1(String dayWoff1) {
+        this.dayWoff1 = dayWoff1;
     }
     
 

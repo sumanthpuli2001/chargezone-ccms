@@ -16,6 +16,8 @@ import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.EmployeeSubType;
+import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveTypeMaster;
@@ -37,9 +39,12 @@ import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.WoffRegularization;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.util.DownloadFile;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -57,6 +62,7 @@ import java.util.Collections;
 import java.util.*;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.time.YearMonth;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14340,12 +14346,20 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         String getmonth = "";
         String getyear = "";
         String monthandyear = request.getParameter("monthYear");
-        
+        int daysInMonth = 0;
         if(!monthandyear.isEmpty()){
             
         String[] splitStr = monthandyear.split("\\s+");
         getmonth = splitStr[0];
         getyear = splitStr[1];
+        
+        Date date = new SimpleDateFormat("MMMM", Locale.ENGLISH).parse(getmonth);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int month1 = cal.get(Calendar.MONTH)+1;
+        
+        YearMonth yearMonthObject = YearMonth.of(Integer.valueOf(getyear), month1);
+        daysInMonth = yearMonthObject.lengthOfMonth();
         
         if(getmonth.equalsIgnoreCase("January")){
             month = 1;
@@ -14388,47 +14402,12 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             month = 0;
         }
         
-        
-        
-        
-        
         String employeeNo = "";
         String shiftRotationName = "";
         int shiftRotationId = 0;
         int[] day = new int[32];
-//        String day1 = "";
-//        String day2 = "";
-//        String day3 = "";
-//        String day4 = "";
-//        String day5 = "";
-//        String day6 = "";
-//        String day7 = "";
-//        String day8 = "";
-//        String day9 = "";
-//        String day10 = "";
-//        String day11 = "";
-//        String day12 = "";
-//        String day13 = "";
-//        String day14 = "";
-//        String day15 = "";
-//        String day16 = "";
-//        String day17 = "";
-//        String day18 = "";
-//        String day19 = "";
-//        String day20 = "";
-//        String day21 = "";
-//        String day22 = "";
-//        String day23 = "";
-//        String day24 = "";
-//        String day25 = "";
-//        String day26 = "";
-//        String day27 = "";
-//        String day28 = "";
-//        String day29 = ""; 
-//        String day30 = "";
         String NextShiftName = "";
         int NextShiftId = 0;
-
         int count = 0;
         String countEmpId = "";
 
@@ -14438,88 +14417,64 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 Workbook workbook = WorkbookFactory.create(file);
                 Sheet sheet = workbook.getSheetAt(0);
                 for (Row row : sheet) {
-                    if (row.getRowNum() != 0 && row.getRowNum() != 1) {
+                    if (row.getRowNum() != 0) {
                         try {
                             employeeNo = "" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0));
                             employeeNo = employeeNo.split("\\.", 2)[0];
                         } catch (Exception e) {
                             employeeNo = "" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0));
                         }
-                        shiftRotationName = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
+                        shiftRotationName = "" + (null == row.getCell((short) 4) ? "" : row.getCell((short) 4));
                         shiftRotationName = shiftRotationName.trim();
-                        if (shiftRotationName.equals("General Fixed Shift")) {
-                            shiftRotationId = 46;
-                        } else if (shiftRotationName.equals("First - Night - Second")) {
-                            shiftRotationId = 51;
-                        } else if (shiftRotationName.equals("First - Second")) {
-                            shiftRotationId = 52;
-                        } else if (shiftRotationName.equals("General - Second")) {
-                            shiftRotationId = 53;
-                        } else if (shiftRotationName.equals("General - First")) {
-                            shiftRotationId = 57;
-                        } else if (shiftRotationName.equals("First - Night")) {
-                            shiftRotationId = 58;
-                        } else if (shiftRotationName.equals("General -Night")) {
-                            shiftRotationId = 60;
-                        } else if (shiftRotationName.equals("Second-Night")) {
-                            shiftRotationId = 61;
-                        } else if (shiftRotationName.equals("First")) {
-                            shiftRotationId = 59;
-                        } else if (shiftRotationName.equals("Second")) {
-                            shiftRotationId = 62;
-                        } else if (shiftRotationName.equals("Plant General")) {
-                            shiftRotationId = 63;
-                        } else if (shiftRotationName.equals("Gavasad GeneralShift")) {
-                            shiftRotationId = 64;
-                        }
-                        for (int i = 1; i <= 31; i++) {
+                        ShiftRotationMaster shiftRotationMaster = new ShiftRotationMaster();
+                        
+                        List<?> shiftlist= shiftRotationMasterService.readByShiftRotationName(shiftRotationName);
+                         if(shiftlist.size() > 0){
+                             shiftRotationMaster = (ShiftRotationMaster)shiftlist.get(0);
+                             shiftRotationId = shiftRotationMaster.getId();
+                         }
 
-                            String dayValue = "" + (null == row.getCell((short) (i + 1)) ? "" : row.getCell((short) (i + 1)));
+                        for (int i = 1; i <= daysInMonth; i++) {
+
+                            String dayValue = "" + (null == row.getCell((short) (i + 4)) ? "" : row.getCell((short) (i + 4)));
+                            
                             dayValue = dayValue.trim();
-                            if (dayValue.equals("General")) {
-                                day[i] = 1;
-                            } else if (dayValue.equals("First")) {
-                                day[i] = 3;
-                            } else if (dayValue.equals("Second")) {
-                                day[i] = 4;
-                            } else if (dayValue.equals("Night")) {
-                                day[i] = 5;
-                            } else if (dayValue.equals("General Plant")) {
-                                day[i] = 6;
-                            } else if (dayValue.equals("Gavasad GeneralShift")) {
-                                day[i] = 7;
-                            } else if (dayValue.equals("WO")) {
+                            if(dayValue.equals("WO")){
                                 day[i] = -1;
+                            }else{
+                                ShiftMaster shiftMaster= new ShiftMaster();
+                                List<?> shiftmasterlist = shiftMasterService.getByShiftName(dayValue);
+                                if(shiftmasterlist.size() > 0){
+                                 shiftMaster = (ShiftMaster)shiftmasterlist.get(0);
+                                 day[i] = shiftMaster.getId();
+                                }
                             }
-
                         }
-//                      
+                            
+                        if(daysInMonth == 28){
+                            NextShiftName = "" + (null == row.getCell((short) 33) ? "" : row.getCell((short) 33));
+                       }else if(daysInMonth == 29){
+                            NextShiftName = "" + (null == row.getCell((short) 34) ? "" : row.getCell((short) 34));
+                       }else if(daysInMonth == 30){
+                            NextShiftName = "" + (null == row.getCell((short) 35) ? "" : row.getCell((short) 35));
+                       }else if(daysInMonth == 31){
+                            NextShiftName = "" + (null == row.getCell((short) 36) ? "" : row.getCell((short) 36));
+                       }
 
-                        NextShiftName = "" + (null == row.getCell((short) 33) ? "" : row.getCell((short) 33));
                         NextShiftName = NextShiftName.trim();
-                        if (NextShiftName.equals("General")) {
-                            NextShiftId = 1;
-                        } else if (NextShiftName.equals("First")) {
-                            NextShiftId = 3;
-                        } else if (NextShiftName.equals("Second")) {
-                            NextShiftId = 4;
-                        } else if (NextShiftName.equals("Night")) {
-                            NextShiftId = 5;
-                        } else if (NextShiftName.equals("General Plant")) {
-                            NextShiftId = 6;
-                        } else if (NextShiftName.equals("Gavasad GeneralShift")) {
-                            NextShiftId = 7;
+                        ShiftMaster shiftMaster= new ShiftMaster();
+                        List<?> shiftmasterlist = shiftMasterService.getByShiftName(NextShiftName);
+                        if(shiftmasterlist.size() > 0){
+                            shiftMaster = (ShiftMaster)shiftmasterlist.get(0);
+                            NextShiftId = shiftMaster.getId();
                         }
 
                         EmployeeMaster employeeMaster = new EmployeeMaster();
                         ShiftGenerateMonthlySchedule monthlySchedule = new ShiftGenerateMonthlySchedule();
                         ShiftRotationMaster rotationMaster = new ShiftRotationMaster();
-//                        int empNo = Integer.parseInt(employeeNo);
                         List<?> list = employeeMasterService.readByEmployeeNo1(employeeNo);
                         if (!list.isEmpty()) {
                             employeeMaster = (EmployeeMaster) list.get(0);
-//                            int month = 7;
-//                            int year = 2017;
                             if(month == 0){
                                 Calendar cal = Calendar.getInstance();
                                 year = cal.get(Calendar.YEAR);
@@ -14561,9 +14516,18 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 monthlySchedule.setDay26(day[26]);
                                 monthlySchedule.setDay27(day[27]);
                                 monthlySchedule.setDay28(day[28]);
-                                monthlySchedule.setDay29(day[29]);
-                                monthlySchedule.setDay30(day[30]);
-                                monthlySchedule.setDay31(day[31]);
+                                if(daysInMonth == 29){
+                                    monthlySchedule.setDay29(day[29]);
+                                }
+                                else if(daysInMonth == 30){
+                                    monthlySchedule.setDay29(day[29]);
+                                    monthlySchedule.setDay30(day[30]);
+                                }else if(daysInMonth == 31){
+                                    monthlySchedule.setDay29(day[29]);
+                                    monthlySchedule.setDay30(day[30]);
+                                    monthlySchedule.setDay31(day[31]);
+                                }
+                                
 
                                 monthlySchedule.setNextShiftId(NextShiftId);
                                 rotationMaster.setId(shiftRotationId);
@@ -14598,8 +14562,17 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                                 monthlySchedule.setDay26(day[26]);
                                 monthlySchedule.setDay27(day[27]);
                                 monthlySchedule.setDay28(day[28]);
-                                monthlySchedule.setDay29(day[29]);
-                                monthlySchedule.setDay30(day[30]);
+                                if(daysInMonth == 29){
+                                    monthlySchedule.setDay29(day[29]);
+                                }
+                                else if(daysInMonth == 30){
+                                    monthlySchedule.setDay29(day[29]);
+                                    monthlySchedule.setDay30(day[30]);
+                                }else if(daysInMonth == 31){
+                                    monthlySchedule.setDay29(day[29]);
+                                    monthlySchedule.setDay30(day[30]);
+                                    monthlySchedule.setDay31(day[31]);
+                                }
 
                                 monthlySchedule.setNextShiftId(NextShiftId);
                                 rotationMaster.setId(shiftRotationId);
@@ -14639,23 +14612,225 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         return mv;
     }
 
-    public void readShiftUploadFile(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        String fileName = request.getParameter("fileName");
+//    public void readShiftUploadFile(HttpServletRequest request,
+//            HttpServletResponse response) throws Exception {
+//        String fileName = request.getParameter("fileName");
+//
+//        String filePath = File.separator + "StorageYard" + File.separator
+//                + "Other" + File.separator + "UserDoc" + File.separator
+//                + "EmployeeShiftData" + File.separator + fileName;
+//
+//        String appPath = request.getServletContext().getRealPath("");
+//
+//        String fullPath = appPath + filePath;
+//
+//        request.setAttribute("filePath", fullPath);
+//
+//        DownloadFile downloadFile = new DownloadFile();
+//        downloadFile.doDownload(request, response);
+//    }
+    
+     public ModelAndView downloadEmployeeMonthlyShiftFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+         ModelAndView mv = new ModelAndView();
+        String getmonth = "";
+        String getyear = "";
+        int daysInMonth = 0;
+        String monthandyear = request.getParameter("month");
+        
+        if(!monthandyear.isEmpty()){
+            
+        String[] splitStr = monthandyear.split("\\s+");
+        getmonth = splitStr[0];
+        getyear = splitStr[1];
+        Date date = new SimpleDateFormat("MMMM", Locale.ENGLISH).parse(getmonth);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int month = cal.get(Calendar.MONTH)+1;
+        
+        YearMonth yearMonthObject = YearMonth.of(Integer.valueOf(getyear), month);
+        daysInMonth = yearMonthObject.lengthOfMonth();
+        }
+         EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
+         EmployeeSubType employeeSubType = new EmployeeSubType();
+         String[] columns1 = {"Employee ID","Employee Name", "Team", "Sub Team","Shift Rotation Name","Day1","Day2","Day3","Day4","Day5","Day6","Day7","Day8","Day9","Day10","Day11","Day12","Day13","Day14","Day15","Day16","Day17","Day18","Day19","Day20","Day21","Day22","Day23","Day24","Day25","Day26","Day27","Day28","Day29","Day30","Day31","Next Shift Name"};
+         String[] columns2 = {"Employee ID","Employee Name", "Team", "Sub Team","Shift Rotation Name","Day1","Day2","Day3","Day4","Day5","Day6","Day7","Day8","Day9","Day10","Day11","Day12","Day13","Day14","Day15","Day16","Day17","Day18","Day19","Day20","Day21","Day22","Day23","Day24","Day25","Day26","Day27","Day28","Day29","Day30","Next Shift Name"};
+         String[] columns3 = {"Employee ID","Employee Name", "Team", "Sub Team","Shift Rotation Name","Day1","Day2","Day3","Day4","Day5","Day6","Day7","Day8","Day9","Day10","Day11","Day12","Day13","Day14","Day15","Day16","Day17","Day18","Day19","Day20","Day21","Day22","Day23","Day24","Day25","Day26","Day27","Day28","Day29","Next Shift Name"};
+         String[] columns4 = {"Employee ID","Employee Name", "Team", "Sub Team","Shift Rotation Name","Day1","Day2","Day3","Day4","Day5","Day6","Day7","Day8","Day9","Day10","Day11","Day12","Day13","Day14","Day15","Day16","Day17","Day18","Day19","Day20","Day21","Day22","Day23","Day24","Day25","Day26","Day27","Day28","Next Shift Name"};
+         Workbook workbook = new XSSFWorkbook(); 
 
-        String filePath = File.separator + "StorageYard" + File.separator
-                + "Other" + File.separator + "UserDoc" + File.separator
-                + "EmployeeShiftData" + File.separator + fileName;
+        CreationHelper createHelper = workbook.getCreationHelper();
+        Sheet sheet = workbook.createSheet("EmployeeData");
+        Font headerFont = workbook.createFont();
+        headerFont.setBoldweight((short)5);
+        headerFont.setFontHeightInPoints((short) 14);
+        headerFont.setColor(IndexedColors.BLACK.getIndex());
 
-        String appPath = request.getServletContext().getRealPath("");
+        CellStyle headerCellStyle = workbook.createCellStyle();
+        headerCellStyle.setFont(headerFont);
 
-        String fullPath = appPath + filePath;
+        Row headerRow = sheet.createRow(0);
+        if(daysInMonth == 31){
+            for(int i = 0; i < columns1.length; i++) {
+            org.apache.poi.ss.usermodel.Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns1[i]);
+            cell.setCellStyle(headerCellStyle);
+            sheet.autoSizeColumn(i);
+            }
+        }else if(daysInMonth == 30){
+            for(int i = 0; i < columns2.length; i++) {
+            org.apache.poi.ss.usermodel.Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns2[i]);
+            cell.setCellStyle(headerCellStyle);
+            sheet.autoSizeColumn(i);
+            }
+        }else if(daysInMonth == 29){
+            for(int i = 0; i < columns3.length; i++) {
+            org.apache.poi.ss.usermodel.Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns3[i]);
+            cell.setCellStyle(headerCellStyle);
+            sheet.autoSizeColumn(i);
+            }
+        }else if(daysInMonth == 28){
+            for(int i = 0; i < columns4.length; i++) {
+            org.apache.poi.ss.usermodel.Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns4[i]);
+            cell.setCellStyle(headerCellStyle);
+            sheet.autoSizeColumn(i);
+            }
+            
+        }
+        
+         int rowNum = 1;
+        List<?> employeeMasterList = employeeMasterService.readEmployeeASC();
+//        int count = 0;
+        for (Object empDataObject : employeeMasterList) {
+            EmployeeMaster employeeMaster1 = (EmployeeMaster) empDataObject;
+            Row row = sheet.createRow(rowNum++);
+//            count++;
+//            row.createCell(0).setCellValue(count);
+                if(employeeMaster1.getEmployeeId().contains("admin")){
+                    rowNum--;
+                    continue;
+                    
+                }
+                row.createCell(0).setCellValue(employeeMaster1.getEmployeeId());
+                row.createCell(1).setCellValue(employeeMaster1.getEmployeeName());
+                int emptypid = employeeMaster1.getEmployeeTypeMaster().getId();
+                List<?> employeeTypeMasterList = employeeTypeService.readByID(emptypid);
+                employeeTypeMaster = (EmployeeTypeMaster) employeeTypeMasterList.get(0);
+                String employeetypename = employeeTypeMaster.getTypeOfEmployee();
+                row.createCell(2).setCellValue(employeetypename);
+                int empsubtypid = employeeMaster1.getEmployeeSubType().getId();
+                List<?> employeeSubTypeMasterList = employeeSubTypeService.readByID(empsubtypid);
+                employeeSubType = (EmployeeSubType) employeeSubTypeMasterList.get(0);
+                String employeesubtypename = employeeSubType.getSubType();
+                row.createCell(3).setCellValue(employeesubtypename);
+                row.createCell(4).setCellValue("General Fixed Shift");
+                row.createCell(5).setCellValue("Morning");
+                row.createCell(6).setCellValue("Evening");
+                row.createCell(7).setCellValue("Second");
+                row.createCell(8).setCellValue("Second");
+                row.createCell(9).setCellValue("WO ");
+                row.createCell(10).setCellValue("General");
+                row.createCell(11).setCellValue("Second");
+                row.createCell(12).setCellValue("General");
+                row.createCell(13).setCellValue("General");
+                row.createCell(14).setCellValue("Second");
+                row.createCell(15).setCellValue("Morning");
+                row.createCell(16).setCellValue("Evening");
+                row.createCell(17).setCellValue("Night");
+                row.createCell(18).setCellValue("Night");
+                row.createCell(19).setCellValue("WO ");
+                row.createCell(20).setCellValue("Second");
+                row.createCell(21).setCellValue("Night");
+                row.createCell(22).setCellValue("Morning");
+                row.createCell(23).setCellValue("Second");
+                row.createCell(24).setCellValue("Evening");
+                row.createCell(25).setCellValue("Morning");
+                row.createCell(26).setCellValue("Morning");
+                row.createCell(27).setCellValue("Second");
+                row.createCell(28).setCellValue("Evening");
+                row.createCell(29).setCellValue("Morning");
+                row.createCell(30).setCellValue("WO ");
+                row.createCell(31).setCellValue("WO ");
+                row.createCell(32).setCellValue("Evening");
+                if(daysInMonth == 28){
+                     row.createCell(33).setCellValue("General");
+                }else if(daysInMonth == 29){
+                     row.createCell(33).setCellValue("Evening");
+                     row.createCell(34).setCellValue("General");
+                }else if(daysInMonth == 30){
+                     row.createCell(33).setCellValue("Evening");
+                     row.createCell(34).setCellValue("Night");
+                     row.createCell(35).setCellValue("General");
+                }else if(daysInMonth == 31){
+                     row.createCell(33).setCellValue("Night");
+                     row.createCell(34).setCellValue("Evening");
+                     row.createCell(35).setCellValue("Night");
+                     row.createCell(36).setCellValue("General");
+                }
+           
+        }
+        if(daysInMonth == 31){
+            for(int i = 0; i < columns1.length; i++) {
+            sheet.autoSizeColumn(i);
+            }
+        }else if(daysInMonth == 30){
+            for(int i = 0; i < columns2.length; i++) {
+            sheet.autoSizeColumn(i);
+            }
+        }else if(daysInMonth == 29){
+            for(int i = 0; i < columns3.length; i++) {
+            sheet.autoSizeColumn(i);
+            }
+        }else if(daysInMonth == 28){
+            for(int i = 0; i < columns4.length; i++) {
+            sheet.autoSizeColumn(i);
+            }
+            
+        }
+                 
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        try{
+            workbook.write(bos);
+        }finally{
+            bos.close();
+        }
+        String fileName = "EmployeeMonthlyExcelData.xlsx";
+        String contentType = null;
 
-        request.setAttribute("filePath", fullPath);
+        if (fileName.endsWith("xlsx")) {
+            contentType = "application/octet-stream";
+        }else {
+            throw new RuntimeException("File type not found");
+        }
 
-        DownloadFile downloadFile = new DownloadFile();
-        downloadFile.doDownload(request, response);
-    }
+        byte[] file = bos.toByteArray();
+
+        response.setHeader("Content-disposition", "attachment;filename=" + fileName);
+        response.setHeader("charset", "iso-8859-1");
+        response.setContentType(contentType);
+        response.setContentLength(file.length);
+        response.setStatus(HttpServletResponse.SC_OK);
+        OutputStream outputStream = null;
+        try {
+            outputStream = response.getOutputStream();
+            outputStream.write(file, 0, file.length);
+            outputStream.flush();
+            outputStream.close();
+            response.flushBuffer();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        
+        mv = employeeShiftChangeMonthly(request, response);
+        return mv;
+     
+     }
+    
+    
+    
+    
 
 //    public ModelAndView overTimeEntry(HttpServletRequest request, HttpServletResponse response) throws Exception {
     private synchronized void overTimeEntry() throws Exception {

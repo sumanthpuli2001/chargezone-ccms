@@ -72,7 +72,7 @@
                 url: "resignationMaster.htm?act=employeeAjax",
                 data: {empId: empid},
                 success: function (data, textStatus, jqXHR) {
-                    alert(data);
+//                    alert(data);
                     var str = data.split("/");
                     document.getElementById("empNo").value = str[0]
                     document.getElementById("dept").value = str[2]
@@ -451,7 +451,7 @@
 
 
         var stat = document.getElementById("datestatus").value;
-        alert(stat);
+//        alert(stat);
         if(!stat == null || !stat == ''){
             $(".reliving_date_id").show();
         }

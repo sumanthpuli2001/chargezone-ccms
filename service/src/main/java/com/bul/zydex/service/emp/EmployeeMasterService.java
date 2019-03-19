@@ -205,4 +205,6 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List readByHrRights();
 
     public String getByEmployeeNo1(String employeeId);
+    
+    public List<?> readEmployeeASC();
 }

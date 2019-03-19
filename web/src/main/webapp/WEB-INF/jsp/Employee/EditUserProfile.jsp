@@ -1214,14 +1214,15 @@
                                                             <input type="text" name="electionCard" value="${list.electionCard}" id="electionCard" class="form-control">
 
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <label>Any Other Government Document Photo Id Proof:</label>
-                                                        <div class="col-sm-6">
-                                                            <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name"></form:input>
+                                                    <label style="padding-left:15px;">Any Other Government Document Photo Id Proof:</label>
+                                                    <div class="col-sm-3">
+                                                        
+                                                        
+                                                            <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name" style="width:250px;"></form:input>
                                                             </div>
-                                                            <div class="col-sm-6">
-                                                           <input type="text" name="documentIdNo" id="documentIdNo" value="${list.documentIdNo}" class="form-control">
-                                                            </div>
+                                                            <div class="col-sm-3">
+                                                           <input type="text" name="documentIdNo" id="documentIdNo" value="${list.documentIdNo}" class="form-control" placeholder="Photo ID No" style="width:150px;"/>
+                                                            
                                                         </div>
                                                     </div>       
                                                 </div><!-- /.col -->
@@ -1394,7 +1395,7 @@
                                                         </div>
                                                     </div>     
                                                         <div class="form-group">
-                                                            <div class="col-sm-6"></div>
+                                                            
 
                                                         <div class="col-sm-6">
                                                             <label>Highest Education Details<span style="color: red;font-size: 12px;">*</span></label>
@@ -1681,7 +1682,7 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <div class="col-sm-6"></div>
+                                                        
                                                         
                                                         <div class="col-sm-6">
 
@@ -1743,7 +1744,7 @@
                                                                 </div>
                                                             </div>
 
-<div class="form-group">
+                                                        <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label>Company:<span style="color: red;font-size: 12px;"></span></label>
                                                                 <form:select path="company"  class="form-control ">
@@ -1754,12 +1755,7 @@
                                                                 </form:select>
                                                                 <form:errors path="company" cssClass="errorDiv"></form:errors>
                                                             </div>
-                                                        </div>
-                                                        <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
-                                                    
-                                                        <div class="form-group">
-                                                            
-                                                        <div class="col-sm-6">
+                                                            <div class="col-sm-6">
                                                             <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
 
                                                             <form:select path="zydexLocationMaster.id" class="form-control">
@@ -1768,6 +1764,12 @@
                                                             </form:select>
                                                             <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
                                                             </div>
+                                                        </div>
+                                                        <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
+                                                    
+                                                        <div class="form-group">
+                                                            
+                                                        
                                                             <div class="col-sm-6">
                                                                 <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
@@ -1775,9 +1777,6 @@
                                                             </form:select>
                                                             <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
                                                             </div>
-
-                                                        </div>
-                                                        <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label>Work Location:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:select path="locationMaster.id" class="form-control">
@@ -1787,8 +1786,11 @@
 
                                                             <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                                             </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                           
                                                             
-<div class="col-sm-6">
+                                                            <div class="col-sm-6">
                                                                 <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:select path="departmentMaster.id" class="form-control">
                                                                 <%--<form:option value="" label="-- Select --" ></form:option>--%>
@@ -1797,10 +1799,7 @@
                                                             <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
 
                                                             </div>
-
-                                                        </div>
-
-                                                        <div class="form-group">
+                                                            
                                                             <div class="col-sm-6">
                                                             <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
 
@@ -1841,12 +1840,20 @@
 
 
                                                         </div>
-<div class="col-sm-6">
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            
+                                                            <div class="col-sm-6">
                                                                 <label>Role:</label>
                                                             <form:input path="role" class="form-control"></form:input>
                                                             </div>
 
-
+<div class="col-sm-6">
+                                                            <label >Official Contact No:</label>
+                                                            <input type="text" name="officialContactNumber" id="officialContactNumber" value="${list.officialContactNumber}" class="form-control">
+                                                            </div>
                                                         </div>
 <!--                                                           <div class="form-group">
                                                         <div class="col-sm-6">
@@ -1860,12 +1867,7 @@
                                                         </div>
 
                                                     </div> -->
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label >Official Contact No:</label>
-                                                            <input type="text" name="officialContactNumber" id="officialContactNumber" value="${list.officialContactNumber}" class="form-control">
-                                                            </div>
-                                                         </div>  
+                                                   
 
                                                        
 

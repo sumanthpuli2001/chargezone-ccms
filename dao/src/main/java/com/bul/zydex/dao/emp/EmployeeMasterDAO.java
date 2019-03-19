@@ -208,4 +208,6 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List readByUserId(Integer id);
     
     public String getByEmployeeNo1(String employeeId);
+
+    public List<?> readEmployeeASC();
 }

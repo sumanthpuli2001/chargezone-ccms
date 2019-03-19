@@ -98,18 +98,18 @@
                                                 <div class="col-sm-6">
                                                     <label>Location:<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
-                                                        <option value="" label="-- Select --" ></option>
+                                                        <option value="">-- Select --</option>
                                                         <c:forEach var="deptName" items="${location}">
-                                                            <option value="${deptName.key}" label="${deptName.value}" ></option>
+                                                            <option value="${deptName.key}">${deptName.value}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Company:<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="companyId" id="companyId" class="form-control ">
-                                                        <option value="" label="-- Select --" ></option>
+                                                        <option value="">-- Select --</option>
                                                         <c:forEach var="companyname" items="${companyList}">
-                                                            <option value="${companyname.value}" label="${companyname.value}" ></option>
+                                                            <option value="${companyname.value}">${companyname.value}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>

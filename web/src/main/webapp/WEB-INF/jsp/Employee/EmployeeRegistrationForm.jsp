@@ -435,9 +435,9 @@
             if (typeof FileReader !== "undefined") {
                 var fileSize = document.getElementById('photograph').files[0].size;
 //                alert("my File size is   " + fileSize);
-                if (fileSize > 102400) {
+                if (fileSize > 1048576) {
                     document.getElementById('photograph').value = '';
-                    document.getElementById('photographError').innerHTML = "- It must not more than 100kb";
+                    document.getElementById('photographError').innerHTML = "- It must not be more than 1 MB";
                 } else {
                     document.getElementById('photographError').innerHTML = '';
                 }
@@ -1073,15 +1073,17 @@
 
                                                         </div>
 
-
-                                                        <div class="col-sm-6">
-                                                            <label>Any Other Government Document Photo Id Proof:</label>
-                                                            <div class="col-sm-6">
-                                                            <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name"></form:input>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                           <input type="text" name="documentIdNo" id="documentIdNo" class="form-control">
-                                                            </div>
+                                                        <label style="padding-left:15px;">Any Other Government Document Photo Id Proof:</label>
+                                                        <div class="col-sm-3">
+                                                            
+<!--                                                            <div class="col-sm-6">-->
+                                                            <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name" style="width:250px;"></form:input>
+<!--                                                            </div>-->
+<!--                                                            <div class="col-sm-6">-->
+</div>
+ <div class="col-sm-3">
+                                                           <input type="text" name="documentIdNo" id="documentIdNo" class="form-control" placeholder="Photo ID No" style="width:150px;"/>
+<!--                                                            </div>-->
                                                         </div>
                                                     </div>
                                                 </div><!-- /.col -->
@@ -1219,7 +1221,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="col-sm-6"></div>
+                                                    
 
                                                     <div class="col-sm-6">
                                                         <label>Highest Education Details:<span style="color: red;font-size: 12px;"></span></label>
@@ -1486,7 +1488,7 @@
 
                                                     </div>
                                                     <div class="form-group">
-                                                        <div class="col-sm-6"></div>
+                                                        
                                                         <div class="col-sm-6">
 
                                                             <label>Other important information relating to your emergency contact:<span style="color: red;font-size: 12px;"></span></label>
@@ -1559,10 +1561,7 @@
                                                             <form:errors path="company" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
+                                                            <div class="col-sm-6">
                                                         <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="zydexLocationMaster.id" class="form-control ">
                                                             <form:option value="" label="-- Select --" ></form:option>
@@ -1570,6 +1569,10 @@
                                                         </form:select>
                                                         <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    
                                                         <div class="col-sm-6">
                                                             <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
@@ -1578,8 +1581,6 @@
                                                         </form:select>
                                                         <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Work Location:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="locationMaster.id" class="form-control ">
@@ -1588,6 +1589,9 @@
                                                         </form:select>
                                                         <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        
                                                         <div class="col-sm-6">
                                                             <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="departmentMaster.id" class="form-control">
@@ -1596,10 +1600,6 @@
                                                         </form:select>
                                                         <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
-
-                                                    </div>
-                                                    <div class="form-group">
-
                                                         <div class="col-sm-6">
                                                             <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeType" id="employeeType" class="form-control ">
@@ -1608,9 +1608,17 @@
                                                             <form:option value="Interns" label="Interns"></form:option>
                                                         </form:select>
                                                     </div>
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                       
                                                     <div class="col-sm-6">
                                                         <label>Role:</label>
                                                         <form:input path="role" class="form-control"></form:input>
+                                                    </div>
+                                                        <div class="col-sm-6">
+                                                            <label >Official Contact No.:</label>
+                                                        <input type="text" name="officialContactNumber" id="officialContactNumber" class="form-control">
                                                         </div>
                                                     </div>
 
@@ -1629,10 +1637,7 @@
                                                     </div>-->
                                                     <div class="form-group">
 
-                                                        <div class="col-sm-6">
-                                                            <label >Official Contact No.:</label>
-                                                        <input type="text" name="officialContactNumber" id="officialContactNumber" class="form-control">
-                                                        </div>
+                                                        
                                                         <div class="col-sm-6">
                                                             <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="shiftType" class="form-control">
@@ -1643,9 +1648,7 @@
                                                         </form:select>
                                                         <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-
+                                                        
                                                         <div class="col-sm-6" id="hourlyBaseTitleDiv" style="display: none">
                                                             <label>Hourly Base Title:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="shiftHoursId" id="shiftHoursId" class="form-control">
@@ -1662,23 +1665,7 @@
                                                         <span style="font-size: 14px; color: red;" id="shiftHoursIdError"></span>
                                                         <form:errors path="shiftHoursId" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                        <div class="col-sm-6" id="shiftRotationNameDiv" style="display: none">
-                                                            <label>Shift Rotation Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <select name="shiftId" id="shiftId" class="form-control" onchange="selectShift(this.value);
-                                                                    selectedShift(this.value)">
-                                                                <option value="" label="-- Select --" ></option>
-                                                            <c:forEach var="shift1" items="${rotationMap}">
-                                                                <c:if test="${shift1.key eq employeeMaster.shiftHoursId}">
-                                                                    <option value="${shift1.key}" selected="">${shift1.value}</option>
-                                                                </c:if>
-                                                                <c:if test="${shift1.key ne employeeMaster.shiftHoursId}">
-                                                                    <option value="${shift1.key}" >${shift1.value}</option>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </select>
-                                                        <span style="font-size: 14px; color: #dd4b39;" id="shiftIdError"></span>
-                                                    </div>
-                                                    <div class="col-sm-6" id="shiftRotationDateDiv" style="display: none">
+                                                        <div class="col-sm-6" id="shiftRotationDateDiv" style="display: none">
                                                         <label>Shift Rotation Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <div class="input-group date form_datetime_shift_rotation"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                             <form:input path="shiftRotationDate" class="form-control" size="16" value="" readonly="true"></form:input>
@@ -1690,7 +1677,25 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <div  id="shiftNameDiv" style="display: none">
+
+                                                        
+                                                        <div class="col-sm-6" id="shiftRotationNameDiv" style="display: none">
+                                                            <label>Shift Rotation Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <select name="shiftId" id="shiftId" class="form-control" onchange="selectShift(this.value);
+                                                                    selectedShift(this.value)">
+                                                                <option value="">-- Select --</option>
+                                                            <c:forEach var="shift1" items="${rotationMap}">
+                                                                <c:if test="${shift1.key eq employeeMaster.shiftHoursId}">
+                                                                    <option value="${shift1.key}" selected="">${shift1.value}</option>
+                                                                </c:if>
+                                                                <c:if test="${shift1.key ne employeeMaster.shiftHoursId}">
+                                                                    <option value="${shift1.key}" >${shift1.value}</option>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                        </select>
+                                                        <span style="font-size: 14px; color: #dd4b39;" id="shiftIdError"></span>
+                                                    </div>
+                                                    <div  id="shiftNameDiv" style="display: none">
                                                             <div class="col-sm-6" id="shiftMasterDivId" >
                                                                 <label>Shift Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <select name="shiftMasterId" id="shiftMasterId" class="form-control">
@@ -1699,7 +1704,8 @@
                                                                 <span style="font-size: 14px; color: #dd4b39;" id="shiftMasterIdError"></span>
                                                             </div>
                                                         </div>
-                                                    </div> 
+                                                    </div>
+                                                    
 
 
                                                     <div class="form-group">

@@ -2587,7 +2587,8 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " d.userName like '%" + searchEmployeeString + "%'"
                 + " )"
                 + " and (a.dateOfLeaving is null or a.dateOfLeaving = '') "
-                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()";
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now()"
+                + " ORDER BY a.employeeId ASC ";
 
         return getHibernateTemplate().find(hqlString);
     }
@@ -2647,6 +2648,17 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         List<?> list = getHibernateTemplate().find(query);
         String list1 = list.get(0).toString();
         return list1;
+    }
+
+    @Override
+    public List<?> readEmployeeASC() {
+         String query = "";
+        query += " "
+                + " SELECT a"
+                + " FROM EmployeeMaster a "
+                + " ORDER BY a.employeeId ASC ";
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
     }
 
 }

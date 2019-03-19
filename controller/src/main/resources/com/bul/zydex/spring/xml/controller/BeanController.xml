@@ -211,7 +211,8 @@
         <property name="otRegularizationValidator" ref="otRegularizationValidator1"/>
         <property name="userRightMasterService" ref="userRightMasterService1" />
         <property name="emailTemplateService" ref="emailTemplateService1" />
-        
+        <property name="employeeTypeService" ref="employeeTypeService1" />
+        <property name="employeeSubTypeService" ref="employeeSubTypeService1" />
         
     </bean>
     <bean id="shiftRotationInfoController1" class="com.bul.zydex.controller.shift.ShiftRotationInfoController" parent="controllerConfig" >

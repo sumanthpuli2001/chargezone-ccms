@@ -123,10 +123,10 @@
                                                                     <td align="center" style="width: 1px;"><input type="checkbox" name="checkId" id="employeeId" value="${list[0]}"/></td>
                                                                     </c:if>
                                                                 <!--<td>/</td>-->
-                                                                <td>${list[1]}</td>
-                                                                <td>${list[2]}</td>
-                                                                <td>${list[3]}</td>
-                                                                <td>${list[4]}</td>
+                                                                <td style="padding-left: 20px;">${list[1]}</td>
+                                                                <td style="padding-left: 20px;">${list[2]}</td>
+                                                                <td style="padding-left: 20px;">${list[3]}</td>
+                                                                <td style="padding-left: 20px;">${list[4]}</td>
                                                                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                 <td>
                                                                     <div class="btn-group">

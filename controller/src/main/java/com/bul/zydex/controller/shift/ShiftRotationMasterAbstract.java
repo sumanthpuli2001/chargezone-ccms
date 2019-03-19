@@ -18,6 +18,8 @@ import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.EmployeeSubType;
+import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveTypeMaster;
@@ -42,6 +44,8 @@ import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMa
 import com.bul.zydex.service.attendanceRegularization.ClientDetailsMasterService;
 import com.bul.zydex.service.attendanceRegularization.OTRegularizationService;
 import com.bul.zydex.service.attendanceRegularization.TimeAttandanceFlaxibleMasterService;
+import com.bul.zydex.service.emp.EmployeeSubTypeService;
+import com.bul.zydex.service.emp.EmployeeTypeService;
 import com.bul.zydex.service.holiday.HolidayMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.leave.LeaveEmployeeDetailService;
@@ -102,6 +106,12 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
      protected Validator otRegularizationValidator;
       protected EmailTemplateService<EmailTemplate> emailTemplateService;
     protected UserRightMasterService<UserRightMaster> userRightMasterService;
+    
+    protected EmployeeTypeService<EmployeeTypeMaster> employeeTypeService;
+    protected EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService;
+    
+    
+    
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
         return timeAttandanceFlaxibleMasterService;
     }
@@ -284,6 +294,22 @@ public class ShiftRotationMasterAbstract extends CustomAbstract {
 
     public void setUserRightMasterService(UserRightMasterService<UserRightMaster> userRightMasterService) {
         this.userRightMasterService = userRightMasterService;
+    }
+
+    public EmployeeTypeService<EmployeeTypeMaster> getEmployeeTypeService() {
+        return employeeTypeService;
+    }
+
+    public void setEmployeeTypeService(EmployeeTypeService<EmployeeTypeMaster> employeeTypeService) {
+        this.employeeTypeService = employeeTypeService;
+    }
+
+    public EmployeeSubTypeService<EmployeeSubType> getEmployeeSubTypeService() {
+        return employeeSubTypeService;
+    }
+
+    public void setEmployeeSubTypeService(EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService) {
+        this.employeeSubTypeService = employeeSubTypeService;
     }
     
     

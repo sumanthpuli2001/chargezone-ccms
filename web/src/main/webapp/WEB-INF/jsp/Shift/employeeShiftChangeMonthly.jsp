@@ -61,6 +61,21 @@
             }
         }
     </script>
+    <script>
+    function redirectToDownloadFile()
+        {
+            var month = $('#monthYear').val();
+            if(month == '' || month == null){
+                document.getElementById("Error").innerHTML = 'It must be Selected.';
+                
+            }else{
+//                alert(month);
+                window.location = 'shiftRotationMaster.htm?act=downloadEmployeeMonthlyShiftFile&month='+month;
+            }
+            
+            
+        }
+    </script>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -95,13 +110,14 @@
                                         <div class="col-sm-4" id="excelDiv">
                                             <input type="file" name="file1" id="file11" value="" onchange="checkfile(this);"/>
                                             <input type="hidden" id="fileName" name="fileName" value=""/>
-                                            <span>[ <a href="shiftRotationMaster.htm?act=readShiftUploadFile&amp;fileName=EmployeeMonthlyShiftData.xls">Sample Excel</a> ]</span>
+                                            <span>[ <a href="#" onclick="redirectToDownloadFile();">Sample Excel</a> ]</span>
                                         </div>
                                         	
                                         <div class="col-sm-2">
                                             <div class="input-group date">
                                                 <label for="startDate">Select Month & Year:</label>  
                                                 <input name="monthYear" id="monthYear" class="date-picker" placeholder="Optional"/> 
+                                                <span id="Error" style="color: red;"></span>
                                             </div>                 
                                         </div>
                                         

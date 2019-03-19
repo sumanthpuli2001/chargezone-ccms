@@ -247,13 +247,13 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-3 control-label">Reliving Date:</label>
                                                     <div class="col-sm-1">
-                                                        <form:radiobutton class="form-control" path="relivingDateRadio" id="relivingDateShow_id" value="0"></form:radiobutton>
-<!--                                                        <input type="radio" name="relivingDateRadio" id="relivingDateShow_id" value="relivingDateShow">-->
+                                                        <form:radiobutton class="form-control" path="relivingDateRadio"  value="0"></form:radiobutton>
+
                                                     </div>
                                                     <label class="col-sm-3 control-label">As Per Employment Rule:</label>
                                                     <div class="col-sm-1">
-                                                        <form:radiobutton class="form-control" path="relivingDateRadio" id="relivingDateHide" value="1"></form:radiobutton>
-<!--                                                        <input type="radio" name="relivingDateRadio" id="relivingDateHide_id" value="relivingDateHide">-->
+                                                        <form:radiobutton class="form-control " path="relivingDateRadio"  value="1" checked="checked"></form:radiobutton>
+
                                                     </div>
                                                     <span id="relivingDateRadioError" style="color: red;"></span>
                                                 </div>
@@ -493,4 +493,45 @@
 
         });
     </script>
+    <script>
+    $(document).ready(function() { 
+         var date = document.getElementById("regDate").value;
+            var array = date.split("-");
+//            alert(array[1]);
+            var dateParts = array[0].split("/");
+            // month is 0-based, that's why we need dataParts[1] - 1
+            var dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]); 
+        
+           
+//            var date_test = new Date(date.replace(/-/g,"/",/-/," "));
+//            alert(date_test);
+            dateObject.setDate( dateObject.getDate() + 90 );
+            var dd = dateObject.getDate();
+//            alert(dd);
+            var mm = dateObject.getMonth()+1; 
+//           alert(mm);
+            var yyyy = dateObject.getFullYear();
+            
+//            alert(yyyy);
+            
+            if(dd<10) 
+            {
+                dd='0'+dd;
+            } 
+
+            if(mm<10) 
+            {
+                mm='0'+mm;
+            } 
+            
+
+            today = dd+'/'+mm+'/'+yyyy+" - "+array[1];
+        $(".reliving_date_id").show();
+        document.getElementById("nexdat").value = today;
+        document.getElementById("nexdatphy").value = today;
+
+          });
+    
+    
+</script>
 </html>

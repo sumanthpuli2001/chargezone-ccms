@@ -503,4 +503,9 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
         return employeeMasterDAO.getByEmployeeNo1(employeeId);
     }
 
+    @Override
+    public List<?> readEmployeeASC() {
+        return employeeMasterDAO.readEmployeeASC();
+    }
+
 }

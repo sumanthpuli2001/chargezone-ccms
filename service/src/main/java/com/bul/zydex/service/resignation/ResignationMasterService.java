@@ -48,4 +48,6 @@ public interface ResignationMasterService<T> extends GenericsService<T> {
     public ResignationMaster readByEmpId(int EmpId);
     
     public List<?> fetchBWdate(int empId, String eftDate, String relivDate);
+
+    public List<?> readByApprovedEmpID(Integer id);
 }

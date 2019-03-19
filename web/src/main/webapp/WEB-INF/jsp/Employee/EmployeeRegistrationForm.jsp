@@ -1605,6 +1605,7 @@
                                                         <form:select path="employeeType" id="employeeType" class="form-control ">
                                                             <form:option value="Probation" label="Probation"></form:option>
                                                             <form:option value="Confirmed" label="Confirmed"></form:option>
+                                                            <form:option value="Interns" label="Interns"></form:option>
                                                         </form:select>
                                                     </div>
                                                     <div class="col-sm-6">

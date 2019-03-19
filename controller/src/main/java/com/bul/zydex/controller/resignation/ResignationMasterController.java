@@ -26,6 +26,7 @@ import com.bul.zydex.model.NoDueMaster;
 import com.bul.zydex.model.ResignationMaster;
 import com.bul.zydex.model.UserMaster;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -371,8 +372,12 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         resignationMaster.setId(id);
         int empId = Integer.parseInt(request.getParameter("empId"));
         employeeMaster.setId(empId);
+//        employeeMaster = employeeMasterService.readById(empId);
+//        employeeMaster = (EmployeeMaster) employeedetail.get(0);
         resignationMaster.setEmployeeMaster(employeeMaster);
         resignationMaster1 = resignationMasterService.readById(id);
+//        HttpSession session = request.getSession();
+//        EmployeeMaster employeeMaster2 = (EmployeeMaster) session.getAttribute("employeeInfo");
         if (resignationMaster1.getHrId() != null) {
             resignationMaster.setHrId(resignationMaster1.getHrId());
             resignationMaster.setHrApproveDate(resignationMaster1.getHrApproveDate());
@@ -380,7 +385,14 @@ public class ResignationMasterController extends ResignationMasterAbstract {
         }
         if ("APPROVE".equals(ButtonType)) {
             resignationMaster.setStatus(2);
-            resignationMasterService.update(resignationMaster);
+//            resignationMaster.setHrId(employeeMaster2.getId());
+//                Date date = Calendar.getInstance().getTime();  
+//                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+//                String strDate = dateFormat.format(date);
+//                resignationMaster.setHrApproveDate(strDate);
+                resignationMasterService.update(resignationMaster);
+//               employeeMaster.setDateOfLeaving(resignationMaster.getRelievingDate());
+//               employeeMasterService.update(employeeMaster);
 //            employeeMaster = employeeMasterService.readById(empId);
 //            employeeMaster.setDateOfLeaving(resignationMaster.getEffectiveDatetime());
 //            employeeMasterService.update(employeeMaster);
@@ -721,6 +733,377 @@ public class ResignationMasterController extends ResignationMasterAbstract {
     }
 //    hr
 
+        public ModelAndView HRsubmitApproveOrRejectResignation(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        ResignationMaster resignationMaster = new ResignationMaster();
+        ResignationMaster resignationMaster1 = new ResignationMaster();
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        bind(request, resignationMaster);
+        String ButtonType = request.getParameter("btnType");
+        int id = Integer.parseInt(request.getParameter("id"));
+        resignationMaster.setId(id);
+        int empId = Integer.parseInt(request.getParameter("empId"));
+        employeeMaster.setId(empId);
+        employeeMaster = employeeMasterService.readById(empId);
+//        employeeMaster = (EmployeeMaster) employeedetail.get(0);
+        resignationMaster.setEmployeeMaster(employeeMaster);
+        resignationMaster1 = resignationMasterService.readById(id);
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster2 = (EmployeeMaster) session.getAttribute("employeeInfo");
+        if (resignationMaster1.getHrId() != null) {
+            resignationMaster.setHrId(resignationMaster1.getHrId());
+            resignationMaster.setHrApproveDate(resignationMaster1.getHrApproveDate());
+            resignationMaster.setHrComment(resignationMaster1.getHrComment());
+        }
+        if ("APPROVE".equals(ButtonType)) {
+            resignationMaster.setStatus(4);
+            resignationMaster.setHrId(employeeMaster2.getId());
+                Date date = Calendar.getInstance().getTime();  
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+                String strDate = dateFormat.format(date);
+                resignationMaster.setHrApproveDate(strDate);
+                resignationMasterService.update(resignationMaster);
+               employeeMaster.setDateOfLeaving(resignationMaster.getRelievingDate());
+               employeeMasterService.update(employeeMaster);
+//            employeeMaster = employeeMasterService.readById(empId);
+//            employeeMaster.setDateOfLeaving(resignationMaster.getEffectiveDatetime());
+//            employeeMasterService.update(employeeMaster);
+            request.setAttribute("successMessage",
+                    "Information : Resignation Accepted Successfully.");
+            mv = HRResult(request, response);
+            //    Email Sent to Employee
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                List l1 = resignationMasterService.readEmpIdFromTabId(id);
+                EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                // id 60 is status for Resignation Approve(Email for Employee)
+                emailTemplate = emailTemplateService.readById(60);
+                String To = employeeRequestee.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                
+                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+                
+                String name = "Resignation";
+                EmailAddMaster emailAddMaster = new EmailAddMaster();
+                emailAddMaster.setModuleName(name);
+                emailAddMaster.setDepartmentMaster(employeeRequestee.getDepartmentMaster());
+                List<?> emailSendList = emailAddMasterService.readByName(emailAddMaster);
+                if (!emailSendList.isEmpty()) {
+                    EmailAddMaster emailAddMaster1 = (EmailAddMaster) emailSendList.get(0);
+                    String emailId = emailAddMaster1.getEmailId();
+                    for (String emailId1 : emailId.split(",")) {
+                        if (!emailId1.equals("")) {
+                            String To1 = emailId1;
+                            String from1 = employeeMasterModel.getOfficeEmailId();
+                            String subject1 = emailTemplate.getSubject();
+                            subject1 = subject1.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                            String msg1 = emailTemplate.getBodytext();
+                            msg1 = msg1.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                            msg1 = msg1.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                            msg1 = msg1.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                            sendMail.sendMail(from1, To1, subject1, msg1);
+                            
+                            List<?> gmOrStateHeadMailSend = employeeMasterService.readForSendMailToAll(employeeRequestee);
+                            if (!gmOrStateHeadMailSend.isEmpty()) {
+                                Object[] emaillist = (Object[]) gmOrStateHeadMailSend.get(0);
+                                for (int i = 0; i <= emaillist.length; i++) {
+                                    if (null != emaillist[i] && "" != emaillist[i]) {
+                                        String emailid = emaillist[i].toString();
+                                        
+                                        String To3 = emailid;
+                                        String from3 = employeeMasterModel.getOfficeEmailId();
+                                        String subject3 = emailTemplate.getSubject();
+                                        
+                                        subject3 = subject3.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                                        String msg3 = emailTemplate.getBodytext();
+                                        msg3 = msg3.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                                        msg3 = msg3.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg3 = msg3.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from3, To3, subject3, msg3);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            } catch (Exception e) {
+                
+            }
+            //    Email Sent to HR(Having EmployeeExit Rights)
+            List<?> ListforEmployeeExitRights = userRightMasterService.readEmployeeExitRightsList();
+            for (Object o : ListforEmployeeExitRights) {
+                Object[] o1 = (Object[]) o;
+                int AdminId = (int) o1[0];
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                    employeeMasterHr = employeeMasterService.readById(AdminId);
+                    List l1 = resignationMasterService.readEmpIdFromTabId(id);
+                    EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                    // id 61 is status for Resignation Approve(Email for HR)
+                    emailTemplate = emailTemplateService.readById(61);
+                    String To = employeeMasterHr.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+                    
+                }
+            }
+        }
+        if ("RETURN".equals(ButtonType)) {
+            resignationMaster.setStatus(1);
+            resignationMasterService.update(resignationMaster);
+            request.setAttribute("successMessage",
+                    "Information : Resignation Returned Successfully.");
+            mv = HRResult(request, response);
+            //    Email Sent to Employee
+            try {
+                EmailTemplate emailTemplate = new EmailTemplate();
+                EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                DesignationMaster designationMaster = new DesignationMaster();
+                designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                List l1 = resignationMasterService.readEmpIdFromTabId(id);
+                EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                // id 62 is status for Resignation Returned(Email for Employee)
+                emailTemplate = emailTemplateService.readById(62);
+                String To = employeeRequestee.getOfficeEmailId();
+                String from = employeeMasterModel.getOfficeEmailId();
+                String Subject = emailTemplate.getSubject();
+                Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                String msg = emailTemplate.getBodytext();
+                msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                sendMail.sendMail(from, To, Subject, msg);
+            } catch (Exception e) {
+                
+            }
+        }
+        if ("APPROVEWITHDRAW".equals(ButtonType)) {
+            if (resignationMaster.getHrId() == null) {
+                resignationMaster.setStatus(9);
+                resignationMasterService.update(resignationMaster);
+                request.setAttribute("successMessage",
+                        "Information : Withdraw Approved Successfully.");
+                //    Email Sent to Employee
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    List l1 = resignationMasterService.readEmpIdFromTabId(id);
+                    EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                    // id 72 is status for Resignation Withdarw Final Approved(Cycle Ends as Hr has yet not Approved) (Email for Employee)
+                    emailTemplate = emailTemplateService.readById(72);
+                    String To = employeeRequestee.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+                    
+                }
+            } else {
+                resignationMaster.setStatus(7);
+                resignationMasterService.update(resignationMaster);
+                request.setAttribute("successMessage",
+                        "Information : Withdraw Approved Successfully.");
+                //    Email Sent to Employee
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    List l1 = resignationMasterService.readEmpIdFromTabId(id);
+                    EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                    // id 70 is status for Resignation Withdarw Rejected by manager (Email for Employee)
+                    emailTemplate = emailTemplateService.readById(70);
+                    String To = employeeRequestee.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+                    
+                }
+                //    Email Sent to HR(Having EmployeeExit Rights)
+                List<?> ListforEmployeeExitRights = userRightMasterService.readEmployeeExitRightsList();
+                for (Object o : ListforEmployeeExitRights) {
+                    Object[] o1 = (Object[]) o;
+                    int AdminId = (int) o1[0];
+                    try {
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                        employeeMasterHr = employeeMasterService.readById(AdminId);
+                        List l1 = resignationMasterService.readEmpIdFromTabId(id);
+                        EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                        // id 71` is status for Resignation Withdarw Approved by manager and Withdraw Request is pending For Hr to approve(Email for HRs)
+                        emailTemplate = emailTemplateService.readById(71);
+                        String To = employeeMasterHr.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+                    } catch (Exception e) {
+                        
+                    }
+                }
+            }
+            mv = HRResult(request, response);
+        }
+        if ("REJECTWITHDRAW".equals(ButtonType)) {
+            if (resignationMaster.getHrId() == null) {
+                resignationMaster.setStatus(2);
+                resignationMasterService.update(resignationMaster);
+                request.setAttribute("successMessage",
+                        "Information : Withdraw Rejected and Resignation Accepted Successfully.");
+                //    Email Sent to Employee
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    List l1 = resignationMasterService.readEmpIdFromTabId(id);
+                    EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                    // id 75 is status for Resignation Withdarw Rejected by manager and Resignation Request is pending For Hr(Email for Employee)
+                    emailTemplate = emailTemplateService.readById(75);
+                    String To = employeeRequestee.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+                    
+                }
+                //    Email Sent to HR(Having EmployeeExit Rights)
+                List<?> ListforEmployeeExitRights = userRightMasterService.readEmployeeExitRightsList();
+                for (Object o : ListforEmployeeExitRights) {
+                    Object[] o1 = (Object[]) o;
+                    int AdminId = (int) o1[0];
+                    try {
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                        employeeMasterHr = employeeMasterService.readById(AdminId);
+                        List l1 = resignationMasterService.readEmpIdFromTabId(id);
+                        EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                        // id 76 is status for Resignation Withdraw Rejected by manager and Resignation Request is pending For Hr(Email for HR)
+                        emailTemplate = emailTemplateService.readById(76);
+                        String To = employeeMasterHr.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+                    } catch (Exception e) {
+                        
+                    }
+                }
+            } else {
+                resignationMaster.setStatus(10);
+                resignationMasterService.update(resignationMaster);
+                request.setAttribute("successMessage",
+                        "Information : Withdraw Rejected Successfully.");
+                //    Email Sent to Employee
+                try {
+                    EmailTemplate emailTemplate = new EmailTemplate();
+                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                    DesignationMaster designationMaster = new DesignationMaster();
+                    designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                    List l1 = resignationMasterService.readEmpIdFromTabId(id);
+                    EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                    // id 73 is status for Resignation Withdarw Rejected by manager and Withdraw Request is pending For Hr(Email for Employee)
+                    emailTemplate = emailTemplateService.readById(73);
+                    String To = employeeRequestee.getOfficeEmailId();
+                    String from = employeeMasterModel.getOfficeEmailId();
+                    String Subject = emailTemplate.getSubject();
+                    Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                    String msg = emailTemplate.getBodytext();
+                    msg = msg.replaceAll("\\{to_user\\}", employeeRequestee.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                    sendMail.sendMail(from, To, Subject, msg);
+                } catch (Exception e) {
+                    
+                }
+                //    Email Sent to HR(Having EmployeeExit Rights)
+                List<?> ListforEmployeeExitRights = userRightMasterService.readEmployeeExitRightsList();
+                for (Object o : ListforEmployeeExitRights) {
+                    Object[] o1 = (Object[]) o;
+                    int AdminId = (int) o1[0];
+                    try {
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        DesignationMaster designationMaster = new DesignationMaster();
+                        designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmployeeMaster employeeMasterHr = new EmployeeMaster();
+                        employeeMasterHr = employeeMasterService.readById(AdminId);
+                        List l1 = resignationMasterService.readEmpIdFromTabId(id);
+                        EmployeeMaster employeeRequestee = (EmployeeMaster) l1.get(0);
+                        // id 74 is status for Resignation Withdraw Rejected by manager and Withdraw Request is pending For Hr(Email for HR)
+                        emailTemplate = emailTemplateService.readById(74);
+                        String To = employeeMasterHr.getOfficeEmailId();
+                        String from = employeeMasterModel.getOfficeEmailId();
+                        String Subject = emailTemplate.getSubject();
+                        Subject = Subject.replaceAll("\\{user\\}", employeeRequestee.getEmployeeName());
+                        String msg = emailTemplate.getBodytext();
+                        msg = msg.replaceAll("\\{to_user\\}", employeeMasterHr.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                        sendMail.sendMail(from, To, Subject, msg);
+                    } catch (Exception e) {
+                        
+                    }
+                }
+            }
+            mv = HRResult(request, response);
+        }
+        return mv;
+    }
+        
     public ModelAndView HRResult(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         HttpSession session = request.getSession();

@@ -45,7 +45,7 @@
             for (var i = 1; i <= element15; i++) {
 //                alert('hi' + document.getElementById('amount' + i).value);
                 var element = document.getElementById('amount' + i).value;
-                alert(element)
+//                alert(element)
                 sum += parseInt(element);
 //                alert("allowance"+sum);
 //                alert(sum);
@@ -781,6 +781,76 @@
             }
             
         </script>
+        
+        <script>
+            function viewClick(){
+//                alert("ss");
+                var empid = document.getElementById("empid").value;
+//                 alert(empid);
+                var physicaldate = document.getElementById("physicaldate").value;
+                var reason = document.getElementById("reason").value;
+                var officialdate = document.getElementById("leavingdate").value;
+                
+                if(empid == null || physicaldate == null || reason == null || officialdate == null || empid == "" || physicaldate == "" || reason == "" || officialdate == ""){
+                    document.getElementById('errormsg').innerHTML = '-  Enter all the details.';
+                    $("#errormsg").delay(0).fadeIn(0);
+                    $("#errormsg").delay(3200).fadeOut(300);
+                }else{
+                    $.ajax({
+                        type: "POST",
+                        url: "employeeMaster.htm?act=readFormerEmployeeDetailsByAjax",
+                        data: {"empId": empid,
+                        "officialdate": officialdate,
+                        "physicaldate": physicaldate,
+                        "reason": reason},
+                        dataType: "text",
+                        success: function (responseTxt) {
+                            var newText = responseTxt.split("~");
+                         
+                            document.getElementById("leavingdate").value = newText[0];
+                            document.getElementById("reason").value = newText[1];
+                            document.getElementById("physicaldate").value = newText[2];
+                            
+
+                        },
+                        error: function () {
+                            document.getElementById('errormsg').innerHTML = '-  Check entered data correctly.';
+                            $("#errormsg").delay(0).fadeIn(0);
+                            $("#errormsg").delay(3200).fadeOut(300);
+//                            alert('Error occured');
+                        }
+                    });
+                 }
+//                alert(physicaldate);
+//                alert(reason);
+//                alert(officialdate);
+                
+//                $.post("employeeMaster.htm?act=readFormerEmployeeDetailsByAjax",
+//                    {
+//                        empId: empid,
+//                        officialdate: officialdate,
+//                        physicaldate: physicaldate,
+//                        reason: reason,
+//                    },
+//                    function (responseTxt, statusTxt, xhr) {
+//                if (statusTxt === "success") {
+//                    var newText = responseTxt.split("~");
+//                    document.getElementById("leavingdate").value = newText[0];
+//                    document.getElementById("reason").value = newText[1];
+//                    document.getElementById("physicaldate").value = newText[2];
+//                    
+//                }
+//                if (statusTxt === "error")
+//                    document.getElementById('errormsg').innerHTML = '-Check entered data correctly.';
+//                    alert("Error: " + xhr.status + ": " + xhr.statusText);
+//            });
+
+
+                    
+        }
+            
+            
+            </script>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -797,10 +867,11 @@
         <c:if test="${!empty failureMessage}">
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
+            
         <!-- Main content -->
          <form:form class="form-horizontal" role="form" action="employeeMaster.htm?act=editSubmit" commandName="employeeMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
             <form:hidden path="userMaster.id"></form:hidden>
-            <form:hidden path="id"></form:hidden>
+            <form:hidden path="id" id="empid"></form:hidden>
             <form:hidden path="shiftType"></form:hidden>
             <form:hidden path="shiftHoursId"></form:hidden>
             <form:hidden path="shiftRotationDate"></form:hidden>
@@ -828,13 +899,13 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Employee Id:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="employeeId" class="form-control" ></form:input>
+                                                            <form:input path="employeeId" class="form-control" readonly="true" disabled="true"></form:input>
                                                         <form:errors path="employeeId" cssClass="errorDiv"></form:errors>
                                                         </div>
 
                                                         <div class="col-sm-6">
                                                             <label>Employee Name (First & Last Name only):<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="employeeName" class="readItOnly form-control"></form:input>
+                                                        <form:input path="employeeName" class="readItOnly form-control" readonly="true" disabled="true"></form:input>
                                                         <form:errors path="employeeName" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
@@ -843,7 +914,7 @@
                                                         <div class="col-sm-6">
                                                             <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <form:input path="dateOfJoining" class="form-control" size="16" value="" readonly="true"></form:input>
+                                                            <form:input path="dateOfJoining" class="form-control" size="16" value="" readonly="true" disabled="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
@@ -853,7 +924,7 @@
                                                             <label>Date Of Birth:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirth" id="dob" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                            <form:input path="dateOfBirth" id="dob" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" disabled="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
@@ -863,7 +934,7 @@
                                                     <div class="form-group">    
                                                         <div class="col-sm-6">
                                                             <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
+                                                        <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control" disabled="true">
                                                             <form:option value="" label="-- Select --" ></form:option>
                                                             <form:options items="${EmployeeTypeList}"></form:options>
                                                         </form:select>
@@ -872,7 +943,7 @@
                                                         <div class="col-sm-6" id="employeeSubTypeId">
                                                             <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="hidden" name="subell" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
-                                                        <form:select path="employeeSubType.id" id="sell" class="form-control">
+                                                        <form:select path="employeeSubType.id" id="sell" class="form-control" disabled="true">
                                                             <form:option value="" label="-- Select --" ></form:option> 
                                                         </form:select>
                                                         <span id="subtypeError" style="color: red;"></span>
@@ -881,7 +952,7 @@
                                                     <div class="form-group">   
                                                         <div class="col-sm-6">
                                                             <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <select name="designationMasterByLevelId" id="designationMasterByLevelId" class="form-control" onchange="setDesignation()">
+                                                            <select name="designationMasterByLevelId" id="designationMasterByLevelId" class="form-control" onchange="setDesignation()" disabled="true">
                                                             <c:forEach var="desn" items="${desigList}">
                                                                 <c:choose>
                                                                     <c:when test="${desn.key eq employeeMaster.designationMaster.id }">
@@ -904,8 +975,8 @@
                                                             <label>Gender:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                             <fieldset id="group1">
 
-                                                            <form:radiobutton path="gender" value="false" />Male&nbsp;&nbsp;
-                                                            <form:radiobutton path="gender" value="true" />Female&nbsp;&nbsp;
+                                                            <form:radiobutton path="gender" value="false" disabled="true"/>Male&nbsp;&nbsp;
+                                                            <form:radiobutton path="gender" value="true" disabled="true"/>Female&nbsp;&nbsp;
 
                                                         </fieldset>
                                                         <form:errors path="gender" cssClass="errorDiv"></form:errors>
@@ -916,25 +987,25 @@
                                                             <input type="hidden" name="mriStatus" id="mriStatus" value="${mriStatus}">
                                                         <label>Marital Status:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <fieldset id="group2">
-                                                            <form:radiobutton path="maritalStatus"  value="Married"/>Married
-                                                            <form:radiobutton path="maritalStatus"  value="UnMarried"/>UnMarried
-                                                            <form:radiobutton path="maritalStatus" value="Other"/>Other
+                                                            <form:radiobutton path="maritalStatus"  value="Married" disabled="true"/>Married
+                                                            <form:radiobutton path="maritalStatus"  value="UnMarried" disabled="true"/>UnMarried
+                                                            <form:radiobutton path="maritalStatus" value="Other" disabled="true"/>Other
 
                                                         </fieldset>
 
                                                         <div style="display: none;" class="col-sm-6" id="otherMaritalStatusId">
-                                                            <form:input type="text" path="maritalStatusOthers" class="form-control"/>
+                                                            <form:input type="text" path="maritalStatusOthers" class="form-control" disabled="true"/>
                                                         </div>
 
                                                     </div>
                                                         <div class="col-sm-3">
                                                             <label>Photograph:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <img src="${imgFile}" id="photograph" name="photograph" width="150px" height="150px"/>
+                                                            <img src="${imgFile}" id="photograph" name="photograph" width="150px" height="150px" disabled="true"/>
                                                     </div>
                                                     <div class="col-sm-3">
                                                         <label>Update Photo:</label>
                                                         <div id="imageSrc">
-                                                            <input type="file" class="form-control" id="photographUpdate" name="photographUpdate" onchange="changeButton();" accept="image/jpg,image/jpeg,image/png">
+                                                            <input type="file" class="form-control" id="photographUpdate" name="photographUpdate" onchange="changeButton();" accept="image/jpg,image/jpeg,image/png" disabled="true">
                                                             <span style="font-size: 14px; color: red;" id="photographError"></span>
                                                         </div>
                                                     </div>
@@ -942,7 +1013,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Official E - Mail ID:</label>
-                                                        <form:input path="officeEmailId" id="officeEmailId" class="form-control"></form:input>
+                                                        <form:input path="officeEmailId" id="officeEmailId" class="form-control" readonly="true" disabled="true"></form:input>
                                                         <form:errors path="officeEmailId" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
@@ -993,12 +1064,12 @@
                                                     <div class="col-sm-6">
                                                         <label>Employee Name (First Name, Middle Name, Last Name as per Passport or Aadhar card.) <span style="color: red;font-size: 12px;">*</span></label><br>
                                                                 <c:if test="${list.nameStatus eq 'false'}">
-                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport;
-                                                                    <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard
+                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false" disabled="true"/>Passport;
+                                                                    <input type="radio" name="nameStatus" id="nameStatus" value="true" disabled="true"/>AadharCard
                                                                 </c:if>
                                                                 <c:if test="${list.nameStatus eq 'true'}">
-                                                                    <input type="radio" name="nameStatus"  id="nameStatus" value="false"/>Passport&nbsp;&nbsp;
-                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="true"/>AadharCard
+                                                                    <input type="radio" name="nameStatus"  id="nameStatus" value="false" disabled="true"/>Passport&nbsp;&nbsp;
+                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="true" disabled="true"/>AadharCard
                                                                 </c:if>
                                                         
                                                     </div>
@@ -1006,25 +1077,25 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>PAN Card No.:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="panCard" style="text-transform:uppercase" id="pancard" class="form-control" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
+                                                        <form:input path="panCard" style="text-transform:uppercase" id="pancard" class="form-control" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A" readonly="true" disabled="true"></form:input>
                                                         <form:errors path="panCard" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                             <label>Nationality:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <input type="text" name="nationality" id="nationality"  style="text-transform:uppercase" value="${list.nationality}" class="form-control">
+                                                            <input type="text" name="nationality" id="nationality"  style="text-transform:uppercase" value="${list.nationality}" class="form-control" readonly="true" disabled="true">
 
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label >Passport No.:</label>
-                                                        <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
+                                                        <form:input path="passportNo" id="passportNo" class="form-control" readonly="true" disabled="true"></form:input>
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                             <label>Country Of Issue:</label>
-                                                            <input type="text" name="countryOfIssue" value="${list.countryOfIssue}" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
+                                                            <input type="text" name="countryOfIssue" value="${list.countryOfIssue}" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control" readonly="true" disabled="true">
 
                                                     </div>
                                                 </div>
@@ -1034,13 +1105,13 @@
                                                     <div class="col-sm-6">
 
                                                         <label>First Name:</label>
-                                                        <input type="text" name="firstName" value="${list.firstName}" id="firstName" placeholder="First Name as per Passport" class="form-control">
+                                                        <input type="text" name="firstName" value="${list.firstName}" id="firstName" placeholder="First Name as per Passport" class="form-control" readonly="true" disabled="true">
 
                                                     </div>
                                                     <div class="col-sm-6">
 
                                                         <label>Middle Name:</label>
-                                                        <input type="text" name="middleName" value="${list.middleName}" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
+                                                        <input type="text" name="middleName" value="${list.middleName}" id="middleName" placeholder="Middle Name as per Passport" class="form-control" readonly="true" disabled="true">
 
                                                     </div>
                                                 </div>   
@@ -1048,13 +1119,13 @@
                                                     <div class="col-sm-6">
 
                                                         <label>Last Name:</label>
-                                                        <input type="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
+                                                        <input type="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control" readonly="true" disabled="true">
 
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Passport Issue Date:</label>
                                                         <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <form:input path="passportIssueDate" class="form-control" size="16"></form:input>
+                                                            <form:input path="passportIssueDate" class="form-control" size="16" readonly="true" disabled="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
@@ -1067,7 +1138,7 @@
                                                             <label>Passport Expiry Date:</label>
                                                             <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="passportExpiryDate" class="form-control" size="16"></form:input>
+                                                            <form:input path="passportExpiryDate" class="form-control" size="16" readonly="true" disabled="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
@@ -1077,7 +1148,7 @@
 
                                                             <label >Driving Licence No :</label>
 
-                                                        <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>
+                                                        <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No." readonly="true" disabled="true"></form:input>
 
 
                                                         </div>  
@@ -1087,7 +1158,7 @@
                                                         <div class="col-sm-6">
 
                                                             <label>Driving Licence Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <select name="drivingLicenceType" id="drivingLicenceType" class="form-control">
+                                                            <select name="drivingLicenceType" id="drivingLicenceType" class="form-control" disabled="true">
                                                             <c:if test="${empty list.drivingLicenceType}">
                                                                 <option value="">-- Select --</option>
                                                                 <option value="2Wheeler">2Wheeler</option>
@@ -1107,7 +1178,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label >Aadhar Card:</label>
-                                                        <form:input path="adharCard" class="form-control"></form:input>
+                                                        <form:input path="adharCard" class="form-control" readonly="true" disabled="true"></form:input>
                                                         <form:errors path="adharCard" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div> 
@@ -1116,16 +1187,16 @@
                                                         <div class="col-sm-6">
 
                                                             <label>Election Card:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="electionCard" value="${list.electionCard}" id="electionCard" class="form-control">
+                                                            <input type="text" name="electionCard" value="${list.electionCard}" id="electionCard" class="form-control" readonly="true" disabled="true">
 
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <label>Any Other Government Document Photo Id Proof:</label>
                                                         <div class="col-sm-6">
-                                                            <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name"></form:input>
+                                                            <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name" readonly="true" disabled="true"></form:input>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                           <input type="text" name="documentIdNo" id="documentIdNo" value="${list.documentIdNo}" class="form-control">
+                                                           <input type="text" name="documentIdNo" id="documentIdNo" value="${list.documentIdNo}" class="form-control" readonly="true" disabled="true">
                                                             </div>
                                                         </div>
                                                     </div>       
@@ -1172,13 +1243,13 @@
                                                                         <tr>
                                                                             <td style="text-align: center">${visacountVal.count}</td> 
                                                                             <td style="text-align: center">
-                                                                                <input name="visaIssueCountry${visacountVal.count}" id="visaIssueCountry${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueCountry}" class="form-control">
+                                                                                <input name="visaIssueCountry${visacountVal.count}" id="visaIssueCountry${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueCountry}" class="form-control" readonly="true" disabled="true">
                                                                             </td>
                                                                             <td style="text-align: center">
-                                                                                <input type="text" name="visaIssueDate${visacountVal.count}" id="visaIssueDate${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueDate}" size="16"  class="form-control">
+                                                                                <input type="text" name="visaIssueDate${visacountVal.count}" id="visaIssueDate${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueDate}" size="16"  class="form-control" readonly="true" disabled="true">
                                                                             </td>
                                                                             <td style="text-align: center">
-                                                                                <input type="text" name="visaValidTillDate${visacountVal.count}" id="visaValidTillDate${visacountVal.count}" value="${employeeVisaDetailsList.visaValidTillDate}" class="form-control" size="16" >
+                                                                                <input type="text" name="visaValidTillDate${visacountVal.count}" id="visaValidTillDate${visacountVal.count}" value="${employeeVisaDetailsList.visaValidTillDate}" class="form-control" size="16" readonly="true" disabled="true">
                                                                             </td>
                                                                             <c:if test="${visacountVal.last}">
                                                                                 <td style="text-align: center">
@@ -1194,14 +1265,14 @@
                                                                     <tr>
                                                                         <td style="text-align: center">1</td>
                                                                         <td style="text-align: center">
-                                                                            <input name="visaIssueCountry1" id="visaIssueCountry1" class="form-control">
+                                                                            <input name="visaIssueCountry1" id="visaIssueCountry1" class="form-control" readonly="true" disabled="true">
                                                                             <input type="hidden" name="visaCount1" id="visaCount1" value="1"/>
                                                                         </td>
                                                                         <td style="text-align: center">
-                                                                            <input type="text" name="visaIssueDate1" id="visaIssueDate1"  size="16"  class="form-control">
+                                                                            <input type="text" name="visaIssueDate1" id="visaIssueDate1"  size="16"  class="form-control" readonly="true" disabled="true">
                                                                         </td>
                                                                         <td style="text-align: center">
-                                                                            <input type="text" name="visaValidTillDate1" id="visaValidTillDate1" class="form-control" size="16" >
+                                                                            <input type="text" name="visaValidTillDate1" id="visaValidTillDate1" class="form-control" size="16" readonly="true" disabled="true">
                                                                         </td>
                                                                         <td style="text-align: center">
                                                                             <span style='margin-top: 5px;'>
@@ -1235,13 +1306,13 @@
                                                     <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label >Personal Email Id:</label>
-                                                            <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
+                                                            <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required="" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="emailAddress" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                            
                                                         <div class="col-sm-6">
                                                             <label >Contact No.1:</label>
-                                                            <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                            <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                         </div>
@@ -1249,13 +1320,13 @@
 
                                                             <div class="col-sm-6">
                                                                 <label >Contact No.2:</label>
-                                                            <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                            <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
                                                             <label>Blood Group:<span style="color: red;font-size: 12px;">*</span></label>
 
-                                                            <form:select path="bloodGroups" id="bloodGroups" class="form-control" >
+                                                            <form:select path="bloodGroups" id="bloodGroups" class="form-control" disabled="true">
                                                                 <option value="">--Select--</option>
                                                                 <form:option value="A +ve">A +ve</form:option>
                                                                 <form:option value="A -ve">A -ve</form:option>
@@ -1274,13 +1345,13 @@
                                                         <div class="col-sm-6">
 
                                                             <label>Religion:</label>
-                                                            <input type="text" name="religion" id="religion" value="${list.religion}" class="form-control">
+                                                            <input type="text" name="religion" id="religion" value="${list.religion}" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                             <div class="col-sm-6">
 
                                                             <label>Languages known:</label>
-                                                            <input type="text" name="languagesKnown" id="languagesKnown" value="${list.languagesKnown}" class="form-control">
+                                                            <input type="text" name="languagesKnown" id="languagesKnown" value="${list.languagesKnown}" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                     </div>      
@@ -1288,13 +1359,13 @@
                                                         <div class="col-sm-6">
 
                                                             <label>Disclosed Health Concerns:</label>
-                                                            <input type="text" name="disclosedHealthConcerns" id="disclosedHealthConcerns" value="${list.disclosedHealthConcerns}" class="form-control">
+                                                            <input type="text" name="disclosedHealthConcerns" id="disclosedHealthConcerns" value="${list.disclosedHealthConcerns}" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                             <label>Hobbies:</label>
-                                                            <input name="hobbies" id="hobbies"  value="${list.hobbies}" class="form-control">
+                                                            <input name="hobbies" id="hobbies"  value="${list.hobbies}" class="form-control" disabled="true">
 
                                                         </div>
                                                     </div>     
@@ -1303,7 +1374,7 @@
 
                                                         <div class="col-sm-6">
                                                             <label>Highest Education Details<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
+                                                            <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                         </div>    
@@ -1330,14 +1401,14 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Father's Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="fatherName" class=" form-control"></form:input>
+                                                        <form:input path="fatherName" class=" form-control" readonly="true" disabled="true"></form:input>
                                                         <form:errors path="fatherName" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label>Father's Date Of Birth:</label>
                                                             <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpFather" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                            <form:input path="dateOfBirthOfEmpFather" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" disabled="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
@@ -1348,7 +1419,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Mother's Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="motherName" class=" form-control" ></form:input>
+                                                        <form:input path="motherName" class=" form-control" readonly="true" disabled="true"></form:input>
                                                         <form:errors path="motherName" cssClass="errorDiv"></form:errors>
                                                         </div>
 
@@ -1356,7 +1427,7 @@
                                                             <label>Mother's Date Of Birth:</label>
                                                             <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                 <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpMother" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                            <form:input path="dateOfBirthOfEmpMother" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" disabled="true"></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
@@ -1367,13 +1438,13 @@
                                                     <div class="form-group">
                                                       <div class="col-sm-6">
                                                             <label>Spouse Name:</label>
-                                                            <form:input path="spouseName" class="form-control"></form:input>
+                                                            <form:input path="spouseName" class="form-control" readonly="true" disabled="true"></form:input>
                                                             </div>  
                                                             <div class="col-sm-6">
                                                                     <label>Spouse's Date Of Birth:</label>
                                                                     <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                         <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                    <form:input path="dateOfBirthOfEmpSpous" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <form:input path="dateOfBirthOfEmpSpous" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" disabled="true"></form:input>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                     </div>
@@ -1404,13 +1475,13 @@
                                                             <div class="form-group">
                                                                 <div class="col-sm-6">
                                                                     <label>Child Name1:</label>
-                                                                <form:input path="child1" class="form-control"></form:input>
+                                                                <form:input path="child1" class="form-control" readonly="true" disabled="true"></form:input>
                                                                 </div>
                                                                 <div class="col-sm-6">
                                                                 <label>Child1's Date Of Birth:</label>
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                    <form:input path="dateOfBirthOfEmpChilld1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <form:input path="dateOfBirthOfEmpChilld1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" disabled="true"></form:input>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                     </div>
@@ -1442,13 +1513,13 @@
                                                             <div class="form-group">
                                                                 <div class="col-sm-6">
                                                                     <label>Child Name2:</label>
-                                                                <form:input path="child2" class="form-control"></form:input>
+                                                                <form:input path="child2" class="form-control" readonly="true" disabled="true"></form:input>
                                                                 </div>
                                                                 <div class="col-sm-6">
                                                                 <label>Child2's Date Of Birth:</label>
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                     <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                    <form:input path="dateOfBirthOfEmpChild2" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <form:input path="dateOfBirthOfEmpChild2" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" disabled="true"></form:input>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                     </div>
@@ -1476,14 +1547,14 @@
                                                          <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:textarea path="presentAddress" class="form-control"></form:textarea>
+                                                            <form:textarea path="presentAddress" class="form-control" readonly="true" disabled="true"></form:textarea>
                                                             <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
 
                                                                 <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
 
-                                                                <textarea name="presentAddress2" id="presentAddress2" class="form-control">${list.presentAddress2}</textarea>
+                                                                <textarea name="presentAddress2" id="presentAddress2" class="form-control" readonly="true" disabled="true">${list.presentAddress2}</textarea>
 
                                                         </div>
                                                     </div>
@@ -1491,13 +1562,13 @@
                                                         <div class="col-sm-6">
 
                                                             <label>Present City:</label>
-                                                            <input type="text" name="presentCity" id="presentCity" value="${list.presentCity}" class="form-control">
+                                                            <input type="text" name="presentCity" id="presentCity" value="${list.presentCity}" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                             <label>Present State:</label>
-                                                            <input type="text" name="presentState" id="presentState" value="${list.presentState}" class="form-control">
+                                                            <input type="text" name="presentState" id="presentState" value="${list.presentState}" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                     </div>
@@ -1505,13 +1576,13 @@
                                                         <div class="col-sm-6">
 
                                                             <label>Present Postal Code:</label>
-                                                            <input type="text" name="presentPostalCode" id="presentPostalCode" value="${list.presentPostalCode}" class="form-control">
+                                                            <input type="text" name="presentPostalCode" id="presentPostalCode" value="${list.presentPostalCode}" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                             <label>Present Country:</label>
-                                                            <input type="text" name="presentCountry" id="presentCountry" value="${list.presentCountry}" class="form-control">
+                                                            <input type="text" name="presentCountry" id="presentCountry" value="${list.presentCountry}" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                     </div>
@@ -1519,14 +1590,14 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Permanent Address:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:textarea path="permanentAddress" class="form-control"></form:textarea>
+                                                            <form:textarea path="permanentAddress" class="form-control" readonly="true" disabled="true"></form:textarea>
                                                             <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
 
                                                                 <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <!--                                                            <input type="textarea" name="permanentAddress2" id="permanentAddress2" class="form-control">-->
-                                                                <textarea name="permanentAddress2" id="permanentAddress2"  class="form-control">${list.permanentAddress2}</textarea>
+                                                                <textarea name="permanentAddress2" id="permanentAddress2"  class="form-control" readonly="true" disabled="true">${list.permanentAddress2}</textarea>
 
                                                         </div>
                                                     </div>
@@ -1534,38 +1605,38 @@
                                                         <div class="col-sm-6">
 
                                                             <label>Permanent City:</label>
-                                                            <input type="text" name="permanentCity" id="permanentCity" value="${list.permanentCity}" class="form-control">
+                                                            <input type="text" name="permanentCity" id="permanentCity" value="${list.permanentCity}" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                             <label>Permanent State:</label>
-                                                            <input type="text" name="permanentState" id="permanentState" value="${list.permanentState}" class="form-control">
+                                                            <input type="text" name="permanentState" id="permanentState" value="${list.permanentState}" class="form-control" readonly="true" disabled="true">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
 
                                                             <label>Permanent Postal Code:</label>
-                                                            <input type="text" name="permanentPostalCode" id="permanentPostalCode" value="${list.permanentState}" class="form-control">
+                                                            <input type="text" name="permanentPostalCode" id="permanentPostalCode" value="${list.permanentState}" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                             <label>Permanent Country:</label>
-                                                            <input type="text" name="permanentCountry" id="permanentCountry" value="${list.permanentCountry}" class="form-control">
+                                                            <input type="text" name="permanentCountry" id="permanentCountry" value="${list.permanentCountry}" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                     </div>   
                                                    <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label>Emergency Contact No:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                            <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label >Emergency Contact Person:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:input path="emergencyContactPerson" class="form-control"></form:input>
+                                                            <form:input path="emergencyContactPerson" class="form-control" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             
@@ -1574,13 +1645,13 @@
                                                         <div class="col-sm-6">
 
                                                             <label>Relationship:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="RelationShip" value="${list.relationShip}" id="RelationShip" class="form-control"/>
+                                                            <input type="text" name="RelationShip" value="${list.relationShip}" id="RelationShip" class="form-control" readonly="true" disabled="true"/>
 
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                                 <label>Emergency Contact Address:<span style="color: red;font-size: 12px;"></span></label>
-                                                                <input type="text" name="emergencyContactAddress" id="emergencyContactAddress" value="${list.emergencyContactAddress}"  maxlength="14" class="form-control">
+                                                                <input type="text" name="emergencyContactAddress" id="emergencyContactAddress" value="${list.emergencyContactAddress}"  maxlength="14" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                     </div>
@@ -1591,7 +1662,7 @@
                                                         <div class="col-sm-6">
 
                                                             <label>Other important information relating to your emergency contact:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="otherImpInfo" id="otherImpInfo" value="${list.otherImpInfo}" class="form-control"/>
+                                                            <input type="text" name="otherImpInfo" id="otherImpInfo" value="${list.otherImpInfo}" class="form-control" readonly="true" disabled="true"/>
 
                                                         </div> 
                                                     </div>
@@ -1617,12 +1688,12 @@
                                                     <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label>Name of Previous company:</label>
-                                                                <input type="text" name="nameOfPreviousCompany" value="${list.nameOfPreviousCompany}" id="nameOfPreviousCompany" class="form-control">
+                                                                <input type="text" name="nameOfPreviousCompany" value="${list.nameOfPreviousCompany}" id="nameOfPreviousCompany" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label>Previous Company Location:</label>
-                                                            <input type="text" name="previousCompanyLocation" value="${list.previousCompanyLocation}" id="previousCompanyLocation" class="form-control">
+                                                            <input type="text" name="previousCompanyLocation" value="${list.previousCompanyLocation}" id="previousCompanyLocation" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                     </div>
@@ -1630,7 +1701,7 @@
                                                         
                                                             <div class="col-sm-6">
                                                                 <label>Exp. on Date Of Joining:  Year:<span style="color: red;font-size: 12px;">*</span></label>
-                                                                <form:select path="experienceYearOnDoj" class="form-control ">
+                                                                <form:select path="experienceYearOnDoj" class="form-control " disabled="true">
                                                                     <c:forEach begin="0" end="50" var="counter">
                                                                         <form:option value="${counter}">${counter}</form:option>
                                                                     </c:forEach>
@@ -1639,7 +1710,7 @@
                                                                 </div>
                                                                 <div class="col-sm-6">
                                                                     <label>Exp. on Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
-                                                                <form:select path="experienceMonthOnDoj" class="form-control">
+                                                                <form:select path="experienceMonthOnDoj" class="form-control" disabled="true">
                                                                     <c:forEach begin="0" end="11" var="counter">
                                                                         <form:option value="${counter}">${counter}</form:option>
                                                                     </c:forEach>
@@ -1651,7 +1722,7 @@
 <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label>Company:<span style="color: red;font-size: 12px;"></span></label>
-                                                                <form:select path="company"  class="form-control ">
+                                                                <form:select path="company"  class="form-control " disabled="true">
                                                                     <form:option label="-- Select --"  value="" ></form:option>
                                                                     <c:forEach var="comp" items="${company}" >
                                                                         <form:option value="${comp.value}">${comp.value}</form:option>
@@ -1667,7 +1738,7 @@
                                                         <div class="col-sm-6">
                                                             <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
 
-                                                            <form:select path="zydexLocationMaster.id" class="form-control">
+                                                            <form:select path="zydexLocationMaster.id" class="form-control" disabled="true">
                                                                 <%--<form:option value="" label="-- Select --" ></form:option>--%>
                                                                 <form:options items="${zydexLocationMap}"></form:options>
                                                             </form:select>
@@ -1675,7 +1746,7 @@
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
+                                                            <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();" disabled="true">
                                                                 <form:options items="${level}" ></form:options>
                                                             </form:select>
                                                             <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
@@ -1685,7 +1756,7 @@
                                                         <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label>Work Location:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:select path="locationMaster.id" class="form-control">
+                                                            <form:select path="locationMaster.id" class="form-control" disabled="true">
                                                                 <%--<form:option value="" label="-- Select --" ></form:option>--%>
                                                                 <form:options items="${location}"></form:options>
                                                             </form:select>
@@ -1695,7 +1766,7 @@
                                                             
 <div class="col-sm-6">
                                                                 <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:select path="departmentMaster.id" class="form-control">
+                                                            <form:select path="departmentMaster.id" class="form-control" disabled="true">
                                                                 <%--<form:option value="" label="-- Select --" ></form:option>--%>
                                                                 <form:options items="${deptMap}"></form:options>
                                                             </form:select>
@@ -1709,7 +1780,7 @@
                                                             <div class="col-sm-6">
                                                             <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
 
-                                                            <select name="employeeType" id="employeeType" class="form-control ">
+                                                            <select name="employeeType" id="employeeType" class="form-control " disabled="true">
                                                                 <c:choose>
                                                                     <c:when test="${employeeType.contains('Probation')}">
 
@@ -1730,6 +1801,16 @@
                                                                         <option value="Confirmed">Confirmed</option>
                                                                     </c:otherwise>
                                                                 </c:choose>
+                                                                        <c:choose>
+                                                                    <c:when test="${employeeType.contains('Interns')}">
+
+                                                                        <option value="Interns" selected="">Interns</option>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+
+                                                                        <option value="Interns">Interns</option>
+                                                                    </c:otherwise>
+                                                                </c:choose>
                                                             </select>
 
                                                             <!--<option value="">--SELECT--</option>-->
@@ -1738,7 +1819,7 @@
                                                         </div>
 <div class="col-sm-6">
                                                                 <label>Role:</label>
-                                                            <form:input path="role" class="form-control"></form:input>
+                                                            <form:input path="role" class="form-control" readonly="true" disabled="true"></form:input>
                                                             </div>
 
 
@@ -1747,7 +1828,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label >Official Contact No:</label>
-                                                            <input type="text" name="officialContactNumber" id="officialContactNumber" value="${list.officialContactNumber}" class="form-control">
+                                                            <input type="text" name="officialContactNumber" id="officialContactNumber" value="${list.officialContactNumber}" class="form-control" readonly="true" disabled="true">
                                                             </div>
                                                          </div>  
 
@@ -1756,24 +1837,24 @@
                                                         <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();"/>
+                                                            <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();" readonly="true" disabled="true"/>
                                                             <form:errors path="basicSalary" cssClass="errorDiv"/>
                                                         </div>
                                                          <div class="col-sm-6">
                                                                 <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
-                                                                <form:input path="esicNo" class="form-control"    placeholder="Enter ESIC No"/>
+                                                                <form:input path="esicNo" class="form-control"    placeholder="Enter ESIC No" readonly="true" disabled="true"/>
                                                                 <form:errors path="esicNo" cssClass="errorDiv"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>PF Contribution(By Employee Basic Salary):</label>
-                                                            <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                            <form:input path="pfAmount" type="number" min="0" placeholder="Enter Amount" class="form-control" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="pfAmount" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label>PF Contribution(By Employer Basic Salary):</label>
-                                                            <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
+                                                            <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                         </div>
@@ -1785,22 +1866,22 @@
                                                         <div class="col-sm-4">
                                                             <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
-                                                                <form:radiobutton path="pf"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <form:radiobutton path="pf" value="true"/>YES
+                                                                <form:radiobutton path="pf"   value="false" checked="checked" disabled="true"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="pf" value="true" disabled="true"/>YES
                                                             </fieldset>
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <label>Professional Tax:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <fieldset>
-                                                                <form:radiobutton path="pt"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <form:radiobutton path="pt" value="true"/>YES
+                                                                <form:radiobutton path="pt"   value="false" checked="checked" disabled="true"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="pt" value="true" disabled="true"/>YES
                                                             </fieldset>
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <label>ESIC:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                             <fieldset>
-                                                                <form:radiobutton path="esic" value="false"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <form:radiobutton path="esic" value="true"/>YES
+                                                                <form:radiobutton path="esic" value="false" disabled="true"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="esic" value="true" disabled="true"/>YES
                                                             </fieldset>
                                                             <form:errors path="esic" cssClass="errorDiv"></form:errors>
                                                             </div>
@@ -1810,24 +1891,24 @@
                                                             <div class="col-sm-4">
                                                                 <label>Salary Base:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                                 <fieldset>
-                                                                <form:radiobutton path="salaryBase" value="false" checked="checked"/>Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <form:radiobutton path="salaryBase" value="true"/>Day
+                                                                <form:radiobutton path="salaryBase" value="false" checked="checked" disabled="true"/>Month&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="salaryBase" value="true" disabled="true"/>Day
                                                             </fieldset>
                                                             <form:errors path="salaryBase" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-4">
                                                                 <label>OT:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                                 <fieldset>
-                                                                <form:radiobutton path="ot" value="false" checked="checked"/>YES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <form:radiobutton path="ot" value="true"/>NO
+                                                                <form:radiobutton path="ot" value="false" checked="checked" disabled="true"/>YES&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="ot" value="true" disabled="true"/>NO
                                                             </fieldset>
                                                             <form:errors path="ot" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-4">
                                                                 <label>Odd Punch Required:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <fieldset>
-                                                                <form:radiobutton path="oddPunch" value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <form:radiobutton path="oddPunch" value="true"/>YES
+                                                                <form:radiobutton path="oddPunch" value="false" checked="checked" disabled="true"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="oddPunch" value="true" disabled="true"/>YES
                                                             </fieldset>
                                                         </div>
                                                     </div>
@@ -1835,8 +1916,8 @@
                                                         <div class="col-sm-4">
                                                             <label>Payroll:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
                                                             <fieldset>
-                                                                <form:radiobutton path="payroll" value="false" checked="checked"/>No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                                <form:radiobutton path="payroll" value="true"/>Yes
+                                                                <form:radiobutton path="payroll" value="false" checked="checked" disabled="true"/>No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                <form:radiobutton path="payroll" value="true" disabled="true"/>Yes
                                                             </fieldset>
                                                             <form:errors path="payroll" cssClass="errorDiv"></form:errors>
                                                             </div>
@@ -1869,7 +1950,7 @@
                                                                             <tr>
                                                                                 <td style="text-align: center">${countVal.count}</td>
                                                                                 <td><div>
-                                                                                        <select id="policyId${countVal.count}"  name="policyId${countVal.count}"  class="form-control">
+                                                                                        <select id="policyId${countVal.count}"  name="policyId${countVal.count}"  class="form-control" disabled="true">
                                                                                             <!--<option value="">--SELECT-- </option>-->
                                                                                             <c:forEach var="policyData" items="${policy}" varStatus = "status">
                                                                                                 <c:choose>
@@ -1951,7 +2032,7 @@
                                                                         <tr>
                                                                             <td style="text-align: center">1</td>
                                                                             <td><div>
-                                                                                    <select id="policyId1"  name="policyId1"  class="form-control">
+                                                                                    <select id="policyId1"  name="policyId1"  class="form-control" disabled="true">
                                                                                         <option value="">--SELECT--</option>
                                                                                         <c:forEach var="policyData" items="${policy}" varStatus = "status">
                                                                                             <option value="${policyData.key}" >${policyData.value}</option>
@@ -1964,10 +2045,10 @@
                                                                                                                                                         <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
                                                                                                                                                     </td>-->
                                                                             <td style="text-align: center">
-                                                                                <input type="number" name="amount1" id="amount1" min="0" onchange="changetotalButton();"class="form-control" value="">
+                                                                                <input type="number" name="amount1" id="amount1" min="0" onchange="changetotalButton();"class="form-control" value="" disabled="true" readonly="true">
                                                                             </td>
                                                                             <td style="text-align: center">
-                                                                                <input type="checkbox" name="taxable1" id="taxable1" >
+                                                                                <input type="checkbox" name="taxable1" id="taxable1" disabled="true">
                                                                             </td>
                                                                             <td style="text-align: center">
                                                                                 <span style='margin-top: 5px;'>
@@ -2022,7 +2103,7 @@
                                                                             <tr>
                                                                                 <td style="text-align: center">${countVal.count}</td>
                                                                                 <td><div>
-                                                                                        <select id="ctcId${countVal.count}"  name="ctcId${countVal.count}"  class="form-control">
+                                                                                        <select id="ctcId${countVal.count}"  name="ctcId${countVal.count}"  class="form-control" disabled="true">
                                                                                             <option value="">--SELECT--</option>
                                                                                             <c:forEach var="policyData" items="${ctc}" varStatus = "status">
                                                                                                 <c:choose>
@@ -2044,23 +2125,23 @@
                                                                                                                                                             </td>-->
 
                                                                                 <td style="text-align: center">
-                                                                                    <input type="number" name="ctcamount${countVal.count}" id="ctcamount${countVal.count}" min="0" onchange="changetotalButtonNewCTC(${countVal.count});" class="form-control" value="${comp[2]}">
+                                                                                    <input type="number" name="ctcamount${countVal.count}" readonly="true" disabled="true" id="ctcamount${countVal.count}" min="0" onchange="changetotalButtonNewCTC(${countVal.count});" class="form-control" value="${comp[2]}" >
                                                                                 </td>
                                                                                 <c:if test="${comp[3] eq 1}">
 
                                                                                     <td style="text-align: center">
-                                                                                        <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" checked="true">
+                                                                                        <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" checked="true" disabled="true">
                                                                                     </td>
                                                                                 </c:if>
                                                                                 <c:if test="${comp[3] ne 1}">
                                                                                     <td style="text-align: center">
-                                                                                        <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" >
+                                                                                        <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" disabled="true">
                                                                                     </td>
                                                                                 </c:if>
                                                                                 <td ><div>
                                                                                         <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
                                                                                         <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
-                                                                                        <select id="month${countVal.count}" name="month${countVal.count}"  class="form-control ">
+                                                                                        <select id="month${countVal.count}" name="month${countVal.count}"  class="form-control " disabled="true">
 
                                                                                             <c:choose>
 
@@ -2283,7 +2364,7 @@
                                                                                 <td ><div>
                                                                                         <!--<td style="text-align: center">-->
                                                                                         <input  type="hidden" class="form-control" id="yearBase" value="${comp[5]}">
-                                                                                        <select name="year${countVal.count}" id="year${countVal.count}"  class="form-control" >
+                                                                                        <select name="year${countVal.count}" id="year${countVal.count}"  class="form-control" disabled="true">
                                                                                             <option  name="year${countVal.count}" id="year${countVal.count}"  value="${comp[5]}">${comp[5]}</option> 
                                                                                             <option  name="year${countVal.count}" id="year${countVal.count}"  value="2018">2018</option> 
                                                                                             <option  name="year${countVal.count}" id="year${countVal.count}"  value="2019">2019</option> 
@@ -2338,7 +2419,7 @@
                                                                         <tr>
                                                                             <td style="text-align: center">1</td>
                                                                             <td><div>
-                                                                                    <select id="ctcId1"  name="ctcId1"  class="form-control">
+                                                                                    <select id="ctcId1"  name="ctcId1"  class="form-control" disabled="true">
                                                                                         <option value="">--SELECT--</option>
                                                                                         <c:forEach var="policyData" items="${ctc}" varStatus = "status">
                                                                                             <option value="${policyData.key}" >${policyData.value}</option>
@@ -2351,16 +2432,16 @@
                                                                                                                                                         <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
                                                                                                                                                     </td>-->
                                                                             <td style="text-align: center">
-                                                                                <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" value="">
+                                                                                <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" value="" readonly="true" disabled="true">
                                                                             </td>
                                                                             <td style="text-align: center">
 
-                                                                                <input type="checkbox" name="ctctaxable1" id="ctctaxable1" >
+                                                                                <input type="checkbox" name="ctctaxable1" id="ctctaxable1" disabled="true">
                                                                             </td>
                                                                             <td id="monthTd1"><div>
                                                                                     <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
                                                                                     <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
-                                                                                    <select id="month1" name="month1"  class="form-control ">
+                                                                                    <select id="month1" name="month1"  class="form-control " disabled="true">
                                                                                         <option value="">--Select--</option>
                                                                                         <option value="01">January</option>
                                                                                         <option value="02">February</option>
@@ -2380,7 +2461,7 @@
                                                                             </td>
                                                                             <td style="text-align: center">
 
-                                                                                <select name="year1" id="year1" class="form-control ">
+                                                                                <select name="year1" id="year1" class="form-control " disabled="true">
 
                                                                                 </select>
                                                                             </td>
@@ -2404,14 +2485,14 @@
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <label>CTC Total:<span style="color: red;font-size: 12px;"></span></label>
-                                                                <form:input path="ctcTotal"  id="txtresultCTC" name="txtresultCTC" class="form-control" readonly="true"  />
+                                                                <form:input path="ctcTotal"  id="txtresultCTC" name="txtresultCTC" class="form-control" readonly="true" disabled="true"/>
 
                                                         </div>
                                                     </div>
 
                                                     <div class="col-md-12 col-sm-12">
                                                         <label>JOB Description:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:textarea  path="jobDescription" id="editor"></form:textarea>
+                                                        <form:textarea  path="jobDescription" id="editor" readonly="true" disabled="true"></form:textarea>
                                                         <form:errors path="jobDescription" cssClass="errorDiv"/>
                                                     </div>
 
@@ -2433,13 +2514,14 @@
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12">
+                                                    <span style="font-size: 14px; color: red;" id="errormsg"></span>
                                                     <div class="form-group">
                                                             <div class="col-sm-6">
                                                             <label>Date of Leaving:</label>
                                                           
                                                                 <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
                                                                         <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                    <form:input path="dateOfLeaving"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" onchange="calculateDayByAjax();"></form:input>
+                                                                    <form:input path="dateOfLeaving" id="leavingdate" class="form-control" size="16" placeholder="DD/MM/YYYY" onchange="calculateDayByAjax();"></form:input>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                     </div>
@@ -2448,12 +2530,33 @@
                                                         <div class="col-sm-6">
                                                          <label>Reason for Leaving:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 
-                                                                <form:textarea  path="reasonForLeaving" class="form-control" rows="3"/>
+                                                                <form:textarea  path="reasonForLeaving" id="reason" class="form-control" rows="3"/>
                                                                 <form:errors path="reasonForLeaving" cssClass="errorDiv"></form:errors>
                                                                           
                                                     </div>
 
                                                     </div> 
+                                                                <div class="form-group">
+                                                                    
+                                                                    
+                                                                <div class="col-sm-6">
+                                                            <label>Physical Date of Leaving:</label>
+                                                          
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy  hh:ii" data-link-field="dtp_input1">
+                                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                        <input type="text" name="physicaldate" id="physicaldate" value="${physicaldate}" class="form-control" size="16" placeholder="DD/MM/YYYY">
+                                                                   
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                    </div>
+                                                       
+                                                        </div>
+                                                                 <div class="col-sm-6">
+                                                                     <label>Edit Former Employee Details Only:</label>
+                                                                     <div style="padding-left: 200px;"><button type="button" class="btn btn-default" style="width: 100px;" onclick="viewClick();">Edit</button></div>
+                                                                    
+                                                                </div>
+                                                                </div>
                                                </div>
                                             </div>
                                         </div>
@@ -2473,13 +2576,13 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Bank Name:</label>
-                                                            <form:input path="bankName" class="form-control"></form:input>
+                                                            <form:input path="bankName" class="form-control" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="bankName" cssClass="errorDiv"></form:errors>
                                                             </div>
 
                                                             <div class="col-sm-6">
                                                                 <label>Bank Account No.:</label>
-                                                            <form:input path="bankAccountNo" class="form-control"></form:input>
+                                                            <form:input path="bankAccountNo" class="form-control" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="bankAccountNo" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                         </div>
@@ -2487,12 +2590,12 @@
                                                         <div class="form-group">
                                                             <div class="col-sm-6">
                                                                 <label>IFSC Code:</label>
-                                                            <form:input path="bankIfscCode" class="form-control" placeholder="(1-4: alphabets, 5th: reserved as 0, 6-11: digits) Example: SBIN0898965"></form:input>
+                                                            <form:input path="bankIfscCode" class="form-control" placeholder="(1-4: alphabets, 5th: reserved as 0, 6-11: digits) Example: SBIN0898965" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="bankIfscCode" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label>Payment Type:</label>
-                                                            <form:select path="paymentType"  class="form-control ">
+                                                            <form:select path="paymentType"  class="form-control " disabled="true">
 
                                                                 <option value="">--Select--</option>
                                                                 <form:option value="Bank">Bank</form:option>
@@ -2504,13 +2607,13 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>PF No(Previous):<span style="color: red;font-size: 12px;"></span></label>
-                                                                <form:input path="pfNo" id="pfNo" class="form-control"></form:input>
+                                                                <form:input path="pfNo" id="pfNo" class="form-control" readonly="true" disabled="true"></form:input>
                                                                 <%--<form:errors path="pfNo" cssClass="errorDiv"></form:errors>--%>
                                                         </div> 
                                                         <div class="col-sm-6">
 
                                                             <label>PF No(FLYdocs):<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="pfNoFlydocs" value="${list.pfNoFlydocs}" id="pfNoFlydocs" class="form-control">
+                                                            <input type="text" name="pfNoFlydocs" value="${list.pfNoFlydocs}" id="pfNoFlydocs" class="form-control" readonly="true" disabled="true">
 
                                                         </div>
                                                     </div>   
@@ -2519,7 +2622,7 @@
 
                                                             <label>PF Withdrawal Date:</label>
                                                             <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <input type="text" name="withdrawalDate" value="${list.withdrawalDate}" id="withdrawalDate" size="16" readonly="true" class="form-control">
+                                                                <input type="text" name="withdrawalDate" value="${list.withdrawalDate}" id="withdrawalDate" size="16" class="form-control" readonly="true" disabled="true">
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
@@ -2528,7 +2631,7 @@
 
                                                         <div class="col-sm-6">
                                                             <label>UAN No.:<span style="color: red;font-size: 12px;"></span></label>
-                                                                <form:input path="uanNo" id="uanNo"  class="form-control"></form:input>
+                                                                <form:input path="uanNo" id="uanNo"  class="form-control" readonly="true" disabled="true"></form:input>
                                                                 <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
                                                         </div>  
                                                     </div>  
@@ -2553,7 +2656,7 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6" id="levelIdDiv1">
                                                             <label>Reporting Manager:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:input path="reportingManagerLevel1" class="form-control" onchange="reportingLevelSet();"></form:input>
+                                                            <form:input path="reportingManagerLevel1" class="form-control" onchange="reportingLevelSet();" readonly="true" disabled="true"></form:input>
                                                             <form:errors path="reportingManagerLevel1" cssClass="errorDiv"></form:errors>
 
                                                             </div>
@@ -2561,7 +2664,7 @@
                                                                 <div class="col-sm-6" id="levelIdDiv2">
                                                                     <label>Level 2:</label>
                                                                 <form:hidden path="reportingManagerLevel2"></form:hidden>
-                                                                    <input type="text" name="reportingManagerLevel2Name" id="reportingManagerLevel2Name" class="form-control" readonly="true"/>
+                                                                    <input type="text" name="reportingManagerLevel2Name" id="reportingManagerLevel2Name" class="form-control" readonly="true" disabled="true"/>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -2570,26 +2673,26 @@
                                                             <div class="col-sm-6" id="levelIdDiv3">
                                                                 <label>Level 3:</label>
                                                             <form:hidden path="reportingManagerLevel3"></form:hidden>
-                                                                <input type="text" name="reportingManagerLevel3Name" id="reportingManagerLevel3Name" class="form-control" readonly="true"/>
+                                                                <input type="text" name="reportingManagerLevel3Name" id="reportingManagerLevel3Name" class="form-control" readonly="true" disabled="true"/>
                                                             </div>
 
                                                             <div class="col-sm-6" id="levelIdDiv4">
                                                                 <label>Level 4:</label>
                                                             <form:hidden path="reportingManagerLevel4"></form:hidden>
-                                                                <input type="text" name="reportingManagerLevel4Name" id="reportingManagerLevel4Name" class="form-control" readonly="true"/>
+                                                                <input type="text" name="reportingManagerLevel4Name" id="reportingManagerLevel4Name" class="form-control" readonly="true" disabled="true"/>
                                                             </div>
                                                         </div>
                                                         <div class="form-group" id="levelIdDiv5">
                                                             <div class="col-sm-6">
                                                                 <label>Functional Head:</label>
                                                             <form:hidden path="reportingManagerLevel5"></form:hidden>
-                                                                <input type="text" name="reportingManagerLevel5Name" id="reportingManagerLevel5Name" class="form-control" readonly="true"/>
+                                                                <input type="text" name="reportingManagerLevel5Name" id="reportingManagerLevel5Name" class="form-control" readonly="true" disabled="true"/>
                                                             </div>
 
                                                             <div class="col-sm-6" id="levelIdDiv6">
                                                                 <label>CEO/Proprietor/MD:</label>
                                                             <form:hidden path="reportingManagerLevel6"></form:hidden>
-                                                                <input type="text" name="reportingManagerLevel6Name" id="reportingManagerLevel6Name" class="form-control" readonly="true"/>
+                                                                <input type="text" name="reportingManagerLevel6Name" id="reportingManagerLevel6Name" class="form-control" readonly="true" disabled="true"/>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -2633,7 +2736,7 @@
                                                                     <tr id="cloneTr_Id">
                                                                         <td style="text-align: center">1</td>
                                                                         <td>
-                                                                            <input type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png"  onchange="checkCertificateFileSize(1);">
+                                                                            <input type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png"  onchange="checkCertificateFileSize(1);" disabled="true">
                                                                             <span style="font-size: 14px; color: red;" id="certificateError"></span>
                                                                             <c:forEach var="certificatesList" items="${certificatesList}">
 
@@ -2671,6 +2774,7 @@
                                     </div>-->
             </section>
         </form:form>
+        
     </div>
     <script type="text/javascript">
         $('.date_of_transfer').datetimepicker({

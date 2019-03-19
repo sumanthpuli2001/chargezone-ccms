@@ -86,7 +86,9 @@
                                                                     <!--<th align="center" style="width: 1px;"><input type="checkbox" id="toggleId"/></th>-->
                                                                     <th>Employee id</th>
                                                                     <th>Employee Name</th>
-                                                                    <th>Effective Date</th>
+                                                                    <th>Team</th>
+                                                                    <th>Sub Team</th>
+                                                                    <th>Resignation date & time</th>
                                                                     <th>Good/Bad Attrition</th>
                                                                     <th>Status</th>
                                                                     <th>Action</th>
@@ -100,6 +102,8 @@
                                                                 <!--<td align="center"><input type="checkbox" name="checkId" id="hoursId" value="${list[0]}"/></td>-->
                                                                 <td>${list[4]}</td>
                                                                 <td>${list[5]}</td>
+                                                                <td>${list[7]}</td>
+                                                                <td>${list[8]}</td>
                                                                 <td>${list[1]}</td>
                                                                 <td>${list[6]}</td>
                                                                 <c:if test="${list[2] == 2}"><td><span class="badge">Pending</span></td></c:if>

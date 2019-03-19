@@ -13,10 +13,12 @@ public class ResignationMaster implements java.io.Serializable {
     private int status;
     private String managerComment;
     private String relievingDate;
+    private String relievingDatephysical;
     private String hrComment;
     private Integer hrId;
     private String hrApproveDate;
     private String attrition;
+    private int relivingDateRadio;
 
     public ResignationMaster() {
     }
@@ -28,7 +30,7 @@ public class ResignationMaster implements java.io.Serializable {
         this.status = status;
     }
 
-    public ResignationMaster(Integer id, EmployeeMaster employeeMaster, String effectiveDatetime, String reason, int status, String managerComment, String relievingDate, String hrComment, Integer hrId, String hrApproveDate, String attrition) {
+    public ResignationMaster(Integer id, EmployeeMaster employeeMaster, String effectiveDatetime, String reason, int status, String managerComment, String relievingDate, String hrComment, Integer hrId, String hrApproveDate, String attrition,String relievingDatephysical,int relivingDateRadio) {
         this.id = id;
         this.employeeMaster = employeeMaster;
         this.effectiveDatetime = effectiveDatetime;
@@ -40,6 +42,8 @@ public class ResignationMaster implements java.io.Serializable {
         this.hrId = hrId;
         this.hrApproveDate = hrApproveDate;
         this.attrition = attrition;
+        this.relievingDatephysical = relievingDatephysical;
+        this.relivingDateRadio = relivingDateRadio;
     }
 
     public Integer getId() {
@@ -129,5 +133,24 @@ public class ResignationMaster implements java.io.Serializable {
     public void setAttrition(String attrition) {
         this.attrition = attrition;
     }
+
+    public String getRelievingDatephysical() {
+        return relievingDatephysical;
+    }
+
+    public void setRelievingDatephysical(String relievingDatephysical) {
+        this.relievingDatephysical = relievingDatephysical;
+    }
+
+    
+
+    public int getRelivingDateRadio() {
+        return relivingDateRadio;
+    }
+
+    public void setRelivingDateRadio(int relivingDateRadio) {
+        this.relivingDateRadio = relivingDateRadio;
+    }
+    
 
 }

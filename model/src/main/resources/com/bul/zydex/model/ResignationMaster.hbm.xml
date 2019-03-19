@@ -20,11 +20,17 @@
         <property name="status" type="int">
             <column name="status" not-null="true" />
         </property>
+        <property name="relivingDateRadio" type="int">
+            <column name="relieving_date_per_rule" not-null="true" />
+        </property>
         <property name="managerComment" type="string">
             <column name="manager_comment" />
         </property>
         <property name="relievingDate" type="string">
             <column name="relieving_date" length="45" />
+        </property>
+        <property name="relievingDatephysical" type="string">
+            <column name="relieving_date_physical" length="45" />
         </property>
         <property name="hrComment" type="string">
             <column name="hr_comment" />

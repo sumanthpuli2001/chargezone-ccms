@@ -41,6 +41,8 @@ public class EmployeeTypeController extends EmployeeTypeAbstract {
         EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
         BindException errors = new BindException(employeeTypeMaster, "employeeTypeMaster");
         bind(request, employeeTypeMaster);
+        String formatvalue = employeeTypeMaster.getTypeOfEmployee();
+        employeeTypeMaster.setTypeOfEmployee(formatvalue.trim());
         employeeTypeValidator.validate(employeeTypeMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -48,7 +50,7 @@ public class EmployeeTypeController extends EmployeeTypeAbstract {
             mv.addAllObjects(errors.getModel());
             mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
             mv.setViewName("Employee/EmployeeTypeCreate");
-
+            
         } else {if (!employeeTypeService.isExist(employeeTypeMaster)) {
             employeeTypeService.create(employeeTypeMaster);
             request.setAttribute("successMessage",

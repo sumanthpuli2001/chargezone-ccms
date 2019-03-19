@@ -112,6 +112,8 @@
         <property name="mprApprovalHistoryService" ref="mprApprovalHistoryService1"/>
         <property name="employeeMasterServiceExtension" ref="employeeMasterServiceExtension1"/>
         <property name="employeeVisaDetailsService" ref="employeeVisaDetailsService1"/>
+        <property name="resignationMasterService" ref="resignationMasterService1" />
+        
     </bean>
 
     <!--Department Master-->

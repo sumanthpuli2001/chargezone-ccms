@@ -49,4 +49,6 @@ public interface ResignationMasterDAO<T> extends GenericsDAO<T> {
     
     public List<?> fetchBWdate(int emp, String eftDate, String relivDate);
 
+    public List<?> readByApprovedEmpID(Integer id);
+
 }

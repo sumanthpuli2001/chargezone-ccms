@@ -31,6 +31,7 @@ import com.bul.zydex.model.PayrollPfCheck;
 import com.bul.zydex.model.PayrollPtCheck;
 import com.bul.zydex.model.PmpFormStatusMaster;
 import com.bul.zydex.model.PolicyMaster;
+import com.bul.zydex.model.ResignationMaster;
 import com.bul.zydex.model.RotationMaster;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
 import com.bul.zydex.model.ShiftMaster;
@@ -59,6 +60,7 @@ import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.policy.CtcAllowanceService;
 import com.bul.zydex.service.policy.EmployeeCtcDetailService;
 import com.bul.zydex.service.policy.PolicyMasterService;
+import com.bul.zydex.service.resignation.ResignationMasterService;
 import com.bul.zydex.service.shift.HoursBasisService;
 import com.bul.zydex.service.shift.RotationMasterService;
 import com.bul.zydex.service.shift.ShiftGenerateMonthlyScheduleService;
@@ -111,6 +113,7 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     protected ApplayJobUserMasterService<ApplayJobUserMaster> applayJobUserMasterService;
     protected MprApprovalHistoryService<MprApprovalHistory> mprApprovalHistoryService;
     protected EmployeeVisaDetailsService<EmployeeVisaDetails> employeeVisaDetailsService;
+    protected ResignationMasterService<ResignationMaster> resignationMasterService;
     
     public CompetencyEvaluationMasterService<CompetencyEvaluationMaster> getCompetencyEvaluationMasterService() {
         return competencyEvaluationMasterService;
@@ -246,6 +249,14 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
 
     public void setEmployeeVisaDetailsService(EmployeeVisaDetailsService<EmployeeVisaDetails> employeeVisaDetailsService) {
         this.employeeVisaDetailsService = employeeVisaDetailsService;
+    }
+
+    public ResignationMasterService<ResignationMaster> getResignationMasterService() {
+        return resignationMasterService;
+    }
+
+    public void setResignationMasterService(ResignationMasterService<ResignationMaster> resignationMasterService) {
+        this.resignationMasterService = resignationMasterService;
     }
 
    

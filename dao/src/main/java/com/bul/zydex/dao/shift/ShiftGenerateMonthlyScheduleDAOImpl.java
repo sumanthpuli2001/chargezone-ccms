@@ -932,4 +932,76 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
             
     }
 
+    @Override
+    public List<?> checkForWoff(Integer id, String str) {
+        String query = "";
+        query += "Select a.rotationDate from WoffRegularization a"
+                + " Where a.userMasterId.id ="+id
+                + " and a.status=1 "
+                + " and STR_TO_DATE(a.rotationDate,'%d/%m/%Y') = STR_TO_DATE('" +str+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+    
+    @Override
+    public List<?> checkForWoff1(Integer id, String str) {
+        String query = "";
+        query += "Select a.dayWoff from WoffRegularization a"
+                + " Where a.userMasterId.id ="+id
+                + " and a.status=1 "
+                + " and STR_TO_DATE(a.dayWoff,'%d/%m/%Y') = STR_TO_DATE('" +str+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public String checkForWoff2(Integer id, String str) {
+        String query = "";
+        query += "Select a.id from WoffRegularization a"
+                + " Where a.userMasterId.id ="+id
+                + " and a.status=1 "
+                + " and STR_TO_DATE(a.rotationDate,'%d/%m/%Y') = STR_TO_DATE('" +str+ "','%d/%m/%Y')";
+        List<?> list = getHibernateTemplate().find(query);
+        String list1 = list.get(0).toString();
+        return list1;
+    }
+    
+    @Override
+    public List<?> checkForWoff3(Integer id, String str) {
+        String query = "";
+        query += "Select a.dayWoff1 from WoffRegularization a"
+                + " Where a.userMasterId.id ="+id
+                + " and a.status=1 "
+                + " and STR_TO_DATE(a.dayWoff1,'%d/%m/%Y') = STR_TO_DATE('" +str+ "','%d/%m/%Y')";
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public String woffDayNextValue(String data) {
+        String a[] = data.split("&");
+        String query = "";
+
+        query += "Select a.day"+a[1]+" from ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.shiftMonth="+a[2]
+                + " and a.shiftYear="+a[3];
+        
+        List<?> list = getHibernateTemplate().find(query);
+        String list1 = list.get(0).toString();
+        return list1;
+    }
+    
+    @Override
+    public String woffDayBeforeValue(String data) {
+        String a[] = data.split("&");
+        String query = "";
+
+        query += "Select a.day"+a[4]+" from ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.shiftMonth="+a[5]
+                + " and a.shiftYear="+a[6];
+        
+        List<?> list = getHibernateTemplate().find(query);
+        String list1 = list.get(0).toString();
+        return list1;
+    }
+
 }

@@ -44,6 +44,9 @@
         <property name="dayWoff" type="string">
             <column name="day_woff" />
         </property>
+        <property name="dayWoff1" type="string">
+            <column name="day_woff1" />
+        </property>
     </class>
   
 

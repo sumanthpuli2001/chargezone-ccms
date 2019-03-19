@@ -28,6 +28,7 @@ import com.bul.zydex.model.ShiftRotationMaster;
 import com.bul.zydex.model.ShortLeave;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.UserRightMaster;
+import com.bul.zydex.model.WoffRegularization;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
@@ -45,6 +46,7 @@ import com.bul.zydex.service.shift.ShiftGenerateMonthlyScheduleService;
 import com.bul.zydex.service.shift.ShiftMasterService;
 import com.bul.zydex.service.shift.ShiftRotationInfoService;
 import com.bul.zydex.service.shift.ShiftRotationMasterService;
+import com.bul.zydex.service.shift.WoffRegularizationService;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -78,6 +80,7 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
     protected ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService;
     protected EmployeeTypeService<EmployeeTypeMaster> employeeTypeService;
     protected EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService;
+    protected WoffRegularizationService<WoffRegularization> woffRegularizationService;
 
     public UserRightMasterService<UserRightMaster> getUserRightMasterService() {
         return userRightMasterService;
@@ -214,7 +217,14 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
     public void setEmployeeSubTypeService(EmployeeSubTypeService<EmployeeSubType> employeeSubTypeService) {
         this.employeeSubTypeService = employeeSubTypeService;
     }
-    
+
+    public WoffRegularizationService<WoffRegularization> getWoffRegularizationService() {
+        return woffRegularizationService;
+    }
+
+    public void setWoffRegularizationService(WoffRegularizationService<WoffRegularization> woffRegularizationService) {
+        this.woffRegularizationService = woffRegularizationService;
+    }
     
 
     protected void addleaveType(HttpServletRequest request) {

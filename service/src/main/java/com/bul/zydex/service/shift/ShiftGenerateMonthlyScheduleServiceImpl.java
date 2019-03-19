@@ -308,4 +308,34 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
         return shiftGenerateMonthlyScheduleDAO.noOfDaysForYear3(id,dateofpreYearint,leave1);
     }
 
+    @Override
+    public List<?> checkForWoff(Integer id, String str) {
+        return shiftGenerateMonthlyScheduleDAO.checkForWoff(id,str);
+    }
+    
+    @Override
+    public List<?> checkForWoff1(Integer id, String str) {
+        return shiftGenerateMonthlyScheduleDAO.checkForWoff1(id,str);
+    }
+
+    @Override
+    public String checkForWoff2(Integer id, String str) {
+        return shiftGenerateMonthlyScheduleDAO.checkForWoff2(id,str);
+    }
+    
+    @Override
+    public List<?> checkForWoff3(Integer id, String str) {
+        return shiftGenerateMonthlyScheduleDAO.checkForWoff3(id,str);
+    }
+
+    @Override
+    public String woffDayNextValue(String data) {
+        return shiftGenerateMonthlyScheduleDAO.woffDayNextValue(data);
+    }
+    
+    @Override
+    public String woffDayBeforeValue(String data) {
+        return shiftGenerateMonthlyScheduleDAO.woffDayBeforeValue(data);
+    }
+
 }

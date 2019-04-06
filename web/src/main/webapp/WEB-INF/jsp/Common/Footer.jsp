@@ -261,7 +261,7 @@
         });
     }
 </script>
-<label style="font-weight: normal;float: right;"> © 2018 <a href="http://www.spcls.co.in" target="_blank"><strong>SPC Lifesciences </strong></a> All rights reserved. </label>
+<label style="font-weight: normal;float: right;"> © 2019 <a href="https://flydocs.aero/" target="_blank"><strong>FLYdocs India Pvt Ltd</strong></a> All rights reserved. </label>
 <script>
 //==============================================================//
 //set time out for errorDiv Class

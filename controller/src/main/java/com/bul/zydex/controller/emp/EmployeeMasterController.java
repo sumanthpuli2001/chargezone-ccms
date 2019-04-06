@@ -85,6 +85,8 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.validation.BindException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -854,6 +856,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         ModelAndView mv = new ModelAndView();
         EmployeeMaster employeeMaster = new EmployeeMaster();
 //        List<?> employeeMasterList = employeeMasterService.read();
+
+        EmployeeTypeList(request);
+        EmployeeSubTypeOnlyUniqueList(request);
         List<?> employeeMasterList = employeeMasterService.readEmployeesDetail();
         mv.getModelMap().put("list", employeeMasterList);
         //dont rename "list" because same used on getEmployeeDetailsBySearchString method and employeeRegistrationResult.jsp
@@ -6556,4 +6561,32 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
        
       
     }
+    
+   
+     public ModelAndView readEmployeeDetailsTeamAndSubTeamWise(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String type = request.getParameter("type");
+        String id = request.getParameter("id");
+        EmployeeTypeList(request);
+        EmployeeSubTypeOnlyUniqueList(request);
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        List<EmployeeMaster> employeemasterlist = new ArrayList<EmployeeMaster>();
+        if(type.equals("Team")){
+            employeemasterlist = (List<EmployeeMaster>) employeeMasterService.readByTeamId(Integer.parseInt(id));
+             request.setAttribute("typeid", id);
+        }else if(type.equals("SubTeam")){
+            employeemasterlist = (List<EmployeeMaster>) employeeMasterService.readBySubTeamId(Integer.parseInt(id));
+             request.setAttribute("subtypeid", id);
+        }
+        mv.getModelMap().put("list", employeemasterlist);
+        
+       
+        //dont rename "list" because same used on getEmployeeDetailsBySearchString method and employeeRegistrationResult.jsp
+        mv.getModelMap().put("employeeMaster", employeeMaster);
+        mv.setViewName("Employee/EmployeeRegistrationResult");
+
+        return mv;
+        
+    }
+    
 }

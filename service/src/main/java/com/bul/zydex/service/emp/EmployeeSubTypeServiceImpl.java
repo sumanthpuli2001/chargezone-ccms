@@ -70,6 +70,11 @@ return employeeSubTypeDAO.readByEmployeeTypeId(typeId);
     public List<?> readOrderNameWise() {
         return employeeSubTypeDAO.readOrderNameWise();
     }
+
+    @Override
+    public List<?> readOrderNameWiseUnique() {
+        return employeeSubTypeDAO.readOrderNameWiseUnique();
+    }
     }
     
    

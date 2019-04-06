@@ -2661,4 +2661,40 @@ public class EmployeeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return list;
     }
 
+    @Override
+    public List<?> readByTeamId(int id) {
+        String query = "";
+        query += " "
+                + " SELECT a.id, a.employeeId, a.employeeName,b.typeOfEmployee,c.subType,  a.role, d.id"
+                + " FROM EmployeeMaster a "
+                + " LEFT JOIN a.employeeTypeMaster b "
+                + " LEFT JOIN a.employeeSubType c "
+                + " LEFT JOIN a.userMaster d "
+                + " where ((a.dateOfLeaving is null or a.dateOfLeaving = '') "
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())"
+                + " AND a.employeeId not in ('admin')"
+                + " AND a.employeeTypeMaster = "+id
+                + " ORDER BY a.employeeId ASC ";
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
+    @Override
+    public List<?> readBySubTeamId(int id) {
+        String query = "";
+        query += " "
+                + " SELECT a.id, a.employeeId, a.employeeName,b.typeOfEmployee,c.subType,  a.role, d.id"
+                + " FROM EmployeeMaster a "
+                + " LEFT JOIN a.employeeTypeMaster b "
+                + " LEFT JOIN a.employeeSubType c "
+                + " LEFT JOIN a.userMaster d "
+                + " where ((a.dateOfLeaving is null or a.dateOfLeaving = '') "
+                + " or STR_TO_DATE(a.dateOfLeaving,'%d/%m/%Y - %H:%i') > now())"
+                + " AND a.employeeId not in ('admin')"
+                + " AND a.employeeSubType = "+id
+                + " ORDER BY a.employeeId ASC ";
+        List<?> list = getHibernateTemplate().find(query);
+        return list;
+    }
+
 }

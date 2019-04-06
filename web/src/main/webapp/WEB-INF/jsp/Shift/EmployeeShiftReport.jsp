@@ -17,7 +17,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Shift Data Search</title>
+        <title>Shift Report</title>
     </head>
 
     <style>
@@ -27,12 +27,29 @@
             width: 25%;
         }
     </style>
+<script>
+        var flag3 = true;
+        function saveSubmit11() {
+            if (flag3) {
+                 var intime = document.getElementById("inDateTime").value;
+                 var outtime = document.getElementById("outDateTime").value;
+                 var locatoin = document.getElementById("zydexLocationId").value;
+                 var empid = document.getElementById("employeeMasterId").value;
+                 if(intime == null || intime == "" || outtime == null || outtime == "" || locatoin == null || locatoin == "" || empid == null || empid == ""){
+                     document.getElementById('errormsg').innerHTML = '-Enter all the details to Export Data.';
+                     $("#errormsg").delay(0).fadeIn(0);
+                     $("#errormsg").delay(3200).fadeOut(300);
+                     return false;
+                 }
+            }
+        }
 
+    </script>
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>MONTHLY ATTENDANCE REPORT</h1>
+            <h1>SHIFT REPORT</h1>
 
         </section>
         <c:if test="${!empty successMessage}">
@@ -44,7 +61,7 @@
         <!-- Main content -->
         <%--<form:form action="shiftRotationMaster.htm?act=employeeAttandanceDataSearchSubmit" method="post" commandName="employeeAdvanceSearch"--%>
         <form:form action="shiftRotationMaster.htm?act=getShiftForReportSubmit" method="post" commandName="employeeAdvanceSearch"
-                   name='form1' class="form-horizontal" role="form">
+                   name='form1' class="form-horizontal" role="form" onsubmit='return saveSubmit11();'>
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -56,13 +73,14 @@
                                 <div class="box-body no-padding">
                                     <div class="row">
                                         <!--<div class="col-md-6 col-sm-6">-->
-                                        <div class="col-md-12 col-sm-12">
+                                        <div class="col-md-12">
+                                            <span style="font-size: 14px; color: red;" id="errormsg"></span>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Start Date<span style="color : red;font-size:12px;"></span></label>
                                                     <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
                                                         <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="inDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                        <form:input path="inDateTime" id="inDateTime" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                         </div>
@@ -71,7 +89,7 @@
                                                         <label>End Date<span style="color:red;font-size:12px;"></span></label>
                                                         <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
                                                             <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="outDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                        <form:input path="outDateTime" id="outDateTime" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                         </div>
@@ -102,7 +120,9 @@
                                                 <div class="form-group">
                                                     <div class=" col-sm-12" style="text-align: center;">
                                                         <button type="submit" class="btn btn-primary" style="width: 100px;" >EXPORT</button>
+                                                       
                                                     </div>
+                                                     
                                                 </div>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->

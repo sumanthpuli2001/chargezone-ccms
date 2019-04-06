@@ -63,4 +63,12 @@ public class EmployeeSubTypeDAOImpl<T> extends GenericsDAOImpl<T> implements Emp
         return getHibernateTemplate().find(query);
     }
 
+    @Override
+    public List<?> readOrderNameWiseUnique() {
+         String query = "";
+        query += "From EmployeeSubType a "
+              + " GROUP BY a.subType";
+        return getHibernateTemplate().find(query);
+    }
+
 }

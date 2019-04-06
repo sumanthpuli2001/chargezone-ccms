@@ -806,5 +806,21 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
         request.setAttribute("ctc", ctc);
     }
     
+    protected void EmployeeSubTypeOnlyUniqueList(HttpServletRequest request) {
+        List<?> EmployeeSubTypeList = employeeSubTypeService.readOrderNameWiseUnique();
+        Map<Integer, String> map = new HashMap();
+        for (Object obj : EmployeeSubTypeList) {
+            EmployeeSubType employeeSubType = (EmployeeSubType) obj;
+            map.put(employeeSubType.getId(), employeeSubType.getSubType());
+        }
+        Map<Integer,String> sorted = map
+        .entrySet()
+        .stream()
+        .sorted(comparingByValue())
+        .collect(
+            toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
+                LinkedHashMap::new));
+        request.setAttribute("EmployeeSubTypeList", sorted);
+    }
 
 }

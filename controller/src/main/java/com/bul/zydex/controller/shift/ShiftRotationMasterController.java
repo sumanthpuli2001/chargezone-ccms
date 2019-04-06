@@ -14731,10 +14731,10 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 row.createCell(7).setCellValue("Second");
                 row.createCell(8).setCellValue("Second");
                 row.createCell(9).setCellValue("WO ");
-                row.createCell(10).setCellValue("General");
+                row.createCell(10).setCellValue("SPL General");
                 row.createCell(11).setCellValue("Second");
                 row.createCell(12).setCellValue("General");
-                row.createCell(13).setCellValue("General");
+                row.createCell(13).setCellValue("SPL General");
                 row.createCell(14).setCellValue("Second");
                 row.createCell(15).setCellValue("Morning");
                 row.createCell(16).setCellValue("Evening");

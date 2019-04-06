@@ -48,6 +48,19 @@
                 return false;
             }
         </script>
+        <script>
+            function teamchanged(type,id){
+               
+               if(id.value === 'None'){
+                    window.location = 'employeeMaster.htm?act=searchSubmit';
+               }
+               else{
+                   var idd =  id.value;
+                   window.location = 'employeeMaster.htm?act=readEmployeeDetailsTeamAndSubTeamWise&id=' + idd + '&type=' + type;
+               }
+                
+            }
+            </script>
     </head>
 
 
@@ -82,12 +95,53 @@
 
                                     <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'employeeMaster.htm?act=createClick'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
                                 </c:if>
+                                    
+                                   
                                 <div class="box-header">
                                 </div>
                                 <div class="box-body no-padding">
                                     <div class="row">
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="table table-bordered">
+                                        <div class="col-md-12">
+                                            <input type="hidden" id="keyval">
+                                            <div class="col-md-2" style="width: 200px; padding-bottom: 20px;">
+                                             
+                                                                <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                
+                                                                <select name="employeeTypeMaster.id" id="employeeTypeMaster.id" class="form-control" onchange="teamchanged('Team',this);" style="font-size: 12px;">
+                                                                    <option value="None">-- Select --</option>
+                                                                    <c:forEach var="EmployeeTypeList" items="${EmployeeTypeList}">
+                                                                        <c:choose>
+                                                                            <c:when test="${typeid == EmployeeTypeList.key}">
+                                                                                    <option value="${typeid}" selected="selected">${EmployeeTypeList.value}</option>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <option value="${EmployeeTypeList.key}">${EmployeeTypeList.value}</option>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                        
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>
+                                                               
+                                                            <div class="col-md-2" style="width: 200px; padding-bottom: 20px;">
+                                               
+                                                                <label>Sub Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <select name="employeeSubType.id" id="employeeSubType.id" class="form-control" onchange="teamchanged('SubTeam',this);" style="font-size: 12px;">
+                                                                    <option value="None">-- Select --</option>
+                                                                    <c:forEach var="EmployeeSubTypeList" items="${EmployeeSubTypeList}">
+                                                                        <c:choose>
+                                                                            <c:when test="${subtypeid == EmployeeSubTypeList.key}">
+                                                                                <option value="${subtypeid}" selected="selected">${EmployeeSubTypeList.value}</option>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <option value="${EmployeeSubTypeList.key}">${EmployeeSubTypeList.value}</option>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>
+                                                            
+                                            <div class="table table-bordered" style="padding-top: 20px;"> 
                                                 <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="center"  >
                                                     <c:choose>
                                                         <c:when test="${empty list}">
@@ -98,6 +152,7 @@
                                                                 </tr>
                                                         </c:when>
                                                         <c:otherwise>
+                                                            
                                                             <thead>
                                                                 <tr>
                                                                     <c:if test="${sessionScope.userRight.employeeManagement}">
@@ -117,6 +172,12 @@
                                                         </c:otherwise>
                                                     </c:choose>
                                                     <tbody>
+                                                        
+                                                        
+<!--                                                        <span id="employeeDetailBody"></span>-->
+                                                     
+                                                        
+                                                        
                                                         <c:forEach var="list" items="${list}">
                                                             <tr>
                                                                 <c:if test="${sessionScope.userRight.employeeManagement}">
@@ -201,6 +262,7 @@
                                                                 <%--</c:if>--%>
                                                             </tr>
                                                         </c:forEach>
+                                                           
                                                     </tbody>
                                                 </table>
                                             </div>

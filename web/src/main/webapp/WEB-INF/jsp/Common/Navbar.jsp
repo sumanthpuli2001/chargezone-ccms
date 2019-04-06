@@ -59,9 +59,9 @@
                         </a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.userRight.budget || sessionScope.userRight.mpr || sessionScope.userRight.mppApproval || sessionScope.userRight.mprApproval || sessionScope.userRight.candidateList || sessionScope.userRight.vacancy || sessionScope.userRight.faceTofaceInterview || sessionScope.userRight.faceTofaceApproval}">
+               
 
-                    <li class="treeview" style="color: #585858;">
+<!--                    <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
                             <i class="fa fa-user fa-lg" style="color: #585858;"></i>
                             <span style="color: #585858;">Recruitment</span>
@@ -91,7 +91,7 @@
                                 <li><a href="candidateF2FApproval.htm?act=candidateF2FReqHr"><i class="fa fa-circle-o"></i>Hr Candidate F2F  Request </a></li>
                                 </c:if>
                                 <%--<c:if test="${sessionScope.userRight.faceTofaceApproval}">--%>
-                            <!--<li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Approval</a></li>-->
+                            <li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Approval</a></li>
                             <%--</c:if>--%>
                             <c:if test="${sessionScope.userRight.hrFtFApproval}">
                                 <li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i>Candidate F2F Request</a></li>
@@ -100,9 +100,9 @@
                                 <li><a href="vacancy.htm?act=vacancyShowByApprove"><i class="fa fa-circle-o"></i>Vacancy Approval</a></li>
                                 </c:if>
                         </ul>
-                    </li>
+                    </li>-->
 
-                </c:if>
+               
                 <c:if test="${sessionScope.userRight.employeeManagement}">
                     <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
@@ -1003,7 +1003,7 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="ow-break-word"><a href="resignationMaster.htm?act=fullandfcreateClick"><i class="fa fa-circle-o"></i>F&F Settlement Letter Formate</a></li>
+                        <li class="ow-break-word"><a href="resignationMaster.htm?act=fullandfcreateClick"><i class="fa fa-circle-o"></i>F&F Settlement Letter Format</a></li>
                         <!--<li><a href="modulesMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Modules Master</a></li>-->
                         <!--<li><a href="componentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Component Master</a></li>-->
                         <li><a href="approval.htm?act=approvalList"><i class="fa fa-circle-o"></i>Approval Setting</a></li>
@@ -1017,8 +1017,8 @@
                         <li><a href="clientDetailsMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Client Master</a></li>
                         <li><a href="holidayMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Holiday Master</a></li>
                         <li><a href="holidayMaster.htm?act=holidayExcelUpload"><i class="fa fa-circle-o"></i>Holiday Excel Import</a></li>
-                        <li><a href="policyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Allowance</a></li>
-                        <li><a href="zydexLocationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Location Master</a></li>
+                            <li><a href="policyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Allowance</a></li>
+                        <li><a href="zydexLocationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Work Location Master</a></li>
                         <li><a href="currencyMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Currency Master</a></li>
                         <li><a href="policyDeviationForAir.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Policy Deviation Master</a></li>
                         <li><a href="visitorVisitedLocation.htm?act=createClick"><i class="fa fa-circle-o"></i>Visitor Visited Location</a></li>

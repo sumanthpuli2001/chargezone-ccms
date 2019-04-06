@@ -27,4 +27,6 @@ public interface EmployeeSubTypeService<T> extends GenericsService<T> {
 
     public List<?> readOrderNameWise();
 
+    public List<?> readOrderNameWiseUnique();
+
 }

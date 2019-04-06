@@ -42,8 +42,10 @@
                     </ul>
                     <!-- Navbar Right Menu -->
                     <div class="navbar-custom-menu">
+                        
                         <!--<form class="navbar-form navbar-left navbar-search alt" role="search">-->
                         <div class="navbar-form navbar-left navbar-search alt form-group">
+                            
                             <input type="text" id="searchBox" class="form-control" placeholder="Employee Search..." value="" style="border-radius: 10px;">
                         </div>
                         <!--</form>-->

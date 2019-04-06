@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Shift Data Search</title>
+        <title>Monthly Attendance Report</title>
     </head>
 
     <script>
@@ -39,7 +39,48 @@
             width: 25%;
         }
     </style>
+<script>
+        var flag3 = true;
+        function saveSubmit11() {
+            if (flag3) {
+                var selObj = document.getElementById("criteria");
+                var selValue = selObj.options[selObj.selectedIndex].text;
+//                alert(selValue);
+                 var intime = document.getElementById("inDateTime").value;
+                 var outtime = document.getElementById("outDateTime").value;
+                 var locatoin = document.getElementById("zydexLocationId").value;
+                 var empid = document.getElementById("employeeMasterId").value;
+                 var levelid = document.getElementById("levelId").value;
+                 var departmentid = document.getElementById("departmentId").value;
+                 
+                 if(selValue == "Employee wise Search"){
+                     if(intime == null || intime == "" || outtime == null || outtime == "" || empid == null || empid == ""){
+                     document.getElementById('errormsg').innerHTML = '-Enter all the details to Export Data.';
+                     $("#errormsg").delay(0).fadeIn(0);
+                     $("#errormsg").delay(3200).fadeOut(300);
+                     return false;
+                    }
+                     
+                 }else if (selValue == "Other"){
+                     if(intime == null || intime == "" || outtime == null || outtime == "" || locatoin == null || locatoin == "" || levelid == null || levelid == "" || departmentid == null || departmentid == ""){
+                     document.getElementById('errormsg').innerHTML = '-Enter all the details to Export Data.';
+                     $("#errormsg").delay(0).fadeIn(0);
+                     $("#errormsg").delay(3200).fadeOut(300);
+                     return false;
+                    }
+                }else{
+                    if(intime == null || intime == "" || outtime == null || outtime == "" || locatoin == null || locatoin == "" || levelid == null || levelid == "" || departmentid == null || departmentid == "" || empid == null || empid == ""){
+                     document.getElementById('errormsg').innerHTML = '-Enter all the details to Export Data.';
+                     $("#errormsg").delay(0).fadeIn(0);
+                     $("#errormsg").delay(3200).fadeOut(300);
+                     return false;
+                    }
+                }
+                 
+            }
+        }
 
+    </script>
 
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -56,7 +97,7 @@
         <!-- Main content -->
         <%--<form:form action="shiftRotationMaster.htm?act=employeeAttandanceDataSearchSubmit" method="post" commandName="employeeAdvanceSearch"--%>
         <form:form action="shiftRotationMaster.htm?act=employeeMonthlyPayrollReport" method="post" commandName="employeeAdvanceSearch"
-                   name='form1' class="form-horizontal" role="form">
+                   name='form1' class="form-horizontal" role="form" onsubmit='return saveSubmit11();'>
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
@@ -74,13 +115,14 @@
                                     <div class="row">
                                         <!--<div class="col-md-6 col-sm-6">-->
                                         <div class="col-md-12 col-sm-12">
+                                             <span style="font-size: 14px; color: red;" id="errormsg"></span>
                                             <div class="form-group">
 
                                                 <div class="col-sm-6">
                                                     <label>Start Date<span style="color : red;font-size:12px;"></span></label>
                                                     <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
                                                         <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="inDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                        <form:input path="inDateTime" id="inDateTime" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                         </div>
@@ -89,7 +131,7 @@
                                                         <label>End Date<span style="color:red;font-size:12px;"></span></label>
                                                         <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
                                                             <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="outDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                        <form:input path="outDateTime" id="outDateTime" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                         </div>
@@ -98,7 +140,7 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Searching Criteria:</label>
-                                                        <select name="vallist" name="vallist" class="form-control" onchange="selectDropsDown11(this.value);">
+                                                        <select name="vallist" id="criteria" name="vallist" class="form-control" onchange="selectDropsDown11(this.value);">
                                                             <option value="emp">Employee wise Search</option>
                                                             <option value="other">Other</option>
                                                         </select>

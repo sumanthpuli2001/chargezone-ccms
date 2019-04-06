@@ -116,7 +116,7 @@
                                         <div class="col-sm-2">
                                             <div class="input-group date">
                                                 <label for="startDate">Select Month & Year:</label>  
-                                                <input name="monthYear" id="monthYear" class="date-picker" placeholder="Optional"/> 
+                                                <input name="monthYear" id="monthYear" class="date-picker"/> 
                                                 <span id="Error" style="color: red;"></span>
                                             </div>                 
                                         </div>

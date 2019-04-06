@@ -51,13 +51,13 @@
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Company Name<span style="color: red;font-size: 12px;">*</span></label>
-                                                     <label>Description:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <label>Company Name:<span style="color: red;font-size: 12px;">*</span></label>
+<!--                                                     <label>Description:<span style="color: red;font-size: 12px;"></span></label>-->
                                                     <span >${formateFullNdFinalLetter.companyName}</span>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Company Name<span style="color: red;font-size: 12px;">*</span></label>
-                                                     <label>Description:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <label>DATE:<span style="color: red;font-size: 12px;">*</span></label>
+<!--                                                     <label>Description:<span style="color: red;font-size: 12px;"></span></label>-->
                                                     <span >${formateFullNdFinalLetter.createDate}</span>
                                                 </div>
                                             </div>

@@ -23,4 +23,6 @@ public interface EmployeeSubTypeDAO<T> extends GenericsDAO<T> {
     public List<?> readByEmployeeTypeIdANDSubTypeName(int emptypid, String employeeSubtype);
 
     public List<?> readOrderNameWise();
+
+    public List<?> readOrderNameWiseUnique();
 }

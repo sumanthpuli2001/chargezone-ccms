@@ -338,4 +338,19 @@ public class ShiftGenerateMonthlyScheduleServiceImpl<T> extends GenericsServiceI
         return shiftGenerateMonthlyScheduleDAO.woffDayBeforeValue(data);
     }
 
+    @Override
+    public String checkWoff(String data11) {
+        return shiftGenerateMonthlyScheduleDAO.checkWoff(data11);
+    }
+
+    @Override
+    public String leaveStartDate(String data15) {
+        return shiftGenerateMonthlyScheduleDAO.leaveStartDate(data15);
+    }
+    
+    @Override
+    public String leaveEndDate(String data15) {
+        return shiftGenerateMonthlyScheduleDAO.leaveEndDate(data15);
+    }
+
 }

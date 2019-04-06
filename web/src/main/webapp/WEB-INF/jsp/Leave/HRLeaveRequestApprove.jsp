@@ -121,7 +121,7 @@
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <div class="col-sm-2">
-                                                            <label>Employee No.:</label>
+                                                            <label>Employee ID:</label>
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <input type="Text" class="form-control" value="${employeeMaster[0]}" readonly>
@@ -142,7 +142,7 @@
                                                         <input type="Text" class="form-control" value="${employeeMaster[10]}" readonly>
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <label>Sub Team:</label>
+                                                        <label>Sub-Team:</label>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <input type="Text" class="form-control" value="${employeeMaster[11]}" readonly>
@@ -258,6 +258,12 @@
                                                         </div>
                                                     </div>
                                                 </div><!-- /.col -->
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Task Assigned to:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <div class="col-sm-7">
+                                                        <input id="taskAssignTo" class="form-control" rows="6" readonly="true" value="${list[8]}" />
+                                                        </div>
+                                                    </div>
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
@@ -452,7 +458,7 @@
                                 </div>
 
                                 
-                                <c:if test="${list[0][7] eq 3 || list[0][7] eq 0 || list[0][7] eq 8}">
+                                <c:if test="${list[0][7] eq 3 || list[0][7] eq 4 || list[0][7] eq 0 || list[0][7] eq 8}">
                                     <div class="form-group">
                                         <div class="col-sm-4" style="text-align: left">
                                             <button type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-success" style="width: 100px" data-original-title="" title="" value="approve">APPROVE</button>

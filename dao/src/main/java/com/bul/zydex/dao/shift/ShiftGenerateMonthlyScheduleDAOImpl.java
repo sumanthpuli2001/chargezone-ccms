@@ -1004,4 +1004,50 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         return list1;
     }
 
+    @Override
+    public String checkWoff(String data11) {
+        String a[] = data11.split(":");
+        String query = "";
+
+        query += "Select a.day"+a[1]+" from ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and a.shiftMonth="+a[2]
+                + " and a.shiftYear="+a[3];
+        
+        List<?> list = getHibernateTemplate().find(query);
+        String list1 = list.get(0).toString();
+        return list1;
+    }
+    
+    @Override
+    public String leaveStartDate(String data15) {
+        String a[] = data15.split(":");
+        String query = "";
+        query += "Select a.startDate from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and STR_TO_DATE(a.startDate,'%d/%m/%Y') = STR_TO_DATE('" +a[1]+ "','%d/%m/%Y')";
+        List<?> list =  getHibernateTemplate().find(query);
+        String list1="";
+        if(!list.isEmpty())
+        {
+            list1= list.get(0).toString();
+        }
+        return list1;
+    }
+    
+    @Override
+    public String leaveEndDate(String data15) {
+        String a[] = data15.split(":");
+        String query = "";
+        query += "Select a.endDate from LeaveEmployeeDetail a"
+                + " Where a.employeeMaster.id ="+a[0]
+                + " and STR_TO_DATE(a.endDate,'%d/%m/%Y') = STR_TO_DATE('" +a[2]+ "','%d/%m/%Y')";
+        List<?> list =  getHibernateTemplate().find(query);
+        String list1="";
+        if(!list.isEmpty())
+        {
+            list1= list.get(0).toString();
+        }
+        return list1;
+    }
 }

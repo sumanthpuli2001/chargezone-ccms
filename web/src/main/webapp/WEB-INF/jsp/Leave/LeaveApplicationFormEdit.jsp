@@ -1587,7 +1587,7 @@
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <div class="col-sm-2">
-                                                        <label>Employee No.:</label>
+                                                        <label>Employee ID:</label>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <input type="Text" class="form-control" value="${employeeMaster[0]}" readonly>
@@ -1847,6 +1847,13 @@
                                                         </div>
                                                     </div>
                                                 </div><!-- /.col -->
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Task Assigned to:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <div class="col-sm-7">
+                                                        <form:input path="taskAssignTo" class="form-control" rows="6"></form:input>
+                                                            <!--<span id="taskAssignToError" style="color: red;"></span>-->
+                                                        </div>
+                                                    </div>
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>

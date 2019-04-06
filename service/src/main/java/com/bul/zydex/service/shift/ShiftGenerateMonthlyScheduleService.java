@@ -140,4 +140,10 @@ public interface ShiftGenerateMonthlyScheduleService<T> extends GenericsService<
     public String woffDayNextValue(String data);
     
     public String woffDayBeforeValue(String data);
+
+    public String checkWoff(String data11);
+
+    public String leaveStartDate(String data15);
+    
+    public String leaveEndDate(String data15);
 }

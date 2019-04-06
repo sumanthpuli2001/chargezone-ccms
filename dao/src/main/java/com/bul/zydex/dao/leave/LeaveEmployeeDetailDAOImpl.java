@@ -88,7 +88,7 @@ public class LeaveEmployeeDetailDAOImpl<T> extends GenericsDAOImpl<T> implements
         LeaveEmployeeDetail leaveEmployeeDetail = (LeaveEmployeeDetail) object;
         String query = "";
 
-        query += " Select b.leaveType, a.startDate, a.startDateStatus, a.endDate, a.endDateStatus, a.noOfDays, a.empRemark, a.status"
+        query += " Select b.leaveType, a.startDate, a.startDateStatus, a.endDate, a.endDateStatus, a.noOfDays, a.empRemark, a.status, a.taskAssignTo"
                 + " FROM LeaveEmployeeDetail a"
                 + " LEFT JOIN a.leaveTypeMaster b"
                 + " LEFT JOIN a.employeeMaster c"

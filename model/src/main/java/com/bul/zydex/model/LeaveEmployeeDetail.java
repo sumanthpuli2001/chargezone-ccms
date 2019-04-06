@@ -21,6 +21,7 @@ public class LeaveEmployeeDetail implements java.io.Serializable {
     private String approveDate;
     private String dateOfSubmit;
     private Boolean useAsSickLeave;
+    private String taskAssignTo;
 
     public LeaveEmployeeDetail() {
     }
@@ -31,7 +32,7 @@ public class LeaveEmployeeDetail implements java.io.Serializable {
         this.status = status;
     }
 
-    public LeaveEmployeeDetail(LeaveTypeMaster leaveTypeMaster, EmployeeMaster employeeMaster, String startDate, String startDateStatus, String endDate, String endDateStatus, Float noOfDays, String empRemark, String hrRemark, int status, Integer approverId, String approveDate, String dateOfSubmit, Boolean useAsSickLeave) {
+    public LeaveEmployeeDetail(LeaveTypeMaster leaveTypeMaster, EmployeeMaster employeeMaster, String startDate, String startDateStatus, String endDate, String endDateStatus, Float noOfDays, String empRemark, String hrRemark, int status, Integer approverId, String approveDate, String dateOfSubmit, Boolean useAsSickLeave, String taskAssignTo) {
         this.leaveTypeMaster = leaveTypeMaster;
         this.employeeMaster = employeeMaster;
         this.startDate = startDate;
@@ -46,6 +47,7 @@ public class LeaveEmployeeDetail implements java.io.Serializable {
         this.approveDate = approveDate;
         this.dateOfSubmit = dateOfSubmit;
         this.useAsSickLeave = useAsSickLeave;
+        this.taskAssignTo = taskAssignTo;
     }
 
     public Integer getId() {
@@ -167,5 +169,15 @@ public class LeaveEmployeeDetail implements java.io.Serializable {
     public void setUseAsSickLeave(Boolean useAsSickLeave) {
         this.useAsSickLeave = useAsSickLeave;
     }
+
+    public String getTaskAssignTo() {
+        return taskAssignTo;
+    }
+
+    public void setTaskAssignTo(String taskAssignTo) {
+        this.taskAssignTo = taskAssignTo;
+    }
+    
+    
 
 }

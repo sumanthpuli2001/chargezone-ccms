@@ -87,6 +87,13 @@
             } else {
                 document.getElementById("empRemarkError").innerHTML = "";
             }
+            
+            if (document.getElementById("taskAssignTo").value == '') {
+                document.getElementById("taskAssignToError").innerHTML = "- It must not be empty or whitespace";
+                flag3 = false;
+            } else {
+                document.getElementById("taskAssignToError").innerHTML = "";
+            }
             if (selectedText !== 'Short Leave') {
                 if (document.getElementById("startDate").value == '') {
                     document.getElementById("startDateError").innerHTML = "- It must be Selected";
@@ -1755,6 +1762,15 @@
                                                         </div>
                                                     </div>
                                                 </div><!-- /.col -->
+                                                <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Task Assigned to:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <div class="col-sm-7">
+                                                        <form:input path="taskAssignTo" class="form-control" rows="6"></form:input>
+                                                            <span id="taskAssignToError" style="color: red;"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>

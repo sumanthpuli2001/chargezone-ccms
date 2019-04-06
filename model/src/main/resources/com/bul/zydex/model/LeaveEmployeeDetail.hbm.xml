@@ -50,5 +50,8 @@
         <property name="useAsSickLeave" type="java.lang.Boolean">
             <column name="use_as_sick_leave"/>
         </property>
+        <property name="taskAssignTo" type="string">
+            <column name="task_assign_to"/>
+        </property>
     </class>
 </hibernate-mapping>

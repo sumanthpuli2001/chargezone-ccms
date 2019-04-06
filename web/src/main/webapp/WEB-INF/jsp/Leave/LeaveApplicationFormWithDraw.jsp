@@ -808,10 +808,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Leave Application Edit:</h1>
+            <h1>Withdraw Leave Application:</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Leave Request</li>
+                <li class="active">Withdraw Leave</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -1070,6 +1070,13 @@
                                                         </div>
                                                     </div>
                                                 </div><!-- /.col -->
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label">Task Assigned to:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <div class="col-sm-7">
+                                                        <form:input path="taskAssignTo" class="form-control" rows="6" readonly="true"></form:input>
+                                                            <!--<span id="taskAssignToError" style="color: red;"></span>-->
+                                                        </div>
+                                                    </div>
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
@@ -1134,7 +1141,7 @@
                                                             <c:forEach var="remain" items="${listRemain}">
                                                                 <c:choose>
                                                                     <c:when test="${(remain.key eq leaveType)}">
-                                                                        <td id="${remain.key}2"><b>${remain.value - leaveEmployeeDetail.noOfDays}</b></td>
+                                                                        <td id="${remain.key}2"><b>${remain.value + leaveEmployeeDetail.noOfDays}</b></td>
                                                                     </c:when>
                                                                     <c:otherwise>
                                                                             <th id="${remain.key}2"><b>${remain.value}</b></th>

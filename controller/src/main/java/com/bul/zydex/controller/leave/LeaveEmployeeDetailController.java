@@ -225,9 +225,11 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         String leaveType = request.getParameter("leaveTypeMaster.id");
         String strDateStatus = request.getParameter("leaveStartDate_SelectFullOrHalfId");
         String endDateStatus = request.getParameter("leaveEndDate_SelectFullOrHalfId");
+        String taskAssignTo = request.getParameter("taskAssignTo");
         leaveEmployeeDetail.setStartDateStatus(strDateStatus);
         leaveEmployeeDetail.setEndDateStatus(endDateStatus);
         leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
+        leaveEmployeeDetail.setTaskAssignTo(taskAssignTo);
         SimpleDateFormat format1 = new SimpleDateFormat("d/M/yyyy");
         Date date11 = format1.parse(sDate);
         String ssDate = format1.format(date11);
@@ -5710,8 +5712,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
         {
             
-//            if((!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1")) || (!leavetype.equals("16") || !leavetype.equals("11") || !leavetype.equals("12")))
-            if(!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1"))
+            if((!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1")) && (!leavetype.equals("16") && !leavetype.equals("11") && !leavetype.equals("12") && !leavetype.equals("18") && !leavetype.equals("7")))
+//            if(!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1"))
             {
                 days+=1.0;
             }
@@ -5724,7 +5726,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 days-=1.0;
             }
         }
-        if(leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("17"))
+        if(leavetype.equals("7") || leavetype.equals("6"))
         {
             List<Date> dates = new ArrayList<Date>();
             List<String> dates1 = new ArrayList<String>();
@@ -5750,86 +5752,193 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             String strDate2 = format2.format(date5);
             Date date6 = format2.parse(enDate);
             String enDate2 = format2.format(date6);
-            String dayWoff1="";
-            String dayWoff2="";
-            String dayWoff="";
-            String rotationdate="";
-            String afterChange1="";
+            Boolean woffCount=false;
+            String beforeWoff = "";
             for (String str : dates1) {
-                List<?> checkForWoff = shiftGenerateMonthlyScheduleService.checkForWoff(employeeMaster1.getUserMaster().getId(),str);
-                List<?> checkForWoff1 = shiftGenerateMonthlyScheduleService.checkForWoff1(employeeMaster1.getUserMaster().getId(),str);
-                List<?> checkForWoff3 = shiftGenerateMonthlyScheduleService.checkForWoff3(employeeMaster1.getUserMaster().getId(),str);
-                if(!checkForWoff.isEmpty())
+                String data11 = employeeMaster1.getId()+":"+str.split("/")[0]+":"+str.split("/")[1]+":"+str.split("/")[2];
+                String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data11);
+                if(checkWoff.equals("-1"))
                 {
-//                    days-=1.0;
-                    rotationdate = checkForWoff.get(0).toString();
-                    String checkForWoff2 = shiftGenerateMonthlyScheduleService.checkForWoff2(employeeMaster1.getUserMaster().getId(),str);
-                    WoffRegularization woffRegularization = woffRegularizationService.readById(Integer.parseInt(checkForWoff2));
-                    dayWoff = woffRegularization.getDayWoff();
-                    String rotationday = woffRegularization.getRotationDate();
-                    SimpleDateFormat format1 = new SimpleDateFormat("d/M/yyyy");
-                    Date date3 = format1.parse(dayWoff);
-                    calendar.setTime(date3);
-                    calendar.add(Calendar.DAY_OF_YEAR, 1);
-                    Date afterChange = calendar.getTime();
-                    afterChange1 = format1.format(afterChange);
-                    Date date4 = format1.parse(strDate);
-                    String strDate1 = format1.format(date4);
-                    if(strDate1.equals(dayWoff) && afterChange1.equals(rotationday))
+                    woffCount=true;
+                    beforeWoff = str;
+                }
+            }
+            if(woffCount==true && !beforeWoff.isEmpty())
+            {
+                Date date3 = format2.parse(beforeWoff);
+                calendar.setTime(date3);
+                calendar.add(Calendar.DAY_OF_YEAR, -7);
+                Date afterChange = calendar.getTime();
+                String afterChange1 = format2.format(afterChange);
+                String data12 = employeeMaster1.getId()+":"+afterChange1.split("/")[0]+":"+afterChange1.split("/")[1]+":"+afterChange1.split("/")[2];
+                String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data12);
+                Date date4 = format2.parse(afterChange1);
+                calendar.setTime(date4);
+                calendar.add(Calendar.DAY_OF_YEAR, -1);
+                Date beforeDayWoff = calendar.getTime();
+                String beforeDayWoff1 = format2.format(beforeDayWoff);
+                Date date7 = format2.parse(afterChange1);
+                calendar.setTime(date7);
+                calendar.add(Calendar.DAY_OF_YEAR, 1);
+                Date afterDayWoff = calendar.getTime();
+                String afterDayWoff1 = format2.format(afterDayWoff);
+                String data13 = employeeMaster1.getId()+":"+beforeDayWoff1.split("/")[0]+":"+beforeDayWoff1.split("/")[1]+":"+beforeDayWoff1.split("/")[2];
+                String checkBeforeWoff = shiftGenerateMonthlyScheduleService.checkWoff(data13);
+                String data14 = employeeMaster1.getId()+":"+afterDayWoff1.split("/")[0]+":"+afterDayWoff1.split("/")[1]+":"+afterDayWoff1.split("/")[2];
+                String checkAfterWoff = shiftGenerateMonthlyScheduleService.checkWoff(data14);
+                if(checkWoff.equals("-1"))
+                {
+                    if(checkBeforeWoff.equals("-1"))
                     {
-//                       days-=1.0; 
+                        Date date8 = format2.parse(beforeDayWoff1);
+                        calendar.setTime(date8);
+                        calendar.add(Calendar.DAY_OF_YEAR, -1);
+                        Date afterDayWoff3 = calendar.getTime();
+                        String beforeWoff1 = format2.format(afterDayWoff3);
+                        Date date9 = format2.parse(afterChange1);
+                        calendar.setTime(date9);
+                        calendar.add(Calendar.DAY_OF_YEAR, 1);
+                        Date beforeDayWoff3 = calendar.getTime();
+                        String afterWoff1 = format2.format(beforeDayWoff3);
+                        String data15 = employeeMaster1.getId()+":"+beforeWoff1+":"+afterWoff1;
+                        String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
+                        String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
+                        if((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty()))
+                        {
+                            days--;
+                        }
+                    }
+                    if(checkAfterWoff.equals("-1"))
+                    {
+                        String afterDayWoff2 = format2.format(afterChange1);
+                        Date date9 = format2.parse(afterDayWoff2);
+                        calendar.setTime(date9);
+                        calendar.add(Calendar.DAY_OF_YEAR, -1);
+                        Date beforeDayWoff3 = calendar.getTime();
+                        String afterWoff1 = format2.format(beforeDayWoff3);
+                        String beforeDayWoff2 = format2.format(afterDayWoff1);
+                        Date date8 = format2.parse(beforeDayWoff2);
+                        calendar.setTime(date8);
+                        calendar.add(Calendar.DAY_OF_YEAR, -1);
+                        Date afterDayWoff3 = calendar.getTime();
+                        String beforeWoff1 = format2.format(afterDayWoff3);
+                        String data15 = employeeMaster1.getId()+":"+afterWoff1+":"+beforeWoff1;
+                        String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
+                        String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
+                        if((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty()))
+                        {
+                            days--;
+                        }
                     }
                 }
-                if(!checkForWoff1.isEmpty())
-                {
-                    dayWoff1 = checkForWoff1.get(0).toString();
-//                    String checkForWoff3 = shiftGenerateMonthlyScheduleService.checkForWoff3(employeeMaster1.getUserMaster().getId(),str);
-//                    WoffRegularization woffRegularization = woffRegularizationService.readById(Integer.parseInt(checkForWoff3));
-//                    dayWoff1 = woffRegularization.getDayWoff1();
-                }
-                if(!checkForWoff3.isEmpty())
-                {
-                    dayWoff2 = checkForWoff3.get(0).toString();
-                }
-                if((!checkForWoff1.isEmpty() || !checkForWoff3.isEmpty()) && !strDate2.equals(dayWoff2))
-                {
-                    days+=1.0;
-                }
-            }
-            if(!rotationdate.isEmpty())
-            {
-                days-=1.0;
-                if(strDate2.equals(dayWoff) && afterChange1.equals(rotationdate))
-                    {
-                       days-=1.0;
-                    }
-            }
-            if(!dayWoff1.isEmpty() && !dayWoff2.isEmpty() && !strDate2.equals(dayWoff2))
-            {
-                days-=1.0;
-            }
-            if( (getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (!rotationdate.isEmpty()) && (!leavetype.equals("16") || !leavetype.equals("11") || !leavetype.equals("12")))
-            {
-                if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
-                {
-                    days-=1.0;
-                }
-            }
-            if(strDate2.equals(dayWoff1) && enDate2.equals(dayWoff1))
-            {
-                days = (float) 1.0;
-            }
-            
-            if(strDate2.equals(dayWoff2) && enDate2.equals(dayWoff2))
-            {
-                days = (float) 1.0;
-            }
-            
-            if( (strDate2.equals(dayWoff1) && enDate2.equals(dayWoff2)) || (strDate2.equals(dayWoff2) && enDate2.equals(dayWoff1)))
-            {
-                days = (float) 2.0;
             }
         }
+//        if(leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("17"))
+//        {
+//            List<Date> dates = new ArrayList<Date>();
+//            List<String> dates1 = new ArrayList<String>();
+//            DateFormat formatter ; 
+//
+//            formatter = new SimpleDateFormat("d/M/yyyy");
+//            Date  startDate = (Date)formatter.parse(strDate); 
+//            Date  endDate = (Date)formatter.parse(enDate);
+//            long interval = 24*1000 * 60 * 60; 
+//            long endTime =endDate.getTime() ;
+//            long curTime = startDate.getTime();
+//            while (curTime <= endTime) {
+//                dates.add(new Date(curTime));
+//                curTime += interval;
+//            }
+//            for(int i=0;i<dates.size();i++){
+//                Date lDate =(Date)dates.get(i);
+//                String ds = formatter.format(lDate);  
+//                dates1.add(ds);
+//            }
+//            SimpleDateFormat format2 = new SimpleDateFormat("d/M/yyyy");
+//            Date date5 = format2.parse(strDate);
+//            String strDate2 = format2.format(date5);
+//            Date date6 = format2.parse(enDate);
+//            String enDate2 = format2.format(date6);
+//            String dayWoff1="";
+//            String dayWoff2="";
+//            String dayWoff="";
+//            String rotationdate="";
+//            String afterChange1="";
+//            for (String str : dates1) {
+//                List<?> checkForWoff = shiftGenerateMonthlyScheduleService.checkForWoff(employeeMaster1.getUserMaster().getId(),str);
+//                List<?> checkForWoff1 = shiftGenerateMonthlyScheduleService.checkForWoff1(employeeMaster1.getUserMaster().getId(),str);
+//                List<?> checkForWoff3 = shiftGenerateMonthlyScheduleService.checkForWoff3(employeeMaster1.getUserMaster().getId(),str);
+//                if(!checkForWoff.isEmpty())
+//                {
+////                    days-=1.0;
+//                    rotationdate = checkForWoff.get(0).toString();
+//                    String checkForWoff2 = shiftGenerateMonthlyScheduleService.checkForWoff2(employeeMaster1.getUserMaster().getId(),str);
+//                    WoffRegularization woffRegularization = woffRegularizationService.readById(Integer.parseInt(checkForWoff2));
+//                    dayWoff = woffRegularization.getDayWoff();
+//                    String rotationday = woffRegularization.getRotationDate();
+//                    SimpleDateFormat format1 = new SimpleDateFormat("d/M/yyyy");
+//                    Date date3 = format1.parse(dayWoff);
+//                    calendar.setTime(date3);
+//                    calendar.add(Calendar.DAY_OF_YEAR, 1);
+//                    Date afterChange = calendar.getTime();
+//                    afterChange1 = format1.format(afterChange);
+//                    Date date4 = format1.parse(strDate);
+//                    String strDate1 = format1.format(date4);
+//                    if(strDate1.equals(dayWoff) && afterChange1.equals(rotationday))
+//                    {
+////                       days-=1.0; 
+//                    }
+//                }
+//                if(!checkForWoff1.isEmpty())
+//                {
+//                    dayWoff1 = checkForWoff1.get(0).toString();
+////                    String checkForWoff3 = shiftGenerateMonthlyScheduleService.checkForWoff3(employeeMaster1.getUserMaster().getId(),str);
+////                    WoffRegularization woffRegularization = woffRegularizationService.readById(Integer.parseInt(checkForWoff3));
+////                    dayWoff1 = woffRegularization.getDayWoff1();
+//                }
+//                if(!checkForWoff3.isEmpty())
+//                {
+//                    dayWoff2 = checkForWoff3.get(0).toString();
+//                }
+//                if((!checkForWoff1.isEmpty() || !checkForWoff3.isEmpty()) && !strDate2.equals(dayWoff2))
+//                {
+//                    days+=1.0;
+//                }
+//            }
+//            if(!rotationdate.isEmpty())
+//            {
+//                days-=1.0;
+//                if(strDate2.equals(dayWoff) && afterChange1.equals(rotationdate))
+//                    {
+//                       days-=1.0;
+//                    }
+//            }
+//            if(!dayWoff1.isEmpty() && !dayWoff2.isEmpty() && !strDate2.equals(dayWoff2))
+//            {
+//                days-=1.0;
+//            }
+//            if( (getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (!rotationdate.isEmpty()) && (!leavetype.equals("16") || !leavetype.equals("11") || !leavetype.equals("12")))
+//            {
+//                if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
+//                {
+//                    days-=1.0;
+//                }
+//            }
+//            if(strDate2.equals(dayWoff1) && enDate2.equals(dayWoff1))
+//            {
+//                days = (float) 1.0;
+//            }
+//            
+//            if(strDate2.equals(dayWoff2) && enDate2.equals(dayWoff2))
+//            {
+//                days = (float) 1.0;
+//            }
+//            
+//            if( (strDate2.equals(dayWoff1) && enDate2.equals(dayWoff2)) || (strDate2.equals(dayWoff2) && enDate2.equals(dayWoff1)))
+//            {
+//                days = (float) 2.0;
+//            }
+//        }
         PrintWriter out = response.getWriter();
         out.print(days);
     }
@@ -8232,8 +8341,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         }
         if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
         {
-            
-            if(!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1"))
+            if((!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1")) && (!leavetype.equals("16") && !leavetype.equals("11") && !leavetype.equals("12") && !leavetype.equals("18") && !leavetype.equals("7")))
+//            if(!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1"))
             {
                 days+=1.0;
             }
@@ -8246,7 +8355,114 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 days-=1.0;
             }
         }
+        
+        if(leavetype.equals("7") || leavetype.equals("6"))
+        {
+            List<Date> dates = new ArrayList<Date>();
+            List<String> dates1 = new ArrayList<String>();
+            DateFormat formatter ; 
 
+            formatter = new SimpleDateFormat("d/M/yyyy");
+            Date  startDate = (Date)formatter.parse(strDate); 
+            Date  endDate = (Date)formatter.parse(enDate);
+            long interval = 24*1000 * 60 * 60; 
+            long endTime =endDate.getTime() ;
+            long curTime = startDate.getTime();
+            while (curTime <= endTime) {
+                dates.add(new Date(curTime));
+                curTime += interval;
+            }
+            for(int i=0;i<dates.size();i++){
+                Date lDate =(Date)dates.get(i);
+                String ds = formatter.format(lDate);  
+                dates1.add(ds);
+            }
+            SimpleDateFormat format2 = new SimpleDateFormat("d/M/yyyy");
+            Date date5 = format2.parse(strDate);
+            String strDate2 = format2.format(date5);
+            Date date6 = format2.parse(enDate);
+            String enDate2 = format2.format(date6);
+            Boolean woffCount=false;
+            String beforeWoff = "";
+            for (String str : dates1) {
+                String data11 = employeeMaster1.getId()+":"+str.split("/")[0]+":"+str.split("/")[1]+":"+str.split("/")[2];
+                String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data11);
+                if(checkWoff.equals("-1"))
+                {
+                    woffCount=true;
+                    beforeWoff = str;
+                }
+            }
+            if(woffCount==true && !beforeWoff.isEmpty())
+            {
+                Date date3 = format2.parse(beforeWoff);
+                calendar.setTime(date3);
+                calendar.add(Calendar.DAY_OF_YEAR, -7);
+                Date afterChange = calendar.getTime();
+                String afterChange1 = format2.format(afterChange);
+                String data12 = employeeMaster1.getId()+":"+afterChange1.split("/")[0]+":"+afterChange1.split("/")[1]+":"+afterChange1.split("/")[2];
+                String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data12);
+                Date date4 = format2.parse(afterChange1);
+                calendar.setTime(date4);
+                calendar.add(Calendar.DAY_OF_YEAR, -1);
+                Date beforeDayWoff = calendar.getTime();
+                String beforeDayWoff1 = format2.format(beforeDayWoff);
+                Date date7 = format2.parse(afterChange1);
+                calendar.setTime(date7);
+                calendar.add(Calendar.DAY_OF_YEAR, 1);
+                Date afterDayWoff = calendar.getTime();
+                String afterDayWoff1 = format2.format(afterDayWoff);
+                String data13 = employeeMaster1.getId()+":"+beforeDayWoff1.split("/")[0]+":"+beforeDayWoff1.split("/")[1]+":"+beforeDayWoff1.split("/")[2];
+                String checkBeforeWoff = shiftGenerateMonthlyScheduleService.checkWoff(data13);
+                String data14 = employeeMaster1.getId()+":"+afterDayWoff1.split("/")[0]+":"+afterDayWoff1.split("/")[1]+":"+afterDayWoff1.split("/")[2];
+                String checkAfterWoff = shiftGenerateMonthlyScheduleService.checkWoff(data14);
+                if(checkWoff.equals("-1"))
+                {
+                    if(checkBeforeWoff.equals("-1"))
+                    {
+                        Date date8 = format2.parse(beforeDayWoff1);
+                        calendar.setTime(date8);
+                        calendar.add(Calendar.DAY_OF_YEAR, -1);
+                        Date afterDayWoff3 = calendar.getTime();
+                        String beforeWoff1 = format2.format(afterDayWoff3);
+                        Date date9 = format2.parse(afterChange1);
+                        calendar.setTime(date9);
+                        calendar.add(Calendar.DAY_OF_YEAR, 1);
+                        Date beforeDayWoff3 = calendar.getTime();
+                        String afterWoff1 = format2.format(beforeDayWoff3);
+                        String data15 = employeeMaster1.getId()+":"+beforeWoff1+":"+afterWoff1;
+                        String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
+                        String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
+                        if((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty()))
+                        {
+                            days--;
+                        }
+                    }
+                    if(checkAfterWoff.equals("-1"))
+                    {
+                        String afterDayWoff2 = format2.format(afterChange1);
+                        Date date9 = format2.parse(afterDayWoff2);
+                        calendar.setTime(date9);
+                        calendar.add(Calendar.DAY_OF_YEAR, -1);
+                        Date beforeDayWoff3 = calendar.getTime();
+                        String afterWoff1 = format2.format(beforeDayWoff3);
+                        String beforeDayWoff2 = format2.format(afterDayWoff1);
+                        Date date8 = format2.parse(beforeDayWoff2);
+                        calendar.setTime(date8);
+                        calendar.add(Calendar.DAY_OF_YEAR, -1);
+                        Date afterDayWoff3 = calendar.getTime();
+                        String beforeWoff1 = format2.format(afterDayWoff3);
+                        String data15 = employeeMaster1.getId()+":"+afterWoff1+":"+beforeWoff1;
+                        String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
+                        String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
+                        if((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty()))
+                        {
+                            days--;
+                        }
+                    }
+                }
+            }
+        }
         PrintWriter out = response.getWriter();
         out.print(days);
     }
@@ -8745,6 +8961,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
         String strDateStatus = request.getParameter("leaveStartDate_SelectFullOrHalfId");
         String endDateStatus = request.getParameter("leaveEndDate_SelectFullOrHalfId");
+        String taskAssignTo = request.getParameter("taskAssignTo");
+        leaveEmployeeDetail.setStartDateStatus(taskAssignTo);
         leaveEmployeeDetail.setStartDateStatus(strDateStatus);
         leaveEmployeeDetail.setEndDateStatus(endDateStatus);
         leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
@@ -12179,7 +12397,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 days-=1.0;
             }
         }
-
+        
         PrintWriter out = response.getWriter();
         out.print(days);
     }

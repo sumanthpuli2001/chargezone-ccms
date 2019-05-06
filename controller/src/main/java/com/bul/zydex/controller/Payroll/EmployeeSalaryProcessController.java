@@ -2941,8 +2941,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
                                                 if(alllistPunch.size() >=2 && empinTime.after(firstLateHours)){
                                                     long diffUF = empinTime.getTime() -firstStartHours.getTime();
-                                                    if(diffUF <= 3600000)
-                                                        {
+//                                                    if(diffUF <= 3600000)
+//                                                        {
                                                             if(countLateEntry > 3){
 
 
@@ -2964,7 +2964,9 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 //                                                    newList.add("AB");
                                                                     countLateEntry++;
 //                                                                    long lateTimeDuff = empinTime.getTime() - startHour.getTime();
-                                                                    totalLateTime += 100;
+                                                                    if(diffUF <= 3600000){
+                                                                        totalLateTime += 100;
+                                                                    }
                                                             }else{
                                                                 countLateEntry++;
                                                                 if(firstHalf.contains("Night")){
@@ -2990,12 +2992,12 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                                                long lateTimeDuff = empinTime.getTime() - startHour.getTime();
 //                                                                totalLateTime +=lateTimeDuff;
                                                             }
-                                                        }
-                                                    else
-                                                    {
-                                                        abcounter = abcounter + 0.5;
-                                                        prcounter = prcounter + 0.5;
-                                                    }
+//                                                        }
+//                                                    else
+//                                                    {
+//                                                        abcounter = abcounter + 0.5;
+//                                                        prcounter = prcounter + 0.5;
+//                                                    }
 
                                                 }}
                                                 }

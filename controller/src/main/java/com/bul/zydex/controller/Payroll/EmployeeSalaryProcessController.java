@@ -2941,8 +2941,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
                                                 if(alllistPunch.size() >=2 && empinTime.after(firstLateHours)){
                                                     long diffUF = empinTime.getTime() -firstStartHours.getTime();
-//                                                    if(diffUF <= 3600000)
-//                                                        {
+                                                    if(diffUF <= 3600000)
+                                                        {
                                                             if(countLateEntry > 3){
 
 
@@ -2962,11 +2962,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
 
                 //                                                    newList.add("AB");
-                                                                    countLateEntry++;
 //                                                                    long lateTimeDuff = empinTime.getTime() - startHour.getTime();
-                                                                    if(diffUF <= 3600000){
+//                                                                    if(diffUF <= 3600000){
                                                                         totalLateTime += 100;
-                                                                    }
+                                                                        countLateEntry++;
+//                                                                    }
                                                             }else{
                                                                 countLateEntry++;
                                                                 if(firstHalf.contains("Night")){
@@ -2992,12 +2992,12 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                                                long lateTimeDuff = empinTime.getTime() - startHour.getTime();
 //                                                                totalLateTime +=lateTimeDuff;
                                                             }
-//                                                        }
-//                                                    else
-//                                                    {
+                                                        }
+                                                    else
+                                                    {
 //                                                        abcounter = abcounter + 0.5;
 //                                                        prcounter = prcounter + 0.5;
-//                                                    }
+                                                    }
 
                                                 }}
                                                 }
@@ -3228,7 +3228,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             firstHalfList.add("" + pat);
                             firstHalfList.add("" + abcounter);//absent
                             firstHalfList.add("" + lwp);//where lwp = ab
-                            if(countLateEntry > 1){
+                            if(countLateEntry > 3){
                                 firstHalfList.add(penaltyhours);
                             }else{
                                 penaltyhours = "0.0";

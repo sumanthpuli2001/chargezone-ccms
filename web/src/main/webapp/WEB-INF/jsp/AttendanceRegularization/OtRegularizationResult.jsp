@@ -74,7 +74,7 @@
                                                                     <th>Reason</th>
                                                                     <th>Date of Submission</th>
                                                                     <th>Time Difference</th>
-                                                                    <th>Manager Name</th>
+                                                                    <!--<th>Manager Name</th>-->
                                                                     
                                                                     <th>Status</th>
                                                                     <th>Action</th>
@@ -90,7 +90,7 @@
                                                                 <td>${list.reason}</td>
                                                                 <td>${list.dateOfSubmit}</td>
                                                                  <td>${list.differentCompare}</td>
-                                                                  <td>${list.arType}</td>
+                                                                  <!--<td>${list.arType}</td>-->
                                                                    
                                                                   
                                                                 <c:if test="${list.status eq 0}">

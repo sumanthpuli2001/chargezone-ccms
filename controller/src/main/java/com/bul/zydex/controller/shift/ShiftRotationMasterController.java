@@ -19940,8 +19940,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         }
 
         otRegularization = oTRegularizationService.readById(Integer.parseInt(id));
-        clientDetailsMaster.setId(otRegularization.getClientDetailsMaster().getId());
-        otRegularization.setClientDetailsMaster(clientDetailsMaster);
+//        clientDetailsMaster.setId(otRegularization.getClientDetailsMaster().getId());
+//        otRegularization.setClientDetailsMaster(clientDetailsMaster);
         int status1 = otRegularization.getStatus();
         String status = Integer.toString(status1);
         String remark = otRegularization.getManagerRemark();
@@ -20138,8 +20138,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         request.setAttribute("remarkNmame", remarkNmame);
         int userId = otRegularization.getUserMasterId();
         UserMaster user = new UserMaster();
-        clientDetailsMaster.setId(otRegularization.getClientDetailsMaster().getId());
-        otRegularization.setClientDetailsMaster(clientDetailsMaster);
+//        clientDetailsMaster.setId(otRegularization.getClientDetailsMaster().getId());
+//        otRegularization.setClientDetailsMaster(clientDetailsMaster);
         user.setId(userId);
         employeeMaster.setUserMaster(user);
         int reportingId = 0;

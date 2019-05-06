@@ -36,11 +36,11 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
 //        String sqlString = "SELECT"
 //                + " b.id, b.approval_id, b.level, c.id"
 //                + " from"
-//                + " hr_power_astral.approval_master a"
+//                + " hr_power_vnc.approval_master a"
 //                + " left join"
-//                + " hr_power_astral.approval_user b on a.id = b.approval_id"
+//                + " hr_power_vnc.approval_user b on a.id = b.approval_id"
 //                + " left join"
-//                + " hr_power_astral.employee_master c on b.employee_master_id = c.id"
+//                + " hr_power_vnc.employee_master c on b.employee_master_id = c.id"
 //                + " where a.id =" + id;
 //
 //        SQLQuery query = s.createSQLQuery(sqlString);
@@ -81,11 +81,11 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
         String sqlString = "SELECT"
                 + " b.id, b.approval_id, b.level, c.id"
                 + " from"
-                + " hr_power_astral.approval_master a"
+                + " hr_power_vnc.approval_master a"
                 + " left join"
-                + " hr_power_astral.approval_user b on a.id = b.approval_id"
+                + " hr_power_vnc.approval_user b on a.id = b.approval_id"
                 + " left join"
-                + " hr_power_astral.employee_master c on b.employee_master_id = c.id"
+                + " hr_power_vnc.employee_master c on b.employee_master_id = c.id"
                 + " where a.id =" + apid;
 
         SQLQuery query = s.createSQLQuery(sqlString);

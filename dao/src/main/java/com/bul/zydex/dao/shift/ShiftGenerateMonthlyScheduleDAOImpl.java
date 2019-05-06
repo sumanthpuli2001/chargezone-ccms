@@ -184,7 +184,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
 //       
         Session s = getSessionFactory().openSession();
         String sqlString = "update"
-                + " hr_power_astral.shift_generate_monthly_schedule a"
+                + " hr_power_vnc.shift_generate_monthly_schedule a"
                 + " SET a.day_" + dayNo + " =" + shiftId
                 + " where a.id =" + id;
 
@@ -276,7 +276,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         String query = "";
         Session s = getSessionFactory().openSession();
 
-        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+        query += "UPDATE hr_power_vnc.shift_generate_monthly_schedule a"
                 + " Set a.day_" + a[0] + "=" + a[2] + ","
                 + " a.day_" + a[6] + "=" + a[8] + ","
                 + " a.day_" + a[1] + "=" + a[3] + ","
@@ -332,7 +332,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         String query = "";
         Session s = getSessionFactory().openSession();
 
-        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+        query += "UPDATE hr_power_vnc.shift_generate_monthly_schedule a"
                 + " Set a.day_" + a[0] + "=" + a[2] + ","
                 + " a.day_" + a[7] + "=" + a[8] + ","
                 + " a.day_" + a[1] + "=" + a[3] + ","
@@ -384,7 +384,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
     public void updateNewShift(String data) {
         String query = "";
         HashMap<Integer, List<Integer>> hm = new HashMap<>();
-        query += "update hr_power_astral.shift_generate_monthly_schedule a set a.day_" + data.split(",")[0]
+        query += "update hr_power_vnc.shift_generate_monthly_schedule a set a.day_" + data.split(",")[0]
                 + " =" + data.split(",")[1]
                 + " , a.day_" + data.split(",")[2]
                 + " where id = " + data.split(",")[3];
@@ -411,7 +411,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         String query = "";
         Session s = getSessionFactory().openSession();
 
-        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+        query += "UPDATE hr_power_vnc.shift_generate_monthly_schedule a"
                 + " Set a.day_" + a[0] + "=" + a[2] + ","
                 + " a.day_" + a[6] + "=" + a[8]
                 + " Where a.shift_month=" + a[15]
@@ -429,7 +429,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         String query = "";
         Session s = getSessionFactory().openSession();
 
-        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+        query += "UPDATE hr_power_vnc.shift_generate_monthly_schedule a"
                 + " Set a.day_" + a[1] + "=" + a[3] + ","
                 + " a.day_" + a[5] + "=" + a[3]
                 + " Where a.shift_month=" + a[9]
@@ -447,7 +447,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         String query = "";
         Session s = getSessionFactory().openSession();
 
-        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+        query += "UPDATE hr_power_vnc.shift_generate_monthly_schedule a"
                 + " Set a.day_" + a[0] + "=" + a[2] + ","
                 + " a.day_" + a[7] + "=" + a[8]
                 + " Where a.shift_month=" + a[15]
@@ -465,7 +465,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         String query = "";
         Session s = getSessionFactory().openSession();
 
-        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+        query += "UPDATE hr_power_vnc.shift_generate_monthly_schedule a"
                 + " Set a.day_" + a[1] + "=" + a[3] + ","
                 + " a.day_" + a[5] + "=" + a[3]
                 + " Where a.shift_month=" + a[9]
@@ -495,7 +495,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         String query = "";
         Session s = getSessionFactory().openSession();
 
-        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+        query += "UPDATE hr_power_vnc.shift_generate_monthly_schedule a"
                 + " Set a.day_" + a[0] + "=" + a[2] + ","
                 + " a.day_" + a[6] + "=" + a[13] + ","
                 + " a.day_" + a[1] + "=" + a[3]
@@ -514,7 +514,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         String query = "";
         Session s = getSessionFactory().openSession();
 
-        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+        query += "UPDATE hr_power_vnc.shift_generate_monthly_schedule a"
                 + " Set a.day_1=" + a[3]
                 + " Where a.shift_month=" + a[17]
                 + " and a.shift_year=" + a[10]
@@ -531,7 +531,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         String query = "";
         Session s = getSessionFactory().openSession();
 
-        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+        query += "UPDATE hr_power_vnc.shift_generate_monthly_schedule a"
                 + " Set a.day_" + a[0] + "=" + a[2] + ","
                 + " a.day_" + a[7] + "=" + a[13] + ","
                 + " a.day_" + a[1] + "=" + a[3]
@@ -550,7 +550,7 @@ public class ShiftGenerateMonthlyScheduleDAOImpl<T> extends GenericsDAOImpl<T> i
         String query = "";
         Session s = getSessionFactory().openSession();
 
-        query += "UPDATE hr_power_astral.shift_generate_monthly_schedule a"
+        query += "UPDATE hr_power_vnc.shift_generate_monthly_schedule a"
                 + " Set a.day_1=" + a[3]
                 + " Where a.shift_month=" + a[17]
                 + " and a.shift_year=" + a[10]

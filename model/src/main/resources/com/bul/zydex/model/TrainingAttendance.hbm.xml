@@ -5,7 +5,7 @@
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.TrainingAttendance" table="training_attendance" catalog="hr_power_astral" optimistic-lock="version">
+    <class name="com.bul.zydex.model.TrainingAttendance" table="training_attendance" catalog="hr_power_vnc" optimistic-lock="version">
     
         <id name="id" type="java.lang.Integer">
             <column name="id" />

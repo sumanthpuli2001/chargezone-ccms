@@ -256,22 +256,7 @@
 
 
                                                         </div>
-                                                        <div class="col-md-12 col-sm-12">
-                                                            <div class="form-group">
-                                                                <div class="col-sm-4">
-                                                                    <label>UK Manager Name:<span style="color: red;font-size: 12px;"></span></label>
-                                                                    <form:input path="arType"  class="form-control"   ></form:input> 
-                                                                </div>
-                                                                <div class="col-sm-4">
-                                                                    <label>Client:<span style="color: red;font-size: 12px;">*</span></label>
-                                                                <form:select path="clientDetailsMaster.id" class="form-control ">
-                                                                    <%--<form:option value="" label="-- Select --" ></form:option>--%>
-                                                                    <form:options items="${clientMaster}"></form:options>
-                                                                </form:select>
-                                                                <%--<form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>--%>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <!-- /.col -->
                                                 </div><!-- /.row -->
                                             </div><!-- /.box-body -->

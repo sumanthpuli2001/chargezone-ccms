@@ -161,17 +161,17 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 //                Iterator it1 = listFirst.iterator();
                 //                if (it1.hasNext()) {
                 //                }
-                LocalDate ld =LocalDate.now();
+                LocalDate ld = LocalDate.now();
                 Integer year = ld.getYear();
-                Integer year1 = year-1;
-                String dateofpreYear = "31/12/"+year1;
-                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(),dateofpreYear,leave1);
+                Integer year1 = year - 1;
+                String dateofpreYear = "31/12/" + year1;
+                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(), dateofpreYear, leave1);
 //                if (noOfDay == null) {
 //                    noOfDay = (float) 0;
-                    noOfDay = Float.parseFloat(noOfDaysForYear)+Float.parseFloat(noOfDaysForYear1)+Float.parseFloat(noOfDaysForYear2)+Float.parseFloat(noOfDaysForYear3);
+                noOfDay = Float.parseFloat(noOfDaysForYear) + Float.parseFloat(noOfDaysForYear1) + Float.parseFloat(noOfDaysForYear2) + Float.parseFloat(noOfDaysForYear3);
 //                }
                 totalMap = days + noOfDay;
                 if ("C Off Leave".equals(name) || "Short Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
@@ -199,7 +199,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         mv.setViewName("Leave/LeaveApplicatioFormForEmployee");
         return mv;
     }
-    
+
     public ModelAndView applySubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
@@ -243,74 +243,66 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         String eYear = eeDate.split("/")[2];
         List<?> shiftValueInsDate = new ArrayList<>();
         List<?> shiftValueIneDate = new ArrayList<>();
-        String data1 = employeeMaster.getId()+":"+sDay+":"+sMonth+":"+sYear;
-        String data2 = employeeMaster.getId()+":"+eDay+":"+eMonth+":"+eYear;
-        if(!sDate.isEmpty())
-        {
-            shiftValueInsDate=shiftGenerateMonthlyScheduleService.shiftValueInsDate(data1);
+        String data1 = employeeMaster.getId() + ":" + sDay + ":" + sMonth + ":" + sYear;
+        String data2 = employeeMaster.getId() + ":" + eDay + ":" + eMonth + ":" + eYear;
+        if (!sDate.isEmpty()) {
+            shiftValueInsDate = shiftGenerateMonthlyScheduleService.shiftValueInsDate(data1);
         }
-        if(!eDate.isEmpty())
-        {
-            shiftValueIneDate=shiftGenerateMonthlyScheduleService.shiftValueInsDate(data2);
+        if (!eDate.isEmpty()) {
+            shiftValueIneDate = shiftGenerateMonthlyScheduleService.shiftValueInsDate(data2);
         }
         String shiftValueInsDate1 = "";
         String shiftValueIneDate1 = "";
-        if(!shiftValueInsDate.isEmpty())
-        {
-             shiftValueInsDate1=shiftValueInsDate.get(0).toString();
+        if (!shiftValueInsDate.isEmpty()) {
+            shiftValueInsDate1 = shiftValueInsDate.get(0).toString();
         }
-        if(!shiftValueIneDate.isEmpty())
-        {
-            shiftValueIneDate1= shiftValueIneDate.get(0).toString();
+        if (!shiftValueIneDate.isEmpty()) {
+            shiftValueIneDate1 = shiftValueIneDate.get(0).toString();
         }
         Date date;
         Date oneDayBefore;
-        String dateBeforeOfsDate="";
+        String dateBeforeOfsDate = "";
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Calendar calendar = Calendar.getInstance();
-        if(!sDate.isEmpty())
-        {
+        if (!sDate.isEmpty()) {
             date = format.parse(sDate);
             oneDayBefore = new Date(date.getTime() - 2);
             dateBeforeOfsDate = format.format(oneDayBefore);
         }
         Date date1;
         Date tomorrow;
-        String dateAfterOfeDate="";
-        if(!sDate.isEmpty())
-        {
+        String dateAfterOfeDate = "";
+        if (!sDate.isEmpty()) {
             date1 = format.parse(eDate);
             calendar.setTime(date1);
             calendar.add(Calendar.DAY_OF_YEAR, 1);
             tomorrow = calendar.getTime();
             dateAfterOfeDate = format.format(tomorrow);
         }
-        String data = employeeMaster.getId()+":"+dateBeforeOfsDate+":"+dateAfterOfeDate;
+        String data = employeeMaster.getId() + ":" + dateBeforeOfsDate + ":" + dateAfterOfeDate;
         List<?> beforesDateCasualLeave = new ArrayList<>();
         List<?> aftereDateCasualLeave = new ArrayList<>();
-        if(!dateBeforeOfsDate.isEmpty() && !dateAfterOfeDate.isEmpty())
-        {
-            beforesDateCasualLeave=shiftGenerateMonthlyScheduleService.beforesDateCasualLeave(data);
-            aftereDateCasualLeave=shiftGenerateMonthlyScheduleService.aftereDateCasualLeave(data);
+        if (!dateBeforeOfsDate.isEmpty() && !dateAfterOfeDate.isEmpty()) {
+            beforesDateCasualLeave = shiftGenerateMonthlyScheduleService.beforesDateCasualLeave(data);
+            aftereDateCasualLeave = shiftGenerateMonthlyScheduleService.aftereDateCasualLeave(data);
         }
         List<?> beforesDate = new ArrayList<>();
         List<?> aftereDate = new ArrayList<>();
-        List<?> beforesDate1= new ArrayList<>();
+        List<?> beforesDate1 = new ArrayList<>();
         List<?> aftereDate1 = new ArrayList<>();
-        if(!dateBeforeOfsDate.isEmpty() && !dateAfterOfeDate.isEmpty())
-        {
+        if (!dateBeforeOfsDate.isEmpty() && !dateAfterOfeDate.isEmpty()) {
             beforesDate = shiftGenerateMonthlyScheduleService.getbeforesDate(data);
             aftereDate = shiftGenerateMonthlyScheduleService.getaftereDate(data);
             beforesDate1 = shiftGenerateMonthlyScheduleService.getbeforesDate1(data);
             aftereDate1 = shiftGenerateMonthlyScheduleService.getaftereDate1(data);
         }
         leaveEmployeeDetailValidator.validate(mv, errors);
-        if(leaveEmployeeDetail.getLeaveTypeMaster().getId()!=null){
-        if (leaveEmployeeDetail.getLeaveTypeMaster().getId() == (11)) {
-            if (leaveEmployeeDetail.getNoOfDays() == 0.8) {
-                leaveEmployeeDetail.setNoOfDays(Float.parseFloat("" + 1));
+        if (leaveEmployeeDetail.getLeaveTypeMaster().getId() != null) {
+            if (leaveEmployeeDetail.getLeaveTypeMaster().getId() == (11)) {
+                if (leaveEmployeeDetail.getNoOfDays() == 0.8) {
+                    leaveEmployeeDetail.setNoOfDays(Float.parseFloat("" + 1));
+                }
             }
-        }
         }
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -324,36 +316,27 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             mv.addAllObjects(errors.getModel());
             mv = applyClick(request, response);
 
-        }
-        else if(leaveType.equals("6") && (!beforesDate.isEmpty() || !aftereDate.isEmpty()))
-        {
-                request.setAttribute("failureMessage",
+        } else if (leaveType.equals("6") && (!beforesDate.isEmpty() || !aftereDate.isEmpty())) {
+            request.setAttribute("failureMessage",
                     "Error : Casual Leave and Privilege Leave cannot combine.");
-                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                mv = applyClick(request, response);
-        }
-        else if(leaveType.equals("7") && (!beforesDate1.isEmpty() || !aftereDate1.isEmpty()))
-        {
-                request.setAttribute("failureMessage",
+            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+            mv = applyClick(request, response);
+        } else if (leaveType.equals("7") && (!beforesDate1.isEmpty() || !aftereDate1.isEmpty())) {
+            request.setAttribute("failureMessage",
                     "Error : Casual Leave and Privilege Leave cannot combine.");
-                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                mv = applyClick(request, response);
-        }
-        else if(shiftValueInsDate1.equals("-1") || shiftValueIneDate1.equals("-1"))
-        {
-                request.setAttribute("failureMessage",
+            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+            mv = applyClick(request, response);
+        } else if (shiftValueInsDate1.equals("-1") || shiftValueIneDate1.equals("-1")) {
+            request.setAttribute("failureMessage",
                     "Error : You Cannot Apply Leave on Woff Day.");
-                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                mv = applyClick(request, response);
-        }
-        else if(!beforesDateCasualLeave.isEmpty() || !aftereDateCasualLeave.isEmpty())
-        {
-                request.setAttribute("failureMessage",
+            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+            mv = applyClick(request, response);
+        } else if (!beforesDateCasualLeave.isEmpty() || !aftereDateCasualLeave.isEmpty()) {
+            request.setAttribute("failureMessage",
                     "Error : You Cannot Apply Casual Leave consecutively.");
-                request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                mv = applyClick(request, response);
-        }
-        else {
+            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+            mv = applyClick(request, response);
+        } else {
             boolean leaveCkeck = true;
             SimpleDateFormat format2 = new SimpleDateFormat("EEEE");
             try {
@@ -1018,7 +1001,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                             mv = applyClick(request, response);
 
                         } else if (leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
-                            
+
                             list = leaveEmployeeDetailService.readEmployeeWiseMaternity(leaveEmployeeDetail);
                             if (employeeMaster.getMaritalStatus().equals("UnMarried")) {
                                 request.setAttribute("failureMessage",
@@ -1042,8 +1025,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                 request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                                 mv = applyClick(request, response);
 
-                            }
-                            else {
+                            } else {
                                 SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                                 String currentDate = dateFormat1.format(new Date());
                                 leaveEmployeeDetail.setDateOfSubmit(currentDate);
@@ -1360,8 +1342,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //                        mv.setViewName("redirect:leaveEmployeeDetail.htm?act=searchOwnLeaveDetail");
 
                         }
-                    }
-                    else {
+                    } else {
                         request.setAttribute("failureMessage",
                                 "Error : Please Insert start date before end date.");
                         request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
@@ -1483,104 +1464,96 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         employeeLeaveBalance.setEmployeeMaster(employeeMaster);
         leaveEmployeeDetail.setEmployeeMaster(employeeMaster);
         leaveEmployeeDetail1 = leaveEmployeeDetailService.readById(Integer.parseInt(id));
-        Float empNoOfDays=leaveEmployeeDetail1.getNoOfDays();
+        Float empNoOfDays = leaveEmployeeDetail1.getNoOfDays();
         Integer leaveType1 = leaveEmployeeDetail1.getLeaveTypeMaster().getId();
         leaveTypeMaster1 = leaveTypeMasterService.readById(leaveType1);
         List<?> empLeaveBalanceList = employeeLeaveBalanceService.readByEmpId(employeeLeaveBalance);
-        List<?> empLeaveBalanceList1 = employeeLeaveBalanceService.readByEmpId1(employeeLeaveBalance.getEmployeeMaster().getId(),empNoOfDays,leaveType1);
-        
+        List<?> empLeaveBalanceList1 = employeeLeaveBalanceService.readByEmpId1(employeeLeaveBalance.getEmployeeMaster().getId(), empNoOfDays, leaveType1);
+
         Integer i = 0;
-        Integer casual=null;
-        Integer privilege=null;
-        Integer paternity=null;
-        Integer maternity=null;
-        Integer Short=null;
-        Integer lieu=null;
-        Integer sick=null;
-        Integer national=null;
-        String casualDiff="";
-        String privilegeDiff="";
-        String paternityDiff="";
-        String maternityDiff="";
-        String ShortDiff="";
-        String lieuDiff="";
-        String sickDiff="";
-        String nationalDiff="";
+        Integer casual = null;
+        Integer privilege = null;
+        Integer paternity = null;
+        Integer maternity = null;
+        Integer Short = null;
+        Integer lieu = null;
+        Integer sick = null;
+        Integer national = null;
+        String casualDiff = "";
+        String privilegeDiff = "";
+        String paternityDiff = "";
+        String maternityDiff = "";
+        String ShortDiff = "";
+        String lieuDiff = "";
+        String sickDiff = "";
+        String nationalDiff = "";
         String diff = "";
         Iterator itr1 = empLeaveBalanceList1.iterator();
-        while(itr1.hasNext()){
+        while (itr1.hasNext()) {
             Object[] aa = (Object[]) itr1.next();
             diff = aa[1].toString();
         }
 //        ArrayList aa = new ArrayList();
         Iterator itr = empLeaveBalanceList.iterator();
-        while(itr.hasNext()){
+        while (itr.hasNext()) {
 //            aa =(ArrayList) itr.next();
             Object[] aa = (Object[]) itr.next();
-            if(aa[0].equals("Casual Leave")){
+            if (aa[0].equals("Casual Leave")) {
                 casual = i;
-                casualDiff =aa[1].toString();
+                casualDiff = aa[1].toString();
             }
-            if(aa[0].equals("Privilege Leave")){
+            if (aa[0].equals("Privilege Leave")) {
                 privilege = i;
-                privilegeDiff =aa[1].toString();
+                privilegeDiff = aa[1].toString();
             }
-            if(aa[0].equals("Paternity Leave")){
+            if (aa[0].equals("Paternity Leave")) {
                 paternity = i;
-                paternityDiff =aa[1].toString();
+                paternityDiff = aa[1].toString();
             }
-            if(aa[0].equals("Maternity Leave")){
+            if (aa[0].equals("Maternity Leave")) {
                 maternity = i;
-                maternityDiff =aa[1].toString();
+                maternityDiff = aa[1].toString();
             }
-            if(aa[0].equals("Short Leave")){
+            if (aa[0].equals("Short Leave")) {
                 Short = i;
-                ShortDiff =aa[1].toString();
+                ShortDiff = aa[1].toString();
             }
-            if(aa[0].equals("Lieu Day Leave")){
+            if (aa[0].equals("Lieu Day Leave")) {
                 lieu = i;
-                lieuDiff =aa[1].toString();
+                lieuDiff = aa[1].toString();
             }
-            if(aa[0].equals("Sick Leave")){
+            if (aa[0].equals("Sick Leave")) {
                 sick = i;
-                sickDiff =aa[1].toString();
+                sickDiff = aa[1].toString();
             }
-            if(aa[0].equals("National Holiday")){
+            if (aa[0].equals("National Holiday")) {
                 national = i;
-                nationalDiff =aa[1].toString();
+                nationalDiff = aa[1].toString();
             }
             i++;
         }
-        if(leaveTypeMaster1.getLeaveType().equals("Casual Leave"))
-        {
+        if (leaveTypeMaster1.getLeaveType().equals("Casual Leave")) {
             ((ArrayList) empLeaveBalanceList).set(casual, empLeaveBalanceList1.get(0));
         }
-        if(leaveTypeMaster1.getLeaveType().equals("Privilege Leave"))
-        {
+        if (leaveTypeMaster1.getLeaveType().equals("Privilege Leave")) {
             ((ArrayList) empLeaveBalanceList).set(privilege, empLeaveBalanceList1.get(0));
         }
-        if(leaveTypeMaster1.getLeaveType().equals("Paternity Leave"))
-        {
+        if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
             ((ArrayList) empLeaveBalanceList).set(paternity, empLeaveBalanceList1.get(0));
         }
-        if(leaveTypeMaster1.getLeaveType().equals("Maternity Leave"))
-        {
+        if (leaveTypeMaster1.getLeaveType().equals("Maternity Leave")) {
             ((ArrayList) empLeaveBalanceList).set(maternity, empLeaveBalanceList1.get(0));
         }
-        if(leaveTypeMaster1.getLeaveType().equals("Short Leave"))
-        {
+        if (leaveTypeMaster1.getLeaveType().equals("Short Leave")) {
             ((ArrayList) empLeaveBalanceList).set(Short, empLeaveBalanceList1.get(0));
         }
-        if(leaveTypeMaster1.getLeaveType().equals("Lieu Day Leave"))
-        {
+        if (leaveTypeMaster1.getLeaveType().equals("Lieu Day Leave")) {
             ((ArrayList) empLeaveBalanceList).set(lieu, empLeaveBalanceList1.get(0));
         }
-        if(leaveTypeMaster1.getLeaveType().equals("Sick Leave"))
-        {
+        if (leaveTypeMaster1.getLeaveType().equals("Sick Leave")) {
             ((ArrayList) empLeaveBalanceList).set(sick, empLeaveBalanceList1.get(0));
         }
-        if(leaveTypeMaster1.getLeaveType().equals("National Holiday"))
-        {
+        if (leaveTypeMaster1.getLeaveType().equals("National Holiday")) {
             ((ArrayList) empLeaveBalanceList).set(national, empLeaveBalanceList1.get(0));
         }
         Map<String, Float> listRemain = new LinkedHashMap<>();
@@ -1618,49 +1591,40 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 //                Iterator it1 = listFirst.iterator();
                 //                if (it1.hasNext()) {
                 //                }
-                LocalDate ld =LocalDate.now();
+                LocalDate ld = LocalDate.now();
                 Integer year = ld.getYear();
-                Integer year1 = year-1;
-                String dateofpreYear = "31/12/"+year1;
-                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(),dateofpreYear,leave1);
-                noOfDay = Float.parseFloat(noOfDaysForYear)+Float.parseFloat(noOfDaysForYear1)+Float.parseFloat(noOfDaysForYear2)+Float.parseFloat(noOfDaysForYear3);
+                Integer year1 = year - 1;
+                String dateofpreYear = "31/12/" + year1;
+                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(), dateofpreYear, leave1);
+                noOfDay = Float.parseFloat(noOfDaysForYear) + Float.parseFloat(noOfDaysForYear1) + Float.parseFloat(noOfDaysForYear2) + Float.parseFloat(noOfDaysForYear3);
                 totalMap = Float.parseFloat(days) + noOfDay;
-                if(leaveTypeMaster1.getLeaveType().equals(name))
-                {
-                    if(leaveTypeMaster1.getLeaveType().equals("Casual Leave"))
-                    {
-                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(casualDiff)))) + noOfDay;
+                if (leaveTypeMaster1.getLeaveType().equals(name)) {
+                    if (leaveTypeMaster1.getLeaveType().equals("Casual Leave")) {
+                        totalMap = (Float.parseFloat(days) - ((Float.parseFloat(diff) - Float.parseFloat(casualDiff)))) + noOfDay;
                     }
-                    if(leaveTypeMaster1.getLeaveType().equals("Privilege Leave"))
-                    {
-                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(privilegeDiff)))) + noOfDay;
+                    if (leaveTypeMaster1.getLeaveType().equals("Privilege Leave")) {
+                        totalMap = (Float.parseFloat(days) - ((Float.parseFloat(diff) - Float.parseFloat(privilegeDiff)))) + noOfDay;
                     }
-                    if(leaveTypeMaster1.getLeaveType().equals("Paternity Leave"))
-                    {
-                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(paternityDiff)))) + noOfDay;
+                    if (leaveTypeMaster1.getLeaveType().equals("Paternity Leave")) {
+                        totalMap = (Float.parseFloat(days) - ((Float.parseFloat(diff) - Float.parseFloat(paternityDiff)))) + noOfDay;
                     }
-                    if(leaveTypeMaster1.getLeaveType().equals("Maternity Leave"))
-                    {
-                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(maternityDiff)))) + noOfDay;
+                    if (leaveTypeMaster1.getLeaveType().equals("Maternity Leave")) {
+                        totalMap = (Float.parseFloat(days) - ((Float.parseFloat(diff) - Float.parseFloat(maternityDiff)))) + noOfDay;
                     }
-                    if(leaveTypeMaster1.getLeaveType().equals("Short Leave"))
-                    {
-                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(ShortDiff)))) + noOfDay;
+                    if (leaveTypeMaster1.getLeaveType().equals("Short Leave")) {
+                        totalMap = (Float.parseFloat(days) - ((Float.parseFloat(diff) - Float.parseFloat(ShortDiff)))) + noOfDay;
                     }
-                    if(leaveTypeMaster1.getLeaveType().equals("Lieu Day Leave"))
-                    {
-                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(lieuDiff)))) + noOfDay;
+                    if (leaveTypeMaster1.getLeaveType().equals("Lieu Day Leave")) {
+                        totalMap = (Float.parseFloat(days) - ((Float.parseFloat(diff) - Float.parseFloat(lieuDiff)))) + noOfDay;
                     }
-                    if(leaveTypeMaster1.getLeaveType().equals("Sick Leave"))
-                    {
-                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(sickDiff)))) + noOfDay;
+                    if (leaveTypeMaster1.getLeaveType().equals("Sick Leave")) {
+                        totalMap = (Float.parseFloat(days) - ((Float.parseFloat(diff) - Float.parseFloat(sickDiff)))) + noOfDay;
                     }
-                    if(leaveTypeMaster1.getLeaveType().equals("National Holiday"))
-                    {
-                        totalMap = (Float.parseFloat(days)- ((Float.parseFloat(diff) - Float.parseFloat(nationalDiff)))) + noOfDay;
+                    if (leaveTypeMaster1.getLeaveType().equals("National Holiday")) {
+                        totalMap = (Float.parseFloat(days) - ((Float.parseFloat(diff) - Float.parseFloat(nationalDiff)))) + noOfDay;
                     }
                 }
 //                if(noOfDay1!=0.0)
@@ -1669,7 +1633,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //                }
 //                else
 //                {
-                    noOfDay1=noOfDay;
+                noOfDay1 = noOfDay;
 //                }
                 if ("Short Leave".equals(name) || "Paternity Leave".equals(name) || "C Off Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                     continue;
@@ -1795,17 +1759,17 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //                if (noOfDay == null) {
 //                    noOfDay = (float) 0;
 //                }
-                LocalDate ld =LocalDate.now();
+                LocalDate ld = LocalDate.now();
                 Integer year = ld.getYear();
-                Integer year1 = year-1;
-                String dateofpreYear = "31/12/"+year1;
-                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(),dateofpreYear,leave1);
+                Integer year1 = year - 1;
+                String dateofpreYear = "31/12/" + year1;
+                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(), dateofpreYear, leave1);
 //                if (noOfDay == null) {
 //                    noOfDay = (float) 0;
-                noOfDay = Float.parseFloat(noOfDaysForYear)+Float.parseFloat(noOfDaysForYear1)+Float.parseFloat(noOfDaysForYear2)+Float.parseFloat(noOfDaysForYear3);
+                noOfDay = Float.parseFloat(noOfDaysForYear) + Float.parseFloat(noOfDaysForYear1) + Float.parseFloat(noOfDaysForYear2) + Float.parseFloat(noOfDaysForYear3);
                 totalMap = days + noOfDay;
                 if ("Short Leave".equals(name) || "Paternity Leave".equals(name) || "C Off Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                     continue;
@@ -1854,7 +1818,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
         String dateAfterOfeDate = format.format(tomorrow);
-        
+
         LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
         LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -1870,7 +1834,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         if (!empId.isEmpty()) {
             employeeMaster = (EmployeeMaster) empId.get(0);
         }
-        String data = employeeMaster.getId()+":"+dateBeforeOfsDate+":"+dateAfterOfeDate;
+        String data = employeeMaster.getId() + ":" + dateBeforeOfsDate + ":" + dateAfterOfeDate;
         List<?> beforesDate = shiftGenerateMonthlyScheduleService.getbeforesDate(data);
         List<?> aftereDate = shiftGenerateMonthlyScheduleService.getaftereDate(data);
         List<?> beforesDate1 = shiftGenerateMonthlyScheduleService.getbeforesDate1(data);
@@ -1934,22 +1898,17 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 mv.addAllObjects(errors.getModel());
                 mv = viewLeaveRequest(request, response);
 //            mv.setViewName("Leave/LeaveApplicatioFormForEmployee");
-            }
-            else if(leaveType.equals("6") && (!beforesDate.isEmpty() || !aftereDate.isEmpty()))
-            {
+            } else if (leaveType.equals("6") && (!beforesDate.isEmpty() || !aftereDate.isEmpty())) {
                 request.setAttribute("failureMessage",
                         "Error : Casual Leave and Privilege Leave cannot combine.");
                 request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                 mv = viewLeaveRequest(request, response);
-            }
-            else if(leaveType.equals("7") && (!beforesDate1.isEmpty() || !aftereDate1.isEmpty()))
-            {
+            } else if (leaveType.equals("7") && (!beforesDate1.isEmpty() || !aftereDate1.isEmpty())) {
                 request.setAttribute("failureMessage",
                         "Error : Casual Leave and Privilege Leave cannot combine.");
                 request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                 mv = viewLeaveRequest(request, response);
-            }
-            else {
+            } else {
                 try {
                     leaveTypeMaster = leaveTypeMasterService.readById(Integer.parseInt(leaveTypeMasterId));
                     leaveTypeMaster.getMaxDayAllowedLeave();
@@ -2488,15 +2447,15 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //                if (noOfDay == null) {
 //                    noOfDay = (float) 0;
 //                }
-                LocalDate ld =LocalDate.now();
+                LocalDate ld = LocalDate.now();
                 Integer year = ld.getYear();
-                Integer year1 = year-1;
-                String dateofpreYear = "31/12/"+year1;
-                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(),dateofpreYear,leave1);
-                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(),dateofpreYear,leave1);
-                noOfDay = Float.parseFloat(noOfDaysForYear)+Float.parseFloat(noOfDaysForYear1)+Float.parseFloat(noOfDaysForYear2)+Float.parseFloat(noOfDaysForYear3);
+                Integer year1 = year - 1;
+                String dateofpreYear = "31/12/" + year1;
+                String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(), dateofpreYear, leave1);
+                String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(), dateofpreYear, leave1);
+                noOfDay = Float.parseFloat(noOfDaysForYear) + Float.parseFloat(noOfDaysForYear1) + Float.parseFloat(noOfDaysForYear2) + Float.parseFloat(noOfDaysForYear3);
                 totalMap = days + noOfDay;
                 if ("C Off Leave".equals(name) || "Short Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                     continue;
@@ -2967,21 +2926,18 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         String endDate = request.getParameter("endDate");
         String employeeTypeMaster = request.getParameter("employeeTypeMaster");
         String employeeSubType = request.getParameter("subTypeId");
-        String useAsSickLeave="";
-        if(leaveTypeId.equals("7"))
-        {
-        useAsSickLeave = request.getParameter("useAsSickLeave");
+        String useAsSickLeave = "";
+        if (leaveTypeId.equals("7")) {
+            useAsSickLeave = request.getParameter("useAsSickLeave");
         }
-        Boolean a=false;
-        if(useAsSickLeave.equals("0"))
-        {
-            a=false;
+        Boolean a = false;
+        if (useAsSickLeave.equals("0")) {
+            a = false;
         }
-        if(useAsSickLeave.equals("1"))
-        {
-            a=true;
+        if (useAsSickLeave.equals("1")) {
+            a = true;
         }
-        
+
         if (!empId.equals("") && !empId.equals(null)) {
             employeeMaster.setId(Integer.parseInt(empId));
         }
@@ -3111,7 +3067,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster.getLocationMaster().getId());
                 if (list.size() == 0) {
 //                    days++;
-                    days=days;
+                    days = days;
                 }
             }
             c.add(Calendar.DATE, 1);
@@ -3257,8 +3213,8 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     noOfLeave = Float.parseFloat(leaveTypeMaster.getNoOfLeave()) + employeeLeaveBalance.getNoOfLeaveRemain();
 
 //                    if (Float.parseFloat(leaveTypeMaster.getNoOfCarriedForwardLeave()) >= noOfLeave) {
-                        employeeLeaveBalance.setNoOfLeaveRemain(noOfLeave);
-                        employeeLeaveBalanceService.update(employeeLeaveBalance);
+                    employeeLeaveBalance.setNoOfLeaveRemain(noOfLeave);
+                    employeeLeaveBalanceService.update(employeeLeaveBalance);
 //                    } else {
 //                        employeeLeaveBalance.setNoOfLeaveRemain(Float.parseFloat(leaveTypeMaster.getNoOfCarriedForwardLeave()));
 //                        employeeLeaveBalanceService.update(employeeLeaveBalance);
@@ -5442,19 +5398,16 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
             }
         }
-        if(leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17"))
-        {
-            String data = employeeMaster1.getId()+":"+strDate+":"+enDate;
+        if (leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17")) {
+            String data = employeeMaster1.getId() + ":" + strDate + ":" + enDate;
             List<?> shiftsBetween = shiftGenerateMonthlyScheduleService.getShiftsBetween(data);
             String size = String.valueOf(shiftsBetween.size());
             Double size1 = Double.parseDouble(size);
-            if(!shiftsBetween.isEmpty())
-            {
-                days-=size1;
+            if (!shiftsBetween.isEmpty()) {
+                days -= size1;
             }
         }
-        if(leavetype.equals("16"))
-        {
+        if (leavetype.equals("16")) {
             SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
             Date date = format.parse(strDate);
             String strDate1 = format.format(date);
@@ -5469,60 +5422,117 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             String employeeId = request.getParameter("employeeId");
             String empNo = employeeMasterService.getByEmployeeNo1(employeeId);
             EmployeeMaster employeeMaster11 = employeeMasterService.readById(Integer.parseInt(empNo));
-            String data = employeeMaster11.getId()+":"+strMonth+":"+strYear+":"+enMonth+":"+enYear;
-            String shiftList="";
-            String shiftList1="";
-            String shiftList2="";
+            String data = employeeMaster11.getId() + ":" + strMonth + ":" + strYear + ":" + enMonth + ":" + enYear;
+            String shiftList = "";
+            String shiftList1 = "";
+            String shiftList2 = "";
             ShiftGenerateMonthlySchedule sgms;
             ShiftGenerateMonthlySchedule sgms1;
             List<?> shiftListId = shiftGenerateMonthlyScheduleService.getshiftsList(data);
             String shiftLists = shiftListId.get(0).toString();
             sgms = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(shiftLists));
-            if(strMonth.equals(enMonth) && strYear.equals(enYear))
-            {
-                
-                 ArrayList<Integer> arrli = new ArrayList<Integer>();
-                 for(int i=Integer.parseInt(strDay);i<=Integer.parseInt(enDay);i++)
-                 {
-                     if(i==1){arrli.add(sgms.getDay1());}
-                     if(i==2){arrli.add(sgms.getDay2());}
-                     if(i==3){arrli.add(sgms.getDay3());}
-                     if(i==4){arrli.add(sgms.getDay4());}
-                     if(i==5){arrli.add(sgms.getDay5());}
-                     if(i==6){arrli.add(sgms.getDay6());}
-                     if(i==7){arrli.add(sgms.getDay7());}
-                     if(i==8){arrli.add(sgms.getDay8());}
-                     if(i==9){arrli.add(sgms.getDay9());}
-                     if(i==10){arrli.add(sgms.getDay10());}
-                     if(i==11){arrli.add(sgms.getDay11());}
-                     if(i==12){arrli.add(sgms.getDay12());}
-                     if(i==13){arrli.add(sgms.getDay13());}
-                     if(i==14){arrli.add(sgms.getDay14());}
-                     if(i==15){arrli.add(sgms.getDay15());}
-                     if(i==16){arrli.add(sgms.getDay16());}
-                     if(i==17){arrli.add(sgms.getDay17());}
-                     if(i==18){arrli.add(sgms.getDay18());}
-                     if(i==19){arrli.add(sgms.getDay19());}
-                     if(i==20){arrli.add(sgms.getDay20());}
-                     if(i==21){arrli.add(sgms.getDay21());}
-                     if(i==22){arrli.add(sgms.getDay22());}
-                     if(i==23){arrli.add(sgms.getDay23());}
-                     if(i==24){arrli.add(sgms.getDay24());}
-                     if(i==25){arrli.add(sgms.getDay25());}
-                     if(i==26){arrli.add(sgms.getDay26());}
-                     if(i==27){arrli.add(sgms.getDay27());}
-                     if(i==28){arrli.add(sgms.getDay28());}
-                     if(i==29){arrli.add(sgms.getDay29());}
-                     if(i==30){arrli.add(sgms.getDay30());}
-                     if(i==31){arrli.add(sgms.getDay31());}
-                 }
-                 if(arrli.contains(-1))
-                 {
-                     days-=1.0;
-                 }
-            }
-            else
-            {
+            if (strMonth.equals(enMonth) && strYear.equals(enYear)) {
+
+                ArrayList<Integer> arrli = new ArrayList<Integer>();
+                for (int i = Integer.parseInt(strDay); i <= Integer.parseInt(enDay); i++) {
+                    if (i == 1) {
+                        arrli.add(sgms.getDay1());
+                    }
+                    if (i == 2) {
+                        arrli.add(sgms.getDay2());
+                    }
+                    if (i == 3) {
+                        arrli.add(sgms.getDay3());
+                    }
+                    if (i == 4) {
+                        arrli.add(sgms.getDay4());
+                    }
+                    if (i == 5) {
+                        arrli.add(sgms.getDay5());
+                    }
+                    if (i == 6) {
+                        arrli.add(sgms.getDay6());
+                    }
+                    if (i == 7) {
+                        arrli.add(sgms.getDay7());
+                    }
+                    if (i == 8) {
+                        arrli.add(sgms.getDay8());
+                    }
+                    if (i == 9) {
+                        arrli.add(sgms.getDay9());
+                    }
+                    if (i == 10) {
+                        arrli.add(sgms.getDay10());
+                    }
+                    if (i == 11) {
+                        arrli.add(sgms.getDay11());
+                    }
+                    if (i == 12) {
+                        arrli.add(sgms.getDay12());
+                    }
+                    if (i == 13) {
+                        arrli.add(sgms.getDay13());
+                    }
+                    if (i == 14) {
+                        arrli.add(sgms.getDay14());
+                    }
+                    if (i == 15) {
+                        arrli.add(sgms.getDay15());
+                    }
+                    if (i == 16) {
+                        arrli.add(sgms.getDay16());
+                    }
+                    if (i == 17) {
+                        arrli.add(sgms.getDay17());
+                    }
+                    if (i == 18) {
+                        arrli.add(sgms.getDay18());
+                    }
+                    if (i == 19) {
+                        arrli.add(sgms.getDay19());
+                    }
+                    if (i == 20) {
+                        arrli.add(sgms.getDay20());
+                    }
+                    if (i == 21) {
+                        arrli.add(sgms.getDay21());
+                    }
+                    if (i == 22) {
+                        arrli.add(sgms.getDay22());
+                    }
+                    if (i == 23) {
+                        arrli.add(sgms.getDay23());
+                    }
+                    if (i == 24) {
+                        arrli.add(sgms.getDay24());
+                    }
+                    if (i == 25) {
+                        arrli.add(sgms.getDay25());
+                    }
+                    if (i == 26) {
+                        arrli.add(sgms.getDay26());
+                    }
+                    if (i == 27) {
+                        arrli.add(sgms.getDay27());
+                    }
+                    if (i == 28) {
+                        arrli.add(sgms.getDay28());
+                    }
+                    if (i == 29) {
+                        arrli.add(sgms.getDay29());
+                    }
+                    if (i == 30) {
+                        arrli.add(sgms.getDay30());
+                    }
+                    if (i == 31) {
+                        arrli.add(sgms.getDay31());
+                    }
+                }
+                if (arrli.contains(-1)) {
+                    days -= 1.0;
+                }
+            } else {
                 List<?> shiftListId2 = shiftGenerateMonthlyScheduleService.getshiftsList1(data);
                 String shiftLists2 = shiftListId2.get(0).toString();
                 sgms1 = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(shiftLists2));
@@ -5531,220 +5541,323 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 String st = format.format(java.sql.Date.valueOf(convertedDate));
                 String monthEndValue = st.split("/")[0];
                 ArrayList<Integer> arrli1 = new ArrayList<Integer>();
-                for(int i=Integer.parseInt(strDay);i<=Integer.parseInt(monthEndValue);i++)
-                 {
-                     if(i==1){arrli1.add(sgms.getDay1());}
-                     if(i==2){arrli1.add(sgms.getDay2());}
-                     if(i==3){arrli1.add(sgms.getDay3());}
-                     if(i==4){arrli1.add(sgms.getDay4());}
-                     if(i==5){arrli1.add(sgms.getDay5());}
-                     if(i==6){arrli1.add(sgms.getDay6());}
-                     if(i==7){arrli1.add(sgms.getDay7());}
-                     if(i==8){arrli1.add(sgms.getDay8());}
-                     if(i==9){arrli1.add(sgms.getDay9());}
-                     if(i==10){arrli1.add(sgms.getDay10());}
-                     if(i==11){arrli1.add(sgms.getDay11());}
-                     if(i==12){arrli1.add(sgms.getDay12());}
-                     if(i==13){arrli1.add(sgms.getDay13());}
-                     if(i==14){arrli1.add(sgms.getDay14());}
-                     if(i==15){arrli1.add(sgms.getDay15());}
-                     if(i==16){arrli1.add(sgms.getDay16());}
-                     if(i==17){arrli1.add(sgms.getDay17());}
-                     if(i==18){arrli1.add(sgms.getDay18());}
-                     if(i==19){arrli1.add(sgms.getDay19());}
-                     if(i==20){arrli1.add(sgms.getDay20());}
-                     if(i==21){arrli1.add(sgms.getDay21());}
-                     if(i==22){arrli1.add(sgms.getDay22());}
-                     if(i==23){arrli1.add(sgms.getDay23());}
-                     if(i==24){arrli1.add(sgms.getDay24());}
-                     if(i==25){arrli1.add(sgms.getDay25());}
-                     if(i==26){arrli1.add(sgms.getDay26());}
-                     if(i==27){arrli1.add(sgms.getDay27());}
-                     if(i==28){arrli1.add(sgms.getDay28());}
-                     if(i==29){arrli1.add(sgms.getDay29());}
-                     if(i==30){arrli1.add(sgms.getDay30());}
-                     if(i==31){arrli1.add(sgms.getDay31());}
-                 }
-                for(int i=1;i<=Integer.parseInt(enDay);i++)
-                 {
-                     if(i==1){arrli1.add(sgms1.getDay1());}
-                     if(i==2){arrli1.add(sgms1.getDay2());}
-                     if(i==3){arrli1.add(sgms1.getDay3());}
-                     if(i==4){arrli1.add(sgms1.getDay4());}
-                     if(i==5){arrli1.add(sgms1.getDay5());}
-                     if(i==6){arrli1.add(sgms1.getDay6());}
-                     if(i==7){arrli1.add(sgms1.getDay7());}
-                     if(i==8){arrli1.add(sgms1.getDay8());}
-                     if(i==9){arrli1.add(sgms1.getDay9());}
-                     if(i==10){arrli1.add(sgms1.getDay10());}
-                     if(i==11){arrli1.add(sgms1.getDay11());}
-                     if(i==12){arrli1.add(sgms1.getDay12());}
-                     if(i==13){arrli1.add(sgms1.getDay13());}
-                     if(i==14){arrli1.add(sgms1.getDay14());}
-                     if(i==15){arrli1.add(sgms1.getDay15());}
-                     if(i==16){arrli1.add(sgms1.getDay16());}
-                     if(i==17){arrli1.add(sgms1.getDay17());}
-                     if(i==18){arrli1.add(sgms1.getDay18());}
-                     if(i==19){arrli1.add(sgms1.getDay19());}
-                     if(i==20){arrli1.add(sgms1.getDay20());}
-                     if(i==21){arrli1.add(sgms1.getDay21());}
-                     if(i==22){arrli1.add(sgms1.getDay22());}
-                     if(i==23){arrli1.add(sgms1.getDay23());}
-                     if(i==24){arrli1.add(sgms1.getDay24());}
-                     if(i==25){arrli1.add(sgms1.getDay25());}
-                     if(i==26){arrli1.add(sgms1.getDay26());}
-                     if(i==27){arrli1.add(sgms1.getDay27());}
-                     if(i==28){arrli1.add(sgms1.getDay28());}
-                     if(i==29){arrli1.add(sgms1.getDay29());}
-                     if(i==30){arrli1.add(sgms1.getDay30());}
-                     if(i==31){arrli1.add(sgms1.getDay31());}
-                 }
-                if(arrli1.contains(-1))
-                 {
-                     days-=1.0;
-                 }
+                for (int i = Integer.parseInt(strDay); i <= Integer.parseInt(monthEndValue); i++) {
+                    if (i == 1) {
+                        arrli1.add(sgms.getDay1());
+                    }
+                    if (i == 2) {
+                        arrli1.add(sgms.getDay2());
+                    }
+                    if (i == 3) {
+                        arrli1.add(sgms.getDay3());
+                    }
+                    if (i == 4) {
+                        arrli1.add(sgms.getDay4());
+                    }
+                    if (i == 5) {
+                        arrli1.add(sgms.getDay5());
+                    }
+                    if (i == 6) {
+                        arrli1.add(sgms.getDay6());
+                    }
+                    if (i == 7) {
+                        arrli1.add(sgms.getDay7());
+                    }
+                    if (i == 8) {
+                        arrli1.add(sgms.getDay8());
+                    }
+                    if (i == 9) {
+                        arrli1.add(sgms.getDay9());
+                    }
+                    if (i == 10) {
+                        arrli1.add(sgms.getDay10());
+                    }
+                    if (i == 11) {
+                        arrli1.add(sgms.getDay11());
+                    }
+                    if (i == 12) {
+                        arrli1.add(sgms.getDay12());
+                    }
+                    if (i == 13) {
+                        arrli1.add(sgms.getDay13());
+                    }
+                    if (i == 14) {
+                        arrli1.add(sgms.getDay14());
+                    }
+                    if (i == 15) {
+                        arrli1.add(sgms.getDay15());
+                    }
+                    if (i == 16) {
+                        arrli1.add(sgms.getDay16());
+                    }
+                    if (i == 17) {
+                        arrli1.add(sgms.getDay17());
+                    }
+                    if (i == 18) {
+                        arrli1.add(sgms.getDay18());
+                    }
+                    if (i == 19) {
+                        arrli1.add(sgms.getDay19());
+                    }
+                    if (i == 20) {
+                        arrli1.add(sgms.getDay20());
+                    }
+                    if (i == 21) {
+                        arrli1.add(sgms.getDay21());
+                    }
+                    if (i == 22) {
+                        arrli1.add(sgms.getDay22());
+                    }
+                    if (i == 23) {
+                        arrli1.add(sgms.getDay23());
+                    }
+                    if (i == 24) {
+                        arrli1.add(sgms.getDay24());
+                    }
+                    if (i == 25) {
+                        arrli1.add(sgms.getDay25());
+                    }
+                    if (i == 26) {
+                        arrli1.add(sgms.getDay26());
+                    }
+                    if (i == 27) {
+                        arrli1.add(sgms.getDay27());
+                    }
+                    if (i == 28) {
+                        arrli1.add(sgms.getDay28());
+                    }
+                    if (i == 29) {
+                        arrli1.add(sgms.getDay29());
+                    }
+                    if (i == 30) {
+                        arrli1.add(sgms.getDay30());
+                    }
+                    if (i == 31) {
+                        arrli1.add(sgms.getDay31());
+                    }
+                }
+                for (int i = 1; i <= Integer.parseInt(enDay); i++) {
+                    if (i == 1) {
+                        arrli1.add(sgms1.getDay1());
+                    }
+                    if (i == 2) {
+                        arrli1.add(sgms1.getDay2());
+                    }
+                    if (i == 3) {
+                        arrli1.add(sgms1.getDay3());
+                    }
+                    if (i == 4) {
+                        arrli1.add(sgms1.getDay4());
+                    }
+                    if (i == 5) {
+                        arrli1.add(sgms1.getDay5());
+                    }
+                    if (i == 6) {
+                        arrli1.add(sgms1.getDay6());
+                    }
+                    if (i == 7) {
+                        arrli1.add(sgms1.getDay7());
+                    }
+                    if (i == 8) {
+                        arrli1.add(sgms1.getDay8());
+                    }
+                    if (i == 9) {
+                        arrli1.add(sgms1.getDay9());
+                    }
+                    if (i == 10) {
+                        arrli1.add(sgms1.getDay10());
+                    }
+                    if (i == 11) {
+                        arrli1.add(sgms1.getDay11());
+                    }
+                    if (i == 12) {
+                        arrli1.add(sgms1.getDay12());
+                    }
+                    if (i == 13) {
+                        arrli1.add(sgms1.getDay13());
+                    }
+                    if (i == 14) {
+                        arrli1.add(sgms1.getDay14());
+                    }
+                    if (i == 15) {
+                        arrli1.add(sgms1.getDay15());
+                    }
+                    if (i == 16) {
+                        arrli1.add(sgms1.getDay16());
+                    }
+                    if (i == 17) {
+                        arrli1.add(sgms1.getDay17());
+                    }
+                    if (i == 18) {
+                        arrli1.add(sgms1.getDay18());
+                    }
+                    if (i == 19) {
+                        arrli1.add(sgms1.getDay19());
+                    }
+                    if (i == 20) {
+                        arrli1.add(sgms1.getDay20());
+                    }
+                    if (i == 21) {
+                        arrli1.add(sgms1.getDay21());
+                    }
+                    if (i == 22) {
+                        arrli1.add(sgms1.getDay22());
+                    }
+                    if (i == 23) {
+                        arrli1.add(sgms1.getDay23());
+                    }
+                    if (i == 24) {
+                        arrli1.add(sgms1.getDay24());
+                    }
+                    if (i == 25) {
+                        arrli1.add(sgms1.getDay25());
+                    }
+                    if (i == 26) {
+                        arrli1.add(sgms1.getDay26());
+                    }
+                    if (i == 27) {
+                        arrli1.add(sgms1.getDay27());
+                    }
+                    if (i == 28) {
+                        arrli1.add(sgms1.getDay28());
+                    }
+                    if (i == 29) {
+                        arrli1.add(sgms1.getDay29());
+                    }
+                    if (i == 30) {
+                        arrli1.add(sgms1.getDay30());
+                    }
+                    if (i == 31) {
+                        arrli1.add(sgms1.getDay31());
+                    }
+                }
+                if (arrli1.contains(-1)) {
+                    days -= 1.0;
+                }
             }
-            
+
         }
-        if(leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17"))
-        {
+        if (leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17")) {
             SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
             Date date = format.parse(strDate);
             Date oneDayBefore = new Date(date.getTime() - 2);
             String dateBeforeOfsDate = format.format(oneDayBefore);
-            String beforeDay =  dateBeforeOfsDate.split("/")[0];
-            String beforeMonth =  dateBeforeOfsDate.split("/")[1];
-            String beforeYear =  dateBeforeOfsDate.split("/")[2];
-        
+            String beforeDay = dateBeforeOfsDate.split("/")[0];
+            String beforeMonth = dateBeforeOfsDate.split("/")[1];
+            String beforeYear = dateBeforeOfsDate.split("/")[2];
+
             Date date1 = format.parse(enDate);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date1);
             calendar.add(Calendar.DAY_OF_YEAR, 1);
             Date tomorrow = calendar.getTime();
             String dateAfterOfeDate = format.format(tomorrow);
-            String afterDay =  dateAfterOfeDate.split("/")[0];
-            String afterMonth =  dateAfterOfeDate.split("/")[1];
-            String afterYear =  dateAfterOfeDate.split("/")[2];
-            
-            String data = employeeMaster1.getId()+":"+beforeDay+":"+beforeMonth+":"+beforeYear+":"+afterDay+":"+afterMonth+":"+afterYear;
+            String afterDay = dateAfterOfeDate.split("/")[0];
+            String afterMonth = dateAfterOfeDate.split("/")[1];
+            String afterYear = dateAfterOfeDate.split("/")[2];
+
+            String data = employeeMaster1.getId() + ":" + beforeDay + ":" + beforeMonth + ":" + beforeYear + ":" + afterDay + ":" + afterMonth + ":" + afterYear;
             String beforeDayList = shiftGenerateMonthlyScheduleService.getBeforeDayList(data);
             String afterDayList = shiftGenerateMonthlyScheduleService.getAfterDayList(data);
-            
+
             SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
             Date date2 = format1.parse(strDate);
             calendar.setTime(date2);
             calendar.add(Calendar.DAY_OF_YEAR, -3);
             Date beforeWoff = calendar.getTime();
             String beforeWoffDay = format1.format(beforeWoff);
-            
+
             Date date3 = format1.parse(enDate);
             calendar.setTime(date3);
             calendar.add(Calendar.DAY_OF_YEAR, 3);
             Date afterWoff = calendar.getTime();
             String afterWoffDay = format1.format(afterWoff);
-            
-            String data1 = employeeMaster1.getId()+":"+beforeWoffDay+":"+afterWoffDay;
-            if(beforeDayList.equals("-1"))
-            {
+
+            String data1 = employeeMaster1.getId() + ":" + beforeWoffDay + ":" + afterWoffDay;
+            if (beforeDayList.equals("-1")) {
                 List<?> beforeWoffDayList = shiftGenerateMonthlyScheduleService.getbeforeWoffDayList(data1);
-                if(!beforeWoffDayList.isEmpty())
-                {
-                    if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday"))
-                    {
-                        if(leavetype.equals("7"))
-                        {
-                            days=days;
+                if (!beforeWoffDayList.isEmpty()) {
+                    if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday")) {
+                        if (leavetype.equals("7")) {
+                            days = days;
+                        } else {
+                            days += 1.0;
                         }
-                        else
-                        {
-                            days+=1.0;
-                        }
-                        
-                    }
-                    else
-                    {
-                        days+=1.0;
+
+                    } else {
+                        days += 1.0;
                     }
                 }
             }
-            if(afterDayList.equals("-1"))
-            {
+            if (afterDayList.equals("-1")) {
                 List<?> afterWoffDayList = shiftGenerateMonthlyScheduleService.getafterWoffDayList(data1);
-                if(!afterWoffDayList.isEmpty())
-                {
-                    days+=1.0;
+                if (!afterWoffDayList.isEmpty()) {
+                    days += 1.0;
                 }
             }
         }
-        
-            SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
-            Date date1 = format.parse(strDate);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date1);
-            calendar.add(Calendar.DAY_OF_YEAR, 1);
-            Date tomorrow = calendar.getTime();
-            String dateAfterOfstrDate = format.format(tomorrow);
-            String afterDay =  dateAfterOfstrDate.split("/")[0];
-            String afterMonth =  dateAfterOfstrDate.split("/")[1];
-            String afterYear =  dateAfterOfstrDate.split("/")[2];
-            
-            Date date2 = format.parse(enDate);
-            calendar.setTime(date2);
-            calendar.add(Calendar.DAY_OF_YEAR, -1);
-            Date before = calendar.getTime();
-            String dateBeforeOfenDate = format.format(before);
-            String beforeDay =  dateBeforeOfenDate.split("/")[0];
-            String beforMonth =  dateBeforeOfenDate.split("/")[1];
-            String beforYear =  dateBeforeOfenDate.split("/")[2];
-            String data = employeeMaster1.getId()+":"+afterDay+":"+afterMonth+":"+afterYear+":"+beforeDay+":"+beforMonth+":"+beforYear;
-            List<?>  getDayAfterOfstrDate = shiftGenerateMonthlyScheduleService.getDayAfterOfstrDate(data);
-            List<?>  getDayBeforeOfenDate = shiftGenerateMonthlyScheduleService.getDayBeforeOfenDate(data);
-            String getDayAfterOfstrDate1 = getDayAfterOfstrDate.get(0).toString();
-            String getDayBeforeOfenDate1 = getDayBeforeOfenDate.get(0).toString();
-        if((sDateStatus.equals("Fullday") && eDateStatus.equals("FirstHalf")))
-        {
-            
-            if(getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1"))
-            {
-                days-=1.0;
+
+        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
+        Date date1 = format.parse(strDate);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date1);
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+        String dateAfterOfstrDate = format.format(tomorrow);
+        String afterDay = dateAfterOfstrDate.split("/")[0];
+        String afterMonth = dateAfterOfstrDate.split("/")[1];
+        String afterYear = dateAfterOfstrDate.split("/")[2];
+
+        Date date2 = format.parse(enDate);
+        calendar.setTime(date2);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        Date before = calendar.getTime();
+        String dateBeforeOfenDate = format.format(before);
+        String beforeDay = dateBeforeOfenDate.split("/")[0];
+        String beforMonth = dateBeforeOfenDate.split("/")[1];
+        String beforYear = dateBeforeOfenDate.split("/")[2];
+        String data = employeeMaster1.getId() + ":" + afterDay + ":" + afterMonth + ":" + afterYear + ":" + beforeDay + ":" + beforMonth + ":" + beforYear;
+        List<?> getDayAfterOfstrDate = shiftGenerateMonthlyScheduleService.getDayAfterOfstrDate(data);
+        List<?> getDayBeforeOfenDate = shiftGenerateMonthlyScheduleService.getDayBeforeOfenDate(data);
+        String getDayAfterOfstrDate1 = getDayAfterOfstrDate.get(0).toString();
+        String getDayBeforeOfenDate1 = getDayBeforeOfenDate.get(0).toString();
+        if ((sDateStatus.equals("Fullday") && eDateStatus.equals("FirstHalf"))) {
+
+            if (getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) {
+                days -= 1.0;
             }
         }
-        if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
-        {
-            
-            if((!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1")) && (!leavetype.equals("16") && !leavetype.equals("11") && !leavetype.equals("12") && !leavetype.equals("18") && !leavetype.equals("7")))
-//            if(!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1"))
+        if ((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday"))) {
+
+            if ((!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1")) && (!leavetype.equals("16") && !leavetype.equals("11") && !leavetype.equals("12") && !leavetype.equals("18") && !leavetype.equals("7"))) //            if(!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1"))
             {
-                days+=1.0;
+                days += 1.0;
             }
         }
-        if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
-        {
-            
-            if((getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (leavetype.equals("16") || leavetype.equals("11") || leavetype.equals("12")))
-            {
-                days-=1.0;
+        if ((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday"))) {
+
+            if ((getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (leavetype.equals("16") || leavetype.equals("11") || leavetype.equals("12"))) {
+                days -= 1.0;
             }
         }
-        if(leavetype.equals("7") || leavetype.equals("6"))
-        {
+        if (leavetype.equals("7") || leavetype.equals("6")) {
             List<Date> dates = new ArrayList<Date>();
             List<String> dates1 = new ArrayList<String>();
-            DateFormat formatter ; 
+            DateFormat formatter;
 
             formatter = new SimpleDateFormat("d/M/yyyy");
-            Date  startDate = (Date)formatter.parse(strDate); 
-            Date  endDate = (Date)formatter.parse(enDate);
-            long interval = 24*1000 * 60 * 60; 
-            long endTime =endDate.getTime() ;
+            Date startDate = (Date) formatter.parse(strDate);
+            Date endDate = (Date) formatter.parse(enDate);
+            long interval = 24 * 1000 * 60 * 60;
+            long endTime = endDate.getTime();
             long curTime = startDate.getTime();
             while (curTime <= endTime) {
                 dates.add(new Date(curTime));
                 curTime += interval;
             }
-            for(int i=0;i<dates.size();i++){
-                Date lDate =(Date)dates.get(i);
-                String ds = formatter.format(lDate);  
+            for (int i = 0; i < dates.size(); i++) {
+                Date lDate = (Date) dates.get(i);
+                String ds = formatter.format(lDate);
                 dates1.add(ds);
             }
             SimpleDateFormat format2 = new SimpleDateFormat("d/M/yyyy");
@@ -5752,25 +5865,23 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             String strDate2 = format2.format(date5);
             Date date6 = format2.parse(enDate);
             String enDate2 = format2.format(date6);
-            Boolean woffCount=false;
+            Boolean woffCount = false;
             String beforeWoff = "";
             for (String str : dates1) {
-                String data11 = employeeMaster1.getId()+":"+str.split("/")[0]+":"+str.split("/")[1]+":"+str.split("/")[2];
+                String data11 = employeeMaster1.getId() + ":" + str.split("/")[0] + ":" + str.split("/")[1] + ":" + str.split("/")[2];
                 String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data11);
-                if(checkWoff.equals("-1"))
-                {
-                    woffCount=true;
+                if (checkWoff.equals("-1")) {
+                    woffCount = true;
                     beforeWoff = str;
                 }
             }
-            if(woffCount==true && !beforeWoff.isEmpty())
-            {
+            if (woffCount == true && !beforeWoff.isEmpty()) {
                 Date date3 = format2.parse(beforeWoff);
                 calendar.setTime(date3);
                 calendar.add(Calendar.DAY_OF_YEAR, -7);
                 Date afterChange = calendar.getTime();
                 String afterChange1 = format2.format(afterChange);
-                String data12 = employeeMaster1.getId()+":"+afterChange1.split("/")[0]+":"+afterChange1.split("/")[1]+":"+afterChange1.split("/")[2];
+                String data12 = employeeMaster1.getId() + ":" + afterChange1.split("/")[0] + ":" + afterChange1.split("/")[1] + ":" + afterChange1.split("/")[2];
                 String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data12);
                 Date date4 = format2.parse(afterChange1);
                 calendar.setTime(date4);
@@ -5782,14 +5893,12 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 calendar.add(Calendar.DAY_OF_YEAR, 1);
                 Date afterDayWoff = calendar.getTime();
                 String afterDayWoff1 = format2.format(afterDayWoff);
-                String data13 = employeeMaster1.getId()+":"+beforeDayWoff1.split("/")[0]+":"+beforeDayWoff1.split("/")[1]+":"+beforeDayWoff1.split("/")[2];
+                String data13 = employeeMaster1.getId() + ":" + beforeDayWoff1.split("/")[0] + ":" + beforeDayWoff1.split("/")[1] + ":" + beforeDayWoff1.split("/")[2];
                 String checkBeforeWoff = shiftGenerateMonthlyScheduleService.checkWoff(data13);
-                String data14 = employeeMaster1.getId()+":"+afterDayWoff1.split("/")[0]+":"+afterDayWoff1.split("/")[1]+":"+afterDayWoff1.split("/")[2];
+                String data14 = employeeMaster1.getId() + ":" + afterDayWoff1.split("/")[0] + ":" + afterDayWoff1.split("/")[1] + ":" + afterDayWoff1.split("/")[2];
                 String checkAfterWoff = shiftGenerateMonthlyScheduleService.checkWoff(data14);
-                if(checkWoff.equals("-1"))
-                {
-                    if(checkBeforeWoff.equals("-1"))
-                    {
+                if (checkWoff.equals("-1")) {
+                    if (checkBeforeWoff.equals("-1")) {
                         Date date8 = format2.parse(beforeDayWoff1);
                         calendar.setTime(date8);
                         calendar.add(Calendar.DAY_OF_YEAR, -1);
@@ -5800,16 +5909,14 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         calendar.add(Calendar.DAY_OF_YEAR, 1);
                         Date beforeDayWoff3 = calendar.getTime();
                         String afterWoff1 = format2.format(beforeDayWoff3);
-                        String data15 = employeeMaster1.getId()+":"+beforeWoff1+":"+afterWoff1;
+                        String data15 = employeeMaster1.getId() + ":" + beforeWoff1 + ":" + afterWoff1;
                         String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
                         String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
-                        if((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty()))
-                        {
+                        if ((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty())) {
                             days--;
                         }
                     }
-                    if(checkAfterWoff.equals("-1"))
-                    {
+                    if (checkAfterWoff.equals("-1")) {
                         String afterDayWoff2 = format2.format(afterChange1);
                         Date date9 = format2.parse(afterDayWoff2);
                         calendar.setTime(date9);
@@ -5822,11 +5929,10 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         calendar.add(Calendar.DAY_OF_YEAR, -1);
                         Date afterDayWoff3 = calendar.getTime();
                         String beforeWoff1 = format2.format(afterDayWoff3);
-                        String data15 = employeeMaster1.getId()+":"+afterWoff1+":"+beforeWoff1;
+                        String data15 = employeeMaster1.getId() + ":" + afterWoff1 + ":" + beforeWoff1;
                         String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
                         String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
-                        if((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty()))
-                        {
+                        if ((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty())) {
                             days--;
                         }
                     }
@@ -5942,6 +6048,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         PrintWriter out = response.getWriter();
         out.print(days);
     }
+
     public void getActualDayByAjax2(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String strDate = request.getParameter("strDate");
         String enDate = request.getParameter("enDate");
@@ -8071,20 +8178,17 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
             }
         }
-        
-        if(leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17"))
-        {
-            String data = employeeMaster1.getId()+":"+strDate+":"+enDate;
+
+        if (leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17")) {
+            String data = employeeMaster1.getId() + ":" + strDate + ":" + enDate;
             List<?> shiftsBetween = shiftGenerateMonthlyScheduleService.getShiftsBetween(data);
             String size = String.valueOf(shiftsBetween.size());
             Double size1 = Double.parseDouble(size);
-            if(!shiftsBetween.isEmpty())
-            {
-                days-=size1;
+            if (!shiftsBetween.isEmpty()) {
+                days -= size1;
             }
         }
-        if(leavetype.equals("16"))
-        {
+        if (leavetype.equals("16")) {
             SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
             Date date = format.parse(strDate);
             String strDate1 = format.format(date);
@@ -8099,60 +8203,117 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //            String employeeId = request.getParameter("employeeId");
 //            String empNo = employeeMasterService.getByEmployeeNo1(employeeId);
 //            EmployeeMaster employeeMaster11 = employeeMasterService.readById(Integer.parseInt(empNo));
-            String data = employeeMaster1.getId()+":"+strMonth+":"+strYear+":"+enMonth+":"+enYear;
-            String shiftList="";
-            String shiftList1="";
-            String shiftList2="";
+            String data = employeeMaster1.getId() + ":" + strMonth + ":" + strYear + ":" + enMonth + ":" + enYear;
+            String shiftList = "";
+            String shiftList1 = "";
+            String shiftList2 = "";
             ShiftGenerateMonthlySchedule sgms;
             ShiftGenerateMonthlySchedule sgms1;
             List<?> shiftListId = shiftGenerateMonthlyScheduleService.getshiftsList(data);
             String shiftLists = shiftListId.get(0).toString();
             sgms = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(shiftLists));
-            if(strMonth.equals(enMonth) && strYear.equals(enYear))
-            {
-                
-                 ArrayList<Integer> arrli = new ArrayList<Integer>();
-                 for(int i=Integer.parseInt(strDay);i<=Integer.parseInt(enDay);i++)
-                 {
-                     if(i==1){arrli.add(sgms.getDay1());}
-                     if(i==2){arrli.add(sgms.getDay2());}
-                     if(i==3){arrli.add(sgms.getDay3());}
-                     if(i==4){arrli.add(sgms.getDay4());}
-                     if(i==5){arrli.add(sgms.getDay5());}
-                     if(i==6){arrli.add(sgms.getDay6());}
-                     if(i==7){arrli.add(sgms.getDay7());}
-                     if(i==8){arrli.add(sgms.getDay8());}
-                     if(i==9){arrli.add(sgms.getDay9());}
-                     if(i==10){arrli.add(sgms.getDay10());}
-                     if(i==11){arrli.add(sgms.getDay11());}
-                     if(i==12){arrli.add(sgms.getDay12());}
-                     if(i==13){arrli.add(sgms.getDay13());}
-                     if(i==14){arrli.add(sgms.getDay14());}
-                     if(i==15){arrli.add(sgms.getDay15());}
-                     if(i==16){arrli.add(sgms.getDay16());}
-                     if(i==17){arrli.add(sgms.getDay17());}
-                     if(i==18){arrli.add(sgms.getDay18());}
-                     if(i==19){arrli.add(sgms.getDay19());}
-                     if(i==20){arrli.add(sgms.getDay20());}
-                     if(i==21){arrli.add(sgms.getDay21());}
-                     if(i==22){arrli.add(sgms.getDay22());}
-                     if(i==23){arrli.add(sgms.getDay23());}
-                     if(i==24){arrli.add(sgms.getDay24());}
-                     if(i==25){arrli.add(sgms.getDay25());}
-                     if(i==26){arrli.add(sgms.getDay26());}
-                     if(i==27){arrli.add(sgms.getDay27());}
-                     if(i==28){arrli.add(sgms.getDay28());}
-                     if(i==29){arrli.add(sgms.getDay29());}
-                     if(i==30){arrli.add(sgms.getDay30());}
-                     if(i==31){arrli.add(sgms.getDay31());}
-                 }
-                 if(arrli.contains(-1))
-                 {
-                     days-=1.0;
-                 }
-            }
-            else
-            {
+            if (strMonth.equals(enMonth) && strYear.equals(enYear)) {
+
+                ArrayList<Integer> arrli = new ArrayList<Integer>();
+                for (int i = Integer.parseInt(strDay); i <= Integer.parseInt(enDay); i++) {
+                    if (i == 1) {
+                        arrli.add(sgms.getDay1());
+                    }
+                    if (i == 2) {
+                        arrli.add(sgms.getDay2());
+                    }
+                    if (i == 3) {
+                        arrli.add(sgms.getDay3());
+                    }
+                    if (i == 4) {
+                        arrli.add(sgms.getDay4());
+                    }
+                    if (i == 5) {
+                        arrli.add(sgms.getDay5());
+                    }
+                    if (i == 6) {
+                        arrli.add(sgms.getDay6());
+                    }
+                    if (i == 7) {
+                        arrli.add(sgms.getDay7());
+                    }
+                    if (i == 8) {
+                        arrli.add(sgms.getDay8());
+                    }
+                    if (i == 9) {
+                        arrli.add(sgms.getDay9());
+                    }
+                    if (i == 10) {
+                        arrli.add(sgms.getDay10());
+                    }
+                    if (i == 11) {
+                        arrli.add(sgms.getDay11());
+                    }
+                    if (i == 12) {
+                        arrli.add(sgms.getDay12());
+                    }
+                    if (i == 13) {
+                        arrli.add(sgms.getDay13());
+                    }
+                    if (i == 14) {
+                        arrli.add(sgms.getDay14());
+                    }
+                    if (i == 15) {
+                        arrli.add(sgms.getDay15());
+                    }
+                    if (i == 16) {
+                        arrli.add(sgms.getDay16());
+                    }
+                    if (i == 17) {
+                        arrli.add(sgms.getDay17());
+                    }
+                    if (i == 18) {
+                        arrli.add(sgms.getDay18());
+                    }
+                    if (i == 19) {
+                        arrli.add(sgms.getDay19());
+                    }
+                    if (i == 20) {
+                        arrli.add(sgms.getDay20());
+                    }
+                    if (i == 21) {
+                        arrli.add(sgms.getDay21());
+                    }
+                    if (i == 22) {
+                        arrli.add(sgms.getDay22());
+                    }
+                    if (i == 23) {
+                        arrli.add(sgms.getDay23());
+                    }
+                    if (i == 24) {
+                        arrli.add(sgms.getDay24());
+                    }
+                    if (i == 25) {
+                        arrli.add(sgms.getDay25());
+                    }
+                    if (i == 26) {
+                        arrli.add(sgms.getDay26());
+                    }
+                    if (i == 27) {
+                        arrli.add(sgms.getDay27());
+                    }
+                    if (i == 28) {
+                        arrli.add(sgms.getDay28());
+                    }
+                    if (i == 29) {
+                        arrli.add(sgms.getDay29());
+                    }
+                    if (i == 30) {
+                        arrli.add(sgms.getDay30());
+                    }
+                    if (i == 31) {
+                        arrli.add(sgms.getDay31());
+                    }
+                }
+                if (arrli.contains(-1)) {
+                    days -= 1.0;
+                }
+            } else {
                 List<?> shiftListId2 = shiftGenerateMonthlyScheduleService.getshiftsList1(data);
                 String shiftLists2 = shiftListId2.get(0).toString();
                 sgms1 = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(shiftLists2));
@@ -8161,220 +8322,323 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 String st = format.format(java.sql.Date.valueOf(convertedDate));
                 String monthEndValue = st.split("/")[0];
                 ArrayList<Integer> arrli1 = new ArrayList<Integer>();
-                for(int i=Integer.parseInt(strDay);i<=Integer.parseInt(monthEndValue);i++)
-                 {
-                     if(i==1){arrli1.add(sgms.getDay1());}
-                     if(i==2){arrli1.add(sgms.getDay2());}
-                     if(i==3){arrli1.add(sgms.getDay3());}
-                     if(i==4){arrli1.add(sgms.getDay4());}
-                     if(i==5){arrli1.add(sgms.getDay5());}
-                     if(i==6){arrli1.add(sgms.getDay6());}
-                     if(i==7){arrli1.add(sgms.getDay7());}
-                     if(i==8){arrli1.add(sgms.getDay8());}
-                     if(i==9){arrli1.add(sgms.getDay9());}
-                     if(i==10){arrli1.add(sgms.getDay10());}
-                     if(i==11){arrli1.add(sgms.getDay11());}
-                     if(i==12){arrli1.add(sgms.getDay12());}
-                     if(i==13){arrli1.add(sgms.getDay13());}
-                     if(i==14){arrli1.add(sgms.getDay14());}
-                     if(i==15){arrli1.add(sgms.getDay15());}
-                     if(i==16){arrli1.add(sgms.getDay16());}
-                     if(i==17){arrli1.add(sgms.getDay17());}
-                     if(i==18){arrli1.add(sgms.getDay18());}
-                     if(i==19){arrli1.add(sgms.getDay19());}
-                     if(i==20){arrli1.add(sgms.getDay20());}
-                     if(i==21){arrli1.add(sgms.getDay21());}
-                     if(i==22){arrli1.add(sgms.getDay22());}
-                     if(i==23){arrli1.add(sgms.getDay23());}
-                     if(i==24){arrli1.add(sgms.getDay24());}
-                     if(i==25){arrli1.add(sgms.getDay25());}
-                     if(i==26){arrli1.add(sgms.getDay26());}
-                     if(i==27){arrli1.add(sgms.getDay27());}
-                     if(i==28){arrli1.add(sgms.getDay28());}
-                     if(i==29){arrli1.add(sgms.getDay29());}
-                     if(i==30){arrli1.add(sgms.getDay30());}
-                     if(i==31){arrli1.add(sgms.getDay31());}
-                 }
-                for(int i=1;i<=Integer.parseInt(enDay);i++)
-                 {
-                     if(i==1){arrli1.add(sgms1.getDay1());}
-                     if(i==2){arrli1.add(sgms1.getDay2());}
-                     if(i==3){arrli1.add(sgms1.getDay3());}
-                     if(i==4){arrli1.add(sgms1.getDay4());}
-                     if(i==5){arrli1.add(sgms1.getDay5());}
-                     if(i==6){arrli1.add(sgms1.getDay6());}
-                     if(i==7){arrli1.add(sgms1.getDay7());}
-                     if(i==8){arrli1.add(sgms1.getDay8());}
-                     if(i==9){arrli1.add(sgms1.getDay9());}
-                     if(i==10){arrli1.add(sgms1.getDay10());}
-                     if(i==11){arrli1.add(sgms1.getDay11());}
-                     if(i==12){arrli1.add(sgms1.getDay12());}
-                     if(i==13){arrli1.add(sgms1.getDay13());}
-                     if(i==14){arrli1.add(sgms1.getDay14());}
-                     if(i==15){arrli1.add(sgms1.getDay15());}
-                     if(i==16){arrli1.add(sgms1.getDay16());}
-                     if(i==17){arrli1.add(sgms1.getDay17());}
-                     if(i==18){arrli1.add(sgms1.getDay18());}
-                     if(i==19){arrli1.add(sgms1.getDay19());}
-                     if(i==20){arrli1.add(sgms1.getDay20());}
-                     if(i==21){arrli1.add(sgms1.getDay21());}
-                     if(i==22){arrli1.add(sgms1.getDay22());}
-                     if(i==23){arrli1.add(sgms1.getDay23());}
-                     if(i==24){arrli1.add(sgms1.getDay24());}
-                     if(i==25){arrli1.add(sgms1.getDay25());}
-                     if(i==26){arrli1.add(sgms1.getDay26());}
-                     if(i==27){arrli1.add(sgms1.getDay27());}
-                     if(i==28){arrli1.add(sgms1.getDay28());}
-                     if(i==29){arrli1.add(sgms1.getDay29());}
-                     if(i==30){arrli1.add(sgms1.getDay30());}
-                     if(i==31){arrli1.add(sgms1.getDay31());}
-                 }
-                if(arrli1.contains(-1))
-                 {
-                     days-=1.0;
-                 }
+                for (int i = Integer.parseInt(strDay); i <= Integer.parseInt(monthEndValue); i++) {
+                    if (i == 1) {
+                        arrli1.add(sgms.getDay1());
+                    }
+                    if (i == 2) {
+                        arrli1.add(sgms.getDay2());
+                    }
+                    if (i == 3) {
+                        arrli1.add(sgms.getDay3());
+                    }
+                    if (i == 4) {
+                        arrli1.add(sgms.getDay4());
+                    }
+                    if (i == 5) {
+                        arrli1.add(sgms.getDay5());
+                    }
+                    if (i == 6) {
+                        arrli1.add(sgms.getDay6());
+                    }
+                    if (i == 7) {
+                        arrli1.add(sgms.getDay7());
+                    }
+                    if (i == 8) {
+                        arrli1.add(sgms.getDay8());
+                    }
+                    if (i == 9) {
+                        arrli1.add(sgms.getDay9());
+                    }
+                    if (i == 10) {
+                        arrli1.add(sgms.getDay10());
+                    }
+                    if (i == 11) {
+                        arrli1.add(sgms.getDay11());
+                    }
+                    if (i == 12) {
+                        arrli1.add(sgms.getDay12());
+                    }
+                    if (i == 13) {
+                        arrli1.add(sgms.getDay13());
+                    }
+                    if (i == 14) {
+                        arrli1.add(sgms.getDay14());
+                    }
+                    if (i == 15) {
+                        arrli1.add(sgms.getDay15());
+                    }
+                    if (i == 16) {
+                        arrli1.add(sgms.getDay16());
+                    }
+                    if (i == 17) {
+                        arrli1.add(sgms.getDay17());
+                    }
+                    if (i == 18) {
+                        arrli1.add(sgms.getDay18());
+                    }
+                    if (i == 19) {
+                        arrli1.add(sgms.getDay19());
+                    }
+                    if (i == 20) {
+                        arrli1.add(sgms.getDay20());
+                    }
+                    if (i == 21) {
+                        arrli1.add(sgms.getDay21());
+                    }
+                    if (i == 22) {
+                        arrli1.add(sgms.getDay22());
+                    }
+                    if (i == 23) {
+                        arrli1.add(sgms.getDay23());
+                    }
+                    if (i == 24) {
+                        arrli1.add(sgms.getDay24());
+                    }
+                    if (i == 25) {
+                        arrli1.add(sgms.getDay25());
+                    }
+                    if (i == 26) {
+                        arrli1.add(sgms.getDay26());
+                    }
+                    if (i == 27) {
+                        arrli1.add(sgms.getDay27());
+                    }
+                    if (i == 28) {
+                        arrli1.add(sgms.getDay28());
+                    }
+                    if (i == 29) {
+                        arrli1.add(sgms.getDay29());
+                    }
+                    if (i == 30) {
+                        arrli1.add(sgms.getDay30());
+                    }
+                    if (i == 31) {
+                        arrli1.add(sgms.getDay31());
+                    }
+                }
+                for (int i = 1; i <= Integer.parseInt(enDay); i++) {
+                    if (i == 1) {
+                        arrli1.add(sgms1.getDay1());
+                    }
+                    if (i == 2) {
+                        arrli1.add(sgms1.getDay2());
+                    }
+                    if (i == 3) {
+                        arrli1.add(sgms1.getDay3());
+                    }
+                    if (i == 4) {
+                        arrli1.add(sgms1.getDay4());
+                    }
+                    if (i == 5) {
+                        arrli1.add(sgms1.getDay5());
+                    }
+                    if (i == 6) {
+                        arrli1.add(sgms1.getDay6());
+                    }
+                    if (i == 7) {
+                        arrli1.add(sgms1.getDay7());
+                    }
+                    if (i == 8) {
+                        arrli1.add(sgms1.getDay8());
+                    }
+                    if (i == 9) {
+                        arrli1.add(sgms1.getDay9());
+                    }
+                    if (i == 10) {
+                        arrli1.add(sgms1.getDay10());
+                    }
+                    if (i == 11) {
+                        arrli1.add(sgms1.getDay11());
+                    }
+                    if (i == 12) {
+                        arrli1.add(sgms1.getDay12());
+                    }
+                    if (i == 13) {
+                        arrli1.add(sgms1.getDay13());
+                    }
+                    if (i == 14) {
+                        arrli1.add(sgms1.getDay14());
+                    }
+                    if (i == 15) {
+                        arrli1.add(sgms1.getDay15());
+                    }
+                    if (i == 16) {
+                        arrli1.add(sgms1.getDay16());
+                    }
+                    if (i == 17) {
+                        arrli1.add(sgms1.getDay17());
+                    }
+                    if (i == 18) {
+                        arrli1.add(sgms1.getDay18());
+                    }
+                    if (i == 19) {
+                        arrli1.add(sgms1.getDay19());
+                    }
+                    if (i == 20) {
+                        arrli1.add(sgms1.getDay20());
+                    }
+                    if (i == 21) {
+                        arrli1.add(sgms1.getDay21());
+                    }
+                    if (i == 22) {
+                        arrli1.add(sgms1.getDay22());
+                    }
+                    if (i == 23) {
+                        arrli1.add(sgms1.getDay23());
+                    }
+                    if (i == 24) {
+                        arrli1.add(sgms1.getDay24());
+                    }
+                    if (i == 25) {
+                        arrli1.add(sgms1.getDay25());
+                    }
+                    if (i == 26) {
+                        arrli1.add(sgms1.getDay26());
+                    }
+                    if (i == 27) {
+                        arrli1.add(sgms1.getDay27());
+                    }
+                    if (i == 28) {
+                        arrli1.add(sgms1.getDay28());
+                    }
+                    if (i == 29) {
+                        arrli1.add(sgms1.getDay29());
+                    }
+                    if (i == 30) {
+                        arrli1.add(sgms1.getDay30());
+                    }
+                    if (i == 31) {
+                        arrli1.add(sgms1.getDay31());
+                    }
+                }
+                if (arrli1.contains(-1)) {
+                    days -= 1.0;
+                }
             }
-            
+
         }
-        if(leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17"))
-        {
+        if (leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17")) {
             SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
             Date date = format.parse(strDate);
             Date oneDayBefore = new Date(date.getTime() - 2);
             String dateBeforeOfsDate = format.format(oneDayBefore);
-            String beforeDay =  dateBeforeOfsDate.split("/")[0];
-            String beforeMonth =  dateBeforeOfsDate.split("/")[1];
-            String beforeYear =  dateBeforeOfsDate.split("/")[2];
-        
+            String beforeDay = dateBeforeOfsDate.split("/")[0];
+            String beforeMonth = dateBeforeOfsDate.split("/")[1];
+            String beforeYear = dateBeforeOfsDate.split("/")[2];
+
             Date date1 = format.parse(enDate);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date1);
             calendar.add(Calendar.DAY_OF_YEAR, 1);
             Date tomorrow = calendar.getTime();
             String dateAfterOfeDate = format.format(tomorrow);
-            String afterDay =  dateAfterOfeDate.split("/")[0];
-            String afterMonth =  dateAfterOfeDate.split("/")[1];
-            String afterYear =  dateAfterOfeDate.split("/")[2];
-            
-            String data = employeeMaster1.getId()+":"+beforeDay+":"+beforeMonth+":"+beforeYear+":"+afterDay+":"+afterMonth+":"+afterYear;
+            String afterDay = dateAfterOfeDate.split("/")[0];
+            String afterMonth = dateAfterOfeDate.split("/")[1];
+            String afterYear = dateAfterOfeDate.split("/")[2];
+
+            String data = employeeMaster1.getId() + ":" + beforeDay + ":" + beforeMonth + ":" + beforeYear + ":" + afterDay + ":" + afterMonth + ":" + afterYear;
             String beforeDayList = shiftGenerateMonthlyScheduleService.getBeforeDayList(data);
             String afterDayList = shiftGenerateMonthlyScheduleService.getAfterDayList(data);
-            
+
             SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
             Date date2 = format1.parse(strDate);
             calendar.setTime(date2);
             calendar.add(Calendar.DAY_OF_YEAR, -3);
             Date beforeWoff = calendar.getTime();
             String beforeWoffDay = format1.format(beforeWoff);
-            
+
             Date date3 = format1.parse(enDate);
             calendar.setTime(date3);
             calendar.add(Calendar.DAY_OF_YEAR, 3);
             Date afterWoff = calendar.getTime();
             String afterWoffDay = format1.format(afterWoff);
-            
-            String data1 = employeeMaster1.getId()+":"+beforeWoffDay+":"+afterWoffDay;
-            if(beforeDayList.equals("-1"))
-            {
+
+            String data1 = employeeMaster1.getId() + ":" + beforeWoffDay + ":" + afterWoffDay;
+            if (beforeDayList.equals("-1")) {
                 List<?> beforeWoffDayList = shiftGenerateMonthlyScheduleService.getbeforeWoffDayList(data1);
-                if(!beforeWoffDayList.isEmpty())
-                {
-                    if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday"))
-                    {
-                        if(leavetype.equals("7"))
-                        {
-                            days=days;
+                if (!beforeWoffDayList.isEmpty()) {
+                    if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday")) {
+                        if (leavetype.equals("7")) {
+                            days = days;
+                        } else {
+                            days += 1.0;
                         }
-                        else
-                        {
-                            days+=1.0;
-                        }
-                        
-                    }
-                    else
-                    {
-                        days+=1.0;
+
+                    } else {
+                        days += 1.0;
                     }
                 }
             }
-            if(afterDayList.equals("-1"))
-            {
+            if (afterDayList.equals("-1")) {
                 List<?> afterWoffDayList = shiftGenerateMonthlyScheduleService.getafterWoffDayList(data1);
-                if(!afterWoffDayList.isEmpty())
-                {
-                    days+=1.0;
+                if (!afterWoffDayList.isEmpty()) {
+                    days += 1.0;
                 }
             }
         }
-        
+
         SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
-            Date date1 = format.parse(strDate);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date1);
-            calendar.add(Calendar.DAY_OF_YEAR, 1);
-            Date tomorrow = calendar.getTime();
-            String dateAfterOfstrDate = format.format(tomorrow);
-            String afterDay =  dateAfterOfstrDate.split("/")[0];
-            String afterMonth =  dateAfterOfstrDate.split("/")[1];
-            String afterYear =  dateAfterOfstrDate.split("/")[2];
-            
-            Date date2 = format.parse(enDate);
-            calendar.setTime(date2);
-            calendar.add(Calendar.DAY_OF_YEAR, -1);
-            Date before = calendar.getTime();
-            String dateBeforeOfenDate = format.format(before);
-            String beforeDay =  dateBeforeOfenDate.split("/")[0];
-            String beforMonth =  dateBeforeOfenDate.split("/")[1];
-            String beforYear =  dateBeforeOfenDate.split("/")[2];
-            String data = employeeMaster1.getId()+":"+afterDay+":"+afterMonth+":"+afterYear+":"+beforeDay+":"+beforMonth+":"+beforYear;
-            List<?>  getDayAfterOfstrDate = shiftGenerateMonthlyScheduleService.getDayAfterOfstrDate(data);
-            List<?>  getDayBeforeOfenDate = shiftGenerateMonthlyScheduleService.getDayBeforeOfenDate(data);
-            String getDayAfterOfstrDate1 = getDayAfterOfstrDate.get(0).toString();
-            String getDayBeforeOfenDate1 = getDayBeforeOfenDate.get(0).toString();
-        if((sDateStatus.equals("Fullday") && eDateStatus.equals("FirstHalf")))
-        {
-            
-            if(getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1"))
-            {
-                days-=1.0;
+        Date date1 = format.parse(strDate);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date1);
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+        String dateAfterOfstrDate = format.format(tomorrow);
+        String afterDay = dateAfterOfstrDate.split("/")[0];
+        String afterMonth = dateAfterOfstrDate.split("/")[1];
+        String afterYear = dateAfterOfstrDate.split("/")[2];
+
+        Date date2 = format.parse(enDate);
+        calendar.setTime(date2);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        Date before = calendar.getTime();
+        String dateBeforeOfenDate = format.format(before);
+        String beforeDay = dateBeforeOfenDate.split("/")[0];
+        String beforMonth = dateBeforeOfenDate.split("/")[1];
+        String beforYear = dateBeforeOfenDate.split("/")[2];
+        String data = employeeMaster1.getId() + ":" + afterDay + ":" + afterMonth + ":" + afterYear + ":" + beforeDay + ":" + beforMonth + ":" + beforYear;
+        List<?> getDayAfterOfstrDate = shiftGenerateMonthlyScheduleService.getDayAfterOfstrDate(data);
+        List<?> getDayBeforeOfenDate = shiftGenerateMonthlyScheduleService.getDayBeforeOfenDate(data);
+        String getDayAfterOfstrDate1 = getDayAfterOfstrDate.get(0).toString();
+        String getDayBeforeOfenDate1 = getDayBeforeOfenDate.get(0).toString();
+        if ((sDateStatus.equals("Fullday") && eDateStatus.equals("FirstHalf"))) {
+
+            if (getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) {
+                days -= 1.0;
             }
         }
-        if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
-        {
-            if((!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1")) && (!leavetype.equals("16") && !leavetype.equals("11") && !leavetype.equals("12") && !leavetype.equals("18") && !leavetype.equals("7")))
-//            if(!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1"))
+        if ((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday"))) {
+            if ((!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1")) && (!leavetype.equals("16") && !leavetype.equals("11") && !leavetype.equals("12") && !leavetype.equals("18") && !leavetype.equals("7"))) //            if(!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1"))
             {
-                days+=1.0;
+                days += 1.0;
             }
         }
-        if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
-        {
-            
-            if((getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (leavetype.equals("16") || leavetype.equals("11") || leavetype.equals("12")))
-            {
-                days-=1.0;
+        if ((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday"))) {
+
+            if ((getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (leavetype.equals("16") || leavetype.equals("11") || leavetype.equals("12"))) {
+                days -= 1.0;
             }
         }
-        
-        if(leavetype.equals("7") || leavetype.equals("6"))
-        {
+
+        if (leavetype.equals("7") || leavetype.equals("6")) {
             List<Date> dates = new ArrayList<Date>();
             List<String> dates1 = new ArrayList<String>();
-            DateFormat formatter ; 
+            DateFormat formatter;
 
             formatter = new SimpleDateFormat("d/M/yyyy");
-            Date  startDate = (Date)formatter.parse(strDate); 
-            Date  endDate = (Date)formatter.parse(enDate);
-            long interval = 24*1000 * 60 * 60; 
-            long endTime =endDate.getTime() ;
+            Date startDate = (Date) formatter.parse(strDate);
+            Date endDate = (Date) formatter.parse(enDate);
+            long interval = 24 * 1000 * 60 * 60;
+            long endTime = endDate.getTime();
             long curTime = startDate.getTime();
             while (curTime <= endTime) {
                 dates.add(new Date(curTime));
                 curTime += interval;
             }
-            for(int i=0;i<dates.size();i++){
-                Date lDate =(Date)dates.get(i);
-                String ds = formatter.format(lDate);  
+            for (int i = 0; i < dates.size(); i++) {
+                Date lDate = (Date) dates.get(i);
+                String ds = formatter.format(lDate);
                 dates1.add(ds);
             }
             SimpleDateFormat format2 = new SimpleDateFormat("d/M/yyyy");
@@ -8382,25 +8646,23 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             String strDate2 = format2.format(date5);
             Date date6 = format2.parse(enDate);
             String enDate2 = format2.format(date6);
-            Boolean woffCount=false;
+            Boolean woffCount = false;
             String beforeWoff = "";
             for (String str : dates1) {
-                String data11 = employeeMaster1.getId()+":"+str.split("/")[0]+":"+str.split("/")[1]+":"+str.split("/")[2];
+                String data11 = employeeMaster1.getId() + ":" + str.split("/")[0] + ":" + str.split("/")[1] + ":" + str.split("/")[2];
                 String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data11);
-                if(checkWoff.equals("-1"))
-                {
-                    woffCount=true;
+                if (checkWoff.equals("-1")) {
+                    woffCount = true;
                     beforeWoff = str;
                 }
             }
-            if(woffCount==true && !beforeWoff.isEmpty())
-            {
+            if (woffCount == true && !beforeWoff.isEmpty()) {
                 Date date3 = format2.parse(beforeWoff);
                 calendar.setTime(date3);
                 calendar.add(Calendar.DAY_OF_YEAR, -7);
                 Date afterChange = calendar.getTime();
                 String afterChange1 = format2.format(afterChange);
-                String data12 = employeeMaster1.getId()+":"+afterChange1.split("/")[0]+":"+afterChange1.split("/")[1]+":"+afterChange1.split("/")[2];
+                String data12 = employeeMaster1.getId() + ":" + afterChange1.split("/")[0] + ":" + afterChange1.split("/")[1] + ":" + afterChange1.split("/")[2];
                 String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data12);
                 Date date4 = format2.parse(afterChange1);
                 calendar.setTime(date4);
@@ -8412,14 +8674,12 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 calendar.add(Calendar.DAY_OF_YEAR, 1);
                 Date afterDayWoff = calendar.getTime();
                 String afterDayWoff1 = format2.format(afterDayWoff);
-                String data13 = employeeMaster1.getId()+":"+beforeDayWoff1.split("/")[0]+":"+beforeDayWoff1.split("/")[1]+":"+beforeDayWoff1.split("/")[2];
+                String data13 = employeeMaster1.getId() + ":" + beforeDayWoff1.split("/")[0] + ":" + beforeDayWoff1.split("/")[1] + ":" + beforeDayWoff1.split("/")[2];
                 String checkBeforeWoff = shiftGenerateMonthlyScheduleService.checkWoff(data13);
-                String data14 = employeeMaster1.getId()+":"+afterDayWoff1.split("/")[0]+":"+afterDayWoff1.split("/")[1]+":"+afterDayWoff1.split("/")[2];
+                String data14 = employeeMaster1.getId() + ":" + afterDayWoff1.split("/")[0] + ":" + afterDayWoff1.split("/")[1] + ":" + afterDayWoff1.split("/")[2];
                 String checkAfterWoff = shiftGenerateMonthlyScheduleService.checkWoff(data14);
-                if(checkWoff.equals("-1"))
-                {
-                    if(checkBeforeWoff.equals("-1"))
-                    {
+                if (checkWoff.equals("-1")) {
+                    if (checkBeforeWoff.equals("-1")) {
                         Date date8 = format2.parse(beforeDayWoff1);
                         calendar.setTime(date8);
                         calendar.add(Calendar.DAY_OF_YEAR, -1);
@@ -8430,16 +8690,14 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         calendar.add(Calendar.DAY_OF_YEAR, 1);
                         Date beforeDayWoff3 = calendar.getTime();
                         String afterWoff1 = format2.format(beforeDayWoff3);
-                        String data15 = employeeMaster1.getId()+":"+beforeWoff1+":"+afterWoff1;
+                        String data15 = employeeMaster1.getId() + ":" + beforeWoff1 + ":" + afterWoff1;
                         String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
                         String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
-                        if((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty()))
-                        {
+                        if ((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty())) {
                             days--;
                         }
                     }
-                    if(checkAfterWoff.equals("-1"))
-                    {
+                    if (checkAfterWoff.equals("-1")) {
                         String afterDayWoff2 = format2.format(afterChange1);
                         Date date9 = format2.parse(afterDayWoff2);
                         calendar.setTime(date9);
@@ -8452,11 +8710,10 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                         calendar.add(Calendar.DAY_OF_YEAR, -1);
                         Date afterDayWoff3 = calendar.getTime();
                         String beforeWoff1 = format2.format(afterDayWoff3);
-                        String data15 = employeeMaster1.getId()+":"+afterWoff1+":"+beforeWoff1;
+                        String data15 = employeeMaster1.getId() + ":" + afterWoff1 + ":" + beforeWoff1;
                         String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
                         String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
-                        if((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty()))
-                        {
+                        if ((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty())) {
                             days--;
                         }
                     }
@@ -8805,7 +9062,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         EmployeeMaster employeeMaster1 = new EmployeeMaster();
         EmployeeMaster employeeMaster2 = new EmployeeMaster();
         EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
-        
+
         String empId = request.getParameter("employeeMasterId");
         if (!empId.isEmpty()) {
             employeeMaster2 = employeeMasterService.readById(Integer.parseInt(empId));
@@ -8892,15 +9149,15 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //                    if (noOfDay == null) {
 //                        noOfDay = (float) 0;
 //                    }
-                    LocalDate ld =LocalDate.now();
+                    LocalDate ld = LocalDate.now();
                     Integer year = ld.getYear();
-                    Integer year1 = year-1;
-                    String dateofpreYear = "31/12/"+year1;
-                    String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(),dateofpreYear,leave1);
-                    String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(),dateofpreYear,leave1);
-                    String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(),dateofpreYear,leave1);
-                    String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(),dateofpreYear,leave1);
-                    noOfDay = Float.parseFloat(noOfDaysForYear)+Float.parseFloat(noOfDaysForYear1)+Float.parseFloat(noOfDaysForYear2)+Float.parseFloat(noOfDaysForYear3);
+                    Integer year1 = year - 1;
+                    String dateofpreYear = "31/12/" + year1;
+                    String noOfDaysForYear = shiftGenerateMonthlyScheduleService.noOfDaysForYear(employeeMaster.getId(), dateofpreYear, leave1);
+                    String noOfDaysForYear1 = shiftGenerateMonthlyScheduleService.noOfDaysForYear1(employeeMaster.getId(), dateofpreYear, leave1);
+                    String noOfDaysForYear2 = shiftGenerateMonthlyScheduleService.noOfDaysForYear2(employeeMaster.getId(), dateofpreYear, leave1);
+                    String noOfDaysForYear3 = shiftGenerateMonthlyScheduleService.noOfDaysForYear3(employeeMaster.getId(), dateofpreYear, leave1);
+                    noOfDay = Float.parseFloat(noOfDaysForYear) + Float.parseFloat(noOfDaysForYear1) + Float.parseFloat(noOfDaysForYear2) + Float.parseFloat(noOfDaysForYear3);
                     totalMap = days + noOfDay;
                     if ("Short Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
                         continue;
@@ -8978,29 +9235,28 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         Calendar calendar = Calendar.getInstance();
         Date date2;
         Date oneDayBefore;
-        String dateBeforeOfsDate="";
-        if(!sDate.isEmpty()){
+        String dateBeforeOfsDate = "";
+        if (!sDate.isEmpty()) {
             date2 = format.parse(sDate);
             oneDayBefore = new Date(date2.getTime() - 2);
             dateBeforeOfsDate = format.format(oneDayBefore);
         }
         Date date1;
         Date tomorrow;
-        String dateAfterOfeDate="";
-        if(!sDate.isEmpty()){
-        date1 = format.parse(eDate);
-        calendar.setTime(date1);
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        tomorrow = calendar.getTime();
-        dateAfterOfeDate = format.format(tomorrow);
+        String dateAfterOfeDate = "";
+        if (!sDate.isEmpty()) {
+            date1 = format.parse(eDate);
+            calendar.setTime(date1);
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            tomorrow = calendar.getTime();
+            dateAfterOfeDate = format.format(tomorrow);
         }
-        String data = employeeMaster.getId()+":"+dateBeforeOfsDate+":"+dateAfterOfeDate;
+        String data = employeeMaster.getId() + ":" + dateBeforeOfsDate + ":" + dateAfterOfeDate;
         List<?> beforesDate = new ArrayList<>();
         List<?> aftereDate = new ArrayList<>();
-        List<?> beforesDate1= new ArrayList<>();
+        List<?> beforesDate1 = new ArrayList<>();
         List<?> aftereDate1 = new ArrayList<>();
-        if(!dateBeforeOfsDate.isEmpty() && !dateAfterOfeDate.isEmpty())
-        {
+        if (!dateBeforeOfsDate.isEmpty() && !dateAfterOfeDate.isEmpty()) {
             beforesDate = shiftGenerateMonthlyScheduleService.getbeforesDate(data);
             aftereDate = shiftGenerateMonthlyScheduleService.getaftereDate(data);
             beforesDate1 = shiftGenerateMonthlyScheduleService.getbeforesDate1(data);
@@ -9026,9 +9282,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
 //            mv.addAllObjects(errors.getModel());
 //            mv = applyClick(request, response);
-        }
-        else if(leaveType.equals("6") && (!beforesDate.isEmpty() || !aftereDate.isEmpty()))
-        {
+        } else if (leaveType.equals("6") && (!beforesDate.isEmpty() || !aftereDate.isEmpty())) {
             request.setAttribute("failureMessage",
                     "Error : Casual Leave and Privilege Leave cannot combine.");
             request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
@@ -9042,9 +9296,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //            request.setAttribute("reportingManager", employeeRM);
             mv = employeeLeaveApplicationClick(request, response);
 //            mv.setViewName("Leave/EmployeeLeaveApplicatioForm");
-        }
-        else if(leaveType.equals("7") && (!beforesDate1.isEmpty() || !aftereDate1.isEmpty()))
-        {
+        } else if (leaveType.equals("7") && (!beforesDate1.isEmpty() || !aftereDate1.isEmpty())) {
             request.setAttribute("failureMessage",
                     "Error : Casual Leave and Privilege Leave cannot combine.");
             request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
@@ -9058,8 +9310,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //            request.setAttribute("reportingManager", employeeRM);
             mv = employeeLeaveApplicationClick(request, response);
 //            mv.setViewName("Leave/EmployeeLeaveApplicatioForm");
-        }
-        else {
+        } else {
             String leaveTypeMasterId = request.getParameter("leaveTypeMaster.id");
             if (!"".equals(leaveTypeMasterId)) {
                 leaveTypeMaster.setId(Integer.parseInt(leaveTypeMasterId));
@@ -12113,20 +12364,17 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 
             }
         }
-        
-        if(leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17"))
-        {
-            String data = employeeMaster1.getId()+":"+strDate+":"+enDate;
+
+        if (leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17")) {
+            String data = employeeMaster1.getId() + ":" + strDate + ":" + enDate;
             List<?> shiftsBetween = shiftGenerateMonthlyScheduleService.getShiftsBetween(data);
             String size = String.valueOf(shiftsBetween.size());
             Double size1 = Double.parseDouble(size);
-            if(!shiftsBetween.isEmpty())
-            {
-                days-=size1;
+            if (!shiftsBetween.isEmpty()) {
+                days -= size1;
             }
         }
-        if(leavetype.equals("16"))
-        {
+        if (leavetype.equals("16")) {
             SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
             Date date = format.parse(strDate);
             String strDate1 = format.format(date);
@@ -12141,60 +12389,117 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             String employeeId = request.getParameter("employeeId");
             String empNo = employeeMasterService.getByEmployeeNo1(employeeId);
             EmployeeMaster employeeMaster11 = employeeMasterService.readById(Integer.parseInt(empNo));
-            String data = employeeMaster11.getId()+":"+strMonth+":"+strYear+":"+enMonth+":"+enYear;
-            String shiftList="";
-            String shiftList1="";
-            String shiftList2="";
+            String data = employeeMaster11.getId() + ":" + strMonth + ":" + strYear + ":" + enMonth + ":" + enYear;
+            String shiftList = "";
+            String shiftList1 = "";
+            String shiftList2 = "";
             ShiftGenerateMonthlySchedule sgms;
             ShiftGenerateMonthlySchedule sgms1;
             List<?> shiftListId = shiftGenerateMonthlyScheduleService.getshiftsList(data);
             String shiftLists = shiftListId.get(0).toString();
             sgms = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(shiftLists));
-            if(strMonth.equals(enMonth) && strYear.equals(enYear))
-            {
-                
-                 ArrayList<Integer> arrli = new ArrayList<Integer>();
-                 for(int i=Integer.parseInt(strDay);i<=Integer.parseInt(enDay);i++)
-                 {
-                     if(i==1){arrli.add(sgms.getDay1());}
-                     if(i==2){arrli.add(sgms.getDay2());}
-                     if(i==3){arrli.add(sgms.getDay3());}
-                     if(i==4){arrli.add(sgms.getDay4());}
-                     if(i==5){arrli.add(sgms.getDay5());}
-                     if(i==6){arrli.add(sgms.getDay6());}
-                     if(i==7){arrli.add(sgms.getDay7());}
-                     if(i==8){arrli.add(sgms.getDay8());}
-                     if(i==9){arrli.add(sgms.getDay9());}
-                     if(i==10){arrli.add(sgms.getDay10());}
-                     if(i==11){arrli.add(sgms.getDay11());}
-                     if(i==12){arrli.add(sgms.getDay12());}
-                     if(i==13){arrli.add(sgms.getDay13());}
-                     if(i==14){arrli.add(sgms.getDay14());}
-                     if(i==15){arrli.add(sgms.getDay15());}
-                     if(i==16){arrli.add(sgms.getDay16());}
-                     if(i==17){arrli.add(sgms.getDay17());}
-                     if(i==18){arrli.add(sgms.getDay18());}
-                     if(i==19){arrli.add(sgms.getDay19());}
-                     if(i==20){arrli.add(sgms.getDay20());}
-                     if(i==21){arrli.add(sgms.getDay21());}
-                     if(i==22){arrli.add(sgms.getDay22());}
-                     if(i==23){arrli.add(sgms.getDay23());}
-                     if(i==24){arrli.add(sgms.getDay24());}
-                     if(i==25){arrli.add(sgms.getDay25());}
-                     if(i==26){arrli.add(sgms.getDay26());}
-                     if(i==27){arrli.add(sgms.getDay27());}
-                     if(i==28){arrli.add(sgms.getDay28());}
-                     if(i==29){arrli.add(sgms.getDay29());}
-                     if(i==30){arrli.add(sgms.getDay30());}
-                     if(i==31){arrli.add(sgms.getDay31());}
-                 }
-                 if(arrli.contains(-1))
-                 {
-                     days-=1.0;
-                 }
-            }
-            else
-            {
+            if (strMonth.equals(enMonth) && strYear.equals(enYear)) {
+
+                ArrayList<Integer> arrli = new ArrayList<Integer>();
+                for (int i = Integer.parseInt(strDay); i <= Integer.parseInt(enDay); i++) {
+                    if (i == 1) {
+                        arrli.add(sgms.getDay1());
+                    }
+                    if (i == 2) {
+                        arrli.add(sgms.getDay2());
+                    }
+                    if (i == 3) {
+                        arrli.add(sgms.getDay3());
+                    }
+                    if (i == 4) {
+                        arrli.add(sgms.getDay4());
+                    }
+                    if (i == 5) {
+                        arrli.add(sgms.getDay5());
+                    }
+                    if (i == 6) {
+                        arrli.add(sgms.getDay6());
+                    }
+                    if (i == 7) {
+                        arrli.add(sgms.getDay7());
+                    }
+                    if (i == 8) {
+                        arrli.add(sgms.getDay8());
+                    }
+                    if (i == 9) {
+                        arrli.add(sgms.getDay9());
+                    }
+                    if (i == 10) {
+                        arrli.add(sgms.getDay10());
+                    }
+                    if (i == 11) {
+                        arrli.add(sgms.getDay11());
+                    }
+                    if (i == 12) {
+                        arrli.add(sgms.getDay12());
+                    }
+                    if (i == 13) {
+                        arrli.add(sgms.getDay13());
+                    }
+                    if (i == 14) {
+                        arrli.add(sgms.getDay14());
+                    }
+                    if (i == 15) {
+                        arrli.add(sgms.getDay15());
+                    }
+                    if (i == 16) {
+                        arrli.add(sgms.getDay16());
+                    }
+                    if (i == 17) {
+                        arrli.add(sgms.getDay17());
+                    }
+                    if (i == 18) {
+                        arrli.add(sgms.getDay18());
+                    }
+                    if (i == 19) {
+                        arrli.add(sgms.getDay19());
+                    }
+                    if (i == 20) {
+                        arrli.add(sgms.getDay20());
+                    }
+                    if (i == 21) {
+                        arrli.add(sgms.getDay21());
+                    }
+                    if (i == 22) {
+                        arrli.add(sgms.getDay22());
+                    }
+                    if (i == 23) {
+                        arrli.add(sgms.getDay23());
+                    }
+                    if (i == 24) {
+                        arrli.add(sgms.getDay24());
+                    }
+                    if (i == 25) {
+                        arrli.add(sgms.getDay25());
+                    }
+                    if (i == 26) {
+                        arrli.add(sgms.getDay26());
+                    }
+                    if (i == 27) {
+                        arrli.add(sgms.getDay27());
+                    }
+                    if (i == 28) {
+                        arrli.add(sgms.getDay28());
+                    }
+                    if (i == 29) {
+                        arrli.add(sgms.getDay29());
+                    }
+                    if (i == 30) {
+                        arrli.add(sgms.getDay30());
+                    }
+                    if (i == 31) {
+                        arrli.add(sgms.getDay31());
+                    }
+                }
+                if (arrli.contains(-1)) {
+                    days -= 1.0;
+                }
+            } else {
                 List<?> shiftListId2 = shiftGenerateMonthlyScheduleService.getshiftsList1(data);
                 String shiftLists2 = shiftListId2.get(0).toString();
                 sgms1 = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(shiftLists2));
@@ -12203,201 +12508,305 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 String st = format.format(java.sql.Date.valueOf(convertedDate));
                 String monthEndValue = st.split("/")[0];
                 ArrayList<Integer> arrli1 = new ArrayList<Integer>();
-                for(int i=Integer.parseInt(strDay);i<=Integer.parseInt(monthEndValue);i++)
-                 {
-                     if(i==1){arrli1.add(sgms.getDay1());}
-                     if(i==2){arrli1.add(sgms.getDay2());}
-                     if(i==3){arrli1.add(sgms.getDay3());}
-                     if(i==4){arrli1.add(sgms.getDay4());}
-                     if(i==5){arrli1.add(sgms.getDay5());}
-                     if(i==6){arrli1.add(sgms.getDay6());}
-                     if(i==7){arrli1.add(sgms.getDay7());}
-                     if(i==8){arrli1.add(sgms.getDay8());}
-                     if(i==9){arrli1.add(sgms.getDay9());}
-                     if(i==10){arrli1.add(sgms.getDay10());}
-                     if(i==11){arrli1.add(sgms.getDay11());}
-                     if(i==12){arrli1.add(sgms.getDay12());}
-                     if(i==13){arrli1.add(sgms.getDay13());}
-                     if(i==14){arrli1.add(sgms.getDay14());}
-                     if(i==15){arrli1.add(sgms.getDay15());}
-                     if(i==16){arrli1.add(sgms.getDay16());}
-                     if(i==17){arrli1.add(sgms.getDay17());}
-                     if(i==18){arrli1.add(sgms.getDay18());}
-                     if(i==19){arrli1.add(sgms.getDay19());}
-                     if(i==20){arrli1.add(sgms.getDay20());}
-                     if(i==21){arrli1.add(sgms.getDay21());}
-                     if(i==22){arrli1.add(sgms.getDay22());}
-                     if(i==23){arrli1.add(sgms.getDay23());}
-                     if(i==24){arrli1.add(sgms.getDay24());}
-                     if(i==25){arrli1.add(sgms.getDay25());}
-                     if(i==26){arrli1.add(sgms.getDay26());}
-                     if(i==27){arrli1.add(sgms.getDay27());}
-                     if(i==28){arrli1.add(sgms.getDay28());}
-                     if(i==29){arrli1.add(sgms.getDay29());}
-                     if(i==30){arrli1.add(sgms.getDay30());}
-                     if(i==31){arrli1.add(sgms.getDay31());}
-                 }
-                for(int i=1;i<=Integer.parseInt(enDay);i++)
-                 {
-                     if(i==1){arrli1.add(sgms1.getDay1());}
-                     if(i==2){arrli1.add(sgms1.getDay2());}
-                     if(i==3){arrli1.add(sgms1.getDay3());}
-                     if(i==4){arrli1.add(sgms1.getDay4());}
-                     if(i==5){arrli1.add(sgms1.getDay5());}
-                     if(i==6){arrli1.add(sgms1.getDay6());}
-                     if(i==7){arrli1.add(sgms1.getDay7());}
-                     if(i==8){arrli1.add(sgms1.getDay8());}
-                     if(i==9){arrli1.add(sgms1.getDay9());}
-                     if(i==10){arrli1.add(sgms1.getDay10());}
-                     if(i==11){arrli1.add(sgms1.getDay11());}
-                     if(i==12){arrli1.add(sgms1.getDay12());}
-                     if(i==13){arrli1.add(sgms1.getDay13());}
-                     if(i==14){arrli1.add(sgms1.getDay14());}
-                     if(i==15){arrli1.add(sgms1.getDay15());}
-                     if(i==16){arrli1.add(sgms1.getDay16());}
-                     if(i==17){arrli1.add(sgms1.getDay17());}
-                     if(i==18){arrli1.add(sgms1.getDay18());}
-                     if(i==19){arrli1.add(sgms1.getDay19());}
-                     if(i==20){arrli1.add(sgms1.getDay20());}
-                     if(i==21){arrli1.add(sgms1.getDay21());}
-                     if(i==22){arrli1.add(sgms1.getDay22());}
-                     if(i==23){arrli1.add(sgms1.getDay23());}
-                     if(i==24){arrli1.add(sgms1.getDay24());}
-                     if(i==25){arrli1.add(sgms1.getDay25());}
-                     if(i==26){arrli1.add(sgms1.getDay26());}
-                     if(i==27){arrli1.add(sgms1.getDay27());}
-                     if(i==28){arrli1.add(sgms1.getDay28());}
-                     if(i==29){arrli1.add(sgms1.getDay29());}
-                     if(i==30){arrli1.add(sgms1.getDay30());}
-                     if(i==31){arrli1.add(sgms1.getDay31());}
-                 }
-                if(arrli1.contains(-1))
-                 {
-                     days-=1.0;
-                 }
+                for (int i = Integer.parseInt(strDay); i <= Integer.parseInt(monthEndValue); i++) {
+                    if (i == 1) {
+                        arrli1.add(sgms.getDay1());
+                    }
+                    if (i == 2) {
+                        arrli1.add(sgms.getDay2());
+                    }
+                    if (i == 3) {
+                        arrli1.add(sgms.getDay3());
+                    }
+                    if (i == 4) {
+                        arrli1.add(sgms.getDay4());
+                    }
+                    if (i == 5) {
+                        arrli1.add(sgms.getDay5());
+                    }
+                    if (i == 6) {
+                        arrli1.add(sgms.getDay6());
+                    }
+                    if (i == 7) {
+                        arrli1.add(sgms.getDay7());
+                    }
+                    if (i == 8) {
+                        arrli1.add(sgms.getDay8());
+                    }
+                    if (i == 9) {
+                        arrli1.add(sgms.getDay9());
+                    }
+                    if (i == 10) {
+                        arrli1.add(sgms.getDay10());
+                    }
+                    if (i == 11) {
+                        arrli1.add(sgms.getDay11());
+                    }
+                    if (i == 12) {
+                        arrli1.add(sgms.getDay12());
+                    }
+                    if (i == 13) {
+                        arrli1.add(sgms.getDay13());
+                    }
+                    if (i == 14) {
+                        arrli1.add(sgms.getDay14());
+                    }
+                    if (i == 15) {
+                        arrli1.add(sgms.getDay15());
+                    }
+                    if (i == 16) {
+                        arrli1.add(sgms.getDay16());
+                    }
+                    if (i == 17) {
+                        arrli1.add(sgms.getDay17());
+                    }
+                    if (i == 18) {
+                        arrli1.add(sgms.getDay18());
+                    }
+                    if (i == 19) {
+                        arrli1.add(sgms.getDay19());
+                    }
+                    if (i == 20) {
+                        arrli1.add(sgms.getDay20());
+                    }
+                    if (i == 21) {
+                        arrli1.add(sgms.getDay21());
+                    }
+                    if (i == 22) {
+                        arrli1.add(sgms.getDay22());
+                    }
+                    if (i == 23) {
+                        arrli1.add(sgms.getDay23());
+                    }
+                    if (i == 24) {
+                        arrli1.add(sgms.getDay24());
+                    }
+                    if (i == 25) {
+                        arrli1.add(sgms.getDay25());
+                    }
+                    if (i == 26) {
+                        arrli1.add(sgms.getDay26());
+                    }
+                    if (i == 27) {
+                        arrli1.add(sgms.getDay27());
+                    }
+                    if (i == 28) {
+                        arrli1.add(sgms.getDay28());
+                    }
+                    if (i == 29) {
+                        arrli1.add(sgms.getDay29());
+                    }
+                    if (i == 30) {
+                        arrli1.add(sgms.getDay30());
+                    }
+                    if (i == 31) {
+                        arrli1.add(sgms.getDay31());
+                    }
+                }
+                for (int i = 1; i <= Integer.parseInt(enDay); i++) {
+                    if (i == 1) {
+                        arrli1.add(sgms1.getDay1());
+                    }
+                    if (i == 2) {
+                        arrli1.add(sgms1.getDay2());
+                    }
+                    if (i == 3) {
+                        arrli1.add(sgms1.getDay3());
+                    }
+                    if (i == 4) {
+                        arrli1.add(sgms1.getDay4());
+                    }
+                    if (i == 5) {
+                        arrli1.add(sgms1.getDay5());
+                    }
+                    if (i == 6) {
+                        arrli1.add(sgms1.getDay6());
+                    }
+                    if (i == 7) {
+                        arrli1.add(sgms1.getDay7());
+                    }
+                    if (i == 8) {
+                        arrli1.add(sgms1.getDay8());
+                    }
+                    if (i == 9) {
+                        arrli1.add(sgms1.getDay9());
+                    }
+                    if (i == 10) {
+                        arrli1.add(sgms1.getDay10());
+                    }
+                    if (i == 11) {
+                        arrli1.add(sgms1.getDay11());
+                    }
+                    if (i == 12) {
+                        arrli1.add(sgms1.getDay12());
+                    }
+                    if (i == 13) {
+                        arrli1.add(sgms1.getDay13());
+                    }
+                    if (i == 14) {
+                        arrli1.add(sgms1.getDay14());
+                    }
+                    if (i == 15) {
+                        arrli1.add(sgms1.getDay15());
+                    }
+                    if (i == 16) {
+                        arrli1.add(sgms1.getDay16());
+                    }
+                    if (i == 17) {
+                        arrli1.add(sgms1.getDay17());
+                    }
+                    if (i == 18) {
+                        arrli1.add(sgms1.getDay18());
+                    }
+                    if (i == 19) {
+                        arrli1.add(sgms1.getDay19());
+                    }
+                    if (i == 20) {
+                        arrli1.add(sgms1.getDay20());
+                    }
+                    if (i == 21) {
+                        arrli1.add(sgms1.getDay21());
+                    }
+                    if (i == 22) {
+                        arrli1.add(sgms1.getDay22());
+                    }
+                    if (i == 23) {
+                        arrli1.add(sgms1.getDay23());
+                    }
+                    if (i == 24) {
+                        arrli1.add(sgms1.getDay24());
+                    }
+                    if (i == 25) {
+                        arrli1.add(sgms1.getDay25());
+                    }
+                    if (i == 26) {
+                        arrli1.add(sgms1.getDay26());
+                    }
+                    if (i == 27) {
+                        arrli1.add(sgms1.getDay27());
+                    }
+                    if (i == 28) {
+                        arrli1.add(sgms1.getDay28());
+                    }
+                    if (i == 29) {
+                        arrli1.add(sgms1.getDay29());
+                    }
+                    if (i == 30) {
+                        arrli1.add(sgms1.getDay30());
+                    }
+                    if (i == 31) {
+                        arrli1.add(sgms1.getDay31());
+                    }
+                }
+                if (arrli1.contains(-1)) {
+                    days -= 1.0;
+                }
             }
-            
+
         }
-        if(leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17"))
-        {
+        if (leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17")) {
             SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
             Date date = format.parse(strDate);
             Date oneDayBefore = new Date(date.getTime() - 2);
             String dateBeforeOfsDate = format.format(oneDayBefore);
-            String beforeDay =  dateBeforeOfsDate.split("/")[0];
-            String beforeMonth =  dateBeforeOfsDate.split("/")[1];
-            String beforeYear =  dateBeforeOfsDate.split("/")[2];
-        
+            String beforeDay = dateBeforeOfsDate.split("/")[0];
+            String beforeMonth = dateBeforeOfsDate.split("/")[1];
+            String beforeYear = dateBeforeOfsDate.split("/")[2];
+
             Date date1 = format.parse(enDate);
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date1);
             calendar.add(Calendar.DAY_OF_YEAR, 1);
             Date tomorrow = calendar.getTime();
             String dateAfterOfeDate = format.format(tomorrow);
-            String afterDay =  dateAfterOfeDate.split("/")[0];
-            String afterMonth =  dateAfterOfeDate.split("/")[1];
-            String afterYear =  dateAfterOfeDate.split("/")[2];
-            
-            String data = employeeMaster1.getId()+":"+beforeDay+":"+beforeMonth+":"+beforeYear+":"+afterDay+":"+afterMonth+":"+afterYear;
+            String afterDay = dateAfterOfeDate.split("/")[0];
+            String afterMonth = dateAfterOfeDate.split("/")[1];
+            String afterYear = dateAfterOfeDate.split("/")[2];
+
+            String data = employeeMaster1.getId() + ":" + beforeDay + ":" + beforeMonth + ":" + beforeYear + ":" + afterDay + ":" + afterMonth + ":" + afterYear;
             String beforeDayList = shiftGenerateMonthlyScheduleService.getBeforeDayList(data);
             String afterDayList = shiftGenerateMonthlyScheduleService.getAfterDayList(data);
-            
+
             SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
             Date date2 = format1.parse(strDate);
             calendar.setTime(date2);
             calendar.add(Calendar.DAY_OF_YEAR, -3);
             Date beforeWoff = calendar.getTime();
             String beforeWoffDay = format1.format(beforeWoff);
-            
+
             Date date3 = format1.parse(enDate);
             calendar.setTime(date3);
             calendar.add(Calendar.DAY_OF_YEAR, 3);
             Date afterWoff = calendar.getTime();
             String afterWoffDay = format1.format(afterWoff);
-            
-            String data1 = employeeMaster1.getId()+":"+beforeWoffDay+":"+afterWoffDay;
-            if(beforeDayList.equals("-1"))
-            {
+
+            String data1 = employeeMaster1.getId() + ":" + beforeWoffDay + ":" + afterWoffDay;
+            if (beforeDayList.equals("-1")) {
                 List<?> beforeWoffDayList = shiftGenerateMonthlyScheduleService.getbeforeWoffDayList(data1);
-                if(!beforeWoffDayList.isEmpty())
-                {
-                    if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday"))
-                    {
-                        if(leavetype.equals("7"))
-                        {
-                            days=days;
+                if (!beforeWoffDayList.isEmpty()) {
+                    if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday")) {
+                        if (leavetype.equals("7")) {
+                            days = days;
+                        } else {
+                            days += 1.0;
                         }
-                        else
-                        {
-                            days+=1.0;
-                        }
-                        
-                    }
-                    else
-                    {
-                        days+=1.0;
+
+                    } else {
+                        days += 1.0;
                     }
                 }
             }
-            if(afterDayList.equals("-1"))
-            {
+            if (afterDayList.equals("-1")) {
                 List<?> afterWoffDayList = shiftGenerateMonthlyScheduleService.getafterWoffDayList(data1);
-                if(!afterWoffDayList.isEmpty())
-                {
-                    days+=1.0;
+                if (!afterWoffDayList.isEmpty()) {
+                    days += 1.0;
                 }
             }
         }
-        
+
         SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
-            Date date1 = format.parse(strDate);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date1);
-            calendar.add(Calendar.DAY_OF_YEAR, 1);
-            Date tomorrow = calendar.getTime();
-            String dateAfterOfstrDate = format.format(tomorrow);
-            String afterDay =  dateAfterOfstrDate.split("/")[0];
-            String afterMonth =  dateAfterOfstrDate.split("/")[1];
-            String afterYear =  dateAfterOfstrDate.split("/")[2];
-            
-            Date date2 = format.parse(enDate);
-            calendar.setTime(date2);
-            calendar.add(Calendar.DAY_OF_YEAR, -1);
-            Date before = calendar.getTime();
-            String dateBeforeOfenDate = format.format(before);
-            String beforeDay =  dateBeforeOfenDate.split("/")[0];
-            String beforMonth =  dateBeforeOfenDate.split("/")[1];
-            String beforYear =  dateBeforeOfenDate.split("/")[2];
-            String data = employeeMaster1.getId()+":"+afterDay+":"+afterMonth+":"+afterYear+":"+beforeDay+":"+beforMonth+":"+beforYear;
-            List<?>  getDayAfterOfstrDate = shiftGenerateMonthlyScheduleService.getDayAfterOfstrDate(data);
-            List<?>  getDayBeforeOfenDate = shiftGenerateMonthlyScheduleService.getDayBeforeOfenDate(data);
-            String getDayAfterOfstrDate1 = getDayAfterOfstrDate.get(0).toString();
-            String getDayBeforeOfenDate1 = getDayBeforeOfenDate.get(0).toString();
-        if((sDateStatus.equals("Fullday") && eDateStatus.equals("FirstHalf")))
-        {
-            
-            if(getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1"))
-            {
-                days-=1.0;
+        Date date1 = format.parse(strDate);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date1);
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+        String dateAfterOfstrDate = format.format(tomorrow);
+        String afterDay = dateAfterOfstrDate.split("/")[0];
+        String afterMonth = dateAfterOfstrDate.split("/")[1];
+        String afterYear = dateAfterOfstrDate.split("/")[2];
+
+        Date date2 = format.parse(enDate);
+        calendar.setTime(date2);
+        calendar.add(Calendar.DAY_OF_YEAR, -1);
+        Date before = calendar.getTime();
+        String dateBeforeOfenDate = format.format(before);
+        String beforeDay = dateBeforeOfenDate.split("/")[0];
+        String beforMonth = dateBeforeOfenDate.split("/")[1];
+        String beforYear = dateBeforeOfenDate.split("/")[2];
+        String data = employeeMaster1.getId() + ":" + afterDay + ":" + afterMonth + ":" + afterYear + ":" + beforeDay + ":" + beforMonth + ":" + beforYear;
+        List<?> getDayAfterOfstrDate = shiftGenerateMonthlyScheduleService.getDayAfterOfstrDate(data);
+        List<?> getDayBeforeOfenDate = shiftGenerateMonthlyScheduleService.getDayBeforeOfenDate(data);
+        String getDayAfterOfstrDate1 = getDayAfterOfstrDate.get(0).toString();
+        String getDayBeforeOfenDate1 = getDayBeforeOfenDate.get(0).toString();
+        if ((sDateStatus.equals("Fullday") && eDateStatus.equals("FirstHalf"))) {
+
+            if (getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) {
+                days -= 1.0;
             }
         }
-        if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
-        {
-            
-            if(!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1"))
-            {
-                days+=1.0;
+        if ((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday"))) {
+
+            if (!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1")) {
+                days += 1.0;
             }
         }
-        if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
-        {
-            
-            if((getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (leavetype.equals("16") || leavetype.equals("11") || leavetype.equals("12")))
-            {
-                days-=1.0;
+        if ((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday"))) {
+
+            if ((getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (leavetype.equals("16") || leavetype.equals("11") || leavetype.equals("12"))) {
+                days -= 1.0;
             }
         }
-        
+
         PrintWriter out = response.getWriter();
         out.print(days);
     }
@@ -12562,6 +12971,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             }
         }
     }
+
     public void readleaveTypeMaster1(HttpServletRequest request, HttpServletResponse response) throws Exception {
         PrintWriter out = response.getWriter();
         JSONObject json = new JSONObject();
@@ -12589,6 +12999,92 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     json.put("useSickLeave", 2);
                     out.println(json.toString());
                 }
+            }
+        }
+    }
+
+    public synchronized void PLLeaveWiseScheduler() {
+
+        EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+        LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+
+        List<?> leaveType = leaveTypeMasterService.readLeaveType("Privilege Leave");
+        if (!leaveType.isEmpty()) {
+            leaveTypeMaster = (LeaveTypeMaster) leaveType.get(0);
+            leaveTypeMaster.getId();
+        }
+        employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+        List empBalancelist = employeeLeaveBalanceService.readByleaveTypeId(employeeLeaveBalance);
+        if (!empBalancelist.isEmpty()) {
+
+            for (Object zz : empBalancelist) {
+                employeeLeaveBalance = (EmployeeLeaveBalance) zz;
+                int empId = employeeLeaveBalance.getEmployeeMaster().getId();
+                EmployeeMaster employeeMaster1 = employeeMasterService.readById(empId);
+                String employeeType = employeeMaster1.getEmployeeType();
+                String experienceYearOnVnc = employeeMaster1.getDateOfJoining();
+                String yearOnVnc = experienceYearOnVnc.substring(6, 10);
+                Calendar cal = Calendar.getInstance();
+                int year2 = cal.get(cal.YEAR);
+                int diffYear = year2 - Integer.parseInt(yearOnVnc);
+
+                if (employeeType.equals("Confirm")) {
+                    if (diffYear < 2) {
+                        employeeLeaveBalance.setNoOfLeaveRemain(15);
+                    } else if (diffYear < 4) {
+                        employeeLeaveBalance.setNoOfLeaveRemain(17);
+                    } else if (diffYear <= 8) {
+                        employeeLeaveBalance.setNoOfLeaveRemain(19);
+                    } else if (diffYear > 8) {
+                        employeeLeaveBalance.setNoOfLeaveRemain(21);
+                    }
+
+                } else {
+
+                    employeeLeaveBalance.setNoOfLeaveRemain(0);
+
+                }
+                employeeLeaveBalanceService.update(employeeLeaveBalance);
+
+            }
+        } else {
+            EmployeeMaster employeeMaster1 = new EmployeeMaster();
+            List<?> empList = employeeMasterService.read();
+            for (Object oo : empList) {
+                employeeMaster1 = (EmployeeMaster) oo;
+                String employeeType = employeeMaster1.getEmployeeType();
+                String experienceYearOnVnc = employeeMaster1.getDateOfJoining();
+                String yearOnVnc = experienceYearOnVnc.substring(6, 10);
+                Calendar cal = Calendar.getInstance();
+                int year2 = cal.get(cal.YEAR);
+                int diffYear = year2 - Integer.parseInt(yearOnVnc);
+                if (employeeType.equals("Confirm")) {
+                    if (diffYear < 2) {
+                        employeeLeaveBalance.setNoOfLeaveRemain(15);
+                    } else if (diffYear < 4) {
+                        employeeLeaveBalance.setNoOfLeaveRemain(17);
+                    } else if (diffYear <= 8) {
+                        employeeLeaveBalance.setNoOfLeaveRemain(19);
+                    } else if (diffYear > 8) {
+                        employeeLeaveBalance.setNoOfLeaveRemain(21);
+                    }
+
+                } else {
+
+                    employeeLeaveBalance.setNoOfLeaveRemain(0);
+
+                }
+                employeeLeaveBalance.setEmployeeMaster(employeeMaster1);
+                employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+                employeeLeaveBalanceService.create(employeeLeaveBalance);
+
+//                int locationId = employeeMaster1.getZydexLocationMaster().getId();
+//                if (locationId == 1 || locationId == 6) {
+//                    employeeLeaveBalance.setNoOfLeaveRemain(1);
+//                } else {
+//                    employeeLeaveBalance.setNoOfLeaveRemain(3);
+//                }
             }
         }
     }

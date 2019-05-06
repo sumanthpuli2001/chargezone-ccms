@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class name="com.bul.zydex.model.PayrollTaxRateMaster" table="payroll_tax_rate_master" catalog="hr_power_astral">
+  <class name="com.bul.zydex.model.PayrollTaxRateMaster" table="payroll_tax_rate_master" catalog="hr_power_vnc">
       
         <id name="id" type="java.lang.Integer">
             <column name="id" />

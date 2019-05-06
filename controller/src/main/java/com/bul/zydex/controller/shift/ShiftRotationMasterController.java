@@ -19797,11 +19797,11 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
         UserMaster user = (UserMaster) request.getSession().getAttribute("user");
         int userMasterId = user.getId();
         employeeMaster.setUserMaster(user);
-        String clientId = request.getParameter("clientDetailsMaster");
-        if(!clientId.isEmpty()){
-            clientDetailsMaster =  clientDetailsMasterService.readById(Integer.parseInt(clientId));
-            otRegularization.setClientDetailsMaster(clientDetailsMaster);
-        }
+//        String clientId = request.getParameter("clientDetailsMaster");
+//        if(!clientId.isEmpty()){
+//            clientDetailsMaster =  clientDetailsMasterService.readById(Integer.parseInt(clientId));
+//            otRegularization.setClientDetailsMaster(clientDetailsMaster);
+//        }
         
         BindException errors = new BindException(otRegularization, "otRegularization");
         bind(request, otRegularization);

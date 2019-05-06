@@ -13,6 +13,18 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 
+<!--        <bean id="leaveUploadYearly"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="leaveEmployeeDetailController1" />
+        <property name="targetMethod" value="PLLeaveWiseScheduler" />
+    </bean>
+    <bean id="cronTrigger52"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="leaveUploadYearly" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+    </bean>-->
+    
+    
     <!--Demo in comment-->
 <!--    <bean id="checkTimeEntryDailyId"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -233,6 +245,7 @@
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
             <list>
+                <!--<ref bean="leaveUploadYearly" />-->
                 <!--<ref bean="checkTimeEntryDailyId" />-->
                 <!--<ref bean="checkOddPunchId" />-->
                 <!--<ref bean="timeAttendanceDetail" />-->
@@ -256,6 +269,7 @@
         </property>
         <property name="triggers">
             <list>
+                <!--<ref bean="cronTrigger52" />-->
                 <!--<ref bean="cronTrigger16" />-->
                 <!--<ref bean="cronTrigger17" />-->
                 <!--<ref bean="cronTrigger1" />-->

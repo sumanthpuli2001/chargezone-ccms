@@ -259,23 +259,7 @@
 
                                                         <!-- /.col -->
                                                     </div><!-- /.row -->
-                                                    <div class="col-md-12 col-sm-12">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-4">
-                                                            <label>UK Manager Name:<span style="color: red;font-size: 12px;"></span></label>
-                                                                <form:input path="arType"  class="form-control"   ></form:input> 
-                                                                <form:errors path="arType" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                          <div class="col-sm-6">
-                                                            <label>Client:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="clientDetailsMaster" class="form-control ">
-                                                            <form:option value="" label="-- Select --" ></form:option>
-                                                            <form:options items="${clientMaster}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="clientDetailsMaster" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        </div>
-                                                        </div>
+
                                                       
                                                  
                                                 </div><!-- /.box-body -->

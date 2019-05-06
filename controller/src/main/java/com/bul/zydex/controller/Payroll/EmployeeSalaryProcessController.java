@@ -2658,7 +2658,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             headerRow1.add("PAT");
                             headerRow1.add("Absent");
                             headerRow1.add("L.W.P");
-                            headerRow1.add("Penalty Hrs");
+                            headerRow1.add("Penalty");
                             headerRow1.add("OT Hrs");
                             headerRow1.add("Unpaid OT Hrs");
                             headerRow1.add("Other Deduction");
@@ -2912,11 +2912,18 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                                 if(employeeshift.size() > 0){
                                                     EmployeeShiftData employeeShiftData2  = (EmployeeShiftData) employeeshift.get(0);
                                                     int sid = employeeShiftData2.getShiftMaster().getId();
+                                                    SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
                                                     String empintime = employeeShiftData2.getInDateTime();
                                                     String[] empintime1 = empintime.split(" ");
                                                     String empouttime = employeeShiftData2.getOutDateTime();
                                                     String[] empouttime1 = empouttime.split(" ");
-
+                                                    String[] LateHoursStr = firstHalf.split("\\$");
+                                                    String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                                                    String[] endHoursStr = firstHalf.split("%");
+                                                    String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                                                    String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                                                    String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
+                                                    Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
                                                     Date empinTime = sdf1.parse(empintime1[1]);
                                                     Date empendTime = sdf1.parse(empouttime1[1]);
                                                     ShiftMaster shiftMaster =  shiftMasterService.readById(sid);
@@ -2933,51 +2940,61 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
 
                                                 if(alllistPunch.size() >=2 && empinTime.after(firstLateHours)){
-                                                    
-                                                    if(countLateEntry > 1){
+                                                    long diffUF = empinTime.getTime() -firstStartHours.getTime();
+                                                    if(diffUF <= 3600000)
+                                                        {
+                                                            if(countLateEntry > 3){
 
-                                                        if(firstHalf.contains("Night")){
-                                                             if(timecount >= 450){
-                                                            abcounter = abcounter + 0.5;
-                                                        }else{
-                                                           abcounter = abcounter + 1;
-                                                        }
-                                                        }else{
-                                                            if(timecount >= 510){
-                                                            abcounter = abcounter + 0.5;
+
+                                                                    if(firstHalf.contains("Night")){
+                                                                         if(timecount >= 450){
+                                                                        abcounter = abcounter + 0.5;
+                                                                    }else{
+                                                                       abcounter = abcounter + 1;
+                                                                    }
+                                                                    }else{
+                                                                        if(timecount >= 510){
+                                                                        abcounter = abcounter + 0.5;
+                                                                        }else{
+                                                                        abcounter = abcounter + 1;
+                                                                    }
+                                                                    }
+
+
+                //                                                    newList.add("AB");
+                                                                    countLateEntry++;
+//                                                                    long lateTimeDuff = empinTime.getTime() - startHour.getTime();
+                                                                    totalLateTime += 100;
                                                             }else{
-                                                            abcounter = abcounter + 1;
+                                                                countLateEntry++;
+                                                                if(firstHalf.contains("Night")){
+                                                                    if(timecount > 1 && timecount >= 210){
+                                                                    prcounter = prcounter + 0.5;
+                                                               }else if(timecount >= 450){
+                                                                    prcounter = prcounter + 1;
+                                                               }else{
+                                                                   abcounter = abcounter + 1;
+                                                               }  
+                                                                }else{
+                                                                    if(timecount > 1 && timecount >= 270){
+                                                                    prcounter = prcounter + 0.5;
+                                                               }else if(timecount >= 510){
+                                                                    prcounter = prcounter + 1;
+                                                               }else{
+                                                                   abcounter = abcounter + 1;
+                                                               }  
+                                                                }
+
+
+            //                                                    newList.add("PR");
+//                                                                long lateTimeDuff = empinTime.getTime() - startHour.getTime();
+//                                                                totalLateTime +=lateTimeDuff;
+                                                            }
                                                         }
-                                                        }
-                                                        
-                                                        
-    //                                                    newList.add("AB");
-                                                         long lateTimeDuff = empinTime.getTime() - startHour.getTime();
-                                                         totalLateTime +=lateTimeDuff;
-                                                    }else{
-                                                        countLateEntry++;
-                                                        if(firstHalf.contains("Night")){
-                                                            if(timecount > 1 && timecount >= 210){
-                                                            prcounter = prcounter + 0.5;
-                                                       }else if(timecount >= 450){
-                                                            prcounter = prcounter + 1;
-                                                       }else{
-                                                           abcounter = abcounter + 1;
-                                                       }  
-                                                        }else{
-                                                            if(timecount > 1 && timecount >= 270){
-                                                            prcounter = prcounter + 0.5;
-                                                       }else if(timecount >= 510){
-                                                            prcounter = prcounter + 1;
-                                                       }else{
-                                                           abcounter = abcounter + 1;
-                                                       }  
-                                                        }
-                                                        
-                                                        
-    //                                                    newList.add("PR");
-                                                        long lateTimeDuff = empinTime.getTime() - startHour.getTime();
-                                                        totalLateTime +=lateTimeDuff;
+                                                    else
+                                                    {
+                                                        abcounter = abcounter + 0.5;
+                                                        prcounter = prcounter + 0.5;
                                                     }
 
                                                 }}
@@ -3184,9 +3201,10 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                }
 //                                
 //                                otHourFinal = hours3 + "." + minutes3;
-                                penaltyhours = String.format("%d.%d", TimeUnit.MILLISECONDS.toHours(totalLateTime),
-                                TimeUnit.MILLISECONDS.toMinutes(totalLateTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(totalLateTime)),
-                                TimeUnit.MILLISECONDS.toSeconds(totalLateTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totalLateTime)));
+                                penaltyhours = String.valueOf(totalLateTime);
+//                                penaltyhours = String.format("%d.%d", TimeUnit.MILLISECONDS.toHours(totalLateTime),
+//                                TimeUnit.MILLISECONDS.toMinutes(totalLateTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(totalLateTime)),
+//                                TimeUnit.MILLISECONDS.toSeconds(totalLateTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totalLateTime)));
                                 
                                 totalPaidOverTime = String.format("%d.%d", TimeUnit.MILLISECONDS.toHours(TotalOtTime),
                                 TimeUnit.MILLISECONDS.toMinutes(TotalOtTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TotalOtTime)),

@@ -3322,18 +3322,23 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     newList.add("PR");
                                 } else if (leave1[0].contains("AB")) {
                                     if(alllistPunch.size() >=2 && userTimeIn.after(LateHours)){
-                                        if(countLateEntry > 3){
+                                        long diffUF = userTimeIn.getTime() -firstStartHours.getTime();
+                                        if(diffUF <= 3600000)
+                                        {
+                                            if(countLateEntry > 3){
                                             countLateEntry++;
                                             newList.add("AB");
 //                                             long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
                                              totalLateTime +=100;
+                                            }else{
+                                                countLateEntry++;
+                                                newList.add("PR");
+    //                                            long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
+    //                                            totalLateTime +=lateTimeDuff;
+                                            }
                                         }else{
-                                            countLateEntry++;
-                                            newList.add("PR");
-//                                            long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
-//                                            totalLateTime +=lateTimeDuff;
+                                           newList.add("AB");
                                         }
-                                       
                                     }
                                     
                                 } else if (leave1[0].contains("AR")) {

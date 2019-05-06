@@ -504,7 +504,7 @@
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">LWP</th>
                                                                             </c:if>
                                                                             <c:if test="${countLateEntry gt 2}">
-                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Penalty Hours</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Penalty</th>
                                                                             </c:if>
                                                                             <c:if test="${!empty totalPaidOverTime}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">OT Hours</th>
@@ -561,7 +561,7 @@
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${lwp}</th>
                                                                             </c:if>
                                                                             <c:if test="${!empty totalPenaltyHours && countLateEntry gt 2}">
-                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalPenaltyHours}</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Rs. ${totalPenaltyHours}</th>
                                                                             </c:if>
                                                                             <c:if test="${!empty totalPaidOverTime}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalPaidOverTime}</th>

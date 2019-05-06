@@ -3322,16 +3322,16 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     newList.add("PR");
                                 } else if (leave1[0].contains("AB")) {
                                     if(alllistPunch.size() >=2 && userTimeIn.after(LateHours)){
-                                        if(countLateEntry > 1){
+                                        if(countLateEntry > 3){
                                             countLateEntry++;
                                             newList.add("AB");
-                                             long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
-                                             totalLateTime +=lateTimeDuff;
+//                                             long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
+                                             totalLateTime +=100;
                                         }else{
                                             countLateEntry++;
                                             newList.add("PR");
-                                            long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
-                                            totalLateTime +=lateTimeDuff;
+//                                            long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
+//                                            totalLateTime +=lateTimeDuff;
                                         }
                                        
                                     }
@@ -4327,10 +4327,10 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             }
 
         }
-                            
-        String totalPenaltyHours = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(totalLateTime),
-                     TimeUnit.MILLISECONDS.toMinutes(totalLateTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(totalLateTime)),
-                     TimeUnit.MILLISECONDS.toSeconds(totalLateTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totalLateTime)));
+          String totalPenaltyAmount = String.valueOf(totalLateTime);
+//        String totalPenaltyHours = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(totalLateTime),
+//                     TimeUnit.MILLISECONDS.toMinutes(totalLateTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(totalLateTime)),
+//                     TimeUnit.MILLISECONDS.toSeconds(totalLateTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totalLateTime)));
         
         String totalPaidOverTime = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(TotalOtTime),
                      TimeUnit.MILLISECONDS.toMinutes(TotalOtTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TotalOtTime)),
@@ -4347,7 +4347,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //        }
 
         request.setAttribute("countLateEntry", countLateEntry);
-        request.setAttribute("totalPenaltyHours", totalPenaltyHours);
+//        request.setAttribute("totalPenaltyHours", totalPenaltyHours);
+        request.setAttribute("totalPenaltyHours", totalPenaltyAmount);
         request.setAttribute("totalPaidOverTime", totalPaidOverTime);
         request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime);
         mv.getModelMap()

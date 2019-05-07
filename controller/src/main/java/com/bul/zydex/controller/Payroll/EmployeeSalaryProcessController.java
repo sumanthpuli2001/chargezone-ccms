@@ -2704,6 +2704,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             double pat = 0;
                             int countNightShift = 0;
                             int countLateEntry = 0;
+                            int countForPenalty = 0;
                             int countOnCallRequests = 0;
                             String totalUnpaidOverTime = "";
                             String totalPaidOverTime = "";
@@ -2995,8 +2996,10 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                                         }
                                                     else
                                                     {
-//                                                        abcounter = abcounter + 0.5;
-//                                                        prcounter = prcounter + 0.5;
+                                                        countForPenalty++;
+                                                        if(countForPenalty > 1){
+                                                             totalLateTime +=100;
+                                                         }
                                                     }
 
                                                 }}

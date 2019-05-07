@@ -500,7 +500,7 @@
                                                                             <th style="color: blue;text-align: center;">LWP</th>
                                                                             </c:if>
                                                                             <c:if test="${countLateEntry ge 1}">
-                                                                            <th style="color: blue;text-align: center;">Penalty Hours</th>
+                                                                            <th style="color: red;text-align: center;">Penalty Hours</th>
                                                                             </c:if>
                                                                             <c:if test="${!empty totalPaidOverTime}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">OT Hours</th>
@@ -557,7 +557,7 @@
                                                                             <th style="color: blue;text-align: center;">${lwp}</th>
                                                                             </c:if>  
                                                                             <c:if test="${!empty totalPenaltyHours && countLateEntry ge 1}">
-                                                                            <th style="color: blue;text-align: center;">${totalPenaltyHours}</th>
+                                                                            <th style="color: red;text-align: center;">${totalPenaltyHours}</th>
                                                                             </c:if>
                                                                             <c:if test="${!empty totalPaidOverTime}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalPaidOverTime}</th>

@@ -2737,6 +2737,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         bind(request, employeeAdvanceSearch);
         long totalLateTime = 0;
         int countLateEntry = 0;
+        int countForPenalty = 0;
         long TotalOtTime = 0;
         long upOtTime = 0;
         String id = request.getParameter("id");
@@ -3285,8 +3286,10 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             Date flexibleStartTime = sdf2.parse(newTime1);
                             long diff = endHours.getTime() - firstStartHours.getTime();
                             long diffMinutes = diff / (60 * 1000);
-                        
-                        
+                        long diffInOut = userTimeOut.getTime() - userTimeIn.getTime();
+                        if(timecount < 120){
+                            TotalOtTime = +diffInOut;
+                        }
                         
                         
                         
@@ -3338,7 +3341,12 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                             }
                                         }else{
                                            newList.add("AB");
+                                           countForPenalty++;
+                                           if(countForPenalty > 1){
+                                                totalLateTime +=100;
+                                            }
                                         }
+                                        
                                     }
                                     
                                 } else if (leave1[0].contains("AR")) {
@@ -4195,7 +4203,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 }
                             }
                             
-                            timecount = timecount - 30;
+//                            timecount = timecount - 30;
                             double empHour = (double) timecount / 60;
                             int hours = (int) empHour;
                             int minutes = (int) (empHour * 60) % 60;

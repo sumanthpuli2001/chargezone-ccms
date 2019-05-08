@@ -152,7 +152,7 @@
         {
             var month = $('#month').val();
             var year = $('#year11').val();
-            alert(month+""+year)
+          
             window.location = 'employeeSalaryProcess.htm?act=downloadAttendanceGeneratedFile&month='+month+'&year11='+year;
         }
     </script>

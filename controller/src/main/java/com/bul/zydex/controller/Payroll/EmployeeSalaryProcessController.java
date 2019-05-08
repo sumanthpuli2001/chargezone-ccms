@@ -2790,6 +2790,23 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                             LocalDateTime dateTime2 = null;
                                             long timecount = 0;
                                             int cnt =0;
+                                            // OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
+                                            if(firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
+                                                    && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay"))        
+                                            {
+                                                String[] userTimeInStr = firstHalf.split("`");
+                                                String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                                String[] userTimeOutStr = firstHalf.split("!");
+                                                String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                                SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+                                                Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                                                Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                                                long diffInOut = userTimeOut.getTime() - userTimeIn.getTime();
+                                                if(userTimeInStr[0].trim().equals("0.5") && (timecount < 120)){
+                                                    TotalOtTime = +diffInOut;
+                                                }
+                                            }
+                                            // OT when one half is leave and employee worked for less than 02:00 hours(Ends here)
                                         for (Object o : alllistPunch) {
                                             EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
                                             cnt++;
@@ -3103,8 +3120,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                                         }
                             
 
-                                                    long beforeinTime = firstStartHours.getTime()-userTimeIn.getTime();
-                                                         beforeinTime = TimeUnit.MILLISECONDS.toMinutes(beforeinTime);
+//                                                    long beforeinTime = firstStartHours.getTime()-userTimeIn.getTime();
+//                                                         beforeinTime = TimeUnit.MILLISECONDS.toMinutes(beforeinTime);
                                             
                                     List<?> otlist =  oTRegularizationService.readOTDateWise(startdate, empMaster.getUserMaster().getId());
                                     if(otlist.size() > 0){
@@ -3139,13 +3156,14 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                                             TotalOtTime += timdiffot;
                                                         }
                                                     }
-                                                    if(beforeinTime > 0){
-                                                        long xtratime = (timecount-totalIntime1)- beforeinTime;
-                                                    xtratime = xtratime-60;
+//                                                    if(beforeinTime > 0){
+//                                                        long xtratime = (timecount-totalIntime1)- beforeinTime;
+                                                        long xtratime = (timecount-totalIntime1);
+//                                                    xtratime = xtratime-60;
                                                     if(xtratime > 0){
                                                         upOtTime += xtratime;
                                                     }
-                                                    }
+//                                                    }
                                                     
                                                 }
                                             }
@@ -3154,13 +3172,14 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                         if(timecount > 510){
                                             if(!userTimeIn.after(firstStartHours)){
                                                 if(userTimeIn.before(firstStartHours)){
-                                                if(beforeinTime > 0){
-                                                    long xtratime = (timecount - 510) - beforeinTime;
-                                                    xtratime = xtratime-60;
+//                                                if(beforeinTime > 0){
+//                                                    long xtratime = (timecount - 510) - beforeinTime;
+                                                    long xtratime = (timecount - 510);
+//                                                    xtratime = xtratime-60;
                                                     if(xtratime > 0){
                                                         upOtTime += xtratime;
                                                     }
-                                                }
+//                                                }
                                                 
                                                 
                                                 }

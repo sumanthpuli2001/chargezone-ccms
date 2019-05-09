@@ -2349,7 +2349,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             float workingdays1 = 0;
                             float presentdays1 = 0;
                             int count = 0;
-                            double hours = 8;
+                            double hours = 8.5;
                             float woff1 = 0;
                             double tdsexcel1 = 0;
                             double incentiveExcel1 = 0;
@@ -2412,7 +2412,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 double leaveTxt = 0;
                                 Calendar cal = Calendar.getInstance();
                                 cal.set(Calendar.MONTH, (Integer.parseInt(month1) - 1));
-                                int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+                                int days = 30;
+//                                int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 //add lwp + absent 
                                 Double BothLwpABsent = lwp1 + absent1;
 
@@ -2423,11 +2424,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                conveyAmount1 = conveyAmount - (conveyAmount * BothLwpABsent / days);
 //                            conveys end
 //                            OT calculate : 
-                                double OT2 = 0;
-                                OT2 = OT1 * 2;
-                                double perdayrate = basicSalary / days;
-                                double perhoursrate = perdayrate / hours;
-                                double Overtimepay = perhoursrate * OT2;
+                                double OT2 = OT1;
+//                                OT2 = OT1 * 2;
+                                double perdayrate = basicSalary / days; /// 25000/30=833
+                                double perhoursrate = perdayrate / hours; //833/8.5=98.01
+                                double Overtimepay = perhoursrate * OT2; // 
 
 //                            OT calculate end
                                 employeeSalaryProcess.setEmployeeMaster(employeeMaster1);

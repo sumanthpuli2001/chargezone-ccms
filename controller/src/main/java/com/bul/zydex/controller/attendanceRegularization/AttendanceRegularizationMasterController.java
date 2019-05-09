@@ -3341,7 +3341,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                         long diffUF = userTimeIn.getTime() -firstStartHours.getTime();
                                         if(diffUF <= 3600000)
                                         {
-                                            if(countLateEntry > 3){
+                                            if(countLateEntry > 4){
                                             countLateEntry++;
                                             newList.add("AB");
 //                                             long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();

@@ -431,10 +431,11 @@
                                                                             </c:forEach>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Working Hour</th>
-                                                                            <c:forEach var="workingHour" items="${workingHour}">
-                                                                            <th style="text-align: center;">${workingHour}</th>
-                                                                            </c:forEach>
+                                                                        <th>View All Punch</th>
+                                                                            <c:forEach var="list" items="${map[employeeMasterList[48]]}">
+                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}', '${employeeMasterList[48]}');">View</a>
+                                                                            </th>
+                                                                        </c:forEach>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>View All Punch</th>
@@ -505,6 +506,15 @@
                                                                             <c:if test="${lwp ne 0}">
                                                                             <th style="color: blue;text-align: center;">LWP</th>
                                                                             </c:if>
+                                                                            <c:if test="${countLateEntry ge 1}">
+                                                                            <th style="color: red;text-align: center;">Penalty Hours</th>
+                                                                            </c:if>
+                                                                            <c:if test="${!empty totalPaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">OT Hours</th>
+                                                                            </c:if>
+                                                                            <c:if test="${!empty totalUnpaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Unpaid OT Hours</th>
+                                                                            </c:if>
                                                                     </tr>
                                                                     <tr>
                                                                         <c:set var="shortL" value="${shl/2}"/>
@@ -552,10 +562,18 @@
                                                                             </c:if>
                                                                             <c:if test="${lwp ne 0}">
                                                                             <th style="color: blue;text-align: center;">${lwp}</th>
-                                                                            </c:if>   
-
+                                                                            </c:if>  
+                                                                            <c:if test="${!empty totalPenaltyHours && countLateEntry ge 1}">
+                                                                            <th style="color: red;text-align: center;">${totalPenaltyHours}</th>
+                                                                            </c:if>
+                                                                            <c:if test="${!empty totalPaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalPaidOverTime}</th>
+                                                                            </c:if>  
+                                                                            <c:if test="${!empty totalUnpaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalUnpaidOverTime}</th>
+                                                                            </c:if>  
                                                                     </tr>
-                                                                    <tr  >
+                                                                    <tr>
                                                                     </tr>
                                                                 </table>
                                                             </div>

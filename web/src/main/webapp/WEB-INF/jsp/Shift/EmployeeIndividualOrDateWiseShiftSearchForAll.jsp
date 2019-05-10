@@ -158,6 +158,7 @@
                                                                     <tr>
                                                                         <th>Shift Name</th>
                                                                             <c:forEach var="list" items="${map[employeeMasterList[48]]}">
+                                                                            
                                                                                 <c:if test="${fn:contains(list[1], ' # ')}">
                                                                                     <c:set var="string1" value="${fn:split(list[1], '#')}"/>
                                                                                     <c:set var="string1" value="${fn:split(string1[1], '$')}"/>
@@ -273,7 +274,7 @@
                                                                             <c:forEach var="list" items="${map[employeeMasterList[48]]}">
 
                                                                             <%--<c:set var="string5" value="${fn:join(list[1], 'To ')}"/>--%>
-
+<!--<input type="text" value="${list[1]}">-->
                                                                             <c:if test="${fn:contains(list[1], '!')}">
                                                                                 <c:set var="string2" value="${fn:split(list[1], '`')}"/>
                                                                                 <c:set var="string2" value="${fn:split(string2[1], '!')}"/>
@@ -281,6 +282,8 @@
                                                                                 <c:set var="string5" value="${fn:split(string4[1], '@')}"/>
                                                                                 <fmt:parseDate value="${string5[0]}" var="lout" pattern="HH:mm" />
                                                                                 <fmt:parseDate value="${string2[0]}" var="fin" pattern="HH:mm" />
+<!--                                                                    <input type="text" value="${string5[0]}">
+                                                                    <input type="text" value="${string2[0]}">-->
                                                                                 <c:choose>
                                                                                     <c:when test="${lout eq fin}">
                                                                                         <th style="text-align: center;">-</th>
@@ -299,327 +302,127 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <th>1st Half</th>
-                                                                            <c:set var="firstHalfVal" value="0"></c:set>
-                                                                            <c:set var="counter" value="0"></c:set>
-                                                                            <c:set var="firstCounter" value="0"></c:set>
-                                                                            <c:forEach var="list" items="${map[employeeMasterList[48]]}">
-                                                                                <c:if test="${fn:contains(list[1], 'fullday')}">
-
-                                                                                <c:set var="counter" value="${counter + 1}"></c:set>
-                                                                                <c:set var="present" value="${present + 0.5}"></c:set>
-                                                                                    <th style="color: green;text-align: center;">PR</th>
+                                                                            <c:forEach var="firstHalfList" items="${firstHalfList}">
+                                                                                <c:if test="${firstHalfList eq 'PR'}">
+                                                                                <th style="color: green;text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="present" value="${present + 0.5}"></c:set>
                                                                                 </c:if>
-                                                                                <c:if test="${!fn:contains(list[1], 'fullday')}">
-
-                                                                                <c:set var="firstHalfVal" value="0"></c:set>
-                                                                                <c:set var="leave" value="${fn:split(list[1], '@')}"/>
-                                                                                <c:set var="leave1" value="${fn:split(leave[1], '#')}"/>
-
-                                                                                <c:set var="userTimeInStr" value="${fn:split(list[1], '`')}"/>
-                                                                                <c:set var="userTimeInStr1" value="${fn:split(userTimeInStr[1], '!')}"/>
-                                                                                <c:set var="userTimeOutStr" value="${fn:split(list[1], '!')}"/>
-                                                                                <c:set var="userTimeOutStr" value="${fn:split(userTimeOutStr[1], '@')}"/>
-                                                                                <c:set var="LateHoursStr" value="${fn:split(list[1], '$')}"/>
-                                                                                <c:set var="LateHoursStr" value="${fn:split(LateHoursStr[1], '%')}"/>
-                                                                                <c:set var="endHoursStr" value="${fn:split(list[1], '%')}"/>
-                                                                                <c:set var="endHoursStr" value="${fn:split(endHoursStr[1], '^')}"/>
-
-                                                                                <c:set var="firstStartHoursStr" value="${fn:split(list[1], '+')}"/>
-
-
-                                                                                <fmt:parseDate value="${userTimeInStr1[0]}" var="userTimeIn" pattern="HH:mm" />
-                                                                                <fmt:parseDate value="${userTimeOutStr[0]}" var="userTimeOut" pattern="HH:mm" />
-                                                                                <fmt:parseDate value="${LateHoursStr[0]}" var="LateHours" pattern="HH:mm" />
-                                                                                <fmt:parseDate value="${endHoursStr[0]}" var="endHours" pattern="HH:mm" />
-                                                                                <fmt:parseDate value="${firstStartHoursStr[1]}" var="firstStartHours" pattern="HH:mm" />
-                                                                                <c:if test="${userTimeIn ne null}">
-                                                                                    <c:choose>
-                                                                                        <c:when test="${userTimeIn le firstStartHours and userTimeOut ge endHours}">
-                                                                                            <c:set var="present" value="${present + 0.5}"></c:set>
-                                                                                                <th style="color: green;text-align: center;">PR</th>
-                                                                                            </c:when>
-                                                                                            <c:when test="${leave1[0] ne null and !fn:contains(leave1[0], 'Short Leave')}">
-                                                                                                <c:choose>
-
-                                                                                                <c:when test="${userTimeIn le LateHours and userTimeOut ge endHours and firstCounter le 31}">
-
-                                                                                                    <c:set var="firstCounter" value="${firstCounter +1}"></c:set>
-                                                                                                    <c:set var="present" value="${present + 0.5}"></c:set>
-                                                                                                        <th style="color: green;text-align: center;">PR</th>
-                                                                                                    </c:when>
-                                                                                                    <c:when test="${fn:contains(leave1[0], 'AR')}">
-                                                                                                    <th style="color: blue;text-align: center;">AR/P</th>
-                                                                                                        <c:set var="ar" value="${ar + 0.5}"></c:set>
-                                                                                                    </c:when>
-                                                                                                    <c:otherwise>
-
-                                                                                                    <c:if test="${fn:contains(leave1[0], 'AB')}">
-                                                                                                        <c:set var="absent" value="${absent + 0.5}"></c:set>
-                                                                                                        <th style="color: red;text-align: center;">${leave1[0]}</th>
-                                                                                                        </c:if>
-                                                                                                    </c:otherwise>
-                                                                                                </c:choose>
-                                                                                            </c:when>
-                                                                                            <c:when test="${null ne leave1[0] and fn:contains(leave1[0], 'Short Leave')}">
-                                                                                                <c:if test="${fn:contains(list[1], ' * ')}">
-                                                                                                    <c:set var="shortArray" value="${fn:split(list[1], '*')}"></c:set>
-                                                                                                    <c:set var="endArray" value="${fn:split(shortArray[1], '-')}"></c:set>
-                                                                                                    <c:set var="startTime" value="${fn:split(endArray[1], '+')}"></c:set>
-                                                                                                    <fmt:parseDate value="${shortArray[1]}" var="shortIn" pattern="HH:mm" />
-                                                                                                    <fmt:parseDate value="${endArray[1]}" var="shortend" pattern="HH:mm" />
-                                                                                                    <fmt:parseDate value="${startTime[1]}" var="startTime" pattern="HH:mm" />
-                                                                                                    <c:choose>
-                                                                                                        <c:when test="${startTime le shortIn and shortIn le endHours}">
-                                                                                                            <c:choose>
-                                                                                                                <c:when  test="${userTimeIn < endHours}">
-                                                                                                                <th style="color: green;text-align: center;">SHL/P</th>
-                                                                                                                    <c:set var="shl" value="${shl + 1}"></c:set>
-                                                                                                                </c:when>
-                                                                                                                <c:when  test="${userTimeIn ge endHours}">
-
-                                                                                                                <th style="color: red;text-align: center;">SHL/A</th>
-                                                                                                                    <c:set var="shlA" value="${shlA + 1}"></c:set>
-                                                                                                                </c:when>
-                                                                                                                <c:otherwise>
-                                                                                                                <th style="color: red;text-align: center;">AB</th>
-                                                                                                                </c:otherwise>
-                                                                                                            </c:choose>
-                                                                                                        </c:when>
-                                                                                                        <c:when test="${userTimeIn le LateHours and userTimeOut ge endHours and firstCounter le 31}">
-                                                                                                            <c:set var="present" value="${present + 0.5}"></c:set>
-                                                                                                            <c:set var="firstCounter" value="${firstCounter +1}"></c:set>
-                                                                                                            <th style="color: green;text-align: center;">PR</th>
-                                                                                                        </c:when>
-                                                                                                        <c:when  test="${fn:contains(leave1[0], '~ AR')}">
-                                                                                                        <th style="color: blue;text-align: center;">AR/P</th>
-                                                                                                            <c:set var="ar" value="${ar + 0.5}"></c:set>
-                                                                                                        </c:when>
-                                                                                                        <c:otherwise>
-                                                                                                        <th style="color: red;text-align: center;">AB</th>
-                                                                                                            <c:set var="absent" value="${absent + 0.5}"></c:set>
-                                                                                                        </c:otherwise>
-                                                                                                    </c:choose>
-                                                                                                </c:if>
-                                                                                            </c:when>
-                                                                                            <c:when test="${null ne leave1[0] &&  !fn:contains(leave1[0], 'AB')}">
-                                                                                                <c:if test="${fn:contains(leave1[0], 'Casual Leave')}">
-                                                                                                    <c:set var="cl" value="${cl + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(leave1[0], 'Privilege Leave')}">
-                                                                                                    <c:set var="pl" value="${pl + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(leave1[0], 'Sick Leave')}">
-                                                                                                    <c:set var="sl" value="${sl + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(list[1], 'Maternity Leave')}">
-                                                                                                    <c:set var="mtl" value="${mtl + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(list[1], 'Paternity Leave')}">
-                                                                                                    <c:set var="ptl" value="${ptl + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(list[1], 'C Off Leave')}">
-                                                                                                    <c:set var="coff" value="${coff + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(list[1], 'Leave Without Pay') || fn:contains(woMap[list[0]], 'LWP')}">
-                                                                                                    <c:set var="lwp" value="${lwp + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                            <th style="text-align: center;">${leave1[0]}</th>
-                                                                                            </c:when>
-                                                                                            <c:when test="${fn:contains(leave1[0], 'AB')}">
-                                                                                            <th style="text-align: center;">-</th>
-                                                                                            </c:when>
-                                                                                            <c:otherwise>
-                                                                                            <th style="color: red;text-align: center;">AB</th>
-                                                                                                <c:set var="absent" value="${absent + 0.5}"></c:set>
-                                                                                            </c:otherwise>
-                                                                                        </c:choose>
-                                                                                    </c:if>
-                                                                                    <c:if test="${userTimeIn eq null && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR') && !fn:contains(list[1], 'WO')  && !fn:contains(list[1], '?') 
-                                                                                                  && !fn:contains(list[1], 'Sick Leave') && !fn:contains(list[1], 'Casual Leave')
-                                                                                                  && !fn:contains(list[1], 'Privilege Leave') && !fn:contains(list[1], 'Paternity Leave')
-                                                                                                  && !fn:contains(list[1], 'Maternity Leave') && !fn:contains(list[1], 'Leave Without Pay')}">
-                                                                                    <th style="color: red;text-align: center;">AB</th>
-                                                                                        <c:set var="absent" value="${absent + 0.5}"></c:set>
-                                                                                    </c:if>
-                                                                                    <c:if test="${userTimeIn eq null && !fn:contains(list[1], 'TR') && fn:contains(list[1], 'AR') && !fn:contains(list[1], 'WO')  && !fn:contains(list[1], '?') 
-                                                                                                  && !fn:contains(list[1], 'Sick Leave') && !fn:contains(list[1], 'Casual Leave')
-                                                                                                  && !fn:contains(list[1], 'Privilege Leave') && !fn:contains(list[1], 'Paternity Leave')
-                                                                                                  && !fn:contains(list[1], 'Maternity Leave') && !fn:contains(list[1], 'Leave Without Pay')}">
-                                                                                    <th style="color: blue;text-align: center;">AR/P</th>
-                                                                                        <c:set var="ar" value="${ar + 0.5}"></c:set>
-                                                                                    </c:if>
-                                                                                    <c:if test="${list[1] == 'TR' || list[1] == 'WO' || fn:contains(list[1], '?') ||
-                                                                                                  list[1] == 'Sick Leave' || list[1] == 'Casual Leave'
-                                                                                                  || list[1] == 'Privilege Leave' || list[1] == 'Paternity Leave'
-                                                                                                  || list[1] == 'Maternity Leave' || list[1] == 'Leave Without Pay' }">
-                                                                                    <th style="text-align: center;">-</th>
-
+                                                                                <c:if test="${firstHalfList eq '-'}">
+                                                                                <th style="color: green;text-align: center;">${firstHalfList}</th>
                                                                                 </c:if>
-                                                                            </c:if>
+                                                                                <c:if test="${firstHalfList eq 'SHL/P'}">
+                                                                                <th style="color: green;text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="shl" value="${shl + 1}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${firstHalfList eq 'SHL/A'}">
+                                                                                <th style="color: red;text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="shlA" value="${shlA + 1}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${firstHalfList eq 'AB'}">
+                                                                                <th style="color: red;text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="absent" value="${absent + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${firstHalfList eq 'Casual Leave'}">
+                                                                                <th style="text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="cl" value="${cl + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${firstHalfList eq 'Privilege Leave'}">
+                                                                                <th style="text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="pl" value="${pl + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${firstHalfList eq 'Sick Leave'}">
+                                                                                <th style="text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="sl" value="${sl + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${firstHalfList eq 'Maternity Leave'}">
+                                                                                <th style="text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="mtl" value="${mtl + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${firstHalfList eq 'Paternity Leave'}">
+                                                                                <th style="text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="ptl" value="${ptl + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${firstHalfList eq 'C Off Leave'}">
+                                                                                <th style="text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="coff" value="${coff + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${firstHalfList eq 'Leave Without Pay'  || fn:contains(woMap[list[0]], 'LWP')}">
+                                                                                <th style="text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="lwp" value="${lwp + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${firstHalfList eq 'AR/P'}">
+                                                                                <th style="color: blue;text-align: center;">${firstHalfList}</th>
+                                                                                    <c:set var="ar" value="${ar + 0.5}"></c:set>
+                                                                                </c:if>
 
                                                                         </c:forEach>
+
 
                                                                     </tr>
 
                                                                     <tr>
                                                                         <th>2nd Half</th>
-                                                                            <c:forEach var="list" items="${map[employeeMasterList[48]]}">
-
-                                                                            <c:if test="${fn:contains(list[1], ' # ')}">
-                                                                                <c:set var="string1" value="${fn:split(list[1], '#')}"/>
-                                                                                <c:set var="string1" value="${fn:split(string1[1], '$')}"/>
-                                                                                <c:set var="shiftName" value="${fn:trim(string1[0])}"/>
-
-                                                                            </c:if>
-
-                                                                            <c:if test="${fn:contains(list[1], 'fullday')}">
-                                                                                <c:set var="present" value="${present + 0.5}"></c:set>
-                                                                                    <th style="color: green;text-align: center;">PR</th>
+                                                                            <c:forEach var="secondHalfList" items="${secondHalfList}">
+                                                                                <c:if test="${secondHalfList eq 'PR'}">
+                                                                                <th style="color: green;text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="present" value="${present + 0.5}"></c:set>
                                                                                 </c:if>
-                                                                                <c:if test="${!fn:contains(list[1], 'fullday') }">
-                                                                                    <c:set var="leave" value="${fn:split(list[1], '@')}"/>
-                                                                                    <c:set var="leave1" value="${fn:split(leave[1], '#')}"/>
-
-                                                                                <c:set var="userTimeInStr" value="${fn:split(list[1], '`')}"/>
-                                                                                <c:set var="userTimeInStr1" value="${fn:split(userTimeInStr[1], '!')}"/>
-                                                                                <c:set var="userTimeOutStr" value="${fn:split(list[1], '!')}"/>
-                                                                                <c:set var="userTimeOutStr" value="${fn:split(userTimeOutStr[1], '@')}"/>
-                                                                                <c:set var="secondHalfTimeStr" value="${fn:split(list[1], '^')}"/>
-                                                                                <c:set var="secondHalfTimeStr" value="${fn:split(secondHalfTimeStr[1], '&')}"/>
-                                                                                <c:set var="endHoursStr" value="${fn:split(list[1], '&')}"/>
-
-                                                                                <fmt:parseDate value="${userTimeInStr1[0]}" var="userTimeIn" pattern="HH:mm" />
-                                                                                <fmt:parseDate value="${userTimeOutStr[0]}" var="userTimeOut" pattern="HH:mm" />
-                                                                                <c:set var="getInHours" value="${fn:split(userTimeInStr1[0], ':')}"/>
-                                                                                <c:set var="getOutHours" value="${fn:split(userTimeOutStr[0], ':')}"/>
-                                                                                <c:set var="abc" value="${fn:trim(getInHours[0])}"/>
-                                                                                <c:set var="xyz" value="${fn:trim(getOutHours[0])}"/>
-                                                                                <fmt:parseNumber var="i11" integerOnly="true" type="number" value="${abc-xyz}" />
-                                                                                <fmt:parseNumber var="totalDuration" value="${24-i11}" type="number"/>
-                                                                                <%--<c:set var="totalDuration1" value="${getInHours[0] - getOutHours[0]}"></c:set>--%>
-                                                                                <c:set var="totalDuration2" value="${getOutHours[0]}"></c:set>
-                                                                                <%--<c:set var="totalDuration3" value="${totalDuration2+1}"></c:set>--%>
-                                                                                <%--<fmt:parseNumber var="parsedNumber" integerOnly="true" type="number" value="${getInHours[0]}" />--%>
-                                                                                <%--<fmt:parseNumber var="parsedNumber" type="number" value="${getInHours[0]}" />--%>
-                                                                                <%--<fmt:parseNumber var="parsedNumber1" type="number" value="${getOutHours[0]}" />--%>
-
-                                                                                <fmt:parseDate value="${secondHalfTimeStr[0]}" var="secondHalfTimeStr" pattern="HH:mm" />
-                                                                                <fmt:parseDate value="${endHoursStr[1]}" var="endHours" pattern="HH:mm" />
-                                                                                <c:if test="${userTimeIn ne null}">
-                                                                                    <c:choose>
-                                                                                        <c:when test="${userTimeIn le secondHalfTimeStr and userTimeOut ge endHours}">
-
-                                                                                            <c:set var="present" value="${present + 0.5}"></c:set>
-                                                                                                <th style="color: green;text-align: center;">PR</th>
-                                                                                            </c:when>
-                                                                                            <c:when test="${fn:contains(shiftName, 'Night') && userTimeOut ge endHours}">
-                                                                                                <c:set var="present" value="${present + 0.5}"></c:set>
-                                                                                                <th style="color: green;text-align: center;">PR</th>
-                                                                                            </c:when>
-
-                                                                                        <c:when test="${null ne leave1[0] and fn:contains(leave1[0], 'Short Leave')}">
-                                                                                            <c:if test="${fn:contains(list[1], ' * ')}">
-                                                                                                <c:set var="shortArray" value="${fn:split(list[1], '*')}"></c:set>
-                                                                                                <c:set var="endArray" value="${fn:split(list[1], '^')}"></c:set>
-                                                                                                <c:set var="secondhalfstartTime" value="${fn:split(endArray[1], '&')}"></c:set>
-                                                                                                <fmt:parseDate value="${shortArray[1]}" var="shortIn" pattern="HH:mm" />
-                                                                                                <fmt:parseDate value="${secondhalfstartTime[0]}" var="secondhalfstartTime" pattern="HH:mm" />
-
-                                                                                                <c:choose>
-                                                                                                    <c:when test="${secondhalfstartTime le shortIn and shortIn le endHours}">
-                                                                                                        <c:choose>
-                                                                                                            <c:when  test="${userTimeOut > secondHalfTimeStr}">
-                                                                                                                <th style="color: green;text-align: center;">SHL/P</th>
-                                                                                                                    <c:set var="shl" value="${shl + 1}"></c:set>
-                                                                                                                </c:when>
-                                                                                                                <c:when  test="${userTimeOut le secondHalfTimeStr}">
-                                                                                                                <th style="color: red;text-align: center;">SHL/A</th>
-                                                                                                                    <c:set var="shlA" value="${shlA + 1}"></c:set>
-                                                                                                                </c:when>
-
-
-                                                                                                            <c:otherwise>
-                                                                                                                <th style="color: red;text-align: center;">AB</th>
-                                                                                                                    <c:set var="absent" value="${absent + 0.5}"></c:set>
-                                                                                                                </c:otherwise>
-                                                                                                            </c:choose>
-                                                                                                        </c:when>
-                                                                                                        <c:when  test="${fn:contains(leave1[0], '~ AR')}">
-                                                                                                        <th style="color: blue;text-align: center;">AR/P</th>
-                                                                                                            <c:set var="ar" value="${ar + 0.5}"></c:set>
-                                                                                                        </c:when>
-                                                                                                        <c:otherwise>
-                                                                                                        <th style="color: red;text-align: center;">AB</th>
-                                                                                                            <c:set var="absent" value="${absent + 0.5}"></c:set>
-                                                                                                        </c:otherwise>
-                                                                                                    </c:choose>
-                                                                                                </c:if>
-                                                                                            </c:when>
-                                                                                            <c:when test="${null ne leave1[0] &&  !fn:contains(leave1[0], 'AB') && !fn:contains(leave1[0], 'AR')}">
-                                                                                                <c:if test="${fn:contains(leave1[0], 'Casual Leave')}">
-                                                                                                    <c:set var="cl" value="${cl + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(leave1[0], 'Privilege Leave')}">
-                                                                                                    <c:set var="pl" value="${pl + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(leave1[0], 'Sick Leave')}">
-                                                                                                    <c:set var="sl" value="${sl + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(list[1], 'Maternity Leave')}">
-                                                                                                    <c:set var="mtl" value="${mtl + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(list[1], 'Paternity Leave')}">
-                                                                                                    <c:set var="ptl" value="${ptl + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(list[1], 'C Off Leave')}">
-                                                                                                    <c:set var="coff" value="${coff + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                                <c:if test="${fn:contains(list[1], 'Leave Without Pay') || fn:contains(woMap[list[0]], 'LWP')}">
-                                                                                                    <c:set var="lwp" value="${lwp + 0.5}"></c:set>
-                                                                                                </c:if>
-                                                                                            <th style="text-align: center;">${leave1[0]}</th>
-                                                                                            </c:when>
-                                                                                            <c:when test="${fn:contains(leave1[0], 'AR')}">
-                                                                                            <th style="color: blue;text-align: center;">AR/P</th>
-                                                                                                <c:set var="ar" value="${ar + 0.5}"></c:set>
-                                                                                            </c:when>
-                                                                                            <c:when test="${fn:contains(leave1[0], 'AB')}">
-                                                                                            <th style="color: red;text-align: center;">${leave1[0]}</th>
-                                                                                                <c:set var="absent" value="${absent + 0.5}"></c:set>
-                                                                                            </c:when>
-
-                                                                                        <c:otherwise>
-                                                                                            <th style="color: red;text-align: center;">AB</th>
-                                                                                                <c:set var="absent" value="${absent + 0.5}"></c:set>
-                                                                                            </c:otherwise>
-                                                                                        </c:choose>
-                                                                                    </c:if>
-                                                                                    <c:if test="${userTimeIn eq null && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR') && !fn:contains(list[1], 'WO') && !fn:contains(list[1], '?') 
-                                                                                                  && !fn:contains(list[1], 'Sick Leave') && !fn:contains(list[1], 'Casual Leave')
-                                                                                                  && !fn:contains(list[1], 'Privilege Leave') && !fn:contains(list[1], 'Paternity Leave')
-                                                                                                  && !fn:contains(list[1], 'Maternity Leave') && !fn:contains(list[1], 'Leave Without Pay')}">
-                                                                                    <th style="color: red;text-align: center;">AB</th>
-                                                                                        <c:set var="absent" value="${absent + 0.5}"></c:set>
-                                                                                    </c:if>
-                                                                                    <c:if test="${userTimeIn eq null && !fn:contains(list[1], 'TR') && fn:contains(list[1], 'AR') && !fn:contains(list[1], 'WO') && !fn:contains(list[1], '?') 
-                                                                                                  && !fn:contains(list[1], 'Sick Leave') && !fn:contains(list[1], 'Casual Leave')
-                                                                                                  && !fn:contains(list[1], 'Privilege Leave') && !fn:contains(list[1], 'Paternity Leave')
-                                                                                                  && !fn:contains(list[1], 'Maternity Leave') && !fn:contains(list[1], 'Leave Without Pay')}">
-                                                                                    <th style="color: blue;text-align: center;">AR/P</th>
-                                                                                        <c:set var="ar" value="${ar + 0.5}"></c:set>
-                                                                                    </c:if>
-                                                                                    <c:if test="${list[1] == 'TR' || list[1] == 'WO' || fn:contains(list[1], '?') ||
-                                                                                                  list[1] == 'Sick Leave' || list[1] == 'Casual Leave'
-                                                                                                  || list[1] == 'Privilege Leave' || list[1] == 'Paternity Leave'
-                                                                                                  || list[1] == 'Maternity Leave' || list[1] == 'Leave Without Pay' }">
-                                                                                    <th style="text-align: center;">-</th>
-                                                                                    </c:if>
-
-                                                                            </c:if>
+                                                                                <c:if test="${secondHalfList eq '-'}">
+                                                                                <th style="color: green;text-align: center;">${secondHalfList}</th>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList eq 'SHL/P'}">
+                                                                                <th style="color: green;text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="shl" value="${shl + 1}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList eq 'SHL/A'}">
+                                                                                <th style="color: red;text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="shlA" value="${shlA + 1}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList eq 'AB'}">
+                                                                                <th style="color: red;text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="absent" value="${absent + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList.contains('Casual Leave')}">
+                                                                                <th style="text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="cl" value="${cl + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList.contains('Privilege Leave')}">
+                                                                                <th style="text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="pl" value="${pl + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList.contains('Sick Leave')}">
+                                                                                <th style="text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="sl" value="${sl + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList eq 'Maternity Leave'}">
+                                                                                <th style="text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="mtl" value="${mtl + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList eq 'Paternity Leave'}">
+                                                                                <th style="text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="ptl" value="${ptl + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList eq 'C Off Leave'}">
+                                                                                <th style="text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="coff" value="${coff + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList eq 'Leave Without Pay'  || fn:contains(woMap[list[0]], 'LWP')}">
+                                                                                <th style="text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="lwp" value="${lwp + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList eq 'AR/P'}">
+                                                                                <th style="color: blue;text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="ar" value="${ar + 0.5}"></c:set>
+                                                                                </c:if>
+                                                                                <c:if test="${secondHalfList eq 'WO'}">
+                                                                                <th style="text-align: center;">${secondHalfList}</th>
+                                                                                    <c:set var="wo" value="${wo + 0.5}"></c:set>
+                                                                                </c:if>
 
                                                                         </c:forEach>
 
                                                                     </tr>
+                                                                   
                                                                     <tr>
                                                                         <th>Break Hours</th>
                                                                             <c:forEach var="breakHour" items="${breakHour}">
@@ -640,7 +443,7 @@
 
                                                                         </c:forEach>
                                                                     </tr>
-                                                                    
+																	                                                                    
                                                                 </table>
                                                                 <table id="table_1" class="table-bordered table-striped table-hover"
                                                                        style="margin-top: 20px;margin-bottom: 20px;margin-left: 5px;width: 25%" >
@@ -652,99 +455,116 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <c:if test="${present ne 0}">
-                                                                            <th style="color: green;text-align: center;">PR</th>
+                                                                            <th style="color: green;text-align: center;padding:0px 20px 0px 20px;">PR</th>
                                                                             </c:if>
                                                                             <c:if test="${absent ne 0}">
-                                                                            <th style="color: red;text-align: center;">AB</th>
+                                                                            <th style="color: red;text-align: center;padding:0px 20px 0px 20px;">AB</th>
                                                                             </c:if>
                                                                             <c:if test="${wo ne 0}">
-                                                                            <th style="text-align: center;">WO</th>
+                                                                            <th style="text-align: center;padding:0px 20px 0px 20px;">WO</th>
                                                                             </c:if>
                                                                             <c:if test="${holiday ne 0}">
-                                                                            <th style="text-align: center;">Holiday</th>
+                                                                            <th style="text-align: center;padding:0px 20px 0px 20px;">Holiday</th>
                                                                             </c:if>
                                                                             <c:if test="${cl ne 0}">
-                                                                            <th style="text-align: center;">CL</th>
+                                                                            <th style="text-align: center;padding:0px 20px 0px 20px;">CL</th>
                                                                             </c:if>
                                                                             <c:if test="${sl ne 0}">
-                                                                            <th style="text-align: center;">SL</th>
+                                                                            <th style="text-align: center;padding:0px 20px 0px 20px;">SL</th>
                                                                             </c:if>
                                                                             <c:if test="${pl ne 0}">
-                                                                            <th style="text-align: center;">PL</th>
+                                                                            <th style="text-align: center;padding:0px 20px 0px 20px;">PL</th>
                                                                             </c:if>
                                                                             <c:if test="${shl ne 0}">
-                                                                            <th style="color: green;text-align: center;">SHL/P</th>
+                                                                            <th style="color: green;text-align: center;padding:0px 20px 0px 20px;">SHL/P</th>
                                                                             </c:if>
                                                                             <c:if test="${shlA ne 0}">
-                                                                            <th style="color: red;text-align: center;">SHL/A</th>
+                                                                            <th style="color: red;text-align: center;padding:0px 20px 0px 20px;">SHL/A</th>
                                                                             </c:if>
                                                                             <c:if test="${ar ne 0}">
-                                                                            <th style="color: blue;text-align: center;">AR/P</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">AR/P</th>
                                                                             </c:if>
                                                                             <c:if test="${tr ne 0}">
-                                                                            <th style="color: blue;text-align: center;">TR</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">TR</th>
                                                                             </c:if>
                                                                             <c:if test="${coff ne 0}">
-                                                                            <th style="color: blue;text-align: center;">C-OFF</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">C-OFF</th>
                                                                             </c:if>
                                                                             <c:if test="${ptl ne 0}">
-                                                                            <th style="color: blue;text-align: center;">PTL</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">PTL</th>
                                                                             </c:if>
                                                                             <c:if test="${mtl ne 0}">
-                                                                            <th style="color: blue;text-align: center;">MTL</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">MTL</th>
                                                                             </c:if>
                                                                             <c:if test="${lwp ne 0}">
-                                                                            <th style="color: blue;text-align: center;">LWP</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">LWP</th>
+                                                                            </c:if>
+                                                                            <c:if test="${countLateEntry gt 2}">
+                                                                            <th style="color: red;text-align: center;padding:0px 20px 0px 20px;">Penalty</th>
+                                                                            </c:if>
+                                                                            <c:if test="${!empty totalPaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">OT Hours</th>
+                                                                            </c:if>
+                                                                            <c:if test="${!empty totalUnpaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Unpaid OT Hours</th>
                                                                             </c:if>
                                                                     </tr>
                                                                     <tr>
                                                                         <c:set var="shortL" value="${shl/2}"/>
                                                                         <c:if test="${present ne 0}">
-                                                                            <td style="color: green;text-align: center;" >${present-shortL}</td>
+                                                                            <td style="color: green;text-align: center;padding:0px 20px 0px 20px;">${present-shortL}</td>
                                                                         </c:if>
                                                                         <c:if test="${absent ne 0}">
-                                                                            <td style="color: red;text-align: center;" >${absent}</td>
+                                                                            <td style="color: red;text-align: center;padding:0px 20px 0px 20px;" >${absent}</td>
                                                                         </c:if>
                                                                         <c:if test="${wo ne 0}">
-                                                                            <td style="text-align: center;">${wo}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${wo}</td>
                                                                         </c:if>
                                                                         <c:if test="${holiday ne 0}">
-                                                                            <td style="text-align: center;">${holiday}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${holiday}</td>
                                                                         </c:if>
                                                                         <c:if test="${cl ne 0}">
-                                                                            <td style="text-align: center;">${cl}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${cl}</td>
                                                                         </c:if>
                                                                         <c:if test="${sl ne 0}">
-                                                                            <td style="text-align: center;">${sl}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${sl}</td>
                                                                         </c:if>
                                                                         <c:if test="${pl ne 0}">
-                                                                            <td style="text-align: center;">${pl}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${pl}</td>
                                                                         </c:if>
                                                                         <c:if test="${shl ne 0}">
-                                                                            <td style="text-align: center;">${shl}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${shl}</td>
                                                                         </c:if>
                                                                         <c:if test="${shlA ne 0}">
-                                                                            <td style="text-align: center;">${shlA}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${shlA}</td>
                                                                         </c:if>
                                                                         <c:if test="${ar ne 0}">
-                                                                            <td style="text-align: center;">${ar}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${ar}</td>
                                                                         </c:if>
                                                                         <c:if test="${tr ne 0}">
-                                                                            <td style="text-align: center;">${tr}</td>
+                                                                            <td style="text-align: center;padding:0px 20px 0px 20px;">${tr}</td>
                                                                         </c:if>
                                                                         <c:if test="${coff ne 0}">
-                                                                            <th style="color: blue;text-align: center;">${coff}</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${coff}</th>
                                                                             </c:if>
                                                                             <c:if test="${ptl ne 0}">
-                                                                            <th style="color: blue;text-align: center;">${ptl}</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${ptl}</th>
                                                                             </c:if>
                                                                             <c:if test="${mtl ne 0}">
-                                                                            <th style="color: blue;text-align: center;">${mtl}</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${mtl}</th>
                                                                             </c:if>
                                                                             <c:if test="${lwp ne 0}">
-                                                                            <th style="color: blue;text-align: center;">${lwp}</th>
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${lwp}</th>
                                                                             </c:if>
-
+                                                                            <c:if test="${!empty totalPenaltyHours && countLateEntry gt 2}">
+                                                                            <th style="color: red;text-align: center;padding:0px 20px 0px 20px;">Rs. ${totalPenaltyHours}</th>
+                                                                            </c:if>
+                                                                            <c:if test="${!empty totalPaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalPaidOverTime}</th>
+                                                                            </c:if>  
+                                                                            <c:if test="${!empty totalUnpaidOverTime}">
+                                                                            <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalUnpaidOverTime}</th>
+                                                                            </c:if>  
                                                                     </tr>
                                                                     <tr  >
                                                                     </tr>

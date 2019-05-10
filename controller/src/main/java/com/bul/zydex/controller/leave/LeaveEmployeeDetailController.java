@@ -3210,15 +3210,16 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 for (Object o1 : list) {
                     employeeLeaveBalance = new EmployeeLeaveBalance();
                     employeeLeaveBalance = (EmployeeLeaveBalance) o1;
-                    noOfLeave = Float.parseFloat(leaveTypeMaster.getNoOfLeave()) + employeeLeaveBalance.getNoOfLeaveRemain();
-
-//                    if (Float.parseFloat(leaveTypeMaster.getNoOfCarriedForwardLeave()) >= noOfLeave) {
+                    if(employeeLeaveBalance.getNoOfLeaveRemain() >= 5.0)
+                    {
+                        noOfLeave = Float.parseFloat(leaveTypeMaster.getNoOfLeave()) + 5;
+                    }
+                    else
+                    {
+                        noOfLeave = Float.parseFloat(leaveTypeMaster.getNoOfLeave());
+                    }
                     employeeLeaveBalance.setNoOfLeaveRemain(noOfLeave);
                     employeeLeaveBalanceService.update(employeeLeaveBalance);
-//                    } else {
-//                        employeeLeaveBalance.setNoOfLeaveRemain(Float.parseFloat(leaveTypeMaster.getNoOfCarriedForwardLeave()));
-//                        employeeLeaveBalanceService.update(employeeLeaveBalance);
-//                    }
                 }
             }
         } catch (Exception e) {

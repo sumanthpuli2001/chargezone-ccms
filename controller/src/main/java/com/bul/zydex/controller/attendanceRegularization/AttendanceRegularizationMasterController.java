@@ -2889,7 +2889,93 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         List newList = new ArrayList();
         List secondHalfList = new ArrayList();
         List workingHour = new ArrayList();
+        List breakHour = new ArrayList();
+        
         for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
+            
+            Iterator itrbh = entry.getValue().iterator();
+            while (itrbh.hasNext()) {
+                try {
+                    List punchList = new ArrayList();
+                    List allpunchList = new ArrayList();
+                    Object[] next = (Object[]) itrbh.next();
+                    String firstHalf = "" + next[1];
+                    String date = "" + next[0];
+                    if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")){
+                        String[] a = firstHalf.split("#");
+                        String[] shift = a[1].split("\\$");
+                        SimpleDateFormat sdf12 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                        long diff=0;
+                        if(shift[0].trim().contains("Night") && shift[0] != null && !shift[0].isEmpty()){
+                            Calendar c = Calendar.getInstance(); 
+                            Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date));  
+                            c.setTime(datenex);
+                            c.add(Calendar.DAY_OF_YEAR, 1); 
+                            Date tomorrow = c.getTime();
+                            String pattern = "dd/MM/YYYY";
+                            SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                            String nextdate = simpleDateFormatpp.format(tomorrow);
+                            punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date,nextdate, Integer.parseInt(id));
+                        }else{
+                            punchList = employeeDatetimeDataService.readAllPuchDataDateWise(date, Integer.parseInt(id));
+                        }
+                        if (!punchList.isEmpty())
+                        {
+                            for(Object o:punchList){
+                                EmployeeDatetimeData employeeDatetimeData12 = (EmployeeDatetimeData)o;
+                                allpunchList.add(employeeDatetimeData12.getDateTime());
+                            }
+                        }
+                        if (!allpunchList.isEmpty())
+                        {
+                            if(allpunchList.size()%2 ==0){
+                                for(int i=1;i<allpunchList.size()-1;i++){
+                                    String out = allpunchList.get(i).toString();
+                                    String in = allpunchList.get(i+1).toString();
+                                    Date out1 = sdf12.parse(out);
+                                    Date in1 = sdf12.parse(in);
+                                    diff += in1.getTime() - out1.getTime();
+                                    i++;
+                                }
+                                long diffSeconds = diff / 1000 % 60;
+                                long diffMinutes = diff / (60 * 1000) % 60;
+                                long diffHours = diff / (60 * 60 * 1000) % 24;
+                                String wh = String.valueOf(diffHours) + ":" + String.valueOf(diffMinutes);
+                                breakHour.add(wh);
+                            }
+                            else{
+                                breakHour.add("-");
+                            }
+
+                        }
+                        else{
+                            breakHour.add("-");
+                        }
+                    }
+                    else{
+                        breakHour.add("-");
+                    }
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             Iterator itr5 = entry.getValue().iterator();
             while (itr5.hasNext()) {
                 try {
@@ -3341,7 +3427,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                         long diffUF = userTimeIn.getTime() -firstStartHours.getTime();
                                         if(diffUF <= 3600000)
                                         {
-                                            if(countLateEntry > 3){
+                                            if(countLateEntry > 4){
                                             countLateEntry++;
                                             newList.add("AB");
 //                                             long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
@@ -4395,6 +4481,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 .put("halfDayMap", halfDayMap);
         mv.getModelMap()
                 .put("employeeAdvanceSearch", employeeAdvanceSearch);
+        mv.getModelMap()
+                .put("breakHour", breakHour);
         Date notflexibleSupportDate;
 
         if (startDate.contains(

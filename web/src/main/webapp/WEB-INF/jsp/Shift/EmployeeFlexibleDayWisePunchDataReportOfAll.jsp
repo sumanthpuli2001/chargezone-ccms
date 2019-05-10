@@ -425,6 +425,12 @@
 
                                                                     </tr>
                                                                     <tr>
+                                                                        <th>Break Hours</th>
+                                                                            <c:forEach var="breakHour" items="${breakHour}">
+                                                                            <th style="text-align: center;">${breakHour}</th>
+                                                                            </c:forEach>
+                                                                    </tr>
+                                                                    <tr>
                                                                         <th>Working Hour</th>
                                                                             <c:forEach var="workingHour" items="${workingHour}">
                                                                             <th style="text-align: center;">${workingHour}</th>

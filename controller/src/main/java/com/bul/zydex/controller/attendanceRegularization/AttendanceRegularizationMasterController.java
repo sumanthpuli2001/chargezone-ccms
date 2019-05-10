@@ -4666,7 +4666,92 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         List newList = new ArrayList();
         List secondHalfList = new ArrayList();
         List workingHour = new ArrayList();
+        List breakHour = new ArrayList();
         for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
+            
+            
+            Iterator itrbh = entry.getValue().iterator();
+            while (itrbh.hasNext()) {
+                try {
+                    List punchList = new ArrayList();
+                    List allpunchList = new ArrayList();
+                    Object[] next = (Object[]) itrbh.next();
+                    String firstHalf = "" + next[1];
+                    String date = "" + next[0];
+                    if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                            && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")){
+                        String[] a = firstHalf.split("#");
+                        String[] shift = a[1].split("\\$");
+                        SimpleDateFormat sdf12 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                        long diff=0;
+                        if(shift[0].trim().contains("Night") && shift[0] != null && !shift[0].isEmpty()){
+                            Calendar c = Calendar.getInstance(); 
+                            Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date));  
+                            c.setTime(datenex);
+                            c.add(Calendar.DAY_OF_YEAR, 1); 
+                            Date tomorrow = c.getTime();
+                            String pattern = "dd/MM/YYYY";
+                            SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                            String nextdate = simpleDateFormatpp.format(tomorrow);
+                            punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date,nextdate, Integer.parseInt(id));
+                        }else{
+                            punchList = employeeDatetimeDataService.readAllPuchDataDateWise(date, Integer.parseInt(id));
+                        }
+                        if (!punchList.isEmpty())
+                        {
+                            for(Object o:punchList){
+                                EmployeeDatetimeData employeeDatetimeData12 = (EmployeeDatetimeData)o;
+                                allpunchList.add(employeeDatetimeData12.getDateTime());
+                            }
+                        }
+                        if (!allpunchList.isEmpty())
+                        {
+                            if(allpunchList.size()%2 ==0){
+                                for(int i=1;i<allpunchList.size()-1;i++){
+                                    String out = allpunchList.get(i).toString();
+                                    String in = allpunchList.get(i+1).toString();
+                                    Date out1 = sdf12.parse(out);
+                                    Date in1 = sdf12.parse(in);
+                                    diff += in1.getTime() - out1.getTime();
+                                    i++;
+                                }
+                                long diffSeconds = diff / 1000 % 60;
+                                long diffMinutes = diff / (60 * 1000) % 60;
+                                long diffHours = diff / (60 * 60 * 1000) % 24;
+                                String wh = String.valueOf(diffHours) + ":" + String.valueOf(diffMinutes);
+                                breakHour.add(wh);
+                            }
+                            else{
+                                breakHour.add("-");
+                            }
+
+                        }
+                        else{
+                            breakHour.add("-");
+                        }
+                    }
+                    else{
+                        breakHour.add("-");
+                    }
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             Iterator itr5 = entry.getValue().iterator();
             while (itr5.hasNext()) {
                 try {
@@ -5679,6 +5764,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 .put("halfDayMap", halfDayMap);
         mv.getModelMap()
                 .put("employeeAdvanceSearch", employeeAdvanceSearch);
+        mv.getModelMap()
+                .put("breakHour", breakHour);
         Date notflexibleSupportDate;
 
         if (startDate.contains(
@@ -5775,8 +5862,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             mv.getModelMap().put("punchList", punchList);
 
         }
-        request.setAttribute("date1", date);
-        request.setAttribute("empId1", empId);
+        if (!punchList.isEmpty()) {
+            String punchListDate = employeeDatetimeDataService.readPuchDataDateWise1(date, Integer.parseInt(empId));
+            request.setAttribute("punchListDate", punchListDate);
+        }
+        Integer size = punchList.size();
+        request.setAttribute("size", size);
+        request.setAttribute("date", date);
+        request.setAttribute("empId", empId);
         mv.setViewName("Shift/ShowAllEmployeePuchData");
 
         return mv;
@@ -5936,6 +6029,215 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //        }
         PrintWriter out = response.getWriter();
         out.print(message);
+    }
+    
+    public ModelAndView viewClick1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
+        String id = request.getParameter("id");
+        String empId = request.getParameter("empId");
+        String date = request.getParameter("date");
+        employeeDatetimeData = employeeDatetimeDataService.readById(Integer.parseInt(id));
+        EmployeeMaster employeeMaster = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+//        companyListEmp(request, employeeMaster.getId());
+        List<?> punchList = employeeDatetimeDataService.readPuchDataDateWise(date, Integer.parseInt(empId));
+        if (!punchList.isEmpty()) {
+            String punchListDate = employeeDatetimeDataService.readPuchDataDateWise1(date, Integer.parseInt(empId));
+//            request.setAttribute("punchListDate", punchListDate);
+        }
+        EmployeeDatetimeData emp = employeeDatetimeDataService.readById(Integer.parseInt(id));
+        request.setAttribute("punchListDate", emp.getDateTime());
+        request.setAttribute("id", id);
+        request.setAttribute("empId", empId);
+        request.setAttribute("date", date);
+        mv.getModelMap().put("employeeDatetimeData", employeeDatetimeData);
+        mv.setViewName("Shift/IndividualPuchDataEdit");
+        return mv;
+    }
+
+    public ModelAndView viewSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
+        EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+        EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+        ShiftMaster shiftMaster = new ShiftMaster();
+        employeeDatetimeData = employeeDatetimeDataService.readById(Integer.parseInt(request.getParameter("idofdate")));
+        String punch = request.getParameter("dateTime");
+        String date = request.getParameter("date");
+        String id = request.getParameter("id");
+        String punchListDate = request.getParameter("punchListDate");
+        EmployeeMaster employeeMaster = employeeMasterService.readById(Integer.parseInt(id));
+        List<?> punchList = employeeDatetimeDataService.readPuchDataDateWise2(date, Integer.parseInt(id));
+        List<?> empShiftData = employeeDatetimeDataService.readByempShiftData(id, punch);
+        String empShiftData1 = "";
+        if (!empShiftData.isEmpty()) {
+            empShiftData1 = empShiftData.get(0).toString();
+            employeeShiftData = employeeShiftDataService.readById(Integer.parseInt(empShiftData1));
+        }
+        if (!empShiftData.isEmpty() && employeeShiftData.getInDateTime() != null && employeeShiftData.getOutDateTime() != null) {
+            if (employeeShiftData.getInDateTime().equals(punchListDate) && !employeeShiftData.getOutDateTime().equals(punchListDate)) {
+                String out = employeeShiftData.getOutDateTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                Date d1 = sdf.parse(punch);
+                Date d2 = sdf.parse(out);
+                if (d1.after(d2)) {
+                    employeeShiftData.setOutDateTime(punch);
+                    employeeShiftData.setInDateTime(out);
+                }
+                if (d1.before(d2)) {
+                    employeeShiftData.setInDateTime(punch);
+                    employeeShiftData.setOutDateTime(out);
+                }
+
+            }
+            if (employeeShiftData.getOutDateTime().equals(punchListDate) && !employeeShiftData.getInDateTime().equals(punchListDate)) {
+                String in = employeeShiftData.getInDateTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                Date d1 = sdf.parse(punch);
+                Date d2 = sdf.parse(in);
+                if (d1.after(d2)) {
+                    employeeShiftData.setOutDateTime(punch);
+                    employeeShiftData.setInDateTime(in);
+                }
+                if (d1.before(d2)) {
+                    employeeShiftData.setInDateTime(punch);
+                    employeeShiftData.setOutDateTime(in);
+                }
+            }
+            if (employeeShiftData.getInDateTime().equals(employeeShiftData.getOutDateTime()) && (punchList.size() == 1)) {
+                employeeShiftData.setInDateTime(punch);
+                employeeShiftData.setOutDateTime(punch);
+            }
+            if (employeeShiftData.getInDateTime().equals(employeeShiftData.getOutDateTime()) && (punchList.size() > 1)) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String preTime = employeeShiftData.getInDateTime();
+                Date d1 = sdf.parse(punch);
+                Date d2 = sdf.parse(preTime);
+                if (d1.after(d2)) {
+                    employeeShiftData.setOutDateTime(punch);
+                }
+                if (d1.before(d2)) {
+                    employeeShiftData.setInDateTime(punch);
+                }
+            }
+            employeeShiftDataService.update(employeeShiftData);
+        } else if ((employeeShiftData.getInDateTime() == null && employeeShiftData.getOutDateTime() != null) || (employeeShiftData.getInDateTime() != null && employeeShiftData.getOutDateTime() == null)) {
+            if (punchList.get(0).toString().equals(punch)) {
+                employeeShiftData.setInDateTime(punch);
+            }
+            if (punchList.get(punchList.size() - 1).toString().equals(punch)) {
+                employeeShiftData.setOutDateTime(punch);
+            }
+            employeeShiftDataService.update(employeeShiftData);
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
+            Date date1 = sdf.parse(date);
+            String date2 = sdf.format(date1);
+            String day = date2.split("/")[0];
+            String month = date2.split("/")[1];
+            String year = date2.split("/")[2];
+            String data = id + ":" + day + ":" + month + ":" + year;
+            String getShiftId = employeeDatetimeDataService.getShiftId(data);
+            if (!getShiftId.equals("-1") && !getShiftId.isEmpty()) {
+                shiftMaster = shiftMasterService.readById(Integer.parseInt(getShiftId));
+            }
+            employeeShiftData1.setShiftMaster(shiftMaster);
+            employeeShiftData1.setEmployeeMaster(employeeMaster);
+            if (punchList.get(0).toString().equals(punch)) {
+                employeeShiftData1.setInDateTime(punch);
+            }
+            if (punchList.get(punchList.size() - 1).toString().equals(punch)) {
+                employeeShiftData1.setOutDateTime(punch);
+            }
+            employeeShiftDataService.create(employeeShiftData1);
+        }
+        employeeDatetimeData.setDateTime(punch);
+        employeeDatetimeDataService.update(employeeDatetimeData);
+        List<?> findDuplicateRecords = employeeDatetimeDataService.findDuplicateRecords(employeeDatetimeData.getEmployeeMaster().getId(), punchListDate);
+        if (!punch.equals(punchListDate)) {
+            if (!findDuplicateRecords.isEmpty()) {
+                for (int i = 0; i <= findDuplicateRecords.size() - 1; i++) {
+                    String a = findDuplicateRecords.get(i).toString();
+                    employeeDatetimeDataService.delete(Integer.parseInt(a));
+                }
+            }
+        }
+        if (punch.equals(punchListDate)) {
+            if (!findDuplicateRecords.isEmpty()) {
+                for (int i = 1; i <= findDuplicateRecords.size() - 1; i++) {
+                    String a = findDuplicateRecords.get(i).toString();
+                    employeeDatetimeDataService.delete(Integer.parseInt(a));
+                }
+            }
+        }
+        request.setAttribute("successMessage",
+                "Information : The Information is Updated Successfully.");
+        mv = showDateWisePunchDataOfAllEmployee(request, response);
+        return mv;
+    }
+
+    public ModelAndView newClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
+        String empId = request.getParameter("empId");
+        String date = request.getParameter("date");
+        request.setAttribute("empId", empId);
+        request.setAttribute("date", date);
+        mv.getModelMap().put("employeeDatetimeData", employeeDatetimeData);
+        mv.setViewName("Shift/CreatNewDatetime");
+        return mv;
+    }
+
+    public ModelAndView newSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();
+        EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+        ShiftMaster shiftMaster = new ShiftMaster();
+        BindException errors = new BindException(employeeDatetimeData, "employeeDatetimeData");
+        bind(request, employeeDatetimeData);
+        String empId = request.getParameter("empId");
+        String dateTime = request.getParameter("dateTime");
+        String date = dateTime.split(" ")[0];
+        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
+        Date date1 = sdf.parse(date);
+        String date2 = sdf.format(date1);
+        String day = date2.split("/")[0];
+        String month = date2.split("/")[1];
+        String year = date2.split("/")[2];
+        String data = empId + ":" + day + ":" + month + ":" + year;
+        String getShiftId = employeeDatetimeDataService.getShiftId(data);
+        if (!getShiftId.equals("-1") && !getShiftId.isEmpty()) {
+            shiftMaster = shiftMasterService.readById(Integer.parseInt(getShiftId));
+        }
+        String empShiftData1 = "";
+        EmployeeMaster emp = employeeMasterService.readById(Integer.parseInt(empId));
+        List<?> empShiftData = employeeDatetimeDataService.readByempShiftData(empId, dateTime);
+        if (empShiftData.isEmpty()) {
+            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+            employeeShiftData1.setEmployeeMaster(emp);
+            employeeShiftData1.setInDateTime(dateTime);
+            employeeShiftData1.setOutDateTime(dateTime);
+            employeeShiftData1.setShiftMaster(shiftMaster);
+            employeeShiftDataService.create(employeeShiftData1);
+        }
+        if (!empShiftData.isEmpty()) {
+            empShiftData1 = empShiftData.get(0).toString();
+        }
+        if (!empShiftData1.isEmpty()) {
+            employeeShiftData = employeeShiftDataService.readById(Integer.parseInt(empShiftData1));
+            if (employeeShiftData.getInDateTime().equals(employeeShiftData.getOutDateTime())) {
+                employeeShiftData.setOutDateTime(dateTime);
+                employeeShiftDataService.update(employeeShiftData);
+            }
+        }
+
+        employeeDatetimeData.setEmployeeMaster(emp);
+        employeeDatetimeDataService.create(employeeDatetimeData);
+        request.setAttribute("successMessage",
+                "Information : The Information is saved Successfully.");
+//            mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=showDateWisePunchDataOfSubordinate");
+        mv = showDateWisePunchDataOfAllEmployee(request, response);
+        return mv;
     }
 
 }

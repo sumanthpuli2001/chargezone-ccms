@@ -5301,6 +5301,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
             headerRow1.add("First Half");
             headerRow1.add("Second Half");
             headerRow1.add("Working Hour");
+            headerRow1.add("Break Hour");
 //            headerRow1.add("Punch In");
 //            headerRow1.add("Punch Out");
 
@@ -5472,6 +5473,101 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 //                    }
 //                    headerRow1.addAll(headerRow3);
                     
+                    EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+                    List breakHour = new ArrayList();
+                    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    if ((!"".equals(startDate) && null != startDate)) {
+                        if (!"".equals(startDate) && null != startDate) {
+                            Date sDate = sdf.parse(startDate);
+                            employeeShiftData.setInDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
+                            employeeShiftData.setOutDateTime(new SimpleDateFormat("yyyy-MM-dd").format(sDate));
+
+                        }
+                    } else {
+                        Calendar c = Calendar.getInstance();
+                        int year = c.get(Calendar.YEAR);
+                        int day = c.get(Calendar.DAY_OF_MONTH);
+                        int month = c.get(Calendar.MONTH) + 1;
+
+                        startDate = year + "-" + (month < 10 ? ("0" + month) : (month)) + "-01";
+                        Date sDate = sdf1.parse(startDate);
+                        employeeShiftData.setInDateTime(sdf1.format(sDate));
+                        employeeShiftData.setOutDateTime(sdf1.format(sDate));
+                    }
+                    employeeShiftData.setId(id);
+                    List list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);
+                    for (Iterator<? extends Object> iterator = list.iterator(); iterator.hasNext();) {
+                        try {
+                            Object[] next1 = (Object[]) iterator.next();
+                            List punchList = new ArrayList();
+                            List allpunchList = new ArrayList();
+                            String firstHalf = "" + next1[1];
+                            String date = "" + next1[0];
+                            if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                                    && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                    && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")){
+                                String[] a = firstHalf.split("#");
+                                String[] shift = a[1].split("\\$");
+                                SimpleDateFormat sdf12 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                long diff=0;
+                                if(shift[0].trim().contains("Night") && shift[0] != null && !shift[0].isEmpty()){
+                                    Calendar c = Calendar.getInstance(); 
+                                    Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date));  
+                                    c.setTime(datenex);
+                                    c.add(Calendar.DAY_OF_YEAR, 1); 
+                                    Date tomorrow = c.getTime();
+                                    String pattern = "dd/MM/YYYY";
+                                    SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                                    String nextdate = simpleDateFormatpp.format(tomorrow);
+                                    punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date,nextdate, id);
+                                }else{
+                                    punchList = employeeDatetimeDataService.readAllPuchDataDateWise(date, id);
+                                }
+                                if (!punchList.isEmpty())
+                                {
+                                    for(Object o:punchList){
+                                        EmployeeDatetimeData employeeDatetimeData12 = (EmployeeDatetimeData)o;
+                                        allpunchList.add(employeeDatetimeData12.getDateTime());
+                                    }
+                                }
+                                if (!allpunchList.isEmpty())
+                                {
+                                    if(allpunchList.size()%2 ==0){
+                                        for(int i=1;i<allpunchList.size()-1;i++){
+                                            String out = allpunchList.get(i).toString();
+                                            String in = allpunchList.get(i+1).toString();
+                                            Date out1 = sdf12.parse(out);
+                                            Date in1 = sdf12.parse(in);
+                                            diff += in1.getTime() - out1.getTime();
+                                            i++;
+                                        }
+                                        long diffSeconds = diff / 1000 % 60;
+                                        long diffMinutes = diff / (60 * 1000) % 60;
+                                        long diffHours = diff / (60 * 60 * 1000) % 24;
+                                        String wh = String.valueOf(diffHours) + ":" + String.valueOf(diffMinutes);
+                                        breakHour.add(wh);
+                                    }
+                                    else{
+                                        breakHour.add("");
+                                    }
+
+                                }
+                                else{
+                                    breakHour.add("");
+                                }
+                            }
+                            else{
+                                breakHour.add("");
+                            }
+                        }
+                        catch(Exception e){
+                            e.printStackTrace();
+                        }
+                        
+                    }
+                    
+                    employeeInfoList.addAll(breakHour);
                     employeeInfoList.addAll(employeeInfoListpunch);
                     recordToAdd.add(employeeInfoList);
 //                    recordToAdd.add(employeeInfoListpunch);

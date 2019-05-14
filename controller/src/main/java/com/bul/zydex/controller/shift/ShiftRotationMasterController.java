@@ -15372,9 +15372,9 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                             cell.setCellStyle(styleBold);
                         }
-//                        rownum++;
+                        rownum++;
                     }
-                    if (j > 1) {
+                    if (j > 0) {
                         id = Integer.parseInt("" + allEmpId.get(j - 1));
                         employeeShiftData.setId(id);
                         List<?> list = employeeShiftDataService.empOrDateWiseSearch(employeeShiftData);

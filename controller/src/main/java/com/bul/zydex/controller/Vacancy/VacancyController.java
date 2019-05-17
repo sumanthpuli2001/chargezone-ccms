@@ -480,7 +480,7 @@ public class VacancyController extends VacancyAbstract {
         List<?> vacancylist = vacancyMasterService.fetchVacancyBydate(date);
         mv.getModelMap().put("list", vacancylist);
         mv.getModelMap().put("vacancyMaster", vacancyMaster);
-      request.setAttribute("ApplayJobUserMaster", ajuMaster);
+        request.setAttribute("ApplayJobUserMaster", ajuMaster);
         mv.setViewName("Vacancy/ShowVacancyList");
 //        mv = showVacancyList(request, response);
         return mv;
@@ -638,7 +638,10 @@ public class VacancyController extends VacancyAbstract {
         bind(request, applayJobUserMaster);
 
         String id = request.getParameter("id");
-        int VacId = Integer.parseInt(id);
+        try {
+            int VacId = Integer.parseInt(id);
+        } catch (Exception e) {
+        }
         Random rnd = new Random();
         String otpCode = String.valueOf(100000 + rnd.nextInt(900000));
         Calendar cal = Calendar.getInstance();
@@ -1256,31 +1259,31 @@ public class VacancyController extends VacancyAbstract {
         //experience of candidate 
         String strCED0[] = request.getParameterValues("candidateExperienceDetail.id");
         String strCED1[] = request.getParameterValues("candidateExperienceDetail.experienceYearFrom");
-        String strCED2[] = request.getParameterValues("candidateExperienceDetail.experienceYearTo");
+//        String strCED2[] = request.getParameterValues("candidateExperienceDetail.experienceYearTo");
         String strCED3[] = request.getParameterValues("candidateExperienceDetail.experienceOrganization");
         String strCED4[] = request.getParameterValues("candidateExperienceDetail.experienceDepartment");
         String strCED5[] = request.getParameterValues("candidateExperienceDetail.experienceDesignation");
         String strCED6[] = request.getParameterValues("candidateExperienceDetail.experienceJobResponsibilities");
         String strCED7[] = request.getParameterValues("candidateExperienceDetail.experienceRemunerationOnJoin");
-        String strCED8[] = request.getParameterValues("candidateExperienceDetail.experienceRemunerationOnLeaving");
+
         String strCED9[] = request.getParameterValues("candidateExperienceDetail.experienceReasonForLeaving");
 
         if (null == cedList || cedList.isEmpty()) {
             for (int i = 0; i < strCED1.length; i++) {
                 if ((!strCED1[i].equals("") && !strCED1[i].isEmpty())
-                        && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
+                        && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
                         && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty())
                         && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
-                        && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
+                        && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
                     CandidateExperienceDetail ced = new CandidateExperienceDetail();
                     ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
-                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
+//                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
                     ced.setExperienceOrganization(strCED3[i]);
                     ced.setExperienceDepartment(strCED4[i]);
                     ced.setExperienceDesignation(strCED5[i]);
                     ced.setExperienceJobResponsibilities(strCED6[i]);
                     ced.setExperienceRemunerationOnJoin(strCED7[i]);
-                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
+//                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
                     ced.setExperienceReasonForLeaving(strCED9[i]);
                     ced.setCreatedDate(sdf.format(cdate));
                     ced.setCandidateApplyJob(candidateApplyJob);
@@ -1290,19 +1293,19 @@ public class VacancyController extends VacancyAbstract {
         } else if ((cedList != null || !cedList.isEmpty()) && (strCED1.length == cedList.size())) {
             for (int i = 0; i < strCED1.length; i++) {
                 if ((!strCED0[i].equals("") && !strCED0[i].isEmpty()) && (!strCED1[i].equals("") && !strCED1[i].isEmpty())
-                        && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
+                        && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
                         && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty())
                         && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
-                        && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
+                        && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
                     CandidateExperienceDetail ced = candidateExperienceDetailService.readById(Integer.parseInt(strCED0[i]));
                     ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
-                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
+//                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
                     ced.setExperienceOrganization(strCED3[i]);
                     ced.setExperienceDepartment(strCED4[i]);
                     ced.setExperienceDesignation(strCED5[i]);
                     ced.setExperienceJobResponsibilities(strCED6[i]);
                     ced.setExperienceRemunerationOnJoin(strCED7[i]);
-                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
+//                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
                     ced.setExperienceReasonForLeaving(strCED9[i]);
                     candidateExperienceDetailService.update(ced);
                 }
@@ -1310,38 +1313,38 @@ public class VacancyController extends VacancyAbstract {
         } else {
             for (int i = 0; i < cedList.size(); i++) {
                 if ((!strCED0[i].equals("") && !strCED0[i].isEmpty()) && (!strCED1[i].equals("") && !strCED1[i].isEmpty())
-                        && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
+                        && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
                         && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty())
                         && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
-                        && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
+                        && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
                     CandidateExperienceDetail ced = candidateExperienceDetailService.readById(Integer.parseInt(strCED0[i]));
                     ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
-                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
+//                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
                     ced.setExperienceOrganization(strCED3[i]);
                     ced.setExperienceDepartment(strCED4[i]);
                     ced.setExperienceDesignation(strCED5[i]);
                     ced.setExperienceJobResponsibilities(strCED6[i]);
                     ced.setExperienceRemunerationOnJoin(strCED7[i]);
-                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
+//                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
                     ced.setExperienceReasonForLeaving(strCED9[i]);
                     candidateExperienceDetailService.update(ced);
                 }
             }
             for (int i = cedList.size() + 1; i < strCED1.length; i++) {
                 if ((!strCED1[i].equals("") && !strCED1[i].isEmpty())
-                        && (!strCED2[i].equals("") && !strCED2[i].isEmpty()) && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
+                        && (!strCED3[i].equals("") && !strCED3[i].isEmpty())
                         && (!strCED4[i].equals("") && !strCED4[i].isEmpty()) && (!strCED5[i].equals("") && !strCED5[i].isEmpty())
                         && (!strCED6[i].equals("") && !strCED6[i].isEmpty()) && (!strCED7[i].equals("") && !strCED7[i].isEmpty())
-                        && (!strCED8[i].equals("") && !strCED8[i].isEmpty()) && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
+                        && (!strCED9[i].equals("") && !strCED9[i].isEmpty())) {
                     CandidateExperienceDetail ced = new CandidateExperienceDetail();
                     ced.setExperienceYearFrom(Integer.parseInt(strCED1[i]));
-                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
+//                    ced.setExperienceYearTo(Integer.parseInt(strCED2[i]));
                     ced.setExperienceOrganization(strCED3[i]);
                     ced.setExperienceDepartment(strCED4[i]);
                     ced.setExperienceDesignation(strCED5[i]);
                     ced.setExperienceJobResponsibilities(strCED6[i]);
                     ced.setExperienceRemunerationOnJoin(strCED7[i]);
-                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
+//                    ced.setExperienceRemunerationOnLeaving(strCED8[i]);
                     ced.setExperienceReasonForLeaving(strCED9[i]);
                     ced.setCreatedDate(sdf.format(cdate));
                     ced.setCandidateApplyJob(candidateApplyJob);
@@ -1497,8 +1500,8 @@ public class VacancyController extends VacancyAbstract {
             applayJobUserMasterSerivce.update(ajuMaster);
         }
 
-        request.setAttribute("successMessage",
-                "Information : The Candidate Registration Information is Updated Successfully.Now you can Apply Vacancy.");
+        request.setAttribute("successMessage1",
+                "Information : Your Profile is Saved,Now you can Apply for Job.");
 
         request.setAttribute("caqList", caqList);
         request.setAttribute("cedList", cedList);
@@ -2124,12 +2127,15 @@ public class VacancyController extends VacancyAbstract {
         long data = endDate.getTime() - startDate.getTime();
 
         if (applayJobUserMaster != null && !"".equals(applayJobUserMaster)) {
-            if (data < 600000) {
+            if (data < 900000) {
                 if (otp.equals(applayJobUserMaster.getOtp())) {
                     applayJobUserMaster.setStatusOtp(1);
                     applayJobUserMasterSerivce.update(applayJobUserMaster);
+                    try {
+                        vacancyMaster = vacancyMasterService.readById(Integer.parseInt(vacid));
+                    } catch (Exception e) {
+                    }
 
-                    vacancyMaster = vacancyMasterService.readById(Integer.parseInt(vacid));
                     HttpSession session = request.getSession();
 //                         ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
 //                    ApplayJobUserMaster ajuMaster = (ApplayJobUserMaster) session.getAttribute("ApplayJobUserMaster");
@@ -2140,32 +2146,68 @@ public class VacancyController extends VacancyAbstract {
                         if (!candidateProfile.isEmpty()) {
 
                             CandidateApplyJob caj = (CandidateApplyJob) candidateProfile.get(0);
+                            try {
 
-                            CandidateJobApplication application = candidateJobApplicationService.readByCandidateIdAndVacancyId(caj.getId(), vacancyMaster.getId());
-                            if (null == application) {
+                                CandidateJobApplication application = candidateJobApplicationService.readByCandidateIdAndVacancyId(caj.getId(), vacancyMaster.getId());
+                                if (null == application) {
 
-                                CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
-                                candidateJobApplication.setVacancyMaster(vacancyMaster);
-                                candidateJobApplication.setApplayJobUserMaster(applayJobUserMaster);
-                                candidateJobApplication.setCreatedBy(applayJobUserMaster.getId());
-                                candidateJobApplication.setCreatedDate(sdf.format(endDate));
-                                candidateJobApplication.setStatus(0);
+                                    CandidateJobApplication candidateJobApplication = new CandidateJobApplication();
+                                    candidateJobApplication.setVacancyMaster(vacancyMaster);
+                                    candidateJobApplication.setApplayJobUserMaster(applayJobUserMaster);
+                                    candidateJobApplication.setCreatedBy(applayJobUserMaster.getId());
+                                    candidateJobApplication.setCreatedDate(sdf.format(endDate));
+                                    candidateJobApplication.setStatus(0);
 
-                                candidateJobApplication.setCandidateApplyJob(caj);
+                                    candidateJobApplication.setCandidateApplyJob(caj);
 
-                                candidateJobApplicationService.create(candidateJobApplication);
+                                    candidateJobApplicationService.create(candidateJobApplication);
 
-                                List<?> CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
+                                    List<?> CandidateJobApplyList = candidateJobApplicationService.readByCandidateId(caj.getId());
 
-                                request.setAttribute("list", CandidateJobApplyList);
+                                    request.setAttribute("list", CandidateJobApplyList);
 //                                mv.getModelMap().put("ajuMaster", ajuMaster);
+                                    HttpSession session1 = request.getSession(false);
+                                    session1.setAttribute("ApplayJobUserMaster", applayJobUserMaster);
+                                    try {
+                                        EmailTemplate emailTemplate = new EmailTemplate();
+                                        emailTemplate = emailTemplateService.readById(160);
+                                        String To = applayJobUserMaster.getUserName();
+                                        String Subject = emailTemplate.getSubject();
+                                        String msg = emailTemplate.getBodytext().replaceAll("&Acirc;", "");
+                                        msg = msg.replaceAll("\\{to_user\\}", applayJobUserMaster.getUserName());
+                                        msg = msg.replaceAll("\\{to_userName\\}", applayJobUserMaster.getUserName());
+                                        msg = msg.replaceAll("\\{to_pasword\\}", applayJobUserMaster.getPassword());
+                                        sendMail.sendMail("", To, Subject, msg);
+                                    } catch (Exception e1) {
+
+                                    }
+
+                                    String forward = "forward:vacancy.htm?act=myProfileClick&id=" + applayJobUserMaster.getId();
+                                    mv.setViewName(forward);
+                                    return mv;
+
+                                }
+
+                            } catch (Exception e) {
+
                                 HttpSession session1 = request.getSession(false);
                                 session1.setAttribute("ApplayJobUserMaster", applayJobUserMaster);
+                                try {
+                                    EmailTemplate emailTemplate = new EmailTemplate();
+                                    emailTemplate = emailTemplateService.readById(160);
+                                    String To = applayJobUserMaster.getUserName();
+                                    String Subject = emailTemplate.getSubject();
+                                    String msg = emailTemplate.getBodytext().replaceAll("&Acirc;", "");
+                                    msg = msg.replaceAll("\\{to_user\\}", applayJobUserMaster.getUserName());
+                                    msg = msg.replaceAll("\\{to_userName\\}", applayJobUserMaster.getUserName());
+                                    msg = msg.replaceAll("\\{to_pasword\\}", applayJobUserMaster.getPassword());
+                                    sendMail.sendMail("", To, Subject, msg);
+                                } catch (Exception e1) {
 
+                                }
                                 String forward = "forward:vacancy.htm?act=myProfileClick&id=" + applayJobUserMaster.getId();
                                 mv.setViewName(forward);
                                 return mv;
-
                             }
 
 //                            else {
@@ -2182,6 +2224,8 @@ public class VacancyController extends VacancyAbstract {
 //                            }
                         }
                     }
+                    String forward = "forward:vacancy.htm?act=myProfileClick&id=" + applayJobUserMaster.getId();
+                    mv.setViewName(forward);
                     return mv;
 //                        return new ModelAndView("Vacancy/ApplayLoginpage", "applayJobUserMaster", applayJobUserMaster);
 //                    mv = backToHomeVacancyList(request, response);

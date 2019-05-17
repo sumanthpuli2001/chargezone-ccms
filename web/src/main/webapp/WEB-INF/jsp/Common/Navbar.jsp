@@ -61,7 +61,7 @@
                 </c:if>
                
 
-<!--                    <li class="treeview" style="color: #585858;">
+                    <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
                             <i class="fa fa-user fa-lg" style="color: #585858;"></i>
                             <span style="color: #585858;">Recruitment</span>
@@ -100,7 +100,7 @@
                                 <li><a href="vacancy.htm?act=vacancyShowByApprove"><i class="fa fa-circle-o"></i>Vacancy Approval</a></li>
                                 </c:if>
                         </ul>
-                    </li>-->
+                    </li>
 
                
                 <c:if test="${sessionScope.userRight.employeeManagement}">

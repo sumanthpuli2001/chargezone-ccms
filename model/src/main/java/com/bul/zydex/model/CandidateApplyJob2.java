@@ -55,12 +55,16 @@ public class CandidateApplyJob2 implements Serializable {
     private String salaryBreakupTotal;
     private String salarySlipAttachment;
     private String createdDate;
+    private Integer friend;
+    private Integer naukri;
+    private Integer indeed;
+    private Integer other;
     private CandidateApplyJob candidateApplyJob;
 
     public CandidateApplyJob2() {
     }
 
-    public CandidateApplyJob2(String lastName, String postAppliedFor, String residentPhoneNumber, String religion, String height, String weight, String physicalDamageOrDiseases, String criminalCaseBackground, String insurancePolicyNumber, String drivingLicenceNumber, String anyRelativeInSPCL, Integer readEnglish, Integer writeEnglish, Integer speakEnglish, Integer readHindi, Integer writeHindi, Integer speakHindi, Integer readGujarati, Integer writeGujarati, Integer speakGujarati, Integer smokingHabit, Integer chewingHabit, Integer tobaccoHabit, Integer otherHabit, String salaryExpected, String noticePeriod, Integer esicStatus, Integer pfStatus, String esicNumber, String pfNumber, String salaryBreakupBasic, String salaryBreakupDaVdaSdAll, String salaryBreakupHRA, String salaryBreakupConveyanceAll, String salaryBreakupLTA, String salaryBreakupMED, String salaryBreakupBonus, String salaryBreakupOther, String salaryBreakupTotal, String salarySlipAttachment, String createdDate, CandidateApplyJob candidateApplyJob) {
+    public CandidateApplyJob2(String lastName, String postAppliedFor, String residentPhoneNumber, String religion, String height, String weight, String physicalDamageOrDiseases, String criminalCaseBackground, String insurancePolicyNumber, String drivingLicenceNumber, String anyRelativeInSPCL, Integer readEnglish, Integer writeEnglish, Integer speakEnglish, Integer readHindi, Integer writeHindi, Integer speakHindi, Integer readGujarati, Integer writeGujarati, Integer speakGujarati, Integer smokingHabit, Integer chewingHabit, Integer tobaccoHabit, Integer otherHabit, String salaryExpected, String noticePeriod, Integer esicStatus, Integer pfStatus, String esicNumber, String pfNumber, String salaryBreakupBasic, String salaryBreakupDaVdaSdAll, String salaryBreakupHRA, String salaryBreakupConveyanceAll, String salaryBreakupLTA, String salaryBreakupMED, String salaryBreakupBonus, String salaryBreakupOther, String salaryBreakupTotal, String salarySlipAttachment, String createdDate, CandidateApplyJob candidateApplyJob,Integer friend,Integer naukri,Integer indeed,Integer other) {
         this.lastName = lastName;
         this.postAppliedFor = postAppliedFor;
         this.residentPhoneNumber = residentPhoneNumber;
@@ -103,9 +107,12 @@ public class CandidateApplyJob2 implements Serializable {
         this.salarySlipAttachment = salarySlipAttachment;
         this.createdDate = createdDate;
         this.candidateApplyJob = candidateApplyJob;
+        this.friend = friend;
+        this.naukri = naukri;
+        this.indeed = indeed;
+        this.other = other;
     }
 
-    
     public Integer getId() {
         return id;
     }
@@ -130,7 +137,6 @@ public class CandidateApplyJob2 implements Serializable {
         this.postAppliedFor = postAppliedFor;
     }
 
-    
     public String getResidentPhoneNumber() {
         return residentPhoneNumber;
     }
@@ -235,7 +241,6 @@ public class CandidateApplyJob2 implements Serializable {
         this.speakGujarati = speakGujarati;
     }
 
-    
     public String getPhysicalDamageOrDiseases() {
         return physicalDamageOrDiseases;
     }
@@ -322,7 +327,7 @@ public class CandidateApplyJob2 implements Serializable {
 
     public void setPfStatus(Integer pfStatus) {
         this.pfStatus = pfStatus;
-    } 
+    }
 
     public String getSalaryExpected() {
         return salaryExpected;
@@ -339,8 +344,6 @@ public class CandidateApplyJob2 implements Serializable {
     public void setNoticePeriod(String noticePeriod) {
         this.noticePeriod = noticePeriod;
     }
-
-    
 
     public String getEsicNumber() {
         return esicNumber;
@@ -454,6 +457,37 @@ public class CandidateApplyJob2 implements Serializable {
         this.candidateApplyJob = candidateApplyJob;
     }
 
+    public Integer getFriend() {
+        return friend;
+    }
+
+    public void setFriend(Integer friend) {
+        this.friend = friend;
+    }
+
+    public Integer getNaukri() {
+        return naukri;
+    }
+
+    public void setNaukri(Integer naukri) {
+        this.naukri = naukri;
+    }
+
+    public Integer getIndeed() {
+        return indeed;
+    }
+
+    public void setIndeed(Integer indeed) {
+        this.indeed = indeed;
+    }
+
+    public Integer getOther() {
+        return other;
+    }
+
+    public void setOther(Integer other) {
+        this.other = other;
+    }
     
-    
+
 }

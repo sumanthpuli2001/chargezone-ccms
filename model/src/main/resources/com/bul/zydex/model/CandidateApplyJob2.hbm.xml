@@ -172,6 +172,19 @@
             <column name="created_date" />
         </property>
         
+        <property name="friend" type="java.lang.Integer">
+            <column name="friend" />
+        </property>
+        <property name="naukri" type="java.lang.Integer">
+            <column name="naukri" />
+        </property>
+        <property name="indeed" type="java.lang.Integer">
+            <column name="indeed" />
+        </property>
+        <property name="other" type="java.lang.Integer">
+            <column name="other" />
+        </property>
+        
         <many-to-one name="candidateApplyJob" class="com.bul.zydex.model.CandidateApplyJob" fetch="select">
             <column name="candidate_apply_job_id" not-null="true"/>
         </many-to-one>

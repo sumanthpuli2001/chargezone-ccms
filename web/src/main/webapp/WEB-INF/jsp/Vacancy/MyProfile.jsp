@@ -347,32 +347,32 @@
                             </table>
                             </br>
                         </div>
-<!--                        <div class="col-sm-7">
-                            <table class="table-bordered" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: left">Post Applied For<span style="color: red;font-size: 12px;"> *</span></th>
-                                    </tr>
-                                </thead>
-                                <%--<c:if test="${empty candidateJobApplyNAmeList}">--%>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                <%--<form:input path="candidateApplyJob2.postAppliedFor" class="form-control" placeholder="Enter Applied Post" required="true"></form:input>--%>
+                        <!--                        <div class="col-sm-7">
+                                                    <table class="table-bordered" style="width:100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="text-align: left">Post Applied For<span style="color: red;font-size: 12px;"> *</span></th>
+                                                            </tr>
+                                                        </thead>
+                        <%--<c:if test="${empty candidateJobApplyNAmeList}">--%>
+                            <tbody>
+                                <tr>
+                                    <td>
+                        <%--<form:input path="candidateApplyJob2.postAppliedFor" class="form-control" placeholder="Enter Applied Post" required="true"></form:input>--%>
 </td>
-                                            </tr>
-                                        </tbody>
-                                <%--</c:if>--%>
-                                <%--<c:if test="${!empty candidateJobApplyNAmeList}">--%>
-                                    <tbody>
-                                        <tr>
-                                            <td><input value="${jobprofileName}" class="form-control" placeholder="Enter Applied Post" required="true"></input></td>
-                                        </tr>
-                                    </tbody>
-                                <%--</c:if>--%>
-                            </table>
-                            </br>
-                        </div>-->
+                                    </tr>
+                                </tbody>
+                        <%--</c:if>--%>
+                        <%--<c:if test="${!empty candidateJobApplyNAmeList}">--%>
+                            <tbody>
+                                <tr>
+                                    <td><input value="${jobprofileName}" class="form-control" placeholder="Enter Applied Post" required="true"></input></td>
+                                </tr>
+                            </tbody>
+                        <%--</c:if>--%>
+                    </table>
+                    </br>
+                </div>-->
                     </div>
 
                     <div class="col-sm-12">
@@ -416,39 +416,39 @@
                                         <form:radiobutton  path="candidateApplyJob.sex" id="sexFemale" value="true" required="true"/>Female
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>Your D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
-
-                            <div class="input-group form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                <td>
-                                    <form:input path="candidateApplyJob.dob" class="form-control" id="datepicker" placeholder="Select Your D.O.B" readonly="true" required="true"></form:input>
-                                    </td>
-                                </div>
-                                </tr>
-                                <tr>
-                                    <th>Father D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
-                                <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                    <td><form:input path="candidateApplyJob.fatherDob" id="datepicker45" class="form-control" size="16" placeholder="dd/MM/yyyy" readonly="true" required="true"></form:input>
-                                </div>
-                                </tr>
-                                <tr>
-                                    <th>Father Name<span style="color: red;font-size: 12px;"> *</span></th>
-                                    <td><form:input path="candidateApplyJob.fatherName" class="form-control" placeholder="Enter Father Name" required="true"></form:input></td>
-                                </tr>
-                                <tr>
-                                    <th>Mother Name<span style="color: red;font-size: 12px;"> *</span></th>
-                                    <td><form:input path="candidateApplyJob.motherName" class="form-control" placeholder="Enter Mother Name" required="true"></form:input></td>
-                                </tr>
-                                <tr>
-                                <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                    <th>Mother D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
-                                    <td><form:input path="candidateApplyJob.motherDob" id="datepicker46"  class="form-control" size="16" placeholder="Select Mother's D.O.B" readonly="true" required="true"></form:input></td>
-                                </div>
-                                </tr>
-                                <tr>
-                                    <th>Blood Group<span style="color: red;font-size: 12px;"> *</span></th>
-                                    <td>
-                                    <form:select path="candidateApplyJob.bloodGroup" id="bloodGroups" class="form-control" required="true">
+                                <!--                                <tr>
+                                                                    <th>Your D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
+                                
+                                                            <div class="input-group form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                <td>
+                                <form:input path="candidateApplyJob.dob" class="form-control" id="datepicker" placeholder="Select Your D.O.B" readonly="true" required="true"></form:input>
+                                </td>
+                            </div>
+                            </tr>-->
+                                    <!--                                <tr>
+                                                                        <th>Father D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                    <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                        <td><form:input path="candidateApplyJob.fatherDob" id="datepicker45" class="form-control" size="16" placeholder="dd/MM/yyyy" readonly="true" required="true"></form:input>
+                                                                    </div>
+                                                                    </tr>-->
+                                    <!--                                <tr>
+                                                                        <th>Father Name<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                        <td><form:input path="candidateApplyJob.fatherName" class="form-control" placeholder="Enter Father Name" required="true"></form:input></td>
+                                                                    </tr>
+                                                                    <tr>-->
+                                    <!--                                    <th>Mother Name<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                        <td><form:input path="candidateApplyJob.motherName" class="form-control" placeholder="Enter Mother Name" required="true"></form:input></td>
+                                                                    </tr>-->
+                                    <!--                                <tr>
+                                                                    <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                        <th>Mother D.O.B<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                        <td><form:input path="candidateApplyJob.motherDob" id="datepicker46"  class="form-control" size="16" placeholder="Select Mother's D.O.B" readonly="true" required="true"></form:input></td>
+                                                                    </div>
+                                                                    </tr>-->
+                                    <tr>
+                                        <th>Blood Group<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <td>
+                                        <form:select path="candidateApplyJob.bloodGroup" id="bloodGroups" class="form-control" required="true">
                                 <option value="">--Select--</option>
                                 <form:option value="A +ve">A+</form:option>
                                 <form:option value="A -ve">A-</form:option>
@@ -461,18 +461,18 @@
                             </form:select>
                             </td>
                             </tr>
-                            <tr>
-                                <th>Height<span style="color: red;font-size: 12px;"> *</span></th>
-                                <td><form:input path="candidateApplyJob2.height" class="form-control" placeholder="Enter Height" required="true"></form:input></td>
-                                </tr>
-                                <tr>
-                                    <th>Weight<span style="color: red;font-size: 12px;"> *</span></th>
-                                    <td><form:input path="candidateApplyJob2.weight" class="form-control" placeholder="Enter Weight" required="true"></form:input></td>
-                                </tr>
-                                <tr>
-                                    <th>Religion<span style="color: red;font-size: 12px;"> *</span></th>
-                                    <td><form:input path="candidateApplyJob2.religion" class="form-control" placeholder="Enter Religion" required="true"></form:input></td>
-                                </tr>
+                            <!--                            <tr>
+                                                            <th>Height<span style="color: red;font-size: 12px;"> *</span></th>
+                                                            <td><form:input path="candidateApplyJob2.height" class="form-control" placeholder="Enter Height" required="true"></form:input></td>
+                                                            </tr>-->
+                                <!--                                <tr>
+                                                                    <th>Weight<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                    <td><form:input path="candidateApplyJob2.weight" class="form-control" placeholder="Enter Weight" required="true"></form:input></td>
+                                                                </tr>-->
+                                <!--                                <tr>
+                                                                    <th>Religion<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                    <td><form:input path="candidateApplyJob2.religion" class="form-control" placeholder="Enter Religion" required="true"></form:input></td>
+                                                                </tr>-->
                                 <tr>
                                     <th>Marital Status<span style="color: red;font-size: 12px;"> *</span></th>
                                     <td style="text-align:left">
@@ -539,18 +539,18 @@
                                         <th>Personal Contact No<span style="color: red;font-size: 12px;"> *</span></th>
                                         <td><form:input type="number" min="0" path="candidateApplyJob.contactNo" placeholder="Enter Contact No" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input></td>
                                     </tr>
-                                    <tr>
-                                        <th>Residential Contact No<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.residentPhoneNumber" class="form-control" placeholder="Enter Residential Contact No" required="true"></form:input></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Emergency Contact Person<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <td><form:input path="candidateApplyJob.emergencyContactPerson" class="form-control" placeholder="Enter Emergency contact Person" required="true"></form:input></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Emergency Contact No<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob.emergencyContactNo" class="form-control" placeholder="Enter Emergency Contact No" required="true"></form:input></td>
-                                    </tr>
+                                    <!--                                    <tr>
+                                                                            <th>Residential Contact No<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                            <td><form:input type="number" min="0" path="candidateApplyJob2.residentPhoneNumber" class="form-control" placeholder="Enter Residential Contact No" required="true"></form:input></td>
+                                                                        </tr>-->
+                                    <!--                                    <tr>
+                                                                            <th>Emergency Contact Person<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                            <td><form:input path="candidateApplyJob.emergencyContactPerson" class="form-control" placeholder="Enter Emergency contact Person" required="true"></form:input></td>
+                                                                        </tr>-->
+                                    <!--                                    <tr>
+                                                                            <th>Emergency Contact No<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                            <td><form:input type="number" min="0" path="candidateApplyJob.emergencyContactNo" class="form-control" placeholder="Enter Emergency Contact No" required="true"></form:input></td>
+                                                                        </tr>-->
                                 </tbody>
                             </table>
                             </br>
@@ -587,44 +587,257 @@
                             <table class="table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th colspan="2">Other Details</th>
+                                        <th colspan="2">CTC Details</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <th>Any Relative in SPCL ?<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <td><form:input path="candidateApplyJob2.anyRelativeInSPCL" class="form-control" placeholder="Tell us about it" required="true"></form:input></td>
+                                        <th>Current CTC:<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <td><form:input path="candidateApplyJob2.anyRelativeInSPCL" class="form-control" placeholder="Current CTC" required="true"></form:input></td>
                                     </tr>
                                     <tr>
-                                        <th>Any Physical Damage or Diseases ?<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <td><form:input path="candidateApplyJob2.physicalDamageOrDiseases" class="form-control" placeholder="Tell us about it" required="true"></form:input></td>
+                                        <th>Current CTC(On Hand):<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <td><form:input path="candidateApplyJob2.physicalDamageOrDiseases" class="form-control" placeholder="Current CTC(On Hand)" required="true"></form:input></td>
                                     </tr>
                                     <tr>
-                                        <th>Criminal Case Background ?<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <td><form:input path="candidateApplyJob2.criminalCaseBackground" class="form-control" placeholder="Tell us about it" required="true"></form:input></td>
+                                        <th>Expected CTC:<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <td><form:input path="candidateApplyJob2.criminalCaseBackground" class="form-control" placeholder="Expected CTC" required="true"></form:input></td>
                                     </tr>
                                     <tr>
-                                        <th>Insurance Policy No</th>
-                                        <td><form:input path="candidateApplyJob2.insurancePolicyNumber" class="form-control" placeholder="Enter Insurance Policy No"></form:input></td>
+                                        <th>Expected CTC(On Hand):</th>
+                                        <td><form:input path="candidateApplyJob2.insurancePolicyNumber" class="form-control" placeholder="Expected CTC(On Hand)"></form:input></td>
                                     </tr>
                                     <tr>
-                                        <th>Driving Liecence No<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <td><form:input path="candidateApplyJob2.drivingLicenceNumber" class="form-control" placeholder="Enter Driving Licence No" required="true"></form:input></td>
+                                        <th>No. of years of commitment you can give:<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <td><form:input path="candidateApplyJob2.drivingLicenceNumber" class="form-control" placeholder="No. of Years" required="true"></form:input></td>
                                     </tr>
                                 </tbody>
                             </table>
                             </br>
                         </div>
+                                      <div class="col-sm-12">
+                        </br>
+                        <table class="table-bordered" style="width:100%">
+                            <thead>
+                                
+                            </thead>
+                            <tbody>
+                                
+                            <div>
+                                <tr>
+                                <th>Reference Source :<span style="color: red;font-size: 12px;"> *</span></th>
+                                <td style="text-align:left">
+                                    <form:checkbox path="candidateApplyJob2.friend" id="friend"  value="1"/>Friend &emsp;
+                                    <form:checkbox path="candidateApplyJob2.naukri" id="naukri"  value="1"/>Naukri &emsp;
+                                    <form:checkbox path="candidateApplyJob2.indeed" id="indeed"  value="1"/>Indeed &nbsp;
+                                    <form:checkbox path="candidateApplyJob2.other" id="other"  value="1"/>Other
+                                </td>
+                            </tr>
+                                
+                            
+                                </tbody>
+                            </table>
+                            </br>
+                        </div>           
+                                         <div class="col-sm-12">
+                        </br>
+                        <table class="table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Please Rate Yourself Out Of ‘10’ For Following Skills</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            <div>
+                                <tr>
+                                    <th>Accounting:</th>
+                                    <td><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupOther" class="form-control" placeholder=""></form:input></td>
+                                    </tr>
+                                </div>
+                                <!--                                <tr>
+                                                                    <th>PF<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                    <td style="text-align: left" id="pfStatusTd">
+                            <form:radiobutton path="candidateApplyJob2.pfStatus" name="pfStatus" id="pfStatus1" value="1" required="true"/>Yes 
+                            <form:radiobutton path="candidateApplyJob2.pfStatus" name="pfStatus" id="pfStatus0" value="0" required="true"/>No
+                        </td>
+                    </tr>-->
+                            <tr>
+                            <div id="trPfNo">
+                                <th>Loyalty:</th>
+                                <td><span style="color: red;font-size: 12px;"> *</span><form:input type="number" min="0" path="candidateApplyJob2.salaryBreakupTotal" class="form-control" placeholder=""></form:input></td>
+                                </div>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </br>
+                        </div>  
+                            
+                            
+                            
+                             <div class="col-sm-12">
+                        </br>
+                        <table class="table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">3 Qualities Which Make You Different / Outstanding Than Other:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            <div>
+                                <tr>
+                                    <th>Professional:</th>
+                                    <td><form:textarea type="text" min="0" path="candidateApplyJob2.salaryBreakupBasic" class="form-control" placeholder=""></form:textarea></td>
+                                    </tr>
+                                </div>
+                              
+                            <tr>
+                            <div >
+                                <th>Personal:</th>
+                                <td><span style="color: red;font-size: 12px;"> *</span><form:textarea type="text" min="0" path="candidateApplyJob2.salaryBreakupDaVdaSdAll" class="form-control" placeholder=""></form:textarea></td>
+                                </div>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </br>
+                        </div> 
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                                    
+                                     <div class="col-sm-12">
+                        </br>  
+                        <center>
+                            <h3>Please Rate Yourself Out Of ‘10’ For Following Skills(English)</h3>
+                        </center>
+                        </br>
+                    </div>  
 
-                        <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <table class="table-bordered" style="width:100%">
+                            <thead>
+                                <tr style="text-align:center">
+                                    <th rowspan="2" style="text-align:center">Speaking</th>
+                                    <th rowspan="2" style="text-align:center">Writing</th>
+                                    <th rowspan="2" style="text-align:center">Reading</th>
+                                    <th rowspan="2" style="text-align:center">Leadership</th>
+                                    <th rowspan="2" style="text-align:center">Responsible</th>
+                                    <th rowspan="2" style="text-align:center">Confident</th>
+                                    <th rowspan="2" style="text-align:center">Honest</th>
+                                    <!--<th style="text-align:center"><button type="button" id="buttonExperience" class="btn btn-flat" style="width: 50px;" data-original-title="" title="" > + </button></th>-->
+                                </tr>
+                                
+                            </thead>
+                            <tbody id="tbodyExperience">
+                                <c:choose>
+                                    <c:when test="${empty cedList}">
+                                        <tr>
+                                    <input type="hidden" name="countId" id="countId" value="1">
+                                    <td><input type="number" min="0" name="candidateExperienceDetail.experienceYearFrom" class="form-control" placeholder=""/></td>
+                                    <!--<td><input type="number" min="0" name="candidateExperienceDetail.experienceYearTo" class="form-control" placeholder="Year To"/></td>-->
+                                    <td><input type="number" min="0" name="candidateExperienceDetail.experienceOrganization" class="form-control" placeholder=""/></td>
+                                    <td><input  type="number" min="0"name="candidateExperienceDetail.experienceDepartment" class="form-control" placeholder=""/></td>
+                                    <td><input type="number" min="0" name="candidateExperienceDetail.experienceDesignation" class="form-control" placeholder=""/></td>
+                                    <td><input type="number" min="0" name="candidateExperienceDetail.experienceJobResponsibilities" class="form-control" placeholder=""/></td>
+                                    <td><input type="number" min="0" name="candidateExperienceDetail.experienceRemunerationOnJoin" class="form-control" placeholder=""/></td>
+                                    <!--<td><input type="number" min="0" name="candidateExperienceDetail.experienceRemunerationOnLeaving" class="form-control" placeholder=""/></td>-->
+                                    <td><input type="number" min="0" name="candidateExperienceDetail.experienceReasonForLeaving" class="form-control" placeholder=""/></td>
+                                    </tr>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach items="${cedList}" var="list">
+                                        <tr>
+                                        <input type="hidden" name="countId" id="countId" value="1">
+                                        <input type="hidden" min="0" name="candidateExperienceDetail.id" class="form-control" value="${list.id}"/>
+                                        <td><input type="number" min="0" name="candidateExperienceDetail.experienceYearFrom" class="form-control" value="${list.experienceYearFrom}"/></td>
+                                        <!--<td><input type="number" min="0" name="candidateExperienceDetail.experienceYearTo" class="form-control" value="${list.experienceYearTo}"/></td>-->
+                                        <td><input type="number" min="0" name="candidateExperienceDetail.experienceOrganization" class="form-control" value="${list.experienceOrganization}"/></td>
+                                        <td><input type="number" min="0" name="candidateExperienceDetail.experienceDepartment" class="form-control" value="${list.experienceDepartment}"/></td>
+                                        <td><input type="number" min="0" name="candidateExperienceDetail.experienceDesignation" class="form-control" value="${list.experienceDesignation}"/></td>
+                                        <td><input type="number" min="0" name="candidateExperienceDetail.experienceJobResponsibilities" class="form-control" value="${list.experienceJobResponsibilities}"/></td>
+                                        <td><input type="number" min="0" name="candidateExperienceDetail.experienceRemunerationOnJoin" class="form-control" value="${list.experienceRemunerationOnJoin}"/></td>
+                                        <!--<td><input type="number" min="0" name="candidateExperienceDetail.experienceRemunerationOnLeaving" class="form-control" value="${list.experienceRemunerationOnLeaving}"/></td>-->
+                                        <td><input type="number" min="0" name="candidateExperienceDetail.experienceReasonForLeaving" class="form-control" value="${list.experienceReasonForLeaving}"/></td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+                            </tbody>
+                        </table>
+                    </div>                      
+
+                    <div class="col-sm-12">
+                        </br>  
+                        <center>
+                            <h3>Please Rate Yourself Out Of ‘10’ For Following Skills(Excel)</h3>
+                        </center>
+                        </br>
+                    </div>   
+
+                    <div class="col-sm-12">
+                        <table class="table-bordered" style="width:100%">
+                            <thead>
+                                <tr style="text-align:center">
+                                    <th style="text-align:center">Basic</th>
+                                    <th style="text-align:center">V Look Up</th>
+                                    <th style="text-align:center">Pivot Table</th>
+                                    <th style="text-align:center">Punctual</th>
+                                    <th style="text-align:center">Team work</th>
+                                    <th style="text-align:center">Positive</th>
+                                    <!--<th style="text-align:center"><button type="button" id="buttonFamilyBackground" class="btn btn-flat" style="width: 50px;" data-original-title="" title="" > + </button></th>-->
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyFamilyBackground">
+                                <c:choose>
+                                    <c:when test="${empty cfbList}">
+                                        <tr>
+                                    <input type="hidden" name="countId" id="countId" value="1">
+                                    <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberName" class="form-control" placeholder=""/></td>
+                                    <td><input type="number" min="0" name="candidateFamilyBackground.relationWithFamilyMember" class="form-control" placeholder=""/></td>
+                                    <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberAge" class="form-control" placeholder=""/></td>
+                                    <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberQualification" class="form-control" placeholder=""/></td>
+                                    <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberDesignationOccupation" class="form-control" placeholder=""/></td>
+                                    <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberMonthlyIncome" class="form-control" placeholder=""/></td>
+                                    </tr>
+                                </c:when>
+                                <c:otherwise>
+                                    <c:forEach items="${cfbList}" var="list">
+                                        <tr>
+                                        <input type="hidden" name="countId" id="countId" value="1">
+                                        <input type="hidden" min="0" name="candidateFamilyBackground.id" class="form-control" value="${list.id}"/>
+                                        <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberName" class="form-control" value="${list.familyMemberName}"/></td>
+                                        <td><input type="number" min="0" name="candidateFamilyBackground.relationWithFamilyMember" class="form-control" value="${list.relationWithFamilyMember}"/></td>
+                                        <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberAge" class="form-control" value="${list.familyMemberAge}"/></td>
+                                        <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberQualification" class="form-control" value="${list.familyMemberQualification}"/></td>
+                                        <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberDesignationOccupation" class="form-control" value="${list.familyMemberDesignationOccupation}"/></td>
+                                        <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberMonthlyIncome" class="form-control" value="${list.familyMemberMonthlyIncome}"/></td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:otherwise>
+                            </c:choose>
+                            </tbody>
+                        </table>
+                    </div>       
+
+<!--                        <div class="col-sm-12">
                             </br>  
                             <center>
                                 <h3>Past Salary Information</h3>
                             </center>
                             </br>
-                        </div>       
+                        </div>       -->
 
-                        <div class="col-sm-12">
+<!--                        <div class="col-sm-12">
                             <table class="table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
@@ -695,7 +908,42 @@
                             </tbody>
                         </table>
                         </br>
-                    </div>    
+                    </div>    -->
+                                    
+                                    
+                         <div class="col-sm-12">
+                        </br>
+                        <table class="table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Goals:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            <div>
+                                <tr>
+                                    <th>Long term:  5 years </th>
+                                    <td><form:input type="text"  path="candidateApplyJob2.salaryBreakupHRA" class="form-control" placeholder=""></form:input></td>
+                                    </tr>
+                                </div>
+                                <!--                                <tr>
+                                                                    <th>PF<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                    <td style="text-align: left" id="pfStatusTd">
+                            <form:radiobutton path="candidateApplyJob2.pfStatus" name="pfStatus" id="pfStatus1" value="1" required="true"/>Yes 
+                            <form:radiobutton path="candidateApplyJob2.pfStatus" name="pfStatus" id="pfStatus0" value="0" required="true"/>No
+                        </td>
+                    </tr>-->
+                            <tr>
+                            <div id="trPfNo">
+                                <th>Short term:  2 years</th>
+                                <td><span style="color: red;font-size: 12px;"> *</span><form:input type="text"  path="candidateApplyJob2.salaryBreakupConveyanceAll" class="form-control" placeholder=""></form:input></td>
+                                </div>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </br>
+                        </div>           
 
                     <div class="col-sm-12">
                         </br>
@@ -707,7 +955,7 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th>ESIC<span style="color: red;font-size: 12px;"> *</span></th>
+                                    <th>Can You Join Immediate:<span style="color: red;font-size: 12px;"> *</span></th>
                                     <td style="text-align: left" id="esicStatusTd">
                                         <form:radiobutton path="candidateApplyJob2.esicStatus" name="esicStatus" id="esicStatus1" value="1" required="true"/>Yes
                                         <form:radiobutton path="candidateApplyJob2.esicStatus" name="esicStatus" id="esicStatus0" value="0" required="true"/>No
@@ -715,45 +963,53 @@
                                 </tr>
                             <div id="trEsicNo">
                                 <tr>
-                                    <th>ESIC No</th>
-                                    <td><form:input type="number" min="0" path="candidateApplyJob2.esicNumber" class="form-control" placeholder="Enter ESIC No"></form:input></td>
+                                    <th>Possibility Of Having Less Notice Period:</th>
+                                    <td><form:input type="number" min="0" path="candidateApplyJob2.esicNumber" class="form-control" placeholder=""></form:input></td>
                                     </tr>
                                 </div>
-                                <tr>
-                                    <th>PF<span style="color: red;font-size: 12px;"> *</span></th>
-                                    <td style="text-align: left" id="pfStatusTd">
-                                    <form:radiobutton path="candidateApplyJob2.pfStatus" name="pfStatus" id="pfStatus1" value="1" required="true"/>Yes 
-                                    <form:radiobutton path="candidateApplyJob2.pfStatus" name="pfStatus" id="pfStatus0" value="0" required="true"/>No
-                                </td>
-                            </tr>
+                                <!--                                <tr>
+                                                                    <th>PF<span style="color: red;font-size: 12px;"> *</span></th>
+                                                                    <td style="text-align: left" id="pfStatusTd">
+                            <form:radiobutton path="candidateApplyJob2.pfStatus" name="pfStatus" id="pfStatus1" value="1" required="true"/>Yes 
+                            <form:radiobutton path="candidateApplyJob2.pfStatus" name="pfStatus" id="pfStatus0" value="0" required="true"/>No
+                        </td>
+                    </tr>-->
                             <tr>
                             <div id="trPfNo">
-                                <th>PF No</th>
-                                <td><span style="color: red;font-size: 12px;"> *</span><form:input type="number" min="0" path="candidateApplyJob2.pfNumber" class="form-control" placeholder="Enter PF No"></form:input></td>
+                                <th>% Increment Expected After 1 Year:</th>
+                                <td><span style="color: red;font-size: 12px;"> *</span><form:input type="number" min="0" path="candidateApplyJob2.pfNumber" class="form-control" placeholder=""></form:input></td>
                                 </div>
                                 </tr>
                                 </tbody>
                             </table>
                             </br>
-                        </div>    
-
+                        </div>   
+                                
+                                  
+                        <div class="col-sm-12">
+                            
+                            <center>
+                                <h3>Growth:</h3>
+                            </center>
+                           
+                        </div>  
                         <div class="col-sm-12">
                             </br>
                             <table class="table-bordered" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th style="text-align:center">Salary Expected<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <th style="text-align:center">Notice Period<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <th style="text-align:center">Total Experience In Year<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <th style="text-align:center">Total Experience In Month<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <th style="text-align:center">Salary when Started:<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <th style="text-align:center">Salary when leaving:<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <th style="text-align:center">No of years:<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <!--<th style="text-align:center">Total Experience In Month<span style="color: red;font-size: 12px;"> *</span></th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryExpected" class="form-control" placeholder="Enter Salary Expected"></form:input></td>
-                                    <td><form:input path="candidateApplyJob2.noticePeriod" class="form-control" placeholder="Enter Required Time to Join" required="true"></form:input></td>
-                                    <td><form:input type="number" min="0" path="candidateApplyJob.experianceDateJoiningYear" class="form-control" step="any" placeholder="Enter Total Experience In Year" required="true"></form:input></td>
-                                    <td><form:input type="number" min="0" path="candidateApplyJob.experianceDateJoiningMonth" class="form-control" step="any" placeholder="Enter Total Experience In Month" required="true"></form:input></td>
+                                        <td><form:input type="number" min="0" path="candidateApplyJob2.salaryExpected" class="form-control" placeholder=""></form:input></td>
+                                    <td><form:input path="candidateApplyJob2.noticePeriod" class="form-control" placeholder="" required="true"></form:input></td>
+                                    <td><form:input type="number" min="0" path="candidateApplyJob.experianceDateJoiningYear" class="form-control" step="any" placeholder="" required="true"></form:input></td>
+                                    <!--<td><form:input type="number" min="0" path="candidateApplyJob.experianceDateJoiningMonth" class="form-control" step="any" placeholder="" required="true"></form:input></td>-->
                                     </tr>
                                 </tbody>
                             </table>
@@ -822,129 +1078,12 @@
                         </table>
                     </div>
 
-                    <div class="col-sm-12">
-                        </br>  
-                        <center>
-                            <h3>Experience Information(Starting With Present Job)</h3>
-                        </center>
-                        </br>
-                    </div>  
-
-                    <div class="col-sm-12">
-                        <table class="table-bordered" style="width:100%">
-                            <thead>
-                                <tr style="text-align:center">
-                                    <th colspan="2" style="text-align:center">Year</th>
-                                    <th rowspan="2" style="text-align:center">Organization</th>
-                                    <th rowspan="2" style="text-align:center">Department</th>
-                                    <th rowspan="2" style="text-align:center">Designation</th>
-                                    <th rowspan="2" style="text-align:center">Job Responsibilities</th>
-                                    <th colspan="2" style="text-align:center">Total Remuneration</th>
-                                    <th rowspan="2" style="text-align:center">Reason For Leaving</th>
-                                    <th style="text-align:center"><button type="button" id="buttonExperience" class="btn btn-flat" style="width: 50px;" data-original-title="" title="" > + </button></th>
-                                </tr>
-                                <tr>
-                                    <th style="text-align:center">From</th>
-                                    <th style="text-align:center">To</th>
-                                    <th style="text-align:center">On Joining</th>
-                                    <th style="text-align:center">On Leaving</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodyExperience">
-                                <c:choose>
-                                    <c:when test="${empty cedList}">
-                                        <tr>
-                                    <input type="hidden" name="countId" id="countId" value="1">
-                                    <td><input type="number" min="0" name="candidateExperienceDetail.experienceYearFrom" class="form-control" placeholder="Year From"/></td>
-                                    <td><input type="number" min="0" name="candidateExperienceDetail.experienceYearTo" class="form-control" placeholder="Year To"/></td>
-                                    <td><input type="text" name="candidateExperienceDetail.experienceOrganization" class="form-control" placeholder="Organization"/></td>
-                                    <td><input type="text" name="candidateExperienceDetail.experienceDepartment" class="form-control" placeholder="Department"/></td>
-                                    <td><input type="text" name="candidateExperienceDetail.experienceDesignation" class="form-control" placeholder="Designation"/></td>
-                                    <td><input type="text" name="candidateExperienceDetail.experienceJobResponsibilities" class="form-control" placeholder="Job Responsibility"/></td>
-                                    <td><input type="number" min="0" name="candidateExperienceDetail.experienceRemunerationOnJoin" class="form-control" placeholder="Remuneration On Joining"/></td>
-                                    <td><input type="number" min="0" name="candidateExperienceDetail.experienceRemunerationOnLeaving" class="form-control" placeholder="Remuneration On Leaving"/></td>
-                                    <td><input type="text" name="candidateExperienceDetail.experienceReasonForLeaving" class="form-control" placeholder="Reason For Leaving"/></td>
-                                    </tr>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:forEach items="${cedList}" var="list">
-                                        <tr>
-                                        <input type="hidden" name="countId" id="countId" value="1">
-                                        <input type="hidden" min="0" name="candidateExperienceDetail.id" class="form-control" value="${list.id}"/>
-                                        <td><input type="number" min="0" name="candidateExperienceDetail.experienceYearFrom" class="form-control" value="${list.experienceYearFrom}"/></td>
-                                        <td><input type="number" min="0" name="candidateExperienceDetail.experienceYearTo" class="form-control" value="${list.experienceYearTo}"/></td>
-                                        <td><input type="text" name="candidateExperienceDetail.experienceOrganization" class="form-control" value="${list.experienceOrganization}"/></td>
-                                        <td><input type="text" name="candidateExperienceDetail.experienceDepartment" class="form-control" value="${list.experienceDepartment}"/></td>
-                                        <td><input type="text" name="candidateExperienceDetail.experienceDesignation" class="form-control" value="${list.experienceDesignation}"/></td>
-                                        <td><input type="text" name="candidateExperienceDetail.experienceJobResponsibilities" class="form-control" value="${list.experienceJobResponsibilities}"/></td>
-                                        <td><input type="number" min="0" name="candidateExperienceDetail.experienceRemunerationOnJoin" class="form-control" value="${list.experienceRemunerationOnJoin}"/></td>
-                                        <td><input type="number" min="0" name="candidateExperienceDetail.experienceRemunerationOnLeaving" class="form-control" value="${list.experienceRemunerationOnLeaving}"/></td>
-                                        <td><input type="text" name="candidateExperienceDetail.experienceReasonForLeaving" class="form-control" value="${list.experienceReasonForLeaving}"/></td>
-                                        </tr>
-                                    </c:forEach>
-                                </c:otherwise>
-                            </c:choose>
-                            </tbody>
-                        </table>
-                    </div>                      
+                    
 
                     <div class="col-sm-12">
                         </br>  
                         <center>
-                            <h3>Family Background Information</h3>
-                        </center>
-                        </br>
-                    </div>   
-
-                    <div class="col-sm-12">
-                        <table class="table-bordered" style="width:100%">
-                            <thead>
-                                <tr style="text-align:center">
-                                    <th style="text-align:center">Name</th>
-                                    <th style="text-align:center">Relation With Person</th>
-                                    <th style="text-align:center">Age</th>
-                                    <th style="text-align:center">Qualification</th>
-                                    <th style="text-align:center">Designation  & Occupation</th>
-                                    <th style="text-align:center">Monthly Income</th>
-                                    <th style="text-align:center"><button type="button" id="buttonFamilyBackground" class="btn btn-flat" style="width: 50px;" data-original-title="" title="" > + </button></th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodyFamilyBackground">
-                                <c:choose>
-                                    <c:when test="${empty cfbList}">
-                                        <tr>
-                                    <input type="hidden" name="countId" id="countId" value="1">
-                                    <td><input type="text" name="candidateFamilyBackground.familyMemberName" class="form-control" placeholder="Name"/></td>
-                                    <td><input type="text" name="candidateFamilyBackground.relationWithFamilyMember" class="form-control" placeholder="Relation With Member"/></td>
-                                    <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberAge" class="form-control" placeholder="Age"/></td>
-                                    <td><input type="text" name="candidateFamilyBackground.familyMemberQualification" class="form-control" placeholder="Qualification"/></td>
-                                    <td><input type="text" name="candidateFamilyBackground.familyMemberDesignationOccupation" class="form-control" placeholder="Designation Ocuupation"/></td>
-                                    <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberMonthlyIncome" class="form-control" placeholder="Monthly Income"/></td>
-                                    </tr>
-                                </c:when>
-                                <c:otherwise>
-                                    <c:forEach items="${cfbList}" var="list">
-                                        <tr>
-                                        <input type="hidden" name="countId" id="countId" value="1">
-                                        <input type="hidden" min="0" name="candidateFamilyBackground.id" class="form-control" value="${list.id}"/>
-                                        <td><input type="text" name="candidateFamilyBackground.familyMemberName" class="form-control" value="${list.familyMemberName}"/></td>
-                                        <td><input type="text" name="candidateFamilyBackground.relationWithFamilyMember" class="form-control" value="${list.relationWithFamilyMember}"/></td>
-                                        <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberAge" class="form-control" value="${list.familyMemberAge}"/></td>
-                                        <td><input type="text" name="candidateFamilyBackground.familyMemberQualification" class="form-control" value="${list.familyMemberQualification}"/></td>
-                                        <td><input type="text" name="candidateFamilyBackground.familyMemberDesignationOccupation" class="form-control" value="${list.familyMemberDesignationOccupation}"/></td>
-                                        <td><input type="number" min="0" name="candidateFamilyBackground.familyMemberMonthlyIncome" class="form-control" value="${list.familyMemberMonthlyIncome}"/></td>
-                                        </tr>
-                                    </c:forEach>
-                                </c:otherwise>
-                            </c:choose>
-                            </tbody>
-                        </table>
-                    </div>        
-
-                    <div class="col-sm-12">
-                        </br>  
-                        <center>
-                            <h3>Reference Information(Other than Relatives)</h3>
+                            <!--<h3>Reference Information(Other than Relatives)</h3>-->
                         </center>
                         </br>
                     </div>
@@ -953,11 +1092,11 @@
                         <table class="table-bordered" style="width:100%">
                             <thead>
                                 <tr style="text-align:center">
-                                    <th style="text-align:center">Name</th>
-                                    <th style="text-align:center">Organization</th>
-                                    <th style="text-align:center">Position</th>
-                                    <th style="text-align:center">Contact No.</th>
-                                    <th style="text-align:center"><button type="button" id="buttonOtherReferences" class="btn btn-flat" style="width: 50px;" data-original-title="" title="" > + </button></th>
+                                    <th style="text-align:center">Strength</th>
+                                    <th style="text-align:center">Weakness</th>
+                                    <th style="text-align:center">Previous Job (Positive)</th>
+                                    <th style="text-align:center">Previous Job (Negative)</th>
+                                    <!--<th style="text-align:center"><button type="button" id="buttonOtherReferences" class="btn btn-flat" style="width: 50px;" data-original-title="" title="" > + </button></th>-->
                                 </tr>
                             </thead>
                             <tbody id="tbodyOtherReferences">
@@ -965,10 +1104,10 @@
                                     <c:when test="${empty corList}">
                                         <tr>
                                     <input type="hidden" name="countId" id="countId" value="1">
-                                    <td><input type="text" name="candidateOtherReferences.referenceNonRelativesName" class="form-control" placeholder="Name"/></td>
-                                    <td><input type="text" name="candidateOtherReferences.referenceNonRelativesOrganization" class="form-control" placeholder="Organization"/></td>
-                                    <td><input type="text" name="candidateOtherReferences.referenceNonRelativesPosition" class="form-control" placeholder="Position"/></td>
-                                    <td><input type="number" min="0" name="candidateOtherReferences.referenceNonRelativesContactNmber" class="form-control" placeholder="Contact No"/></td>
+                                    <td><input type="text" name="candidateOtherReferences.referenceNonRelativesName" class="form-control" placeholder=""/></td>
+                                    <td><input type="text" name="candidateOtherReferences.referenceNonRelativesOrganization" class="form-control" placeholder=""/></td>
+                                    <td><input type="text" name="candidateOtherReferences.referenceNonRelativesPosition" class="form-control" placeholder=""/></td>
+                                    <td><input type="text"  min="0" name="candidateOtherReferences.referenceNonRelativesContactNmber" class="form-control" placeholder=""/></td>
                                     </tr>
                                 </c:when>
                                 <c:otherwise>
@@ -1036,16 +1175,16 @@
             <div class=" col-sm-12" style="text-align: center;">
                 <button type="submit" class="btn btn-primary" style="width: 200px !important;" data-original-title="" title="" >Save</button>
             </div>
-<!--            <div class=" col-sm-6" style="text-align: center;">
-                <button type="button" class="btn btn-primary" style="width: 200px !important;" onclick="onapply(${sessionScope.ApplayJobUserMaster.id},${idvanacy});" data-original-title="" title="" >Apply</button>
-            </div>  
-            <div class="col-sm-12" style="text-align: center;">
-
-            </div>-->
-<!--            <div class="col-sm-12" style="text-align: right;">
-
-                <a href="vacancy.htm?act=applyJobRegistration&id=${sessionScope.ApplayJobUserMaster.id}&vacancyId=${idvanacy}"  onclick="return confirm('Are you Ready to Apply?')">Apply</a>
-            </div>-->
+            <!--            <div class=" col-sm-6" style="text-align: center;">
+                            <button type="button" class="btn btn-primary" style="width: 200px !important;" onclick="onapply(${sessionScope.ApplayJobUserMaster.id},${idvanacy});" data-original-title="" title="" >Apply</button>
+                        </div>  
+                        <div class="col-sm-12" style="text-align: center;">
+            
+                        </div>-->
+            <!--            <div class="col-sm-12" style="text-align: right;">
+            
+                            <a href="vacancy.htm?act=applyJobRegistration&id=${sessionScope.ApplayJobUserMaster.id}&vacancyId=${idvanacy}"  onclick="return confirm('Are you Ready to Apply?')">Apply</a>
+                        </div>-->
         </div>
 
     </form:form>

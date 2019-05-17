@@ -316,10 +316,10 @@
                                                                         <c:if test="${candidateApplyJob.sex eq 'false'}"><td colspan="3">Male</td></c:if>
                                                                         <c:if test="${candidateApplyJob.sex eq 'true'}"><td colspan="3">Female</td></c:if>
                                                                         </tr>
-                                                                        <tr>
-                                                                            <td><label>Residence</label></td>
-                                                                            <td colspan="3">${candidateApplyJob2.residentPhoneNumber}</td>
-                                                                    </tr>
+                                                                        <!--                                                                        <tr>
+                                                                                                                                                    <td><label>Residence</label></td>
+                                                                                                                                                    <td colspan="3">${candidateApplyJob2.residentPhoneNumber}</td>
+                                                                                                                                            </tr>-->
                                                                     <tr>
                                                                         <td><label>Mobile</label></td>
                                                                         <td colspan="3">${candidateApplyJob.contactNo}</td>
@@ -336,22 +336,22 @@
                                                                         <td><label>Permanent Address</label></td>
                                                                         <td colspan="3">${candidateApplyJob.permanentAddress}</td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td><label>Date of Birth</label></td>
-                                                                        <td colspan="3">${candidateApplyJob.dob}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><label>Religion</label></td>
-                                                                        <td colspan="3">${candidateApplyJob2.religion}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><label>Height</label></td>
-                                                                        <td colspan="3">${candidateApplyJob2.height}<span>&nbsp;</span></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td><label>Weight</label></td>
-                                                                        <td colspan="3">${candidateApplyJob2.weight}<span>&nbsp;</span></td>
-                                                                    </tr>
+                                                                    <!--                                                                    <tr>
+                                                                                                                                            <td><label>Date of Birth</label></td>
+                                                                                                                                            <td colspan="3">${candidateApplyJob.dob}</td>
+                                                                                                                                        </tr>-->
+                                                                    <!--                                                                    <tr>
+                                                                                                                                            <td><label>Religion</label></td>
+                                                                                                                                            <td colspan="3">${candidateApplyJob2.religion}</td>
+                                                                                                                                        </tr>-->
+                                                                    <!--                                                                    <tr>
+                                                                                                                                            <td><label>Height</label></td>
+                                                                                                                                            <td colspan="3">${candidateApplyJob2.height}<span>&nbsp;</span></td>
+                                                                                                                                        </tr>-->
+                                                                    <!--                                                                    <tr>
+                                                                                                                                            <td><label>Weight</label></td>
+                                                                                                                                            <td colspan="3">${candidateApplyJob2.weight}<span>&nbsp;</span></td>
+                                                                                                                                        </tr>-->
                                                                     <tr>
                                                                         <td><label>Marital Status</label></td>
                                                                         <td colspan="3">${candidateApplyJob.martialStatus}<span>&nbsp;</span></td>
@@ -394,25 +394,26 @@
                                                                         <c:if test="${candidateApplyJob2.speakGujarati eq 0 or candidateApplyJob2.speakGujarati eq null}"><td>N</td></c:if>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td><label>Any Physical Limitation/ Chronic Disease?</label></td>
-                                                                            <td colspan="3">${candidateApplyJob2.physicalDamageOrDiseases}</td>
+                                                                            <td><label>Current CTC:</label></td>
+                                                                            <td colspan="3">${candidateApplyJob2.anyRelativeInSPCL}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td><label>Any criminal case or background?</label></td>
+                                                                        <td><label>Current CTC(On Hand):</label></td>
+                                                                        <td colspan="3">${candidateApplyJob2.physicalDamageOrDiseases}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label>Expected CTC:</label></td>
                                                                         <td colspan="3">${candidateApplyJob2.criminalCaseBackground}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td><label>Insurance Policy Number</label></td>
+                                                                        <td><label>Expected CTC(On Hand):</label></td>
                                                                         <td colspan="3">${candidateApplyJob2.insurancePolicyNumber}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td><label>Driving License No</label></td>
+                                                                        <td><label>No. Of Years Of Commitment You Can Give:</label></td>
                                                                         <td colspan="3">${candidateApplyJob2.drivingLicenceNumber}</td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td><label>Any relatives employed in SPCL?</label></td>
-                                                                        <td colspan="3">${candidateApplyJob2.anyRelativeInSPCL}</td>
-                                                                    </tr>
+
                                                                     <tr>
                                                                         <td><label>Habit of Smoking, Chewing Tobacco, other?</label></td>
                                                                         <td colspan="3">
@@ -422,32 +423,109 @@
                                                                             <c:if test="${candidateApplyJob2.otherHabit eq 1}">,Other</c:if>
                                                                             </td>
                                                                         </tr>
-                                                                    </table>
-                                                                </div>    
-                                                                <div class="col-sm-12">
-                                                                    </br>
-                                                                    <label>FAMILY BACKGROUND:</label> </br>
-                                                                    <table border="1" class="table table-bordered">
                                                                         <tr>
-                                                                            <td style="text-align: center;">
-                                                                                <label>Name</label>
-                                                                            </td>
-                                                                            <td style="text-align: center;">
-                                                                                <label>Relation</label>
-                                                                            </td>
-                                                                            <td style="text-align: center;">
-                                                                                <label>Age</label>
-                                                                            </td>
-                                                                            <td style="text-align: center;">
-                                                                                <label>Qualification</label>
-                                                                            </td>
-                                                                            <td style="text-align: center;">
-                                                                                <label>Designation  & Occupation</label>
-                                                                            </td>
-                                                                            <td style="text-align: center;">
-                                                                                <label>Monthly Income</label>
+                                                                            <td><label>Reference Source :</label></td>
+                                                                            <td colspan="3">
+                                                                            <c:if test="${candidateApplyJob2.friend eq 1}">Friend&nbsp;</c:if>
+                                                                            <c:if test="${candidateApplyJob2.naukri eq 1}">,Naukri&nbsp;</c:if>
+                                                                            <c:if test="${candidateApplyJob2.indeed eq 1}">,Indeed&nbsp;</c:if>
+                                                                            <c:if test="${candidateApplyJob2.other eq 1}">,Other</c:if>
                                                                             </td>
                                                                         </tr>
+                                                                        <tr>
+
+                                                                            <td><label>Please Rate Yourself Out Of ‘10’ For Following Skills:</label></td>
+                                                                            <td colspan="3"></td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><label>Accounting:</label></td>
+                                                                            <td colspan="3"> ${candidateApplyJob2.salaryBreakupOther}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label>Loyalty:</label></td>
+                                                                        <td colspan="3"> ${candidateApplyJob2.salaryBreakupTotal}</td>
+                                                                    </tr>
+
+                                                                    <tr>
+
+                                                                        <td><label>3 Qualities Which Make You Different / Outstanding Than Other:</label></td>
+                                                                        <td colspan="3"></td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label>Professional:</label></td>
+                                                                        <td colspan="3"> ${candidateApplyJob2.salaryBreakupBasic}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label>Personal:</label></td>
+                                                                        <td colspan="3"> ${candidateApplyJob2.salaryBreakupDaVdaSdAll}</td>
+                                                                    </tr>
+                                                                    <tr>
+
+                                                                        <td><label>Goals:</label></td>
+                                                                        <td colspan="3"></td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label>Long term:  5 years </label></td>
+                                                                        <td colspan="3"> ${candidateApplyJob2.salaryBreakupHRA}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label>Short term:  2 years</label></td>
+                                                                        <td colspan="3"> ${candidateApplyJob2.salaryBreakupConveyanceAll}</td>
+                                                                    </tr>
+                                                                    <tr>
+
+                                                                        <td><label>Goals:</label></td>
+                                                                        <td colspan="3"></td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label>Can You Join Immediate: </label></td>
+
+                                                                        <td colspan="3"> 
+                                                                            <c:if test="${candidateApplyJob2.esicStatus eq 1}">Y</c:if>
+                                                                            <c:if test="${candidateApplyJob2.esicStatus eq 0}">N</c:if>
+                                                                            </td>
+
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><label>Possibility Of Having Less Notice Period:</label></td>
+                                                                            <td colspan="3"> ${candidateApplyJob2.esicNumber}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><label>% Increment Expected After 1 Year:</label></td>
+                                                                        <td colspan="3"> ${candidateApplyJob2.pfNumber}</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>  
+
+
+                                                            <div class="col-sm-12">
+                                                                </br>
+                                                                <label>Please Rate Yourself Out Of ‘10’ For Following Skills(Excel):</label> </br>
+                                                                <table border="1" class="table table-bordered">
+                                                                    <tr>
+                                                                        <td style="text-align: center;">
+                                                                            <label>Basic</label>
+                                                                        </td>
+                                                                        <td style="text-align: center;">
+                                                                            <label>V Look Up</label>
+                                                                        </td>
+                                                                        <td style="text-align: center;">
+                                                                            <label>Pivot Table</label>
+                                                                        </td>
+                                                                        <td style="text-align: center;">
+                                                                            <label>Punctual</label>
+                                                                        </td>
+                                                                        <td style="text-align: center;">
+                                                                            <label>Team work</label>
+                                                                        </td>
+                                                                        <td style="text-align: center;">
+                                                                            <label>Positive</label>
+                                                                        </td>
+                                                                    </tr>
                                                                     <c:forEach items="${candidateFamilyBackground}" var="list">
                                                                         <tr>
                                                                             <td style="text-align: center;"> ${list.familyMemberName} </td>
@@ -498,33 +576,34 @@
 
                                                             <div class="col-sm-12">
                                                                 </br>
-                                                                <label>EXPERIENCE INFORMATION(Starting With Present Job):</label> </br>
+                                                                <label>Please Rate Yourself Out Of ‘10’ For Following Skills(English):</label> </br>
                                                                 <table border="1" class="table table-bordered">
                                                                     <tr>
-                                                                        <td colspan="2" style="text-align: center; vertical-align: middle"><label>Year</label></td>
-                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Organization</label></td>
-                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Department</label></td>
-                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Designation</label></td>
-                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Job Responsibilities</label></td>
-                                                                        <td colspan="2" style="text-align: center; vertical-align: middle"><label>Total Remuneration</label></td>
-                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Reason For Leaving</label></td> 
+                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Speaking</label></td>
+                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Writing</label></td>
+                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Reading</label></td>
+                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Leadership</label></td>
+                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Responsible</label></td>
+                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Confident</label></td>
+                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Honest</label></td>
+                                                                        <!--<td rowspan="2" style="text-align: center; vertical-align: middle"><label>Reason For Leaving</label></td>--> 
                                                                     </tr>
                                                                     <tr>
-                                                                        <td style="text-align: center; vertical-align: middle"><label>From Year</label></td>
-                                                                        <td style="text-align: center; vertical-align: middle"><label>To Year</label></td>
-                                                                        <td style="text-align: center; vertical-align: middle"><label>On Joining</label></td>
-                                                                        <td style="text-align: center; vertical-align: middle"><label>On Leaving</label></td>
+                                                                        <!--                                                                        <td style="text-align: center; vertical-align: middle"><label>From Year</label></td>
+                                                                                                                                                <td style="text-align: center; vertical-align: middle"><label>To Year</label></td>
+                                                                                                                                                <td style="text-align: center; vertical-align: middle"><label>On Joining</label></td>
+                                                                                                                                                <td style="text-align: center; vertical-align: middle"><label>On Leaving</label></td>-->
                                                                     </tr>
                                                                     <c:forEach var="list" items="${candidateExperienceDetail}">
                                                                         <tr>
                                                                             <td style="text-align: center;"> ${list.experienceYearFrom} </td>
-                                                                            <td style="text-align: center;"> ${list.experienceYearTo} </td>
+                                                                            <!--<td style="text-align: center;"> ${list.experienceYearTo} </td>-->
                                                                             <td style="text-align: center;"> ${list.experienceOrganization} </td>
                                                                             <td style="text-align: center;"> ${list.experienceDepartment} </td>
                                                                             <td style="text-align: center;"> ${list.experienceDesignation} </td>
                                                                             <td style="text-align: center;"> ${list.experienceJobResponsibilities} </td>
                                                                             <td style="text-align: center;"> ${list.experienceRemunerationOnJoin} </td>
-                                                                            <td style="text-align: center;"> ${list.experienceRemunerationOnLeaving} </td>
+                                                                            <!--<td style="text-align: center;"> ${list.experienceRemunerationOnLeaving} </td>-->
                                                                             <td style="text-align: center;"> ${list.experienceReasonForLeaving} </td>
                                                                         </tr>
                                                                     </c:forEach>
@@ -532,111 +611,18 @@
                                                             </div>
 
                                                             <div class="col-sm-12">            
-                                                                </br>
-                                                                <div class="col-sm-6">
-                                                                    <label>Present Salary Details:</label> </br>
-                                                                    <table border="1" class="table table-bordered">
-                                                                        <tr>
-                                                                            <td style="text-align: center; vertical-align: middle"><label>Present Salary Breakup</label></td>
-                                                                            <td style="text-align: center; vertical-align: middle"><label>Salary Slip to be Attached</label></td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle">Basic</td>
-                                                                            <td style="vertical-align: middle">${candidateApplyJob2.salaryBreakupBasic}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle">DA/VDA/SD/ALL</td>
-                                                                            <td style="vertical-align: middle">${candidateApplyJob2.salaryBreakupDaVdaSdAll}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle">HRA</td>
-                                                                            <td style="vertical-align: middle">${candidateApplyJob2.salaryBreakupHRA}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle">CONVEYANCE ALL.</td>
-                                                                            <td style="vertical-align: middle">${candidateApplyJob2.salaryBreakupConveyanceAll}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle">LTA</td>
-                                                                            <td style="vertical-align: middle">${candidateApplyJob2.salaryBreakupLTA}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle">MED.</td>
-                                                                            <td style="vertical-align: middle">${candidateApplyJob2.salaryBreakupMED}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle">BONUS</td>
-                                                                            <td style="vertical-align: middle">${candidateApplyJob2.salaryBreakupBonus}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle">OTHER, If any</td>
-                                                                            <td style="vertical-align: middle">${candidateApplyJob2.salaryBreakupOther}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle">TOTAL</td>
-                                                                            <td style="vertical-align: middle">${candidateApplyJob2.salaryBreakupTotal}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle">Salary Slip</td>
-                                                                            <td style="vertical-align: middle">
-                                                                                <a href="vacancy.htm?act=downloadCandidateSalaryAttachment&cajid=${candidateApplyJob.id}&fileName=${candidateApplyJob2.salarySlipAttachment}">${candidateApplyJob2.salarySlipAttachment}</a>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
-                                                                </br>
-                                                                <div class="col-sm-6">
-                                                                    <table border="1" class="table table-bordered">
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle;"><label>Salary Expected:</label>&nbsp;&nbsp;<span>${candidateApplyJob2.salaryExpected}</span></td>
-                                                                        </tr>
-                                                                        <!--</table>-->
-                                                                        <!--<table border="1" class="table table-bordered">-->
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle"><label>Total Experience In Year:&nbsp;&nbsp;</label><span>${candidateApplyJob.experianceDateJoiningYear}</span></td>
-                                                                        </tr>
-                                                                        <!--</table>-->
-                                                                        <!--<table border="1" class="table table-bordered">-->
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle"><label>Total Experience In Month:&nbsp;&nbsp;</label><span>${candidateApplyJob.experianceDateJoiningMonth}</span></td>
-                                                                        </tr>
-                                                                        <!--</table>-->
-                                                                        <!--<table border="1" class="table table-bordered">-->
-                                                                        <tr>
-                                                                            <td style="vertical-align: middle"><label>Joining Time Required:&nbsp;&nbsp;</label><span>${candidateApplyJob2.noticePeriod}</span></td>
-                                                                        </tr>
-                                                                        <!--</table>-->
-                                                                        <table border="1" class="table table-bordered">
-                                                                            <tr>
-                                                                                <td style="vertical-align: middle">
-                                                                                    <c:if test="${candidateApplyJob2.esicStatus eq 1}"><label>ESIC:</label>&nbsp;&nbsp;<span>Yes</span></br></c:if>
-                                                                                    <c:if test="${candidateApplyJob2.esicStatus eq 0}"><label>ESIC:</label>&nbsp;&nbsp;<span>No</span></br></c:if>
-                                                                                    <label>ESIC No:</label>&nbsp;&nbsp;<span>${candidateApplyJob2.esicNumber}</span></br>
-                                                                                    <c:if test="${candidateApplyJob2.pfStatus eq 1}"><label>PF:</label>&nbsp;&nbsp;<span>Yes</span></br></c:if>
-                                                                                    <c:if test="${candidateApplyJob2.pfStatus eq 0}"><label>PF:</label>&nbsp;&nbsp;<span>No</span></br></c:if>
-                                                                                    <label>PF No:</label>&nbsp;&nbsp;<span>${candidateApplyJob2.pfNumber}</span>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </table>
-                                                                        <table border="1" class="table table-bordered">
-                                                                            <tr>
-                                                                                <td style="vertical-align: middle">
-                                                                                    <label>Download Attached Resume:</label>&nbsp;&nbsp;<span><a href="vacancy.htm?act=downloadCandidateCertificate&cajid=${candidateApplyJob.id}&fileName=${candidateApplyJob.certificateAttach}">${candidateApplyJob.certificateAttach}</a></span></br>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </table>
-                                                                </div>
+
                                                             </div>
 
                                                             <div class="col-sm-12">
                                                                 </br>
-                                                                <label>REFERENCES(Other than relatives):</label> </br>
+                                                                <label>Other:</label> </br>
                                                                 <table border="1" class="table table-bordered">
                                                                     <tr>
-                                                                        <td  style="text-align: center; vertical-align: middle"><label>Name</label></td>
-                                                                        <td  style="text-align: center; vertical-align: middle"><label>Organization</label></td>
-                                                                        <td  style="text-align: center; vertical-align: middle"><label>Position</label></td>
-                                                                        <td  style="text-align: center; vertical-align: middle"><label>Contact No.</label></td>
+                                                                        <td  style="text-align: center; vertical-align: middle"><label>Strength</label></td>
+                                                                        <td  style="text-align: center; vertical-align: middle"><label>Weakness</label></td>
+                                                                        <td  style="text-align: center; vertical-align: middle"><label>Previous Job (Positive)</label></td>
+                                                                        <td  style="text-align: center; vertical-align: middle"><label>Previous Job (Negative)</label></td>
                                                                     </tr>
                                                                     <c:forEach items="${candidateOtherReferences}" var="list">
                                                                         <tr>
@@ -648,6 +634,37 @@
                                                                     </c:forEach>
                                                                 </table>
                                                             </div>
+                                                            <div class="col-sm-12">
+                                                                </br>
+                                                                <label>Growth:</label> </br>
+                                                                <table border="1" class="table table-bordered">
+                                                                    <tr>
+                                                                        <td  style="text-align: center; vertical-align: middle"><label>Salary when Started</label></td>
+                                                                        <td  style="text-align: center; vertical-align: middle"><label>Salary when leaving</label></td>
+                                                                        <td  style="text-align: center; vertical-align: middle"><label>No of years</label></td>
+                                                                        <!--<td  style="text-align: center; vertical-align: middle"><label>Contact No.</label></td>-->
+                                                                    </tr>
+                                                                    <%--<c:forEach items="${candidateOtherReferences}" var="list">--%>
+                                                                    <tr>
+                                                                        <td style="text-align: center;"> ${candidateApplyJob2.salaryExpected} </td>
+                                                                        <td style="text-align: center;"> ${candidateApplyJob2.noticePeriod} </td>
+                                                                        <td style="text-align: center;"> ${candidateApplyJob.experianceDateJoiningYear} </td>
+                                                                        <!--<td style="text-align: center;"> ${candidateApplyJob.experianceDateJoiningMonth} </td>-->
+                                                                    </tr>
+                                                                    <%--</c:forEach>--%>
+                                                                </table>
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <table border="1" class="table table-bordered">
+                                                                    <tr>
+                                                                        <td style="vertical-align: middle">
+                                                                            <label>Download Attached Resume:</label>&nbsp;&nbsp;<span><a href="vacancy.htm?act=downloadCandidateCertificate&cajid=${candidateApplyJob.id}&fileName=${candidateApplyJob.certificateAttach}">${candidateApplyJob.certificateAttach}</a></span></br>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+
+
                                                             <div class="col-sm-12">
                                                                 </br>
                                                                 <label>Sign. Of candidate :</label> </br>
@@ -703,11 +720,11 @@
                                                             <table border="1" style="width: 100%;" align="center">
                                                                 <c:choose>
                                                                     <c:when test="${empty list}">
-<!--                                                                        <tr>
-                                                                            <td align="center">
-                                                                                <%--<c:out value="There is no record found."></c:out>--%>
-                                                                                </td>
-                                                                            </tr>-->
+                                                                        <!--                                                                        <tr>
+                                                                                                                                                    <td align="center">
+                                                                        <%--<c:out value="There is no record found."></c:out>--%>
+                                                                        </td>
+                                                                    </tr>-->
                                                                     </c:when>
                                                                     <c:otherwise>
                                                                         <thead>
@@ -729,18 +746,18 @@
                                                                             <td>${list[3]}</td>
                                                                             <td>${list[5]} By&nbsp${list[1]}</td>
                                                                         </tr>
-                                                                        </c:forEach>
-                                                                        <tr>
-                                                                            <td >${candidateApplyJob.name}  ${candidateApplyJob2.lastName}</td>
-                                                                            <td >${candidateJobApplication.createdDate}</td>
-                                                                            <td >Applied</td>
-                                                                            <td >Applied By ${candidateApplyJob.name} </td>
-                                                                </tr>
+                                                                    </c:forEach>
+                                                                    <tr>
+                                                                        <td >${candidateApplyJob.name}  ${candidateApplyJob2.lastName}</td>
+                                                                        <td >${candidateJobApplication.createdDate}</td>
+                                                                        <td >Applied</td>
+                                                                        <td >Applied By ${candidateApplyJob.name} </td>
+                                                                    </tr>
                                                                 </tbody>
                                                             </table>
                                                             <table  border="1" style="width: 100%;" align="center">
-                                                                
-                                                                
+
+
                                                             </table>
 
                                                         </div>
@@ -758,7 +775,7 @@
                                                     <c:if test="${candidateJobApplication.status eq 1 || candidateJobApplication.status eq 14 || candidateJobApplication.status eq 0}">
                                                         <button type="button" class="btn btn-danger" onclick="return reject(${candidateJobApplication.id},${candidateApplyJob.id});" value="Reject">Reject</button>
                                                     </c:if>
-                                                         
+
                                                     <%--<c:if test="${candidateJobApplication.status eq 21}">--%>
                                                         <!--<button type="button" class="btn btn-primary" style="width:130px !important;" onclick="offerLate(${candidateJobApplication.id},${candidateApplyJob.id});">Offer Letter</button>-->
                                                     <%--</c:if>--%>

@@ -105,7 +105,7 @@
                                             <input type="hidden" id="keyval">
                                             <div class="col-md-2" style="width: 200px; padding-bottom: 20px;">
                                              
-                                                                <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 
                                                                 <select name="employeeTypeMaster.id" id="employeeTypeMaster.id" class="form-control" onchange="teamchanged('Team',this);" style="font-size: 12px;">
                                                                     <option value="None">-- Select --</option>
@@ -125,7 +125,7 @@
                                                                
                                                             <div class="col-md-2" style="width: 200px; padding-bottom: 20px;">
                                                
-                                                                <label>Sub Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <label>Division:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <select name="employeeSubType.id" id="employeeSubType.id" class="form-control" onchange="teamchanged('SubTeam',this);" style="font-size: 12px;">
                                                                     <option value="None">-- Select --</option>
                                                                     <c:forEach var="EmployeeSubTypeList" items="${EmployeeSubTypeList}">
@@ -161,8 +161,8 @@
                                                                     <!--<th>user id</th>-->
                                                                     <th style="width: 50px;">Employee ID</th>
                                                                     <th style="width: 50px;">Employee Name</th>
-                                                                    <th style="width: 50px;">Team</th>
-                                                                    <th style="width: 50px;">Sub Team</th>
+                                                                    <th style="width: 50px;">Department</th>
+                                                                    <th style="width: 50px;">Division</th>
                                                                         <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
                                                                     <th style="width: 50px;">Action</th>
                                                                         <%--</c:if>--%>

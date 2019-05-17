@@ -214,4 +214,6 @@ public interface EmployeeMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readByTeamId(int id);
 
     public List<?> readBySubTeamId(int id);
+    
+    public String getNameById(Integer id);
 }

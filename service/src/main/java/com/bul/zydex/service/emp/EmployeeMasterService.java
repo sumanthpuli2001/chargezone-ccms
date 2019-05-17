@@ -211,4 +211,6 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List<?> readByTeamId(int id);
     
     public List<?> readBySubTeamId(int id);
+
+    public String getNameById(Integer id);
 }

@@ -56,7 +56,7 @@ public class EmployeeMasterValidator implements Validator {
 //        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "company", "field.error27", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "locationMaster.id", "field.error27", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "zydexLocationMaster.id", "field.error27", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "levelMaster.id", "field.error27", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "levelMaster.id", "field.error27", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "departmentMaster.id", "field.error27", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "designationMaster.id", "field.error27", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dateOfJoining", "field.error1", "None");

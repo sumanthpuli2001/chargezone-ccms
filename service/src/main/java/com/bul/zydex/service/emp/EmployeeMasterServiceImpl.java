@@ -517,4 +517,9 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T>
     public List<?> readBySubTeamId(int id) {
         return employeeMasterDAO.readBySubTeamId(id);
     }
+    
+    @Override
+    public String getNameById(Integer id) {
+        return employeeMasterDAO.getNameById(id);
+    }
 }

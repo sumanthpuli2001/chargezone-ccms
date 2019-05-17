@@ -13,7 +13,7 @@ public class EmployeeMasterExtension implements java.io.Serializable {
     private String permanentState;
     private String permanentPostalCode;
     private String permanentCountry;
-    private String religion;
+//    private String religion;
     private String disclosedHealthConcerns;
     private String languagesKnown;
     private String hobbies;
@@ -27,29 +27,29 @@ public class EmployeeMasterExtension implements java.io.Serializable {
     private String firstName;
     private String middleName;
     private String lastName;
-    private String countryOfIssue;
-    private String visaIssueCountry;
-    private String visaIssueDate;
-    private String visaValidTillDate;
+//    private String countryOfIssue;
+//    private String visaIssueCountry;
+//    private String visaIssueDate;
+//    private String visaValidTillDate;
     private String drivingLicenceType;
-    private String electionCard;
+//    private String electionCard;
     private String pfNoFlydocs;
     private String withdrawalDate;
     private String nameOfPreviousCompany;
     private String previousCompanyLocation;
     private EmployeeMaster employeeMaster;
-    private Boolean nameStatus;
+//    private Boolean nameStatus;
     private Boolean spouseGender;
-    private String documentIdNo;
+//    private String documentIdNo;
     private String subteamTransferDate;
-    private String officialContactNumber;
+//    private String officialContactNumber;
 
     public EmployeeMasterExtension() {
     }
 
    
 
-    public EmployeeMasterExtension(String presentAddress2, String presentCity, String presentState, String presentPostalCode, String presentCountry, String permanentAddress2, String permanentCity, String permanentState, String permanentPostalCode, String permanentCountry, String religion, String disclosedHealthConcerns, String languagesKnown, String hobbies, Boolean childOneGender, Boolean childTwoGender, String flyDocsEmailId, String emergencyContactAddress, String RelationShip, String otherImpInfo, String nationality, String firstName, String middleName, String lastName, String countryOfIssue, String visaIssueCountry, String visaIssueDate, String visaValidTillDate, String drivingLicenceType, String electionCard, String pfNoFlydocs, String withdrawalDate, String nameOfPreviousCompany, String previousCompanyLocation, EmployeeMaster employeeMaster,Boolean nameStatus, Boolean spouseGender,String documentIdNo,String subteamTransferDate,String officialContactNumber) {
+    public EmployeeMasterExtension(String presentAddress2, String presentCity, String presentState, String presentPostalCode, String presentCountry, String permanentAddress2, String permanentCity, String permanentState, String permanentPostalCode, String permanentCountry, String disclosedHealthConcerns, String languagesKnown, String hobbies, Boolean childOneGender, Boolean childTwoGender, String flyDocsEmailId, String emergencyContactAddress, String RelationShip, String otherImpInfo, String nationality, String firstName, String middleName, String lastName, String drivingLicenceType, String pfNoFlydocs, String withdrawalDate, String nameOfPreviousCompany, String previousCompanyLocation, EmployeeMaster employeeMaster,Boolean spouseGender,String subteamTransferDate) {
         this.presentAddress2 = presentAddress2;
         this.presentCity = presentCity;
         this.presentState = presentState;
@@ -60,7 +60,7 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.permanentState = permanentState;
         this.permanentPostalCode = permanentPostalCode;
         this.permanentCountry = permanentCountry;
-        this.religion = religion;
+//        this.religion = religion;
         this.disclosedHealthConcerns = disclosedHealthConcerns;
         this.languagesKnown = languagesKnown;
         this.hobbies = hobbies;
@@ -74,22 +74,22 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;
-        this.countryOfIssue = countryOfIssue;
-        this.visaIssueCountry = visaIssueCountry;
-        this.visaIssueDate = visaIssueDate;
-        this.visaValidTillDate = visaValidTillDate;
+//        this.countryOfIssue = countryOfIssue;
+//        this.visaIssueCountry = visaIssueCountry;
+//        this.visaIssueDate = visaIssueDate;
+//        this.visaValidTillDate = visaValidTillDate;
         this.drivingLicenceType = drivingLicenceType;
-        this.electionCard = electionCard;
+//        this.electionCard = electionCard;
         this.pfNoFlydocs = pfNoFlydocs;
         this.withdrawalDate = withdrawalDate;
         this.nameOfPreviousCompany = nameOfPreviousCompany;
         this.previousCompanyLocation = previousCompanyLocation;
         this.employeeMaster = employeeMaster;
-        this.nameStatus = nameStatus;
+//        this.nameStatus = nameStatus;
         this.spouseGender = spouseGender;
-        this.documentIdNo = documentIdNo;
+//        this.documentIdNo = documentIdNo;
         this.subteamTransferDate = subteamTransferDate;
-        this.officialContactNumber =officialContactNumber;
+//        this.officialContactNumber =officialContactNumber;
     }
 
     
@@ -182,13 +182,13 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.permanentCountry = permanentCountry;
     }
 
-    public String getReligion() {
-        return religion;
-    }
-
-    public void setReligion(String religion) {
-        this.religion = religion;
-    }
+//    public String getReligion() {
+//        return religion;
+//    }
+//
+//    public void setReligion(String religion) {
+//        this.religion = religion;
+//    }
 
     public String getDisclosedHealthConcerns() {
         return disclosedHealthConcerns;
@@ -294,37 +294,37 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.lastName = lastName;
     }
 
-    public String getCountryOfIssue() {
-        return countryOfIssue;
-    }
+//    public String getCountryOfIssue() {
+//        return countryOfIssue;
+//    }
+//
+//    public void setCountryOfIssue(String countryOfIssue) {
+//        this.countryOfIssue = countryOfIssue;
+//    }
 
-    public void setCountryOfIssue(String countryOfIssue) {
-        this.countryOfIssue = countryOfIssue;
-    }
-
-    public String getVisaIssueCountry() {
-        return visaIssueCountry;
-    }
-
-    public void setVisaIssueCountry(String visaIssueCountry) {
-        this.visaIssueCountry = visaIssueCountry;
-    }
-
-    public String getVisaIssueDate() {
-        return visaIssueDate;
-    }
-
-    public void setVisaIssueDate(String visaIssueDate) {
-        this.visaIssueDate = visaIssueDate;
-    }
-
-    public String getVisaValidTillDate() {
-        return visaValidTillDate;
-    }
-
-    public void setVisaValidTillDate(String visaValidTillDate) {
-        this.visaValidTillDate = visaValidTillDate;
-    }
+//    public String getVisaIssueCountry() {
+//        return visaIssueCountry;
+//    }
+//
+//    public void setVisaIssueCountry(String visaIssueCountry) {
+//        this.visaIssueCountry = visaIssueCountry;
+//    }
+//
+//    public String getVisaIssueDate() {
+//        return visaIssueDate;
+//    }
+//
+//    public void setVisaIssueDate(String visaIssueDate) {
+//        this.visaIssueDate = visaIssueDate;
+//    }
+//
+//    public String getVisaValidTillDate() {
+//        return visaValidTillDate;
+//    }
+//
+//    public void setVisaValidTillDate(String visaValidTillDate) {
+//        this.visaValidTillDate = visaValidTillDate;
+//    }
 
     public String getDrivingLicenceType() {
         return drivingLicenceType;
@@ -334,13 +334,13 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.drivingLicenceType = drivingLicenceType;
     }
 
-    public String getElectionCard() {
-        return electionCard;
-    }
-
-    public void setElectionCard(String electionCard) {
-        this.electionCard = electionCard;
-    }
+//    public String getElectionCard() {
+//        return electionCard;
+//    }
+//
+//    public void setElectionCard(String electionCard) {
+//        this.electionCard = electionCard;
+//    }
 
     public String getPfNoFlydocs() {
         return pfNoFlydocs;
@@ -385,13 +385,13 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.employeeMaster = employeeMaster;
     }
 
-    public Boolean getNameStatus() {
-        return nameStatus;
-    }
-
-    public void setNameStatus(Boolean nameStatus) {
-        this.nameStatus = nameStatus;
-    }
+//    public Boolean getNameStatus() {
+//        return nameStatus;
+//    }
+//
+//    public void setNameStatus(Boolean nameStatus) {
+//        this.nameStatus = nameStatus;
+//    }
 
     public Boolean getSpouseGender() {
         return spouseGender;
@@ -401,13 +401,13 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.spouseGender = SpouseGender;
     }
 
-    public String getDocumentIdNo() {
-        return documentIdNo;
-    }
-
-    public void setDocumentIdNo(String documentIdNo) {
-        this.documentIdNo = documentIdNo;
-    }
+//    public String getDocumentIdNo() {
+//        return documentIdNo;
+//    }
+//
+//    public void setDocumentIdNo(String documentIdNo) {
+//        this.documentIdNo = documentIdNo;
+//    }
 
     public String getSubteamTransferDate() {
         return subteamTransferDate;
@@ -417,13 +417,13 @@ public class EmployeeMasterExtension implements java.io.Serializable {
         this.subteamTransferDate = subteamTransferDate;
     }
 
-    public String getOfficialContactNumber() {
-        return officialContactNumber;
-    }
-
-    public void setOfficialContactNumber(String officialContactNumber) {
-        this.officialContactNumber = officialContactNumber;
-    }
+//    public String getOfficialContactNumber() {
+//        return officialContactNumber;
+//    }
+//
+//    public void setOfficialContactNumber(String officialContactNumber) {
+//        this.officialContactNumber = officialContactNumber;
+//    }
 
     
 }

@@ -216,7 +216,7 @@
             <h1>FORMER EMPLOYEE DETAILS</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Employee Registration Form</li>
+                <li class="active">Former employee Details</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -1501,7 +1501,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
 
-                                                        <label>PF No(FLYdocs):<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>PF No(VNC):<span style="color: red;font-size: 12px;"></span></label>
                                                         <input type="text" name="pfNoFlydocs" id="pfNoFlydocs" value="${list.pfNoFlydocs}" readonly="true" class="form-control">
 
                                                     </div>  

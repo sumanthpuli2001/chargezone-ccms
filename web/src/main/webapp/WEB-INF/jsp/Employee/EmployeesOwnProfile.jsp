@@ -10,7 +10,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Employee Edit</title>
+        <title>Employee Profile Data</title>
     </head>
 
 
@@ -213,10 +213,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>EMPLOYEE REGISTRATION FORM</h1>
+            <h1>EMPLOYEE PROFILE DATA</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Employee Registration Form</li>
+                <li class="active">Employee Profile Data</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">
@@ -1501,7 +1501,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
 
-                                                        <label>PF No(FLYdocs):<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>PF No(VCN):<span style="color: red;font-size: 12px;"></span></label>
                                                         <input type="text" name="pfNoFlydocs" id="pfNoFlydocs" value="${list.pfNoFlydocs}" readonly="true" class="form-control">
 
                                                     </div>  

@@ -10,7 +10,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Employee Create</title>
+        <title>Employee Registration Form</title>
     </head>
     <style>
         #tabs{ margin: 20px -20px; border: none; }
@@ -2003,7 +2003,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
 
-                                                        <label>PF No(FLYdocs):<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>PF No(VNC):<span style="color: red;font-size: 12px;"></span></label>
                                                         <input type="text" name="pfNoFlydocs" id="pfNoFlydocs" class="form-control">
 
                                                     </div>  

@@ -4099,7 +4099,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     }
                                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-                                    Date date1 = sdf.parse(dateOfJoiningNonFormated);
+//                                    Date date1 = sdf.parse(dateOfJoiningNonFormated);
+                                    SimpleDateFormat sdfDOJ3 = new SimpleDateFormat("dd-MMM-yyyy");
+                                    SimpleDateFormat sdfDOJ4 = new SimpleDateFormat("dd/MM/yyyy");
+
+                                    Date dateDOJ1 = sdfDOJ3.parse(dateOfJoiningNonFormated);
+                                    String dateOfJoining1 = sdfDOJ4.format(dateDOJ1);
+                                    Date date1 = sdf.parse(dateOfJoining1);
                                     Date date3 = new Date();
                                     cal1.setTime(date1);
                                     Date date2 = sdf.parse(dateOfEnd);
@@ -4222,14 +4228,17 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                     }
                 }
             }
-            request.setAttribute("successMessage", "Information : The Excel Uploaded Successfully.");
+            if ((counter == 0) && (counterOfException==0)) {
+               request.setAttribute("successMessage", "Information : The Excel Uploaded Successfully."); 
+            }
+            
             //if user already exist then this failure messge will be printed.
             if (counter > 0) {
-                request.setAttribute("failureMessage", "Information : " + stringBuffer + " Rcecords Not Inserted Due To Existsing Data");
+                request.setAttribute("failureMessage", "Information : " + stringBuffer + " Records not inserted because the user is already existed");
             }
             if (counterOfException > 0) {
-                request.setAttribute("failureMessage", " " + stringBufferOfExceptions + " Rcecords Not Inserted Due To Invalid Data");
-                System.out.println("failureMessage," + stringBufferOfExceptions + " Rcecords Not Inserted Due To Invalid Data");
+                request.setAttribute("failureMessage", " " + stringBufferOfExceptions + " Records not inserted due to invalid data");
+                System.out.println("failureMessage," + stringBufferOfExceptions + " Records not inserted due to invalid data");
             }
             mv = searchSubmit(request, response);
         } catch (Exception e) {

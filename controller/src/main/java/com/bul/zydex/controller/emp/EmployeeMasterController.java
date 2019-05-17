@@ -169,7 +169,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
          String permanentState=request.getParameter("permanentState");
          String permanentPostalCode=request.getParameter("permanentPostalCode");
          String permanentCountry=request.getParameter("permanentCountry");
-         String religion=request.getParameter("religion");
+//         String religion=request.getParameter("religion");
          String disclosedHealthConcerns=request.getParameter("disclosedHealthConcerns");
          String languagesKnown=request.getParameter("languagesKnown");
          String hobbies=request.getParameter("hobbies");
@@ -183,19 +183,19 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
          String firstName=request.getParameter("firstName");
          String middleName=request.getParameter("middleName");
          String lastName=request.getParameter("lastName");
-         String countryOfIssue=request.getParameter("countryOfIssue");
+//         String countryOfIssue=request.getParameter("countryOfIssue");
          
          String drivingLicenceType=request.getParameter("drivingLicenceType");
-         String electionCard=request.getParameter("electionCard");
+//         String electionCard=request.getParameter("electionCard");
          String pfNoFlydocs=request.getParameter("pfNoFlydocs");
          String withdrawalDate=request.getParameter("withdrawalDate");
          String nameOfPreviousCompany=request.getParameter("nameOfPreviousCompany");
          String previousCompanyLocation=request.getParameter("previousCompanyLocation");
-         String namestatus = request.getParameter("nameStatus");
+//         String namestatus = request.getParameter("nameStatus");
          String spousegender = request.getParameter("SpouseGender");
-         String documentIdNo = request.getParameter("documentIdNo");
+//         String documentIdNo = request.getParameter("documentIdNo");
          String subteamTransferDate = request.getParameter("subteamTransferDate");
-         String officialContactNumber = request.getParameter("officialContactNumber");
+//         String officialContactNumber = request.getParameter("officialContactNumber");
         
         
         
@@ -379,7 +379,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             //***********employeeextension create*****************//
             employeeMasterExtension.setChildOneGender(Boolean.valueOf(childOneGender));
             employeeMasterExtension.setChildTwoGender(Boolean.valueOf(childTwoGender));
-            employeeMasterExtension.setNameStatus(Boolean.valueOf(namestatus));
+//            employeeMasterExtension.setNameStatus(Boolean.valueOf(namestatus));
             employeeMasterExtension.setSpouseGender(Boolean.valueOf(spousegender));
             employeeMasterExtension.setPresentAddress2(presentAddress2);
             employeeMasterExtension.setPresentCity(presentCity);
@@ -391,7 +391,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             employeeMasterExtension.setPermanentCountry(permanentCountry);
             employeeMasterExtension.setPermanentPostalCode(permanentPostalCode);
             employeeMasterExtension.setPermanentState(permanentState);
-            employeeMasterExtension.setReligion(religion);
+//            employeeMasterExtension.setReligion(religion);
             employeeMasterExtension.setDisclosedHealthConcerns(disclosedHealthConcerns);
             employeeMasterExtension.setLanguagesKnown(languagesKnown);
             employeeMasterExtension.setHobbies(hobbies);
@@ -403,36 +403,36 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             employeeMasterExtension.setFirstName(firstName);
             employeeMasterExtension.setMiddleName(middleName);
             employeeMasterExtension.setLastName(lastName);
-            employeeMasterExtension.setCountryOfIssue(countryOfIssue);
+//            employeeMasterExtension.setCountryOfIssue(countryOfIssue);
 //                employeeMasterExtension.setVisaIssueCountry(visaIssueCountry);
 //                employeeMasterExtension.setVisaIssueDate(visaIssueDate);
 //                employeeMasterExtension.setVisaValidTillDate(visaValidTillDate);
                 employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
-                employeeMasterExtension.setElectionCard(electionCard);
+//                employeeMasterExtension.setElectionCard(electionCard);
                 employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
                 employeeMasterExtension.setWithdrawalDate(withdrawalDate);
                 employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
                 employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
-                employeeMasterExtension.setDocumentIdNo(documentIdNo);
-                employeeMasterExtension.setOfficialContactNumber(officialContactNumber);
+//                employeeMasterExtension.setDocumentIdNo(documentIdNo);
+//                employeeMasterExtension.setOfficialContactNumber(officialContactNumber);
                 employeeMasterExtension.setSubteamTransferDate(subteamTransferDate);
                 employeeMasterExtension.setEmployeeMaster(employeeMaster);
                 employeeMasterServiceExtension.create(employeeMasterExtension);
             
                 //***********employee visa doc create*****************//
                 
-                int visaCount=Integer.parseInt(request.getParameter("visaCount"));
-                EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
-                for(int i = 1;i<=visaCount;i++){
-                    String visaIssueCountry=request.getParameter("visaIssueCountry"+i);
-                    String visaIssueDate=request.getParameter("visaIssueDate"+i);
-                    String visaValidTillDate=request.getParameter("visaValidTillDate"+i);
-                    employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
-                    employeeVisaDetails.setVisaIssueDate(visaIssueDate);
-                    employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
-                    employeeVisaDetails.setEmployeeMaster(employeeMaster);
-                    employeeVisaDetailsService.create(employeeVisaDetails);
-                }
+//                int visaCount=Integer.parseInt(request.getParameter("visaCount"));
+//                EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
+//                for(int i = 1;i<=visaCount;i++){
+//                    String visaIssueCountry=request.getParameter("visaIssueCountry"+i);
+//                    String visaIssueDate=request.getParameter("visaIssueDate"+i);
+//                    String visaValidTillDate=request.getParameter("visaValidTillDate"+i);
+//                    employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+//                    employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+//                    employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+//                    employeeVisaDetails.setEmployeeMaster(employeeMaster);
+//                    employeeVisaDetailsService.create(employeeVisaDetails);
+//                }
                 
             
             //Code for Employee Policy Detail
@@ -885,7 +885,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         // Employee Extension
         employeeMaster = employeeMasterService.readById(id);
         List<?> employeeMasterExtensionList = employeeMasterServiceExtension.readByemployeeId(employeeMaster.getId());
-        List<?> employeeVisaDetailsList = employeeVisaDetailsService.readByemployeeId(employeeMaster.getId());
+//        List<?> employeeVisaDetailsList = employeeVisaDetailsService.readByemployeeId(employeeMaster.getId());
 
         ///this code is for read file name and display it
 //        String userName = readUserName(request);
@@ -1005,7 +1005,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
 //        request.setAttribute("company", employeeMaster.getCompany());
 
-        request.setAttribute("employeeVisaDetailsList", employeeVisaDetailsList);
+//        request.setAttribute("employeeVisaDetailsList", employeeVisaDetailsList);
         request.setAttribute("employeeType", employeeMaster.getEmployeeType());
         request.setAttribute("shiftType", employeeMaster.getShiftType());
         request.setAttribute("certificatesList", certificatesList);
@@ -1044,7 +1044,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
          String permanentState=request.getParameter("permanentState");
          String permanentPostalCode=request.getParameter("permanentPostalCode");
          String permanentCountry=request.getParameter("permanentCountry");
-         String religion=request.getParameter("religion");
+//         String religion=request.getParameter("religion");
          String disclosedHealthConcerns=request.getParameter("disclosedHealthConcerns");
          String languagesKnown=request.getParameter("languagesKnown");
          String hobbies=request.getParameter("hobbies");
@@ -1058,20 +1058,20 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
          String firstName=request.getParameter("firstName");
          String middleName=request.getParameter("middleName");
          String lastName=request.getParameter("lastName");
-         String countryOfIssue=request.getParameter("countryOfIssue");
+//         String countryOfIssue=request.getParameter("countryOfIssue");
          
          String drivingLicenceType=request.getParameter("drivingLicenceType");
-         String electionCard=request.getParameter("electionCard");
+//         String electionCard=request.getParameter("electionCard");
          String pfNoFlydocs=request.getParameter("pfNoFlydocs");
          String withdrawalDate=request.getParameter("withdrawalDate");
          String nameOfPreviousCompany=request.getParameter("nameOfPreviousCompany");
          String previousCompanyLocation=request.getParameter("previousCompanyLocation");    
          
-         String namestatus=request.getParameter("nameStatus");  
+//         String namestatus=request.getParameter("nameStatus");  
          String spousegender=request.getParameter("spouseGender");  
-         String documentIdNo = request.getParameter("documentIdNo");
+//         String documentIdNo = request.getParameter("documentIdNo");
          String subteamTransferDate = request.getParameter("subteamTransferDate");
-         String officialContactNumber = request.getParameter("officialContactNumber");
+//         String officialContactNumber = request.getParameter("officialContactNumber");
         
         
         bind(request, employeeMaster);
@@ -1185,7 +1185,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         employeeMasterExtension.setId(employeeMasterExtension1.getId());
         employeeMasterExtension.setChildOneGender(Boolean.valueOf(childOneGender));
         employeeMasterExtension.setChildTwoGender(Boolean.valueOf(childTwoGender));
-        employeeMasterExtension.setNameStatus(Boolean.valueOf(namestatus));
+//        employeeMasterExtension.setNameStatus(Boolean.valueOf(namestatus));
         employeeMasterExtension.setSpouseGender(Boolean.valueOf(spousegender));
         employeeMasterExtension.setPresentAddress2(presentAddress2);
         employeeMasterExtension.setPresentCity(presentCity);
@@ -1197,7 +1197,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         employeeMasterExtension.setPermanentCountry(permanentCountry);
         employeeMasterExtension.setPermanentPostalCode(permanentPostalCode);
         employeeMasterExtension.setPermanentState(permanentState);
-        employeeMasterExtension.setReligion(religion);
+//        employeeMasterExtension.setReligion(religion);
         employeeMasterExtension.setDisclosedHealthConcerns(disclosedHealthConcerns);
         employeeMasterExtension.setLanguagesKnown(languagesKnown);
         employeeMasterExtension.setHobbies(hobbies);
@@ -1209,49 +1209,49 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         employeeMasterExtension.setFirstName(firstName);
         employeeMasterExtension.setMiddleName(middleName);
         employeeMasterExtension.setLastName(lastName);
-        employeeMasterExtension.setCountryOfIssue(countryOfIssue);
+//        employeeMasterExtension.setCountryOfIssue(countryOfIssue);
 //                employeeMasterExtension.setVisaIssueCountry(visaIssueCountry);
 //                employeeMasterExtension.setVisaIssueDate(visaIssueDate);
 //                employeeMasterExtension.setVisaValidTillDate(visaValidTillDate);
                 employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
-                employeeMasterExtension.setElectionCard(electionCard);
+//                employeeMasterExtension.setElectionCard(electionCard);
                 employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
                 employeeMasterExtension.setWithdrawalDate(withdrawalDate);
                 employeeMasterExtension.setNameOfPreviousCompany(nameOfPreviousCompany);
                 employeeMasterExtension.setPreviousCompanyLocation(previousCompanyLocation);
-                employeeMasterExtension.setDocumentIdNo(documentIdNo);
-                employeeMasterExtension.setOfficialContactNumber(officialContactNumber);
+//                employeeMasterExtension.setDocumentIdNo(documentIdNo);
+//                employeeMasterExtension.setOfficialContactNumber(officialContactNumber);
                 employeeMasterExtension.setSubteamTransferDate(subteamTransferDate);
                 employeeMasterExtension.setEmployeeMaster(employeeMaster);
                 employeeMasterServiceExtension.update(employeeMasterExtension);
                 
                 //*******employee visa details ********// 
                 
-                EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
-                boolean employeeexist = employeeVisaDetailsService.employeeVisadetailsexist(employeeMaster.getId());
-                if(employeeexist){
-                    employeeVisaDetailsService.deleteByemployeeId(employeeMaster.getId());
-                    int visaCount1 = Integer.parseInt(request.getParameter("visaCount1"));
-                    for(int i = 1;i<=visaCount1;i++){
-                        String visaIssueCountry=request.getParameter("visaIssueCountry"+i);
-                        String visaIssueDate=request.getParameter("visaIssueDate"+i);
-                        String visaValidTillDate=request.getParameter("visaValidTillDate"+i);
-                        employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
-                        employeeVisaDetails.setVisaIssueDate(visaIssueDate);
-                        employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
-                        employeeVisaDetails.setEmployeeMaster(employeeMaster);
-                        employeeVisaDetailsService.create(employeeVisaDetails);
-                    }
-                }else{
-                        String visaIssueCountry="";
-                        String visaIssueDate="";
-                        String visaValidTillDate="";
-                        employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
-                        employeeVisaDetails.setVisaIssueDate(visaIssueDate);
-                        employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
-                        employeeVisaDetails.setEmployeeMaster(employeeMaster);
-                        employeeVisaDetailsService.create(employeeVisaDetails);
-                }
+//                EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
+//                boolean employeeexist = employeeVisaDetailsService.employeeVisadetailsexist(employeeMaster.getId());
+//                if(employeeexist){
+//                    employeeVisaDetailsService.deleteByemployeeId(employeeMaster.getId());
+//                    int visaCount1 = Integer.parseInt(request.getParameter("visaCount1"));
+//                    for(int i = 1;i<=visaCount1;i++){
+//                        String visaIssueCountry=request.getParameter("visaIssueCountry"+i);
+//                        String visaIssueDate=request.getParameter("visaIssueDate"+i);
+//                        String visaValidTillDate=request.getParameter("visaValidTillDate"+i);
+//                        employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+//                        employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+//                        employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+//                        employeeVisaDetails.setEmployeeMaster(employeeMaster);
+//                        employeeVisaDetailsService.create(employeeVisaDetails);
+//                    }
+//                }else{
+//                        String visaIssueCountry="";
+//                        String visaIssueDate="";
+//                        String visaValidTillDate="";
+//                        employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+//                        employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+//                        employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+//                        employeeVisaDetails.setEmployeeMaster(employeeMaster);
+//                        employeeVisaDetailsService.create(employeeVisaDetails);
+//                }
                 
                 
                 
@@ -2824,8 +2824,36 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             physicaldate = resignationMaster.getRelievingDatephysical();
         }
         
-        
-        
+        String rmName2 = "";
+        String rmName3 = "";
+        String rmName4 = "";
+        String rmName5 = "";
+        String rmName6 = "";
+        String rm2 = employeeMaster.getReportingManagerLevel2();
+        String rm3 = employeeMaster.getReportingManagerLevel3();
+        String rm4 = employeeMaster.getReportingManagerLevel4();
+        String rm5 = employeeMaster.getReportingManagerLevel5();
+        String rm6 = employeeMaster.getReportingManagerLevel6();
+        if(!rm2.isEmpty()){
+            rmName2 = employeeMasterService.getNameById(Integer.parseInt(rm2));
+        }
+        if(!rm3.isEmpty()){
+            rmName3 = employeeMasterService.getNameById(Integer.parseInt(rm3));
+        }
+        if(!rm4.isEmpty()){
+            rmName4 = employeeMasterService.getNameById(Integer.parseInt(rm4));
+        }
+        if(!rm5.isEmpty()){
+            rmName5 = employeeMasterService.getNameById(Integer.parseInt(rm5));
+        }
+        if(!rm6.isEmpty()){
+            rmName6 = employeeMasterService.getNameById(Integer.parseInt(rm6));
+        }
+        request.setAttribute("rmName2", rmName2);
+        request.setAttribute("rmName3", rmName3);
+        request.setAttribute("rmName4", rmName4);
+        request.setAttribute("rmName5", rmName5);
+        request.setAttribute("rmName6", rmName6);
         
         
         request.setAttribute("officialdate", officialdate);
@@ -2936,18 +2964,18 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String LastName = "";
         //***employee extension END****//
 
-        String passportNo = "";
+//        String passportNo = "";
         //***employee extension****//
         String nationality = "";
-        String countryOfIssue = "";
+//        String countryOfIssue = "";
         //***employee extension END****//
 
-        String passportDateOfIssue = "";
-        String passportExpiryDate = "";
+//        String passportDateOfIssue = "";
+//        String passportExpiryDate = "";
         //***employee extension****//
-        String visaIssueCountry = "";
-        String visaIssueDate = "";
-        String visaValidTillDate = "";
+//        String visaIssueCountry = "";
+//        String visaIssueDate = "";
+//        String visaValidTillDate = "";
         //***employee extension END****//
 
         String presentAddress1 = "";
@@ -2971,7 +2999,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String contactNo1resident = "";
         String contactNo2mobile = "";
         //***employee extension****//
-        String flyDocsEmailId = "";
+//        String flyDocsEmailId = "";
         //***employee extension END****//
 
         String personalEmailId = "";
@@ -2985,7 +3013,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String pfNo = ""; //pf 
         //***employee extension****//
         String pfNoFlydocs = "";
-        String electionCard = "";
+//        String electionCard = "";
         //***employee extension END****//
 
         String pan = "";
@@ -2994,7 +3022,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         String uanNo = ""; //uano
         String maritalStatus = "";
         //***employee extension****//
-        String religion = "";
+//        String religion = "";
         //***employee extension END****//
 
         String bloodGroup = "";
@@ -3136,51 +3164,51 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             FirstName = "" + (null == row.getCell((short) 16) ? "" : row.getCell((short) 16));
                             MiddleName = "" + (null == row.getCell((short) 17) ? "" : row.getCell((short) 17));
                             LastName = "" + (null == row.getCell((short) 18) ? "" : row.getCell((short) 18));
-                            passportNo = "" + (null == row.getCell((short) 19) ? "" : row.getCell((short) 19));
-                            nationality = "" + (null == row.getCell((short) 20) ? "" : row.getCell((short) 20));
-                            countryOfIssue = "" + (null == row.getCell((short) 21) ? "" : row.getCell((short) 21));
-                            passportDateOfIssue = "" + (null == row.getCell((short) 22) ? "" : row.getCell((short) 22));
-                            String passportDateOfIssueformated;
-                            if (!passportDateOfIssue.contains("N/A")) {
-                                SimpleDateFormat sdfpDOJ = new SimpleDateFormat("dd-MMM-yyyy");
-                                SimpleDateFormat sdfpDOJ2 = new SimpleDateFormat("dd/MM/yyyy");
-
-                                Date datepDOJ = sdfpDOJ.parse(passportDateOfIssue);
-                                String nDate8 = sdfpDOJ.format(datepDOJ);
-                                passportDateOfIssueformated = sdfpDOJ2.format(datepDOJ);
-                            } else {
-                                passportDateOfIssueformated = "N/A";
-                            }
-                            passportExpiryDate = "" + (null == row.getCell((short) 23) ? "" : row.getCell((short) 23));
-                            String passportExpiryDateformated;
-                            if (!passportExpiryDate.contains("N/A")) {
-                                SimpleDateFormat sdfpeDOJ = new SimpleDateFormat("dd-MMM-yyyy");
-                                SimpleDateFormat sdfpeDOJ2 = new SimpleDateFormat("dd/MM/yyyy");
-
-                                Date datepeDOJ = sdfpeDOJ.parse(passportExpiryDate);
-                                String nDate9 = sdfpeDOJ.format(datepeDOJ);
-                                passportExpiryDateformated = sdfpeDOJ2.format(datepeDOJ);
-                            } else {
-                                passportExpiryDateformated = "N/A";
-                            }
-                            visaIssueCountry = "" + (null == row.getCell((short) 24) ? "" : row.getCell((short) 24));
-                            visaIssueDate = "" + (null == row.getCell((short) 25) ? "" : row.getCell((short) 25));
-                            visaValidTillDate = "" + (null == row.getCell((short) 26) ? "" : row.getCell((short) 26));
-                            presentAddress1 = "" + (null == row.getCell((short) 28) ? "" : row.getCell((short) 28));
-                            presentAddress2 = "" + (null == row.getCell((short) 29) ? "" : row.getCell((short) 29));
-                            presentCity = "" + (null == row.getCell((short) 30) ? "" : row.getCell((short) 30));
-                            presentState = "" + (null == row.getCell((short) 31) ? "" : row.getCell((short) 31));
-                            presentPostalCode = "" + (null == row.getCell((short) 32) ? "" : row.getCell((short) 32));
+//                            passportNo = "" + (null == row.getCell((short) 19) ? "" : row.getCell((short) 19));
+                            nationality = "" + (null == row.getCell((short) 19) ? "" : row.getCell((short) 19));
+//                            countryOfIssue = "" + (null == row.getCell((short) 21) ? "" : row.getCell((short) 21));
+//                            passportDateOfIssue = "" + (null == row.getCell((short) 22) ? "" : row.getCell((short) 22));
+//                            String passportDateOfIssueformated;
+//                            if (!passportDateOfIssue.contains("N/A")) {
+//                                SimpleDateFormat sdfpDOJ = new SimpleDateFormat("dd-MMM-yyyy");
+//                                SimpleDateFormat sdfpDOJ2 = new SimpleDateFormat("dd/MM/yyyy");
+//
+//                                Date datepDOJ = sdfpDOJ.parse(passportDateOfIssue);
+//                                String nDate8 = sdfpDOJ.format(datepDOJ);
+//                                passportDateOfIssueformated = sdfpDOJ2.format(datepDOJ);
+//                            } else {
+//                                passportDateOfIssueformated = "N/A";
+//                            }
+//                            passportExpiryDate = "" + (null == row.getCell((short) 23) ? "" : row.getCell((short) 23));
+//                            String passportExpiryDateformated;
+//                            if (!passportExpiryDate.contains("N/A")) {
+//                                SimpleDateFormat sdfpeDOJ = new SimpleDateFormat("dd-MMM-yyyy");
+//                                SimpleDateFormat sdfpeDOJ2 = new SimpleDateFormat("dd/MM/yyyy");
+//
+//                                Date datepeDOJ = sdfpeDOJ.parse(passportExpiryDate);
+//                                String nDate9 = sdfpeDOJ.format(datepeDOJ);
+//                                passportExpiryDateformated = sdfpeDOJ2.format(datepeDOJ);
+//                            } else {
+//                                passportExpiryDateformated = "N/A";
+//                            }
+//                            visaIssueCountry = "" + (null == row.getCell((short) 24) ? "" : row.getCell((short) 24));
+//                            visaIssueDate = "" + (null == row.getCell((short) 25) ? "" : row.getCell((short) 25));
+//                            visaValidTillDate = "" + (null == row.getCell((short) 26) ? "" : row.getCell((short) 26));
+                            presentAddress1 = "" + (null == row.getCell((short) 20) ? "" : row.getCell((short) 20));
+                            presentAddress2 = "" + (null == row.getCell((short) 21) ? "" : row.getCell((short) 21));
+                            presentCity = "" + (null == row.getCell((short) 22) ? "" : row.getCell((short) 22));
+                            presentState = "" + (null == row.getCell((short) 23) ? "" : row.getCell((short) 23));
+                            presentPostalCode = "" + (null == row.getCell((short) 24) ? "" : row.getCell((short) 24));
                             presentPostalCode = presentPostalCode.split("\\.", 2)[0];
-                            presentCountry = "" + (null == row.getCell((short) 33) ? "" : row.getCell((short) 33));
-                            permanentAddress1 = "" + (null == row.getCell((short) 35) ? "" : row.getCell((short) 35));
-                            permanentAddress2 = "" + (null == row.getCell((short) 36) ? "" : row.getCell((short) 36));
-                            permanentCity = "" + (null == row.getCell((short) 37) ? "" : row.getCell((short) 37));
-                            permanentState = "" + (null == row.getCell((short) 38) ? "" : row.getCell((short) 38));
-                            permanentPostalCode = "" + (null == row.getCell((short) 39) ? "" : row.getCell((short) 39));
+                            presentCountry = "" + (null == row.getCell((short) 25) ? "" : row.getCell((short) 25));
+                            permanentAddress1 = "" + (null == row.getCell((short) 27) ? "" : row.getCell((short) 27));
+                            permanentAddress2 = "" + (null == row.getCell((short) 28) ? "" : row.getCell((short) 28));
+                            permanentCity = "" + (null == row.getCell((short) 29) ? "" : row.getCell((short) 29));
+                            permanentState = "" + (null == row.getCell((short) 30) ? "" : row.getCell((short) 30));
+                            permanentPostalCode = "" + (null == row.getCell((short) 31) ? "" : row.getCell((short) 31));
                             permanentPostalCode = permanentPostalCode.split("\\.", 2)[0];
-                            permanentCountry = "" + (null == row.getCell((short) 40) ? "" : row.getCell((short) 40));
-                            contactNo1resident = "" + (null == row.getCell((short) 42) ? "" : row.getCell((short) 42));
+                            permanentCountry = "" + (null == row.getCell((short) 32) ? "" : row.getCell((short) 32));
+                            contactNo1resident = "" + (null == row.getCell((short) 34) ? "" : row.getCell((short) 34));
                             String contactNo = "";
                             if (!contactNo1resident.equals("")) {
                                 BigDecimal bdContactNo = new BigDecimal(contactNo1resident);
@@ -3188,7 +3216,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 contactNo = "";
                             }
-                            contactNo2mobile = "" + (null == row.getCell((short) 43) ? "" : row.getCell((short) 43));
+                            contactNo2mobile = "" + (null == row.getCell((short) 35) ? "" : row.getCell((short) 35));
                             String contactNo2 = "";
                             if (!contactNo2mobile.equals("")) {
                                 BigDecimal bdContactNo2 = new BigDecimal(contactNo2mobile);
@@ -3196,9 +3224,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 contactNo2 = "";
                             }
-                            flyDocsEmailId = "" + (null == row.getCell((short) 44) ? "" : row.getCell((short) 44));
-                            personalEmailId = "" + (null == row.getCell((short) 45) ? "" : row.getCell((short) 45));
-                            bankAccountNo = "" + (null == row.getCell((short) 47) ? "" : row.getCell((short) 47));
+//                            flyDocsEmailId = "" + (null == row.getCell((short) 36) ? "" : row.getCell((short) 36));
+                            personalEmailId = "" + (null == row.getCell((short) 36) ? "" : row.getCell((short) 36));
+                            bankAccountNo = "" + (null == row.getCell((short) 38) ? "" : row.getCell((short) 38));
                             String bNo = "";
                             if (!bankAccountNo.equals("")) {
                                 BigDecimal bdbNo = new BigDecimal(bankAccountNo);
@@ -3206,14 +3234,14 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 bNo = "";
                             }
-                            bankName = "" + (null == row.getCell((short) 48) ? "" : row.getCell((short) 48));
-                            ifscCode = "" + (null == row.getCell((short) 49) ? "" : row.getCell((short) 49));
-                            pfwithdrawalDate = "" + (null == row.getCell((short) 50) ? "" : row.getCell((short) 50));
-                            pfNo = "" + (null == row.getCell((short) 51) ? "" : row.getCell((short) 51));
-                            pfNoFlydocs = "" + (null == row.getCell((short) 52) ? "" : row.getCell((short) 52));
-                            electionCard = "" + (null == row.getCell((short) 53) ? "" : row.getCell((short) 53));
-                            pan = "" + (null == row.getCell((short) 54) ? "" : row.getCell((short) 54));
-                            aadharCard = "" + (null == row.getCell((short) 55) ? "" : row.getCell((short) 55));
+                            bankName = "" + (null == row.getCell((short) 39) ? "" : row.getCell((short) 39));
+                            ifscCode = "" + (null == row.getCell((short) 40) ? "" : row.getCell((short) 40));
+                            pfwithdrawalDate = "" + (null == row.getCell((short) 41) ? "" : row.getCell((short) 41));
+                            pfNo = "" + (null == row.getCell((short) 42) ? "" : row.getCell((short) 42));
+                            pfNoFlydocs = "" + (null == row.getCell((short) 43) ? "" : row.getCell((short) 43));
+//                            electionCard = "" + (null == row.getCell((short) 53) ? "" : row.getCell((short) 53));
+                            pan = "" + (null == row.getCell((short) 44) ? "" : row.getCell((short) 44));
+                            aadharCard = "" + (null == row.getCell((short) 45) ? "" : row.getCell((short) 45));
                             String aNo = "";
                             if (!aadharCard.equals("")) {
                                 BigDecimal bdaNo = new BigDecimal(aadharCard);
@@ -3221,8 +3249,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 aNo = "";
                             }
-                            esicNo = "" + (null == row.getCell((short) 56) ? "" : row.getCell((short) 56));
-                            uanNo = "" + (null == row.getCell((short) 57) ? "" : row.getCell((short) 57));
+                            esicNo = "" + (null == row.getCell((short) 46) ? "" : row.getCell((short) 46));
+                            uanNo = "" + (null == row.getCell((short) 47) ? "" : row.getCell((short) 47));
                             String uannNo = "";
                             if (!uanNo.equals("")) {
                                 BigDecimal bduNo = new BigDecimal(uanNo);
@@ -3230,11 +3258,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 uannNo = "";
                             }
-                            maritalStatus = "" + (null == row.getCell((short) 59) ? "" : row.getCell((short) 59));
-                            religion = "" + (null == row.getCell((short) 60) ? "" : row.getCell((short) 60));
-                            bloodGroup = "" + (null == row.getCell((short) 61) ? "" : row.getCell((short) 61));
-                            disclosedHealthConcerns = "" + (null == row.getCell((short) 62) ? "" : row.getCell((short) 62));
-                            drivinglicenceNo = "" + (null == row.getCell((short) 64) ? "" : row.getCell((short) 64));
+                            maritalStatus = "" + (null == row.getCell((short) 49) ? "" : row.getCell((short) 49));
+//                            religion = "" + (null == row.getCell((short) 60) ? "" : row.getCell((short) 60));
+                            bloodGroup = "" + (null == row.getCell((short) 50) ? "" : row.getCell((short) 50));
+                            disclosedHealthConcerns = "" + (null == row.getCell((short) 51) ? "" : row.getCell((short) 51));
+                            drivinglicenceNo = "" + (null == row.getCell((short) 53) ? "" : row.getCell((short) 53));
 //                            String drilicNo = "";
 //                            if (!drivinglicenceNo.equals("")) {
 //                                BigDecimal bddrilicNo = new BigDecimal(drivinglicenceNo);
@@ -3242,9 +3270,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                            } else {
 //                                drilicNo = "";
 //                            }
-                            drivingLicenceType = "" + (null == row.getCell((short) 65) ? "" : row.getCell((short) 65));
-                            fatherNamed1 = "" + (null == row.getCell((short) 68) ? "" : row.getCell((short) 68));
-                            fatherdob = "" + (null == row.getCell((short) 70) ? "" : row.getCell((short) 70));
+                            drivingLicenceType = "" + (null == row.getCell((short) 54) ? "" : row.getCell((short) 54));
+                            fatherNamed1 = "" + (null == row.getCell((short) 57) ? "" : row.getCell((short) 57));
+                            fatherdob = "" + (null == row.getCell((short) 59) ? "" : row.getCell((short) 59));
                             String fatherdobformated;
                             if (!fatherdob.contains("N/A")) {
                                 SimpleDateFormat sdfdDOJ = new SimpleDateFormat("dd-MMM-yyyy");
@@ -3256,8 +3284,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 fatherdobformated = "N/A";
                             }
-                            motherNamed2 = "" + (null == row.getCell((short) 71) ? "" : row.getCell((short) 71));
-                            motherdob = "" + (null == row.getCell((short) 73) ? "" : row.getCell((short) 73));
+                            motherNamed2 = "" + (null == row.getCell((short) 60) ? "" : row.getCell((short) 60));
+                            motherdob = "" + (null == row.getCell((short) 62) ? "" : row.getCell((short) 62));
                             String motherdobformated;
                             if (!motherdob.contains("N/A")) {
                                 SimpleDateFormat sdfmDOJ = new SimpleDateFormat("dd-MMM-yyyy");
@@ -3269,9 +3297,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 motherdobformated = "N/A";
                             }
-                            spouseNamed3 = "" + (null == row.getCell((short) 74) ? "" : row.getCell((short) 74));
-                            spouseGender3 = "" + (null == row.getCell((short) 75) ? "" : row.getCell((short) 75));
-                            spousedob = "" + (null == row.getCell((short) 76) ? "" : row.getCell((short) 76));
+                            spouseNamed3 = "" + (null == row.getCell((short) 63) ? "" : row.getCell((short) 63));
+                            spouseGender3 = "" + (null == row.getCell((short) 64) ? "" : row.getCell((short) 64));
+                            spousedob = "" + (null == row.getCell((short) 65) ? "" : row.getCell((short) 65));
                             String spousedobformated;
                             if (!spousedob.contains("N/A")) {
                                 SimpleDateFormat sdfsDOJ = new SimpleDateFormat("dd-MMM-yyyy");
@@ -3284,9 +3312,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 spousedobformated = "N/A";
                             }
 
-                            childname1 = "" + (null == row.getCell((short) 77) ? "" : row.getCell((short) 77));
-                            childOneGender = "" + (null == row.getCell((short) 78) ? "" : row.getCell((short) 78));
-                            childdob1 = "" + (null == row.getCell((short) 79) ? "" : row.getCell((short) 79));
+                            childname1 = "" + (null == row.getCell((short) 66) ? "" : row.getCell((short) 66));
+                            childOneGender = "" + (null == row.getCell((short) 67) ? "" : row.getCell((short) 67));
+                            childdob1 = "" + (null == row.getCell((short) 68) ? "" : row.getCell((short) 68));
                             String childdob1formated;
                             if (!childdob1.contains("N/A")) {
                                 SimpleDateFormat sdfcDOJ = new SimpleDateFormat("dd-MMM-yyyy");
@@ -3298,9 +3326,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 childdob1formated = "N/A";
                             }
-                            childname2 = "" + (null == row.getCell((short) 80) ? "" : row.getCell((short) 80));
-                            childTwoGender = "" + (null == row.getCell((short) 81) ? "" : row.getCell((short) 81));
-                            childdob2 = "" + (null == row.getCell((short) 82) ? "" : row.getCell((short) 82));
+                            childname2 = "" + (null == row.getCell((short) 69) ? "" : row.getCell((short) 69));
+                            childTwoGender = "" + (null == row.getCell((short) 70) ? "" : row.getCell((short) 70));
+                            childdob2 = "" + (null == row.getCell((short) 71) ? "" : row.getCell((short) 71));
                             String childdob2formated;
                             if (!childdob2.contains("N/A")) {
                                 SimpleDateFormat sdfc2DOJ = new SimpleDateFormat("dd-MMM-yyyy");
@@ -3312,9 +3340,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 childdob2formated = "N/A";
                             }
-                            emergencyContactPerson = "" + (null == row.getCell((short) 84) ? "" : row.getCell((short) 84));
-                            RelationShip = "" + (null == row.getCell((short) 85) ? "" : row.getCell((short) 85));
-                            emergencyContactNo = "" + (null == row.getCell((short) 86) ? "" : row.getCell((short) 86));
+                            emergencyContactPerson = "" + (null == row.getCell((short) 73) ? "" : row.getCell((short) 73));
+                            RelationShip = "" + (null == row.getCell((short) 74) ? "" : row.getCell((short) 74));
+                            emergencyContactNo = "" + (null == row.getCell((short) 75) ? "" : row.getCell((short) 75));
                             String econtactNo = "";
                             if (!emergencyContactNo.equals("")) {
                                 BigDecimal bdeContactNo = new BigDecimal(emergencyContactNo);
@@ -3322,17 +3350,17 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 econtactNo = "";
                             }
-                            emergencyContactAddress = "" + (null == row.getCell((short) 87) ? "" : row.getCell((short) 87));
-                            otherImpInfo = "" + (null == row.getCell((short) 88) ? "" : row.getCell((short) 88));
-                            previouscompanyname = "" + (null == row.getCell((short) 94) ? "" : row.getCell((short) 94));
-                            previouscompanylocation = "" + (null == row.getCell((short) 95) ? "" : row.getCell((short) 95));
-                            companylocationCity = "" + (null == row.getCell((short) 96) ? "" : row.getCell((short) 96));
+                            emergencyContactAddress = "" + (null == row.getCell((short) 76) ? "" : row.getCell((short) 76));
+                            otherImpInfo = "" + (null == row.getCell((short) 77) ? "" : row.getCell((short) 77));
+                            previouscompanyname = "" + (null == row.getCell((short) 83) ? "" : row.getCell((short) 83));
+                            previouscompanylocation = "" + (null == row.getCell((short) 84) ? "" : row.getCell((short) 84));
+                            companylocationCity = "" + (null == row.getCell((short) 85) ? "" : row.getCell((short) 85));
 //                            employeeeEXPonJoiningYears = "" + (null == row.getCell((short) 96) ? "" : row.getCell((short) 96));
                             try {
-                                employeeeEXPonJoiningYears = new BigDecimal("" + (null == row.getCell((short) 97) ? "" : row.getCell((short) 97))).toPlainString();
+                                employeeeEXPonJoiningYears = new BigDecimal("" + (null == row.getCell((short) 86) ? "" : row.getCell((short) 86))).toPlainString();
                                 employeeeEXPonJoiningYears = employeeeEXPonJoiningYears.split("\\.", 2)[0];
                             } catch (Exception e) {
-                                employeeeEXPonJoiningYears = "" + (null == row.getCell((short) 97) ? "" : row.getCell((short) 97));
+                                employeeeEXPonJoiningYears = "" + (null == row.getCell((short) 86) ? "" : row.getCell((short) 86));
                             }
 //                            String employeeeEXPYear = "";
 //                            if (!employeeeEXPonJoiningYears.equals("")) {
@@ -3343,10 +3371,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                            }
 //                            employeeeEXPonJoiningMonths = "" + (null == row.getCell((short) 97) ? "" : row.getCell((short) 97));
                             try {
-                                employeeeEXPonJoiningMonths = new BigDecimal("" + (null == row.getCell((short) 98) ? "" : row.getCell((short) 98))).toPlainString();
+                                employeeeEXPonJoiningMonths = new BigDecimal("" + (null == row.getCell((short) 87) ? "" : row.getCell((short) 87))).toPlainString();
                                 employeeeEXPonJoiningMonths = employeeeEXPonJoiningMonths.split("\\.", 2)[0];
                             } catch (Exception e) {
-                                employeeeEXPonJoiningMonths = "" + (null == row.getCell((short) 98) ? "" : row.getCell((short) 98));
+                                employeeeEXPonJoiningMonths = "" + (null == row.getCell((short) 87) ? "" : row.getCell((short) 87));
                             }
 //                            String employeeeEXPMonth = "";
 //                            if (!employeeeEXPonJoiningMonths.equals("")) {
@@ -3355,29 +3383,29 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                            } else {
 //                                employeeeEXPMonth = "";
 //                            }
-                            highestEducation = "" + (null == row.getCell((short) 99) ? "" : row.getCell((short) 99));
-                            languagesKnown = "" + (null == row.getCell((short) 100) ? "" : row.getCell((short) 100));
-                            hobbies = "" + (null == row.getCell((short) 101) ? "" : row.getCell((short) 101));
-                            workType = "" + (null == row.getCell((short) 103) ? "" : row.getCell((short) 103));
-                            hours = "" + (null == row.getCell((short) 104) ? "" : row.getCell((short) 104));
-                            shiftName = "" + (null == row.getCell((short) 105) ? "" : row.getCell((short) 105));
-                            shiftRotation = "" + (null == row.getCell((short) 106) ? "" : row.getCell((short) 106));
-                            shiftRotationDate = "" + (null == row.getCell((short) 107) ? "" : row.getCell((short) 107));
-                            paymentType = "" + (null == row.getCell((short) 108) ? "" : row.getCell((short) 108));
-                            basicSalary = "" + (null == row.getCell((short) 109) ? "" : row.getCell((short) 109));
+                            highestEducation = "" + (null == row.getCell((short) 88) ? "" : row.getCell((short) 88));
+                            languagesKnown = "" + (null == row.getCell((short) 89) ? "" : row.getCell((short) 89));
+                            hobbies = "" + (null == row.getCell((short) 90) ? "" : row.getCell((short) 90));
+                            workType = "" + (null == row.getCell((short) 92) ? "" : row.getCell((short) 92));
+                            hours = "" + (null == row.getCell((short) 93) ? "" : row.getCell((short) 93));
+                            shiftName = "" + (null == row.getCell((short) 94) ? "" : row.getCell((short) 94));
+                            shiftRotation = "" + (null == row.getCell((short) 95) ? "" : row.getCell((short) 95));
+                            shiftRotationDate = "" + (null == row.getCell((short) 96) ? "" : row.getCell((short) 96));
+                            paymentType = "" + (null == row.getCell((short) 97) ? "" : row.getCell((short) 97));
+                            basicSalary = "" + (null == row.getCell((short) 98) ? "" : row.getCell((short) 98));
                             basicSalary = basicSalary.split("\\.", 2)[0];
-                            company = "" + (null == row.getCell((short) 110) ? "" : row.getCell((short) 110));
-                            department = "" + (null == row.getCell((short) 111) ? "" : row.getCell((short) 111));
+                            company = "" + (null == row.getCell((short) 99) ? "" : row.getCell((short) 99));
+                            department = "" + (null == row.getCell((short) 100) ? "" : row.getCell((short) 100));
                             
-                            pfconbyemployee = "" + (null == row.getCell((short) 112) ? "" : row.getCell((short) 112));
-                            pfconbyemployer = "" + (null == row.getCell((short) 113) ? "" : row.getCell((short) 113));
-                            pfcheck = "" + (null == row.getCell((short) 114) ? "" : row.getCell((short) 114));
-                            ptcheck = "" + (null == row.getCell((short) 115) ? "" : row.getCell((short) 115));
-                            esiccheck = "" + (null == row.getCell((short) 116) ? "" : row.getCell((short) 116));
-                            salarybase = "" + (null == row.getCell((short) 117) ? "" : row.getCell((short) 117));
-                            ot = "" + (null == row.getCell((short) 118) ? "" : row.getCell((short) 118));
-                            oddpunchreq = "" + (null == row.getCell((short) 119) ? "" : row.getCell((short) 119));
-                            payroll = "" + (null == row.getCell((short) 120) ? "" : row.getCell((short) 120));
+                            pfconbyemployee = "" + (null == row.getCell((short) 101) ? "" : row.getCell((short) 101));
+                            pfconbyemployer = "" + (null == row.getCell((short) 102) ? "" : row.getCell((short) 102));
+                            pfcheck = "" + (null == row.getCell((short) 103) ? "" : row.getCell((short) 103));
+                            ptcheck = "" + (null == row.getCell((short) 104) ? "" : row.getCell((short) 104));
+                            esiccheck = "" + (null == row.getCell((short) 105) ? "" : row.getCell((short) 105));
+                            salarybase = "" + (null == row.getCell((short) 106) ? "" : row.getCell((short) 106));
+                            ot = "" + (null == row.getCell((short) 107) ? "" : row.getCell((short) 107));
+                            oddpunchreq = "" + (null == row.getCell((short) 108) ? "" : row.getCell((short) 108));
+                            payroll = "" + (null == row.getCell((short) 109) ? "" : row.getCell((short) 109));
                             
                             
                             
@@ -3448,9 +3476,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             }else {
                                 employeeMaster.setPayroll(null);
                             }
-                            employeeMaster.setPassportNo(passportNo);
-                            employeeMaster.setPassportIssueDate(passportDateOfIssueformated);
-                            employeeMaster.setPassportExpiryDate(passportExpiryDateformated);
+//                            employeeMaster.setPassportNo(passportNo);
+//                            employeeMaster.setPassportIssueDate(passportDateOfIssueformated);
+//                            employeeMaster.setPassportExpiryDate(passportExpiryDateformated);
                             employeeMaster.setPresentAddress(presentAddress1);
                             employeeMaster.setDateOfBirthOfEmpFather(fatherdobformated);
                             employeeMaster.setDateOfBirthOfEmpMother(motherdobformated);
@@ -3462,24 +3490,24 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMaster.setCityOfEmployee(companylocationCity);
                             employeeMaster.setDrivingLicence(drivinglicenceNo);
 
-                            EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
-                            employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
-                            employeeVisaDetails.setVisaIssueDate(visaIssueDate);
-                            employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
+//                            EmployeeVisaDetails employeeVisaDetails = new EmployeeVisaDetails();
+//                            employeeVisaDetails.setVisaIssueCountry(visaIssueCountry);
+//                            employeeVisaDetails.setVisaIssueDate(visaIssueDate);
+//                            employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
 
                             EmployeeMasterExtension employeeMasterExtension = new EmployeeMasterExtension();
-                            if (nameper.equalsIgnoreCase("Passport")){
-                                employeeMasterExtension.setNameStatus(false);
-                            }else if(nameper.equalsIgnoreCase("AadharCard")){
-                                employeeMasterExtension.setNameStatus(true);
-                            }else{
-                                employeeMasterExtension.setNameStatus(false);
-                            }
+//                            if (nameper.equalsIgnoreCase("Passport")){
+//                                employeeMasterExtension.setNameStatus(false);
+//                            }else if(nameper.equalsIgnoreCase("AadharCard")){
+//                                employeeMasterExtension.setNameStatus(true);
+//                            }else{
+//                                employeeMasterExtension.setNameStatus(false);
+//                            }
                             employeeMasterExtension.setFirstName(FirstName);
                             employeeMasterExtension.setMiddleName(MiddleName);
                             employeeMasterExtension.setLastName(LastName);
                             employeeMasterExtension.setNationality(nationality);
-                            employeeMasterExtension.setCountryOfIssue(countryOfIssue);
+//                            employeeMasterExtension.setCountryOfIssue(countryOfIssue);
 //                            employeeMasterExtension.setVisaIssueCountry(visaIssueCountry);
 //                            employeeMasterExtension.setVisaIssueDate(visaIssueDate);
 //                            employeeMasterExtension.setVisaValidTillDate(visaValidTillDate);
@@ -3497,8 +3525,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                            employeeMasterExtension.setFlyDocsEmailId(flyDocsEmailId);
                             employeeMasterExtension.setWithdrawalDate(pfwithdrawalDate);
                             employeeMasterExtension.setPfNoFlydocs(pfNoFlydocs);
-                            employeeMasterExtension.setElectionCard(electionCard);
-                            employeeMasterExtension.setReligion(religion);
+//                            employeeMasterExtension.setElectionCard(electionCard);
+//                            employeeMasterExtension.setReligion(religion);
                             employeeMasterExtension.setDisclosedHealthConcerns(disclosedHealthConcerns);
                             employeeMasterExtension.setDrivingLicenceType(drivingLicenceType);
                             employeeMasterExtension.setPreviousCompanyLocation(previouscompanylocation);
@@ -3659,7 +3687,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             }
 
                             employeeMaster.setCompany(company);
-                            employeeMaster.setOfficeEmailId(flyDocsEmailId);
+//                            employeeMaster.setOfficeEmailId(flyDocsEmailId);
                             employeeMaster.setContactNo1(contactNo);
                             employeeMaster.setContactNo2(contactNo2);
                             employeeMaster.setFatherName(fatherNamed1);
@@ -3898,8 +3926,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 employeeMasterService.create(employeeMaster);
                                 employeeMasterExtension.setEmployeeMaster(employeeMaster);
                                 employeeMasterServiceExtension.create(employeeMasterExtension);
-                                employeeVisaDetails.setEmployeeMaster(employeeMaster);
-                                employeeVisaDetailsService.create(employeeVisaDetails);
+//                                employeeVisaDetails.setEmployeeMaster(employeeMaster);
+//                                employeeVisaDetailsService.create(employeeVisaDetails);
 
                                 //        Code for Shift generate monthly Schedule(Start)
 //                if (employeeMaster.getShiftType().equals("ShiftBase")) {
@@ -4172,11 +4200,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 }
                                 List<?> empvisalist = employeeVisaDetailsService.readByemployeeId(employeeMaster.getId());
                                 EmployeeVisaDetails employeeVisaDetails1 = (EmployeeVisaDetails) empvisalist.get(0);
-                                if (!empvisalist.isEmpty()) {
-                                    employeeVisaDetails.setId(employeeVisaDetails1.getId());
-                                    employeeVisaDetails.setEmployeeMaster(employeeMaster);
-                                    employeeVisaDetailsService.update(employeeVisaDetails);
-                                }
+//                                if (!empvisalist.isEmpty()) {
+//                                    employeeVisaDetails.setId(employeeVisaDetails1.getId());
+//                                    employeeVisaDetails.setEmployeeMaster(employeeMaster);
+//                                    employeeVisaDetailsService.update(employeeVisaDetails);
+//                                }
                                 stringBuffer.append(employeeNo);
                                 stringBuffer.append(" , ");
                                 counter++;
@@ -4344,9 +4372,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             String zydxlocationname = zydexLocationMaster.getZydexLocation();
             row.createCell(12).setCellValue(zydxlocationname);
             row.createCell(13).setCellValue(employeeMaster1.getRole());
-            row.createCell(18).setCellValue(employeeMaster1.getPassportNo());
-            row.createCell(21).setCellValue(employeeMaster1.getPassportIssueDate());
-            row.createCell(22).setCellValue(employeeMaster1.getPassportExpiryDate());
+//            row.createCell(18).setCellValue(employeeMaster1.getPassportNo());
+//            row.createCell(21).setCellValue(employeeMaster1.getPassportIssueDate());
+//            row.createCell(22).setCellValue(employeeMaster1.getPassportExpiryDate());
             row.createCell(26).setCellValue(employeeMaster1.getPresentAddress());
             row.createCell(32).setCellValue(employeeMaster1.getPermanentAddress());
             row.createCell(38).setCellValue(employeeMaster1.getContactNo1());
@@ -4405,26 +4433,26 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 for (Object empextDataObject : employeeMasterextensionList) {
                 EmployeeMasterExtension employeeMasterext1 = (EmployeeMasterExtension) empextDataObject;
                 
-                Boolean namstat = employeeMasterext1.getNameStatus();
-                if(namstat != null){
-                    String stat = "";
-                    if(namstat == false){
-                        stat = "Passport";
-                    }else if(namstat == true){
-                        stat = "AadharCard";
-                    }else{
-                        stat = "";
-                    }
-                        row.createCell(14).setCellValue(stat);
-                }else{
-                    row.createCell(14).setCellValue(" ");
-                }
+//                Boolean namstat = employeeMasterext1.getNameStatus();
+//                if(namstat != null){
+//                    String stat = "";
+//                    if(namstat == false){
+//                        stat = "Passport";
+//                    }else if(namstat == true){
+//                        stat = "AadharCard";
+//                    }else{
+//                        stat = "";
+//                    }
+//                        row.createCell(14).setCellValue(stat);
+//                }else{
+//                    row.createCell(14).setCellValue(" ");
+//                }
                 
                 row.createCell(15).setCellValue(employeeMasterext1.getFirstName());
                 row.createCell(16).setCellValue(employeeMasterext1.getMiddleName());
                 row.createCell(17).setCellValue(employeeMasterext1.getLastName());
                 row.createCell(19).setCellValue(employeeMasterext1.getNationality());
-                row.createCell(20).setCellValue(employeeMasterext1.getCountryOfIssue());
+//                row.createCell(20).setCellValue(employeeMasterext1.getCountryOfIssue());
                 row.createCell(27).setCellValue(employeeMasterext1.getPresentAddress2());
                 row.createCell(28).setCellValue(employeeMasterext1.getPresentCity());
                 row.createCell(29).setCellValue(employeeMasterext1.getPresentState());
@@ -4437,8 +4465,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 row.createCell(37).setCellValue(employeeMasterext1.getPermanentCountry());
                 row.createCell(45).setCellValue(employeeMasterext1.getWithdrawalDate());
                 row.createCell(47).setCellValue(employeeMasterext1.getPfNoFlydocs());
-                row.createCell(48).setCellValue(employeeMasterext1.getElectionCard());
-                row.createCell(54).setCellValue(employeeMasterext1.getReligion());
+//                row.createCell(48).setCellValue(employeeMasterext1.getElectionCard());
+//                row.createCell(54).setCellValue(employeeMasterext1.getReligion());
                 row.createCell(56).setCellValue(employeeMasterext1.getDisclosedHealthConcerns());
                 row.createCell(58).setCellValue(employeeMasterext1.getDrivingLicenceType());
                 Boolean sgen = employeeMasterext1.getSpouseGender();
@@ -4615,10 +4643,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             empList.add(zydxlocationname);
             empList.add(employeeMaster1.getRole());//12//
 
-            empList.add(employeeMaster1.getPassportNo());//13//
+//            empList.add(employeeMaster1.getPassportNo());//13//
 
-            empList.add(employeeMaster1.getPassportIssueDate());
-            empList.add(employeeMaster1.getPassportExpiryDate());//15//
+//            empList.add(employeeMaster1.getPassportIssueDate());
+//            empList.add(employeeMaster1.getPassportExpiryDate());//15//
 
             empList.add(employeeMaster1.getPresentAddress());
 
@@ -4707,7 +4735,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 empList.add(employeeMasterext1.getLastName());
 
                 empList.add(employeeMasterext1.getNationality());//19//
-                empList.add(employeeMasterext1.getCountryOfIssue());
+//                empList.add(employeeMasterext1.getCountryOfIssue());
 
                 empList.add(employeeMasterext1.getPresentAddress2());
                 empList.add(employeeMasterext1.getPresentCity());
@@ -4724,9 +4752,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 empList.add(employeeMasterext1.getWithdrawalDate());
 
                 empList.add(employeeMasterext1.getPfNoFlydocs());
-                empList.add(employeeMasterext1.getElectionCard());
+//                empList.add(employeeMasterext1.getElectionCard());
 
-                empList.add(employeeMasterext1.getReligion());
+//                empList.add(employeeMasterext1.getReligion());
 
                 empList.add(employeeMasterext1.getDisclosedHealthConcerns());
 
@@ -4745,7 +4773,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
                 empList.add(employeeMasterext1.getHobbies());
                 empList.add(employeeMasterext1.getLanguagesKnown());//82//
-                empList.add(employeeMasterext1.getNameStatus());//83//
+//                empList.add(employeeMasterext1.getNameStatus());//83//
                 empList.add(employeeMasterext1.getSpouseGender());//84//
 
             }
@@ -5481,10 +5509,16 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         companyList(request);
 //        shiftList(request);
         hoursBasisList(request);
+        competencyList(request);
+        EmployeeTypeList(request);
+        EmployeeSubTypeList(request);
+        policyList(request);
+        ctcList(request);
         //getLastYearPerformance Ratings Of Employee For ReadOnly.s
         List<?> lastYearPerformanceRatingsOfEmployeeList = employeeMasterService.getLastYearPerformanceRatingOfEmployee(id);
 
         lastYearPerformanceRatingsOfEmployee = (lastYearPerformanceRatingsOfEmployeeList.isEmpty()) ? lastYearPerformanceRatingsOfEmployee : String.valueOf(lastYearPerformanceRatingsOfEmployeeList.get(0));
+        List<?> employeeMasterExtensionList = employeeMasterServiceExtension.readByemployeeId(employeeMaster.getId());
         //set user master id//
         String userid = request.getParameter("userid");
         userMaster.setId(Integer.parseInt(userid));
@@ -5519,12 +5553,43 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 }
             }
         }
+        String rmName2 = "";
+        String rmName3 = "";
+        String rmName4 = "";
+        String rmName5 = "";
+        String rmName6 = "";
+        String rm2 = employeeMaster.getReportingManagerLevel2();
+        String rm3 = employeeMaster.getReportingManagerLevel3();
+        String rm4 = employeeMaster.getReportingManagerLevel4();
+        String rm5 = employeeMaster.getReportingManagerLevel5();
+        String rm6 = employeeMaster.getReportingManagerLevel6();
+        if(!rm2.isEmpty()){
+            rmName2 = employeeMasterService.getNameById(Integer.parseInt(rm2));
+        }
+        if(!rm3.isEmpty()){
+            rmName3 = employeeMasterService.getNameById(Integer.parseInt(rm3));
+        }
+        if(!rm4.isEmpty()){
+            rmName4 = employeeMasterService.getNameById(Integer.parseInt(rm4));
+        }
+        if(!rm5.isEmpty()){
+            rmName5 = employeeMasterService.getNameById(Integer.parseInt(rm5));
+        }
+        if(!rm6.isEmpty()){
+            rmName6 = employeeMasterService.getNameById(Integer.parseInt(rm6));
+        }
         request.setAttribute("maritalStatus", employeeMaster.getMaritalStatus());
         request.setAttribute("lastYearPerformanceRatingsOfEmployee", lastYearPerformanceRatingsOfEmployee);
         request.setAttribute("company", employeeMaster.getCompany());
         request.setAttribute("employeeType", employeeMaster.getEmployeeType());
         request.setAttribute("shiftType", employeeMaster.getShiftType());
         request.setAttribute("certificatesList", certificatesList);
+        request.setAttribute("employeeMasterExtensionList", employeeMasterExtensionList);
+        request.setAttribute("rmName2", rmName2);
+        request.setAttribute("rmName3", rmName3);
+        request.setAttribute("rmName4", rmName4);
+        request.setAttribute("rmName5", rmName5);
+        request.setAttribute("rmName6", rmName6);
 
         mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.setViewName("Employee/EmployeesOwnProfile");

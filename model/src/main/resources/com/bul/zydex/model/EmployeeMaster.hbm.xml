@@ -85,15 +85,15 @@
         <property name="panCard" type="string">
             <column name="pan_card" />
         </property>
-        <property name="passportNo" type="string">
+<!--        <property name="passportNo" type="string">
             <column name="passport_no" />
-        </property>
-        <property name="passportIssueDate" type="string">
+        </property>-->
+<!--        <property name="passportIssueDate" type="string">
             <column name="passport_issue_date" />
-        </property>
-        <property name="passportExpiryDate" type="string">
+        </property>-->
+<!--        <property name="passportExpiryDate" type="string">
             <column name="passport_expiry_date" />
-        </property>
+        </property>-->
         <property name="dateOfLeaving" type="string">
             <column name="date_of_leaving" />
         </property>
@@ -166,9 +166,9 @@
         <property name="autoGenerationCode" type="string">
             <column name="auto_generation_code" />
         </property>
-        <property name="govLicenceName" type="string">
+<!--        <property name="govLicenceName" type="string">
             <column name="gov_licenceName" length="45" />
-        </property>
+        </property>-->
         <property name="maritalStatusOthers" type="string">
             <column name="marital_status_others" length="45" />
         </property>

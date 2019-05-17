@@ -810,7 +810,7 @@
 
         }
     </script>
-    <script>
+<!--    <script>
         var tempCount = 1;
         $(function () {
             tempCount = document.getElementById('visaCount1').value;
@@ -871,7 +871,7 @@
             element1.parentNode.removeChild(element1);
         }
 
-    </script>
+    </script>-->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -953,7 +953,7 @@
                                                     </div>
                                                     <div class="form-group">    
                                                         <div class="col-sm-6">
-                                                            <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
                                                             <form:option value="None" label="-- Select --" ></form:option>
                                                             <form:options items="${EmployeeTypeList}"></form:options>
@@ -961,7 +961,7 @@
                                                         <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6" id="employeeSubTypeId">
-                                                            <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Division:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="hidden" name="subell" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
                                                         <form:select path="employeeSubType.id" id="sell" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option> 
@@ -1037,36 +1037,11 @@
                                                         <form:errors path="officeEmailId" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
-
-
-
-
-
-
                                                 </div><!-- /.col -->
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
                                     <!--pesonal detail complete-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                                     <div class="box box-info collapsed-box">
@@ -1082,17 +1057,16 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Employee Name (First Name, Middle Name, Last Name as per Passport or Aadhar card.)
-<span style="color: red;font-size: 12px;">*</span></label><br>
-                                                                <c:if test="${list.nameStatus eq 'false'}">
-                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport
-                                                                    <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard
-                                                                </c:if>
-                                                                <c:if test="${list.nameStatus eq 'true'}">
-                                                                    <input type="radio" name="nameStatus"  id="nameStatus" value="false"/>Passport&nbsp;&nbsp;
-                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="true"/>AadharCard
-                                                                </c:if>
-                                                        <span style="font-size: 14px; color: red;" id="errormsg"></span>
+                                                        <label>Employee Name (First Name, Middle Name, Last Name as per Aadhar card.)<span style="color: red;font-size: 12px;">*</span></label><br>
+                                                                <%--<c:if test="${list.nameStatus eq 'false'}">--%>
+<!--                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport
+                                                                    <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard-->
+                                                                <%--</c:if>--%>
+                                                                <%--<c:if test="${list.nameStatus eq 'true'}">--%>
+<!--                                                                    <input type="radio" name="nameStatus"  id="nameStatus" value="false"/>Passport&nbsp;&nbsp;
+                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="true"/>AadharCard-->
+                                                                <%--</c:if>--%>
+                                                        <!--<span style="font-size: 14px; color: red;" id="errormsg"></span>-->
                                                     </div>
                                                 </div>
                                                     <div class="form-group">
@@ -1108,10 +1082,10 @@
 
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+<!--                                                <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label >Passport No:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
+                                                        <%--<form:input path="passportNo" id="passportNo" class="form-control"></form:input>--%>
                                                          <span style="font-size: 14px; color: red;" id="passportNoError"></span>
                                                     </div>
                                                         <div class="col-sm-6">
@@ -1120,7 +1094,7 @@
                                                             <input type="text" name="countryOfIssue" value="${list.countryOfIssue}" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
                                                             <span style="font-size: 14px; color: red;" id="countryOfIssueError"></span>
                                                     </div>
-                                                </div>
+                                                </div>-->
                                                 
 
                                                 <div class="form-group">
@@ -1144,32 +1118,32 @@
                                                         <input type="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
                                                     <span style="font-size: 14px; color: red;" id="lastNameError"></span>
                                                     </div>
-                                                    <div class="col-sm-6">
+<!--                                                    <div class="col-sm-6">
                                                         <label>Passport Issue Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <form:input path="passportIssueDate" class="form-control" size="16"></form:input>
+                                                            <%--<form:input path="passportIssueDate" class="form-control" size="16"></form:input>--%>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                                 <span style="font-size: 14px; color: red;" id="passportIssueDateError"></span>
-                                                        <form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>
-                                                        </div>
+                                                        <%--<form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>--%>
+                                                        </div>-->
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <div class=" col-sm-6">
+<!--                                                        <div class=" col-sm-6">
                                                             <label>Passport Expiry Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="passportExpiryDate" class="form-control" size="16"></form:input>
+                                                                <input class="form-control" size="16" type="text" value="" readonly>
+                                                            <%--<form:input path="passportExpiryDate" class="form-control" size="16"></form:input>--%>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                             <span style="font-size: 14px; color: red;" id="passportExpiryDateError"></span>
-                                                        </div>    
+                                                        </div>    -->
                                                         <div class="col-sm-6">
 
-                                                            <label >Driving Licence No :</label>
+                                                            <label>Driving Licence No :</label>
 
                                                         <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>
 
@@ -1206,7 +1180,7 @@
                                                         <span style="font-size: 14px; color: red;" id="adharCardError"></span>
                                                         </div>
                                                     </div> 
-                                                    <div class="form-group">
+<!--                                                    <div class="form-group">
 
                                                         <div class="col-sm-6">
 
@@ -1218,27 +1192,27 @@
                                                     <div class="col-sm-3">
                                                         
                                                         
-                                                            <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name" style="width:250px;"></form:input>
+                                                            <%--<form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name" style="width:250px;"></form:input>--%>
                                                             </div>
                                                             <div class="col-sm-3">
                                                            <input type="text" name="documentIdNo" id="documentIdNo" value="${list.documentIdNo}" class="form-control" placeholder="Photo ID No" style="width:150px;"/>
                                                             
                                                         </div>
-                                                    </div>       
+                                                    </div>       -->
                                                 </div><!-- /.col -->
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
                                        <!--Legal Document detail completes here-->
                                        <!--Document Visa detail starts here-->
-                                    <div class="box box-info collapsed-box">
+<!--                                    <div class="box box-info collapsed-box">
                                         <div class="box-header">
                                             <h3 class="box-title">Visa Details:</h3>
                                             <div class="box-tools pull-right">
-                                                <!--                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                                                 <span id="spanId9">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun9();"><i class="fa fa-plus" id="minusId9" ></i></button>
                                             </div>
-                                        </div> <!--/.box-header -->
+                                        </div> /.box-header 
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
@@ -1250,20 +1224,20 @@
                                                                 <th style="text-align: center; vertical-align: middle">Visa Issue Date</th>
                                                                 <th style="text-align: center; vertical-align: middle">Visa Valid till Date</th>
                                                                 <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                                    <c:choose>
-                                                                        <c:when test="${not empty employeeVisaDetailsList}">
+                                                                    <%--<c:choose>--%>
+                                                                        <%--<c:when test="${not empty employeeVisaDetailsList}">--%>
                                                                     <input type="hidden" name="visaCount" id="visaCount"  value="${fn:length(employeeVisaDetailsList)}"/>
-                                                                </c:when>
-                                                                <c:otherwise>
+                                                                <%--</c:when>--%>
+                                                                <%--<c:otherwise>--%>
                                                                     <input type="hidden" name="visaCount" id="visaCount"  value="1"/>
-                                                                </c:otherwise>
-                                                            </c:choose>
+                                                                <%--</c:otherwise>--%>
+                                                            <%--</c:choose>--%>
                                                             </tr>
 
-                                                            <c:choose>
-                                                                <c:when test="${not empty employeeVisaDetailsList}">
+                                                            <%--<c:choose>--%>
+                                                                <%--<c:when test="${not empty employeeVisaDetailsList}">--%>
                                                                     <input type="hidden" name="visaCount1" id="visaCount1" value="${fn:length(employeeVisaDetailsList)}"/>
-                                                                    <c:forEach var="employeeVisaDetailsList" items="${employeeVisaDetailsList}" varStatus = "visacountVal">
+                                                                    <%--<c:forEach var="employeeVisaDetailsList" items="${employeeVisaDetailsList}" varStatus = "visacountVal">--%>
 
                                                                         <tr>
                                                                             <td style="text-align: center">${visacountVal.count}</td> 
@@ -1276,17 +1250,17 @@
                                                                             <td style="text-align: center">
                                                                                 <input type="text" name="visaValidTillDate${visacountVal.count}" id="visaValidTillDate${visacountVal.count}" value="${employeeVisaDetailsList.visaValidTillDate}" class="form-control" size="16" >
                                                                             </td>
-                                                                            <c:if test="${visacountVal.last}">
+                                                                            <%--<c:if test="${visacountVal.last}">--%>
                                                                                 <td style="text-align: center">
                                                                                     <span style='margin-top: 5px;'>
                                                                                         <input type="button" value="+" id="visaCloneid" />
                                                                                     </span>
                                                                                 </td>
-                                                                            </c:if>
+                                                                            <%--</c:if>--%>
                                                                         </tr>
-                                                                    </c:forEach>
-                                                                </c:when>
-                                                                <c:otherwise>
+                                                                    <%--</c:forEach>--%>
+                                                                <%--</c:when>--%>
+                                                                <%--<c:otherwise>--%>
                                                                     <tr>
                                                                         <td style="text-align: center">1</td>
                                                                         <td style="text-align: center">
@@ -1305,15 +1279,15 @@
                                                                             </span>
                                                                         </td>
                                                                     </tr>
-                                                                </c:otherwise>
-                                                            </c:choose>
+                                                                <%--</c:otherwise>--%>
+                                                            <%--</c:choose>--%>
 
                                                         </table>
                                                     </div>
-                                                </div> <!--/.col -->
-                                            </div> <!--/.row -->
-                                        </div> <!--/.box-body -->
-                                    </div>
+                                                </div>  
+                                            </div> 
+                                        </div> 
+                                    </div>-->
                                     <!--document visa detail completes here-->                     
                                     <!--Personal Contact Detail starts here-->
                                     <div class="box box-info collapsed-box">
@@ -1330,13 +1304,13 @@
 
                                                     <div class="form-group">
                                                             <div class="col-sm-6">
-                                                                <label >Personal Email Id:</label>
+                                                                <label >Personal Email Id:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
                                                             <form:errors path="emailAddress" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                            
                                                         <div class="col-sm-6">
-                                                            <label >Contact No.1:</label>
+                                                            <label >Contact No.1:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                             <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
                                                             </div>
@@ -1344,7 +1318,7 @@
                                                     <div class="form-group">
 
                                                             <div class="col-sm-6">
-                                                                <label >Contact No.2:</label>
+                                                                <label >Contact No.2:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                             <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                             </div>
@@ -1367,12 +1341,12 @@
                                                     
                                                     </div>
                                                       <div class="form-group">
-                                                        <div class="col-sm-6">
+<!--                                                        <div class="col-sm-6">
 
                                                             <label>Religion:</label>
                                                             <input type="text" name="religion" id="religion" value="${list.religion}" class="form-control">
 
-                                                        </div>
+                                                        </div>-->
                                                             <div class="col-sm-6">
 
                                                             <label>Languages known:</label>
@@ -1791,7 +1765,7 @@
                                                            
                                                             
                                                             <div class="col-sm-6">
-                                                                <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <label>Business Unit:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:select path="departmentMaster.id" class="form-control">
                                                                 <%--<form:option value="" label="-- Select --" ></form:option>--%>
                                                                 <form:options items="${deptMap}"></form:options>
@@ -1850,10 +1824,10 @@
                                                             <form:input path="role" class="form-control"></form:input>
                                                             </div>
 
-<div class="col-sm-6">
+<!--                                                            <div class="col-sm-6">
                                                             <label >Official Contact No:</label>
                                                             <input type="text" name="officialContactNumber" id="officialContactNumber" value="${list.officialContactNumber}" class="form-control">
-                                                            </div>
+                                                            </div>-->
                                                         </div>
 <!--                                                           <div class="form-group">
                                                         <div class="col-sm-6">
@@ -2615,7 +2589,7 @@
                                                                 <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
                                                         </div>  
                                                     </div>  
-                                                </c:forEach>
+                                                <%--</c:forEach>--%>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div><!-- /.box-body -->
@@ -2744,6 +2718,7 @@
                                         </div>
                                     </div>
                                 </c:if>
+                           </c:forEach>
                             </div>
 
                         </div>

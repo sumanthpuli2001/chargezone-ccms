@@ -36,9 +36,9 @@
         <property name="permanentCountry" type="string">
             <column name="permanent_country" />
         </property>
-        <property name="religion" type="string">
+<!--        <property name="religion" type="string">
             <column name="religion" />
-        </property>
+        </property>-->
         <property name="disclosedHealthConcerns" type="string">
             <column name="disclosed_health_concerns" />
         </property>
@@ -82,10 +82,10 @@
         <property name="lastName" type="string">
             <column name="last_name" />
         </property>
-        <property name="countryOfIssue" type="string">
+<!--        <property name="countryOfIssue" type="string">
             <column name="passport_issue_country" />
-        </property>
-        <property name="visaIssueCountry" type="string">
+        </property>-->
+<!--        <property name="visaIssueCountry" type="string">
             <column name="visa_issue_country" />
         </property>
         <property name="visaIssueDate" type="string">
@@ -93,13 +93,13 @@
         </property>
         <property name="visaValidTillDate" type="string">
             <column name="visa_valid_till_date" />
-        </property>
+        </property>-->
         <property name="drivingLicenceType" type="string">
             <column name="driving_licence_type" />
         </property>
-        <property name="electionCard" type="string">
+<!--        <property name="electionCard" type="string">
             <column name="election_card" />
-        </property>
+        </property>-->
         <property name="pfNoFlydocs" type="string">
             <column name="pf_no_flydocs" />
         </property>
@@ -115,24 +115,24 @@
         <many-to-one name="employeeMaster" class="com.bul.zydex.model.EmployeeMaster" fetch="select">
             <column name="employee_id" />
         </many-to-one>
-        <property name="nameStatus" type="java.lang.Boolean">
-            <column name="name_status" >
+<!--        <property name="nameStatus" type="java.lang.Boolean">
+            <column name="name_statu" >
                 <comment>gender 0=Male,1=female</comment>
             </column>
-        </property>
+        </property>-->
         <property name="SpouseGender" type="java.lang.Boolean">
             <column name="spouse_gender" >
                 <comment>gender 0=Male,1=female</comment>
             </column>
         </property>
-         <property name="documentIdNo" type="string">
+<!--         <property name="documentIdNo" type="string">
             <column name="officail_documentno" />
-        </property>
+        </property>-->
          <property name="subteamTransferDate" type="string">
             <column name="subteamTransfer_date" />
         </property>
-         <property name="officialContactNumber" type="string">
+<!--         <property name="officialContactNumber" type="string">
             <column name="official_contact" />
-        </property>
+        </property>-->
     </class>
 </hibernate-mapping>

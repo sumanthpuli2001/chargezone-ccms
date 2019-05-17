@@ -861,7 +861,7 @@
                                                     </div>
                                                     <div class="form-group">    
                                                         <div class="col-sm-6">
-                                                            <label>Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
                                                             <form:option value="None" label="-- Select --" ></form:option>
                                                             <form:options items="${EmployeeTypeList}"></form:options>
@@ -869,7 +869,7 @@
                                                         <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                         <div class="col-sm-6" id="employeeSubTypeId">
-                                                            <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Division:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
                                                         <form:select path="employeeSubType.id" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option> 
@@ -954,12 +954,12 @@
                                                     
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Employee Name (First Name, Middle Name, Last Name as per Passport or Aadhar card)<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <fieldset id="group11">
+                                                            <label>Employee Name (First Name, Middle Name, Last Name as per Aadhar card)<span style="color: red;font-size: 12px;">*</span></label>
+<!--                                                            <fieldset id="group11">
                                                                 <input type="radio" name="nameStatus" id="nameStatus" checked="true" value="false"/>Passport
                                                                 <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard
                                                             </fieldset>
-                                                            <span style="font-size: 14px; color: red;" id="errormsg"></span>
+                                                            <span style="font-size: 14px; color: red;" id="errormsg"></span>-->
                                                         </div>
                                                         
                                                     </div>
@@ -979,10 +979,10 @@
 
                                                     </div>  
 
-                                                    <div class="form-group">
+<!--                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Passport No:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
+                                                        <%--<form:input path="passportNo" id="passportNo" class="form-control"></form:input>--%>
                                                         <span style="font-size: 14px; color: red;" id="passportNoError"></span>
                                                         </div>
                                                         <div class="col-sm-6">
@@ -991,7 +991,7 @@
                                                             <input type="text" name="countryOfIssue" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
                                                              <span style="font-size: 14px; color: red;" id="countryOfIssueError"></span>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                     
 
                                                     <div class="form-group">
@@ -1008,7 +1008,7 @@
                                                             <span style="font-size: 14px; color: red;" id="middleNameError"></span>
                                                         </div>
                                                     </div>
-                                                    <div class="form-group">
+<!--                                                    <div class="form-group">
                                                         <div class="col-sm-6">
 
                                                             <label>Last Name:<span style="color: red;font-size: 12px;">*</span></label>
@@ -1018,31 +1018,37 @@
                                                         <div class="col-sm-6">
                                                             <label>Passport Issue Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <form:input path="passportIssueDate" id="passportIssueDate" class="form-control" size="16" readonly="true"></form:input>
+                                                            <%--<form:input path="passportIssueDate" id="passportIssueDate" class="form-control" size="16" readonly="true"></form:input>--%>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                                 <span style="font-size: 14px; color: red;" id="passportIssueDateError"></span>
-                                                        <!--<form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>-->
+                                                        <%--<form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>--%>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                     <div class="form-group">
-                                                        <div class=" col-sm-6">
+<!--                                                        <div class=" col-sm-6">
                                                             <label>Passport Expiry Date:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="passportExpiryDate" id="passportExpiryDate"  class="form-control" size="16" readonly="true"></form:input>
+                                                                <input class="form-control" size="16" type="text" value="" readonly>
+                                                            <%--<form:input path="passportExpiryDate" id="passportExpiryDate"  class="form-control" size="16" readonly="true"></form:input>--%>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                 
                                                             </div>
                                                                 <span style="font-size: 14px; color: red;" id="passportExpiryDateError"></span>
+                                                        </div>-->
+                                                        <div class="col-sm-6">
+
+                                                            <label>Last Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="text" name="lastName" id="lastName"  class="form-control">
+                                                            <span style="font-size: 14px; color: red;" id="lastNameError"></span>
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                             <label >Driving Licence No:</label>
-                                                            <input type="text" name="drivingLicence" id="drivingLicence" class="form-control" >
-
+                                                            <!--<input type="text" name="drivingLicence" id="drivingLicence" class="form-control" >-->
+                                                            <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -1064,7 +1070,7 @@
                                                         
                                                     </div>
 
-                                                    <div class="form-group">
+<!--                                                    <div class="form-group">
 
                                                         <div class="col-sm-6">
 
@@ -1076,30 +1082,30 @@
                                                         <label style="padding-left:15px;">Any Other Government Document Photo Id Proof:</label>
                                                         <div class="col-sm-3">
                                                             
-<!--                                                            <div class="col-sm-6">-->
-                                                            <form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name" style="width:250px;"></form:input>
-<!--                                                            </div>-->
-<!--                                                            <div class="col-sm-6">-->
+                                                            <div class="col-sm-6">
+                                                            <%--<form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name" style="width:250px;"></form:input>--%>
+                                                            </div>
+                                                            <div class="col-sm-6">
 </div>
  <div class="col-sm-3">
                                                            <input type="text" name="documentIdNo" id="documentIdNo" class="form-control" placeholder="Photo ID No" style="width:150px;"/>
-<!--                                                            </div>-->
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
                                                 </div><!-- /.col -->
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
                                     <!--Employee Official Details completes here-->    
                                     <!--Document visa detail starts here--> 
-                                    <div class="box box-info collapsed-box">
+<!--                                    <div class="box box-info collapsed-box">
                                         <div class="box-header">
                                             <h3 class="box-title">Visa Details:</h3>
                                             <div class="box-tools pull-right">
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
                                                 <span id="spanId9">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun9();"><i class="fa fa-plus" id="minusId9" ></i></button>
                                             </div>
-                                        </div><!-- /.box-header -->
+                                        </div> /.box-header 
                                         <div class="box-body no-padding">
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
@@ -1132,10 +1138,10 @@
                                                             </tr>
                                                         </table>
                                                     </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
+                                                </div> /.col 
+                                            </div> /.row 
+                                        </div> /.box-body 
+                                    </div>-->
                                     <!--Document visa detail completes here-->                    
                                     <!--Personal Contact Detail starts here-->        
                                     <div class="box box-info collapsed-box" id="personal_Detail_id">
@@ -1151,7 +1157,7 @@
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Personal Email Id:</label>
+                                                            <label>Personal Email Id:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
 
                                                         <%--<form:input path="emailAddress" class="form-control"></form:input>--%>
@@ -1165,14 +1171,14 @@
                                                                                                                 
                                                                                                                 </div>-->
                                                         <div class="col-sm-6">
-                                                            <label >Contact No.1:</label>
+                                                            <label >Contact No.1:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label >Contact No.2:</label>
+                                                            <label >Contact No.2:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -1194,41 +1200,38 @@
 
                                                 </div>
                                                 <div class="form-group">
-                                                    <div class="col-sm-6">
+<!--                                                    <div class="col-sm-6">
 
                                                         <label>Religion:</label>
                                                         <input type="text" name="religion" id="religion" class="form-control">
-                                                    </div>
+                                                    </div>-->
                                                     <div class="col-sm-6">
 
                                                         <label>Languages known:</label>
                                                         <input type="text" name="languagesKnown" id="languagesKnown" class="form-control">
 
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
                                                     <div class="col-sm-6">
 
                                                         <label>Disclosed Health Concerns:</label>
                                                         <input type="text" name="disclosedHealthConcerns" id="disclosedHealthConcerns" class="form-control">
 
                                                     </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    
                                                     <div class="col-sm-6">
 
                                                         <label>Hobbies:</label>
                                                         <input name="hobbies" id="hobbies" class="form-control">
 
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    
-
                                                     <div class="col-sm-6">
                                                         <label>Highest Education Details:<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
                                                             <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
+                                                </div>
 
                                                 </div><!-- /.col -->
                                             </div><!-- /.row -->
@@ -1593,7 +1596,7 @@
                                                     <div class="form-group">
                                                         
                                                         <div class="col-sm-6">
-                                                            <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Business Unit:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:select path="departmentMaster.id" class="form-control">
                                                             <form:option value="" label="-- Select --" ></form:option>
                                                             <form:options items="${deptMap}"></form:options>
@@ -1609,18 +1612,15 @@
                                                         </form:select>
                                                     </div>
                                                     </div>
-                                                    <div class="form-group">
+                                                    <!--<div class="form-group">-->
 
                                                        
-                                                    <div class="col-sm-6">
-                                                        <label>Role:</label>
-                                                        <form:input path="role" class="form-control"></form:input>
-                                                    </div>
-                                                        <div class="col-sm-6">
+                                                    
+<!--                                                        <div class="col-sm-6">
                                                             <label >Official Contact No.:</label>
                                                         <input type="text" name="officialContactNumber" id="officialContactNumber" class="form-control">
-                                                        </div>
-                                                    </div>
+                                                        </div>-->
+                                                    <!--</div>-->
 
 
 <!--                                                    <div class="form-group">
@@ -1636,7 +1636,10 @@
 
                                                     </div>-->
                                                     <div class="form-group">
-
+                                                        <div class="col-sm-6">
+                                                        <label>Role:</label>
+                                                        <form:input path="role" class="form-control"></form:input>
+                                                    </div>
                                                         
                                                         <div class="col-sm-6">
                                                             <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>

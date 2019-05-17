@@ -370,21 +370,21 @@ public class CertificateTemplateController extends CertificateTemplateAbstract {
                 } else {
                     msg = msg.replaceAll("\\{pan_card\\}", "");
                 }
-                if (employeeMaster.getPanCard() != null && !employeeMaster.getPanCard().equals("") && !employeeMaster.getPanCard().isEmpty()) {
-                    msg = msg.replaceAll("\\{passport_no\\}", employeeMaster.getPassportNo());
-                } else {
-                    msg = msg.replaceAll("\\{passport_no\\}", "");
-                }
-                if (employeeMaster.getPassportIssueDate() != null && !employeeMaster.getPassportIssueDate().equals("") && !employeeMaster.getPassportIssueDate().isEmpty()) {
-                    msg = msg.replaceAll("\\{passport_issue_date\\}", employeeMaster.getPassportIssueDate());
-                } else {
-                    msg = msg.replaceAll("\\{passport_issue_date\\}", "");
-                }
-                if (employeeMaster.getPassportExpiryDate() != null && !employeeMaster.getPassportExpiryDate().equals("") && !employeeMaster.getPassportExpiryDate().isEmpty()) {
-                    msg = msg.replaceAll("\\{passport_expiry_date\\}", employeeMaster.getPassportExpiryDate());
-                } else {
-                    msg = msg.replaceAll("\\{passport_expiry_date\\}", "");
-                }
+//                if (employeeMaster.getPanCard() != null && !employeeMaster.getPanCard().equals("") && !employeeMaster.getPanCard().isEmpty()) {
+//                    msg = msg.replaceAll("\\{passport_no\\}", employeeMaster.getPassportNo());
+//                } else {
+//                    msg = msg.replaceAll("\\{passport_no\\}", "");
+//                }
+//                if (employeeMaster.getPassportIssueDate() != null && !employeeMaster.getPassportIssueDate().equals("") && !employeeMaster.getPassportIssueDate().isEmpty()) {
+//                    msg = msg.replaceAll("\\{passport_issue_date\\}", employeeMaster.getPassportIssueDate());
+//                } else {
+//                    msg = msg.replaceAll("\\{passport_issue_date\\}", "");
+//                }
+//                if (employeeMaster.getPassportExpiryDate() != null && !employeeMaster.getPassportExpiryDate().equals("") && !employeeMaster.getPassportExpiryDate().isEmpty()) {
+//                    msg = msg.replaceAll("\\{passport_expiry_date\\}", employeeMaster.getPassportExpiryDate());
+//                } else {
+//                    msg = msg.replaceAll("\\{passport_expiry_date\\}", "");
+//                }
                 if (employeeMaster.getDateOfLeaving() != null && !employeeMaster.getDateOfLeaving().equals("") && !employeeMaster.getDateOfLeaving().isEmpty()) {
                     msg = msg.replaceAll("\\{date_of_leaving\\}", employeeMaster.getDateOfLeaving());
                 } else {

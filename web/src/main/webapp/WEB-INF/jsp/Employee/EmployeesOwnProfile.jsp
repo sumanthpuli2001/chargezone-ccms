@@ -242,10 +242,11 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
+                                <c:forEach var="list" items="${employeeMasterExtensionList}">
                                 <!--form horizontal starts here-->
                                 <div class="box box-info collapsed-box ">
                                     <div class="box-header">
-                                        <h3 class="box-title">Personal Detail:</h3>
+                                        <h3 class="box-title">Employee Official Details:</h3>
                                         <div class="box-tools pull-right">
                                             <span id="spanId1">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun1();"><i class="fa fa-plus" id="minusId1" ></i></button>
                                             <!--                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
@@ -256,7 +257,7 @@
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
-                                                        <label>Employee Id:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <label>Employee No.:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="employeeId" class="form-control"  readonly="true"></form:input>
                                                         <form:errors path="employeeId" cssClass="errorDiv"></form:errors>
                                                         </div>
@@ -267,398 +268,41 @@
                                                         <form:errors path="employeeName" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
-
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Father's Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="fatherName" class=" form-control"></form:input>
-                                                        <form:errors path="fatherName" cssClass="errorDiv"></form:errors>
+                                                            <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                            <form:input path="dateOfJoining" class="form-control" size="16" value="" readonly="true" style="pointer-events: none; cursor: default;" ></form:input>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            </div>
                                                         </div>
-
                                                         <div class="col-sm-6">
-                                                            <label>Mother's Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="motherName" class=" form-control" ></form:input>
-                                                        <form:errors path="motherName" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Father's Date Of Birth:</label>
+                                                            <label>Date Of Birth:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpFather" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                        <form:errors path="dateOfBirthOfEmpFather" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label>Mother's Date Of Birth:</label>
-                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpMother" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                        <form:errors path="dateOfBirthOfEmpMother" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Sex:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
-                                                            <fieldset id="group1">
-
-                                                            <form:radiobutton path="gender" value="false" />Male&nbsp;&nbsp;
-                                                            <form:radiobutton path="gender" value="true" />Female&nbsp;&nbsp;
-
-                                                        </fieldset>
-                                                        <form:errors path="gender" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Marital Status:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <fieldset id="group2">
-                                                            <form:radiobutton path="maritalStatus"  value="Married"/>Married
-                                                            <form:radiobutton path="maritalStatus"  value="UnMarried"/>UnMarried
-                                                            <form:radiobutton path="maritalStatus" value="Other"/>Other
-
-                                                        </fieldset>
-
-                                                        <div style="display: none;" class="col-sm-6" id="otherMaritalStatusId">
-                                                            <form:input type="text" path="maritalStatusOthers" class="form-control"/>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Date Of Birth:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                        <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirth" id="dob" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-
-                                                        <form:errors path="dateOfBirth" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-3">
-                                                            <label>Photograph:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <img src="${imgFile}" id="photograph" name="photograph" width="150px" height="150px"/>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <label>Update Photo:</label>
-                                                        <div id="imageSrc">
-                                                            <input type="file" class="form-control" id="photographUpdate" name="photographUpdate" onchange="checkfile(this);
-                                                                                changeButton();" accept="image/jpg,image/jpeg,image/png">
-                                                            <span style="font-size: 14px; color: red;" id="photographError"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:textarea path="presentAddress" class="form-control"></form:textarea>
-                                                        <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label>Permanent Address<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:textarea path="permanentAddress" class="form-control"></form:textarea>
-                                                        <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group" id="hideInfo1" style="display: none;">
-                                                        <div class="col-sm-6">
-                                                            <label>Spouse Name:</label>
-                                                        <form:input path="spouseName" class="form-control"></form:input>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Spouse's Date Of Birth:</label>
-                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpSpous" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                            <form:input path="dateOfBirth" id="dob" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" style="pointer-events: none; cursor: default;" ></form:input>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                 <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div id="hideInfo2" style="display: none;">
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                <label>Child Name1:</label>
-                                                            <form:input path="child1" class="form-control"></form:input>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label>Child1's Date Of Birth:</label>
-                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="dateOfBirthOfEmpChilld1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                <label>Child Name2:</label>
-                                                            <form:input path="child2" class="form-control"></form:input>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label>Child2's Date Of Birth:</label>
-                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                                <form:input path="dateOfBirthOfEmpChild2" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>City:</label>
-                                                        <form:input path="cityOfEmployee" class="form-control"></form:input>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label>Blood Groups:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                        <form:select path="bloodGroups" id="bloodGroups" class="form-control" > 
-                                                            <option value="">--Select--</option>
-                                                            <form:option value="A +ve">A +ve</form:option>
-                                                            <form:option value="A -ve">A -ve</form:option>
-                                                            <form:option value="B +ve">B +ve</form:option>
-                                                            <form:option value="B -ve">B -ve</form:option>
-                                                            <form:option value="AB +ve">AB +ve</form:option>
-                                                            <form:option value="AB -ve">AB -ve</form:option>
-                                                            <form:option value="O +ve">O +ve</form:option>
-                                                            <form:option value="O -ve">O -ve</form:option>
-                                                        </form:select>
-                                                        <%--<form:hidden path="bloodGroups"/>--%>
-                                                    </div>
-                                                </div>
-
-
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
-                                </div><!-- /.box-body -->
-
-                                <!--pesonal detail complete-->
-                                <div class="box box-info collapsed-box">
-                                    <div class="box-header">
-                                        <h3 class="box-title">Contact Detail:</h3>
-                                        <div class="box-tools pull-right">
-                                            <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
-                                            <!--<button  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                        </div>
-                                    </div><!-- /.box-header -->
-                                    <div class="box-body no-padding">
-                                        <div class="row">
-                                            <div class="col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label >Email Id:</label>
-                                                        <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
-                                                        <form:errors path="emailAddress" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label >Contact No.1:</label>
-                                                        <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label >Emergency Contact Person:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="emergencyContactPerson" class="form-control"></form:input>
-                                                        <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <!--contact detail completes here-->
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Document Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>PAN Card No.:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="panCard" style="text-transform:uppercase" id="pancard" class=" form-control" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
-                                                        <form:errors path="panCard" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label >Passport No.:</label>
-                                                        <form:input path="passportNo" id="passportNo" class="form-control"></form:input>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Passport Issue Date:</label>
-                                                            <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <form:input path="passportIssueDate" class="form-control" size="16" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                        <form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class=" col-sm-6">
-                                                            <label>Passport Expiry Date:</label>
-                                                            <div class="input-group date form_datetime_passport_expiry"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="passportExpiryDate" class="form-control" size="16" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label >Aadhar Card:</label>
-                                                        <form:input path="adharCard" class=" form-control"></form:input>
-                                                        <form:errors path="adharCard" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Any Other Government Document Photo Id Proof:</label>
-                                                            <div class="col-sm-6">
-                                                            <form:input path="govLicenceName" type="text" class=" form-control" placeholder="Please Specify Photo ID Name"></form:input>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                            <form:input path="drivingLicence" type="text" class=" form-control" placeholder="Please Specify No."></form:input>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- /.col -->
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <!--Document detail completes here-->
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Organization Specific Detail:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4"></i></button>
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Official E - Mail ID:</label>
-                                                        <form:input path="officeEmailId" id="officeEmailId" class="form-control"></form:input>
-                                                        <form:errors path="officeEmailId" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label>Highest Education Details<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
-                                                        <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <div class="col-sm-6">
-                                                                <label>Exp. on Date Of Joining:  Year:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:select path="experienceYearOnDoj" class="form-control ">
-                                                                <c:forEach begin="0" end="50" var="counter">
-                                                                    <form:option value="${counter}">${counter}</form:option>
-                                                                </c:forEach>
-                                                            </form:select>
-                                                            <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <label>Exp. on Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <form:select path="experienceMonthOnDoj" class="form-control">
-                                                                <c:forEach begin="0" end="11" var="counter">
-                                                                    <form:option value="${counter}">${counter}</form:option>
-                                                                </c:forEach>
-                                                            </form:select>
-                                                            <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <!--<div class="col-sm-6">-->
-                                                            <label >Company:</label>
-                                                        <form:input path="company" class=" form-control" cssStyle="pointer-events: none;"></form:input>
-                                                        <form:errors path="company" cssClass="errorDiv"></form:errors>
-                                                            <!--</div>-->
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="zydexLocationMaster.id" class="form-control" cssStyle="pointer-events: none;">
-                                                            <%--<form:option value="" label="-- Select --" ></form:option>--%>
-                                                            <form:options items="${zydexLocationMap}"></form:options>
-                                                        </form:select>
-                                                        <form:hidden path="zydexLocationMaster.id"/>
-
-                                                        <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                        <div class="col-sm-6">
-                                                            <label>Work Location:<span style="color: red;font-size: 12px;">*</span></label>
-
-
-                                                        <form:select path="locationMaster.id" class="form-control" cssStyle="pointer-events: none;">
-                                                            <%--<form:option value="" label="-- Select --" ></form:option>--%>
-                                                            <form:options items="${location}"></form:options>
-                                                        </form:select>
-
-                                                        <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                        <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();" cssStyle="pointer-events: none;">
-                                                            <form:options items="${level}" ></form:options>
-                                                        </form:select>
-
-                                                        <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
+                                                    <div class="form-group">    
                                                         <div class="col-sm-6">
                                                             <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="departmentMaster.id" class="form-control" cssStyle="pointer-events: none;">
-                                                            <%--<form:option value="" label="-- Select --" ></form:option>--%>
-                                                            <form:options items="${deptMap}"></form:options>
+                                                        <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control" style="pointer-events: none; cursor: default;">
+                                                            <form:option value="None" label="-- Select --" ></form:option>
+                                                            <form:options items="${EmployeeTypeList}"></form:options>
                                                         </form:select>
-                                                        <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
-
                                                         </div>
+                                                        <div class="col-sm-6" id="employeeSubTypeId">
+                                                            <label>Division:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
+                                                        <form:select path="employeeSubType.id" class="form-control" style="pointer-events: none; cursor: default;">
+                                                            <form:option value="" label="-- Select --" ></form:option> 
+                                                            <form:options items="${EmployeeSubTypeList}"></form:options>
+                                                        </form:select>
+                                                        </div>    
                                                     </div>
-
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
@@ -675,22 +319,635 @@
                                                         <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
 
                                                         </div>
+                                                        <div class="col-sm-6" style="pointer-events: none;">
+                                                            <label>Gender:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                            <fieldset id="group1">
+
+                                                            <form:radiobutton path="gender" value="false"/>Male&nbsp;&nbsp;
+                                                            <form:radiobutton path="gender" value="true" />Female&nbsp;&nbsp;
+
+                                                        </fieldset>
+                                                        <form:errors path="gender" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                    
+
+                                                    <div class="form-group">
+                                                        
+                                                        <div class="col-sm-6" style="pointer-events: none;">
+                                                            <label>Marital Status:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <fieldset id="group2">
+                                                            <form:radiobutton path="maritalStatus"  value="Married"/>Married
+                                                            <form:radiobutton path="maritalStatus"  value="UnMarried"/>UnMarried
+                                                            <form:radiobutton path="maritalStatus" value="Other"/>Other
+
+                                                        </fieldset>
+
+                                                        <div style="display: none;" class="col-sm-6" id="otherMaritalStatusId">
+                                                            <form:input type="text" path="maritalStatusOthers" class="form-control"/>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                            <label>Photograph:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <img src="${imgFile}" id="photograph" name="photograph" width="150px" height="150px"/>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <label>Update Photo:</label>
+                                                        <div id="imageSrc">
+                                                            <input type="file" class="form-control" id="photographUpdate" name="photographUpdate" onchange="checkfile(this);
+                                                                                changeButton();" accept="image/jpg,image/jpeg,image/png">
+                                                            <span style="font-size: 14px; color: red;" id="photographError"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Official E - Mail ID:</label>
+                                                            <form:input path="officeEmailId" id="officeEmailId" class="form-control" readonly="true"></form:input>
+                                                        <form:errors path="officeEmailId" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+
+
+                                            </div><!-- /.col -->
+                                        </div><!-- /.row -->
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box-body -->
+
+                                <!--pesonal detail complete-->
+                                
+                                <div class="box box-info collapsed-box" id="personal_Detail_id">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Legal Documents:</h3>
+                                            <div class="box-tools pull-right">
+                                                <!--<button  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Employee Name (First Name, Middle Name, Last Name as per Aadhar card)<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>PAN Card No:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="panCard" class="form-control"  style="text-transform: uppercase" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A" readonly="true"></form:input>
+                                                        <form:errors path="panCard" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Nationality:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="text" name="nationality" id="nationality" value="${list.nationality}" readonly="true" style="text-transform:uppercase" class="form-control">
+
+                                                        </div>
+
+                                                    </div>  
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>First Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="text" name="firstName" id="firstName" value="${list.firstName}" class="form-control" readonly="true">
+                                                            <span style="font-size: 14px; color: red;" id="firstNameError"></span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Middle Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="text" name="middleName" id="middleName" value="${list.middleName}" class="form-control" readonly="true">
+                                                            <span style="font-size: 14px; color: red;" id="middleNameError"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+
+                                                        <div class="col-sm-6">
+
+                                                            <label>Last Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="text" name="lastName" id="lastName" value="${list.lastName}" class="form-control" readonly="true">
+                                                            <span style="font-size: 14px; color: red;" id="lastNameError"></span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label >Driving Licence No:</label>
+                                                            <!--<input type="text" name="drivingLicence" id="drivingLicence" value="" class="form-control" readonly="true">-->
+                                                            <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No." readonly="true"></form:input>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6" style="pointer-events: none;">
+                                                            <label>Driving Licence Type:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <select name="drivingLicenceType" id="drivingLicenceType" class="form-control">
+                                                                <c:if test="${empty list.drivingLicenceType}">
+                                                                <option value="">-- Select --</option>
+                                                                <option value="2Wheeler">2Wheeler</option>
+                                                                <option value="4Wheeler">4Wheeler</option>
+                                                                <option value="Both">Both</option>
+
+                                                            </c:if>
+                                                            <c:if test="${!empty list.drivingLicenceType}">
+                                                                <option <c:choose><c:when test="${list.drivingLicenceType eq '2Wheeler'}"> value="2Wheeler" selected="true"</c:when><c:otherwise>value="2Wheeler"</c:otherwise></c:choose>>2 Wheeler</option>
+                                                                <option <c:choose><c:when test="${list.drivingLicenceType eq '4Wheeler'}"> value="4Wheeler" selected="true"</c:when><c:otherwise>value="4Wheeler"</c:otherwise></c:choose>>4 Wheeler</option>
+                                                                <option <c:choose><c:when test="${list.drivingLicenceType eq 'Both'}"> value="Both" selected="true"</c:when><c:otherwise>value="Both"</c:otherwise></c:choose>>Both</option>
+                                                            </c:if>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label >Aadhar Card:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="adharCard" id="adharCard" class="form-control" readonly="true"></form:input>
+                                                        <form:errors path="adharCard"  cssClass="errorDiv"></form:errors>
+                                                        <span style="font-size: 14px; color: red;" id="adharCardError"></span>
+                                                        </div>
+                                                        
+                                                    </div>
+
+
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                
+                                                        
+                                 <div class="box box-info collapsed-box" id="personal_Detail_id">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Personal Contact Details:</h3>
+                                            <div class="box-tools pull-right">
+                                                <!--<button  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <span id="spanId10">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun10();"><i class="fa fa-plus" id="minusId10" ></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Personal Email Id:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" readonly="true" placeholder="abc@domain.com" required=""></form:input>
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label >Contact No.1:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="contactNo1" id="contactNo1" maxlength="14" readonly="true" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                        <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label >Contact No.2:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="contactNo2" id="contactNo2" maxlength="14" readonly="true" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                        <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6" style="pointer-events: none;">
+                                                            <label>Blood Group:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
+                                                        <form:select path="bloodGroups" id="bloodGroups" class="form-control ">
+                                                            <option value="">--Select--</option>
+                                                            <form:option value="A +ve">A +ve</form:option>
+                                                            <form:option value="A -ve">A -ve</form:option>
+                                                            <form:option value="B +ve">B +ve</form:option>
+                                                            <form:option value="B -ve">B -ve</form:option>
+                                                            <form:option value="AB +ve">AB +ve</form:option>
+                                                            <form:option value="AB -ve">AB -ve</form:option>
+                                                            <form:option value="O +ve">O +ve</form:option>
+                                                            <form:option value="O -ve">O -ve</form:option>
+                                                        </form:select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+<!--                                                    <div class="col-sm-6">
+
+                                                        <label>Religion:</label>
+                                                        <input type="text" name="religion" id="religion" class="form-control">
+                                                    </div>-->
+                                                    <div class="col-sm-6">
+
+                                                        <label>Languages known:</label>
+                                                        <input type="text" name="languagesKnown" id="languagesKnown" value="${list.languagesKnown}" readonly="true" class="form-control">
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+
+                                                        <label>Disclosed Health Concerns:</label>
+                                                        <input type="text" name="disclosedHealthConcerns" id="disclosedHealthConcerns" value="${list.disclosedHealthConcerns}" readonly="true" class="form-control">
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    
+                                                    <div class="col-sm-6">
+
+                                                        <label>Hobbies:</label>
+                                                        <input name="hobbies" id="hobbies" value="${list.hobbies}" readonly="true" class="form-control">
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>Highest Education Details:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control" readonly="true"></form:input>
+                                                        </div>
+                                                </div>
+
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+                                                        
+                                <div class="box box-info collapsed-box" id="document_detail_id">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Family Background:</h3>
+                                            <div class="box-tools pull-right">
+                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                <span id="spanId3">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun3();"><i class="fa fa-plus" id="minusId3" ></i></button>
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Father's Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="fatherName" class=" form-control" readonly="true"></form:input>
+                                                        <form:errors path="fatherName" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6" style="pointer-events: none;">
+                                                            <label>Father's Date Of Birth:</label>
+                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                                                            <form:input path="dateOfBirthOfEmpFather" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Mother's Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="motherName" class=" form-control" readonly="true"></form:input>
+                                                        <form:errors path="motherName" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6" style="pointer-events: none;">
+                                                            <label>Mother's Date Of Birth:</label>
+                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                                                            <form:input path="dateOfBirthOfEmpMother" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            </div>
+                                                        <form:errors path="dateOfBirthOfEmpMother" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="hideInfo1" style="display: none;margin-left: 2px;">
+                                                        <div class="form-group" id="">
+                                                            <div class="col-sm-6">
+                                                                <label>Spouse Name:</label>
+                                                            <form:input path="spouseName" class="form-control"></form:input>
+                                                            </div>
+                                                            <div class="col-sm-6" style="pointer-events: none;">
+                                                                <label>Spouse's Date Of Birth:</label>
+                                                                <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                                                                <form:input path="dateOfBirthOfEmpSpous" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+
+                                                                <label>Spouse's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                <fieldset id="group10">
+                                                                    <input type="radio" name="SpouseGender" id="SpouseGender" checked="true" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="SpouseGender" id="SpouseGender" value="true"/>Female
+                                                                </fieldset>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>  
+
+                                                    <div id="hideInfo2" style="display: none;margin-left: 2px;">
+                                                        <div class="form-group" id="">
+
+                                                            <div class="col-sm-6">
+                                                                <label>Child Name1:</label>
+                                                            <form:input path="child1" class="form-control"></form:input>
+                                                            </div>
+                                                            <div class="col-sm-6" style="pointer-events: none;">
+                                                                <label>Child1's Date Of Birth:</label>
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                                                                <form:input path="dateOfBirthOfEmpChilld1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6" cssStyle="pointer-events: none;">
+
+                                                                <label>Child1's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                <fieldset id="group6">
+                                                                    <input type="radio" name="childOneGender" id="childOneGender" checked="true" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
+                                                                </fieldset>
+                                                            </div> 
+                                                            
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Child Name2:</label>
+                                                            <form:input path="child2" class="form-control"></form:input>
+                                                            </div>
+                                                            <div class="col-sm-6" style="pointer-events: none;">
+                                                                <label>Child2's Date Of Birth:</label>
+                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+
+                                                                <form:input path="dateOfBirthOfEmpChild2" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+
+                                                                <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                <fieldset id="group6">
+                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" checked="true" value="false"/>Male&nbsp;&nbsp;
+                                                                    <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
+                                                                </fieldset>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:textarea path="presentAddress" class="form-control" readonly="true"></form:textarea>
+                                                        <form:errors path="presentAddress" cssClass="errorDiv"></form:errors>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <form>
+                                                                <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                                <textarea name="presentAddress2" id="presentAddress2" readonly="true"  class="form-control">${list.presentAddress2}</textarea>
+                                                            </form>
+                                                        <%--  <form:errors path="" cssClass="errorDiv"></form:errors>--%>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                        <label>Present City:</label>
+                                                        <input type="text" name="presentCity" id="presentCity" readonly="true" value="${list.presentCity}" class="form-control">
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+
+                                                        <label>Present State:</label>
+                                                        <input type="text" name="presentState" id="presentState" readonly="true" value="${list.presentState}" class="form-control">
+
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+
+                                                        <label>Present Postal Code:</label>
+                                                        <input type="text" name="presentPostalCode" id="presentPostalCode" readonly="true" value="${list.presentPostalCode}" class="form-control">
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+
+                                                        <label>Present Country:</label>
+                                                        <input type="text" name="presentCountry" id="presentCountry" readonly="true" value="${list.presentCountry}" class="form-control">
+
+                                                    </div>
+                                                </div>             
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Permanent Address:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:textarea path="permanentAddress" class="form-control" readonly="true"></form:textarea>
+                                                        <form:errors path="permanentAddress" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <!--                                                            <input type="textarea" name="permanentAddress2" id="permanentAddress2" class="form-control">-->
+                                                            <textarea name="permanentAddress2" id="permanentAddress2" readonly="true" class="form-control">${list.permanentAddress2}</textarea>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent City:</label>
+                                                            <input type="text" name="permanentCity" id="permanentCity" readonly="true" value="${list.permanentCity}" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent State:</label>
+                                                            <input type="text" name="permanentState" id="permanentState" readonly="true" value="${list.permanentState}" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent Postal Code:</label>
+                                                            <input type="text" name="permanentPostalCode" id="permanentPostalCode" readonly="true" value="${list.permanentPostalCode}" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Permanent Country:</label>
+                                                            <input type="text" name="permanentCountry" id="permanentCountry" readonly="true" value="${list.permanentCountry}" class="form-control">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+
+                                                        <div class="col-sm-6">
+                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <form:input path="emergencyContactNo" readonly="true"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                            <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label >Emergency Contact Person:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <form:input path="emergencyContactPerson" readonly="true" class="form-control"></form:input>
+                                                            <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Relationship:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="RelationShip" id="RelationShip" readonly="true" value="${list.relationShip}" maxlength="14" class="form-control" >
+
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+
+                                                            <label>Emergency Contact Address:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="emergencyContactAddress"  id="emergencyContactAddress" readonly="true" value="${list.emergencyContactAddress}"  maxlength="14" class="form-control">
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        
+                                                        <div class="col-sm-6">
+
+                                                            <label>Other important information relating to your emergency contact:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="otherImpInfo" readonly="true" value="${list.otherImpInfo}" id="otherImpInfo" class="form-control">
+
+                                                        </div> 
+                                                    </div>
+
+
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
+                                    </div>
+
+                                    <div class="box box-info collapsed-box">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Organization Specific Detail:</h3>
+                                            <div class="box-tools pull-right">
+                                                <span id="spanId4">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun4();"><i class="fa fa-plus" id="minusId4"></i></button>
+                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                            </div>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding">
+                                            <div class="row">
+                                                <div class="col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Name of Previous company:</label>
+                                                            <input type="text" name="nameOfPreviousCompany" id="nameOfPreviousCompany" readonly="true" value="${list.nameOfPreviousCompany}" class="form-control">
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Previous Company Location:</label>
+                                                            <input type="text" name="previousCompanyLocation" id="previousCompanyLocation" readonly="true" value="${list.previousCompanyLocation}" class="form-control">
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                            <div class="col-sm-6" style="pointer-events: none">
+                                                                <label>Exp. on Date Of Joining:  Year:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:select path="experienceYearOnDoj" class="form-control ">
+                                                                <c:forEach begin="0" end="50" var="counter">
+                                                                    <form:option value="${counter}">${counter}</form:option>
+                                                                </c:forEach>
+                                                            </form:select>
+                                                            <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-6" style="pointer-events: none">
+                                                                <label>Exp. on Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:select path="experienceMonthOnDoj" class="form-control">
+                                                                <c:forEach begin="0" end="11" var="counter">
+                                                                    <form:option value="${counter}">${counter}</form:option>
+                                                                </c:forEach>
+                                                            </form:select>
+                                                            <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
+                                                            </div>
+
+                                                        
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label >Company:</label>
+                                                        <form:input path="company" class=" form-control" cssStyle="pointer-events: none;"></form:input>
+                                                        <form:errors path="company" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="zydexLocationMaster.id" class="form-control" cssStyle="pointer-events: none;">
+                                                            <%--<form:option value="" label="-- Select --" ></form:option>--%>
+                                                            <form:options items="${zydexLocationMap}"></form:options>
+                                                        </form:select>
+                                                        <form:hidden path="zydexLocationMaster.id"/>
+
+                                                        <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                        <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();" cssStyle="pointer-events: none;">
+                                                            <form:options items="${level}" ></form:options>
+                                                        </form:select>
+
+                                                        <form:errors path="levelMaster.id" cssClass="errorDiv"></form:errors>
+                                                        </div>
+
+                                                        <div class="col-sm-6">
+                                                            <label>Work Location:<span style="color: red;font-size: 12px;">*</span></label>
+
+
+                                                        <form:select path="locationMaster.id" class="form-control" cssStyle="pointer-events: none;">
+                                                            <%--<form:option value="" label="-- Select --" ></form:option>--%>
+                                                            <form:options items="${location}"></form:options>
+                                                        </form:select>
+
+                                                        <form:errors path="locationMaster.id" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        
+
+                                                        <div class="col-sm-6">
+                                                            <label>Business Unit:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="departmentMaster.id" class="form-control" cssStyle="pointer-events: none;">
+                                                            <%--<form:option value="" label="-- Select --" ></form:option>--%>
+                                                            <form:options items="${deptMap}"></form:options>
+                                                        </form:select>
+                                                        <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
+
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="employeeType" id="employeeType" class="form-control ">
+                                                            <form:option value="Probation" label="Probation"></form:option>
+                                                            <form:option value="Confirmed" label="Confirmed"></form:option>
+                                                            <form:option value="Interns" label="Interns"></form:option>
+                                                        </form:select>
+                                                    </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        
 
                                                         <div class="col-sm-6">
                                                             <label>Role:</label>
                                                         <form:input path="role" class="form-control"></form:input>
                                                         </div>
+                                                        <div class="col-sm-6" style="pointer-events: none">
+                                                            <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="shiftType" class="form-control">
+                                                            <!--<option value="">--SELECT--</option>-->
+                                                            <form:option value="" label="-- Select --" ></form:option>
+                                                            <form:option value="HourlyBase" label="Hourly Base"></form:option>
+                                                            <form:option value="ShiftBase" label="Shift Base"></form:option>
+                                                        </form:select>
+                                                        <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
+                                                        </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <!--<div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">-->
-                                                        <form:input path="dateOfJoining" class="form-control" size="16" value="" readonly="true"></form:input>
-                                                            <!--<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>-->
-                                                            <!--<span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>-->
-                                                            <!--</div>-->
-                                                        <form:errors path="dateOfJoining" cssClass="errorDiv"></form:errors>
-                                                        </div>
 
                                                         <div class="col-sm-6">
                                                             <label>Last Year's Performance Rating:</label>
@@ -698,44 +955,6 @@
                                                         <%--<form:hidden path="lastYearPerformanceRating" class="form-control"></form:input>--%>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Type:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                        <select name="employeeType" id="employeeType" class="form-control" style="pointer-events: none;">
-                                                            <c:choose>
-                                                                <c:when test="${employeeType.contains('Probation')}">
-
-                                                                    <option value="Probation" selected="">Probation</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <option value="Probation">Probation</option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                            <c:choose>
-                                                                <c:when test="${employeeType.contains('Confirmed')}">
-
-                                                                    <option value="Confirmed" selected="">Confirmed</option>
-                                                                </c:when>
-                                                                <c:otherwise>
-
-                                                                    <option value="Confirmed">Confirmed</option>
-                                                                </c:otherwise>
-                                                            </c:choose>
-                                                        </select>
-
-                                                        <!--<option value="">--SELECT--</option>-->
-
-
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label >Contact No.:</label>
-                                                        <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" style="pointer-events: none;" class="form-control"></form:input>
-                                                        <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-                                                    </div><!-- /.col -->
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Basic Salary:<span style="color: red;font-size: 12px;"></span></label>
@@ -1247,13 +1466,13 @@
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
                                                         <label>Bank Name:</label>
-                                                        <form:input path="bankName" class="form-control"></form:input>
+                                                        <form:input path="bankName" class="form-control" readonly="true"></form:input>
                                                         <form:errors path="bankName" cssClass="errorDiv"></form:errors>
                                                         </div>
 
                                                         <div class="col-sm-6">
                                                             <label>Bank Account No.:</label>
-                                                        <form:input path="bankAccountNo" class="form-control"></form:input>
+                                                        <form:input path="bankAccountNo" class="form-control" readonly="true"></form:input>
                                                         <form:errors path="bankAccountNo" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
@@ -1261,10 +1480,50 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>IFSC Code:</label>
-                                                        <form:input path="bankIfscCode" class="form-control" placeholder="(1-4: alphabets, 5th: reserved as 0, 6-11: digits) Example: SBIN0898965"></form:input>
+                                                        <form:input path="bankIfscCode" class="form-control" readonly="true" placeholder="(1-4: alphabets, 5th: reserved as 0, 6-11: digits) Example: SBIN0898965"></form:input>
                                                         <form:errors path="bankIfscCode" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                        <div class="col-sm-6" style="pointer-events: none">
+                                                            <label>Payment Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:select path="paymentType" id="paymentType" class="form-control ">
+                                                            <option value="">--Select--</option>
+                                                            <form:option value="Bank">Bank</form:option>
+                                                            <form:option value="Check">Check</form:option>
+
+                                                        </form:select>
                                                     </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>PF No(Previous):<span style="color: red;font-size: 12px;"></span></label>
+                                                    <form:input path="pfNo" id="pfNo" readonly="true" class="form-control"></form:input>
+                                                            <%--<form:errors path="pfNo" cssClass="errorDiv"></form:errors>--%>
+                                                    </div>
+                                                    <div class="col-sm-6">
+
+                                                        <label>PF No(FLYdocs):<span style="color: red;font-size: 12px;"></span></label>
+                                                        <input type="text" name="pfNoFlydocs" id="pfNoFlydocs" value="${list.pfNoFlydocs}" readonly="true" class="form-control">
+
+                                                    </div>  
+                                                </div>  
+                                                <div class="form-group">
+                                                    <div class="col-sm-6" style="pointer-events: none">
+
+                                                        <label>PF Withdrawal Date:</label>
+                                                        <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                            <input type="text" name="withdrawalDate" id="withdrawalDate" value="${list.withdrawalDate}" size="16" readonly="true" class="form-control">
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label>UAN No:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <form:input path="uanNo" id="uanNo"  class="form-control" readonly="true"></form:input>
+                                                            <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
+                                                    </div> 
+
+                                                </div>
                                                 </div>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
@@ -1297,7 +1556,7 @@
                                                         <div class="col-sm-6" id="levelIdDiv2">
                                                             <label>Level 2:</label>
                                                         <form:hidden path="reportingManagerLevel2"></form:hidden>
-                                                            <input type="text" name="reportingManagerLevel2Name" id="reportingManagerLevel2Name" class="form-control" readonly="true"/>
+                                                        <input type="text" name="reportingManagerLevel2Name" value="${rmName2}" id="reportingManagerLevel2Name" class="form-control" readonly="true"/>
                                                         </div>
 
                                                     </div>
@@ -1307,26 +1566,26 @@
                                                         <div class="col-sm-6" id="levelIdDiv3">
                                                             <label>Level 3:</label>
                                                         <form:hidden path="reportingManagerLevel3"></form:hidden>
-                                                            <input type="text" name="reportingManagerLevel3Name" id="reportingManagerLevel3Name" class="form-control" readonly="true"/>
+                                                            <input type="text" name="reportingManagerLevel3Name" value="${rmName3}" id="reportingManagerLevel3Name" class="form-control" readonly="true"/>
                                                         </div>
 
                                                         <div class="col-sm-6" id="levelIdDiv4">
                                                             <label>Level 4:</label>
                                                         <form:hidden path="reportingManagerLevel4"></form:hidden>
-                                                            <input type="text" name="reportingManagerLevel4Name" id="reportingManagerLevel4Name" class="form-control" readonly="true"/>
+                                                            <input type="text" name="reportingManagerLevel4Name" value="${rmName4}" id="reportingManagerLevel4Name" class="form-control" readonly="true"/>
                                                         </div>
                                                     </div>
                                                     <div class="form-group" id="levelIdDiv5">
                                                         <div class="col-sm-6">
                                                             <label>Functional Head:</label>
                                                         <form:hidden path="reportingManagerLevel5"></form:hidden>
-                                                            <input type="text" name="reportingManagerLevel5Name" id="reportingManagerLevel5Name" class="form-control" readonly="true"/>
+                                                            <input type="text" name="reportingManagerLevel5Name" value="${rmName5}" id="reportingManagerLevel5Name" class="form-control" readonly="true"/>
                                                         </div>
 
                                                         <div class="col-sm-6" id="levelIdDiv6">
                                                             <label>CEO/Proprietor/MD:</label>
                                                         <form:hidden path="reportingManagerLevel6"></form:hidden>
-                                                            <input type="text" name="reportingManagerLevel6Name" id="reportingManagerLevel6Name" class="form-control" readonly="true"/>
+                                                            <input type="text" name="reportingManagerLevel6Name" value="${rmName6}" id="reportingManagerLevel6Name" class="form-control" readonly="true"/>
                                                         </div>
                                                     </div>
 
@@ -1335,6 +1594,7 @@
                                             </div>
                                         </div><!-- /.col -->
                                     </div><!-- /.row -->
+                                    </c:forEach>
                                 </div><!-- /.box-body --> 
                                 <!--
                                                                     <div class="box box-info collapsed-box" id="login_detail_id">

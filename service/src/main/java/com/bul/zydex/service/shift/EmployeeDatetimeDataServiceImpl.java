@@ -131,4 +131,29 @@ public class EmployeeDatetimeDataServiceImpl<T> extends GenericsServiceImpl<T> i
     public List readAllNightShiftPuchDataDateWise(String startdate, String nextdate, int id) {
         return employeeDatetimeDataDAO.readAllNightShiftPuchDataDateWise(startdate,nextdate,id);
     }
+    
+    @Override
+    public String readPuchDataDateWise1(String date, int empId) {
+        return employeeDatetimeDataDAO.readPuchDataDateWise1(date, empId);
+    }
+    
+    @Override
+    public List<?> readPuchDataDateWise2(String date, int empId) {
+        return employeeDatetimeDataDAO.readPuchDataDateWise2(date, empId);
+    }
+    
+    @Override
+    public List<?> readByempShiftData(String id, String punch) {
+        return employeeDatetimeDataDAO.readByempShiftData(id, punch);
+    }
+    
+    @Override
+    public String getShiftId(String data) {
+        return employeeDatetimeDataDAO.getShiftId(data);
+    }
+    
+    @Override
+    public List<?> findDuplicateRecords(Integer id, String punchListDate) {
+        return employeeDatetimeDataDAO.findDuplicateRecords(id, punchListDate);
+    }
 }

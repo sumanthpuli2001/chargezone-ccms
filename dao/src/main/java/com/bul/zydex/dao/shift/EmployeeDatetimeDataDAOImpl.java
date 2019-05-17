@@ -336,5 +336,71 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " DATE_FORMAT(STR_TO_DATE(a.dateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('"+ nextdate +"','%d/%m/%Y'),'%d/%m/%Y'))";
         return getHibernateTemplate().find(query);
     }
+    
+    @Override
+    public String readPuchDataDateWise1(String date, int empId) {
+        String query = "";
+        query += " select a.dateTime"
+                + " From EmployeeDatetimeData a "
+                + " left join a.deviceMaster b"
+                + " left join b.zydexLocationMaster c"
+                + " where a.employeeMaster.id = " + empId
+                + " and DATE_FORMAT(STR_TO_DATE(a.dateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + date + "','%d/%m/%Y'),'%d/%m/%Y') "
+                + " GROUP BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i')"
+                + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
+        List<?> list = getHibernateTemplate().find(query);
+        String list1 = list.get(0).toString();
+        return list1;
+    }
+    
+    @Override
+    public List<?> readPuchDataDateWise2(String date, int empId) {
+        String query = "";
+        query += " select a.dateTime"
+                + " From EmployeeDatetimeData a "
+                + " left join a.deviceMaster b"
+                + " left join b.zydexLocationMaster c"
+                + " where a.employeeMaster.id = " + empId
+                + " and DATE_FORMAT(STR_TO_DATE(a.dateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + date + "','%d/%m/%Y'),'%d/%m/%Y') "
+                + " GROUP BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i')"
+                + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
+        return getHibernateTemplate().find(query);
+    }
+    
+    @Override
+    public List<?> readByempShiftData(String id, String punch) {
+        String query = "";
+
+        query += " Select a.id From EmployeeShiftData a "
+                + " Where (STR_TO_DATE(a.inDateTime,'%d/%m/%Y') = STR_TO_DATE('" + punch + "','%d/%m/%Y') OR STR_TO_DATE(a.outDateTime,'%d/%m/%Y') = STR_TO_DATE('" + punch + "','%d/%m/%Y'))"
+                + " AND a.employeeMaster.id=" + id;
+
+        return getHibernateTemplate().find(query);
+    }
+    
+    @Override
+    public String getShiftId(String data) {
+        String a[] = data.split(":");
+        String query = "Select concat(day_" + a[1] + ") "
+                + "From ShiftGenerateMonthlySchedule a"
+                + " Where a.employeeMaster=" + a[0]
+                + " And a.shiftMonth = " + a[2]
+                + " And a.shiftYear =" + a[3];
+        List<?> list = getHibernateTemplate().find(query);
+        String list1 = "";
+        if (!list.isEmpty()) {
+            list1 = list.get(0).toString();
+        }
+        return list1;
+    }
+    
+    @Override
+    public List<?> findDuplicateRecords(Integer id, String punchListDate) {
+        String query = "Select a.id "
+                + "From EmployeeDatetimeData a"
+                + " Where a.employeeMaster.id=" + id
+                + " And a.dateTime ='" + punchListDate + "'";
+        return getHibernateTemplate().find(query);
+    }
 
 }

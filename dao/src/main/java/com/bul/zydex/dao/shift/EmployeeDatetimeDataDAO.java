@@ -56,4 +56,15 @@ public interface EmployeeDatetimeDataDAO<T> extends GenericsDAO<T> {
     public List readALLPuchOnlyDataDateWise(String startDate, int id);
 
     public List readAllNightShiftPuchDataDateWise(String startdate, String nextdate, int id);
+    
+    public String readPuchDataDateWise1(String date, int empId);
+    
+    public List<?> readPuchDataDateWise2(String date, int empId);
+    
+    public List<?> readByempShiftData(String id, String punch);
+    
+    public String getShiftId(String data);
+    
+    public List<?> findDuplicateRecords(Integer id, String punchListDate);
+
 }

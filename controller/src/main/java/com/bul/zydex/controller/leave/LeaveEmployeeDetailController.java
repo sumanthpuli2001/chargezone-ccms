@@ -3210,12 +3210,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 for (Object o1 : list) {
                     employeeLeaveBalance = new EmployeeLeaveBalance();
                     employeeLeaveBalance = (EmployeeLeaveBalance) o1;
-                    if(employeeLeaveBalance.getNoOfLeaveRemain() >= 5.0)
-                    {
+                    if (employeeLeaveBalance.getNoOfLeaveRemain() >= 5.0) {
                         noOfLeave = Float.parseFloat(leaveTypeMaster.getNoOfLeave()) + 5;
-                    }
-                    else
-                    {
+                    } else {
                         noOfLeave = Float.parseFloat(leaveTypeMaster.getNoOfLeave());
                     }
                     employeeLeaveBalance.setNoOfLeaveRemain(noOfLeave);
@@ -3344,2621 +3341,2639 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         c.setTime(sDate);
         List<String> list1 = new ArrayList<String>();
         float days = 0;
-        if (Boolean.parseBoolean(useSickLeave) == false && sDate.after(today) && leavetype.equals("7")) {
-            while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
+        while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
 
-                Calendar calForEnddate = Calendar.getInstance();
-                calForEnddate.setTime(eDate);
-                int dayEnd = calForEnddate.get(Calendar.DAY_OF_WEEK);
-
-//              
-////                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
-                Date nDate = c.getTime();
-                String daString = sdf.format(nDate);
-                HolidayMaster holidayMaster = new HolidayMaster();
-                holidayMaster.setHolidayFromDate(daString);
-                List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
-                if (list.size() == 0) {
-                    days++;
-                }
-                //-------------------Code for Saturaday and Sunday List Check Starts Here-------------
-                if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 1) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 1) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 1) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 7) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Saturaday and Sunday List Check Ends Here-------------
-                //-------------------Code for Sunday and Monday List Check Starts Here-------------
-                else if (sm.format(dt1).equals("Sunday") && sm.format(dt2).equals("Monday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 2) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 2) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 2) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 2) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-                        coutnter++;
-                    }
-                } //-------------------Code for Sunday and Monday List Check Ends Here-------------
-                //-------------------Code for Monday and Tuesday List Check Starts Here-------------
-                else if (sm.format(dt1).equals("Monday") && sm.format(dt2).equals("Tuesday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 3) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 3) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 3) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && eDateStatus.contains("Fullday") && weekOff != 3 && weekOff != 2) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-                        coutnter++;
-                    }
-                } //-------------------Code for Monday and Tuesday List Check Ends Here-------------
-                //-------------------Code for Tuesday And Wednesday List Check Starts Here-------------
-                else if (sm.format(dt1).equals("Tuesday") && sm.format(dt2).equals("Wednesday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 4) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 4) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 4) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && eDateStatus.contains("Fullday") && weekOff != 3 && weekOff != 4) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-                        coutnter++;
-                    }
-                } //-------------------Code for Tuesday And Wednesday List Check Ends Here-------------
-                //-------------------Code for Wednesday and Thursday List Check Starts Here-------------
-                else if (sm.format(dt1).equals("Wednesday") && sm.format(dt2).equals("Thursday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 5) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 5) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 5) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && eDateStatus.contains("Fullday") && weekOff != 4 && weekOff != 5) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-                        coutnter++;
-                    }
-                } //-------------------Code for Wednesday and Thursday List Check Ends Here-------------
-                //-------------------Code for Thursday and Friday List Check Starts Here-------------
-                else if (sm.format(dt1).equals("Thursday") && sm.format(dt2).equals("Friday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 6) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 6) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 6) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && eDateStatus.contains("Fullday") && weekOff != 5 && weekOff != 6) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-                        coutnter++;
-                    }
-                } //-------------------Code for Thursday and Friday List Check Ends Here-------------
-                //-------------------Code for Friday & Saturday List Check Starts Here-------------
-                else if (sm.format(dt1).equals("Friday") && sm.format(dt2).equals("Saturday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 7) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 7) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 7) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && eDateStatus.contains("Fullday") && weekOff != 6 && weekOff != 7) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-                        coutnter++;
-                    }
-                }
-                //-------------------Code for Friday & Saturday List Check Ends Here-------------
-                c.add(Calendar.DATE, 1);
-            }
-        } else if (Boolean.parseBoolean(useSickLeave) == false && !leavetype.equals("7")) {
-            while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
-
-                Calendar calForEnddate = Calendar.getInstance();
-                calForEnddate.setTime(eDate);
-                int dayEnd = calForEnddate.get(Calendar.DAY_OF_WEEK);
+            Calendar calForEnddate = Calendar.getInstance();
+            calForEnddate.setTime(eDate);
+            int dayEnd = calForEnddate.get(Calendar.DAY_OF_WEEK);
 
 //              
 ////                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
-                Date nDate = c.getTime();
-                String daString = sdf.format(nDate);
-                HolidayMaster holidayMaster = new HolidayMaster();
-                holidayMaster.setHolidayFromDate(daString);
-                List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
-                if (list.size() == 0) {
-                    days++;
-                }
-                //-------------------Code for Saturday & Sunday Starts Here-------------
-                if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 1) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 1) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 1) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 7) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Saturday & Sunday List Check Ends Here-------------
-                //-------------------Code for Sunday & Monday Starts Here-------------
-                else if (sm.format(dt1).equals("Sunday") && sm.format(dt2).equals("Monday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 2) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 2) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 2) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 2) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Sunday & Monday List Check Ends Here-------------
-                //-------------------Code for Monday & Tuesday Starts Here-------------
-                else if (sm.format(dt1).equals("Monday") && sm.format(dt2).equals("Tuesday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 3) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 3) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 3) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && eDateStatus.contains("Fullday") && weekOff != 2 && weekOff != 3) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Monday & Tuesday List Check Ends Here-------------
-                //-------------------Code for Tuesday & Wednesday Starts Here-------------
-                else if (sm.format(dt1).equals("Tuesday") && sm.format(dt2).equals("Wednesday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 4) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 4) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 4) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && eDateStatus.contains("Fullday") && weekOff != 3 && weekOff != 4) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Tuesday & Wednesday List Check Ends Here-------------
-                //-------------------Code for Wednesday & Thursday Starts Here-------------
-                else if (sm.format(dt1).equals("Wednesday") && sm.format(dt2).equals("Thursday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 5) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 5) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 5) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && eDateStatus.contains("Fullday") && weekOff != 4 && weekOff != 5) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Wednesday & Thursday List Check Ends Here-------------
-                //-------------------Code for Thursday & Friday Starts Here-------------
-                else if (sm.format(dt1).equals("Thursday") && sm.format(dt2).equals("Friday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 6) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 6) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 6) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && eDateStatus.contains("Fullday") && weekOff != 5 && weekOff != 6) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Thursday & Friday  Ends Here-------------
-                //-------------------Code for Friday & Saturday Starts Here-------------
-                else if (sm.format(dt1).equals("Friday") && sm.format(dt2).equals("Saturday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 7) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 7) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 7) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && eDateStatus.contains("Fullday") && weekOff != 6 && weekOff != 7) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
+            int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+            Date nDate = c.getTime();
+            String daString = sdf.format(nDate);
+            HolidayMaster holidayMaster = new HolidayMaster();
+            holidayMaster.setHolidayFromDate(daString);
+            List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
+            if (list.size() == 0) {
+                days++;
+            }
+            for (String z : weekOffDay.split(",")) {
+                int weekOff = 0;
+                if (!z.equals("")) {
+                    if (z.equals("Sunday")) {
+                        weekOff = 1;
+//                        sundayCheck = true;
+                    } else if (z.equals("monday")) {
+                        weekOff = 2;
+                    } else if (z.equals("tuesday")) {
+                        weekOff = 3;
+                    } else if (z.equals("wednesday")) {
+                        weekOff = 4;
+                    } else if (z.equals("thursday")) {
+                        weekOff = 5;
+                    } else if (z.equals("friday")) {
+                        weekOff = 6;
+                    } else if (z.equals("Saturday")) {
+                        weekOff = 7;
                     }
                 }
-                //-------------------Code for Friday & Saturday  Ends Here-------------
-                c.add(Calendar.DATE, 1);
-
-            }
-        } else if (Boolean.parseBoolean(useSickLeave) == true && (leavetype.equals("6") || leavetype.equals("7"))) {
-            while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
-
-                Calendar calForEnddate = Calendar.getInstance();
-                calForEnddate.setTime(eDate);
-                int dayEnd = calForEnddate.get(Calendar.DAY_OF_WEEK);
-
-//              
-////                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
-                Date nDate = c.getTime();
-                String daString = sdf.format(nDate);
-                HolidayMaster holidayMaster = new HolidayMaster();
-                holidayMaster.setHolidayFromDate(daString);
-                List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
-                if (list.size() == 0) {
-                    days++;
-                }
-                //-------------------Code for Saturday & Sunday Starts Here-------------
-                if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 1) {
+                if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+                        if (sDateStatus.contains("SecondHalf")) {
+                            if (!strDate.equals(enDate)) {
                                 days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 1) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 1) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 7) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
                             }
                         }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Saturday & Sunday List Check Ends Here-------------
-                //-------------------Code for Sunday & Monday Starts Here-------------
-                else if (sm.format(dt1).equals("Sunday") && sm.format(dt2).equals("Monday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 2) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 2) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 2) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 2) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Sunday & Monday List Check Ends Here-------------
-                //-------------------Code for Monday & Tuesday Starts Here-------------
-                else if (sm.format(dt1).equals("Monday") && sm.format(dt2).equals("Tuesday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 3) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 3) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 3) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && eDateStatus.contains("Fullday") && weekOff != 2 && weekOff != 3) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Monday & Tuesday List Check Ends Here-------------
-                //-------------------Code for Tuesday & Wednesday Starts Here-------------
-                else if (sm.format(dt1).equals("Tuesday") && sm.format(dt2).equals("Wednesday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 4) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 4) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 4) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && eDateStatus.contains("Fullday") && weekOff != 3 && weekOff != 4) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Tuesday & Wednesday List Check Ends Here-------------
-                //-------------------Code for Wednesday & Thursday Starts Here-------------
-                else if (sm.format(dt1).equals("Wednesday") && sm.format(dt2).equals("Thursday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 5) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 5) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 5) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && eDateStatus.contains("Fullday") && weekOff != 4 && weekOff != 5) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Wednesday & Thursday List Check Ends Here-------------
-                //-------------------Code for Thursday & Friday Starts Here-------------
-                else if (sm.format(dt1).equals("Thursday") && sm.format(dt2).equals("Friday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 6) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 6) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 6) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && eDateStatus.contains("Fullday") && weekOff != 5 && weekOff != 6) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
-                    }
-                } //-------------------Code for Thursday & Friday  Ends Here-------------
-                //-------------------Code for Friday & Saturday Starts Here-------------
-                else if (sm.format(dt1).equals("Friday") && sm.format(dt2).equals("Saturday")) {
-                    for (String z : weekOffDay.split(",")) {
-                        int weekOff = 0;
-                        if (!z.equals("")) {
-                            if (z.equals("Sunday")) {
-                                weekOff = 1;
-                                sundayCheck = true;
-                            } else if (z.equals("Monday")) {
-                                weekOff = 2;
-                            } else if (z.equals("Tuesday")) {
-                                weekOff = 3;
-                            } else if (z.equals("Wednesday")) {
-                                weekOff = 4;
-                            } else if (z.equals("Thursday")) {
-                                weekOff = 5;
-                            } else if (z.equals("Friday")) {
-                                weekOff = 6;
-                            } else if (z.equals("Saturday")) {
-                                weekOff = 7;
-                            }
-                        }
-                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
-                                if (sDateStatus.contains("SecondHalf")) {
-                                    if (!strDate.equals(enDate)) {
-                                        days--;
-                                    }
-                                }
-                            }
-                        }
-                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
-                                if (!strDate.equals(enDate)) {
-                                    days--;
-                                }
-                            }
-                        }
-                        if (leavetype.equals("7")) {
-                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 7) {
-                                days--;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 7) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 7) {
-                                days = days - (float) 1;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && eDateStatus.contains("Fullday") && weekOff != 6 && weekOff != 7) {
-                                days = days - (float) 0.5;
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
-                                Calendar c12 = Calendar.getInstance();
-                                c12.setTime(sDate);
-                                c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                                int d = c.get(Calendar.MONTH);
-                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                if (empPreviousLeavebal) {
-                                    days++;
-                                }
-                                break;
-                            }
-                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
-                                Calendar c123 = Calendar.getInstance();
-                                c123.setTime(sDate);
-                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-                                int d1 = c.get(Calendar.MONTH);
-                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
-                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
-                                if (list12.size() == 1) {
-                                    Calendar c12 = Calendar.getInstance();
-                                    c12.setTime(sDate);
-                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
-                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
-                                    int d = c.get(Calendar.MONTH);
-                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
-                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
-                                    if (empPreviousLeavebal) {
-                                        days++;
-                                    }
-                                    break;
-                                }
-                                break;
-                            }
-                        }
-
-                        coutnter++;
                     }
                 }
-                //-------------------Code for Friday & Saturday  Ends Here-------------
-                c.add(Calendar.DATE, 1);
-
-            }
-        }
-        if (leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17")) {
-            String data = employeeMaster1.getId() + ":" + strDate + ":" + enDate;
-            List<?> shiftsBetween = shiftGenerateMonthlyScheduleService.getShiftsBetween(data);
-            String size = String.valueOf(shiftsBetween.size());
-            Double size1 = Double.parseDouble(size);
-            if (!shiftsBetween.isEmpty()) {
-                days -= size1;
-            }
-        }
-        if (leavetype.equals("16")) {
-            SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
-            Date date = format.parse(strDate);
-            String strDate1 = format.format(date);
-            Date date1 = format.parse(enDate);
-            String enDate1 = format.format(date1);
-            String strDay = strDate1.split("/")[0];
-            String strMonth = strDate1.split("/")[1];
-            String strYear = strDate1.split("/")[2];
-            String enDay = enDate1.split("/")[0];
-            String enMonth = enDate1.split("/")[1];
-            String enYear = enDate1.split("/")[2];
-            String employeeId = request.getParameter("employeeId");
-            String empNo = employeeMasterService.getByEmployeeNo1(employeeId);
-            EmployeeMaster employeeMaster11 = employeeMasterService.readById(Integer.parseInt(empNo));
-            String data = employeeMaster11.getId() + ":" + strMonth + ":" + strYear + ":" + enMonth + ":" + enYear;
-            String shiftList = "";
-            String shiftList1 = "";
-            String shiftList2 = "";
-            ShiftGenerateMonthlySchedule sgms;
-            ShiftGenerateMonthlySchedule sgms1;
-            List<?> shiftListId = shiftGenerateMonthlyScheduleService.getshiftsList(data);
-            String shiftLists = shiftListId.get(0).toString();
-            sgms = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(shiftLists));
-            if (strMonth.equals(enMonth) && strYear.equals(enYear)) {
-
-                ArrayList<Integer> arrli = new ArrayList<Integer>();
-                for (int i = Integer.parseInt(strDay); i <= Integer.parseInt(enDay); i++) {
-                    if (i == 1) {
-                        arrli.add(sgms.getDay1());
-                    }
-                    if (i == 2) {
-                        arrli.add(sgms.getDay2());
-                    }
-                    if (i == 3) {
-                        arrli.add(sgms.getDay3());
-                    }
-                    if (i == 4) {
-                        arrli.add(sgms.getDay4());
-                    }
-                    if (i == 5) {
-                        arrli.add(sgms.getDay5());
-                    }
-                    if (i == 6) {
-                        arrli.add(sgms.getDay6());
-                    }
-                    if (i == 7) {
-                        arrli.add(sgms.getDay7());
-                    }
-                    if (i == 8) {
-                        arrli.add(sgms.getDay8());
-                    }
-                    if (i == 9) {
-                        arrli.add(sgms.getDay9());
-                    }
-                    if (i == 10) {
-                        arrli.add(sgms.getDay10());
-                    }
-                    if (i == 11) {
-                        arrli.add(sgms.getDay11());
-                    }
-                    if (i == 12) {
-                        arrli.add(sgms.getDay12());
-                    }
-                    if (i == 13) {
-                        arrli.add(sgms.getDay13());
-                    }
-                    if (i == 14) {
-                        arrli.add(sgms.getDay14());
-                    }
-                    if (i == 15) {
-                        arrli.add(sgms.getDay15());
-                    }
-                    if (i == 16) {
-                        arrli.add(sgms.getDay16());
-                    }
-                    if (i == 17) {
-                        arrli.add(sgms.getDay17());
-                    }
-                    if (i == 18) {
-                        arrli.add(sgms.getDay18());
-                    }
-                    if (i == 19) {
-                        arrli.add(sgms.getDay19());
-                    }
-                    if (i == 20) {
-                        arrli.add(sgms.getDay20());
-                    }
-                    if (i == 21) {
-                        arrli.add(sgms.getDay21());
-                    }
-                    if (i == 22) {
-                        arrli.add(sgms.getDay22());
-                    }
-                    if (i == 23) {
-                        arrli.add(sgms.getDay23());
-                    }
-                    if (i == 24) {
-                        arrli.add(sgms.getDay24());
-                    }
-                    if (i == 25) {
-                        arrli.add(sgms.getDay25());
-                    }
-                    if (i == 26) {
-                        arrli.add(sgms.getDay26());
-                    }
-                    if (i == 27) {
-                        arrli.add(sgms.getDay27());
-                    }
-                    if (i == 28) {
-                        arrli.add(sgms.getDay28());
-                    }
-                    if (i == 29) {
-                        arrli.add(sgms.getDay29());
-                    }
-                    if (i == 30) {
-                        arrli.add(sgms.getDay30());
-                    }
-                    if (i == 31) {
-                        arrli.add(sgms.getDay31());
-                    }
-                }
-                if (arrli.contains(-1)) {
-                    days -= 1.0;
-                }
-            } else {
-                List<?> shiftListId2 = shiftGenerateMonthlyScheduleService.getshiftsList1(data);
-                String shiftLists2 = shiftListId2.get(0).toString();
-                sgms1 = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(shiftLists2));
-                LocalDate convertedDate = LocalDate.parse(strDate1, DateTimeFormatter.ofPattern("d/M/yyyy"));
-                convertedDate = convertedDate.withDayOfMonth(convertedDate.getMonth().length(convertedDate.isLeapYear()));
-                String st = format.format(java.sql.Date.valueOf(convertedDate));
-                String monthEndValue = st.split("/")[0];
-                ArrayList<Integer> arrli1 = new ArrayList<Integer>();
-                for (int i = Integer.parseInt(strDay); i <= Integer.parseInt(monthEndValue); i++) {
-                    if (i == 1) {
-                        arrli1.add(sgms.getDay1());
-                    }
-                    if (i == 2) {
-                        arrli1.add(sgms.getDay2());
-                    }
-                    if (i == 3) {
-                        arrli1.add(sgms.getDay3());
-                    }
-                    if (i == 4) {
-                        arrli1.add(sgms.getDay4());
-                    }
-                    if (i == 5) {
-                        arrli1.add(sgms.getDay5());
-                    }
-                    if (i == 6) {
-                        arrli1.add(sgms.getDay6());
-                    }
-                    if (i == 7) {
-                        arrli1.add(sgms.getDay7());
-                    }
-                    if (i == 8) {
-                        arrli1.add(sgms.getDay8());
-                    }
-                    if (i == 9) {
-                        arrli1.add(sgms.getDay9());
-                    }
-                    if (i == 10) {
-                        arrli1.add(sgms.getDay10());
-                    }
-                    if (i == 11) {
-                        arrli1.add(sgms.getDay11());
-                    }
-                    if (i == 12) {
-                        arrli1.add(sgms.getDay12());
-                    }
-                    if (i == 13) {
-                        arrli1.add(sgms.getDay13());
-                    }
-                    if (i == 14) {
-                        arrli1.add(sgms.getDay14());
-                    }
-                    if (i == 15) {
-                        arrli1.add(sgms.getDay15());
-                    }
-                    if (i == 16) {
-                        arrli1.add(sgms.getDay16());
-                    }
-                    if (i == 17) {
-                        arrli1.add(sgms.getDay17());
-                    }
-                    if (i == 18) {
-                        arrli1.add(sgms.getDay18());
-                    }
-                    if (i == 19) {
-                        arrli1.add(sgms.getDay19());
-                    }
-                    if (i == 20) {
-                        arrli1.add(sgms.getDay20());
-                    }
-                    if (i == 21) {
-                        arrli1.add(sgms.getDay21());
-                    }
-                    if (i == 22) {
-                        arrli1.add(sgms.getDay22());
-                    }
-                    if (i == 23) {
-                        arrli1.add(sgms.getDay23());
-                    }
-                    if (i == 24) {
-                        arrli1.add(sgms.getDay24());
-                    }
-                    if (i == 25) {
-                        arrli1.add(sgms.getDay25());
-                    }
-                    if (i == 26) {
-                        arrli1.add(sgms.getDay26());
-                    }
-                    if (i == 27) {
-                        arrli1.add(sgms.getDay27());
-                    }
-                    if (i == 28) {
-                        arrli1.add(sgms.getDay28());
-                    }
-                    if (i == 29) {
-                        arrli1.add(sgms.getDay29());
-                    }
-                    if (i == 30) {
-                        arrli1.add(sgms.getDay30());
-                    }
-                    if (i == 31) {
-                        arrli1.add(sgms.getDay31());
-                    }
-                }
-                for (int i = 1; i <= Integer.parseInt(enDay); i++) {
-                    if (i == 1) {
-                        arrli1.add(sgms1.getDay1());
-                    }
-                    if (i == 2) {
-                        arrli1.add(sgms1.getDay2());
-                    }
-                    if (i == 3) {
-                        arrli1.add(sgms1.getDay3());
-                    }
-                    if (i == 4) {
-                        arrli1.add(sgms1.getDay4());
-                    }
-                    if (i == 5) {
-                        arrli1.add(sgms1.getDay5());
-                    }
-                    if (i == 6) {
-                        arrli1.add(sgms1.getDay6());
-                    }
-                    if (i == 7) {
-                        arrli1.add(sgms1.getDay7());
-                    }
-                    if (i == 8) {
-                        arrli1.add(sgms1.getDay8());
-                    }
-                    if (i == 9) {
-                        arrli1.add(sgms1.getDay9());
-                    }
-                    if (i == 10) {
-                        arrli1.add(sgms1.getDay10());
-                    }
-                    if (i == 11) {
-                        arrli1.add(sgms1.getDay11());
-                    }
-                    if (i == 12) {
-                        arrli1.add(sgms1.getDay12());
-                    }
-                    if (i == 13) {
-                        arrli1.add(sgms1.getDay13());
-                    }
-                    if (i == 14) {
-                        arrli1.add(sgms1.getDay14());
-                    }
-                    if (i == 15) {
-                        arrli1.add(sgms1.getDay15());
-                    }
-                    if (i == 16) {
-                        arrli1.add(sgms1.getDay16());
-                    }
-                    if (i == 17) {
-                        arrli1.add(sgms1.getDay17());
-                    }
-                    if (i == 18) {
-                        arrli1.add(sgms1.getDay18());
-                    }
-                    if (i == 19) {
-                        arrli1.add(sgms1.getDay19());
-                    }
-                    if (i == 20) {
-                        arrli1.add(sgms1.getDay20());
-                    }
-                    if (i == 21) {
-                        arrli1.add(sgms1.getDay21());
-                    }
-                    if (i == 22) {
-                        arrli1.add(sgms1.getDay22());
-                    }
-                    if (i == 23) {
-                        arrli1.add(sgms1.getDay23());
-                    }
-                    if (i == 24) {
-                        arrli1.add(sgms1.getDay24());
-                    }
-                    if (i == 25) {
-                        arrli1.add(sgms1.getDay25());
-                    }
-                    if (i == 26) {
-                        arrli1.add(sgms1.getDay26());
-                    }
-                    if (i == 27) {
-                        arrli1.add(sgms1.getDay27());
-                    }
-                    if (i == 28) {
-                        arrli1.add(sgms1.getDay28());
-                    }
-                    if (i == 29) {
-                        arrli1.add(sgms1.getDay29());
-                    }
-                    if (i == 30) {
-                        arrli1.add(sgms1.getDay30());
-                    }
-                    if (i == 31) {
-                        arrli1.add(sgms1.getDay31());
-                    }
-                }
-                if (arrli1.contains(-1)) {
-                    days -= 1.0;
-                }
-            }
-
-        }
-        if (leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17")) {
-            SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
-            Date date = format.parse(strDate);
-            Date oneDayBefore = new Date(date.getTime() - 2);
-            String dateBeforeOfsDate = format.format(oneDayBefore);
-            String beforeDay = dateBeforeOfsDate.split("/")[0];
-            String beforeMonth = dateBeforeOfsDate.split("/")[1];
-            String beforeYear = dateBeforeOfsDate.split("/")[2];
-
-            Date date1 = format.parse(enDate);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date1);
-            calendar.add(Calendar.DAY_OF_YEAR, 1);
-            Date tomorrow = calendar.getTime();
-            String dateAfterOfeDate = format.format(tomorrow);
-            String afterDay = dateAfterOfeDate.split("/")[0];
-            String afterMonth = dateAfterOfeDate.split("/")[1];
-            String afterYear = dateAfterOfeDate.split("/")[2];
-
-            String data = employeeMaster1.getId() + ":" + beforeDay + ":" + beforeMonth + ":" + beforeYear + ":" + afterDay + ":" + afterMonth + ":" + afterYear;
-            String beforeDayList = shiftGenerateMonthlyScheduleService.getBeforeDayList(data);
-            String afterDayList = shiftGenerateMonthlyScheduleService.getAfterDayList(data);
-
-            SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
-            Date date2 = format1.parse(strDate);
-            calendar.setTime(date2);
-            calendar.add(Calendar.DAY_OF_YEAR, -3);
-            Date beforeWoff = calendar.getTime();
-            String beforeWoffDay = format1.format(beforeWoff);
-
-            Date date3 = format1.parse(enDate);
-            calendar.setTime(date3);
-            calendar.add(Calendar.DAY_OF_YEAR, 3);
-            Date afterWoff = calendar.getTime();
-            String afterWoffDay = format1.format(afterWoff);
-
-            String data1 = employeeMaster1.getId() + ":" + beforeWoffDay + ":" + afterWoffDay;
-            if (beforeDayList.equals("-1")) {
-                List<?> beforeWoffDayList = shiftGenerateMonthlyScheduleService.getbeforeWoffDayList(data1);
-                if (!beforeWoffDayList.isEmpty()) {
-                    if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday")) {
-                        if (leavetype.equals("7")) {
-                            days = days;
-                        } else {
-                            days += 1.0;
-                        }
-
-                    } else {
-                        days += 1.0;
-                    }
-                }
-            }
-            if (afterDayList.equals("-1")) {
-                List<?> afterWoffDayList = shiftGenerateMonthlyScheduleService.getafterWoffDayList(data1);
-                if (!afterWoffDayList.isEmpty()) {
-                    days += 1.0;
-                }
-            }
-        }
-
-        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
-        Date date1 = format.parse(strDate);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date1);
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        Date tomorrow = calendar.getTime();
-        String dateAfterOfstrDate = format.format(tomorrow);
-        String afterDay = dateAfterOfstrDate.split("/")[0];
-        String afterMonth = dateAfterOfstrDate.split("/")[1];
-        String afterYear = dateAfterOfstrDate.split("/")[2];
-
-        Date date2 = format.parse(enDate);
-        calendar.setTime(date2);
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
-        Date before = calendar.getTime();
-        String dateBeforeOfenDate = format.format(before);
-        String beforeDay = dateBeforeOfenDate.split("/")[0];
-        String beforMonth = dateBeforeOfenDate.split("/")[1];
-        String beforYear = dateBeforeOfenDate.split("/")[2];
-        String data = employeeMaster1.getId() + ":" + afterDay + ":" + afterMonth + ":" + afterYear + ":" + beforeDay + ":" + beforMonth + ":" + beforYear;
-        List<?> getDayAfterOfstrDate = shiftGenerateMonthlyScheduleService.getDayAfterOfstrDate(data);
-        List<?> getDayBeforeOfenDate = shiftGenerateMonthlyScheduleService.getDayBeforeOfenDate(data);
-        String getDayAfterOfstrDate1 = getDayAfterOfstrDate.get(0).toString();
-        String getDayBeforeOfenDate1 = getDayBeforeOfenDate.get(0).toString();
-        if ((sDateStatus.equals("Fullday") && eDateStatus.equals("FirstHalf"))) {
-
-            if (getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) {
-                days -= 1.0;
-            }
-        }
-        if ((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday"))) {
-
-            if ((!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1")) && (!leavetype.equals("16") && !leavetype.equals("11") && !leavetype.equals("12") && !leavetype.equals("18") && !leavetype.equals("7"))) //            if(!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1"))
-            {
-                days += 1.0;
-            }
-        }
-        if ((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday"))) {
-
-            if ((getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (leavetype.equals("16") || leavetype.equals("11") || leavetype.equals("12"))) {
-                days -= 1.0;
-            }
-        }
-        if (leavetype.equals("7") || leavetype.equals("6")) {
-            List<Date> dates = new ArrayList<Date>();
-            List<String> dates1 = new ArrayList<String>();
-            DateFormat formatter;
-
-            formatter = new SimpleDateFormat("d/M/yyyy");
-            Date startDate = (Date) formatter.parse(strDate);
-            Date endDate = (Date) formatter.parse(enDate);
-            long interval = 24 * 1000 * 60 * 60;
-            long endTime = endDate.getTime();
-            long curTime = startDate.getTime();
-            while (curTime <= endTime) {
-                dates.add(new Date(curTime));
-                curTime += interval;
-            }
-            for (int i = 0; i < dates.size(); i++) {
-                Date lDate = (Date) dates.get(i);
-                String ds = formatter.format(lDate);
-                dates1.add(ds);
-            }
-            SimpleDateFormat format2 = new SimpleDateFormat("d/M/yyyy");
-            Date date5 = format2.parse(strDate);
-            String strDate2 = format2.format(date5);
-            Date date6 = format2.parse(enDate);
-            String enDate2 = format2.format(date6);
-            Boolean woffCount = false;
-            String beforeWoff = "";
-            for (String str : dates1) {
-                String data11 = employeeMaster1.getId() + ":" + str.split("/")[0] + ":" + str.split("/")[1] + ":" + str.split("/")[2];
-                String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data11);
-                if (checkWoff.equals("-1")) {
-                    woffCount = true;
-                    beforeWoff = str;
-                }
-            }
-            if (woffCount == true && !beforeWoff.isEmpty()) {
-                Date date3 = format2.parse(beforeWoff);
-                calendar.setTime(date3);
-                calendar.add(Calendar.DAY_OF_YEAR, -7);
-                Date afterChange = calendar.getTime();
-                String afterChange1 = format2.format(afterChange);
-                String data12 = employeeMaster1.getId() + ":" + afterChange1.split("/")[0] + ":" + afterChange1.split("/")[1] + ":" + afterChange1.split("/")[2];
-                String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data12);
-                Date date4 = format2.parse(afterChange1);
-                calendar.setTime(date4);
-                calendar.add(Calendar.DAY_OF_YEAR, -1);
-                Date beforeDayWoff = calendar.getTime();
-                String beforeDayWoff1 = format2.format(beforeDayWoff);
-                Date date7 = format2.parse(afterChange1);
-                calendar.setTime(date7);
-                calendar.add(Calendar.DAY_OF_YEAR, 1);
-                Date afterDayWoff = calendar.getTime();
-                String afterDayWoff1 = format2.format(afterDayWoff);
-                String data13 = employeeMaster1.getId() + ":" + beforeDayWoff1.split("/")[0] + ":" + beforeDayWoff1.split("/")[1] + ":" + beforeDayWoff1.split("/")[2];
-                String checkBeforeWoff = shiftGenerateMonthlyScheduleService.checkWoff(data13);
-                String data14 = employeeMaster1.getId() + ":" + afterDayWoff1.split("/")[0] + ":" + afterDayWoff1.split("/")[1] + ":" + afterDayWoff1.split("/")[2];
-                String checkAfterWoff = shiftGenerateMonthlyScheduleService.checkWoff(data14);
-                if (checkWoff.equals("-1")) {
-                    if (checkBeforeWoff.equals("-1")) {
-                        Date date8 = format2.parse(beforeDayWoff1);
-                        calendar.setTime(date8);
-                        calendar.add(Calendar.DAY_OF_YEAR, -1);
-                        Date afterDayWoff3 = calendar.getTime();
-                        String beforeWoff1 = format2.format(afterDayWoff3);
-                        Date date9 = format2.parse(afterChange1);
-                        calendar.setTime(date9);
-                        calendar.add(Calendar.DAY_OF_YEAR, 1);
-                        Date beforeDayWoff3 = calendar.getTime();
-                        String afterWoff1 = format2.format(beforeDayWoff3);
-                        String data15 = employeeMaster1.getId() + ":" + beforeWoff1 + ":" + afterWoff1;
-                        String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
-                        String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
-                        if ((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty())) {
-                            days--;
-                        }
-                    }
-                    if (checkAfterWoff.equals("-1")) {
-                        String afterDayWoff2 = format2.format(afterChange1);
-                        Date date9 = format2.parse(afterDayWoff2);
-                        calendar.setTime(date9);
-                        calendar.add(Calendar.DAY_OF_YEAR, -1);
-                        Date beforeDayWoff3 = calendar.getTime();
-                        String afterWoff1 = format2.format(beforeDayWoff3);
-                        String beforeDayWoff2 = format2.format(afterDayWoff1);
-                        Date date8 = format2.parse(beforeDayWoff2);
-                        calendar.setTime(date8);
-                        calendar.add(Calendar.DAY_OF_YEAR, -1);
-                        Date afterDayWoff3 = calendar.getTime();
-                        String beforeWoff1 = format2.format(afterDayWoff3);
-                        String data15 = employeeMaster1.getId() + ":" + afterWoff1 + ":" + beforeWoff1;
-                        String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
-                        String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
-                        if ((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty())) {
+                if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12") && !leavetype.equals("11")) {
+                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+                        if (!strDate.equals(enDate)) {
                             days--;
                         }
                     }
                 }
+                if (c.get(Calendar.DAY_OF_WEEK) == weekOff) {
+//                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                        if (sDateStatus.contains("SecondHalf")) {
+//                            if (!strDate.equals(enDate)) {
+                    days--;
+//                            }
+//                        }
+//                    }
+                }
+
+//                if ((ZydexLocId == 1 || ZydexLocId == 6)) {
+////                    if (dayOfWeek == 2 && c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+////                        if (!strDate.equals(enDate) && !eDateStatus.contains("FirstHalf")) {
+////                            days = days - (float) 0.50;
+////                        }
+////                        if (strDate.equals(enDate) && !sDateStatus.contains("SecondHalf") && !sDateStatus.contains("FirstHalf")) {
+////                            days = days - (float) 0.50;
+////                        }
+//////                          
+////                    }
+//                    if (dayOfWeek == 3 && c.get(Calendar.DAY_OF_WEEK) == 1) {
+//                        if (!strDate.equals(enDate)) {
+//                            days--;
+//                        }
+//                        if (!sDateStatus.contains("SecondHalf") && eDateStatus.contains("FirstHalf")) {
+//                            days = days - (float) 0.50;
+//                        }
+//
+//                    }
+//                    if (dayOfWeek == 2 && c.get(Calendar.DAY_OF_WEEK) == 7) {
+//                        if (coutnter != 0 && sDateStatus.contains("SecondHalf")) {
+//                            if (!strDate.equals(enDate)) {
+//                                days = days - (float) 0.50;
+//                            }
+//                        }
+//                    }
+//                    if (dayOfWeek == 2 && dayEnd == 7 && c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && eDateStatus.contains("FirstHalf")) {
+//                        if (!strDate.equals(enDate)) {
+//                            days = days + (float) 0.50;
+//                        }
+//                    }
+//
+//                }
+//                if (leavetype.equals("8")) {
+//                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                        if (!strDate.equals(enDate)) {
+//                            days--;
+//                        }
+//                    }
+//                }
+                coutnter++;
             }
+            c.add(Calendar.DATE, 1);
+
         }
-//        if(leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("17"))
-//        {
+
+        PrintWriter out = response.getWriter();
+        out.print(days);
+//
+//        int coutnter = 0;
+//        boolean sundayCheck = false;
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(sDate);
+//        List<String> list1 = new ArrayList<String>();
+//        float days = 0;
+//        if (Boolean.parseBoolean(useSickLeave) == false && sDate.after(today) && leavetype.equals("7")) {
+//            while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
+//
+//                Calendar calForEnddate = Calendar.getInstance();
+//                calForEnddate.setTime(eDate);
+//                int dayEnd = calForEnddate.get(Calendar.DAY_OF_WEEK);
+//
+////              
+//////                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+//                Date nDate = c.getTime();
+//                String daString = sdf.format(nDate);
+//                HolidayMaster holidayMaster = new HolidayMaster();
+//                holidayMaster.setHolidayFromDate(daString);
+//                List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
+//                if (list.size() == 0) {
+//                    days++;
+//                }
+//                //-------------------Code for Saturaday and Sunday List Check Starts Here-------------
+//                if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 1) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 1) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 1) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 7) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Saturaday and Sunday List Check Ends Here-------------
+//                //-------------------Code for Sunday and Monday List Check Starts Here-------------
+//                else if (sm.format(dt1).equals("Sunday") && sm.format(dt2).equals("Monday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 2) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 2) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 2) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 2) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Sunday and Monday List Check Ends Here-------------
+//                //-------------------Code for Monday and Tuesday List Check Starts Here-------------
+//                else if (sm.format(dt1).equals("Monday") && sm.format(dt2).equals("Tuesday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 3) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 3) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 3) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && eDateStatus.contains("Fullday") && weekOff != 3 && weekOff != 2) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Monday and Tuesday List Check Ends Here-------------
+//                //-------------------Code for Tuesday And Wednesday List Check Starts Here-------------
+//                else if (sm.format(dt1).equals("Tuesday") && sm.format(dt2).equals("Wednesday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 4) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 4) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 4) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && eDateStatus.contains("Fullday") && weekOff != 3 && weekOff != 4) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Tuesday And Wednesday List Check Ends Here-------------
+//                //-------------------Code for Wednesday and Thursday List Check Starts Here-------------
+//                else if (sm.format(dt1).equals("Wednesday") && sm.format(dt2).equals("Thursday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 5) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 5) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 5) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && eDateStatus.contains("Fullday") && weekOff != 4 && weekOff != 5) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Wednesday and Thursday List Check Ends Here-------------
+//                //-------------------Code for Thursday and Friday List Check Starts Here-------------
+//                else if (sm.format(dt1).equals("Thursday") && sm.format(dt2).equals("Friday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 6) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 6) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 6) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && eDateStatus.contains("Fullday") && weekOff != 5 && weekOff != 6) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Thursday and Friday List Check Ends Here-------------
+//                //-------------------Code for Friday & Saturday List Check Starts Here-------------
+//                else if (sm.format(dt1).equals("Friday") && sm.format(dt2).equals("Saturday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 7) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 7) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 7) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && eDateStatus.contains("Fullday") && weekOff != 6 && weekOff != 7) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//                        coutnter++;
+//                    }
+//                }
+//                //-------------------Code for Friday & Saturday List Check Ends Here-------------
+//                c.add(Calendar.DATE, 1);
+//            }
+//        } else if (Boolean.parseBoolean(useSickLeave) == false && !leavetype.equals("7")) {
+//            while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
+//
+//                Calendar calForEnddate = Calendar.getInstance();
+//                calForEnddate.setTime(eDate);
+//                int dayEnd = calForEnddate.get(Calendar.DAY_OF_WEEK);
+//
+////              
+//////                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+//                Date nDate = c.getTime();
+//                String daString = sdf.format(nDate);
+//                HolidayMaster holidayMaster = new HolidayMaster();
+//                holidayMaster.setHolidayFromDate(daString);
+//                List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
+//                if (list.size() == 0) {
+//                    days++;
+//                }
+//                //-------------------Code for Saturday & Sunday Starts Here-------------
+//                if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 1) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 1) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 1) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 7) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Saturday & Sunday List Check Ends Here-------------
+//                //-------------------Code for Sunday & Monday Starts Here-------------
+//                else if (sm.format(dt1).equals("Sunday") && sm.format(dt2).equals("Monday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 2) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 2) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 2) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 2) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Sunday & Monday List Check Ends Here-------------
+//                //-------------------Code for Monday & Tuesday Starts Here-------------
+//                else if (sm.format(dt1).equals("Monday") && sm.format(dt2).equals("Tuesday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 3) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 3) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 3) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && eDateStatus.contains("Fullday") && weekOff != 2 && weekOff != 3) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Monday & Tuesday List Check Ends Here-------------
+//                //-------------------Code for Tuesday & Wednesday Starts Here-------------
+//                else if (sm.format(dt1).equals("Tuesday") && sm.format(dt2).equals("Wednesday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 4) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 4) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 4) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && eDateStatus.contains("Fullday") && weekOff != 3 && weekOff != 4) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Tuesday & Wednesday List Check Ends Here-------------
+//                //-------------------Code for Wednesday & Thursday Starts Here-------------
+//                else if (sm.format(dt1).equals("Wednesday") && sm.format(dt2).equals("Thursday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 5) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 5) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 5) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && eDateStatus.contains("Fullday") && weekOff != 4 && weekOff != 5) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Wednesday & Thursday List Check Ends Here-------------
+//                //-------------------Code for Thursday & Friday Starts Here-------------
+//                else if (sm.format(dt1).equals("Thursday") && sm.format(dt2).equals("Friday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 6) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 6) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 6) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && eDateStatus.contains("Fullday") && weekOff != 5 && weekOff != 6) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Thursday & Friday  Ends Here-------------
+//                //-------------------Code for Friday & Saturday Starts Here-------------
+//                else if (sm.format(dt1).equals("Friday") && sm.format(dt2).equals("Saturday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 7) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 7) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 7) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && eDateStatus.contains("Fullday") && weekOff != 6 && weekOff != 7) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                }
+//                //-------------------Code for Friday & Saturday  Ends Here-------------
+//                c.add(Calendar.DATE, 1);
+//
+//            }
+//        } else if (Boolean.parseBoolean(useSickLeave) == true && (leavetype.equals("6") || leavetype.equals("7"))) {
+//            while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
+//
+//                Calendar calForEnddate = Calendar.getInstance();
+//                calForEnddate.setTime(eDate);
+//                int dayEnd = calForEnddate.get(Calendar.DAY_OF_WEEK);
+//
+////              
+//////                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+//                Date nDate = c.getTime();
+//                String daString = sdf.format(nDate);
+//                HolidayMaster holidayMaster = new HolidayMaster();
+//                holidayMaster.setHolidayFromDate(daString);
+//                List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
+//                if (list.size() == 0) {
+//                    days++;
+//                }
+//                //-------------------Code for Saturday & Sunday Starts Here-------------
+//                if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 1) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 1) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 1) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 7) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Saturday & Sunday List Check Ends Here-------------
+//                //-------------------Code for Sunday & Monday Starts Here-------------
+//                else if (sm.format(dt1).equals("Sunday") && sm.format(dt2).equals("Monday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 2) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 2) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 2) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && eDateStatus.contains("Fullday") && weekOff != 1 && weekOff != 2) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Sunday & Monday List Check Ends Here-------------
+//                //-------------------Code for Monday & Tuesday Starts Here-------------
+//                else if (sm.format(dt1).equals("Monday") && sm.format(dt2).equals("Tuesday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 3) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 3) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 3) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && eDateStatus.contains("Fullday") && weekOff != 2 && weekOff != 3) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Monday & Tuesday List Check Ends Here-------------
+//                //-------------------Code for Tuesday & Wednesday Starts Here-------------
+//                else if (sm.format(dt1).equals("Tuesday") && sm.format(dt2).equals("Wednesday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 4) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 4) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 4) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && eDateStatus.contains("Fullday") && weekOff != 3 && weekOff != 4) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Tuesday & Wednesday List Check Ends Here-------------
+//                //-------------------Code for Wednesday & Thursday Starts Here-------------
+//                else if (sm.format(dt1).equals("Wednesday") && sm.format(dt2).equals("Thursday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 5) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 5) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 3 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 5) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && eDateStatus.contains("Fullday") && weekOff != 4 && weekOff != 5) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 6 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Wednesday & Thursday List Check Ends Here-------------
+//                //-------------------Code for Thursday & Friday Starts Here-------------
+//                else if (sm.format(dt1).equals("Thursday") && sm.format(dt2).equals("Friday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 6) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 6) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 4 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 6) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && eDateStatus.contains("Fullday") && weekOff != 5 && weekOff != 6) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                } //-------------------Code for Thursday & Friday  Ends Here-------------
+//                //-------------------Code for Friday & Saturday Starts Here-------------
+//                else if (sm.format(dt1).equals("Friday") && sm.format(dt2).equals("Saturday")) {
+//                    for (String z : weekOffDay.split(",")) {
+//                        int weekOff = 0;
+//                        if (!z.equals("")) {
+//                            if (z.equals("Sunday")) {
+//                                weekOff = 1;
+//                                sundayCheck = true;
+//                            } else if (z.equals("Monday")) {
+//                                weekOff = 2;
+//                            } else if (z.equals("Tuesday")) {
+//                                weekOff = 3;
+//                            } else if (z.equals("Wednesday")) {
+//                                weekOff = 4;
+//                            } else if (z.equals("Thursday")) {
+//                                weekOff = 5;
+//                            } else if (z.equals("Friday")) {
+//                                weekOff = 6;
+//                            } else if (z.equals("Saturday")) {
+//                                weekOff = 7;
+//                            }
+//                        }
+//                        if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+//                                if (sDateStatus.contains("SecondHalf")) {
+//                                    if (!strDate.equals(enDate)) {
+//                                        days--;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+//                                if (!strDate.equals(enDate)) {
+//                                    days--;
+//                                }
+//                            }
+//                        }
+//                        if (leavetype.equals("7")) {
+//                            if (c.get(Calendar.DAY_OF_WEEK) == weekOff && c.get(Calendar.DAY_OF_WEEK) != 7) {
+//                                days--;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("SecondHalf") && eDateStatus != "" && weekOff != 7) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 5 && sDateStatus.contains("FirstHalf") && eDateStatus != "" && weekOff != 7) {
+//                                days = days - (float) 1;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && eDateStatus.contains("Fullday") && weekOff != 6 && weekOff != 7) {
+//                                days = days - (float) 0.5;
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 1 && sDateStatus.contains("Fullday")) {
+//                                Calendar c12 = Calendar.getInstance();
+//                                c12.setTime(sDate);
+//                                c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+//                                int d = c.get(Calendar.MONTH);
+//                                String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                if (empPreviousLeavebal) {
+//                                    days++;
+//                                }
+//                                break;
+//                            }
+//                            if (c.get(Calendar.DAY_OF_WEEK) == 2 && sDateStatus.contains("Fullday")) {
+//                                Calendar c123 = Calendar.getInstance();
+//                                c123.setTime(sDate);
+//                                c123.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+//                                int d1 = c.get(Calendar.MONTH);
+//                                String fdate1 = c123.get(Calendar.DATE) + "/" + (d1 + 1) + "/" + c123.get(Calendar.YEAR);
+//                                List list12 = holidayMasterService.checkHoliday(fdate1, "" + employeeMaster1.getLocationMaster().getId());
+//                                if (list12.size() == 1) {
+//                                    Calendar c12 = Calendar.getInstance();
+//                                    c12.setTime(sDate);
+//                                    c12.add(Calendar.WEEK_OF_YEAR, -1);
+//                                    c12.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+//                                    int d = c.get(Calendar.MONTH);
+//                                    String fdate = c12.get(Calendar.DATE) + "/" + (d + 1) + "/" + c12.get(Calendar.YEAR);
+//                                    Boolean empPreviousLeavebal = leaveEmployeeDetailService.readPreviousLeaveFriday(fdate, employeeMaster1.getId());
+//                                    if (empPreviousLeavebal) {
+//                                        days++;
+//                                    }
+//                                    break;
+//                                }
+//                                break;
+//                            }
+//                        }
+//
+//                        coutnter++;
+//                    }
+//                }
+//                //-------------------Code for Friday & Saturday  Ends Here-------------
+//                c.add(Calendar.DATE, 1);
+//
+//            }
+//        }
+//        if (leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17")) {
+//            String data = employeeMaster1.getId() + ":" + strDate + ":" + enDate;
+//            List<?> shiftsBetween = shiftGenerateMonthlyScheduleService.getShiftsBetween(data);
+//            String size = String.valueOf(shiftsBetween.size());
+//            Double size1 = Double.parseDouble(size);
+//            if (!shiftsBetween.isEmpty()) {
+//                days -= size1;
+//            }
+//        }
+//        if (leavetype.equals("16")) {
+//            SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
+//            Date date = format.parse(strDate);
+//            String strDate1 = format.format(date);
+//            Date date1 = format.parse(enDate);
+//            String enDate1 = format.format(date1);
+//            String strDay = strDate1.split("/")[0];
+//            String strMonth = strDate1.split("/")[1];
+//            String strYear = strDate1.split("/")[2];
+//            String enDay = enDate1.split("/")[0];
+//            String enMonth = enDate1.split("/")[1];
+//            String enYear = enDate1.split("/")[2];
+//            String employeeId = request.getParameter("employeeId");
+//            String empNo = employeeMasterService.getByEmployeeNo1(employeeId);
+//            EmployeeMaster employeeMaster11 = employeeMasterService.readById(Integer.parseInt(empNo));
+//            String data = employeeMaster11.getId() + ":" + strMonth + ":" + strYear + ":" + enMonth + ":" + enYear;
+//            String shiftList = "";
+//            String shiftList1 = "";
+//            String shiftList2 = "";
+//            ShiftGenerateMonthlySchedule sgms;
+//            ShiftGenerateMonthlySchedule sgms1;
+//            List<?> shiftListId = shiftGenerateMonthlyScheduleService.getshiftsList(data);
+//            String shiftLists = shiftListId.get(0).toString();
+//            sgms = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(shiftLists));
+//            if (strMonth.equals(enMonth) && strYear.equals(enYear)) {
+//
+//                ArrayList<Integer> arrli = new ArrayList<Integer>();
+//                for (int i = Integer.parseInt(strDay); i <= Integer.parseInt(enDay); i++) {
+//                    if (i == 1) {
+//                        arrli.add(sgms.getDay1());
+//                    }
+//                    if (i == 2) {
+//                        arrli.add(sgms.getDay2());
+//                    }
+//                    if (i == 3) {
+//                        arrli.add(sgms.getDay3());
+//                    }
+//                    if (i == 4) {
+//                        arrli.add(sgms.getDay4());
+//                    }
+//                    if (i == 5) {
+//                        arrli.add(sgms.getDay5());
+//                    }
+//                    if (i == 6) {
+//                        arrli.add(sgms.getDay6());
+//                    }
+//                    if (i == 7) {
+//                        arrli.add(sgms.getDay7());
+//                    }
+//                    if (i == 8) {
+//                        arrli.add(sgms.getDay8());
+//                    }
+//                    if (i == 9) {
+//                        arrli.add(sgms.getDay9());
+//                    }
+//                    if (i == 10) {
+//                        arrli.add(sgms.getDay10());
+//                    }
+//                    if (i == 11) {
+//                        arrli.add(sgms.getDay11());
+//                    }
+//                    if (i == 12) {
+//                        arrli.add(sgms.getDay12());
+//                    }
+//                    if (i == 13) {
+//                        arrli.add(sgms.getDay13());
+//                    }
+//                    if (i == 14) {
+//                        arrli.add(sgms.getDay14());
+//                    }
+//                    if (i == 15) {
+//                        arrli.add(sgms.getDay15());
+//                    }
+//                    if (i == 16) {
+//                        arrli.add(sgms.getDay16());
+//                    }
+//                    if (i == 17) {
+//                        arrli.add(sgms.getDay17());
+//                    }
+//                    if (i == 18) {
+//                        arrli.add(sgms.getDay18());
+//                    }
+//                    if (i == 19) {
+//                        arrli.add(sgms.getDay19());
+//                    }
+//                    if (i == 20) {
+//                        arrli.add(sgms.getDay20());
+//                    }
+//                    if (i == 21) {
+//                        arrli.add(sgms.getDay21());
+//                    }
+//                    if (i == 22) {
+//                        arrli.add(sgms.getDay22());
+//                    }
+//                    if (i == 23) {
+//                        arrli.add(sgms.getDay23());
+//                    }
+//                    if (i == 24) {
+//                        arrli.add(sgms.getDay24());
+//                    }
+//                    if (i == 25) {
+//                        arrli.add(sgms.getDay25());
+//                    }
+//                    if (i == 26) {
+//                        arrli.add(sgms.getDay26());
+//                    }
+//                    if (i == 27) {
+//                        arrli.add(sgms.getDay27());
+//                    }
+//                    if (i == 28) {
+//                        arrli.add(sgms.getDay28());
+//                    }
+//                    if (i == 29) {
+//                        arrli.add(sgms.getDay29());
+//                    }
+//                    if (i == 30) {
+//                        arrli.add(sgms.getDay30());
+//                    }
+//                    if (i == 31) {
+//                        arrli.add(sgms.getDay31());
+//                    }
+//                }
+//                if (arrli.contains(-1)) {
+//                    days -= 1.0;
+//                }
+//            } else {
+//                List<?> shiftListId2 = shiftGenerateMonthlyScheduleService.getshiftsList1(data);
+//                String shiftLists2 = shiftListId2.get(0).toString();
+//                sgms1 = shiftGenerateMonthlyScheduleService.readById(Integer.parseInt(shiftLists2));
+//                LocalDate convertedDate = LocalDate.parse(strDate1, DateTimeFormatter.ofPattern("d/M/yyyy"));
+//                convertedDate = convertedDate.withDayOfMonth(convertedDate.getMonth().length(convertedDate.isLeapYear()));
+//                String st = format.format(java.sql.Date.valueOf(convertedDate));
+//                String monthEndValue = st.split("/")[0];
+//                ArrayList<Integer> arrli1 = new ArrayList<Integer>();
+//                for (int i = Integer.parseInt(strDay); i <= Integer.parseInt(monthEndValue); i++) {
+//                    if (i == 1) {
+//                        arrli1.add(sgms.getDay1());
+//                    }
+//                    if (i == 2) {
+//                        arrli1.add(sgms.getDay2());
+//                    }
+//                    if (i == 3) {
+//                        arrli1.add(sgms.getDay3());
+//                    }
+//                    if (i == 4) {
+//                        arrli1.add(sgms.getDay4());
+//                    }
+//                    if (i == 5) {
+//                        arrli1.add(sgms.getDay5());
+//                    }
+//                    if (i == 6) {
+//                        arrli1.add(sgms.getDay6());
+//                    }
+//                    if (i == 7) {
+//                        arrli1.add(sgms.getDay7());
+//                    }
+//                    if (i == 8) {
+//                        arrli1.add(sgms.getDay8());
+//                    }
+//                    if (i == 9) {
+//                        arrli1.add(sgms.getDay9());
+//                    }
+//                    if (i == 10) {
+//                        arrli1.add(sgms.getDay10());
+//                    }
+//                    if (i == 11) {
+//                        arrli1.add(sgms.getDay11());
+//                    }
+//                    if (i == 12) {
+//                        arrli1.add(sgms.getDay12());
+//                    }
+//                    if (i == 13) {
+//                        arrli1.add(sgms.getDay13());
+//                    }
+//                    if (i == 14) {
+//                        arrli1.add(sgms.getDay14());
+//                    }
+//                    if (i == 15) {
+//                        arrli1.add(sgms.getDay15());
+//                    }
+//                    if (i == 16) {
+//                        arrli1.add(sgms.getDay16());
+//                    }
+//                    if (i == 17) {
+//                        arrli1.add(sgms.getDay17());
+//                    }
+//                    if (i == 18) {
+//                        arrli1.add(sgms.getDay18());
+//                    }
+//                    if (i == 19) {
+//                        arrli1.add(sgms.getDay19());
+//                    }
+//                    if (i == 20) {
+//                        arrli1.add(sgms.getDay20());
+//                    }
+//                    if (i == 21) {
+//                        arrli1.add(sgms.getDay21());
+//                    }
+//                    if (i == 22) {
+//                        arrli1.add(sgms.getDay22());
+//                    }
+//                    if (i == 23) {
+//                        arrli1.add(sgms.getDay23());
+//                    }
+//                    if (i == 24) {
+//                        arrli1.add(sgms.getDay24());
+//                    }
+//                    if (i == 25) {
+//                        arrli1.add(sgms.getDay25());
+//                    }
+//                    if (i == 26) {
+//                        arrli1.add(sgms.getDay26());
+//                    }
+//                    if (i == 27) {
+//                        arrli1.add(sgms.getDay27());
+//                    }
+//                    if (i == 28) {
+//                        arrli1.add(sgms.getDay28());
+//                    }
+//                    if (i == 29) {
+//                        arrli1.add(sgms.getDay29());
+//                    }
+//                    if (i == 30) {
+//                        arrli1.add(sgms.getDay30());
+//                    }
+//                    if (i == 31) {
+//                        arrli1.add(sgms.getDay31());
+//                    }
+//                }
+//                for (int i = 1; i <= Integer.parseInt(enDay); i++) {
+//                    if (i == 1) {
+//                        arrli1.add(sgms1.getDay1());
+//                    }
+//                    if (i == 2) {
+//                        arrli1.add(sgms1.getDay2());
+//                    }
+//                    if (i == 3) {
+//                        arrli1.add(sgms1.getDay3());
+//                    }
+//                    if (i == 4) {
+//                        arrli1.add(sgms1.getDay4());
+//                    }
+//                    if (i == 5) {
+//                        arrli1.add(sgms1.getDay5());
+//                    }
+//                    if (i == 6) {
+//                        arrli1.add(sgms1.getDay6());
+//                    }
+//                    if (i == 7) {
+//                        arrli1.add(sgms1.getDay7());
+//                    }
+//                    if (i == 8) {
+//                        arrli1.add(sgms1.getDay8());
+//                    }
+//                    if (i == 9) {
+//                        arrli1.add(sgms1.getDay9());
+//                    }
+//                    if (i == 10) {
+//                        arrli1.add(sgms1.getDay10());
+//                    }
+//                    if (i == 11) {
+//                        arrli1.add(sgms1.getDay11());
+//                    }
+//                    if (i == 12) {
+//                        arrli1.add(sgms1.getDay12());
+//                    }
+//                    if (i == 13) {
+//                        arrli1.add(sgms1.getDay13());
+//                    }
+//                    if (i == 14) {
+//                        arrli1.add(sgms1.getDay14());
+//                    }
+//                    if (i == 15) {
+//                        arrli1.add(sgms1.getDay15());
+//                    }
+//                    if (i == 16) {
+//                        arrli1.add(sgms1.getDay16());
+//                    }
+//                    if (i == 17) {
+//                        arrli1.add(sgms1.getDay17());
+//                    }
+//                    if (i == 18) {
+//                        arrli1.add(sgms1.getDay18());
+//                    }
+//                    if (i == 19) {
+//                        arrli1.add(sgms1.getDay19());
+//                    }
+//                    if (i == 20) {
+//                        arrli1.add(sgms1.getDay20());
+//                    }
+//                    if (i == 21) {
+//                        arrli1.add(sgms1.getDay21());
+//                    }
+//                    if (i == 22) {
+//                        arrli1.add(sgms1.getDay22());
+//                    }
+//                    if (i == 23) {
+//                        arrli1.add(sgms1.getDay23());
+//                    }
+//                    if (i == 24) {
+//                        arrli1.add(sgms1.getDay24());
+//                    }
+//                    if (i == 25) {
+//                        arrli1.add(sgms1.getDay25());
+//                    }
+//                    if (i == 26) {
+//                        arrli1.add(sgms1.getDay26());
+//                    }
+//                    if (i == 27) {
+//                        arrli1.add(sgms1.getDay27());
+//                    }
+//                    if (i == 28) {
+//                        arrli1.add(sgms1.getDay28());
+//                    }
+//                    if (i == 29) {
+//                        arrli1.add(sgms1.getDay29());
+//                    }
+//                    if (i == 30) {
+//                        arrli1.add(sgms1.getDay30());
+//                    }
+//                    if (i == 31) {
+//                        arrli1.add(sgms1.getDay31());
+//                    }
+//                }
+//                if (arrli1.contains(-1)) {
+//                    days -= 1.0;
+//                }
+//            }
+//
+//        }
+//        if (leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("16") || leavetype.equals("17")) {
+//            SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
+//            Date date = format.parse(strDate);
+//            Date oneDayBefore = new Date(date.getTime() - 2);
+//            String dateBeforeOfsDate = format.format(oneDayBefore);
+//            String beforeDay = dateBeforeOfsDate.split("/")[0];
+//            String beforeMonth = dateBeforeOfsDate.split("/")[1];
+//            String beforeYear = dateBeforeOfsDate.split("/")[2];
+//
+//            Date date1 = format.parse(enDate);
+//            Calendar calendar = Calendar.getInstance();
+//            calendar.setTime(date1);
+//            calendar.add(Calendar.DAY_OF_YEAR, 1);
+//            Date tomorrow = calendar.getTime();
+//            String dateAfterOfeDate = format.format(tomorrow);
+//            String afterDay = dateAfterOfeDate.split("/")[0];
+//            String afterMonth = dateAfterOfeDate.split("/")[1];
+//            String afterYear = dateAfterOfeDate.split("/")[2];
+//
+//            String data = employeeMaster1.getId() + ":" + beforeDay + ":" + beforeMonth + ":" + beforeYear + ":" + afterDay + ":" + afterMonth + ":" + afterYear;
+//            String beforeDayList = shiftGenerateMonthlyScheduleService.getBeforeDayList(data);
+//            String afterDayList = shiftGenerateMonthlyScheduleService.getAfterDayList(data);
+//
+//            SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
+//            Date date2 = format1.parse(strDate);
+//            calendar.setTime(date2);
+//            calendar.add(Calendar.DAY_OF_YEAR, -3);
+//            Date beforeWoff = calendar.getTime();
+//            String beforeWoffDay = format1.format(beforeWoff);
+//
+//            Date date3 = format1.parse(enDate);
+//            calendar.setTime(date3);
+//            calendar.add(Calendar.DAY_OF_YEAR, 3);
+//            Date afterWoff = calendar.getTime();
+//            String afterWoffDay = format1.format(afterWoff);
+//
+//            String data1 = employeeMaster1.getId() + ":" + beforeWoffDay + ":" + afterWoffDay;
+//            if (beforeDayList.equals("-1")) {
+//                List<?> beforeWoffDayList = shiftGenerateMonthlyScheduleService.getbeforeWoffDayList(data1);
+//                if (!beforeWoffDayList.isEmpty()) {
+//                    if (sm.format(dt1).equals("Saturday") && sm.format(dt2).equals("Sunday")) {
+//                        if (leavetype.equals("7")) {
+//                            days = days;
+//                        } else {
+//                            days += 1.0;
+//                        }
+//
+//                    } else {
+//                        days += 1.0;
+//                    }
+//                }
+//            }
+//            if (afterDayList.equals("-1")) {
+//                List<?> afterWoffDayList = shiftGenerateMonthlyScheduleService.getafterWoffDayList(data1);
+//                if (!afterWoffDayList.isEmpty()) {
+//                    days += 1.0;
+//                }
+//            }
+//        }
+//
+//        SimpleDateFormat format = new SimpleDateFormat("d/M/yyyy");
+//        Date date1 = format.parse(strDate);
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.setTime(date1);
+//        calendar.add(Calendar.DAY_OF_YEAR, 1);
+//        Date tomorrow = calendar.getTime();
+//        String dateAfterOfstrDate = format.format(tomorrow);
+//        String afterDay = dateAfterOfstrDate.split("/")[0];
+//        String afterMonth = dateAfterOfstrDate.split("/")[1];
+//        String afterYear = dateAfterOfstrDate.split("/")[2];
+//
+//        Date date2 = format.parse(enDate);
+//        calendar.setTime(date2);
+//        calendar.add(Calendar.DAY_OF_YEAR, -1);
+//        Date before = calendar.getTime();
+//        String dateBeforeOfenDate = format.format(before);
+//        String beforeDay = dateBeforeOfenDate.split("/")[0];
+//        String beforMonth = dateBeforeOfenDate.split("/")[1];
+//        String beforYear = dateBeforeOfenDate.split("/")[2];
+//        String data = employeeMaster1.getId() + ":" + afterDay + ":" + afterMonth + ":" + afterYear + ":" + beforeDay + ":" + beforMonth + ":" + beforYear;
+//        List<?> getDayAfterOfstrDate = shiftGenerateMonthlyScheduleService.getDayAfterOfstrDate(data);
+//        List<?> getDayBeforeOfenDate = shiftGenerateMonthlyScheduleService.getDayBeforeOfenDate(data);
+//        String getDayAfterOfstrDate1 = getDayAfterOfstrDate.get(0).toString();
+//        String getDayBeforeOfenDate1 = getDayBeforeOfenDate.get(0).toString();
+//        if ((sDateStatus.equals("Fullday") && eDateStatus.equals("FirstHalf"))) {
+//
+//            if (getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) {
+//                days -= 1.0;
+//            }
+//        }
+//        if ((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday"))) {
+//
+//            if ((!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1")) && (!leavetype.equals("16") && !leavetype.equals("11") && !leavetype.equals("12") && !leavetype.equals("18") && !leavetype.equals("7"))) //            if(!getDayAfterOfstrDate1.equals("-1") && !getDayBeforeOfenDate1.equals("-1"))
+//            {
+//                days += 1.0;
+//            }
+//        }
+//        if ((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday"))) {
+//
+//            if ((getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (leavetype.equals("16") || leavetype.equals("11") || leavetype.equals("12"))) {
+//                days -= 1.0;
+//            }
+//        }
+//        if (leavetype.equals("7") || leavetype.equals("6")) {
 //            List<Date> dates = new ArrayList<Date>();
 //            List<String> dates1 = new ArrayList<String>();
-//            DateFormat formatter ; 
+//            DateFormat formatter;
 //
 //            formatter = new SimpleDateFormat("d/M/yyyy");
-//            Date  startDate = (Date)formatter.parse(strDate); 
-//            Date  endDate = (Date)formatter.parse(enDate);
-//            long interval = 24*1000 * 60 * 60; 
-//            long endTime =endDate.getTime() ;
+//            Date startDate = (Date) formatter.parse(strDate);
+//            Date endDate = (Date) formatter.parse(enDate);
+//            long interval = 24 * 1000 * 60 * 60;
+//            long endTime = endDate.getTime();
 //            long curTime = startDate.getTime();
 //            while (curTime <= endTime) {
 //                dates.add(new Date(curTime));
 //                curTime += interval;
 //            }
-//            for(int i=0;i<dates.size();i++){
-//                Date lDate =(Date)dates.get(i);
-//                String ds = formatter.format(lDate);  
+//            for (int i = 0; i < dates.size(); i++) {
+//                Date lDate = (Date) dates.get(i);
+//                String ds = formatter.format(lDate);
 //                dates1.add(ds);
 //            }
 //            SimpleDateFormat format2 = new SimpleDateFormat("d/M/yyyy");
@@ -5966,88 +5981,188 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //            String strDate2 = format2.format(date5);
 //            Date date6 = format2.parse(enDate);
 //            String enDate2 = format2.format(date6);
-//            String dayWoff1="";
-//            String dayWoff2="";
-//            String dayWoff="";
-//            String rotationdate="";
-//            String afterChange1="";
+//            Boolean woffCount = false;
+//            String beforeWoff = "";
 //            for (String str : dates1) {
-//                List<?> checkForWoff = shiftGenerateMonthlyScheduleService.checkForWoff(employeeMaster1.getUserMaster().getId(),str);
-//                List<?> checkForWoff1 = shiftGenerateMonthlyScheduleService.checkForWoff1(employeeMaster1.getUserMaster().getId(),str);
-//                List<?> checkForWoff3 = shiftGenerateMonthlyScheduleService.checkForWoff3(employeeMaster1.getUserMaster().getId(),str);
-//                if(!checkForWoff.isEmpty())
-//                {
-////                    days-=1.0;
-//                    rotationdate = checkForWoff.get(0).toString();
-//                    String checkForWoff2 = shiftGenerateMonthlyScheduleService.checkForWoff2(employeeMaster1.getUserMaster().getId(),str);
-//                    WoffRegularization woffRegularization = woffRegularizationService.readById(Integer.parseInt(checkForWoff2));
-//                    dayWoff = woffRegularization.getDayWoff();
-//                    String rotationday = woffRegularization.getRotationDate();
-//                    SimpleDateFormat format1 = new SimpleDateFormat("d/M/yyyy");
-//                    Date date3 = format1.parse(dayWoff);
-//                    calendar.setTime(date3);
-//                    calendar.add(Calendar.DAY_OF_YEAR, 1);
-//                    Date afterChange = calendar.getTime();
-//                    afterChange1 = format1.format(afterChange);
-//                    Date date4 = format1.parse(strDate);
-//                    String strDate1 = format1.format(date4);
-//                    if(strDate1.equals(dayWoff) && afterChange1.equals(rotationday))
-//                    {
-////                       days-=1.0; 
+//                String data11 = employeeMaster1.getId() + ":" + str.split("/")[0] + ":" + str.split("/")[1] + ":" + str.split("/")[2];
+//                String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data11);
+//                if (checkWoff.equals("-1")) {
+//                    woffCount = true;
+//                    beforeWoff = str;
+//                }
+//            }
+//            if (woffCount == true && !beforeWoff.isEmpty()) {
+//                Date date3 = format2.parse(beforeWoff);
+//                calendar.setTime(date3);
+//                calendar.add(Calendar.DAY_OF_YEAR, -7);
+//                Date afterChange = calendar.getTime();
+//                String afterChange1 = format2.format(afterChange);
+//                String data12 = employeeMaster1.getId() + ":" + afterChange1.split("/")[0] + ":" + afterChange1.split("/")[1] + ":" + afterChange1.split("/")[2];
+//                String checkWoff = shiftGenerateMonthlyScheduleService.checkWoff(data12);
+//                Date date4 = format2.parse(afterChange1);
+//                calendar.setTime(date4);
+//                calendar.add(Calendar.DAY_OF_YEAR, -1);
+//                Date beforeDayWoff = calendar.getTime();
+//                String beforeDayWoff1 = format2.format(beforeDayWoff);
+//                Date date7 = format2.parse(afterChange1);
+//                calendar.setTime(date7);
+//                calendar.add(Calendar.DAY_OF_YEAR, 1);
+//                Date afterDayWoff = calendar.getTime();
+//                String afterDayWoff1 = format2.format(afterDayWoff);
+//                String data13 = employeeMaster1.getId() + ":" + beforeDayWoff1.split("/")[0] + ":" + beforeDayWoff1.split("/")[1] + ":" + beforeDayWoff1.split("/")[2];
+//                String checkBeforeWoff = shiftGenerateMonthlyScheduleService.checkWoff(data13);
+//                String data14 = employeeMaster1.getId() + ":" + afterDayWoff1.split("/")[0] + ":" + afterDayWoff1.split("/")[1] + ":" + afterDayWoff1.split("/")[2];
+//                String checkAfterWoff = shiftGenerateMonthlyScheduleService.checkWoff(data14);
+//                if (checkWoff.equals("-1")) {
+//                    if (checkBeforeWoff.equals("-1")) {
+//                        Date date8 = format2.parse(beforeDayWoff1);
+//                        calendar.setTime(date8);
+//                        calendar.add(Calendar.DAY_OF_YEAR, -1);
+//                        Date afterDayWoff3 = calendar.getTime();
+//                        String beforeWoff1 = format2.format(afterDayWoff3);
+//                        Date date9 = format2.parse(afterChange1);
+//                        calendar.setTime(date9);
+//                        calendar.add(Calendar.DAY_OF_YEAR, 1);
+//                        Date beforeDayWoff3 = calendar.getTime();
+//                        String afterWoff1 = format2.format(beforeDayWoff3);
+//                        String data15 = employeeMaster1.getId() + ":" + beforeWoff1 + ":" + afterWoff1;
+//                        String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
+//                        String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
+//                        if ((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty())) {
+//                            days--;
+//                        }
+//                    }
+//                    if (checkAfterWoff.equals("-1")) {
+//                        String afterDayWoff2 = format2.format(afterChange1);
+//                        Date date9 = format2.parse(afterDayWoff2);
+//                        calendar.setTime(date9);
+//                        calendar.add(Calendar.DAY_OF_YEAR, -1);
+//                        Date beforeDayWoff3 = calendar.getTime();
+//                        String afterWoff1 = format2.format(beforeDayWoff3);
+//                        String beforeDayWoff2 = format2.format(afterDayWoff1);
+//                        Date date8 = format2.parse(beforeDayWoff2);
+//                        calendar.setTime(date8);
+//                        calendar.add(Calendar.DAY_OF_YEAR, -1);
+//                        Date afterDayWoff3 = calendar.getTime();
+//                        String beforeWoff1 = format2.format(afterDayWoff3);
+//                        String data15 = employeeMaster1.getId() + ":" + afterWoff1 + ":" + beforeWoff1;
+//                        String leaveStartDate = shiftGenerateMonthlyScheduleService.leaveStartDate(data15);
+//                        String leaveEndDate = shiftGenerateMonthlyScheduleService.leaveEndDate(data15);
+//                        if ((!leaveStartDate.isEmpty() && !leaveEndDate.isEmpty()) || (!leaveStartDate.isEmpty() && leaveEndDate.isEmpty())) {
+//                            days--;
+//                        }
 //                    }
 //                }
-//                if(!checkForWoff1.isEmpty())
-//                {
-//                    dayWoff1 = checkForWoff1.get(0).toString();
-////                    String checkForWoff3 = shiftGenerateMonthlyScheduleService.checkForWoff3(employeeMaster1.getUserMaster().getId(),str);
-////                    WoffRegularization woffRegularization = woffRegularizationService.readById(Integer.parseInt(checkForWoff3));
-////                    dayWoff1 = woffRegularization.getDayWoff1();
-//                }
-//                if(!checkForWoff3.isEmpty())
-//                {
-//                    dayWoff2 = checkForWoff3.get(0).toString();
-//                }
-//                if((!checkForWoff1.isEmpty() || !checkForWoff3.isEmpty()) && !strDate2.equals(dayWoff2))
-//                {
-//                    days+=1.0;
-//                }
-//            }
-//            if(!rotationdate.isEmpty())
-//            {
-//                days-=1.0;
-//                if(strDate2.equals(dayWoff) && afterChange1.equals(rotationdate))
-//                    {
-//                       days-=1.0;
-//                    }
-//            }
-//            if(!dayWoff1.isEmpty() && !dayWoff2.isEmpty() && !strDate2.equals(dayWoff2))
-//            {
-//                days-=1.0;
-//            }
-//            if( (getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (!rotationdate.isEmpty()) && (!leavetype.equals("16") || !leavetype.equals("11") || !leavetype.equals("12")))
-//            {
-//                if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
-//                {
-//                    days-=1.0;
-//                }
-//            }
-//            if(strDate2.equals(dayWoff1) && enDate2.equals(dayWoff1))
-//            {
-//                days = (float) 1.0;
-//            }
-//            
-//            if(strDate2.equals(dayWoff2) && enDate2.equals(dayWoff2))
-//            {
-//                days = (float) 1.0;
-//            }
-//            
-//            if( (strDate2.equals(dayWoff1) && enDate2.equals(dayWoff2)) || (strDate2.equals(dayWoff2) && enDate2.equals(dayWoff1)))
-//            {
-//                days = (float) 2.0;
 //            }
 //        }
-        PrintWriter out = response.getWriter();
-        out.print(days);
+////        if(leavetype.equals("7") || leavetype.equals("6") || leavetype.equals("8") || leavetype.equals("9") || leavetype.equals("10") || leavetype.equals("11") || leavetype.equals("12") || leavetype.equals("17"))
+////        {
+////            List<Date> dates = new ArrayList<Date>();
+////            List<String> dates1 = new ArrayList<String>();
+////            DateFormat formatter ; 
+////
+////            formatter = new SimpleDateFormat("d/M/yyyy");
+////            Date  startDate = (Date)formatter.parse(strDate); 
+////            Date  endDate = (Date)formatter.parse(enDate);
+////            long interval = 24*1000 * 60 * 60; 
+////            long endTime =endDate.getTime() ;
+////            long curTime = startDate.getTime();
+////            while (curTime <= endTime) {
+////                dates.add(new Date(curTime));
+////                curTime += interval;
+////            }
+////            for(int i=0;i<dates.size();i++){
+////                Date lDate =(Date)dates.get(i);
+////                String ds = formatter.format(lDate);  
+////                dates1.add(ds);
+////            }
+////            SimpleDateFormat format2 = new SimpleDateFormat("d/M/yyyy");
+////            Date date5 = format2.parse(strDate);
+////            String strDate2 = format2.format(date5);
+////            Date date6 = format2.parse(enDate);
+////            String enDate2 = format2.format(date6);
+////            String dayWoff1="";
+////            String dayWoff2="";
+////            String dayWoff="";
+////            String rotationdate="";
+////            String afterChange1="";
+////            for (String str : dates1) {
+////                List<?> checkForWoff = shiftGenerateMonthlyScheduleService.checkForWoff(employeeMaster1.getUserMaster().getId(),str);
+////                List<?> checkForWoff1 = shiftGenerateMonthlyScheduleService.checkForWoff1(employeeMaster1.getUserMaster().getId(),str);
+////                List<?> checkForWoff3 = shiftGenerateMonthlyScheduleService.checkForWoff3(employeeMaster1.getUserMaster().getId(),str);
+////                if(!checkForWoff.isEmpty())
+////                {
+//////                    days-=1.0;
+////                    rotationdate = checkForWoff.get(0).toString();
+////                    String checkForWoff2 = shiftGenerateMonthlyScheduleService.checkForWoff2(employeeMaster1.getUserMaster().getId(),str);
+////                    WoffRegularization woffRegularization = woffRegularizationService.readById(Integer.parseInt(checkForWoff2));
+////                    dayWoff = woffRegularization.getDayWoff();
+////                    String rotationday = woffRegularization.getRotationDate();
+////                    SimpleDateFormat format1 = new SimpleDateFormat("d/M/yyyy");
+////                    Date date3 = format1.parse(dayWoff);
+////                    calendar.setTime(date3);
+////                    calendar.add(Calendar.DAY_OF_YEAR, 1);
+////                    Date afterChange = calendar.getTime();
+////                    afterChange1 = format1.format(afterChange);
+////                    Date date4 = format1.parse(strDate);
+////                    String strDate1 = format1.format(date4);
+////                    if(strDate1.equals(dayWoff) && afterChange1.equals(rotationday))
+////                    {
+//////                       days-=1.0; 
+////                    }
+////                }
+////                if(!checkForWoff1.isEmpty())
+////                {
+////                    dayWoff1 = checkForWoff1.get(0).toString();
+//////                    String checkForWoff3 = shiftGenerateMonthlyScheduleService.checkForWoff3(employeeMaster1.getUserMaster().getId(),str);
+//////                    WoffRegularization woffRegularization = woffRegularizationService.readById(Integer.parseInt(checkForWoff3));
+//////                    dayWoff1 = woffRegularization.getDayWoff1();
+////                }
+////                if(!checkForWoff3.isEmpty())
+////                {
+////                    dayWoff2 = checkForWoff3.get(0).toString();
+////                }
+////                if((!checkForWoff1.isEmpty() || !checkForWoff3.isEmpty()) && !strDate2.equals(dayWoff2))
+////                {
+////                    days+=1.0;
+////                }
+////            }
+////            if(!rotationdate.isEmpty())
+////            {
+////                days-=1.0;
+////                if(strDate2.equals(dayWoff) && afterChange1.equals(rotationdate))
+////                    {
+////                       days-=1.0;
+////                    }
+////            }
+////            if(!dayWoff1.isEmpty() && !dayWoff2.isEmpty() && !strDate2.equals(dayWoff2))
+////            {
+////                days-=1.0;
+////            }
+////            if( (getDayAfterOfstrDate1.equals("-1") || getDayBeforeOfenDate1.equals("-1")) && (!rotationdate.isEmpty()) && (!leavetype.equals("16") || !leavetype.equals("11") || !leavetype.equals("12")))
+////            {
+////                if((sDateStatus.equals("SecondHalf") && eDateStatus.equals("Fullday")))
+////                {
+////                    days-=1.0;
+////                }
+////            }
+////            if(strDate2.equals(dayWoff1) && enDate2.equals(dayWoff1))
+////            {
+////                days = (float) 1.0;
+////            }
+////            
+////            if(strDate2.equals(dayWoff2) && enDate2.equals(dayWoff2))
+////            {
+////                days = (float) 1.0;
+////            }
+////            
+////            if( (strDate2.equals(dayWoff1) && enDate2.equals(dayWoff2)) || (strDate2.equals(dayWoff2) && enDate2.equals(dayWoff1)))
+////            {
+////                days = (float) 2.0;
+////            }
+////        }
+//        PrintWriter out = response.getWriter();
+//        out.print(days);
     }
 
     public void getActualDayByAjax2(HttpServletRequest request, HttpServletResponse response) throws Exception {

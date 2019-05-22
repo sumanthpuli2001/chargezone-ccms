@@ -21,7 +21,8 @@
     <bean id="cronTrigger52"
           class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="leaveUploadYearly" />
-        <property name="cronExpression" value="0 0/3 * * * ?" />
+        <property name="cronExpression" value="0 0 1 1 * ?" />
+        
     </bean>-->
     
     

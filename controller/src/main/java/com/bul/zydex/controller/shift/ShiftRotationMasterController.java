@@ -14515,6 +14515,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 for (Row row : sheet) {
                     if (row.getRowNum() != 0) {
                         try {
+                        try {
                             employeeNo = "" + (null == row.getCell((short) 0) ? "" : row.getCell((short) 0));
                             employeeNo = employeeNo.split("\\.", 2)[0];
                         } catch (Exception e) {
@@ -14681,23 +14682,21 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                             }
 
                         }
-
-//                      
-                    } else {
+                    }catch(Exception e) {
                         count++;
                         countEmpId += employeeNo + ",";
                     }
-//                }
+                    }
+                    
                 }
 
-            } else {
+            } 
+            if(count == 0){
                 request.setAttribute("successMessage", "Information : The Excel Uploaded Successfully.");
                 mv = employeeShiftChangeMonthly(request, response);
             }
             if (count > 0) {
                 request.setAttribute("failureMessage", "Information : " + countEmpId + " Records Not Inserted Due To Employe No Is Not Correct");
-                mv = employeeShiftChangeMonthly(request, response);
-            } else {
                 mv = employeeShiftChangeMonthly(request, response);
             }
         } catch (Exception e) {

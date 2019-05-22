@@ -16,7 +16,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Salary Slip</title>
+        <style>
+            table {
+                border:1px solid #000 !important;
+                padding: 3px !important;
+            }
+            th, td {
+                padding: 3px !important;
+                border:1px solid #000 !important;
+            }
+        </style>
     </head>
+    <body onload="test_skill(${nettotal});">
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -62,7 +73,7 @@
                                         <header>
                                             <center><img src=" StorageYard/Images/logo.png" style="width:14%;height: 14%;" BORDER="0"/> </center>
                                             <center><b><font size="4">  ${employeeMaster.company}</font></b></center> 
-                                            <center><b><font size="4">PAY SLIP FOR THE MONTH OF<c:if test="${month eq 1}">JANUARY</c:if>
+                                            <center><b><font size="4">SALARY SLIP FOR <c:if test="${month eq 1}">JANUARY</c:if>
                                                     <c:if test="${month eq 2}">FEBRUARY</c:if>
                                                     <c:if test="${month eq 3}">MARCH</c:if>
                                                     <c:if test="${month eq 4}">APRIL</c:if>
@@ -72,119 +83,146 @@
                                                     <c:if test="${month eq 8}">AUGUST</c:if>
                                                     <c:if test="${month eq 9}">SEPTEMBER</c:if>
                                                     <c:if test="${month eq 10}">OCTOBER</c:if>
-                                                    <c:if test="${month eq 11}">NOVEMBERr</c:if>
-                                                    <c:if test="${month eq 12}">DECEMBERr</c:if> ${year}</font></b></center> 
+                                                    <c:if test="${month eq 11}">NOVEMBER</c:if>
+                                                    <c:if test="${month eq 12}">DECEMBER</c:if> ${year}</font></b></center> 
                                             </header>
 
 
-                                            <table style=" width: 90%; height: 0px !important;" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">
-                                                <tr>
-                                                    <td ><!--style="border:0px"-->
-                                                        <b>Company Code&nbsp;</b>
-                                                        <b>:</b>&nbsp;&nbsp;${employeeMaster.employeeLocation} </td>
-                                            </tr>
-                                            <tr>
+                                           
+
+                                        <table style=" width: 90%;" align="center">
+                                          
+                                        
+                                         <tr>
+                                                    <td style="border:0px; width: 30%;"><!--style="border:0px"-->
+                                                        <b>Emp Name</b>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.employeeName} </td>
                                                 <td style="border:0px; width: 30%;  height: 0px !important">
+                                                    <b>Employee Type&nbsp;</b>
+                                                    <b>:</b>&nbsp;&nbsp;${employeeMaster.employeeId}
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;
                                                     <b>Emp ID&nbsp;</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.employeeId} </td>
-                                                <td style="border:0px; width: 30%;"><!--style="border:0px"-->
-                                                    <b>Emp Name</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.employeeName} </td>
+                                                    <b>:</b>&nbsp;&nbsp;${employeeMaster.employeeId}
+
+                                                </td>
+
 
                                             </tr>
 
                                             <tr>
-                                                <td><!--style="border:0px"-->
-                                                    <b>Department&nbsp;</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.departmentMaster.departmentName} </td>
                                                 <td><!--style="border:0px"-->
                                                     <b>Designation</b>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.designationMaster.designationName}</td>
+                                                <td><!--style="border:0px"-->
+                                                    <b>Duration&nbsp;</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;1st <c:if test="${month eq 1}">January</c:if>
+                                                    <c:if test="${month eq 2}">February</c:if>
+                                                    <c:if test="${month eq 3}">March</c:if>
+                                                    <c:if test="${month eq 4}">April</c:if>
+                                                    <c:if test="${month eq 5}">May</c:if>
+                                                    <c:if test="${month eq 6}">June</c:if>
+                                                    <c:if test="${month eq 7}">July</c:if>
+                                                    <c:if test="${month eq 8}">August</c:if>
+                                                    <c:if test="${month eq 9}">September</c:if>
+                                                    <c:if test="${month eq 10}">October</c:if>
+                                                    <c:if test="${month eq 11}">November</c:if>
+                                                    <c:if test="${month eq 12}">December</c:if>, ${year}    to 31st <c:if test="${month eq 1}">January</c:if>
+                                                    <c:if test="${month eq 2}">February</c:if>
+                                                    <c:if test="${month eq 3}">March</c:if>
+                                                    <c:if test="${month eq 4}">April</c:if>
+                                                    <c:if test="${month eq 5}">May</c:if>
+                                                    <c:if test="${month eq 6}">June</c:if>
+                                                    <c:if test="${month eq 7}">July</c:if>
+                                                    <c:if test="${month eq 8}">August</c:if>
+                                                    <c:if test="${month eq 9}">September</c:if>
+                                                    <c:if test="${month eq 10}">October</c:if>
+                                                    <c:if test="${month eq 11}">November</c:if>
+                                                    <c:if test="${month eq 12}">December</c:if>, ${year}</td>
+
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <b>Department&nbsp;</b>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.departmentMaster.departmentName} </td>
+                                                <td><!--style="border:0px"-->
+                                                    <b>Total Month Days&nbsp;</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.uanNo} </td>
+                                                <!--                                            <td>style="border:0px"
+                                                                                                <b>DOJ&nbsp;</b>
+                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.dateOfJoining} </td>
+                                                                                            <td>style="border:0px"
+                                                                                                <b>Bank A/C No</b>
+                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.bankAccountNo} </td>-->
                                             </tr>
-                                            <td><!--style="border:0px"-->
-                                                <b>DOJ&nbsp;</b>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.dateOfJoining} </td>
-                                            <td><!--style="border:0px"-->
-                                                <b>Bank A/C No</b>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.bankAccountNo} </td>
+
+                                            <tr>
+                                                <td>
+                                                    <b>DOJ&nbsp;</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.dateOfJoining} </td>
+                                                <td><!--style="border:0px"-->
+                                                    <b>Working Days</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.esicNo}</td>
+                                            </tr>
+                                            <tr>
+
+                                                <td><!--style="border:0px"-->
+                                                    <b>PF Number&nbsp;</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.uanNo} </td>
+                                                <!--<td>style="border:0px"-->
+                                                <td>
+                                                    <b>UAN No&nbsp;</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.uanNo} </td>
+
+
+
+
+                                            </tr>
+
+                                            <tr>
+
+
+
+
+                                                <c:if test="${not empty employeeMaster.esicNo}">
+                                                    <td><!--style="border:0px"-->
+                                                        <b>PAN Number</b>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.esicNo}</td>
+                                                    </c:if>
+                                                    <c:if test="${not empty employeeMaster.esicNo}">
+                                                    <td>
+                                                        <b>E.S.I.C No</b>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.esicNo}</td>
+                                                    </c:if>
+
+                                            </tr>
                                             <tr>
 
 
                                                 <td><!--style="border:0px"-->
-                                                    <b>UAN No&nbsp;</b>
+                                                    <b>Bank Name&nbsp;</b>
                                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.uanNo} </td>
 
                                                 <c:if test="${not empty employeeMaster.esicNo}">
                                                     <td><!--style="border:0px"-->
-                                                        <b>E.S.I.C No</b>
+                                                        <b>IFSC Code</b>
                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.esicNo}</td>
                                                     </c:if>
 
 
                                             </tr>
-                                        </table>
-
-                                        <table style=" width: 90%;" align="center">
                                             <tr>
-                                                <td colspan="2">
-                                                    <table border="1" style="width: 100%" name="leave" id="leave" cellspacing="0" cellpadding="0" align="center"  class="table table-bordered table-striped table-hover">
-                                                        <tr>
 
-                                                            <th style="width: 150px;">Working Days</th>
-                                                            <th style="width: 150px;">W.Off</th>
-                                                            <th style="width: 150px;">Present Days</th>
-                                                            <th style="width: 150px;">C.L</th>
-                                                            <th style="width: 150px;">P.L</th>
-                                                            <th style="width: 150px;">S.L</th>
-                                                            <th style="width: 150px;">PAT</th>
-                                                            <th style="width: 150px;">LWP</th>
-                                                            <th style="width: 150px;">Paid Days</th>
-                                                            <th style="width: 150px;">OT Hours</th>
-                                                        </tr>
-                                                        <tr>
-                                                        <tbody>
-                                                            <c:forEach  var="employeeExcelRecordList" items="${employeeExcelRecordList}">
-                                                                <c:set var="count" value="${count + 1}" scope="page"/>
-                                                                <tr>
-                                                                    <td>
-                                                                        ${employeeExcelRecordList.workingDays}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${employeeExcelRecordList.sickLeave}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${employeeExcelRecordList.presentDays}
-                                                                    </td>
 
-                                                                    <td>
-                                                                        ${employeeExcelRecordList.casuaLeave}
-                                                                    </td>
+                                                <td><!--style="border:0px"-->
+                                                    <b>Branch Name&nbsp;</b>
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.uanNo} </td>
 
-                                                                    <td>
-                                                                        ${employeeExcelRecordList.pleave}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${employeeExcelRecordList.slleave}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${employeeExcelRecordList.pllleave}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${employeeExcelRecordList.lwp}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${days1-employeeExcelRecordList.lwp}
-                                                                    </td>
-                                                                    <td>
-                                                                        ${employeeExcelRecordList.otHours}
-                                                                    </td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                        </tbody>
+
+
+
                                             </tr>
-                                        </table>
-                                        </td>
-                                        </tr>
+                                           
 
                                         <tr >
                                             <td valign="top">
@@ -285,9 +323,14 @@
                                                 <tr>
                                                     <th align="right">Recd. Pay Slip, Salary & Verified</th>
                                                     <th align="left">Net Salary</th>
-                                                    <th style="text-align: right; padding-right:  2cm">${nettotal}</th>
+                                                    <th style="text-align: right; padding-right:  2cm">${nettotal} <b id="roundOffAmount" style="font-size: 10px;"></b></th>
 
                                                 </tr>
+<!--                                                <tr style="border: none !important;">
+                                                        <td style="text-align: left; vertical-align: middle;width:50%;border: none !important;">
+                                                            <b style="font-size: 10px;">Rupee:</b>&nbsp;&nbsp;&emsp;<b id="paraGraphId" style="font-size: 10px;">&nbsp;Only</b>
+                                                        </td>
+                                                    </tr>-->
                                                 <c:if test="${not empty loanRemainigAmount[0]}">
                                                     <tr>
 
@@ -295,6 +338,8 @@
 
                                                     </tr>
                                                 </c:if>
+                                                    
+                                                     
 
                                             </thead>
 
@@ -325,9 +370,132 @@
             padding: 0px;
         }
     </style>
+    
+    
+     <script>
+            function test_skill(aa) {
+              
+                var junkVal = String(aa);
+                junkVal = Math.round(junkVal);
+                var obStr = new String(junkVal);
+                numReversed = obStr.split("");
+                actnumber = numReversed.reverse();
+                if (Number(junkVal) >= 0) {
+                    //do nothing
+                } else {
+                    //                alert('wrong Number cannot be converted');
+                    return false;
+                }
+                if (Number(junkVal) == 0) {
+                    //document.getElementById('container').innerHTML=obStr+''+'Rupees Zero Only';
+                    return false;
+                }
+                if (actnumber.length > 9) {
+                    //                alert('Oops!!!! the Number is too big to covertes');
+                    return false;
+                }
+
+                var iWords = ["Zero", " One", " Two", " Three", " Four", " Five", " Six", " Seven", " Eight", " Nine"];
+                var ePlace = ['Ten', ' Eleven', ' Twelve', ' Thirteen', ' Fourteen', ' Fifteen', ' Sixteen', ' Seventeen', ' Eighteen', ' Nineteen'];
+                var tensPlace = ['dummy', ' Ten', ' Twenty', ' Thirty', ' Forty', ' Fifty', ' Sixty', ' Seventy', ' Eighty', ' Ninety'];
+
+                var iWordsLength = numReversed.length;
+                var totalWords = "";
+                var inWords = new Array();
+                var finalWord = "";
+                j = 0;
+                for (i = 0; i < iWordsLength; i++) {
+                    switch (i)
+                    {
+                        case 0:
+                            if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                                inWords[j] = '';
+                            } else {
+                                inWords[j] = iWords[actnumber[i]];
+                            }
+                            //                        inWords[j] = inWords[j] + ' Point ';
+                            inWords[j] = inWords[j] + '';
+                            break;
+                        case 1:
+                            tens_complication();
+                            break;
+                        case 2:
+                            if (actnumber[i] == 0) {
+                                inWords[j] = '';
+                            } else if (actnumber[i - 1] != 0 && actnumber[i - 2] != 0) {
+                                inWords[j] = iWords[actnumber[i]] + ' Hundred and';
+                            } else {
+                                inWords[j] = iWords[actnumber[i]] + ' Hundred';
+                            }
+                            break;
+                        case 3:
+                            if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                                inWords[j] = '';
+                            } else {
+                                inWords[j] = iWords[actnumber[i]];
+                            }
+                            if (actnumber[i + 1] != 0 || actnumber[i] > 0) {
+                                inWords[j] = inWords[j] + " Thousand";
+                            }
+                            break;
+                        case 4:
+                            tens_complication();
+                            break;
+                        case 5:
+                            if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                                inWords[j] = '';
+                            } else {
+                                inWords[j] = iWords[actnumber[i]];
+                            }
+                            if (actnumber[i + 1] != 0 || actnumber[i] > 0) {
+                                inWords[j] = inWords[j] + " Lakh";
+                            }
+                            break;
+                        case 6:
+                            tens_complication();
+                            break;
+                        case 7:
+                            if (actnumber[i] == 0 || actnumber[i + 1] == 1) {
+                                inWords[j] = '';
+                            } else {
+                                inWords[j] = iWords[actnumber[i]];
+                            }
+                            inWords[j] = inWords[j] + " Crore";
+                            break;
+                        case 8:
+                            tens_complication();
+                            break;
+                        default:
+                            break;
+                    }
+                    j++;
+                }
+
+                function tens_complication() {
+                    if (actnumber[i] == 0) {
+                        inWords[j] = '';
+                    } else if (actnumber[i] == 1) {
+                        inWords[j] = ePlace[actnumber[i - 1]];
+                    } else {
+                        inWords[j] = tensPlace[actnumber[i]];
+                    }
+                }
+                inWords.reverse();
+                for (i = 0; i < inWords.length; i++) {
+                    finalWord += inWords[i];
+                }
+
+                var a = finalWord;
+                document.getElementById('paraGraphId').innerHTML = a;
+              
+                document.getElementById('roundOffAmount').innerHTML = (parseFloat(junkVal) - parseFloat(${netAmount})).toFixed(2);
+            }
+
+        </script>
     <!--    <form>
             <input type="button" value="Print" onclick="window.print()">
         </form>-->
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+     </body>
 </html>
 

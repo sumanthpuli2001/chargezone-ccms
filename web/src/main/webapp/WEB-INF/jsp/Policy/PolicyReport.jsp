@@ -134,7 +134,7 @@
                                                 <center>  <img src=" StorageYard/Images/logo.png" style="width:15%;height: 15%;" BORDER="0"/> </center> 
 
                                                 <div class="form-group">
-                                                    <center><b><font size="4">SPC LIFESCIENCES PVT LTD</font></b></center> 
+                                                    <center><b><font size="4">Vadera & Co.</font></b></center> 
                                                 </div>
                                                 <div class="box-body no-padding">
                                                     <div class="row">

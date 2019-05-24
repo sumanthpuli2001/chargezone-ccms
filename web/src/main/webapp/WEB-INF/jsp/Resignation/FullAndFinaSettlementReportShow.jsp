@@ -37,7 +37,7 @@
 
                                             <!--<table style=" width: 100%; height: 0px !important;" align="left" name="SalarySlip" id="salarySlip" cellspacing="0" cellpadding="0" align="center" class="table table-bordered table-striped table-hover">-->
                                             <table style=" width: 100%; height: 0px !important;" border="1">
-                                                <center><b><font size="3">SPC LIFESCIENCES PVT LTD. </font></b></center> 
+                                                <center><b><font size="3">Vadera & Co.. </font></b></center> 
                                                 <div class="form-group">
                                                     <center><b><font size="2">FULL AND FINAL SETTLEMENT </font></b></center> 
                                                     <tr>

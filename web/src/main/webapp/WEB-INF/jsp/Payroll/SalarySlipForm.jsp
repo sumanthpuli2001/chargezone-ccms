@@ -28,309 +28,298 @@
         </style>
     </head>
     <body onload="test_skill(${nettotal});">
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>Salary Slip</h1>
-            <h3>
-                <input type="button" class="btn btn-primary" value="Print" onclick="window.print('printDiv')">
-            </h3>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Salary Slip</li>
-            </ol>
-        </section>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <h1>Salary Slip</h1>
+                <h3>
+                    <input type="button" class="btn btn-primary" value="Print" onclick="window.print('printDiv')">
+                </h3>
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <li class="active">Salary Slip</li>
+                </ol>
+            </section>
 
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="row" id="printDiv">
+            <!-- Main content -->
+            <section class="content">
+                <div class="row" id="printDiv">
 
 
 
-                <div class="col-md-8" >
-                    <!-- Custom Tabs -->
-                    <div class="nav-tabs-custom">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab_1">
-                                <c:if test="${!empty successMessage}">
-                                    <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
-                                </c:if>
-                                <c:if test="${!empty failureMessage}">
-                                    <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
-                                </c:if>
+                    <div class="col-md-8" >
+                        <!-- Custom Tabs -->
+                        <div class="nav-tabs-custom">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab_1">
+                                    <c:if test="${!empty successMessage}">
+                                        <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
+                                    </c:if>
+                                    <c:if test="${!empty failureMessage}">
+                                        <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+                                    </c:if>
 
-                                <form:form action="" method="post" commandName=""
-                                           name='form1' class="form-horizontal" id="form1" role="form">
+                                    <form:form action="" method="post" commandName=""
+                                               name='form1' class="form-horizontal" id="form1" role="form">
 
-                                    <input type="hidden" name="id" value="${id}"/>
-                                    <input type="hidden" name="month" value="${month}"/>
-                                    <input type="hidden" name="year" value="${year}"/>
-                                    <%--<%@include file="/WEB-INF/jsp/Payroll/PayrollMonthYearDetails.jsp"%>--%>
+                                        <input type="hidden" name="id" value="${id}"/>
+                                        <input type="hidden" name="month" value="${month}"/>
+                                        <input type="hidden" name="year" value="${year}"/>
+                                        <%--<%@include file="/WEB-INF/jsp/Payroll/PayrollMonthYearDetails.jsp"%>--%>
 
-                                    <div class="form-group">
-                                        <header>
-                                            <center><img src=" StorageYard/Images/logo.png" style="width:14%;height: 14%;" BORDER="0"/> </center>
-                                            <center><b><font size="4">  ${employeeMaster.company}</font></b></center> 
-                                            <center><b><font size="4">SALARY SLIP FOR <c:if test="${month eq 1}">JANUARY</c:if>
-                                                    <c:if test="${month eq 2}">FEBRUARY</c:if>
-                                                    <c:if test="${month eq 3}">MARCH</c:if>
-                                                    <c:if test="${month eq 4}">APRIL</c:if>
-                                                    <c:if test="${month eq 5}">MAY</c:if>
-                                                    <c:if test="${month eq 6}">JUNE</c:if>
-                                                    <c:if test="${month eq 7}">JULY</c:if>
-                                                    <c:if test="${month eq 8}">AUGUST</c:if>
-                                                    <c:if test="${month eq 9}">SEPTEMBER</c:if>
-                                                    <c:if test="${month eq 10}">OCTOBER</c:if>
-                                                    <c:if test="${month eq 11}">NOVEMBER</c:if>
-                                                    <c:if test="${month eq 12}">DECEMBER</c:if> ${year}</font></b></center> 
-                                            </header>
-
-
-                                           
-
-                                        <table style=" width: 90%;" align="center">
-                                          
-                                        
-                                         <tr>
-                                                    <td style="border:0px; width: 30%;"><!--style="border:0px"-->
-                                                        <b>Emp Name</b>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.employeeName} </td>
-                                                <td style="border:0px; width: 30%;  height: 0px !important">
-                                                    <b>Employee Type&nbsp;</b>
-                                                    <b>:</b>&nbsp;&nbsp;${employeeMaster.employeeId}
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                                    <b>Emp ID&nbsp;</b>
-                                                    <b>:</b>&nbsp;&nbsp;${employeeMaster.employeeId}
+                                        <div class="form-group">
+                                            <table style=" width: 90%;" align="center">
+                                                <tr>
+                                                    <td style="border:0px; width: 17%;">
+                                                <center><img src=" StorageYard/Images/logo.png" style="width: 70%;height: 70%;" BORDER="0"/> </center>
+                                                </td>
+                                                <td style="border:0px; width: 40%;">
+                                                <center><b><font size="5">Vadera & Co.</font></b></center>
+                                                <font size="2"><b>Registered Office Address:</b> 406, Ozone, Nr Centre Square Mall, Sarabhai Marg , Vadodara -
+                                                390003, Gujarat , India<br/>
+                                                <b>Business Unit:</b> Business Augmentation Services<br/>
+                                                <b> Business Unit Address:</b> 403, Ozone, Near Vadodara Central, Sarabhai Road, Vadodara </font>
 
                                                 </td>
-
-
-                                            </tr>
-
-                                            <tr>
-                                                <td><!--style="border:0px"-->
-                                                    <b>Designation</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.designationMaster.designationName}</td>
-                                                <td><!--style="border:0px"-->
-                                                    <b>Duration&nbsp;</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;1st <c:if test="${month eq 1}">January</c:if>
-                                                    <c:if test="${month eq 2}">February</c:if>
-                                                    <c:if test="${month eq 3}">March</c:if>
-                                                    <c:if test="${month eq 4}">April</c:if>
-                                                    <c:if test="${month eq 5}">May</c:if>
-                                                    <c:if test="${month eq 6}">June</c:if>
-                                                    <c:if test="${month eq 7}">July</c:if>
-                                                    <c:if test="${month eq 8}">August</c:if>
-                                                    <c:if test="${month eq 9}">September</c:if>
-                                                    <c:if test="${month eq 10}">October</c:if>
-                                                    <c:if test="${month eq 11}">November</c:if>
-                                                    <c:if test="${month eq 12}">December</c:if>, ${year}    to 31st <c:if test="${month eq 1}">January</c:if>
-                                                    <c:if test="${month eq 2}">February</c:if>
-                                                    <c:if test="${month eq 3}">March</c:if>
-                                                    <c:if test="${month eq 4}">April</c:if>
-                                                    <c:if test="${month eq 5}">May</c:if>
-                                                    <c:if test="${month eq 6}">June</c:if>
-                                                    <c:if test="${month eq 7}">July</c:if>
-                                                    <c:if test="${month eq 8}">August</c:if>
-                                                    <c:if test="${month eq 9}">September</c:if>
-                                                    <c:if test="${month eq 10}">October</c:if>
-                                                    <c:if test="${month eq 11}">November</c:if>
-                                                    <c:if test="${month eq 12}">December</c:if>, ${year}</td>
-
-
                                                 </tr>
+                                            </table>
+                                            <table style=" width: 90%;" align="center">
                                                 <tr>
                                                     <td>
-                                                        <b>Department&nbsp;</b>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.departmentMaster.departmentName} </td>
-                                                <td><!--style="border:0px"-->
-                                                    <b>Total Month Days&nbsp;</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.uanNo} </td>
-                                                <!--                                            <td>style="border:0px"
-                                                                                                <b>DOJ&nbsp;</b>
-                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.dateOfJoining} </td>
-                                                                                            <td>style="border:0px"
-                                                                                                <b>Bank A/C No</b>
-                                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.bankAccountNo} </td>-->
-                                            </tr>
-
-                                            <tr>
-                                                <td>
-                                                    <b>DOJ&nbsp;</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.dateOfJoining} </td>
-                                                <td><!--style="border:0px"-->
-                                                    <b>Working Days</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.esicNo}</td>
-                                            </tr>
-                                            <tr>
-
-                                                <td><!--style="border:0px"-->
-                                                    <b>PF Number&nbsp;</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.uanNo} </td>
-                                                <!--<td>style="border:0px"-->
-                                                <td>
-                                                    <b>UAN No&nbsp;</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.uanNo} </td>
-
-
-
-
-                                            </tr>
-
-                                            <tr>
-
-
-
-
-                                                <c:if test="${not empty employeeMaster.esicNo}">
-                                                    <td><!--style="border:0px"-->
-                                                        <b>PAN Number</b>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.esicNo}</td>
-                                                    </c:if>
-                                                    <c:if test="${not empty employeeMaster.esicNo}">
-                                                    <td>
-                                                        <b>E.S.I.C No</b>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.esicNo}</td>
-                                                    </c:if>
-
-                                            </tr>
-                                            <tr>
-
-
-                                                <td><!--style="border:0px"-->
-                                                    <b>Bank Name&nbsp;</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.uanNo} </td>
-
-                                                <c:if test="${not empty employeeMaster.esicNo}">
-                                                    <td><!--style="border:0px"-->
-                                                        <b>IFSC Code</b>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.esicNo}</td>
-                                                    </c:if>
-
-
-                                            </tr>
-                                            <tr>
-
-
-                                                <td><!--style="border:0px"-->
-                                                    <b>Branch Name&nbsp;</b>
-                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>:</b>&nbsp;&nbsp;${employeeMaster.uanNo} </td>
-
-
-
-
-                                            </tr>
-                                           
-
-                                        <tr >
-                                            <td valign="top">
-                                                <table border="0" cellspacing="0" cellpadding="0" style="width: 100%; border: 0px;"  align="center" id="demo" class="table table-bordered table-striped table-hover">
-
-                                                    <c:choose>
-                                                        <c:when test="${empty employeeAdditionalList}">
-                                                            <tr>
-                                                                <td align="center">
-                                                                    <c:out value="No any Increment."></c:out>
-                                                                    </td>
-                                                                </tr>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <thead style="height: 5%">
-                                                                <tr>
-                                                                    <th align="left">Earnings</th>
-                                                                    <th  style="text-align: right; padding-right:  2cm">Amount</th>
-
-                                                                </tr>
-                                                            </thead>
-                                                            <tfoot>
-                                                                <tr >
-                                                                    <th align="left">Gross Salary</th>
-                                                                    <th style="text-align: right; padding-right:  2cm" ><fmt:formatNumber maxFractionDigits="0" value="${total}"></fmt:formatNumber>.00</th>
-                                                                    </tr>
-                                                                </tfoot>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Basic +DA </td>
-                                                            <td style="text-align: right; padding-right:  2cm"><fmt:formatNumber maxFractionDigits="0" value="${basicSalary}"></fmt:formatNumber>.00</td>
-                                                            </tr>
-
-                                                        <c:forEach var="employeeAdditional" items="${employeeAdditionalList}">
-                                                            <c:if test="${employeeAdditional[1] ne 0.0}">
-
-                                                                <tr>
-                                                                    <td>${employeeAdditional[0]}</td>
-                                                                    <td style="text-align: right; padding-right:  2cm"><fmt:formatNumber maxFractionDigits="0" value="${employeeAdditional[1]}"></fmt:formatNumber>.00</td>
-
-                                                                    </tr>
-                                                            </c:if>
-
-                                                        </c:forEach>
-
-                                                    </tbody>
-                                                </table></td>
-                                            <td valign="top">
-                                                <table id="demo" cellspacing="0" cellpadding="0" style="width: 100%; border: 0px;"
-                                                       border="0" align="center" class="table table-bordered table-striped table-hover"  >
-
-                                                    <c:choose>
-                                                        <c:when test="${empty employeeDeductionList}">
-                                                            <tr>
-                                                                <td align="center">
-                                                                    <c:out value="No any Decrement."></c:out>
-                                                                    </td>
-                                                                </tr>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <thead>
-                                                                <tr >
-                                                                    <th align="left" >Deductions</th>
-                                                                    <th style="text-align: right; padding-right:  2cm">Amount</th>
-                                                                </tr>
-                                                            </thead>
-
-                                                            <tfoot>
-                                                                <tr>
-                                                                    <th align="left">Total Deduction</th>
-                                                                    <th style="text-align: right; padding-right:  2cm"><fmt:formatNumber maxFractionDigits="0" value="${totalDeductionAmount}"></fmt:formatNumber>.00</th>
-                                                                    </tr>
-                                                                </tfoot>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <tbody>
-                                                        <c:forEach var="listDec" items="${employeeDeductionList}">
-                                                            <tr>
-                                                                <td>${listDec[0]}</td>
-                                                                <td style="text-align: right; padding-right:  2cm"><fmt:formatNumber maxFractionDigits="0" value="${listDec[1]}"></fmt:formatNumber>.00</td>
-                                                                </tr>
-
-
-
-                                                        </c:forEach>
-
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        </table>
-                                        <!--</table></td><td>-->
-                                        <table border="1" style="width: 90%" cellspacing="0" cellpadding="0" align="center" id="demo" class="table table-bordered table-striped table-hover">
-                                            <thead>
-
-                                                <tr>
-                                                    <th align="right">Recd. Pay Slip, Salary & Verified</th>
-                                                    <th align="left">Net Salary</th>
-                                                    <th style="text-align: right; padding-right:  2cm">${nettotal} <b id="roundOffAmount" style="font-size: 10px;"></b></th>
-
-                                                </tr>
-<!--                                                <tr style="border: none !important;">
-                                                        <td style="text-align: left; vertical-align: middle;width:50%;border: none !important;">
-                                                            <b style="font-size: 10px;">Rupee:</b>&nbsp;&nbsp;&emsp;<b id="paraGraphId" style="font-size: 10px;">&nbsp;Only</b>
+                                                        <header>
+                                                            <center><font size="4">Salary Slip for <c:if test="${month eq 1}">January</c:if>
+                                                                <c:if test="${month eq 2}"> February</c:if>
+                                                                <c:if test="${month eq 3}">March</c:if>
+                                                                <c:if test="${month eq 4}">April</c:if>
+                                                                <c:if test="${month eq 5}">May</c:if>
+                                                                <c:if test="${month eq 6}">June</c:if>
+                                                                <c:if test="${month eq 7}">July</c:if>
+                                                                <c:if test="${month eq 8}">August</c:if>
+                                                                <c:if test="${month eq 9}">September</c:if>
+                                                                <c:if test="${month eq 10}">October</c:if>
+                                                                <c:if test="${month eq 11}">November</c:if>
+                                                                <c:if test="${month eq 12}">December</c:if> - ${year}</font></center> 
+                                                            </header>
                                                         </td>
-                                                    </tr>-->
+
+                                                    </tr>
+                                                </table>
+                                                <table style=" width: 90%;" align="center">
+
+                                                    <tr>
+                                                        <td style="border:0px; width: 30%;" colspan="2">
+                                                            <font size="2">Employee Name:&nbsp;&nbsp;<b>${employeeMaster.employeeName}</b></font></td>
+                                                    <td style="border:0px; width: 15%;  height: 0px !important">
+                                                        <font size="2">Employee Type:&nbsp;&nbsp;<b>${employeeMaster.employeeId}</font>
+                                                    </td>
+                                                    <td style="border:0px; width: 15%;  height: 0px !important">
+                                                        <font size="2">Employee NO:&nbsp;&nbsp;<b>${employeeMaster.employeeId}</b></font>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <font size="2">Designation:&nbsp;&nbsp;<b>${employeeMaster.designationMaster.designationName}</b></font></td>
+                                                    <td colspan="2">
+                                                        <font size="2">Duration:&nbsp;&nbsp;<b>1st <c:if test="${month eq 1}">January</c:if>
+                                                            <c:if test="${month eq 2}">February</c:if>
+                                                            <c:if test="${month eq 3}">March</c:if>
+                                                            <c:if test="${month eq 4}">April</c:if>
+                                                            <c:if test="${month eq 5}">May</c:if>
+                                                            <c:if test="${month eq 6}">June</c:if>
+                                                            <c:if test="${month eq 7}">July</c:if>
+                                                            <c:if test="${month eq 8}">August</c:if>
+                                                            <c:if test="${month eq 9}">September</c:if>
+                                                            <c:if test="${month eq 10}">October</c:if>
+                                                            <c:if test="${month eq 11}">November</c:if>
+                                                            <c:if test="${month eq 12}">December</c:if>, ${year} to 31st <c:if test="${month eq 1}">January</c:if>
+                                                            <c:if test="${month eq 2}">February</c:if>
+                                                            <c:if test="${month eq 3}">March</c:if>
+                                                            <c:if test="${month eq 4}">April</c:if>
+                                                            <c:if test="${month eq 5}">May</c:if>
+                                                            <c:if test="${month eq 6}">June</c:if>
+                                                            <c:if test="${month eq 7}">July</c:if>
+                                                            <c:if test="${month eq 8}">August</c:if>
+                                                            <c:if test="${month eq 9}">September</c:if>
+                                                            <c:if test="${month eq 10}">October</c:if>
+                                                            <c:if test="${month eq 11}">November</c:if>
+                                                            <c:if test="${month eq 12}">December</c:if>, ${year}</b></font></td>
+
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <font size="2">Department:&nbsp;&nbsp;<b>${employeeMaster.departmentMaster.departmentName}</b></font> </td>
+                                                    <td colspan="2">
+                                                        <font size="2">Total Month Days:&nbsp;&nbsp;<b>${employeeMaster.uanNo}</b></font></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <font size="2">Date of Joining:&nbsp;&nbsp;<b>${employeeMaster.dateOfJoining}</b></font></td>
+                                                    <td colspan="2">
+                                                        <font size="2">Working Days:<b>&nbsp;&nbsp;${employeeMaster.esicNo}</b></font></td>
+                                                </tr>
+                                                <tr>
+
+                                                    <td style="border:0px; width: 15%;" >
+                                                        <font size="2">PF Number: <b>${employeeMaster.pfNo}</b></font></td>
+                                                    <td style="border:0px; width: 15%;" >
+                                                        <font size="2">UAN Number: <b>${employeeMaster.uanNo}</b></font> </td>
+                                                        <c:if test="${not empty employeeMaster.esicNo}">
+                                                        <td>
+                                                            <font size="2">PAN Number: &nbsp;&nbsp;<b>${employeeMaster.panCard}</b></font></td>
+                                                        </c:if>
+                                                        <c:if test="${not empty employeeMaster.esicNo}">
+                                                        <td>
+                                                            <font size="2"> ESIC No: &nbsp;&nbsp;<b>${employeeMaster.esicNo}</b></font></td>
+                                                        </c:if>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="1">
+                                                        <font size="2">Bank Name: <b>${employeeMaster.uanNo}</b></font> </td>
+                                                    <td colspan="1">
+                                                        <font size="2">Account No: <b>${employeeMaster.bankAccountNo}</b></font> </td>
+                                                        <c:if test="${not empty employeeMaster.esicNo}">
+                                                        <td>
+                                                            <font size="2">IFSC Code: <b>${employeeMaster.esicNo}</b></font></td>
+                                                        </c:if>
+
+                                                    <td>
+                                                        <font size="2">Branch Name: <b>${employeeMaster.uanNo}</b> </font></td>
+                                                </tr>        
+                                                <tr>
+                                                    <td colspan="2">
+                                                <center><font size="2"><b>Earnings</b></font></center> </td>
+                                                <td colspan="2">
+                                                <center><font size="2"><b>Deductions</b></font></center></td>
+                                                </tr>
+                                                <!--
+                                                
+                                                <tr>
+                                                    <td colspan="1">
+                                                    <center><font size="2"><b>Components</b></font></center> </td>
+                                                    <td colspan="1">
+                                                    <center><font size="2">Amount (Rs.)</font></center></td>
+                                                    <td colspan="1">
+                                                    <font size="2"><b>Common Deductions</b></font></td>
+                                                    <td colspan="1">
+                                                    <center><font size="2">Amount (Rs.)</font></center></td>
+                                                </tr>-->
+
+
+
+                                                <tr>
+                                                    <td  colspan="2">
+                                                        <table border="0" cellspacing="0" cellpadding="0" style="width: 100%; border: 0px;"  align="center" id="demo" class="table table-bordered table-striped table-hover">
+
+                                                            <c:choose>
+                                                                <c:when test="${empty employeeAdditionalList}">
+                                                                    <tr>
+                                                                        <td align="center">
+                                                                            <c:out value="No any Increment."></c:out>
+                                                                            </td>
+                                                                        </tr>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <thead style="height: 5%">
+                                                                        <tr>
+                                                                            <th align="left">Components</th>
+                                                                            <th  style="text-align: right; padding-right:  2cm">Amount</th>
+
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tfoot>
+                                                                        <tr>
+                                                                            <th align="left">Gross Earning (A)</th>
+                                                                            <th style="text-align: right; padding-right:  2cm" ><fmt:formatNumber maxFractionDigits="0" value="${total}"></fmt:formatNumber>.00</th>
+                                                                            </tr>
+                                                                        </tfoot>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Basic +DA </td>
+                                                                    <td style="text-align: right; padding-right:  2cm"><fmt:formatNumber maxFractionDigits="0" value="${basicSalary}"></fmt:formatNumber>.00</td>
+                                                                    </tr>
+
+                                                                <c:forEach var="employeeAdditional" items="${employeeAdditionalList}">
+                                                                    <c:if test="${employeeAdditional[1] ne 0.0}">
+
+                                                                        <tr>
+                                                                            <td>${employeeAdditional[0]}</td>
+                                                                            <td style="text-align: right; padding-right:  2cm"><fmt:formatNumber maxFractionDigits="0" value="${employeeAdditional[1]}"></fmt:formatNumber>.00</td>
+
+                                                                            </tr>
+                                                                    </c:if>
+
+                                                                </c:forEach>
+
+                                                            </tbody>
+                                                            <!--</table>-->
+                                                        </table>
+                                                    </td>
+                                                    <td colspan="2">
+                                                        <table id="demo" cellspacing="0" cellpadding="0" style="width: 100%; border: 0px;"
+                                                               border="0" align="center" class="table table-bordered table-striped table-hover"  >
+
+                                                            <c:choose>
+                                                                <c:when test="${empty employeeDeductionList}">
+                                                                    <tr>
+                                                                        <td align="center">
+                                                                            <c:out value="No any Decrement."></c:out>
+                                                                            </td>
+                                                                        </tr>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <thead>
+                                                                        <tr >
+                                                                            <th align="left" >Components</th>
+                                                                            <th style="text-align: right; padding-right:  2cm">Amount</th>
+                                                                        </tr>
+                                                                    </thead>
+
+                                                                    <tfoot>
+                                                                        <tr>
+                                                                            <th align="left">Total Deduction (B)</th>
+                                                                            <th style="text-align: right; padding-right:  2cm"><fmt:formatNumber maxFractionDigits="0" value="${totalDeductionAmount}"></fmt:formatNumber>.00</th>
+                                                                            </tr>
+                                                                        </tfoot>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            <tbody>
+                                                                <c:forEach var="listDec" items="${employeeDeductionList}">
+                                                                    <tr>
+                                                                        <td>${listDec[0]}</td>
+                                                                        <td style="text-align: right; padding-right:  2cm"><fmt:formatNumber maxFractionDigits="0" value="${listDec[1]}"></fmt:formatNumber>.00</td>
+                                                                        </tr>
+
+
+
+                                                                </c:forEach>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <!--</table>-->
+
+                                                <!--<table border="1" style="width: 90%" cellspacing="0" cellpadding="0" align="center" id="demo" class="table table-bordered table-striped table-hover">-->
+                                                <!--<thead>-->
+
+                                                <tr>
+                                                    <!--<th align="right">Recd. Pay Slip, Salary & Verified</th>-->
+                                                    <td align="left">Net Pay (A-B)</td>
+                                                    <td style="text-align: right; padding-right:  2cm">${nettotal} <b id="roundOffAmount" style="font-size: 10px;"></b></td>
+                                                    <td colspan="2"></td>
+                                                </tr>
+                                                <!--                                                <tr style="border: none !important;">
+                                                                                                        <td style="text-align: left; vertical-align: middle;width:50%;border: none !important;">
+                                                                                                            <b style="font-size: 10px;">Rupee:</b>&nbsp;&nbsp;&emsp;<b id="paraGraphId" style="font-size: 10px;">&nbsp;Only</b>
+                                                                                                        </td>
+                                                                                                    </tr>-->
                                                 <c:if test="${not empty loanRemainigAmount[0]}">
                                                     <tr>
 
@@ -338,43 +327,46 @@
 
                                                     </tr>
                                                 </c:if>
-                                                    
-                                                     
 
-                                            </thead>
 
-                                            <%--</c:otherwise>--%>
-                                            <%--</c:choose>--%>
 
-                                        </table>
+                                                <!--</thead>-->
 
-                                    </div>
-                                    <div class="row" align="center"><b>Note:</b> ${notes}</div>
+                                                <%--</c:otherwise>--%>
+                                                <%--</c:choose>--%>
+                                                <tr>
+                                                    <td colspan="4" align="center"><b>Note:</b> ${notes}</td> 
+                                                </tr>
 
-                                    <!--<input type="submit" value="Export To Pdf" class="btn btn-primary"/>-->
+                                            </table>
 
-                                </form:form>
-                                <hr />
+                                        </div>
 
-                            </div>
 
-                        </div> <!-- /container -->
+                                        <!--<input type="submit" value="Export To Pdf" class="btn btn-primary"/>-->
 
+                                    </form:form>
+                                    <hr />
+
+                                </div>
+
+                            </div> <!-- /container -->
+
+                        </div> 
                     </div> 
                 </div> 
-            </div> 
-        </section> 
-    </div> 
-    <style>
-        .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
-            padding: 0px;
-        }
-    </style>
-    
-    
-     <script>
+            </section> 
+        </div> 
+        <style>
+            .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+                padding: 0px;
+            }
+        </style>
+
+
+        <script>
             function test_skill(aa) {
-              
+
                 var junkVal = String(aa);
                 junkVal = Math.round(junkVal);
                 var obStr = new String(junkVal);
@@ -487,15 +479,15 @@
 
                 var a = finalWord;
                 document.getElementById('paraGraphId').innerHTML = a;
-              
+
                 document.getElementById('roundOffAmount').innerHTML = (parseFloat(junkVal) - parseFloat(${netAmount})).toFixed(2);
             }
 
         </script>
-    <!--    <form>
-            <input type="button" value="Print" onclick="window.print()">
-        </form>-->
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
-     </body>
+        <!--    <form>
+                <input type="button" value="Print" onclick="window.print()">
+            </form>-->
+        <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    </body>
 </html>
 

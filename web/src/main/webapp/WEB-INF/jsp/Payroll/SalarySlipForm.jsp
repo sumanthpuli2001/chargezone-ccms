@@ -153,14 +153,14 @@
                                                         <td colspan="2">
                                                             <font size="2">Department:&nbsp;&nbsp;<b>${employeeMaster.departmentMaster.departmentName}</b></font> </td>
                                                     <td colspan="2">
-                                                        <font size="2">Total Month Days:&nbsp;&nbsp;<b>${employeeMaster.uanNo}</b></font></td>
+                                                        <font size="2">Total Month Days:&nbsp;&nbsp;<b>${employeeExcelRecordList[0].presentDays}</b></font></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td colspan="2">
                                                         <font size="2">Date of Joining:&nbsp;&nbsp;<b>${employeeMaster.dateOfJoining}</b></font></td>
                                                     <td colspan="2">
-                                                        <font size="2">Working Days:<b>&nbsp;&nbsp;${employeeMaster.esicNo}</b></font></td>
+                                                        <font size="2">Working Days:<b>&nbsp;&nbsp;${employeeExcelRecordList[0].workingDays}</b></font></td>
                                                 </tr>
                                                 <tr>
 
@@ -179,16 +179,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="1">
-                                                        <font size="2">Bank Name: <b>${employeeMaster.uanNo}</b></font> </td>
+                                                        <font size="2">Bank Name: <b>${employeeMaster.bankName}</b></font> </td>
                                                     <td colspan="1">
                                                         <font size="2">Account No: <b>${employeeMaster.bankAccountNo}</b></font> </td>
                                                         <c:if test="${not empty employeeMaster.esicNo}">
                                                         <td>
-                                                            <font size="2">IFSC Code: <b>${employeeMaster.esicNo}</b></font></td>
+                                                            <font size="2">IFSC Code: <b>${employeeMaster.bankIfscCode}</b></font></td>
                                                         </c:if>
 
                                                     <td>
-                                                        <font size="2">Branch Name: <b>${employeeMaster.uanNo}</b> </font></td>
+                                                        <font size="2">Branch Name: <b>${employeeMaster.bankName}</b> </font></td>
                                                 </tr>        
                                                 <tr>
                                                     <td colspan="2">
@@ -219,7 +219,7 @@
                                                                 <c:when test="${empty employeeAdditionalList}">
                                                                     <tr>
                                                                         <td align="center">
-                                                                            <c:out value="No any Increment."></c:out>
+                                                                            <c:out value="No any Earning."></c:out>
                                                                             </td>
                                                                         </tr>
                                                                 </c:when>
@@ -269,7 +269,7 @@
                                                                 <c:when test="${empty employeeDeductionList}">
                                                                     <tr>
                                                                         <td align="center">
-                                                                            <c:out value="No any Decrement."></c:out>
+                                                                            <c:out value="No any Deduction."></c:out>
                                                                             </td>
                                                                         </tr>
                                                                 </c:when>

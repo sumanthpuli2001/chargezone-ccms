@@ -110,9 +110,9 @@
 
                                                     <tr>
                                                         <td style="border:0px; width: 30%;" colspan="2">
-                                                            <font size="2">Employee Name:&nbsp;&nbsp;<b>${employeeMaster.employeeName}</b></font></td>
+                                                            <font size="2">Employee Name: <b>${employeeMaster.employeeName}</b></font></td>
                                                     <td style="border:0px; width: 15%;  height: 0px !important">
-                                                        <font size="2">Employee Type:&nbsp;&nbsp;<b>${employeeMaster.employeeId}</font>
+                                                        <font size="2">Employee Type: <b>${employeeMaster.employeeType}</b></font>
                                                     </td>
                                                     <td style="border:0px; width: 15%;  height: 0px !important">
                                                         <font size="2">Employee NO:&nbsp;&nbsp;<b>${employeeMaster.employeeId}</b></font>
@@ -487,7 +487,7 @@
         <!--    <form>
                 <input type="button" value="Print" onclick="window.print()">
             </form>-->
-        <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+        <%--<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>--%>
     </body>
 </html>
 

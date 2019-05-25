@@ -850,6 +850,13 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
             Addfinallist3.add(Addfinallist);
 
         }
+        DisplaymorNotes displaymorNotes = new DisplaymorNotes();
+        List list = displaymorNotesService.read();
+        for (Object o : list) {
+            displaymorNotes = (DisplaymorNotes) o;
+
+        }
+        String notes = displaymorNotes.getPayrollNotes();
 //                mv.getModelMap().put("employeeSalaryProcessList", employeeSalaryProcessList);
 //                mv.getModelMap().put("employeeAdditionalList", employeeAdditionalList);
 //                mv.getModelMap().put("employeeDeductionList", employeeDeductionList);
@@ -862,6 +869,8 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 //                request.setAttribute("basicSalary", basicSalary);
 //                request.setAttribute("employeeExcelRecordList", employeeExcelRecordList);
 //                request.setAttribute("loanRemainigAmount", loanRemainigAmount);
+        request.setAttribute("notes", notes);
+        request.setAttribute("nettotal", nettotal);
         request.setAttribute("month", month);
         request.setAttribute("year", year);
         request.setAttribute("days1", days1);

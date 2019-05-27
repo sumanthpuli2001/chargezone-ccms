@@ -84,7 +84,7 @@
                                                         <form:errors path="employeeName" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Department:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>Business Unit:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:select path="departmentMaster" id="departmentMaster" class="form-control">
                                                             <form:option value="" label="-- Select --" />
                                                             <form:options items="${deptMap}"></form:options>

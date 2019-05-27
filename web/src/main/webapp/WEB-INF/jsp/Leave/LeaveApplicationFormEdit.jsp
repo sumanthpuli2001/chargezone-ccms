@@ -1602,13 +1602,13 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="col-sm-2">
-                                                        <label>Team:</label>
+                                                        <label>Department:</label>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <input type="Text"  class="form-control" value="${employeeMaster[10]}" readonly>
                                                     </div>
                                                     <div class="col-sm-2">
-                                                        <label>Sub-Team:</label>
+                                                        <label>Division:</label>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <input type="Text" class="form-control" value="${employeeMaster[11]}" readonly>

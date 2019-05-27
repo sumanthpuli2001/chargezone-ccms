@@ -107,7 +107,7 @@
                                                         <form:errors path="employeeName" cssClass="errorDiv"></form:errors>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <label>Department:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <label>Business Unit:<span style="color: red;font-size: 12px;"></span></label>
                                                         <form:select path="departmentMaster" id="departmentMaster" class="form-control">
                                                             <form:option value="" label="-- Select --" />
                                                             <form:options items="${deptMap}"></form:options>
@@ -150,7 +150,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
-                                                    <label>Team:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <label>Department:<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="employeeTypeMaster" id="employeeTypeMaster" onchange="selectsubtype(this.value);" class="form-control">
                                                         <option value="">--Select--</option>
                                                         <c:forEach var="map" items="${EmployeeTypeList}">
@@ -159,7 +159,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-6" id="employeeSubTypeId">
-                                                    <label>Sub-Team:<span style="color: red;font-size: 12px;"></span></label>
+                                                    <label>Division:<span style="color: red;font-size: 12px;"></span></label>
                                                     <input type="hidden" name="subTypeId" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
                                                     <select name="employeeSubType" id="employeeSubType" class="form-control">
                                                         <option value="" label="-- Select --" ></option> 
@@ -232,16 +232,16 @@
                                                                 <tr>
                                                                     <th>Employee Id</th>
                                                                     <th>Employee Name</th>
+                                                                    <!--<th>Business Unit</th>-->
+                                                                    <!--<th>Designation</th>-->
                                                                     <th>Department</th>
-                                                                    <th>Designation</th>
-                                                                    <th>Team</th>
-                                                                    <th>Sub Team</th>
+                                                                    <th>Division</th>
                                                                     <th>Leave Type</th>
-                                                                    <th>Use As Sick Leave</th>
+                                                                    <!--<th>Use As Sick Leave</th>-->
                                                                     <th>Start Date</th>
                                                                     <th>End Date</th>
                                                                     <th>Date of Submission</th>
-                                                                    <th>No Of Day</th>
+                                                                    <th>No Of Days</th>
                                                                     <th>Status</th>
                                                                 </tr>
                                                             </thead>
@@ -252,12 +252,12 @@
                                                             <tr>
                                                                 <td>${list11[0]}</td>
                                                                 <td>${list11[1]}</td>
-                                                                <td>${list11[2]}</td>
-                                                                <td>${list11[3]}</td>
+                                                                <!--<td>${list11[2]}</td>-->
+                                                                <!--<td>${list11[3]}</td>-->
                                                                 <td>${list11[10]}</td>
                                                                 <td>${list11[11]}</td>
                                                                 <td>${list11[4]}</td>
-                                                                <td>${list11[12]}</td>
+                                                                <!--<td>${list11[12]}</td>-->
                                                                 <td>${list11[5]}</td>
                                                                 <td>${list11[6]}</td>
                                                                 <td>${list11[9]}</td>

@@ -110,9 +110,9 @@
 
                                                     <tr>
                                                         <td style="border:0px; width: 30%;" colspan="2">
-                                                            <font size="2">Employee Name: <b>${employeeMaster.employeeName}</b></font></td>
+                                                            <font size="2">Employee Name:<b>${employeeMaster.employeeName}</b></font></td>
                                                     <td style="border:0px; width: 15%;  height: 0px !important">
-                                                        <font size="2">Employee Type: <b>${employeeMaster.employeeType}</b></font>
+                                                        <font size="2">Employee Type:<b>${employeeMaster.employeeType}</b></font>
                                                     </td>
                                                     <td style="border:0px; width: 15%;  height: 0px !important">
                                                         <font size="2">Employee NO:&nbsp;&nbsp;<b>${employeeMaster.employeeId}</b></font>
@@ -159,8 +159,11 @@
                                                 <tr>
                                                     <td colspan="2">
                                                         <font size="2">Date of Joining:&nbsp;&nbsp;<b>${employeeMaster.dateOfJoining}</b></font></td>
+                                                    <c:forEach  var="employeeExcelRecordList" items="${employeeExcelRecordList}">
+                                                                <c:set var="count" value="${count + 1}" scope="page"/>
                                                     <td colspan="2">
-                                                        <font size="2">Working Days:<b>&nbsp;&nbsp;${employeeMaster.esicNo}</b></font></td>
+                                                        <font size="2">Working Days:<b>&nbsp;&nbsp;${employeeExcelRecordList.workingDays}</b></font></td>
+                                                    </c:forEach>
                                                 </tr>
                                                 <tr>
 
@@ -312,7 +315,7 @@
                                                 <tr>
                                                     <!--<th align="right">Recd. Pay Slip, Salary & Verified</th>-->
                                                     <td align="left">Net Pay (A-B)</td>
-                                                    <td style="text-align: right; padding-right:  2cm">${nettotal} <b id="roundOffAmount" style="font-size: 10px;"></b></td>
+                                                    <td style="text-align: right; padding-right:  2cm"> <b id="roundOffAmount">${nettotal}</b></td>
                                                     <td colspan="2"></td>
                                                 </tr>
                                                 <!--                                                <tr style="border: none !important;">

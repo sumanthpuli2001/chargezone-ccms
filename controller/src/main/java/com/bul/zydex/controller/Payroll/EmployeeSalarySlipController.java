@@ -771,6 +771,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         double totalDeductionAmount2 = 0;
         double total = 0;
         double nettotal = 0;
+        String n1="";
         double basicSalary = 0;
         String month = null;
         String year = null;
@@ -833,6 +834,8 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 //      
 
                     nettotal = total - totalDeductionAmount;
+                    int nettotal1 = (int) Math.round(nettotal);
+                    n1 = df.format(nettotal1);
 
                 }
             }
@@ -843,7 +846,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
             Addfinallist.add(total);//4
             Addfinallist.add(employeeDeductionList);//5
             Addfinallist.add(totalDeductionAmount2);//6
-            Addfinallist.add(nettotal);//7
+            Addfinallist.add(n1);//7
             Addfinallist.add(loanRemainigAmount);//8
             Addfinallist.add(month);//9
             Addfinallist.add(year);//10
@@ -870,7 +873,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 //                request.setAttribute("employeeExcelRecordList", employeeExcelRecordList);
 //                request.setAttribute("loanRemainigAmount", loanRemainigAmount);
         request.setAttribute("notes", notes);
-        request.setAttribute("nettotal", nettotal);
+        request.setAttribute("nettotal", n1);
         request.setAttribute("month", month);
         request.setAttribute("year", year);
         request.setAttribute("days1", days1);

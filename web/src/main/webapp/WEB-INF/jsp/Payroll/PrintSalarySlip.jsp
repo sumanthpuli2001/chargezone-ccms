@@ -55,7 +55,7 @@
         <!-- Main content --> 
         <section class="content">
             <div class="row" id="printDiv">
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <!-- Custom Tabs -->
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
@@ -98,7 +98,8 @@
                                             <table style=" width: 90%;" align="center">
                                             <tr>
                                                 <td>
-                                            <center><b><font size="4">Salary Slip for<c:if test="${month eq 1}">January</c:if>
+                                                    <header>
+                                            <center><font size="4">Salary Slip for <c:if test="${month eq 1}">January</c:if>
                                                     <c:if test="${month eq 2}">February</c:if>
                                                     <c:if test="${month eq 3}">March</c:if>
                                                     <c:if test="${month eq 4}">April</c:if>
@@ -109,8 +110,8 @@
                                                     <c:if test="${month eq 9}">September</c:if>
                                                     <c:if test="${month eq 10}">October</c:if>
                                                     <c:if test="${month eq 11}">November</c:if>
-                                                    <c:if test="${month eq 12}">December</c:if> - ${year}</font></b></center> 
-
+                                                    <c:if test="${month eq 12}">December</c:if> - ${year}</font></center> 
+                                                    </header>
                                                 </td>
                                                 </tr>
                                             </table>
@@ -119,9 +120,9 @@
                                             <table style=" width: 90%;" align="center">
                                                 <tr>
                                                         <td style="border:0px; width: 30%;" colspan="2">
-                                                            <font size="2">Employee Name:&nbsp;&nbsp;<b>${employeeMaster[0].employeeName}</b></font></td>
+                                                            <font size="2">Employee Name:<b>${employeeMaster[0].employeeName}</b></font></td>
                                                     <td style="border:0px; width: 15%;  height: 0px !important">
-                                                        <font size="2">Employee Type:&nbsp;&nbsp;<b>${employeeMaster[0].employeeType}</font>
+                                                        <font size="2">Employee Type:<b>${employeeMaster[0].employeeType}</font>
                                                     </td>
                                                     <td style="border:0px; width: 15%;  height: 0px !important">
                                                         <font size="2">Employee NO:&nbsp;&nbsp;<b>${employeeMaster[0].employeeId}</b></font>

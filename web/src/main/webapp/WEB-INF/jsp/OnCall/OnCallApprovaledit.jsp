@@ -95,7 +95,7 @@
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group">
                                                         <div class="col-sm-2">
-                                                            <label>Employee No.:</label>
+                                                            <label>Employee ID:</label>
                                                         </div>
                                                         <div class="col-sm-4">
                                                             <input type="Text" class="form-control" value="${employeeMaster[0]}" readonly>

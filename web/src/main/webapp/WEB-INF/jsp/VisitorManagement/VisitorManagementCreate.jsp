@@ -112,63 +112,63 @@
                                             <div class="box-body no-padding">
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <div class="col-sm-2">
-                                                                <label>Employee No.:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                            <form:input path="employeeMasterByEmployeeMasterId.employeeId" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                <label>Employee Name:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">   
-                                                            <form:input path="employeeMasterByEmployeeMasterId.employeeName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-2">
-                                                                <label>Department:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">   
-                                                            <form:input path="employeeMasterByEmployeeMasterId.departmentMaster.departmentName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                <label>Designation:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">   
-                                                            <form:input path="employeeMasterByEmployeeMasterId.designationMaster.designationName" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-2">
-                                                                <label>Level:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">   
-                                                            <form:input path="employeeMasterByEmployeeMasterId.levelMaster.level" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                <label>Reporting Manager:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">   
-                                                            <form:input path="" class="form-control" size="16" type="text" value="${reportingLevel1}" readonly="true"></form:input>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class=" col-sm-2">
-                                                                <label>Location:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">   
-                                                            <form:input path="employeeMasterByEmployeeMasterId.locationMaster.location" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                            </div>
-                                                            <div class=" col-sm-2">
-                                                                <label>Work Location:</label>
-                                                            </div>
-                                                            <div class="col-sm-4">   
-                                                            <form:input path="employeeMasterByEmployeeMasterId.zydexLocationMaster.zydexLocation" class="form-control" size="16" type="text" value="" readonly="true"></form:input>
-                                                            </div>
-                                                        </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label>Employee ID:</label>
                                                     </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" value="${employeeMaster[0]}" readonly>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Employee Name:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" value="${employeeMaster[1]}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label>Department:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text"  class="form-control" value="${employeeMaster[10]}" readonly>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Division:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" value="${employeeMaster[11]}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label>Designation:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" value="${employeeMaster[2]}" readonly>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Level:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" value="${employeeMaster[3]}" readonly>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-2">
+                                                        <label>Work Location:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control"  value="${employeeMaster[5]}" readonly>
+                                                    </div>
+                                                    <div class="col-sm-2">
+                                                        <label>Reporting Manager:</label>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <input type="Text" class="form-control" value="${reportingManager}" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
                                                 </div>
                                             </div>
                                         </div>                 

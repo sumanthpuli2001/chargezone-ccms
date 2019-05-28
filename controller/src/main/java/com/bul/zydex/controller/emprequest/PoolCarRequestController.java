@@ -11,6 +11,7 @@ import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.PoolCarRequest;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
 import java.text.SimpleDateFormat;

@@ -8,6 +8,8 @@ import com.bul.zydex.model.DesignationMaster;
 import com.bul.zydex.model.EmailTemplate;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.VisitorManagement;
 import com.bul.zydex.model.VisitorVisitedLocation;
 import com.bul.zydex.model.ZydexLocationMaster;
@@ -81,6 +83,29 @@ public class VisitorManagementController extends VisitorManagementAbstract {
         HttpSession session = request.getSession();
         EmployeeMaster employeeMaster = (EmployeeMaster) session.getAttribute("employeeInfo");
         String type = request.getParameter("get");
+        EmployeeMaster employeeMaster1 = new EmployeeMaster();
+        EmployeeMaster employeeMaster2 = new EmployeeMaster();
+        UserMaster user = (UserMaster) request.getSession().getAttribute("user");
+        UserRightMaster user1 = (UserRightMaster) request.getSession().getAttribute("userRight");
+        int reportingId = 0;
+        user.getId();
+        employeeMaster1.setUserMaster(user);
+        List<?> empDetailList = employeeMasterService.readEmployeeDetailUserIdWise(employeeMaster1);
+        if (!empDetailList.isEmpty()) {
+            request.setAttribute("employeeMaster", empDetailList.get(0));
+            Object[] arrayOfObject = (Object[]) empDetailList.get(0);
+            String reportmanager = (String) arrayOfObject[6];
+            if (!reportmanager.equals("")) {
+                reportingId = Integer.parseInt(reportmanager);
+            }
+
+            employeeMaster2.setId(reportingId);
+        }
+        List<?> reportmanager1 = employeeMasterService.readByReportManager(employeeMaster2);
+        if (!reportmanager1.isEmpty()) {
+            employeeMaster2 = (EmployeeMaster) reportmanager1.get(0);
+            request.setAttribute("reportingManager", employeeMaster2.getEmployeeName());
+        }
 
         if (employeeMaster.getEmployeeId().equals("admin")) {
             request.setAttribute("failureMessage",
@@ -113,7 +138,7 @@ public class VisitorManagementController extends VisitorManagementAbstract {
         visitorManagement.setZydexLocationMaster(new ZydexLocationMaster());
         zydexLocationList(request);
         selectEmployee(request, response);
-        mv.getModelMap().put("employeeMaster", employeeMaster);
+//        mv.getModelMap().put("employeeMaster", employeeMaster);
         mv.getModelMap().put("visitorManagement", visitorManagement);
         return mv;
     }

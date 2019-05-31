@@ -258,12 +258,11 @@
                                                                 </c:forEach>
 
                                                             </tbody>
-                                                            <!--</table>-->
-                                                        </table>
+                                                            </table>
+                                                        <!--</table>-->
                                                     </td>
-                                                    <td colspan="2">
-                                                        <table id="demo" cellspacing="0" cellpadding="0" style="width: 100%; border: 0px;"
-                                                               border="0" align="center" class="table table-bordered table-striped table-hover"  >
+                                                    <td colspan="2" valign="top">
+                                                        <table cellspacing="0" cellpadding="0" style="width: 100%; border: 0px;" border="0" align="center" id="demo" class="table table-bordered table-striped table-hover"  >
 
                                                             <c:choose>
                                                                 <c:when test="${empty employeeDeductionList}">

@@ -7718,14 +7718,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         return mv;
     }
 
-    public ModelAndView readTextFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+     public ModelAndView readTextFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile readTextFile = multipartRequest.getFile("file1");
-        String readTextFile1 = readTextFile.getOriginalFilename();
+//        String readTextFile1 = readTextFile.getOriginalFilename();
 //        String textfile;
 //        File files = readTextFile.getInputStream();
-        File dir = new File(readTextFile.toString());
+//        File dir = new File(readTextFile.toString());
 
         if (readTextFile.getSize() > 0) {
             int count = 0;
@@ -7737,6 +7737,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             String EmpId2 = "";
             String date = "";
             String dateTime = "";
+            String time = "";
             String punchDateTime = "";
 
             try {
@@ -7746,20 +7747,31 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 String[] splitStr;
                 while ((line = inputStream.readLine()) != null) {
                     if (count != 0) {
-                        List arr = new ArrayList();
-                        splitStr = line.split("\\s+");
-//                        if (splitStr[3] == "" || splitStr[1] == null || splitStr[1] == "" || splitStr[2] == null || splitStr[2] == "" || splitStr[0] == "I") {
-                        EmpId = splitStr[3];
+//                        line = line.trim().replaceAll("\\W", "");
+//                        List arr = new ArrayList();
+                        splitStr = inputStream.readLine().split("\\s+");
 
-                        date = splitStr[1];
+//                        if (splitStr[3] == "" || splitStr[1] == null || splitStr[1] == "" || splitStr[2] == null || splitStr[2] == "" || splitStr[0] == "I") {
+//                        EmpId = splitStr[2].replaceAll("\\s+", "").replaceAll(" ", "");
+//                        EmpId = splitStr[2].replaceAll("\\s", "");
+                        EmpId = splitStr[2].trim().replaceAll("\\W", "");
+
+                        date = splitStr[11].trim().replaceAll("\\W", "");
                         String year = date.substring(0, 4);
                         String month = date.substring(4, 6);
                         String day = date.substring(6, 8);
                         String yearMonthDay = day + "/" + month + "/" + year;
 
-                        dateTime = yearMonthDay + " " + splitStr[2];
+                        // time
+                        time = splitStr[12].trim().replaceAll("\\W", "");
+                        String hours = time.substring(0, 2);
+                        String min = time.substring(2, 4);
+                        String sec = time.substring(4, 6);
+                        String timeconcat = hours + ":" + min + ":" + sec;
+
+                        dateTime = yearMonthDay + " " + timeconcat;
 //                        List<EmployeeMaster> emplist = (List<EmployeeMaster>) employeeMasterService.readByEmployeeId((EmpId.substring(4)));
-                        List<EmployeeMaster> emplist = (List<EmployeeMaster>) employeeMasterService.readByEmployeeId((EmpId));
+                        List<EmployeeMaster> emplist = (List<EmployeeMaster>) employeeMasterService.readByEmployeeId((EmpId.replaceAll("^0+(?=.)", "")));
                         if (!emplist.isEmpty()) {
                             EmployeeMaster em = emplist.get(0);
                             int employeemasterId = em.getId();
@@ -7776,7 +7788,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                 }
             } catch (Exception e) {
-                request.setAttribute("failureMessage", "Information : The Excel Not Upload Successfully. Please Check Excel Data.");
+                request.setAttribute("failureMessage", "Information : The Text Not Upload Successfully. Please Check Excel Data.");
                 mv = textReadModule(request, response);
             } finally {
                 if (inputStream != null) {
@@ -7784,7 +7796,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 }
             }
         }
-        request.setAttribute("successMessage", "Information : The Excel Uploaded Successfully.");
+        request.setAttribute("successMessage", "Information : The Text Uploaded Successfully.");
         mv = textReadModule(request, response);
         return mv;
     }

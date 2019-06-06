@@ -110,9 +110,9 @@
 
                                                     <tr>
                                                         <td style="border:0px; width: 30%;" colspan="2">
-                                                            <font size="2">Employee Name:<b>${employeeMaster.employeeName}</b></font></td>
+                                                            <font size="2">Employee Name:&nbsp;&nbsp;<b>${employeeMaster.employeeName}</b></font></td>
                                                     <td style="border:0px; width: 15%;  height: 0px !important">
-                                                        <font size="2">Employee Type:<b>${employeeMaster.employeeType}</b></font>
+                                                        <font size="2">Employee Type:&nbsp;&nbsp;<b>${employeeMaster.employeeId}</font>
                                                     </td>
                                                     <td style="border:0px; width: 15%;  height: 0px !important">
                                                         <font size="2">Employee NO:&nbsp;&nbsp;<b>${employeeMaster.employeeId}</b></font>
@@ -153,17 +153,14 @@
                                                         <td colspan="2">
                                                             <font size="2">Department:&nbsp;&nbsp;<b>${employeeMaster.departmentMaster.departmentName}</b></font> </td>
                                                     <td colspan="2">
-                                                        <font size="2">Total Month Days:&nbsp;&nbsp;<b>${employeeMaster.uanNo}</b></font></td>
+                                                        <font size="2">Total Month Days:&nbsp;&nbsp;<b>${employeeExcelRecordList[0].presentDays}</b></font></td>
                                                 </tr>
 
                                                 <tr>
                                                     <td colspan="2">
                                                         <font size="2">Date of Joining:&nbsp;&nbsp;<b>${employeeMaster.dateOfJoining}</b></font></td>
-                                                    <c:forEach  var="employeeExcelRecordList" items="${employeeExcelRecordList}">
-                                                                <c:set var="count" value="${count + 1}" scope="page"/>
                                                     <td colspan="2">
-                                                        <font size="2">Working Days:<b>&nbsp;&nbsp;${employeeExcelRecordList.workingDays}</b></font></td>
-                                                    </c:forEach>
+                                                        <font size="2">Working Days:<b>&nbsp;&nbsp;${employeeExcelRecordList[0].workingDays}</b></font></td>
                                                 </tr>
                                                 <tr>
 
@@ -182,16 +179,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td colspan="1">
-                                                        <font size="2">Bank Name: <b>${employeeMaster.uanNo}</b></font> </td>
+                                                        <font size="2">Bank Name: <b>${employeeMaster.bankName}</b></font> </td>
                                                     <td colspan="1">
                                                         <font size="2">Account No: <b>${employeeMaster.bankAccountNo}</b></font> </td>
                                                         <c:if test="${not empty employeeMaster.esicNo}">
                                                         <td>
-                                                            <font size="2">IFSC Code: <b>${employeeMaster.esicNo}</b></font></td>
+                                                            <font size="2">IFSC Code: <b>${employeeMaster.bankIfscCode}</b></font></td>
                                                         </c:if>
 
                                                     <td>
-                                                        <font size="2">Branch Name: <b>${employeeMaster.uanNo}</b> </font></td>
+                                                        <font size="2">Branch Name: <b>${employeeMaster.bankName}</b> </font></td>
                                                 </tr>        
                                                 <tr>
                                                     <td colspan="2">
@@ -222,7 +219,7 @@
                                                                 <c:when test="${empty employeeAdditionalList}">
                                                                     <tr>
                                                                         <td align="center">
-                                                                            <c:out value="No any Increment."></c:out>
+                                                                            <c:out value="No any Earning."></c:out>
                                                                             </td>
                                                                         </tr>
                                                                 </c:when>
@@ -271,7 +268,7 @@
                                                                 <c:when test="${empty employeeDeductionList}">
                                                                     <tr>
                                                                         <td align="center">
-                                                                            <c:out value="No any Decrement."></c:out>
+                                                                            <c:out value="No any Deduction."></c:out>
                                                                             </td>
                                                                         </tr>
                                                                 </c:when>
@@ -314,7 +311,7 @@
                                                 <tr>
                                                     <!--<th align="right">Recd. Pay Slip, Salary & Verified</th>-->
                                                     <td align="left">Net Pay (A-B)</td>
-                                                    <td style="text-align: right; padding-right:  2cm"> <b id="roundOffAmount">${nettotal}</b></td>
+                                                    <td style="text-align: right; padding-right:  2cm">${nettotal} <b id="roundOffAmount" style="font-size: 10px;"></b></td>
                                                     <td colspan="2"></td>
                                                 </tr>
                                                 <!--                                                <tr style="border: none !important;">
@@ -489,7 +486,7 @@
         <!--    <form>
                 <input type="button" value="Print" onclick="window.print()">
             </form>-->
-        <%--<%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>--%>
+        <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     </body>
 </html>
 

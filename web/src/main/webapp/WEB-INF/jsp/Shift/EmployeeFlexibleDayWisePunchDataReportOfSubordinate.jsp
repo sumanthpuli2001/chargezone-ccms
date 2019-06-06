@@ -35,8 +35,14 @@
         }
     </script>
     <script>
-        function showPunchData(date, id) {
-            var path = 'attendanceRegularizationMaster.htm?act=showDateWisePunchDataOfSubordinate&date=' + date + '&id=' + id;
+        function showPunchData(date, id,punchshift) {
+            var array = punchshift.split("#");
+            var datetime = array[0];
+//            alert(datetime);
+            var shiftname = array[1];
+            var arraya = shiftname.split("$");
+            var shiftname1 = arraya[0];
+            var path = 'attendanceRegularizationMaster.htm?act=showDateWisePunchDataOfSubordinate&date=' + date + '&id=' + id+'&shiftname='+shiftname1;
             popupWindow = window.open(path, 'popUpWindow', 'height=300,width=500,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')
 
 //             window.location = 'attendanceRegularizationMaster.htm?act=showDateWisePunchData&date=' + date;
@@ -439,7 +445,7 @@
                                                                     <tr>
                                                                         <th>View All Punch</th>
                                                                             <c:forEach var="list" items="${map[employeeMasterList[48]]}">
-                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}', '${employeeMasterList[48]}');">View</a>
+                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}', '${employeeMasterList[48]}','${list[1]}');">View</a>
                                                                             </th>
 
                                                                         </c:forEach>

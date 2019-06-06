@@ -37,11 +37,11 @@
                       <input type="hidden" name="date" id="date" value="${date}" />
                                     <div class="box-body no-padding">
                                         <c:if test="${sessionScope.userRight.hr}">
-                                        <c:if test="${size == 1 || size == 0}">
+                                        <%--<c:if test="${size == 1 || size == 0}">--%>
                                             <div class="btn-group">
                                             <button type="button" class="btn btn-primary" style="float:right" onclick="newClick('${empId}','${date}');" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-plus"></i>&nbsp&nbsp;New</button>  
                                             </div>
-                                        </c:if>
+                                        <%--</c:if>--%>
                                         </c:if>
                                         <div class="row">
                                             <div class="col-md-12 col-sm-12">

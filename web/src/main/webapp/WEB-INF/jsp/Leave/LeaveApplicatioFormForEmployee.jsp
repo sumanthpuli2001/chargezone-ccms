@@ -92,7 +92,7 @@
             } else {
                 document.getElementById("empRemarkError").innerHTML = "";
             }
-            
+
             if (document.getElementById("taskAssignTo").value == '') {
                 document.getElementById("taskAssignToError").innerHTML = "- It must not be empty or whitespace";
                 setTimeout(function () {
@@ -106,8 +106,8 @@
                 if (document.getElementById("startDate").value == '') {
                     document.getElementById("startDateError").innerHTML = "- It must be Selected";
                     setTimeout(function () {
-                    $("#startDateError").fadeOut();
-                }, 1000);
+                        $("#startDateError").fadeOut();
+                    }, 1000);
                     flag3 = false;
                 } else {
                     document.getElementById("startDateError").innerHTML = "";
@@ -115,8 +115,8 @@
                 if (document.getElementById("leaveStartDate_SelectFullOrHalfId").value == '') {
                     document.getElementById("startDateSelectFullOrHalfError").innerHTML = "- It must be Selected";
                     setTimeout(function () {
-                    $("#startDateSelectFullOrHalfError").fadeOut();
-                }, 1000);
+                        $("#startDateSelectFullOrHalfError").fadeOut();
+                    }, 1000);
                     flag3 = false;
                 } else {
                     document.getElementById("startDateSelectFullOrHalfError").innerHTML = "";
@@ -124,8 +124,8 @@
                 if (document.getElementById("endDate").value == '') {
                     document.getElementById("endDateError").innerHTML = "- It must be Selected";
                     setTimeout(function () {
-                    $("#endDateError").fadeOut();
-                }, 1000);
+                        $("#endDateError").fadeOut();
+                    }, 1000);
                     flag3 = false;
                 } else {
                     document.getElementById("endDateError").innerHTML = "";
@@ -134,8 +134,8 @@
                     if (document.getElementById("leaveEndDate_SelectFullOrHalfId").value == '') {
                         document.getElementById("endDateSelectFullOrHalfError").innerHTML = "- It must be Selected";
                         setTimeout(function () {
-                    $("#endDateSelectFullOrHalfError").fadeOut();
-                }, 1000);
+                            $("#endDateSelectFullOrHalfError").fadeOut();
+                        }, 1000);
                         flag3 = false;
                     } else {
                         document.getElementById("endDateSelectFullOrHalfError").innerHTML = "";
@@ -590,7 +590,7 @@
                                 document.getElementById('Sick Leave').innerHTML = "0";
                                 document.getElementById('Sick Leave2').innerHTML = document.getElementById('Sick Leave1').innerHTML;
                             }
-                            
+
 //        if (strUser == "Leave Without Pay") {
 //        if (parseFloat(document.getElementById("noOfDays").value) > 60) {
 //        $("#leaveWithoutPayLeaveDiv").show();
@@ -921,16 +921,16 @@
                             }
                             if (strUser == "National Holiday") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 1) {
-                                        $("#nhDiv").show();
-                                        setTimeout(function () {
-                                            $("#nhDiv").fadeOut();
-                                        }, 5000);
-                                        document.getElementById("noOfDays").value = "";
-                                        document.getElementById("startDate").value = "";
-                                        document.getElementById("endDate").value = "";
-                                        document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    }
+                                    $("#nhDiv").show();
+                                    setTimeout(function () {
+                                        $("#nhDiv").fadeOut();
+                                    }, 5000);
+                                    document.getElementById("noOfDays").value = "";
+                                    document.getElementById("startDate").value = "";
+                                    document.getElementById("endDate").value = "";
+                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+                                }
                             }
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -1054,16 +1054,16 @@
                             }
                             if (strUser == "National Holiday") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 1) {
-                                        $("#nhDiv").show();
-                                        setTimeout(function () {
-                                            $("#nhDiv").fadeOut();
-                                        }, 5000);
-                                        document.getElementById("noOfDays").value = "";
-                                        document.getElementById("startDate").value = "";
-                                        document.getElementById("endDate").value = "";
-                                        document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    }
+                                    $("#nhDiv").show();
+                                    setTimeout(function () {
+                                        $("#nhDiv").fadeOut();
+                                    }, 5000);
+                                    document.getElementById("noOfDays").value = "";
+                                    document.getElementById("startDate").value = "";
+                                    document.getElementById("endDate").value = "";
+                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+                                }
                             }
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -1189,16 +1189,16 @@
                             }
                             if (strUser == "National Holiday") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 1) {
-                                        $("#nhDiv").show();
-                                        setTimeout(function () {
-                                            $("#nhDiv").fadeOut();
-                                        }, 5000);
-                                        document.getElementById("noOfDays").value = "";
-                                        document.getElementById("startDate").value = "";
-                                        document.getElementById("endDate").value = "";
-                                        document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    }
+                                    $("#nhDiv").show();
+                                    setTimeout(function () {
+                                        $("#nhDiv").fadeOut();
+                                    }, 5000);
+                                    document.getElementById("noOfDays").value = "";
+                                    document.getElementById("startDate").value = "";
+                                    document.getElementById("endDate").value = "";
+                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+                                }
                             }
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -1323,16 +1323,16 @@
                             }
                             if (strUser == "National Holiday") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 1) {
-                                        $("#nhDiv").show();
-                                        setTimeout(function () {
-                                            $("#nhDiv").fadeOut();
-                                        }, 5000);
-                                        document.getElementById("noOfDays").value = "";
-                                        document.getElementById("startDate").value = "";
-                                        document.getElementById("endDate").value = "";
-                                        document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    }
+                                    $("#nhDiv").show();
+                                    setTimeout(function () {
+                                        $("#nhDiv").fadeOut();
+                                    }, 5000);
+                                    document.getElementById("noOfDays").value = "";
+                                    document.getElementById("startDate").value = "";
+                                    document.getElementById("endDate").value = "";
+                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+                                }
                             }
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -1469,16 +1469,16 @@
                             document.getElementById("noOfDays").value = parseFloat(leaveDays1) - 0.5;
                             if (strUser == "National Holiday") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 1) {
-                                        $("#nhDiv").show();
-                                        setTimeout(function () {
-                                            $("#nhDiv").fadeOut();
-                                        }, 5000);
-                                        document.getElementById("noOfDays").value = "";
-                                        document.getElementById("startDate").value = "";
-                                        document.getElementById("endDate").value = "";
-                                        document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                        document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                    }
+                                    $("#nhDiv").show();
+                                    setTimeout(function () {
+                                        $("#nhDiv").fadeOut();
+                                    }, 5000);
+                                    document.getElementById("noOfDays").value = "";
+                                    document.getElementById("startDate").value = "";
+                                    document.getElementById("endDate").value = "";
+                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+                                }
                             }
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
@@ -1788,6 +1788,27 @@
                         }
                     });
                 }
+                if (strDate != '') {
+                    $.ajax({
+                        type: "POST",
+                        url: "leaveEmployeeDetail.htm?act=checkWorkingValidationSDate&strDate=" + strDate + "&enDate=" + enDate,
+                        data: {},
+                        dataType: "text",
+                        success: function (responseTxt) {
+                            document.getElementById("sDatePolicyError").innerHTML = responseTxt;
+                            if (responseTxt != '') {
+                                document.getElementById("startDate").value = "";
+                            }
+
+                        },
+                        error: function () {
+
+                        }
+                    });
+                }
+
+
+
                 if (enDate != '') {
                     $.ajax({
                         type: "POST",
@@ -1812,7 +1833,7 @@
                     //                    alert("sDateStatus" + sDateStatus);
                     $.ajax({
                         type: "POST",
-                        url: "leaveEmployeeDetail.htm?act=getActualDayByAjax&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus + "&leaveType=" + leaveTypeMaster + "&useSickLeave=" + useSickLeave+"&employeeId="+employeeId,
+                        url: "leaveEmployeeDetail.htm?act=getActualDayByAjax&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus + "&leaveType=" + leaveTypeMaster + "&useSickLeave=" + useSickLeave + "&employeeId=" + employeeId,
                         data: {},
                         dataType: "text",
                         success: function (responseTxt) {
@@ -2021,7 +2042,7 @@
                                                         <input type="Text" class="form-control" value="${employeeMaster[1]}" readonly>
                                                     </div>
                                                 </div>
-                                                     <div class="form-group">
+                                                <div class="form-group">
                                                     <div class="col-sm-2">
                                                         <label>Department:</label>
                                                     </div>
@@ -2050,7 +2071,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    
+
 
                                                     <div class="col-sm-2">
                                                         <label>Work Location:</label>
@@ -2058,14 +2079,14 @@
                                                     <div class="col-sm-4">
                                                         <input type="Text" class="form-control"  value="${employeeMaster[5]}" readonly>
                                                     </div>
-                                                     <div class="col-sm-2">
+                                                    <div class="col-sm-2">
                                                         <label>Reporting Manager:</label>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <input type="Text" class="form-control" value="${reportingManager}" readonly>
                                                     </div>
                                                 </div>
-                                               
+
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
                                     </div>
@@ -2121,6 +2142,7 @@
                                                                 <span id="startDateError" style="color: red;"></span>
                                                                 <span id="sDateHolidayError" style="color: red;"></span>
                                                                 <span id="presetErrorDiv" style="color: red;"></span>
+
                                                             <%--<form:errors path="startDate" cssClass="errorDiv"></form:errors>--%>
                                                         </div>
                                                         <div class="col-sm-2">
@@ -2219,7 +2241,7 @@
                                                             <form:input path="noOfDays" type="number" class="form-control" readonly="true"></form:input>
                                                                 <input type="hidden" name="hiddenDays" id="hiddenDays" value="">
                                                                 <span id="noOfDaysError" style="color: red;"></span>
-                                                        </div>
+                                                            </div>
                                                             <div  id="calsualLeaveDiv" name="calsualLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Case If You want to Apply Leave For More than 2 Days for Casual/Personal/Any Other except for Sickness.Please Apply PL.</div>
                                                             <!--<div  id="calsualLeaveDiv" name="calsualLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Casual Leave You Apply Max. 3 days.If you wan't to apply More Days of leave Then Apply For PL.</div>-->
                                                             <div  id="sickLeaveDiv" name="sickLeaveDiv" style="color: red; display: none; margin-left: 20px;">You taken More than 3 of days sick leave. So for that doctor's authorize certificate submit when come at office. </div>
@@ -2229,6 +2251,7 @@
                                                             <div  id="plDiv" name="plDiv" style="color: red; display: none; margin-left: 20px;">SL Balance is available so in that case u can't apply PL less than 3 Days</div>
                                                             <div  id="nhDiv" name="nhDiv" style="color: red; display: none; margin-left: 20px;">You can't apply National Holiday more than 1 day</div>
                                                             <div  id="futureDateSelect" name="futureDateSelect" style="color: red; display: none; margin-left: 20px;">Future Date Must be Selected</div>
+                                                            <div> <span id="sDatePolicyError" style="color: red;"></span></div>
                                                         </div>
                                                     </div>
                                                     <div id="shortLeave" style="display: none;">
@@ -2281,9 +2304,9 @@
                                                     </div>
                                                 </div><!-- /.col -->
                                                 <div class="col-md-12 col-sm-12">
-                                                <div class="form-group">
-                                                    <label class="col-sm-3 control-label">Task Assigned to:<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <div class="col-sm-7">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-3 control-label">Task Assigned to:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <div class="col-sm-7">
                                                         <form:input path="taskAssignTo" class="form-control" rows="6"></form:input>
                                                             <span id="taskAssignToError" style="color: red;"></span>
                                                         </div>

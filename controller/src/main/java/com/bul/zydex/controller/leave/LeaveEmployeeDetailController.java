@@ -37,10 +37,12 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -13203,5 +13205,84 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //                }
             }
         }
+    }
+
+    public void checkWorkingValidationSDate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String strDate = request.getParameter("strDate");
+        String endDate = request.getParameter("enDate");
+        String message = "";
+
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date date3;
+        Date date4;
+
+        SimpleDateFormat dates1 = new SimpleDateFormat("dd/MM/yyyy");
+
+        //Setting dates
+        date3 = dates1.parse(endDate);
+        date4 = dates1.parse(strDate);
+
+        //Comparing dates
+        long difference1 = Math.abs(date3.getTime() - date4.getTime());
+        long differenceDates1 = difference1 / (24 * 60 * 60 * 1000);
+
+        //Convert long to String
+        String leaveDiff = Long.toString(differenceDates1);
+
+        EnumSet<DayOfWeek> weekend = EnumSet.of(DayOfWeek.of(7), DayOfWeek.of(6));
+        List<LocalDate> list = new ArrayList();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate start = LocalDate.parse(strDate, dateTimeFormatter);
+        LocalDate end = LocalDate.parse(endDate, dateTimeFormatter);
+
+        while (start.compareTo(end) <= 0) {
+            if (!weekend.contains(start.getDayOfWeek())) {
+                list.add(start);
+            }
+            start = start.plus(1, ChronoUnit.DAYS);
+        }
+        int listwithout = list.size();
+
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        Date cDate1 = new Date();
+        String CurrentDate = sdf1.format(cDate1);
+
+        Date date1;
+        Date date2;
+
+        SimpleDateFormat dates = new SimpleDateFormat("dd/MM/yyyy");
+
+        //Setting dates
+        date1 = dates.parse(CurrentDate);
+        date2 = dates.parse(strDate);
+
+        //Comparing dates
+        long difference = Math.abs(date1.getTime() - date2.getTime());
+        long differenceDates = difference / (24 * 60 * 60 * 1000);
+
+        //Convert long to String
+        String dayDifference = Long.toString(differenceDates);
+
+        if (2 != Integer.parseInt(dayDifference) && 2 >= Integer.parseInt(dayDifference)) {
+            message = "Leave request should be done in advance as Per Policy";
+
+        } else if (3 <= listwithout && 2 == listwithout) {
+
+            if (5 != Integer.parseInt(dayDifference) && 5 >= Integer.parseInt(dayDifference)) {
+                message = "Leave request should be done in advance as Per Policy";
+
+            }
+
+        } else if (4 <= listwithout) {
+            if (15 != Integer.parseInt(dayDifference) && 15 >= Integer.parseInt(dayDifference)) {
+                message = "Leave request should be done in advance as Per Policy";
+
+            }
+
+        }
+
+        PrintWriter out = response.getWriter();
+        out.print(message);
     }
 }

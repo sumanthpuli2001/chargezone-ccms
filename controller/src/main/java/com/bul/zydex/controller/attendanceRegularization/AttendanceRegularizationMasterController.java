@@ -2313,7 +2313,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         employeeShiftDataService.update(employeeShiftData1);
                     }
 
-            // add c-off balance in employee leave balance when day is sunday
+                    // add c-off balance in employee leave balance when day is sunday
 //                    SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 //                    Date startDate1 = sdf1.parse(startDate);
 //                    Date endDate1 = sdf1.parse(endDate);
@@ -2520,66 +2520,66 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //                    }
                     // add c-off balance in employee leave balance when day is sunday
                     try {
-                    EmailTemplate emailTemplate = new EmailTemplate();
-                    EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
-                    DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
-                    EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                        EmailTemplate emailTemplate = new EmailTemplate();
+                        EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
+                        DesignationMaster designationMaster = designationMasterService.readById(employeeMasterModel.getDesignationMaster().getId());
+                        EmployeeMaster employeeMaster1 = new EmployeeMaster();
 
-                    List<?> allhrlist = userRightMasterService.readallHRList();
+                        List<?> allhrlist = userRightMasterService.readallHRList();
 
-                    if (!allhrlist.isEmpty()) {
+                        if (!allhrlist.isEmpty()) {
 
-                        for (Object obj : allhrlist) {
-                            UserRightMaster userRightMaster = new UserRightMaster();
-                            EmployeeMaster employeeMaster2 = new EmployeeMaster();
-                            userRightMaster = (UserRightMaster) obj;
-                            List list = employeeMasterService.readByUserId(userRightMaster.getUserMaster().getId());
-                            if (!list.isEmpty()) {
+                            for (Object obj : allhrlist) {
+                                UserRightMaster userRightMaster = new UserRightMaster();
+                                EmployeeMaster employeeMaster2 = new EmployeeMaster();
+                                userRightMaster = (UserRightMaster) obj;
+                                List list = employeeMasterService.readByUserId(userRightMaster.getUserMaster().getId());
+                                if (!list.isEmpty()) {
 
-                                for (Object obj1 : list) {
-                                    employeeMaster2 = (EmployeeMaster) obj1;
-                                    emailTemplate = emailTemplateService.readById(69);
+                                    for (Object obj1 : list) {
+                                        employeeMaster2 = (EmployeeMaster) obj1;
+                                        emailTemplate = emailTemplateService.readById(69);
 
-                                    String To = employeeMaster2.getOfficeEmailId();
-                                    String from = employeeMasterModel.getOfficeEmailId();
-                                    String Subject = emailTemplate.getSubject();
-                                    Subject = Subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
-                                    String msg = emailTemplate.getBodytext();
-                                    msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
-                                    msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                                    msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                                    sendMail.sendMail(from, To, Subject, msg);
+                                        String To = employeeMaster2.getOfficeEmailId();
+                                        String from = employeeMasterModel.getOfficeEmailId();
+                                        String Subject = emailTemplate.getSubject();
+                                        Subject = Subject.replaceAll("\\{user\\}", employeeMaster2.getEmployeeName());
+                                        String msg = emailTemplate.getBodytext();
+                                        msg = msg.replaceAll("\\{to_user\\}", employeeMaster2.getEmployeeName());
+                                        msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                        msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                        sendMail.sendMail(from, To, Subject, msg);
+                                    }
+
                                 }
+
+                            }
+                        }
+                        //id=69 is for attandence regularization approve to employee...
+                        emailTemplate = emailTemplateService.readById(69);
+                        String EmpStr = request.getParameter("empid");
+                        if (null != EmpStr && !"".equals(EmpStr)) {
+                            int Empid = Integer.parseInt(EmpStr);
+                            List list = employeeMasterService.readByEmployeeNo(Empid);
+                            if (!list.isEmpty()) {
+                                employeeMaster1 = (EmployeeMaster) list.get(0);
+                                String To = employeeMaster1.getOfficeEmailId();
+                                String from = employeeMasterModel.getOfficeEmailId();
+                                String Subject = emailTemplate.getSubject();
+                                Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
+                                String msg = emailTemplate.getBodytext();
+                                msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
+                                msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
+                                sendMail.sendMail(from, To, Subject, msg);
 
                             }
 
                         }
+
+                    } catch (Exception e) {
+                        System.out.println(e);
                     }
-                    //id=69 is for attandence regularization approve to employee...
-                    emailTemplate = emailTemplateService.readById(69);
-                    String EmpStr = request.getParameter("empid");
-                    if (null != EmpStr && !"".equals(EmpStr)) {
-                        int Empid = Integer.parseInt(EmpStr);
-                        List list = employeeMasterService.readByEmployeeNo(Empid);
-                        if (!list.isEmpty()) {
-                            employeeMaster1 = (EmployeeMaster) list.get(0);
-                            String To = employeeMaster1.getOfficeEmailId();
-                            String from = employeeMasterModel.getOfficeEmailId();
-                            String Subject = emailTemplate.getSubject();
-                            Subject = Subject.replaceAll("\\{user\\}", employeeMaster1.getEmployeeName());
-                            String msg = emailTemplate.getBodytext();
-                            msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_user\\}", employeeMasterModel.getEmployeeName());
-                            msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                            sendMail.sendMail(from, To, Subject, msg);
-
-                        }
-
-                    }
-
-                } catch (Exception e) {
-                    System.out.println(e);
-                }
 
                 }
 
@@ -2869,8 +2869,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         boolean flexible = false;
         int earlyMinute = 0;
         int lateMinute = 0;
-        
-        
+
         List<?> timeAttFlexibleList = timeAttandanceFlaxibleMasterService.read();
         if (!timeAttFlexibleList.isEmpty()) {
             for (Object flexiObject : timeAttFlexibleList) {
@@ -2890,9 +2889,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         List secondHalfList = new ArrayList();
         List workingHour = new ArrayList();
         List breakHour = new ArrayList();
-        
+
         for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
-            
+
             Iterator itrbh = entry.getValue().iterator();
             while (itrbh.hasNext()) {
                 try {
@@ -2903,37 +2902,35 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     String date = "" + next[0];
                     if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")){
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                         String[] a = firstHalf.split("#");
                         String[] shift = a[1].split("\\$");
                         SimpleDateFormat sdf12 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                        long diff=0;
-                        if(shift[0].trim().contains("Night") && shift[0] != null && !shift[0].isEmpty()){
-                            Calendar c = Calendar.getInstance(); 
-                            Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date));  
+                        long diff = 0;
+                        if (shift[0].trim().contains("Night") && shift[0] != null && !shift[0].isEmpty()) {
+                            Calendar c = Calendar.getInstance();
+                            Date datenex = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date));
                             c.setTime(datenex);
-                            c.add(Calendar.DAY_OF_YEAR, 1); 
+                            c.add(Calendar.DAY_OF_YEAR, 1);
                             Date tomorrow = c.getTime();
                             String pattern = "dd/MM/YYYY";
                             SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
                             String nextdate = simpleDateFormatpp.format(tomorrow);
-                            punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date,nextdate, Integer.parseInt(id));
-                        }else{
+                            punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date, nextdate, Integer.parseInt(id));
+                        } else {
                             punchList = employeeDatetimeDataService.readAllPuchDataDateWise(date, Integer.parseInt(id));
                         }
-                        if (!punchList.isEmpty())
-                        {
-                            for(Object o:punchList){
-                                EmployeeDatetimeData employeeDatetimeData12 = (EmployeeDatetimeData)o;
+                        if (!punchList.isEmpty()) {
+                            for (Object o : punchList) {
+                                EmployeeDatetimeData employeeDatetimeData12 = (EmployeeDatetimeData) o;
                                 allpunchList.add(employeeDatetimeData12.getDateTime());
                             }
                         }
-                        if (!allpunchList.isEmpty())
-                        {
-                            if(allpunchList.size()%2 ==0){
-                                for(int i=1;i<allpunchList.size()-1;i++){
+                        if (!allpunchList.isEmpty()) {
+                            if (allpunchList.size() % 2 == 0) {
+                                for (int i = 1; i < allpunchList.size() - 1; i++) {
                                     String out = allpunchList.get(i).toString();
-                                    String in = allpunchList.get(i+1).toString();
+                                    String in = allpunchList.get(i + 1).toString();
                                     Date out1 = sdf12.parse(out);
                                     Date in1 = sdf12.parse(in);
                                     diff += in1.getTime() - out1.getTime();
@@ -2944,38 +2941,21 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 long diffHours = diff / (60 * 60 * 1000) % 24;
                                 String wh = String.valueOf(diffHours) + ":" + String.valueOf(diffMinutes);
                                 breakHour.add(wh);
-                            }
-                            else{
+                            } else {
                                 breakHour.add("-");
                             }
 
-                        }
-                        else{
+                        } else {
                             breakHour.add("-");
                         }
-                    }
-                    else{
+                    } else {
                         breakHour.add("-");
                     }
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
             Iterator itr5 = entry.getValue().iterator();
             while (itr5.hasNext()) {
                 try {
@@ -3119,123 +3099,121 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     String dayName = format.format(date);
 
                     List alllistPunch = new ArrayList();
-                    if(firstHalf.contains("Night")){
-                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));  
+                    if (firstHalf.contains("Night")) {
+                        Date datenex = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));
                         c.setTime(datenex);
-                        c.add(Calendar.DAY_OF_YEAR, 1); 
+                        c.add(Calendar.DAY_OF_YEAR, 1);
                         Date tomorrow = c.getTime();
                         String pattern = "dd/MM/YYYY";
                         SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
                         String nextdate = simpleDateFormatpp.format(tomorrow);
-                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0],nextdate, Integer.parseInt(id));
-                    }
-                    else{
+                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0], nextdate, Integer.parseInt(id));
+                    } else {
                         alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
                     }
-                    
-                    
-                     
-                            int listLen = alllistPunch.size();
-                            boolean isMisPunch;
-                            if(listLen % 2 == 0)
-                                isMisPunch = false;
-                            else
-                                isMisPunch = true;
-                            
-                                boolean inBool = true;
-                                boolean outBool = false;
-                                String inTime1 = null;
-                                String outTime1= null;
+
+                    int listLen = alllistPunch.size();
+                    boolean isMisPunch;
+                    if (listLen % 2 == 0) {
+                        isMisPunch = false;
+                    } else {
+                        isMisPunch = true;
+                    }
+
+                    boolean inBool = true;
+                    boolean outBool = false;
+                    String inTime1 = null;
+                    String outTime1 = null;
 //                                SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss");  
 //                                SimpleDateFormat formatshift = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");  
 //                                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                                Date d1 = null;
-                                Date d2 = null;
-                                String []inTime1val;
-                                String []outTime1val;
-                                String outTime1val1;
-                                String inTime1val1;
-                                LocalDateTime dateTime1 = null;
-                                LocalDateTime dateTime2 = null;
-                                long timecount = 0;
-                                int cnt =0;
-                            for (Object o : alllistPunch) {
-                                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
-                                cnt++;
-                                if(isMisPunch && (listLen == cnt)){
-                                    break;
-                                }else if(inBool){
-                                    inTime1 = employeeDatetimeData.getDateTime();                                    
-                                    inTime1val = inTime1.split(" ");
-                                    inTime1val1 = inTime1val[1];
-                                    try {
-                                         Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesif); 
-                                        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                        dateTime1= LocalDateTime.parse(strDate, formatter1);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }    
-                                    inBool = false;
-                                    outBool = true;
-                                } else if(outBool){
-                                    outTime1 = employeeDatetimeData.getDateTime();
-                                    outTime1val = outTime1.split(" ");
-                                    outTime1val1 = outTime1val[1];
-                                    inBool = true;
-                                    outBool = false;
-                                     try {
-                                         Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesiff); 
-                                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                         dateTime2= LocalDateTime.parse(strDate, formatter1);
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }    
-                                    long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
-                                    long diffMinutes = diffInMilli / (60 * 1000);
-                                    timecount += diffMinutes;
-                                }
+                    Date d1 = null;
+                    Date d2 = null;
+                    String[] inTime1val;
+                    String[] outTime1val;
+                    String outTime1val1;
+                    String inTime1val1;
+                    LocalDateTime dateTime1 = null;
+                    LocalDateTime dateTime2 = null;
+                    long timecount = 0;
+                    int cnt = 0;
+                    for (Object o : alllistPunch) {
+                        EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                        cnt++;
+                        if (isMisPunch && (listLen == cnt)) {
+                            break;
+                        } else if (inBool) {
+                            inTime1 = employeeDatetimeData.getDateTime();
+                            inTime1val = inTime1.split(" ");
+                            inTime1val1 = inTime1val[1];
+                            try {
+                                Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1);
+                                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                String strDate = dateFormat.format(datesif);
+                                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                dateTime1 = LocalDateTime.parse(strDate, formatter1);
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                            
-                            if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                            inBool = false;
+                            outBool = true;
+                        } else if (outBool) {
+                            outTime1 = employeeDatetimeData.getDateTime();
+                            outTime1val = outTime1.split(" ");
+                            outTime1val1 = outTime1val[1];
+                            inBool = true;
+                            outBool = false;
+                            try {
+                                Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1);
+                                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                String strDate = dateFormat.format(datesiff);
+                                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                dateTime2 = LocalDateTime.parse(strDate, formatter1);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
+                            long diffMinutes = diffInMilli / (60 * 1000);
+                            timecount += diffMinutes;
+                        }
+                    }
+
+                    if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
-                                String[] userTimeInStr = firstHalf.split("`");
-                                String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                                String[] userTimeOutStr = firstHalf.split("!");
-                                String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                                String[] leave = firstHalf.split("@");
-                                String[] leave1 = leave[1].split("#");
-                                String[] LateHoursStr = firstHalf.split("\\$");
-                                String[] LateHoursStr1 = LateHoursStr[1].split("%");
-                                String[] endHoursStr = firstHalf.split("%");
-                                String[] endHoursStr1 = endHoursStr[1].split("\\^");
-                                String[] firstStartHoursStr = endHoursStr[1].split("\\+");
-                                String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
+                        String[] userTimeInStr = firstHalf.split("`");
+                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                        String[] userTimeOutStr = firstHalf.split("!");
+                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                        String[] leave = firstHalf.split("@");
+                        String[] leave1 = leave[1].split("#");
+                        String[] LateHoursStr = firstHalf.split("\\$");
+                        String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                        String[] endHoursStr = firstHalf.split("%");
+                        String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                        String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                        String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
 
-                                Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
-                                Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                                Date endHours = sdf2.parse(endHoursStr1[0]);
-                                Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
-                                Date secondEndHour = sdf2.parse(secondEndHoursStr[1]);
-                                Calendar cal = Calendar.getInstance();
-                                Calendar cal1 = Calendar.getInstance();
-                                cal.setTime(firstStartHours);
-                                cal1.setTime(firstStartHours);
-                                cal1.add(Calendar.MINUTE, -earlyMinute);
-                                cal.add(Calendar.MINUTE, lateMinute);
-                                String newTime = sdf2.format(cal.getTime());
-                                Date flexibleEndTime = sdf2.parse(newTime);
-                                Date LateHours = sdf2.parse(LateHoursStr1[0]);
-                                String newTime1 = sdf2.format(cal1.getTime());
-                                Date flexibleStartTime = sdf2.parse(newTime1);
-                                long diff = endHours.getTime() - firstStartHours.getTime();
-                                long diffMinutes = diff / (60 * 1000);
-                            
+                        Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                        Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                        Date endHours = sdf2.parse(endHoursStr1[0]);
+                        Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                        Date secondEndHour = sdf2.parse(secondEndHoursStr[1]);
+                        Calendar cal = Calendar.getInstance();
+                        Calendar cal1 = Calendar.getInstance();
+                        cal.setTime(firstStartHours);
+                        cal1.setTime(firstStartHours);
+                        cal1.add(Calendar.MINUTE, -earlyMinute);
+                        cal.add(Calendar.MINUTE, lateMinute);
+                        String newTime = sdf2.format(cal.getTime());
+                        Date flexibleEndTime = sdf2.parse(newTime);
+                        Date LateHours = sdf2.parse(LateHoursStr1[0]);
+                        String newTime1 = sdf2.format(cal1.getTime());
+                        Date flexibleStartTime = sdf2.parse(newTime1);
+                        long diff = endHours.getTime() - firstStartHours.getTime();
+                        long diffMinutes = diff / (60 * 1000);
+
 //                            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
 //                            employeeShiftData1.setEmployeeMaster(employeeMaster1);
 //                            List<?> employeeshift = employeeShiftDataService.readByEmployeeIdAndDate(employeeShiftData1,"" + next[0]);
@@ -3248,81 +3226,78 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //                                    Date endHour = sdf2.parse(shiftMaster.getEndTime());
 //                                     long beforeinTime = firstStartHours.getTime()-userTimeIn.getTime();
 //                                                beforeinTime = TimeUnit.MILLISECONDS.toMinutes(beforeinTime);
-                                            
-                                    List<?> otlist =  oTRegularizationService.readOTDateWise("" + next[0], employeeMaster1.getUserMaster().getId());
-                                    if(otlist.size() > 0){
-                                        for (Object o1 : otlist) {
-                                            long timdiffot = 0;
-                                            long totalIntime = 0;
-                                            OTRegularization oTRegularization = (OTRegularization) o1;
-                                            String otstartDateTime = oTRegularization.getStartDateTime();
-                                            String[] otstartDateTimeinStr = otstartDateTime.split(" ");
-                                            Date startDateOT = sdf.parse(otstartDateTimeinStr[0]);
-                                            Date startTimeOT = sdf2.parse(otstartDateTimeinStr[2]);
-                                            String otendDateTime = oTRegularization.getEndDateTime();
-                                            String[] otendDateTimeinStr = otendDateTime.split(" ");
-                                            Date endDateOT = sdf.parse(otendDateTimeinStr[0]);
-                                            Date endTimeOT = sdf2.parse(otendDateTimeinStr[2]);
-                                            timdiffot = endTimeOT.getTime() -  startTimeOT.getTime();
+                        List<?> otlist = oTRegularizationService.readOTDateWise("" + next[0], employeeMaster1.getUserMaster().getId());
+                        if (otlist.size() > 0) {
+                            for (Object o1 : otlist) {
+                                long timdiffot = 0;
+                                long totalIntime = 0;
+                                OTRegularization oTRegularization = (OTRegularization) o1;
+                                String otstartDateTime = oTRegularization.getStartDateTime();
+                                String[] otstartDateTimeinStr = otstartDateTime.split(" ");
+                                Date startDateOT = sdf.parse(otstartDateTimeinStr[0]);
+                                Date startTimeOT = sdf2.parse(otstartDateTimeinStr[2]);
+                                String otendDateTime = oTRegularization.getEndDateTime();
+                                String[] otendDateTimeinStr = otendDateTime.split(" ");
+                                Date endDateOT = sdf.parse(otendDateTimeinStr[0]);
+                                Date endTimeOT = sdf2.parse(otendDateTimeinStr[2]);
+                                timdiffot = endTimeOT.getTime() - startTimeOT.getTime();
 //                                            totalIntime = timecount+timdiffot;
-                                            long intimeintomilisec = TimeUnit.MINUTES.toMillis(510);
-                                            
-                                            totalIntime=intimeintomilisec+timdiffot;
-                                            long totalIntime1 = TimeUnit.MILLISECONDS.toMinutes(totalIntime);
-                                           
-                                            if(startDateOT.equals(endDateOT)){
-                                                if(timecount > 510 && totalIntime1 > 510){
-                                                    if(startTimeOT.before(firstStartHours) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))){
-                                                        if((startTimeOT.after(userTimeIn) || startTimeOT.equals(userTimeIn)) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))){
-                                                            TotalOtTime += timdiffot;
-                                                        }
-                                                        
-                                                    }else if((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && endTimeOT.after(secondEndHour)){
-                                                        if((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && (endTimeOT.before(userTimeOut) || endTimeOT.equals(userTimeOut))){
-                                                            TotalOtTime += timdiffot;
-                                                        }
-                                                    }
+                                long intimeintomilisec = TimeUnit.MINUTES.toMillis(510);
+
+                                totalIntime = intimeintomilisec + timdiffot;
+                                long totalIntime1 = TimeUnit.MILLISECONDS.toMinutes(totalIntime);
+
+                                if (startDateOT.equals(endDateOT)) {
+                                    if (timecount > 510 && totalIntime1 > 510) {
+                                        if (startTimeOT.before(firstStartHours) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))) {
+                                            if ((startTimeOT.after(userTimeIn) || startTimeOT.equals(userTimeIn)) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))) {
+                                                TotalOtTime += timdiffot;
+                                            }
+
+                                        } else if ((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && endTimeOT.after(secondEndHour)) {
+                                            if ((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && (endTimeOT.before(userTimeOut) || endTimeOT.equals(userTimeOut))) {
+                                                TotalOtTime += timdiffot;
+                                            }
+                                        }
 //                                                    if(beforeinTime > 0){
 //                                                        long xtratime = (timecount-totalIntime1)- beforeinTime;
-                                                        long xtratime = (timecount-totalIntime1);
+                                        long xtratime = (timecount - totalIntime1);
 //                                                    xtratime = xtratime-60;
-                                                    if(xtratime > 0){
-                                                        upOtTime += xtratime;
-                                                    }
+                                        if (xtratime > 0) {
+                                            upOtTime += xtratime;
+                                        }
 //                                                    }
-                                                    
-                                                }
-                                            }
-                                        } 
-                                    }else{
-                                        if(timecount > 510){
-                                            if(!userTimeIn.after(firstStartHours)){
-                                                if(userTimeIn.before(firstStartHours)){
+
+                                    }
+                                }
+                            }
+                        } else {
+                            if (timecount > 510) {
+                                if (!userTimeIn.after(firstStartHours)) {
+                                    if (userTimeIn.before(firstStartHours)) {
 //                                                if(beforeinTime > 0){
 //                                                    long xtratime = (timecount - 510) - beforeinTime;
-                                                    long xtratime = (timecount - 510);
+                                        long xtratime = (timecount - 510);
 //                                                    xtratime = xtratime-60;
-                                                    if(xtratime > 0){
-                                                        upOtTime += xtratime;
-                                                    }
-//                                                }
-                                                
-                                                
-                                                }
-                                                }
-                                            
+                                        if (xtratime > 0) {
+                                            upOtTime += xtratime;
                                         }
+//                                                }
+
                                     }
-                                    
                                 }
+
+                            }
+                        }
+
+                    }
 //                                }
 //                                
 //                            }
-                            
+
                     // OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
-                    if(firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
-                            && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay"))        
-                    {
+                    if (firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
+                            && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay")) {
                         String[] userTimeInStr = firstHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
                         String[] userTimeOutStr = firstHalf.split("!");
@@ -3330,71 +3305,63 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
                         Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
                         long diffInOut = userTimeOut.getTime() - userTimeIn.getTime();
-                        if(userTimeInStr[0].trim().equals("0.5") && (timecount < 120)){
+                        if (userTimeInStr[0].trim().equals("0.5") && (timecount < 120)) {
                             TotalOtTime = +diffInOut;
                         }
                     }
                     // OT when one half is leave and employee worked for less than 02:00 hours(Ends here)
-                            
+
                     if (firstHalf.contains("fullday")) {
-                        if(firstHalf.contains("General")){
-                            if(timecount > 270){
+                        if (firstHalf.contains("General")) {
+                            if (timecount > 270) {
                                 newList.add("PR");
-                            }else{
+                            } else {
                                 newList.add("AB");
                             }
-                        }else{
-                            if(timecount > 210){
+                        } else {
+                            if (timecount > 210) {
                                 newList.add("PR");
-                            }else{
+                            } else {
                                 newList.add("AB");
                             }
                         }
-                            
-                        
+
                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
-                        
-                        
+
                         String[] userTimeInStr = firstHalf.split("`");
-                            String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                            String[] userTimeOutStr = firstHalf.split("!");
-                            String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                            String[] leave = firstHalf.split("@");
-                            String[] leave1 = leave[1].split("#");
-                            String[] LateHoursStr = firstHalf.split("\\$");
-                            String[] LateHoursStr1 = LateHoursStr[1].split("%");
-                            String[] endHoursStr = firstHalf.split("%");
-                            String[] endHoursStr1 = endHoursStr[1].split("\\^");
-                            String[] firstStartHoursStr = endHoursStr[1].split("\\+");
-                            String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
-                            
-                            Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
-                            Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                            Date endHours = sdf2.parse(endHoursStr1[0]);
-                            Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
-                            Date secondEndHour = sdf2.parse(secondEndHoursStr[1]);
-                            Calendar cal = Calendar.getInstance();
-                            Calendar cal1 = Calendar.getInstance();
-                            cal.setTime(firstStartHours);
-                            cal1.setTime(firstStartHours);
-                            cal1.add(Calendar.MINUTE, -earlyMinute);
-                            cal.add(Calendar.MINUTE, lateMinute);
-                            String newTime = sdf2.format(cal.getTime());
-                            Date flexibleEndTime = sdf2.parse(newTime);
-                            Date LateHours = sdf2.parse(LateHoursStr1[0]);
-                            String newTime1 = sdf2.format(cal1.getTime());
-                            Date flexibleStartTime = sdf2.parse(newTime1);
-                            long diff = endHours.getTime() - firstStartHours.getTime();
-                            long diffMinutes = diff / (60 * 1000);
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                        String[] userTimeOutStr = firstHalf.split("!");
+                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                        String[] leave = firstHalf.split("@");
+                        String[] leave1 = leave[1].split("#");
+                        String[] LateHoursStr = firstHalf.split("\\$");
+                        String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                        String[] endHoursStr = firstHalf.split("%");
+                        String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                        String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                        String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
+
+                        Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                        Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                        Date endHours = sdf2.parse(endHoursStr1[0]);
+                        Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                        Date secondEndHour = sdf2.parse(secondEndHoursStr[1]);
+                        Calendar cal = Calendar.getInstance();
+                        Calendar cal1 = Calendar.getInstance();
+                        cal.setTime(firstStartHours);
+                        cal1.setTime(firstStartHours);
+                        cal1.add(Calendar.MINUTE, -earlyMinute);
+                        cal.add(Calendar.MINUTE, lateMinute);
+                        String newTime = sdf2.format(cal.getTime());
+                        Date flexibleEndTime = sdf2.parse(newTime);
+                        Date LateHours = sdf2.parse(LateHoursStr1[0]);
+                        String newTime1 = sdf2.format(cal1.getTime());
+                        Date flexibleStartTime = sdf2.parse(newTime1);
+                        long diff = endHours.getTime() - firstStartHours.getTime();
+                        long diffMinutes = diff / (60 * 1000);
+
                         long diff1 = 0;
                         if (userTimeIn.after(flexibleStartTime) || userTimeIn.equals(flexibleStartTime)) {
                             diff1 = endHours.getTime() - userTimeIn.getTime();
@@ -3404,15 +3371,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         long diffMinutes1 = diff1 / (60 * 1000);
                         if (dayName.equals("Saturday") && dayOfWeek == 2 && diffMinutes1 >= 240) {
                             newList.add("PR");
-                            
-                        }else if(firstHalf.contains("General") && timecount < 270){
-                            
-                                newList.add("AB");
-                          
+
+                        } else if (firstHalf.contains("General") && timecount < 270) {
+
+                            newList.add("AB");
+
                         } else if (timecount < 210) {
                             newList.add("AB");
-                        }
-                        else if (diffMinutes1 >= diffMinutes) {
+                        } else if (diffMinutes1 >= diffMinutes) {
                             newList.add("PR");
                         } else if (userTimeIn != null) {
                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
@@ -3423,31 +3389,30 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                     newList.add("PR");
                                 } else if (leave1[0].contains("AB")) {
-                                    if(alllistPunch.size() >=2 && userTimeIn.after(LateHours)){
-                                        long diffUF = userTimeIn.getTime() -firstStartHours.getTime();
-                                        if(diffUF <= 3600000)
-                                        {
-                                            if(countLateEntry > 4){
-                                            countLateEntry++;
-                                            newList.add("AB");
+                                    if (alllistPunch.size() >= 2 && userTimeIn.after(LateHours)) {
+                                        long diffUF = userTimeIn.getTime() - firstStartHours.getTime();
+                                        if (diffUF <= 3600000) {
+                                            if (countLateEntry > 4) {
+                                                countLateEntry++;
+                                                newList.add("AB");
 //                                             long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
-                                             totalLateTime +=100;
-                                            }else{
+                                                totalLateTime += 100;
+                                            } else {
                                                 countLateEntry++;
                                                 newList.add("PR");
-    //                                            long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
-    //                                            totalLateTime +=lateTimeDuff;
+                                                //                                            long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
+                                                //                                            totalLateTime +=lateTimeDuff;
                                             }
-                                        }else{
-                                           newList.add("AB");
-                                           countForPenalty++;
-                                           if(countForPenalty > 1){
-                                                totalLateTime +=100;
+                                        } else {
+                                            newList.add("AB");
+                                            countForPenalty++;
+                                            if (countForPenalty > 1) {
+                                                totalLateTime += 100;
                                             }
                                         }
-                                        
+
                                     }
-                                    
+
                                 } else if (leave1[0].contains("AR")) {
                                     newList.add("AR/P");
                                 } else {
@@ -3760,107 +3725,101 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR") && !secondHalf.contains("Short Leave")) {
                         secondHalfList.add("AB");
                     } else if (secondHalf.contains("fullday")) {
-                        
-                        List alllistPunch = new ArrayList();
-                    if(secondHalf.contains("Night")){
-                        Calendar c = Calendar.getInstance();
-                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));  
-                        c.setTime(datenex);
-                        c.add(Calendar.DAY_OF_YEAR, 1); 
-                        Date tomorrow = c.getTime();
-                        String pattern = "dd/MM/YYYY";
-                        SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
-                        String nextdate = simpleDateFormatpp.format(tomorrow);
-                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0],nextdate, Integer.parseInt(id));
-                    }
-                    else{
-                        alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
-                    }
-                        
-                         
-                            int listLen = alllistPunch.size();
-                            boolean isMisPunch;
-                            if(listLen % 2 == 0)
-                                isMisPunch = false;
-                            else
-                                isMisPunch = true;
-                            
-                                boolean inBool = true;
-                                boolean outBool = false;
-                                String inTime1 = null;
-                                String outTime1= null;
-                                SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss");  
-                              
-                                Date d1 = null;
-                                Date d2 = null;
-                                String []inTime1val;
-                                String []outTime1val;
-                                String outTime1val1;
-                                String inTime1val1;
-                                LocalDateTime dateTime1 = null;
-                                LocalDateTime dateTime2 = null;
-                                long timecount = 0;
-                                int cnt =0;
-                            for (Object o : alllistPunch) {
-                                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
-                                cnt++;
-                                if(isMisPunch && (listLen == cnt)){
-                                    break;
-                                }else if(inBool){
-                                    inTime1 = employeeDatetimeData.getDateTime();                                    
-                                    inTime1val = inTime1.split(" ");
-                                    inTime1val1 = inTime1val[1];
-                                    try {
-                                         Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesif); 
-                                        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                        dateTime1= LocalDateTime.parse(strDate, formatter1);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }    
-                                    inBool = false;
-                                    outBool = true;
-                                } else if(outBool){
-                                    outTime1 = employeeDatetimeData.getDateTime();
-                                    outTime1val = outTime1.split(" ");
-                                    outTime1val1 = outTime1val[1];
-                                    inBool = true;
-                                    outBool = false;
-                                     try {
-                                         Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesiff); 
-                                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                         dateTime2= LocalDateTime.parse(strDate, formatter1);
 
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }    
-                                    long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
-                                    long diffMinutes = diffInMilli / (60 * 1000);
-                                    timecount += diffMinutes;
+                        List alllistPunch = new ArrayList();
+                        if (secondHalf.contains("Night")) {
+                            Calendar c = Calendar.getInstance();
+                            Date datenex = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));
+                            c.setTime(datenex);
+                            c.add(Calendar.DAY_OF_YEAR, 1);
+                            Date tomorrow = c.getTime();
+                            String pattern = "dd/MM/YYYY";
+                            SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                            String nextdate = simpleDateFormatpp.format(tomorrow);
+                            alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0], nextdate, Integer.parseInt(id));
+                        } else {
+                            alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                        }
+
+                        int listLen = alllistPunch.size();
+                        boolean isMisPunch;
+                        if (listLen % 2 == 0) {
+                            isMisPunch = false;
+                        } else {
+                            isMisPunch = true;
+                        }
+
+                        boolean inBool = true;
+                        boolean outBool = false;
+                        String inTime1 = null;
+                        String outTime1 = null;
+                        SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss");
+
+                        Date d1 = null;
+                        Date d2 = null;
+                        String[] inTime1val;
+                        String[] outTime1val;
+                        String outTime1val1;
+                        String inTime1val1;
+                        LocalDateTime dateTime1 = null;
+                        LocalDateTime dateTime2 = null;
+                        long timecount = 0;
+                        int cnt = 0;
+                        for (Object o : alllistPunch) {
+                            EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                            cnt++;
+                            if (isMisPunch && (listLen == cnt)) {
+                                break;
+                            } else if (inBool) {
+                                inTime1 = employeeDatetimeData.getDateTime();
+                                inTime1val = inTime1.split(" ");
+                                inTime1val1 = inTime1val[1];
+                                try {
+                                    Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1);
+                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                    String strDate = dateFormat.format(datesif);
+                                    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                    dateTime1 = LocalDateTime.parse(strDate, formatter1);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
+                                inBool = false;
+                                outBool = true;
+                            } else if (outBool) {
+                                outTime1 = employeeDatetimeData.getDateTime();
+                                outTime1val = outTime1.split(" ");
+                                outTime1val1 = outTime1val[1];
+                                inBool = true;
+                                outBool = false;
+                                try {
+                                    Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1);
+                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                    String strDate = dateFormat.format(datesiff);
+                                    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                    dateTime2 = LocalDateTime.parse(strDate, formatter1);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
+                                long diffMinutes = diffInMilli / (60 * 1000);
+                                timecount += diffMinutes;
                             }
-                            
-                            if(secondHalf.contains("General")){
-                            if(timecount > 270 && timecount >= 510){
+                        }
+
+                        if (secondHalf.contains("General")) {
+                            if (timecount > 270 && timecount >= 510) {
                                 secondHalfList.add("PR");
-                            }else{
+                            } else {
                                 secondHalfList.add("AB");
                             }
-                        }else{
-                            if(timecount > 210 && timecount >= 450){
+                        } else {
+                            if (timecount > 210 && timecount >= 450) {
                                 secondHalfList.add("PR");
-                            }else{
+                            } else {
                                 secondHalfList.add("AB");
                             }
                         }
-                            
-                        
-                        
-                        
-                        
 
                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
                             && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
@@ -3917,16 +3876,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         } else {
                             diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                         }
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+
                         long diffMinutes1 = diff1 / (60 * 1000);
 
                         if (userTimeIn != null) {
@@ -4221,87 +4171,87 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             totalDayTime1 = diff2 / (60 * 1000);
 
                             totalDayTime = totalDayTime + totalDayTime1 + ARTime;
-                            
-                           List alllistPunch = new ArrayList();
-                    if(secondHalf.contains("Night")){
-                        Calendar c = Calendar.getInstance();
-                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));  
-                        c.setTime(datenex);
-                        c.add(Calendar.DAY_OF_YEAR, 1); 
-                        Date tomorrow = c.getTime();
-                        String pattern = "dd/MM/YYYY";
-                        SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
-                        String nextdate = simpleDateFormatpp.format(tomorrow);
-                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0],nextdate, Integer.parseInt(id));
-                    }
-                    else{
-                        alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
-                    }
+
+                            List alllistPunch = new ArrayList();
+                            if (secondHalf.contains("Night")) {
+                                Calendar c = Calendar.getInstance();
+                                Date datenex = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));
+                                c.setTime(datenex);
+                                c.add(Calendar.DAY_OF_YEAR, 1);
+                                Date tomorrow = c.getTime();
+                                String pattern = "dd/MM/YYYY";
+                                SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                                String nextdate = simpleDateFormatpp.format(tomorrow);
+                                alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0], nextdate, Integer.parseInt(id));
+                            } else {
+                                alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                            }
                             int listLen = alllistPunch.size();
                             boolean isMisPunch;
-                            if(listLen % 2 == 0)
+                            if (listLen % 2 == 0) {
                                 isMisPunch = false;
-                            else
+                            } else {
                                 isMisPunch = true;
-                            
-                                boolean inBool = true;
-                                boolean outBool = false;
-                                String inTime1 = null;
-                                String outTime1= null;
-                                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");  
-                              
-                                Date d1 = null;
-                                Date d2 = null;
-                                String []inTime1val;
-                                String []outTime1val;
-                                String outTime1val1;
-                                String inTime1val1;
-                                LocalDateTime dateTime1 = null;
-                                LocalDateTime dateTime2 = null;
-                                long timecount = 0;
-                                int cnt =0;
+                            }
+
+                            boolean inBool = true;
+                            boolean outBool = false;
+                            String inTime1 = null;
+                            String outTime1 = null;
+                            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+
+                            Date d1 = null;
+                            Date d2 = null;
+                            String[] inTime1val;
+                            String[] outTime1val;
+                            String outTime1val1;
+                            String inTime1val1;
+                            LocalDateTime dateTime1 = null;
+                            LocalDateTime dateTime2 = null;
+                            long timecount = 0;
+                            int cnt = 0;
                             for (Object o : alllistPunch) {
                                 EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
                                 cnt++;
-                                if(isMisPunch && (listLen == cnt)){
+                                if (isMisPunch && (listLen == cnt)) {
                                     break;
-                                }else if(inBool){
-                                    inTime1 = employeeDatetimeData.getDateTime();                                    
+                                } else if (inBool) {
+                                    inTime1 = employeeDatetimeData.getDateTime();
                                     inTime1val = inTime1.split(" ");
                                     inTime1val1 = inTime1val[1];
                                     try {
-                                         Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesif); 
+                                        Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1);
+                                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                        String strDate = dateFormat.format(datesif);
                                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                        dateTime1= LocalDateTime.parse(strDate, formatter1);
+                                        dateTime1 = LocalDateTime.parse(strDate, formatter1);
                                     } catch (Exception e) {
                                         e.printStackTrace();
-                                    }    
+                                    }
                                     inBool = false;
                                     outBool = true;
-                                } else if(outBool){
+                                } else if (outBool) {
                                     outTime1 = employeeDatetimeData.getDateTime();
                                     outTime1val = outTime1.split(" ");
                                     outTime1val1 = outTime1val[1];
                                     inBool = true;
                                     outBool = false;
-                                     try {
-                                         Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesiff); 
-                                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                         dateTime2= LocalDateTime.parse(strDate, formatter1);
+                                    try {
+                                        Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1);
+                                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                        String strDate = dateFormat.format(datesiff);
+                                        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                        dateTime2 = LocalDateTime.parse(strDate, formatter1);
 
                                     } catch (Exception e) {
                                         e.printStackTrace();
-                                    }    
+                                    }
                                     long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
                                     long diffMinutes = diffInMilli / (60 * 1000);
                                     timecount += diffMinutes;
                                 }
                             }
-                            
+
 //                            timecount = timecount - 30;
                             double empHour = (double) timecount / 60;
                             int hours = (int) empHour;
@@ -4315,7 +4265,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             }
                             String workingHours = hour + ":" + minute;
                             workingHour.add(workingHours);
-                            
+
 //                            double empHour = (double) totalDayTime / 60;
 //                            int hours = (int) empHour;
 //                            int minutes = (int) (empHour * 60) % 60;
@@ -4328,7 +4278,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //                            }
 //                            String workingHours = hour + ":" + minute;
 //                            workingHour.add(workingHours);
-
                         }
 
                     } else if (null != mobPunchlist && mobPunchlist.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
@@ -4439,25 +4388,24 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             }
 
         }
-          String totalPenaltyAmount = String.valueOf(totalLateTime);
+        String totalPenaltyAmount = String.valueOf(totalLateTime);
 //        String totalPenaltyHours = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(totalLateTime),
 //                     TimeUnit.MILLISECONDS.toMinutes(totalLateTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(totalLateTime)),
 //                     TimeUnit.MILLISECONDS.toSeconds(totalLateTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totalLateTime)));
-        
+
         String totalPaidOverTime = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(TotalOtTime),
-                     TimeUnit.MILLISECONDS.toMinutes(TotalOtTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TotalOtTime)),
-                     TimeUnit.MILLISECONDS.toSeconds(TotalOtTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(TotalOtTime)));
+                TimeUnit.MILLISECONDS.toMinutes(TotalOtTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TotalOtTime)),
+                TimeUnit.MILLISECONDS.toSeconds(TotalOtTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(TotalOtTime)));
         long upotinmilsec = TimeUnit.MINUTES.toMillis(upOtTime);
         String totalUnpaidOverTime = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(upotinmilsec),
-                     TimeUnit.MILLISECONDS.toMinutes(upotinmilsec) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(upotinmilsec)),
-                     TimeUnit.MILLISECONDS.toSeconds(upotinmilsec) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(upotinmilsec)));
-                                   
+                TimeUnit.MILLISECONDS.toMinutes(upotinmilsec) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(upotinmilsec)),
+                TimeUnit.MILLISECONDS.toSeconds(upotinmilsec) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(upotinmilsec)));
+
 //        List<?> attendanceDateList =
 //        List<?> l1 = null;
 //        if (("".equals(startDate) || null == startDate) || ("".equals(endDate) || null == endDate)) {
 //            empDetail = l1;
 //        }
-
         request.setAttribute("countLateEntry", countLateEntry);
 //        request.setAttribute("totalPenaltyHours", totalPenaltyHours);
         request.setAttribute("totalPenaltyHours", totalPenaltyAmount);
@@ -4510,7 +4458,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
         return mv;
     }
-    
+
     public ModelAndView showOwnAttandanceOfAllEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
@@ -4652,8 +4600,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         boolean flexible = false;
         int earlyMinute = 0;
         int lateMinute = 0;
-        
-        
+
         List<?> timeAttFlexibleList = timeAttandanceFlaxibleMasterService.read();
         if (!timeAttFlexibleList.isEmpty()) {
             for (Object flexiObject : timeAttFlexibleList) {
@@ -4673,9 +4620,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         List secondHalfList = new ArrayList();
         List workingHour = new ArrayList();
         List breakHour = new ArrayList();
-        
+
         for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
-            
+
             Iterator itrbh = entry.getValue().iterator();
             while (itrbh.hasNext()) {
                 try {
@@ -4686,37 +4633,35 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     String date = "" + next[0];
                     if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")){
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
                         String[] a = firstHalf.split("#");
                         String[] shift = a[1].split("\\$");
                         SimpleDateFormat sdf12 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                        long diff=0;
-                        if(shift[0].trim().contains("Night") && shift[0] != null && !shift[0].isEmpty()){
-                            Calendar c = Calendar.getInstance(); 
-                            Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date));  
+                        long diff = 0;
+                        if (shift[0].trim().contains("Night") && shift[0] != null && !shift[0].isEmpty()) {
+                            Calendar c = Calendar.getInstance();
+                            Date datenex = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date));
                             c.setTime(datenex);
-                            c.add(Calendar.DAY_OF_YEAR, 1); 
+                            c.add(Calendar.DAY_OF_YEAR, 1);
                             Date tomorrow = c.getTime();
                             String pattern = "dd/MM/YYYY";
                             SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
                             String nextdate = simpleDateFormatpp.format(tomorrow);
-                            punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date,nextdate, Integer.parseInt(id));
-                        }else{
+                            punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date, nextdate, Integer.parseInt(id));
+                        } else {
                             punchList = employeeDatetimeDataService.readAllPuchDataDateWise(date, Integer.parseInt(id));
                         }
-                        if (!punchList.isEmpty())
-                        {
-                            for(Object o:punchList){
-                                EmployeeDatetimeData employeeDatetimeData12 = (EmployeeDatetimeData)o;
+                        if (!punchList.isEmpty()) {
+                            for (Object o : punchList) {
+                                EmployeeDatetimeData employeeDatetimeData12 = (EmployeeDatetimeData) o;
                                 allpunchList.add(employeeDatetimeData12.getDateTime());
                             }
                         }
-                        if (!allpunchList.isEmpty())
-                        {
-                            if(allpunchList.size()%2 ==0){
-                                for(int i=1;i<allpunchList.size()-1;i++){
+                        if (!allpunchList.isEmpty()) {
+                            if (allpunchList.size() % 2 == 0) {
+                                for (int i = 1; i < allpunchList.size() - 1; i++) {
                                     String out = allpunchList.get(i).toString();
-                                    String in = allpunchList.get(i+1).toString();
+                                    String in = allpunchList.get(i + 1).toString();
                                     Date out1 = sdf12.parse(out);
                                     Date in1 = sdf12.parse(in);
                                     diff += in1.getTime() - out1.getTime();
@@ -4727,38 +4672,21 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 long diffHours = diff / (60 * 60 * 1000) % 24;
                                 String wh = String.valueOf(diffHours) + ":" + String.valueOf(diffMinutes);
                                 breakHour.add(wh);
-                            }
-                            else{
+                            } else {
                                 breakHour.add("-");
                             }
 
-                        }
-                        else{
+                        } else {
                             breakHour.add("-");
                         }
-                    }
-                    else{
+                    } else {
                         breakHour.add("-");
                     }
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+
             Iterator itr5 = entry.getValue().iterator();
             while (itr5.hasNext()) {
                 try {
@@ -4902,123 +4830,121 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     String dayName = format.format(date);
 
                     List alllistPunch = new ArrayList();
-                    if(firstHalf.contains("Night")){
-                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));  
+                    if (firstHalf.contains("Night")) {
+                        Date datenex = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));
                         c.setTime(datenex);
-                        c.add(Calendar.DAY_OF_YEAR, 1); 
+                        c.add(Calendar.DAY_OF_YEAR, 1);
                         Date tomorrow = c.getTime();
                         String pattern = "dd/MM/YYYY";
                         SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
                         String nextdate = simpleDateFormatpp.format(tomorrow);
-                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0],nextdate, Integer.parseInt(id));
-                    }
-                    else{
+                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0], nextdate, Integer.parseInt(id));
+                    } else {
                         alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
                     }
-                    
-                    
-                     
-                            int listLen = alllistPunch.size();
-                            boolean isMisPunch;
-                            if(listLen % 2 == 0)
-                                isMisPunch = false;
-                            else
-                                isMisPunch = true;
-                            
-                                boolean inBool = true;
-                                boolean outBool = false;
-                                String inTime1 = null;
-                                String outTime1= null;
+
+                    int listLen = alllistPunch.size();
+                    boolean isMisPunch;
+                    if (listLen % 2 == 0) {
+                        isMisPunch = false;
+                    } else {
+                        isMisPunch = true;
+                    }
+
+                    boolean inBool = true;
+                    boolean outBool = false;
+                    String inTime1 = null;
+                    String outTime1 = null;
 //                                SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss");  
 //                                SimpleDateFormat formatshift = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");  
 //                                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                                Date d1 = null;
-                                Date d2 = null;
-                                String []inTime1val;
-                                String []outTime1val;
-                                String outTime1val1;
-                                String inTime1val1;
-                                LocalDateTime dateTime1 = null;
-                                LocalDateTime dateTime2 = null;
-                                long timecount = 0;
-                                int cnt =0;
-                            for (Object o : alllistPunch) {
-                                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
-                                cnt++;
-                                if(isMisPunch && (listLen == cnt)){
-                                    break;
-                                }else if(inBool){
-                                    inTime1 = employeeDatetimeData.getDateTime();                                    
-                                    inTime1val = inTime1.split(" ");
-                                    inTime1val1 = inTime1val[1];
-                                    try {
-                                         Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesif); 
-                                        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                        dateTime1= LocalDateTime.parse(strDate, formatter1);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }    
-                                    inBool = false;
-                                    outBool = true;
-                                } else if(outBool){
-                                    outTime1 = employeeDatetimeData.getDateTime();
-                                    outTime1val = outTime1.split(" ");
-                                    outTime1val1 = outTime1val[1];
-                                    inBool = true;
-                                    outBool = false;
-                                     try {
-                                         Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesiff); 
-                                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                         dateTime2= LocalDateTime.parse(strDate, formatter1);
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }    
-                                    long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
-                                    long diffMinutes = diffInMilli / (60 * 1000);
-                                    timecount += diffMinutes;
-                                }
+                    Date d1 = null;
+                    Date d2 = null;
+                    String[] inTime1val;
+                    String[] outTime1val;
+                    String outTime1val1;
+                    String inTime1val1;
+                    LocalDateTime dateTime1 = null;
+                    LocalDateTime dateTime2 = null;
+                    long timecount = 0;
+                    int cnt = 0;
+                    for (Object o : alllistPunch) {
+                        EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                        cnt++;
+                        if (isMisPunch && (listLen == cnt)) {
+                            break;
+                        } else if (inBool) {
+                            inTime1 = employeeDatetimeData.getDateTime();
+                            inTime1val = inTime1.split(" ");
+                            inTime1val1 = inTime1val[1];
+                            try {
+                                Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1);
+                                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                String strDate = dateFormat.format(datesif);
+                                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                dateTime1 = LocalDateTime.parse(strDate, formatter1);
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                            
-                            if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                            inBool = false;
+                            outBool = true;
+                        } else if (outBool) {
+                            outTime1 = employeeDatetimeData.getDateTime();
+                            outTime1val = outTime1.split(" ");
+                            outTime1val1 = outTime1val[1];
+                            inBool = true;
+                            outBool = false;
+                            try {
+                                Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1);
+                                DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                String strDate = dateFormat.format(datesiff);
+                                DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                dateTime2 = LocalDateTime.parse(strDate, formatter1);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
+                            long diffMinutes = diffInMilli / (60 * 1000);
+                            timecount += diffMinutes;
+                        }
+                    }
+
+                    if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
-                                String[] userTimeInStr = firstHalf.split("`");
-                                String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                                String[] userTimeOutStr = firstHalf.split("!");
-                                String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                                String[] leave = firstHalf.split("@");
-                                String[] leave1 = leave[1].split("#");
-                                String[] LateHoursStr = firstHalf.split("\\$");
-                                String[] LateHoursStr1 = LateHoursStr[1].split("%");
-                                String[] endHoursStr = firstHalf.split("%");
-                                String[] endHoursStr1 = endHoursStr[1].split("\\^");
-                                String[] firstStartHoursStr = endHoursStr[1].split("\\+");
-                                String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
+                        String[] userTimeInStr = firstHalf.split("`");
+                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                        String[] userTimeOutStr = firstHalf.split("!");
+                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                        String[] leave = firstHalf.split("@");
+                        String[] leave1 = leave[1].split("#");
+                        String[] LateHoursStr = firstHalf.split("\\$");
+                        String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                        String[] endHoursStr = firstHalf.split("%");
+                        String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                        String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                        String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
 
-                                Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
-                                Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                                Date endHours = sdf2.parse(endHoursStr1[0]);
-                                Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
-                                Date secondEndHour = sdf2.parse(secondEndHoursStr[1]);
-                                Calendar cal = Calendar.getInstance();
-                                Calendar cal1 = Calendar.getInstance();
-                                cal.setTime(firstStartHours);
-                                cal1.setTime(firstStartHours);
-                                cal1.add(Calendar.MINUTE, -earlyMinute);
-                                cal.add(Calendar.MINUTE, lateMinute);
-                                String newTime = sdf2.format(cal.getTime());
-                                Date flexibleEndTime = sdf2.parse(newTime);
-                                Date LateHours = sdf2.parse(LateHoursStr1[0]);
-                                String newTime1 = sdf2.format(cal1.getTime());
-                                Date flexibleStartTime = sdf2.parse(newTime1);
-                                long diff = endHours.getTime() - firstStartHours.getTime();
-                                long diffMinutes = diff / (60 * 1000);
-                            
+                        Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                        Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                        Date endHours = sdf2.parse(endHoursStr1[0]);
+                        Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                        Date secondEndHour = sdf2.parse(secondEndHoursStr[1]);
+                        Calendar cal = Calendar.getInstance();
+                        Calendar cal1 = Calendar.getInstance();
+                        cal.setTime(firstStartHours);
+                        cal1.setTime(firstStartHours);
+                        cal1.add(Calendar.MINUTE, -earlyMinute);
+                        cal.add(Calendar.MINUTE, lateMinute);
+                        String newTime = sdf2.format(cal.getTime());
+                        Date flexibleEndTime = sdf2.parse(newTime);
+                        Date LateHours = sdf2.parse(LateHoursStr1[0]);
+                        String newTime1 = sdf2.format(cal1.getTime());
+                        Date flexibleStartTime = sdf2.parse(newTime1);
+                        long diff = endHours.getTime() - firstStartHours.getTime();
+                        long diffMinutes = diff / (60 * 1000);
+
 //                            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
 //                            employeeShiftData1.setEmployeeMaster(employeeMaster1);
 //                            List<?> employeeshift = employeeShiftDataService.readByEmployeeIdAndDate(employeeShiftData1,"" + next[0]);
@@ -5031,81 +4957,78 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //                                    Date endHour = sdf2.parse(shiftMaster.getEndTime());
 //                                     long beforeinTime = firstStartHours.getTime()-userTimeIn.getTime();
 //                                                beforeinTime = TimeUnit.MILLISECONDS.toMinutes(beforeinTime);
-                                            
-                                    List<?> otlist =  oTRegularizationService.readOTDateWise("" + next[0], employeeMaster1.getUserMaster().getId());
-                                    if(otlist.size() > 0){
-                                        for (Object o1 : otlist) {
-                                            long timdiffot = 0;
-                                            long totalIntime = 0;
-                                            OTRegularization oTRegularization = (OTRegularization) o1;
-                                            String otstartDateTime = oTRegularization.getStartDateTime();
-                                            String[] otstartDateTimeinStr = otstartDateTime.split(" ");
-                                            Date startDateOT = sdf.parse(otstartDateTimeinStr[0]);
-                                            Date startTimeOT = sdf2.parse(otstartDateTimeinStr[2]);
-                                            String otendDateTime = oTRegularization.getEndDateTime();
-                                            String[] otendDateTimeinStr = otendDateTime.split(" ");
-                                            Date endDateOT = sdf.parse(otendDateTimeinStr[0]);
-                                            Date endTimeOT = sdf2.parse(otendDateTimeinStr[2]);
-                                            timdiffot = endTimeOT.getTime() -  startTimeOT.getTime();
+                        List<?> otlist = oTRegularizationService.readOTDateWise("" + next[0], employeeMaster1.getUserMaster().getId());
+                        if (otlist.size() > 0) {
+                            for (Object o1 : otlist) {
+                                long timdiffot = 0;
+                                long totalIntime = 0;
+                                OTRegularization oTRegularization = (OTRegularization) o1;
+                                String otstartDateTime = oTRegularization.getStartDateTime();
+                                String[] otstartDateTimeinStr = otstartDateTime.split(" ");
+                                Date startDateOT = sdf.parse(otstartDateTimeinStr[0]);
+                                Date startTimeOT = sdf2.parse(otstartDateTimeinStr[2]);
+                                String otendDateTime = oTRegularization.getEndDateTime();
+                                String[] otendDateTimeinStr = otendDateTime.split(" ");
+                                Date endDateOT = sdf.parse(otendDateTimeinStr[0]);
+                                Date endTimeOT = sdf2.parse(otendDateTimeinStr[2]);
+                                timdiffot = endTimeOT.getTime() - startTimeOT.getTime();
 //                                            totalIntime = timecount+timdiffot;
-                                            long intimeintomilisec = TimeUnit.MINUTES.toMillis(510);
-                                            
-                                            totalIntime=intimeintomilisec+timdiffot;
-                                            long totalIntime1 = TimeUnit.MILLISECONDS.toMinutes(totalIntime);
-                                           
-                                            if(startDateOT.equals(endDateOT)){
-                                                if(timecount > 510 && totalIntime1 > 510){
-                                                    if(startTimeOT.before(firstStartHours) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))){
-                                                        if((startTimeOT.after(userTimeIn) || startTimeOT.equals(userTimeIn)) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))){
-                                                            TotalOtTime += timdiffot;
-                                                        }
-                                                        
-                                                    }else if((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && endTimeOT.after(secondEndHour)){
-                                                        if((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && (endTimeOT.before(userTimeOut) || endTimeOT.equals(userTimeOut))){
-                                                            TotalOtTime += timdiffot;
-                                                        }
-                                                    }
+                                long intimeintomilisec = TimeUnit.MINUTES.toMillis(510);
+
+                                totalIntime = intimeintomilisec + timdiffot;
+                                long totalIntime1 = TimeUnit.MILLISECONDS.toMinutes(totalIntime);
+
+                                if (startDateOT.equals(endDateOT)) {
+                                    if (timecount > 510 && totalIntime1 > 510) {
+                                        if (startTimeOT.before(firstStartHours) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))) {
+                                            if ((startTimeOT.after(userTimeIn) || startTimeOT.equals(userTimeIn)) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))) {
+                                                TotalOtTime += timdiffot;
+                                            }
+
+                                        } else if ((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && endTimeOT.after(secondEndHour)) {
+                                            if ((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && (endTimeOT.before(userTimeOut) || endTimeOT.equals(userTimeOut))) {
+                                                TotalOtTime += timdiffot;
+                                            }
+                                        }
 //                                                    if(beforeinTime > 0){
 //                                                        long xtratime = (timecount-totalIntime1)- beforeinTime;
-                                                        long xtratime = (timecount-totalIntime1);
+                                        long xtratime = (timecount - totalIntime1);
 //                                                    xtratime = xtratime-60;
-                                                    if(xtratime > 0){
-                                                        upOtTime += xtratime;
-                                                    }
+                                        if (xtratime > 0) {
+                                            upOtTime += xtratime;
+                                        }
 //                                                    }
-                                                    
-                                                }
-                                            }
-                                        } 
-                                    }else{
-                                        if(timecount > 510){
-                                            if(!userTimeIn.after(firstStartHours)){
-                                                if(userTimeIn.before(firstStartHours)){
+
+                                    }
+                                }
+                            }
+                        } else {
+                            if (timecount > 510) {
+                                if (!userTimeIn.after(firstStartHours)) {
+                                    if (userTimeIn.before(firstStartHours)) {
 //                                                if(beforeinTime > 0){
 //                                                    long xtratime = (timecount - 510) - beforeinTime;
-                                                    long xtratime = (timecount - 510);
+                                        long xtratime = (timecount - 510);
 //                                                    xtratime = xtratime-60;
-                                                    if(xtratime > 0){
-                                                        upOtTime += xtratime;
-                                                    }
-//                                                }
-                                                
-                                                
-                                                }
-                                                }
-                                            
+                                        if (xtratime > 0) {
+                                            upOtTime += xtratime;
                                         }
+//                                                }
+
                                     }
-                                    
                                 }
+
+                            }
+                        }
+
+                    }
 //                                }
 //                                
 //                            }
-                            
+
                     // OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
-                    if(firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
-                            && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay"))        
-                    {
+                    if (firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
+                            && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay")) {
                         String[] userTimeInStr = firstHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
                         String[] userTimeOutStr = firstHalf.split("!");
@@ -5113,71 +5036,63 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
                         Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
                         long diffInOut = userTimeOut.getTime() - userTimeIn.getTime();
-                        if(userTimeInStr[0].trim().equals("0.5") && (timecount < 120)){
+                        if (userTimeInStr[0].trim().equals("0.5") && (timecount < 120)) {
                             TotalOtTime = +diffInOut;
                         }
                     }
                     // OT when one half is leave and employee worked for less than 02:00 hours(Ends here)
-                            
+
                     if (firstHalf.contains("fullday")) {
-                        if(firstHalf.contains("General")){
-                            if(timecount > 270){
+                        if (firstHalf.contains("General")) {
+                            if (timecount > 270) {
                                 newList.add("PR");
-                            }else{
+                            } else {
                                 newList.add("AB");
                             }
-                        }else{
-                            if(timecount > 210){
+                        } else {
+                            if (timecount > 210) {
                                 newList.add("PR");
-                            }else{
+                            } else {
                                 newList.add("AB");
                             }
                         }
-                            
-                        
+
                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
-                        
-                        
+
                         String[] userTimeInStr = firstHalf.split("`");
-                            String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                            String[] userTimeOutStr = firstHalf.split("!");
-                            String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                            String[] leave = firstHalf.split("@");
-                            String[] leave1 = leave[1].split("#");
-                            String[] LateHoursStr = firstHalf.split("\\$");
-                            String[] LateHoursStr1 = LateHoursStr[1].split("%");
-                            String[] endHoursStr = firstHalf.split("%");
-                            String[] endHoursStr1 = endHoursStr[1].split("\\^");
-                            String[] firstStartHoursStr = endHoursStr[1].split("\\+");
-                            String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
-                            
-                            Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
-                            Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                            Date endHours = sdf2.parse(endHoursStr1[0]);
-                            Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
-                            Date secondEndHour = sdf2.parse(secondEndHoursStr[1]);
-                            Calendar cal = Calendar.getInstance();
-                            Calendar cal1 = Calendar.getInstance();
-                            cal.setTime(firstStartHours);
-                            cal1.setTime(firstStartHours);
-                            cal1.add(Calendar.MINUTE, -earlyMinute);
-                            cal.add(Calendar.MINUTE, lateMinute);
-                            String newTime = sdf2.format(cal.getTime());
-                            Date flexibleEndTime = sdf2.parse(newTime);
-                            Date LateHours = sdf2.parse(LateHoursStr1[0]);
-                            String newTime1 = sdf2.format(cal1.getTime());
-                            Date flexibleStartTime = sdf2.parse(newTime1);
-                            long diff = endHours.getTime() - firstStartHours.getTime();
-                            long diffMinutes = diff / (60 * 1000);
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                        String[] userTimeOutStr = firstHalf.split("!");
+                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                        String[] leave = firstHalf.split("@");
+                        String[] leave1 = leave[1].split("#");
+                        String[] LateHoursStr = firstHalf.split("\\$");
+                        String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                        String[] endHoursStr = firstHalf.split("%");
+                        String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                        String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                        String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
+
+                        Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                        Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                        Date endHours = sdf2.parse(endHoursStr1[0]);
+                        Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                        Date secondEndHour = sdf2.parse(secondEndHoursStr[1]);
+                        Calendar cal = Calendar.getInstance();
+                        Calendar cal1 = Calendar.getInstance();
+                        cal.setTime(firstStartHours);
+                        cal1.setTime(firstStartHours);
+                        cal1.add(Calendar.MINUTE, -earlyMinute);
+                        cal.add(Calendar.MINUTE, lateMinute);
+                        String newTime = sdf2.format(cal.getTime());
+                        Date flexibleEndTime = sdf2.parse(newTime);
+                        Date LateHours = sdf2.parse(LateHoursStr1[0]);
+                        String newTime1 = sdf2.format(cal1.getTime());
+                        Date flexibleStartTime = sdf2.parse(newTime1);
+                        long diff = endHours.getTime() - firstStartHours.getTime();
+                        long diffMinutes = diff / (60 * 1000);
+
                         long diff1 = 0;
                         if (userTimeIn.after(flexibleStartTime) || userTimeIn.equals(flexibleStartTime)) {
                             diff1 = endHours.getTime() - userTimeIn.getTime();
@@ -5187,15 +5102,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         long diffMinutes1 = diff1 / (60 * 1000);
                         if (dayName.equals("Saturday") && dayOfWeek == 2 && diffMinutes1 >= 240) {
                             newList.add("PR");
-                            
-                        }else if(firstHalf.contains("General") && timecount < 270){
-                            
-                                newList.add("AB");
-                          
+
+                        } else if (firstHalf.contains("General") && timecount < 270) {
+
+                            newList.add("AB");
+
                         } else if (timecount < 210) {
                             newList.add("AB");
-                        }
-                        else if (diffMinutes1 >= diffMinutes) {
+                        } else if (diffMinutes1 >= diffMinutes) {
                             newList.add("PR");
                         } else if (userTimeIn != null) {
                             if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
@@ -5206,31 +5120,30 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 if ((userTimeIn.before(flexibleEndTime) || userTimeIn.equals(flexibleEndTime)) && (userTimeOut.after(endHours) || userTimeOut.equals(endHours))) {
                                     newList.add("PR");
                                 } else if (leave1[0].contains("AB")) {
-                                    if(alllistPunch.size() >=2 && userTimeIn.after(LateHours)){
-                                        long diffUF = userTimeIn.getTime() -firstStartHours.getTime();
-                                        if(diffUF <= 3600000)
-                                        {
-                                            if(countLateEntry > 4){
-                                            countLateEntry++;
-                                            newList.add("AB");
+                                    if (alllistPunch.size() >= 2 && userTimeIn.after(LateHours)) {
+                                        long diffUF = userTimeIn.getTime() - firstStartHours.getTime();
+                                        if (diffUF <= 3600000) {
+                                            if (countLateEntry > 4) {
+                                                countLateEntry++;
+                                                newList.add("AB");
 //                                             long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
-                                             totalLateTime +=100;
-                                            }else{
+                                                totalLateTime += 100;
+                                            } else {
                                                 countLateEntry++;
                                                 newList.add("PR");
-    //                                            long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
-    //                                            totalLateTime +=lateTimeDuff;
+                                                //                                            long lateTimeDuff = userTimeIn.getTime() - firstStartHours.getTime();
+                                                //                                            totalLateTime +=lateTimeDuff;
                                             }
-                                        }else{
-                                           newList.add("AB");
-                                           countForPenalty++;
-                                           if(countForPenalty > 1){
-                                                totalLateTime +=100;
+                                        } else {
+                                            newList.add("AB");
+                                            countForPenalty++;
+                                            if (countForPenalty > 1) {
+                                                totalLateTime += 100;
                                             }
                                         }
-                                        
+
                                     }
-                                    
+
                                 } else if (leave1[0].contains("AR")) {
                                     newList.add("AR/P");
                                 } else {
@@ -5543,107 +5456,101 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     } else if (checkLunchTime == true && totalTime < shiftdiffMinutes && !secondHalf.contains("AR") && !secondHalf.contains("Short Leave")) {
                         secondHalfList.add("AB");
                     } else if (secondHalf.contains("fullday")) {
-                        
-                        List alllistPunch = new ArrayList();
-                    if(secondHalf.contains("Night")){
-                        Calendar c = Calendar.getInstance();
-                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));  
-                        c.setTime(datenex);
-                        c.add(Calendar.DAY_OF_YEAR, 1); 
-                        Date tomorrow = c.getTime();
-                        String pattern = "dd/MM/YYYY";
-                        SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
-                        String nextdate = simpleDateFormatpp.format(tomorrow);
-                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0],nextdate, Integer.parseInt(id));
-                    }
-                    else{
-                        alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
-                    }
-                        
-                         
-                            int listLen = alllistPunch.size();
-                            boolean isMisPunch;
-                            if(listLen % 2 == 0)
-                                isMisPunch = false;
-                            else
-                                isMisPunch = true;
-                            
-                                boolean inBool = true;
-                                boolean outBool = false;
-                                String inTime1 = null;
-                                String outTime1= null;
-                                SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss");  
-                              
-                                Date d1 = null;
-                                Date d2 = null;
-                                String []inTime1val;
-                                String []outTime1val;
-                                String outTime1val1;
-                                String inTime1val1;
-                                LocalDateTime dateTime1 = null;
-                                LocalDateTime dateTime2 = null;
-                                long timecount = 0;
-                                int cnt =0;
-                            for (Object o : alllistPunch) {
-                                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
-                                cnt++;
-                                if(isMisPunch && (listLen == cnt)){
-                                    break;
-                                }else if(inBool){
-                                    inTime1 = employeeDatetimeData.getDateTime();                                    
-                                    inTime1val = inTime1.split(" ");
-                                    inTime1val1 = inTime1val[1];
-                                    try {
-                                         Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesif); 
-                                        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                        dateTime1= LocalDateTime.parse(strDate, formatter1);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }    
-                                    inBool = false;
-                                    outBool = true;
-                                } else if(outBool){
-                                    outTime1 = employeeDatetimeData.getDateTime();
-                                    outTime1val = outTime1.split(" ");
-                                    outTime1val1 = outTime1val[1];
-                                    inBool = true;
-                                    outBool = false;
-                                     try {
-                                         Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesiff); 
-                                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                         dateTime2= LocalDateTime.parse(strDate, formatter1);
 
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }    
-                                    long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
-                                    long diffMinutes = diffInMilli / (60 * 1000);
-                                    timecount += diffMinutes;
+                        List alllistPunch = new ArrayList();
+                        if (secondHalf.contains("Night")) {
+                            Calendar c = Calendar.getInstance();
+                            Date datenex = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));
+                            c.setTime(datenex);
+                            c.add(Calendar.DAY_OF_YEAR, 1);
+                            Date tomorrow = c.getTime();
+                            String pattern = "dd/MM/YYYY";
+                            SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                            String nextdate = simpleDateFormatpp.format(tomorrow);
+                            alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0], nextdate, Integer.parseInt(id));
+                        } else {
+                            alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                        }
+
+                        int listLen = alllistPunch.size();
+                        boolean isMisPunch;
+                        if (listLen % 2 == 0) {
+                            isMisPunch = false;
+                        } else {
+                            isMisPunch = true;
+                        }
+
+                        boolean inBool = true;
+                        boolean outBool = false;
+                        String inTime1 = null;
+                        String outTime1 = null;
+                        SimpleDateFormat format1 = new SimpleDateFormat("HH:mm:ss");
+
+                        Date d1 = null;
+                        Date d2 = null;
+                        String[] inTime1val;
+                        String[] outTime1val;
+                        String outTime1val1;
+                        String inTime1val1;
+                        LocalDateTime dateTime1 = null;
+                        LocalDateTime dateTime2 = null;
+                        long timecount = 0;
+                        int cnt = 0;
+                        for (Object o : alllistPunch) {
+                            EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
+                            cnt++;
+                            if (isMisPunch && (listLen == cnt)) {
+                                break;
+                            } else if (inBool) {
+                                inTime1 = employeeDatetimeData.getDateTime();
+                                inTime1val = inTime1.split(" ");
+                                inTime1val1 = inTime1val[1];
+                                try {
+                                    Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1);
+                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                    String strDate = dateFormat.format(datesif);
+                                    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                    dateTime1 = LocalDateTime.parse(strDate, formatter1);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
+                                inBool = false;
+                                outBool = true;
+                            } else if (outBool) {
+                                outTime1 = employeeDatetimeData.getDateTime();
+                                outTime1val = outTime1.split(" ");
+                                outTime1val1 = outTime1val[1];
+                                inBool = true;
+                                outBool = false;
+                                try {
+                                    Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1);
+                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                    String strDate = dateFormat.format(datesiff);
+                                    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                    dateTime2 = LocalDateTime.parse(strDate, formatter1);
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
+                                long diffMinutes = diffInMilli / (60 * 1000);
+                                timecount += diffMinutes;
                             }
-                            
-                            if(secondHalf.contains("General")){
-                            if(timecount > 270 && timecount >= 510){
+                        }
+
+                        if (secondHalf.contains("General")) {
+                            if (timecount > 270 && timecount >= 510) {
                                 secondHalfList.add("PR");
-                            }else{
+                            } else {
                                 secondHalfList.add("AB");
                             }
-                        }else{
-                            if(timecount > 210 && timecount >= 450){
+                        } else {
+                            if (timecount > 210 && timecount >= 450) {
                                 secondHalfList.add("PR");
-                            }else{
+                            } else {
                                 secondHalfList.add("AB");
                             }
                         }
-                            
-                        
-                        
-                        
-                        
 
                     } else if (!secondHalf.contains("fullday") && !secondHalf.equals("WO") && !secondHalf.equals("TR") && !secondHalf.equals("AR") && !secondHalf.equals("AB") && !secondHalf.contains("?")
                             && !secondHalf.equals("Casual Leave") && !secondHalf.equals("Short Leave") && !secondHalf.equals("C Off Leave") && !secondHalf.equals("Privilege Leave") && !secondHalf.equals("Sick Leave")
@@ -5700,16 +5607,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         } else {
                             diff1 = userTimeOut.getTime() - flexibleInTime.getTime();
                         }
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
+
                         long diffMinutes1 = diff1 / (60 * 1000);
 
                         if (userTimeIn != null) {
@@ -6004,87 +5902,87 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             totalDayTime1 = diff2 / (60 * 1000);
 
                             totalDayTime = totalDayTime + totalDayTime1 + ARTime;
-                            
-                           List alllistPunch = new ArrayList();
-                    if(secondHalf.contains("Night")){
-                        Calendar c = Calendar.getInstance();
-                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));  
-                        c.setTime(datenex);
-                        c.add(Calendar.DAY_OF_YEAR, 1); 
-                        Date tomorrow = c.getTime();
-                        String pattern = "dd/MM/YYYY";
-                        SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
-                        String nextdate = simpleDateFormatpp.format(tomorrow);
-                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0],nextdate, Integer.parseInt(id));
-                    }
-                    else{
-                        alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
-                    }
+
+                            List alllistPunch = new ArrayList();
+                            if (secondHalf.contains("Night")) {
+                                Calendar c = Calendar.getInstance();
+                                Date datenex = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(next[0]));
+                                c.setTime(datenex);
+                                c.add(Calendar.DAY_OF_YEAR, 1);
+                                Date tomorrow = c.getTime();
+                                String pattern = "dd/MM/YYYY";
+                                SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                                String nextdate = simpleDateFormatpp.format(tomorrow);
+                                alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise("" + next[0], nextdate, Integer.parseInt(id));
+                            } else {
+                                alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise("" + next[0], Integer.parseInt(id));
+                            }
                             int listLen = alllistPunch.size();
                             boolean isMisPunch;
-                            if(listLen % 2 == 0)
+                            if (listLen % 2 == 0) {
                                 isMisPunch = false;
-                            else
+                            } else {
                                 isMisPunch = true;
-                            
-                                boolean inBool = true;
-                                boolean outBool = false;
-                                String inTime1 = null;
-                                String outTime1= null;
-                                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");  
-                              
-                                Date d1 = null;
-                                Date d2 = null;
-                                String []inTime1val;
-                                String []outTime1val;
-                                String outTime1val1;
-                                String inTime1val1;
-                                LocalDateTime dateTime1 = null;
-                                LocalDateTime dateTime2 = null;
-                                long timecount = 0;
-                                int cnt =0;
+                            }
+
+                            boolean inBool = true;
+                            boolean outBool = false;
+                            String inTime1 = null;
+                            String outTime1 = null;
+                            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+
+                            Date d1 = null;
+                            Date d2 = null;
+                            String[] inTime1val;
+                            String[] outTime1val;
+                            String outTime1val1;
+                            String inTime1val1;
+                            LocalDateTime dateTime1 = null;
+                            LocalDateTime dateTime2 = null;
+                            long timecount = 0;
+                            int cnt = 0;
                             for (Object o : alllistPunch) {
                                 EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
                                 cnt++;
-                                if(isMisPunch && (listLen == cnt)){
+                                if (isMisPunch && (listLen == cnt)) {
                                     break;
-                                }else if(inBool){
-                                    inTime1 = employeeDatetimeData.getDateTime();                                    
+                                } else if (inBool) {
+                                    inTime1 = employeeDatetimeData.getDateTime();
                                     inTime1val = inTime1.split(" ");
                                     inTime1val1 = inTime1val[1];
                                     try {
-                                         Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesif); 
+                                        Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1);
+                                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                        String strDate = dateFormat.format(datesif);
                                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                        dateTime1= LocalDateTime.parse(strDate, formatter1);
+                                        dateTime1 = LocalDateTime.parse(strDate, formatter1);
                                     } catch (Exception e) {
                                         e.printStackTrace();
-                                    }    
+                                    }
                                     inBool = false;
                                     outBool = true;
-                                } else if(outBool){
+                                } else if (outBool) {
                                     outTime1 = employeeDatetimeData.getDateTime();
                                     outTime1val = outTime1.split(" ");
                                     outTime1val1 = outTime1val[1];
                                     inBool = true;
                                     outBool = false;
-                                     try {
-                                         Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1); 
-                                         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                         String strDate = dateFormat.format(datesiff); 
-                                         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                         dateTime2= LocalDateTime.parse(strDate, formatter1);
+                                    try {
+                                        Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1);
+                                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                        String strDate = dateFormat.format(datesiff);
+                                        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                        dateTime2 = LocalDateTime.parse(strDate, formatter1);
 
                                     } catch (Exception e) {
                                         e.printStackTrace();
-                                    }    
+                                    }
                                     long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
                                     long diffMinutes = diffInMilli / (60 * 1000);
                                     timecount += diffMinutes;
                                 }
                             }
-                            
+
 //                            timecount = timecount - 30;
                             double empHour = (double) timecount / 60;
                             int hours = (int) empHour;
@@ -6098,7 +5996,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             }
                             String workingHours = hour + ":" + minute;
                             workingHour.add(workingHours);
-                            
+
 //                            double empHour = (double) totalDayTime / 60;
 //                            int hours = (int) empHour;
 //                            int minutes = (int) (empHour * 60) % 60;
@@ -6111,7 +6009,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //                            }
 //                            String workingHours = hour + ":" + minute;
 //                            workingHour.add(workingHours);
-
                         }
 
                     } else if (null != mobPunchlist && mobPunchlist.size() > 0 && !secondHalf.equals("WO") && !secondHalf.equals("AB") && !secondHalf.equals("TR") && !secondHalf.equals("AR")) {
@@ -6222,25 +6119,24 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             }
 
         }
-          String totalPenaltyAmount = String.valueOf(totalLateTime);
+        String totalPenaltyAmount = String.valueOf(totalLateTime);
 //        String totalPenaltyHours = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(totalLateTime),
 //                     TimeUnit.MILLISECONDS.toMinutes(totalLateTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(totalLateTime)),
 //                     TimeUnit.MILLISECONDS.toSeconds(totalLateTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totalLateTime)));
-        
+
         String totalPaidOverTime = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(TotalOtTime),
-                     TimeUnit.MILLISECONDS.toMinutes(TotalOtTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TotalOtTime)),
-                     TimeUnit.MILLISECONDS.toSeconds(TotalOtTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(TotalOtTime)));
+                TimeUnit.MILLISECONDS.toMinutes(TotalOtTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TotalOtTime)),
+                TimeUnit.MILLISECONDS.toSeconds(TotalOtTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(TotalOtTime)));
         long upotinmilsec = TimeUnit.MINUTES.toMillis(upOtTime);
         String totalUnpaidOverTime = String.format("%02d:%02d", TimeUnit.MILLISECONDS.toHours(upotinmilsec),
-                     TimeUnit.MILLISECONDS.toMinutes(upotinmilsec) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(upotinmilsec)),
-                     TimeUnit.MILLISECONDS.toSeconds(upotinmilsec) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(upotinmilsec)));
-                                   
+                TimeUnit.MILLISECONDS.toMinutes(upotinmilsec) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(upotinmilsec)),
+                TimeUnit.MILLISECONDS.toSeconds(upotinmilsec) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(upotinmilsec)));
+
 //        List<?> attendanceDateList =
 //        List<?> l1 = null;
 //        if (("".equals(startDate) || null == startDate) || ("".equals(endDate) || null == endDate)) {
 //            empDetail = l1;
 //        }
-
         request.setAttribute("countLateEntry", countLateEntry);
 //        request.setAttribute("totalPenaltyHours", totalPenaltyHours);
         request.setAttribute("totalPenaltyHours", totalPenaltyAmount);
@@ -7576,7 +7472,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //
 //        return mv;
 //    }
-
     public void checkPunchtime(HttpServletRequest request, HttpServletResponse response) throws ParseException, IOException {
         String strDate = request.getParameter("strDate");
         String message = "";
@@ -7594,7 +7489,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         PrintWriter out = response.getWriter();
         out.print(message);
     }
-
+    
     public ModelAndView showDateWisePunchDataOfSubordinate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String date = request.getParameter("date");
@@ -7602,17 +7497,17 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         List punchList = new ArrayList();
         List allpunchList = new ArrayList();
         String punchdetails2 = request.getParameter("shiftname");
-        if(punchdetails2.contains("Night") && punchdetails2 != null){
-                        Calendar c = Calendar.getInstance(); 
-                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date));  
-                        c.setTime(datenex);
-                        c.add(Calendar.DAY_OF_YEAR, 1); 
-                        Date tomorrow = c.getTime();
-                        String pattern = "dd/MM/YYYY";
-                        SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
-                        String nextdate = simpleDateFormatpp.format(tomorrow);
-                        punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date,nextdate, Integer.parseInt(empId));
-        }else{
+        if (punchdetails2.contains("Night") && punchdetails2 != null) {
+            Calendar c = Calendar.getInstance();
+            Date datenex = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date));
+            c.setTime(datenex);
+            c.add(Calendar.DAY_OF_YEAR, 1);
+            Date tomorrow = c.getTime();
+            String pattern = "dd/MM/YYYY";
+            SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+            String nextdate = simpleDateFormatpp.format(tomorrow);
+            punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date, nextdate, Integer.parseInt(empId));
+        } else {
             punchList = employeeDatetimeDataService.readAllPuchDataDateWise(date, Integer.parseInt(empId));
         }
 
@@ -7620,9 +7515,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             List<?> MobPunchList = employeePunchForMobileAppService.readPuchDataDateWise(date, Integer.parseInt(empId));
             mv.getModelMap().put("punchList", MobPunchList);
         } else {
-            
-            for(Object o:punchList){
-                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData)o;
+
+            for (Object o : punchList) {
+                EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
                 allpunchList.add(employeeDatetimeData.getDateTime());
 //                allpunchList.add(employeeDatetimeData.getDeviceMaster().getId());
             }
@@ -7718,7 +7613,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         return mv;
     }
 
-     public ModelAndView readTextFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView readTextFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile readTextFile = multipartRequest.getFile("file1");
@@ -7756,20 +7651,33 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //                        EmpId = splitStr[2].replaceAll("\\s", "");
                         EmpId = splitStr[2].trim().replaceAll("\\W", "");
 
-                        date = splitStr[11].trim().replaceAll("\\W", "");
+                        date = splitStr[10].trim().replaceAll("\\W", "");
                         String year = date.substring(0, 4);
                         String month = date.substring(4, 6);
                         String day = date.substring(6, 8);
                         String yearMonthDay = day + "/" + month + "/" + year;
-
+                        String sec = "00";
                         // time
-                        time = splitStr[12].trim().replaceAll("\\W", "");
+                        time = splitStr[11].trim().replaceAll("\\W", "");
                         String hours = time.substring(0, 2);
                         String min = time.substring(2, 4);
-                        String sec = time.substring(4, 6);
+
+                        try {
+                            sec = time.substring(4, 6);
+                        } catch (Exception e) {
+                            sec = "00";
+                        }
                         String timeconcat = hours + ":" + min + ":" + sec;
 
                         dateTime = yearMonthDay + " " + timeconcat;
+                        List<?> findDuplicateRecords = employeeDatetimeDataService.findDuplicateRecords(Integer.parseInt(EmpId.replaceAll("^0+(?=.)", "")), dateTime);
+                        if (!findDuplicateRecords.isEmpty()) {
+                            for (int i = 0; i <= findDuplicateRecords.size() - 1; i++) {
+                                String a = findDuplicateRecords.get(i).toString();
+                                employeeDatetimeDataService.delete(Integer.parseInt(a));
+                            }
+                        }
+
 //                        List<EmployeeMaster> emplist = (List<EmployeeMaster>) employeeMasterService.readByEmployeeId((EmpId.substring(4)));
                         List<EmployeeMaster> emplist = (List<EmployeeMaster>) employeeMasterService.readByEmployeeId((EmpId.replaceAll("^0+(?=.)", "")));
                         if (!emplist.isEmpty()) {
@@ -7825,7 +7733,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         PrintWriter out = response.getWriter();
         out.print(message);
     }
-    
+
     public ModelAndView viewClick1(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         EmployeeDatetimeData employeeDatetimeData = new EmployeeDatetimeData();

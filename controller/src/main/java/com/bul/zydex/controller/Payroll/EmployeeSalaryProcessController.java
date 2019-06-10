@@ -2668,6 +2668,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             headerRow1.add("Bonus");
                             headerRow1.add("Night Shift Counts");
                             headerRow1.add("On Call Requests");
+                            headerRow1.add("Working Hours");
                             
                             for (int k1 = 0; k1 < headerRow1.size(); k1++) {
                                 Cell cell = row.createCell(k1);
@@ -2716,7 +2717,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             long totalLateTime = 0;
 //                            Integer otMinuteCounter = 0;
                             String otHourFinal = "";
-                            
+                            String workingHours = "";
+                            long diff12 =0;
 //                            int otHoursMinutes1 = 0;
                             for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
 
@@ -3223,7 +3225,58 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                         otMinuteCounter += 0;
                                     }
                                     n++;
+                           
+                            List punchList = new ArrayList();
+                            List allpunchList = new ArrayList();
+                            String date12 = "" + next2[0];
+                            long diff11=0;
+                            try{
+                                    if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                                        && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("LWP") && !firstHalf.equals("Gross Leave")) {
+
+                                    String[] a = firstHalf.split("#");
+                                    String[] shift = a[1].split("\\$");
+                                    SimpleDateFormat sdf12 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                    if(shift[0].trim().contains("Night") && shift[0] != null && !shift[0].isEmpty()){
+                                        Calendar c3 = Calendar.getInstance(); 
+                                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date12));  
+                                        c3.setTime(datenex);
+                                        c3.add(Calendar.DAY_OF_YEAR, 1); 
+                                        Date tomorrow = c3.getTime();
+                                        String pattern = "dd/MM/YYYY";
+                                        SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                                        String nextdate = simpleDateFormatpp.format(tomorrow);
+                                        allpunchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date12,nextdate, id);
+                                    }else{
+                                        allpunchList = employeeDatetimeDataService.readPuchDataDateWiseAll1(date12, id);
+                                    }
+
+                                    if (!allpunchList.isEmpty())
+                                    {
+                                        if(allpunchList.size()%2 ==0){
+                                            for(int i=0;i<allpunchList.size()-1;i++){
+                                                String in = allpunchList.get(i).toString();
+                                                String out = allpunchList.get(i+1).toString();
+                                                Date out1 = sdf12.parse(out);
+                                                Date in1 = sdf12.parse(in);
+                                                diff12 += (out1.getTime() - in1.getTime());
+                                                i++;
+                                            }
+//                                            diff12 += diff11;
+                                            String wh = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(diff12),
+                                                        TimeUnit.MILLISECONDS.toMinutes(diff12) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff12)),
+                                                        TimeUnit.MILLISECONDS.toSeconds(diff12) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff12)));
+                                        }
+                                    }
                                 }
+                                
+                            }catch(Exception e){
+                                e.printStackTrace();
+                            }
+                            
+                       }
+                                
 
 //                                int hours3 = (int) otMinuteCounter / 60;
 //                                int minutes3 = (int) otMinuteCounter % 60;
@@ -3257,7 +3310,17 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 totalUnpaidOverTime = String.format("%d.%d", TimeUnit.MILLISECONDS.toHours(upotinmilsec),
                                 TimeUnit.MILLISECONDS.toMinutes(upotinmilsec) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(upotinmilsec)),
                                 TimeUnit.MILLISECONDS.toSeconds(upotinmilsec) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(upotinmilsec)));
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             }
+                            String wh1 = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(diff12),
+                                                        TimeUnit.MILLISECONDS.toMinutes(diff12) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff12)),
+                                                        TimeUnit.MILLISECONDS.toSeconds(diff12) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff12)));
 
                             firstHalfList.add("" + (list.size() - wo));
                             firstHalfList.add("" + wo);
@@ -3284,6 +3347,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             firstHalfList.add("" + bonus);
                             firstHalfList.add("" + countNightShift);
                             firstHalfList.add("" + countOnCallRequests);
+                            firstHalfList.add("" + wh1);
 
                             Row row1 = firstSheet.createRow(rownum - 1);
                             for (int k1 = 0; k1 < firstHalfList.size(); k1++) {

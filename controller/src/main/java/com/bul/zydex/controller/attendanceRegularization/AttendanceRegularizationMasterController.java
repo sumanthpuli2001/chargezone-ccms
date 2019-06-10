@@ -2919,14 +2919,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             String nextdate = simpleDateFormatpp.format(tomorrow);
                             punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date,nextdate, Integer.parseInt(id));
                         }else{
-                            punchList = employeeDatetimeDataService.readAllPuchDataDateWise(date, Integer.parseInt(id));
-                        }
-                        if (!punchList.isEmpty())
-                        {
-                            for(Object o:punchList){
-                                EmployeeDatetimeData employeeDatetimeData12 = (EmployeeDatetimeData)o;
-                                allpunchList.add(employeeDatetimeData12.getDateTime());
-                            }
+                            allpunchList = employeeDatetimeDataService.readPuchDataDateWiseAll1(date, Integer.parseInt(id));
                         }
                         if (!allpunchList.isEmpty())
                         {
@@ -4700,16 +4693,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             String pattern = "dd/MM/YYYY";
                             SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
                             String nextdate = simpleDateFormatpp.format(tomorrow);
-                            punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date,nextdate, Integer.parseInt(id));
+                            allpunchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date,nextdate, Integer.parseInt(id));
                         }else{
-                            punchList = employeeDatetimeDataService.readAllPuchDataDateWise(date, Integer.parseInt(id));
-                        }
-                        if (!punchList.isEmpty())
-                        {
-                            for(Object o:punchList){
-                                EmployeeDatetimeData employeeDatetimeData12 = (EmployeeDatetimeData)o;
-                                allpunchList.add(employeeDatetimeData12.getDateTime());
-                            }
+                            allpunchList = employeeDatetimeDataService.readPuchDataDateWiseAll1(date, Integer.parseInt(id));
                         }
                         if (!allpunchList.isEmpty())
                         {

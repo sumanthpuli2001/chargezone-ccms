@@ -41,6 +41,11 @@ public class EmployeeDatetimeDataServiceImpl<T> extends GenericsServiceImpl<T> i
     public List<?> readPuchDataDateWiseAll(String date, int empId) {
         return employeeDatetimeDataDAO.readPuchDataDateWiseAll(date, empId);
     }
+    
+    @Override
+    public List<?> readPuchDataDateWiseAll1(String date, int empId) {
+        return employeeDatetimeDataDAO.readPuchDataDateWiseAll1(date, empId);
+    }
 
     @Override
     public List<?> readPuchDataEmpIdWise(int empId) {

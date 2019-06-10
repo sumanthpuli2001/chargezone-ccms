@@ -2794,8 +2794,9 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                             long timecount = 0;
                                             int cnt =0;
                                             // OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
-                                            if(firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
-                                                    && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay"))        
+                                            if((firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
+                                                    && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay")) && (!firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                                    && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")))        
                                             {
                                                 String[] userTimeInStr = firstHalf.split("`");
                                                 String[] userTimeInStr1 = userTimeInStr[1].split("!");

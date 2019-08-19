@@ -430,7 +430,7 @@
                                                                     <tr>
                                                                         <th>View All Punch</th>
                                                                             <c:forEach var="list" items="${map[employeeMasterList[48]]}">
-                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}', '${employeeMasterList[48]}');">View</a>
+                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}', '${employeeMasterList[48]}','${list[1]}');">View</a>
                                                                             </th>
 
                                                                         </c:forEach>

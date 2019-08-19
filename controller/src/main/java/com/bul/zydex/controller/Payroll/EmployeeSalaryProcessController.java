@@ -3628,13 +3628,6 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                     }
 
                                 }
-                                
-                            }catch(Exception e){
-                                e.printStackTrace();
-                            }
-                            
-                       }
-                                
 
 //                                int hours3 = (int) otMinuteCounter / 60;
 //                                int minutes3 = (int) otMinuteCounter % 60;
@@ -3668,9 +3661,6 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                         TimeUnit.MILLISECONDS.toMinutes(upotinmilsec) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(upotinmilsec)),
                                         TimeUnit.MILLISECONDS.toSeconds(upotinmilsec) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(upotinmilsec)));
                             }
-                            String wh1 = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(diff12),
-                                                        TimeUnit.MILLISECONDS.toMinutes(diff12) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff12)),
-                                                        TimeUnit.MILLISECONDS.toSeconds(diff12) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff12)));
 
                             String wh1 = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(diff12),
                                     TimeUnit.MILLISECONDS.toMinutes(diff12) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff12)),
@@ -3922,16 +3912,6 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //            empMap.put("Deduction Amount", "" + df.format(deductionAmount));
             empMap.put("Tot.Dedn", "" + df.format((int) Math.round(deductionAmount)));
             empMap.put("Net Pay", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
-            
-            try {
-
-                empMap.put("Excess/Short", "" + df.format((int) Math.round(employeeSalaryProcess1.getExcessShort())));
-                empMap.put("Actual NetPayable", "" + df.format((int) Math.round(employeeSalaryProcess1.getNetPayable())));
-
-            } catch (Exception e) {
-                empMap.put("Excess/Short", "" + 0);
-                empMap.put("Actual NetPayable", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
-            }
 //            empMap.put("Net Amount", "" + df.format(additionalAmount - deductionAmount));
 //            List ctcList = employeeCtcDetailService.fetchctcData(employeeSalaryProcess1.getEmployeeMaster().getId());
 //            for (Object dedSalaryList2 : ctcList) {

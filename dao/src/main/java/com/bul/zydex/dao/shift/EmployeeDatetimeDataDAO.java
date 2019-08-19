@@ -69,7 +69,7 @@ public interface EmployeeDatetimeDataDAO<T> extends GenericsDAO<T> {
 
     public List<?> findDuplicateRecords(Integer id, String punchListDate);
 
-    public List<?> readPuchDataDateWiseAll1(String date, int empId);
+//    public List<?> readPuchDataDateWiseAll1(String date, int empId);
     
 
 }

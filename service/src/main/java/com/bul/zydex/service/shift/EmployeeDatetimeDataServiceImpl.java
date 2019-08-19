@@ -156,4 +156,9 @@ public class EmployeeDatetimeDataServiceImpl<T> extends GenericsServiceImpl<T> i
     public List<?> findDuplicateRecords(Integer id, String punchListDate) {
         return employeeDatetimeDataDAO.findDuplicateRecords(id, punchListDate);
     }
+
+    @Override
+    public List<?> readPuchDataDateWiseAll1(String date, int empId) {
+      return employeeDatetimeDataDAO.readPuchDataDateWiseAll1(date, empId);
+    }
 }

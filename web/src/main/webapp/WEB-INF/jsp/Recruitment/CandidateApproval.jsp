@@ -799,12 +799,12 @@
                                                         test="${candidateJobApplication.status eq 6}">
                                                         <button type="button" class="btn btn-default" onclick="sendToF2F(${candidateJobApplication.id},${candidateApplyJob.id});">F To F Interview</button>
                                                     </c:if>    
-                                                    <%--<c:if test="${candidateJobApplication.status eq 2}">--%>
-                                                    <!--<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>-->
-                                                    <%--</c:if>--%>
-                                                    <%--<c:if test="${candidateJobApplication.status eq 4}">--%>
-                                                        <!--<button type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent"  >Check Assessment</button>-->
-                                                    <%--</c:if>--%>
+                                                    <c:if test="${candidateJobApplication.status eq 2}">
+                                                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalOnline">Online Assessment</button>
+                                                    </c:if>
+                                                    <c:if test="${candidateJobApplication.status eq 4}">
+                                                        <button type="button" class="btn btn-default" id="btnType1" onclick="goToAns(${candidateJobApplication.id},${candidateApplyJob.id})" name="btnType" value="AssessMent"  >Check Assessment</button>
+                                                    </c:if>
                                                 </div>
 
 

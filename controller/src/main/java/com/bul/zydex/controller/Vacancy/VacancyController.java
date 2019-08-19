@@ -958,7 +958,7 @@ public class VacancyController extends VacancyAbstract {
 //        }
 //        return mv;
 //    }
-    public ModelAndView myProfileClick(HttpServletRequest request,
+   public ModelAndView myProfileClick(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
         ModelAndView mv = new ModelAndView();

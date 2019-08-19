@@ -12,7 +12,9 @@ import com.bul.zydex.model.EmployeeCtcDetailSalary;
 import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
+import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.EmployeePolicyDetail;
 import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.EmployeeSubType;
@@ -41,6 +43,7 @@ import com.bul.zydex.util.DownloadFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -61,6 +64,7 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.time.DateUtils;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -230,8 +234,13 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
     private void checkAdditionDaywise(EmployeeSalaryProcess employeeSalaryProcess) throws Exception {
 
         EmployeeMaster employeeMaster = new EmployeeMaster();
+        EmployeeExcelRecord employeeExcelRecord = new EmployeeExcelRecord();
         EmployeeAdditionalSalary employeeAdditionalSalary = new EmployeeAdditionalSalary();
         employeeMaster = employeeMasterService.readById(employeeSalaryProcess.getEmployeeMaster().getId());
+        List excelEmployeeFetch = employeeExcelRecordService.readByEmployeExcelFetch(employeeSalaryProcess);
+        if (!excelEmployeeFetch.isEmpty()) {
+            employeeExcelRecord = (EmployeeExcelRecord) excelEmployeeFetch.get(0);
+        }
 
         List<?> list = employeeTypeWiseSalaryService.readForAdditionalAmount(employeeMaster.getEmployeeTypeMaster().getId(),
                 employeeMaster.getEmployeeSubType().getId());
@@ -298,14 +307,101 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                 Object[] o = (Object[]) PolicyAmountList1;
                 String policyName = (String) o[1];
                 Double PolicyAmount = (Double) o[0];
-                Double employeeLwp = employeeSalaryProcess.getEmployeeLwp();
-                Calendar cal = Calendar.getInstance();
-                cal.set(Calendar.MONTH, (Integer.parseInt(employeeSalaryProcess.getMonth()) - 1));
-                int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-                double PolicyAmount1 = PolicyAmount - (PolicyAmount * employeeLwp / days);
+
+                double allowanceTotal = 0;
+                List<?> PolicyAmountList5 = employeePolicyDetailService.readPolicyTotal(employeeSalaryProcess.getEmployeeMaster().getId());
+                if (!PolicyAmountList5.isEmpty()) {
+                    allowanceTotal = (Double) PolicyAmountList5.get(0);
+                    allowanceTotal += Double.parseDouble(employeeMaster.getBasicSalary());
+
+                }
+                Double HoursMadatory = Double.parseDouble(employeeMaster.getHoursMadatory());
+                // Working Hours Monthly
+                Double MonthlyWorkingHours = 0.0;
+                MonthlyWorkingHours = employeeExcelRecord.getWorkingDays() * HoursMadatory;
+//                               
+
+                // Working Hours Split
+                String[] parts = employeeExcelRecord.getWorkingours().split(":");
+                int horaHour = Integer.valueOf(parts[0]);
+                int horaMinute = Integer.valueOf(parts[1]);
+//                                String HrConcat = horaHour + "." + horaMinute;
+//                                Double s = Double.parseDouble(HrConcat);
+//                                BigDecimal bigDec = BigDecimal.valueOf(s);
+//                                double round2 = bigDec.setScale(0, BigDecimal.ROUND_CEILING).doubleValue();
+                int totalHR = 0;
+                double allowanceamount = 0;
+//                if (horaHour >= (int) Math.round(MonthlyWorkingHours)) {
+                if (!employeeSalaryProcess.getEmployeeLwp().equals("") || employeeSalaryProcess.getEmployeeLwp() != null) {
+
+                    if (allowanceTotal >= 25000) {
+
+                        allowanceamount = PolicyAmount;
+
+                    } else {
+
+                        double rateperhours = PolicyAmount / 22;
+                        double perhours = rateperhours / HoursMadatory;
+//                        double hoursMinus = MonthlyWorkingHours - horaHour;
+                        double totalamount = employeeSalaryProcess.getEmployeeLwp() * rateperhours;
+                        double totalamount1 = PolicyAmount - totalamount;
+
+                        allowanceamount = totalamount1;
+
+//                   
+//                      
+                    }
+
+//                    if (horaMinute >= 30) {
+//                        totalHR = horaHour + 1;
+//                        allowanceamount = PolicyAmount;
+//
+//                    } else {
+//
+//                        allowanceamount = PolicyAmount;
+//                    }
+                } else {
+                    if (allowanceTotal >= 25000) {
+
+                        allowanceamount = PolicyAmount;
+
+                    } else {
+
+                        allowanceamount = PolicyAmount;
+//                        double rateperhours = PolicyAmount / 22;
+//                        double perhours = rateperhours / HoursMadatory;
+//                        double hoursMinus = MonthlyWorkingHours - horaHour;
+//                        double totalamount = hoursMinus * perhours;
+//                        double totalamount1 = PolicyAmount - totalamount;
+
+//                        allowanceamount = totalamount1;
+//                        double rateperhours = PolicyAmount / 22;
+//                        double perhours = rateperhours / hoursMadatory;
+//                        double hoursMinus = MonthlyWorkingHours - horaHour;
+//                        double totalamount = hoursMinus * perhours;
+//                        double totalamount1 = basicSalary - totalamount;
+//                        basicSalary1 = totalamount1;
+                        // minus total monthhly working hours - actual working hours
+//                        int minusHr = (int) Math.round(MonthlyWorkingHours) - horaHour;
+                        /// count per day working hours in day
+//                        int perdayWorkingDay = (int) (minusHr / 8.5);
+                        // per day Salary 
+//                        int perDaySalary = (int) (PolicyAmount / employeeExcelRecord.getPresentDays());
+                        // per day salary cut 
+//                        int perminusSalary = perDaySalary * perdayWorkingDay;
+//                        allowanceamount = PolicyAmount - perminusSalary;
+                    }
+
+                }
+
+//                Double employeeLwp = employeeSalaryProcess.getEmployeeLwp();
+//                Calendar cal = Calendar.getInstance();
+//                cal.set(Calendar.MONTH, (Integer.parseInt(employeeSalaryProcess.getMonth()) - 1));
+//                int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+//                double PolicyAmount1 = PolicyAmount - (PolicyAmount * employeeLwp / days);
                 employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
                 employeeAdditionalSalary.setPayrollSalaryType(policyName);
-                employeeAdditionalSalary.setAdditionalAmount(PolicyAmount1);
+                employeeAdditionalSalary.setAdditionalAmount(allowanceamount);
                 employeeAdditionalSalaryService.create(employeeAdditionalSalary);
 
             }
@@ -663,7 +759,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
                             } else {
                                 double lwp = employeeSalaryProcess.getEmployeeLwp();
-                                double basicSalaryMAster = Double.parseDouble(employeeMaster.getBasicSalary());
+//                                double basicSalaryMAster = Double.parseDouble(employeeMaster.getBasicSalary());
+                                double basicSalaryMAster = employeeSalaryProcess.getEmployeeBasicSalary();
 
                                 minitaxpf = basicSalaryMAster * lwp / days2;
                                 minitaxpf = basicSalaryMAster - minitaxpf;
@@ -1839,7 +1936,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         DecimalFormat df = new DecimalFormat("####0.00");
 
         List<String> headerList = new ArrayList<String>();
-        headerList.add("Emp Company Code");
+//        headerList.add("Emp Company Code");
         headerList.add("Emp Id");
         headerList.add("Emp Name");
         headerList.add("P.Day");
@@ -1876,6 +1973,8 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
         headerList.add("Tot.Dedn");
         headerList.add("Net Pay");
+        headerList.add("Excess/Short");
+        headerList.add("Actual NetPayable");
 //        List<?> list6 = ctcAllowanceService.read();
 //        CtcAllowance ctcAllowance = new CtcAllowance();
 ////        Map<Integer, String> leaveTypemap = new HashMap();
@@ -1897,7 +1996,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeSalaryProcess1.getEmployeeMaster().getId());
             List<?> list = employeeExcelRecordService.readByEmployeExcelReportSearch(employeeSalaryProcess1);
 //            List tempList = (List) list.get(0);
-            empMap.put("Emp Company Code", "" + employeeMaster1.getEmployeeLocation());
+//            empMap.put("Emp Company Code", "" + employeeMaster1.getEmployeeLocation());
             empMap.put("Emp Id", "" + employeeMaster1.getEmployeeId());
             empMap.put("Emp Name", employeeMaster1.getEmployeeName());
             empMap.put("P.Day", "" + list.get(0));
@@ -1929,6 +2028,17 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //            empMap.put("Deduction Amount", "" + df.format(deductionAmount));
             empMap.put("Tot.Dedn", "" + df.format((int) Math.round(deductionAmount)));
             empMap.put("Net Pay", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
+
+            try {
+
+                empMap.put("Excess/Short", "" + df.format((int) Math.round(employeeSalaryProcess1.getExcessShort())));
+                empMap.put("Actual NetPayable", "" + df.format((int) Math.round(employeeSalaryProcess1.getNetPayable())));
+
+            } catch (Exception e) {
+                empMap.put("Excess/Short", "" + 0);
+                empMap.put("Actual NetPayable", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
+            }
+
 //            empMap.put("Net Amount", "" + df.format(additionalAmount - deductionAmount));
 //            List ctcList = employeeCtcDetailService.fetchctcData(employeeSalaryProcess1.getEmployeeMaster().getId());
 //            for (Object dedSalaryList2 : ctcList) {
@@ -2262,8 +2372,12 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         String tdsexcel = "";
         String incentiveExcel = "";
         String bonusExcel = "";
+        String workinghours = "";
         String penaltyhours = "";
         String unpaidOT = "";
+        String perdayHours = "";
+        String actualworkingHours = "";
+        String excessShort = "";
 //        float cLeave = 0;
 //        float sLeave = 0;
 //        float pLeave = 0;
@@ -2321,22 +2435,26 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             workingdays = "" + (null == row.getCell((short) 2) ? "" : row.getCell((short) 2));
                             woff = "" + (null == row.getCell((short) 3) ? "" : row.getCell((short) 3));
                             presentdays = "" + (null == row.getCell((short) 4) ? "" : row.getCell((short) 4));
-                            casualLeave = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 5));
+//                            casualLeave = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 5));
 //                            sickLeave = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 5));
-                            privilegeLeave = "" + (null == row.getCell((short) 6) ? "" : row.getCell((short) 6));
-                            sickLeave = "" + (null == row.getCell((short) 7) ? "" : row.getCell((short) 7));
-                            paternityLeave = "" + (null == row.getCell((short) 8) ? "" : row.getCell((short) 8));
-                            absent = "" + (null == row.getCell((short) 9) ? "" : row.getCell((short) 9));
-                            lwp = "" + (null == row.getCell((short) 10) ? "" : row.getCell((short) 10));
-                            
-                            penaltyhours = "" + (null == row.getCell((short) 11) ? "" : row.getCell((short) 11));
-                            OT = "" + (null == row.getCell((short) 12) ? "" : row.getCell((short) 12));
-                            unpaidOT = "" + (null == row.getCell((short) 13) ? "" : row.getCell((short) 13));
-                            
-                            otherDeduction = "" + (null == row.getCell((short) 14) ? "" : row.getCell((short) 14));
-                            tdsexcel = "" + (null == row.getCell((short) 15) ? "" : row.getCell((short) 15));
-                            incentiveExcel = "" + (null == row.getCell((short) 16) ? "" : row.getCell((short) 16));
-                            bonusExcel = "" + (null == row.getCell((short) 17) ? "" : row.getCell((short) 17));
+                            privilegeLeave = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 5));
+//                            sickLeave = "" + (null == row.getCell((short) 7) ? "" : row.getCell((short) 7));
+//                            paternityLeave = "" + (null == row.getCell((short) 8) ? "" : row.getCell((short) 8));
+                            absent = "" + (null == row.getCell((short) 6) ? "" : row.getCell((short) 6));
+                            lwp = "" + (null == row.getCell((short) 7) ? "" : row.getCell((short) 7));
+
+                            penaltyhours = "" + (null == row.getCell((short) 8) ? "" : row.getCell((short) 8));
+                            OT = "" + (null == row.getCell((short) 9) ? "" : row.getCell((short) 9));
+                            unpaidOT = "" + (null == row.getCell((short) 10) ? "" : row.getCell((short) 10));
+
+                            otherDeduction = "" + (null == row.getCell((short) 11) ? "" : row.getCell((short) 11));
+                            tdsexcel = "" + (null == row.getCell((short) 12) ? "" : row.getCell((short) 12));
+                            incentiveExcel = "" + (null == row.getCell((short) 13) ? "" : row.getCell((short) 13));
+                            bonusExcel = "" + (null == row.getCell((short) 14) ? "" : row.getCell((short) 14));
+                            workinghours = "" + (null == row.getCell((short) 15) ? "" : row.getCell((short) 15));
+                            perdayHours = "" + (null == row.getCell((short) 16) ? "" : row.getCell((short) 16));
+                            actualworkingHours = "" + (null == row.getCell((short) 17) ? "" : row.getCell((short) 17));
+                            excessShort = "" + (null == row.getCell((short) 18) ? "" : row.getCell((short) 18));
 
                             float cLeave = 0;
                             float sLeave = 0;
@@ -2348,12 +2466,18 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             double otherDeduction1 = 0;
                             float workingdays1 = 0;
                             float presentdays1 = 0;
+                            double penaltyhours1 = 0;
                             int count = 0;
                             double hours = 8.5;
                             float woff1 = 0;
                             double tdsexcel1 = 0;
                             double incentiveExcel1 = 0;
                             double bonusExcel1 = 0;
+                            double perdayHours1 = 0;
+                            double actualworkingHours1 = 0;
+                            double excessShort1 = 0;
+
+                            String workinghours1 = "";
                             if (!workingdays.equals("")) {
                                 workingdays1 = Float.parseFloat(workingdays);
                             }
@@ -2363,23 +2487,26 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             if (!presentdays.equals("")) {
                                 presentdays1 = Float.parseFloat(presentdays);
                             }
-                            if (!casualLeave.equals("")) {
-                                cLeave = Float.parseFloat(casualLeave);
-                            }
+//                            if (!casualLeave.equals("")) {
+//                                cLeave = Float.parseFloat(casualLeave);
+//                            }
                             if (!privilegeLeave.equals("")) {
                                 pLeave = Float.parseFloat(privilegeLeave);
                             }
-                            if (!sickLeave.equals("")) {
-                                sLeave = Float.parseFloat(sickLeave);
-                            }
-                            if (!paternityLeave.equals("")) {
-                                plLeave = Float.parseFloat(paternityLeave);
-                            }
+//                            if (!sickLeave.equals("")) {
+//                                sLeave = Float.parseFloat(sickLeave);
+//                            }
+//                            if (!paternityLeave.equals("")) {
+//                                plLeave = Float.parseFloat(paternityLeave);
+//                            }
                             if (!absent.equals("")) {
                                 absent1 = Float.parseFloat(absent);
                             }
                             if (!lwp.equals("")) {
                                 lwp1 = Double.parseDouble(lwp);
+                            }
+                            if (!penaltyhours.equals("")) {
+                                penaltyhours1 = Double.parseDouble(penaltyhours);
                             }
                             if (!OT.equals("")) {
                                 OT1 = Double.parseDouble(OT);
@@ -2396,6 +2523,18 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             if (!bonusExcel.equals("")) {
                                 bonusExcel1 = Double.parseDouble(bonusExcel);
                             }
+                            if (!workinghours.equals("")) {
+                                workinghours1 = workinghours;
+                            }
+                            if (!perdayHours.equals("")) {
+                                perdayHours1 = Double.parseDouble(perdayHours);
+                            }
+                            if (!actualworkingHours.equals("")) {
+                                actualworkingHours1 = Double.parseDouble(actualworkingHours);
+                            }
+                            if (!excessShort.equals("")) {
+                                excessShort1 = Double.parseDouble(excessShort);
+                            }
                             EmployeeMaster employeeMaster = new EmployeeMaster();
 //                            int empNo = Integer.parseInt(employeeNo);
 //                            int empNo = Integer.parseInt(employeeNo);
@@ -2405,30 +2544,111 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 employeeMaster = (EmployeeMaster) list.get(0);
                                 int empId = employeeMaster.getId();
                                 EmployeeMaster employeeMaster1 = employeeMasterService.readById(empId);
+                                Double hoursMadatory = Double.parseDouble(employeeMaster1.getHoursMadatory());
                                 double basicSalary = Double.parseDouble(employeeMaster1.getBasicSalary());
-//                                double conveyAmount = Double.parseDouble(employeeMaster1.getConveysAmount());
-//                                double tdsAmount = Double.parseDouble(employeeMaster1.getTdsAmount());
+                                SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+                                double allowanceTotal = 0;
+                                List<?> PolicyAmountList = employeePolicyDetailService.readPolicyTotal(employeeMaster1.getId());
+                                if (!PolicyAmountList.isEmpty()) {
+                                    allowanceTotal = (Double) PolicyAmountList.get(0);
+                                    allowanceTotal += basicSalary;
 
-                                double leaveTxt = 0;
-                                Calendar cal = Calendar.getInstance();
-                                cal.set(Calendar.MONTH, (Integer.parseInt(month1) - 1));
-                                int days = 30;
-//                                int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-//add lwp + absent 
-                                Double BothLwpABsent = lwp1 + absent1;
+                                }
+                                double Overtimepay = 0;
 
-//                                int days = 30;
-                                double basicSalary1 = basicSalary - (basicSalary * lwp1 / days);
-//                            conveys start
-//                                double conveyAmount1 = 0;
-//                                conveyAmount1 = conveyAmount - (conveyAmount * BothLwpABsent / days);
-//                            conveys end
-//                            OT calculate : 
-                                double OT2 = OT1;
+                                // Working Hours Monthly
+                                Double MonthlyWorkingHours = 0.0;
+                                MonthlyWorkingHours = workingdays1 * hoursMadatory;
+//                               
+
+                                // Working Hours Split
+                                String[] parts = workinghours1.split(":");
+                                int horaHour = Integer.valueOf(parts[0]);
+                                int horaMinute = Integer.valueOf(parts[1]);
+//                                String HrConcat = horaHour + "." + horaMinute;
+//                                Double s = Double.parseDouble(HrConcat);
+//                                BigDecimal bigDec = BigDecimal.valueOf(s);
+//                                double round2 = bigDec.setScale(0, BigDecimal.ROUND_CEILING).doubleValue();
+                                int totalHR = 0;
+                                double basicSalary1 = 0;
+//                                if (horaHour >= (int) Math.round(MonthlyWorkingHours)) {
+                                if (!lwp.equals("")) {
+
+                                    if (allowanceTotal >= 25000) {
+
+                                        basicSalary1 = basicSalary;
+
+                                    } else {
+
+                                        double rateperhours = basicSalary / 22;
+                                        double perhours = rateperhours / hoursMadatory;
+                                        double totalamount = lwp1 * rateperhours;
+//                                        double hoursMinus = MonthlyWorkingHours - horaHour;
+//                                        double totalamount = hoursMinus * perhours;
+                                        double totalamount1 = basicSalary - totalamount;
+                                        basicSalary1 = totalamount1;
+//                                        
+                                    }
+//                                    if (horaMinute >= 30) {
+//                                        totalHR = horaHour + 1;
+//                                        basicSalary1 = basicSalary;
+//
+//                                    } else {
+//
+//                                        basicSalary1 = basicSalary;
+//                                    }
+
+                                } else {
+                                    if (allowanceTotal >= 25000) {
+
+                                        basicSalary1 = basicSalary;
+
+                                    } else {
+                                        basicSalary1 = basicSalary;
+//                                        basicSalary1 = totalamount1;
+
+                                        // minus total monthhly working hours - actual working hours
+//                                        int minusHr = (int) Math.round(MonthlyWorkingHours) - horaHour;
+                                        /// count per day working hours in day
+//                                        int perdayWorkingDay = (int) (minusHr / 8.5);
+                                        // per day Salary 
+//                                        int perDaySalary = (int) (allowanceTotal / presentdays1);
+                                        // per day salary cut 
+//                                        int perminusSalary = perDaySalary * perdayWorkingDay;
+//                                        basicSalary1 = allowanceTotal - perminusSalary;
+                                    }
+
+                                }
+                                EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+                                float plleaveBal = 0;
+                                List<?> empLeaveBalance = employeeLeaveBalanceService.readleavebalance(empId);
+                                if (!empLeaveBalance.isEmpty()) {
+                                    employeeLeaveBalance = (EmployeeLeaveBalance) empLeaveBalance.get(0);
+                                    plleaveBal = employeeLeaveBalance.getNoOfLeaveRemain();
+                                }
+                                if (allowanceTotal >= 25000) {
+
+                                    int minusHr = (int) Math.round(MonthlyWorkingHours) - horaHour;
+
+//                                    if(Math.abs(minusHr) >=OT1){
+//                                    
+//                                    
+//                                    }
+                                    /// count per day working hours in day
+                                    int perdayWorkingDay = (int) (Math.abs(minusHr) / hoursMadatory);
+                                    employeeLeaveBalance.setNoOfLeaveRemain(plleaveBal + perdayWorkingDay);
+                                    employeeLeaveBalanceService.update(employeeLeaveBalance);
+
+                                } else {
+//                                    OT calculate : 
+                                    double OT2 = OT1;
 //                                OT2 = OT1 * 2;
-                                double perdayrate = basicSalary / days; /// 25000/30=833
-                                double perhoursrate = perdayrate / hours; //833/8.5=98.01
-                                double Overtimepay = perhoursrate * OT2; // 
+                                    double perdayrate = allowanceTotal / 22; /// 25000/30=833
+                                    double perhoursrate = perdayrate / hoursMadatory; //833/8.5=98.01
+                                    Overtimepay = perhoursrate * OT2; // 
+
+                                }
+//                           
 
 //                            OT calculate end
                                 employeeSalaryProcess.setEmployeeMaster(employeeMaster1);
@@ -2491,13 +2711,40 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 employeeExcelRecord.setOtAmount(Overtimepay);
                                 employeeExcelRecord.setMonth(month1);
                                 employeeExcelRecord.setPllleave(plLeave);
-                                employeeExcelRecord.setSlleave(sLeave);
+                                employeeExcelRecord.setWorkingours(workinghours1);
+//                                employeeExcelRecord.setSlleave(penaltyhours1);
                                 employeeExcelRecord.setYear(year11);
 
                                 employeeExcelRecordService.create(employeeExcelRecord);
                                 checkAdditionDaywise(employeeSalaryProcess);
-//                             conveys create in Additional Salary
 
+                                if (horaHour >= (int) Math.round(MonthlyWorkingHours)) {
+                                    if (horaMinute >= 30) {
+                                        totalHR = horaHour + 1;
+//                                        basicSalary1 = basicSalary;
+
+                                    } else {
+
+//                                        basicSalary1 = basicSalary;
+                                    }
+
+                                } else {
+                                    if (allowanceTotal >= 25000) {
+                                        // minus total monthhly working hours - actual working hours
+                                        int minusHr = (int) Math.round(MonthlyWorkingHours) - horaHour;
+                                        /// count per day working hours in day
+                                        int perdayWorkingDay = (int) (minusHr / 8.5);
+
+                                        employeeLeaveBalance.setNoOfLeaveRemain(plleaveBal - perdayWorkingDay);
+                                        employeeLeaveBalanceService.update(employeeLeaveBalance);
+
+                                    } else {
+
+                                    }
+
+                                }
+
+//                             conveys create in Additional Salary
 //                                employeeAdditionalSalary.setEmployeeSalaryProcess(employeeSalaryProcess);
 //                                employeeAdditionalSalary.setPayrollSalaryType("Conveyance");
 //                                employeeAdditionalSalary.setAdditionalAmount(conveyAmount1);
@@ -2536,8 +2783,14 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 }
                                 if (otherDeduction1 != 0) {
                                     employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                                    employeeDeductionAmount.setDeductionType("Other Deduction");
+                                    employeeDeductionAmount.setDeductionType("Statutory Deduction");
                                     employeeDeductionAmount.setDeductionAmount(otherDeduction1);
+                                    employeeDeductionAmountService.create(employeeDeductionAmount);
+                                }
+                                if (penaltyhours1 != 0) {
+                                    employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+                                    employeeDeductionAmount.setDeductionType("Penalty");
+                                    employeeDeductionAmount.setDeductionAmount(penaltyhours1);
                                     employeeDeductionAmountService.create(employeeDeductionAmount);
                                 }
 
@@ -2549,6 +2802,24 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                    employeeDeductionAmountService.create(employeeDeductionAmount);
 //                                }
                                 checkDeductionwise(employeeSalaryProcess);
+
+                                if (excessShort1 != 0) {
+                                    double rateperhours = employeeSalaryProcess.getNetPayable() / 22;
+                                    double perhours = rateperhours / hoursMadatory;
+                                    double totalamount = excessShort1 * perhours;
+                                    double totalamount1 = employeeSalaryProcess.getNetPayable() - totalamount;
+
+                                    employeeSalaryProcess.setId(employeeSalaryProcess.getId());
+                                    employeeSalaryProcess.setEmployeeMaster(employeeMaster);
+                                    employeeSalaryProcess.setNetPayable(totalamount1);
+                                    employeeSalaryProcess.setExcessShort(totalamount);
+
+                                    employeeSalaryProcessService.update(employeeSalaryProcess);
+//                                    employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
+//                                    employeeDeductionAmount.setDeductionType("Penalty");
+//                                    employeeDeductionAmount.setDeductionAmount(penaltyhours1);
+//                                    employeeDeductionAmountService.create(employeeDeductionAmount);
+                                }
 
                             }
 
@@ -2624,7 +2895,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
             EmployeeShiftData employeeShiftData = new EmployeeShiftData();
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            
+
             try {
 
                 List allEmpId = new ArrayList();
@@ -2653,11 +2924,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             headerRow1.add("W.Days");
                             headerRow1.add("W.off");
                             headerRow1.add("P.Days");
-                            headerRow1.add("C.L");
+//                            headerRow1.add("C.L");
                             headerRow1.add("P.L");
-                            headerRow1.add("S.L");
-                            headerRow1.add("PAT");
-                            headerRow1.add("Absent");
+//                            headerRow1.add("S.L");
+//                            headerRow1.add("PAT");
+                            headerRow1.add("Public Holiday");
                             headerRow1.add("L.W.P");
                             headerRow1.add("Penalty");
                             headerRow1.add("OT Hrs");
@@ -2666,9 +2937,14 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             headerRow1.add("TDS");
                             headerRow1.add("Incentive");
                             headerRow1.add("Bonus");
-                            headerRow1.add("Night Shift Counts");
-                            headerRow1.add("On Call Requests");
-                            
+//                            headerRow1.add("Night Shift Counts");
+//                            headerRow1.add("On Call Requests");
+
+                            headerRow1.add("Working Hours");
+                            headerRow1.add("Per Day Hours");
+                            headerRow1.add("Actual Working Hours");
+                            headerRow1.add("Excess/Short");
+
                             for (int k1 = 0; k1 < headerRow1.size(); k1++) {
                                 Cell cell = row.createCell(k1);
 
@@ -2678,6 +2954,15 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             }
 //                            rownum++;
                         }
+                        List PrAb = new ArrayList();
+                        List late = new ArrayList();
+                        int presentCount = 0;
+                        int WOCount = 0;
+                        int absent = 0;
+                        int LateCount = 0;
+                        int VeryLateCount = 0;
+                        int totalLateCollection = 0;
+                        int holiday = 0;
                         if (j > 1) {
                             id = Integer.parseInt("" + allEmpId.get(j - 1));
                             employeeShiftData.setId(id);
@@ -2703,6 +2988,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             double incentive = 0;
                             double bonus = 0;
                             double pat = 0;
+                            double ShortHours = 0;
                             int countNightShift = 0;
                             int countLateEntry = 0;
                             int countForPenalty = 0;
@@ -2711,12 +2997,12 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             String totalPaidOverTime = "";
                             long TotalOtTime = 0;
                             long upOtTime = 0;
-
+                            long diff12 = 0;
                             String penaltyhours = "";
                             long totalLateTime = 0;
 //                            Integer otMinuteCounter = 0;
                             String otHourFinal = "";
-                            
+
 //                            int otHoursMinutes1 = 0;
                             for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
 
@@ -2746,226 +3032,316 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                     long totalDayTime1 = 0;
                                     long totalTime = 0;
                                     long shiftdiffMinutes = 0;
-                                    
+
                                     String startTime = "";
                                     String endTime = "";
                                     int d = 1;
                                     int s = 2;
+
+                                    /// New calculation PR/WO/Penality
+                                    String[] userTimeInStr22 = firstHalf.split("`");
+//                                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                    try {
+                                        String[] userTimeInStr12 = userTimeInStr22[1].split("!");
+
+                                        String[] LateHoursStr = firstHalf.split("\\$");
+                                        String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                                        String[] endHoursStr = firstHalf.split("%");
+                                        String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                                        String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                                        String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
+                                        PrAb.add("PR");
+                                        presentCount++;
+                                        String[] userTimeOutStr111 = firstHalf.split("!");
+                                        String[] userTimeOutStr11 = userTimeOutStr111[1].split("@");
+                                        SimpleDateFormat sdfTimes = new SimpleDateFormat("HH:mm");
+                                        Date endHours1 = sdfTimes.parse(userTimeInStr12[0]);
+//                                        Date StartHours = sdfTimes.parse("08:00:00");
+                                        Date StartHours = sdfTimes.parse(firstStartHoursStr[1]);
+                                        long diff111 = endHours1.getTime() - StartHours.getTime();
+                                        long diffMinutes1 = diff111 / (60 * 1000);
+                                        long diff1111 = 0;
+                                        String experienceYearOnVnc = empMaster.getDateOfJoining();
+                                        SimpleDateFormat dates = new SimpleDateFormat("dd/MM/yyyy");
+                                        Date joinDate = dates.parse(experienceYearOnVnc);
+                                        Date cDate = new Date();
+
+                                        long diffa = cDate.getTime() - joinDate.getTime();
+
+                                        int diffInYears = (int) (diffa / (60 * 60 * 1000 * 24 * 30.41666666 * 12));
+
+//                                        String yearOnVnc = experienceYearOnVnc.substring(6, 10);
+//                                        Calendar cal11 = Calendar.getInstance();
+//                                        int year2 = cal11.get(cal11.YEAR);
+//                                        int diffYear = year2 - Integer.parseInt(yearOnVnc);
+                                        if (diffInYears >= 3) {
+                                            if (diffMinutes1 >= 60) {
+                                                late.add("Very Late");
+                                                VeryLateCount++;
+                                                if (VeryLateCount > 1) {
+                                                    VeryLateCount++;
+                                                    totalLateCollection += 100;
+                                                }
+                                            } else if (diffMinutes1 >= 30 && diffMinutes1 < 60) {
+                                                late.add("Late");
+                                                LateCount++;
+                                                if (LateCount > 5) {
+                                                    LateCount++;
+                                                    totalLateCollection += 100;
+                                                }
+                                            } else {
+                                                late.add("-");
+                                            }
+                                        } else {
+                                            if (diffMinutes1 >= 15 && diffMinutes1 < 60) {
+                                                late.add("Late");
+                                                LateCount++;
+                                                if (LateCount > 5) {
+                                                    LateCount++;
+                                                    totalLateCollection += 100;
+                                                }
+                                            } else if (diffMinutes1 >= 60) {
+                                                late.add("Very Late");
+                                                VeryLateCount++;
+                                                if (VeryLateCount > 1) {
+                                                    VeryLateCount++;
+                                                    totalLateCollection += 100;
+                                                }
+                                            } else {
+                                                late.add("-");
+                                            }
+                                        }
+
+                                    } catch (Exception e) {
+
+                                        PrAb.add(firstHalf);
+                                        late.add("WO");
+                                        if (firstHalf.equals("WO")) {
+
+                                            WOCount++;
+                                        }
+                                        if (firstHalf.equals("AB")) {
+
+                                            absent++;
+                                        }
+                                        if (firstHalf.contains("?") && firstHalf.contains("ho")) {
+                                            holiday++;
+
+                                        }
+
+                                    }
+
+                                    request.setAttribute("PrAb", PrAb);
+                                    request.setAttribute("late", late);
+                                    request.setAttribute("presentCount", presentCount);
+                                    request.setAttribute("WOCount", WOCount);
+                                    request.setAttribute("totalLateCollection", totalLateCollection);
+
                                     if (!firstHalf.equals("null") && firstHalf != null) {
-                                        
+
                                         List alllistPunch = new ArrayList();
-                                    if(firstHalf.contains("Night")){
-                                        Calendar c2 = Calendar.getInstance();
-                                        Date datenex=new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(startdate));  
-                                        c2.setTime(datenex);
-                                        c2.add(Calendar.DAY_OF_YEAR, 1); 
-                                        Date tomorrow = c2.getTime();
-                                        String pattern = "dd/MM/YYYY";
-                                        SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
-                                        String nextdate = simpleDateFormatpp.format(tomorrow);
-                                        alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(startdate,nextdate, id);
-                                    }
-                                    else{
-                                        alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise(startdate, id);
-                                    }
+                                        if (firstHalf.contains("Night")) {
+                                            Calendar c2 = Calendar.getInstance();
+                                            Date datenex = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(startdate));
+                                            c2.setTime(datenex);
+                                            c2.add(Calendar.DAY_OF_YEAR, 1);
+                                            Date tomorrow = c2.getTime();
+                                            String pattern = "dd/MM/YYYY";
+                                            SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                                            String nextdate = simpleDateFormatpp.format(tomorrow);
+                                            alllistPunch = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(startdate, nextdate, id);
+                                        } else {
+                                            alllistPunch = employeeDatetimeDataService.readAllPuchDataDateWise(startdate, id);
+                                        }
                                         int listLen = alllistPunch.size();
                                         boolean isMisPunch;
-                                        if(listLen % 2 == 0)
+                                        if (listLen % 2 == 0) {
                                             isMisPunch = false;
-                                        else
+                                        } else {
                                             isMisPunch = true;
+                                        }
 
-                                            boolean inBool = true;
-                                            boolean outBool = false;
-                                            String inTime1 = null;
-                                            String outTime1= null;
-            //                                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");  
+                                        boolean inBool = true;
+                                        boolean outBool = false;
+                                        String inTime1 = null;
+                                        String outTime1 = null;
+                                        //                                SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");  
 
-                                            Date d1 = null;
-                                            Date d2 = null;
-                                            String []inTime1val;
-                                            String []outTime1val;
-                                            String outTime1val1;
-                                            String inTime1val1;
-                                            LocalDateTime dateTime1 = null;
-                                            LocalDateTime dateTime2 = null;
-                                            long timecount = 0;
-                                            int cnt =0;
-                                            // OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
-                                            if(firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
-                                                    && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay"))        
-                                            {
-                                                String[] userTimeInStr = firstHalf.split("`");
-                                                String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                                                String[] userTimeOutStr = firstHalf.split("!");
-                                                String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                                                SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
-                                                Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
-                                                Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
-                                                long diffInOut = userTimeOut.getTime() - userTimeIn.getTime();
-                                                if(userTimeInStr[0].trim().equals("0.5") && (timecount < 120)){
-                                                    TotalOtTime = +diffInOut;
-                                                }
+                                        Date d1 = null;
+                                        Date d2 = null;
+                                        String[] inTime1val;
+                                        String[] outTime1val;
+                                        String outTime1val1;
+                                        String inTime1val1;
+                                        LocalDateTime dateTime1 = null;
+                                        LocalDateTime dateTime2 = null;
+                                        long timecount = 0;
+                                        int cnt = 0;
+                                        // OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
+                                        if ((firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
+                                                && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay")) && (!firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                                && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay"))) {
+                                            String[] userTimeInStr = firstHalf.split("`");
+                                            String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                            String[] userTimeOutStr = firstHalf.split("!");
+                                            String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                            SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+                                            Date userTimeIn = sdf2.parse(userTimeInStr1[0]);
+                                            Date userTimeOut = sdf2.parse(userTimeOutStr1[0]);
+                                            long diffInOut = userTimeOut.getTime() - userTimeIn.getTime();
+                                            if (userTimeInStr[0].trim().equals("0.5") && (timecount < 120)) {
+                                                TotalOtTime = +diffInOut;
                                             }
-                                            // OT when one half is leave and employee worked for less than 02:00 hours(Ends here)
+                                        }
+                                        // OT when one half is leave and employee worked for less than 02:00 hours(Ends here)
                                         for (Object o : alllistPunch) {
                                             EmployeeDatetimeData employeeDatetimeData = (EmployeeDatetimeData) o;
                                             cnt++;
-                                            if(isMisPunch && (listLen == cnt)){
+                                            if (isMisPunch && (listLen == cnt)) {
                                                 break;
-                                            }else if(inBool){
-                                                inTime1 = employeeDatetimeData.getDateTime();                                    
+                                            } else if (inBool) {
+                                                inTime1 = employeeDatetimeData.getDateTime();
                                                 inTime1val = inTime1.split(" ");
                                                 inTime1val1 = inTime1val[1];
                                                 try {
-                                                     Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1); 
-                                                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                                     String strDate = dateFormat.format(datesif); 
+                                                    Date datesif = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(inTime1);
+                                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                                    String strDate = dateFormat.format(datesif);
                                                     DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                                    dateTime1= LocalDateTime.parse(strDate, formatter1);
+                                                    dateTime1 = LocalDateTime.parse(strDate, formatter1);
                                                 } catch (Exception e) {
                                                     e.printStackTrace();
-                                                }    
+                                                }
                                                 inBool = false;
                                                 outBool = true;
-                                            } else if(outBool){
+                                            } else if (outBool) {
                                                 outTime1 = employeeDatetimeData.getDateTime();
                                                 outTime1val = outTime1.split(" ");
                                                 outTime1val1 = outTime1val[1];
                                                 inBool = true;
                                                 outBool = false;
-                                                 try {
-                                                     Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1); 
-                                                     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
-                                                     String strDate = dateFormat.format(datesiff); 
-                                                     DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-                                                     dateTime2= LocalDateTime.parse(strDate, formatter1);
+                                                try {
+                                                    Date datesiff = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(outTime1);
+                                                    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                                    String strDate = dateFormat.format(datesiff);
+                                                    DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                                                    dateTime2 = LocalDateTime.parse(strDate, formatter1);
 
                                                 } catch (Exception e) {
                                                     e.printStackTrace();
-                                                }    
+                                                }
                                                 long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
                                                 long diffMinutes = diffInMilli / (60 * 1000);
                                                 timecount += diffMinutes;
                                             }
                                         }
                                         if (firstHalf.contains("General") || firstHalf.contains("First") || firstHalf.contains("Second") || firstHalf.contains("Night") || firstHalf.contains("General1") || firstHalf.contains("Evening")) {
-                                            if(firstHalf.contains("Night")){
-                                               countNightShift ++; 
-                                               if(timecount >= 450){
+                                            if (firstHalf.contains("Night")) {
+                                                countNightShift++;
+                                                if (timecount >= 450) {
                                                     prcounter = prcounter + 1;
-                                               }else if (timecount >= 210){
+                                                } else if (timecount >= 210) {
                                                     prcounter = prcounter + 0.5;
                                                 }
-                                            }else{
-                                                if(timecount >= 510){
-                                                 prcounter = prcounter + 1;
-                                                }else if(timecount >= 270){
-                                                     prcounter = prcounter + 0.5;
-                                                }  
+                                            } else {
+                                                if (timecount >= 510) {
+                                                    prcounter = prcounter + 1;
+                                                } else if (timecount >= 270) {
+                                                    prcounter = prcounter + 0.5;
+                                                }
                                             }
-                                            
-                                            
-                                            
-                                            
-                                            
-                                            
 
                                         } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.contains("AB") && !firstHalf.contains("?")
                                                 && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                                 && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
-                                                String[] userTimeInStr = firstHalf.split("`");
-                                                String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                                                String[] userTimeOutStr = firstHalf.split("!");
-                                                String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                                                String[] leave = firstHalf.split("@");
-                                                String[] leave1 = leave[1].split("#");
+                                            String[] userTimeInStr = firstHalf.split("`");
+                                            String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                            String[] userTimeOutStr = firstHalf.split("!");
+                                            String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                            String[] leave = firstHalf.split("@");
+                                            String[] leave1 = leave[1].split("#");
+                                            String[] LateHoursStr = firstHalf.split("\\$");
+                                            String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                                            String[] endHoursStr = firstHalf.split("%");
+                                            String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                                            String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                                            Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
+                                            Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                            Date endHours = sdf1.parse(endHoursStr1[0]);
+                                            Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
+                                            Calendar cal = Calendar.getInstance();
+                                            Calendar cal1 = Calendar.getInstance();
+                                            cal.setTime(firstStartHours);
+                                            cal1.setTime(firstStartHours);
+                                            cal1.add(Calendar.MINUTE, -earlyMinute);
+                                            cal.add(Calendar.MINUTE, lateMinute);
+                                            String newTime = sdf1.format(cal.getTime());
+                                            Date flexibleEndTime = sdf1.parse(newTime);
+                                            Date LateHours = sdf1.parse(LateHoursStr1[0]);
+                                            String newTime1 = sdf1.format(cal1.getTime());
+                                            Date flexibleStartTime = sdf1.parse(newTime1);
+                                            long diff = endHours.getTime() - firstStartHours.getTime();
+                                            long diffMinutes = diff / (60 * 1000);
+                                            long diff1 = 0;
+
+                                            if (userTimeInStr[0].contains("0.5")) {
+                                                //                                        firstHalfList.add("Half AB");
+                                                abcounter = abcounter + 0.5;
+                                                prcounter = prcounter + 0.5;
+                                            } else if (userTimeInStr[0].contains("0")) {
+                                                //                                        firstHalfList.add("AB");
+                                                abcounter = abcounter + 1;
+                                            } else if (firstHalf.contains("AR") && userTimeInStr[0].contains("0.5")) {
+                                                //                                        firstHalfList.add("Half AR/P");
+                                                ar = ar + 0.5;
+                                                prcounter = prcounter + 0.5;
+                                            }
+
+                                        } else if (firstHalf.equals("WO")) {
+                                            //                                    firstHalfList.add("WO");
+                                            wo = wo + 1;
+                                        } else if (firstHalf.contains("AR")) {
+                                            //                                    firstHalfList.add("AR/P");
+                                            ar = ar + 1;
+                                        } else if (firstHalf.contains("AB")) {
+
+                                            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+                                            employeeShiftData1.setEmployeeMaster(empMaster);
+                                            List<?> employeeshift = employeeShiftDataService.readByEmployeeIdAndDate(employeeShiftData1, startdate);
+                                            if (employeeshift.size() > 0) {
+                                                EmployeeShiftData employeeShiftData2 = (EmployeeShiftData) employeeshift.get(0);
+                                                int sid = employeeShiftData2.getShiftMaster().getId();
+                                                SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
+                                                String empintime = employeeShiftData2.getInDateTime();
+                                                String[] empintime1 = empintime.split(" ");
+                                                String empouttime = employeeShiftData2.getOutDateTime();
+                                                String[] empouttime1 = empouttime.split(" ");
                                                 String[] LateHoursStr = firstHalf.split("\\$");
                                                 String[] LateHoursStr1 = LateHoursStr[1].split("%");
                                                 String[] endHoursStr = firstHalf.split("%");
                                                 String[] endHoursStr1 = endHoursStr[1].split("\\^");
                                                 String[] firstStartHoursStr = endHoursStr[1].split("\\+");
-                                                Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
-                                                Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
-                                                Date endHours = sdf1.parse(endHoursStr1[0]);
-                                                Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
-                                                Calendar cal = Calendar.getInstance();
-                                                Calendar cal1 = Calendar.getInstance();
-                                                cal.setTime(firstStartHours);
-                                                cal1.setTime(firstStartHours);
-                                                cal1.add(Calendar.MINUTE, -earlyMinute);
-                                                cal.add(Calendar.MINUTE, lateMinute);
-                                                String newTime = sdf1.format(cal.getTime());
-                                                Date flexibleEndTime = sdf1.parse(newTime);
-                                                Date LateHours = sdf1.parse(LateHoursStr1[0]);
-                                                String newTime1 = sdf1.format(cal1.getTime());
-                                                Date flexibleStartTime = sdf1.parse(newTime1);
-                                                long diff = endHours.getTime() - firstStartHours.getTime();
-                                                long diffMinutes = diff / (60 * 1000);
-                                                long diff1 = 0;
+                                                String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
+                                                Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
+                                                Date secondEndHours = sdf2.parse(secondEndHoursStr[1]);
+                                                Date empinTime = sdf1.parse(empintime1[1]);
+                                                Date empendTime = sdf1.parse(empouttime1[1]);
+                                                ShiftMaster shiftMaster = shiftMasterService.readById(sid);
 
-                                                if (userTimeInStr[0].contains("0.5")) {
-    //                                        firstHalfList.add("Half AB");
-                                                    abcounter = abcounter + 0.5;
-                                                    prcounter = prcounter + 0.5;
-                                                } else if (userTimeInStr[0].contains("0")) {
-    //                                        firstHalfList.add("AB");
-                                                    abcounter = abcounter + 1;
-                                                } else if (firstHalf.contains("AR") && userTimeInStr[0].contains("0.5")) {
-    //                                        firstHalfList.add("Half AR/P");
-                                                    ar = ar + 0.5;
-                                                    prcounter = prcounter + 0.5;
+                                                int shiftID = employeeShiftData2.getShiftMaster().getId();
+                                                if (shiftID == 5) {
+                                                    countNightShift++;
                                                 }
+                                                if (shiftMaster != null) {
+                                                    Date startHour = sdf1.parse(shiftMaster.getStartTime());
+                                                    Date endHour = sdf1.parse(shiftMaster.getEndTime());
+                                                    Date firstLateHours = sdf1.parse(shiftMaster.getLateHours());
 
-                                            } else if (firstHalf.equals("WO")) {
-    //                                    firstHalfList.add("WO");
-                                                wo = wo + 1;
-                                            } else if (firstHalf.contains("AR")) {
-    //                                    firstHalfList.add("AR/P");
-                                                ar = ar + 1;
-                                            } else if (firstHalf.contains("AB")) {
+                                                    if (alllistPunch.size() >= 2 && empinTime.after(firstLateHours)) {
+                                                        long diffUF = empinTime.getTime() - firstStartHours.getTime();
+                                                        if (diffUF <= 3600000) {
+                                                            if (countLateEntry > 4) {
 
-                                                 EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
-                                                employeeShiftData1.setEmployeeMaster(empMaster);
-                                                List<?> employeeshift = employeeShiftDataService.readByEmployeeIdAndDate(employeeShiftData1,startdate);
-                                                if(employeeshift.size() > 0){
-                                                    EmployeeShiftData employeeShiftData2  = (EmployeeShiftData) employeeshift.get(0);
-                                                    int sid = employeeShiftData2.getShiftMaster().getId();
-                                                    SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
-                                                    String empintime = employeeShiftData2.getInDateTime();
-                                                    String[] empintime1 = empintime.split(" ");
-                                                    String empouttime = employeeShiftData2.getOutDateTime();
-                                                    String[] empouttime1 = empouttime.split(" ");
-                                                    String[] LateHoursStr = firstHalf.split("\\$");
-                                                    String[] LateHoursStr1 = LateHoursStr[1].split("%");
-                                                    String[] endHoursStr = firstHalf.split("%");
-                                                    String[] endHoursStr1 = endHoursStr[1].split("\\^");
-                                                    String[] firstStartHoursStr = endHoursStr[1].split("\\+");
-                                                    String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
-                                                    Date firstStartHours = sdf2.parse(firstStartHoursStr[1]);
-                                                    Date secondEndHours = sdf2.parse(secondEndHoursStr[1]);
-                                                    Date empinTime = sdf1.parse(empintime1[1]);
-                                                    Date empendTime = sdf1.parse(empouttime1[1]);
-                                                    ShiftMaster shiftMaster =  shiftMasterService.readById(sid);
-
-                                                    int shiftID = employeeShiftData2.getShiftMaster().getId();
-                                                    if(shiftID == 5){
-                                                        countNightShift ++;
-                                                    }
-                                                    if(shiftMaster != null){
-                                                        Date startHour = sdf1.parse(shiftMaster.getStartTime());
-                                                        Date endHour = sdf1.parse(shiftMaster.getEndTime());
-                                                        Date firstLateHours = sdf1.parse(shiftMaster.getLateHours());
-
-
-
-                                                if(alllistPunch.size() >=2 && empinTime.after(firstLateHours)){
-                                                    long diffUF = empinTime.getTime() -firstStartHours.getTime();
-                                                    if(diffUF <= 3600000)
-                                                        {
-                                                            if(countLateEntry > 4){
-
-                                                                
 //                                                                    if(firstHalf.contains("Night")){
 //                                                                         if(timecount >= 450){
 //                                                                        abcounter = abcounter + 0.5;
@@ -2979,21 +3355,19 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                                                        abcounter = abcounter + 1;
 //                                                                    }
 //                                                                    }
-
-                                                                    if(empendTime.after(secondEndHours) || empendTime.equals(secondEndHours))
-                                                                    {
-                                                                        abcounter = abcounter + 0.5;
-                                                                        prcounter = prcounter + 0.5;
-                                                                    }else{
-                                                                        abcounter = abcounter + 1;
-                                                                    }
-                //                                                    newList.add("AB");
+                                                                if (empendTime.after(secondEndHours) || empendTime.equals(secondEndHours)) {
+                                                                    abcounter = abcounter + 0.5;
+                                                                    prcounter = prcounter + 0.5;
+                                                                } else {
+                                                                    abcounter = abcounter + 1;
+                                                                }
+                                                                //                                                    newList.add("AB");
 //                                                                    long lateTimeDuff = empinTime.getTime() - startHour.getTime();
 //                                                                    if(diffUF <= 3600000){
-                                                                        totalLateTime += 100;
-                                                                        countLateEntry++;
+                                                                totalLateTime += 100;
+                                                                countLateEntry++;
 //                                                                    }
-                                                            }else{
+                                                            } else {
                                                                 countLateEntry++;
 //                                                                if(firstHalf.contains("Night")){
 //                                                                    if(timecount > 1 && timecount >= 210){
@@ -3012,43 +3386,34 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                                                   abcounter = abcounter + 1;
 //                                                               }  
 //                                                                }
-                                                                if(empendTime.after(secondEndHours) || empendTime.equals(secondEndHours))
-                                                                {
+                                                                if (empendTime.after(secondEndHours) || empendTime.equals(secondEndHours)) {
                                                                     prcounter = prcounter + 1;
-                                                                }else{
+                                                                } else {
                                                                     abcounter = abcounter + 1;
                                                                 }
-            //                                                    newList.add("PR");
+                                                                //                                                    newList.add("PR");
 //                                                                long lateTimeDuff = empinTime.getTime() - startHour.getTime();
 //                                                                totalLateTime +=lateTimeDuff;
                                                             }
+                                                        } else {
+                                                            countForPenalty++;
+                                                            if (empendTime.after(secondEndHours) || empendTime.equals(secondEndHours)) {
+                                                                prcounter = prcounter + 0.5;
+                                                                abcounter = abcounter + 0.5;
+                                                            } else {
+                                                                abcounter = abcounter + 1;
+                                                            }
+                                                            if (countForPenalty > 1) {
+                                                                totalLateTime += 100;
+                                                            }
                                                         }
-                                                    else
-                                                    {
-                                                        countForPenalty++;
-                                                        if(empendTime.after(secondEndHours) || empendTime.equals(secondEndHours))
-                                                        {
-                                                            prcounter = prcounter + 0.5;
-                                                            abcounter = abcounter + 0.5;
-                                                        }else{
-                                                            abcounter = abcounter + 1;
-                                                        }
-                                                        if(countForPenalty > 1){
-                                                             totalLateTime +=100;
-                                                         }
-                                                    }
 
-                                                }}
-                                                }
-                                            else{
-                                                        abcounter = abcounter + 1;
                                                     }
                                                 }
-                                            
-                                            
-                                            
-                                            
-                                         else {
+                                            } else {
+                                                abcounter = abcounter + 1;
+                                            }
+                                        } else {
                                             if (firstHalf.equals("Casual Leave")) {
                                                 cl = cl + 1;
                                             }
@@ -3093,128 +3458,118 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                                     s = s + 2;
                                                 }
                                             }
-                                            
-                                            
 
                                             try {
                                                 if (!firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave")
                                                         && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                                                         && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
 
-                                                        String[] userTimeInStr = firstHalf.split("`");
-                                                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
-                                                        String[] userTimeOutStr = firstHalf.split("!");
-                                                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
-                                                        String[] leave = firstHalf.split("@");
-                                                        String[] leave1 = leave[1].split("#");
-                                                        String[] LateHoursStr = firstHalf.split("\\$");
-                                                        String[] LateHoursStr1 = LateHoursStr[1].split("%");
-                                                        String[] endHoursStr = firstHalf.split("%");
-                                                        String[] endHoursStr1 = endHoursStr[1].split("\\^");
-                                                        String[] firstStartHoursStr = endHoursStr[1].split("\\+");
-                                                        String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
+                                                    String[] userTimeInStr = firstHalf.split("`");
+                                                    String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                                                    String[] userTimeOutStr = firstHalf.split("!");
+                                                    String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                                                    String[] leave = firstHalf.split("@");
+                                                    String[] leave1 = leave[1].split("#");
+                                                    String[] LateHoursStr = firstHalf.split("\\$");
+                                                    String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                                                    String[] endHoursStr = firstHalf.split("%");
+                                                    String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                                                    String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                                                    String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
 
-                                                        Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
-                                                        Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
-                                                        Date endHours = sdf1.parse(endHoursStr1[0]);
-                                                        Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
-                                                        Date secondEndHour = sdf1.parse(secondEndHoursStr[1]);
-                                                        Calendar cal = Calendar.getInstance();
-                                                        Calendar cal1 = Calendar.getInstance();
-                                                        cal.setTime(firstStartHours);
-                                                        cal1.setTime(firstStartHours);
-                                                        cal1.add(Calendar.MINUTE, -earlyMinute);
-                                                        cal.add(Calendar.MINUTE, lateMinute);
-                                                        String newTime = sdf1.format(cal.getTime());
-                                                        Date flexibleEndTime = sdf1.parse(newTime);
-                                                        Date LateHours = sdf1.parse(LateHoursStr1[0]);
-                                                        String newTime1 = sdf1.format(cal1.getTime());
-                                                        Date flexibleStartTime = sdf1.parse(newTime1);
-                                                        long diff = endHours.getTime() - firstStartHours.getTime();
-                                                        long diffMinutes = diff / (60 * 1000);
-                                                        
-                                                        List<?> oncalllist =  OnCallService.readOnCallRequestDateAndIdWise(startdate, empMaster.getUserMaster().getId());
-                                                        if(oncalllist.size()>0){
-                                                            countOnCallRequests+=1;
-                                                        }
-                            
+                                                    Date userTimeIn = sdf1.parse(userTimeInStr1[0]);
+                                                    Date userTimeOut = sdf1.parse(userTimeOutStr1[0]);
+                                                    Date endHours = sdf1.parse(endHoursStr1[0]);
+                                                    Date firstStartHours = sdf1.parse(firstStartHoursStr[1]);
+                                                    Date secondEndHour = sdf1.parse(secondEndHoursStr[1]);
+                                                    Calendar cal = Calendar.getInstance();
+                                                    Calendar cal1 = Calendar.getInstance();
+                                                    cal.setTime(firstStartHours);
+                                                    cal1.setTime(firstStartHours);
+                                                    cal1.add(Calendar.MINUTE, -earlyMinute);
+                                                    cal.add(Calendar.MINUTE, lateMinute);
+                                                    String newTime = sdf1.format(cal.getTime());
+                                                    Date flexibleEndTime = sdf1.parse(newTime);
+                                                    Date LateHours = sdf1.parse(LateHoursStr1[0]);
+                                                    String newTime1 = sdf1.format(cal1.getTime());
+                                                    Date flexibleStartTime = sdf1.parse(newTime1);
+                                                    long diff = endHours.getTime() - firstStartHours.getTime();
+                                                    long diffMinutes = diff / (60 * 1000);
+
+                                                    List<?> oncalllist = OnCallService.readOnCallRequestDateAndIdWise(startdate, empMaster.getUserMaster().getId());
+                                                    if (oncalllist.size() > 0) {
+                                                        countOnCallRequests += 1;
+                                                    }
 
 //                                                    long beforeinTime = firstStartHours.getTime()-userTimeIn.getTime();
 //                                                         beforeinTime = TimeUnit.MILLISECONDS.toMinutes(beforeinTime);
-                                            
-                                    List<?> otlist =  oTRegularizationService.readOTDateWise(startdate, empMaster.getUserMaster().getId());
-                                    if(otlist.size() > 0){
-                                        for (Object o1 : otlist) {
-                                            long timdiffot = 0;
-                                            long totalIntime = 0;
-                                            OTRegularization oTRegularization = (OTRegularization) o1;
-                                            String otstartDateTime = oTRegularization.getStartDateTime();
-                                            String[] otstartDateTimeinStr = otstartDateTime.split(" ");
-                                            Date startDateOT = sdf.parse(otstartDateTimeinStr[0]);
-                                            Date startTimeOT = sdf1.parse(otstartDateTimeinStr[2]);
-                                            String otendDateTime = oTRegularization.getEndDateTime();
-                                            String[] otendDateTimeinStr = otendDateTime.split(" ");
-                                            Date endDateOT = sdf.parse(otendDateTimeinStr[0]);
-                                            Date endTimeOT = sdf1.parse(otendDateTimeinStr[2]);
-                                            timdiffot = endTimeOT.getTime() -  startTimeOT.getTime();
+                                                    List<?> otlist = oTRegularizationService.readOTDateWise(startdate, empMaster.getUserMaster().getId());
+                                                    if (otlist.size() > 0) {
+                                                        for (Object o1 : otlist) {
+                                                            long timdiffot = 0;
+                                                            long totalIntime = 0;
+                                                            OTRegularization oTRegularization = (OTRegularization) o1;
+                                                            String otstartDateTime = oTRegularization.getStartDateTime();
+                                                            String[] otstartDateTimeinStr = otstartDateTime.split(" ");
+                                                            Date startDateOT = sdf.parse(otstartDateTimeinStr[0]);
+                                                            Date startTimeOT = sdf1.parse(otstartDateTimeinStr[2]);
+                                                            String otendDateTime = oTRegularization.getEndDateTime();
+                                                            String[] otendDateTimeinStr = otendDateTime.split(" ");
+                                                            Date endDateOT = sdf.parse(otendDateTimeinStr[0]);
+                                                            Date endTimeOT = sdf1.parse(otendDateTimeinStr[2]);
+                                                            timdiffot = endTimeOT.getTime() - startTimeOT.getTime();
 //                                            totalIntime = timecount+timdiffot;
-                                            long intimeintomilisec = TimeUnit.MINUTES.toMillis(510);
-                                            
-                                            totalIntime=intimeintomilisec+timdiffot;
-                                            long totalIntime1 = TimeUnit.MILLISECONDS.toMinutes(totalIntime);
-                                           
-                                            if(startDateOT.equals(endDateOT)){
-                                                if(timecount > 510 && totalIntime1 > 510){
-                                                    if(startTimeOT.before(firstStartHours) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))){
-                                                        if((startTimeOT.after(userTimeIn) || startTimeOT.equals(userTimeIn)) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))){
-                                                            TotalOtTime += timdiffot;
-                                                        }
-                                                        
-                                                    }else if((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && endTimeOT.after(secondEndHour)){
-                                                        if((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && (endTimeOT.before(userTimeOut) || endTimeOT.equals(userTimeOut))){
-                                                            TotalOtTime += timdiffot;
-                                                        }
-                                                    }
+                                                            long intimeintomilisec = TimeUnit.MINUTES.toMillis(510);
+
+                                                            totalIntime = intimeintomilisec + timdiffot;
+                                                            long totalIntime1 = TimeUnit.MILLISECONDS.toMinutes(totalIntime);
+
+                                                            if (startDateOT.equals(endDateOT)) {
+                                                                if (timecount > 510 && totalIntime1 > 510) {
+                                                                    if (startTimeOT.before(firstStartHours) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))) {
+                                                                        if ((startTimeOT.after(userTimeIn) || startTimeOT.equals(userTimeIn)) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))) {
+                                                                            TotalOtTime += timdiffot;
+                                                                        }
+
+                                                                    } else if ((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && endTimeOT.after(secondEndHour)) {
+                                                                        if ((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && (endTimeOT.before(userTimeOut) || endTimeOT.equals(userTimeOut))) {
+                                                                            TotalOtTime += timdiffot;
+                                                                        }
+                                                                    }
 //                                                    if(beforeinTime > 0){
 //                                                        long xtratime = (timecount-totalIntime1)- beforeinTime;
-                                                        long xtratime = (timecount-totalIntime1);
+                                                                    long xtratime = (timecount - totalIntime1);
 //                                                    xtratime = xtratime-60;
-                                                    if(xtratime > 0){
-                                                        upOtTime += xtratime;
-                                                    }
+                                                                    if (xtratime > 0) {
+                                                                        upOtTime += xtratime;
+                                                                    }
 //                                                    }
-                                                    
-                                                }
-                                            }
-                                        } 
-                                    }else{
-                                        if(timecount > 510){
-                                            if(!userTimeIn.after(firstStartHours)){
-                                                if(userTimeIn.before(firstStartHours)){
+
+                                                                }
+                                                            }
+                                                        }
+                                                    } else {
+                                                        if (timecount > 510) {
+                                                            if (!userTimeIn.after(firstStartHours)) {
+                                                                if (userTimeIn.before(firstStartHours)) {
 //                                                if(beforeinTime > 0){
 //                                                    long xtratime = (timecount - 510) - beforeinTime;
-                                                    long xtratime = (timecount - 510);
+                                                                    long xtratime = (timecount - 510);
 //                                                    xtratime = xtratime-60;
-                                                    if(xtratime > 0){
-                                                        upOtTime += xtratime;
-                                                    }
+                                                                    if (xtratime > 0) {
+                                                                        upOtTime += xtratime;
+                                                                    }
 //                                                }
-                                                
-                                                
-                                                }
-                                                }
-                                            
-                                        }
-                                    }
+
+                                                                }
+                                                            }
+
+                                                        }
+                                                    }
                                                 }
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
-                                            
-                                            
-                                            
-                                            
-                                            
 
                                         } else {
                                             otMinuteCounter += 0;
@@ -3223,12 +3578,60 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                         otMinuteCounter += 0;
                                     }
                                     n++;
+
+                                    List punchList = new ArrayList();
+                                    List allpunchList = new ArrayList();
+                                    String date12 = "" + next2[0];
+                                    long diff11 = 0;
+                                    try {
+                                        if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
+                                                && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
+                                                && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("LWP") && !firstHalf.equals("Gross Leave")) {
+
+                                            String[] a = firstHalf.split("#");
+                                            String[] shift = a[1].split("\\$");
+                                            SimpleDateFormat sdf12 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                                            if (shift[0].trim().contains("Night") && shift[0] != null && !shift[0].isEmpty()) {
+                                                Calendar c3 = Calendar.getInstance();
+                                                Date datenex = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(date12));
+                                                c3.setTime(datenex);
+                                                c3.add(Calendar.DAY_OF_YEAR, 1);
+                                                Date tomorrow = c3.getTime();
+                                                String pattern = "dd/MM/YYYY";
+                                                SimpleDateFormat simpleDateFormatpp = new SimpleDateFormat(pattern);
+                                                String nextdate = simpleDateFormatpp.format(tomorrow);
+                                                allpunchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date12, nextdate, id);
+                                            } else {
+                                                allpunchList = employeeDatetimeDataService.readPuchDataDateWiseAll1(date12, id);
+                                            }
+
+                                            if (!allpunchList.isEmpty()) {
+                                                if (allpunchList.size() % 2 == 0) {
+                                                    for (int i = 0; i < allpunchList.size() - 1; i++) {
+                                                        String in = allpunchList.get(i).toString();
+                                                        String out = allpunchList.get(i + 1).toString();
+                                                        Date out1 = sdf12.parse(out);
+                                                        Date in1 = sdf12.parse(in);
+                                                        diff12 += (out1.getTime() - in1.getTime());
+                                                        i++;
+                                                    }
+//                                            diff12 += diff11;
+                                                    String wh = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(diff12),
+                                                            TimeUnit.MILLISECONDS.toMinutes(diff12) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff12)),
+                                                            TimeUnit.MILLISECONDS.toSeconds(diff12) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff12)));
+                                                }
+                                            }
+                                        }
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
                                 }
 
 //                                int hours3 = (int) otMinuteCounter / 60;
 //                                int minutes3 = (int) otMinuteCounter % 60;
 //                                String totalHour1 = "";
-
 //                                if (hours3 >= 1) {
 //                                    totalHour1 += hours3 + ".";
 //                                } else {
@@ -3248,42 +3651,76 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                penaltyhours = String.format("%d.%d", TimeUnit.MILLISECONDS.toHours(totalLateTime),
 //                                TimeUnit.MILLISECONDS.toMinutes(totalLateTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(totalLateTime)),
 //                                TimeUnit.MILLISECONDS.toSeconds(totalLateTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(totalLateTime)));
-                                
+
                                 totalPaidOverTime = String.format("%d.%d", TimeUnit.MILLISECONDS.toHours(TotalOtTime),
-                                TimeUnit.MILLISECONDS.toMinutes(TotalOtTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TotalOtTime)),
-                                TimeUnit.MILLISECONDS.toSeconds(TotalOtTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(TotalOtTime)));
-                                
+                                        TimeUnit.MILLISECONDS.toMinutes(TotalOtTime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(TotalOtTime)),
+                                        TimeUnit.MILLISECONDS.toSeconds(TotalOtTime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(TotalOtTime)));
+
                                 long upotinmilsec = TimeUnit.MINUTES.toMillis(upOtTime);
                                 totalUnpaidOverTime = String.format("%d.%d", TimeUnit.MILLISECONDS.toHours(upotinmilsec),
-                                TimeUnit.MILLISECONDS.toMinutes(upotinmilsec) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(upotinmilsec)),
-                                TimeUnit.MILLISECONDS.toSeconds(upotinmilsec) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(upotinmilsec)));
+                                        TimeUnit.MILLISECONDS.toMinutes(upotinmilsec) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(upotinmilsec)),
+                                        TimeUnit.MILLISECONDS.toSeconds(upotinmilsec) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(upotinmilsec)));
                             }
 
-                            firstHalfList.add("" + (list.size() - wo));
-                            firstHalfList.add("" + wo);
-                            firstHalfList.add("" + prcounter);//present
-                            firstHalfList.add("" + cl);
+                            String wh1 = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(diff12),
+                                    TimeUnit.MILLISECONDS.toMinutes(diff12) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(diff12)),
+                                    TimeUnit.MILLISECONDS.toSeconds(diff12) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(diff12)));
+
+                            firstHalfList.add("" + ((list.size() - WOCount) - pl + holiday));
+                            firstHalfList.add("" + WOCount);
+                            firstHalfList.add("" + presentCount);//present
+//                            firstHalfList.add("" + cl);
 //                        firstHalfList.add("" + sl);
                             firstHalfList.add("" + pl);
-                            firstHalfList.add("" + sl);
-                            firstHalfList.add("" + pat);
-                            firstHalfList.add("" + abcounter);//absent
-                            firstHalfList.add("" + lwp);//where lwp = ab
-                            if(countLateEntry > 4){
-                                firstHalfList.add(penaltyhours);
-                            }else{
-                                penaltyhours = "0.0";
-                                firstHalfList.add(penaltyhours);
-                            }
-                            
+//                            firstHalfList.add("" + sl);
+//                            firstHalfList.add("" + pat);
+                            firstHalfList.add("" + holiday);//absent
+                            firstHalfList.add("" + absent);//where lwp = ab
+//                            if (countLateEntry > 4) {
+//                                firstHalfList.add(penaltyhours);
+//                            } else {
+//                                penaltyhours = "0.0";
+//                                firstHalfList.add(penaltyhours);
+//                            }
+
+                            firstHalfList.add("" + totalLateCollection);
                             firstHalfList.add(totalPaidOverTime);
                             firstHalfList.add(totalUnpaidOverTime);
                             firstHalfList.add("" + otherDeduction);
                             firstHalfList.add("" + tds);
                             firstHalfList.add("" + incentive);
                             firstHalfList.add("" + bonus);
-                            firstHalfList.add("" + countNightShift);
-                            firstHalfList.add("" + countOnCallRequests);
+//                            firstHalfList.add("" + countNightShift);
+//                            firstHalfList.add("" + countOnCallRequests);
+                            firstHalfList.add("" + wh1);
+
+                            /// Short Hours Code 
+                            EmployeeMaster empMaster1 = employeeMasterService.readById(id);// employee details
+                            // show hours madaroty
+                            String hoursMadatory = "";
+                            hoursMadatory = empMaster1.getHoursMadatory();
+                            // calculate actual working days
+                            Double MonthlyWorkingHours = 0.0;
+                            double totalworking = (list.size() - WOCount) - pl + absent + holiday;
+
+                            try {
+
+                                MonthlyWorkingHours = totalworking * Double.parseDouble(hoursMadatory);
+
+                            } catch (Exception e) {
+                                MonthlyWorkingHours = totalworking * 8.5;
+                            }
+
+                            // short hours actual working - earned working hours
+                            String[] parts = wh1.split(":");
+                            int horaHour = Integer.valueOf(parts[0]);
+
+                            ShortHours = MonthlyWorkingHours - horaHour;
+                            // actual working hours
+
+                            firstHalfList.add("" + hoursMadatory);
+                            firstHalfList.add("" + MonthlyWorkingHours);
+                            firstHalfList.add("" + ShortHours);
 
                             Row row1 = firstSheet.createRow(rownum - 1);
                             for (int k1 = 0; k1 < firstHalfList.size(); k1++) {
@@ -3393,7 +3830,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         DecimalFormat df = new DecimalFormat("####0.00");
 
         List<String> headerList = new ArrayList<String>();
-        headerList.add("Emp Company Code");
+//        headerList.add("Emp Company Code");
         headerList.add("Emp Id");
         headerList.add("Emp Name");
         headerList.add("P.Day");
@@ -3420,15 +3857,17 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
         headerList.add("Tot.Dedn");
         headerList.add("Net Pay");
-        List<?> list6 = ctcAllowanceService.read();
-        CtcAllowance ctcAllowance = new CtcAllowance();
-//        Map<Integer, String> leaveTypemap = new HashMap();
-        for (Object o : list6) {
-            ctcAllowance = (CtcAllowance) o;
-            headerList.add("" + ctcAllowance.getCtcName());
-        }
-        headerList.add("Total");
-        headerList.add("CTCPerMonth");
+        headerList.add("Excess/Short");
+        headerList.add("Actual NetPayable");
+//        List<?> list6 = ctcAllowanceService.read();
+//        CtcAllowance ctcAllowance = new CtcAllowance();
+////        Map<Integer, String> leaveTypemap = new HashMap();
+//        for (Object o : list6) {
+//            ctcAllowance = (CtcAllowance) o;
+//            headerList.add("" + ctcAllowance.getCtcName());
+//        }
+//        headerList.add("Total");
+//        headerList.add("CTCPerMonth");
 
         List<EmployeeSalaryProcess> empList = (List<EmployeeSalaryProcess>) employeeSalaryProcessService.readEmpSalaryReport(employeeMaster);
         List<Object> finalList = new LinkedList<Object>();
@@ -3441,7 +3880,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             EmployeeMaster employeeMaster1 = employeeMasterService.readById(employeeSalaryProcess1.getEmployeeMaster().getId());
             List<?> list = employeeExcelRecordService.readByEmployeExcelReportSearch(employeeSalaryProcess1);
 //            List tempList = (List) list.get(0);
-            empMap.put("Emp Company Code", "" + employeeMaster1.getEmployeeLocation());
+//            empMap.put("Emp Company Code", "" + employeeMaster1.getEmployeeLocation());
             empMap.put("Emp Id", "" + employeeMaster1.getEmployeeId());
             empMap.put("Emp Name", employeeMaster1.getEmployeeName());
             empMap.put("P.Day", "" + list.get(0));
@@ -3473,16 +3912,26 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //            empMap.put("Deduction Amount", "" + df.format(deductionAmount));
             empMap.put("Tot.Dedn", "" + df.format((int) Math.round(deductionAmount)));
             empMap.put("Net Pay", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
-//            empMap.put("Net Amount", "" + df.format(additionalAmount - deductionAmount));
-            List ctcList = employeeCtcDetailService.fetchctcData(employeeSalaryProcess1.getEmployeeMaster().getId());
-            for (Object dedSalaryList2 : ctcList) {
-                Object[] o5 = (Object[]) dedSalaryList2;
-//                empMap.put("" + o[0], "" + df.format(o[1]));
-                empMap.put("" + o5[1], "" + df.format((int) Math.round((double) o5[2])));
-                total += (Double) o5[2];
+            
+            try {
+
+                empMap.put("Excess/Short", "" + df.format((int) Math.round(employeeSalaryProcess1.getExcessShort())));
+                empMap.put("Actual NetPayable", "" + df.format((int) Math.round(employeeSalaryProcess1.getNetPayable())));
+
+            } catch (Exception e) {
+                empMap.put("Excess/Short", "" + 0);
+                empMap.put("Actual NetPayable", "" + df.format((int) Math.round(additionalAmount - deductionAmount)));
             }
-            empMap.put("Total", "" + df.format((int) Math.round(total)));
-            empMap.put("CTCPerMonth", "" + df.format((int) Math.round(total + (additionalAmount - deductionAmount))));
+//            empMap.put("Net Amount", "" + df.format(additionalAmount - deductionAmount));
+//            List ctcList = employeeCtcDetailService.fetchctcData(employeeSalaryProcess1.getEmployeeMaster().getId());
+//            for (Object dedSalaryList2 : ctcList) {
+//                Object[] o5 = (Object[]) dedSalaryList2;
+////                empMap.put("" + o[0], "" + df.format(o[1]));
+//                empMap.put("" + o5[1], "" + df.format((int) Math.round((double) o5[2])));
+//                total += (Double) o5[2];
+//            }
+//            empMap.put("Total", "" + df.format((int) Math.round(total)));
+//            empMap.put("CTCPerMonth", "" + df.format((int) Math.round(total + (additionalAmount - deductionAmount))));
             finalList.add(empMap);
         }
 
@@ -3719,8 +4168,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         mv.setViewName("Payroll/employeesalarySearchNewResiger");
 
         return mv;
+
     }
-    
-    
 
 }

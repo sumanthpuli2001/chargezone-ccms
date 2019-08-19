@@ -133,7 +133,6 @@ public class EmployeeAdditionalSalaryDAOImpl<T> extends GenericsDAOImpl<T> imple
                 + " From EmployeeAdditionalSalary a"
                 + " left join a.employeeSalaryProcess b"
                 + " where b.employeeMaster.id= " + employeeSalaryProcess.getEmployeeMaster().getId()
-                + " and a.payrollSalaryType not like '%OT Amount%'"
                 + " and b.month='" + employeeSalaryProcess.getMonth() + "'"
                 + " and b.year='" + employeeSalaryProcess.getYear() + "'";
 

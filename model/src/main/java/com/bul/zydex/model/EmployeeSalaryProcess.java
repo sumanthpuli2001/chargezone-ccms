@@ -19,6 +19,7 @@ public class EmployeeSalaryProcess implements java.io.Serializable {
     private Double otAmount;
     private Double netPayable;
     private Double grossTotal;
+    private Double excessShort;
     private Set employeeDeductionAmounts = new HashSet(0);
     private Set employeeAdditionalSalaries = new HashSet(0);
     private Set payrollEsicDeductions = new HashSet(0);
@@ -27,7 +28,7 @@ public class EmployeeSalaryProcess implements java.io.Serializable {
     public EmployeeSalaryProcess() {
     }
 
-    public EmployeeSalaryProcess(EmployeeMaster employeeMaster, Double employeeLwp, Double employeeBasicSalary, String month, String year, Double employeeLeaveEncashment, Double otAmount, Double netPayable, Double grossTotal, Set employeeDeductionAmounts, Set employeeAdditionalSalaries,Set payrollEsicDeductions) {
+    public EmployeeSalaryProcess(EmployeeMaster employeeMaster, Double employeeLwp, Double employeeBasicSalary, String month, String year, Double employeeLeaveEncashment, Double otAmount, Double netPayable, Double grossTotal,Double excessShort, Set employeeDeductionAmounts, Set employeeAdditionalSalaries,Set payrollEsicDeductions) {
         this.employeeMaster = employeeMaster;
         this.employeeLwp = employeeLwp;
         this.employeeBasicSalary = employeeBasicSalary;
@@ -37,6 +38,7 @@ public class EmployeeSalaryProcess implements java.io.Serializable {
         this.otAmount = otAmount;
         this.netPayable = netPayable;
         this.grossTotal = grossTotal;
+        this.excessShort = excessShort;
         this.employeeDeductionAmounts = employeeDeductionAmounts;
         this.employeeAdditionalSalaries = employeeAdditionalSalaries;
         this.payrollEsicDeductions = payrollEsicDeductions;
@@ -126,6 +128,15 @@ public class EmployeeSalaryProcess implements java.io.Serializable {
     public Set getEmployeeDeductionAmounts() {
         return this.employeeDeductionAmounts;
     }
+
+    public Double getExcessShort() {
+        return excessShort;
+    }
+
+    public void setExcessShort(Double excessShort) {
+        this.excessShort = excessShort;
+    }
+    
 
     public void setEmployeeDeductionAmounts(Set employeeDeductionAmounts) {
         this.employeeDeductionAmounts = employeeDeductionAmounts;

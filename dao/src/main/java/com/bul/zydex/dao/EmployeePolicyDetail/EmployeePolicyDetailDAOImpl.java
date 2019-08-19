@@ -154,4 +154,16 @@ public class EmployeePolicyDetailDAOImpl<T> extends GenericsDAOImpl<T> implement
         getHibernateTemplate().bulkUpdate(query);
     }
 
+    @Override
+    public List<?> readPolicyTotal(int employeeid) {
+      String query = "";
+        query += "select Sum(a.amount)"
+                + " FROM EmployeePolicyDetail a "
+                + " left join a.policyMaster b"
+                + " where a.employeeMaster.id=" + employeeid
+                + " order by b.countstatus asc";
+
+        return getHibernateTemplate().find(query);   
+    }
+
 }

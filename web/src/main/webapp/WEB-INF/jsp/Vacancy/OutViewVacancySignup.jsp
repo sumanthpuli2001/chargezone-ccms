@@ -92,7 +92,7 @@
             <section class="content">
                 <div class="row">
                     <div class="col-md-12 col-sm-12" style="text-align: left; margin-left: 15%; width: 85%;">
-                        <p style='font-size:19px; font-weight:600; text-align: left;'>SPC Lifesciencess Pvt.Ltd</p>
+                        <p style='font-size:19px; font-weight:600; text-align: left;'>Vadera & Co</p>
                         <div class='col-md-4 col-sm-4 col-xs-12'>
 
                             <p>

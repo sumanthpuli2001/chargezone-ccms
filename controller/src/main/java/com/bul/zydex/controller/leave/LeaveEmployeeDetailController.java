@@ -176,7 +176,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                 noOfDay = Float.parseFloat(noOfDaysForYear) + Float.parseFloat(noOfDaysForYear1) + Float.parseFloat(noOfDaysForYear2) + Float.parseFloat(noOfDaysForYear3);
 //                }
                 totalMap = days + noOfDay;
-                if ("C Off Leave".equals(name) || "Short Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name)) {
+                if ("C Off Leave".equals(name) || "Paternity Leave".equals(name) || "Maternity Leave".equals(name) || "Leave Without Pay".equals(name) || "Casual Leave".equals(name) || "Lieu Day Leave".equals(name) || "Sick Leave".equals(name)) {
                     continue;
                 } else {
                     listRemain.put(name, days);
@@ -980,11 +980,11 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                                     "Error :On Second Saturday You can Not Apply Full Day Of Leave");
                             request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
                             mv = applyClick(request, response);
-                        } else if (plBalCheck && leaveTypeMaster.getLeaveType().contains("Privilege Leave") && leaveEmployeeDetail.getNoOfDays() < 3) {
-                            request.setAttribute("failureMessage",
-                                    "Error :Your Pl Limit for less dhen 3 is over so you can't apply less than 3 days pl leave.");
-                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
-                            mv = applyClick(request, response);
+//                        } else if (plBalCheck && leaveTypeMaster.getLeaveType().contains("Privilege Leave") && leaveEmployeeDetail.getNoOfDays() < 3) {
+//                            request.setAttribute("failureMessage",
+//                                    "Error :Your Pl Limit for less dhen 3 is over so you can't apply less than 3 days pl leave.");
+//                            request.setAttribute("leaveEmployeeDetail", leaveEmployeeDetail);
+//                            mv = applyClick(request, response);
                         } else if (leaveEmployeeDetail.getNoOfDays() > Float.parseFloat(leaveTypeMaster.getMaxDayAllowedLeave()) && !leaveTypeMaster.getLeaveType().contains("Privilege Leave") && !leaveTypeMaster.getLeaveType().contains("Maternity Leave") && !leaveTypeMaster.getLeaveType().contains("C Off Leave")
                                 && !leaveTypeMaster.getLeaveType().contains("Sick Leave")) {
                             request.setAttribute("failureMessage",
@@ -3306,36 +3306,37 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
 //            weekOffDay = hoursBasis.getWeekof();
 //
 //        }
-        List<?> listShiftGenerateMonthy = shiftGenerateMonthlyScheduleService.readByEmpMonthYear(employeeMaster1.getId());
-        SimpleDateFormat sm = new SimpleDateFormat("dd/MM/yyyy");;
-        Date dt1 = null, dt2 = null, dt3 = null, dt4 = null, dt5 = null, dt6 = null, dt7 = null, dt8 = null;
-        if (listShiftGenerateMonthy.size() > 0) {
-            Date d = new Date();
-            LocalDate localDate = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            String wdate1 = (String) listShiftGenerateMonthy.get(0) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
-            String wdate2 = (String) listShiftGenerateMonthy.get(1) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
-            String wdate3 = (String) listShiftGenerateMonthy.get(2) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
-            String wdate4 = (String) listShiftGenerateMonthy.get(3) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
-            String wdate5 = (String) listShiftGenerateMonthy.get(4) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
-            String wdate6 = (String) listShiftGenerateMonthy.get(5) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
-            String wdate7 = (String) listShiftGenerateMonthy.get(6) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
-            String wdate8 = (String) listShiftGenerateMonthy.get(7) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
-            dt1 = sm.parse(wdate1);
-            dt2 = sm.parse(wdate2);
-            dt3 = sm.parse(wdate3);
-            dt4 = sm.parse(wdate4);
-            dt5 = sm.parse(wdate5);
-            dt6 = sm.parse(wdate6);
-            dt7 = sm.parse(wdate7);
-            dt8 = sm.parse(wdate8);
-            sm = new SimpleDateFormat("EEEE"); // the day of the week spelled out completely
-            if (sm.format(dt1).equals(sm.format(dt3)) && sm.format(dt2).equals(sm.format(dt4))) {
-                weekOffDay = sm.format(dt1) + "," + sm.format(dt2);
-            }
-            if (sm.format(dt5).equals(sm.format(dt7)) && sm.format(dt6).equals(sm.format(dt8))) {
-                weekOffDay = sm.format(dt5) + "," + sm.format(dt6);
-            }
-        }
+//        List<?> listShiftGenerateMonthy = shiftGenerateMonthlyScheduleService.readByEmpMonthYear(employeeMaster1.getId());
+//        SimpleDateFormat sm = new SimpleDateFormat("dd/MM/yyyy");;
+//        Date dt1 = null, dt2 = null, dt3 = null, dt4 = null, dt5 = null, dt6 = null, dt7 = null, dt8 = null;
+//        if (listShiftGenerateMonthy.size() > 0) {
+//            Date d = new Date();
+//            LocalDate localDate = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//            String wdate1 = (String) listShiftGenerateMonthy.get(0) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+//            String wdate2 = (String) listShiftGenerateMonthy.get(1) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+//            String wdate3 = (String) listShiftGenerateMonthy.get(2) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+//            String wdate4 = (String) listShiftGenerateMonthy.get(3) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+//            String wdate5 = (String) listShiftGenerateMonthy.get(4) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+//            String wdate6 = (String) listShiftGenerateMonthy.get(5) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+//            String wdate7 = (String) listShiftGenerateMonthy.get(6) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+//            String wdate8 = (String) listShiftGenerateMonthy.get(7) + "/" + localDate.getMonthValue() + "/" + localDate.getYear();
+//            dt1 = sm.parse(wdate1);
+//            dt2 = sm.parse(wdate2);
+//            dt3 = sm.parse(wdate3);
+//            dt4 = sm.parse(wdate4);
+//            dt5 = sm.parse(wdate5);
+//            dt6 = sm.parse(wdate6);
+//            dt7 = sm.parse(wdate7);
+//            dt8 = sm.parse(wdate8);
+//            sm = new SimpleDateFormat("EEEE"); // the day of the week spelled out completely
+//            if (sm.format(dt1).equals(sm.format(dt3)) && sm.format(dt2).equals(sm.format(dt4))) {
+//                weekOffDay = sm.format(dt1) + "," + sm.format(dt2);
+//            }
+//            if (sm.format(dt5).equals(sm.format(dt7)) && sm.format(dt6).equals(sm.format(dt8))) {
+//                weekOffDay = sm.format(dt5) + "," + sm.format(dt6);
+//            }
+//        }
+        weekOffDay = "Saturday,Sunday";
 
         int coutnter = 0;
         boolean sundayCheck = false;
@@ -13281,6 +13282,68 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             }
 
         }
+
+        PrintWriter out = response.getWriter();
+        out.print(message);
+    }
+
+    public void checkLeaveWithoutPayDate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String strDate = request.getParameter("strDate");
+        String sDateStatus = request.getParameter("sDateStatus");
+        strDate = strDate.replaceAll(",", "/");
+        EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+        HttpSession session = request.getSession();
+        EmployeeMaster employeeMaster1 = (EmployeeMaster) session.getAttribute("employeeInfo");
+
+        String message = "";
+        if (sDateStatus.equals("Fullday")) {
+            employeeShiftData.setOutDateTime(strDate);
+            employeeShiftData.setEmployeeMaster(employeeMaster1);
+            List<?> list = employeeShiftDataService.checkTodayPresent(employeeShiftData);
+            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+            if (!list.isEmpty()) {
+                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+
+                String sDate = employeeShiftData1.getInDateTime();
+                String eDate = employeeShiftData1.getOutDateTime();
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+                Date iDate = sdf.parse(sDate);
+                Date oDate = sdf.parse(eDate);
+                long diff = oDate.getTime() - iDate.getTime();
+
+                long diffHours = diff / (60 * 60 * 1000) % 24;
+
+//                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+                if (diffHours > 4 && employeeShiftData1.getShiftMaster().getId() != 5) {
+                    message = "On This Day You Are Present";
+                }
+            }
+        }
+//        if (sDateStatus.equals("FirstHalf")) {
+//            employeeShiftData.setOutDateTime(strDate);
+//            employeeShiftData.setEmployeeMaster(employeeMaster1);
+//            List<?> list = employeeShiftDataService.checkTodayFirstHalfDayPresent(employeeShiftData);
+//            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+//            if (!list.isEmpty()) {
+//                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+//                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+//                    message = "On This Day You Are Present";
+//                }
+//            }
+//        }
+//        if (sDateStatus.equals("SecondHalf")) {
+//            employeeShiftData.setOutDateTime(strDate);
+//            employeeShiftData.setEmployeeMaster(employeeMaster1);
+//            List<?> list = employeeShiftDataService.checkTodaySecondHalfDayPresent(employeeShiftData);
+//            EmployeeShiftData employeeShiftData1 = new EmployeeShiftData();
+//            if (!list.isEmpty()) {
+//                employeeShiftData1 = (EmployeeShiftData) list.get(0);
+//                if (list.size() > 0 && employeeShiftData1.getShiftMaster().getId() != 5) {
+//                    message = "On This Day You Are Present";
+//                }
+//            }
+//        }
 
         PrintWriter out = response.getWriter();
         out.print(message);

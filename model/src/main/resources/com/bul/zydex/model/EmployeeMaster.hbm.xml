@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+"classpath://org/hibernate/hibernate-mapping-3.0.dtd">
 <!-- Generated Apr 21, 2016 3:33:09 PM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
     <class name="com.bul.zydex.model.EmployeeMaster" table="employee_master" catalog="hr_power_vnc">
@@ -85,13 +85,13 @@
         <property name="panCard" type="string">
             <column name="pan_card" />
         </property>
-<!--        <property name="passportNo" type="string">
+        <!--        <property name="passportNo" type="string">
             <column name="passport_no" />
         </property>-->
-<!--        <property name="passportIssueDate" type="string">
+        <!--        <property name="passportIssueDate" type="string">
             <column name="passport_issue_date" />
         </property>-->
-<!--        <property name="passportExpiryDate" type="string">
+        <!--        <property name="passportExpiryDate" type="string">
             <column name="passport_expiry_date" />
         </property>-->
         <property name="dateOfLeaving" type="string">
@@ -166,7 +166,7 @@
         <property name="autoGenerationCode" type="string">
             <column name="auto_generation_code" />
         </property>
-<!--        <property name="govLicenceName" type="string">
+        <!--        <property name="govLicenceName" type="string">
             <column name="gov_licenceName" length="45" />
         </property>-->
         <property name="maritalStatusOthers" type="string">
@@ -235,6 +235,9 @@
         </property>
         <property name="pfAmount" type="string">
             <column name="pf_amount" length="45" />
+        </property>
+        <property name="hoursMadatory" type="string">
+            <column name="hours_madatory" length="45" />
         </property>
         <property name="salaryBase" type="java.lang.Boolean">
             <column name="salary_base"></column>

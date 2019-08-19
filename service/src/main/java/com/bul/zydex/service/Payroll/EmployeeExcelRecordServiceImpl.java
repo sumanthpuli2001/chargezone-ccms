@@ -53,4 +53,9 @@ public class EmployeeExcelRecordServiceImpl<T> extends GenericsServiceImpl<T> im
     return employeeExcelRecordDAO.readByEmployeExcelReportSearch(employeeSalaryProcess);
     }
 
+    @Override
+    public List<?> readByEmployeExcelFetch(EmployeeSalaryProcess employeeSalaryProcess) {
+       return employeeExcelRecordDAO.readByEmployeExcelFetch(employeeSalaryProcess);
+    }
+
 }

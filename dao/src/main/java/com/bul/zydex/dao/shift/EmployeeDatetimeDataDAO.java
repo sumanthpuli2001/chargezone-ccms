@@ -18,7 +18,7 @@ public interface EmployeeDatetimeDataDAO<T> extends GenericsDAO<T> {
     public List<?> readTodaysAndPreviousData(String empId, String endShiftTime);
 
     public List<?> readPuchDataDateWise(String date, int empId);
-    
+
     public List<?> readPuchDataDateWiseAll(String date, int empId);
 
     public List<?> readPuchDataEmpIdWise(int empId);
@@ -44,27 +44,30 @@ public interface EmployeeDatetimeDataDAO<T> extends GenericsDAO<T> {
     public List<?> readEmployeeByDatevise(String date);
 
     public List<?> readOddPunchedEmployeeData(String date);
-    
+
     public List<?> readEmployeePunchData(String empId);
-    
+
     public String getShiftsTime(String empId);
-    
+
     public String getEmailAddress(String empId);
-    
+
     public List readAllPuchDataDateWise(String tdate, int id);
 
     public List readALLPuchOnlyDataDateWise(String startDate, int id);
 
     public List readAllNightShiftPuchDataDateWise(String startdate, String nextdate, int id);
-    
+
     public String readPuchDataDateWise1(String date, int empId);
-    
+
     public List<?> readPuchDataDateWise2(String date, int empId);
-    
+
     public List<?> readByempShiftData(String id, String punch);
-    
+
     public String getShiftId(String data);
-    
+
     public List<?> findDuplicateRecords(Integer id, String punchListDate);
+
+    public List<?> readPuchDataDateWiseAll1(String date, int empId);
+    
 
 }

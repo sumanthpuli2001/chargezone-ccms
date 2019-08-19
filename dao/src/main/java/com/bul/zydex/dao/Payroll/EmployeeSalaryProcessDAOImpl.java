@@ -230,7 +230,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
             condition += " AND b.year = '" + employeeMaster.getPanCard() + "'";
         }
 
-        query += " Select a.employeeId, a.employeeName,b.month,b.year,a.id,b.id,b.employeeBasicSalary"
+        query += " Select a.employeeId, a.employeeName,b.month,b.year,a.id,b.id,b.employeeBasicSalary,b.netPayable"
                 + " From EmployeeMaster a"
                 + " left join a.employeeSalaryProcesses b"
                 + " where 1=1 " + condition;
@@ -598,7 +598,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
             condition += " AND b.year = '" + employeeMaster.getPanCard() + "'";
         }
 
-        query += " Select a.employeeId, a.employeeName,a.bankAccountNo,b.employeeBasicSalary,b.month,b.year,b.id"
+        query += " Select a.employeeId, a.employeeName,a.bankAccountNo,b.employeeBasicSalary,b.month,b.year,b.id,b.netPayable"
                 + " From EmployeeMaster a"
                 + " left join a.employeeSalaryProcesses b"
                 + " where 1=1 " + condition;
@@ -844,7 +844,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
                 + " LEFT JOIN a.employeeMaster b"
                 + " LEFT JOIN a.employeeAdditionalSalaries c"
                 + " LEFT JOIN a.employeeDeductionAmounts d"
-                + " Where c.payrollSalaryType not like '%OT Amount%'"
+                + " Where c.payrollSalaryType not like '%custom%'"
                 + " and 1=1" + condition
                 + " GROUP BY a.id,c.payrollSalaryType";
 
@@ -979,7 +979,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
             condition += " AND a.id = " + employeeMaster.getId();
         }
 
-        query += " Select a.employeeId, a.employeeName,b.month,b.year,a.id,b.id,b.employeeBasicSalary"
+        query += " Select a.employeeId, a.employeeName,b.month,b.year,a.id,b.id,b.employeeBasicSalary,b.netPayable"
                 + " From EmployeeMaster a"
                 + " left join a.employeeSalaryProcesses b"
                 + " where 1=1 " + condition;

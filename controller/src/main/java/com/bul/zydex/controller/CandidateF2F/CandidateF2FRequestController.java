@@ -106,7 +106,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         return mv;
     }
 
-    public ModelAndView submitFtoF(HttpServletRequest request,
+   public ModelAndView submitFtoF(HttpServletRequest request,
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession();
         ModelAndView mv = new ModelAndView();
@@ -121,6 +121,9 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         BindException errors = new BindException(candidateF2FRequest, "candidateF2FRequest");
         bind(request, candidateF2FRequest);
         String applicationId = request.getParameter("applicationId");
+        String timeInterview = request.getParameter("dateOfInterview1");
+        String dateInterview = request.getParameter("dateOfInterview");
+        String dateTime = dateInterview + " " + timeInterview;
         int otherDetailCount = 0;
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date cDate = new Date();
@@ -137,6 +140,7 @@ public class CandidateF2FRequestController extends CandidateF2FRequestAbstract {
         candidateF2FRequest.setStatus(0);
         candidateF2FRequest.setHrStatus(0);
         candidateF2FRequest.setUserStatus(0);
+        candidateF2FRequest.setDateOfInterview(dateTime);
         candidateF2FRequestService.create(candidateF2FRequest);
 
         candidateJobApplication.setStatus(8);

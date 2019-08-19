@@ -242,10 +242,22 @@
         <property name="cronExpression" value="0 0/3 * * * ?" />
        
     </bean>-->
+<!--    <bean id="shiftRotationMasterSchedule"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="shiftRotationMasterController1" />
+        <property name="targetMethod" value="schedulerMethodForShiftRotateMonthly" />
+    </bean>
+    <bean id="shiftRotationMasterScheduleCronTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="shiftRotationMasterSchedule" />
+        <property name="cronExpression" value="0 0/3 * * * ?" />
+      
+    </bean>-->
   
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
             <list>
+                <!--<ref bean="shiftRotationMasterSchedule" />-->
                 <!--<ref bean="leaveUploadYearly" />-->
                 <!--<ref bean="checkTimeEntryDailyId" />-->
                 <!--<ref bean="checkOddPunchId" />-->
@@ -270,6 +282,7 @@
         </property>
         <property name="triggers">
             <list>
+                <!--<ref bean="shiftRotationMasterScheduleCronTrigger" />-->
                 <!--<ref bean="cronTrigger52" />-->
                 <!--<ref bean="cronTrigger16" />-->
                 <!--<ref bean="cronTrigger17" />-->

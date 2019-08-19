@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
@@ -21,7 +22,7 @@
         /*.example-container input{ border: solid 1px #aaa; padding: 4px; width: 175px; }*/
     </style>
 
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+   
     <script>
         $(document).ready(function () {
             window.onload = changetotalButtonNew();
@@ -532,120 +533,120 @@
     </script>
 
     <script>
-         var flag3 = true;
+        var flag3 = true;
         function saveSubmit11() {
 //            alert("vxcvxcvjk");
             if (flag3) {
                 var radioValue = $("input[name='nameStatus']:checked").val();
-                    if(radioValue == "false"){
+                if (radioValue == "false") {
 //                       alert("passportttttt");
-                        if (document.getElementById("passportNo").value == ""){
-                            document.getElementById('passportNoError').innerHTML = '-It must not be empty.';
-                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
-                            $("#errormsg").delay(0).fadeIn(0);
-                            $("#errormsg").delay(3200).fadeOut(300);
-                            $("#passportNoError").delay(0).fadeIn(0);
-                            $("#passportNoError").delay(3200).fadeOut(300);
-                            return false;
-                        }
-                        else if (document.getElementById("countryOfIssue").value == ""){
-                            document.getElementById('countryOfIssueError').innerHTML = '-It must not be empty.';
-                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
-                            $("#errormsg").delay(0).fadeIn(0);
-                            $("#errormsg").delay(3200).fadeOut(300);
-                            $("#countryOfIssueError").delay(0).fadeIn(0);
-                            $("#countryOfIssueError").delay(3200).fadeOut(300);
-                             return false;
-                        }
-                        else if (document.getElementById("firstName").value == ""){
-                            document.getElementById('firstNameError').innerHTML = '-It must not be empty.';
-                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
-                            $("#errormsg").delay(0).fadeIn(0);
-                            $("#errormsg").delay(3200).fadeOut(300);
-                            $("#firstNameError").delay(0).fadeIn(0);
-                            $("#firstNameError").delay(3200).fadeOut(300);
-                             return false;
-                        }
-                        else if (document.getElementById("middleName").value == ""){
-                            document.getElementById('middleNameError').innerHTML = '-It must not be empty.';
-                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
-                            $("#errormsg").delay(0).fadeIn(0);
-                             $("#errormsg").delay(3200).fadeOut(300);
-                             $("#middleNameError").delay(0).fadeIn(0);
-                            $("#middleNameError").delay(3200).fadeOut(300);
-                             return false;
-                        }
-                        else if (document.getElementById("lastName").value == ""){
-                            document.getElementById('lastNameError').innerHTML = '-It must not be empty.';
-                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
-                            $("#errormsg").delay(0).fadeIn(0);
-                             $("#errormsg").delay(3200).fadeOut(300);
-                             $("#lastNameError").delay(0).fadeIn(0);
-                            $("#lastNameError").delay(3200).fadeOut(300);
-                             return false;
-                        }
-                        else if (document.getElementById("passportIssueDate").value == ""){
-                            document.getElementById('passportIssueDateError').innerHTML = '-It must not be empty.';
-                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
-                            $("#errormsg").delay(0).fadeIn(0);
-                             $("#errormsg").delay(3200).fadeOut(300);
-                             $("#passportIssueDateError").delay(0).fadeIn(0);
-                            $("#passportIssueDateError").delay(3200).fadeOut(300);
-                            
-                             return false;
-                        }
-                        else if (document.getElementById("passportExpiryDate").value == ""){
-                            document.getElementById('passportExpiryDateError').innerHTML = '-It must not be empty.';
-                            document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
-                            $("#errormsg").delay(0).fadeIn(0);
-                             $("#errormsg").delay(3200).fadeOut(300);
-                             $("#passportExpiryDateError").delay(0).fadeIn(0);
-                            $("#passportExpiryDateError").delay(3200).fadeOut(300);
-                             return false;
-                        }
-
+                    if (document.getElementById("passportNo").value == "") {
+                        document.getElementById('passportNoError').innerHTML = '-It must not be empty.';
+                        document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                        $("#errormsg").delay(0).fadeIn(0);
+                        $("#errormsg").delay(3200).fadeOut(300);
+                        $("#passportNoError").delay(0).fadeIn(0);
+                        $("#passportNoError").delay(3200).fadeOut(300);
+                        return false;
                     }
-                    else if(radioValue == "true"){
+                    else if (document.getElementById("countryOfIssue").value == "") {
+                        document.getElementById('countryOfIssueError').innerHTML = '-It must not be empty.';
+                        document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                        $("#errormsg").delay(0).fadeIn(0);
+                        $("#errormsg").delay(3200).fadeOut(300);
+                        $("#countryOfIssueError").delay(0).fadeIn(0);
+                        $("#countryOfIssueError").delay(3200).fadeOut(300);
+                        return false;
+                    }
+                    else if (document.getElementById("firstName").value == "") {
+                        document.getElementById('firstNameError').innerHTML = '-It must not be empty.';
+                        document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                        $("#errormsg").delay(0).fadeIn(0);
+                        $("#errormsg").delay(3200).fadeOut(300);
+                        $("#firstNameError").delay(0).fadeIn(0);
+                        $("#firstNameError").delay(3200).fadeOut(300);
+                        return false;
+                    }
+                    else if (document.getElementById("middleName").value == "") {
+                        document.getElementById('middleNameError').innerHTML = '-It must not be empty.';
+                        document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                        $("#errormsg").delay(0).fadeIn(0);
+                        $("#errormsg").delay(3200).fadeOut(300);
+                        $("#middleNameError").delay(0).fadeIn(0);
+                        $("#middleNameError").delay(3200).fadeOut(300);
+                        return false;
+                    }
+                    else if (document.getElementById("lastName").value == "") {
+                        document.getElementById('lastNameError').innerHTML = '-It must not be empty.';
+                        document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                        $("#errormsg").delay(0).fadeIn(0);
+                        $("#errormsg").delay(3200).fadeOut(300);
+                        $("#lastNameError").delay(0).fadeIn(0);
+                        $("#lastNameError").delay(3200).fadeOut(300);
+                        return false;
+                    }
+                    else if (document.getElementById("passportIssueDate").value == "") {
+                        document.getElementById('passportIssueDateError').innerHTML = '-It must not be empty.';
+                        document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                        $("#errormsg").delay(0).fadeIn(0);
+                        $("#errormsg").delay(3200).fadeOut(300);
+                        $("#passportIssueDateError").delay(0).fadeIn(0);
+                        $("#passportIssueDateError").delay(3200).fadeOut(300);
+
+                        return false;
+                    }
+                    else if (document.getElementById("passportExpiryDate").value == "") {
+                        document.getElementById('passportExpiryDateError').innerHTML = '-It must not be empty.';
+                        document.getElementById('errormsg').innerHTML = '-Enter all the details of Passport Fields.';
+                        $("#errormsg").delay(0).fadeIn(0);
+                        $("#errormsg").delay(3200).fadeOut(300);
+                        $("#passportExpiryDateError").delay(0).fadeIn(0);
+                        $("#passportExpiryDateError").delay(3200).fadeOut(300);
+                        return false;
+                    }
+
+                }
+                else if (radioValue == "true") {
 //                       alert("aadhar");
-                       if (document.getElementById("adharCard").value == ""){
-                            document.getElementById('adharCardError').innerHTML = '-It must not be empty.';
-                            document.getElementById('errormsg').innerHTML = '-Enter Aadhar Card details.';
-                            $("#errormsg").delay(0).fadeIn(0);
-                             $("#errormsg").delay(3200).fadeOut(300);
-                             $("#adharCardError").delay(0).fadeIn(0);
-                            $("#adharCardError").delay(3200).fadeOut(300);
-                            return false;
-                        }else if (document.getElementById("firstName").value == ""){
-                            document.getElementById('firstNameError').innerHTML = '-It must not be empty.';
-                            document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
-                             $("#errormsg").delay(0).fadeIn(0);
-                             $("#errormsg").delay(3200).fadeOut(300);
-                             $("#firstNameError").delay(0).fadeIn(0);
-                            $("#firstNameError").delay(3200).fadeOut(300);
-                            return false;
-                        }
-                        else if (document.getElementById("middleName").value == ""){
-                            document.getElementById('middleNameError').innerHTML = '-It must not be empty.';
-                            document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
-                             $("#errormsg").delay(0).fadeIn(0);
-                             $("#errormsg").delay(3200).fadeOut(300);
-                             $("#middleNameError").delay(0).fadeIn(0);
-                            $("#middleNameError").delay(3200).fadeOut(300);
-                            return false;
-                        }
-                        else if (document.getElementById("lastName").value == ""){
-                            document.getElementById('lastNameError').innerHTML = '-It must not be empty.';
-                            document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
-                             $("#errormsg").delay(0).fadeIn(0);
-                            $("#errormsg").delay(3200).fadeOut(300);
-                            $("#lastNameError").delay(0).fadeIn(0);
-                             $("#lastNameError").delay(3200).fadeOut(300);
-                            return false;
-                        }
-                    } 
+                    if (document.getElementById("adharCard").value == "") {
+                        document.getElementById('adharCardError').innerHTML = '-It must not be empty.';
+                        document.getElementById('errormsg').innerHTML = '-Enter Aadhar Card details.';
+                        $("#errormsg").delay(0).fadeIn(0);
+                        $("#errormsg").delay(3200).fadeOut(300);
+                        $("#adharCardError").delay(0).fadeIn(0);
+                        $("#adharCardError").delay(3200).fadeOut(300);
+                        return false;
+                    } else if (document.getElementById("firstName").value == "") {
+                        document.getElementById('firstNameError').innerHTML = '-It must not be empty.';
+                        document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
+                        $("#errormsg").delay(0).fadeIn(0);
+                        $("#errormsg").delay(3200).fadeOut(300);
+                        $("#firstNameError").delay(0).fadeIn(0);
+                        $("#firstNameError").delay(3200).fadeOut(300);
+                        return false;
+                    }
+                    else if (document.getElementById("middleName").value == "") {
+                        document.getElementById('middleNameError').innerHTML = '-It must not be empty.';
+                        document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
+                        $("#errormsg").delay(0).fadeIn(0);
+                        $("#errormsg").delay(3200).fadeOut(300);
+                        $("#middleNameError").delay(0).fadeIn(0);
+                        $("#middleNameError").delay(3200).fadeOut(300);
+                        return false;
+                    }
+                    else if (document.getElementById("lastName").value == "") {
+                        document.getElementById('lastNameError').innerHTML = '-It must not be empty.';
+                        document.getElementById('errormsg').innerHTML = '-Enter all the details of First, Middle & Last Name as per Aadhar Card Fields.';
+                        $("#errormsg").delay(0).fadeIn(0);
+                        $("#errormsg").delay(3200).fadeOut(300);
+                        $("#lastNameError").delay(0).fadeIn(0);
+                        $("#lastNameError").delay(3200).fadeOut(300);
+                        return false;
+                    }
+                }
             }
         }
-        
+
     </script>
     <script>
         function userName1(val) {
@@ -735,7 +736,7 @@
                 document.getElementById('spanId9').innerHTML = 'Expand';
             }
         }
-        
+
         function buttonFun10() {
             var className = $('#minusId10').attr('class');
             if (className == 'fa fa-plus') {
@@ -810,68 +811,68 @@
 
         }
     </script>
-<!--    <script>
-        var tempCount = 1;
-        $(function () {
-            tempCount = document.getElementById('visaCount1').value;
-            $("#visaCloneid").on("click", function () {
-//                alert("clicked");
-                tempCount++;
-                //                alert(tempCount3);
-                var clone = "<tr id='addmoreTR" + tempCount + "' style='clear:both;'>"
-                        + "<td style=\"text-align: center\">" + tempCount + "</td>"
-                        + "<td id=\"visaIssueCountry" + tempCount + "\"><input type =\"text\" name='visaIssueCountry" + tempCount + "' id='visaIssueCountry" + tempCount + "' class =\"form-control\" />"
-                        + "<td style=\"text-align: center\">"
-                        + "<input type=\"text\" name='visaIssueDate" + tempCount + "' id='visaIssueDate" + tempCount + "' size=\"16\"  class=\"form-control\">"
-                        + "</td>"
-                        + "<td style=\"text-align: center\">"
-                        + "<input type=\"text\" name='visaValidTillDate" + tempCount + "' id='visaValidTillDate" + tempCount + "' class=\"form-control\" size=\"16\">"
-                        + "</td>"
-                        + "<td style=\"text-align: center\">"
-                        + "<span style='margin-top: 5px;'>"
-                        + "<input type=\"button\"value=\"-\"  onclick=\"removevisadoc('addmoreTR" + tempCount + "');\"/>"
-                        + "</span>"
-                        + "</td>"
-                        + "</tr>";
-                $("#visaTable").append(clone);
-                document.getElementById('visaCount1').value = tempCount;
-                $("#visaIssueDate" + tempCount + "").datepicker({dateFormat: 'dd/mm/yy'});
-                $("#visaValidTillDate" + tempCount + "").datepicker({dateFormat: 'dd/mm/yy'});
-//                $("#ui-datepicker-div").css("z-index",2);
-//                window.onload = init;
-//                function init() {
-//                    document.form1.month.options[new Date().getMonth()].selected = true;
-//                }
-
-
+    <!--    <script>
+            var tempCount = 1;
+            $(function () {
+                tempCount = document.getElementById('visaCount1').value;
+                $("#visaCloneid").on("click", function () {
+    //                alert("clicked");
+                    tempCount++;
+                    //                alert(tempCount3);
+                    var clone = "<tr id='addmoreTR" + tempCount + "' style='clear:both;'>"
+                            + "<td style=\"text-align: center\">" + tempCount + "</td>"
+                            + "<td id=\"visaIssueCountry" + tempCount + "\"><input type =\"text\" name='visaIssueCountry" + tempCount + "' id='visaIssueCountry" + tempCount + "' class =\"form-control\" />"
+                            + "<td style=\"text-align: center\">"
+                            + "<input type=\"text\" name='visaIssueDate" + tempCount + "' id='visaIssueDate" + tempCount + "' size=\"16\"  class=\"form-control\">"
+                            + "</td>"
+                            + "<td style=\"text-align: center\">"
+                            + "<input type=\"text\" name='visaValidTillDate" + tempCount + "' id='visaValidTillDate" + tempCount + "' class=\"form-control\" size=\"16\">"
+                            + "</td>"
+                            + "<td style=\"text-align: center\">"
+                            + "<span style='margin-top: 5px;'>"
+                            + "<input type=\"button\"value=\"-\"  onclick=\"removevisadoc('addmoreTR" + tempCount + "');\"/>"
+                            + "</span>"
+                            + "</td>"
+                            + "</tr>";
+                    $("#visaTable").append(clone);
+                    document.getElementById('visaCount1').value = tempCount;
+                    $("#visaIssueDate" + tempCount + "").datepicker({dateFormat: 'dd/mm/yy'});
+                    $("#visaValidTillDate" + tempCount + "").datepicker({dateFormat: 'dd/mm/yy'});
+    //                $("#ui-datepicker-div").css("z-index",2);
+    //                window.onload = init;
+    //                function init() {
+    //                    document.form1.month.options[new Date().getMonth()].selected = true;
+    //                }
+    
+    
+                });
             });
-        });
-        $(function () {
-            var cont = document.getElementById("visaCount1").value;
-            var id;
-            for (id = 1; id <= cont; id++) {
-                $("#visaIssueDate" + id).datepicker({dateFormat: 'dd/mm/yy'});
+            $(function () {
+                var cont = document.getElementById("visaCount1").value;
+                var id;
+                for (id = 1; id <= cont; id++) {
+                    $("#visaIssueDate" + id).datepicker({dateFormat: 'dd/mm/yy'});
+                }
+    
+            });
+            $(function () {
+                var cont1 = document.getElementById("visaCount1").value;
+                var idd;
+                for (idd = 1; idd <= cont1; idd++) {
+                    $("#visaValidTillDate" + idd).datepicker({dateFormat: 'dd/mm/yy'});
+                }
+    
+            });
+        </script>
+        <script>
+            function removevisadoc(addmoreTR) {
+                --tempCount;
+                document.getElementById('visaCount1').value = tempCount;
+                var element1 = document.getElementById(addmoreTR);
+                element1.parentNode.removeChild(element1);
             }
-
-        });
-        $(function () {
-            var cont1 = document.getElementById("visaCount1").value;
-            var idd;
-            for (idd = 1; idd <= cont1; idd++) {
-                $("#visaValidTillDate" + idd).datepicker({dateFormat: 'dd/mm/yy'});
-            }
-
-        });
-    </script>
-    <script>
-        function removevisadoc(addmoreTR) {
-            --tempCount;
-            document.getElementById('visaCount1').value = tempCount;
-            var element1 = document.getElementById(addmoreTR);
-            element1.parentNode.removeChild(element1);
-        }
-
-    </script>-->
+    
+        </script>-->
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -904,7 +905,7 @@
                                     <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
                                     <!--form horizontal starts here-->
                                     <!--pesonal detail starts-->
-                                    <c:forEach var="list" items="${employeeMasterExtensionList}">
+                                <c:forEach var="list" items="${employeeMasterExtensionList}">
                                     <div class="box box-info collapsed-box ">
                                         <div class="box-header">
                                             <h3 class="box-title">Employee Official Details:</h3>
@@ -919,358 +920,335 @@
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Employee Id:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="employeeId" class="form-control" ></form:input>
-                                                        <form:errors path="employeeId" cssClass="errorDiv"></form:errors>
+                                                            <form:input path="employeeId" class="form-control" ></form:input>
+                                                            <form:errors path="employeeId" cssClass="errorDiv"></form:errors>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <label>Employee Name (First & Last Name only):<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:input path="employeeName" class="readItOnly form-control"></form:input>
+                                                            <form:errors path="employeeName" cssClass="errorDiv"></form:errors>
+                                                            </div>
                                                         </div>
 
-                                                        <div class="col-sm-6">
-                                                            <label>Employee Name (First & Last Name only):<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="employeeName" class="readItOnly form-control"></form:input>
-                                                        <form:errors path="employeeName" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <form:input path="dateOfJoining" class="form-control" size="16" value="" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Date Of Joining:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                <form:input path="dateOfJoining" class="form-control" size="16" value="" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            <form:errors path="dateOfJoining" cssClass="errorDiv"></form:errors>
                                                             </div>
-                                                        <form:errors path="dateOfJoining" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Date Of Birth:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirth" id="dob" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            <div class="col-sm-6">
+                                                                <label>Date Of Birth:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                <form:input path="dateOfBirth" id="dob" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            <form:errors path="dateOfBirth" cssClass="errorDiv"></form:errors>
                                                             </div>
-                                                        <form:errors path="dateOfBirth" cssClass="errorDiv"></form:errors>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">    
-                                                        <div class="col-sm-6">
-                                                            <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
-                                                            <form:option value="None" label="-- Select --" ></form:option>
-                                                            <form:options items="${EmployeeTypeList}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6" id="employeeSubTypeId">
-                                                            <label>Division:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <input type="hidden" name="subell" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
-                                                        <form:select path="employeeSubType.id" id="sell" class="form-control">
-                                                            <form:option value="" label="-- Select --" ></form:option> 
-                                                        </form:select>
-                                                        <span id="subtypeError" style="color: red;"></span>
+                                                        <div class="form-group">    
+                                                            <div class="col-sm-6">
+                                                                <label>Department:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:select path="employeeTypeMaster.id" id="employeeTypeMaster.id" onchange="selectsubtype(this.value);" class="form-control">
+                                                                <form:option value="None" label="-- Select --" ></form:option>
+                                                                <form:options items="${EmployeeTypeList}"></form:options>
+                                                            </form:select>
+                                                            <form:errors path="employeeTypeMaster.id" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-6" id="employeeSubTypeId">
+                                                                <label>Division:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <input type="hidden" name="subell" id="subTypeId" value="${employeeMaster.employeeSubType.id}">
+                                                            <form:select path="employeeSubType.id" id="sell" class="form-control">
+                                                                <form:option value="" label="-- Select --" ></form:option> 
+                                                            </form:select>
+                                                            <span id="subtypeError" style="color: red;"></span>
                                                         </div>    
                                                     </div>
                                                     <div class="form-group">   
                                                         <div class="col-sm-6">
                                                             <label>Designation:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <select name="designationMasterByLevelId" id="designationMasterByLevelId" class="form-control" onchange="setDesignation()">
-                                                            <c:forEach var="desn" items="${desigList}">
-                                                                <c:choose>
-                                                                    <c:when test="${desn.key eq employeeMaster.designationMaster.id }">
-                                                                        <option value="${desn.key}" selected="true">${desn.value}</option>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <option value="${desn.key}">${desn.value}</option>
-                                                                    </c:otherwise>
-                                                                </c:choose>
+                                                                <c:forEach var="desn" items="${desigList}">
+                                                                    <c:choose>
+                                                                        <c:when test="${desn.key eq employeeMaster.designationMaster.id }">
+                                                                            <option value="${desn.key}" selected="true">${desn.value}</option>
+                                                                        </c:when>
+                                                                        <c:otherwise>
+                                                                            <option value="${desn.key}">${desn.value}</option>
+                                                                        </c:otherwise>
+                                                                    </c:choose>
 
-                                                            </c:forEach>
-                                                            <%--<form:options items="${desigList}"></form:options>--%>
-                                                        </select>
-                                                        <form:hidden path="designationMaster.id" class="form-control"></form:hidden>
+                                                                </c:forEach>
+                                                                <%--<form:options items="${desigList}"></form:options>--%>
+                                                            </select>
+                                                            <form:hidden path="designationMaster.id" class="form-control"></form:hidden>
 
-                                                        <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
+                                                            <form:errors path="designationMaster.id" cssClass="errorDiv"></form:errors>
+
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label>Gender:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
+                                                                <fieldset id="group1">
+
+                                                                <form:radiobutton path="gender" value="false" />Male&nbsp;&nbsp;
+                                                                <form:radiobutton path="gender" value="true" />Female&nbsp;&nbsp;
+
+                                                            </fieldset>
+                                                            <form:errors path="gender" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                        </div>   
+                                                        <div class="form-group">  
+                                                            <div class="col-sm-6">
+                                                                <input type="hidden" name="mriStatus" id="mriStatus" value="${mriStatus}">
+                                                            <label>Marital Status:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <fieldset id="group2">
+                                                                <form:radiobutton path="maritalStatus"  value="Married"/>Married
+                                                                <form:radiobutton path="maritalStatus"  value="UnMarried"/>UnMarried
+                                                                <form:radiobutton path="maritalStatus" value="Other"/>Other
+
+                                                            </fieldset>
+
+                                                            <div style="display: none;" class="col-sm-6" id="otherMaritalStatusId">
+                                                                <form:input type="text" path="maritalStatusOthers" class="form-control"/>
+                                                            </div>
 
                                                         </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Gender:<span style="color: red;font-size: 12px;">*</span></label>&nbsp;&nbsp;
-                                                            <fieldset id="group1">
-
-                                                            <form:radiobutton path="gender" value="false" />Male&nbsp;&nbsp;
-                                                            <form:radiobutton path="gender" value="true" />Female&nbsp;&nbsp;
-
-                                                        </fieldset>
-                                                        <form:errors path="gender" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>   
-                                                    <div class="form-group">  
-                                                        <div class="col-sm-6">
-                                                            <input type="hidden" name="mriStatus" id="mriStatus" value="${mriStatus}">
-                                                        <label>Marital Status:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <fieldset id="group2">
-                                                            <form:radiobutton path="maritalStatus"  value="Married"/>Married
-                                                            <form:radiobutton path="maritalStatus"  value="UnMarried"/>UnMarried
-                                                            <form:radiobutton path="maritalStatus" value="Other"/>Other
-
-                                                        </fieldset>
-
-                                                        <div style="display: none;" class="col-sm-6" id="otherMaritalStatusId">
-                                                            <form:input type="text" path="maritalStatusOthers" class="form-control"/>
-                                                        </div>
-
-                                                    </div>
                                                         <div class="col-sm-3">
                                                             <label>Photograph:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <img src="${imgFile}" id="photograph" name="photograph" width="150px" height="150px"/>
-                                                    </div>
-                                                    <div class="col-sm-3">
-                                                        <label>Update Photo:</label>
-                                                        <div id="imageSrc">
-                                                            <input type="file" class="form-control" id="photographUpdate" name="photographUpdate" onchange="changeButton();" accept="image/jpg,image/jpeg,image/png">
-                                                            <span style="font-size: 14px; color: red;" id="photographError"></span>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <label>Update Photo:</label>
+                                                            <div id="imageSrc">
+                                                                <input type="file" class="form-control" id="photographUpdate" name="photographUpdate" onchange="changeButton();" accept="image/jpg,image/jpeg,image/png">
+                                                                <span style="font-size: 14px; color: red;" id="photographError"></span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Official E - Mail ID:</label>
-                                                        <form:input path="officeEmailId" id="officeEmailId" class="form-control"></form:input>
-                                                        <form:errors path="officeEmailId" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <!--pesonal detail complete-->
-
-
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Legal Documents:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
-                                                <!--<button  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12">
                                                     <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label>Employee Name (First Name, Middle Name, Last Name as per Aadhar card.)<span style="color: red;font-size: 12px;">*</span></label><br>
-                                                                <%--<c:if test="${list.nameStatus eq 'false'}">--%>
-<!--                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport
-                                                                    <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard-->
-                                                                <%--</c:if>--%>
-                                                                <%--<c:if test="${list.nameStatus eq 'true'}">--%>
-<!--                                                                    <input type="radio" name="nameStatus"  id="nameStatus" value="false"/>Passport&nbsp;&nbsp;
-                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="true"/>AadharCard-->
-                                                                <%--</c:if>--%>
-                                                        <!--<span style="font-size: 14px; color: red;" id="errormsg"></span>-->
-                                                    </div>
+                                                        <div class="col-sm-6">
+                                                            <label>Official E - Mail ID:</label>
+                                                            <form:input path="officeEmailId" id="officeEmailId" class="form-control"></form:input>
+                                                            <form:errors path="officeEmailId" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                        </div>
+                                                    </div><!-- /.col -->
+                                                </div><!-- /.row -->
+                                            </div><!-- /.box-body -->
+                                        </div>
+                                        <!--pesonal detail complete-->
+
+
+                                        <div class="box box-info collapsed-box">
+                                            <div class="box-header">
+                                                <h3 class="box-title">Legal Documents:</h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId2">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun2();"><i class="fa fa-plus" id="minusId2" ></i></button>
+                                                    <!--<button  class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
                                                 </div>
+                                            </div><!-- /.box-header -->
+                                            <div class="box-body no-padding">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Employee Name (First Name, Middle Name, Last Name as per Aadhar card.)<span style="color: red;font-size: 12px;">*</span></label><br>
+                                                            <%--<c:if test="${list.nameStatus eq 'false'}">--%>
+                                                            <!--                                                                    <input type="radio" name="nameStatus" checked="" id="nameStatus" value="false"/>Passport
+                                                                                                                                <input type="radio" name="nameStatus" id="nameStatus" value="true"/>AadharCard-->
+                                                            <%--</c:if>--%>
+                                                            <%--<c:if test="${list.nameStatus eq 'true'}">--%>
+                                                            <!--                                                                    <input type="radio" name="nameStatus"  id="nameStatus" value="false"/>Passport&nbsp;&nbsp;
+                                                                                                                                <input type="radio" name="nameStatus" checked="" id="nameStatus" value="true"/>AadharCard-->
+                                                            <%--</c:if>--%>
+                                                            <!--<span style="font-size: 14px; color: red;" id="errormsg"></span>-->
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>PAN Card No:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="panCard" style="text-transform:uppercase" id="pancard" class="form-control" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
-                                                        <form:errors path="panCard" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-
-                                                            <label>Nationality:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <input type="text" name="nationality" id="nationality"  style="text-transform:uppercase" value="${list.nationality}" class="form-control">
-
-                                                    </div>
-                                                </div>
-<!--                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-                                                        <label >Passport No:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <%--<form:input path="passportNo" id="passportNo" class="form-control"></form:input>--%>
-                                                         <span style="font-size: 14px; color: red;" id="passportNoError"></span>
-                                                    </div>
-                                                        <div class="col-sm-6">
-
-                                                            <label>Country Of Issue:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <input type="text" name="countryOfIssue" value="" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
-                                                            <span style="font-size: 14px; color: red;" id="countryOfIssueError"></span>
-                                                    </div>
-                                                </div>-->
-                                                
-
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-
-                                                        <label>First Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <input type="text" name="firstName" value="${list.firstName}" id="firstName" placeholder="First Name as per Passport" class="form-control">
-                                                    <span style="font-size: 14px; color: red;" id="firstNameError"></span>
-                                                    </div>
-                                                    <div class="col-sm-6">
-
-                                                        <label>Middle Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <input type="text" name="middleName" value="${list.middleName}" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
-                                                    <span style="font-size: 14px; color: red;" id="middleNameError"></span>
-                                                    </div>
-                                                </div>   
-                                                <div class="form-group">
-                                                    <div class="col-sm-6">
-
-                                                        <label>Last Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <input type="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
-                                                    <span style="font-size: 14px; color: red;" id="lastNameError"></span>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                            <label>Driving Licence No :</label>
-                                                        <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>
-                                                        </div>
-<!--                                                    <div class="col-sm-6">
-                                                        <label>Passport Issue Date:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                            <%--<form:input path="passportIssueDate" class="form-control" size="16"></form:input>--%>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                            <form:input path="panCard" style="text-transform:uppercase" id="pancard" class="form-control" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"></form:input>
+                                                            <form:errors path="panCard" cssClass="errorDiv"></form:errors>
                                                             </div>
-                                                                <span style="font-size: 14px; color: red;" id="passportIssueDateError"></span>
+                                                            <div class="col-sm-6">
+
+                                                                <label>Nationality:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <input type="text" name="nationality" id="nationality"  style="text-transform:uppercase" value="${list.nationality}" class="form-control">
+
+                                                        </div>
+                                                    </div>
+                                                    <!--                                                <div class="form-group">
+                                                                                                        <div class="col-sm-6">
+                                                                                                            <label >Passport No:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <%--<form:input path="passportNo" id="passportNo" class="form-control"></form:input>--%>
+                                                     <span style="font-size: 14px; color: red;" id="passportNoError"></span>
+                                                </div>
+                                                    <div class="col-sm-6">
+
+                                                        <label>Country Of Issue:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <input type="text" name="countryOfIssue" value="" id="countryOfIssue"  placeholder="Passport Issue Country" class="form-control">
+                                                        <span style="font-size: 14px; color: red;" id="countryOfIssueError"></span>
+                                                </div>
+                                            </div>-->
+
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>First Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="text" name="firstName" value="${list.firstName}" id="firstName" placeholder="First Name as per Passport" class="form-control">
+                                                            <span style="font-size: 14px; color: red;" id="firstNameError"></span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+
+                                                            <label>Middle Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="text" name="middleName" value="${list.middleName}" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
+                                                            <span style="font-size: 14px; color: red;" id="middleNameError"></span>
+                                                        </div>
+                                                    </div>   
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+
+                                                            <label>Last Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <input type="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
+                                                            <span style="font-size: 14px; color: red;" id="lastNameError"></span>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <label >Aadhar Card:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:input path="adharCard" class="form-control"></form:input>
+                                                            <form:errors path="adharCard" cssClass="errorDiv"></form:errors>
+                                                                <span style="font-size: 14px; color: red;" id="adharCardError"></span>
+                                                            </div>
+                                                            <!--                                                    <div class="col-sm-6">
+                                                                                                                        <label>Driving Licence No :</label>
+                                                        <%--<form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>--%>
+                                                        </div>-->
+                                                        <!--                                                    <div class="col-sm-6">
+                                                                                                                <label>Passport Issue Date:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                                                                <div class="input-group date form_datetime_passport_issue"  data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                        <%--<form:input path="passportIssueDate" class="form-control" size="16"></form:input>--%>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+                                                            <span style="font-size: 14px; color: red;" id="passportIssueDateError"></span>
                                                         <%--<form:errors path="passportIssueDate" cssClass="errorDiv"></form:errors>--%>
                                                         </div>-->
                                                     </div>  
-                                                    <div class="form-group">
 
-                                                        <div class="col-sm-6">
-
-                                                            <label>Driving Licence Type:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <select name="drivingLicenceType" id="drivingLicenceType" class="form-control">
-                                                            <c:if test="${empty list.drivingLicenceType}">
-                                                                <option value="">-- Select --</option>
-                                                                <option value="2Wheeler">2Wheeler</option>
-                                                                <option value="4Wheeler">4Wheeler</option>
-                                                                <option value="Both">Both</option>
-
-                                                            </c:if>
-                                                            <c:if test="${!empty list.drivingLicenceType}">
-                                                                <option <c:choose><c:when test="${list.drivingLicenceType eq '2Wheeler'}"> value="2Wheeler" selected="true"</c:when><c:otherwise>value="2Wheeler"</c:otherwise></c:choose>>2 Wheeler</option>
-                                                                <option <c:choose><c:when test="${list.drivingLicenceType eq '4Wheeler'}"> value="4Wheeler" selected="true"</c:when><c:otherwise>value="4Wheeler"</c:otherwise></c:choose>>4 Wheeler</option>
-                                                                <option <c:choose><c:when test="${list.drivingLicenceType eq 'Both'}"> value="Both" selected="true"</c:when><c:otherwise>value="Both"</c:otherwise></c:choose>>Both</option>
-                                                            </c:if>
-
-                                                        </select>
-
-
+                                                    <!--                                                    <div class="form-group">
+                                                    
+                                                                                                            <div class="col-sm-6">
+                                                    
+                                                                                                                <label>Election Card:<span style="color: red;font-size: 12px;"></span></label>
+                                                                                                                <input type="text" name="electionCard" value="" id="electionCard" class="form-control">
+                                                    
+                                                                                                        </div>
+                                                                                                        <label style="padding-left:15px;">Any Other Government Document Photo Id Proof:</label>
+                                                                                                        <div class="col-sm-3">
+                                                                                                            
+                                                                                                            
+                                                    <%--<form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name" style="width:250px;"></form:input>--%>
                                                     </div>
-                                                    <div class="col-sm-6">
-                                                        <label >Aadhar Card:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="adharCard" class="form-control"></form:input>
-                                                        <form:errors path="adharCard" cssClass="errorDiv"></form:errors>
-                                                        <span style="font-size: 14px; color: red;" id="adharCardError"></span>
-                                                        </div>
-                                                    </div> 
-<!--                                                    <div class="form-group">
-
-                                                        <div class="col-sm-6">
-
-                                                            <label>Election Card:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="electionCard" value="" id="electionCard" class="form-control">
-
-                                                    </div>
-                                                    <label style="padding-left:15px;">Any Other Government Document Photo Id Proof:</label>
                                                     <div class="col-sm-3">
-                                                        
-                                                        
-                                                            <%--<form:input path="govLicenceName" type="text" class="form-control" placeholder="Please Specify Photo ID Name" style="width:250px;"></form:input>--%>
-                                                            </div>
-                                                            <div class="col-sm-3">
-                                                           <input type="text" name="documentIdNo" id="documentIdNo" value="" class="form-control" placeholder="Photo ID No" style="width:150px;"/>
-                                                            
-                                                        </div>
-                                                    </div>       -->
+                                                   <input type="text" name="documentIdNo" id="documentIdNo" value="" class="form-control" placeholder="Photo ID No" style="width:150px;"/>
+                                                    
+                                                </div>
+                                            </div>       -->
                                                 </div><!-- /.col -->
                                             </div><!-- /.row -->
                                         </div><!-- /.box-body -->
                                     </div>
-                                       <!--Legal Document detail completes here-->
-                                       <!--Document Visa detail starts here-->
-<!--                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Visa Details:</h3>
-                                            <div class="box-tools pull-right">
-                                                                                                <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
-                                                <span id="spanId9">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun9();"><i class="fa fa-plus" id="minusId9" ></i></button>
-                                            </div>
-                                        </div> /.box-header 
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-                                                    <div class="table-responsive">
-                                                        <table id="visaTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                            <tr>
-                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                <th style="text-align: center; vertical-align: middle">Visa Issue Country</th>
-                                                                <th style="text-align: center; vertical-align: middle">Visa Issue Date</th>
-                                                                <th style="text-align: center; vertical-align: middle">Visa Valid till Date</th>
-                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                                    <%--<c:choose>--%>
-                                                                        <%--<c:when test="${not empty employeeVisaDetailsList}">--%>
-                                                                    <input type="hidden" name="visaCount" id="visaCount"  value="${fn:length(employeeVisaDetailsList)}"/>
-                                                                <%--</c:when>--%>
-                                                                <%--<c:otherwise>--%>
-                                                                    <input type="hidden" name="visaCount" id="visaCount"  value="1"/>
-                                                                <%--</c:otherwise>--%>
-                                                            <%--</c:choose>--%>
-                                                            </tr>
+                                    <!--Legal Document detail completes here-->
+                                    <!--Document Visa detail starts here-->
+                                    <!--                                    <div class="box box-info collapsed-box">
+                                                                            <div class="box-header">
+                                                                                <h3 class="box-title">Visa Details:</h3>
+                                                                                <div class="box-tools pull-right">
+                                                                                                                                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                                                                                    <span id="spanId9">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun9();"><i class="fa fa-plus" id="minusId9" ></i></button>
+                                                                                </div>
+                                                                            </div> /.box-header 
+                                                                            <div class="box-body no-padding">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 col-sm-12">
+                                                                                        <div class="table-responsive">
+                                                                                            <table id="visaTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                                                                <tr>
+                                                                                                    <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                                                    <th style="text-align: center; vertical-align: middle">Visa Issue Country</th>
+                                                                                                    <th style="text-align: center; vertical-align: middle">Visa Issue Date</th>
+                                                                                                    <th style="text-align: center; vertical-align: middle">Visa Valid till Date</th>
+                                                                                                    <th style="text-align: center; vertical-align: middle">Add New</th>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${not empty employeeVisaDetailsList}">--%>
+                                <input type="hidden" name="visaCount" id="visaCount"  value="${fn:length(employeeVisaDetailsList)}"/>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+                                        <input type="hidden" name="visaCount" id="visaCount"  value="1"/>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
+                                    </tr>
 
-                                                            <%--<c:choose>--%>
-                                                                <%--<c:when test="${not empty employeeVisaDetailsList}">--%>
-                                                                    <input type="hidden" name="visaCount1" id="visaCount1" value="${fn:length(employeeVisaDetailsList)}"/>
-                                                                    <%--<c:forEach var="employeeVisaDetailsList" items="${employeeVisaDetailsList}" varStatus = "visacountVal">--%>
+                                    <%--<c:choose>--%>
+                                    <%--<c:when test="${not empty employeeVisaDetailsList}">--%>
+                                        <input type="hidden" name="visaCount1" id="visaCount1" value="${fn:length(employeeVisaDetailsList)}"/>
+                                    <%--<c:forEach var="employeeVisaDetailsList" items="${employeeVisaDetailsList}" varStatus = "visacountVal">--%>
 
-                                                                        <tr>
-                                                                            <td style="text-align: center">${visacountVal.count}</td> 
-                                                                            <td style="text-align: center">
-                                                                                <input name="visaIssueCountry${visacountVal.count}" id="visaIssueCountry${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueCountry}" class="form-control">
-                                                                            </td>
-                                                                            <td style="text-align: center">
-                                                                                <input type="text" name="visaIssueDate${visacountVal.count}" id="visaIssueDate${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueDate}" size="16"  class="form-control">
-                                                                            </td>
-                                                                            <td style="text-align: center">
-                                                                                <input type="text" name="visaValidTillDate${visacountVal.count}" id="visaValidTillDate${visacountVal.count}" value="${employeeVisaDetailsList.visaValidTillDate}" class="form-control" size="16" >
-                                                                            </td>
-                                                                            <%--<c:if test="${visacountVal.last}">--%>
-                                                                                <td style="text-align: center">
-                                                                                    <span style='margin-top: 5px;'>
-                                                                                        <input type="button" value="+" id="visaCloneid" />
-                                                                                    </span>
-                                                                                </td>
-                                                                            <%--</c:if>--%>
-                                                                        </tr>
-                                                                    <%--</c:forEach>--%>
-                                                                <%--</c:when>--%>
-                                                                <%--<c:otherwise>--%>
-                                                                    <tr>
-                                                                        <td style="text-align: center">1</td>
-                                                                        <td style="text-align: center">
-                                                                            <input name="visaIssueCountry1" id="visaIssueCountry1" class="form-control">
-                                                                            <input type="hidden" name="visaCount1" id="visaCount1" value="1"/>
-                                                                        </td>
-                                                                        <td style="text-align: center">
-                                                                            <input type="text" name="visaIssueDate1" id="visaIssueDate1"  size="16"  class="form-control">
-                                                                        </td>
-                                                                        <td style="text-align: center">
-                                                                            <input type="text" name="visaValidTillDate1" id="visaValidTillDate1" class="form-control" size="16" >
-                                                                        </td>
-                                                                        <td style="text-align: center">
-                                                                            <span style='margin-top: 5px;'>
-                                                                                <input type="button" value="+" id="visaCloneid" />
-                                                                            </span>
-                                                                        </td>
-                                                                    </tr>
-                                                                <%--</c:otherwise>--%>
-                                                            <%--</c:choose>--%>
+                                        <tr>
+                                            <td style="text-align: center">${visacountVal.count}</td> 
+                                            <td style="text-align: center">
+                                                <input name="visaIssueCountry${visacountVal.count}" id="visaIssueCountry${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueCountry}" class="form-control">
+                                            </td>
+                                            <td style="text-align: center">
+                                                <input type="text" name="visaIssueDate${visacountVal.count}" id="visaIssueDate${visacountVal.count}" value="${employeeVisaDetailsList.visaIssueDate}" size="16"  class="form-control">
+                                            </td>
+                                            <td style="text-align: center">
+                                                <input type="text" name="visaValidTillDate${visacountVal.count}" id="visaValidTillDate${visacountVal.count}" value="${employeeVisaDetailsList.visaValidTillDate}" class="form-control" size="16" >
+                                            </td>
+                                    <%--<c:if test="${visacountVal.last}">--%>
+                                        <td style="text-align: center">
+                                            <span style='margin-top: 5px;'>
+                                                <input type="button" value="+" id="visaCloneid" />
+                                            </span>
+                                        </td>
+                                    <%--</c:if>--%>
+                                </tr>
+                                    <%--</c:forEach>--%>
+                                    <%--</c:when>--%>
+                                    <%--<c:otherwise>--%>
+                                        <tr>
+                                            <td style="text-align: center">1</td>
+                                            <td style="text-align: center">
+                                                <input name="visaIssueCountry1" id="visaIssueCountry1" class="form-control">
+                                                <input type="hidden" name="visaCount1" id="visaCount1" value="1"/>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <input type="text" name="visaIssueDate1" id="visaIssueDate1"  size="16"  class="form-control">
+                                            </td>
+                                            <td style="text-align: center">
+                                                <input type="text" name="visaValidTillDate1" id="visaValidTillDate1" class="form-control" size="16" >
+                                            </td>
+                                            <td style="text-align: center">
+                                                <span style='margin-top: 5px;'>
+                                                    <input type="button" value="+" id="visaCloneid" />
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    <%--</c:otherwise>--%>
+                                    <%--</c:choose>--%>
 
-                                                        </table>
-                                                    </div>
-                                                </div>  
-                                            </div> 
-                                        </div> 
-                                    </div>-->
+                                </table>
+                            </div>
+                        </div>  
+                    </div> 
+                </div> 
+            </div>-->
                                     <!--document visa detail completes here-->                     
                                     <!--Personal Contact Detail starts here-->
                                     <div class="box box-info collapsed-box">
@@ -1286,27 +1264,27 @@
                                                 <div class="col-md-12 col-sm-12">
 
                                                     <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                <label >Personal Email Id:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <div class="col-sm-6">
+                                                            <label >Personal Email Id:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:input path="emailAddress" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="abc@domain.com" required=""></form:input>
                                                             <form:errors path="emailAddress" cssClass="errorDiv"></form:errors>
                                                             </div>
-                                                           
-                                                        <div class="col-sm-6">
-                                                            <label >Contact No.1:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                            <div class="col-sm-6">
+                                                                <label >Personal Contact No:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                             <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                         </div>
-                                                    <div class="form-group">
+                                                        <div class="form-group">
 
                                                             <div class="col-sm-6">
-                                                                <label >Contact No.2:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <label >Contact No.2:<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="contactNo2" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                            <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
+                                                            <%--<form:errors path="contactNo2" cssClass="errorDiv"></form:errors>--%>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                            <label>Blood Group:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <label>Blood Group:<span style="color: red;font-size: 12px;">*</span></label>
 
                                                             <form:select path="bloodGroups" id="bloodGroups" class="form-control" >
                                                                 <option value="">--Select--</option>
@@ -1321,16 +1299,16 @@
                                                             </form:select>
                                                             <%--<form:hidden path="bloodGroups"/>--%>
                                                         </div>
-                                                    
+
                                                     </div>
-                                                      <div class="form-group">
-<!--                                                        <div class="col-sm-6">
-
-                                                            <label>Religion:</label>
-                                                            <input type="text" name="religion" id="religion" value="" class="form-control">
-
-                                                        </div>-->
-                                                            <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <!--                                                        <div class="col-sm-6">
+                                                        
+                                                                                                                    <label>Religion:</label>
+                                                                                                                    <input type="text" name="religion" id="religion" value="" class="form-control">
+                                                        
+                                                                                                                </div>-->
+                                                        <div class="col-sm-6">
 
                                                             <label>Languages known:</label>
                                                             <input type="text" name="languagesKnown" id="languagesKnown" value="${list.languagesKnown}" class="form-control">
@@ -1341,8 +1319,8 @@
                                                             <input type="text" name="disclosedHealthConcerns" id="disclosedHealthConcerns" value="${list.disclosedHealthConcerns}" class="form-control">
                                                         </div>
                                                     </div>      
-                                                        <div class="form-group">
-                                                        
+                                                    <div class="form-group">
+
                                                         <div class="col-sm-6">
 
                                                             <label>Hobbies:</label>
@@ -1354,70 +1332,70 @@
                                                             <form:input path="highestEducationDetails" id="highestEducationDetails" class="form-control"></form:input>
                                                             <form:errors path="highestEducationDetails" cssClass="errorDiv"></form:errors>
                                                             </div>
-                                                    </div>
-
-                                                </div><!-- /.col -->
-                                            </div><!-- /.row -->
-                                        </div><!-- /.box-body -->
-                                    </div>
-                                    <!--Personal Contact Detail complete here-->
-                                    <!--Family Background Detail starts here-->
-                                    
-                                    <div class="box box-info collapsed-box">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Family Background:</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId10">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun10();"><i class="fa fa-plus" id="minusId10"></i></button>
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
-
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Father's Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="fatherName" class=" form-control"></form:input>
-                                                        <form:errors path="fatherName" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label>Father's Date Of Birth:</label>
-                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpFather" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                        <form:errors path="dateOfBirthOfEmpFather" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Mother's Name:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="motherName" class=" form-control" ></form:input>
-                                                        <form:errors path="motherName" cssClass="errorDiv"></form:errors>
                                                         </div>
 
-                                                        <div class="col-sm-6">
-                                                            <label>Mother's Date Of Birth:</label>
-                                                            <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                            <form:input path="dateOfBirthOfEmpMother" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                            </div>
-                                                        <form:errors path="dateOfBirthOfEmpMother" cssClass="errorDiv"></form:errors>
-                                                        </div>
-                                                    </div>
-                                                <div id="hideInfo1" style="display: none;">
-                                                    <div class="form-group">
-                                                      <div class="col-sm-6">
-                                                            <label>Spouse Name:</label>
-                                                            <form:input path="spouseName" class="form-control"></form:input>
-                                                            </div>  
+                                                    </div><!-- /.col -->
+                                                </div><!-- /.row -->
+                                            </div><!-- /.box-body -->
+                                        </div>
+                                        <!--Personal Contact Detail complete here-->
+                                        <!--Family Background Detail starts here-->
+
+                                        <div class="box box-info collapsed-box">
+                                            <div class="box-header">
+                                                <h3 class="box-title">Family Background:</h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId10">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun10();"><i class="fa fa-plus" id="minusId10"></i></button>
+                                                    <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                </div>
+                                            </div><!-- /.box-header -->
+                                            <div class="box-body no-padding">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12">
+
+                                                        <div class="form-group">
                                                             <div class="col-sm-6">
+                                                                <label>Father's Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:input path="fatherName" class=" form-control"></form:input>
+                                                            <form:errors path="fatherName" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label>Father's Date Of Birth:</label>
+                                                                <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                <form:input path="dateOfBirthOfEmpFather" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            <form:errors path="dateOfBirthOfEmpFather" cssClass="errorDiv"></form:errors>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Mother's Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:input path="motherName" class=" form-control" ></form:input>
+                                                            <form:errors path="motherName" cssClass="errorDiv"></form:errors>
+                                                            </div>
+
+                                                            <div class="col-sm-6">
+                                                                <label>Mother's Date Of Birth:</label>
+                                                                <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                <form:input path="dateOfBirthOfEmpMother" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                </div>
+                                                            <form:errors path="dateOfBirthOfEmpMother" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                        </div>
+                                                        <div id="hideInfo1" style="display: none;">
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Spouse Name:</label>
+                                                                <form:input path="spouseName" class="form-control"></form:input>
+                                                                </div>  
+                                                                <div class="col-sm-6">
                                                                     <label>Spouse's Date Of Birth:</label>
                                                                     <div class="input-group date form_datetime_dob" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                                         <!--<input class="form-control" size="16" type="text" value="" readonly>-->
@@ -1426,102 +1404,102 @@
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                     </div>
                                                                 </div> 
-                                                        </div>
-                                               
-                                                           <div class="form-group">
-                                                               <div class="col-sm-6">
-
-                                                                <label>Spouse's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
-                                                                 <c:if test="${list.spouseGender eq 'false'}">
-                                                                 <fieldset id="group6">
-                                                                    <input type="radio" name="spouseGender" checked="" id="spouseGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="spouseGender" id="spouseGender" value="true"/>Female
-                                                               </fieldset>
-                                                                 </c:if>
-                                                                <c:if test="${list.spouseGender eq 'true'}">
-                                                                <fieldset id="group6">
-                                                                    <input type="radio" name="spouseGender"  id="spouseGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="spouseGender" checked="" id="spouseGender" value="true"/>Female
-                                                               </fieldset>
-                                                            </c:if>
                                                             </div>
-                                                                
-                                                            </div> 
-                                                            </div>  
-                                                            <div id="hideInfo2" style="display: none;">
+
                                                             <div class="form-group">
                                                                 <div class="col-sm-6">
-                                                                    <label>Child Name1:</label>
+
+                                                                    <label>Spouse's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                                    <c:if test="${list.spouseGender eq 'false'}">
+                                                                    <fieldset id="group6">
+                                                                        <input type="radio" name="spouseGender" checked="" id="spouseGender" value="false"/>Male&nbsp;&nbsp;
+                                                                        <input type="radio" name="spouseGender" id="spouseGender" value="true"/>Female
+                                                                    </fieldset>
+                                                                </c:if>
+                                                                <c:if test="${list.spouseGender eq 'true'}">
+                                                                    <fieldset id="group6">
+                                                                        <input type="radio" name="spouseGender"  id="spouseGender" value="false"/>Male&nbsp;&nbsp;
+                                                                        <input type="radio" name="spouseGender" checked="" id="spouseGender" value="true"/>Female
+                                                                    </fieldset>
+                                                                </c:if>
+                                                            </div>
+
+                                                        </div> 
+                                                    </div>  
+                                                    <div id="hideInfo2" style="display: none;">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Child Name1:</label>
                                                                 <form:input path="child1" class="form-control"></form:input>
                                                                 </div>
                                                                 <div class="col-sm-6">
-                                                                <label>Child1's Date Of Birth:</label>
-                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                    <label>Child1's Date Of Birth:</label>
+                                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                                     <form:input path="dateOfBirthOfEmpChilld1" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                     </div>
                                                                 </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
 
                                                                     <label>Child1's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
                                                                     <c:if test="${list.childOneGender eq 'false'}">
                                                                     <fieldset id="group6">
-                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
+                                                                        <input type="radio" name="childOneGender" checked="" id="childOneGender" value="false"/>Male&nbsp;&nbsp;
+                                                                        <input type="radio" name="childOneGender" id="childOneGender" value="true"/>Female
                                                                     </fieldset>
                                                                 </c:if>
                                                                 <c:if test="${list.childOneGender eq 'true'}">
-                                                                <fieldset id="group6">
-                                                                    <input type="radio" name="childOneGender"  id="childOneGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childOneGender" checked="" id="childOneGender" value="true"/>Female
+                                                                    <fieldset id="group6">
+                                                                        <input type="radio" name="childOneGender"  id="childOneGender" value="false"/>Male&nbsp;&nbsp;
+                                                                        <input type="radio" name="childOneGender" checked="" id="childOneGender" value="true"/>Female
                                                                     </fieldset>
                                                                 </c:if>
 
 
                                                             </div>
-                                                            
-                                                                
-                                                            </div>
 
-                                                            <div class="form-group">
-                                                                <div class="col-sm-6">
-                                                                    <label>Child Name2:</label>
+
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+                                                                <label>Child Name2:</label>
                                                                 <form:input path="child2" class="form-control"></form:input>
                                                                 </div>
                                                                 <div class="col-sm-6">
-                                                                <label>Child2's Date Of Birth:</label>
-                                                                <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-                                                                    <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                                                    <label>Child2's Date Of Birth:</label>
+                                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                                                     <form:input path="dateOfBirthOfEmpChild2" class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                                         <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                                                     </div>
                                                                 </div>
-                                                        </div>
-                                                         <div class="form-group">
-                                                             <div class="col-sm-6">
-                                                                   <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="col-sm-6">
+                                                                    <label>Child2's Gender:<span style="color: red;font-size: 12px;"></span></label>&nbsp;&nbsp;
                                                                     <c:if test="${list.childTwoGender eq 'false'}">
                                                                     <fieldset id="group6">
-                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
-                                                                   <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
-                                                                </fieldset>
+                                                                        <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
+                                                                        <input type="radio" name="childTwoGender" id="childTwoGender" value="true"/>Female
+                                                                    </fieldset>
                                                                 </c:if>
                                                                 <c:if test="${list.childTwoGender eq 'true'}">
                                                                     <fieldset id="group6">
-                                                                    <input type="radio" name="childTwoGender"  id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
-                                                                    <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="true"/>Female
-                                                                </fieldset>
-                                                                    </c:if>
+                                                                        <input type="radio" name="childTwoGender"  id="childTwoGender" value="false"/>Male&nbsp;&nbsp;
+                                                                        <input type="radio" name="childTwoGender" checked="" id="childTwoGender" value="true"/>Female
+                                                                    </fieldset>
+                                                                </c:if>
                                                             </div>
-                                                            
-                                                            </div>
+
                                                         </div>
-                                                         <div class="form-group">
+                                                    </div>
+                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Present Address:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:textarea path="presentAddress" class="form-control"></form:textarea>
@@ -1605,9 +1583,9 @@
 
                                                         </div>
                                                     </div>   
-                                                   <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                <label>Emergency Contact No:<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-6">
+                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                             <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
                                                             </div>
@@ -1616,26 +1594,26 @@
                                                             <form:input path="emergencyContactPerson" class="form-control"></form:input>
                                                             <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
                                                             </div>
-                                                            
-                                                    </div>         
-                                                     <div class="form-group">
-                                                        <div class="col-sm-6">
 
-                                                            <label>Relationship:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <input type="text" name="RelationShip" value="${list.relationShip}" id="RelationShip" class="form-control"/>
+                                                        </div>         
+                                                        <div class="form-group">
+                                                            <div class="col-sm-6">
+
+                                                                <label>Relationship:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <input type="text" name="RelationShip" value="${list.relationShip}" id="RelationShip" class="form-control"/>
 
                                                         </div>
                                                         <div class="col-sm-6">
 
-                                                                <label>Emergency Contact Address:<span style="color: red;font-size: 12px;"></span></label>
-                                                                <input type="text" name="emergencyContactAddress" id="emergencyContactAddress" value="${list.emergencyContactAddress}"  maxlength="14" class="form-control">
+                                                            <label>Emergency Contact Address:<span style="color: red;font-size: 12px;"></span></label>
+                                                            <input type="text" name="emergencyContactAddress" id="emergencyContactAddress" value="${list.emergencyContactAddress}"  maxlength="14" class="form-control">
 
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group">
-                                                        
-                                                        
+
+
                                                         <div class="col-sm-6">
 
                                                             <label>Other important information relating to your emergency contact:<span style="color: red;font-size: 12px;"></span></label>
@@ -1648,8 +1626,8 @@
                                         </div>
                                     </div>
                                     <!--Family Background detail completes here-->
-                                    
-                                    
+
+
                                     <!--Organization Specific Detail starts here-->
                                     <div class="box box-info collapsed-box">
                                         <div class="box-header">
@@ -1663,9 +1641,9 @@
                                             <div class="row">
                                                 <div class="col-md-12 col-sm-12">
                                                     <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                <label>Name of Previous company:</label>
-                                                                <input type="text" name="nameOfPreviousCompany" value="${list.nameOfPreviousCompany}" id="nameOfPreviousCompany" class="form-control">
+                                                        <div class="col-sm-6">
+                                                            <label>Name of Previous company:</label>
+                                                            <input type="text" name="nameOfPreviousCompany" value="${list.nameOfPreviousCompany}" id="nameOfPreviousCompany" class="form-control">
 
                                                         </div>
                                                         <div class="col-sm-6">
@@ -1675,55 +1653,55 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        
-                                                            <div class="col-sm-6">
-                                                                <label>Exp. on Date Of Joining:  Year:<span style="color: red;font-size: 12px;">*</span></label>
-                                                                <form:select path="experienceYearOnDoj" class="form-control ">
-                                                                    <c:forEach begin="0" end="50" var="counter">
-                                                                        <form:option value="${counter}">${counter}</form:option>
-                                                                    </c:forEach>
-                                                                </form:select>
-                                                                <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <label>Exp. on Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
-                                                                <form:select path="experienceMonthOnDoj" class="form-control">
-                                                                    <c:forEach begin="0" end="11" var="counter">
-                                                                        <form:option value="${counter}">${counter}</form:option>
-                                                                    </c:forEach>
-                                                                </form:select>
-                                                                <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
-                                                                </div>
-                                                            </div>
 
-                                                        <div class="form-group">
-                                                            <div class="col-sm-6">
-                                                                <label>Company:<span style="color: red;font-size: 12px;"></span></label>
-                                                                <form:select path="company"  class="form-control ">
-                                                                    <form:option label="-- Select --"  value="" ></form:option>
-                                                                    <c:forEach var="comp" items="${company}" >
-                                                                        <form:option value="${comp.value}">${comp.value}</form:option>
-                                                                    </c:forEach>
-                                                                </form:select>
-                                                                <form:errors path="company" cssClass="errorDiv"></form:errors>
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                            <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
-
-                                                            <form:select path="zydexLocationMaster.id" class="form-control">
-                                                                <%--<form:option value="" label="-- Select --" ></form:option>--%>
-                                                                <form:options items="${zydexLocationMap}"></form:options>
+                                                        <div class="col-sm-6">
+                                                            <label>Exp. on Date Of Joining:  Year:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:select path="experienceYearOnDoj" class="form-control ">
+                                                                <c:forEach begin="0" end="50" var="counter">
+                                                                    <form:option value="${counter}">${counter}</form:option>
+                                                                </c:forEach>
                                                             </form:select>
-                                                            <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
+                                                            <form:errors path="experienceYearOnDoj" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label>Exp. on Date Of Joining: Month:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:select path="experienceMonthOnDoj" class="form-control">
+                                                                <c:forEach begin="0" end="11" var="counter">
+                                                                    <form:option value="${counter}">${counter}</form:option>
+                                                                </c:forEach>
+                                                            </form:select>
+                                                            <form:errors path="experienceMonthOnDoj" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                         </div>
-                                                        <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
-                                                    
-                                                        <div class="form-group">
-                                                            
-                                                        
+
+<!--                                                        <div class="form-group">
                                                             <div class="col-sm-6">
-                                                                <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <label>Company:<span style="color: red;font-size: 12px;"></span></label>
+                                                                <%--<form:select path="company"  class="form-control ">--%>
+                                                                    <%--<form:option label="-- Select --"  value="" ></form:option>--%>
+                                                                    <%--<c:forEach var="comp" items="${company}" >--%>
+                                                                        <%--<form:option value="${comp.value}">${comp.value}</form:option>--%>
+                                                                    <%--</c:forEach>--%>
+                                                                <%--</form:select>--%>
+                                                                <%--<form:errors path="company" cssClass="errorDiv"></form:errors>--%>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                            <%--<form:select path="zydexLocationMaster.id" class="form-control">--%>
+                                                                <%--<form:option value="" label="-- Select --" ></form:option>--%>
+                                                                <%--<form:options items="${zydexLocationMap}"></form:options>--%>
+                                                            <%--</form:select>--%>
+                                                            <%--<form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>--%>
+                                                            </div>
+                                                        </div>-->
+                                                        <!--<input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">-->
+
+                                                    <div class="form-group">
+
+
+                                                        <div class="col-sm-6">
+                                                            <label>Level:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:select path="levelMaster.id" class="form-control" onchange="getDesignation();">
                                                                 <form:options items="${level}" ></form:options>
                                                             </form:select>
@@ -1740,8 +1718,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
-                                                           
-                                                            
+
+
                                                             <div class="col-sm-6">
                                                                 <label>Business Unit:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:select path="departmentMaster.id" class="form-control">
@@ -1751,11 +1729,11 @@
                                                             <form:errors path="departmentMaster.id" cssClass="errorDiv"></form:errors>
 
                                                             </div>
-                                                            
-                                                            <div class="col-sm-6">
-                                                            <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
 
-                                                            <select name="employeeType" id="employeeType" class="form-control ">
+                                                            <div class="col-sm-6">
+                                                                <label>Type of Employment:<span style="color: red;font-size: 12px;">*</span></label>
+
+                                                                <select name="employeeType" id="employeeType" class="form-control ">
                                                                 <c:choose>
                                                                     <c:when test="${employeeType.contains('Probation')}">
 
@@ -1776,7 +1754,7 @@
                                                                         <option value="Confirmed">Confirmed</option>
                                                                     </c:otherwise>
                                                                 </c:choose>
-                                                                         <c:choose>
+                                                                <c:choose>
                                                                     <c:when test="${employeeType.contains('Interns')}">
 
                                                                         <option value="Interns" selected="">Interns</option>
@@ -1793,54 +1771,54 @@
 
                                                         </div>
 
-                                                        </div>
+                                                    </div>
 
-                                                        <div class="form-group">
-                                                            
-                                                            <div class="col-sm-6">
-                                                                <label>Role:</label>
+                                                    <div class="form-group">
+
+                                                        <div class="col-sm-6">
+                                                            <label>Role:</label>
                                                             <form:input path="role" class="form-control"></form:input>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                            <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="shiftType" class="form-control">
-                                                            <!--<option value="">--SELECT--</option>-->
-                                                            <form:option value="" label="-- Select --" ></form:option>
-                                                            <form:option value="HourlyBase" label="Hourly Base"></form:option>
-                                                            <form:option value="ShiftBase" label="Shift Base"></form:option>
-                                                        </form:select>
-                                                        <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
-                                                        </div>
-
-<!--                                                            <div class="col-sm-6">
-                                                            <label >Official Contact No:</label>
-                                                            <input type="text" name="officialContactNumber" id="officialContactNumber" value="" class="form-control">
-                                                            </div>-->
-                                                        </div>
-<!--                                                           <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Sub Team Transfer Date:</label>
-                                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
-
-                                                                <input type="text" name="subteamTransferDate" class="form-control" size="16" value="" placeholder="DD/MM/YYYY" readonly="true"/>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <form:select path="shiftType" class="form-control">
+                                                                <!--<option value="">--SELECT--</option>-->
+                                                                <form:option value="" label="-- Select --" ></form:option>
+                                                                <form:option value="HourlyBase" label="Hourly Base"></form:option>
+                                                                <form:option value="ShiftBase" label="Shift Base"></form:option>
+                                                            </form:select>
+                                                            <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
                                                             </div>
+
+                                                            <!--                                                            <div class="col-sm-6">
+                                                                                                                        <label >Official Contact No:</label>
+                                                                                                                        <input type="text" name="officialContactNumber" id="officialContactNumber" value="" class="form-control">
+                                                                                                                        </div>-->
                                                         </div>
+                                                        <!--                                                           <div class="form-group">
+                                                                                                                <div class="col-sm-6">
+                                                                                                                    <label>Sub Team Transfer Date:</label>
+                                                                                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                        
+                                                                                                                        <input type="text" name="subteamTransferDate" class="form-control" size="16" value="" placeholder="DD/MM/YYYY" readonly="true"/>
+                                                                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                                                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                                                                                    </div>
+                                                                                                                </div>
+                                                        
+                                                                                                            </div> -->
 
-                                                    </div> -->
-                                                   
 
-                                                       
+
 
                                                         <div class="form-group">
-                                                        <div class="col-sm-6">
-                                                            <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <div class="col-sm-6">
+                                                                <label>Basic Salary:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:input path="basicSalary" class="form-control"  placeholder="Enter Basic Salary" onchange="changetotalButton();"/>
                                                             <form:errors path="basicSalary" cssClass="errorDiv"/>
                                                         </div>
-                                                         <div class="col-sm-6">
-                                                                <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
+                                                        <div class="col-sm-6">
+                                                            <label>ESIC No<span style="color: red;font-size: 12px;"></span></label>
                                                                 <form:input path="esicNo" class="form-control"    placeholder="Enter ESIC No"/>
                                                                 <form:errors path="esicNo" cssClass="errorDiv"/>
                                                         </div>
@@ -1857,14 +1835,22 @@
                                                             <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                         </div>
-                                                        
-
-
-                                                    
                                                     <div class="form-group">
-                                                        <div class="col-sm-4">
-                                                            <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
-                                                            <fieldset>
+                                                        <div class="col-sm-6">
+                                                            <label>Hours Mandatory:</label>
+                                                            <form:input path="hoursMadatory" type="text" placeholder="Enter Amount" class="form-control"></form:input>
+                                                            <form:errors path="hoursMadatory" cssClass="errorDiv"></form:errors>
+                                                            </div>
+                                                           
+                                                        </div>
+
+
+
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-4">
+                                                                <label>Provident Fund:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <fieldset>
                                                                 <form:radiobutton path="pf"   value="false" checked="checked"/>NO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                                                 <form:radiobutton path="pf" value="true"/>YES
                                                             </fieldset>
@@ -2499,11 +2485,11 @@
                                             </div><!-- /.box-body -->
                                         </div>
                                     </div>
-                                    
-                                    
-                                    
-                                    
-                                    
+
+
+
+
+
                                     <div class="box box-info collapsed-box" id="empInfo_id">
                                         <div class="box-header">
                                             <h3 class="box-title">Employee's Bank Account Detail:</h3>
@@ -2577,10 +2563,10 @@
                                                                 <%--<form:errors path="uanNo" cssClass="errorDiv"></form:errors>--%>
                                                         </div>  
                                                     </div>  
-                                                <%--</c:forEach>--%>
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
+                                                    <%--</c:forEach>--%>
+                                                </div><!-- /.col -->
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-body -->
                                     </div>
                                     <!--bank detail complete-->
                                     <div class="box box-info collapsed-box collapsed-box">
@@ -2641,72 +2627,72 @@
                                                 </div>
                                             </div><!-- /.col -->
                                         </div><!-- /.row -->
-                                    <!-- /.box-body -->
-                                    <div class="box box-info collapsed-box" id="login_detail_id">
-                                        <div class="box-header">
-                                            <h3 class="box-title">Employee Certificate Attachments</h3>
-                                            <div class="box-tools pull-right">
-                                                <span id="spanId8">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun8();"><i class="fa fa-plus" id="minusId8" ></i></button>
-                                                <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
-                                            </div>
-                                        </div><!-- /.box-header -->
-                                        <div class="box-body no-padding">
-                                            <div class="row">
-                                                <div class="col-md-12 col-sm-12">
+                                        <!-- /.box-body -->
+                                        <div class="box box-info collapsed-box" id="login_detail_id">
+                                            <div class="box-header">
+                                                <h3 class="box-title">Employee Certificate Attachments</h3>
+                                                <div class="box-tools pull-right">
+                                                    <span id="spanId8">Expand</span><button class="btn btn-box-tool" data-widget="collapse" onclick="buttonFun8();"><i class="fa fa-plus" id="minusId8" ></i></button>
+                                                    <!--<button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i></button>-->
+                                                </div>
+                                            </div><!-- /.box-header -->
+                                            <div class="box-body no-padding">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-sm-12">
 
-                                                    <!--                                                    <div class="form-group">
-                                                <%--<c:forEach var="certificatesList" items="${certificatesList}">--%>
+                                                        <!--                                                    <div class="form-group">
+                                                    <%--<c:forEach var="certificatesList" items="${certificatesList}">--%>
+    
+                                                        <div class="col-sm-12">
+                                                            <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=${certificatesList}&userId=${employeeMaster.userMaster.id}">${certificatesList}</a> ]</span>
+                                                        </div>
+                                                    <%--</c:forEach>--%>
+    
+                                                </div>-->
+                                                    <div class="box-body no-padding">
+                                                        <div class="row">
+                                                            <div class="col-md-12 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center">
+                                                                        <tr>
+                                                                            <th style="text-align: center;width:55px">Sr No.</th>
+                                                                            <th style="text-align: center;">Certificate Attach</th>
+                                                                            <th style="text-align: center;width:55px"></th>
+                                                                        </tr>
+                                                                        <input type="hidden" name="firstStepCount" id="firstStepCount" value="1">
+                                                                        <input type="hidden" name="certificateId1" id="certificateId1" value="certificatesList">
+                                                                        <tr id="cloneTr_Id">
+                                                                            <td style="text-align: center">1</td>
+                                                                            <td>
+                                                                                <input type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png"  onchange="checkCertificateFileSize(1);">
+                                                                                <span style="font-size: 14px; color: red;" id="certificateError"></span>
+                                                                                <c:forEach var="certificatesList" items="${certificatesList}">
 
-                                                    <div class="col-sm-12">
-                                                        <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=${certificatesList}&userId=${employeeMaster.userMaster.id}">${certificatesList}</a> ]</span>
-                                                    </div>
-                                                <%--</c:forEach>--%>
-
-                                            </div>-->
-                                                <div class="box-body no-padding">
-                                                    <div class="row">
-                                                        <div class="col-md-12 col-sm-12">
-                                                            <div class="form-group">
-                                                                <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center">
-                                                                    <tr>
-                                                                        <th style="text-align: center;width:55px">Sr No.</th>
-                                                                        <th style="text-align: center;">Certificate Attach</th>
-                                                                        <th style="text-align: center;width:55px"></th>
-                                                                    </tr>
-                                                                    <input type="hidden" name="firstStepCount" id="firstStepCount" value="1">
-                                                                    <input type="hidden" name="certificateId1" id="certificateId1" value="certificatesList">
-                                                                    <tr id="cloneTr_Id">
-                                                                        <td style="text-align: center">1</td>
-                                                                        <td>
-                                                                            <input type="file" class="form-control" id="certificateId1" name="certificateId1" accept="image/jpg,image/jpeg,image/png"  onchange="checkCertificateFileSize(1);">
-                                                                            <span style="font-size: 14px; color: red;" id="certificateError"></span>
-                                                                            <c:forEach var="certificatesList" items="${certificatesList}">
-
-                                                                                <div class="col-sm-12">
-                                                                                    <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=${certificatesList}&userId=${employeeMaster.userMaster.id}">${certificatesList}</a> ]</span>
-                                                                                </div>
-                                                                            </c:forEach>
-                                                                        </td>
-                                                                        <td style="text-align: center"><span style='margin-top: 5px;'>
-                                                                                <input type="button" value="+" id="step1cloneid" />  </span>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </div></div>
-                                                    </div></div>
+                                                                                    <div class="col-sm-12">
+                                                                                        <span>[ <a href="employeeMaster.htm?act=downloadEmployeeCertificates&amp;fileName=${certificatesList}&userId=${employeeMaster.userMaster.id}">${certificatesList}</a> ]</span>
+                                                                                    </div>
+                                                                                </c:forEach>
+                                                                            </td>
+                                                                            <td style="text-align: center"><span style='margin-top: 5px;'>
+                                                                                    <input type="button" value="+" id="step1cloneid" />  </span>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div></div>
+                                                        </div></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <c:if test="${!(employeeMaster.employeeName eq  'Admin')}">
-                                    <div class="form-group">
-                                        <div class=" col-sm-12" style="text-align: center;">
-                                            <button type="submit" class="btn btn-primary" data-original-title="" title="" style="width: 100px;">SUBMIT</button>
+                                    <c:if test="${!(employeeMaster.employeeName eq  'Admin')}">
+                                        <div class="form-group">
+                                            <div class=" col-sm-12" style="text-align: center;">
+                                                <button type="submit" class="btn btn-primary" data-original-title="" title="" style="width: 100px;">SUBMIT</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                </c:if>
-                           </c:forEach>
+                                    </c:if>
+                                </c:forEach>
                             </div>
 
                         </div>
@@ -2778,7 +2764,7 @@
             startDate: dt,
             endDate: dt1,
             forceParse: 0
-            
+
         });</script>
 
     <script type="text/javascript">
@@ -3057,36 +3043,36 @@
                         {
                             levelMasterId: levelMasterId
                         },
-                        function (responseJson) {
-                            ////                    $(".result").html(data);
-                            //                    alert("response     " + responseJson);
-                            //                    var tempjson = JSON.parse(responseJson);
-                            //                    alert("jsosnsnssnsn    "+tempjson[0]);
-                            var $select = $('#designationMasterByLevelId'); // Locate HTML DOM element with ID "someselect".
-                            //                    alert("this is my select    " + select);
-                            if (setOptionRemoveFlag) {
-                                $select.find("option").remove(); // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
-                                alert("I have been called   " + setOptionRemoveFlag + " times");
-                            }
-                            $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
-                                //                        alert(key + '     ' + value);
-                                if (!setOptionRemoveFlag && $("#designationMasterByLevelId option:first").val() != key) {
-                                    //this conditions check will remove duplicates from list.
-                                    $('#designationMasterByLevelId')
-                                            .append($("<option></option>")
-                                                    .attr("value", key)
-                                                    .text(value));
-                                }
-                                if (setOptionRemoveFlag) {
-                                    $('#designationMasterByLevelId')
-                                            .append($("<option></option>")
-                                                    .attr("value", key)
-                                                    .text(value));
-                                }
-                            });
-                            setDesignation();
-                            setOptionRemoveFlag = true; //this is setted again to true for option remove function call on onchange() event.
-                        });
+                function (responseJson) {
+                    ////                    $(".result").html(data);
+                    //                    alert("response     " + responseJson);
+                    //                    var tempjson = JSON.parse(responseJson);
+                    //                    alert("jsosnsnssnsn    "+tempjson[0]);
+                    var $select = $('#designationMasterByLevelId'); // Locate HTML DOM element with ID "someselect".
+                    //                    alert("this is my select    " + select);
+                    if (setOptionRemoveFlag) {
+                        $select.find("option").remove(); // Find all child elements with tag name "option" and remove them (just to prevent duplicate options when button is pressed again).
+                        alert("I have been called   " + setOptionRemoveFlag + " times");
+                    }
+                    $.each(responseJson, function (key, value) {               // Iterate over the JSON object.
+                        //                        alert(key + '     ' + value);
+                        if (!setOptionRemoveFlag && $("#designationMasterByLevelId option:first").val() != key) {
+                            //this conditions check will remove duplicates from list.
+                            $('#designationMasterByLevelId')
+                                    .append($("<option></option>")
+                                            .attr("value", key)
+                                            .text(value));
+                        }
+                        if (setOptionRemoveFlag) {
+                            $('#designationMasterByLevelId')
+                                    .append($("<option></option>")
+                                            .attr("value", key)
+                                            .text(value));
+                        }
+                    });
+                    setDesignation();
+                    setOptionRemoveFlag = true; //this is setted again to true for option remove function call on onchange() event.
+                });
                 ////                alert("response     " + responseJson);
                 //            }
             }
@@ -3162,6 +3148,6 @@
 
     </script>
 
-
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
 </html>
 

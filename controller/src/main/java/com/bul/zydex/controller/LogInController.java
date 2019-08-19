@@ -56,6 +56,7 @@ public class LogInController extends LogInAbstract {
         mv.getModelMap().put("userMaster", user);
         request.setAttribute("lockCounter", 0);
         mv.setViewName(LOGIN_PAGE);
+//         mv.setViewName("User/Login");
         return mv;
     }
 

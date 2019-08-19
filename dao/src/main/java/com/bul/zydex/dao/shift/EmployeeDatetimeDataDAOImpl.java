@@ -73,6 +73,20 @@ public class EmployeeDatetimeDataDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
         return getHibernateTemplate().find(query);
     }
+    
+    @Override
+    public List<?> readPuchDataDateWiseAll1(String date, int empId) {
+        String query = "";
+        query += " select a.dateTime"
+                + " From EmployeeDatetimeData a "
+                + " left join a.deviceMaster b"
+                + " left join b.zydexLocationMaster c"
+                + " where a.employeeMaster.id = " + empId
+                + " and DATE_FORMAT(STR_TO_DATE(a.dateTime,'%d/%m/%Y'),'%d/%m/%Y') = DATE_FORMAT(STR_TO_DATE('" + date + "','%d/%m/%Y'),'%d/%m/%Y') "
+                + " GROUP BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i')"
+                + " ORDER BY STR_TO_DATE(a.dateTime,'%d/%m/%Y %H:%i:%s') ASC";
+        return getHibernateTemplate().find(query);
+    }
 
     @Override
     public List<?> readPuchDataEmpIdWise(int empId) {

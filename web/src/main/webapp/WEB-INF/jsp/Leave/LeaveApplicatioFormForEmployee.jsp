@@ -457,17 +457,53 @@
             leaveEndDate = new Date(leaveEndDate[2], leaveEndDate[1], leaveEndDate[0]);
             var leaveDays = document.getElementById("hiddenDays").value;
             var days = document.getElementById("noOfDays").value = leaveDays;
-//        if (selectedText == 'Leave Without Pay') {
-//        if (days > 60) {
-//        $("#leaveWithoutPayLeaveDiv").show();
-//        document.getElementById("endDate").value = '';
-//        setTimeout(function () {
-//        $("#leaveWithoutPayLeaveDiv").fadeOut();
-//        }, 5000);
-//        }
+//            if (selectedText == 'Leave Without Pay') {
+//                if (days > 60) {
+//                    $("#leaveWithoutPayLeaveDiv").show();
+//                    document.getElementById("endDate").value = '';
+//                    setTimeout(function () {
+//                        $("#leaveWithoutPayLeaveDiv").fadeOut();
+//                    }, 5000);
+//                }
+//                LeaveWithoutpayCount();
+//
+//            }
+        }
+//        function LeaveWithoutpayCount() {
+//            var strDate = document.getElementById("startDate").value;
+//            var enDate = document.getElementById("endDate").value;
+//            var leaveTypeMaster = document.getElementById("leaveTypeMaster.id").value;
+//            var sDateStatus = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+//            var eDateStatus = document.getElementById("leaveEndDate_SelectFullOrHalfId").value;
+//            var employeeId = document.getElementById("employeeId").value;
+//            if (strDate != '' && enDate != '' && sDateStatus != '' && leaveTypeMaster != "" && useSickLeave != "") {
+//                //                    alert("wwww" + strDate);
+//                //                    alert("sDateStatus" + sDateStatus);
+//                $.ajax({
+//                    type: "POST",
+//                    url: "leaveEmployeeDetail.htm?act=getActualDayByAjax&strDate=" + strDate + "&enDate=" + enDate + "&sDateStatus=" + sDateStatus + "&eDateStatus=" + eDateStatus + "&leaveType=" + leaveTypeMaster + "&useSickLeave=" + useSickLeave + "&employeeId=" + employeeId,
+//                    data: {},
+//                    dataType: "text",
+//                    success: function (responseTxt) {
+//                        console.log(responseTxt);
+//                        if (responseTxt == 0.0 && leaveTypeMaster == 7) {
+//                            $("#futureDateSelect").show();
+//                            setTimeout(function () {
+//                                $("#futureDateSelect").fadeOut();
+//                            }, 5000);
+//                        } else {
+//                            alert(responseTxt);
+//                            document.getElementById("hiddenDays").value = responseTxt;
+//                        }
+////                        daysCount();
+//                    },
+//                    error: function () {
+//                    }
+//                });
+//            }
 //
 //        }
-        }
+
 
         function daysCount() {
 //            alert("4Aman");

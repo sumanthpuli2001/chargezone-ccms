@@ -112,7 +112,7 @@
                                                         <td style="border:0px; width: 30%;" colspan="2">
                                                             <font size="2">Employee Name:&nbsp;&nbsp;<b>${employeeMaster.employeeName}</b></font></td>
                                                     <td style="border:0px; width: 15%;  height: 0px !important">
-                                                        <font size="2">Employee Type:&nbsp;&nbsp;<b>${employeeMaster.employeeId}</font>
+                                                        <font size="2">Employee Type:&nbsp;&nbsp;<b>${employeeMaster.employeeType}</font>
                                                     </td>
                                                     <td style="border:0px; width: 15%;  height: 0px !important">
                                                         <font size="2">Employee NO:&nbsp;&nbsp;<b>${employeeMaster.employeeId}</b></font>
@@ -258,7 +258,7 @@
                                                                 </c:forEach>
 
                                                             </tbody>
-                                                            </table>
+                                                        </table>
                                                         <!--</table>-->
                                                     </td>
                                                     <td colspan="2" valign="top">
@@ -310,10 +310,20 @@
 
                                                 <tr>
                                                     <!--<th align="right">Recd. Pay Slip, Salary & Verified</th>-->
+
                                                     <td align="left">Net Pay (A-B)</td>
                                                     <td style="text-align: right; padding-right:  2cm">${nettotal} <b id="roundOffAmount" style="font-size: 10px;"></b></td>
                                                     <td colspan="2"></td>
                                                 </tr>
+                                                <%--<c:if test="${excessShort ne 0 || excessShort ne null}">--%>
+                                                    <tr>
+                                                    <td align="left">Excess/Short </td>
+                                                    <td style="text-align: right; padding-right:  2cm">${excessShort} <b id="" style="font-size: 10px;"></b></td>
+                                                    <td align="left">Actual Net Pay</td>
+                                                    <td style="text-align: right; padding-right:  2cm">${actualNetPay}</td>
+                                                </tr>
+                                                <%--</c:if>--%>
+                                                
                                                 <!--                                                <tr style="border: none !important;">
                                                                                                         <td style="text-align: left; vertical-align: middle;width:50%;border: none !important;">
                                                                                                             <b style="font-size: 10px;">Rupee:</b>&nbsp;&nbsp;&emsp;<b id="paraGraphId" style="font-size: 10px;">&nbsp;Only</b>

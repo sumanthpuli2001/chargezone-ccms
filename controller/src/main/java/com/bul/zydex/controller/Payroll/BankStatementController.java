@@ -93,11 +93,13 @@ public class BankStatementController extends BankStatementAbstract {
                 DecimalFormat df = new DecimalFormat("####0.00");
                 Object[] o = (Object[]) dedSalaryList1;
                 double basicSalary = 0;
+                double netpayable2 = 0;
                 int empid = 0;
                 String employeeId = (String) o[0];
                 String employeeName = (String) o[1];
                 String bankAccountNo = (String) o[2];
                 basicSalary += (Double) o[3];
+                netpayable2 += (Double) o[7];
                 String month1 = (String) o[4];
                 String year1 = (String) o[5];
                 empid += (Integer) o[6];
@@ -121,7 +123,7 @@ public class BankStatementController extends BankStatementAbstract {
                 int netpayable1 = (int) Math.round(netpayable);
 
                 sum = sum + netpayable1;
-                finalList.add(df.format(netpayable1));
+                finalList.add(df.format((int) Math.round(netpayable2)));
                 finalList.add(month1);
                 finalList.add(year1);
                 listForMonthAndYear.add(finalList);

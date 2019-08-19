@@ -92,12 +92,11 @@ public class EmployeeExcelRecordDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + "delete FROM EmployeeExcelRecord a "
                 + " WHERE a.id = " + employeeExcelRecord.getId();
 
-      
     }
 
     @Override
     public List<?> readEmployeeForIncentive(String pincentive, String aincentive, String month1, String year11) {
-          String query = "";
+        String query = "";
         String condition = "";
         query += "Select c.employeeId, c.employeeName,a.presentDays,b.employeeBasicSalary,b.employeeLwp,c.basicSalary,c.id"
                 + " From EmployeeExcelRecord a "
@@ -119,7 +118,7 @@ public class EmployeeExcelRecordDAOImpl<T> extends GenericsDAOImpl<T> implements
 
     @Override
     public List<?> readByEmployeExcelReportSearch(EmployeeSalaryProcess employeeSalaryProcess) {
-       String query = "";
+        String query = "";
         String condition = "";
 
         query += " select a.presentDays "
@@ -128,6 +127,19 @@ public class EmployeeExcelRecordDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " where b.employeeMaster.id= " + employeeSalaryProcess.getEmployeeMaster().getId()
                 + " and b.month='" + employeeSalaryProcess.getMonth() + "'"
                 + " and b.year='" + employeeSalaryProcess.getYear() + "'";
+
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readByEmployeExcelFetch(EmployeeSalaryProcess employeeSalaryProcess) {
+        String query = "";
+        String condition = "";
+
+        query += " select a"
+                + " From EmployeeExcelRecord a"
+                + " left join a.employeeSalaryProcess b"
+                + " where b.id= " + employeeSalaryProcess.getId();
 
         return getHibernateTemplate().find(query);
     }

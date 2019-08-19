@@ -31,6 +31,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -2800,7 +2801,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         employeeAdvanceSearch.setDateOfBirthOfEmpChilld1(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfBirthOfEmpChild2(Boolean.FALSE);
         employeeAdvanceSearch.setDateOfTransferOfEntity(Boolean.FALSE);
-
+        List allpunchList = new ArrayList();
         if ((!"".equals(startDate) && null != startDate) && (!"".equals(endDate) && null != endDate)) {
             if (!"".equals(startDate) && null != startDate) {
                 Date sDate = sdf.parse(startDate);
@@ -2884,22 +2885,120 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 }
             }
         }
+        long diffMinuteBreakHours = 0;
         SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm");
         List newList = new ArrayList();
         List secondHalfList = new ArrayList();
         List workingHour = new ArrayList();
         List breakHour = new ArrayList();
-
+        List PrAb = new ArrayList();
+        List late = new ArrayList();
+        int presentCount = 0;
+        int WOCount = 0;
+        int LateCount = 0;
+        int VeryLateCount = 0;
+        int totalLateCollection = 0;
         for (Map.Entry<Integer, List<?>> entry : map.entrySet()) {
 
             Iterator itrbh = entry.getValue().iterator();
             while (itrbh.hasNext()) {
                 try {
+
                     List punchList = new ArrayList();
-                    List allpunchList = new ArrayList();
+
                     Object[] next = (Object[]) itrbh.next();
                     String firstHalf = "" + next[1];
                     String date = "" + next[0];
+                    String[] userTimeInStr = firstHalf.split("`");
+                    try {
+                        String[] userTimeInStr1 = userTimeInStr[1].split("!");
+                    
+                        String[] LateHoursStr = firstHalf.split("\\$");
+                        String[] LateHoursStr1 = LateHoursStr[1].split("%");
+                        String[] endHoursStr = firstHalf.split("%");
+                        String[] endHoursStr1 = endHoursStr[1].split("\\^");
+                        String[] firstStartHoursStr = endHoursStr[1].split("\\+");
+                        String[] secondEndHoursStr = firstStartHoursStr[0].split("\\&");
+                        
+                        PrAb.add("PR");
+                        presentCount++;
+                        String[] userTimeOutStr = firstHalf.split("!");
+                        String[] userTimeOutStr1 = userTimeOutStr[1].split("@");
+                        SimpleDateFormat sdfTimes = new SimpleDateFormat("HH:mm");
+                        Date endHours = sdfTimes.parse(userTimeInStr1[0]);
+//                        Date StartHours = sdfTimes.parse("08:00:00");
+                        Date StartHours = sdfTimes.parse(firstStartHoursStr[1]);
+                        long diff = endHours.getTime() - StartHours.getTime();
+                        long diffMinutes = diff / (60 * 1000);
+                        long diff1 = 0;
+                        String experienceYearOnVnc = employeeMaster1.getDateOfJoining();
+                        SimpleDateFormat dates = new SimpleDateFormat("dd/MM/yyyy");
+                        Date joinDate = dates.parse(experienceYearOnVnc);
+                        Date cDate = new Date();
+
+                        long diffa = cDate.getTime() - joinDate.getTime();
+
+                        int diffInYears = (int) (diffa / (60 * 60 * 1000 * 24 * 30.41666666 * 12));
+
+//                        String yearOnVnc = experienceYearOnVnc.substring(6, 10);
+//                        Calendar cal = Calendar.getInstance();
+//                        int year2 = cal.get(cal.YEAR);
+//                        int diffYear = year2 - Integer.parseInt(yearOnVnc);
+                        if (diffInYears >= 3) {
+                            if (diffMinutes >= 60) {
+                                late.add("Very Late");
+                                VeryLateCount++;
+                                if (VeryLateCount > 1) {
+                                    VeryLateCount++;
+                                    totalLateCollection += 100;
+                                }
+                            } else if (diffMinutes >= 30 && diffMinutes < 60) {
+                                late.add("Late");
+                                LateCount++;
+                                if (LateCount > 5) {
+                                    LateCount++;
+                                    totalLateCollection += 100;
+                                }
+                            } else {
+                                late.add("-");
+                            }
+                        } else {
+                            if (diffMinutes >= 15 && diffMinutes < 60) {
+                                late.add("Late");
+                                LateCount++;
+                                if (LateCount > 5) {
+                                    LateCount++;
+                                    totalLateCollection += 100;
+                                }
+                            } else if (diffMinutes >= 60) {
+                                late.add("Very Late");
+                                VeryLateCount++;
+                                if (VeryLateCount > 1) {
+                                    VeryLateCount++;
+                                    totalLateCollection += 100;
+                                }
+                            } else {
+                                late.add("-");
+                            }
+                        }
+
+                    } catch (Exception e) {
+
+                        PrAb.add(firstHalf);
+                        late.add("WO");
+                        if (firstHalf.equals("WO")) {
+
+                            WOCount++;
+                        }
+
+                    }
+
+                    request.setAttribute("PrAb", PrAb);
+                    request.setAttribute("late", late);
+                    request.setAttribute("presentCount", presentCount);
+                    request.setAttribute("WOCount", WOCount);
+                    request.setAttribute("totalLateCollection", totalLateCollection);
+
                     if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
                             && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
@@ -2918,13 +3017,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             String nextdate = simpleDateFormatpp.format(tomorrow);
                             punchList = employeeDatetimeDataService.readAllNightShiftPuchDataDateWise(date, nextdate, Integer.parseInt(id));
                         } else {
-                            punchList = employeeDatetimeDataService.readAllPuchDataDateWise(date, Integer.parseInt(id));
-                        }
-                        if (!punchList.isEmpty()) {
-                            for (Object o : punchList) {
-                                EmployeeDatetimeData employeeDatetimeData12 = (EmployeeDatetimeData) o;
-                                allpunchList.add(employeeDatetimeData12.getDateTime());
-                            }
+                            allpunchList = employeeDatetimeDataService.readPuchDataDateWiseAll1(date, Integer.parseInt(id));
                         }
                         if (!allpunchList.isEmpty()) {
                             if (allpunchList.size() % 2 == 0) {
@@ -2938,6 +3031,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 }
                                 long diffSeconds = diff / 1000 % 60;
                                 long diffMinutes = diff / (60 * 1000) % 60;
+//                                   long diffMinuteBreakHours = diffMinutes;
                                 long diffHours = diff / (60 * 60 * 1000) % 24;
                                 String wh = String.valueOf(diffHours) + ":" + String.valueOf(diffMinutes);
                                 breakHour.add(wh);
@@ -2954,6 +3048,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
 
             Iterator itr5 = entry.getValue().iterator();
@@ -4249,11 +4344,42 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     long diffInMilli = java.time.Duration.between(dateTime1, dateTime2).toMillis();
                                     long diffMinutes = diffInMilli / (60 * 1000);
                                     timecount += diffMinutes;
+
                                 }
                             }
+                            long diffMinutes = 0;
+                            int diff11 = 0;
+                            String date = "" + next[0];
+                            SimpleDateFormat sdf123 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                            List<?> allpunchList1 = employeeDatetimeDataService.readPuchDataDateWiseAll1(date, Integer.parseInt(id));
+                            if (!allpunchList1.isEmpty()) {
+                                if (allpunchList1.size() % 2 == 0) {
+                                    for (int h = 1; h < allpunchList1.size() - 1; h++) {
+                                        String out = allpunchList1.get(h).toString();
+                                        String in = allpunchList1.get(h + 1).toString();
+                                        Date out1 = sdf123.parse(out);
+                                        Date in1 = sdf123.parse(in);
+                                        diff11 += in1.getTime() - out1.getTime();
+                                        h++;
 
-//                            timecount = timecount - 30;
-                            double empHour = (double) timecount / 60;
+                                    }
+                                    long diffSeconds = diff11 / 1000 % 60;
+                                    diffMinutes = diff11 / (60 * 1000);
+//                                   long diffMinuteBreakHours = diffMinutes;
+                                    long diffHours = diff11 / (60 * 60 * 1000) % 24;
+
+//                                String wh = String.valueOf(diffHours) + ":" + String.valueOf(diffMinutes);
+//                                breakHour.add(wh);
+                                } else {
+//                                breakHour.add("-");
+                                }
+
+                            } else {
+//                            breakHour.add("-");
+                            }
+
+                            totalDayTime = totalDayTime - diffMinutes;
+                            double empHour = (double) totalDayTime / 60;
                             int hours = (int) empHour;
                             int minutes = (int) (empHour * 60) % 60;
                             String hour = "" + hours;
@@ -4264,8 +4390,10 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 minute = "00";
                             }
                             String workingHours = hour + ":" + minute;
-                            workingHour.add(workingHours);
 
+                            workingHour.add(workingHours);
+//                            timecount = timecount - breakHour;
+//                            double empHour = (double) timecount / 60;
 //                            double empHour = (double) totalDayTime / 60;
 //                            int hours = (int) empHour;
 //                            int minutes = (int) (empHour * 60) % 60;
@@ -7489,7 +7617,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         PrintWriter out = response.getWriter();
         out.print(message);
     }
-    
+
     public ModelAndView showDateWisePunchDataOfSubordinate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String date = request.getParameter("date");
@@ -7530,6 +7658,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
     public ModelAndView showDateWisePunchDataOfAllEmployee(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+
         String date = request.getParameter("date");
         String empId = request.getParameter("id");
         List<?> punchList = employeeDatetimeDataService.readPuchDataDateWiseAll(date, Integer.parseInt(empId));
@@ -7548,6 +7677,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         request.setAttribute("size", size);
         request.setAttribute("date", date);
         request.setAttribute("empId", empId);
+
         mv.setViewName("Shift/ShowAllEmployeePuchData");
 
         return mv;
@@ -7936,10 +8066,107 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
         employeeDatetimeData.setEmployeeMaster(emp);
         employeeDatetimeDataService.create(employeeDatetimeData);
+        
+        List<?> punchList = employeeDatetimeDataService.readPuchDataDateWiseAll1(date, Integer.parseInt(empId));
+        if(!punchList.isEmpty() && !empShiftData1.isEmpty()){
+            EmployeeShiftData employeeShiftData2 = employeeShiftDataService.readById(Integer.parseInt(empShiftData1));
+            employeeShiftDataService.delete(Integer.parseInt(empShiftData1));
+            EmployeeShiftData employeeShiftData3 = new EmployeeShiftData();
+            employeeShiftData3.setEmployeeMaster(emp);
+            employeeShiftData3.setShiftMaster(shiftMaster);
+            if(punchList.size() > 1){
+             employeeShiftData3.setInDateTime(punchList.get(0).toString());
+             employeeShiftData3.setOutDateTime(punchList.get(punchList.size() -1).toString());
+             
+            } else if(punchList.size() == 1) {
+                employeeShiftData3.setInDateTime(punchList.get(0).toString());
+                employeeShiftData3.setOutDateTime(punchList.get(0).toString());
+            }
+            employeeShiftDataService.create(employeeShiftData3);
+            
+        }
+        
         request.setAttribute("successMessage",
                 "Information : The Information is saved Successfully.");
 //            mv.setViewName("redirect:attendanceRegularizationMaster.htm?act=showDateWisePunchDataOfSubordinate");
         mv = showDateWisePunchDataOfAllEmployee(request, response);
+        return mv;
+    }
+
+    public ModelAndView deleteClickpunch(HttpServletRequest request, HttpServletResponse response, EmployeeDatetimeData employeeDatetimeData) throws Exception {
+        String[] checkId = request.getParameterValues("checkId");
+        String checkStr = "";
+        ModelAndView mv = new ModelAndView();
+        int count = 0;
+//        List<String> checkIdList = Arrays.asList(checkId);
+//            checkIdList.forEach((checkedValues) -> departmentMasterService.delete(Integer.parseInt(checkedValues)));
+        boolean flag = false;
+        for (String checkedValues : checkId) {
+
+            try {
+
+                EmployeeDatetimeData employeeDatetimeData1 = employeeDatetimeDataService.readById(Integer.parseInt(checkedValues));
+                String empId = employeeDatetimeData1.getEmployeeMaster().getId().toString();
+                EmployeeMaster employeeMaster = new EmployeeMaster();
+                employeeMaster.setId(Integer.parseInt(empId));
+                employeeDatetimeData1.setEmployeeMaster(employeeMaster);
+                employeeDatetimeDataService.delete(Integer.parseInt(checkedValues));
+
+                mv.addObject("successMessage", "Information Is Deleted Successfully.");
+                mv = showDateWisePunchDataOfAllEmployeeTemp(request, response, employeeDatetimeData1);
+            } catch (Exception e) {
+                e.printStackTrace();
+//                try {
+//                    employeeDatetimeData = employeeDatetimeDataService.readById(Integer.parseInt(checkedValues));
+//                    if (count == 0) {
+//                        checkStr += employeeDatetimeData.getDateTime();
+//                    } else {
+//                        checkStr += "," + employeeDatetimeData.getDateTime();
+//                    }
+//                    count++;
+//                    flag = true;
+//                } catch (Exception ee) {
+//
+//                }employeeDatetimeData1
+            }
+        }
+//        mv.addObject("successMessage", "Information Is Deleted Successfully.");
+
+//        List<?> departmentList = departmentMasterService.read();
+//        mv.addObject("departmentList", departmentList);
+//        /mv.setViewName("Shift/ShowAllEmployeePuchData");
+        return mv;
+    }
+
+    public ModelAndView showDateWisePunchDataOfAllEmployeeTemp(HttpServletRequest request, HttpServletResponse response, EmployeeDatetimeData employeeDatetimeData) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        String date = request.getParameter("date");
+        String empId = request.getParameter("id");
+
+        if (empId == null) {
+            empId = employeeDatetimeData.getEmployeeMaster().getId().toString();
+
+        }
+        List<?> punchList = employeeDatetimeDataService.readPuchDataDateWiseAll(date, Integer.parseInt(empId));
+        if (punchList.isEmpty()) {
+            List<?> MobPunchList = employeePunchForMobileAppService.readPuchDataDateWise(date, Integer.parseInt(empId));
+            mv.getModelMap().put("punchList", MobPunchList);
+        } else {
+            mv.getModelMap().put("punchList", punchList);
+
+        }
+        if (!punchList.isEmpty()) {
+            String punchListDate = employeeDatetimeDataService.readPuchDataDateWise1(date, Integer.parseInt(empId));
+            request.setAttribute("punchListDate", punchListDate);
+        }
+        Integer size = punchList.size();
+        request.setAttribute("size", size);
+        request.setAttribute("date", date);
+        request.setAttribute("empId", empId);
+
+        mv.setViewName("Shift/ShowAllEmployeePuchData");
+
         return mv;
     }
 

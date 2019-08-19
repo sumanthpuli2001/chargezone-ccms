@@ -77,14 +77,14 @@ public class EmployeeLeaveBalanceDAOImpl<T> extends GenericsDAOImpl<T> implement
                 + " and (b.leaveType = 'Casual Leave' or b.leaveType = 'Sick Leave')";
         return getHibernateTemplate().find(query);
     }
-    
+
     @Override
     public boolean readByEmpeIdAndLeaveTypeId(int empid, int leaveid) {
         boolean flag = false;
         String query = "";
         query += ""
                 + " From EmployeeLeaveBalance a "
-                + " WHERE a.leaveTypeMaster.id = " + leaveid 
+                + " WHERE a.leaveTypeMaster.id = " + leaveid
                 + " and a.employeeMaster.id = " + empid;
         List list = getHibernateTemplate().find(query);
         if (list.isEmpty()) {
@@ -95,7 +95,7 @@ public class EmployeeLeaveBalanceDAOImpl<T> extends GenericsDAOImpl<T> implement
 
     @Override
     public List<?> readByLeave(Integer empId, int leaveId) {
-          String query = "";
+        String query = "";
         query += ""
                 + " From EmployeeLeaveBalance a "
                 + " WHERE a.leaveTypeMaster = " + leaveId
@@ -104,15 +104,25 @@ public class EmployeeLeaveBalanceDAOImpl<T> extends GenericsDAOImpl<T> implement
     }
 
     @Override
-    public List<?> readByEmpId1(Integer id, Float empNoOfDays,Integer leaveType) {
+    public List<?> readByEmpId1(Integer id, Float empNoOfDays, Integer leaveType) {
         String query = "";
 
-        query += " Select b.leaveType, sum(a.noOfLeaveRemain+"+empNoOfDays+"), b.id"
+        query += " Select b.leaveType, sum(a.noOfLeaveRemain+" + empNoOfDays + "), b.id"
                 + " FROM EmployeeLeaveBalance a"
                 + " LEFT JOIN a.leaveTypeMaster b"
                 + " WHERE a.employeeMaster = " + id
-                + " and a.leaveTypeMaster.id="+leaveType;
+                + " and a.leaveTypeMaster.id=" + leaveType;
 
+        return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readleavebalance(int empid) {
+        String query = "";
+        query += ""
+                + " From EmployeeLeaveBalance a "
+                + " WHERE a.employeeMaster.id = " + empid
+                + " and a.leaveTypeMaster.id = " + 7;
         return getHibernateTemplate().find(query);
     }
 

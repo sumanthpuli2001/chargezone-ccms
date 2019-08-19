@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<!--<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">-->
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+"classpath://org/hibernate/hibernate-configuration-3.0.dtd">
+
 <hibernate-configuration>
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
@@ -146,9 +149,9 @@
     <mapping resource="com/bul/zydex/model/EmployeeCtcDetailSalary.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/PayrollTaxDeductionMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/PayrollTaxDeductionComponent.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/ComponentMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/DataTableReportMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/Modules.hbm.xml"/>
-    <mapping resource="com/bul/zydex/model/ComponentMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/TaxDeductionDecarationSubmit.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/TaxSavingSubmit.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/PayrollTaxDeclarationPeriodMaster.hbm.xml"/>
@@ -194,5 +197,6 @@
     <mapping resource="com/bul/zydex/model/OnCall.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/OTRegularization.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/ClientDetailsMaster.hbm.xml"/>
+    <mapping resource="../java/com/bul/zydex/model/zzz.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

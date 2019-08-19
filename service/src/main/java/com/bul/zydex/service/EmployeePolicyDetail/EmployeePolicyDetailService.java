@@ -35,4 +35,5 @@ public interface EmployeePolicyDetailService<T> extends GenericsService<T> {
 
     public void deleteByemployeeId(int id);
 
+    public List<?> readPolicyTotal(int employeeid);
 }

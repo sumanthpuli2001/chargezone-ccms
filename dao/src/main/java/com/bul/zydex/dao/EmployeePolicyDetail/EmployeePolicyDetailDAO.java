@@ -32,10 +32,10 @@ public interface EmployeePolicyDetailDAO<T> extends GenericsDAO<T> {
 
     public List<?> readBypolicyAmountWithTaxable(int empId);
 
-    public List<?> readForMasterAdditionalAmount(int empTypeId,int policyMasterId);
+    public List<?> readForMasterAdditionalAmount(int empTypeId, int policyMasterId);
 
     public void deleteByemployeeId(int id);
-    
-    
+
+    public List<?> readPolicyTotal(int employeeid);
 
 }

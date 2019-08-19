@@ -1044,15 +1044,21 @@
                                                             <input type="text" name="lastName" id="lastName"  class="form-control">
                                                             <span style="font-size: 14px; color: red;" id="lastNameError"></span>
                                                         </div>
-                                                        <div class="col-sm-6">
+                                                            <div class="col-sm-6">
+                                                            <label >Aadhar Card:<span style="color: red;font-size: 12px;">*</span></label>
+                                                        <form:input path="adharCard" id="adharCard" class="form-control"></form:input>
+                                                        <form:errors path="adharCard"  cssClass="errorDiv"></form:errors>
+                                                        <span style="font-size: 14px; color: red;" id="adharCardError"></span>
+                                                        </div>
+<!--                                                        <div class="col-sm-6">
 
                                                             <label >Driving Licence No:</label>
-                                                            <!--<input type="text" name="drivingLicence" id="drivingLicence" class="form-control" >-->
-                                                            <form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>
-                                                        </div>
+                                                            <input type="text" name="drivingLicence" id="drivingLicence" class="form-control" >
+                                                            <%--<form:input path="drivingLicence" type="text" class="form-control" placeholder="Please Specify No."></form:input>--%>
+                                                        </div>-->
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-6">
+                                                    <!--<div class="form-group">-->
+<!--                                                        <div class="col-sm-6">
                                                             <label>Driving Licence Type:<span style="color: red;font-size: 12px;"></span></label>
                                                             <select name="drivingLicenceType" id="drivingLicenceType" class="form-control">
                                                                 <option value="">-- Select --</option>
@@ -1060,15 +1066,10 @@
                                                                 <option value="4Wheeler">4 Wheeler</option>
                                                                 <option value="Both">Both</option>
                                                             </select>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <label >Aadhar Card:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="adharCard" id="adharCard" class="form-control"></form:input>
-                                                        <form:errors path="adharCard"  cssClass="errorDiv"></form:errors>
-                                                        <span style="font-size: 14px; color: red;" id="adharCardError"></span>
-                                                        </div>
+                                                        </div>-->
                                                         
-                                                    </div>
+                                                        
+                                                    <!--</div>-->
 
 <!--                                                    <div class="form-group">
 
@@ -1171,16 +1172,16 @@
                                                                                                                 
                                                                                                                 </div>-->
                                                         <div class="col-sm-6">
-                                                            <label >Contact No.1:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label >Personal Contact No:<span style="color: red;font-size: 12px;">*</span></label>
                                                         <form:input path="contactNo1" id="contactNo1" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                         <form:errors path="contactNo1" cssClass="errorDiv"></form:errors>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label >Contact No.2:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:input path="contactNo2" id="contactNo2" maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
-                                                        <form:errors path="contactNo2" cssClass="errorDiv"></form:errors>
+                                                            <label >Contact No.2:<span style="color: red;font-size: 12px;"></span></label>
+                                                        <form:input path="contactNo2" id="contactNo1"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
+                                                        <%--<form:errors path="contactNo2" cssClass="errorDiv"></form:errors>--%>
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <label>Blood Group:<span style="color: red;font-size: 12px;">*</span></label>
@@ -1552,27 +1553,27 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group">
+<!--                                                    <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <label>Company:<span style="color: red;font-size: 12px;"></span></label>
-                                                            <form:select path="company"  class="form-control ">
-                                                                <form:option label="-- Select --"  value="" ></form:option>
-                                                                <c:forEach var="comp" items="${company}" >
-                                                                    <form:option value="${comp.value}">${comp.value}</form:option>
-                                                                </c:forEach>
-                                                            </form:select>
-                                                            <form:errors path="company" cssClass="errorDiv"></form:errors>
+                                                            <%--<form:select path="company"  class="form-control ">--%>
+                                                                <%--<form:option label="-- Select --"  value="" ></form:option>--%>
+                                                                <%--<c:forEach var="comp" items="${company}" >--%>
+                                                                    <%--<form:option value="${comp.value}">${comp.value}</form:option>--%>
+                                                                <%--</c:forEach>--%>
+                                                            <%--</form:select>--%>
+                                                            <%--<form:errors path="company" cssClass="errorDiv"></form:errors>--%>
                                                         </div>
                                                         <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
                                                             <div class="col-sm-6">
                                                         <label> Location:<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <form:select path="zydexLocationMaster.id" class="form-control ">
-                                                            <form:option value="" label="-- Select --" ></form:option>
-                                                            <form:options items="${zydexLocationMap}"></form:options>
-                                                        </form:select>
-                                                        <form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>
+                                                        <%--<form:select path="zydexLocationMaster.id" class="form-control ">--%>
+                                                            <%--<form:option value="" label="-- Select --" ></form:option>--%>
+                                                            <%--<form:options items="${zydexLocationMap}"></form:options>--%>
+                                                        <%--</form:select>--%>
+                                                        <%--<form:errors path="zydexLocationMaster.id" cssClass="errorDiv"></form:errors>--%>
                                                         </div>
-                                                </div>
+                                                </div>-->
 
                                                 <div class="form-group">
                                                     
@@ -1738,6 +1739,14 @@
                                                         <form:input path="pfAmountEmployer" type="number" min="0" placeholder="Enter Amount" class="form-control"></form:input>
                                                         <form:errors path="pfAmountEmployer" cssClass="errorDiv"></form:errors>
                                                         </div>
+                                                    </div>    
+                                                <div  class="form-group">
+                                                    <div class="col-sm-6">
+                                                        <label>Hours Mandatory:</label>
+                                                        <form:input path="hoursMadatory" type="text" placeholder="Enter Hours" class="form-control"></form:input>
+                                                        <form:errors path="hoursMadatory" cssClass="errorDiv"></form:errors>
+                                                        </div>
+                                                        
                                                     </div>    
                                                     <div class="form-group">
                                                         <div class="col-sm-4">

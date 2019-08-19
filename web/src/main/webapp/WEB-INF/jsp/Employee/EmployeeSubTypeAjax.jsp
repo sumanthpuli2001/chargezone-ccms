@@ -18,7 +18,7 @@
     </head>
     <body class="navbar-fixed">
         <div id="shiftName">
-             <label>Sub-Team:<span style="color: red;font-size: 12px;">*</span></label>
+             <label>Division:<span style="color: red;font-size: 12px;">*</span></label>
             <c:choose>
                 <c:when test="${empty employeeSubTypeList || val eq 'None'}">
                     <select id="subTypeId" name="subTypeId" class="form-control">

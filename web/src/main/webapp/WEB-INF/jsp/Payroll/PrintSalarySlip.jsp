@@ -311,6 +311,12 @@
                                                     <td colspan="2"></td>
 
                                         </tr>
+                                        <tr>
+                                                    <td align="left">Excess/Short </td>
+                                                    <td style="text-align: right; padding-right:  2cm">${excessShort} <b id="" style="font-size: 10px;"></b></td>
+                                                    <td align="left">Actual Net Pay</td>
+                                                    <td style="text-align: right; padding-right:  2cm">${actualNetpaybale}</td>
+                                                </tr>
 
 <!--                                        <tr>
                                             <td align="left"><b>Recd. Pay Slip, Salary & Verified</b></td>

@@ -15,6 +15,7 @@ import com.bul.zydex.model.EmployeeCtcDetailSalary;
 import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeDeductionAmount;
 import com.bul.zydex.model.EmployeeExcelRecord;
+import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeePolicyDetail;
 import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.EmployeeShiftData;
@@ -87,6 +88,7 @@ import com.bul.zydex.service.attendanceRegularization.OTRegularizationService;
 import com.bul.zydex.service.company.CompanyMasterService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
+import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.policy.CtcAllowanceService;
 import com.bul.zydex.service.policy.EmployeeCtcDetailService;
@@ -150,6 +152,7 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected OTRegularizationService<OTRegularization> oTRegularizationService;
     protected ShiftMasterService<ShiftMaster> shiftMasterService;
     protected OnCallService<OnCall> OnCallService;  
+    protected EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService;  
 
     Validator employeeSalaryProcessValidator;
 
@@ -560,6 +563,17 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
         this.locationMasterService = locationMasterService;
     }
+
+    public EmployeeLeaveBalanceService<EmployeeLeaveBalance> getEmployeeLeaveBalanceService() {
+        return employeeLeaveBalanceService;
+    }
+
+    public void setEmployeeLeaveBalanceService(EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService) {
+        this.employeeLeaveBalanceService = employeeLeaveBalanceService;
+    }
+
+  
+    
      
 
 }

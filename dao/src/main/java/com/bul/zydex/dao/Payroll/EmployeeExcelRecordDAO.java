@@ -23,7 +23,9 @@ public interface EmployeeExcelRecordDAO<T> extends GenericsDAO<T> {
     public void delete1(T object);
 
     public List<?> readEmployeeForIncentive(String pincentive, String aincentive, String month1, String year11);
-    
-     public List<?> readByEmployeExcelReportSearch(EmployeeSalaryProcess employeeSalaryProcess);
+
+    public List<?> readByEmployeExcelReportSearch(EmployeeSalaryProcess employeeSalaryProcess);
+
+    public List<?> readByEmployeExcelFetch(EmployeeSalaryProcess employeeSalaryProcess);
 
 }

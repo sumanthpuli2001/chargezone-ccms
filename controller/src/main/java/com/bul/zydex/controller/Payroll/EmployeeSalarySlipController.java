@@ -81,7 +81,6 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 
         HttpSession session = request.getSession();
 //       
-        
 
         List listForMonthAndYear = new ArrayList();
         boolean emright = false;
@@ -99,14 +98,14 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         }
 
         if (emrightHR || emright) {
-            
-            if (!zydex_location_id.equals("")) {
-            employeeMaster.setAdharCard(zydex_location_id);
-        }
 
-        if (!type_of_employee.equals("")) {
-            employeeMaster.setCompany(type_of_employee);
-        }
+            if (!zydex_location_id.equals("")) {
+                employeeMaster.setAdharCard(zydex_location_id);
+            }
+
+            if (!type_of_employee.equals("")) {
+                employeeMaster.setCompany(type_of_employee);
+            }
 //        if (null != employee_sub_id && !employee_sub_id.equals("")) {
 //            employeeMaster.setCompany(employee_sub_id);
 //        }
@@ -116,12 +115,12 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 //
 //        }
 
-        if (!"".equals(month)) {
-            employeeMaster.setBankAccountNo(month);
-        }
-        if (!"".equals(year)) {
-            employeeMaster.setPanCard(year);
-        }
+            if (!"".equals(month)) {
+                employeeMaster.setBankAccountNo(month);
+            }
+            if (!"".equals(year)) {
+                employeeMaster.setPanCard(year);
+            }
             List<?> list = employeeSalaryProcessService.readEmployeeForSlip(employeeMaster);
             if (!list.isEmpty()) {
 
@@ -130,6 +129,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
                     DecimalFormat df = new DecimalFormat("####0.00");
                     Object[] o = (Object[]) dedSalaryList1;
                     double basicSalary = 0;
+                    double netpayable2 = 0;
                     int empid = 0;
                     int empid2 = 0;
                     basicSalary += (Double) o[6];
@@ -139,6 +139,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
                     String month1 = (String) o[2];
                     String year1 = (String) o[3];
                     empid2 += (Integer) o[4];
+                    netpayable2 += (Double) o[7];
 
                     finalList.add(employeeId);
                     finalList.add(employeeName);
@@ -161,7 +162,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
                     }
                     double netpayable = netSalary - deductionAmt1;
                     int netpayable1 = (int) Math.round(netpayable);
-                    finalList.add(netpayable1);
+                    finalList.add((int) Math.round(netpayable2));
                     listForMonthAndYear.add(finalList);
 
                     request.setAttribute("employeelist", listForMonthAndYear);
@@ -198,6 +199,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
                         DecimalFormat df = new DecimalFormat("####0.00");
                         Object[] o = (Object[]) dedSalaryList1;
                         double basicSalary = 0;
+                        double netpayable2 = 0;
                         int empid = 0;
                         int empid2 = 0;
                         basicSalary += (Double) o[6];
@@ -207,7 +209,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
                         String month1 = (String) o[2];
                         String year1 = (String) o[3];
                         empid2 += (Integer) o[4];
-
+                        netpayable2 += (Double) o[7];
                         finalList.add(employeeId);
                         finalList.add(employeeName);
                         finalList.add(month1);
@@ -229,7 +231,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
                         }
                         double netpayable = netSalary - deductionAmt1;
                         int netpayable1 = (int) Math.round(netpayable);
-                        finalList.add(netpayable1);
+                        finalList.add((int) Math.round(netpayable2));
                         listForMonthAndYear.add(finalList);
 
                         request.setAttribute("employeelist", listForMonthAndYear);
@@ -320,12 +322,29 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 
         }
         String notes = displaymorNotes.getPayrollNotes();
+
+        List<?> list3 = employeeSalaryProcessService.readByEmployeeSalaryProcess(employeeSalaryProcess);
+        for (Object o : list3) {
+            employeeSalaryProcess = (EmployeeSalaryProcess) o;
+//            employeeSalaryProcessService.delete(employeeSalaryProcess.getId());
+        }
+
         mv.getModelMap().put("employeeSalaryProcessList", employeeSalaryProcessList);
         mv.getModelMap().put("employeeAdditionalList", employeeAdditionalList);
         mv.getModelMap().put("employeeDeductionList", employeeDeductionList);
         mv.getModelMap().put("totalDeductionAmount", totalDeductionAmount1);
         mv.getModelMap().put("total", total);
         mv.getModelMap().put("nettotal", n1);
+        try {
+            mv.getModelMap().put("excessShort", df.format((int) Math.round(employeeSalaryProcess.getExcessShort())));
+            mv.getModelMap().put("actualNetPay", df.format((int) Math.round(employeeSalaryProcess.getNetPayable())));
+
+        } catch (Exception w) {
+            mv.getModelMap().put("excessShort", 0);
+            mv.getModelMap().put("actualNetPay", 0);
+
+        }
+
 //        mv.getModelMap().put("loanRemainigAmount1", loanRemainigAmount1);
         request.setAttribute("employeeMaster", employeeMaster);
         request.setAttribute("basicSalary", basicSalary);
@@ -350,7 +369,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 //        EmployeeTypeList(request);
 //        EmployeeSubTypeList(request);
 //        zydexLocationList(request);
-         locationList(request);
+        locationList(request);
         companyList(request);
         selectEmployee(request, response);
         request.setAttribute("search", request.getParameter("search"));
@@ -771,7 +790,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         double totalDeductionAmount2 = 0;
         double total = 0;
         double nettotal = 0;
-        String n1="";
+        String n1 = "";
         double basicSalary = 0;
         String month = null;
         String year = null;
@@ -837,6 +856,12 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
                     int nettotal1 = (int) Math.round(nettotal);
                     n1 = df.format(nettotal1);
 
+                    List<?> list3 = employeeSalaryProcessService.readByEmployeeSalaryProcess(employeeSalaryProcess);
+                    for (Object o1 : list3) {
+                        employeeSalaryProcess = (EmployeeSalaryProcess) o1;
+//            employeeSalaryProcessService.delete(employeeSalaryProcess.getId());
+                    }
+
                 }
             }
             Addfinallist.add(employeeMaster);//0
@@ -850,6 +875,8 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
             Addfinallist.add(loanRemainigAmount);//8
             Addfinallist.add(month);//9
             Addfinallist.add(year);//10
+//            Addfinallist.add(df.format((int) Math.round(employeeSalaryProcess.getExcessShort())));//11
+//            Addfinallist.add(df.format((int) Math.round(employeeSalaryProcess.getNetPayable())));//12
             Addfinallist3.add(Addfinallist);
 
         }
@@ -859,6 +886,7 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
             displaymorNotes = (DisplaymorNotes) o;
 
         }
+        DecimalFormat df = new DecimalFormat("####0.00");
         String notes = displaymorNotes.getPayrollNotes();
 //                mv.getModelMap().put("employeeSalaryProcessList", employeeSalaryProcessList);
 //                mv.getModelMap().put("employeeAdditionalList", employeeAdditionalList);
@@ -874,6 +902,14 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 //                request.setAttribute("loanRemainigAmount", loanRemainigAmount);
         request.setAttribute("notes", notes);
         request.setAttribute("nettotal", n1);
+        try {
+            request.setAttribute("excessShort", df.format((int) Math.round(employeeSalaryProcess.getExcessShort())));
+            request.setAttribute("actualNetpaybale", df.format((int) Math.round(employeeSalaryProcess.getNetPayable())));
+        } catch (Exception e) {
+            request.setAttribute("excessShort", "");
+            request.setAttribute("actualNetpaybale", "");
+        }
+
         request.setAttribute("month", month);
         request.setAttribute("year", year);
         request.setAttribute("days1", days1);

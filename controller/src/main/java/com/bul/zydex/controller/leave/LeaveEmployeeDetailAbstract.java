@@ -225,7 +225,6 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
     public void setWoffRegularizationService(WoffRegularizationService<WoffRegularization> woffRegularizationService) {
         this.woffRegularizationService = woffRegularizationService;
     }
-    
 
     protected void addleaveType(HttpServletRequest request) {
         List list = leaveTypeMasterService.read();
@@ -256,26 +255,29 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
             if (!balanceList.isEmpty()) {
                 employeeLeaveBalance = (EmployeeLeaveBalance) balanceList.get(0);
             }
-            try {
-                if (null != employeeMaster.getGender() && employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
+            if (employeeLeaveBalance.getNoOfLeaveRemain() != 0.0) {
+                try {
+                    if (null != employeeMaster.getGender() && employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Paternity Leave")) {
 
-                } else if (!employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Maternity Leave")) {
+                    } else if (!employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Maternity Leave")) {
 
-                } else if (employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Maternity Leave")) {
-                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(As Per Maternity Act)");
+                    } else if (employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Maternity Leave")) {
+                        leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(As Per Maternity Act)");
 
-                } else if (!employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Paternity Leave") && employeeMaster.getMaritalStatus().equals("UnMarried")) {
+                    } else if (!employeeMaster.getGender() && leaveTypeMaster.getLeaveType().equals("Paternity Leave") && employeeMaster.getMaritalStatus().equals("UnMarried")) {
 
-                } else if (leaveTypeMaster.getId().intValue() == employeeLeaveBalance.getLeaveTypeMaster().getId().intValue() && !balanceList.isEmpty()) {
-                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + employeeLeaveBalance.getNoOfLeaveRemain() + ")");
-                } else {
-                    leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + 0 + ")");
+                    } else if (leaveTypeMaster.getId().intValue() == employeeLeaveBalance.getLeaveTypeMaster().getId().intValue() && !balanceList.isEmpty()) {
+                        leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + employeeLeaveBalance.getNoOfLeaveRemain() + ")");
+                    } else {
+                        leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + 0 + ")");
+                    }
+                } catch (Exception e) {
+
                 }
-            } catch (Exception e) {
 
             }
-//          }
 
+//          }
         }
         request.setAttribute("leaveTypemap", leaveTypemap);
     }
@@ -446,7 +448,7 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
         } catch (Exception e) {
         }
     }
-    
+
     protected void EmployeeTypeList(HttpServletRequest request) {
         EmployeeTypeMaster employeeTypeMaster = new EmployeeTypeMaster();
         List<?> EmployeeTypeList = employeeTypeService.read();

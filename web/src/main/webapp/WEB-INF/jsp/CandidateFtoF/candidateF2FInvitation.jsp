@@ -122,6 +122,14 @@
                                             </div>
                                             <%--<form:errors path="dateOfInterview" cssClass="errorDiv"></form:errors>--%>
                                         </div>
+                                        <div class=" col-sm-6">
+                                            <label>Time Of Interview:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_input1" >
+                                                <%--<form:input path="dateOfInterview" class="form-control" onchange="dateDifference(this.value);" placeholder="Date" readonly="true" ></form:input>--%>
+                                                <input type="time"  id="dateOfInterview1" class="form-control" placeholder="Please select From Date" name="dateOfInterview1" required="true"/>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-6">
@@ -250,6 +258,7 @@
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
 </html>
+
 <script>
     $(document).ready(function () {
         $('#datetimepicker2').datepicker({
@@ -259,6 +268,27 @@
 //    format: 'yyyy-mm-dd hh:ii'
 //});
     });
-    
+    $(document).ready(function () {
+        $('#datetimepicker3').datepicker({
+            dateFormat: 'dd/mm/yy'
+        });
+//        $('#datetimepicker2').datetimepicker({
+//    format: 'yyyy-mm-dd hh:ii'
+//});
+    });
+
+</script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        language: 'fr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 1,
+        minView: 0,
+        maxView: 1,
+        forceParse: 0
+    });
 </script>
 

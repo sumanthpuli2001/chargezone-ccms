@@ -21,11 +21,12 @@ public class EmployeeExcelRecord implements java.io.Serializable {
     private Double lwp;
     private Float pllleave;
     private Float slleave;
+    private String workingours;
 
     public EmployeeExcelRecord() {
     }
 
-    public EmployeeExcelRecord(EmployeeSalaryProcess employeeSalaryProcess, Float workingDays, Float presentDays, Float casuaLeave, Float sickLeave, Float pleave, Float otherLeave, Double otHours, Double otAmount, String month, String year,Double lwp,Float pllleave,Float slleave) {
+    public EmployeeExcelRecord(EmployeeSalaryProcess employeeSalaryProcess, Float workingDays, Float presentDays, Float casuaLeave, Float sickLeave, Float pleave, Float otherLeave, Double otHours, Double otAmount, String month, String year, Double lwp, Float pllleave, Float slleave,String workingours) {
         this.employeeSalaryProcess = employeeSalaryProcess;
         this.workingDays = workingDays;
         this.presentDays = presentDays;
@@ -39,6 +40,7 @@ public class EmployeeExcelRecord implements java.io.Serializable {
         this.lwp = lwp;
         this.pllleave = pllleave;
         this.slleave = slleave;
+        this.workingours = workingours;
     }
 
     public Integer getId() {
@@ -161,6 +163,13 @@ public class EmployeeExcelRecord implements java.io.Serializable {
         this.slleave = slleave;
     }
 
+    public String getWorkingours() {
+        return workingours;
+    }
+
+    public void setWorkingours(String workingours) {
+        this.workingours = workingours;
+    }
     
 
 }

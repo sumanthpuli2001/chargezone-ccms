@@ -25,8 +25,8 @@ public abstract class LogInAbstract extends CustomAbstract {
     protected Validator loginValidator;
     protected Validator userInitPwdValidator;
     protected Validator forgotPwdValidator;
-    protected static final String PATH = "User" + File.separator;
-    protected static final String LOGIN_PAGE = PATH + "Login";
+//    protected static final String PATH = "User" + File.separator;
+    protected static final String LOGIN_PAGE = "User/Login";
 
     public Validator getLoginValidator() {
         return loginValidator;

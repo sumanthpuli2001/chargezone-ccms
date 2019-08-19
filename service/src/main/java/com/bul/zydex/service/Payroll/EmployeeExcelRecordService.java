@@ -25,4 +25,6 @@ public interface EmployeeExcelRecordService<T> extends GenericsService<T> {
     public List<?> readEmployeeForIncentive(String pincentive, String aincentive, String month1, String year11);
 
     public List<?> readByEmployeExcelReportSearch(EmployeeSalaryProcess employeeSalaryProcess);
+
+    public List<?> readByEmployeExcelFetch(EmployeeSalaryProcess employeeSalaryProcess);
 }

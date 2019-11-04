@@ -19,6 +19,7 @@ import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeType;
+import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.model.PayrollAdditionalAmount;
 import com.bul.zydex.model.PayrollBonus;
@@ -893,13 +894,13 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
             double otEsicNet = 0;
             if (grossTotalEsic <= 21000) {
 
-                nettotalEsic = netSalary * 1.75 / 100;
+                nettotalEsic = netSalary * 0.75 / 100;
 //emp contrubtion of esic
-                emptotalEsic = netSalary * 1.75 / 100;
+                emptotalEsic = netSalary * 0.75 / 100;
 //            comp contribution of netSalary
-                comptotalEsic = netSalary * 4.75 / 100;
+                comptotalEsic = netSalary * 3.25 / 100;
 //            Ot Esic 
-                otEsic = OTAmt * 1.75 / 100;
+                otEsic = OTAmt * 0.75 / 100;
                 otEsicNet = OTAmt - otEsic;
 
                 employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
@@ -1886,6 +1887,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         companyList(request);
 //        EmployeeTypeList(request);
 //        EmployeeSubTypeList(request);
+        selectEmployee(request, response);
         request.setAttribute("search", request.getParameter("search"));
         List<?> list1 = (List<?>) request.getAttribute("SalaryList");
         mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
@@ -1902,8 +1904,9 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
         EmployeeMaster employeeMaster = new EmployeeMaster();
         EmployeeType employeeType = new EmployeeType();
         EmployeeSubType employeeSubType = new EmployeeSubType();
-
+        selectEmployee(request, response);
         HttpSession session = request.getSession();
+        String employee_master_id = request.getParameter("employeeMasterId");
         String zydex_location_id = request.getParameter("zydexLocationMasterId");
         String type_of_employee = request.getParameter("companyId");
 
@@ -1916,6 +1919,9 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 
         if (!type_of_employee.equals("")) {
             employeeMaster.setCompany(type_of_employee);
+        }
+        if (!employee_master_id.equals("")) {
+            employeeMaster.setBankIfscCode(employee_master_id);
         }
 
         if (!month1.equals("")) {
@@ -2783,7 +2789,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 }
                                 if (otherDeduction1 != 0) {
                                     employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
-                                    employeeDeductionAmount.setDeductionType("Statutory Deduction");
+                                    employeeDeductionAmount.setDeductionType("Short Excess");
                                     employeeDeductionAmount.setDeductionAmount(otherDeduction1);
                                     employeeDeductionAmountService.create(employeeDeductionAmount);
                                 }
@@ -3019,6 +3025,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                     Date date = sdf.parse("" + next2[0]);
                                     Calendar c = Calendar.getInstance();
                                     c.setTime(date);
+                                    String daString = sdf.format(date);
+                                    HolidayMaster holidayMaster = new HolidayMaster();
+                                    holidayMaster.setHolidayFromDate(daString);
+                                    List listholiday = holidayMasterService.checkHoliday(daString, "" + empMaster.getLocationMaster().getId());
+
                                     int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
                                     SimpleDateFormat format = new SimpleDateFormat("EEEE");
                                     String dayName = format.format(date);
@@ -3074,38 +3085,47 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                        Calendar cal11 = Calendar.getInstance();
 //                                        int year2 = cal11.get(cal11.YEAR);
 //                                        int diffYear = year2 - Integer.parseInt(yearOnVnc);
-                                        if (diffInYears >= 3) {
-                                            if (diffMinutes1 >= 60) {
-                                                late.add("Very Late");
-                                                VeryLateCount++;
-                                                if (VeryLateCount > 1) {
-                                                    VeryLateCount++;
-                                                    totalLateCollection += 100;
-                                                }
-                                            } else if (diffMinutes1 >= 30 && diffMinutes1 < 60) {
-                                                late.add("Late");
-                                                LateCount++;
-                                                if (LateCount > 5) {
-                                                    LateCount++;
-                                                    totalLateCollection += 100;
-                                                }
-                                            } else {
-                                                late.add("-");
-                                            }
+                                        if (dayName.equals("Saturday") || dayName.equals("Sunday")) {
+                                            late.add("-");
                                         } else {
-                                            if (diffMinutes1 >= 15 && diffMinutes1 < 60) {
-                                                late.add("Late");
-                                                LateCount++;
-                                                if (LateCount > 5) {
-                                                    LateCount++;
-                                                    totalLateCollection += 100;
-                                                }
-                                            } else if (diffMinutes1 >= 60) {
-                                                late.add("Very Late");
-                                                VeryLateCount++;
-                                                if (VeryLateCount > 1) {
-                                                    VeryLateCount++;
-                                                    totalLateCollection += 100;
+                                            if (listholiday.size() == 0) {
+
+                                                if (diffInYears >= 3) {
+                                                    if (diffMinutes1 >= 60) {
+                                                        late.add("Very Late");
+                                                        VeryLateCount++;
+                                                        if (VeryLateCount > 1) {
+                                                            VeryLateCount++;
+                                                            totalLateCollection += 100;
+                                                        }
+                                                    } else if (diffMinutes1 >= 30 && diffMinutes1 < 60) {
+                                                        late.add("Late");
+                                                        LateCount++;
+                                                        if (LateCount > 5) {
+                                                            LateCount++;
+                                                            totalLateCollection += 100;
+                                                        }
+                                                    } else {
+                                                        late.add("-");
+                                                    }
+                                                } else {
+                                                    if (diffMinutes1 >= 15 && diffMinutes1 < 60) {
+                                                        late.add("Late");
+                                                        LateCount++;
+                                                        if (LateCount > 5) {
+                                                            LateCount++;
+                                                            totalLateCollection += 100;
+                                                        }
+                                                    } else if (diffMinutes1 >= 60) {
+                                                        late.add("Very Late");
+                                                        VeryLateCount++;
+                                                        if (VeryLateCount > 1) {
+                                                            VeryLateCount++;
+                                                            totalLateCollection += 100;
+                                                        }
+                                                    } else {
+                                                        late.add("-");
+                                                    }
                                                 }
                                             } else {
                                                 late.add("-");
@@ -3701,7 +3721,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             hoursMadatory = empMaster1.getHoursMadatory();
                             // calculate actual working days
                             Double MonthlyWorkingHours = 0.0;
-                            double totalworking = (list.size() - WOCount) - pl + absent + holiday;
+                            double totalworking = (list.size() - WOCount) - (pl + holiday);
 
                             try {
 
@@ -3711,16 +3731,28 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 MonthlyWorkingHours = totalworking * 8.5;
                             }
 
-                            // short hours actual working - earned working hours
-                            String[] parts = wh1.split(":");
-                            int horaHour = Integer.valueOf(parts[0]);
+                            String l = "";
+                            try {
 
-                            ShortHours = MonthlyWorkingHours - horaHour;
+                                // short hours actual working - earned working hours
+                                String[] parts = wh1.split(":");
+                                int horaHour = Integer.valueOf(parts[0]);
+                                int horaMin = Integer.valueOf(parts[1]);
+
+                                ShortHours = MonthlyWorkingHours - horaHour;
+                                int l2 = (int) ShortHours;
+                                l = l2 + ":" + horaMin;
+
+                            } catch (Exception e) {
+
+                                l = 0 + ":" + 0 + ":" + 0;
+
+                            }
+
                             // actual working hours
-
                             firstHalfList.add("" + hoursMadatory);
                             firstHalfList.add("" + MonthlyWorkingHours);
-                            firstHalfList.add("" + ShortHours);
+                            firstHalfList.add("" + l);
 
                             Row row1 = firstSheet.createRow(rownum - 1);
                             for (int k1 = 0; k1 < firstHalfList.size(); k1++) {

@@ -20,8 +20,8 @@
         <property name="status" type="int">
             <column name="status" not-null="true" />
         </property>
-        <property name="relivingDateRadio" type="int">
-            <column name="relieving_date_per_rule" not-null="true" />
+        <property name="relivingDateRadio" type="java.lang.Boolean">
+            <column name="relieving_date_per_rule"  />
         </property>
         <property name="managerComment" type="string">
             <column name="manager_comment" />

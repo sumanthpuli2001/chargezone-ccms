@@ -174,134 +174,138 @@
                                                                             </c:forEach>
 
                                                                     </tr>
-                                                                    <tr>
-                                                                        <th>First In</th>
+                                                                   
+                                                                        <tr>
+                                                                            <th>First In</th>
 
-                                                                        <c:forEach var="list" items="${map[employeeMasterList[48]]}">
-                                                                            <c:if test="${fn:contains(list[1], '`') && !fn:contains(list[1], '?')}">
-                                                                                <c:set var="string2" value="${fn:split(list[1], '`')}"/>
-                                                                                <c:set var="string2" value="${fn:split(string2[1], '!')}"/>
-                                                                                <th style="text-align: center;">${string2[0]}</th>
-                                                                                </c:if>
-                                                                                <c:if test="${!fn:contains(list[1], '`') && !fn:contains(list[1], '?') && !fn:contains(list[1], 'AB') && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR')}">
-                                                                                    <c:if test="${fn:contains(list[1], 'Casual Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="cl" value="${(satMap[list[0]] eq 'AB') ? (cl + 0.5) : (cl + 1)}"></c:set>
-                                                                                    </c:if>
-                                                                                    <c:if test="${fn:contains(list[1], 'Privilege Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="pl" value="${(satMap[list[0]] eq 'AB') ? (pl + 0.5) : (pl + 1)}"></c:set>
-                                                                                    </c:if>
-                                                                                    <c:if test="${fn:contains(list[1], 'Sick Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="sl" value="${(satMap[list[0]] eq 'AB') ? (sl + 0.5) : (sl + 1)}"></c:set>
-                                                                                    </c:if>
-                                                                                    <c:if test="${fn:contains(list[1], 'Maternity Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="mtl" value="${(satMap[list[0]] eq 'AB') ? (mtl + 0.5) : (mtl + 1)}"></c:set>
-                                                                                    </c:if>
-                                                                                    <c:if test="${fn:contains(list[1], 'Paternity Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="ptl" value="${(satMap[list[0]] eq 'AB') ? (ptl + 0.5) :(ptl + 1)}"></c:set>
-                                                                                    </c:if>
-                                                                                    <c:if test="${fn:contains(list[1], 'C Off Leave') && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="coff" value="${(satMap[list[0]] eq 'AB') ? (coff + 0.5) : (coff + 1)}"></c:set>
-                                                                                    </c:if>
-                                                                                    <c:if test="${(fn:contains(list[1], 'Leave Without Pay') || fn:contains(woMap[list[0]], 'LWP')) && halfDayMap[list[0]] ne list[1]}">
-                                                                                        <c:set var="lwp" value="${(satMap[list[0]] eq 'AB') ? (lwp + 0.5) : (lwp + 1)}"></c:set>
-                                                                                    </c:if>
-
-                                                                                <th style="text-align: center;">
-                                                                                    <c:choose>
-                                                                                        <c:when test="${list[1] eq 'WO'}">
-
-
-
-
-                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Casual Leave')}">
-                                                                                                <c:set var="cl" value="${cl + 1}"></c:set>
-                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
-                                                                                            </c:if>
-                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Privilege Leave')}">
-                                                                                                <c:set var="pl" value="${pl + 1}"></c:set>
-                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
-                                                                                            </c:if>
-                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Sick Leave')}">
-                                                                                                <c:set var="sl" value="${sl + 1}"></c:set>
-                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
-                                                                                            </c:if>
-                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Maternity Leave')}">
-                                                                                                <c:set var="mtl" value="${mtl + 1}"></c:set>
-                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
-                                                                                            </c:if>
-                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Paternity Leave')}">
-                                                                                                <c:set var="ptl" value="${ptl + 1}"></c:set>
-                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
-                                                                                            </c:if>
-                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'C Off Leave')}">
-                                                                                                <c:set var="coff" value="${coff + 1}"></c:set>
-                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
-                                                                                            </c:if>
-                                                                                            <c:if test="${fn:contains(woMap[list[0]], 'Leave Without Pay') || fn:contains(woMap[list[0]], 'LWP')}">
-                                                                                                <c:set var="lwp" value="${lwp + 1}"></c:set>
-                                                                                                <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
-                                                                                            </c:if>
-
-
-
-                                                                                            ${woMap[list[0]]}
-                                                                                        </c:when>
-                                                                                        <c:otherwise>
-                                                                                            <c:choose>
-                                                                                                <c:when test="${halfDayMap[list[0]] eq list[1]}">-</c:when> 
-                                                                                                <c:otherwise>${list[1]}</c:otherwise>
-                                                                                            </c:choose>
-                                                                                        </c:otherwise>
-                                                                                    </c:choose>
-                                                                                </th>
-                                                                            </c:if>
-                                                                            <c:if test="${fn:contains(list[1], '?') && !fn:contains(list[1], '`') && !fn:contains(list[1], 'AB') && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR')}">
-                                                                                <c:set var="hostring" value="${fn:split(list[1], '?')}"/>
-                                                                                <th style="text-align: center;">${hostring[0]}</th>
-                                                                                    <c:set var="holiday" value="${holiday + 1}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AB') && !fn:contains(list[1], '?') && !fn:contains(list[1], '`') && !fn:contains(list[1], 'AR')}">
-                                                                                <th style="text-align: center;color: blue;" >${list[1]}</th>
-                                                                                    <c:set var="tr" value="${tr + 1}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${fn:contains(list[1], 'AB') && !fn:contains(list[1], '?') && !fn:contains(list[1], '`') && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR')}">
-                                                                                <th style="text-align: center;">-</th>
-                                                                                </c:if>
-                                                                                <c:if test="${list[1] eq 'AR'}">
-                                                                                <th style="text-align: center;">-</th>
-                                                                                </c:if>
-
-                                                                        </c:forEach>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Last Out</th>
                                                                             <c:forEach var="list" items="${map[employeeMasterList[48]]}">
+                                                                                <c:if test="${fn:contains(list[1], '`') && !fn:contains(list[1], '?')}">
+                                                                                    <c:set var="string2" value="${fn:split(list[1], '`')}"/>
+                                                                                    <c:set var="string2" value="${fn:split(string2[1], '!')}"/>
+                                                                                    <th style="text-align: center;">${string2[0]}</th>
+                                                                                    </c:if>
+                                                                                    <c:if test="${!fn:contains(list[1], '`') && !fn:contains(list[1], '?') && !fn:contains(list[1], 'AB') && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR')}">
+                                                                                        <c:if test="${fn:contains(list[1], 'Casual Leave') && halfDayMap[list[0]] ne list[1]}">
+                                                                                            <c:set var="cl" value="${(satMap[list[0]] eq 'AB') ? (cl + 0.5) : (cl + 1)}"></c:set>
+                                                                                        </c:if>
+                                                                                        <c:if test="${fn:contains(list[1], 'Privilege Leave') && halfDayMap[list[0]] ne list[1]}">
+                                                                                            <c:set var="pl" value="${(satMap[list[0]] eq 'AB') ? (pl + 0.5) : (pl + 1)}"></c:set>
+                                                                                        </c:if>
+                                                                                        <c:if test="${fn:contains(list[1], 'Sick Leave') && halfDayMap[list[0]] ne list[1]}">
+                                                                                            <c:set var="sl" value="${(satMap[list[0]] eq 'AB') ? (sl + 0.5) : (sl + 1)}"></c:set>
+                                                                                        </c:if>
+                                                                                        <c:if test="${fn:contains(list[1], 'Maternity Leave') && halfDayMap[list[0]] ne list[1]}">
+                                                                                            <c:set var="mtl" value="${(satMap[list[0]] eq 'AB') ? (mtl + 0.5) : (mtl + 1)}"></c:set>
+                                                                                        </c:if>
+                                                                                        <c:if test="${fn:contains(list[1], 'Paternity Leave') && halfDayMap[list[0]] ne list[1]}">
+                                                                                            <c:set var="ptl" value="${(satMap[list[0]] eq 'AB') ? (ptl + 0.5) :(ptl + 1)}"></c:set>
+                                                                                        </c:if>
+                                                                                        <c:if test="${fn:contains(list[1], 'C Off Leave') && halfDayMap[list[0]] ne list[1]}">
+                                                                                            <c:set var="coff" value="${(satMap[list[0]] eq 'AB') ? (coff + 0.5) : (coff + 1)}"></c:set>
+                                                                                        </c:if>
+                                                                                        <c:if test="${(fn:contains(list[1], 'Leave Without Pay') || fn:contains(woMap[list[0]], 'LWP')) && halfDayMap[list[0]] ne list[1]}">
+                                                                                            <c:set var="lwp" value="${(satMap[list[0]] eq 'AB') ? (lwp + 0.5) : (lwp + 1)}"></c:set>
+                                                                                        </c:if>
 
-                                                                            <%--<c:set var="string5" value="${fn:join(list[1], 'To ')}"/>--%>
+                                                                                    <th style="text-align: center;">
+                                                                                        <c:choose>
+                                                                                            <c:when test="${list[1] eq 'WO'}">
 
-                                                                            <c:if test="${fn:contains(list[1], '!')}">
-                                                                                <c:set var="string2" value="${fn:split(list[1], '`')}"/>
-                                                                                <c:set var="string2" value="${fn:split(string2[1], '!')}"/>
-                                                                                <c:set var="string4" value="${fn:split(list[1], '!')}"/>
-                                                                                <c:set var="string5" value="${fn:split(string4[1], '@')}"/>
-                                                                                <fmt:parseDate value="${string5[0]}" var="lout" pattern="HH:mm" />
-                                                                                <fmt:parseDate value="${string2[0]}" var="fin" pattern="HH:mm" />
-                                                                                <c:choose>
-                                                                                    <c:when test="${lout eq fin}">
-                                                                                        <th style="text-align: center;">-</th>
-                                                                                        </c:when>
-                                                                                        <c:otherwise>
-                                                                                        <th style="text-align: center;">${string5[0]}</th>
-                                                                                        </c:otherwise>
-                                                                                    </c:choose>
+
+
+
+                                                                                                <c:if test="${fn:contains(woMap[list[0]], 'Casual Leave')}">
+                                                                                                    <c:set var="cl" value="${cl + 1}"></c:set>
+                                                                                                    <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(woMap[list[0]], 'Privilege Leave')}">
+                                                                                                    <c:set var="pl" value="${pl + 1}"></c:set>
+                                                                                                    <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(woMap[list[0]], 'Sick Leave')}">
+                                                                                                    <c:set var="sl" value="${sl + 1}"></c:set>
+                                                                                                    <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(woMap[list[0]], 'Maternity Leave')}">
+                                                                                                    <c:set var="mtl" value="${mtl + 1}"></c:set>
+                                                                                                    <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(woMap[list[0]], 'Paternity Leave')}">
+                                                                                                    <c:set var="ptl" value="${ptl + 1}"></c:set>
+                                                                                                    <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(woMap[list[0]], 'C Off Leave')}">
+                                                                                                    <c:set var="coff" value="${coff + 1}"></c:set>
+                                                                                                    <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                                </c:if>
+                                                                                                <c:if test="${fn:contains(woMap[list[0]], 'Leave Without Pay') || fn:contains(woMap[list[0]], 'LWP')}">
+                                                                                                    <c:set var="lwp" value="${lwp + 1}"></c:set>
+                                                                                                    <c:set var="wo" value="${wo ne 0 ? (wo - 1) : 0}"></c:set>
+                                                                                                </c:if>
+
+
+
+                                                                                                ${woMap[list[0]]}
+                                                                                            </c:when>
+                                                                                            <c:otherwise>
+                                                                                                <c:choose>
+                                                                                                    <c:when test="${halfDayMap[list[0]] eq list[1]}">-</c:when> 
+                                                                                                    <c:otherwise>${list[1]}</c:otherwise>
+                                                                                                </c:choose>
+                                                                                            </c:otherwise>
+                                                                                        </c:choose>
+                                                                                    </th>
                                                                                 </c:if>
-                                                                                <c:if test="${!fn:contains(list[1], '@')}">
-                                                                                <th style="text-align: center;">-</th>
-                                                                                </c:if>
+                                                                                <c:if test="${fn:contains(list[1], '?') && !fn:contains(list[1], '`') && !fn:contains(list[1], 'AB') && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR')}">
+                                                                                    <c:set var="hostring" value="${fn:split(list[1], '?')}"/>
+                                                                                    <th style="text-align: center;">${hostring[0]}</th>
+                                                                                        <c:set var="holiday" value="${holiday + 1}"></c:set>
+                                                                                    </c:if>
+                                                                                    <c:if test="${fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AB') && !fn:contains(list[1], '?') && !fn:contains(list[1], '`') && !fn:contains(list[1], 'AR')}">
+                                                                                    <th style="text-align: center;color: blue;" >${list[1]}</th>
+                                                                                        <c:set var="tr" value="${tr + 1}"></c:set>
+                                                                                    </c:if>
+                                                                                    <c:if test="${fn:contains(list[1], 'AB') && !fn:contains(list[1], '?') && !fn:contains(list[1], '`') && !fn:contains(list[1], 'TR') && !fn:contains(list[1], 'AR')}">
+                                                                                    <th style="text-align: center;">-</th>
+                                                                                    </c:if>
+                                                                                    <c:if test="${list[1] eq 'AR'}">
+                                                                                    <th style="text-align: center;">-</th>
+                                                                                    </c:if>
 
-                                                                        </c:forEach>
+                                                                            </c:forEach>
+                                                                        </tr>
+                                                                 
+                                                                   
+                                                                        <tr>
+                                                                            <th>Last Out</th>
+                                                                                <c:forEach var="list" items="${map[employeeMasterList[48]]}">
 
-                                                                    </tr>
+                                                                                <%--<c:set var="string5" value="${fn:join(list[1], 'To ')}"/>--%>
+
+                                                                                <c:if test="${fn:contains(list[1], '!')}">
+                                                                                    <c:set var="string2" value="${fn:split(list[1], '`')}"/>
+                                                                                    <c:set var="string2" value="${fn:split(string2[1], '!')}"/>
+                                                                                    <c:set var="string4" value="${fn:split(list[1], '!')}"/>
+                                                                                    <c:set var="string5" value="${fn:split(string4[1], '@')}"/>
+                                                                                    <fmt:parseDate value="${string5[0]}" var="lout" pattern="HH:mm" />
+                                                                                    <fmt:parseDate value="${string2[0]}" var="fin" pattern="HH:mm" />
+                                                                                    <c:choose>
+                                                                                        <c:when test="${lout eq fin}">
+                                                                                            <th style="text-align: center;">-</th>
+                                                                                            </c:when>
+                                                                                            <c:otherwise>
+                                                                                            <th style="text-align: center;">${string5[0]}</th>
+                                                                                            </c:otherwise>
+                                                                                        </c:choose>
+                                                                                    </c:if>
+                                                                                    <c:if test="${!fn:contains(list[1], '@')}">
+                                                                                    <th style="text-align: center;">-</th>
+                                                                                    </c:if>
+
+                                                                            </c:forEach>
+
+                                                                        </tr>
+                                                                 
                                                                     <!--                                                                    <tr>
                                                                                                                                             <th>1st Half</th>
                                                                     <%--<c:forEach var="firstHalfList" items="${firstHalfList}">--%>
@@ -361,6 +365,7 @@
 
 
                                                                 </tr>-->
+
                                                                     <tr>
                                                                         <th>PR/AB</th>
                                                                             <c:forEach var="PrAb" items="${PrAb}">
@@ -427,14 +432,16 @@
                                                                             <th style="text-align: center;">${workingHour}</th>
                                                                             </c:forEach>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <th>View All Punch</th>
-                                                                            <c:forEach var="list" items="${map[employeeMasterList[48]]}">
-                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}', '${employeeMasterList[48]}');">View</a>
-                                                                            </th>
+                                                                    <c:if test="${sessionScope.userRight.hr}">
+                                                                        <tr>
+                                                                            <th>View All Punch</th>
+                                                                                <c:forEach var="list" items="${map[employeeMasterList[48]]}">
+                                                                                <th style="text-align: center;"><a onclick="showPunchData('${list[0]}', '${employeeMasterList[48]}');">View</a>
+                                                                                </th>
 
-                                                                        </c:forEach>
-                                                                    </tr>
+                                                                            </c:forEach>
+                                                                        </tr>
+                                                                    </c:if>
                                                                     <c:forEach var="list" items="${map[employeeMasterList[48]]}">
                                                                         <c:if test="${fn:contains(list[1], 'WO')}">
                                                                             <c:set var="wo" value="${wo + 1}"></c:set>
@@ -443,22 +450,22 @@
 
                                                                 </table>
                                                                 <table id="table_1" class="table-bordered table-striped table-hover"
-                                                                       style="margin-top: 20px;margin-bottom: 20px;margin-left: 5px;width: 25%" >
+                                                                       style="margin-top: 20px;margin-bottom: 20px;margin-left: 5px;" >
                                                                     <tr >
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th colspan="2">Day Count</th>
                                                                     </tr>
-                                                                    <tr>
+                                                                    <tr >
                                                                         <c:if test="${presentCount ne 0}">
-                                                                            <th style="color: green;text-align: center;">PR</th>
+                                                                            <th style="color: green;text-align: center; width: 50px;">PR</th>
                                                                             </c:if>
                                                                             <c:if test="${absent ne 0}">
                                                                             <th style="color: red;text-align: center;">AB</th>
                                                                             </c:if>
                                                                             <c:if test="${WOCount ne 0}">
-                                                                            <th style="text-align: center;">WO</th>
+                                                                            <th style="text-align: center; width: 50px;">WO</th>
                                                                             </c:if>
                                                                             <c:if test="${holiday ne 0}">
                                                                             <th style="text-align: center;">Holiday</th>
@@ -500,7 +507,7 @@
                                                                         <!--<th style="color: red;text-align: center;">Penalty Hours</th>-->
                                                                         <%--</c:if>--%>
                                                                         <c:if test="${!empty totalLateCollection}">
-                                                                            <th style="color: red;text-align: center;">Penalty Hours</th>
+                                                                            <th style="color: red;text-align: center; width: 50px;">Penalty Hours</th>
                                                                             </c:if>
                                                                             <c:if test="${!empty totalPaidOverTime}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">OT Hours</th>
@@ -508,6 +515,9 @@
                                                                             <c:if test="${!empty totalUnpaidOverTime}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Unpaid OT Hours</th>
                                                                             </c:if>
+                                                                        <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Actual Working Hours</th>
+                                                                        <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Total Working</th>
+                                                                        <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Difference ( OT + / Short hours - )</th>
                                                                     </tr>
                                                                     <tr>
                                                                         <c:set var="shortL" value="${shl/2}"/>
@@ -567,7 +577,10 @@
                                                                             </c:if>  
                                                                             <c:if test="${!empty totalUnpaidOverTime}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalUnpaidOverTime}</th>
-                                                                            </c:if>  
+                                                                            </c:if> 
+                                                                        <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${presentCount * hoursMadatory}</th>
+                                                                        <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalWorkingSystem}</th>
+                                                                        <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${shortHours}</th>
                                                                     </tr>
                                                                     <tr>
                                                                     </tr>

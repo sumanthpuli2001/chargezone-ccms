@@ -42,7 +42,7 @@ public class OTRegularizationDAOImpl<T> extends GenericsDAOImpl<T> implements OT
     @Override
     public List<?> approvalLeval1WiseOtRegularizationList(int id) {
        String query = "";
-        query += " SELECT a.id,b.employeeName,a.startDateTime,a.endDateTime,a.reason,a.status,a.dateOfSubmit"
+        query += " SELECT a.id,b.employeeName,a.startDateTime,a.endDateTime,a.reason,a.status,a.dateOfSubmit,a.differentCompare"
                 + " FROM OTRegularization a,"
                 + " EmployeeMaster b"
                 + " Where a.userMasterId=b.userMaster.id"

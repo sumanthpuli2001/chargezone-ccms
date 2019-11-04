@@ -88,6 +88,7 @@
                                                                     <th>Employee Name</th>
                                                                     <th>Start Date & Time</th>
                                                                     <th>End Date & Time</th>
+                                                                    <th>Time Difference</th>
                                                                     <th>Reason</th>
                                                                     <th>Date of Submission</th>
                                                                     <th>Status</th>
@@ -102,6 +103,7 @@
                                                                 <td >${list[1]}</td>
                                                                 <td >${list[2]}</td>
                                                                 <td>${list[3]}</td>
+                                                                <td>${list[7]}</td>
                                                                 <td style="width:40%;">${list[4]}</td>
                                                                 <td>${list[6]}</td>
                                                                 <c:if test="${list[5] eq 0}">

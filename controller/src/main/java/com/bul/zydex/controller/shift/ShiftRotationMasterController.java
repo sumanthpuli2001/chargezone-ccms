@@ -609,7 +609,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     //EmployeeMaster employeeMasterModel = (EmployeeMaster) request.getSession().getAttribute("employeeInfo");
                     emailTemplate = emailTemplateService.readById(169);
                     String To = emailList;
-                    String from = "myspc@spcls.co.in";
+                    String from = "pooja@vaderanco.com";
                     String Subject = emailTemplate.getSubject();
                     // Subject = Subject.replaceAll("\\{user\\}", employeeMasterModel.getEmployeeName());
                     String msg = emailTemplate.getBodytext();
@@ -668,7 +668,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                     EmployeeMaster employeeMasterHr = new EmployeeMaster();
                     emailTemplate = emailTemplateService.readById(170);
                     String To = emailList;
-                    String from = "myspc@spcls.co.in";
+                    String from = "pooja@vaderanco.com";
                     String Subject = emailTemplate.getSubject();
                     String msg = emailTemplate.getBodytext();
                     msg = msg.replaceAll("\\{data\\}", "Employee " + employeeCompanyId + " is having Odd punch today" + "\n");
@@ -755,8 +755,8 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
                 if (!employeeMaster1.getZydexLocationMaster().getId().equals(1)
                         && !employeeMaster1.getZydexLocationMaster().getId().equals(6)) {
 
-                    ShiftMaster firstShift = shiftMasterService.readById(3);
-                    ShiftMaster secondShift = shiftMasterService.readById(4);
+                    ShiftMaster firstShift = shiftMasterService.readById(8);
+                    ShiftMaster secondShift = shiftMasterService.readById(1);
                     ShiftMaster nightShift = shiftMasterService.readById(5);
                     ShiftMaster generalShift = shiftMasterService.readById(6);
                     Date date1 = new Date();

@@ -10,7 +10,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Monthly Employee Shift Upload For TextFile</title>
+        <title>Monthly Employee Shift Upload For Text File</title>
     </head>
     <script>
         var flag3 = true;

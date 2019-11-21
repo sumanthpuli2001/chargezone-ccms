@@ -1174,27 +1174,25 @@ public class VacancyController extends VacancyAbstract {
         String strCAQ0[] = request.getParameterValues("candidateAcademicQualification.id");
         String strCAQ1[] = request.getParameterValues("candidateAcademicQualification.academicYearFrom");
         String strCAQ2[] = request.getParameterValues("candidateAcademicQualification.academicYearTo");
-        String strCAQ3[] = request.getParameterValues("candidateAcademicQualification.academicExamination");
-        String strCAQ4[] = request.getParameterValues("candidateAcademicQualification.academicBoard");
-        String strCAQ5[] = request.getParameterValues("candidateAcademicQualification.academicNumberOfAttempts");
-        String strCAQ6[] = request.getParameterValues("candidateAcademicQualification.academicMarksInPercent");
-        String strCAQ7[] = request.getParameterValues("candidateAcademicQualification.academicClass");
-        String strCAQ8[] = request.getParameterValues("candidateAcademicQualification.academicRankOrScholarship");
+//        String strCAQ3[] = request.getParameterValues("candidateAcademicQualification.academicExamination");
+//        String strCAQ4[] = request.getParameterValues("candidateAcademicQualification.academicBoard");
+//        String strCAQ5[] = request.getParameterValues("candidateAcademicQualification.academicNumberOfAttempts");
+//        String strCAQ6[] = request.getParameterValues("candidateAcademicQualification.academicMarksInPercent");
+//        String strCAQ7[] = request.getParameterValues("candidateAcademicQualification.academicClass");
+//        String strCAQ8[] = request.getParameterValues("candidateAcademicQualification.academicRankOrScholarship");
 
         if (null == caqList || caqList.isEmpty()) {
             for (int i = 0; i < strCAQ1.length; i++) {
-                if ((!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty())
-                        && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty())
-                        && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())) {
+                if ((!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty())) {
                     CandidateAcademicQualification caq = new CandidateAcademicQualification();
                     caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
                     caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
-                    caq.setAcademicExamination(strCAQ3[i]);
-                    caq.setAcademicBoard(strCAQ4[i]);
-                    caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
-                    caq.setAcademicMarksInPercent(strCAQ6[i]);
-                    caq.setAcademicClass(strCAQ7[i]);
-                    caq.setAcademicRankOrScholarship(strCAQ8[i]);
+                    caq.setAcademicExamination("");
+                    caq.setAcademicBoard("");
+                    caq.setAcademicNumberOfAttempts(0);
+                    caq.setAcademicMarksInPercent("");
+                    caq.setAcademicClass("");
+                    caq.setAcademicRankOrScholarship("");
                     caq.setCreatedDate(sdf.format(cdate));
                     caq.setCandidateApplyJob(candidateApplyJob);
                     candidateAcademicQualificationService.create(caq);
@@ -1203,52 +1201,46 @@ public class VacancyController extends VacancyAbstract {
         } else if ((caqList != null || !caqList.isEmpty()) && (strCAQ1.length == caqList.size())) {
             for (int i = 0; i < strCAQ1.length; i++) {
                 if ((!strCAQ0[i].equals("") && !strCAQ0[i].isEmpty())
-                        && (!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty())
-                        && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty())
-                        && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())) {
+                        && (!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty())) {
                     CandidateAcademicQualification caq = candidateAcademicQualificationService.readById(Integer.parseInt(strCAQ0[i]));
                     caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
                     caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
-                    caq.setAcademicExamination(strCAQ3[i]);
-                    caq.setAcademicBoard(strCAQ4[i]);
-                    caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
-                    caq.setAcademicMarksInPercent(strCAQ6[i]);
-                    caq.setAcademicClass(strCAQ7[i]);
-                    caq.setAcademicRankOrScholarship(strCAQ8[i]);
+                    caq.setAcademicExamination("");
+                    caq.setAcademicBoard("");
+                    caq.setAcademicNumberOfAttempts(0);
+                    caq.setAcademicMarksInPercent("");
+                    caq.setAcademicClass("");
+                    caq.setAcademicRankOrScholarship("");
                     candidateAcademicQualificationService.update(caq);
                 }
             }
         } else {
             for (int i = 0; i < caqList.size(); i++) {
                 if ((!strCAQ0[i].equals("") && !strCAQ0[i].isEmpty())
-                        && (!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty())
-                        && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty())
-                        && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())) {
+                        && (!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty())) {
                     CandidateAcademicQualification caq = candidateAcademicQualificationService.readById(Integer.parseInt(strCAQ0[i]));
                     caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
                     caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
-                    caq.setAcademicExamination(strCAQ3[i]);
-                    caq.setAcademicBoard(strCAQ4[i]);
-                    caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
-                    caq.setAcademicMarksInPercent(strCAQ6[i]);
-                    caq.setAcademicClass(strCAQ7[i]);
-                    caq.setAcademicRankOrScholarship(strCAQ8[i]);
+                    caq.setAcademicExamination("");
+                    caq.setAcademicBoard("");
+                    caq.setAcademicNumberOfAttempts(0);
+                    caq.setAcademicMarksInPercent("");
+                    caq.setAcademicClass("");
+                    caq.setAcademicRankOrScholarship("");
                     candidateAcademicQualificationService.update(caq);
                 }
             }
             for (int i = caqList.size() + 1; i < strCAQ1.length; i++) {
-                if ((!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty()) && (!strCAQ3[i].equals("") && !strCAQ3[i].isEmpty())
-                        && (!strCAQ4[i].equals("") && !strCAQ4[i].isEmpty()) && (!strCAQ5[i].equals("") && !strCAQ5[i].isEmpty())
-                        && (!strCAQ6[i].equals("") && !strCAQ6[i].isEmpty()) && (!strCAQ7[i].equals("") && !strCAQ7[i].isEmpty())) {
+                if ((!strCAQ1[i].equals("") && !strCAQ1[i].isEmpty()) && (!strCAQ2[i].equals("") && !strCAQ2[i].isEmpty())) {
                     CandidateAcademicQualification caq = new CandidateAcademicQualification();
                     caq.setAcademicYearFrom(Integer.parseInt(strCAQ1[i]));
                     caq.setAcademicYearTo(Integer.parseInt(strCAQ2[i]));
-                    caq.setAcademicExamination(strCAQ3[i]);
-                    caq.setAcademicBoard(strCAQ4[i]);
-                    caq.setAcademicNumberOfAttempts(Integer.parseInt(strCAQ5[i]));
-                    caq.setAcademicMarksInPercent(strCAQ6[i]);
-                    caq.setAcademicClass(strCAQ7[i]);
-                    caq.setAcademicRankOrScholarship(strCAQ8[i]);
+                    caq.setAcademicExamination("");
+                    caq.setAcademicBoard("");
+                    caq.setAcademicNumberOfAttempts(0);
+                    caq.setAcademicMarksInPercent("");
+                    caq.setAcademicClass("");
+                    caq.setAcademicRankOrScholarship("");
                     caq.setCandidateApplyJob(candidateApplyJob);
                     caq.setCreatedDate(sdf.format(cdate));
                     candidateAcademicQualificationService.create(caq);
@@ -1433,19 +1425,18 @@ public class VacancyController extends VacancyAbstract {
 
         //other references of candidate
         String strCOR0[] = request.getParameterValues("candidateOtherReferences.id");
-        String strCOR1[] = request.getParameterValues("candidateOtherReferences.referenceNonRelativesName");
-        String strCOR2[] = request.getParameterValues("candidateOtherReferences.referenceNonRelativesOrganization");
+//        String strCOR1[] = request.getParameterValues("candidateOtherReferences.referenceNonRelativesName");
+//        String strCOR2[] = request.getParameterValues("candidateOtherReferences.referenceNonRelativesOrganization");
         String strCOR3[] = request.getParameterValues("candidateOtherReferences.referenceNonRelativesPosition");
         String strCOR4[] = request.getParameterValues("candidateOtherReferences.referenceNonRelativesContactNmber");
 
         if (null == corList || corList.isEmpty()) {
-            for (int i = 0; i < strCOR1.length; i++) {
-                if ((!strCOR1[i].equals("") && !strCOR1[i].isEmpty())
-                        && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
+            for (int i = 0; i < strCOR3.length; i++) {
+                if ((!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
                         && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())) {
                     CandidateOtherReferences cor = new CandidateOtherReferences();
-                    cor.setReferenceNonRelativesName(strCOR1[i]);
-                    cor.setReferenceNonRelativesOrganization(strCOR2[i]);
+                    cor.setReferenceNonRelativesName("");
+                    cor.setReferenceNonRelativesOrganization("");
                     cor.setReferenceNonRelativesPosition(strCOR3[i]);
                     cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
                     cor.setCreatedDate(sdf.format(cdate));
@@ -1453,14 +1444,13 @@ public class VacancyController extends VacancyAbstract {
                     candidateOtherReferencesService.create(cor);
                 }
             }
-        } else if ((corList != null || !corList.isEmpty()) && (strCOR1.length == corList.size())) {
-            for (int i = 0; i < strCOR1.length; i++) {
-                if ((!strCOR0[i].equals("") && !strCOR0[i].isEmpty()) && (!strCOR1[i].equals("") && !strCOR1[i].isEmpty())
-                        && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
+        } else if ((corList != null || !corList.isEmpty()) && (strCOR3.length == corList.size())) {
+            for (int i = 0; i < strCOR3.length; i++) {
+                if ((!strCOR0[i].equals("") && !strCOR0[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
                         && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())) {
                     CandidateOtherReferences cor = candidateOtherReferencesService.readById(Integer.parseInt(strCOR0[i]));
-                    cor.setReferenceNonRelativesName(strCOR1[i]);
-                    cor.setReferenceNonRelativesOrganization(strCOR2[i]);
+                    cor.setReferenceNonRelativesName("");
+                    cor.setReferenceNonRelativesOrganization("");
                     cor.setReferenceNonRelativesPosition(strCOR3[i]);
                     cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
                     candidateOtherReferencesService.update(cor);
@@ -1468,24 +1458,22 @@ public class VacancyController extends VacancyAbstract {
             }
         } else {
             for (int i = 0; i < corList.size(); i++) {
-                if ((!strCOR0[i].equals("") && !strCOR0[i].isEmpty()) && (!strCOR1[i].equals("") && !strCOR1[i].isEmpty())
-                        && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
+                if ((!strCOR0[i].equals("") && !strCOR0[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
                         && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())) {
                     CandidateOtherReferences cor = candidateOtherReferencesService.readById(Integer.parseInt(strCOR0[i]));
-                    cor.setReferenceNonRelativesName(strCOR1[i]);
-                    cor.setReferenceNonRelativesOrganization(strCOR2[i]);
+                    cor.setReferenceNonRelativesName("");
+                    cor.setReferenceNonRelativesOrganization("");
                     cor.setReferenceNonRelativesPosition(strCOR3[i]);
                     cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
                     candidateOtherReferencesService.update(cor);
                 }
             }
-            for (int i = corList.size() + 1; i < strCOR1.length; i++) {
-                if ((!strCOR1[i].equals("") && !strCOR1[i].isEmpty())
-                        && (!strCOR2[i].equals("") && !strCOR2[i].isEmpty()) && (!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
+            for (int i = corList.size() + 1; i < strCOR3.length; i++) {
+                if ((!strCOR3[i].equals("") && !strCOR3[i].isEmpty())
                         && (!strCOR4[i].equals("") && !strCOR4[i].isEmpty())) {
                     CandidateOtherReferences cor = new CandidateOtherReferences();
-                    cor.setReferenceNonRelativesName(strCOR1[i]);
-                    cor.setReferenceNonRelativesOrganization(strCOR2[i]);
+                    cor.setReferenceNonRelativesName("");
+                    cor.setReferenceNonRelativesOrganization("");
                     cor.setReferenceNonRelativesPosition(strCOR3[i]);
                     cor.setReferenceNonRelativesContactNmber(strCOR4[i]);
                     cor.setCreatedDate(sdf.format(cdate));

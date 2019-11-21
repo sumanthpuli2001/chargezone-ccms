@@ -269,7 +269,13 @@ public class LeaveEmployeeDetailAbstract extends CustomAbstract {
                     } else if (leaveTypeMaster.getId().intValue() == employeeLeaveBalance.getLeaveTypeMaster().getId().intValue() && !balanceList.isEmpty()) {
                         leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + employeeLeaveBalance.getNoOfLeaveRemain() + ")");
                     } else {
-                        leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + 0 + ")");
+
+                        if (leaveTypeMaster.getLeaveType().equals("National Holiday ")) {
+
+                        } else {
+                            leaveTypemap.put(leaveTypeMaster.getId(), leaveTypeMaster.getLeaveType() + "(" + 0 + ")");
+
+                        }
                     }
                 } catch (Exception e) {
 

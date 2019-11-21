@@ -205,12 +205,12 @@
                                                                         <ul class="dropdown-menu">
                                                                             <c:if test="${list[5] ne 2}">
 
-                                                                                <li>
+<!--                                                                                <li>
                                                                                     <a href="#"
                                                                                        onclick="viewClick(${list[4]});">
                                                                                         &nbsp;&nbsp;View/Edit
                                                                                     </a>
-                                                                                </li>
+                                                                                </li>-->
                                                                                 <li>
                                                                                     <c:if test="${list[5] ne 1}">
                                                                                         <a href="#"

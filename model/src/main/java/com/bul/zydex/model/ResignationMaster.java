@@ -18,7 +18,7 @@ public class ResignationMaster implements java.io.Serializable {
     private Integer hrId;
     private String hrApproveDate;
     private String attrition;
-    private int relivingDateRadio;
+    private Boolean relivingDateRadio;
 
     public ResignationMaster() {
     }
@@ -30,7 +30,7 @@ public class ResignationMaster implements java.io.Serializable {
         this.status = status;
     }
 
-    public ResignationMaster(Integer id, EmployeeMaster employeeMaster, String effectiveDatetime, String reason, int status, String managerComment, String relievingDate, String hrComment, Integer hrId, String hrApproveDate, String attrition,String relievingDatephysical,int relivingDateRadio) {
+    public ResignationMaster(Integer id, EmployeeMaster employeeMaster, String effectiveDatetime, String reason, int status, String managerComment, String relievingDate, String hrComment, Integer hrId, String hrApproveDate, String attrition,String relievingDatephysical,Boolean relivingDateRadio) {
         this.id = id;
         this.employeeMaster = employeeMaster;
         this.effectiveDatetime = effectiveDatetime;
@@ -44,6 +44,7 @@ public class ResignationMaster implements java.io.Serializable {
         this.attrition = attrition;
         this.relievingDatephysical = relievingDatephysical;
         this.relivingDateRadio = relivingDateRadio;
+       
     }
 
     public Integer getId() {
@@ -142,15 +143,17 @@ public class ResignationMaster implements java.io.Serializable {
         this.relievingDatephysical = relievingDatephysical;
     }
 
-    
-
-    public int getRelivingDateRadio() {
+    public Boolean getRelivingDateRadio() {
         return relivingDateRadio;
     }
 
-    public void setRelivingDateRadio(int relivingDateRadio) {
+    public void setRelivingDateRadio(Boolean relivingDateRadio) {
         this.relivingDateRadio = relivingDateRadio;
     }
+
+    
+
+   
     
 
 }

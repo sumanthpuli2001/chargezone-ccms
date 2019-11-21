@@ -192,7 +192,7 @@ public class LeaveTypeMasterController extends LeaveTypeMasterAbstract {
                                     String leaveTypeName = (String) firstHeaderRow.getCell(i).toString();
                                     if(leaveTypeName.equalsIgnoreCase(leaveTypeMaster.getLeaveType())){
                                         String noOfLeaves = row.getCell(i).toString();
-                                        noOfLeaves = noOfLeaves.split("\\.", 2)[0];
+//                                        noOfLeaves = noOfLeaves.split("\\.", 2)[0];
                                         boolean employeeLeaveBalancevalue1 = employeeLeaveBalanceService.readByEmpeIdAndLeaveTypeId(empid, leaveid);
                                         if(employeeLeaveBalancevalue1){
                                             employeeLeaveBalance.setEmployeeMaster(employeeMaster);

@@ -334,7 +334,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="nav-tabs-custom">
+<!--                    <div class="nav-tabs-custom">
                         <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
                             <div class="box-header" style="background-color: #006fad !important;text-align: center;">
                                 <h3 class="box-title"style="font-size: 30px;color: white;font-weight:700;font-size:16px;">EMPLOYEE DETAIL INFORMATION</h3>
@@ -354,7 +354,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="nav-tabs-custom">
                         <div  style="border: 1px #3c8dbc solid;border-radius: 5px;">
                             <div class="box-header" style="background-color: #006fad !important;text-align: center;">

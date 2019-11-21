@@ -541,34 +541,34 @@
 
                                                             <div class="col-sm-12">
                                                                 </br>
-                                                                <label>ACADEMIC QUALIFICATION:</label> </br>
+                                                                <label></label> </br>
                                                                 <table border="1" class="table table-bordered">
                                                                     <tr>
-                                                                        <td colspan="2" style="text-align: center; vertical-align: middle"><label>Year</label></td>
-                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Examination</label></td>
-                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Board/ College/ Institution</label></td>
+                                                                        <td  style="text-align: center; vertical-align: middle"><label>Strength</label></td>
+                                                                        <td  style="text-align: center; vertical-align: middle"><label>Weakness</label></td>
+<!--                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Board/ College/ Institution</label></td>
                                                                         <td rowspan="2" style="text-align: center; vertical-align: middle"><label>No. Of Attempts</label></td>
                                                                         <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Marks(%)</label></td>
                                                                         <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Class</label></td>
-                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Rank Or Scholarship(if Any)</label></td>
+                                                                        <td rowspan="2" style="text-align: center; vertical-align: middle"><label>Rank Or Scholarship(if Any)</label></td>-->
 
                                                                     </tr>
-                                                                    <tr>
+<!--                                                                    <tr>
                                                                         <td style="text-align: center; vertical-align: middle"><label>From Year</label></td>
                                                                         <td style="text-align: center; vertical-align: middle"><label>To Year</label></td>
-                                                                    </tr>
+                                                                    </tr>-->
                                                                     <tr>
                                                                     </tr>
                                                                     <c:forEach items="${candidateAcademicQualification}" var="list">
                                                                         <tr>
                                                                             <td style="text-align: center;"> ${list.academicYearFrom} </td>
                                                                             <td style="text-align: center;"> ${list.academicYearTo} </td>
-                                                                            <td style="text-align: center;"> ${list.academicExamination} </td>
+<!--                                                                            <td style="text-align: center;"> ${list.academicExamination} </td>
                                                                             <td style="text-align: center;"> ${list.academicBoard} </td>
                                                                             <td style="text-align: center;"> ${list.academicNumberOfAttempts} </td>
                                                                             <td style="text-align: center;"> ${list.academicMarksInPercent} </td>
                                                                             <td style="text-align: center;"> ${list.academicClass} </td>
-                                                                            <td style="text-align: center;"> ${list.academicRankOrScholarship} </td>
+                                                                            <td style="text-align: center;"> ${list.academicRankOrScholarship} </td>-->
                                                                         </tr>
                                                                     </c:forEach>
                                                                 </table>
@@ -619,15 +619,15 @@
                                                                 <label>Other:</label> </br>
                                                                 <table border="1" class="table table-bordered">
                                                                     <tr>
-                                                                        <td  style="text-align: center; vertical-align: middle"><label>Strength</label></td>
-                                                                        <td  style="text-align: center; vertical-align: middle"><label>Weakness</label></td>
+<!--                                                                        <td  style="text-align: center; vertical-align: middle"><label>Strength</label></td>
+                                                                        <td  style="text-align: center; vertical-align: middle"><label>Weakness</label></td>-->
                                                                         <td  style="text-align: center; vertical-align: middle"><label>Previous Job (Positive)</label></td>
                                                                         <td  style="text-align: center; vertical-align: middle"><label>Previous Job (Negative)</label></td>
                                                                     </tr>
                                                                     <c:forEach items="${candidateOtherReferences}" var="list">
                                                                         <tr>
-                                                                            <td style="text-align: center;"> ${list.referenceNonRelativesName} </td>
-                                                                            <td style="text-align: center;"> ${list.referenceNonRelativesOrganization} </td>
+<!--                                                                            <td style="text-align: center;"> ${list.referenceNonRelativesName} </td>
+                                                                            <td style="text-align: center;"> ${list.referenceNonRelativesOrganization} </td>-->
                                                                             <td style="text-align: center;"> ${list.referenceNonRelativesPosition} </td>
                                                                             <td style="text-align: center;"> ${list.referenceNonRelativesContactNmber} </td>
                                                                         </tr>

@@ -167,8 +167,8 @@
                                         </select>
                                     </div>
                                 </div>-->
-                                            <c:if test="${sessionScope.userRight.payroll || sessionScope.userRight.hr}">
-                                            <div class="form-group">
+                                            <%--<c:if test="${sessionScope.userRight.payroll || sessionScope.userRight.hr}">--%>
+<!--                                            <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Location:<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
@@ -178,8 +178,8 @@
                                                         </c:forEach>
                                                     </select>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <label>Company:<span style="color: red;font-size: 12px;"></span></label>
+                                                <div class="col-sm-6">-->
+<!--                                                    <label>Company:<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="companyId" id="companyId" class="form-control ">
                                                         <option value="" label="-- Select --" ></option>
                                                         <c:forEach var="companyname" items="${companyList}">
@@ -190,8 +190,8 @@
                                                
                                                 
 
-                                            </div>
-                                            </c:if>
+                                            </div>-->
+                                            <%--</c:if>--%>
                                             <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Months:<span style="color: red;font-size: 12px;">*</span></label>

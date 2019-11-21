@@ -46,7 +46,7 @@
             for (var i = 1; i <= element15; i++) {
 //                alert('hi' + document.getElementById('amount' + i).value);
                 var element = document.getElementById('amount' + i).value;
-                alert(element)
+               // alert(element)
                 sum += parseInt(element);
 //                alert("allowance"+sum);
 //                alert(sum);
@@ -176,9 +176,21 @@
         var tempCount3 = 1;
         $(function () {
             tempCount3 = document.getElementById('policyCount').value;
+            var tempCountArray3 = [tempCount3];
             $("#policyCloneid").on("click", function () {
-//                alert(tempCount3);
+                // alert(tempCount3);
                 tempCount3++;
+                var ansArraybool3 = tempCountArray3.includes(tempCount3);
+                //var ansArraybool = tempCountArray.includes(2);
+                while (ansArraybool3)
+                {
+                    tempCount3++;
+                    ansArraybool3 = tempCountArray3.includes(tempCount3);
+                }
+                tempCountArray3.push(tempCount3);
+                //console.log("Temp Count: "+tempCount3);
+                //tempCountArray4.forEach(myFunction4);
+
                 var clone = "<tr id='" + tempCount3 + "' style='clear:both;'>"
                         + "<td style=\"text-align: center\">" + tempCount3 + "</td>"
                         + "<td><div><select id=\"policyId" + tempCount3 + "\" name='policyId" + tempCount3 + "' class=\"form-control\">"
@@ -186,8 +198,9 @@
                         + "</select>"
                         + "</div><span id=\"policyError" + tempCount3 + "\" style=\"color: red;\"></span></td>"
 //                        + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.id=this.value)\" onchange=\"totalValueChange(this,this.id);\" min=\"0\" value=\"0\" class=\"form-control\"></td>"
-                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "'</td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onchange=\"changetotalButtonNew(this);\" min=\"0\" value=\"0\" class=\"form-control\"></td>"
+//                        + "<td style=\"text-align: center\"><input type=\"number\" name='amount" + tempCount3 + "' id='amount" + tempCount3 + "' onFocus=\"(this.id=this.value)\" onchange=\"changetotalButtonNew()\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxable" + tempCount3 + "' id='taxable" + tempCount3 + "' value=\"off\" ></td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
                         + "<input type=\"button\"value=\"-\"  onclick=\"removePolicy('" + tempCount3 + "');\"/>"
@@ -197,12 +210,24 @@
                 $("#policyTable").append(clone);
                 document.getElementById('policyCount').value = tempCount3;
                 addAPolicy(tempCount3);
-//                alert(tempCount3);
+                /*var elementCheck2 = document.getElementById('amount' + tempCount3);
+                 if(elementCheck2)
+                 {
+                 console.log("Id Found"+document.getElementById('amount' + tempCount3).value);
+                 }
+                 else
+                 {
+                 console.log("Id NOT Found");
+                 }
+                 console.log("txt result ctc; "+document.getElementById("txtresultCTC").value);
+                 */
+                changetotalButtonNew();
 
             });
         });
         function addAPolicy(id) {
             var element2 = document.getElementById('policyId1');
+            //console.log("element2.options.length: "+element2.options.length);
             var obj2 = document.getElementById("policyId" + id);
             for (var i2 = 0; i2 < element2.options.length; i2++) {
                 var opt2 = document.createElement("option");
@@ -211,15 +236,37 @@
                 obj2.appendChild(opt2);
             }
         }
+        function changetotalButtonNew1(ele, oldvalue)
+        {
+            alert(ele.value);
+            var element = document.getElementById('txtresult').value;
+            var element1 = document.getElementById('txtresultCTC').value;
+            alert(parseInt(element1));
+            document.getElementById('txtresult').value = '';
+            document.getElementById('txtresult').value = parseInt(ele.value) + parseInt(element) - oldvalue;
+            document.getElementById('txtresultCTC').value = '';
+            document.getElementById('txtresultCTC').value = parseInt(ele.value) + parseInt(element1) - oldvalue;
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
         function changetotalButtonNew(id) {
+            //alert('hi');
             var sum = 0;
             var sum1 = 0;
             var total = 0;
             var element15 = document.getElementById('policyCount').value;
+            //console.log("Policy Count value: "+element15);
             for (var i = 1; i <= element15; i++) {
 //                alert('hi' + document.getElementById('amount' + i).value);
-                var element = document.getElementById('amount' + i).value;
-                sum += parseInt(element);
+                var elementCheck = document.getElementById('amount' + i);
+                if (elementCheck)
+                {
+                    var element = document.getElementById('amount' + i).value;
+                    sum += parseInt(element);
+                }
+                else
+                {
+                    // console.log("Index not found: "+i);
+                }
 //                alert(sum);
             }
 
@@ -246,71 +293,62 @@
             document.getElementById("txtresult").value = total;
             document.getElementById("txtresultCTC").value = total + sum1;
 
+            //console.log("sum is: "+sum);
 
 //            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
         }
 
+        function removedefaultpolicy(id) {
 
+            //------------- ---------------------
+            var element = document.getElementsByName("amount" + id)[0].value;//document.getElementById("ctcamount" + val).value;
+            var element2 = document.getElementById('txtresult').value;
 
+            document.getElementById('txtresult').value = '';
+            document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
+
+            var element21 = document.getElementById('txtresultCTC').value;
+            document.getElementById('txtresultCTC').value = '';
+            document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
+
+            document.getElementsByName("amount" + id)[0].value = 0;
+            //--------------------------------------------
+            var element1 = document.getElementById("removepolicyDefault" + id);
+            element1.parentNode.removeChild(element1);
+            //console.log("- button clicked"+id);
+        }
+
+        
         function removePolicy(policyDiv) {
-//            try {
-////                
-//                tempCount3--;
-////                alert(tempCount3);
-////                alert(policyDiv.index);
-//
-//                var val = document.getElementById("policyCount").value;
-//
-////                alert(val);
-////                var obj2 = document.getElementById("policyId" + tempCount3).value;
-////                alert(obj2);
-//                var element = document.getElementById("amount" + val).value;
-////                 alert(element);
-//                val = val - 1;
-//                var element2 = document.getElementById('txtresult').value;
-//                var element21 = document.getElementById('txtresultCTC').value;
-////                alert(element2);
-//                document.getElementById('txtresult').value = '';
-//                document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
-//                document.getElementById('txtresultCTC').value = '';
-//                document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
-//
-//                document.getElementById("policyCount").value = val;
-//                element1 = document.getElementById(policyDiv);
-//
-//                element1.parentNode.removeChild(element1);
-//            } catch (e) {
-//
-//            }
-
             try {
-//                
+                //--------------------------------------
+                //  console.log("Temp Remove count value:"+policyDiv);
+
+                var str = policyDiv;
+                var array = str.replace("addmoreFile7", "");
+                var element = document.getElementsByName("amount" + policyDiv)[0].value;
+
                 tempCount3--;
-//                alert(policyDiv);
-                var element2 = 0;
-                var element = 0;
-                var element21 = 0;
-                var val = document.getElementById("policyCount").value;
+                // console.log("element value:"+parseInt(element));
 
-//            
-                element = document.getElementsByName("amount" + val)[0].value;
-
-                val = val - 1;
-
-                element2 = document.getElementById('txtresult').value;
-
-                element21 = document.getElementById('txtresultCTC').value;
-
-//                alert(element2);
+                var element2 = document.getElementById('txtresult').value;
                 document.getElementById('txtresult').value = '';
                 document.getElementById('txtresult').value = parseInt(element2) - parseInt(element);
+                var element21 = document.getElementById('txtresultCTC').value;
                 document.getElementById('txtresultCTC').value = '';
                 document.getElementById('txtresultCTC').value = parseInt(element21) - parseInt(element);
-                document.getElementById("policyCount").value = val;
-                var element1 = document.getElementById(policyDiv);
-//                alert(element1);
 
+                //--------------------------------------------
+                //After amount minus we can make it zero to avoid in total sum
+                document.getElementsByName("amount" + policyDiv)[0].value = 0;
+                //--------------------------------------------
+                var element1 = document.getElementById(policyDiv);
+
+                //console.log("element 1 value*****:"+parseInt(element1));
                 element1.parentNode.removeChild(element1);
+              
+                //-----------------------------------------------
+               
             } catch (e) {
 
             }
@@ -338,8 +376,9 @@
 
     <script>
 
-        var tempCount4 = 1;
+       // var tempCount4 = 1;
         $(function () {
+            /*
             tempCount4 = document.getElementById('ctcCount').value;
             $("#ctcCloneid").on("click", function () {
 
@@ -397,11 +436,79 @@
                 document.getElementById('year4').innerHTML = options11;
                 document.getElementById('year5').innerHTML = options11;
                 document.getElementById('year6').innerHTML = options11;
-                document.getElementById('year7').innerHTML = options11;
+                document.getElementById('year7').innerHTML = options11;*/
+        
+         var tempCount4 = document.getElementById('ctcCount').value;
+            var tempCountArray4 = [tempCount4];
+            //console.log("test tempcount"+tempCount4);
+            $("#ctcCloneid").on("click", function () {
+                //console.log("test tempcount"+tempCount4);
+                tempCount4++;
+                // alert("ctcCount: "+document.getElementById('ctcCount').value);
+                var ansArraybool4 = tempCountArray4.includes(tempCount4);
+                //var ansArraybool = tempCountArray.includes(2);
+                while (ansArraybool4)
+                {
+                    //console.log("CAUTION!!!");
+                    tempCount4++;
+                    ansArraybool4 = tempCountArray4.includes(tempCount4);
+                }
+                tempCountArray4.push(tempCount4);
+                //console.log("tempCountArray4"+tempCount4);
+                // tempCountArray4.forEach(myFunction4);
+
+                var clone = "<tr id='addmoreFile1" + tempCount4 + "' style='clear:both;'>"
+                        + "<td style=\"text-align: center\">" + tempCount4 + "</td>"
+                        + "<td id=\"ctcTd" + tempCount4 + "\"><div><select id='ctcId" + tempCount4 + "' name='ctcId" + tempCount4 + "' class=\"form-control\">"
+                        + "</select>"
+                        + "</div><span id=\"ctcError" + tempCount4 + "\" style=\"color: red;\"></span></td>"
+                        //  onFocus=\"(this.id=this.value)\"                      + "<td style=\"text-align: center\"><input type=\"text\" name='policyNumber" + tempCount3 + "' id='policyNumber" + tempCount3 + "'  class=\"form-control\"></td>"
+//  // changetotalButtonNewCTC       + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'  value=\"0\"  onchange=\"totalValueChangeCTC(this,this.id);\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"number\" name='ctcamount" + tempCount4 + "' id='ctcamount" + tempCount4 + "'  value=\"0\" onchange=\"changetotalButtonNewCTC(this);\" min=\"0\" class=\"form-control\"></td>"
+                        + "<td style=\"text-align: center\"><input type=\"checkbox\" name='taxablectc" + tempCount4 + "' id='taxablectc" + tempCount4 + "' value=\"off\" ></td>"
+                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='month" + tempCount4 + "' name='month" + tempCount4 + "' class=\"form-control\">"
+                        + "<option value=\"\">--SELECT--</option>"
+                        + "<option value=\"01\">January</option>"
+                        + "<option value=\"02\">February</option>"
+                        + "<option value=\"03\">March</option>"
+                        + "<option value=\"04\">April</option>"
+                        + "<option value=\"05\">May</option>"
+                        + "<option value=\"06\">June</option>"
+                        + "<option value=\"07\">July</option>"
+                        + "<option value=\"08\">August</option>"
+                        + "<option value=\"09\">September</option>"
+                        + "<option value=\"10\">October</option>"
+                        + "<option value=\"11\">November</option>"
+                        + "<option value=\"12\">December</option></select>"
+                        + "</div></td>"
+                        + "<td id=\"monthTd" + tempCount4 + "\"><div><select id='year" + tempCount4 + "' name='year" + tempCount4 + "' class=\"form-control\">"
+                        + "</div></td>"
+                        + "<td style=\"text-align: center\">"
+                        + "<span style='margin-top: 5px;'>"
+                        + "<input type=\"button\"value=\"-\"  onclick=\"removectc('" + tempCount4 + "');\"/>"
+                        + "</span>"
+                        + "</td>"
+                        + "</tr>";
+                $("#ctcTable").append(clone);
+                document.getElementById('ctcCount').value = tempCount4;
+                //                var expenseType = document.getElementById('expenseType').value;
+                addActc(tempCount4);
+                window.onload = init;
+                function init() {
+                    document.form1.month.options[new Date().getMonth()].selected = true;
+                }
+                var start = new Date().getFullYear();
+                var end = start + 50;
+                var options11 = "";
+                for (var yearloop = start; yearloop <= end; yearloop++) {
+                    options11 += "<option>" + yearloop + "</option>";
+                }
+                //                alert(tempCount4);
+                document.getElementById('year' + tempCount4).innerHTML = options11;
 
             });
         });
-        function changetotalButtonNewCTC(id) {
+        /*function changetotalButtonNewCTC(id) {
             var sum = 0;
             var total = 0;
             var element15 = document.getElementById('ctcCount').value;
@@ -428,10 +535,42 @@
 
 
 //            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
-        }
-        function addActc(id) {
+        }*/
+        function changetotalButtonNewCTC(id) {
+            //      alert('hi');
+            var sum = 0;
+            var total = 0;
+            var element15 = document.getElementById('ctcCount').value;
+            for (var i = 1; i <= element15; i++) {
+//                alert('hi' + document.getElementById('amount' + i).value);
+                var elementCheck = document.getElementById('ctcamount' + i);
+                if (elementCheck)
+                {
+                    var element = document.getElementById('ctcamount' + i).value;
+                    sum += parseInt(element);
+                }
+            }
+//            var conyance = parseInt(document.getElementById("conveysAmount").value);
+            var basicSalary = parseInt(document.getElementById("txtresult").value);
+            if (parseInt(sum) > 0) {
+                total = total + parseInt(sum);
+            }
+//            if (parseInt(conyance) > 0) {
+//                total = total + parseInt(conyance);
+//            }
+            if (parseInt(basicSalary) > 0) {
+                total = total + parseInt(basicSalary);
 
+            }
+            document.getElementById("txtresultCTC").value = total;
+            document.getElementsByName("ctcTotal").value = total;
+//            var conyance = document.getElementById("leaveStartDate_SelectFullOrHalfId").value;
+        }
+    
+        function addActc(id) {
+            //                alert(id);
             var element2 = document.getElementById('ctcId1');
+            //alert(element2);
             var obj2 = document.getElementById("ctcId" + id);
             for (var i2 = 0; i2 < element2.options.length; i2++) {
                 var opt2 = document.createElement("option");
@@ -441,39 +580,47 @@
             }
         }
 
-        function removectc(policyDiv) {
-//            try {
-//                tempCount4--;
-//                var val = document.getElementById("ctcCount").value;
-//                val = val - 1;
-//                document.getElementById("ctcCount").value = val;
-//                var element1 = document.getElementById(policyDiv);
-//                element1.parentNode.removeChild(element1);
-//            } catch (e) {
-//
-//            }
+
+        function removedefaultctc(id) {
+            var ele = document.getElementsByName("ctcamount" + id)[0].value;//document.getElementById("ctcamount" + val).value;
+
+            var ele2 = document.getElementById('txtresultCTC').value;
+
+            document.getElementById('txtresultCTC').value = '';
+            document.getElementById('txtresultCTC').value = parseInt(ele2) - parseInt(ele);
+
+            document.getElementsByName("ctcamount" + id)[0].value = 0;
+            //--------------------------------------------
+            var element1 = document.getElementById("removectcDefault" + id);
+            element1.parentNode.removeChild(element1);
+            //console.log("- button clicked"+id);
+        }
+        
+        function removectc(policyDiv) {  
             try {
-//                
-                tempCount4--;
-//                alert(policyDiv);
-                var element2 = 0;
-                var element = 0;
-                var val = document.getElementById("ctcCount").value;
-//                alert(val);
-//                var obj2 = document.getElementById("policyId" + tempCount3).value;
-//                alert(obj2);
-                element = document.getElementsByName("ctcamount" + val)[0].value;
-//                element = document.getElementById("ctcamount" + policyDiv).value;
-                val = val - 1;
-                element2 = document.getElementById('txtresultCTC').value;
-//                alert(element2);
+                var str = policyDiv;
+                var array = str.replace("addmoreFile1", "");
+                var element = document.getElementsByName("ctcamount" + policyDiv)[0].value;//document.getElementById("ctcamount" + val).value;
+
+                //  console.log("Amount removectc"+parseInt(element));
+                //tempCount4--; these will cause problem
+                var element2 = document.getElementById('txtresultCTC').value;
+                // console.log("element 2 value*****:"+parseInt(element2));
+
                 document.getElementById('txtresultCTC').value = '';
                 document.getElementById('txtresultCTC').value = parseInt(element2) - parseInt(element);
 
-                document.getElementById("ctcCount").value = val;
-                var element1 = document.getElementById(policyDiv);
+                //console.log("element 1 value*****:");
+                //--------------------------------------------
+                //After amount minus we can make it zero to avoid in total sum
+                document.getElementsByName("ctcamount" + policyDiv)[0].value = 0;
+                //--------------------------------------------
+                //document.getElementById("ctcCount").value = val;
+                //console.log("element 1 value*****:");
+                var element1 = document.getElementById("addmoreFile1" + policyDiv);
 
                 element1.parentNode.removeChild(element1);
+
             } catch (e) {
 
             }
@@ -761,6 +908,7 @@
                         document.getElementById('photographError').innerHTML = '';
                         var photographUpdate = document.getElementById("photographUpdate").files[0];
                         var userName = '${param.userid}';
+                        //alert("Username"+userName);
                         var fd = new FormData();
                         fd.append('userName', '${param.userid}');
                         fd.append('photographUpdate', photographUpdate);
@@ -886,9 +1034,7 @@
         <c:if test="${!empty successMessage}">
             <div class="fadeOutEffect alert alert-info" role=" ">${successMessage}</div>
         </c:if>
-        <c:if test="${!empty failureMessage}">
-            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
-        </c:if>
+        
         <!-- Main content -->
         <form:form class="form-horizontal" role="form" action="employeeMaster.htm?act=editSubmit" commandName="employeeMaster" enctype="multipart/form-data" method="post" name='form' onsubmit='return saveSubmit11();'>
             <form:hidden path="userMaster.id"></form:hidden>
@@ -897,6 +1043,12 @@
             <form:hidden path="shiftHoursId"></form:hidden>
             <form:hidden path="shiftRotationDate"></form:hidden>
                 <section class="content">
+                    <c:if test="${!empty failureMessage}">
+                        <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}
+                            <br/><form:errors path="*" cssClass="errorDiv"></form:errors>
+                            <font class="errorDiv" color="#dd4b39"> ${failureMessageExtension} </font>
+                        </div>
+                    </c:if>
                     <div class="row">
                         <div class="col-md-12">
                             <!-- Custom Tabs -->
@@ -1080,7 +1232,9 @@
 
                                                                 <label>Nationality:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <input type="text" name="nationality" id="nationality"  style="text-transform:uppercase" value="${list.nationality}" class="form-control">
-
+                                                                <c:if test="${!empty Nati}">
+                                                                    <font class="errorDiv" color="#dd4b39"> ${Nati} </font>
+                                                                </c:if>
                                                         </div>
                                                     </div>
                                                     <!--                                                <div class="form-group">
@@ -1103,12 +1257,18 @@
 
                                                             <label>First Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="text" name="firstName" value="${list.firstName}" id="firstName" placeholder="First Name as per Passport" class="form-control">
+                                                            <c:if test="${!empty Firs}">
+                                                                <font class="errorDiv" color="#dd4b39"> ${Firs} </font>
+                                                            </c:if>
                                                             <span style="font-size: 14px; color: red;" id="firstNameError"></span>
                                                         </div>
                                                         <div class="col-sm-6">
 
                                                             <label>Middle Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="text" name="middleName" value="${list.middleName}" id="middleName" placeholder="Middle Name as per Passport" class="form-control">
+                                                            <c:if test="${!empty Midd}">
+                                                                <font class="errorDiv" color="#dd4b39"> ${Midd} </font>
+                                                            </c:if>
                                                             <span style="font-size: 14px; color: red;" id="middleNameError"></span>
                                                         </div>
                                                     </div>   
@@ -1117,6 +1277,9 @@
 
                                                             <label>Last Name:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <input type="text" name="lastName" value="${list.lastName}" id="lastName" placeholder="Last Name as per Passport" class="form-control">
+                                                            <c:if test="${!empty Last}">
+                                                                <font class="errorDiv" color="#dd4b39"> ${Last} </font>
+                                                            </c:if>
                                                             <span style="font-size: 14px; color: red;" id="lastNameError"></span>
                                                         </div>
                                                         <div class="col-sm-6">
@@ -1510,7 +1673,9 @@
                                                                 <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
 
                                                                 <textarea name="presentAddress2" id="presentAddress2" class="form-control">${list.presentAddress2}</textarea>
-
+                                                                <c:if test="${!empty Pres}">
+                                                                    <font class="errorDiv" color="#dd4b39"> ${Pres} </font>
+                                                                </c:if>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -1553,7 +1718,9 @@
                                                                 <label>Street/Road/Area:<span style="color: red;font-size: 12px;">*</span></label>
                                                                 <!--                                                            <input type="textarea" name="permanentAddress2" id="permanentAddress2" class="form-control">-->
                                                                 <textarea name="permanentAddress2" id="permanentAddress2"  class="form-control">${list.permanentAddress2}</textarea>
-
+                                                                 <c:if test="${!empty Perm}">
+                                                                    <font class="errorDiv" color="#dd4b39"> ${Perm} </font>
+                                                                    </c:if>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
@@ -1585,12 +1752,12 @@
                                                     </div>   
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
-                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;">*</span></label>
+                                                            <label>Emergency Contact No:<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="emergencyContactNo"  maxlength="14" data-fv-numeric="true" data-fv-numeric-message="Please enter valid number" data-fv-phone-country11="IN" class="form-control"></form:input>
                                                             <form:errors path="emergencyContactNo" cssClass="errorDiv"></form:errors>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <label >Emergency Contact Person:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <label >Emergency Contact Person:<span style="color: red;font-size: 12px;"></span></label>
                                                             <form:input path="emergencyContactPerson" class="form-control"></form:input>
                                                             <form:errors path="emergencyContactPerson" cssClass="errorDiv"></form:errors>
                                                             </div>
@@ -1780,7 +1947,12 @@
                                                             <form:input path="role" class="form-control"></form:input>
                                                             </div>
                                                             <div class="col-sm-6">
-                                                                <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                
+                                                            <label>Hours Mandatory:</label>
+                                                            <form:input path="hoursMadatory" type="text" placeholder="Enter Amount" class="form-control"></form:input>
+                                                            <form:errors path="hoursMadatory" cssClass="errorDiv"></form:errors>
+                                                            
+                                                            <%--    <label>Work Type:<span style="color: red;font-size: 12px;">*</span></label>
                                                             <form:select path="shiftType" class="form-control">
                                                                 <!--<option value="">--SELECT--</option>-->
                                                                 <form:option value="" label="-- Select --" ></form:option>
@@ -1788,6 +1960,7 @@
                                                                 <form:option value="ShiftBase" label="Shift Base"></form:option>
                                                             </form:select>
                                                             <form:errors path="shiftType" cssClass="errorDiv"></form:errors>
+                                                                --%>
                                                             </div>
 
                                                             <!--                                                            <div class="col-sm-6">
@@ -1836,12 +2009,12 @@
                                                             </div>
                                                         </div>
                                                     <div class="form-group">
-                                                        <div class="col-sm-6">
+                                                        <%-- <div class="col-sm-6">
                                                             <label>Hours Mandatory:</label>
                                                             <form:input path="hoursMadatory" type="text" placeholder="Enter Amount" class="form-control"></form:input>
                                                             <form:errors path="hoursMadatory" cssClass="errorDiv"></form:errors>
                                                             </div>
-                                                           
+                                                           --%>
                                                         </div>
 
 
@@ -1909,143 +2082,154 @@
 
 
                                                         </div>
-                                                        <div class="col-md-12 col-sm-12">
-                                                            <div class="table-responsive">
-                                                                <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                                    <tr>
-                                                                        <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                        <th style="text-align: center; vertical-align: middle">Select Allowance</th>
-                                                                        <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
-                                                                        <th style="text-align: center; vertical-align: middle">Amount</th>
-                                                                        <th style="text-align: center; vertical-align: middle">Taxable</th>
-                                                                        <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                                        <c:choose>
-                                                                            <c:when test="${not empty finalPolicyList}">
-                                                                        <input type="hidden" name="policyCount" id="policyCount"  value="${fn:length(finalPolicyList)}"/>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <input type="hidden" name="policyCount" id="policyCount"  value="1"/>
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                                </tr>
-                                                                <c:choose>
-                                                                    <c:when test="${not empty finalPolicyList}">
-                                                                        <c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">
-                                                                            <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>
-                                                                            <tr>
-                                                                                <td style="text-align: center">${countVal.count}</td>
-                                                                                <td><div>
-                                                                                        <select id="policyId${countVal.count}"  name="policyId${countVal.count}"  class="form-control">
-                                                                                            <!--<option value="">--SELECT-- </option>-->
-                                                                                            <c:forEach var="policyData" items="${policy}" varStatus = "status">
-                                                                                                <c:choose>
-                                                                                                    <c:when test="${comp[1] == policyData.value}">
-                                                                                                        <option value="${policyData.key}" selected="selected">${comp[1]}</option>
-                                                                                                    </c:when>
-                                                                                                    <c:otherwise>
-                                                                                                        <option value="${policyData.key}" >${policyData.value}</option>
-                                                                                                    </c:otherwise>
-                                                                                                </c:choose>
-                                                                                            </c:forEach>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <span id="policyError${countVal.count}" style="color: red;"></span>
-                                                                                </td>
-                                                                                <!--</td>-->
-                                                                                <!--                                                                            <td style="text-align: center">
-                                                                                                                                                                <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
-                                                                                                                                                            </td>-->
-                                                                                <td style="text-align: center">
-                                                                                    <input type="number" name="amount${countVal.count}" id="amount${countVal.count}" min="0"  onchange="changetotalButtonNew(${countVal.count});" class="form-control" value="${comp[3]}">
-                                                                                </td>
+                                                     <div class="col-md-12 col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table id="policyTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                            <tr>
+                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                <th style="text-align: center; vertical-align: middle">Select Allowance</th>
+                                                                <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
+                                                                <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                <th style="text-align: center; vertical-align: middle">Taxable</th>
+                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                                    <c:choose>
+                                                                        <c:when test="${not empty finalPolicyList}">
+                                                                    <input type="hidden" name="policyCount" id="policyCount"  value="${fn:length(finalPolicyList)}"/>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <input type="hidden" name="policyCount" id="policyCount"  value="1"/>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            </tr>
+                                                            <c:choose>
+                                                                <c:when test="${not empty finalPolicyList}">
+                                                                    <c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">
+                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>
+                                                                        <tr id="removepolicyDefault${countVal.count}">
 
-                                                                                <c:if test="${comp[4] eq 1}">
-
-                                                                                    <td style="text-align: center">
-                                                                                        <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" checked="true">
-                                                                                    </td>
-                                                                                </c:if>
-                                                                                <c:if test="${comp[4] ne 1}">
-                                                                                    <td style="text-align: center">
-                                                                                        <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" >
-                                                                                    </td>
-                                                                                </c:if>
-                                                                                <td style="text-align: center">
-                                                                                    <%--<c:choose>--%>
-                                                                                    <%--<c:when test="${countVal.first}">--%>
-                                                                                    <!--<span style='margin-top: 5px;'>-->
-                                                                                    <!--<input type="button" value="+" id="policyCloneid" />-->
-                                                                                    <!--</span>-->
-                                                                                    <%--</c:if>--%>
-                                                                                    <%--</c:when>--%>
-                                                                                    <%--<c:otherwise>--%>
-                                                                                    <!--                                                                                <span style='margin-top: 5px;'>
-                                                                                                                                                                    <input type="button" value="-" id="policyRemoveid" onclick="removeForEdit()"/>
-                                                                                                                                                                    </span>-->
-                                                                                    <%--</c:otherwise>--%>
-                                                                                    <%--</c:choose>--%>
-                                                                                    <c:if test="${countVal.last}">
-                                                                                        <c:if test="${countVal.last}">
-                                                                                            <span style='margin-top: 5px;'>
-                                                                                                <input type="button" value="+" id="policyCloneid" />
-                                                                                            </span>
-                                                                                        </c:if>
-                                                                                    </c:if>
-                                                                                    <c:if test="${!countVal.last}">
-                                                                                        <c:if test="${!countVal.last}">
-                                                                                            <span style='margin-top: 5px;'>
-                                                                                                <input type="button" value="-" id="policyRemoveid" onclick="removePolicy12('${comp[5]}')"/>
-                                                                                                <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicy('${comp[5]}')"/>-->
-                                                                                            </span>
-                                                                                        </c:if>
-                                                                                    </c:if>
-                                                                                    <%--<c:if test="${!countVal.last}">--%>
-                                                                                    <%--<c:if test="${!countVal.last}">--%>
-                                                                                    <!--<span style='margin-top: 5px;'>-->
-                                                                                    <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicyEdit(tempCount3)"/>-->
-                                                                                    <!--</span>-->
-                                                                                    <%--</c:if>--%>
-                                                                                    <%--</c:if>--%>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </c:forEach>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-
-                                                                        <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
-        <!--                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
-                                                                        <tr>
-                                                                            <td style="text-align: center">1</td>
+                                                                            <td style="text-align: center">${countVal.count}</td>
                                                                             <td><div>
-                                                                                    <select id="policyId1"  name="policyId1"  class="form-control">
-                                                                                        <option value="">--SELECT--</option>
+                                                                                    <select id="policyId${countVal.count}"  name="policyId${countVal.count}"  class="form-control">
+                                                                                        <option value="">--SELECT-- ${comp[5]}</option>
                                                                                         <c:forEach var="policyData" items="${policy}" varStatus = "status">
-                                                                                            <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                            <c:choose>
+                                                                                                <c:when test="${comp[1] == policyData.value}">
+                                                                                                    <option value="${policyData.key}" selected="selected">${comp[1]}</option>
+                                                                                                </c:when>
+                                                                                                <c:otherwise>
+                                                                                                    <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                                </c:otherwise>
+                                                                                            </c:choose>
                                                                                         </c:forEach>
                                                                                     </select>
                                                                                 </div>
-                                                                                <span id="policyError1" style="color: red;"></span>
+                                                                                <span id="policyError${countVal.count}" style="color: red;"></span>
                                                                             </td>
-                                                                            <!--                                                                        <td style="text-align: center">
-                                                                                                                                                        <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
-                                                                                                                                                    </td>-->
+                                                                            <!--</td>-->
+                                                                            <!--                                                                            <td style="text-align: center">
+                                                                                                                                                            <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
+                                                                                                                                                        </td>-->
                                                                             <td style="text-align: center">
-                                                                                <input type="number" name="amount1" id="amount1" min="0" onchange="changetotalButton();"class="form-control" value="">
+
+                                                                                <input type="number" name="amount${countVal.count}" id="amount${countVal.count}" min="0"  onchange="changetotalButtonNew();" class="form-control" value="${comp[3]}">
                                                                             </td>
+
+                                                                            <!--  <input type="checkbox" id="mycheckbox">
+                                                                            -->
+
+                                                                            <!--<p id="addCheckBox"></p>-->
+                                                                            <c:if test="${comp[4] eq 1}">
+                                                                                <td style="text-align: center">
+
+                                                                                    <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" checked="true" value="off">                                                                             
+
+                                                                                </td>
+                                                                            </c:if>
+                                                                            <c:if test="${comp[4] ne 1}">
+                                                                                <td style="text-align: center">
+
+                                                                                    <input type="checkbox" name="taxable${countVal.count}" id="taxable${countVal.count}" value="off" >
+                                                                                </td>                                                                              
+                                                                            </c:if>
                                                                             <td style="text-align: center">
-                                                                                <input type="checkbox" name="taxable1" id="taxable1" >
-                                                                            </td>
-                                                                            <td style="text-align: center">
-                                                                                <span style='margin-top: 5px;'>
-                                                                                    <input type="button" value="+" id="policyCloneid" />
-                                                                                </span>
+                                                                                <%--<c:choose>--%>
+                                                                                <%--<c:when test="${countVal.first}">--%>
+                                                                                <!--<span style='margin-top: 5px;'>-->
+                                                                                <!--<input type="button" value="+" id="policyCloneid" />-->
+                                                                                <!--</span>-->
+                                                                                <%--</c:if>--%>
+                                                                                <%--</c:when>--%>
+                                                                                <%--<c:otherwise>--%>
+                                                                                <!--                                                                                <span style='margin-top: 5px;'>
+                                                                                                                                                                <input type="button" value="-" id="policyRemoveid" onclick="removeForEdit()"/>
+                                                                                                                                                                </span>-->
+                                                                                <%--</c:otherwise>--%>
+                                                                                <%--</c:choose>
+                                                                                <c:if test="${countVal.last}">
+                                                                                    <c:if test="${countVal.last}">
+                                                                                        <span style='margin-top: 5px;'>
+                                                                                       
+                                                                                            <input type="button" value="+" id="policyCloneid" />
+                                                                                        </span>
+                                                                                    </c:if>
+                                                                                </c:if>--%>
+                                                                                <c:if test="${countVal.count eq 1}">
+                                                                                    <span style='margin-top: 5px;'>
+                                                                                        <input type="button" value="+" id="policyCloneid" />
+                                                                                    </span>
+                                                                                </c:if>
+                                                                                <c:if test="${countVal.count ne 1}">
+                                                                                    <span style='margin-top: 5px;'>
+                                                                                        <input type="button" value="-" onClick="removedefaultpolicy(${countVal.count})" />
+                                                                                    </span>
+                                                                                </c:if>
+                                                                                <%--<c:if test="${!countVal.last}">--%>
+                                                                                <%--<c:if test="${!countVal.last}">--%>
+                                                                                <!--<span style='margin-top: 5px;'>-->
+                                                                                <!--<input type="button" value="-" id="policyRemoveid" onclick="removePolicyEdit(tempCount3)"/>-->
+                                                                                <!--</span>-->
+                                                                                <%--</c:if>--%>
+                                                                                <%--</c:if>--%>
                                                                             </td>
                                                                         </tr>
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                            </table>
-                                                        </div>
+                                                                    </c:forEach>
+                                                                </c:when>
+                                                                <c:otherwise>
+
+                                                                    <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
+    <!--                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
+                                                                    <tr>
+                                                                        <td style="text-align: center">1</td>
+                                                                        <td><div>
+                                                                                <select id="policyId1"  name="policyId1"  class="form-control">
+                                                                                    <option value="">--SELECT--</option>
+                                                                                    <c:forEach var="policyData" items="${policy}" varStatus = "status">
+                                                                                        <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                    </c:forEach>
+                                                                                </select>
+                                                                            </div>
+                                                                            <span id="policyError1" style="color: red;"></span>
+                                                                        </td>
+                                                                        <!--                                                                        <td style="text-align: center">
+                                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
+                                                                                                                                                </td>-->
+                                                                        <td style="text-align: center">
+                                                                            <input type="number" name="amount1" id="amount1" min="0" onchange="changetotalButton();"class="form-control" value="">
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <input type="checkbox" name="taxable1" id="taxable1" >
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <span style='margin-top: 5px;'>
+                                                                                <input type="button" value="+" id="policyCloneid" />
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </table>
                                                     </div>
+                                                </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
                                                             <!--<label>Total:<span style="color: red;font-size: 12px;"></span></label>-->
@@ -2060,407 +2244,531 @@
                                                                 <form:input path="grossTotal"  id="txtresult" class="form-control" readonly="true" />
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 col-sm-12">
-                                                        <div class="table-responsive">
-                                                            <table id="ctcTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                                <tr>
-                                                                    <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Select CTC Component</th>
-                                                                    <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
-                                                                    <th style="text-align: center; vertical-align: middle">Amount</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Taxable</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Month</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Year</th>
-                                                                    <th style="text-align: center; vertical-align: middle">Add New</th>
-                                                                        <c:choose>
-                                                                            <c:when test="${not empty finalPolicyList}">
-                                                                        <input type="hidden" name="ctcCount" id="ctcCount"  value="${fn:length(finalctcList)}"/>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <input type="hidden" name="ctcCount" id="ctcCount"  value="1"/>
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                                </tr>
-                                                                <c:choose>
-                                                                    <c:when test="${not empty finalctcList}">
-                                                                        <c:forEach var="comp" items="${finalctcList}" varStatus = "countVal">
-                                                                            <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalctcList)}"/>
-                                                                            <tr>
-                                                                                <td style="text-align: center">${countVal.count}</td>
-                                                                                <td><div>
-                                                                                        <select id="ctcId${countVal.count}"  name="ctcId${countVal.count}"  class="form-control">
-                                                                                            <option value="">--SELECT--</option>
-                                                                                            <c:forEach var="policyData" items="${ctc}" varStatus = "status">
-                                                                                                <c:choose>
-                                                                                                    <c:when test="${comp[1] == policyData.value}">
-                                                                                                        <option value="${policyData.key}" selected="selected">${comp[1]}</option>
-                                                                                                    </c:when>
-                                                                                                    <c:otherwise>
-                                                                                                        <option value="${policyData.key}" >${policyData.value}</option>
-                                                                                                    </c:otherwise>
-                                                                                                </c:choose>
-                                                                                            </c:forEach>
-                                                                                        </select>
-                                                                                    </div>
-                                                                                    <span id="ctcError${countVal.count}" style="color: red;"></span>
-                                                                                </td>
-                                                                                <!--</td>-->
-                                                                                <!--                                                                            <td style="text-align: center">
-                                                                                                                                                                <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
-                                                                                                                                                            </td>-->
+                                                    
+                                                        
+                                                        <div class="col-md-12 col-sm-12">
+                                                    <div class="table-responsive">
+                                                        <table id="ctcTable" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                                                            <tr>
+                                                                <th style="text-align: center; vertical-align: middle;width: 5%">Sr.No.</th>
+                                                                <th style="text-align: center; vertical-align: middle">Select CTC Component</th>
+                                                                <!--<th style="text-align: center; vertical-align: middle">Policy Number</th>-->
+                                                                <th style="text-align: center; vertical-align: middle">Amount</th>
+                                                                <th style="text-align: center; vertical-align: middle">Taxable</th>
+                                                                <th style="text-align: center; vertical-align: middle">Month</th>
+                                                                <th style="text-align: center; vertical-align: middle">Year</th>
+                                                                <th style="text-align: center; vertical-align: middle">Add New</th>
+                                                                    <c:choose>
+                                                                        <c:when test="${not empty finalPolicyList}">
+                                                                    <input type="hidden" name="ctcCount" id="ctcCount"  value="${fn:length(finalctcList)}"/>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <input type="hidden" name="ctcCount" id="ctcCount"  value="1"/>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            </tr>
+                                                            <td>
+                                                                <!--   <input type="radio" name="taxable" id="taxable" onClick="onClickFunction();" >
+                                                               <input type="button" id="checkboxID">-->
+                                                            </td>
+                                                            <c:choose>
+                                                                <c:when test="${not empty finalctcList}">
+                                                                    <c:forEach var="comp" items="${finalctcList}" varStatus = "countVal">
+                                                                        <input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalctcList)}"/>
 
-                                                                                <td style="text-align: center">
-                                                                                    <input type="number" name="ctcamount${countVal.count}" id="ctcamount${countVal.count}" min="0" onchange="changetotalButtonNewCTC(${countVal.count});" class="form-control" value="${comp[2]}">
-                                                                                </td>
-                                                                                <c:if test="${comp[3] eq 1}">
-
-                                                                                    <td style="text-align: center">
-                                                                                        <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" checked="true">
-                                                                                    </td>
-                                                                                </c:if>
-                                                                                <c:if test="${comp[3] ne 1}">
-                                                                                    <td style="text-align: center">
-                                                                                        <input type="checkbox" name="ctctaxable${countVal.count}" id="ctctaxable${countVal.count}" >
-                                                                                    </td>
-                                                                                </c:if>
-                                                                                <td ><div>
-                                                                                        <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
-                                                                                        <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
-                                                                                        <select id="month${countVal.count}" name="month${countVal.count}"  class="form-control ">
-
-                                                                                            <c:choose>
-
-                                                                                                <c:when test="${comp[4] eq 01}">
-                                                                                                    <!--<option value="01" selected="selected">January</option>-->
-                                                                                                    <option value="01" selected="selected">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${comp[4] eq 02}">
-                                                                                                    <!--<option value="02" selected="selected">February</option>-->
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02" selected="selected">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${comp[4] eq 03}">
-                                                                                                    <!--<option value="03" selected="selected">March</option>-->
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03" selected="selected">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${comp[4] eq 04}">
-                                                                                                    <!--<option value="04" selected="selected">April</option>-->
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04" selected="selected">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${comp[4] eq 05}">
-                                                                                                    <!--<option value="05" selected="selected">May</option>-->
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05" selected="selected">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${comp[4] eq 06}">
-                                                                                                    <!--<option value="06" selected="selected">June</option>-->
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06" selected="selected">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${comp[4] eq 07}">
-                                                                                                    <!--<option value="07" selected="selected">July</option>-->
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07" selected="selected">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${comp[4] eq 08}">
-                                                                                                    <!--<option value="08" selected="selected">August</option>-->
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08" selected="selected">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${comp[4] eq 09}">
-                                                                                                    <!--<option value="09" selected="selected">September</option>-->
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09" selected="selected">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${comp[4] eq 10}">
-                                                                                                    <!--<option value="10" selected="selected">October</option>-->
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10" selected="selected">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${comp[4] eq 11}">
-                                                                                                    <!--<option value="11" selected="selected">November</option>-->
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11" selected="selected">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${comp[4] eq 12}">
-                                                                                                    <!--<option value="12" selected="selected">December</option>-->
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12" selected="selected">December</option>
-                                                                                                </c:when>
-                                                                                                <c:when test="${empty comp[4] }">
-                                                                                                    <option value="">--Select--</option>
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:when>
-                                                                                                <c:otherwise>
-                                                                                                    <option value="">--Select--</option>
-                                                                                                    <option value="01">January</option>
-                                                                                                    <option value="02">February</option>
-                                                                                                    <option value="03">March </option>
-                                                                                                    <option value="04">April</option>
-                                                                                                    <option value="05">May</option>
-                                                                                                    <option value="06">June</option>
-                                                                                                    <option value="07">July</option>
-                                                                                                    <option value="08">August</option>
-                                                                                                    <option value="09">September</option>
-                                                                                                    <option value="10">October </option>
-                                                                                                    <option value="11">November </option>
-                                                                                                    <option value="12">December</option>
-                                                                                                </c:otherwise>
-                                                                                            </c:choose>
+                                                                        <tr id="removectcDefault${countVal.count}">
 
 
-                                                                                        </select>
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td ><div>
-                                                                                        <!--<td style="text-align: center">-->
-                                                                                        <input  type="hidden" class="form-control" id="yearBase" value="${comp[5]}">
-                                                                                        <select name="year${countVal.count}" id="year${countVal.count}"  class="form-control" >
-                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="${comp[5]}">${comp[5]}</option> 
-                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2018">2018</option> 
-                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2019">2019</option> 
-                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2020">2020</option> 
-                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2021">2021</option> 
-                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2022">2022</option> 
-                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2023">2023</option> 
-                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2024">2024</option> 
-                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2025">2025</option> 
-                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2026">2026</option> 
-                                                                                            <option  name="year${countVal.count}" id="year${countVal.count}"  value="2027">2027</option> 
-
-                                                                                        </select> 
-                                                                                    </div>
-                                                                                </td>
-                                                                                <td style="text-align: center">
-                                                                                    <%--<c:choose>--%>
-                                                                                    <%--<c:when test="${countVal.first}">--%>
-                                                                                    <!--<span style='margin-top: 5px;'>-->
-                                                                                    <!--<input type="button" value="+" id="policyCloneid" />-->
-                                                                                    <!--</span>-->
-                                                                                    <%--</c:if>--%>
-                                                                                    <%--</c:when>--%>
-                                                                                    <%--<c:otherwise>--%>
-                                                                                    <!--<span style='margin-top: 5px;'>-->
-                                                                                    <!--<input type="button" value="-" id="policyRemoveid" onclick="removeForEdit()"/>-->
-                                                                                    <!--</span>-->
-                                                                                    <%--</c:otherwise>--%>
-                                                                                    <%--</c:choose>--%>
-                                                                                    <c:if test="${countVal.last}">
-                                                                                        <c:if test="${countVal.last}">
-                                                                                            <span style='margin-top: 5px;'>
-                                                                                                <input type="button" value="+" id="ctcCloneid" />
-                                                                                            </span>
-                                                                                        </c:if>
-                                                                                    </c:if>
-                                                                                    <c:if test="${!countVal.last}">
-                                                                                        <c:if test="${!countVal.last}">
-                                                                                            <span style='margin-top: 5px;'>
-                                                                                                <input type="button" value="-" id="ctcRemoveid" onclick="removeCtc12('${comp[6]}')"/>
-                                                                                            </span>
-                                                                                        </c:if>
-                                                                                    </c:if>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </c:forEach>
-                                                                    </c:when>
-                                                                    <c:otherwise>
-
-                                                                        <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
-                                                                                <!--<input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
-                                                                        <tr>
-                                                                            <td style="text-align: center">1</td>
+                                                                            <td style="text-align: center">${countVal.count}</td>
                                                                             <td><div>
-                                                                                    <select id="ctcId1"  name="ctcId1"  class="form-control">
+
+                                                                                    <select id="ctcId${countVal.count}"  name="ctcId${countVal.count}"  class="form-control">
                                                                                         <option value="">--SELECT--</option>
                                                                                         <c:forEach var="policyData" items="${ctc}" varStatus = "status">
-                                                                                            <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                            <c:choose>
+                                                                                                <c:when test="${comp[1] == policyData.value}">
+                                                                                                    <option value="${policyData.key}" selected="selected">${comp[1]}</option>
+                                                                                                </c:when>
+                                                                                                <c:otherwise>
+                                                                                                    <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                                </c:otherwise>
+                                                                                            </c:choose>
                                                                                         </c:forEach>
                                                                                     </select>
                                                                                 </div>
-                                                                                <span id="ctcError1" style="color: red;"></span>
+                                                                                <span id="ctcError${countVal.count}" style="color: red;"></span>
                                                                             </td>
-                                                                            <!--                                                                        <td style="text-align: center">
-                                                                                                                                                        <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
-                                                                                                                                                    </td>-->
-                                                                            <td style="text-align: center">
-                                                                                <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" value="">
-                                                                            </td>
-                                                                            <td style="text-align: center">
+                                                                            <!--</td>-->
+                                                                            <!--                                                                            <td style="text-align: center">
+                                                                                                                                                            <input type="text" name="policyNumber${countVal.count}" id="policyNumber${countVal.count}"  class="form-control"  value="${comp[2]}">
+                                                                                                                                                        </td>-->
 
-                                                                                <input type="checkbox" name="ctctaxable1" id="ctctaxable1" >
-                                                                            </td>
-                                                                            <td id="monthTd1"><div>
-                                                                                    <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
-                                                                                    <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
-                                                                                    <select id="month1" name="month1"  class="form-control ">
-                                                                                        <option value="">--Select--</option>
-                                                                                        <option value="01">January</option>
-                                                                                        <option value="02">February</option>
-                                                                                        <option value="03">March </option>
-                                                                                        <option value="04">April</option>
-                                                                                        <option value="05">May</option>
-                                                                                        <option value="06">June</option>
-                                                                                        <option value="07">July</option>
-                                                                                        <option value="08">August</option>
-                                                                                        <option value="09">September</option>
-                                                                                        <option value="10">October </option>
-                                                                                        <option value="11">November </option>
-                                                                                        <option value="12">December</option>
+                                                                            <c:choose>
+                                                                                <c:when test="${!empty comp[2] }">
+                                                                                    <td style="text-align: center">
+                                                                                        <input type="number" name="ctcamount${countVal.count}" id="ctcamount${countVal.count}" min="0" onchange="changetotalButtonNewCTC(${countVal.count});" class="form-control" value="${comp[2]}">
+                                                                                        <script>//console.log("comp not empty@"+ ${comp[2]} );</script>
+                                                                                    </td>
+                                                                                </c:when>
+                                                                                <c:otherwise>
+                                                                                    <td style="text-align: center">
+                                                                                        <input type="number" name="ctcamount${countVal.count}" id="ctcamount${countVal.count}" min="0" onchange="changetotalButtonNewCTC(${countVal.count});" class="form-control" value="0">
+                                                                                        <script>//console.log("comp empty");</script>
+                                                                                    </td>
+                                                                                </c:otherwise>
+                                                                            </c:choose>
 
-                                                                                    </select>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td style="text-align: center">
+                                                                            <c:if test="${comp[3] eq 1}">
+                                                                                <td style="text-align: center">
+                                                                                    <input type="checkbox" name="taxablectc${countVal.count}" id="taxablectc${countVal.count}" checked="true" value="off" >
+                                                                                </td>
+                                                                            </c:if>
+                                                                            <c:if test="${comp[3] ne 1}">
+                                                                                <td style="text-align: center">
+                                                                                    <input type="checkbox" name="taxablectc${countVal.count}" id="taxablectc${countVal.count}" value="off" >
+                                                                                </td>
+                                                                            </c:if>
 
-                                                                                <select name="year1" id="year1" class="form-control ">
+
+
+                                                                        <script>//console.log("Taxable: "+ ${comp[3]} );</script>
+                                                                        <td ><div>
+                                                                                <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
+                                                                                <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
+                                                                                <select id="month${countVal.count}" name="month${countVal.count}"  class="form-control ">
+
+                                                                                    <c:choose>
+
+                                                                                        <c:when test="${comp[4] eq 01}">
+                                                                                            <!--<option value="01" selected="selected">January</option>-->
+                                                                                            <option value="01" selected="selected">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${comp[4] eq 02}">
+                                                                                            <!--<option value="02" selected="selected">February</option>-->
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02" selected="selected">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${comp[4] eq 03}">
+                                                                                            <!--<option value="03" selected="selected">March</option>-->
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03" selected="selected">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${comp[4] eq 04}">
+                                                                                            <!--<option value="04" selected="selected">April</option>-->
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04" selected="selected">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${comp[4] eq 05}">
+                                                                                            <!--<option value="05" selected="selected">May</option>-->
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05" selected="selected">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${comp[4] eq 06}">
+                                                                                            <!--<option value="06" selected="selected">June</option>-->
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06" selected="selected">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${comp[4] eq 07}">
+                                                                                            <!--<option value="07" selected="selected">July</option>-->
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07" selected="selected">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${comp[4] eq 08}">
+                                                                                            <!--<option value="08" selected="selected">August</option>-->
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08" selected="selected">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${comp[4] eq 09}">
+                                                                                            <!--<option value="09" selected="selected">September</option>-->
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09" selected="selected">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${comp[4] eq 10}">
+                                                                                            <!--<option value="10" selected="selected">October</option>-->
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10" selected="selected">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${comp[4] eq 11}">
+                                                                                            <!--<option value="11" selected="selected">November</option>-->
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11" selected="selected">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${comp[4] eq 12}">
+                                                                                            <!--<option value="12" selected="selected">December</option>-->
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12" selected="selected">December</option>
+                                                                                        </c:when>
+                                                                                        <c:when test="${empty comp[4] }">
+                                                                                            <option value="">--Select--</option>
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:when>
+                                                                                        <c:otherwise>
+                                                                                            <option value="">--Select--</option>
+                                                                                            <option value="01">January</option>
+                                                                                            <option value="02">February</option>
+                                                                                            <option value="03">March </option>
+                                                                                            <option value="04">April</option>
+                                                                                            <option value="05">May</option>
+                                                                                            <option value="06">June</option>
+                                                                                            <option value="07">July</option>
+                                                                                            <option value="08">August</option>
+                                                                                            <option value="09">September</option>
+                                                                                            <option value="10">October </option>
+                                                                                            <option value="11">November </option>
+                                                                                            <option value="12">December</option>
+                                                                                        </c:otherwise>
+                                                                                    </c:choose>
+
 
                                                                                 </select>
-                                                                            </td>
-                                                                            <td style="text-align: center">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div>
+
+                                                                                <!-- ------------------------------------ -->
+                                                                                <script>
+                                                                                    //console.log("NOT Empty...@@"+${comp[5]});
+                                                                                    //var year1Data = document.getElementById("year1").value;
+                                                                                </script>
+                                                                                <input  type="hidden" class="form-control" id="yearBase" value="${comp[5]}">
+
+           <!--  <input type="number" name="year${countVal.count}" id="year${countVal.count}" min="0" class="form-control"  value="${comp[5]}">
+                                                                                --> <script>
+                                                                                    //    console.log("NOT Empty...@@"+${comp[5]});
+                                                                                </script>
+
+
+
+                                                                                <select name="year${countVal.count}" id="year${countVal.count}"  class="form-control" >
+
+                                                                                    <!-- <script>
+                                                                                     var start = new Date().getFullYear();
+                                                                                     var end = start+50;
+                                                                                     var options11 = "";
+                                                                                     for (var yearloop = start; yearloop <= end; yearloop++) {
+                                                                                         optiosLoop = "<option> name=\"year${countVal.count}\" id=\"year${countVal.count}\" value="+yearloop+">yearloop "</option>";
+                                                                                         
+                                                                                         document.getElementById('year'+tempCount4).innerHTML = optiosLoop;
+                                                                                     }
+                                                                                     //                alert(tempCount4);
+                                                                                    </script>-->
+
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="${comp[5]}">${comp[5]}</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2018">2018</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2019">2019</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2020">2020</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2021">2021</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2022">2022</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2023">2023</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2024">2024</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2025">2025</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2026">2026</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2027">2027</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2028">2028</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2029">2029</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2030">2030</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2031">2031</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2032">2032</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2033">2033</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2034">2034</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2035">2035</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2036">2036</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2037">2037</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2038">2038</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2039">2039</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2040">2040</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2041">2041</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2042">2042</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2043">2043</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2044">2044</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2045">2045</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2046">2046</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2047">2047</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2048">2048</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2049">2049</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2050">2050</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2051">2051</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2052">2052</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2053">2053</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2054">2054</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2055">2055</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2056">2056</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2057">2057</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2058">2058</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2059">2059</option> 
+                                                                                    <option  name="year${countVal.count}" id="year${countVal.count}"  value="2060">2060</option> 
+
+
+                                                                                    <script>//initDropdownList( 'year2' );</script>
+                                                                                    </select><!--onchange="changeAmountButtonNewCTC(${countVal.count});"-->
+                                                                                <!-- ------------------------------------ -->
+
+
+                                                                            </div>
+                                                                        </td>
+
+
+
+
+                                                                        <td style="text-align: center">
+                                                                            <%--<c:choose>--%>
+                                                                            <%--<c:when test="${countVal.first}">--%>
+                                                                            <!--<span style='margin-top: 5px;'>-->
+                                                                            <!--<input type="button" value="+" id="policyCloneid" />-->
+                                                                            <!--</span>-->
+                                                                            <%--</c:if>--%>
+                                                                            <%--</c:when>--%>
+                                                                            <%--<c:otherwise>--%>
+                                                                            <!--<span style='margin-top: 5px;'>-->
+                                                                            <!--<input type="button" value="-" id="policyRemoveid" onclick="removeForEdit()"/>-->
+                                                                            <!--</span>-->
+                                                                            <%--</c:otherwise>--%>
+                                                                            <%--<c:when test="${countVal.last}">--%>
+                                                                            <%--<c:if test="${countVal.last}">
                                                                                 <span style='margin-top: 5px;'>
                                                                                     <input type="button" value="+" id="ctcCloneid" />
                                                                                 </span>
-                                                                            </td>
+                                                                            </c:if>--%>
+
+                                                                            <c:if test="${countVal.count eq 1}">
+                                                                                <span style='margin-top: 5px;'>
+                                                                                    <input type="button" value="+" id="ctcCloneid" />
+                                                                                </span>
+                                                                            </c:if>
+                                                                            <c:if test="${countVal.count ne 1}">
+                                                                                <span style='margin-top: 5px;'>
+                                                                                    <input type="button" value="-" onClick="removedefaultctc(${countVal.count})" />
+                                                                                </span>
+                                                                            </c:if>
+
+
+                                                                        </td>
                                                                         </tr>
-                                                                    </c:otherwise>
-                                                                </c:choose>
-                                                            </table>
-                                                        </div>
+                                                                    </c:forEach>
+                                                                </c:when>
+                                                                <c:otherwise>
+
+                                                                    <%--<c:forEach var="comp" items="${finalPolicyList}" varStatus = "countVal">--%>
+                                                                            <!--<input type="hidden" name="countSecond" id="countSecond" value="${fn:length(finalPolicyList)}"/>-->
+                                                                    <tr>
+
+                                                                        <td style="text-align: center">1</td>
+                                                                        <td><div>
+                                                                                <select id="ctcId1"  name="ctcId1"  class="form-control">
+                                                                                    <option value="">--SELECT--</option>
+                                                                                    <c:forEach var="policyData" items="${ctc}" varStatus = "status">
+                                                                                        <option value="${policyData.key}" >${policyData.value}</option>
+                                                                                    </c:forEach>
+                                                                                </select>
+                                                                            </div>
+                                                                            <span id="ctcError1" style="color: red;"></span>
+                                                                        </td>
+                                                                        <!--                                                                        <td style="text-align: center">
+                                                                                                                                                    <input type="text" name="policyNumber1" id="policyNumber1"  class="form-control"  value="">
+                                                                                                                                                </td>-->
+                                                                        <td style="text-align: center">
+                                                                            <input type="number" name="ctcamount1" id="ctcamount1" min="0" onchange="changetotalButtonCTC();"class="form-control" value="0">
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <input type="checkbox" name="taxable1" id="taxable1" >
+                                                                        </td>
+                                                                        <td id="monthTd1"><div>
+                                                                                <!--<label>Months:<span style="color: red;font-size: 12px;">*</span></label>-->
+                                                                                <%--<form:input path="bloodGroups" class="form-control"></form:input>--%>
+                                                                                <select id="month1" name="month1"  class="form-control ">
+                                                                                    <option value="">--Select--</option>
+                                                                                    <option value="01">January</option>
+                                                                                    <option value="02">February</option>
+                                                                                    <option value="03">March </option>
+                                                                                    <option value="04">April</option>
+                                                                                    <option value="05">May</option>
+                                                                                    <option value="06">June</option>
+                                                                                    <option value="07">July</option>
+                                                                                    <option value="08">August</option>
+                                                                                    <option value="09">September</option>
+                                                                                    <option value="10">October </option>
+                                                                                    <option value="11">November </option>
+                                                                                    <option value="12">December</option>
+
+                                                                                </select>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="text-align: center">
+
+                                                                            <select id="year1" name="year1" class="form-control "><!--Select-->
+
+
+
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2018">2018</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2019">2019</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2020">2020</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2021">2021</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2022">2022</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2023">2023</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2024">2024</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2025">2025</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2026">2026</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2027">2027</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2028">2028</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2029">2029</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2030">2030</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2031">2031</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2032">2032</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2033">2033</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2034">2034</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2035">2035</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2036">2036</option> 
+                                                                                <option  name="year${countVal.count}" id="year${countVal.count}"  value="2037">2037</option> 
+                                                                            </select>
+                                                                        </td>
+                                                                        <td style="text-align: center">
+                                                                            <span style='margin-top: 5px;'>
+                                                                                <input type="button" value="+" id="ctcCloneid" />
+                                                                            </span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </table>
                                                     </div>
+                                                </div>
+                                                        
+                                                        
+                                                        
+                                                        
                                                     <div class="form-group">
                                                         <div class="col-sm-6">
 
@@ -2591,7 +2899,7 @@
                                                             <div id="reportingHirarchy_div">
                                                                 <div class="col-sm-6" id="levelIdDiv2">
                                                                     <label>Level 2:</label>
-                                                                <form:hidden path="reportingManagerLevel2"></form:hidden>
+                                                                    <form:hidden path="reportingManagerLevel2"></form:hidden>
                                                                     <input type="text" name="reportingManagerLevel2Name" id="reportingManagerLevel2Name" class="form-control" readonly="true"/>
                                                                 </div>
                                                             </div>

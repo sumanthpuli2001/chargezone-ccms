@@ -1,7 +1,7 @@
 <%--
-Document   : ShiftCreate
-Created on : Oct 9, 2015, 10:47:55 AM
-Author     : Dhaval Patel
+    Document   : ShiftCreate
+    Created on : Oct 9, 2015, 10:47:55 AM
+    Author     : Dhaval Patel
 --%>
 
 <%@page import="java.util.Calendar"%>
@@ -14,7 +14,7 @@ Author     : Dhaval Patel
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Shift Data Search</title>
+        <title>Punch Data</title>
     </head>
 
     <script>
@@ -35,8 +35,8 @@ Author     : Dhaval Patel
         }
     </script>
     <script>
-        function showPunchData(date) {
-            var path = 'attendanceRegularizationMaster.htm?act=showDateWisePunchData&date=' + date;
+        function showPunchData(date, id) {
+            var path = 'attendanceRegularizationMaster.htm?act=showDateWisePunchDataOfAllEmployee&date=' + date + '&id=' + id;
             popupWindow = window.open(path, 'popUpWindow', 'height=300,width=500,left=500%,top=100%,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no')
 
 //             window.location = 'attendanceRegularizationMaster.htm?act=showDateWisePunchData&date=' + date;
@@ -53,28 +53,10 @@ Author     : Dhaval Patel
 
 
 
-    <script>
-        function CheckDate() {
-            var startDate = document.getElementById("inDateTime").value;
-            var endDate = document.getElementById("outDateTime").value;
-
-            if (endDate <= startDate) {
-                confirm("End date should be greater than Start date");
-//                document.getElementById("outDateTime").value = "";
-                return false;
-            } else {
-                return true;
-            }
-
-
-        }
-
-    </script>
-
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>EMPLOYEE ADVANCE SEARCH </h1>
+            <h1>PUNCH DATA </h1>
 
         </section>
         <c:if test="${!empty successMessage}">
@@ -84,82 +66,48 @@ Author     : Dhaval Patel
             <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
         </c:if>
         <!-- Main content -->
-        <form:form action="attendanceRegularizationMaster.htm?act=showOwnAttandance" method="post" commandName="employeeAdvanceSearch"
-                   name='form1' onsubmit='return CheckDate();' class="form-horizontal" role="form">
+        <form:form action="attendanceRegularizationMaster.htm?act=showOwnAttandanceOfSubordinate" method="post" commandName="employeeAdvanceSearch"
+                   name='form1' class="form-horizontal" role="form">
+            <input type="hidden" name="id" id="id" value="${id}">
+
             <section class="content">
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                <div class="box-header">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <div><button type="button" class="btn-primary"  onclick="window.history.back();" title="View">Back</button></div>
+                                    </div>
                                 </div>
-                                <div class="box-body no-padding">
+                                <div class="form-group">
 
-
-
-                                    <div class="row">
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <div class="col-sm-6" id="zydexLocationIdDiv" style="display: none;">
-                                                    <label> Location:</label>
-                                                    <input type="text" id="zydexLocationId" name="zydexLocationId" class="form-control">
-                                                </div>
+                                    <div class="col-sm-6">
+                                        <label>Start Date<span style="color: red;font-size: 12px;">*</span></label>
+                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
+                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                            <form:input path="inDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="col-sm-6" id="levelIdDiv" style="display: none;">
-                                                    <label>Level Name:</label>
-                                                    <input type="text" id="levelId" name="levelId" class="form-control">
-                                                </div>
-
-                                                <div class="col-sm-6" id="departmentIdDiv" style="display: none;">
-                                                    <label>Department Name:</label>
-                                                    <input type="text" id="departmentId" name="departmentId" class="form-control">
-                                                </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>End Date<span style="color: red;font-size: 12px;">*</span></label>
+                                            <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
+                                                <!--<input class="form-control" size="16" type="text" value="" readonly>-->
+                                            <form:input path="outDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                             </div>
-                                            <div class="form-group">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class=" col-sm-12" >
+                                            <button type="submit" class="btn btn-primary" style="width: 100px;" >SEARCH</button>
+                                        </div>
+                                    </div>
 
-                                                <div class="col-sm-6">
-                                                    <label>Start Date<span style="color: red;font-size: 12px;">*</span></label>
-                                                    <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
-                                                        <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="inDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6">
-                                                        <label>End Date<span style="color: red;font-size: 12px;">*</span></label>
-                                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" data-link-field="dtp_form:input1">
-                                                            <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                                        <form:input path="outDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true"></form:input>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <div class=" col-sm-12" >
-                                                        <button type="submit" class="btn btn-primary" style="width: 100px;" >SEARCH</button>
-                                                    </div>
-                                                </div>
-
-
-                                            </div><!-- /.col -->
-                                        </div><!-- /.row -->
-                                    </div><!-- /.box-body -->
-                                </div><!-- /.tab-content -->
-                            </div><!-- nav-tabs-custom -->
-                        </div><!-- /.col -->
-                    </div>
-                </section>
-                <section class="content">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- Custom Tabs -->
-                            <div class="nav-tabs-custom">
-                                <div class="tab-content">
                                     <!--<button type="submit" class="btn btn-danger" ><i class="fa fa-trash-o"></i>&nbsp;&nbsp;Delete</button>-->
                                     <div class="box-body no-padding">
                                         <div class="row">
@@ -226,6 +174,7 @@ Author     : Dhaval Patel
                                                                             </c:forEach>
 
                                                                     </tr>
+                                                                    <%--<c:if test="${sessionScope.userRight.hr}">--%>
                                                                     <tr>
                                                                         <th>First In</th>
 
@@ -325,6 +274,8 @@ Author     : Dhaval Patel
 
                                                                         </c:forEach>
                                                                     </tr>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${sessionScope.userRight.hr}">--%>
                                                                     <tr>
                                                                         <th>Last Out</th>
                                                                             <c:forEach var="list" items="${map[employeeMasterList[48]]}">
@@ -354,61 +305,89 @@ Author     : Dhaval Patel
                                                                         </c:forEach>
 
                                                                     </tr>
-                                                                    <tr>
-                                                                        <th>1st Half</th>
-                                                                            <c:forEach var="firstHalfList" items="${firstHalfList}">
-                                                                                <c:if test="${firstHalfList eq 'PR'}">
-                                                                                <th style="color: green;text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="present" value="${present + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${firstHalfList eq '-'}">
-                                                                                <th style="color: green;text-align: center;">${firstHalfList}</th>
-                                                                                </c:if>
-                                                                                <c:if test="${firstHalfList eq 'SHL/P'}">
-                                                                                <th style="color: green;text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="shl" value="${shl + 1}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${firstHalfList eq 'SHL/A'}">
-                                                                                <th style="color: red;text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="shlA" value="${shlA + 1}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${firstHalfList eq 'AB'}">
-                                                                                <th style="color: red;text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="absent" value="${absent + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${firstHalfList eq 'Casual Leave'}">
-                                                                                <th style="text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="cl" value="${cl + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${firstHalfList eq 'Privilege Leave'}">
-                                                                                <th style="text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="pl" value="${pl + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${firstHalfList eq 'Sick Leave'}">
-                                                                                <th style="text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="sl" value="${sl + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${firstHalfList eq 'Maternity Leave'}">
-                                                                                <th style="text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="mtl" value="${mtl + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${firstHalfList eq 'Paternity Leave'}">
-                                                                                <th style="text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="ptl" value="${ptl + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${firstHalfList eq 'C Off Leave'}">
-                                                                                <th style="text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="coff" value="${coff + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${firstHalfList eq 'Leave Without Pay' || fn:contains(woMap[list[0]], 'LWP')}">
-                                                                                <th style="text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="lwp" value="${lwp + 0.5}"></c:set>
-                                                                                </c:if>
+                                                                    <%--</c:if>--%>
+                                                                    <!--                                                                    <tr>
+                                                                                                                                            <th>1st Half</th>
+                                                                    <%--<c:forEach var="firstHalfList" items="${firstHalfList}">--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'PR'}">--%>
+                                                                    <th style="color: green;text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="present" value="${present + 0.5}"></c:set>--%>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq '-'}">--%>
+                                                                    <th style="color: green;text-align: center;">${firstHalfList}</th>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'SHL/P'}">--%>
+                                                                    <th style="color: green;text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="shl" value="${shl + 1}"></c:set>--%>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'SHL/A'}">--%>
+                                                                    <th style="color: red;text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="shlA" value="${shlA + 1}"></c:set>--%>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'AB'}">--%>
+                                                                    <th style="color: red;text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="absent" value="${absent + 0.5}"></c:set>--%>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'Casual Leave'}">--%>
+                                                                    <th style="text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="cl" value="${cl + 0.5}"></c:set>--%>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'Privilege Leave'}">--%>
+                                                                    <th style="text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="pl" value="${pl + 0.5}"></c:set>--%>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'Sick Leave'}">--%>
+                                                                    <th style="text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="sl" value="${sl + 0.5}"></c:set>--%>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'Maternity Leave'}">--%>
+                                                                    <th style="text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="mtl" value="${mtl + 0.5}"></c:set>--%>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'Paternity Leave'}">--%>
+                                                                    <th style="text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="ptl" value="${ptl + 0.5}"></c:set>--%>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'C Off Leave'}">--%>
+                                                                    <th style="text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="coff" value="${coff + 0.5}"></c:set>--%>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'Leave Without Pay'  || fn:contains(woMap[list[0]], 'LWP')}">--%>
+                                                                    <th style="text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="lwp" value="${lwp + 0.5}"></c:set>--%>
+                                                                    <%--</c:if>--%>
+                                                                    <%--<c:if test="${firstHalfList eq 'AR/P'}">--%>
+                                                                    <th style="color: blue;text-align: center;">${firstHalfList}</th>
+                                                                    <%--<c:set var="ar" value="${ar + 0.5}"></c:set>--%>
+                                                                    <%--</c:if>--%>
 
-                                                                            <c:if test="${firstHalfList eq 'AR/P'}">
-                                                                                <th style="color: blue;text-align: center;">${firstHalfList}</th>
-                                                                                    <c:set var="ar" value="${ar + 0.5}"></c:set>
-                                                                                </c:if>
+                                                                    <%--</c:forEach>--%>
+
+
+                                                                </tr>-->
+
+                                                                    <tr>
+                                                                        <th>PR/AB</th>
+                                                                            <c:forEach var="PrAb" items="${PrAb}">
+                                                                                <c:choose>
+                                                                                    <c:when test="${PrAb eq 'WO'}">
+                                                                                    <th style="color: green;text-align: center;">-</th>
+                                                                                        <%--<c:set var="present" value="${present + 0.5}"></c:set>--%>
+                                                                                    </c:when>
+                                                                                    <c:when test="${PrAb eq 'AB'}">
+                                                                                    <th style="color: red;text-align: center;">${PrAb}</th>
+                                                                                        <%--<c:set var="present" value="${present + 0.5}"></c:set>--%>
+                                                                                    </c:when>
+                                                                                    <c:when test="${PrAb eq 'PR'}">
+                                                                                    <th style="color: green;text-align: center;">${PrAb}</th>
+                                                                                        <%--<c:set var="present" value="${present + 0.5}"></c:set>--%>
+                                                                                    </c:when>
+                                                                                    <c:otherwise>
+                                                                                    <th style="text-align: center;">${PrAb}</th>
+                                                                                    </c:otherwise>
+                                                                                </c:choose>
+
+
 
                                                                         </c:forEach>
 
@@ -416,66 +395,36 @@ Author     : Dhaval Patel
                                                                     </tr>
 
                                                                     <tr>
-                                                                        <th>2nd Half</th>
-                                                                            <c:forEach var="secondHalfList" items="${secondHalfList}">
-                                                                                <c:if test="${secondHalfList eq 'PR'}">
-                                                                                <th style="color: green;text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="present" value="${present + 0.5}"></c:set>
+                                                                        <th>Late/Very Late</th>
+                                                                            <c:forEach var="late" items="${late}">
+                                                                                <c:if test="${late eq 'Late'}">
+                                                                                <th style="color: red;text-align: center;">${late}</th>
+                                                                                    <%--<c:set var="present" value="${present + 0.5}"></c:set>--%>
                                                                                 </c:if>
-                                                                                <c:if test="${secondHalfList eq '-'}">
-                                                                                <th style="color: green;text-align: center;">${secondHalfList}</th>
+                                                                                <c:if test="${late eq 'Very Late'}">
+                                                                                <th style="color: red;text-align: center;">${late}</th>
+                                                                                    <%--<c:set var="present" value="${present + 0.5}"></c:set>--%>
                                                                                 </c:if>
-                                                                                <c:if test="${secondHalfList eq 'SHL/P'}">
-                                                                                <th style="color: green;text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="shl" value="${shl + 1}"></c:set>
+                                                                                <c:if test="${late eq 'WO'}">
+                                                                                <th style="color: green;text-align: center;">-</th>
+                                                                                    <%--<c:set var="present" value="${present + 0.5}"></c:set>--%>
                                                                                 </c:if>
-                                                                                <c:if test="${secondHalfList eq 'SHL/A'}">
-                                                                                <th style="color: red;text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="shlA" value="${shlA + 1}"></c:set>
+                                                                                <c:if test="${late eq '-'}">
+                                                                                <th style="color: green;text-align: center;">-</th>
+                                                                                    <%--<c:set var="present" value="${present + 0.5}"></c:set>--%>
                                                                                 </c:if>
-                                                                                <c:if test="${secondHalfList eq 'AB'}">
-                                                                                <th style="color: red;text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="absent" value="${absent + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${secondHalfList.contains('Casual Leave')}">
-                                                                                <th style="text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="cl" value="${cl + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${secondHalfList.contains('Privilege Leave')}">
-                                                                                <th style="text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="pl" value="${pl + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${secondHalfList.contains('Sick Leave')}">
-                                                                                <th style="text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="sl" value="${sl + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${secondHalfList eq 'Maternity Leave'}">
-                                                                                <th style="text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="mtl" value="${mtl + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${secondHalfList eq 'Paternity Leave'}">
-                                                                                <th style="text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="ptl" value="${ptl + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${secondHalfList eq 'C Off Leave'}">
-                                                                                <th style="text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="coff" value="${coff + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${secondHalfList eq 'Leave Without Pay' || fn:contains(woMap[list[0]], 'LWP')}">
-                                                                                <th style="text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="lwp" value="${lwp + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${secondHalfList eq 'AR/P'}">
-                                                                                <th style="color: blue;text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="ar" value="${ar + 0.5}"></c:set>
-                                                                                </c:if>
-                                                                                <c:if test="${secondHalfList eq 'WO'}">
-                                                                                <th style="text-align: center;">${secondHalfList}</th>
-                                                                                    <c:set var="wo" value="${wo + 0.5}"></c:set>
-                                                                                </c:if>
+
+
 
                                                                         </c:forEach>
 
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <th>Break Hours</th>
+                                                                            <c:forEach var="breakHour" items="${breakHour}">
+                                                                            <th style="text-align: center;">${breakHour}</th>
+                                                                            </c:forEach>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Working Hour</th>
@@ -483,15 +432,21 @@ Author     : Dhaval Patel
                                                                             <th style="text-align: center;">${workingHour}</th>
                                                                             </c:forEach>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <th>View All Punch</th>
-                                                                            <c:forEach var="list" items="${map[employeeMasterList[48]]}">
-                                                                            <th style="text-align: center;"><a onclick="showPunchData('${list[0]}');">View</a>
-                                                                            </th>
+                                                                    <c:if test="${sessionScope.userRight.hr}">
+                                                                        <tr>
+                                                                            <th>View All Punch</th>
+                                                                                <c:forEach var="list" items="${map[employeeMasterList[48]]}">
+                                                                                <th style="text-align: center;"><a onclick="showPunchData('${list[0]}', '${employeeMasterList[48]}');">View</a>
+                                                                                </th>
 
-                                                                        </c:forEach>
-                                                                    </tr>
-
+                                                                            </c:forEach>
+                                                                        </tr>
+                                                                    </c:if>
+                                                                    <c:forEach var="list" items="${map[employeeMasterList[48]]}">
+                                                                        <c:if test="${fn:contains(list[1], 'WO')}">
+                                                                            <c:set var="wo" value="${wo + 1}"></c:set>
+                                                                        </c:if>
+                                                                    </c:forEach>
 
                                                                 </table>
                                                                 <table id="table_1" class="table-bordered table-striped table-hover"
@@ -502,14 +457,14 @@ Author     : Dhaval Patel
                                                                     <tr>
                                                                         <th colspan="2">Day Count</th>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <c:if test="${present ne 0}">
-                                                                            <th style="color: green;text-align: center;">PR</th>
+                                                                    <tr >
+                                                                        <c:if test="${presentCount ne 0}">
+                                                                            <th style="color: green;text-align: center; width: 20;">PR</th>
                                                                             </c:if>
                                                                             <c:if test="${absent ne 0}">
                                                                             <th style="color: red;text-align: center;">AB</th>
                                                                             </c:if>
-                                                                            <c:if test="${wo ne 0}">
+                                                                            <c:if test="${WOCount ne 0}">
                                                                             <th style="text-align: center;">WO</th>
                                                                             </c:if>
                                                                             <c:if test="${holiday ne 0}">
@@ -548,17 +503,30 @@ Author     : Dhaval Patel
                                                                             <c:if test="${lwp ne 0}">
                                                                             <th style="color: blue;text-align: center;">LWP</th>
                                                                             </c:if>
+                                                                            <%--<c:if test="${countLateEntry ge 1}">--%>
+                                                                        <!--<th style="color: red;text-align: center;">Penalty Hours</th>-->
+                                                                        <%--</c:if>--%>
+                                                                        <%--<c:if test="${!empty totalLateCollection}">--%>
+                                                                        <!--<th style="color: red;text-align: center;">Penalty Hours</th>-->
+                                                                        <%--</c:if>--%>
+                                                                        <%--<c:if test="${!empty totalPaidOverTime}">--%>
+                                                                        <!--<th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">OT Hours</th>-->
+                                                                        <%--</c:if>--%>
+                                                                        <%--<c:if test="${!empty totalUnpaidOverTime}">--%>
+                                                                        <!--<th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Unpaid OT Hours</th>-->
+                                                                        <%--</c:if>--%>
+                                                                        <!--<th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">Total Working Hours</th>-->
                                                                     </tr>
                                                                     <tr>
                                                                         <c:set var="shortL" value="${shl/2}"/>
-                                                                        <c:if test="${present ne 0}">
-                                                                            <td style="color: green;text-align: center;" >${present-shortL}</td>
+                                                                        <c:if test="${presentCount ne 0}">
+                                                                            <td style="color: green;text-align: center;" >${presentCount}</td>
                                                                         </c:if>
                                                                         <c:if test="${absent ne 0}">
                                                                             <td style="color: red;text-align: center;" >${absent}</td>
                                                                         </c:if>
-                                                                        <c:if test="${wo ne 0}">
-                                                                            <td style="text-align: center;">${wo}</td>
+                                                                        <c:if test="${WOCount ne 0}">
+                                                                            <td style="text-align: center;">${WOCount}</td>
                                                                         </c:if>
                                                                         <c:if test="${holiday ne 0}">
                                                                             <td style="text-align: center;">${holiday}</td>
@@ -595,10 +563,22 @@ Author     : Dhaval Patel
                                                                             </c:if>
                                                                             <c:if test="${lwp ne 0}">
                                                                             <th style="color: blue;text-align: center;">${lwp}</th>
-                                                                            </c:if>
-
+                                                                            </c:if>  
+                                                                            <%--<c:if test="${!empty totalPenaltyHours && countLateEntry ge 1}">--%>
+                                                                            <!--<th style="color: red;text-align: center;">${totalPenaltyHours}</th>-->
+                                                                        <%--</c:if>--%>
+                                                                        <%--<c:if test="${!empty totalLateCollection}">--%>
+                                                                            <!--<th style="color: red;text-align: center;">${totalLateCollection}</th>-->
+                                                                        <%--</c:if>--%>
+                                                                        <%--<c:if test="${!empty totalPaidOverTime}">--%>
+                                                                        <!--<th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalPaidOverTime}</th>-->
+                                                                        <%--</c:if>--%>  
+                                                                        <%--<c:if test="${!empty totalUnpaidOverTime}">--%>
+                                                                        <!--<th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalUnpaidOverTime}</th>-->
+                                                                        <%--</c:if>--%> 
+                                                                         <!--<th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${presentCount * hoursMadatory}</th>-->
                                                                     </tr>
-                                                                    <tr  >
+                                                                    <tr>
                                                                     </tr>
                                                                 </table>
                                                             </div>

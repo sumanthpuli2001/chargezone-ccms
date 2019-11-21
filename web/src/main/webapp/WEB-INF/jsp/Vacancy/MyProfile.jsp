@@ -135,32 +135,32 @@
                     i1++;
                             var addNewRow = "<tr id='table_1_rowNo_" + i1 + "'>" +
                             "<td>" +
-                            "<input type=\"number\" min=\"0\" name=\"candidateAcademicQualification.academicYearFrom\" class=\"form-control academicFrom\" id=\"academicFrom\" placeholder=\"Year From\"/>" +
+                            "<input type=\"text\"  name=\"candidateAcademicQualification.academicYearFrom\" class=\"form-control academicFrom\" id=\"academicFrom\" placeholder=\"Strength\"/>" +
                             "</td>" +
                             "<td>" +
-                            "<input type='number' min='0' name='candidateAcademicQualification.academicYearTo' class='form-control academicTo' id='academicTo' placeholder='Year To'/>" +
+                            "<input type='text'  name='candidateAcademicQualification.academicYearTo' class='form-control academicTo' id='academicTo' placeholder='Weakness'/>" +
                             "</td>" +
-                            "<td>" +
-                            "<input type='text' name='candidateAcademicQualification.academicExamination' class='form-control' placeholder='Academic Qualification'/>" +
-                            "</td>" +
-                            "<td>" +
-                            "<input type='text' name='candidateAcademicQualification.academicBoard' class='form-control' placeholder='Academic Board'/>" +
-                            "</td>" +
-                            "<td>" +
-                            "<input type='number' min='0' name='candidateAcademicQualification.academicNumberOfAttempts' class='form-control' placeholder='No Of Attempts'/>" +
-                            "</td>" +
-                            "<td>" +
-                            "<input type='text' name='candidateAcademicQualification.academicMarksInPercent' class='form-control' placeholder='Academic Marks(%)'/>" +
-                            "</td>" +
-                            "<td>" +
-                            "<input type='text' name='candidateAcademicQualification.academicClass' class='form-control' placeholder='Academic Class'/>" +
-                            "</td>" +
-                            "<td>" +
-                            "<input type='text' name='candidateAcademicQualification.academicRankOrScholarship' class='form-control' placeholder='Academic Rank/Scholarship'/>" +
-                            "</td>" +
-                            "<td>" +
-                            "<button type=\"button\" class='btn btn-flat' style='width: 50px;' id='removeQualification' onClick=\"removeChild1('table_1_rowNo_" + i1 + "');\" value=\"-\">-</button>" +
-                            "</td>" +
+//                            "<td>" +
+//                            "<input type='text' name='candidateAcademicQualification.academicExamination' class='form-control' placeholder='Academic Qualification'/>" +
+//                            "</td>" +
+//                            "<td>" +
+//                            "<input type='text' name='candidateAcademicQualification.academicBoard' class='form-control' placeholder='Academic Board'/>" +
+//                            "</td>" +
+//                            "<td>" +
+//                            "<input type='number' min='0' name='candidateAcademicQualification.academicNumberOfAttempts' class='form-control' placeholder='No Of Attempts'/>" +
+//                            "</td>" +
+//                            "<td>" +
+//                            "<input type='text' name='candidateAcademicQualification.academicMarksInPercent' class='form-control' placeholder='Academic Marks(%)'/>" +
+//                            "</td>" +
+//                            "<td>" +
+//                            "<input type='text' name='candidateAcademicQualification.academicClass' class='form-control' placeholder='Academic Class'/>" +
+//                            "</td>" +
+//                            "<td>" +
+//                            "<input type='text' name='candidateAcademicQualification.academicRankOrScholarship' class='form-control' placeholder='Academic Rank/Scholarship'/>" +
+//                            "</td>" +
+//                            "<td>" +
+//                            "<button type=\"button\" class='btn btn-flat' style='width: 50px;' id='removeQualification' onClick=\"removeChild1('table_1_rowNo_" + i1 + "');\" value=\"-\">-</button>" +
+//                            "</td>" +
                             "</tr>";
                             document.getElementById("countId").value = i1;
                             $('#tbodyQualification').append(addNewRow);
@@ -573,10 +573,10 @@
                                         <th>Permanent Address<span style="color: red;font-size: 12px;"> *</span></th>
                                         <td><form:textarea path="candidateApplyJob.permanentAddress" class="form-control" placeholder="Enter Permanent Address" required="true"></form:textarea></td>
                                     </tr>
-                                    <tr>
+<!--                                    <tr>
                                         <th>City<span style="color: red;font-size: 12px;"> *</span></th>
                                         <td><form:input path="candidateApplyJob.city" class="form-control" placeholder="Enter City" required="true"></form:input></td>
-                                    </tr>
+                                    </tr>-->
                                 </tbody>
                             </table>
                             </br>
@@ -596,7 +596,7 @@
                                         <td><form:input path="candidateApplyJob2.anyRelativeInSPCL" class="form-control" placeholder="Current CTC" required="true"></form:input></td>
                                     </tr>
                                     <tr>
-                                        <th>Current CTC(On Hand):<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <th>Current CTC(PM Or On Hand):<span style="color: red;font-size: 12px;"> *</span></th>
                                         <td><form:input path="candidateApplyJob2.physicalDamageOrDiseases" class="form-control" placeholder="Current CTC(On Hand)" required="true"></form:input></td>
                                     </tr>
                                     <tr>
@@ -604,7 +604,7 @@
                                         <td><form:input path="candidateApplyJob2.criminalCaseBackground" class="form-control" placeholder="Expected CTC" required="true"></form:input></td>
                                     </tr>
                                     <tr>
-                                        <th>Expected CTC(On Hand):</th>
+                                        <th>Expected CTC(PM Or On Hand):</th>
                                         <td><form:input path="candidateApplyJob2.insurancePolicyNumber" class="form-control" placeholder="Expected CTC(On Hand)"></form:input></td>
                                     </tr>
                                     <tr>
@@ -1019,7 +1019,7 @@
                         <div class="col-sm-12">
                             </br>  
                             <center>
-                                <h3>Academic Qualification Information</h3>
+                                <!--<h3>Academic Qualification Information</h3>-->
                             </center>
                             </br>
                         </div>  
@@ -1028,33 +1028,33 @@
                             <table class="table-bordered" style="width:100%">
                                 <thead>
                                     <tr style="text-align:center">
-                                        <th colspan="2" style="text-align:center">Year<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <th rowspan="2" style="text-align:center">Examination<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <th rowspan="2" style="text-align:center">Board/College/University<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <th rowspan="2" style="text-align:center">No. of Attempts<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <th rowspan="2" style="text-align:center">Academic Marks(%)<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <th rowspan="2" style="text-align:center">Academic Class<span style="color: red;font-size: 12px;"> *</span></th>
-                                        <th rowspan="2" style="text-align:center">Rank Or Scholarship(if Any)</th>
+                                        <th  style="text-align:center">Strength<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <th  style="text-align:center">Weakness<span style="color: red;font-size: 12px;"> *</span></th>
+                                        <!--<th rowspan="2" style="text-align:center">Board/College/University<span style="color: red;font-size: 12px;"> *</span></th>-->
+                                        <!--<th rowspan="2" style="text-align:center">No. of Attempts<span style="color: red;font-size: 12px;"> *</span></th>-->
+                                        <!--<th rowspan="2" style="text-align:center">Academic Marks(%)<span style="color: red;font-size: 12px;"> *</span></th>-->
+                                        <!--<th rowspan="2" style="text-align:center">Academic Class<span style="color: red;font-size: 12px;"> *</span></th>-->
+                                        <!--<th rowspan="2" style="text-align:center">Rank Or Scholarship(if Any)</th>-->
                                         <th style="text-align:center"><button type="button" id="buttonQualification" class="btn btn-flat" style="width: 50px;" data-original-title="" title="" >+</button></th>
                                     </tr>
-                                    <tr>
+<!--                                    <tr>
                                         <th style="text-align:center">From</th>
                                         <th style="text-align:center">To</th>
-                                    </tr>
+                                    </tr>-->
                                 </thead>
                                 <tbody id="tbodyQualification">
                                 <c:choose>
                                     <c:when test="${empty caqList}">
                                         <tr>
                                     <input type="hidden" name="countId" id="countId" value="1">
-                                    <td><input type="number" min="0" name="candidateAcademicQualification.academicYearFrom" class="form-control academicFrom" id="academicFrom" placeholder="Year From" required="true"/></td>
-                                    <td><input type="number" min="0" name="candidateAcademicQualification.academicYearTo" class="form-control academicTo" id="academicTo" placeholder="Year To" required="true"/></td>
-                                    <td><input type="text" name="candidateAcademicQualification.academicExamination" class="form-control" placeholder="Academic Examination" required="true"/></td>
-                                    <td><input type="text" name="candidateAcademicQualification.academicBoard" class="form-control" placeholder="Academic Board" required="true"/></td>
+                                    <td><input type="text"  name="candidateAcademicQualification.academicYearFrom" class="form-control academicFrom" id="academicFrom" placeholder="Strength" required="true"/></td>
+                                    <td><input type="text" name="candidateAcademicQualification.academicYearTo" class="form-control academicTo" id="academicTo" placeholder="Weakness" required="true"/></td>
+                                    <!--<td><input type="text" name="candidateAcademicQualification.academicExamination" class="form-control" placeholder="Academic Examination" required="true"/></td>-->
+<!--                                    <td><input type="text" name="candidateAcademicQualification.academicBoard" class="form-control" placeholder="Academic Board" required="true"/></td>
                                     <td><input type="number" min="0" name="candidateAcademicQualification.academicNumberOfAttempts" class="form-control" placeholder="No of Attempts" required="true"/></td>
                                     <td><input type="text" name="candidateAcademicQualification.academicMarksInPercent" class="form-control" placeholder="Academic Marks(%)" required="true"/></td>
                                     <td><input type="text" name="candidateAcademicQualification.academicClass" class="form-control" placeholder="Academic Class" required="true"/></td>
-                                    <td><input type="text" name="candidateAcademicQualification.academicRankOrScholarship" class="form-control" placeholder="Academic Rank/Scholarship"/></td>
+                                    <td><input type="text" name="candidateAcademicQualification.academicRankOrScholarship" class="form-control" placeholder="Academic Rank/Scholarship"/></td>-->
                                     </tr>
                                 </c:when>
                                 <c:otherwise>
@@ -1064,12 +1064,12 @@
                                         <input type="hidden" min="0" name="candidateAcademicQualification.id" class="form-control" value="${list.id}"/>
                                         <td><input type="number" min="0" name="candidateAcademicQualification.academicYearFrom" class="form-control academicFrom" value="${list.academicYearFrom}" id="academicFrom" placeholder="Year From" required="true"/></td>
                                         <td><input type="number" min="0" name="candidateAcademicQualification.academicYearTo" class="form-control academicTo" value="${list.academicYearTo}" id="academicTo" placeholder="Year To" required="true"/></td>
-                                        <td><input type="text" name="candidateAcademicQualification.academicExamination" class="form-control" value="${list.academicExamination}" placeholder="Academic Examination" required="true"/></td>
+<!--                                        <td><input type="text" name="candidateAcademicQualification.academicExamination" class="form-control" value="${list.academicExamination}" placeholder="Academic Examination" required="true"/></td>
                                         <td><input type="text" name="candidateAcademicQualification.academicBoard" class="form-control" value="${list.academicBoard}" placeholder="Academic Board" required="true"/></td>
                                         <td><input type="number" min="0" name="candidateAcademicQualification.academicNumberOfAttempts" class="form-control" value="${list.academicNumberOfAttempts}" placeholder="No of Attempts" required="true"/></td>
                                         <td><input type="text" name="candidateAcademicQualification.academicMarksInPercent" class="form-control" value="${list.academicMarksInPercent}" placeholder="Academic Marks(%)" required="true"/></td>
                                         <td><input type="text" name="candidateAcademicQualification.academicClass" class="form-control" value="${list.academicClass}" placeholder="Academic Class" required="true"/></td>
-                                        <td><input type="text" name="candidateAcademicQualification.academicRankOrScholarship" class="form-control" value="${list.academicRankOrScholarship}" placeholder="Academic Rank/Scholarship"/></td>
+                                        <td><input type="text" name="candidateAcademicQualification.academicRankOrScholarship" class="form-control" value="${list.academicRankOrScholarship}" placeholder="Academic Rank/Scholarship"/></td>-->
                                         </tr>
                                     </c:forEach>
                                 </c:otherwise>
@@ -1092,8 +1092,8 @@
                         <table class="table-bordered" style="width:100%">
                             <thead>
                                 <tr style="text-align:center">
-                                    <th style="text-align:center">Strength</th>
-                                    <th style="text-align:center">Weakness</th>
+<!--                                    <th style="text-align:center">Strength</th>
+                                    <th style="text-align:center">Weakness</th>-->
                                     <th style="text-align:center">Previous Job (Positive)</th>
                                     <th style="text-align:center">Previous Job (Negative)</th>
                                     <!--<th style="text-align:center"><button type="button" id="buttonOtherReferences" class="btn btn-flat" style="width: 50px;" data-original-title="" title="" > + </button></th>-->
@@ -1104,8 +1104,8 @@
                                     <c:when test="${empty corList}">
                                         <tr>
                                     <input type="hidden" name="countId" id="countId" value="1">
-                                    <td><input type="text" name="candidateOtherReferences.referenceNonRelativesName" class="form-control" placeholder=""/></td>
-                                    <td><input type="text" name="candidateOtherReferences.referenceNonRelativesOrganization" class="form-control" placeholder=""/></td>
+<!--                                    <td><input type="text" name="candidateOtherReferences.referenceNonRelativesName" class="form-control" placeholder=""/></td>
+                                    <td><input type="text" name="candidateOtherReferences.referenceNonRelativesOrganization" class="form-control" placeholder=""/></td>-->
                                     <td><input type="text" name="candidateOtherReferences.referenceNonRelativesPosition" class="form-control" placeholder=""/></td>
                                     <td><input type="text"  min="0" name="candidateOtherReferences.referenceNonRelativesContactNmber" class="form-control" placeholder=""/></td>
                                     </tr>
@@ -1115,10 +1115,10 @@
                                         <tr>
                                         <input type="hidden" name="countId" id="countId" value="1">
                                         <input type="hidden" min="0" name="candidateOtherReferences.id" class="form-control" value="${list.id}"/>
-                                        <td><input type="text" name="candidateOtherReferences.referenceNonRelativesName" class="form-control" value="${list.referenceNonRelativesName}"/></td>
-                                        <td><input type="text" name="candidateOtherReferences.referenceNonRelativesOrganization" class="form-control" value="${list.referenceNonRelativesOrganization}"/></td>
+<!--                                        <td><input type="text" name="candidateOtherReferences.referenceNonRelativesName" class="form-control" value="${list.referenceNonRelativesName}"/></td>
+                                        <td><input type="text" name="candidateOtherReferences.referenceNonRelativesOrganization" class="form-control" value="${list.referenceNonRelativesOrganization}"/></td>-->
                                         <td><input type="text" name="candidateOtherReferences.referenceNonRelativesPosition" class="form-control" value="${list.referenceNonRelativesPosition}"/></td>
-                                        <td><input type="number" min="0" name="candidateOtherReferences.referenceNonRelativesContactNmber" class="form-control" value="${list.referenceNonRelativesContactNmber}"/></td>
+                                        <td><input type="text"  name="candidateOtherReferences.referenceNonRelativesContactNmber" class="form-control" value="${list.referenceNonRelativesContactNmber}"/></td>
                                         </tr>
                                     </c:forEach>
                                 </c:otherwise>

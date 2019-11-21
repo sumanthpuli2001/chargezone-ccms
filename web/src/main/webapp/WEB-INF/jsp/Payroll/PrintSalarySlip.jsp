@@ -143,7 +143,7 @@
                                                             <c:if test="${month eq 9}">September</c:if>
                                                             <c:if test="${month eq 10}">October</c:if>
                                                             <c:if test="${month eq 11}">November</c:if>
-                                                            <c:if test="${month eq 12}">December</c:if>, ${year} to 31st <c:if test="${month eq 1}">January</c:if>
+                                                            <c:if test="${month eq 12}">December</c:if>, ${year} to ${days1}st <c:if test="${month eq 1}">January</c:if>
                                                             <c:if test="${month eq 2}">February</c:if>
                                                             <c:if test="${month eq 3}">March</c:if>
                                                             <c:if test="${month eq 4}">April</c:if>
@@ -162,7 +162,7 @@
                                                         <td colspan="2">
                                                             <font size="2">Department:&nbsp;&nbsp;<b>${employeeMaster[0].departmentMaster.departmentName}</b></font> </td>
                                                     <td colspan="2">
-                                                        <font size="2">Total Month Days:&nbsp;&nbsp;<b>${employeeMaster[0].uanNo}</b></font></td>
+                                                        <font size="2">Total Month Days:&nbsp;&nbsp;<b>${days1}</b></font></td>
                                                 </tr>
 
 

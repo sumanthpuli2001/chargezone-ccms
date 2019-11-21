@@ -210,13 +210,13 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
         String condition = "";
         EmployeeMaster employeeMaster = (EmployeeMaster) object;
 
-        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND a.locationMaster.id = " + employeeMaster.getAdharCard();
-        }
-        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
-//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
-            condition += " AND a.company = '" + employeeMaster.getCompany() + "'";
-        }
+//        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
+//            condition += " AND a.locationMaster.id = " + employeeMaster.getAdharCard();
+//        }
+//        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
+////            condition += " AND b.company = " + employeeMaster.getEmployeeType();
+//            condition += " AND a.company = '" + employeeMaster.getCompany() + "'";
+//        }
 //        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
 //            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
 //        }
@@ -368,9 +368,9 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
 //            condition += " AND b.company = " + employeeMaster.getEmployeeType();
             condition += " AND a.company = '" + employeeMaster.getCompany() + "'";
         }
-//        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
-//            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
-//        }
+        if (!"".equals(employeeMaster.getBankIfscCode()) && null != employeeMaster.getBankIfscCode()) {
+            condition += " AND a.id = '" + employeeMaster.getBankIfscCode()+ "'";
+        }
 
 //        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
 //            condition += " AND a.paymentType = '" + employeeMaster.getPaymentType() + "'";
@@ -824,9 +824,9 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
 //            condition += " AND b.company = " + employeeMaster.getEmployeeType();
             condition += " AND b.company = '" + employeeMaster.getCompany() + "'";
         }
-//        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
-//            condition += " AND b.employeeSubType.id = " + employeeMaster.getCompany();
-//        }
+        if (null != employeeMaster.getBankIfscCode() && !"".equals(employeeMaster.getBankIfscCode())) {
+            condition += " AND b.id = '" + employeeMaster.getBankIfscCode()+ "'";
+        }
 //        if (null != employeeMaster.getPaymentType() && !"".equals(employeeMaster.getPaymentType())) {
 //            condition += " AND b.paymentType = '" + employeeMaster.getPaymentType() + "'";
 //        }

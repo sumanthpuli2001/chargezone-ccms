@@ -42,6 +42,17 @@ public class UserMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         }
         return false;
     }
+    
+    public boolean isOtherUserExist(int userMatserId, String userName) {
+        String query = "";
+        query += " FROM UserMaster a"
+                + " WHERE a.userName='" + userName + "' AND a.id!='" + userMatserId + "'";
+        List<?> list = getHibernateTemplate().find(query);
+        if (list.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
 
     @Override
     public List<?> read(T object) {

@@ -24,11 +24,11 @@
     </script>
     <script>
         function onprintDiv() {
-           
+
             var month = document.getElementById('month1').value;
-           
+
             var year = document.getElementById('year').value;
-            
+
             var zydexlocationid = document.getElementById('zydexlocationid').value;
             var typeofemployee = document.getElementById('typeofemployee').value;
 //            var employeesubid = document.getElementById('employeesubid').value;
@@ -98,6 +98,14 @@
                                     <div class="row">
                                         <div class="col-md-12 col-sm-12">
                                             <div class="form-group">
+
+
+                                                <div class="col-md-6" id="employeeName">
+                                                    <label>Employee Name:</label>
+                                                    <input type="text" id="employeeMasterId" name="employeeMasterId" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <div class="col-sm-6">
                                                     <label>Location:<span style="color: red;font-size: 12px;"></span></label>
                                                     <select name="zydexLocationMasterId" id="zydexLocationMasterId" class="form-control ">
@@ -116,8 +124,8 @@
                                                         </c:forEach>
                                                     </select>
                                                 </div>
-                                               
-                                                
+
+
 
 <!--                                                <input type="hidden" name="typeOfEmployee" id="typeOfEmployee" value="${employeeTypeMaster.typeOfEmployee}">
                                                 <div class="col-sm-6">
@@ -311,7 +319,7 @@
         </c:if>
     </form:form>
 </div>
-<script>
+<!--<script>
     function selectsubtype(typeId) {
 
         var empSubTypeId = document.getElementById("employeeSubTypeId").value;
@@ -333,7 +341,7 @@
     $(document).ready(function () {
         var empTypeId = document.getElementById("employeeTypeMasterId").value;
         selectsubtype(empTypeId);
-    });</script>
+    });</script>-->
 <script type="text/javascript">
     $('.form_datetime').datetimepicker({
         //language:  'fr',
@@ -349,13 +357,14 @@
 <script>
     jQuery.noConflict();
     jQuery(document).ready(function () {
-        jQuery("#employeeName").tokenInput(${list}, {
+        jQuery("#employeeMasterId").tokenInput(${list}, {
             preventDuplicates: true,
             noResultsText: "No Result",
             tokenLimit: "1",
             searchingText: "Searching ... .. .",
         });
-    });</script>
+    });
+</script>
 <script type="text/javascript">
     window.onload = init;
     function init() {

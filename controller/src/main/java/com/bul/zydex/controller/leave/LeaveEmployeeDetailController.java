@@ -1493,7 +1493,12 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         Iterator itr1 = empLeaveBalanceList1.iterator();
         while (itr1.hasNext()) {
             Object[] aa = (Object[]) itr1.next();
-            diff = aa[1].toString();
+            try {
+                diff = aa[1].toString();
+            } catch (Exception e) {
+                diff = "";
+            }
+
         }
 //        ArrayList aa = new ArrayList();
         Iterator itr = empLeaveBalanceList.iterator();
@@ -9642,7 +9647,12 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         }
         HttpSession session = request.getSession();
         if (!"".equals(empId)) {
-            employeeMaster.setId(Integer.parseInt(empId));
+            try {
+                employeeMaster.setId(Integer.parseInt(empId));
+            } catch (Exception e) {
+
+            }
+
         }
         if (!"".equals(deptId)) {
             employeeMaster.setChild1(deptId);
@@ -9766,7 +9776,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     empInfoList.add("");
                 }
                 //                c.off
-                List leaveTypeList5 = leaveTypeMasterService.readLeaveType("Lieu Day Leave");
+                List leaveTypeList5 = leaveTypeMasterService.readLeaveType("Set Off Leaves");
                 if (!leaveTypeList5.isEmpty()) {
                     leaveTypeMaster5 = (LeaveTypeMaster) leaveTypeList5.get(0);
                     coffId = "" + leaveTypeMaster5.getId();

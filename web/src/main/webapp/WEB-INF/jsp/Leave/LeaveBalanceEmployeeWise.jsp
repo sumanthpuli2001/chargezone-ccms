@@ -15,6 +15,7 @@
 
     <script>
         function viewClick(empId, leaveTypId) {
+//            alert(leaveTypId);
             document.getElementById('viewLeaveBal_id').innerHTML = "Fetching ......";
             $.post("leaveEmployeeDetail.htm?act=readLeaveBalAjax",
                     {
@@ -167,7 +168,7 @@
                                                                     <th>Privilege Leave</th>
                                                                     <th>Paternity Leave</th>
                                                                     <th>Short Leave</th>
-                                                                    <th>Lieu Day</th>
+                                                                    <th>Set Off Leaves</th>
                                                                     <th>Action</th>
                                                                 </tr>
                                                             </thead>
@@ -201,35 +202,35 @@
                                                                             </li>
                                                                             <li>
                                                                                 <a href="#" data-toggle="modal" data-target="#myModal"
-                                                                                   onclick="viewClick(${employeeBalanceMap.key},${leaveType[1]});">
+                                                                                   onclick="viewClick(${employeeBalanceMap.key},${leaveType[6]});">
                                                                                     &nbsp;&nbsp;SL
                                                                                 </a>
                                                                             </li>
                                                                             <li>
                                                                                 <a href="#" data-toggle="modal" data-target="#myModal"
-                                                                                   onclick="viewClick(${employeeBalanceMap.key},${leaveType[2]});">
+                                                                                   onclick="viewClick(${employeeBalanceMap.key},${leaveType[1]});">
                                                                                     &nbsp;&nbsp;PL
                                                                                 </a>
                                                                             </li>
                                                                             <li>
                                                                                 <a href="#" data-toggle="modal" data-target="#myModal"
-                                                                                   onclick="viewClick(${employeeBalanceMap.key},${leaveType[4]});">
+                                                                                   onclick="viewClick(${employeeBalanceMap.key},${leaveType[3]});">
                                                                                     &nbsp;&nbsp;Short Leave
                                                                                 </a>
                                                                             </li>
-                                                                            <c:if test="${leaveType[3] ne '0'}">
-                                                                                <li>
-                                                                                    <a href="#" data-toggle="modal" data-target="#myModal"
-                                                                                       onclick="viewClick(${employeeBalanceMap.key},${leaveType[3]});">
-                                                                                        &nbsp;&nbsp;PTL
-                                                                                    </a>
-                                                                                </li>
-                                                                            </c:if>
                                                                             <%--<c:if test="${leaveType[3] ne '0'}">--%>
                                                                                 <li>
                                                                                     <a href="#" data-toggle="modal" data-target="#myModal"
-                                                                                       onclick="viewClick(${employeeBalanceMap.key},${leaveType[5]});">
-                                                                                        &nbsp;&nbsp;Lieu Day
+                                                                                       onclick="viewClick(${employeeBalanceMap.key},${leaveType[2]});">
+                                                                                        &nbsp;&nbsp;PTL
+                                                                                    </a>
+                                                                                </li>
+                                                                            <%--</c:if>--%>
+                                                                            <%--<c:if test="${leaveType[3] ne '0'}">--%>
+                                                                                <li>
+                                                                                    <a href="#" data-toggle="modal" data-target="#myModal"
+                                                                                       onclick="viewClick(${employeeBalanceMap.key},${leaveType[4]});">
+                                                                                        &nbsp;&nbsp;Set Off Leaves
                                                                                     </a>
                                                                                 </li>
                                                                             <%--</c:if>--%>

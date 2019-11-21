@@ -955,19 +955,19 @@
                             } else {
                                 document.getElementById("noOfDays").value = leaveDays1;
                             }
-                            if (strUser == "National Holiday") {
-                                if (parseFloat(document.getElementById("noOfDays").value) > 1) {
-                                    $("#nhDiv").show();
-                                    setTimeout(function () {
-                                        $("#nhDiv").fadeOut();
-                                    }, 5000);
-                                    document.getElementById("noOfDays").value = "";
-                                    document.getElementById("startDate").value = "";
-                                    document.getElementById("endDate").value = "";
-                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                }
-                            }
+//                            if (strUser == "National Holiday") {
+//                                if (parseFloat(document.getElementById("noOfDays").value) > 1) {
+//                                    $("#nhDiv").show();
+//                                    setTimeout(function () {
+//                                        $("#nhDiv").fadeOut();
+//                                    }, 5000);
+//                                    document.getElementById("noOfDays").value = "";
+//                                    document.getElementById("startDate").value = "";
+//                                    document.getElementById("endDate").value = "";
+//                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+//                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+//                                }
+//                            }
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
@@ -1088,19 +1088,19 @@
                             } else {
                                 document.getElementById("noOfDays").value = parseFloat(leaveDays1) - 0.5;
                             }
-                            if (strUser == "National Holiday") {
-                                if (parseFloat(document.getElementById("noOfDays").value) > 1) {
-                                    $("#nhDiv").show();
-                                    setTimeout(function () {
-                                        $("#nhDiv").fadeOut();
-                                    }, 5000);
-                                    document.getElementById("noOfDays").value = "";
-                                    document.getElementById("startDate").value = "";
-                                    document.getElementById("endDate").value = "";
-                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                }
-                            }
+//                            if (strUser == "National Holiday") {
+//                                if (parseFloat(document.getElementById("noOfDays").value) > 1) {
+//                                    $("#nhDiv").show();
+//                                    setTimeout(function () {
+//                                        $("#nhDiv").fadeOut();
+//                                    }, 5000);
+//                                    document.getElementById("noOfDays").value = "";
+//                                    document.getElementById("startDate").value = "";
+//                                    document.getElementById("endDate").value = "";
+//                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+//                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+//                                }
+//                            }
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
@@ -1223,19 +1223,19 @@
                             } else {
                                 document.getElementById("noOfDays").value = parseFloat(leaveDays1) - 1;
                             }
-                            if (strUser == "National Holiday") {
-                                if (parseFloat(document.getElementById("noOfDays").value) > 1) {
-                                    $("#nhDiv").show();
-                                    setTimeout(function () {
-                                        $("#nhDiv").fadeOut();
-                                    }, 5000);
-                                    document.getElementById("noOfDays").value = "";
-                                    document.getElementById("startDate").value = "";
-                                    document.getElementById("endDate").value = "";
-                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                }
-                            }
+//                            if (strUser == "National Holiday") {
+//                                if (parseFloat(document.getElementById("noOfDays").value) > 1) {
+//                                    $("#nhDiv").show();
+//                                    setTimeout(function () {
+//                                        $("#nhDiv").fadeOut();
+//                                    }, 5000);
+//                                    document.getElementById("noOfDays").value = "";
+//                                    document.getElementById("startDate").value = "";
+//                                    document.getElementById("endDate").value = "";
+//                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+//                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+//                                }
+//                            }
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
@@ -1357,19 +1357,19 @@
                             } else {
                                 document.getElementById("noOfDays").value = parseFloat(leaveDays1) - 0.5;
                             }
-                            if (strUser == "National Holiday") {
-                                if (parseFloat(document.getElementById("noOfDays").value) > 1) {
-                                    $("#nhDiv").show();
-                                    setTimeout(function () {
-                                        $("#nhDiv").fadeOut();
-                                    }, 5000);
-                                    document.getElementById("noOfDays").value = "";
-                                    document.getElementById("startDate").value = "";
-                                    document.getElementById("endDate").value = "";
-                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                }
-                            }
+//                            if (strUser == "National Holiday") {
+//                                if (parseFloat(document.getElementById("noOfDays").value) > 1) {
+//                                    $("#nhDiv").show();
+//                                    setTimeout(function () {
+//                                        $("#nhDiv").fadeOut();
+//                                    }, 5000);
+//                                    document.getElementById("noOfDays").value = "";
+//                                    document.getElementById("startDate").value = "";
+//                                    document.getElementById("endDate").value = "";
+//                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+//                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+//                                }
+//                            }
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
@@ -1503,19 +1503,19 @@
                                 }
                             }
                             document.getElementById("noOfDays").value = parseFloat(leaveDays1) - 0.5;
-                            if (strUser == "National Holiday") {
-                                if (parseFloat(document.getElementById("noOfDays").value) > 1) {
-                                    $("#nhDiv").show();
-                                    setTimeout(function () {
-                                        $("#nhDiv").fadeOut();
-                                    }, 5000);
-                                    document.getElementById("noOfDays").value = "";
-                                    document.getElementById("startDate").value = "";
-                                    document.getElementById("endDate").value = "";
-                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
-                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
-                                }
-                            }
+//                            if (strUser == "National Holiday") {
+//                                if (parseFloat(document.getElementById("noOfDays").value) > 1) {
+//                                    $("#nhDiv").show();
+//                                    setTimeout(function () {
+//                                        $("#nhDiv").fadeOut();
+//                                    }, 5000);
+//                                    document.getElementById("noOfDays").value = "";
+//                                    document.getElementById("startDate").value = "";
+//                                    document.getElementById("endDate").value = "";
+//                                    document.getElementById("leaveStartDate_SelectFullOrHalfId").value = "";
+//                                    document.getElementById("leaveEndDate_SelectFullOrHalfId").value = "";
+//                                }
+//                            }
                             if (strUser == "Sick Leave") {
                                 if (parseFloat(document.getElementById("noOfDays").value) > 3) {
                                     $("#sickLeaveDiv").show();
@@ -2285,7 +2285,7 @@
                                                             <div  id="leaveWithoutPayLeaveDiv" name="leaveWithoutPayLeaveDiv" style="color: red; display: none; margin-left: 20px;">In Leave Without Pay Only Apply When All leave is not in balance. And Max OF 60 Days.</div>
                                                             <div  id="balanceDiv" name="Please enter days less or equal current available Balance" style="color: red; display: none; margin-left: 20px;">Please enter days less or equal current available Balance</div>
                                                             <div  id="plDiv" name="plDiv" style="color: red; display: none; margin-left: 20px;">SL Balance is available so in that case u can't apply PL less than 3 Days</div>
-                                                            <div  id="nhDiv" name="nhDiv" style="color: red; display: none; margin-left: 20px;">You can't apply National Holiday more than 1 day</div>
+                                                            <!--<div  id="nhDiv" name="nhDiv" style="color: red; display: none; margin-left: 20px;">You can't apply National Holiday more than 1 day</div>-->
                                                             <div  id="futureDateSelect" name="futureDateSelect" style="color: red; display: none; margin-left: 20px;">Future Date Must be Selected</div>
                                                             <div> <span id="sDatePolicyError" style="color: red;"></span></div>
                                                         </div>

@@ -42,6 +42,7 @@
                             <th>Sick Leave</th>
                             <th>Privilege Leave</th>
                             <th>Paternity Leave</th>
+                            <th>Set Off</th>
                         </tr>
                     </thead>
                 </c:otherwise>
@@ -55,6 +56,7 @@
                         <td>${employeeBalanceMap.value[3]}</td>
                         <td>${employeeBalanceMap.value[4]}</td>
                         <td>${employeeBalanceMap.value[5]}</td>
+                        <td>${employeeBalanceMap.value[7]}</td>
                     </tr>
                 </c:forEach>
             </tbody>

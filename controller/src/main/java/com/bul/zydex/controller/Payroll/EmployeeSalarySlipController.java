@@ -71,8 +71,8 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
         EmployeeType employeeType = new EmployeeType();
         EmployeeSubType employeeSubType = new EmployeeSubType();
 
-        String zydex_location_id = request.getParameter("zydexLocationMasterId");
-        String type_of_employee = request.getParameter("companyId");
+//        String zydex_location_id = request.getParameter("zydexLocationMasterId");
+//        String type_of_employee = request.getParameter("companyId");
 //        String employee_sub_id = request.getParameter("subTypeId");
 //        String Payment_Type = request.getParameter("paymentType");
         String month = request.getParameter("month");
@@ -99,13 +99,13 @@ public class EmployeeSalarySlipController extends EmployeeSalarySlipAbstract {
 
         if (emrightHR || emright) {
 
-            if (!zydex_location_id.equals("")) {
-                employeeMaster.setAdharCard(zydex_location_id);
-            }
-
-            if (!type_of_employee.equals("")) {
-                employeeMaster.setCompany(type_of_employee);
-            }
+//            if (!zydex_location_id.equals("")) {
+//                employeeMaster.setAdharCard(zydex_location_id);
+//            }
+//
+//            if (!type_of_employee.equals("")) {
+//                employeeMaster.setCompany(type_of_employee);
+//            }
 //        if (null != employee_sub_id && !employee_sub_id.equals("")) {
 //            employeeMaster.setCompany(employee_sub_id);
 //        }

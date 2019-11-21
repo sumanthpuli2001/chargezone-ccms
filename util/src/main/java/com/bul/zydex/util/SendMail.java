@@ -50,7 +50,7 @@ public class SendMail {
 
 //        if(to.contains("spcls.co.in")){
 //        helper.setFrom(from);
-        helper.setFrom("myspc@spcls.co.in");
+        helper.setFrom("pooja@vaderanco.com");
         if(toList!=""){
             helper.setTo(toList.substring(1));
         }
@@ -104,7 +104,7 @@ public class SendMail {
 //        mimeMessage.setFileName(filename);
 //        if(to.contains("spcls.co.in")){
 //        helper.setFrom(from);
-        helper.setFrom("myspc@spcls.co.in");
+        helper.setFrom("pooja@vaderanco.com");
         helper.setTo(to);
         helper.setSubject(subject);
         helper.setText(msg.replaceAll("\\<[^>]*>", "").replaceAll("&nbsp;", " ").replaceAll("&amp;", "&").replaceAll("&#160", "&"));

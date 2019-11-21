@@ -22,6 +22,7 @@ import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.EmployeeTypeWiseSalary;
+import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.model.OnCall;
@@ -88,6 +89,7 @@ import com.bul.zydex.service.attendanceRegularization.OTRegularizationService;
 import com.bul.zydex.service.company.CompanyMasterService;
 import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
+import com.bul.zydex.service.holiday.HolidayMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.policy.CtcAllowanceService;
@@ -151,8 +153,9 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected LocationMasterService<LocationMaster> locationMasterService;
     protected OTRegularizationService<OTRegularization> oTRegularizationService;
     protected ShiftMasterService<ShiftMaster> shiftMasterService;
-    protected OnCallService<OnCall> OnCallService;  
-    protected EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService;  
+    protected OnCallService<OnCall> OnCallService;
+    protected EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService;
+    protected HolidayMasterService<HolidayMaster> holidayMasterService;
 
     Validator employeeSalaryProcessValidator;
 
@@ -499,9 +502,14 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     public void setOnCallService(OnCallService<OnCall> OnCallService) {
         this.OnCallService = OnCallService;
     }
-    
-    
-    
+
+    public HolidayMasterService<HolidayMaster> getHolidayMasterService() {
+        return holidayMasterService;
+    }
+
+    public void setHolidayMasterService(HolidayMasterService<HolidayMaster> holidayMasterService) {
+        this.holidayMasterService = holidayMasterService;
+    }
     
 
     protected void EmployeeTypeList(HttpServletRequest request) {
@@ -536,7 +544,8 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
 
         request.setAttribute("companyList", dm);
     }
-     protected void locationList(HttpServletRequest request) {
+
+    protected void locationList(HttpServletRequest request) {
         LocationMaster locationMaster = new LocationMaster();
         List<?> location = locationMasterService.read();
 
@@ -571,9 +580,5 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     public void setEmployeeLeaveBalanceService(EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService) {
         this.employeeLeaveBalanceService = employeeLeaveBalanceService;
     }
-
-  
-    
-     
 
 }

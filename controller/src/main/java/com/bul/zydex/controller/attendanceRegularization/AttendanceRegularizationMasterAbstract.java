@@ -15,6 +15,7 @@ import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeePunchForMobileApp;
 import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.OTRegularization;
@@ -26,6 +27,7 @@ import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
 import com.bul.zydex.service.attendanceRegularization.OTRegularizationService;
 import com.bul.zydex.service.attendanceRegularization.TimeAttandanceFlaxibleMasterService;
+import com.bul.zydex.service.holiday.HolidayMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
 import com.bul.zydex.service.leave.LeaveEmployeeDetailService;
 import com.bul.zydex.service.level.LevelMasterService;
@@ -57,6 +59,8 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
     protected UserRightMasterService<UserRightMaster> userRightMasterService;
     protected OTRegularizationService<OTRegularization> oTRegularizationService;
     protected ShiftMasterService<ShiftMaster> shiftMasterService;
+    protected HolidayMasterService<HolidayMaster> holidayMasterService;
+    
     
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
         return timeAttandanceFlaxibleMasterService;
@@ -161,6 +165,16 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
     public void setShiftMasterService(ShiftMasterService<ShiftMaster> shiftMasterService) {
         this.shiftMasterService = shiftMasterService;
     }
+
+    public HolidayMasterService<HolidayMaster> getHolidayMasterService() {
+        return holidayMasterService;
+    }
+
+    public void setHolidayMasterService(HolidayMasterService<HolidayMaster> holidayMasterService) {
+        this.holidayMasterService = holidayMasterService;
+    }
+    
+    
 
     
     public void mailSendArApply(HttpServletRequest request) throws Exception {

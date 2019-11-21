@@ -9,6 +9,7 @@ import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeShiftData;
+import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
@@ -3386,46 +3387,33 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                 long totalIntime1 = TimeUnit.MILLISECONDS.toMinutes(totalIntime);
 
                                 if (startDateOT.equals(endDateOT)) {
-                                    if (timecount > 510 && totalIntime1 > 510) {
-                                        if (startTimeOT.before(firstStartHours) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))) {
-                                            if ((startTimeOT.after(userTimeIn) || startTimeOT.equals(userTimeIn)) && (endTimeOT.before(firstStartHours) || endTimeOT.equals(firstStartHours))) {
-                                                TotalOtTime += timdiffot;
-                                            }
-
-                                        } else if ((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && endTimeOT.after(secondEndHour)) {
-                                            if ((startTimeOT.after(secondEndHour) || startTimeOT.equals(secondEndHour)) && (endTimeOT.before(userTimeOut) || endTimeOT.equals(userTimeOut))) {
-                                                TotalOtTime += timdiffot;
-                                            }
-                                        }
-//                                                    if(beforeinTime > 0){
-//                                                        long xtratime = (timecount-totalIntime1)- beforeinTime;
-                                        long xtratime = (timecount - totalIntime1);
-//                                                    xtratime = xtratime-60;
+                                    if (totalIntime1 > 510) {
+//                                        
+                                        TotalOtTime += timdiffot;
+//                                           
+                                        long xtratime = (totalIntime1 - timecount);
+//                                                  
                                         if (xtratime > 0) {
                                             upOtTime += xtratime;
                                         }
-//                                                    }
 
                                     }
+//                                                   
+
+//                                                   
                                 }
                             }
                         } else {
                             if (timecount > 510) {
-                                if (!userTimeIn.after(firstStartHours)) {
-                                    if (userTimeIn.before(firstStartHours)) {
-//                                                if(beforeinTime > 0){
-//                                                    long xtratime = (timecount - 510) - beforeinTime;
-                                        long xtratime = (timecount - 510);
+
+//                                            
+                                long xtratime = (timecount - 510);
 //                                                    xtratime = xtratime-60;
-                                        if (xtratime > 0) {
-                                            upOtTime += xtratime;
-                                        }
-//                                                }
-
-                                    }
+                                if (xtratime > 0) {
+                                    upOtTime += xtratime;
                                 }
-
                             }
+
                         }
 
                     }

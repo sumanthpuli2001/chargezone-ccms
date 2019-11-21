@@ -9779,53 +9779,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 stringBuffer.append(" , ");
                                 counter++;
                                
-                                //-----------------------------------
-                                employeeMasterValidator.validate(employeeMaster, errors);
-                                if (errors.hasErrors()) {
-                                    //request.setAttribute("failureMessage",
-                                     //   "<br/>Error : Employee No:"+ employeeNo + " - Unable to Update employee due to Information is not valid.");
-                                    strBuffFailer.append("<br/>Error : Employee No:"+ employeeNo + " - Unable to Update employee due to Information is not valid.");
-                                    //request.setAttribute("failureMessage", " <br/>Employee No:"+ employeeNo + " Error Description : " + errorMessage );
-                                    //Locale localeValue = new Locale("Error");
-                                    
-                                    for (ObjectError individualError : errors.getAllErrors()) {
-                                        //String errorMsg = individualError.getDefaultMessage();
-                                        String errorMsg = individualError.getCode();//getDefaultMessage();
-                                        //String errorMsg2[] = individualError.getCodes();//getDefaultMessage();
-                                       // messageSource.getMessage(errorMsg, null, localeValue);
-                                        
-                                        //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + errorMsg );
-                                        strBuffFailer.append(" <br/> Update Employee No:"+ employeeNo + " Error Description : " + errorMsg);
-                                   
-                                    }
-                                    
-                                    //mv.addAllObjects(errors.getModel());
-                                    stringBuffError.append(employeeNo);
-                                    stringBuffError.append(" , ");
-                                    stringBuffer.append(" , ");
-                                }
-                                else
-                                {
-                                    employeeMasterService.update(employeeMaster);
-                                    List<?> empextlist = employeeMasterServiceExtension.readByemployeeId(employeeMaster.getId());
-                                    EmployeeMasterExtension employeeMasterExtension1 = (EmployeeMasterExtension) empextlist.get(0);
-                                    if (!empextlist.isEmpty()) {
-                                        employeeMasterExtension.setId(employeeMasterExtension1.getId());
-                                        employeeMasterExtension.setEmployeeMaster(employeeMaster);
-                                        employeeMasterServiceExtension.update(employeeMasterExtension);
-                                    }
-                                    List<?> empvisalist = employeeVisaDetailsService.readByemployeeId(employeeMaster.getId());
-                                    EmployeeVisaDetails employeeVisaDetails1 = (EmployeeVisaDetails) empvisalist.get(0);
-                                    if (!empvisalist.isEmpty()) {
-                                        employeeVisaDetails.setId(employeeVisaDetails1.getId());
-                                        employeeVisaDetails.setEmployeeMaster(employeeMaster);
-                                        employeeVisaDetailsService.update(employeeVisaDetails);
-                                    }
-                                    //request.setAttribute("successMessage",
-                                    //    "<br/>Success : Employee No:"+ employeeNo + " - The Employee Information is Updated Sucessfully.");
-                                    stringBuffSuccess.append("<br/>Success : Employee No:"+ employeeNo + " - The Employee Information is Updated Sucessfully.");
-                                }
-                                //------------------------------------
+                               
                             }
 
                         }
@@ -9878,7 +9832,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
             mv = excelUploadRegistration(request, response);
         }
         return mv;
+       
+        
       
     }
+
 
 }

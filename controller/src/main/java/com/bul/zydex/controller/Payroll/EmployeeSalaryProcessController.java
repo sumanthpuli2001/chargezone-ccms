@@ -19,6 +19,7 @@ import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeType;
+import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.model.PayrollAdditionalAmount;
 import com.bul.zydex.model.PayrollBonus;
@@ -3024,6 +3025,11 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                     Date date = sdf.parse("" + next2[0]);
                                     Calendar c = Calendar.getInstance();
                                     c.setTime(date);
+                                    String daString = sdf.format(date);
+                                    HolidayMaster holidayMaster = new HolidayMaster();
+                                    holidayMaster.setHolidayFromDate(daString);
+                                    List listholiday = holidayMasterService.checkHoliday(daString, "" + empMaster.getLocationMaster().getId());
+
                                     int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
                                     SimpleDateFormat format = new SimpleDateFormat("EEEE");
                                     String dayName = format.format(date);
@@ -3082,24 +3088,44 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                         if (dayName.equals("Saturday") || dayName.equals("Sunday")) {
                                             late.add("-");
                                         } else {
+                                            if (listholiday.size() == 0) {
 
-                                            if (diffInYears >= 3) {
-                                                if (diffMinutes1 >= 60) {
-                                                    late.add("Very Late");
-                                                    VeryLateCount++;
-                                                    if (VeryLateCount > 1) {
+                                                if (diffInYears >= 3) {
+                                                    if (diffMinutes1 >= 60) {
+                                                        late.add("Very Late");
                                                         VeryLateCount++;
-                                                        totalLateCollection += 100;
-                                                    }
-                                                } else if (diffMinutes1 >= 30 && diffMinutes1 < 60) {
-                                                    late.add("Late");
-                                                    LateCount++;
-                                                    if (LateCount > 5) {
+                                                        if (VeryLateCount > 1) {
+                                                            VeryLateCount++;
+                                                            totalLateCollection += 100;
+                                                        }
+                                                    } else if (diffMinutes1 >= 30 && diffMinutes1 < 60) {
+                                                        late.add("Late");
                                                         LateCount++;
-                                                        totalLateCollection += 100;
+                                                        if (LateCount > 5) {
+                                                            LateCount++;
+                                                            totalLateCollection += 100;
+                                                        }
+                                                    } else {
+                                                        late.add("-");
                                                     }
                                                 } else {
-                                                    late.add("-");
+                                                    if (diffMinutes1 >= 15 && diffMinutes1 < 60) {
+                                                        late.add("Late");
+                                                        LateCount++;
+                                                        if (LateCount > 5) {
+                                                            LateCount++;
+                                                            totalLateCollection += 100;
+                                                        }
+                                                    } else if (diffMinutes1 >= 60) {
+                                                        late.add("Very Late");
+                                                        VeryLateCount++;
+                                                        if (VeryLateCount > 1) {
+                                                            VeryLateCount++;
+                                                            totalLateCollection += 100;
+                                                        }
+                                                    } else {
+                                                        late.add("-");
+                                                    }
                                                 }
                                             } else {
                                                 if (diffMinutes1 >= 15 && diffMinutes1 < 60) {

@@ -526,7 +526,7 @@
 
                                 <!--                                <div class="box box-info ">
                                                                     <div class="box-header">
-                                                                        <h3 class="box-title">Competency Evaluation (As Per Bulwarks System Competency Framework) :</h3>
+                                                                        <h3 class="box-title">Competency Evaluation (As Per Vadera & Co Competency Framework) :</h3>
                                 
                                                                     </div> /.box-header 
                                                                     <div class="box-body no-padding">

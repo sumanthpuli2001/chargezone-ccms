@@ -79,7 +79,7 @@
 
 //            var empSubTypeId = document.getElementById("employeeSubTypeId").value;
             //            document.getElementById('EmployeeId').innerHTML = "Fetching ... .. .";
-            $.post("certificateTemplate.htm?act=readCertificateTypeAjax",
+            $.post("certificateTemplate.htm?act=readCertificateTypeAjaxNew",
                     {
                         certificateId: typeId,
                         empId: '${employeeMaster.id}'

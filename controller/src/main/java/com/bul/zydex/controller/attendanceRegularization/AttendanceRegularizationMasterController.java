@@ -7850,7 +7850,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         return mv;
     }
 
-    public ModelAndView readTextFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+   public ModelAndView readTextFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile readTextFile = multipartRequest.getFile("file1");
@@ -7888,35 +7888,22 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //                        EmpId = splitStr[2].replaceAll("\\s", "");
                         EmpId = splitStr[2].trim().replaceAll("\\W", "");
 
-                        date = splitStr[10].trim().replaceAll("\\W", "");
+                        date = splitStr[9].trim().replaceAll("\\W", "");
                         String year = date.substring(0, 4);
                         String month = date.substring(4, 6);
                         String day = date.substring(6, 8);
                         String yearMonthDay = day + "/" + month + "/" + year;
-                        String sec = "00";
+
                         // time
-                        time = splitStr[11].trim().replaceAll("\\W", "");
+                        time = splitStr[10].trim().replaceAll("\\W", "");
                         String hours = time.substring(0, 2);
                         String min = time.substring(2, 4);
-
-                        try {
-                            sec = time.substring(4, 6);
-                        } catch (Exception e) {
-                            sec = "00";
-                        }
+                        String sec = time.substring(4, 6);
                         String timeconcat = hours + ":" + min + ":" + sec;
 
                         dateTime = yearMonthDay + " " + timeconcat;
-                        List<?> findDuplicateRecords = employeeDatetimeDataService.findDuplicateRecords(Integer.parseInt(EmpId.replaceAll("^0+(?=.)", "")), dateTime);
-                        if (!findDuplicateRecords.isEmpty()) {
-                            for (int i = 0; i <= findDuplicateRecords.size() - 1; i++) {
-                                String a = findDuplicateRecords.get(i).toString();
-                                employeeDatetimeDataService.delete(Integer.parseInt(a));
-                            }
-                        }
-
 //                        List<EmployeeMaster> emplist = (List<EmployeeMaster>) employeeMasterService.readByEmployeeId((EmpId.substring(4)));
-                        List<EmployeeMaster> emplist = (List<EmployeeMaster>) employeeMasterService.readByEmployeeId((EmpId.replaceAll("^0+(?=.)", "")));
+                        List<EmployeeMaster> emplist = (List<EmployeeMaster>) employeeMasterService.readByEmployeeId((EmpId));
                         if (!emplist.isEmpty()) {
                             EmployeeMaster em = emplist.get(0);
                             int employeemasterId = em.getId();
@@ -7933,7 +7920,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                 }
             } catch (Exception e) {
-                request.setAttribute("failureMessage", "Information : The Text Not Upload Successfully. Please Check Excel Data.");
+                request.setAttribute("failureMessage", "Information : The Excel Not Upload Successfully. Please Check Excel Data.");
                 mv = textReadModule(request, response);
             } finally {
                 if (inputStream != null) {
@@ -7941,7 +7928,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 }
             }
         }
-        request.setAttribute("successMessage", "Information : The Text Uploaded Successfully.");
+        request.setAttribute("successMessage", "Information : The Excel Uploaded Successfully.");
         mv = textReadModule(request, response);
         return mv;
     }

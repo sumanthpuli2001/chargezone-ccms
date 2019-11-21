@@ -154,7 +154,7 @@ public abstract class EmployeeMasterAbstract extends CustomAbstract {
     public void setEmployeeMasterValidator(Validator employeeMasterValidator) {
         this.employeeMasterValidator = employeeMasterValidator;
     }
-
+    
     public LocationMasterService<LocationMaster> getLocationMasterService() {
         return locationMasterService;
     }

@@ -59,4 +59,11 @@ public class UserMasterServiceImpl<T> extends GenericsServiceImpl<T>
 
         return userMasterDAO.isExist(userName);
     }
+    
+    @Override
+    public boolean isOtherUserExist(int userMatserId, String userName) {
+        
+        return userMasterDAO.isOtherUserExist(userMatserId, userName);
+        
+    }
 }

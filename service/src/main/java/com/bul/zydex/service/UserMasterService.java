@@ -20,4 +20,5 @@ public interface UserMasterService<T> extends GenericsService<T> {
 
     public boolean isExist(String userName);
 
+    public boolean isOtherUserExist(int userMatserId, String userName);
 }

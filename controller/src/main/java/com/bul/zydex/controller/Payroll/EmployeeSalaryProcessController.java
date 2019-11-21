@@ -3128,8 +3128,25 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                                     }
                                                 }
                                             } else {
-                                                late.add("-");
+                                                if (diffMinutes1 >= 15 && diffMinutes1 < 60) {
+                                                    late.add("Late");
+                                                    LateCount++;
+                                                    if (LateCount > 5) {
+                                                        LateCount++;
+                                                        totalLateCollection += 100;
+                                                    }
+                                                } else if (diffMinutes1 >= 60) {
+                                                    late.add("Very Late");
+                                                    VeryLateCount++;
+                                                    if (VeryLateCount > 1) {
+                                                        VeryLateCount++;
+                                                        totalLateCollection += 100;
+                                                    }
+                                                } else {
+                                                    late.add("-");
+                                                }
                                             }
+
                                         }
 
                                     } catch (Exception e) {

@@ -17,5 +17,5 @@ public interface UserMasterDAO<T> extends GenericsDAO<T> {
     public List<?> readByUserName(T object);
     public boolean isExist(String userName);
     public List<?> read(T object);
-  
+    public boolean isOtherUserExist(int userMatserId, String userName);
 }

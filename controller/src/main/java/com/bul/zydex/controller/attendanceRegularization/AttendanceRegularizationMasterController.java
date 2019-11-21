@@ -2923,11 +2923,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                     c3.setTime(date1);
                     String dayName11 = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date1.getTime());
 
-                    String daString = sdf.format(date1);
-                    HolidayMaster holidayMaster = new HolidayMaster();
-                    holidayMaster.setHolidayFromDate(daString);
-                    List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
-
                     String[] userTimeInStr = firstHalf.split("`");
                     try {
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
@@ -2967,7 +2962,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             late.add("-");
 
                         } else {
-                            if (list.size() == 0) {
                             if (diffInYears >= 3) {
                                 if (diffMinutes >= 60) {
                                     late.add("Very Late");
@@ -3005,11 +2999,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                                     late.add("-");
                                 }
                             }
-                            }
-                            else{
-                             late.add("-");
-                            
-                            }
+
                         }
 
                     } catch (Exception e) {
@@ -4608,38 +4598,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //        request.setAttribute("totalPenaltyHours", totalPenaltyHours);
         request.setAttribute("totalPenaltyHours", totalPenaltyAmount);
         request.setAttribute("totalPaidOverTime", totalPaidOverTime);
-//        request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime);
+        request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime);
         request.setAttribute("shortHours", l);
-
-        // For Each Loop for iterating ArrayList 
-        int minuteTotal = 0, hourTemp = 0, minuteTemp = 0;
-
-        Iterator<String> iterTime = workingHour.iterator();
-
-        while (iterTime.hasNext()) {
-            String[] arrayStr;
-            minuteTemp = 0;
-            hourTemp = 0;
-
-            String tempStr = (iterTime.next() + "");
-
-            if (!(tempStr).equals("-")) {
-                arrayStr = tempStr.split(":");
-                hourTemp = Integer.parseInt(arrayStr[0]);
-                minuteTemp = Integer.parseInt(arrayStr[1]);
-
-                minuteTemp = minuteTemp + (hourTemp * 60);
-
-                if (minuteTemp > 510) {
-                    minuteTemp = minuteTemp - 510;
-                    minuteTotal += minuteTemp;
-                }
-            }
-        }
-
-        String totalUnpaidOverTime1 = "" + (minuteTotal / 60) + ":" + (minuteTotal % 60);
-
-        request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime1);
 
         mv.getModelMap()
                 .put("firstHalfList", newList);

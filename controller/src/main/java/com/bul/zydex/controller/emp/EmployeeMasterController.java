@@ -8376,6 +8376,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         ShiftMaster shiftMaster = new ShiftMaster();
         HoursBasis hoursBasis = new HoursBasis();
         RotationMaster rotationMaster = new RotationMaster();
+        EmployeeMasterExtension employeeMasterExtension;
         int counter = 0;
         int counterOfException = 0;
         String employeeNo = "";
@@ -8546,7 +8547,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
         StringBuffer stringBuffSuccess = new StringBuffer();
         
         //----------------
-        BindException errors;
+        BindException errors, errors2;
         //---------------
         try {
             if (multipartFile.getSize() > 0) {
@@ -8555,10 +8556,13 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                 Sheet sheet = workbook.getSheetAt(0);
                 for (Row row : sheet) {
                     //--------------------------------------------
-                    boolean createCheckFlags[] = new boolean[9];
-                    
+                    boolean createCheckFlags[] = new boolean[15];
+                    boolean updateCheckFlags[] = new boolean[5];
                     employeeMaster = new EmployeeMaster();
+                    employeeMasterExtension = new EmployeeMasterExtension();
+                            
                     errors = new BindException(employeeMaster, "employeeMaster");
+                    errors2 = new BindException(employeeMasterExtension, "employeeMasterExtension");
                     //--------------------------------------------
                     try {
                         if (row.getRowNum() != 0 && row.getRowNum() != 1 && row.getRowNum() != 2) {
@@ -8642,6 +8646,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             visaIssueCountry = "" + (null == row.getCell((short) 24) ? "" : row.getCell((short) 24));
                             visaIssueDate = "" + (null == row.getCell((short) 25) ? "" : row.getCell((short) 25));
                             visaValidTillDate = "" + (null == row.getCell((short) 26) ? "" : row.getCell((short) 26));
+                            // Skip One column
                             presentAddress1 = "" + (null == row.getCell((short) 28) ? "" : row.getCell((short) 28));
                             presentAddress2 = "" + (null == row.getCell((short) 29) ? "" : row.getCell((short) 29));
                             presentCity = "" + (null == row.getCell((short) 30) ? "" : row.getCell((short) 30));
@@ -8649,6 +8654,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             presentPostalCode = "" + (null == row.getCell((short) 32) ? "" : row.getCell((short) 32));
                             presentPostalCode = presentPostalCode.split("\\.", 2)[0];
                             presentCountry = "" + (null == row.getCell((short) 33) ? "" : row.getCell((short) 33));
+                            // Skip One column
                             permanentAddress1 = "" + (null == row.getCell((short) 35) ? "" : row.getCell((short) 35));
                             permanentAddress2 = "" + (null == row.getCell((short) 36) ? "" : row.getCell((short) 36));
                             permanentCity = "" + (null == row.getCell((short) 37) ? "" : row.getCell((short) 37));
@@ -8656,6 +8662,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             permanentPostalCode = "" + (null == row.getCell((short) 39) ? "" : row.getCell((short) 39));
                             permanentPostalCode = permanentPostalCode.split("\\.", 2)[0];
                             permanentCountry = "" + (null == row.getCell((short) 40) ? "" : row.getCell((short) 40));
+                            // Skip One column
                             contactNo1resident = "" + (null == row.getCell((short) 42) ? "" : row.getCell((short) 42));
                             String contactNo = "";
                             if (!contactNo1resident.equals("")) {
@@ -8672,8 +8679,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 contactNo2 = "";
                             }
-                            flyDocsEmailId = "" + (null == row.getCell((short) 44) ? "" : row.getCell((short) 44));
+                            
+                            flyDocsEmailId = ""+ (null == row.getCell((short) 44) ? "" : row.getCell((short) 44));
                             personalEmailId = "" + (null == row.getCell((short) 45) ? "" : row.getCell((short) 45));
+                            // Skip one column
                             bankAccountNo = "" + (null == row.getCell((short) 47) ? "" : row.getCell((short) 47));
                             String bNo = "";
                             if (!bankAccountNo.equals("")) {
@@ -8706,20 +8715,28 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 uannNo = "";
                             }
+                            // Skip one column for Finance
                             maritalStatus = "" + (null == row.getCell((short) 59) ? "" : row.getCell((short) 59));
                             religion = "" + (null == row.getCell((short) 60) ? "" : row.getCell((short) 60));
                             bloodGroup = "" + (null == row.getCell((short) 61) ? "" : row.getCell((short) 61));
                             disclosedHealthConcerns = "" + (null == row.getCell((short) 62) ? "" : row.getCell((short) 62));
+                            // Skip one column no over here
                             drivinglicenceNo = "" + (null == row.getCell((short) 64) ? "" : row.getCell((short) 64));
-//                            String drilicNo = "";
-//                            if (!drivinglicenceNo.equals("")) {
+                            String drilicNo = "";
+                            if (!drivinglicenceNo.equals("")) {
 //                                BigDecimal bddrilicNo = new BigDecimal(drivinglicenceNo);
 //                                drilicNo = "" + bddrilicNo.longValue();
-//                            } else {
-//                                drilicNo = "";
-//                            }
+                                drilicNo = drivinglicenceNo;
+                            } else {
+                                drilicNo = "";
+                            }
                             drivingLicenceType = "" + (null == row.getCell((short) 65) ? "" : row.getCell((short) 65));
+                            // Skip 1 column for driving 
+                            // Skip 1 column for no of dependents
+                            
+                            //---------- Dependent 1 --------------------
                             fatherNamed1 = "" + (null == row.getCell((short) 68) ? "" : row.getCell((short) 68));
+                            // Skip one column for Gender 
                             fatherdob = "" + (null == row.getCell((short) 70) ? "" : row.getCell((short) 70));
                             String fatherdobformated;
                             if (!fatherdob.contains("N/A")) {
@@ -8732,7 +8749,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 fatherdobformated = "N/A";
                             }
+                            
+                            
+                            //---------- Dependent 2 --------------------
                             motherNamed2 = "" + (null == row.getCell((short) 71) ? "" : row.getCell((short) 71));
+                            // Skip one column for Gender 
                             motherdob = "" + (null == row.getCell((short) 73) ? "" : row.getCell((short) 73));
                             String motherdobformated;
                             if (!motherdob.contains("N/A")) {
@@ -8745,6 +8766,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 motherdobformated = "N/A";
                             }
+                            
+                            
+                            //---------- Dependent 3 --------------------
                             spouseNamed3 = "" + (null == row.getCell((short) 74) ? "" : row.getCell((short) 74));
                             spouseGender3 = "" + (null == row.getCell((short) 75) ? "" : row.getCell((short) 75));
                             spousedob = "" + (null == row.getCell((short) 76) ? "" : row.getCell((short) 76));
@@ -8760,6 +8784,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 spousedobformated = "N/A";
                             }
 
+                            //---------- Dependent 4 --------------------
                             childname1 = "" + (null == row.getCell((short) 77) ? "" : row.getCell((short) 77));
                             childOneGender = "" + (null == row.getCell((short) 78) ? "" : row.getCell((short) 78));
                             childdob1 = "" + (null == row.getCell((short) 79) ? "" : row.getCell((short) 79));
@@ -8774,6 +8799,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 childdob1formated = "N/A";
                             }
+                            
+                            //---------- Dependent 5 --------------------
                             childname2 = "" + (null == row.getCell((short) 80) ? "" : row.getCell((short) 80));
                             childTwoGender = "" + (null == row.getCell((short) 81) ? "" : row.getCell((short) 81));
                             childdob2 = "" + (null == row.getCell((short) 82) ? "" : row.getCell((short) 82));
@@ -8788,6 +8815,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             } else {
                                 childdob2formated = "N/A";
                             }
+                            
+                            // Skip One column for dependents ---------------
                             emergencyContactPerson = "" + (null == row.getCell((short) 84) ? "" : row.getCell((short) 84));
                             RelationShip = "" + (null == row.getCell((short) 85) ? "" : row.getCell((short) 85));
                             emergencyContactNo = "" + (null == row.getCell((short) 86) ? "" : row.getCell((short) 86));
@@ -8800,6 +8829,9 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             }
                             emergencyContactAddress = "" + (null == row.getCell((short) 87) ? "" : row.getCell((short) 87));
                             otherImpInfo = "" + (null == row.getCell((short) 88) ? "" : row.getCell((short) 88));
+                            // Skip 1 for emergency Contact
+                            // Skip 3 Column for rejoing, relive and final date
+                            // Skip 1 column for exit info
                             previouscompanyname = "" + (null == row.getCell((short) 94) ? "" : row.getCell((short) 94));
                             previouscompanylocation = "" + (null == row.getCell((short) 95) ? "" : row.getCell((short) 95));
                             companylocationCity = "" + (null == row.getCell((short) 96) ? "" : row.getCell((short) 96));
@@ -8834,6 +8866,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             highestEducation = "" + (null == row.getCell((short) 99) ? "" : row.getCell((short) 99));
                             languagesKnown = "" + (null == row.getCell((short) 100) ? "" : row.getCell((short) 100));
                             hobbies = "" + (null == row.getCell((short) 101) ? "" : row.getCell((short) 101));
+                            // Skip 1 Column for other info
                             workType = "" + (null == row.getCell((short) 103) ? "" : row.getCell((short) 103));
                             hours = "" + (null == row.getCell((short) 104) ? "" : row.getCell((short) 104));
                             shiftName = "" + (null == row.getCell((short) 105) ? "" : row.getCell((short) 105));
@@ -8854,7 +8887,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             ot = "" + (null == row.getCell((short) 118) ? "" : row.getCell((short) 118));
                             oddpunchreq = "" + (null == row.getCell((short) 119) ? "" : row.getCell((short) 119));
                             payroll = "" + (null == row.getCell((short) 120) ? "" : row.getCell((short) 120));
-                            LineManager2 = "" + (null == row.getCell((short) 121) ? "" : row.getCell((short) 121));
+                            //LineManager2 = "" + (null == row.getCell((short) 121) ? "" : row.getCell((short) 121));
                             
                             
                             employeeMaster.setEmployeeType(typeofemployee);
@@ -8943,7 +8976,6 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeVisaDetails.setVisaIssueDate(visaIssueDate);
                             employeeVisaDetails.setVisaValidTillDate(visaValidTillDate);
 
-                            EmployeeMasterExtension employeeMasterExtension = new EmployeeMasterExtension();
                             if (nameper.equalsIgnoreCase("Passport")){
 //                                employeeMasterExtension.setNameStatus(false);
                             }else if(nameper.equalsIgnoreCase("AadharCard")){
@@ -9026,9 +9058,6 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             employeeMaster.setPaymentType(paymentType);
                             employeeMaster.setPfNo(pfNo);
                             employeeMaster.setUanNo(uannNo);
-                            
-                            
-                            
                             
                             if (!employeeType.equals("")) {
                                 List<?> levelList11 = employeeTypeService.readByName(employeeType.trim());
@@ -9256,7 +9285,8 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                             String workTypeTemp = "";
                             String shiftRotationTemp = "";
                             String shiftTemp = "";
-
+                            EmployeeMasterExtensionValidator employeeExtensionValidator = new EmployeeMasterExtensionValidator();
+        
                             if (!userMasterService.isExist(employeeNo)) {
                                 userMaster.setFirstTime(true);//this is for change password forcibly when user first time logsIn.
                                 //userMasterService.create(userMaster);
@@ -9330,7 +9360,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                                 rotationMaster.setShiftMaster(shiftMaster);
                                             }
                                             //rotationMasterService.createOrUpdate(rotationMaster);
-                                            createCheckFlags[8] = true;
+                                            createCheckFlags[9] = true;
                                             isShiftRotationCreated = false;//reset it again because instance member.
                                         }
 //                                            else {
@@ -9361,11 +9391,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                             ShiftRotationInfo shiftRotationInfo2 = new ShiftRotationInfo();
                                             shiftRotationInfo2 = (ShiftRotationInfo) getShiftRotationInfoByUsernameList.get(0);
                                             shiftRotationInfo.setId(shiftRotationInfo2.getId());
-                                            shiftRotationInfoService.update(shiftRotationInfo);
+                                            updateCheckFlags[0] = true;
+                                            //shiftRotationInfoService.update(shiftRotationInfo);
                                         } else {
                                             //create new entry in Shift ChangeInfo.
                                             //shiftRotationInfoService.create(shiftRotationInfo);
-                                            createCheckFlags[9] = true;
+                                            createCheckFlags[10] = true;
                                         }
                                         //Shift Change date in employeeMaster if shiftBase workType.
                                         employeeMaster.setShiftRotationDate(shiftRotationDate);
@@ -9401,7 +9432,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                    ***************************************Shift Create Ends Here.*******************************
 
                                 //employeeMasterService.create(employeeMaster);
-                                createCheckFlags[10] = true;
+                                createCheckFlags[11] = true;
                                 employeeMasterExtension.setEmployeeMaster(employeeMaster);
                                 //employeeMasterServiceExtension.create(employeeMasterExtension);
                                 employeeVisaDetails.setEmployeeMaster(employeeMaster);
@@ -9458,7 +9489,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 userRightMaster.setEmployee(true);//By default employee right for allows logsIn successfully without Exception.
                                 userRightMaster.setUserMaster(userMaster);
                                 //userRightMasterService.create(userRightMaster);
-                                //createCheckFlags[11] = true;
+                                //createCheckFlags[12] = true;
 //                    ***************************************User Rights Creation End.*******************************
 
 //                    ***************************************Leave Balance Create*******************************
@@ -9660,13 +9691,15 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     // Iterator array list store data
                                 }
                                 
-                                
                                 // ----------------------------------------------------
-                                
+                                employeeMaster.setJobDescription("Write Job Description over here");
                                 employeeMaster.setUserMaster(userMaster);
+                                employeeMasterExtension.setNationality(nationality);
                                 //---------------
                                 employeeMasterValidator.validate(employeeMaster, errors);
-                                if (errors.hasErrors()) {
+                                
+                                employeeExtensionValidator.validate(employeeMasterExtension, errors2);
+                                if (errors.hasErrors() || errors2.hasErrors()) {
                                     //errorFlag = true;
                                     //errorCounter++;
                                     //request.setAttribute("failureMessage",
@@ -9678,6 +9711,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     strBuffFailer.append("<br/>Error : Employee No:"+ employeeNo + " - Unable to Insert employee due to Information is not valid." );
                                    
                                     for (ObjectError individualError : errors.getAllErrors()) {
+                                        //individualError.getDefaultMessage();
+                                        String errorMsg = individualError.getCode();
+                                        //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + individualError.getDefaultMessage() );
+                                        strBuffFailer.append(" <br/> Insert Employee No:"+ employeeNo + " Error Description : " +errorMsg );
+                                    }
+                                    for (ObjectError individualError : errors2.getAllErrors()) {
                                         //individualError.getDefaultMessage();
                                         String errorMsg = individualError.getCode();
                                         //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + individualError.getDefaultMessage() );
@@ -9749,7 +9788,11 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     if(createCheckFlags[10] == true)
                                     {
                                         shiftRotationInfoService.create(shiftRotationInfo);            
-                                    }                                   
+                                    }          
+                                    if(updateCheckFlags[0] == true)
+                                    {
+                                        shiftRotationInfoService.update(shiftRotationInfo);
+                                    }
                                     //request.setAttribute("successMessage", "<br/>Success : Employee No: "+ employeeNo + " -  The Employee information is Intserted Successfully.");
                                     
                                     //stringBuffSuccessInsert.append(employeeNo);
@@ -9759,28 +9802,163 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 //-----------------------------------------------------
                                 // ..............................to......................
                             } else {
-                                EmployeeMaster employeeMaster1 = new EmployeeMaster();
-                                List<?> list1 = employeeMasterService.readEmployeeId(employeeMaster.getEmployeeId());
-                                employeeMaster1 = (EmployeeMaster) list1.get(0);
-                                employeeMaster.setId(employeeMaster1.getId());
-                                UserMaster userMaster1 = new UserMaster();
-                                userMaster1.setId(employeeMaster1.getUserMaster().getId());
-                                employeeMaster.setUserMaster(userMaster1);
-                                employeeMaster.setShiftType(employeeMaster1.getShiftType());
-                                shiftRotationTemp = shiftRotation.trim().toLowerCase();
-                                List<?> shiftRotationMasterList = shiftRotationMasterService.readByShiftRotationName(shiftRotationTemp);
-                                if (!shiftRotationMasterList.isEmpty()) {
-                                    shiftRotationMaster = (ShiftRotationMaster) shiftRotationMasterList.get(0);
-                                    shiftRotationInfo.setShiftRotationMaster(shiftRotationMaster);
+                                /*employeeMaster.setId(1);
+                                employeeMaster.setJobDescription("Write Job Description over here");
+                                employeeMaster.setShiftType("ShiftBase");
+                                employeeMaster.setUserMaster(userMaster);
+                                employeeMasterValidator.validate(employeeMaster, errors);
+                                employeeExtensionValidator.validate(employeeMasterExtension, errors2);
+                                if (errors.hasErrors() || errors2.hasErrors()) {
+                                    //errorFlag = true;
+                                    //errorCounter++;
+                                    //request.setAttribute("failureMessage",
+                                    //        "Error : The Entered Information is not valid.");
+                                    
+                                    //request.setAttribute("failureMessage",
+                                    //   "<br/>Error : Employee No:"+ employeeNo + " - Unable to Insert employee due to Information is not valid.");
+                                    //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + errorMessage );
+                                    strBuffFailer.append("<br/>Error : Employee No:"+ employeeNo + " - Unable to Update employee due to Information is not valid." );
+                                   
+                                    for (ObjectError individualError : errors.getAllErrors()) {
+                                        //individualError.getDefaultMessage();
+                                        String errorMsg = individualError.getCode();
+                                        //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + individualError.getDefaultMessage() );
+                                        strBuffFailer.append(" <br/> Update Employee No:"+ employeeNo + " Error Description : " +errorMsg );
+                                    }
+                                    for (ObjectError individualError : errors2.getAllErrors()) {
+                                        //individualError.getDefaultMessage();
+                                        String errorMsg = individualError.getCode();
+                                        //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + individualError.getDefaultMessage() );
+                                        strBuffFailer.append(" <br/> Update Employee No:"+ employeeNo + " Error Description : " +errorMsg );
+                                    }
+                                    
+                                    stringBuffError.append(employeeNo);
+                                    stringBuffError.append(" , ");
+                                    
+                                    //mv.addAllObjects(errors.getModel());
                                 }
-                                employeeMaster.setShiftHoursId(shiftRotationMaster.getId());
-                                
-                                stringBuffer.append(employeeNo);
-                                stringBuffer.append(" , ");
-                                counter++;
-                               
-                               
-                            }
+                                else
+                                {*/
+                                    //------------------------------------------------------
+                                    if(createCheckFlags[0] == true)
+                                    {
+                                        employeeTypeService.create(employeeType1);            
+                                    }
+                                    if(createCheckFlags[1] == true)
+                                    {
+                                        employeeSubTypeService.create(employeeSubType);         
+                                    }
+                                    if(createCheckFlags[2] == true)
+                                    {
+                                        levelMasterService.create(levelMaster);         
+                                    }
+                                    if(createCheckFlags[3] == true)
+                                    {
+                                        designationMasterService.create(designationMaster);           
+                                    }
+                                    if(createCheckFlags[4] == true)
+                                    {
+                                        departmentMasterService.create(departmentMaster);            
+                                    }
+                                    if(createCheckFlags[5] == true)
+                                    {
+                                        zydexLocationMasterService.create(zydexLocationMaster);           
+                                    }
+                                    if(createCheckFlags[6] == true)
+                                    {
+                                        locationMasterService.create(locationMaster);            
+                                    }
+                                    if(createCheckFlags[7] == true)
+                                    {
+                                        userMasterService.create(userMaster);           
+                                    }
+                                    if(createCheckFlags[8] == true)
+                                    {
+                                        shiftRotationMasterService.create(shiftRotationMaster);           
+                                    }
+                                    if(createCheckFlags[9] == true)
+                                    {
+                                        rotationMasterService.createOrUpdate(rotationMaster);
+                                    }
+                                    if(createCheckFlags[10] == true)
+                                    {
+                                        shiftRotationInfoService.create(shiftRotationInfo);            
+                                    }         
+                                    if(updateCheckFlags[0] == true)
+                                    {
+                                        shiftRotationInfoService.update(shiftRotationInfo);
+                                    }
+                                    //request.setAttribute("successMessage", "<br/>Success : Employee No: "+ employeeNo + " -  The Employee information is Intserted Successfully.");
+
+                                    //stringBuffSuccessInsert.append(employeeNo);
+                                    //stringBuffSuccessInsert.append(" , ");
+                                    
+                                    EmployeeMaster employeeMaster1 = new EmployeeMaster();
+                                    List<?> list1 = employeeMasterService.readEmployeeId(employeeMaster.getEmployeeId());
+                                    employeeMaster1 = (EmployeeMaster) list1.get(0);
+                                    employeeMaster.setId(employeeMaster1.getId());
+                                    UserMaster userMaster1 = new UserMaster();
+                                    userMaster1.setId(employeeMaster1.getUserMaster().getId());
+                                    employeeMaster.setUserMaster(userMaster1);
+                                    employeeMaster.setShiftType(employeeMaster1.getShiftType());
+                                    shiftRotationTemp = shiftRotation.trim().toLowerCase();
+                                    List<?> shiftRotationMasterList = shiftRotationMasterService.readByShiftRotationName(shiftRotationTemp);
+                                    if (!shiftRotationMasterList.isEmpty()) {
+                                        shiftRotationMaster = (ShiftRotationMaster) shiftRotationMasterList.get(0);
+                                        shiftRotationInfo.setShiftRotationMaster(shiftRotationMaster);
+                                    }
+                                    employeeMaster.setShiftHoursId(shiftRotationMaster.getId());
+
+                                    stringBuffer.append(employeeNo);
+                                    stringBuffer.append(" , ");
+                                    counter++;
+                                    
+                                    //------------------------------
+                                    employeeMaster.setJobDescription("Write Job Description over here");
+                                    
+                                    employeeMasterValidator.validate(employeeMaster, errors);
+                                    
+                                    employeeMasterExtension.setEmployeeMaster(employeeMaster);
+                                    employeeExtensionValidator.validate(employeeMasterExtension, errors2);
+                                    if (errors.hasErrors() || errors2.hasErrors()) {
+                                        //errorFlag = true;
+                                        //errorCounter++;
+                                        //request.setAttribute("failureMessage",
+                                        //        "Error : The Entered Information is not valid.");
+
+                                        //request.setAttribute("failureMessage",
+                                        //   "<br/>Error : Employee No:"+ employeeNo + " - Unable to Insert employee due to Information is not valid.");
+                                        //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + errorMessage );
+                                        strBuffFailer.append("<br/>Error : Employee No:"+ employeeNo + " - Unable to Update employee due to Information is not valid." );
+
+                                        for (ObjectError individualError : errors.getAllErrors()) {
+                                            //individualError.getDefaultMessage();
+                                            String errorMsg = individualError.getCode();
+                                            //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + individualError.getDefaultMessage() );
+                                            strBuffFailer.append(" <br/> Update Employee No:"+ employeeNo + " Error Description : " +errorMsg );
+                                        }
+    //                                    for (ObjectError individualError : errors2.getAllErrors()) {
+    //                                        //individualError.getDefaultMessage();
+    //                                        String errorMsg = individualError.getCode();
+    //                                        //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + individualError.getDefaultMessage() );
+    //                                        strBuffFailer.append(" <br/> Update Employee No:"+ employeeNo + " Error Description : " +errorMsg );
+    //                                    }
+
+                                        stringBuffError.append(employeeNo);
+                                        stringBuffError.append(" , ");
+
+                                        //mv.addAllObjects(errors.getModel());
+                                    }
+                                    else
+                                    {
+                                        employeeMasterService.update(employeeMaster);
+                                        //employeeMasterExtension.//update(employeeMasterExtension);
+                                        //request.setAttribute("successMessage",
+                                        //    "<br/>Success : Employee No:"+ employeeNo + " - The Employee Information is Updated Sucessfully.");
+                                        stringBuffSuccess.append("<br/>Success : Employee No:"+ employeeNo + " - The Employee Information is Updated Sucessfully.");
+                                    }
+                                }
+                          //  }
 
                         }
                     }

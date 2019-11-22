@@ -9952,7 +9952,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     else
                                     {
                                         employeeMasterService.update(employeeMaster);
-                                        //employeeMasterExtension.//update(employeeMasterExtension);
+//                                        employeeMasterServiceExtension.update(employeeMasterExtension);
                                         //request.setAttribute("successMessage",
                                         //    "<br/>Success : Employee No:"+ employeeNo + " - The Employee Information is Updated Sucessfully.");
                                         stringBuffSuccess.append("<br/>Success : Employee No:"+ employeeNo + " - The Employee Information is Updated Sucessfully.");

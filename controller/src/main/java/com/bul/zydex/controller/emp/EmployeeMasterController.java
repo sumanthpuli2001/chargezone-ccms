@@ -9775,7 +9775,7 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     }
                                     if(createCheckFlags[7] == true)
                                     {
-                                        userMasterService.create(userMaster);           
+                                        //userMasterService.create(userMaster);           
                                     }
                                     if(createCheckFlags[8] == true)
                                     {
@@ -9802,43 +9802,6 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 //-----------------------------------------------------
                                 // ..............................to......................
                             } else {
-                                /*employeeMaster.setId(1);
-                                employeeMaster.setJobDescription("Write Job Description over here");
-                                employeeMaster.setShiftType("ShiftBase");
-                                employeeMaster.setUserMaster(userMaster);
-                                employeeMasterValidator.validate(employeeMaster, errors);
-                                employeeExtensionValidator.validate(employeeMasterExtension, errors2);
-                                if (errors.hasErrors() || errors2.hasErrors()) {
-                                    //errorFlag = true;
-                                    //errorCounter++;
-                                    //request.setAttribute("failureMessage",
-                                    //        "Error : The Entered Information is not valid.");
-                                    
-                                    //request.setAttribute("failureMessage",
-                                    //   "<br/>Error : Employee No:"+ employeeNo + " - Unable to Insert employee due to Information is not valid.");
-                                    //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + errorMessage );
-                                    strBuffFailer.append("<br/>Error : Employee No:"+ employeeNo + " - Unable to Update employee due to Information is not valid." );
-                                   
-                                    for (ObjectError individualError : errors.getAllErrors()) {
-                                        //individualError.getDefaultMessage();
-                                        String errorMsg = individualError.getCode();
-                                        //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + individualError.getDefaultMessage() );
-                                        strBuffFailer.append(" <br/> Update Employee No:"+ employeeNo + " Error Description : " +errorMsg );
-                                    }
-                                    for (ObjectError individualError : errors2.getAllErrors()) {
-                                        //individualError.getDefaultMessage();
-                                        String errorMsg = individualError.getCode();
-                                        //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + individualError.getDefaultMessage() );
-                                        strBuffFailer.append(" <br/> Update Employee No:"+ employeeNo + " Error Description : " +errorMsg );
-                                    }
-                                    
-                                    stringBuffError.append(employeeNo);
-                                    stringBuffError.append(" , ");
-                                    
-                                    //mv.addAllObjects(errors.getModel());
-                                }
-                                else
-                                {*/
                                     //------------------------------------------------------
                                     if(createCheckFlags[0] == true)
                                     {
@@ -9937,12 +9900,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                             //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + individualError.getDefaultMessage() );
                                             strBuffFailer.append(" <br/> Update Employee No:"+ employeeNo + " Error Description : " +errorMsg );
                                         }
-    //                                    for (ObjectError individualError : errors2.getAllErrors()) {
-    //                                        //individualError.getDefaultMessage();
-    //                                        String errorMsg = individualError.getCode();
-    //                                        //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + individualError.getDefaultMessage() );
-    //                                        strBuffFailer.append(" <br/> Update Employee No:"+ employeeNo + " Error Description : " +errorMsg );
-    //                                    }
+                                        for (ObjectError individualError : errors2.getAllErrors()) {
+                                            //individualError.getDefaultMessage();
+                                            String errorMsg = individualError.getCode();
+                                            //request.setAttribute("failureMessage", " <br/> Employee No:"+ employeeNo + " Error Description : " + individualError.getDefaultMessage() );
+                                            strBuffFailer.append(" <br/> Update Employee No:"+ employeeNo + " Error Description : " +errorMsg );
+                                        }
 
                                         stringBuffError.append(employeeNo);
                                         stringBuffError.append(" , ");
@@ -9952,7 +9915,12 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                     else
                                     {
                                         employeeMasterService.update(employeeMaster);
-//                                        employeeMasterServiceExtension.update(employeeMasterExtension);
+                                        
+                                        List<?> employeeMasterExtensionList = employeeMasterServiceExtension.readByemployeeId(employeeMasterExtension.getEmployeeMaster().getId());
+                                        EmployeeMasterExtension employeeMasterExtension2 = (EmployeeMasterExtension)employeeMasterExtensionList.get(0);                         
+                                        employeeMasterExtension.setId(employeeMasterExtension2.getId());
+                                        
+                                        employeeMasterServiceExtension.update(employeeMasterExtension);
                                         //request.setAttribute("successMessage",
                                         //    "<br/>Success : Employee No:"+ employeeNo + " - The Employee Information is Updated Sucessfully.");
                                         stringBuffSuccess.append("<br/>Success : Employee No:"+ employeeNo + " - The Employee Information is Updated Sucessfully.");

@@ -188,7 +188,7 @@
                     ansArraybool3 = tempCountArray3.includes(tempCount3);
                 }
                 tempCountArray3.push(tempCount3);
-                //console.log("Temp Count: "+tempCount3);
+                console.log("Temp Count: "+tempCount3);
                 //tempCountArray4.forEach(myFunction4);
 
                 var clone = "<tr id='" + tempCount3 + "' style='clear:both;'>"

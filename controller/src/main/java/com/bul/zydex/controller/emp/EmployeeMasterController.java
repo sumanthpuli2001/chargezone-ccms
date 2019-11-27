@@ -764,102 +764,104 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 
             //employeeMaster.setEmployeeId("" + employeeMaster1);
             boolean isLeapYear = false;
-            LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
-            List<?> leaveType = leaveTypeMasterService.read();
-            final boolean gender_Female = employeeMaster.getGender();
-            String marital_status = employeeMaster.getMaritalStatus();
-            for (Object o : leaveType) {
-                employeeLeaveBalance = new EmployeeLeaveBalance();
-                leaveTypeMaster = (LeaveTypeMaster) o;
-                employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-                employeeLeaveBalance.setEmployeeMaster(employeeMaster);
-                String noOfLeave = "" + leaveTypeMaster.getNoOfLeave();
-                String leave = "" + leaveTypeMaster.getLeaveType();
-                Calendar cal1 = new GregorianCalendar();
-                Calendar cal2 = new GregorianCalendar();
-                Calendar gc = new GregorianCalendar();
-                int year = gc.get(Calendar.YEAR);
-                String cyear = "" + year;
-                String dateOfEndMonth = "31/12/";
-                String dateOfEnd = dateOfEndMonth + cyear;
-                if ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) {
-                    isLeapYear = true;
-                }
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-                Date date1 = sdf.parse(dateOfJoining);
-                Date date3 = new Date();
-                cal1.setTime(date1);
-                Date date2 = sdf.parse(dateOfEnd);
-                cal2.setTime(date2);
-                int y = Integer.parseInt(noOfLeave);
-                long days = 0;
-                if (date1.before(date3)) {
-                    days = date2.getTime() - date3.getTime();
-                } else {
-                    days = date2.getTime() - date1.getTime();
-                }
-                long diffDays = days / (24 * 60 * 60 * 1000) + 1;
-                if (leave.equals("Sick Leave")) {
-                    if (isLeapYear == true) {
-                        long SL = (diffDays * y / 366) + 1;
-                        employeeLeaveBalance.setNoOfLeaveRemain(SL);
-                    } else {
-                        long SL = (diffDays * y / 365) + 1;
-                        employeeLeaveBalance.setNoOfLeaveRemain(SL);
-                    }
-                } else if (leave.equals("Casual Leave")) {
-                    if (isLeapYear == true) {
-                        long CL = (diffDays * y / 366) + 1;
-                        employeeLeaveBalance.setNoOfLeaveRemain(CL);
-                    } else {
-                        long CL = (diffDays * y / 365) + 1;
-                        employeeLeaveBalance.setNoOfLeaveRemain(CL);
-                    }
-                } //                else if (leave.equals("Privilege Leave")) {
-                //                    if (isLeapYear == true) {
-                //                        long PL = (diffDays * y / 366) + 1;
-                //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
-                //                    } else {
-                //                        long PL = (diffDays * y / 365) + 1;
-                //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
-                //                    }
-                //                }
-                else if (leave.equals("Paternity Leave") && !gender_Female && marital_status.equals("Married")) {
-                    if (isLeapYear == true) {
-//                        long PAT = (diffDays * y / 366) + 1;
-                        long PAT = 6;
-                        employeeLeaveBalance.setNoOfLeaveRemain(PAT);
-                    } else {
-                        long PAT = 6;
-                        employeeLeaveBalance.setNoOfLeaveRemain(PAT);
-                    }
-                } else if (leave.equals("Maternity Leave")) {
-                    if (gender_Female) {
-                        long ML = 0;
-                        employeeLeaveBalance.setNoOfLeaveRemain(ML);
-                    }
-                } else if (leave.equals("Short Leave")) {
-                    if (isLeapYear == true) {
-                        long SHL = (diffDays * y / 366) + 1;
-                        employeeLeaveBalance.setNoOfLeaveRemain(SHL);
-                    } else {
-                        long SHL = (diffDays * y / 365) + 1;
-                        employeeLeaveBalance.setNoOfLeaveRemain(SHL);
-                    }
-                } else if (leave.equals("Leave Without Pay")) {
-                    if (isLeapYear == true) {
-                        long LWP = (diffDays * y / 366) + 1;
-                        employeeLeaveBalance.setNoOfLeaveRemain(LWP);
-                    } else {
-                        long LWP = (diffDays * y / 365) + 1;
-                        employeeLeaveBalance.setNoOfLeaveRemain(LWP);
-                    }
-                }
-
-                employeeLeaveBalanceService.create(employeeLeaveBalance);
-
-            }
+            //---------- Start of Leave Section ----------------------
+//            LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+//            List<?> leaveType = leaveTypeMasterService.read();
+//            final boolean gender_Female = employeeMaster.getGender();
+//            String marital_status = employeeMaster.getMaritalStatus();
+//            for (Object o : leaveType) {
+//                employeeLeaveBalance = new EmployeeLeaveBalance();
+//                leaveTypeMaster = (LeaveTypeMaster) o;
+//                employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+//                employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+//                String noOfLeave = "" + leaveTypeMaster.getNoOfLeave();
+//                String leave = "" + leaveTypeMaster.getLeaveType();
+//                Calendar cal1 = new GregorianCalendar();
+//                Calendar cal2 = new GregorianCalendar();
+//                Calendar gc = new GregorianCalendar();
+//                int year = gc.get(Calendar.YEAR);
+//                String cyear = "" + year;
+//                String dateOfEndMonth = "31/12/";
+//                String dateOfEnd = dateOfEndMonth + cyear;
+//                if ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) {
+//                    isLeapYear = true;
+//                }
+//                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//
+//                Date date1 = sdf.parse(dateOfJoining);
+//                Date date3 = new Date();
+//                cal1.setTime(date1);
+//                Date date2 = sdf.parse(dateOfEnd);
+//                cal2.setTime(date2);
+//                int y = Integer.parseInt(noOfLeave);
+//                long days = 0;
+//                if (date1.before(date3)) {
+//                    days = date2.getTime() - date3.getTime();
+//                } else {
+//                    days = date2.getTime() - date1.getTime();
+//                }
+//                long diffDays = days / (24 * 60 * 60 * 1000) + 1;
+//                if (leave.equals("Sick Leave")) {
+//                    if (isLeapYear == true) {
+//                        long SL = (diffDays * y / 366) + 1;
+//                        employeeLeaveBalance.setNoOfLeaveRemain(SL);
+//                    } else {
+//                        long SL = (diffDays * y / 365) + 1;
+//                        employeeLeaveBalance.setNoOfLeaveRemain(SL);
+//                    }
+//                } else if (leave.equals("Casual Leave")) {
+//                    if (isLeapYear == true) {
+//                        long CL = (diffDays * y / 366) + 1;
+//                        employeeLeaveBalance.setNoOfLeaveRemain(CL);
+//                    } else {
+//                        long CL = (diffDays * y / 365) + 1;
+//                        employeeLeaveBalance.setNoOfLeaveRemain(CL);
+//                    }
+//                } //                else if (leave.equals("Privilege Leave")) {
+//                //                    if (isLeapYear == true) {
+//                //                        long PL = (diffDays * y / 366) + 1;
+//                //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
+//                //                    } else {
+//                //                        long PL = (diffDays * y / 365) + 1;
+//                //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
+//                //                    }
+//                //                }
+//                else if (leave.equals("Paternity Leave") && !gender_Female && marital_status.equals("Married")) {
+//                    if (isLeapYear == true) {
+////                        long PAT = (diffDays * y / 366) + 1;
+//                        long PAT = 6;
+//                        employeeLeaveBalance.setNoOfLeaveRemain(PAT);
+//                    } else {
+//                        long PAT = 6;
+//                        employeeLeaveBalance.setNoOfLeaveRemain(PAT);
+//                    }
+//                } else if (leave.equals("Maternity Leave")) {
+//                    if (gender_Female) {
+//                        long ML = 0;
+//                        employeeLeaveBalance.setNoOfLeaveRemain(ML);
+//                    }
+//                } else if (leave.equals("Short Leave")) {
+//                    if (isLeapYear == true) {
+//                        long SHL = (diffDays * y / 366) + 1;
+//                        employeeLeaveBalance.setNoOfLeaveRemain(SHL);
+//                    } else {
+//                        long SHL = (diffDays * y / 365) + 1;
+//                        employeeLeaveBalance.setNoOfLeaveRemain(SHL);
+//                    }
+//                } else if (leave.equals("Leave Without Pay")) {
+//                    if (isLeapYear == true) {
+//                        long LWP = (diffDays * y / 366) + 1;
+//                        employeeLeaveBalance.setNoOfLeaveRemain(LWP);
+//                    } else {
+//                        long LWP = (diffDays * y / 365) + 1;
+//                        employeeLeaveBalance.setNoOfLeaveRemain(LWP);
+//                    }
+//                }
+//
+//                employeeLeaveBalanceService.create(employeeLeaveBalance);
+//
+//            }
+            //--------------------- End of Leave Section -----------------
             ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
             ShiftRotationInfo shiftRotationInfo1 = new ShiftRotationInfo();
             ShiftRotationMaster shiftRotationMaster = new ShiftRotationMaster();
@@ -9585,111 +9587,114 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
 //                    ***************************************Leave Balance Create*******************************
 // code by yoo.........................from......................
                                 boolean isLeapYear = false;
-                                LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
-                                EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
-                                List<?> leaveType = leaveTypeMasterService.read();
-                                final boolean gender_Female = employeeMaster.getGender();
-                                String marital_status = employeeMaster.getMaritalStatus();
+                                //-------- Leave Section -----------------------
                                 
-                                List<EmployeeLeaveBalance> employeeLeaveBalanceList = new ArrayList();
-        
-                                for (Object o : leaveType) {
-                                    employeeLeaveBalance = new EmployeeLeaveBalance();
-                                    leaveTypeMaster = (LeaveTypeMaster) o;
-                                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
-                                    employeeLeaveBalance.setEmployeeMaster(employeeMaster);
-                                    String noOfLeave = "" + leaveTypeMaster.getNoOfLeave();
-                                    String leave = "" + leaveTypeMaster.getLeaveType();
-                                    Calendar cal1 = new GregorianCalendar();
-                                    Calendar cal2 = new GregorianCalendar();
-                                    Calendar gc = new GregorianCalendar();
-                                    int year = gc.get(Calendar.YEAR);
-                                    String cyear = "" + year;
-                                    String dateOfEndMonth = "31/12/";
-                                    String dateOfEnd = dateOfEndMonth + cyear;
-                                    if ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) {
-                                        isLeapYear = true;
-                                    }
-                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-                                     SimpleDateFormat sdfDOJ3 = new SimpleDateFormat("dd-MMM-yyyy");
-                                    SimpleDateFormat sdfDOJ4 = new SimpleDateFormat("dd/MM/yyyy");
-
-                                    Date dateDOJ1 = sdfDOJ3.parse(dateOfJoiningNonFormated);
-                                    String dateOfJoining1 = sdfDOJ4.format(dateDOJ1);
-                                    Date date1 = sdf.parse(dateOfJoining1);
-                                    Date date3 = new Date();
-                                    cal1.setTime(date1);
-                                    Date date2 = sdf.parse(dateOfEnd);
-                                    cal2.setTime(date2);
-                                    int y = Integer.parseInt(noOfLeave);
-                                    long days = 0;
-                                    if (date1.before(date3)) {
-                                        days = date2.getTime() - date3.getTime();
-                                    } else {
-                                        days = date2.getTime() - date1.getTime();
-                                    }
-                                    long diffDays = days / (24 * 60 * 60 * 1000) + 1;
-                                    if (leave.equals("Sick Leave")) {
-                                        if (isLeapYear == true) {
-                                            long SL = (diffDays * y / 366) + 1;
-                                            employeeLeaveBalance.setNoOfLeaveRemain(SL);
-                                        } else {
-                                            long SL = (diffDays * y / 365) + 1;
-                                            employeeLeaveBalance.setNoOfLeaveRemain(SL);
-                                        }
-                                    } else if (leave.equals("Casual Leave")) {
-                                        if (isLeapYear == true) {
-                                            long CL = (diffDays * y / 366) + 1;
-                                            employeeLeaveBalance.setNoOfLeaveRemain(CL);
-                                        } else {
-                                            long CL = (diffDays * y / 365) + 1;
-                                            employeeLeaveBalance.setNoOfLeaveRemain(CL);
-                                        }
-                                    } //                else if (leave.equals("Privilege Leave")) {
-                                    //                    if (isLeapYear == true) {
-                                    //                        long PL = (diffDays * y / 366) + 1;
-                                    //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
-                                    //                    } else {
-                                    //                        long PL = (diffDays * y / 365) + 1;
-                                    //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
-                                    //                    }
-                                    //                }
-                                    else if (leave.equals("Paternity Leave") && !gender_Female && marital_status.equals("Married")) {
-                                        if (isLeapYear == true) {
-//                        long PAT = (diffDays * y / 366) + 1;
-                                            long PAT = 6;
-                                            employeeLeaveBalance.setNoOfLeaveRemain(PAT);
-                                        } else {
-                                            long PAT = 6;
-                                            employeeLeaveBalance.setNoOfLeaveRemain(PAT);
-                                        }
-                                    } else if (leave.equals("Maternity Leave")) {
-                                        if (gender_Female) {
-                                            long ML = 0;
-                                            employeeLeaveBalance.setNoOfLeaveRemain(ML);
-                                        }
-                                    } else if (leave.equals("Short Leave")) {
-                                        if (isLeapYear == true) {
-                                            long SHL = (diffDays * y / 366) + 1;
-                                            employeeLeaveBalance.setNoOfLeaveRemain(SHL);
-                                        } else {
-                                            long SHL = (diffDays * y / 365) + 1;
-                                            employeeLeaveBalance.setNoOfLeaveRemain(SHL);
-                                        }
-                                    } else if (leave.equals("Leave Without Pay")) {
-                                        if (isLeapYear == true) {
-                                            long LWP = (diffDays * y / 366) + 1;
-                                            employeeLeaveBalance.setNoOfLeaveRemain(LWP);
-                                        } else {
-                                            long LWP = (diffDays * y / 365) + 1;
-                                            employeeLeaveBalance.setNoOfLeaveRemain(LWP);
-                                        }
-                                    }
-                                    
-                                    employeeLeaveBalanceList.add(employeeLeaveBalance);
-                                    // Iterator array list store data
-                                }
+//                                LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
+//                                EmployeeLeaveBalance employeeLeaveBalance = new EmployeeLeaveBalance();
+//                                List<?> leaveType = leaveTypeMasterService.read();
+//                                final boolean gender_Female = employeeMaster.getGender();
+//                                String marital_status = employeeMaster.getMaritalStatus();
+//                                
+//                                List<EmployeeLeaveBalance> employeeLeaveBalanceList = new ArrayList();
+//        
+//                                for (Object o : leaveType) {
+//                                    employeeLeaveBalance = new EmployeeLeaveBalance();
+//                                    leaveTypeMaster = (LeaveTypeMaster) o;
+//                                    employeeLeaveBalance.setLeaveTypeMaster(leaveTypeMaster);
+//                                    employeeLeaveBalance.setEmployeeMaster(employeeMaster);
+//                                    String noOfLeave = "" + leaveTypeMaster.getNoOfLeave();
+//                                    String leave = "" + leaveTypeMaster.getLeaveType();
+//                                    Calendar cal1 = new GregorianCalendar();
+//                                    Calendar cal2 = new GregorianCalendar();
+//                                    Calendar gc = new GregorianCalendar();
+//                                    int year = gc.get(Calendar.YEAR);
+//                                    String cyear = "" + year;
+//                                    String dateOfEndMonth = "31/12/";
+//                                    String dateOfEnd = dateOfEndMonth + cyear;
+//                                    if ((year % 400 == 0) || ((year % 4 == 0) && (year % 100 != 0))) {
+//                                        isLeapYear = true;
+//                                    }
+//                                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//
+//                                     SimpleDateFormat sdfDOJ3 = new SimpleDateFormat("dd-MMM-yyyy");
+//                                    SimpleDateFormat sdfDOJ4 = new SimpleDateFormat("dd/MM/yyyy");
+//
+//                                    Date dateDOJ1 = sdfDOJ3.parse(dateOfJoiningNonFormated);
+//                                    String dateOfJoining1 = sdfDOJ4.format(dateDOJ1);
+//                                    Date date1 = sdf.parse(dateOfJoining1);
+//                                    Date date3 = new Date();
+//                                    cal1.setTime(date1);
+//                                    Date date2 = sdf.parse(dateOfEnd);
+//                                    cal2.setTime(date2);
+//                                    int y = Integer.parseInt(noOfLeave);
+//                                    long days = 0;
+//                                    if (date1.before(date3)) {
+//                                        days = date2.getTime() - date3.getTime();
+//                                    } else {
+//                                        days = date2.getTime() - date1.getTime();
+//                                    }
+//                                    long diffDays = days / (24 * 60 * 60 * 1000) + 1;
+//                                    if (leave.equals("Sick Leave")) {
+//                                        if (isLeapYear == true) {
+//                                            long SL = (diffDays * y / 366) + 1;
+//                                            employeeLeaveBalance.setNoOfLeaveRemain(SL);
+//                                        } else {
+//                                            long SL = (diffDays * y / 365) + 1;
+//                                            employeeLeaveBalance.setNoOfLeaveRemain(SL);
+//                                        }
+//                                    } else if (leave.equals("Casual Leave")) {
+//                                        if (isLeapYear == true) {
+//                                            long CL = (diffDays * y / 366) + 1;
+//                                            employeeLeaveBalance.setNoOfLeaveRemain(CL);
+//                                        } else {
+//                                            long CL = (diffDays * y / 365) + 1;
+//                                            employeeLeaveBalance.setNoOfLeaveRemain(CL);
+//                                        }
+//                                    } //                else if (leave.equals("Privilege Leave")) {
+//                                    //                    if (isLeapYear == true) {
+//                                    //                        long PL = (diffDays * y / 366) + 1;
+//                                    //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
+//                                    //                    } else {
+//                                    //                        long PL = (diffDays * y / 365) + 1;
+//                                    //                        employeeLeaveBalance.setNoOfLeaveRemain(PL);
+//                                    //                    }
+//                                    //                }
+//                                    else if (leave.equals("Paternity Leave") && !gender_Female && marital_status.equals("Married")) {
+//                                        if (isLeapYear == true) {
+////                        long PAT = (diffDays * y / 366) + 1;
+//                                            long PAT = 6;
+//                                            employeeLeaveBalance.setNoOfLeaveRemain(PAT);
+//                                        } else {
+//                                            long PAT = 6;
+//                                            employeeLeaveBalance.setNoOfLeaveRemain(PAT);
+//                                        }
+//                                    } else if (leave.equals("Maternity Leave")) {
+//                                        if (gender_Female) {
+//                                            long ML = 0;
+//                                            employeeLeaveBalance.setNoOfLeaveRemain(ML);
+//                                        }
+//                                    } else if (leave.equals("Short Leave")) {
+//                                        if (isLeapYear == true) {
+//                                            long SHL = (diffDays * y / 366) + 1;
+//                                            employeeLeaveBalance.setNoOfLeaveRemain(SHL);
+//                                        } else {
+//                                            long SHL = (diffDays * y / 365) + 1;
+//                                            employeeLeaveBalance.setNoOfLeaveRemain(SHL);
+//                                        }
+//                                    } else if (leave.equals("Leave Without Pay")) {
+//                                        if (isLeapYear == true) {
+//                                            long LWP = (diffDays * y / 366) + 1;
+//                                            employeeLeaveBalance.setNoOfLeaveRemain(LWP);
+//                                        } else {
+//                                            long LWP = (diffDays * y / 365) + 1;
+//                                            employeeLeaveBalance.setNoOfLeaveRemain(LWP);
+//                                        }
+//                                    }
+//                                    
+//                                    employeeLeaveBalanceList.add(employeeLeaveBalance);
+//                                    // Iterator array list store data
+//                                }
+                                //--------------------- End of leave balance --------------
                                 
                                 // ----------------------------------------------------
                                 employeeMaster.setJobDescription("Write Job Description over here");
@@ -9731,10 +9736,10 @@ public class EmployeeMasterController extends EmployeeMasterAbstract {
                                 else
                                 {
                                     //------- Iterator array list store data ------------
-                                    ListIterator<EmployeeLeaveBalance> iteratorList = employeeLeaveBalanceList.listIterator(); 
-                                    while (iteratorList.hasNext()) {
-                                         employeeLeaveBalanceService.create(iteratorList.next());
-                                    }
+//                                    ListIterator<EmployeeLeaveBalance> iteratorList = employeeLeaveBalanceList.listIterator(); 
+//                                    while (iteratorList.hasNext()) {
+//                                         employeeLeaveBalanceService.create(iteratorList.next());
+//                                    }
                                     //---------------------------------------------
 
                                     userRightMasterService.create(userRightMaster);

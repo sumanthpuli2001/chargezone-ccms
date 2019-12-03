@@ -6,7 +6,9 @@
 package com.bul.zydex.service.Payroll;
 
 import com.bul.zydex.dao.Payroll.EmployeeSalaryProcessDAO;
+import com.bul.zydex.model.AttendanceRegularization;
 import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.service.GenericsServiceImpl;
 import java.util.List;
 
@@ -148,7 +150,7 @@ public class EmployeeSalaryProcessServiceImpl<T> extends GenericsServiceImpl<T> 
     }
 
     @Override
-    public List<?> readEmployeeForOTStatement(EmployeeMaster object) {
+    public List<?> readEmployeeForOTStatement(OTRegularization object) {
         return employeeSalaryProcessDAO.readEmployeeForOTStatement(object);
     }
 
@@ -221,5 +223,10 @@ public class EmployeeSalaryProcessServiceImpl<T> extends GenericsServiceImpl<T> 
     public List<?> monthDaysFetch(int EmpId) {
         return employeeSalaryProcessDAO.monthDaysFetch(EmpId);
 
+    }
+
+    @Override
+    public List<?> readEmployeeForAttendanceRegurization(AttendanceRegularization object) {
+       return employeeSalaryProcessDAO.readEmployeeForAttendanceRegurization(object);
     }
 }

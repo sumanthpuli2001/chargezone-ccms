@@ -2481,7 +2481,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                             double bonusExcel1 = 0;
                             double perdayHours1 = 0;
                             double actualworkingHours1 = 0;
-                            double excessShort1 = 0;
+                            String excessShort1 = "";
 
                             String workinghours1 = "";
                             if (!workingdays.equals("")) {
@@ -2539,7 +2539,7 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 actualworkingHours1 = Double.parseDouble(actualworkingHours);
                             }
                             if (!excessShort.equals("")) {
-                                excessShort1 = Double.parseDouble(excessShort);
+                                excessShort1 = excessShort;
                             }
                             EmployeeMaster employeeMaster = new EmployeeMaster();
 //                            int empNo = Integer.parseInt(employeeNo);
@@ -2809,18 +2809,22 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
 //                                }
                                 checkDeductionwise(employeeSalaryProcess);
 
-                                if (excessShort1 != 0) {
-                                    double rateperhours = employeeSalaryProcess.getNetPayable() / 22;
-                                    double perhours = rateperhours / hoursMadatory;
-                                    double totalamount = excessShort1 * perhours;
-                                    double totalamount1 = employeeSalaryProcess.getNetPayable() - totalamount;
-
-                                    employeeSalaryProcess.setId(employeeSalaryProcess.getId());
-                                    employeeSalaryProcess.setEmployeeMaster(employeeMaster);
-                                    employeeSalaryProcess.setNetPayable(totalamount1);
-                                    employeeSalaryProcess.setExcessShort(totalamount);
-
-                                    employeeSalaryProcessService.update(employeeSalaryProcess);
+                                if (excessShort1.equals("null")) {
+//                                    double rateperhours = employeeSalaryProcess.getNetPayable() / 22;
+//                                    double perhours = rateperhours / hoursMadatory;
+//                                    double totalamount = excessShort1 * perhours;
+//                                    double totalamount1 = employeeSalaryProcess.getNetPayable() - totalamount;
+//
+//                                    employeeSalaryProcess.setId(employeeSalaryProcess.getId());
+//                                    employeeSalaryProcess.setEmployeeMaster(employeeMaster);
+//                                    employeeSalaryProcess.setNetPayable(totalamount1);
+//                                    employeeSalaryProcess.setExcessShort(totalamount);
+//
+//                                    employeeSalaryProcessService.update(employeeSalaryProcess);
+                                    
+                                    
+                                    
+                                    
 //                                    employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
 //                                    employeeDeductionAmount.setDeductionType("Penalty");
 //                                    employeeDeductionAmount.setDeductionAmount(penaltyhours1);

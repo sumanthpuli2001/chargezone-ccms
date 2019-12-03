@@ -5,8 +5,10 @@
  */
 package com.bul.zydex.service.Payroll;
 
+import com.bul.zydex.model.AttendanceRegularization;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeSalaryProcess;
+import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
@@ -65,7 +67,7 @@ public interface EmployeeSalaryProcessService<T> extends GenericsService<T> {
 
     public List<?> readEmployeeForEsicStatement(EmployeeMaster object);
 
-    public List<?> readEmployeeForOTStatement(EmployeeMaster object);
+    public List<?> readEmployeeForOTStatement(OTRegularization object);
 
     public List<?> readOTAmounts(int employeeSalaryProcessId);
 
@@ -92,4 +94,6 @@ public interface EmployeeSalaryProcessService<T> extends GenericsService<T> {
     public List<?> readEmpId(int EmpId);
 
     public List<?> monthDaysFetch(int EmpId);
+    
+     public List<?> readEmployeeForAttendanceRegurization(AttendanceRegularization object);
 }

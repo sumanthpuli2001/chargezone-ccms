@@ -131,7 +131,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             if (attendanceRegularization.getArType().equals("Compassion")) {
                 attendanceRegularization.setUserMasterId(userMasterId);
                 attendanceRegularization.setStatus(18);
-                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 String currentDate = dateFormat1.format(new Date());
                 attendanceRegularization.setDateOfSubmit(currentDate);
                 attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
@@ -144,7 +144,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             if (attendanceRegularization.getArType().equals("Official")) {
                 attendanceRegularization.setUserMasterId(userMasterId);
                 attendanceRegularization.setStatus(0);
-                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 String currentDate = dateFormat1.format(new Date());
                 attendanceRegularization.setDateOfSubmit(currentDate);
                 attendanceRegularizationMasterService.createOrUpdate(attendanceRegularization);
@@ -2846,7 +2846,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 String firstHalf = "" + next[1];
                 if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                         && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay") && !firstHalf.equals("Lieu Day Leave")) {
                     Date date1 = sdf.parse("" + next[0]);
                     Calendar c2 = Calendar.getInstance();
                     c2.setTime(date1);
@@ -11407,5 +11407,70 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
         return mv;
     }
+    
+    // work from home Report
+    public ModelAndView searchWorkFromHomeDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+        selectEmployee(request, response);
+        mv.getModelMap().put("attendanceRegularization", attendanceRegularization);
+        mv.setViewName("Payroll/workfromhomeReport");
+        return mv;
+    }
+    public ModelAndView searchFormEmployeeWorkfromHomeDetailSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
+
+        String employeeName = request.getParameter("employeeMasterId");
+        String startDate = request.getParameter("startDateTime");
+        String enddate = request.getParameter("endDateTime");
+
+        HttpSession session = request.getSession();
+//       
+
+        if (!"".equals(startDate)) {
+            attendanceRegularization.setStartDateTime(startDate);
+        }
+
+        if (!"".equals(enddate)) {
+            attendanceRegularization.setEndDateTime(enddate);
+        }
+        if (!"".equals(employeeName)) {
+            attendanceRegularization.setReason(employeeName);
+        }
+
+        List<?> readEmployeeOTStatementlist = employeeSalaryProcessService.readEmployeeForAttendanceRegurization(attendanceRegularization);
+        List finalOtlist = new ArrayList();
+        for (Object empExcelObject : readEmployeeOTStatementlist) {
+            List otList = new ArrayList();
+            Object[] empExcelData = (Object[]) empExcelObject;
+            Integer userId = (Integer) empExcelData[0];
+
+            UserMaster Us = userMasterService.readById(userId);
+            String employeeid = Us.getUserName();
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            List<?> list = employeeMasterService.getByEmployeeNo(employeeid);
+            employeeMaster = (EmployeeMaster) list.get(0);
+            String employeeName1 = employeeMaster.getEmployeeName();
+            otList.add(employeeid);
+            otList.add(employeeName1);
+            otList.add(empExcelData[1]);
+            otList.add(empExcelData[2]);
+            otList.add(empExcelData[4]);
+            otList.add(empExcelData[3]);
+            
+
+            finalOtlist.add(otList);
+        }
+
+//     
+        request.setAttribute("employeelist", finalOtlist);
+
+//        request.setAttribute("month", month);
+//        request.setAttribute("year", year);
+        mv = searchWorkFromHomeDetail(request, response);
+        return mv;
+    }
+
 
 }

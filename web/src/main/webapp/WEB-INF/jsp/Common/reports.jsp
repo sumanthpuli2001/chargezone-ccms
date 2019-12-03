@@ -205,6 +205,18 @@
                                         </div>
 
                                     </div>
+                                           <div class="row">
+                                        <div class="col-xs-4 col-sm-4 col-md-4">
+                                            <c:if test="${sessionScope.userRight.overTimeReport}">
+                                                <a  style="font-size: 14px;text-align: left;color: #2c3e50;"   href="attendanceRegularizationMaster.htm?act=searchWorkFromHomeDetail&search=none">
+                                                    Work From Home Report
+                                                </a>
+                                            </c:if>
+                                        </div>
+                                        
+                                        
+
+                                    </div>
                                     <br>
                                 </div>
                             </div>

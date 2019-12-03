@@ -6,9 +6,11 @@
 package com.bul.zydex.dao.Payroll;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
+import com.bul.zydex.model.AttendanceRegularization;
 import com.bul.zydex.model.EmployeeAdditionalSalary;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeSalaryProcess;
+import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.model.PayrollAdditionalAmount;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -369,7 +371,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
             condition += " AND a.company = '" + employeeMaster.getCompany() + "'";
         }
         if (!"".equals(employeeMaster.getBankIfscCode()) && null != employeeMaster.getBankIfscCode()) {
-            condition += " AND a.id = '" + employeeMaster.getBankIfscCode()+ "'";
+            condition += " AND a.id = '" + employeeMaster.getBankIfscCode() + "'";
         }
 
 //        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
@@ -648,47 +650,27 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
     }
 
     @Override
-    public List<?> readEmployeeForOTStatement(EmployeeMaster object) {
+    public List<?> readEmployeeForOTStatement(OTRegularization object) {
         String query = "";
         String condition = "";
-        EmployeeMaster employeeMaster = (EmployeeMaster) object;
-        if (!"".equals(employeeMaster.getAdharCard()) && null != employeeMaster.getAdharCard()) {
-            condition += " AND c.locationMaster.id = " + employeeMaster.getAdharCard();
-        }
-        if (null != employeeMaster.getCompany() && !"".equals(employeeMaster.getCompany())) {
-//            condition += " AND b.company = " + employeeMaster.getEmployeeType();
-            condition += " AND c.company = '" + employeeMaster.getCompany() + "'";
-        }
-//        if (!"".equals(employeeMaster.getCompany()) && null != employeeMaster.getCompany()) {
-//            condition += " AND a.employeeSubType.id = " + employeeMaster.getCompany();
+        OTRegularization oTRegularization = (OTRegularization) object;
+
+//        if (!"".equals(oTRegularization.getStartDateTime()) && null != oTRegularization.getStartDateTime()) {
+//            condition += " and a.startDateTime = '" + oTRegularization.getStartDateTime() + "'";
 //        }
-//        if (!"".equals(employeeMaster.getPaymentType()) && null != employeeMaster.getPaymentType()) {
-//            condition += " AND a.paymentType = " + employeeMaster.getPaymentType();
+//        if (!"".equals(oTRegularization.getEndDateTime()) && null != oTRegularization.getEndDateTime()) {
+//            condition += " AND a.endDateTime = '" + oTRegularization.getEndDateTime() + "'";
 //        }
-        if (!"".equals(employeeMaster.getBankAccountNo()) && null != employeeMaster.getBankAccountNo()) {
-            condition += " AND b.month = '" + employeeMaster.getBankAccountNo() + "'";
-        }
-        if (!"".equals(employeeMaster.getPanCard()) && null != employeeMaster.getPanCard()) {
-            condition += " AND b.year = '" + employeeMaster.getPanCard() + "'";
+        if (!"".equals(oTRegularization.getReason()) && null != oTRegularization.getReason())   {
+            condition += " AND a.userMasterId = '" + oTRegularization.getReason() + "'";
         }
 
-//       
-//        query += " Select c.employeeId, c.employeeName,a.otHours,b.otAmount,b.grossTotal,c.basicSalary,d.otEsic,d.otEsicNet,b.month,b.year"
-//                + " From EmployeeExcelRecord a"
-//                + " left join a.employeeSalaryProcess b"
-//                + " left join b.employeeMaster c"
-//                + " left join b.payrollEsicDeductions d"
-//                + " where  1=1" + condition;
-//                + " where  1=1" + condition;
-        query += "Select c.employeeId, c.employeeName,a.otHours,a.otAmount,b.grossTotal,c.basicSalary,d.otEsic,d.otEsicNet,b.month,b.year"
-                + " from EmployeeExcelRecord a,"
-                + " EmployeeSalaryProcess b"
-                + " left join b.employeeMaster c"
-                + " left join b.payrollEsicDeductions d"
-                + " where a.employeeSalaryProcess.id=b.id "
-                + " and a.otAmount >0 "
-                + " and 1=1" + condition;
-
+        query += "Select a.userMasterId,a.startDateTime,a.endDateTime,a.status,a.differentCompare"
+                + " from OTRegularization a"
+                + " left join a.employeeMaster c"
+                + " Where STR_TO_DATE(a.startDateTime, '%d/%m/%Y') >= STR_TO_DATE('" + oTRegularization.getStartDateTime() + "','%d/%m/%Y')"
+                + " and STR_TO_DATE(a.endDateTime, '%d/%m/%Y') <= STR_TO_DATE('" + oTRegularization.getEndDateTime() + "', '%d/%m/%Y')"
+                + " and 1=1 " + condition;
         return getHibernateTemplate().find(query);
 
     }
@@ -825,7 +807,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
             condition += " AND b.company = '" + employeeMaster.getCompany() + "'";
         }
         if (null != employeeMaster.getBankIfscCode() && !"".equals(employeeMaster.getBankIfscCode())) {
-            condition += " AND b.id = '" + employeeMaster.getBankIfscCode()+ "'";
+            condition += " AND b.id = '" + employeeMaster.getBankIfscCode() + "'";
         }
 //        if (null != employeeMaster.getPaymentType() && !"".equals(employeeMaster.getPaymentType())) {
 //            condition += " AND b.paymentType = '" + employeeMaster.getPaymentType() + "'";
@@ -997,6 +979,31 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
                 + " where b.employeeMaster =" + EmpId;
 
         return getHibernateTemplate().find(query);
+    }
+
+    @Override
+    public List<?> readEmployeeForAttendanceRegurization(AttendanceRegularization object) {
+     String query = "";
+        String condition = "";
+        AttendanceRegularization attendanceRegularization = (AttendanceRegularization) object;
+
+//        if (!"".equals(oTRegularization.getStartDateTime()) && null != oTRegularization.getStartDateTime()) {
+//            condition += " and a.startDateTime = '" + oTRegularization.getStartDateTime() + "'";
+//        }
+//        if (!"".equals(oTRegularization.getEndDateTime()) && null != oTRegularization.getEndDateTime()) {
+//            condition += " AND a.endDateTime = '" + oTRegularization.getEndDateTime() + "'";
+//        }
+        if (!"".equals(attendanceRegularization.getReason()) && null != attendanceRegularization.getReason())   {
+            condition += " AND a.userMasterId = '" + attendanceRegularization.getReason() + "'";
+        }
+
+        query += "Select a.userMasterId,a.startDateTime,a.endDateTime,a.status,a.differentCompare"
+                + " from AttendanceRegularization a"
+                + " left join a.employeeMaster c"
+                + " Where STR_TO_DATE(a.startDateTime, '%d/%m/%Y') >= STR_TO_DATE('" + attendanceRegularization.getStartDateTime() + "','%d/%m/%Y')"
+                + " and STR_TO_DATE(a.endDateTime, '%d/%m/%Y') <= STR_TO_DATE('" + attendanceRegularization.getEndDateTime() + "', '%d/%m/%Y')"
+                + " and 1=1 " + condition;
+        return getHibernateTemplate().find(query);   
     }
 
 }

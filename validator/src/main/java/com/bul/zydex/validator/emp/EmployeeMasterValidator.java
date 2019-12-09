@@ -57,7 +57,11 @@ public class EmployeeMasterValidator implements Validator {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "employeeType", "employeeType.required", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "shiftType", "shiftType.required", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "basicSalary", "basicSalary.required", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobDescription", "jobDescription.required", "None");
+        
+        //if (employeeMaster.getId() == null) {
+            ValidationUtils.rejectIfEmptyOrWhitespace(errors, "jobDescription", "jobDescription.required", "None");
+        //}
+        
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "paymentType", "paymentType.required", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "reportingManagerLevel1", "reportingManagerLevel1.required", "None");
         if (employeeMaster.getId() == null) {

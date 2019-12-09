@@ -40,5 +40,9 @@ public class ShiftRotationInfoServiceImpl<T> extends GenericsServiceImpl<T> impl
     public List<?> readByUserId(int usermasterid) {
         return shiftRotationInfoDAO.readByUserId(usermasterid);
     }
-
+    
+    @Override
+    public List<?> readShiftRotationMaster() {
+        return shiftRotationInfoDAO.readShiftRotationMaster();
+    }
 }

@@ -22,4 +22,6 @@ public interface ShiftRotationInfoService<T> extends GenericsService<T> {
 
     public List<?> readByUserId(int usermasterid);
     
+    public List<?> readShiftRotationMaster();
+    
 }

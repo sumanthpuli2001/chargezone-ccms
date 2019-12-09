@@ -522,6 +522,7 @@
         <property name="oTRegularizationService" ref="oTRegularizationService1"/>
         <property name="shiftMasterService" ref="shiftMasterService1" />
         <property name="holidayMasterService" ref="holidayMasterService1" />
+        <property name="employeeSalaryProcessService" ref="employeeSalaryProcessService1" />
         
     </bean>
     <bean id="timeAttandanceFlaxibleMasterController1" class="com.bul.zydex.controller.attendanceRegularization.TimeAttandanceFlaxibleMasterController" parent="controllerConfig" >

@@ -14,6 +14,7 @@ import com.bul.zydex.model.EmployeeDatetimeData;
 import com.bul.zydex.model.EmployeeLeaveBalance;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeePunchForMobileApp;
+import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.EmployeeShiftData;
 import com.bul.zydex.model.HolidayMaster;
 import com.bul.zydex.model.LeaveEmployeeDetail;
@@ -23,6 +24,7 @@ import com.bul.zydex.model.OverTimeMaster;
 import com.bul.zydex.model.ShiftMaster;
 import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.model.UserRightMaster;
+import com.bul.zydex.service.Payroll.EmployeeSalaryProcessService;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
 import com.bul.zydex.service.attendanceRegularization.OTRegularizationService;
@@ -60,6 +62,7 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
     protected OTRegularizationService<OTRegularization> oTRegularizationService;
     protected ShiftMasterService<ShiftMaster> shiftMasterService;
     protected HolidayMasterService<HolidayMaster> holidayMasterService;
+    protected EmployeeSalaryProcessService<EmployeeSalaryProcess> employeeSalaryProcessService;
     
     
     public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
@@ -173,6 +176,15 @@ public class AttendanceRegularizationMasterAbstract extends CustomAbstract {
     public void setHolidayMasterService(HolidayMasterService<HolidayMaster> holidayMasterService) {
         this.holidayMasterService = holidayMasterService;
     }
+
+    public EmployeeSalaryProcessService<EmployeeSalaryProcess> getEmployeeSalaryProcessService() {
+        return employeeSalaryProcessService;
+    }
+
+    public void setEmployeeSalaryProcessService(EmployeeSalaryProcessService<EmployeeSalaryProcess> employeeSalaryProcessService) {
+        this.employeeSalaryProcessService = employeeSalaryProcessService;
+    }
+    
     
     
 

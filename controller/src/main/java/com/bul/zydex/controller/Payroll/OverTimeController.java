@@ -9,7 +9,10 @@ import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.EmployeeSalaryProcess;
 import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeType;
+import com.bul.zydex.model.OTRegularization;
+import com.bul.zydex.model.UserMaster;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -25,133 +28,64 @@ public class OverTimeController extends OverTimeAbstract {
 
     public ModelAndView searchOTDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        EmployeeSalaryProcess employeeSalaryProcess = new EmployeeSalaryProcess();
-        HttpSession session = request.getSession();
-        EmployeeMaster employeeMaster = new EmployeeMaster();
-        EmployeeType employeeType = new EmployeeType();
-        EmployeeSubType employeeSubType = new EmployeeSubType();
-        List<?> list = (List<?>) request.getAttribute("employeelist");
-//        zydexLocationList(request);
-//        EmployeeTypeList(request);
-//        EmployeeSubTypeList(request);
-         locationList(request);
-        companyList(request);
-        request.setAttribute("search", request.getParameter("search"));
-        List<?> list1 = (List<?>) request.getAttribute("SalaryList");
-        mv.getModelMap().put("employeeSalaryProcess", employeeSalaryProcess);
-        request.setAttribute("employeelist", list);
-        session.setAttribute("EmployeePfcheck1", list1);
+        OTRegularization oTRegularization = new OTRegularization();
+        selectEmployee(request, response);
+        mv.getModelMap().put("oTRegularization", oTRegularization);
         mv.setViewName("Payroll/overtimeStatement");
         return mv;
     }
 
     public ModelAndView searchFormEmployeeOTStatementDetailSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        EmployeeSalaryProcess employeeSalaryProcess = new EmployeeSalaryProcess();
-        EmployeeMaster employeeMaster = new EmployeeMaster();
-        EmployeeType employeeType = new EmployeeType();
-        EmployeeSubType employeeSubType = new EmployeeSubType();
-        Double grossTotal = 0.0D;
-        Double EmpCont = 0.0D;
-        Double comCont = 0.0D;
-        String employeeId = "";
-        String employeeName = "";
+        OTRegularization oTRegularization = new OTRegularization();
 
-        List finalList = new ArrayList();
-        List listForMonthAndYear = new ArrayList();
-        String zydex_location_id = request.getParameter("zydexLocationMasterId");
-        String type_of_employee = request.getParameter("companyId");
-//        String employee_sub_id = request.getParameter("subTypeId");
-//        String Payment_Type = request.getParameter("paymentType");
-        String month = request.getParameter("month");
-        String year = request.getParameter("year11");
+        String employeeName = request.getParameter("employeeMasterId");
+        String startDate = request.getParameter("startDateTime");
+        String enddate = request.getParameter("endDateTime");
 
         HttpSession session = request.getSession();
 //       
 
-        if (!zydex_location_id.equals(
-                "")) {
-            employeeMaster.setAdharCard(zydex_location_id);
+        if (!"".equals(startDate)) {
+            oTRegularization.setStartDateTime(startDate);
         }
 
-        if (!type_of_employee.equals(
-                "")) {
-            employeeMaster.setCompany(type_of_employee);
+        if (!"".equals(enddate)) {
+            oTRegularization.setEndDateTime(enddate);
         }
-        
-
-        if (!"".equals(month)) {
-            employeeMaster.setBankAccountNo(month);
+        if (!"".equals(employeeName)) {
+            oTRegularization.setReason(employeeName);
         }
 
-        if (!"".equals(year)) {
-            employeeMaster.setPanCard(year);
+        List<?> readEmployeeOTStatementlist = employeeSalaryProcessService.readEmployeeForOTStatement(oTRegularization);
+        List finalOtlist = new ArrayList();
+        for (Object empExcelObject : readEmployeeOTStatementlist) {
+            List otList = new ArrayList();
+            Object[] empExcelData = (Object[]) empExcelObject;
+            Integer userId = (Integer) empExcelData[0];
+
+            UserMaster Us = userMasterService.readById(userId);
+            String employeeid = Us.getUserName();
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            List<?> list = employeeMasterService.getByEmployeeNo(employeeid);
+            employeeMaster = (EmployeeMaster) list.get(0);
+            String employeeName1 = employeeMaster.getEmployeeName();
+            otList.add(employeeid);
+            otList.add(employeeName1);
+            otList.add(empExcelData[1]);
+            otList.add(empExcelData[2]);
+            otList.add(empExcelData[4]);
+            otList.add(empExcelData[3]);
+            
+
+            finalOtlist.add(otList);
         }
 
-        List<?> readEmployeeOTStatementlist = employeeSalaryProcessService.readEmployeeForOTStatement(employeeMaster);
-        
-//         for (Object empExcelObject : readEmployeeOTStatementlist) {
-//            List attendanceList = new ArrayList();
-//            Object[] empExcelData = (Object[]) empExcelObject;
-////            attendanceList.add(empExcelData[0]);
-////            attendanceList.add(empExcelData[1]);
-////            attendanceList.add(empExcelData[2]);
-////            attendanceList.add(empExcelData[3]);
-////            attendanceList.add(empExcelData[4]);
-////            attendanceList.add(empExcelData[5]);
-////            attendanceList.add(empExcelData[6]);
-////            attendanceList.add(empExcelData[7]);
-////            attendanceList.add(empExcelData[8]);
-////            attendanceList.add(empExcelData[9]);
-////            company = (String) empExcelData[10];
-////            finalAttendanceList.add(attendanceList);
-//        }
-        
-        
-        
-        
-        double totalOtAmount = 0;
-        Iterator itr = readEmployeeOTStatementlist.iterator();
-        while (itr.hasNext()) {
-            Object[] next = (Object[]) itr.next();
-            totalOtAmount += (Double) next[3];
-        }
-        double totalOtHours = 0;
-        Iterator itr1 = readEmployeeOTStatementlist.iterator();
-        while (itr1.hasNext()) {
-          
-            Object[] next = (Object[]) itr1.next();
-            totalOtHours += (Double) next[2];
-        }
-        double totalGrossTotal = 0;
-        Iterator itr2 = readEmployeeOTStatementlist.iterator();
-        while (itr2.hasNext()) {
-            Object[] next = (Object[]) itr2.next();
-            totalGrossTotal += (Double) next[4];
-        }
-//        double totalOtEsic = 0;
-//        Iterator itr3 = readEmployeeOTStatementlist.iterator();
-//        while (itr3.hasNext()) {
-//            Object[] next = (Object[]) itr3.next();
-//            totalOtEsic += (Double) next[6];
-//        }
-//        double totalOtEsicNet = 0;
-//        Iterator itr4 = readEmployeeOTStatementlist.iterator();
-//        while (itr4.hasNext()) {
-//            Object[] next = (Object[]) itr4.next();
-//            totalOtEsicNet += (Double) next[7];
-//        }
-        
-        
+//     
+        request.setAttribute("employeelist", finalOtlist);
 
-        request.setAttribute("employeelist", readEmployeeOTStatementlist);
-        request.setAttribute("totalOtAmount", totalOtAmount);
-        request.setAttribute("totalOtHours", totalOtHours);
-        request.setAttribute("totalGrossTotal", totalGrossTotal);
-//        request.setAttribute("totalOtEsic", totalOtEsic);
-//        request.setAttribute("totalOtEsicNet", totalOtEsicNet);
-        request.setAttribute("month", month);
-        request.setAttribute("year", year);
+//        request.setAttribute("month", month);
+//        request.setAttribute("year", year);
         mv = searchOTDetail(request, response);
         return mv;
     }

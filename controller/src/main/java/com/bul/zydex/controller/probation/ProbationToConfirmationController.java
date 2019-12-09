@@ -1446,7 +1446,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 if (!list.isEmpty()) {
                     probationPeriod = (int) list.get(0);
                 }
-                int pp = probationPeriod - 1;
+                int pp = probationPeriod;
 //                double pp = probationPeriod - 0.5;
                 String dojstring = employeeMaster.getDateOfJoining();
                 Date dojdate = null;
@@ -1459,7 +1459,7 @@ public class ProbationToConfirmationController extends ProbationToConfirmationAb
                 c.setTime(dojdate);
 //                c.add(Calendar.MONTH, pp);
                 c.add(Calendar.MONTH, pp);
-                c.add(Calendar.DATE, 14);
+                c.add(Calendar.DATE, 0);
                 Date dateAfterPP = c.getTime();
                 String checkdateString = sdf.format(dateAfterPP);
                 if (DateUtils.isSameDay(tDate, dateAfterPP)) {

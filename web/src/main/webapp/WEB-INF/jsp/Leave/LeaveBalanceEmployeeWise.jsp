@@ -166,7 +166,7 @@
                                                                     <th>Casual Leave</th>
                                                                     <th>Sick Leave</th>
                                                                     <th>Privilege Leave</th>
-                                                                    <th>Paternity Leave</th>
+                                                                    <th>Leave Without Pay</th>
                                                                     <th>Short Leave</th>
                                                                     <th>Set Off Leaves</th>
                                                                     <th>Action</th>

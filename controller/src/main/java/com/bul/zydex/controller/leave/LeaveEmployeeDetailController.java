@@ -9746,7 +9746,7 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
                     empInfoList.add("");
                 }
 //            Privilege Leave
-                List leaveTypeList3 = leaveTypeMasterService.readLeaveType("Paternity Leave");
+                List leaveTypeList3 = leaveTypeMasterService.readLeaveType("Leave Without Pay");
                 if (!leaveTypeList3.isEmpty()) {
                     leaveTypeMaster3 = (LeaveTypeMaster) leaveTypeList3.get(0);
                     pTlId = "" + leaveTypeMaster3.getId();

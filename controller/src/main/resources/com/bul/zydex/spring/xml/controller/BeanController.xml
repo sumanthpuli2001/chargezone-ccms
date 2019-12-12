@@ -217,6 +217,11 @@
     </bean>
     <bean id="shiftRotationInfoController1" class="com.bul.zydex.controller.shift.ShiftRotationInfoController" parent="controllerConfig" >
         <property name="shiftRotationInfoService" ref="shiftRotationInfoService1" />
+        <property name="shiftRotationMasterService" ref="shiftRotationMasterService1" />
+        <property name="shiftGenerateMonthlyScheduleService" ref="shiftGenerateMonthlyScheduleService1" />
+        <property name="shiftMasterService" ref="shiftMasterService1" />
+        <property name="rotationMasterService" ref="rotationMasterService1" />
+        
     </bean>
     <bean id="shiftGenerateMonthlyScheduleController1" class="com.bul.zydex.controller.shift.ShiftGenerateMonthlyScheduleController" parent="controllerConfig" >
         <property name="shiftGenerateMonthlyScheduleService" ref="shiftGenerateMonthlyScheduleService1" />

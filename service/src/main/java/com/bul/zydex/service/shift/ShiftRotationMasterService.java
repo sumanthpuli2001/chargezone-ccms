@@ -6,6 +6,7 @@
 package com.bul.zydex.service.shift;
 
 import com.bul.zydex.dao.shift.ShiftRotationMasterDAO;
+import com.bul.zydex.service.GenericsService;
 import java.util.List;
 
 /**
@@ -21,5 +22,5 @@ public interface ShiftRotationMasterService<T> extends ShiftRotationMasterDAO<T>
     public List<?> checkByShiftRotationName(T object);
 
     public List<?> readByShiftRotationName(String shiftRotationTemp);
-
+    
 }

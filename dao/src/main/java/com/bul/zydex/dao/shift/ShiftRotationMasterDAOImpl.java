@@ -30,7 +30,7 @@ public class ShiftRotationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
         return getHibernateTemplate().find(query);
 
     }
-
+    
     @Override
     public List<?> readByDuration(T object) {
         ShiftRotationMaster shiftRotationMaster = (ShiftRotationMaster) object;
@@ -61,5 +61,4 @@ public class ShiftRotationMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
 
         return getHibernateTemplate().find(hqlString);
     }
-
 }

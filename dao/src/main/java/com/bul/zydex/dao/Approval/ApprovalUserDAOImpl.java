@@ -28,6 +28,7 @@ public class ApprovalUserDAOImpl<T> extends GenericsDAOImpl<T> implements Approv
 
         String query = "SELECT a"
                 + " FROM ApprovalUser a "
+                + " left join a.employeeMaster c"
                 + " left join a.approvalMaster b"
                 + " WHERE a.approvalMaster.id = " + id;
 

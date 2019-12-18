@@ -2902,6 +2902,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         List late = new ArrayList();
         int presentCount = 0;
         int WOCount = 0;
+        double leaveCount = 0;
         int LateCount = 0;
         int VeryLateCount = 0;
         int totalLateCollection = 0;
@@ -2968,47 +2969,46 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                         } else {
                             if (list.size() == 0) {
-                            if (diffInYears >= 3) {
-                                if (diffMinutes >= 60) {
-                                    late.add("Very Late");
-                                    VeryLateCount++;
-                                    if (VeryLateCount > 1) {
+                                if (diffInYears >= 3) {
+                                    if (diffMinutes >= 60) {
+                                        late.add("Very Late");
                                         VeryLateCount++;
-                                        totalLateCollection += 100;
-                                    }
-                                } else if (diffMinutes >= 30 && diffMinutes < 60) {
-                                    late.add("Late");
-                                    LateCount++;
-                                    if (LateCount > 5) {
+                                        if (VeryLateCount > 1) {
+                                            VeryLateCount++;
+                                            totalLateCollection += 100;
+                                        }
+                                    } else if (diffMinutes >= 30 && diffMinutes < 60) {
+                                        late.add("Late");
                                         LateCount++;
-                                        totalLateCollection += 100;
+                                        if (LateCount > 5) {
+                                            LateCount++;
+                                            totalLateCollection += 100;
+                                        }
+                                    } else {
+                                        late.add("-");
                                     }
                                 } else {
-                                    late.add("-");
+                                    if (diffMinutes >= 15 && diffMinutes < 60) {
+                                        late.add("Late");
+                                        LateCount++;
+                                        if (LateCount > 5) {
+                                            LateCount++;
+                                            totalLateCollection += 100;
+                                        }
+                                    } else if (diffMinutes >= 60) {
+                                        late.add("Very Late");
+                                        VeryLateCount++;
+                                        if (VeryLateCount > 1) {
+                                            VeryLateCount++;
+                                            totalLateCollection += 100;
+                                        }
+                                    } else {
+                                        late.add("-");
+                                    }
                                 }
                             } else {
-                                if (diffMinutes >= 15 && diffMinutes < 60) {
-                                    late.add("Late");
-                                    LateCount++;
-                                    if (LateCount > 5) {
-                                        LateCount++;
-                                        totalLateCollection += 100;
-                                    }
-                                } else if (diffMinutes >= 60) {
-                                    late.add("Very Late");
-                                    VeryLateCount++;
-                                    if (VeryLateCount > 1) {
-                                        VeryLateCount++;
-                                        totalLateCollection += 100;
-                                    }
-                                } else {
-                                    late.add("-");
-                                }
-                            }
-                            } 
-                            else{
-                             late.add("-");
-                            
+                                late.add("-");
+
                             }
                         }
 
@@ -3023,11 +3023,19 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                     }
 
+                    // leave first / second half
+                    Boolean empLeavebal = leaveEmployeeDetailService.readleaveAttendance(date, employeeMaster1.getId());
+                    if (empLeavebal) {
+                        leaveCount = leaveCount + 0.5;
+
+                    }
+
                     request.setAttribute("PrAb", PrAb);
                     request.setAttribute("late", late);
                     request.setAttribute("presentCount", presentCount);
                     request.setAttribute("WOCount", WOCount);
                     request.setAttribute("totalLateCollection", totalLateCollection);
+                    request.setAttribute("leaveCount", leaveCount);
 
                     if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
@@ -11407,7 +11415,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
         return mv;
     }
-    
+
     // work from home Report
     public ModelAndView searchWorkFromHomeDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -11417,6 +11425,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("Payroll/workfromhomeReport");
         return mv;
     }
+
     public ModelAndView searchFormEmployeeWorkfromHomeDetailSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -11458,7 +11467,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             otList.add(empExcelData[2]);
             otList.add(empExcelData[4]);
             otList.add(empExcelData[3]);
-            
 
             finalOtlist.add(otList);
         }
@@ -11471,6 +11479,5 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv = searchWorkFromHomeDetail(request, response);
         return mv;
     }
-
 
 }

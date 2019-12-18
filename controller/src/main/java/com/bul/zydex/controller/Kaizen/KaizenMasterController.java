@@ -303,7 +303,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
                         msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
                         msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
                         msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                        sendMail.sendMail(from, To, Subject, msg);
+//                        sendMail.sendMail(from, To, Subject, msg);
                     } catch (Exception e) {
                     }
 
@@ -328,7 +328,7 @@ public class KaizenMasterController extends KaizenMasterAbstract {
                                 msg = msg.replaceAll("\\{to_user\\}", employeeMaster1.getEmployeeName());
                                 msg = msg.replaceAll("\\{from_user\\}", employeeMaster.getEmployeeName());
                                 msg = msg.replaceAll("\\{from_designation\\}", designationMaster.getDesignationName());
-                                sendMail.sendMail(from, To, Subject, msg);
+//                                sendMail.sendMail(from, To, Subject, msg);
                             } catch (Exception e) {
                             }
 

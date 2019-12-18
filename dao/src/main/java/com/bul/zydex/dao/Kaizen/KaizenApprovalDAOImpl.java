@@ -47,7 +47,7 @@ public class KaizenApprovalDAOImpl<T> extends GenericsDAOImpl<T> implements Kaiz
                 + " FROM KaizenApproval ma "
                 + " Left Join ma.kaizenMaster mm "
                 //                + " Where  mm.currentLevel >= ma.level "
-                + " Where mm.status = " + 1
+                + " Where mm.status = " + 0
                 + " And ma.employeeMaster.id = " + empId
                 + " order by mm.id desc"
                 + " group by mm.id desc";

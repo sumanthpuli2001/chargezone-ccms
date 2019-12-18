@@ -87,4 +87,6 @@ public interface LeaveEmployeeDetailDAO<T> extends GenericsDAO<T> {
 
     
     public Boolean readPreviousLeaveFriday(String fdate, int empId);
+    
+    public Boolean readleaveAttendance(String fdate, int empId);
 }

@@ -389,6 +389,10 @@
                                                 <i class="fa fa-paypal"></i>
                                                 Policy
                                             </a>
+                                            <a style="font-size: 14px;text-align: left;color: #2c3e50;" href="homeController.htm?act=kaizen">
+                                                <i class="fa fa-twitch"></i>&nbsp;Kaizen
+                                            </a>
+                                            
                                         </div>
                                     </div>
                                     <div class="col-md-9">

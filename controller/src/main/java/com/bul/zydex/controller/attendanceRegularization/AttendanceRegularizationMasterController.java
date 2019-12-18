@@ -4586,18 +4586,68 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             double Actualhours = 0;
 //            Actualhours = prcount * HrManatory;
             Actualhours = prcount * HrManatory;
-
+            String ActualhoursString = String.valueOf(Actualhours);
+            String[] ActualhoursArray = new String[2];
+            if(ActualhoursString.contains("."))
+            {
+                ActualhoursArray = ActualhoursString.split("\\.");
+            }
+            else
+            {
+                //ActualhoursArray = new String[2];
+                ActualhoursArray[0] = ActualhoursString;
+                ActualhoursArray[1] = "0";
+            }
+            Actualhours = (double)((int)Actualhours);
+             // convert base 60 min to 100 decimal point
+            double ActualMinutes = (Double.valueOf(ActualhoursArray[1]) * 60)/10;
+            double totalActualMinutes = (Double.valueOf(ActualhoursArray[0])*60) + ActualMinutes;
             // short hours actual working - earned working hours
             String[] parts = wh2.split(":");
             int horaHour = Integer.valueOf(parts[0]);
             int horaMin = Integer.valueOf(parts[1]);
-
-            Double totalShortHours = Actualhours - horaHour;
-
-            l = totalShortHours.intValue() + ":" + horaMin;
+            
+            double totalWoringMinutes = (horaHour*60)+horaMin;
+            int finalDifferenceMinute = (int)(totalActualMinutes - totalWoringMinutes);
+            String differenceInTime = "";
+            if(finalDifferenceMinute<0)
+            {
+                differenceInTime +="- ";
+                finalDifferenceMinute = finalDifferenceMinute * (-1);
+            }
+            else
+            {
+                differenceInTime +="+ ";
+            }
+            differenceInTime += (finalDifferenceMinute/60)+":"+(finalDifferenceMinute%60);
+            l = differenceInTime;
+            
+            //----- Calculatation of Unpaid OT Hours ---------------
+            // Unpaid OT Hours = Difference ( OT + / Short hours - ) - OT Hours;
+            long totalUnpaidOverTimeInt = ((long)finalDifferenceMinute - TimeUnit.MILLISECONDS.toMinutes(TotalOtTime));
+            totalUnpaidOverTime = String.format("%02d:%02d", TimeUnit.MINUTES.toHours(totalUnpaidOverTimeInt),
+                TimeUnit.MINUTES.toMinutes(totalUnpaidOverTimeInt) - TimeUnit.HOURS.toMinutes(TimeUnit.MINUTES.toHours(totalUnpaidOverTimeInt)));
+        
+// convert base 60 min to 100 decimal point
+/*            double horaMinTemp = (((double)horaMin) * 100)/60;
+            double multiPlayer = 1.0;
+            
+            int tempMinLength = String.valueOf(((int)horaMinTemp)).length();
+            
+            for(int loop=0 ; loop<tempMinLength ; loop++)
+            {
+                multiPlayer = multiPlayer * 10;
+            }
+            
+            double tempTotalWorkHours = (double)horaHour + (horaMinTemp / multiPlayer);
+            
+            //Double totalShortHours = Actualhours - horaHour;
+            double differenceHours = Actualhours - tempTotalWorkHours;
+            l = String.valueOf(differenceHours);
+            //l = totalShortHours.intValue() + ":" + horaMin;*/
 
         } catch (Exception e) {
-            l = 0 + ":" + 0 + ":" + 0;
+            l = ""+0;// + ":" + 0 + ":" + 0;
         }
 
 //        if (horaMin >= 30) {
@@ -4608,7 +4658,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //        request.setAttribute("totalPenaltyHours", totalPenaltyHours);
         request.setAttribute("totalPenaltyHours", totalPenaltyAmount);
         request.setAttribute("totalPaidOverTime", totalPaidOverTime);
-//        request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime);
+        request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime);
         request.setAttribute("shortHours", l);
 
         // For Each Loop for iterating ArrayList 
@@ -4637,9 +4687,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             }
         }
 
-        String totalUnpaidOverTime1 = "" + (minuteTotal / 60) + ":" + (minuteTotal % 60);
+        //String totalUnpaidOverTime1 = "" + (minuteTotal / 60) + ":" + (minuteTotal % 60);
 
-        request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime1);
+        //request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime1);
 
         mv.getModelMap()
                 .put("firstHalfList", newList);

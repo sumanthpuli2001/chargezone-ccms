@@ -862,6 +862,7 @@
         <property name="onCallService" ref="onCallService1" />
         <property name="employeeLeaveBalanceService" ref="employeeLeaveBalanceService1" />
         <property name="holidayMasterService" ref="holidayMasterService1" />
+        <property name="leaveEmployeeDetailService" ref="leaveEmployeeDetailService1"/>
         
     </bean>
     <bean id="additionalAmountCheckController1" class="com.bul.zydex.controller.Payroll.AdditionalAmountCheckController" parent="controllerConfig" >

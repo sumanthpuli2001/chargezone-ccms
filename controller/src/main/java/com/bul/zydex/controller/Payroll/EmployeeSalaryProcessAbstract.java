@@ -23,6 +23,7 @@ import com.bul.zydex.model.EmployeeSubType;
 import com.bul.zydex.model.EmployeeTypeMaster;
 import com.bul.zydex.model.EmployeeTypeWiseSalary;
 import com.bul.zydex.model.HolidayMaster;
+import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.model.OnCall;
@@ -91,6 +92,7 @@ import com.bul.zydex.service.emp.EmployeeSubTypeService;
 import com.bul.zydex.service.emp.EmployeeTypeService;
 import com.bul.zydex.service.holiday.HolidayMasterService;
 import com.bul.zydex.service.leave.EmployeeLeaveBalanceService;
+import com.bul.zydex.service.leave.LeaveEmployeeDetailService;
 import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.policy.CtcAllowanceService;
 import com.bul.zydex.service.policy.EmployeeCtcDetailService;
@@ -156,9 +158,18 @@ public class EmployeeSalaryProcessAbstract extends CustomAbstract {
     protected OnCallService<OnCall> OnCallService;
     protected EmployeeLeaveBalanceService<EmployeeLeaveBalance> employeeLeaveBalanceService;
     protected HolidayMasterService<HolidayMaster> holidayMasterService;
-
+    protected LeaveEmployeeDetailService<LeaveEmployeeDetail> leaveEmployeeDetailService;
+    
     Validator employeeSalaryProcessValidator;
 
+    public LeaveEmployeeDetailService<LeaveEmployeeDetail> getLeaveEmployeeDetailService() {
+        return leaveEmployeeDetailService;
+    }
+
+    public void setLeaveEmployeeDetailService(LeaveEmployeeDetailService<LeaveEmployeeDetail> leaveEmployeeDetailService) {
+        this.leaveEmployeeDetailService = leaveEmployeeDetailService;
+    }
+    
     public EmployeeDatetimeDataService<EmployeeDatetimeData> getEmployeeDatetimeDataService() {
         return employeeDatetimeDataService;
     }

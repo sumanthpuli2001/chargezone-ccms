@@ -3439,7 +3439,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //                                
 //                            }
 
-                    // OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
+//                     OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
                     if (firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
                             && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay")) {
                         String[] userTimeInStr = firstHalf.split("`");
@@ -4589,12 +4589,15 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         String l = "";
         try {
             SimpleDateFormat sdf12 = new SimpleDateFormat("HH:mm:ss");
-            int prcount = presentCount;
+            double prcount = presentCount - leaveCount;
             double HrManatory = Double.parseDouble(employeeMaster1.getHoursMadatory());
             double Actualhours = 0;
 //            Actualhours = prcount * HrManatory;
             Actualhours = prcount * HrManatory;
-            String ActualhoursString = String.valueOf(Actualhours);
+            
+            String formattedString = String.format("%.02f", Actualhours);
+            
+            String ActualhoursString = String.valueOf(formattedString);
             String[] ActualhoursArray = new String[2];
             if(ActualhoursString.contains("."))
             {
@@ -4608,7 +4611,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             }
             Actualhours = (double)((int)Actualhours);
              // convert base 60 min to 100 decimal point
-            double ActualMinutes = (Double.valueOf(ActualhoursArray[1]) * 60)/10;
+            double ActualMinutes = (Double.valueOf(ActualhoursArray[1]) * 60)/100;
             double totalActualMinutes = (Double.valueOf(ActualhoursArray[0])*60) + ActualMinutes;
             // short hours actual working - earned working hours
             String[] parts = wh2.split(":");
@@ -4616,25 +4619,41 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             int horaMin = Integer.valueOf(parts[1]);
             
             double totalWoringMinutes = (horaHour*60)+horaMin;
-            int finalDifferenceMinute = (int)(totalActualMinutes - totalWoringMinutes);
+            int finalDifferenceMinute = (int)(totalWoringMinutes - totalActualMinutes);//totalActualMinutes - totalWoringMinutes);
             String differenceInTime = "";
+            long totalUnpaidOverTimeInt = 0;
             if(finalDifferenceMinute<0)
             {
                 differenceInTime +="- ";
                 finalDifferenceMinute = finalDifferenceMinute * (-1);
+                totalUnpaidOverTimeInt = 0;
             }
             else
             {
                 differenceInTime +="+ ";
+                totalUnpaidOverTimeInt = ((long)finalDifferenceMinute - TimeUnit.MILLISECONDS.toMinutes(TotalOtTime));
             }
+            
             differenceInTime += (finalDifferenceMinute/60)+":"+(finalDifferenceMinute%60);
             l = differenceInTime;
             
+            
             //----- Calculatation of Unpaid OT Hours ---------------
             // Unpaid OT Hours = Difference ( OT + / Short hours - ) - OT Hours;
-            long totalUnpaidOverTimeInt = ((long)finalDifferenceMinute - TimeUnit.MILLISECONDS.toMinutes(TotalOtTime));
+//            if(finalDifferenceMinute > 0)
+//            {
+//                totalUnpaidOverTimeInt = ((long)finalDifferenceMinute - TimeUnit.MILLISECONDS.toMinutes(TotalOtTime));
+//            }
+//            else
+//            {
+//                totalUnpaidOverTimeInt = 0;
+//            }
+            if(totalUnpaidOverTimeInt < 0)
+            {
+                totalUnpaidOverTimeInt = totalUnpaidOverTimeInt * (-1);
+            }
             totalUnpaidOverTime = String.format("%02d:%02d", TimeUnit.MINUTES.toHours(totalUnpaidOverTimeInt),
-                TimeUnit.MINUTES.toMinutes(totalUnpaidOverTimeInt) - TimeUnit.HOURS.toMinutes(TimeUnit.MINUTES.toHours(totalUnpaidOverTimeInt)));
+            TimeUnit.MINUTES.toMinutes(totalUnpaidOverTimeInt) - TimeUnit.HOURS.toMinutes(TimeUnit.MINUTES.toHours(totalUnpaidOverTimeInt)));
         
 // convert base 60 min to 100 decimal point
 /*            double horaMinTemp = (((double)horaMin) * 100)/60;

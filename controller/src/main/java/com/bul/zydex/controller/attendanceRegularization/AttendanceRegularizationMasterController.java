@@ -3039,7 +3039,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                     if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")&& !firstHalf.equals("Lieu Day Leave")) {
                         String[] a = firstHalf.split("#");
                         String[] shift = a[1].split("\\$");
                         SimpleDateFormat sdf12 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -3338,7 +3338,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                     if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")&& !firstHalf.equals("Lieu Day Leave")) {
                         String[] userTimeInStr = firstHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
                         String[] userTimeOutStr = firstHalf.split("!");
@@ -3441,7 +3441,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
 //                     OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
                     if (firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
-                            && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay")) {
+                            && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay")|| firstHalf.contains("Lieu Day Leave")) {
                         String[] userTimeInStr = firstHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
                         String[] userTimeOutStr = firstHalf.split("!");
@@ -3472,7 +3472,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")&& !firstHalf.equals("Lieu Day Leave")) {
 
                         String[] userTimeInStr = firstHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");

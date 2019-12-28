@@ -2902,6 +2902,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         List late = new ArrayList();
         int presentCount = 0;
         int WOCount = 0;
+        double leaveCount = 0;
         int LateCount = 0;
         int VeryLateCount = 0;
         int totalLateCollection = 0;
@@ -2968,47 +2969,46 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                         } else {
                             if (list.size() == 0) {
-                            if (diffInYears >= 3) {
-                                if (diffMinutes >= 60) {
-                                    late.add("Very Late");
-                                    VeryLateCount++;
-                                    if (VeryLateCount > 1) {
+                                if (diffInYears >= 3) {
+                                    if (diffMinutes >= 60) {
+                                        late.add("Very Late");
                                         VeryLateCount++;
-                                        totalLateCollection += 100;
-                                    }
-                                } else if (diffMinutes >= 30 && diffMinutes < 60) {
-                                    late.add("Late");
-                                    LateCount++;
-                                    if (LateCount > 5) {
+                                        if (VeryLateCount > 1) {
+                                            VeryLateCount++;
+                                            totalLateCollection += 100;
+                                        }
+                                    } else if (diffMinutes >= 30 && diffMinutes < 60) {
+                                        late.add("Late");
                                         LateCount++;
-                                        totalLateCollection += 100;
+                                        if (LateCount > 5) {
+                                            LateCount++;
+                                            totalLateCollection += 100;
+                                        }
+                                    } else {
+                                        late.add("-");
                                     }
                                 } else {
-                                    late.add("-");
+                                    if (diffMinutes >= 15 && diffMinutes < 60) {
+                                        late.add("Late");
+                                        LateCount++;
+                                        if (LateCount > 5) {
+                                            LateCount++;
+                                            totalLateCollection += 100;
+                                        }
+                                    } else if (diffMinutes >= 60) {
+                                        late.add("Very Late");
+                                        VeryLateCount++;
+                                        if (VeryLateCount > 1) {
+                                            VeryLateCount++;
+                                            totalLateCollection += 100;
+                                        }
+                                    } else {
+                                        late.add("-");
+                                    }
                                 }
                             } else {
-                                if (diffMinutes >= 15 && diffMinutes < 60) {
-                                    late.add("Late");
-                                    LateCount++;
-                                    if (LateCount > 5) {
-                                        LateCount++;
-                                        totalLateCollection += 100;
-                                    }
-                                } else if (diffMinutes >= 60) {
-                                    late.add("Very Late");
-                                    VeryLateCount++;
-                                    if (VeryLateCount > 1) {
-                                        VeryLateCount++;
-                                        totalLateCollection += 100;
-                                    }
-                                } else {
-                                    late.add("-");
-                                }
-                            }
-                            } 
-                            else{
-                             late.add("-");
-                            
+                                late.add("-");
+
                             }
                         }
 
@@ -3023,11 +3023,19 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                     }
 
+                    // leave first / second half
+                    Boolean empLeavebal = leaveEmployeeDetailService.readleaveAttendance(date, employeeMaster1.getId());
+                    if (empLeavebal) {
+                        leaveCount = leaveCount + 0.5;
+
+                    }
+
                     request.setAttribute("PrAb", PrAb);
                     request.setAttribute("late", late);
                     request.setAttribute("presentCount", presentCount);
                     request.setAttribute("WOCount", WOCount);
                     request.setAttribute("totalLateCollection", totalLateCollection);
+                    request.setAttribute("leaveCount", leaveCount);
 
                     if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
@@ -3431,7 +3439,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //                                
 //                            }
 
-                    // OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
+//                     OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
                     if (firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
                             && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay")|| firstHalf.contains("Lieu Day Leave")) {
                         String[] userTimeInStr = firstHalf.split("`");
@@ -4581,23 +4589,92 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         String l = "";
         try {
             SimpleDateFormat sdf12 = new SimpleDateFormat("HH:mm:ss");
-            int prcount = presentCount;
+            double prcount = presentCount - leaveCount;
             double HrManatory = Double.parseDouble(employeeMaster1.getHoursMadatory());
             double Actualhours = 0;
 //            Actualhours = prcount * HrManatory;
             Actualhours = prcount * HrManatory;
-
+            
+            String formattedString = String.format("%.02f", Actualhours);
+            
+            String ActualhoursString = String.valueOf(formattedString);
+            String[] ActualhoursArray = new String[2];
+            if(ActualhoursString.contains("."))
+            {
+                ActualhoursArray = ActualhoursString.split("\\.");
+            }
+            else
+            {
+                //ActualhoursArray = new String[2];
+                ActualhoursArray[0] = ActualhoursString;
+                ActualhoursArray[1] = "0";
+            }
+            Actualhours = (double)((int)Actualhours);
+             // convert base 60 min to 100 decimal point
+            double ActualMinutes = (Double.valueOf(ActualhoursArray[1]) * 60)/100;
+            double totalActualMinutes = (Double.valueOf(ActualhoursArray[0])*60) + ActualMinutes;
             // short hours actual working - earned working hours
             String[] parts = wh2.split(":");
             int horaHour = Integer.valueOf(parts[0]);
             int horaMin = Integer.valueOf(parts[1]);
-
-            Double totalShortHours = Actualhours - horaHour;
-
-            l = totalShortHours.intValue() + ":" + horaMin;
+            
+            double totalWoringMinutes = (horaHour*60)+horaMin;
+            int finalDifferenceMinute = (int)(totalWoringMinutes - totalActualMinutes);//totalActualMinutes - totalWoringMinutes);
+            String differenceInTime = "";
+            long totalUnpaidOverTimeInt = 0;
+            if(finalDifferenceMinute<0)
+            {
+                differenceInTime +="- ";
+                finalDifferenceMinute = finalDifferenceMinute * (-1);
+                totalUnpaidOverTimeInt = 0;
+            }
+            else
+            {
+                differenceInTime +="+ ";
+                totalUnpaidOverTimeInt = ((long)finalDifferenceMinute - TimeUnit.MILLISECONDS.toMinutes(TotalOtTime));
+            }
+            
+            differenceInTime += (finalDifferenceMinute/60)+":"+(finalDifferenceMinute%60);
+            l = differenceInTime;
+            
+            
+            //----- Calculatation of Unpaid OT Hours ---------------
+            // Unpaid OT Hours = Difference ( OT + / Short hours - ) - OT Hours;
+//            if(finalDifferenceMinute > 0)
+//            {
+//                totalUnpaidOverTimeInt = ((long)finalDifferenceMinute - TimeUnit.MILLISECONDS.toMinutes(TotalOtTime));
+//            }
+//            else
+//            {
+//                totalUnpaidOverTimeInt = 0;
+//            }
+            if(totalUnpaidOverTimeInt < 0)
+            {
+                totalUnpaidOverTimeInt = totalUnpaidOverTimeInt * (-1);
+            }
+            totalUnpaidOverTime = String.format("%02d:%02d", TimeUnit.MINUTES.toHours(totalUnpaidOverTimeInt),
+            TimeUnit.MINUTES.toMinutes(totalUnpaidOverTimeInt) - TimeUnit.HOURS.toMinutes(TimeUnit.MINUTES.toHours(totalUnpaidOverTimeInt)));
+        
+// convert base 60 min to 100 decimal point
+/*            double horaMinTemp = (((double)horaMin) * 100)/60;
+            double multiPlayer = 1.0;
+            
+            int tempMinLength = String.valueOf(((int)horaMinTemp)).length();
+            
+            for(int loop=0 ; loop<tempMinLength ; loop++)
+            {
+                multiPlayer = multiPlayer * 10;
+            }
+            
+            double tempTotalWorkHours = (double)horaHour + (horaMinTemp / multiPlayer);
+            
+            //Double totalShortHours = Actualhours - horaHour;
+            double differenceHours = Actualhours - tempTotalWorkHours;
+            l = String.valueOf(differenceHours);
+            //l = totalShortHours.intValue() + ":" + horaMin;*/
 
         } catch (Exception e) {
-            l = 0 + ":" + 0 + ":" + 0;
+            l = ""+0;// + ":" + 0 + ":" + 0;
         }
 
 //        if (horaMin >= 30) {
@@ -4608,7 +4685,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 //        request.setAttribute("totalPenaltyHours", totalPenaltyHours);
         request.setAttribute("totalPenaltyHours", totalPenaltyAmount);
         request.setAttribute("totalPaidOverTime", totalPaidOverTime);
-//        request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime);
+        request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime);
         request.setAttribute("shortHours", l);
 
         // For Each Loop for iterating ArrayList 
@@ -4637,9 +4714,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             }
         }
 
-        String totalUnpaidOverTime1 = "" + (minuteTotal / 60) + ":" + (minuteTotal % 60);
+        //String totalUnpaidOverTime1 = "" + (minuteTotal / 60) + ":" + (minuteTotal % 60);
 
-        request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime1);
+        //request.setAttribute("totalUnpaidOverTime", totalUnpaidOverTime1);
 
         mv.getModelMap()
                 .put("firstHalfList", newList);
@@ -11407,7 +11484,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
         return mv;
     }
-    
+
     // work from home Report
     public ModelAndView searchWorkFromHomeDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -11417,6 +11494,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv.setViewName("Payroll/workfromhomeReport");
         return mv;
     }
+
     public ModelAndView searchFormEmployeeWorkfromHomeDetailSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         AttendanceRegularization attendanceRegularization = new AttendanceRegularization();
@@ -11458,7 +11536,6 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             otList.add(empExcelData[2]);
             otList.add(empExcelData[4]);
             otList.add(empExcelData[3]);
-            
 
             finalOtlist.add(otList);
         }
@@ -11471,6 +11548,5 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         mv = searchWorkFromHomeDetail(request, response);
         return mv;
     }
-
 
 }

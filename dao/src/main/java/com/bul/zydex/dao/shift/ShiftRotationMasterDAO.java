@@ -21,5 +21,5 @@ public interface ShiftRotationMasterDAO<T> extends GenericsDAO<T> {
     public List<?> checkByShiftRotationName(T object);
 
     public List<?> readByShiftRotationName(String shiftRotationTemp);
-
+    
 }

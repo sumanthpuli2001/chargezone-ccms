@@ -84,6 +84,9 @@ public interface LeaveEmployeeDetailService<T> extends GenericsService<T> {
     public List<?> viewEmpLeaveRequestForHR();
 
     public List<?> readLeaveDaysAsApproved(LeaveEmployeeDetail leaveEmployeeDetail);
+
     public Boolean readPreviousLeaveFriday(String fdate, int empId);
+
+    public Boolean readleaveAttendance(String fdate, int empId);
 
 }

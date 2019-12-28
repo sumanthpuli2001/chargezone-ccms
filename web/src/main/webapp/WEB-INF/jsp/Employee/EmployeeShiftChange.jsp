@@ -162,7 +162,6 @@
                                                         <select name="shiftMasterId" id="shiftMasterId" class="form-control">
                                                             
                                                         </select>
-
                                                     </div> 
                                                 </div>
                                                 <div class="form-group">

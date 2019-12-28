@@ -522,7 +522,7 @@
                                                                     <tr>
                                                                         <c:set var="shortL" value="${shl/2}"/>
                                                                         <c:if test="${presentCount ne 0}">
-                                                                            <td style="color: green;text-align: center;" >${presentCount}</td>
+                                                                            <td style="color: green;text-align: center;" >${presentCount-leaveCount}</td>
                                                                         </c:if>
                                                                         <c:if test="${absent ne 0}">
                                                                             <td style="color: red;text-align: center;" >${absent}</td>
@@ -578,7 +578,7 @@
                                                                             <c:if test="${!empty totalUnpaidOverTime}">
                                                                             <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalUnpaidOverTime}</th>
                                                                             </c:if> 
-                                                                        <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${presentCount * hoursMadatory}</th>
+                                                                        <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${(presentCount-leaveCount) * hoursMadatory}</th>
                                                                         <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${totalWorkingSystem}</th>
                                                                         <th style="color: blue;text-align: center;padding:0px 20px 0px 20px;">${shortHours}</th>
                                                                     </tr>

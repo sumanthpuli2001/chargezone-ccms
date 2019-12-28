@@ -25,6 +25,22 @@
                 return false;
             }
         }
+        function selectShift(rotationId) {
+            console.log("......."+${employeeMaster.shiftHoursId});
+            rotationId = ${employeeMaster.shiftHoursId};
+            var userId = document.getElementById("userId").value;
+//            document.getElementById('shiftMasterId').innerHTML = "Fetching ... .. .";
+            $.post("shiftRotationMaster.htm?act=readRotationAjax",
+                    {
+                        rotationId: rotationId, userId: userId
+                    }, function (responseTxt, statusTxt, xhr) {
+                if (statusTxt === "success") {
+                    document.getElementById('shiftMasterId').innerHTML = responseTxt;
+                }
+                if (statusTxt === "error")
+                    alert("Error: " + xhr.status + ": " + xhr.statusText);
+            });
+        }
 
     </script>
 
@@ -50,7 +66,10 @@
         <form:form action="shiftRotationInfo.htm?act=editRotationSubmit" method="post" commandName="shiftRotationInfo"
                    name='form1' onsubmit='return saveSubmit11();' class="form-horizontal" role="form">
             <form:hidden path="id"></form:hidden>
-
+                <input type="hidden" name="userId" id="userId" value="${employeeMaster.userMaster.id}">
+                <input type="hidden" name="empId" id="empId" value="${employeeMaster.id}">
+                <input type="hidden" name="shiftId" id="shiftId" value="${employeeMaster.shiftHoursId}">
+                
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">
@@ -66,24 +85,78 @@
                                             <div class="col-md-12 col-sm-12">
                                                 <div class="form-group">
                                                     <div class="col-sm-6">
+                                                        <!-- ----------------- -->
+                                                        
+                                                                <script>
+                                                                    selectShift(${employeeMaster.shiftHoursId});
+                                                                </script>
+                                                                <%--<select name="shiftId" id="shiftId" class="form-control" onchange="selectShift(this.value)">
+                                                                    <script>
+                                                                        console.log("this.value"+this.value);
+                                                                    </script>
+                                                                    <option value="" label="-- Select --" ></option>
+                                                                    <c:forEach var="shift1" items="${rotationMap}">
+                                                                        <c:if test="${shift1.key eq employeeMaster.shiftHoursId}">
+                                                                            <option value="${shift1.key}" selected="">${shift1.value}</option>
+                                                                        </c:if>
+                                                                        <c:if test="${shift1.key ne employeeMaster.shiftHoursId}">
+                                                                            <option value="${shift1.key}" >${shift1.value}</option>
+                                                                        </c:if>
+                                                                    </c:forEach>
+                                                                </select>--%>
+                                                         
+                                                                <label>Shift Name:<span style="color: red;font-size: 12px;">*</span></label>
+                                                                <select name="shiftMasterId" id="shiftMasterId" class="form-control">
+
+                                                                </select>
+                                                          
+                                                        <!-- ------------------ -->
+                                                        <%--
                                                         <label>Shift Name:</label>
 
-                                                        <select name="shiftId" id="shiftId" class="form-control">
-                                                            <!--<option value="" label="-- Select --" ></option>-->
+                                                        <select name="shiftId" id="shiftId" class="form-control" onchange="selectShift(this.value)">
+                                                                <!--<option value="" label="-- Select --" ></option>-->
+                                                            <c:forEach var="shift1" items="${rotationMap}">
+                                                                <option value="${shift1.key}">${shift1.value}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                        
+                                                        <div class="col-sm-6" id="shiftMasterId">
+                                                            <select name="shiftMasterId" id="shiftMasterId" class="form-control">
+                                                            </select>
+                                                        </div>--%>
+                                                   <%-- 
                                                         <c:forEach var="shift1" items="${rotationMap}">
-                                                            <option value="${shift1.key}">${shift1.value}</option>
+                                                        <option value="${shift1.key}">${shift1.value}</option>
+                                                        <c:choose>
+                                                        <c:when test="${shiftRotationInfo.shiftRotationMaster.id == shift1.key}">
+                                                        <option value="${shift1.key}" selected="">${shift1.value}</option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                        <option value="${shift1.key}">${shift1.value}</option>
+                                                        </c:otherwise>
+                                                        </c:choose>
                                                         </c:forEach>
-                                                    </select>
+                                                    --%>
                                                 </div>
                                                 <div class="col-sm-6">
-                                                    <label>Shift Rotation Date:</label>
+                                                    
+                                                    <%-- ------ --%>
+                                                   
+                                                        <label>Shift Rotation Date:<span style="color: red;font-size: 12px;">*</span></label>
 
+                                                        <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
+                                                            <form:input path="rotationDate" class="form-control" size="16" readonly="true"></form:input>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                                            <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                                        </div>
+                                                    <%--
                                                     <div class="input-group date form_datetime"   data-date-format="dd/mm/yyyy" data-link-field="dtp_input1">
                                                         <form:input path="rotationDate" class="form-control" size="16" value="" readonly="true"></form:input>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-                                                        </div>
-                                                    <form:errors path="rotationDate" cssClass="errorDiv"></form:errors>
+                                                        </div>--%>
+                                                    <%--<form:errors path="rotationDate" cssClass="errorDiv"></form:errors>--%>
 
                                                     </div>
                                                 </div>
@@ -114,12 +187,30 @@
         <!-- /.content -->
     </div>
 
+    <script type="text/javascript">
+        $('.form_datetime').datetimepicker({
+            //language:  'fr',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    </script>
     <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+     
     <script>
         $(document).ready(function () {
             if ($('#carriedForwardStatus1').attr('checked')) {
                 $('#chechBoxDivId').show(500);
             }
+            //-----------------
+            //var rotationId = document.getElementById("shiftId").value;
+            //console.log("Rotation id: "+rotationId);
+            //selectShift(rotationId);
+            //----------------
         });
         $('#carriedForwardStatus1').on('ifChecked', function (event) {
             $('#chechBoxDivId').show(500);

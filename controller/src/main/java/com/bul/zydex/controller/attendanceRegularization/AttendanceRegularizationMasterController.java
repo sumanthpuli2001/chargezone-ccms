@@ -4403,12 +4403,13 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             List<?> allpunchList1 = employeeDatetimeDataService.readPuchDataDateWiseAll1(date, Integer.parseInt(id));
                             if (!allpunchList1.isEmpty()) {
                                 if (allpunchList1.size() % 2 == 0) {
-                                    for (int h = 1; h < allpunchList1.size() - 1; h++) {
-                                        String out = allpunchList1.get(h).toString();
-                                        String in = allpunchList1.get(h + 1).toString();
+                                    for (int h = 0; h < allpunchList1.size() - 1; h++) {
+                                        String in = allpunchList1.get(h).toString();
+                                        String out = allpunchList1.get(h + 1).toString();
                                         Date out1 = sdf123.parse(out);
                                         Date in1 = sdf123.parse(in);
-                                        diff11 += in1.getTime() - out1.getTime();
+                                        //diff11 += in1.getTime() - out1.getTime();
+                                        diff11 += out1.getTime() - in1.getTime();
                                         h++;
 
                                     }
@@ -4438,8 +4439,9 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             } else if (minutes < 0) {
                                 minute = "00";
                             }
-                            String workingHours = hour + ":" + minute;
-
+                            
+                            //String workingHours = hour + ":" + minute;
+                            String workingHours = "" + (diffMinutes/60) + ":" + (diffMinutes%60); 
                             workingHour.add(workingHours);
 //                            timecount = timecount - breakHour;
 //                            double empHour = (double) timecount / 60;

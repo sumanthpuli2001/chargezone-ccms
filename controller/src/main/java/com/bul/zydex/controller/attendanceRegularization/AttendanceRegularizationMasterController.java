@@ -9666,7 +9666,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                 String firstHalf = "" + next[1];
                 if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                         && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")&& !firstHalf.equals("Lieu Day Leave")) {
                     Date date1 = sdf.parse("" + next[0]);
                     Calendar c2 = Calendar.getInstance();
                     c2.setTime(date1);
@@ -9722,6 +9722,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         List late = new ArrayList();
         int presentCount = 0;
         int WOCount = 0;
+          double leaveCount = 0;
         int LateCount = 0;
         int VeryLateCount = 0;
         int totalLateCollection = 0;
@@ -9832,6 +9833,14 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                         }
 
                     }
+                    
+                    // leave first / second half
+                    Boolean empLeavebal = leaveEmployeeDetailService.readleaveAttendance(date, employeeMaster1.getId());
+                    if (empLeavebal) {
+                        leaveCount = leaveCount + 0.5;
+
+                    }
+                    request.setAttribute("leaveCount", leaveCount);
 
                     request.setAttribute("PrAb", PrAb);
                     request.setAttribute("late", late);
@@ -9841,7 +9850,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                     if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay") && !firstHalf.equals("Lieu Day Leave")) {
                         String[] a = firstHalf.split("#");
                         String[] shift = a[1].split("\\$");
                         SimpleDateFormat sdf12 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -10140,7 +10149,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                     if (!firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")&& !firstHalf.equals("Lieu Day Leave")) {
                         String[] userTimeInStr = firstHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
                         String[] userTimeOutStr = firstHalf.split("!");
@@ -10256,7 +10265,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                     // OT when one half is leave and employee worked for less than 02:00 hours(Strats here)
                     if (firstHalf.contains("Casual Leave") || firstHalf.contains("Short Leave") || firstHalf.contains("C Off Leave") || firstHalf.contains("Privilege Leave") || firstHalf.contains("Sick Leave")
-                            && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay")) {
+                            && firstHalf.contains("Paternity Leave") || firstHalf.contains("Maternity Leave") || firstHalf.contains("Leave Without Pay") || firstHalf.equals("Lieu Day Leave")) {
                         String[] userTimeInStr = firstHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
                         String[] userTimeOutStr = firstHalf.split("!");
@@ -10287,7 +10296,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
 
                     } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                             && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                            && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")&& !firstHalf.equals("Lieu Day Leave")) {
 
                         String[] userTimeInStr = firstHalf.split("`");
                         String[] userTimeInStr1 = userTimeInStr[1].split("!");
@@ -11218,7 +11227,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             List<?> allpunchList1 = employeeDatetimeDataService.readPuchDataDateWiseAll1(date, Integer.parseInt(id));
                             if (!allpunchList1.isEmpty()) {
                                 if (allpunchList1.size() % 2 == 0) {
-                                    for (int h = 1; h < allpunchList1.size() - 1; h++) {
+                                    for (int h = 0; h < allpunchList1.size() - 1; h++) {
                                         String out = allpunchList1.get(h).toString();
                                         String in = allpunchList1.get(h + 1).toString();
                                         Date out1 = sdf123.parse(out);
@@ -11253,8 +11262,8 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
                             } else if (minutes < 0) {
                                 minute = "00";
                             }
-                            String workingHours = hour + ":" + minute;
-
+                            //String workingHours = hour + ":" + minute;
+                            String workingHours = "" + (diffMinutes/60) + ":" + (diffMinutes%60); 
                             workingHour.add(workingHours);
 //                            timecount = timecount - breakHour;
 //                            double empHour = (double) timecount / 60;
@@ -11404,23 +11413,92 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
         String l = "";
         try {
             SimpleDateFormat sdf12 = new SimpleDateFormat("HH:mm:ss");
-            int prcount = presentCount;
+            double prcount = presentCount - leaveCount;
             double HrManatory = Double.parseDouble(employeeMaster1.getHoursMadatory());
             double Actualhours = 0;
 //            Actualhours = prcount * HrManatory;
             Actualhours = prcount * HrManatory;
-
+            
+            String formattedString = String.format("%.02f", Actualhours);
+            
+            String ActualhoursString = String.valueOf(formattedString);
+            String[] ActualhoursArray = new String[2];
+            if(ActualhoursString.contains("."))
+            {
+                ActualhoursArray = ActualhoursString.split("\\.");
+            }
+            else
+            {
+                //ActualhoursArray = new String[2];
+                ActualhoursArray[0] = ActualhoursString;
+                ActualhoursArray[1] = "0";
+            }
+            Actualhours = (double)((int)Actualhours);
+             // convert base 60 min to 100 decimal point
+            double ActualMinutes = (Double.valueOf(ActualhoursArray[1]) * 60)/100;
+            double totalActualMinutes = (Double.valueOf(ActualhoursArray[0])*60) + ActualMinutes;
             // short hours actual working - earned working hours
             String[] parts = wh2.split(":");
             int horaHour = Integer.valueOf(parts[0]);
             int horaMin = Integer.valueOf(parts[1]);
-
-            Double totalShortHours = Actualhours - horaHour;
-
-            l = totalShortHours.intValue() + ":" + horaMin;
+            
+            double totalWoringMinutes = (horaHour*60)+horaMin;
+            int finalDifferenceMinute = (int)(totalWoringMinutes - totalActualMinutes);//totalActualMinutes - totalWoringMinutes);
+            String differenceInTime = "";
+            long totalUnpaidOverTimeInt = 0;
+            if(finalDifferenceMinute<0)
+            {
+                differenceInTime +="- ";
+                finalDifferenceMinute = finalDifferenceMinute * (-1);
+                totalUnpaidOverTimeInt = 0;
+            }
+            else
+            {
+                differenceInTime +="+ ";
+                totalUnpaidOverTimeInt = ((long)finalDifferenceMinute - TimeUnit.MILLISECONDS.toMinutes(TotalOtTime));
+            }
+            
+            differenceInTime += (finalDifferenceMinute/60)+":"+(finalDifferenceMinute%60);
+            l = differenceInTime;
+            
+            
+            //----- Calculatation of Unpaid OT Hours ---------------
+            // Unpaid OT Hours = Difference ( OT + / Short hours - ) - OT Hours;
+//            if(finalDifferenceMinute > 0)
+//            {
+//                totalUnpaidOverTimeInt = ((long)finalDifferenceMinute - TimeUnit.MILLISECONDS.toMinutes(TotalOtTime));
+//            }
+//            else
+//            {
+//                totalUnpaidOverTimeInt = 0;
+//            }
+            if(totalUnpaidOverTimeInt < 0)
+            {
+                totalUnpaidOverTimeInt = totalUnpaidOverTimeInt * (-1);
+            }
+            totalUnpaidOverTime = String.format("%02d:%02d", TimeUnit.MINUTES.toHours(totalUnpaidOverTimeInt),
+            TimeUnit.MINUTES.toMinutes(totalUnpaidOverTimeInt) - TimeUnit.HOURS.toMinutes(TimeUnit.MINUTES.toHours(totalUnpaidOverTimeInt)));
+        
+// convert base 60 min to 100 decimal point
+/*            double horaMinTemp = (((double)horaMin) * 100)/60;
+            double multiPlayer = 1.0;
+            
+            int tempMinLength = String.valueOf(((int)horaMinTemp)).length();
+            
+            for(int loop=0 ; loop<tempMinLength ; loop++)
+            {
+                multiPlayer = multiPlayer * 10;
+            }
+            
+            double tempTotalWorkHours = (double)horaHour + (horaMinTemp / multiPlayer);
+            
+            //Double totalShortHours = Actualhours - horaHour;
+            double differenceHours = Actualhours - tempTotalWorkHours;
+            l = String.valueOf(differenceHours);
+            //l = totalShortHours.intValue() + ":" + horaMin;*/
 
         } catch (Exception e) {
-            l = 0 + ":" + 0 + ":" + 0;
+            l = ""+0;// + ":" + 0 + ":" + 0;
         }
 
 //        if (horaMin >= 30) {

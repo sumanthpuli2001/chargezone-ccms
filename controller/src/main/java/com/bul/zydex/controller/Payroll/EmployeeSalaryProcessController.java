@@ -759,14 +759,14 @@ public class EmployeeSalaryProcessController extends EmployeeSalaryProcessAbstra
                                 payrollPfRecordService.create(payrollPfRecord);
 
                             } else {
-                                double lwp = employeeSalaryProcess.getEmployeeLwp();
+//                                double lwp = employeeSalaryProcess.getEmployeeLwp();
 //                                double basicSalaryMAster = Double.parseDouble(employeeMaster.getBasicSalary());
                                 double basicSalaryMAster = employeeSalaryProcess.getEmployeeBasicSalary();
 
-                                minitaxpf = basicSalaryMAster * lwp / days2;
-                                minitaxpf = basicSalaryMAster - minitaxpf;
+//                                minitaxpf = basicSalaryMAster * lwp / days2;
+//                                minitaxpf = basicSalaryMAster - minitaxpf;
 
-                                taxpf = minitaxpf * pf / 100; /// 12%
+                                taxpf = basicSalaryMAster * pf / 100; /// 12%
 
                                 employeeDeductionAmount.setEmployeeSalaryProcess(employeeSalaryProcess);
                                 employeeDeductionAmount.setDeductionType("Provident Fund");

@@ -20604,7 +20604,7 @@ public class ShiftRotationMasterController extends ShiftRotationMasterAbstract {
 
                                 } else if (!firstHalf.contains("fullday") && !firstHalf.equals("WO") && !firstHalf.equals("TR") && !firstHalf.equals("AR") && !firstHalf.equals("AB") && !firstHalf.contains("?")
                                         && !firstHalf.equals("Casual Leave") && !firstHalf.equals("Short Leave") && !firstHalf.equals("C Off Leave") && !firstHalf.equals("Privilege Leave") && !firstHalf.equals("Sick Leave")
-                                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay")) {
+                                        && !firstHalf.equals("Paternity Leave") && !firstHalf.equals("Maternity Leave") && !firstHalf.equals("Leave Without Pay") && !firstHalf.equals("Lieu Day Leave")) {
                                     String[] userTimeInStr = firstHalf.split("`");
                                     String[] userTimeInStr1 = userTimeInStr[1].split("!");
                                     String[] userTimeOutStr = firstHalf.split("!");

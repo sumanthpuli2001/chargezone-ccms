@@ -150,6 +150,7 @@
                                                                                                     <th>Start Date Time</th>
                                                                                                     <th>End Date Time</th>
                                                                                                     <th>OT Hours</th>
+                                                                                                    <th>Status</th>
 
 
 
@@ -172,6 +173,8 @@
                                                                                                 <td>${list[2]}</td>
                                                                                                 <td>${list[3]}</td>
                                                                                                 <td>${list[4]}</td>
+                                                                                                <td>${list[5]}</td>
+                                                                                                
                                                                                             </c:if>
 
 

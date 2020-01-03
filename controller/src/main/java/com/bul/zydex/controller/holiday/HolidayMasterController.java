@@ -19,6 +19,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -64,11 +65,11 @@ public class HolidayMasterController extends HolidayMasterAbstract {
         ModelAndView mv = new ModelAndView();
         Map<Integer, String> locationMap = readLocations();
         mv.addObject("locationMap", locationMap);
-        
-        List<?> holidayMasterList = holidayMasterService.readHolidaysDateLocationWise(request.getParameter("holidayFromDate"),request.getParameter("holidayToDate"),Integer.parseInt(request.getParameter("locationMaster.id")));
-        
+
+        List<?> holidayMasterList = holidayMasterService.readHolidaysDateLocationWise(request.getParameter("holidayFromDate"), request.getParameter("holidayToDate"), Integer.parseInt(request.getParameter("locationMaster.id")));
+
         holidayMasterValidator.validate(holidayMaster, errors);
-        
+
         if (errors.hasFieldErrors()) {
             mv.addObject("failureMessage", "Error : Information Is Not Valid.");
             mv.addAllObjects(errors.getModel());
@@ -168,12 +169,15 @@ public class HolidayMasterController extends HolidayMasterAbstract {
                         zydexLocation = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
 //                        fromDate = "" + (null == row.getCell((short) 2) ? "" : row.getCell((short) 2));
                         toDate = "" + (null == row.getCell((short) 3) ? "" : row.getCell((short) 3));
-                        Date sDate = row.getCell((short) 2).getDateCellValue();
-                        Date eDate = row.getCell((short) 3).getDateCellValue();
+                        DataFormatter formatter = new DataFormatter();
+                        String sDate = formatter.formatCellValue(row.getCell((short) 2));
+                        String eDate = formatter.formatCellValue(row.getCell((short) 3));
+//                        Date sDate = row.getCell((short) 2).getDateCellValue();
+//                        Date eDate = row.getCell((short) 3).getDateCellValue();
                         if (sDate != null && eDate != null) {
 
-                            fromDate = sdf.format(sDate);
-                            toDate = sdf.format(eDate);
+                            fromDate = sDate;
+                            toDate = eDate;
                             List<?> list = locationMasterService.readByName(zydexLocation);
                             LocationMaster locationMaster = new LocationMaster();
                             if (!list.isEmpty()) {
@@ -201,22 +205,21 @@ public class HolidayMasterController extends HolidayMasterAbstract {
         }
         return mv;
     }
-  
+
     public ModelAndView viewHolidaysLocationWise(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        
+
         HttpSession session1 = request.getSession(false);
         EmployeeMaster employeeMaster1 = (EmployeeMaster) session1.getAttribute("employeeInfo");
-        
+
         Calendar now = Calendar.getInstance();
-          int year = now.get(Calendar.YEAR);
-        List<?> holidayList = holidayMasterService.readHolidaysLocationWise(""+employeeMaster1.getLocationMaster().getId());
+        int year = now.get(Calendar.YEAR);
+        List<?> holidayList = holidayMasterService.readHolidaysLocationWise("" + employeeMaster1.getLocationMaster().getId());
         request.setAttribute("holidayList", holidayList);
         request.setAttribute("currentYear", year);
-        
-        
+
         mv.setViewName("Holiday/HolidayListLocationwise");
-        
-     return mv;
+
+        return mv;
     }
 }

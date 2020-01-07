@@ -11609,6 +11609,7 @@ public class AttendanceRegularizationMasterController extends AttendanceRegulari
             } else {
                 otList.add("");
             }
+             otList.add(empExcelData[5]);
 
             finalOtlist.add(otList);
         }

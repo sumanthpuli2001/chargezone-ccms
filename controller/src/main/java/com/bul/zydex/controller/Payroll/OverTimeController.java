@@ -75,8 +75,8 @@ public class OverTimeController extends OverTimeAbstract {
             otList.add(empExcelData[1]);
             otList.add(empExcelData[2]);
             otList.add(empExcelData[4]);
-            otList.add(empExcelData[3]);
-            
+//            otList.add(empExcelData[3]);
+
             if (empExcelData[3].equals(1)) {
                 otList.add("Approved");
             } else if (empExcelData[3].equals(0)) {
@@ -90,7 +90,7 @@ public class OverTimeController extends OverTimeAbstract {
             } else {
                 otList.add("");
             }
-
+            otList.add(empExcelData[5]);
             finalOtlist.add(otList);
         }
 

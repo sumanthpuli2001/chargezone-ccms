@@ -665,7 +665,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
             condition += " AND a.userMasterId = '" + oTRegularization.getReason() + "'";
         }
 
-        query += "Select a.userMasterId,a.startDateTime,a.endDateTime,a.status,a.differentCompare"
+        query += "Select a.userMasterId,a.startDateTime,a.endDateTime,a.status,a.differentCompare,a.reason"
                 + " from OTRegularization a"
                 + " left join a.employeeMaster c"
                 + " Where STR_TO_DATE(a.startDateTime, '%d/%m/%Y') >= STR_TO_DATE('" + oTRegularization.getStartDateTime() + "','%d/%m/%Y')"
@@ -997,7 +997,7 @@ public class EmployeeSalaryProcessDAOImpl<T> extends GenericsDAOImpl<T> implemen
             condition += " AND a.userMasterId = '" + attendanceRegularization.getReason() + "'";
         }
 
-        query += "Select a.userMasterId,a.startDateTime,a.endDateTime,a.status,a.differentCompare"
+        query += "Select a.userMasterId,a.startDateTime,a.endDateTime,a.status,a.differentCompare,a.reason"
                 + " from AttendanceRegularization a"
                 + " left join a.employeeMaster c"
                 + " Where STR_TO_DATE(a.startDateTime, '%d/%m/%Y') >= STR_TO_DATE('" + attendanceRegularization.getStartDateTime() + "','%d/%m/%Y')"

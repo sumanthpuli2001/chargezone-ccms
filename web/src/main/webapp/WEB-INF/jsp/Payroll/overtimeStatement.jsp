@@ -151,6 +151,7 @@
                                                                                                     <th>End Date Time</th>
                                                                                                     <th>OT Hours</th>
                                                                                                     <th>Status</th>
+                                                                                                    <th>Reason</th>
 
 
 
@@ -174,6 +175,7 @@
                                                                                                 <td>${list[3]}</td>
                                                                                                 <td>${list[4]}</td>
                                                                                                 <td>${list[5]}</td>
+                                                                                                <td>${list[6]}</td>
                                                                                                 
                                                                                             </c:if>
 

@@ -182,7 +182,7 @@
                                         <!--<li><a href="attendanceRegularizationMaster.htm?act=showOwnAttandance"><i class="fa fa-circle-o"></i>Show Attendance</a></li>-->
 
                                     </c:if>
-                                    <li><a href="attendanceRegularizationMaster.htm?act=showOwnAttandanceOfOwn"><i class="fa fa-circle-o"></i>Show Attendance</a></li>
+                                     <li><a href="attendanceRegularizationMaster.htm?act=showOwnAttandanceOfOwn"><i class="fa fa-circle-o"></i>Show Attendance</a></li>
                                         <%--</c:if>--%>
                                         <%--<c:if test="${sessionScope.userRight.hr}">--%>
                                     <!--<li><a href="attendanceRegularizationMaster.htm?act=textReadModule"><i class="fa fa-circle-o"></i>Read TextFile For Monthly</a></li>-->

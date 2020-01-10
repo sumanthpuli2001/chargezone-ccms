@@ -75,9 +75,22 @@ public class OverTimeController extends OverTimeAbstract {
             otList.add(empExcelData[1]);
             otList.add(empExcelData[2]);
             otList.add(empExcelData[4]);
-            otList.add(empExcelData[3]);
-            
+//            otList.add(empExcelData[3]);
 
+            if (empExcelData[3].equals(1)) {
+                otList.add("Approved");
+            } else if (empExcelData[3].equals(0)) {
+                otList.add("Pending");
+            } else if (empExcelData[3].equals(2)) {
+                otList.add("Withdraw");
+            } else if (empExcelData[3].equals(3)) {
+                otList.add("Reject");
+            } else if (empExcelData[3].equals(7)) {
+                otList.add("Recycle");
+            } else {
+                otList.add("");
+            }
+            otList.add(empExcelData[5]);
             finalOtlist.add(otList);
         }
 

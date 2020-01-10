@@ -418,7 +418,7 @@
     
         function totalValueChange(ele, oldvalue) {
 //      alert("hi");
-            alert("ele: " + parseInt(ele.value));
+//            alert("ele: " + parseInt(ele.value));
             //alert("oldvalue: "+document.getElementById(oldvalue).value);
 
             var oldvalueNum = document.getElementById(oldvalue).value;

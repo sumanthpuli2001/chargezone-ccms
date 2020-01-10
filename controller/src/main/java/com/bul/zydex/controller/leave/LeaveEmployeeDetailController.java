@@ -2907,12 +2907,9 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         HttpSession session = request.getSession();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         selectEmployee(request, response);
-        departmentList(request);
-        designationList(request);
         readleaveType(request);
         List<?> list = (List<?>) request.getAttribute("leavelist");
-        EmployeeTypeList(request);
-        EmployeeSubTypeList(request);
+        
         mv.getModelMap().put("employeeMaster", employeeMaster);
         request.setAttribute("list11", list);
         session.setAttribute("leaveListExcel", list);
@@ -2925,25 +2922,11 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         LeaveEmployeeDetail leaveEmployeeDetail = new LeaveEmployeeDetail();
         EmployeeMaster employeeMaster = new EmployeeMaster();
         LeaveTypeMaster leaveTypeMaster = new LeaveTypeMaster();
-        String empId = request.getParameter("employeeName");
+        String empId = request.getParameter("employeeMasterId");
         String leaveTypeId = request.getParameter("leaveType");
-        String departmentId = request.getParameter("departmentMaster");
-        String designationId = request.getParameter("designationMaster");
         String startDate = request.getParameter("startDate");
         String endDate = request.getParameter("endDate");
-        String employeeTypeMaster = request.getParameter("employeeTypeMaster");
-        String employeeSubType = request.getParameter("subTypeId");
-        String useAsSickLeave = "";
-        if (leaveTypeId.equals("7")) {
-            useAsSickLeave = request.getParameter("useAsSickLeave");
-        }
-        Boolean a = false;
-        if (useAsSickLeave.equals("0")) {
-            a = false;
-        }
-        if (useAsSickLeave.equals("1")) {
-            a = true;
-        }
+       
 
         if (!empId.equals("") && !empId.equals(null)) {
             employeeMaster.setId(Integer.parseInt(empId));
@@ -2953,29 +2936,14 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
             leaveTypeMaster.setId(Integer.parseInt(leaveTypeId));
         }
         leaveEmployeeDetail.setLeaveTypeMaster(leaveTypeMaster);
-        if (!departmentId.equals("")) {
-            leaveEmployeeDetail.setStartDateStatus(departmentId);
-
-        }
-        if (!designationId.equals("")) {
-            leaveEmployeeDetail.setEndDateStatus(designationId);
-
-        }
+        
         if (!startDate.equals("")) {
             leaveEmployeeDetail.setStartDate(startDate);
         }
         if (!endDate.equals("")) {
             leaveEmployeeDetail.setEndDate(endDate);
         }
-        if (!employeeTypeMaster.equals("")) {
-            leaveEmployeeDetail.setHrRemark(employeeTypeMaster);
-        }
-        if (!employeeSubType.equals("")) {
-            leaveEmployeeDetail.setEmpRemark(employeeSubType);
-        }
-        if (!useAsSickLeave.equals("")) {
-            leaveEmployeeDetail.setUseAsSickLeave(a);
-        }
+        
 
         List<?> list = leaveEmployeeDetailService.readEmpLeave(leaveEmployeeDetail);
 //        mv.getModelMap().put("leavelist", list);

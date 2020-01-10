@@ -622,8 +622,11 @@
         <property name="relocationOrOtherExpenseService" ref="relocationOrOtherExpenseService1"/>
         <property name="expenseTravelTypeService" ref="expenseTravelTypeService1"/>
         <property name="attendanceRegularizationMasterService" ref="attendanceRegularizationMasterService1" /> 
+        <property name="shiftGenerateMonthlyScheduleService" ref="shiftGenerateMonthlyScheduleService1" />
+        <property name="leaveEmployeeDetailValidator" ref="leaveEmployeeDetailValidator1" />
         
     </bean>
+    
     <bean id="emailAddMasterController1" class="com.bul.zydex.controller.EmailAddMasterController" parent="controllerConfig" >
         <property name="emailAddMasterService" ref="emailAddMasterService1" />
     </bean>

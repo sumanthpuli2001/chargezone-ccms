@@ -22,6 +22,7 @@ import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.RelocationOrOtherExpense;
+import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
 import com.bul.zydex.model.TravelApproverHistory;
 import com.bul.zydex.model.TravelRequestMaster;
 import com.bul.zydex.model.UserMaster;
@@ -43,6 +44,7 @@ import com.bul.zydex.service.level.LevelMasterService;
 import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.otherExpense.RelocationOrOtherExpenseService;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
+import com.bul.zydex.service.shift.ShiftGenerateMonthlyScheduleService;
 import com.bul.zydex.service.travel.TravelApproverHistoryService;
 import com.bul.zydex.service.travel.TravelRequestMasterService;
 import java.io.BufferedReader;
@@ -57,6 +59,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.validation.Validator;
 
 /**
  *
@@ -81,7 +84,25 @@ public abstract class WebServiceAbstract extends CustomAbstract {
     protected ExpenseTravelTypeService<ExpenseTravelType> expenseTravelTypeService;
     protected RelocationOrOtherExpenseService<RelocationOrOtherExpense> relocationOrOtherExpenseService;
     protected ExpenseOtherTypeService<ExpenseOtherType> expenseOtherTypeService;
+    protected ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService;
+    protected Validator leaveEmployeeDetailValidator;
+    
+    public Validator getLeaveEmployeeDetailValidator() {
+        return leaveEmployeeDetailValidator;
+    }
 
+    public void setLeaveEmployeeDetailValidator(Validator leaveEmployeeDetailValidator) {
+        this.leaveEmployeeDetailValidator = leaveEmployeeDetailValidator;
+    }
+    
+    public ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> getShiftGenerateMonthlyScheduleService() {
+        return shiftGenerateMonthlyScheduleService;
+    }
+
+    public void setShiftGenerateMonthlyScheduleService(ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService) {
+        this.shiftGenerateMonthlyScheduleService = shiftGenerateMonthlyScheduleService;
+    }
+    
     public ExpenseOtherTypeService<ExpenseOtherType> getExpenseOtherTypeService() {
         return expenseOtherTypeService;
     }

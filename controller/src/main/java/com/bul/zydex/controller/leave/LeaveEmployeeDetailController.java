@@ -28,6 +28,7 @@ import com.bul.zydex.model.WoffRegularization;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.shift.EmployeeShiftDataService;
 import com.bul.zydex.service.shift.WoffRegularizationService;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,11 +48,14 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import static org.apache.commons.lang3.time.DateUtils.addDays;
 import org.exolab.castor.types.DateTime;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.aop.IntroductionAdvisor;
 import org.springframework.validation.BindException;
@@ -3244,6 +3248,147 @@ public class LeaveEmployeeDetailController extends LeaveEmployeeDetailAbstract {
         return mv;
     }
 
+    
+    public void getActualDayByAjaxWebService(HttpServletRequest request, HttpServletResponse response) throws JSONException, IOException, ServletException, ParseException {
+        //========
+        PrintWriter out = null;
+        out = response.getWriter();
+        UserMaster user = new UserMaster();
+        String rcode = "";
+        String empid = "";
+        String message = "";
+        JSONObject userData = new JSONObject();
+        JSONObject data = new JSONObject();
+        try {
+            String id = request.getParameter("id");
+            int userid = Integer.parseInt(id);
+            user.setId(userid);
+            EmployeeMaster employeeMaster = new EmployeeMaster();
+            EmployeeMaster employeeMaster1 = new EmployeeMaster();
+            employeeMaster.setUserMaster(user);
+            JSONArray jSONArray = new JSONArray();
+            List<EmployeeMaster> empDetailList = (List<EmployeeMaster>) employeeMasterService.readByEmployeeUserId(employeeMaster);
+            if (!empDetailList.isEmpty()) {
+                employeeMaster1 = (EmployeeMaster) empDetailList.get(0);
+            }
+            //}
+            //=========
+
+            String strDate = request.getParameter("strDate");
+            String enDate = request.getParameter("enDate");
+            String sDateStatus = request.getParameter("startDayPart");////sDateStatus");
+            String eDateStatus = request.getParameter("endDayPart");////eDateStatus");
+            String leavetype = request.getParameter("leaveType");
+            //String useSickLeave = request.getParameter("useSickLeave");
+            strDate = strDate.replaceAll(",", "/");
+            enDate = enDate.replaceAll(",", "/");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Date sDate = sdf.parse(strDate);
+            Date eDate = sdf.parse(enDate);
+            Date today = new Date();
+
+            HttpSession session = request.getSession();
+            //EmployeeMaster employeeMaster1 = (EmployeeMaster) session.getAttribute("employeeInfo");
+            ShiftMaster shiftMaster = new ShiftMaster();
+            HoursBasis hoursBasis = new HoursBasis();
+            ShiftRotationMaster shiftRotationMaster = new ShiftRotationMaster();
+            ShiftRotationInfo shiftRotationInfo = new ShiftRotationInfo();
+            //int appId = employeeMaster1.getId();
+            //String shiftType = employeeMaster1.getShiftType();
+            //int ZydexLocId = employeeMaster1.getZydexLocationMaster().getId();
+            String weekOffDay = "";
+
+            weekOffDay = "Saturday,Sunday";
+
+            int coutnter = 0;
+            boolean sundayCheck = false;
+            Calendar c = Calendar.getInstance();
+            c.setTime(sDate);
+            List<String> list1 = new ArrayList<String>();
+            float days = 0;
+            while (c.getTime().before(eDate) || c.getTime().equals(eDate)) {
+
+                Calendar calForEnddate = Calendar.getInstance();
+                calForEnddate.setTime(eDate);
+                int dayEnd = calForEnddate.get(Calendar.DAY_OF_WEEK);
+
+    //              
+    ////                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+                int dayOfWeek = c.get(Calendar.WEEK_OF_MONTH);
+                Date nDate = c.getTime();
+                String daString = sdf.format(nDate);
+                HolidayMaster holidayMaster = new HolidayMaster();
+                holidayMaster.setHolidayFromDate(daString);
+                List list = holidayMasterService.checkHoliday(daString, "" + employeeMaster1.getLocationMaster().getId());
+                if (list.size() == 0) {
+                    days++;
+                }
+                for (String z : weekOffDay.split(",")) {
+                    int weekOff = 0;
+                    if (!z.equals("")) {
+                        if (z.equals("Sunday")) {
+                            weekOff = 1;
+    //                        sundayCheck = true;
+                        } else if (z.equals("monday")) {
+                            weekOff = 2;
+                        } else if (z.equals("tuesday")) {
+                            weekOff = 3;
+                        } else if (z.equals("wednesday")) {
+                            weekOff = 4;
+                        } else if (z.equals("thursday")) {
+                            weekOff = 5;
+                        } else if (z.equals("friday")) {
+                            weekOff = 6;
+                        } else if (z.equals("Saturday")) {
+                            weekOff = 7;
+                        }
+                    }
+                    if (c.get(Calendar.DAY_OF_WEEK) != weekOff) {
+                        if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+                            if (sDateStatus.contains("SecondHalf")) {
+                                if (!strDate.equals(enDate)) {
+                                    days--;
+                                }
+                            }
+                        }
+                    }
+                    if (!leavetype.equals("6") && !leavetype.equals("7") && !leavetype.equals("16") && !leavetype.equals("12") && !leavetype.equals("11")) {
+                        if (c.get(Calendar.DAY_OF_WEEK) == 7 && !sDateStatus.contains("SecondHalf")) {
+                            if (!strDate.equals(enDate)) {
+                                days--;
+                            }
+                        }
+                    }
+                    if (c.get(Calendar.DAY_OF_WEEK) == weekOff) {
+    //                    if (c.get(Calendar.DAY_OF_WEEK) == 7 && coutnter == 0) {
+    //                        if (sDateStatus.contains("SecondHalf")) {
+    //                            if (!strDate.equals(enDate)) {
+                        days--;
+    //                            }
+    //                        }
+    //                    }
+                    }
+                    coutnter++;
+                }
+                c.add(Calendar.DATE, 1);
+
+            }
+
+//            PrintWriter out = response.getWriter();
+
+            userData.put("responseMessage", message);
+            userData.put("responseCode", rcode);
+            
+            data.put("days", days);
+            out.print(days);
+            
+        }
+        catch(Exception e)
+        {
+
+        }
+    }
+    
     public void getActualDayByAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String strDate = request.getParameter("strDate");
         String enDate = request.getParameter("enDate");

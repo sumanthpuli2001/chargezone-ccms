@@ -64,6 +64,7 @@ public class DepartmentMasterDAOImpl<T> extends GenericsDAOImpl<T> implements
                 + " left join employee_master b on b.id=a.emp_master_id"
                 + " left join department_master c on c.id=b.department_id"
                 + " where STR_TO_DATE(a.relieving_date, '%d/%m/%Y') <= CURDATE() AND a.status = 4"
+                + " and c.department_name is not null"
                 + " group by c.department_name";
 //        String hqryString = "select dm.departmentName, count(rm.employeeMaster.id) from DepartmentMaster dm"
 //                + " left join dm.employeeMasters em "

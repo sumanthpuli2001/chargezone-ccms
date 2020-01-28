@@ -134,6 +134,7 @@ public class DepartmentMasterController extends DepartmentMasterAbstract {
 //this method is for display department wise employee Resignation on Hr Deshboard
     public ModelAndView hrDashboardResignation(HttpServletRequest request, HttpServletResponse response, DepartmentMaster departmentMaster) throws Exception {
         ModelAndView mv = new ModelAndView();
+//        List<?> resignedEmpOfDeptList = departmentMasterService.countResignedEmpOfDept();
         List<?> resignedEmpOfDeptList = departmentMasterService.countResignedEmpOfDept();
         if (!resignedEmpOfDeptList.isEmpty()) {
             try {

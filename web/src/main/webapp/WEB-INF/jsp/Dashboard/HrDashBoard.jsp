@@ -5,7 +5,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-
+        <title>Dashboard</title>
         <script type = "text/javascript" >
             google.load("visualization", "1", {packages: ["corechart", 'bar']});
             google.setOnLoadCallback(drawChart);

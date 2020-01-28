@@ -21,8 +21,10 @@ import com.bul.zydex.model.LeaveEmployeeDetail;
 import com.bul.zydex.model.LeaveTypeMaster;
 import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.OTRegularization;
 import com.bul.zydex.model.RelocationOrOtherExpense;
 import com.bul.zydex.model.ShiftGenerateMonthlySchedule;
+import com.bul.zydex.model.TimeAttandanceFlaxibleMaster;
 import com.bul.zydex.model.TravelApproverHistory;
 import com.bul.zydex.model.TravelRequestMaster;
 import com.bul.zydex.model.UserMaster;
@@ -30,6 +32,8 @@ import com.bul.zydex.model.UserRightMaster;
 import com.bul.zydex.model.ZydexLocationMaster;
 import com.bul.zydex.service.UserRight.UserRightMasterService;
 import com.bul.zydex.service.attendanceRegularization.AttendanceRegularizationMasterService;
+import com.bul.zydex.service.attendanceRegularization.OTRegularizationService;
+import com.bul.zydex.service.attendanceRegularization.TimeAttandanceFlaxibleMasterService;
 import com.bul.zydex.service.emprequest.HrServiceRequestService;
 import com.bul.zydex.service.emprequest.ItServiceRequestService;
 import com.bul.zydex.service.expense.ExpenseMasterService;
@@ -86,6 +90,24 @@ public abstract class WebServiceAbstract extends CustomAbstract {
     protected ExpenseOtherTypeService<ExpenseOtherType> expenseOtherTypeService;
     protected ShiftGenerateMonthlyScheduleService<ShiftGenerateMonthlySchedule> shiftGenerateMonthlyScheduleService;
     protected Validator leaveEmployeeDetailValidator;
+    protected OTRegularizationService<OTRegularization> oTRegularizationService;
+    protected TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> timeAttandanceFlaxibleMasterService;
+    
+    public TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> getTimeAttandanceFlaxibleMasterService() {
+        return timeAttandanceFlaxibleMasterService;
+    }
+
+    public void setTimeAttandanceFlaxibleMasterService(TimeAttandanceFlaxibleMasterService<TimeAttandanceFlaxibleMaster> timeAttandanceFlaxibleMasterService) {
+        this.timeAttandanceFlaxibleMasterService = timeAttandanceFlaxibleMasterService;
+    }
+    
+    public OTRegularizationService<OTRegularization> getOTRegularizationService() {
+        return oTRegularizationService;
+    }
+
+    public void setOTRegularizationService(OTRegularizationService<OTRegularization> oTRegularizationService) {
+        this.oTRegularizationService = oTRegularizationService;
+    }
     
     public Validator getLeaveEmployeeDetailValidator() {
         return leaveEmployeeDetailValidator;

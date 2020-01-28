@@ -624,7 +624,7 @@
         <property name="attendanceRegularizationMasterService" ref="attendanceRegularizationMasterService1" /> 
         <property name="shiftGenerateMonthlyScheduleService" ref="shiftGenerateMonthlyScheduleService1" />
         <property name="leaveEmployeeDetailValidator" ref="leaveEmployeeDetailValidator1" />
-        
+        <property name="oTRegularizationService" ref="oTRegularizationService1"/>
     </bean>
     
     <bean id="emailAddMasterController1" class="com.bul.zydex.controller.EmailAddMasterController" parent="controllerConfig" >

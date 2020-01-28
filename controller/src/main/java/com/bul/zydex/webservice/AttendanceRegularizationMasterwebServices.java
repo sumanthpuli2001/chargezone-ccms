@@ -71,7 +71,7 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
             String managerName = "";
             if (!list1.isEmpty()) {
 
-                JSONArray listsType = new JSONArray();
+                
                 employeeMaster = (EmployeeMaster) list1.get(0);
                 if (!employeeMaster.getReportingManagerLevel1().equals("")) {
                     List<?> reportingmanagerNameList = employeeMasterService.readByEmployeeLevel1Id(employeeMaster);
@@ -80,7 +80,9 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
                         managerName = (String) o[2];
                     }
                 }
-
+            }
+            JSONArray listsType = new JSONArray();
+            if (!list.isEmpty()) {
                 for (Object o : list) {
                     Object[] ob = (Object[]) o;
                     JSONObject listType = new JSONObject();
@@ -601,6 +603,11 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
                     listType.put("Status", atendanceRegularization.getStatus());
                     listType.put("EndDateTime", atendanceRegularization.getEndDateTime());
                     listType.put("DateOfSubmit", atendanceRegularization.getDateOfSubmit());
+                    //===
+                    listType.put("ARType", atendanceRegularization.getArType());
+                    listType.put("TimeDifference", atendanceRegularization.getDifferentCompare());
+                    
+                    //==
                     String dateOfSubmit = "";
                     if (null != atendanceRegularization.getDateOfSubmit()) {
                         dateOfSubmit = atendanceRegularization.getDateOfSubmit();
@@ -912,6 +919,7 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
             String enddate = data.getString("enddate");
             String reason = data.getString("reason");
             String userId = data.getString("userId");
+            String arType = data.getString("ARType");
             int userMasterId = Integer.parseInt(userId);
 
             user.setId(userMasterId);
@@ -920,11 +928,31 @@ public class AttendanceRegularizationMasterwebServices extends AttendanceRegular
             Date sdate = dateFormat1.parse(Startdate);
             Date edate = dateFormat1.parse(enddate);
 
+            //==================================================================
+//            String strDate = request.getParameter("strDate");
+//            String enDate = request.getParameter("enDate");
+
+    //        strDate = strDate.replaceAll(",", "/");
+    ////        enDate = enDate.replaceAll(",", "/");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    //        Date sDate = sdf.parse(strDate);
+    //        Date eDate = sdf.parse(enDate);
+            //String message = "";
+            Date loginStartDate = sdf.parse(Startdate);
+            Date loginEndDate = sdf.parse(enddate);
+            long diff = loginEndDate.getTime() - loginStartDate.getTime();
+            long diffMinutes = diff / (60 * 1000);
+            int minute = (int) (diffMinutes % 60);
+            int hour = (int) (diffMinutes / 60);
+            message = hour + ":" + minute;
+            //==================================================================
             attendanceRegularization.setUserMasterId(userMasterId);
-            attendanceRegularization.setStartDateTime(sdate.toString());
-            attendanceRegularization.setEndDateTime(edate.toString());
+            attendanceRegularization.setStartDateTime(Startdate);//sdate.toString());
+            attendanceRegularization.setEndDateTime(enddate);//edate.toString());
             attendanceRegularization.setReason(reason);
             attendanceRegularization.setStatus(0);
+            attendanceRegularization.setArType(arType);
+            attendanceRegularization.setDifferentCompare(message);
 
             String currentDate = dateFormat1.format(new Date());
             attendanceRegularization.setDateOfSubmit(currentDate);

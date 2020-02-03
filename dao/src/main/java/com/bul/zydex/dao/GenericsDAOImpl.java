@@ -30,8 +30,7 @@ public abstract class GenericsDAOImpl<T> extends HibernateDaoSupport implements
     @Override
     public void create(T object) {
         try{
-            
-        getHibernateTemplate().save(object);
+            getHibernateTemplate().save(object);
         }catch(Exception e){
             e.printStackTrace();
         }

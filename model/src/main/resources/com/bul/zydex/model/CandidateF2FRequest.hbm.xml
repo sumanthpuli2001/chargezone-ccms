@@ -4,7 +4,7 @@
 "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.CandidateF2FRequest" table="candidate_f2f_request" catalog="hr_power_vnc">
+    <class name="com.bul.zydex.model.CandidateF2FRequest" table="candidate_f2f_request" catalog="hr_power_gipcl">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />

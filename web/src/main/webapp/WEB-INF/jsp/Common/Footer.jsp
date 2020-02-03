@@ -261,7 +261,7 @@
         });
     }
 </script>
-<label style="font-weight: normal;float: right;"> © 2019 <a href="https://vaderanco.com/" target="_blank"><strong>Vadera & Co</strong></a> All rights reserved. </label>
+<label style="font-weight: normal;float: right;"> © 2019 <a href="http://www.gipcl.com/" target="_blank"><strong>GIPCL</strong></a> All rights reserved. </label>
 <script>
 //==============================================================//
 //set time out for errorDiv Class

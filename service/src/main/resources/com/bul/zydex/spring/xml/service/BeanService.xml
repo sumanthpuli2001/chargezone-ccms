@@ -8,6 +8,17 @@
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
+    <!-- Payment -->
+    
+    <bean id="paymentTypeService1" class="com.bul.zydex.service.payment.PaymentTypeServiceImpl">
+        <property name="paymentTypeDAO" ref="paymentTypeDAO1" />
+    </bean>
+    <bean id="paymentModeService1" class="com.bul.zydex.service.payment.PaymentModeServiceImpl">
+        <property name="paymentModeDAO" ref="paymentModeDAO1" />
+    </bean>
+    <bean id="paymentTypeMasterService1" class="com.bul.zydex.service.payment.PaymentTypeMasterServiceImpl">
+        <property name="paymentTypeMasterDAO" ref="paymentTypeMasterDAO1" />
+    </bean>
     <!--User-->
     <bean id="userActivityLogService1" class="com.bul.zydex.service.UserActivityLogServiceImpl">
         <property name="userActivityLogDAO" ref="userActivityLogDAO1"/>

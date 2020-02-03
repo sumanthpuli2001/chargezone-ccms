@@ -56,7 +56,7 @@ public class TrainingIdentificationDAOImpl<T> extends GenericsDAOImpl<T> impleme
         String sqlString = "SELECT"
                 + " c.training_master_id,c.title,c.trainingdate"
                 + " FROM"
-                + " hr_power_vnc.training_master b"
+                + " hr_power_gipcl.training_master b"
                 + " LEFT JOIN"
                 + " training_identification a ON b.id = a.training_id"
                 + " LEFT JOIN"

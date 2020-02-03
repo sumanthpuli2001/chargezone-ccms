@@ -7,9 +7,14 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://192.168.0.153:3306/hr_power_vnc</property>
+    <property name="hibernate.connection.url">jdbc:mysql://192.168.0.9:3306/hr_power_gipcl</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
+    
+    <mapping resource="com/bul/zydex/model/PaymentType.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/ModeOfPayment.hbm.xml"/>
+    <mapping resource="com/bul/zydex/model/PaymentTypeMaster.hbm.xml"/>
+    
     <mapping resource="com/bul/zydex/model/CafeteriaRequest.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/DeviceMaster.hbm.xml"/>
     <mapping resource="com/bul/zydex/model/ExpenseMaster.hbm.xml"/>

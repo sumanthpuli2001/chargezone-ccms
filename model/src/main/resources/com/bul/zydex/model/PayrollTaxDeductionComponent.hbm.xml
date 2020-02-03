@@ -3,7 +3,7 @@
 "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class name="com.bul.zydex.model.PayrollTaxDeductionComponent" table="payroll_tax_deduction_component" catalog="hr_power_vnc">
+  <class name="com.bul.zydex.model.PayrollTaxDeductionComponent" table="payroll_tax_deduction_component" catalog="hr_power_gipcl">
         <id name="componentId" type="java.lang.Integer">
              <column name="component_id"/>
              <generator class="identity"/>

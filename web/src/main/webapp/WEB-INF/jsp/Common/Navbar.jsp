@@ -1016,6 +1016,9 @@
                         <li class="ow-break-word"><a href="resignationMaster.htm?act=fullandfcreateClick"><i class="fa fa-circle-o"></i>F&F Settlement Letter Format</a></li>
                         <!--<li><a href="modulesMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Modules Master</a></li>-->
                         <!--<li><a href="componentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Component Master</a></li>-->
+                        <li><a href="payment.html?act=showTypeOfPayment"><i class="fa fa-circle-o"></i>Payment Type</a></li>
+                        <li><a href="payment.html?act=showPaymentMode"><i class="fa fa-circle-o"></i>Payment Mode</a></li>
+                        
                         <li><a href="approval.htm?act=approvalList"><i class="fa fa-circle-o"></i>Approval Setting</a></li>
                         <li><a href="deviceMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Device Management</a></li>
                         <li><a href="employeeType.htm?act=showResult"><i class="fa fa-circle-o"></i>Team List</a></li>

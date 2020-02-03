@@ -82,9 +82,9 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
         String sqlString = "SELECT"
                 + "  b.id, b.ctc_allowance_id, b.employee_master_id, b.amount, b.month , b.year"
                 + " FROM"
-                + " hr_power_vnc.employee_ctc_detail a"
+                + " hr_power_gipcl.employee_ctc_detail a"
                 + " INNER JOIN"
-                + " hr_power_vnc.employee_ctc_detail_salary b"
+                + " hr_power_gipcl.employee_ctc_detail_salary b"
                 + " ON b.monthly  = a.month"
                 + " WHERE  b.employee_master_id =" + employeeid
                 + " and  a.ctc_master_id!=3"
@@ -142,9 +142,9 @@ public class EmployeeCtcDetailDAOImpl<T> extends GenericsDAOImpl<T> implements E
         String sqlString = "SELECT"
                 + "  b.id, a.ctc_master_id, a.amount, a.month, a.year"
                 + " FROM"
-                + " hr_power_vnc.employee_ctc_detail a"
+                + " hr_power_gipcl.employee_ctc_detail a"
                 + " left join"
-                + " hr_power_vnc.employee_master b"
+                + " hr_power_gipcl.employee_master b"
                 + " ON a.employee_master_id = b.id"
                 + " WHERE b.id =" + employeeid
                 + " and FLOOR(datediff(CURDATE(),STR_TO_DATE(b.date_of_joining, '%d/%m/%Y')) / 1825)"

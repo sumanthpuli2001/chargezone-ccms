@@ -1,0 +1,313 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.bul.zydex.controller.payment;
+
+import com.bul.zydex.model.EmployeeTypeMaster;
+import com.bul.zydex.model.LevelMaster;
+import com.bul.zydex.model.LocationMaster;
+import com.bul.zydex.model.PaymentMode;
+import com.bul.zydex.model.PaymentTypeMaster;
+import com.bul.zydex.model.ShiftRotationInfo;
+import com.bul.zydex.model.TypeOfPayment;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.validation.BindException;
+import org.springframework.web.servlet.ModelAndView;
+
+/**
+ *
+ * @author admin
+ */
+public class PaymentController extends PaymentAbstract{
+    
+    public ModelAndView showTypeOfPayment(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        List<?> list1 = paymentTypeService.read();
+        request.setAttribute("list", list1);
+        mv.setViewName("Payment/PaymentTypeShow");
+
+        return mv;
+    }
+    
+    public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TypeOfPayment employeeTypeMaster = new TypeOfPayment();
+        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+        mv.setViewName("Payment/PaymentTypeCreate");
+        return mv;
+    }
+    
+    
+    public ModelAndView showPaymentMode(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        List<?> list1 = paymentModeService.read();
+        request.setAttribute("list", list1);
+        mv.setViewName("Payment/PaymentModeShow");
+
+        return mv;
+    }
+    
+    public ModelAndView createPaymentModeClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PaymentMode employeeTypeMaster = new PaymentMode();
+        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+        mv.setViewName("Payment/PaymentModeCreate");
+        return mv;
+    }
+    
+    
+    public ModelAndView createPaymentModeSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PaymentMode employeeTypeMaster = new PaymentMode();
+        BindException errors = new BindException(employeeTypeMaster, "employeeTypeMaster");
+        bind(request, employeeTypeMaster);
+        
+        String formatvalue = employeeTypeMaster.getAmountTo();
+        employeeTypeMaster.setAmountTo(formatvalue.trim());
+        
+        //employeeTypeValidator.validate(employeeTypeMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+            mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+            mv.setViewName("Payment/PaymentModeCreate");
+            
+        } 
+        else {
+                paymentModeService.create(employeeTypeMaster);
+                request.setAttribute("successMessage",
+                        "Information : The Information is saved Successfully.");
+                mv = showPaymentMode(request, response);
+        }
+        return mv;
+    }
+    
+    
+    public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        TypeOfPayment employeeTypeMaster = new TypeOfPayment();
+        BindException errors = new BindException(employeeTypeMaster, "employeeTypeMaster");
+        bind(request, employeeTypeMaster);
+        String formatvalue = employeeTypeMaster.getTypeOfEmployee();
+        employeeTypeMaster.setTypeOfEmployee(formatvalue.trim());
+        //employeeTypeValidator.validate(employeeTypeMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+            mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+            mv.setViewName("Payment/PaymentTypeCreate");
+            
+        } 
+        else {
+                paymentTypeService.create(employeeTypeMaster);
+                request.setAttribute("successMessage",
+                        "Information : The Information is saved Successfully.");
+                mv = showTypeOfPayment(request, response);
+        }
+        return mv;
+    }
+    
+    public ModelAndView deleteSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String savingList[] = request.getParameterValues("checkId");
+        for (String z : savingList) {
+            try {
+                paymentTypeService.delete(Integer.parseInt(z));
+                request.setAttribute("successMessage",
+                        "Info : One or more records are deleted successfully.");
+            } catch (Exception e) {
+
+            }
+        }
+        mv = showTypeOfPayment(request, response);
+        return mv;
+    }
+    
+    public ModelAndView deletePaymentModeSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String savingList[] = request.getParameterValues("checkId");
+        for (String z : savingList) {
+            try {
+                paymentModeService.delete(Integer.parseInt(z));
+                request.setAttribute("successMessage",
+                        "Info : One or more records are deleted successfully.");
+            } catch (Exception e) {
+
+            }
+        }
+        mv = showPaymentMode(request, response);
+        return mv;
+    }
+    
+    
+    public ModelAndView showPaymentMasterForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        List<?> list1 = paymentTypeMasterService.read();
+        request.setAttribute("list", list1);
+        mv.setViewName("Payment/PaymentTypeMasterShow");
+
+        return mv;
+    }
+    
+    public ModelAndView createPaymentTypeMasterClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PaymentTypeMaster employeeTypeMaster = new PaymentTypeMaster();
+        
+        //----- Get data of payment type
+        TypeOfPayment typeOfPayment = new TypeOfPayment();
+        List<?> level = paymentTypeService.read();
+        Map<Integer, String> level1 = new HashMap<>();
+        for (Object o : level) {
+            typeOfPayment = (TypeOfPayment) o;
+            level1.put(typeOfPayment.getId(), typeOfPayment.getTypeOfEmployee());
+        }
+        request.setAttribute("paymentTypeMap", level1);
+        
+        //---- Get data of location master
+        LocationMaster locationMaster = new LocationMaster();
+        List<?> level2 = locationMasterService.read();
+        Map<Integer, String> level3 = new HashMap<>();
+        for (Object o : level2) {
+            locationMaster = (LocationMaster) o;
+            level3.put(locationMaster.getId(), locationMaster.getLocation());
+        }
+        request.setAttribute("locationTypeMap", level3);
+        
+        
+        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+        mv.setViewName("Payment/PaymentTypeMasterCreate");
+        return mv;
+    }
+    
+    public ModelAndView createPaymentTypeMasterSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PaymentTypeMaster employeeTypeMaster = new PaymentTypeMaster();
+        BindException errors = new BindException(employeeTypeMaster, "employeeTypeMaster");
+        bind(request, employeeTypeMaster);
+        String formatvalue = employeeTypeMaster.getEmailId();
+        employeeTypeMaster.setEmailId(formatvalue.trim());
+        //employeeTypeValidator.validate(employeeTypeMaster, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+            mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+            mv.setViewName("Payment/PaymentTypeMasterCreate");
+            
+        } 
+        else {
+                paymentTypeMasterService.create(employeeTypeMaster);
+                
+                 //---- Get data of payment mode
+                PaymentMode locationMaster = new PaymentMode();
+                List<?> level2 = paymentModeService.read();
+                Map<Integer, String> level3 = new HashMap<>();
+                for (Object o : level2) {
+                    locationMaster = (PaymentMode) o;
+                    level3.put(locationMaster.getId(), locationMaster.getModeOfPayment());
+                }
+                request.setAttribute("paymentModeMap", level3);
+                
+                request.setAttribute("successMessage",
+                        "Information : The Information is saved Successfully.");
+                
+                mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+                mv.setViewName("Payment/paymentTypeMasterModeCreate");
+        }
+        return mv;
+    }
+    
+    
+    public ModelAndView createPaymentTypeMasterModeSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PaymentTypeMaster employeeTypeMaster = new PaymentTypeMaster();
+        BindException errors = new BindException(employeeTypeMaster, "employeeTypeMaster");
+        bind(request, employeeTypeMaster);
+        
+        String paymentMode = request.getParameter("paymentMode");
+        String totalPaymentAmount = request.getParameter("status");
+        //int formatvalue = employeeTypeMaster.getPaymentMode();
+        //employeeTypeMaster.setEmailId(formatvalue.trim());
+        //employeeTypeValidator.validate(employeeTypeMaster, errors);
+        if (null == paymentMode || paymentMode.equals("")) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+            mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+            mv.setViewName("Payment/PaymentTypeMasterCreate");
+            
+        } 
+        else {
+                PaymentTypeMaster paymentTypeMaster = new PaymentTypeMaster();
+                
+                paymentTypeMaster = paymentTypeMasterService.readById(employeeTypeMaster.getId());
+                
+                paymentTypeMaster.setPaymentMode(employeeTypeMaster.getPaymentMode());
+                paymentTypeMaster.setStatus(totalPaymentAmount);
+                
+                paymentTypeMasterService.update(paymentTypeMaster);
+                
+                request.setAttribute("successMessage",
+                        "Information : The Information is saved Successfully.");
+                        
+                mv = createPaymentTypeMasterClick(request, response);
+//                 //---- Get data of payment mode
+//                PaymentMode locationMaster = new PaymentMode();
+//                List<?> level2 = paymentModeService.read();
+//                Map<Integer, String> level3 = new HashMap<>();
+//                for (Object o : level2) {
+//                    locationMaster = (PaymentMode) o;
+//                    level3.put(locationMaster.getId(), locationMaster.getModeOfPayment());
+//                }
+//                request.setAttribute("paymentModeMap", level3);
+//                
+//                
+//                
+//                mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+//                mv.setViewName("Payment/PaymentTypeMasterCreate");
+        }
+        return mv;
+    }
+    
+     public String calculateAmountAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PaymentMode paymentMode = new PaymentMode();
+        PaymentTypeMaster paymentTypeMaster = new PaymentTypeMaster();
+        
+        float totalPaymentAount = 0;
+        
+        String paymentModeId = request.getParameter("paymentModeId");
+        String userId = request.getParameter("paymentTypeMasterId");
+        
+        if(null != paymentModeId && !paymentModeId.equals(""))
+        {
+            Integer paymedModeInt = Integer.valueOf(paymentModeId);
+            paymentMode = paymentModeService.readById(paymedModeInt);
+            paymentTypeMaster = paymentTypeMasterService.readById(Integer.valueOf(userId));
+            if(Integer.valueOf(paymentTypeMaster.getPaymentAmount()) >= Integer.valueOf(paymentMode.getAmountFrom()) && Integer.valueOf(paymentTypeMaster.getPaymentAmount()) < Integer.valueOf(paymentMode.getAmountTo()))
+            {
+                totalPaymentAount = Float.valueOf(paymentTypeMaster.getPaymentAmount()) + Float.valueOf(paymentMode.getCharges()) + Float.valueOf(paymentMode.getApplicableTaxes());
+            }
+        }
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+            out.print(""+totalPaymentAount);
+        } finally {
+            out.close();
+        }
+        return paymentModeId;
+    }
+}

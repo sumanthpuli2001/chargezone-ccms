@@ -3,7 +3,7 @@
 "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
 <!-- Generated Feb 22, 2018 10:15:24 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.CorporateVideo" table="corporate_video" catalog="hr_power_vnc" optimistic-lock="version">
+    <class name="com.bul.zydex.model.CorporateVideo" table="corporate_video" catalog="hr_power_gipcl" optimistic-lock="version">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />

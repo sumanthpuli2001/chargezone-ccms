@@ -16,6 +16,13 @@
             <value>act</value>
         </property>
     </bean>
+    <bean id="paymentController1" class="com.bul.zydex.controller.payment.PaymentController" parent="controllerConfig" >
+        <property name="paymentTypeService" ref="paymentTypeService1" />
+        <property name="paymentModeService" ref="paymentModeService1" />
+        <property name="paymentTypeMasterService" ref="paymentTypeMasterService1" />
+        <property name="locationMasterService" ref="locationMasterService1" />
+        
+    </bean>
     <!--Parent-->
     <bean id="controllerConfig" abstract="true">
         <property name="methodNameResolver" ref="methodNameResolver"></property>

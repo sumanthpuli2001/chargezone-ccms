@@ -24,6 +24,9 @@
         </property>
         <property name="mappings">
             <props>
+                <!-- Payment Type -->
+                
+                <prop key="payment.html">paymentController1</prop>
                 <!--Login-->
                 <prop key="logIn.html">logInController1</prop>
                 <prop key="out.html">outController1</prop>

@@ -12,6 +12,11 @@
         <property name="sessionFactory" ref="sessionFactory1"></property>
     </bean>
 
+    <!-- Payment -->
+    <bean id="paymentTypeDAO1" class="com.bul.zydex.dao.Payment.PaymentTypeDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="paymentModeDAO1" class="com.bul.zydex.dao.Payment.PaymentModeDAOImpl" parent="sessionFactoryConfig" />
+    <bean id="paymentTypeMasterDAO1" class="com.bul.zydex.dao.Payment.PaymentTypeMasterDAOImpl" parent="sessionFactoryConfig" />
+    
     <!--User-->
     <bean id="userActivityLogDAO1" class="com.bul.zydex.dao.UserActivityLogDAOImpl" parent="sessionFactoryConfig" />
     <bean id="userLoginLogDAO1" class="com.bul.zydex.dao.UserLoginLogDAOImpl" parent="sessionFactoryConfig" />

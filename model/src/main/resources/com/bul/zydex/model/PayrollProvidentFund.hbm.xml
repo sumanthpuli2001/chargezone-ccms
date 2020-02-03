@@ -3,7 +3,7 @@
 "classpath://org/hibernate/hibernate-mapping-3.0.dtd">
 <!-- Generated Sep 12, 2016 10:43:31 AM by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.PayrollProvidentFund" table="payroll_provident_fund" catalog="hr_power_vnc">
+    <class name="com.bul.zydex.model.PayrollProvidentFund" table="payroll_provident_fund" catalog="hr_power_gipcl">
         <id name="id" type="java.lang.Integer">
             <column name="id" />
             <generator class="identity" />

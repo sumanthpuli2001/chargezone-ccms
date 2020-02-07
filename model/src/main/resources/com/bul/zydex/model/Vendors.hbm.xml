@@ -9,8 +9,27 @@
             <generator class="identity" />
         </id>
         <property name="vendor" type="string">
-            <column name="vendor" length="100" not-null="true" />
+            <column name="vendor" length="100" not-null="false" />
         </property>
+        <property name="gstNo" type="string">
+            <column name="gst_No" length="100" not-null="false" />
+        </property>
+        <property name="panNo" type="string">
+            <column name="pan_No" length="100" not-null="false" />
+        </property>
+        <property name="emailId" type="string">
+            <column name="email_Id" length="100" not-null="false" />
+        </property>
+        <property name="phoneNo" type="string">
+            <column name="phone_No" length="100" not-null="false" />
+        </property>
+        <property name="mobileNo" type="string">
+            <column name="mobile_No" length="100" not-null="false" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="100" not-null="false" />
+        </property>
+        
         <property name="comments" type="string">
             <column name="comments" length="65535" />
         </property>

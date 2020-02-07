@@ -13,9 +13,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Vendor Registration Result</title>
         <script>
-            function viewClick(id, userid) {
+            function viewClick1(vendorId) {
                 //            window.location = 'employeeMaster.htm?act=viewClick&id=' + id;
-                window.location = 'employeeMaster.htm?act=viewClick&id=' + id + '&userid=' + userid;
+                window.location = 'payment.html?act=viewClick1&vendorId=' + vendorId ;
             }
 
             function deleteCheck11() {
@@ -30,7 +30,7 @@
                 return false;
             }
         </script>
-       
+
     </head>
 
 
@@ -102,17 +102,18 @@
                                                     <td>
                                                         ${savingList1.vendor}
                                                     </td>
-                                                    <td>Action</td>
-                                                    <!--<td>-->
-                                                    <!--                                                                    <div class="btn-group">
-                                                                                                                            <button type="button" onclick="viewClick(${savingList.id});" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                                                                &nbsp;&nbsp;Edit
-                                                                                                                            </button>
-                                                    
-                                                                                                                        </div>-->
-                                                    <!--</td>-->
-                                                </tr>
-                                            </c:forEach>
+                                                    <td><a href="#"onclick="viewClick1(${savingList1.vendorId});">Edit </a></td>
+                                            
+                                            <!--<td>-->
+                                            <!--                                                                    <div class="btn-group">
+                                                                                                                    <button type="button" onclick="viewClick(${savingList.id});" class="btn btn-default " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                                        &nbsp;&nbsp;Edit
+                                                                                                                    </button>
+                                            
+                                                                                                                </div>-->
+                                            <!--</td>-->
+                                            </tr>
+                                        </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

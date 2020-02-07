@@ -338,6 +338,11 @@ public class PaymentController extends PaymentAbstract {
         Vendors vendors = new Vendors();
         String vendorCode = request.getParameter("vendorId");
         String vendorName = request.getParameter("vendor");
+        String gstno = request.getParameter("gstNo");
+        String panno = request.getParameter("panNo");
+        String emailid = request.getParameter("emailId");
+        String phoneno = request.getParameter("phoneNo");
+        String mobileno = request.getParameter("mobileNo");
         String address = request.getParameter("address");
 
         BindException errors = new BindException(vendors, "vendors");
@@ -353,10 +358,95 @@ public class PaymentController extends PaymentAbstract {
         } else {
             vendors.setVendorId(Integer.parseInt(vendorCode));
             vendors.setVendor(vendorName);
+            vendors.setGstNo(gstno);
+            vendors.setPanNo(panno);
+            vendors.setEmailId(emailid);
+            vendors.setPhoneNo(phoneno);
+            vendors.setMobileNo(mobileno);
             vendors.setAddress(address);
             vendorService.create(vendors);
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
+            mv = VendorRegistration(request, response);
+
+        }
+        return mv;
+    }
+
+    public ModelAndView viewClick1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+
+        int vendorId = Integer.parseInt(request.getParameter("vendorId"));
+        Vendors vendors = vendorService.readById(vendorId);
+
+//        String vendorCode = request.getParameter("vendorId");
+//        String vendorName = request.getParameter("vendor");
+//        String address = request.getParameter("address");
+        BindException errors = new BindException(vendors, "vendors");
+        bind(request, vendors);
+        vendorValidator.validate(vendors, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+
+            mv.setViewName("Payment/VendorRegistrationForm");
+
+        } else {
+            request.setAttribute("vendorId", vendorId);
+            request.setAttribute("vendor", vendors.getVendor());
+            request.setAttribute("address", vendors.getAddress());
+            request.setAttribute("gstNo", vendors.getGstNo());
+            request.setAttribute("mobileNo", vendors.getMobileNo());
+            request.setAttribute("phoneNo", vendors.getPhoneNo());
+            request.setAttribute("panNo", vendors.getPanNo());
+            request.setAttribute("emailId", vendors.getEmailId());
+
+//            vendorService.update(vendors);
+//            request.setAttribute("successMessage",
+//                    "Information : The Information is saved Successfully.");
+//            mv = VendorRegistration(request, response);
+            mv.getModelMap().put("vendors", vendors);
+            mv.setViewName("Payment/EditVendorRegistrationForm");
+        }
+        return mv;
+    }
+
+    public ModelAndView editSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        int vendorId = Integer.parseInt(request.getParameter("vendorId"));
+        Vendors vendors = vendorService.readById(vendorId);
+        String vendorCode = request.getParameter("vendorId");
+        String vendorName = request.getParameter("vendor");
+        String gstno = request.getParameter("gstNo");
+        String panno = request.getParameter("panNo");
+        String emailid = request.getParameter("emailId");
+        String phoneno = request.getParameter("phoneNo");
+        String mobileno = request.getParameter("mobileNo");
+        String address = request.getParameter("address");
+
+        BindException errors = new BindException(vendors, "vendors");
+        bind(request, vendors);
+        vendorValidator.validate(vendors, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+            mv.getModelMap().put("vendors", vendors);
+            mv.setViewName("Payment/VendorRegistrationForm");
+
+        } else {
+            vendors.setVendorId(Integer.parseInt(vendorCode));
+            vendors.setVendor(vendorName);
+            vendors.setGstNo(gstno);
+            vendors.setPanNo(panno);
+            vendors.setEmailId(emailid);
+            vendors.setPhoneNo(phoneno);
+            vendors.setMobileNo(mobileno);
+            vendors.setAddress(address);
+            vendorService.update(vendors);
+            request.setAttribute("successMessage",
+                    "Information : The Information is updated Successfully.");
             mv = VendorRegistration(request, response);
 
         }

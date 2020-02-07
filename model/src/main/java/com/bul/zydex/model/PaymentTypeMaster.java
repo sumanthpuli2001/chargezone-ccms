@@ -38,7 +38,6 @@ public class PaymentTypeMaster {
      private Integer paymentMode;
 
      private String status;
-
      
      public PaymentTypeMaster() {
          

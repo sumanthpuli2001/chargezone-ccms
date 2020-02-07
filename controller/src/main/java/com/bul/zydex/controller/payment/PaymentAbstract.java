@@ -10,23 +10,35 @@ import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.PaymentMode;
 import com.bul.zydex.model.PaymentTypeMaster;
 import com.bul.zydex.model.TypeOfPayment;
+import com.bul.zydex.model.Vendors;
 import com.bul.zydex.service.location.LocationMasterService;
 import com.bul.zydex.service.payment.PaymentModeService;
 import com.bul.zydex.service.payment.PaymentTypeMasterService;
 import com.bul.zydex.service.payment.PaymentTypeService;
+import com.bul.zydex.service.payment.VendorService;
+import org.springframework.validation.Validator;
 
 /**
  *
  * @author admin
  */
+public abstract class PaymentAbstract extends CustomAbstract {
 
-public abstract class PaymentAbstract extends CustomAbstract
-{
     //protected EmployeeTypeService<EmployeeTypeMaster> employeeTypeService;
+    protected Validator vendorValidator;
+
+    public Validator getVendorValidator() {
+        return vendorValidator;
+    }
+
+    public void setVendorValidator(Validator vendorValidator) {
+        this.vendorValidator = vendorValidator;
+    }
     protected PaymentTypeService<TypeOfPayment> paymentTypeService;
     protected PaymentModeService<PaymentMode> paymentModeService;
     protected PaymentTypeMasterService<PaymentTypeMaster> paymentTypeMasterService;
     protected LocationMasterService<LocationMaster> locationMasterService;
+    protected VendorService<Vendors> vendorService;
 
     public LocationMasterService<LocationMaster> getLocationMasterService() {
         return locationMasterService;
@@ -35,7 +47,7 @@ public abstract class PaymentAbstract extends CustomAbstract
     public void setLocationMasterService(LocationMasterService<LocationMaster> locationMasterService) {
         this.locationMasterService = locationMasterService;
     }
-    
+
     public PaymentTypeMasterService<PaymentTypeMaster> getPaymentTypeMasterService() {
         return paymentTypeMasterService;
     }
@@ -58,5 +70,13 @@ public abstract class PaymentAbstract extends CustomAbstract
 
     public void setPaymentTypeService(PaymentTypeService<TypeOfPayment> employeeTypeService) {
         this.paymentTypeService = employeeTypeService;
+    }
+
+    public VendorService<Vendors> getVendorService() {
+        return vendorService;
+    }
+
+    public void setVendorService(VendorService<Vendors> vendorService) {
+        this.vendorService = vendorService;
     }
 }

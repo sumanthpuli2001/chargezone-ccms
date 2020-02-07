@@ -57,9 +57,9 @@
             <c:set var="rememberMe" value="${cookie.rememberMeCookie.value}"/>
         </c:if>
         <div class="col-sm-12">
-            <div class="col-sm-7">
+<!--            <div class="col-sm-7">
                 <img src="StorageYard/Images/Design.jpg" style="width: 95%;"/>
-            </div>
+            </div>-->
             <div class="col-sm-5">
                 <div class="row" style="margin-left: 0px !important;margin-right: 0px !important;;margin-top: 5% !important;">
                     <div class="col-sm-8 col-sm-offset-2">
@@ -114,8 +114,8 @@
                                     <hr style="clear:both;border: 0px;"/>
                                     <div class="col-sm-12"><a href="out.html?act=forgotPassword" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg1"></spring:message></a></div>
                                     <!--<div class="col-sm-12"><a href="vacancy.htm?act=showVacancyList" />" style="color:  #19b9e7;">-->
-                                    <div class="col-sm-12"><a href="out.html?act=vacancyDetailListPage" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg2"></spring:message></a></div>
-                                    <div class="col-sm-12"><a href="trainerLogin.htm?act=Login" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg3"></spring:message></a></div>
+                                    <!--<div class="col-sm-12"><a href="out.html?act=vacancyDetailListPage" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg2"></spring:message></a></div>-->
+                                    <!--<div class="col-sm-12"><a href="trainerLogin.htm?act=Login" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg3"></spring:message></a></div>-->
                                     <div class="col-sm-12"><a href="payment.html?act=createPaymentTypeMasterClick" style="color:  #19b9e7;">Payment Form</a></div>    
                                 </div>
                                 </div>

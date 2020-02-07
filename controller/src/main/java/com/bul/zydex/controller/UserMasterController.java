@@ -112,7 +112,7 @@ public class UserMasterController extends UserMasterAbstract {
         ModelAndView mv = new ModelAndView();
         UserMaster userMaster = new UserMaster();
         userMaster = (UserMaster) request.getSession().getAttribute("user");
-        mv.setViewName("forward:departmentMaster.htm?act=hrDashboard");
+//        mv.setViewName("forward:departmentMaster.htm?act=hrDashboard");
         return mv;
     }
 

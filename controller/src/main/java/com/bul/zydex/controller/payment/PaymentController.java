@@ -12,6 +12,8 @@ import com.bul.zydex.model.PaymentMode;
 import com.bul.zydex.model.PaymentTypeMaster;
 import com.bul.zydex.model.ShiftRotationInfo;
 import com.bul.zydex.model.TypeOfPayment;
+import com.bul.zydex.model.Vendors;
+import com.bul.zydex.service.payment.VendorService;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
@@ -25,8 +27,8 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author admin
  */
-public class PaymentController extends PaymentAbstract{
-    
+public class PaymentController extends PaymentAbstract {
+
     public ModelAndView showTypeOfPayment(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 
@@ -36,7 +38,7 @@ public class PaymentController extends PaymentAbstract{
 
         return mv;
     }
-    
+
     public ModelAndView createClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         TypeOfPayment employeeTypeMaster = new TypeOfPayment();
@@ -44,8 +46,7 @@ public class PaymentController extends PaymentAbstract{
         mv.setViewName("Payment/PaymentTypeCreate");
         return mv;
     }
-    
-    
+
     public ModelAndView showPaymentMode(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 
@@ -55,7 +56,7 @@ public class PaymentController extends PaymentAbstract{
 
         return mv;
     }
-    
+
     public ModelAndView createPaymentModeClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PaymentMode employeeTypeMaster = new PaymentMode();
@@ -63,17 +64,16 @@ public class PaymentController extends PaymentAbstract{
         mv.setViewName("Payment/PaymentModeCreate");
         return mv;
     }
-    
-    
+
     public ModelAndView createPaymentModeSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PaymentMode employeeTypeMaster = new PaymentMode();
         BindException errors = new BindException(employeeTypeMaster, "employeeTypeMaster");
         bind(request, employeeTypeMaster);
-        
+
         String formatvalue = employeeTypeMaster.getAmountTo();
         employeeTypeMaster.setAmountTo(formatvalue.trim());
-        
+
         //employeeTypeValidator.validate(employeeTypeMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
@@ -81,18 +81,16 @@ public class PaymentController extends PaymentAbstract{
             mv.addAllObjects(errors.getModel());
             mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
             mv.setViewName("Payment/PaymentModeCreate");
-            
-        } 
-        else {
-                paymentModeService.create(employeeTypeMaster);
-                request.setAttribute("successMessage",
-                        "Information : The Information is saved Successfully.");
-                mv = showPaymentMode(request, response);
+
+        } else {
+            paymentModeService.create(employeeTypeMaster);
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+            mv = showPaymentMode(request, response);
         }
         return mv;
     }
-    
-    
+
     public ModelAndView createSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         TypeOfPayment employeeTypeMaster = new TypeOfPayment();
@@ -107,17 +105,16 @@ public class PaymentController extends PaymentAbstract{
             mv.addAllObjects(errors.getModel());
             mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
             mv.setViewName("Payment/PaymentTypeCreate");
-            
-        } 
-        else {
-                paymentTypeService.create(employeeTypeMaster);
-                request.setAttribute("successMessage",
-                        "Information : The Information is saved Successfully.");
-                mv = showTypeOfPayment(request, response);
+
+        } else {
+            paymentTypeService.create(employeeTypeMaster);
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+            mv = showTypeOfPayment(request, response);
         }
         return mv;
     }
-    
+
     public ModelAndView deleteSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String savingList[] = request.getParameterValues("checkId");
@@ -133,7 +130,7 @@ public class PaymentController extends PaymentAbstract{
         mv = showTypeOfPayment(request, response);
         return mv;
     }
-    
+
     public ModelAndView deletePaymentModeSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         String savingList[] = request.getParameterValues("checkId");
@@ -149,8 +146,7 @@ public class PaymentController extends PaymentAbstract{
         mv = showPaymentMode(request, response);
         return mv;
     }
-    
-    
+
     public ModelAndView showPaymentMasterForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 
@@ -160,11 +156,11 @@ public class PaymentController extends PaymentAbstract{
 
         return mv;
     }
-    
+
     public ModelAndView createPaymentTypeMasterClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PaymentTypeMaster employeeTypeMaster = new PaymentTypeMaster();
-        
+
         //----- Get data of payment type
         TypeOfPayment typeOfPayment = new TypeOfPayment();
         List<?> level = paymentTypeService.read();
@@ -174,7 +170,7 @@ public class PaymentController extends PaymentAbstract{
             level1.put(typeOfPayment.getId(), typeOfPayment.getTypeOfEmployee());
         }
         request.setAttribute("paymentTypeMap", level1);
-        
+
         //---- Get data of location master
         LocationMaster locationMaster = new LocationMaster();
         List<?> level2 = locationMasterService.read();
@@ -184,13 +180,12 @@ public class PaymentController extends PaymentAbstract{
             level3.put(locationMaster.getId(), locationMaster.getLocation());
         }
         request.setAttribute("locationTypeMap", level3);
-        
-        
+
         mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
         mv.setViewName("Payment/PaymentTypeMasterCreate");
         return mv;
     }
-    
+
     public ModelAndView createPaymentTypeMasterSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PaymentTypeMaster employeeTypeMaster = new PaymentTypeMaster();
@@ -205,37 +200,35 @@ public class PaymentController extends PaymentAbstract{
             mv.addAllObjects(errors.getModel());
             mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
             mv.setViewName("Payment/PaymentTypeMasterCreate");
-            
-        } 
-        else {
-                paymentTypeMasterService.create(employeeTypeMaster);
-                
-                 //---- Get data of payment mode
-                PaymentMode locationMaster = new PaymentMode();
-                List<?> level2 = paymentModeService.read();
-                Map<Integer, String> level3 = new HashMap<>();
-                for (Object o : level2) {
-                    locationMaster = (PaymentMode) o;
-                    level3.put(locationMaster.getId(), locationMaster.getModeOfPayment());
-                }
-                request.setAttribute("paymentModeMap", level3);
-                
-                request.setAttribute("successMessage",
-                        "Information : The Information is saved Successfully.");
-                
-                mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
-                mv.setViewName("Payment/paymentTypeMasterModeCreate");
+
+        } else {
+            paymentTypeMasterService.create(employeeTypeMaster);
+
+            //---- Get data of payment mode
+            PaymentMode locationMaster = new PaymentMode();
+            List<?> level2 = paymentModeService.read();
+            Map<Integer, String> level3 = new HashMap<>();
+            for (Object o : level2) {
+                locationMaster = (PaymentMode) o;
+                level3.put(locationMaster.getId(), locationMaster.getModeOfPayment());
+            }
+            request.setAttribute("paymentModeMap", level3);
+
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+
+            mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+            mv.setViewName("Payment/paymentTypeMasterModeCreate");
         }
         return mv;
     }
-    
-    
+
     public ModelAndView createPaymentTypeMasterModeSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PaymentTypeMaster employeeTypeMaster = new PaymentTypeMaster();
         BindException errors = new BindException(employeeTypeMaster, "employeeTypeMaster");
         bind(request, employeeTypeMaster);
-        
+
         String paymentMode = request.getParameter("paymentMode");
         String totalPaymentAmount = request.getParameter("status");
         //int formatvalue = employeeTypeMaster.getPaymentMode();
@@ -247,22 +240,21 @@ public class PaymentController extends PaymentAbstract{
             mv.addAllObjects(errors.getModel());
             mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
             mv.setViewName("Payment/PaymentTypeMasterCreate");
-            
-        } 
-        else {
-                PaymentTypeMaster paymentTypeMaster = new PaymentTypeMaster();
-                
-                paymentTypeMaster = paymentTypeMasterService.readById(employeeTypeMaster.getId());
-                
-                paymentTypeMaster.setPaymentMode(employeeTypeMaster.getPaymentMode());
-                paymentTypeMaster.setStatus(totalPaymentAmount);
-                
-                paymentTypeMasterService.update(paymentTypeMaster);
-                
-                request.setAttribute("successMessage",
-                        "Information : The Information is saved Successfully.");
-                        
-                mv = createPaymentTypeMasterClick(request, response);
+
+        } else {
+            PaymentTypeMaster paymentTypeMaster = new PaymentTypeMaster();
+
+            paymentTypeMaster = paymentTypeMasterService.readById(employeeTypeMaster.getId());
+
+            paymentTypeMaster.setPaymentMode(employeeTypeMaster.getPaymentMode());
+            paymentTypeMaster.setStatus(totalPaymentAmount);
+
+            paymentTypeMasterService.update(paymentTypeMaster);
+
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+
+            mv = createPaymentTypeMasterClick(request, response);
 //                 //---- Get data of payment mode
 //                PaymentMode locationMaster = new PaymentMode();
 //                List<?> level2 = paymentModeService.read();
@@ -280,34 +272,94 @@ public class PaymentController extends PaymentAbstract{
         }
         return mv;
     }
-    
-     public String calculateAmountAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+    public String calculateAmountAjax(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PaymentMode paymentMode = new PaymentMode();
         PaymentTypeMaster paymentTypeMaster = new PaymentTypeMaster();
-        
+
         float totalPaymentAount = 0;
-        
+
         String paymentModeId = request.getParameter("paymentModeId");
         String userId = request.getParameter("paymentTypeMasterId");
-        
-        if(null != paymentModeId && !paymentModeId.equals(""))
-        {
+
+        if (null != paymentModeId && !paymentModeId.equals("")) {
             Integer paymedModeInt = Integer.valueOf(paymentModeId);
             paymentMode = paymentModeService.readById(paymedModeInt);
             paymentTypeMaster = paymentTypeMasterService.readById(Integer.valueOf(userId));
-            if(Integer.valueOf(paymentTypeMaster.getPaymentAmount()) >= Integer.valueOf(paymentMode.getAmountFrom()) && Integer.valueOf(paymentTypeMaster.getPaymentAmount()) < Integer.valueOf(paymentMode.getAmountTo()))
-            {
+            if (Integer.valueOf(paymentTypeMaster.getPaymentAmount()) >= Integer.valueOf(paymentMode.getAmountFrom()) && Integer.valueOf(paymentTypeMaster.getPaymentAmount()) < Integer.valueOf(paymentMode.getAmountTo())) {
                 totalPaymentAount = Float.valueOf(paymentTypeMaster.getPaymentAmount()) + Float.valueOf(paymentMode.getCharges()) + Float.valueOf(paymentMode.getApplicableTaxes());
             }
         }
         PrintWriter out = null;
         try {
             out = response.getWriter();
-            out.print(""+totalPaymentAount);
+            out.print("" + totalPaymentAount);
         } finally {
             out.close();
         }
         return paymentModeId;
+    }
+
+    public ModelAndView VendorRegistration(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<?> list2 = vendorService.read();
+        request.setAttribute("list", list2);
+        mv.setViewName("Payment/VendorRegistrationResult");
+        return mv;
+    }
+
+    public ModelAndView deleteSubmit1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String savingList1[] = request.getParameterValues("checkId");
+        for (String v : savingList1) {
+            try {
+                vendorService.delete(Integer.parseInt(v));
+                request.setAttribute("successMessage",
+                        "Info : One or more records are deleted successfully.");
+            } catch (Exception e) {
+
+            }
+        }
+        mv = VendorRegistration(request, response);
+        return mv;
+    }
+
+    public ModelAndView createClick1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        Vendors vendors = new Vendors();
+        mv.getModelMap().put("vendors", vendors);
+        mv.setViewName("Payment/VendorRegistrationForm");
+        return mv;
+    }
+
+    public ModelAndView createSubmit1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        Vendors vendors = new Vendors();
+        String vendorCode = request.getParameter("vendorId");
+        String vendorName = request.getParameter("vendor");
+        String address = request.getParameter("address");
+
+        BindException errors = new BindException(vendors, "vendors");
+        bind(request, vendors);
+        vendorValidator.validate(vendors, errors);
+        if (errors.hasErrors()) {
+            request.setAttribute("failureMessage",
+                    "Error : The Entered Information is not valid.");
+            mv.addAllObjects(errors.getModel());
+            mv.getModelMap().put("vendors", vendors);
+            mv.setViewName("Payment/VendorRegistrationForm");
+
+        } else {
+            vendors.setVendorId(Integer.parseInt(vendorCode));
+            vendors.setVendor(vendorName);
+            vendors.setAddress(address);
+            vendorService.create(vendors);
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+            mv = VendorRegistration(request, response);
+
+        }
+        return mv;
     }
 }

@@ -19,6 +19,10 @@
     <bean id="paymentTypeMasterService1" class="com.bul.zydex.service.payment.PaymentTypeMasterServiceImpl">
         <property name="paymentTypeMasterDAO" ref="paymentTypeMasterDAO1" />
     </bean>
+    <!--Vendor-->
+    <bean id="vendorService1" class="com.bul.zydex.service.payment.VendorServiceImpl">
+        <property name="vendorDAO" ref="vendorDAO1" />
+    </bean>
     <!--User-->
     <bean id="userActivityLogService1" class="com.bul.zydex.service.UserActivityLogServiceImpl">
         <property name="userActivityLogDAO" ref="userActivityLogDAO1"/>
@@ -749,22 +753,22 @@
     <bean id="dynamicApprovalSettingEmailService1" class="com.bul.zydex.service.Approval.DynamicApprovalSettingEmailServiceImpl">
         <property name="dynamicApprovalSettingEmailDAO" ref="dynamicApprovalSettingEmailDAO1" />
     </bean>
-     <bean id="eSICMasterService1" class="com.bul.zydex.service.PayrollESIC.ESICMasterServiceImpl">
+    <bean id="eSICMasterService1" class="com.bul.zydex.service.PayrollESIC.ESICMasterServiceImpl">
         <property name="eSICMasterDAO" ref="eSICMasterDAO1" />
     </bean>
-     <bean id="vacancyApprovalService1" class="com.bul.zydex.service.Vacancy.VacancyApprovalServiceImpl">
+    <bean id="vacancyApprovalService1" class="com.bul.zydex.service.Vacancy.VacancyApprovalServiceImpl">
         <property name="vacancyApprovalDAO" ref="vacancyApprovalDAO1" />
     </bean>
-     <bean id="vacancyApprovalHistoryService1" class="com.bul.zydex.service.Vacancy.VacancyApprovalHistoryServiceImpl">
+    <bean id="vacancyApprovalHistoryService1" class="com.bul.zydex.service.Vacancy.VacancyApprovalHistoryServiceImpl">
         <property name="vacancyApprovalHistoryDAO" ref="vacancyApprovalHistoryDAO1" />
     </bean>
-      <bean id="shiftRegularizationService1" class="com.bul.zydex.service.shift.ShiftRegularizationServiceImpl">
+    <bean id="shiftRegularizationService1" class="com.bul.zydex.service.shift.ShiftRegularizationServiceImpl">
         <property name="shiftRegularizationDAO" ref="shiftRegularizationDAO1"/>
     </bean>
-      <bean id="woffRegularizationService1" class="com.bul.zydex.service.shift.WoffRegularizationServiceImpl">
+    <bean id="woffRegularizationService1" class="com.bul.zydex.service.shift.WoffRegularizationServiceImpl">
         <property name="woffRegularizationDAO" ref="woffRegularizationDAO1"/>
     </bean>
-     <bean id="candidateF2FObservationService1" class="com.bul.zydex.service.CandidateF2FRequest.CandidateF2FObservationServiceImpl">
+    <bean id="candidateF2FObservationService1" class="com.bul.zydex.service.CandidateF2FRequest.CandidateF2FObservationServiceImpl">
         <property name="candidateF2FObservationDAO" ref="candidateF2FObservationDAO1" />
     </bean>
     <bean id="coffRegularizationService1" class="com.bul.zydex.service.shift.CoffRegularizationServiceImpl">
@@ -780,9 +784,9 @@
     <bean id="employeeDateTimeDataDetailService1" class="com.bul.zydex.service.shift.EmployeeDateTimeDataDetailServiceImpl">
         <property name="employeeDateTimeDataDetailDAO" ref="employeeDateTimeDataDetailDAO1"/>
     </bean>
-     <bean id="onCallService1" class="com.bul.zydex.service.OnCall.OnCallServiceImpl">
+    <bean id="onCallService1" class="com.bul.zydex.service.OnCall.OnCallServiceImpl">
         <property name="onCallDAO" ref="onCallDAO1"/>
-     </bean>
+    </bean>
     <bean id="oTRegularizationService1" class="com.bul.zydex.service.attendanceRegularization.OTRegularizationServiceImpl">
         <property name="oTRegularizationDAO" ref="oTRegularizationDAO1"/>
     </bean>

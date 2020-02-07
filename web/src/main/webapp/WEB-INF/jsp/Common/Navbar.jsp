@@ -38,13 +38,13 @@
                         </a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.userRight.hr}">
-                    <li class="active treeview">
-                        <a href="userMaster.htm?act=hrDashboard">
-                            <i class="fa fa-dashboard fa-lg" style="color: #424242;"></i> <span style="color: #424242;">My Dashboard</span>
-                        </a>
-                    </li>
-                </c:if>
+                <%--<c:if test="${sessionScope.userRight.hr}">--%>
+                <!--                    <li class="active treeview">
+                                        <a href="userMaster.htm?act=hrDashboard">
+                                            <i class="fa fa-dashboard fa-lg" style="color: #424242;"></i> <span style="color: #424242;">My Dashboard</span>
+                                        </a>
+                                    </li>-->
+                <%--</c:if>--%>
                 <c:if test="${!sessionScope.userRight.hr}">
                     <li class="active treeview">
                         <a href="homeController.htm?act=openHomePage">
@@ -60,49 +60,49 @@
                     </li>
                 </c:if>
 
-                <c:if test="${sessionScope.userRight.employeeManagement}">
-                    <li class="treeview" style="color: #585858;">
-                        <a href="#" style="background: #fff;">
-                            <i class="fa fa-user fa-lg" style="color: #585858;"></i>
-                            <span style="color: #585858;">Recruitment</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <c:if test="${sessionScope.userRight.budget}">
-                                <li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP Create</a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.userRight.mpr}">
-                                <li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR Create</a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.userRight.mppApproval}">
-                                <li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.userRight.mprApproval}">
-                                <li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.userRight.vacancy}">
-                                <li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.userRight.candidateList}">
-                                <li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>
-                                </c:if>
+                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                <!--<li class="treeview" style="color: #585858;">-->
+                <!--                        <a href="#" style="background: #fff;">
+                                            <i class="fa fa-user fa-lg" style="color: #585858;"></i>
+                                            <span style="color: #585858;">Recruitment</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>-->
+                <!--<ul class="treeview-menu">-->
+                <%--<c:if test="${sessionScope.userRight.budget}">--%>
+                <!--<li><a href="recruitment.htm?act=recruitmentCreate"><i class="fa fa-circle-o"></i>MPP Create</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.mpr}">--%>
+                <!--<li><a href="recruitment.htm?act=createMpr"><i class="fa fa-circle-o"></i>MPR Create</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.mppApproval}">--%>
+                <!--<li><a href="recruitment.htm?act=approvalMppCreate"><i class="fa fa-circle-o"></i>MPP Approval</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.mprApproval}">--%>
+                <!--<li><a href="recruitment.htm?act=recruitmentApprovalCreate"><i class="fa fa-circle-o"></i>MPR Approval</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.vacancy}">--%>
+                <!--<li><a href="vacancy.htm?act=vacancyDetailList"><i class="fa fa-circle-o"></i>Vacancy</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.candidateList}">--%>
+                <!--<li><a href="recruitment.htm?act=candidateList"><i class="fa fa-circle-o"></i>Candidate</a></li>-->
+                <%--</c:if>--%>
 
-                            <c:if test="${sessionScope.userRight.hr}">
-                                <li><a href="candidateF2FApproval.htm?act=candidateF2FReqHr"><i class="fa fa-circle-o"></i>Hr Candidate F2F  Request </a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.userRight.faceTofaceApproval}">
-                                <li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Approval</a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.userRight.hrFtFApproval}">
-                                <li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i>Candidate F2F Request</a></li>
-                                </c:if>
-                                <c:if test="${sessionScope.userRight.vacancyApprove}">
-                                <li><a href="vacancy.htm?act=vacancyShowByApprove"><i class="fa fa-circle-o"></i>Vacancy Approval</a></li>
-                                </c:if>
-                        </ul>
-                    </li>
-                </c:if>
-
+                <%--<c:if test="${sessionScope.userRight.hr}">--%>
+                <!--<li><a href="candidateF2FApproval.htm?act=candidateF2FReqHr"><i class="fa fa-circle-o"></i>Hr Candidate F2F  Request </a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.faceTofaceApproval}">--%>
+                <!--<li><a href="candidateF2FApproval.htm?act=candidateF2FReqListForInterviewer"><i class="fa fa-circle-o"></i>Candidate F2F  Approval</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.hrFtFApproval}">--%>
+                <!--<li><a href="candidateF2FApproval.htm?act=candidateF2FInterviewList"><i class="fa fa-circle-o"></i>Candidate F2F Request</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.vacancyApprove}">--%>
+                <!--<li><a href="vacancy.htm?act=vacancyShowByApprove"><i class="fa fa-circle-o"></i>Vacancy Approval</a></li>-->
+                <%--</c:if>--%>
+                <!--</ul>-->
+                <!--</li>-->
+                <%--</c:if>--%>
+                <!--here-->
                 <c:if test="${sessionScope.userRight.employeeManagement}">
                     <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
@@ -114,184 +114,187 @@
 
                             <!--<li><a href="employeeMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Employee Registration</a></li>-->
                             <li><a href="employeeMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Employee Registration</a></li>
-                            <li><a href="employeeMaster.htm?act=formerEmployeeRecords"><i class="fa fa-circle-o"></i>Former Employee Details</a></li>
-                            <li><a href="employeeMaster.htm?act=excelUploadRegistration"><i class="fa fa-circle-o"></i>Employee Registration By Excel</a></li>
-                            <li><a href="employeeMaster.htm?act=excelUploadAllowance"><i class="fa fa-circle-o"></i>Allowance By Excel</a></li>
+                            <!--                            <li><a href="employeeMaster.htm?act=formerEmployeeRecords"><i class="fa fa-circle-o"></i>Former Employee Details</a></li>
+                                                        <li><a href="employeeMaster.htm?act=excelUploadRegistration"><i class="fa fa-circle-o"></i>Employee Registration By Excel</a></li>
+                                                        <li><a href="employeeMaster.htm?act=excelUploadAllowance"><i class="fa fa-circle-o"></i>Allowance By Excel</a></li>-->
                             <!--                        <li><a href="userMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>User Right</a></li>-->
                         </ul>
                     </li>
                 </c:if>
+
+
+                <!--                <li class="treeview" style="color: #585858;">
+                                    <a href="#" style="background: #fff;" >
+                                        <i class="fa fa-calendar fa-lg" style="color: #585858;"></i>
+                                        <span style="color: #585858;">Leave & Attendance</span>
+                                        <i class="fa fa-angle-left pull-right" ></i>
+                                    </a>-->
+                <!--                    <ul class="treeview-menu"> 
+                                        <li class="treeview" style="color: #585858;">
+                                            <a href="#">
+                                                <i class="fa fa-circle-o"></i>
+                                                <span>Leave Management</span>
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </a>
+                                            <ul class="treeview-menu">-->
+                <%--<c:if test="${sessionScope.userRight.leaveManagement}">--%>
+                <!--                                    <li><a href="leaveTypeMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Leave Type</a></li>
+                                                    <li><a href="shortLeave.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Short Leave Setting</a></li>
+                                                    <li><a href="coffMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Lieu Day Leave Setting</a></li>
+                                                    <li><a href="leaveTypeMaster.htm?act=leaveExcelUpload"><i class="fa fa-circle-o"></i>Leave Excel Upload</a></li>
+                                                    <li><a href="leaveEncashment.htm?act=approveNRejectResult"><i class="fa fa-circle-o"></i>Leave Encashment Request</a></li>
+                                                    <li><a href="leaveEmployeeDetail.htm?act=employeeLeaveApplication"><i class="fa fa-circle-o"></i>Employee Leave Application</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.employee}">--%>
+                <%--<c:if test="${sessionScope.checkReportingManager}">--%>
+                <!--<li><a href="leaveEmployeeDetail.htm?act=searchOwnLeaveDetail"><i class="fa fa-circle-o"></i>Leave Application</a></li>-->
+                <%--</c:if>--%>
+                <%--</c:if>--%>
+                <%--<c:if    test="${sessionScope.userRight.hr or sessionScope.userRight.leaveManagement}">--%>
+                <!--                                    <li><a href="leaveEmployeeDetail.htm?act=searchEmpLeaveDetail"><i class="fa fa-circle-o"></i>Search Employee Leave Detail</a></li>
+                                                    <li><a href="leaveEmployeeDetail.htm?act=searchEmployeeLeaveBalance"><i class="fa fa-circle-o"></i>Search Employee Leave Balance</a></li>
+                                                    <li><a href="leaveEmployeeDetail.htm?act=showEmployeeLeaveBalance"><i class="fa fa-circle-o"></i>Search Employee Leave Balance</a></li>
+                                                    <li><a href="leaveEmployeeDetail.htm?act=hremployeeleaveManagement"><i class="fa fa-circle-o"></i>HR Employee Leave Management</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.isReportingManagerDataExist}">--%>
+                <!--<li><a href="leaveEmployeeDetail.htm?act=viewRequestAdminClick"><i class="fa fa-circle-o"></i>Leave Request Of Subordinates</a></li>-->
+                <%--</c:if>--%>
+                <!--                            </ul>
+                                        </li>-->
+                <!--                        <li class="treeview" style="color: #585858;">
+                                            <a href="#">
+                                                <i class="fa fa-circle-o"></i>
+                                                <span>Attendance Regularization</span>
+                                                <i class="fa fa-angle-left pull-right"></i>
+                                            </a>
+                                            <ul class="treeview-menu">-->
+                <%--<c:if test="${sessionScope.userRight.employee}">--%>
+                <!--                                    <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplication"><i class="fa fa-circle-o"></i>Shift Application</a></li>
+                
+                                                    <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff"><i class="fa fa-circle-o"></i>Woff Application</a></li>
+                                                    <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff"><i class="fa fa-circle-o"></i>Lieu day</a></li>
+                                                    <li><a href="shiftRotationMaster.htm?act=searchSubmitOTRegularization"><i class="fa fa-circle-o"></i>OT Request</a></li>
+                                                    <li><a href="attendanceRegularizationMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i> Work From Home Application</a></li>-->
+                <%--<c:if test="${sessionScope.checkReportingManager}">--%>
+                <!--                                        <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff"><i class="fa fa-circle-o"></i>Lieu Addition</a></li>-->
+                <%--<c:if test="${sessionScope.checkReportingManager}">--%>
+                <%--</c:if>--%>
+
+                <!--<li><a href="attendanceRegularizationMaster.htm?act=employyeAttendanceApproeList"><i class="fa fa-circle-o"></i>Approved</a></li>-->
+                <!--<li><a href="attendanceRegularizationMaster.htm?act=showOwnAttandance"><i class="fa fa-circle-o"></i>Show Attendance</a></li>-->
+
+                <%--</c:if>--%>
+                <!--<li><a href="attendanceRegularizationMaster.htm?act=showOwnAttandanceOfOwn"><i class="fa fa-circle-o"></i>Show Attendance</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.hr}">--%>
+                <!--<li><a href="attendanceRegularizationMaster.htm?act=textReadModule"><i class="fa fa-circle-o"></i>Read TextFile For Monthly</a></li>-->
+
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.attendanceReport}">--%>
+                <!--<li><a href="attendanceRegularizationMaster.htm?act=powerAdminApprovalList"><i class="fa fa-circle-o"></i>View All AR</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.hr}">--%>
+
+                <!--<li><a href="attendanceRegularizationMaster.htm?act=allEmployeeAttendanceView"><i class="fa fa-circle-o"></i>All Employee Attendance View</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.isReportingManagerDataExist}">--%>
+
+                <!--                                        <li><a href="attendanceRegularizationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Work From Home Subordinates Request</a></li>
+                                                        <li><a href="attendanceRegularizationMaster.htm?act=allEmployeeAttendanceView"><i class="fa fa-circle-o"></i>All Employee Attendance View</a></li>
+                                                        <li><a href="attendanceRegularizationMaster.htm?act=subOrdinateAttendanceView"><i class="fa fa-circle-o"></i>Subordinates Attendance View</a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> W-off Subordinates Request</a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmitcoff"><i class="fa fa-circle-o"></i> C-off Subordinates Request</a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmitOTregularization"><i class="fa fa-circle-o"></i> OT Subordinates Request</a></li>-->
+                <!--<li><a href="oncall.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i>On Call Subordinates Request</a></li>-->
+                <!--<li><a href="shiftRotationMaster.htm?act=approvalSubmitcoff"><i class="fa fa-circle-o"></i> Lieu day Subordinates Request</a></li>-->
+                <!--<li><a href="attendanceRegularizationMaster.htm?act=approvedList"><i class="fa fa-circle-o"></i>Approved Request</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.departmentWiseAttendance}">--%>
+                <!--<li><a href="attendanceRegularizationMaster.htm?act=departmentWiseAttendanceView"><i class="fa fa-circle-o"></i>Department Wise Attendance</a></li>-->
+
+                <%--</c:if>--%>
+                <!--<li><a href="employeeDatetimeData.htm?act=searchOddPunch"><i class="fa fa-circle-o"></i>Odd Punch Report</a></li>-->
+                <!--<li><a href="oncall.htm?act=view"><i class="fa fa-circle-o"></i>On Call Support Request</a></li>-->
+                <!--                                </ul>
+                                            </li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.hr or sessionScope.userRight.shiftManagement or sessionScope.userRight.temporaryShiftAssign}">--%>
+                <!--                            <li class="treeview" style="color: #585858;">
+                                                <a href="#">
+                                                    <i class="fa fa-circle-o"></i>
+                                                    <span>Shift Management</span>
+                                                    <i class="fa fa-angle-left pull-right"></i>
+                                                </a>
+                                                <ul class="treeview-menu">-->
+                <%--<c:if test="${sessionScope.userRight.hr or sessionScope.userRight.shiftManagement}">--%>
+                <!--                                        <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplication"><i class="fa fa-circle-o"></i>Shift Application</a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> Woff Subordinates Request</a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff"><i class="fa fa-circle-o"></i>Woff Application</a></li>-->
+                <!--                                        <li><a href="shiftMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Shift</a></li>
+                
+                                                        <li><a href="hoursBasis.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Hours </a></li>
+                                                        <li><a href="maxDayLateAllowed.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Maximum Day Late Allowed </a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Shift Rotation </a></li>
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.hr or sessionScope.userRight.temporaryShiftAssign}">--%>
+                <li><a href="temporaryShiftAssign.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Temporary Shift Assign </a></li>-->
+                <%--</c:if>--%>
+                <!--                                </ul>
+                                                <ul class="treeview-menu">
+                                                    <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetail"><i class="fa fa-circle-o"></i>Employee Shift Assign</a></li>
+                                                </ul>
+                                                <ul class="treeview-menu">
+                                                    <li><a href="shiftRotationMaster.htm?act=employeeManualPunch"><i class="fa fa-circle-o"></i>Employee Punch Entry</a></li>
+                                                </ul>
+                                                <ul class="treeview-menu">
+                                                    <li><a href="shiftRotationMaster.htm?act=employeeShiftChangeMonthly"><i class="fa fa-circle-o"></i>Monthly Shift Assign By Excel</a></li>
+                <%--<c:if test="${sessionScope.userRight.hr}">--%>
+                <li><a href="attendanceRegularizationMaster.htm?act=textReadModule"><i class="fa fa-circle-o"></i>Read TextFile For Monthly</a></li>-->
+
+                <%--</c:if>--%>
+                <!--                                </ul>
+                
+                
+                                            </li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
+                <!--                            <li class="treeview" style="color: #585858;">
+                                                <a href="#">
+                                                    <i class="fa fa-circle-o"></i>
+                                                    <span>Attendance Report</span>
+                                                    <i class="fa fa-angle-left pull-right"></i>
+                                                </a>
+                                                <ul class="treeview-menu">-->
+                <%--<c:if test="${sessionScope.userRight.attendanceReport}">--%>
+                <!--                                        <li><a href="shiftRotationMaster.htm?act=employeeDataSearch"><i class="fa fa-circle-o"></i> Employee Master Report</a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=employeeDataSearch2"><i class="fa fa-circle-o"></i> Employee Attendance Report</a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=employeeAttandanceDataSearch"><i class="fa fa-circle-o"></i> Monthly Attendance Report  </a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=employeePresentSearch"><i class="fa fa-circle-o"></i>Daily Present Report</a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=employeeDataOTSearch"><i class="fa fa-circle-o"></i>OT Report</a></li>
+                                                        <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>-->
+                <!--<li><a href="shiftRotationMaster.htm?act=employeeManualPunch"><i class="fa fa-circle-o"></i>Manual Punch</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.lunaPlantAttendanceMgnt}">--%>
+                <!--<li><a href="shiftRotationMaster.htm?act=employeeAttendanceForLuna"><i class="fa fa-circle-o"></i>Luna Attendance Download</a></li>-->
+                <%--</c:if>--%>
+                <%--<c:if test="${sessionScope.userRight.gavasatPlantAttendanceMgnt}">--%>
+                <!--<li><a href="shiftRotationMaster.htm?act=employeeAttendanceForGavasat"><i class="fa fa-circle-o"></i>Gavasat Attendance Download</a></li>-->
+                <%--</c:if>--%>
+                <!--                                </ul>
+                
+                                            </li>-->
+                <%--</c:if>--%>
+                <!--                    </ul>
+                                </li>-->
+                <!--                End-->
                 <li class="treeview" style="color: #585858;">
-                    <a href="#" style="background: #fff;" >
-                        <i class="fa fa-calendar fa-lg" style="color: #585858;"></i>
-                        <span style="color: #585858;">Leave & Attendance</span>
-                        <i class="fa fa-angle-left pull-right" ></i>
-                    </a>
-                    <ul class="treeview-menu"> 
-                        <li class="treeview" style="color: #585858;">
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i>
-                                <span>Leave Management</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <c:if test="${sessionScope.userRight.leaveManagement}">
-                                    <li><a href="leaveTypeMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Leave Type</a></li>
-                                    <li><a href="shortLeave.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Short Leave Setting</a></li>
-                                    <li><a href="coffMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Lieu Day Leave Setting</a></li>
-                                    <li><a href="leaveTypeMaster.htm?act=leaveExcelUpload"><i class="fa fa-circle-o"></i>Leave Excel Upload</a></li>
-                                    <li><a href="leaveEncashment.htm?act=approveNRejectResult"><i class="fa fa-circle-o"></i>Leave Encashment Request</a></li>
-                                    <li><a href="leaveEmployeeDetail.htm?act=employeeLeaveApplication"><i class="fa fa-circle-o"></i>Employee Leave Application</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.employee}">
-                                        <c:if test="${sessionScope.checkReportingManager}">
-                                        <li><a href="leaveEmployeeDetail.htm?act=searchOwnLeaveDetail"><i class="fa fa-circle-o"></i>Leave Application</a></li>
-                                        </c:if>
-                                    </c:if>
-                                    <c:if    test="${sessionScope.userRight.hr or sessionScope.userRight.leaveManagement}">
-                                    <li><a href="leaveEmployeeDetail.htm?act=searchEmpLeaveDetail"><i class="fa fa-circle-o"></i>Search Employee Leave Detail</a></li>
-                                    <!--<li><a href="leaveEmployeeDetail.htm?act=searchEmployeeLeaveBalance"><i class="fa fa-circle-o"></i>Search Employee Leave Balance</a></li>-->
-                                    <li><a href="leaveEmployeeDetail.htm?act=showEmployeeLeaveBalance"><i class="fa fa-circle-o"></i>Search Employee Leave Balance</a></li>
-                                    <li><a href="leaveEmployeeDetail.htm?act=hremployeeleaveManagement"><i class="fa fa-circle-o"></i>HR Employee Leave Management</a></li>
-                                    </c:if>
-                                    <c:if test="${sessionScope.isReportingManagerDataExist}">
-                                    <li><a href="leaveEmployeeDetail.htm?act=viewRequestAdminClick"><i class="fa fa-circle-o"></i>Leave Request Of Subordinates</a></li>
-                                    </c:if>
-                            </ul>
-                        </li>
-                        <li class="treeview" style="color: #585858;">
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i>
-                                <span>Attendance Regularization</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <c:if test="${sessionScope.userRight.employee}">
-                                    <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplication"><i class="fa fa-circle-o"></i>Shift Application</a></li>
-
-                                    <!--<li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff"><i class="fa fa-circle-o"></i>Woff Application</a></li>-->
-                                    <!--<li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff"><i class="fa fa-circle-o"></i>Lieu day</a></li>-->
-                                    <li><a href="shiftRotationMaster.htm?act=searchSubmitOTRegularization"><i class="fa fa-circle-o"></i>OT Request</a></li>
-                                    <li><a href="attendanceRegularizationMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i> Work From Home Application</a></li>
-                                        <c:if test="${sessionScope.checkReportingManager}">
-                                        <!--                                        <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplicationCoff"><i class="fa fa-circle-o"></i>Lieu Addition</a></li>-->
-                                        <%--<c:if test="${sessionScope.checkReportingManager}">--%>
-                                        <%--</c:if>--%>
-
-                                        <!--<li><a href="attendanceRegularizationMaster.htm?act=employyeAttendanceApproeList"><i class="fa fa-circle-o"></i>Approved</a></li>-->
-                                        <!--<li><a href="attendanceRegularizationMaster.htm?act=showOwnAttandance"><i class="fa fa-circle-o"></i>Show Attendance</a></li>-->
-
-                                    </c:if>
-                                     <li><a href="attendanceRegularizationMaster.htm?act=showOwnAttandanceOfOwn"><i class="fa fa-circle-o"></i>Show Attendance</a></li>
-                                        <%--</c:if>--%>
-                                        <%--<c:if test="${sessionScope.userRight.hr}">--%>
-                                    <!--<li><a href="attendanceRegularizationMaster.htm?act=textReadModule"><i class="fa fa-circle-o"></i>Read TextFile For Monthly</a></li>-->
-
-                                    <%--</c:if>--%>
-                                    <c:if test="${sessionScope.userRight.attendanceReport}">
-                                        <li><a href="attendanceRegularizationMaster.htm?act=powerAdminApprovalList"><i class="fa fa-circle-o"></i>View All AR</a></li>
-                                        </c:if>
-                                        <c:if test="${sessionScope.userRight.hr}">
-
-                                        <!--<li><a href="attendanceRegularizationMaster.htm?act=allEmployeeAttendanceView"><i class="fa fa-circle-o"></i>All Employee Attendance View</a></li>-->
-                                    </c:if>
-                                    <c:if test="${sessionScope.isReportingManagerDataExist}">
-
-                                        <li><a href="attendanceRegularizationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Work From Home Subordinates Request</a></li>
-                                        <!--<li><a href="attendanceRegularizationMaster.htm?act=allEmployeeAttendanceView"><i class="fa fa-circle-o"></i>All Employee Attendance View</a></li>-->
-                                        <li><a href="attendanceRegularizationMaster.htm?act=subOrdinateAttendanceView"><i class="fa fa-circle-o"></i>Subordinates Attendance View</a></li>
-                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
-                                        <!--<li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> W-off Subordinates Request</a></li>-->
-                                        <!--<li><a href="shiftRotationMaster.htm?act=approvalSubmitcoff"><i class="fa fa-circle-o"></i> C-off Subordinates Request</a></li>-->
-                                        <li><a href="shiftRotationMaster.htm?act=approvalSubmitOTregularization"><i class="fa fa-circle-o"></i> OT Subordinates Request</a></li>
-                                        <!--<li><a href="oncall.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i>On Call Subordinates Request</a></li>-->
-                                        <!--<li><a href="shiftRotationMaster.htm?act=approvalSubmitcoff"><i class="fa fa-circle-o"></i> Lieu day Subordinates Request</a></li>-->
-                                        <!--<li><a href="attendanceRegularizationMaster.htm?act=approvedList"><i class="fa fa-circle-o"></i>Approved Request</a></li>-->
-                                    </c:if>
-                                    <c:if test="${sessionScope.userRight.departmentWiseAttendance}">
-                                        <li><a href="attendanceRegularizationMaster.htm?act=departmentWiseAttendanceView"><i class="fa fa-circle-o"></i>Department Wise Attendance</a></li>
-
-                                    </c:if>
-                                    <!--<li><a href="employeeDatetimeData.htm?act=searchOddPunch"><i class="fa fa-circle-o"></i>Odd Punch Report</a></li>-->
-                                    <!--<li><a href="oncall.htm?act=view"><i class="fa fa-circle-o"></i>On Call Support Request</a></li>-->
-                                </ul>
-                            </li>
-                        </c:if>
-                        <c:if test="${sessionScope.userRight.hr or sessionScope.userRight.shiftManagement or sessionScope.userRight.temporaryShiftAssign}">
-                            <li class="treeview" style="color: #585858;">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i>
-                                    <span>Shift Management</span>
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <c:if test="${sessionScope.userRight.hr or sessionScope.userRight.shiftManagement}">
-                                        <!--                                        <li><a href="shiftRotationMaster.htm?act=searchSubmitShiftApplication"><i class="fa fa-circle-o"></i>Shift Application</a></li>
-                                                                                <li><a href="shiftRotationMaster.htm?act=approvalSubmit"><i class="fa fa-circle-o"></i> Shift Subordinates Request</a></li>
-                                                                                <li><a href="shiftRotationMaster.htm?act=approvalSubmitWoff"><i class="fa fa-circle-o"></i> Woff Subordinates Request</a></li>
-                                                                                <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetailWoff"><i class="fa fa-circle-o"></i>Woff Application</a></li>-->
-                                        <li><a href="shiftMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Shift</a></li>
-
-                                        <li><a href="hoursBasis.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Hours </a></li>
-                                        <li><a href="maxDayLateAllowed.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Maximum Day Late Allowed </a></li>
-                                        <li><a href="shiftRotationMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Shift Rotation </a></li>
-                                        </c:if>
-                                        <c:if test="${sessionScope.userRight.hr or sessionScope.userRight.temporaryShiftAssign}">
-                                        <li><a href="temporaryShiftAssign.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Temporary Shift Assign </a></li>
-                                        </c:if>
-                                </ul>
-                                <ul class="treeview-menu">
-                                    <li><a href="shiftRotationMaster.htm?act=EmployeeShiftAssignDetail"><i class="fa fa-circle-o"></i>Employee Shift Assign</a></li>
-                                </ul>
-                                <ul class="treeview-menu">
-                                    <li><a href="shiftRotationMaster.htm?act=employeeManualPunch"><i class="fa fa-circle-o"></i>Employee Punch Entry</a></li>
-                                </ul>
-                                <ul class="treeview-menu">
-                                    <li><a href="shiftRotationMaster.htm?act=employeeShiftChangeMonthly"><i class="fa fa-circle-o"></i>Monthly Shift Assign By Excel</a></li>
-                                        <c:if test="${sessionScope.userRight.hr}">
-                                        <li><a href="attendanceRegularizationMaster.htm?act=textReadModule"><i class="fa fa-circle-o"></i>Read TextFile For Monthly</a></li>
-
-                                    </c:if>
-                                </ul>
-
-
-                            </li>
-                        </c:if>
-                        <c:if test="${sessionScope.userRight.employeeManagement}">
-                            <li class="treeview" style="color: #585858;">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i>
-                                    <span>Attendance Report</span>
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <c:if test="${sessionScope.userRight.attendanceReport}">
-                                        <li><a href="shiftRotationMaster.htm?act=employeeDataSearch"><i class="fa fa-circle-o"></i> Employee Master Report</a></li>
-                                        <li><a href="shiftRotationMaster.htm?act=employeeDataSearch2"><i class="fa fa-circle-o"></i> Employee Attendance Report</a></li>
-                                        <li><a href="shiftRotationMaster.htm?act=employeeAttandanceDataSearch"><i class="fa fa-circle-o"></i> Monthly Attendance Report  </a></li>
-                                        <li><a href="shiftRotationMaster.htm?act=employeePresentSearch"><i class="fa fa-circle-o"></i>Daily Present Report</a></li>
-                                        <li><a href="shiftRotationMaster.htm?act=employeeDataOTSearch"><i class="fa fa-circle-o"></i>OT Report</a></li>
-                                        <li><a href="shiftRotationMaster.htm?act=attendanceExcelUpload"><i class="fa fa-circle-o"></i>Attendance Upload</a></li>
-                                        <!--<li><a href="shiftRotationMaster.htm?act=employeeManualPunch"><i class="fa fa-circle-o"></i>Manual Punch</a></li>-->
-                                    </c:if>
-                                    <%--<c:if test="${sessionScope.userRight.lunaPlantAttendanceMgnt}">--%>
-                                    <!--<li><a href="shiftRotationMaster.htm?act=employeeAttendanceForLuna"><i class="fa fa-circle-o"></i>Luna Attendance Download</a></li>-->
-                                    <%--</c:if>--%>
-                                    <c:if test="${sessionScope.userRight.gavasatPlantAttendanceMgnt}">
-                                        <li><a href="shiftRotationMaster.htm?act=employeeAttendanceForGavasat"><i class="fa fa-circle-o"></i>Gavasat Attendance Download</a></li>
-                                        </c:if>
-                                </ul>
-
-                            </li>
-                        </c:if>
-                    </ul>
-                </li>
-                <li class="treeview" style="color: #585858;">
-                    <a href="#" style="background: #fff;" >
-                        <i class="fa fa-calendar fa-lg" style="color: #585858;"></i>
-                        <span style="color: #585858;">Employee Services</span>
-                        <i class="fa fa-angle-left pull-right" ></i>
-                    </a>
+                    <!--                    <a href="#" style="background: #fff;" >
+                                            <i class="fa fa-calendar fa-lg" style="color: #585858;"></i>
+                                            <span style="color: #585858;">Employee Services</span>
+                                            <i class="fa fa-angle-left pull-right" ></i>
+                                        </a>-->
                     <ul class="treeview-menu">
                         <%--<c:if test="${sessionScope.userRight.travelManagementRights}">--%>
                         <li class="treeview" style="color: #585858;">
@@ -538,11 +541,11 @@
                     </ul>
                 </li>
                 <li class="treeview" style="color: #585858;">
-                    <a href="#" style="background: #fff;">
-                        <i class="fa fa-bar-chart fa-lg" style="color: #585858;"></i>
-                        <span style="color: #585858;">Performance Management</span>
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </a>
+                    <!--                    <a href="#" style="background: #fff;">
+                                            <i class="fa fa-bar-chart fa-lg" style="color: #585858;"></i>
+                                            <span style="color: #585858;">Performance Management</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>-->
                     <ul class="treeview-menu">
                         <!--<li><a href="appraisalPerformance.htm?act=createClick"><i class="fa fa-circle-o"></i>Performance Appraisal </a></li>-->
                         <%--<c:if test="${sessionScope.checkReportingManager}">--%>
@@ -576,12 +579,12 @@
 
                 <c:if test="${sessionScope.userRight.payroll}">
                     <li class="treeview" style="color: #585858;">
-                        <a href="#" style="background: #fff;">
-                            <i class="fa fa-rupee fa-lg" style="color: #585858;"></i>
-                            <span style="color: #585858;">Payroll</span>
-                            <i class="fa fa-angle-left pull-right"></i>                            <i class="fa fa-angle-left pull-right"></i>
-
-                        </a>
+                        <!--                        <a href="#" style="background: #fff;">
+                                                    <i class="fa fa-rupee fa-lg" style="color: #585858;"></i>
+                                                    <span style="color: #585858;">Payroll</span>
+                                                    <i class="fa fa-angle-left pull-right"></i>                            <i class="fa fa-angle-left pull-right"></i>
+                        
+                                                </a>-->
                         <ul class="treeview-menu">
                             <li>
                                 <a href="#">
@@ -758,11 +761,11 @@
                 </li>
             </c:if>
             <li class="treeview" style="color: #585858;">
-                <a href="#" style="background: #fff;">
-                    <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
-                    <span style="color: #585858;">Learning & Development</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
+                <!--                <a href="#" style="background: #fff;">
+                                    <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
+                                    <span style="color: #585858;">Learning & Development</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>-->
                 <ul class="treeview-menu">
                     <c:if test="${sessionScope.userRight.training}">
                         <li>
@@ -801,11 +804,11 @@
 
             <%--</c:if>--%>
             <li class="treeview" style="color: #585858;">
-                <a href="#" style="background: #fff;">
-                    <i class="fa fa-sign-out fa-lg" style="color: #585858;"></i>
-                    <span style="color: #585858;">Separation Management</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
+                <!--                <a href="#" style="background: #fff;">
+                                    <i class="fa fa-sign-out fa-lg" style="color: #585858;"></i>
+                                    <span style="color: #585858;">Separation Management</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>-->
                 <ul class="treeview-menu">
 
                     <%--<c:if test="${fn:length(existinglist) > 0}">--%>
@@ -929,11 +932,11 @@
             <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
 
             <li>
-                <a href="#" style="background: #fff;">
-                    <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
-                    <span style="color: #585858;">Kaizen</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
+                <!--                <a href="#" style="background: #fff;">
+                                    <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
+                                    <span style="color: #585858;">Kaizen</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>-->
                 <ul class="treeview-menu">
 
                     <!--<li><a href="kaizen.htm?act=myKaizen"><i class="fa fa-circle-o"></i>My Kaizen</a></li>-->
@@ -954,9 +957,9 @@
                 </ul>
             </li>   
             <li class="active treeview">
-                <a href="homeController.htm?act=report">
-                    <i class="fa fa-archive fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Report</span>
-                </a>
+                <!--                <a href="homeController.htm?act=report">
+                                    <i class="fa fa-archive fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Report</span>
+                                </a>-->
             </li>
             <!--            <li>
                             <a href="homeController.htm?act=redirectToAllReports" style="background: #fff;">
@@ -964,11 +967,11 @@
                             </a>
                         </li>-->
             <li>
-                <a href="#" style="background: #fff;">
-                    <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
-                    <span style="color: #585858;">Tax</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
+                <!--                <a href="#" style="background: #fff;">
+                                    <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
+                                    <span style="color: #585858;">Tax</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>-->
                 <ul class="treeview-menu">
 
 
@@ -1013,72 +1016,77 @@
                         <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                        <li class="ow-break-word"><a href="resignationMaster.htm?act=fullandfcreateClick"><i class="fa fa-circle-o"></i>F&F Settlement Letter Format</a></li>
+                        <!--<li class="ow-break-word"><a href="resignationMaster.htm?act=fullandfcreateClick"><i class="fa fa-circle-o"></i>F&F Settlement Letter Format</a></li>-->
                         <!--<li><a href="modulesMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Modules Master</a></li>-->
                         <!--<li><a href="componentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Component Master</a></li>-->
                         <li><a href="payment.html?act=showTypeOfPayment"><i class="fa fa-circle-o"></i>Payment Type</a></li>
                         <li><a href="payment.html?act=showPaymentMode"><i class="fa fa-circle-o"></i>Payment Mode</a></li>
-                        
-                        <li><a href="approval.htm?act=approvalList"><i class="fa fa-circle-o"></i>Approval Setting</a></li>
-                        <li><a href="deviceMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Device Management</a></li>
-                        <li><a href="employeeType.htm?act=showResult"><i class="fa fa-circle-o"></i>Team List</a></li>
-                        <li><a href="employeeSubType.htm?act=showResult"><i class="fa fa-circle-o"></i>Sub-Team List </a></li>
-                        <li><a href="departmentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Department List</a></li>
-                        <li><a href="designationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Designation List</a></li>
-                        <li><a href="levelMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Level Master</a></li>
+
+                        <!--                        <li><a href="approval.htm?act=approvalList"><i class="fa fa-circle-o"></i>Approval Setting</a></li>
+                                                <li><a href="deviceMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Device Management</a></li>
+                                                <li><a href="employeeType.htm?act=showResult"><i class="fa fa-circle-o"></i>Team List</a></li>
+                                                <li><a href="employeeSubType.htm?act=showResult"><i class="fa fa-circle-o"></i>Sub-Team List </a></li>
+                                                <li><a href="departmentMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Department List</a></li>
+                                                <li><a href="designationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Designation List</a></li>
+                                                <li><a href="levelMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Level Master</a></li>-->
                         <li><a href="locationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Location Master</a></li>
-                        <li><a href="clientDetailsMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Client Master</a></li>
-                        <li><a href="holidayMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Holiday Master</a></li>
-                        <li><a href="holidayMaster.htm?act=holidayExcelUpload"><i class="fa fa-circle-o"></i>Holiday Excel Import</a></li>
-                        <li><a href="policyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Allowance</a></li>
-                        <li><a href="zydexLocationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Work Location Master</a></li>
-                        <li><a href="currencyMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Currency Master</a></li>
-                        <li><a href="policyDeviationForAir.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Policy Deviation Master</a></li>
-                        <li><a href="visitorVisitedLocation.htm?act=createClick"><i class="fa fa-circle-o"></i>Visitor Visited Location</a></li>
-                        <li><a href="timeAttandanceFlaxibleMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Time Attendance Flexible</a></li>
-                        <li><a href="urlMaster.htm?act=viewUrlResult"><i class="fa fa-pie-chart fa-lg"></i>Web Service URL</a></li>
-                        <li><a href="policyMaster.htm?act=showPolicyList"><i class="fa fa-circle-o"></i>Policy</a></li>
+                        <!--                        <li><a href="clientDetailsMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Client Master</a></li>
+                                                <li><a href="holidayMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Holiday Master</a></li>
+                                                <li><a href="holidayMaster.htm?act=holidayExcelUpload"><i class="fa fa-circle-o"></i>Holiday Excel Import</a></li>
+                                                <li><a href="policyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Allowance</a></li>
+                                                <li><a href="zydexLocationMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Work Location Master</a></li>
+                                                <li><a href="currencyMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Currency Master</a></li>
+                                                <li><a href="policyDeviationForAir.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Policy Deviation Master</a></li>
+                                                <li><a href="visitorVisitedLocation.htm?act=createClick"><i class="fa fa-circle-o"></i>Visitor Visited Location</a></li>
+                                                <li><a href="timeAttandanceFlaxibleMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Time Attendance Flexible</a></li>
+                                                <li><a href="urlMaster.htm?act=viewUrlResult"><i class="fa fa-pie-chart fa-lg"></i>Web Service URL</a></li>
+                                                <li><a href="policyMaster.htm?act=showPolicyList"><i class="fa fa-circle-o"></i>Policy</a></li>-->
                         <!--<li><a href="appraisalPerformance.htm?act=trasferCompatencyEvaluationInEmployeeMaster"><i class="fa fa-pie-chart fa-lg"></i>Competency Evaluation Transfer</a></li>-->
-                        <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
-                        <li><a href="payrollESIC.htm?act=showList"><i class="fa fa-circle-o"></i>ESIC Master</a></li>
-                            <%--<c:if test="${!sessionScope.userRight.employeeManagement}">--%>
+                        <!--                        <li><a href="companyMaster.htm?act=showList"><i class="fa fa-circle-o"></i>Company Master</a></li>
+                                                <li><a href="payrollESIC.htm?act=showList"><i class="fa fa-circle-o"></i>ESIC Master</a></li>
+                        <%--<c:if test="${!sessionScope.userRight.employeeManagement}">--%>
 
                         <%--</c:if>--%>
                         <li><a href="thoughtMaster.htm?act=createthought"><i class="fa fa-circle-o"></i>Homepage Setting</a></li>
                         <li><a href="classifiedBox.htm?act=showResult"><i class="fa fa-circle-o"></i>Classified Setting</a></li>
                         <li><a href="ctcAllowance.htm?act=showList"><i class="fa fa-circle-o"></i>CTC Master</a></li>
                         <li><a href="retirementAge.htm?act=showList"><i class="fa fa-circle-o"></i>Retirement Ages</a></li>
-                        <li><a href="emergencyContact.htm?act=createContact"><i class="fa fa-circle-o"></i>Emergency Contacts</a></li>
-                            <c:if test="${sessionScope.userRight.hr}">
+                        <li><a href="emergencyContact.htm?act=createContact"><i class="fa fa-circle-o"></i>Emergency Contacts</a></li>-->
+                        <c:if test="${sessionScope.userRight.hr}">
                             <li class="treeview" style="color: #585858;">
-                                <a href="#">
-                                    <i class="fa fa-circle-o"></i>
-                                    <span>Email Template Master</span>
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </a>
+                                <!--                                <a href="#">
+                                                                    <i class="fa fa-circle-o"></i>
+                                                                    <span>Email Template Master</span>
+                                                                    <i class="fa fa-angle-left pull-right"></i>
+                                                                </a>-->
                                 <ul class="treeview-menu">
                                     <li><a href="emailTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Template Result</a></li>
                                     <li><a href="emailAddMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Email Add Master</a></li>
                                 </ul>
                             </li>
                         </c:if>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i>
-                                <span>Certificate</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="certificateTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Certificate Template Result</a></li>
-                                <li><a href="certificateTemplate.htm?act=searchEmployeeDetail&search=none"><i class="fa fa-circle-o"></i> Assign Certificate</a></li>
-                            </ul>
-                        </li>
+                        <!--                        <li>
+                                                    <a href="#">
+                                                        <i class="fa fa-circle-o"></i>
+                                                        <span>Certificate</span>
+                                                        <i class="fa fa-angle-left pull-right"></i>
+                                                    </a>
+                                                    <ul class="treeview-menu">
+                                                        <li><a href="certificateTemplate.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Certificate Template Result</a></li>
+                                                        <li><a href="certificateTemplate.htm?act=searchEmployeeDetail&search=none"><i class="fa fa-circle-o"></i> Assign Certificate</a></li>
+                                                    </ul>
+                                                </li>-->
 
                     </ul>
                 </li>
             </c:if>
 
             </ul>
+            <li class="active treeview">
+                <a href="payment.html?act=VendorRegistration">
+                    <i class="fa fa-user fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Vendor Registration</span>
+                </a>
+            </li>
 
         </section>
         <!-- /.sidebar -->

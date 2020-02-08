@@ -236,11 +236,22 @@ public class PaymentController extends PaymentAbstract {
         //employeeTypeMaster.setEmailId(formatvalue.trim());
         //employeeTypeValidator.validate(employeeTypeMaster, errors);
         if (null == paymentMode || paymentMode.equals("")) {
+            
+            
+             PaymentMode locationMaster = new PaymentMode();
+            List<?> level2 = paymentModeService.read();
+            Map<Integer, String> level3 = new HashMap<>();
+            for (Object o : level2) {
+                locationMaster = (PaymentMode) o;
+                level3.put(locationMaster.getId(), locationMaster.getModeOfPayment());
+            }
+            request.setAttribute("paymentModeMap", level3);
+ 
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
             mv.addAllObjects(errors.getModel());
             mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
-            mv.setViewName("Payment/PaymentTypeMasterCreate");
+            mv.setViewName("Payment/paymentTypeMasterModeCreate");
 
         } else {
             PaymentTypeMaster paymentTypeMaster = new PaymentTypeMaster();

@@ -60,7 +60,7 @@
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
                                 <button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>
-                                <!--<button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 100px;" onclick="window.location = 'payment.html?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;EXPORT</button>-->
+                                <button type="button" class="btn btn-facebook col-sm-offset-4" style="width: 130px;" onclick="window.location = 'payment.html?act=exportToExcel&searchString=${param.searchString}'"><i class="fa fa-file-excel-o"></i>&nbsp&nbsp;Upload Vendor</button>
                                 <button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'payment.html?act=createClick1'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>
 
                                 <div class="table table-bordered" style="padding-top: 20px;"> 

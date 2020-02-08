@@ -12,5 +12,7 @@ import com.bul.zydex.service.GenericsService;
  * @author admin
  */
 public interface PaymentTypeMasterService<T> extends GenericsService<T> {
+  
     
+    public Integer paymentCountByDate();
 }

@@ -13,4 +13,5 @@ import com.bul.zydex.dao.GenericsDAO;
  */
 public interface PaymentTypeMasterDAO<T> extends GenericsDAO<T>{
     
+     public Integer paymentCountByDate();
 }

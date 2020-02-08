@@ -167,4 +167,5 @@
     <bean id="otRegularizationValidator1" class="com.bul.zydex.validator.attendanceRegularization.OtRegularizationValidator" />
     <!--Venodor-->
     <bean id="vendorValidator1" class="com.bul.zydex.validator.Vendor.VendorValidator" />
+    <bean id="paymentTypeMasterValidator1" class="com.bul.zydex.validator.Payment.PaymentTypeMasterValidator" />
 </beans>

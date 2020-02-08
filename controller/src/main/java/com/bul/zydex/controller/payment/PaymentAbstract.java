@@ -26,14 +26,8 @@ public abstract class PaymentAbstract extends CustomAbstract {
 
     //protected EmployeeTypeService<EmployeeTypeMaster> employeeTypeService;
     protected Validator vendorValidator;
+    protected Validator paymentTypeMasterValidator;
 
-    public Validator getVendorValidator() {
-        return vendorValidator;
-    }
-
-    public void setVendorValidator(Validator vendorValidator) {
-        this.vendorValidator = vendorValidator;
-    }
     protected PaymentTypeService<TypeOfPayment> paymentTypeService;
     protected PaymentModeService<PaymentMode> paymentModeService;
     protected PaymentTypeMasterService<PaymentTypeMaster> paymentTypeMasterService;
@@ -78,5 +72,21 @@ public abstract class PaymentAbstract extends CustomAbstract {
 
     public void setVendorService(VendorService<Vendors> vendorService) {
         this.vendorService = vendorService;
+    }
+
+    public Validator getVendorValidator() {
+        return vendorValidator;
+    }
+
+    public void setVendorValidator(Validator vendorValidator) {
+        this.vendorValidator = vendorValidator;
+    }
+
+    public Validator getpaymentTypeMasterValidator() {
+        return paymentTypeMasterValidator;
+    }
+
+    public void setpaymentTypeMasterValidator(Validator paymentTypeMasterValidator) {
+        this.paymentTypeMasterValidator = paymentTypeMasterValidator;
     }
 }

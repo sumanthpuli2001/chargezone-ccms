@@ -13,7 +13,8 @@ import com.bul.zydex.service.GenericsServiceImpl;
  *
  * @author admin
  */
-public class PaymentTypeMasterServiceImpl<T> extends GenericsServiceImpl<T> implements PaymentTypeMasterService<T>{
+public class PaymentTypeMasterServiceImpl<T> extends GenericsServiceImpl<T> implements PaymentTypeMasterService<T> {
+
     private PaymentTypeMasterDAO<T> paymentTypeMasterDAO;
 
     public PaymentTypeMasterDAO<T> getPaymentTypeMasterDAO() {
@@ -24,5 +25,10 @@ public class PaymentTypeMasterServiceImpl<T> extends GenericsServiceImpl<T> impl
         this.paymentTypeMasterDAO = paymentTypeMasterDAO;
         setGenericsDAO(paymentTypeMasterDAO);
     }
-    
+
+    @Override
+    public Integer paymentCountByDate() {
+        return paymentTypeMasterDAO.paymentCountByDate();
+    }
+
 }

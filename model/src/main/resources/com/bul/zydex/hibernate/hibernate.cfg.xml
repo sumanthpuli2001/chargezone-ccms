@@ -203,6 +203,6 @@
         <mapping resource="com/bul/zydex/model/OTRegularization.hbm.xml"/>
         <mapping resource="com/bul/zydex/model/ClientDetailsMaster.hbm.xml"/>
         <mapping resource="../java/com/bul/zydex/model/zzz.hbm.xml"/>
-        <mapping resource="../java/com/bul/zydex/model/Vendors.hbm.xml"/>
+        <mapping resource="com/bul/zydex/model/Vendors.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

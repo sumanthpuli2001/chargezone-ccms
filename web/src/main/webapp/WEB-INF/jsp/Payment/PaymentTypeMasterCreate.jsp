@@ -36,13 +36,22 @@
                                 <c:if test="${!empty successMessage}">
                                     <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
                                 </c:if>
-                                <c:if test="${!empty failureMessage}">
-                                    <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
-                                </c:if>
+                               
                               <form:form class="form-horizontal" method="post"
                                            modelAttribute="employeeTypeMaster" action="payment.html?act=createPaymentTypeMasterSubmit">
                                     <form:hidden path="id"></form:hidden>
+                                         <c:if test="${!empty failureMessage}">
+                                        <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}
+                                            <br/><form:errors path="*" cssClass="errorDiv"></form:errors>
+
+                                            <%--<form:errors path="failureMessageExtension" cssClass="errorDiv"></form:errors>
                                         
+                                            <input type="text" name="firstName" value="${list.firstName}" id="firstName">
+                                            --%>    
+
+                                            <font class="errorDiv" color="#dd4b39"> ${failureMessageExtension} </font>
+                                        </div>
+                                    </c:if>
                                         <div class="form-group">
                                             <div class="col-sm-3">
                                                 <label class="control-label">Select Type of Payment:<span style="color: red;font-size: 12px;">*</span></label>
@@ -95,7 +104,7 @@
                                                 <label class="control-label">Enter PAN No:<span style="color: red;font-size: 12px;">*</span></label>
                                             </div>
                                             <div class="col-sm-7">
-                                                <form:input path="panNo" class="form-control"  placeholder="Enter Pan No"  maxlength="30"/>
+                                                <form:input path="panNo" class="form-control"  style="text-transform: uppercase" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"  />
                                                 <form:errors path="panNo" cssClass="errorDiv"/>
                                             </div>
                                         </div>
@@ -104,7 +113,7 @@
                                                 <label class="control-label">Enter Email Id:<span style="color: red;font-size: 12px;">*</span></label>
                                             </div>
                                             <div class="col-sm-7">
-                                                <form:input path="emailId" class="form-control"  placeholder="Enter Email Id"  maxlength="30"/>
+                                                <form:input path="emailId" class="form-control"  pattern="[^ @]*@[^ @]*"  placeholder="abc@domain.com"  maxlength="30"/>
                                                 <form:errors path="emailId" cssClass="errorDiv"/>
                                             </div>
                                         </div>

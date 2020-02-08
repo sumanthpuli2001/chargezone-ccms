@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.bul.zydex.model;
 
 /*
@@ -11,7 +10,6 @@ package com.bul.zydex.model;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,30 +18,31 @@ import java.util.Set;
  * @author admin
  */
 public class PaymentTypeMaster {
-   
-     private Integer id;
-     private Integer typeOfPayment;
 
-     private String partyCode;
-     private String nameOfParty;
-     private String gstNo;
-     private String panNo;
-     private String emailId;
-     private String phoneNo;
-     private String mobileNo;
-     private String address;
-     private int location;
-     private String paymentAmount;
-     private String additionalRemarks;
-     private Integer paymentMode;
+    private Integer id;
+    private Integer typeOfPayment;
 
-     private String status;
-     
-     public PaymentTypeMaster() {
-         
-     }
-     
-    public PaymentTypeMaster(Integer id, Integer typeOfPayment, String partyCode, String nameOfParty, String gstNo, String panNo, String emailId, String phoneNo, String mobileNo, String address, int location, String paymentAmount, String additionalRemarks, Integer paymentMode, String status) {
+    private String partyCode;
+    private String nameOfParty;
+    private String gstNo;
+    private String panNo;
+    private String emailId;
+    private String phoneNo;
+    private String mobileNo;
+    private String address;
+    private int location;
+    private String paymentAmount;
+    private String additionalRemarks;
+    private Integer paymentMode;
+    private String createdDate;
+
+    private String status;
+
+    public PaymentTypeMaster() {
+
+    }
+
+    public PaymentTypeMaster(Integer id, Integer typeOfPayment, String partyCode, String nameOfParty, String gstNo, String panNo, String emailId, String phoneNo, String mobileNo, String address, int location, String paymentAmount, String additionalRemarks, Integer paymentMode, String status,String createdDate) {
         this.id = id;
         this.typeOfPayment = typeOfPayment;
         this.partyCode = partyCode;
@@ -59,9 +58,9 @@ public class PaymentTypeMaster {
         this.additionalRemarks = additionalRemarks;
         this.paymentMode = paymentMode;
         this.status = status;
+        this.createdDate= createdDate;
     }
-    
-    
+
     public Integer getPaymentMode() {
         return paymentMode;
     }
@@ -69,7 +68,7 @@ public class PaymentTypeMaster {
     public void setPaymentMode(Integer paymentMode) {
         this.paymentMode = paymentMode;
     }
-    
+
     public Integer getId() {
         return id;
     }
@@ -85,7 +84,7 @@ public class PaymentTypeMaster {
     public void setTypeOfPayment(Integer typeOfPayment) {
         this.typeOfPayment = typeOfPayment;
     }
-    
+
     public String getPartyCode() {
         return partyCode;
     }
@@ -174,13 +173,20 @@ public class PaymentTypeMaster {
         this.additionalRemarks = additionalRemarks;
     }
 
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 
 }

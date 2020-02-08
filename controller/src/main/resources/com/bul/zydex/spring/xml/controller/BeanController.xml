@@ -22,7 +22,8 @@
         <property name="paymentTypeMasterService" ref="paymentTypeMasterService1" />
         <property name="locationMasterService" ref="locationMasterService1" />
         <property name="vendorService" ref="vendorService1" />
-         <property name="vendorValidator" ref="vendorValidator1" />
+        <property name="vendorValidator" ref="vendorValidator1" />
+        <property name="paymentTypeMasterValidator" ref="paymentTypeMasterValidator1" />
     </bean>
     <!--Parent-->
     <bean id="controllerConfig" abstract="true">

@@ -194,6 +194,7 @@ public class PaymentController extends PaymentAbstract {
         String formatvalue = employeeTypeMaster.getEmailId();
         employeeTypeMaster.setEmailId(formatvalue.trim());
         //employeeTypeValidator.validate(employeeTypeMaster, errors);
+        paymentTypeMasterValidator.validate(employeeTypeMaster, errors);
         if (errors.hasErrors()) {
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");

@@ -90,16 +90,6 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>junit.test</groupId>
-            <artifactId>junit.all</artifactId>
-            <version>1.1.0</version>
-        </dependency>
-        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -133,6 +123,15 @@
             <version>5.4.1</version>
         </dependency>
         
+        
+        <dependency>
+    <groupId>com.googlecode.json-simple</groupId>
+    <artifactId>json-simple</artifactId>
+    <version>1.1.1</version>
+</dependency>
+
+        
+
     </dependencies>
   
 </project>

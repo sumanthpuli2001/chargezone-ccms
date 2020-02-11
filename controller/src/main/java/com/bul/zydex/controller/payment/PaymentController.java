@@ -5,16 +5,17 @@
  */
 package com.bul.zydex.controller.payment;
 
+import com.bul.zydex.controller.PaymentGateway.CreateOrderRequest;
+import com.bul.zydex.controller.PaymentGateway.CreateOrderResponse;
+import com.bul.zydex.controller.PaymentGateway.Environment;
+import com.bul.zydex.controller.PaymentGateway.PaymentService;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.PaymentMode;
 import com.bul.zydex.model.PaymentTypeMaster;
 import com.bul.zydex.model.TypeOfPayment;
 import com.bul.zydex.model.Vendors;
 import java.io.PrintWriter;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,9 @@ import org.springframework.web.servlet.ModelAndView;
  * @author admin
  */
 public class PaymentController extends PaymentAbstract {
+    
+    private String testKey = "7F3282CC43004D5A818E781F39440442";
+    private String testOrderId = "" + System.currentTimeMillis();
 
     public ModelAndView showTypeOfPayment(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -203,10 +207,60 @@ public class PaymentController extends PaymentAbstract {
             mv.setViewName("Payment/PaymentTypeMasterCreate");
 
         } else {
-            
-            String date=LocalDate.now().toString();
+
+            String date = LocalDate.now().toString();
             employeeTypeMaster.setCreatedDate(date);
             paymentTypeMasterService.create(employeeTypeMaster);
+
+            Integer paymentCount = paymentTypeMasterService.paymentCountByDate(date);
+
+            String suffix = "0000";
+
+            String months = "";
+            if (LocalDate.now().getMonthValue() < 10) {
+                months = "0" + LocalDate.now().getMonthValue();
+            } else {
+
+                months = "" + LocalDate.now().getMonthValue();
+            }
+            String referenceNo = "GIPCL" + LocalDate.now().getDayOfMonth() + "" + months + "" + "20";
+
+            if (paymentCount < 10) {
+
+                suffix = "000" + paymentCount;
+
+            } else if (paymentCount < 100) {
+
+                suffix = "00" + paymentCount;
+
+            } else if (paymentCount < 1000) {
+
+                suffix = "0" + paymentCount;
+
+            } else {
+
+                suffix = "" + paymentCount;
+            }
+
+            referenceNo = referenceNo + suffix;
+
+            String api = referenceNo + "INR" + employeeTypeMaster.getPaymentAmount();
+
+            PaymentService juspayService = new PaymentService().withEnvironment(Environment.DEVELOPMENT)
+                    .withKey(testKey).withMerchantId("juspay_test");
+
+            CreateOrderRequest paymentRequest = new CreateOrderRequest()
+                    .withOrderId(api)
+                    .withAmount(Double.valueOf(employeeTypeMaster.getPaymentAmount()))
+                    .withCustomerId(employeeTypeMaster.getPartyCode()).withEmail(employeeTypeMaster.getEmailId());
+            paymentRequest.setUdf1("udf1");
+            paymentRequest.setUdf2("udf2");
+            paymentRequest.setUdf3("udf3");
+            paymentRequest.setUdf4("udf4");
+            paymentRequest.setUdf5("udf5");
+            paymentRequest.setReturnUrl("https://www.google.com/");
+            
+            CreateOrderResponse paymentResponse =juspayService.createOrder(paymentRequest);
 
             //---- Get data of payment mode
             PaymentMode locationMaster = new PaymentMode();
@@ -239,9 +293,8 @@ public class PaymentController extends PaymentAbstract {
         //employeeTypeMaster.setEmailId(formatvalue.trim());
         //employeeTypeValidator.validate(employeeTypeMaster, errors);
         if (null == paymentMode || paymentMode.equals("")) {
-            
-            
-             PaymentMode locationMaster = new PaymentMode();
+
+            PaymentMode locationMaster = new PaymentMode();
             List<?> level2 = paymentModeService.read();
             Map<Integer, String> level3 = new HashMap<>();
             for (Object o : level2) {
@@ -249,7 +302,7 @@ public class PaymentController extends PaymentAbstract {
                 level3.put(locationMaster.getId(), locationMaster.getModeOfPayment());
             }
             request.setAttribute("paymentModeMap", level3);
- 
+
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
             mv.addAllObjects(errors.getModel());

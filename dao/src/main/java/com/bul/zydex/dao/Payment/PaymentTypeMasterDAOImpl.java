@@ -7,7 +7,6 @@ package com.bul.zydex.dao.Payment;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.PaymentTypeMaster;
-import com.bul.zydex.model.TypeOfPayment;
 import java.util.List;
 
 /**
@@ -22,16 +21,19 @@ public class PaymentTypeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements P
     }
 
     @Override
-    public Integer paymentCountByDate() {
-     //   return 0;
-           List list = getHibernateTemplate().find(
-                "select count(*) from " + domainClass.getName() + " x ");
-        Integer count = (Integer) list.get(0);
-        
-        return count.intValue();
-//        return DataAccessUtils.intResult(getHibernateTemplate().find("select count(*) from " + domainClass.getName()));
-    }
-        
+    public Integer paymentCountByDate(String date) {
+
+        String query = "";
+
+        query += "  "
+                + " select a"
+                + " FROM PaymentTypeMaster a "
+                + " WHERE a.createdDate=" + "'" + date + "'";
+        List list = getHibernateTemplate().find(query);
+        Integer count = (Integer) list.size();
+
+        return count;
+
     }
 
-
+}

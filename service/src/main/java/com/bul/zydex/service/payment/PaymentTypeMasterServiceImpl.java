@@ -27,8 +27,8 @@ public class PaymentTypeMasterServiceImpl<T> extends GenericsServiceImpl<T> impl
     }
 
     @Override
-    public Integer paymentCountByDate() {
-        return paymentTypeMasterDAO.paymentCountByDate();
+    public Integer paymentCountByDate(String date) {
+        return paymentTypeMasterDAO.paymentCountByDate(date);
     }
 
 }

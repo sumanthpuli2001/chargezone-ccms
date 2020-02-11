@@ -51,6 +51,10 @@
             <column name="additional_remarks" length="45" />
         </property>
         
+        
+         <property name="createdDate" type="string">
+            <column name="created_date" length="45" />
+        </property>
         <!--<many-to-one name="paymentMode" class="com.bul.zydex.model.PaymentMode" fetch="select">
             <column name="payment_mode" not-null="false" />
         </many-to-one>-->

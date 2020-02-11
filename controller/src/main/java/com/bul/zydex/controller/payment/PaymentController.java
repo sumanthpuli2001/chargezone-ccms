@@ -5,16 +5,16 @@
  */
 package com.bul.zydex.controller.payment;
 
-import com.bul.zydex.model.EmployeeTypeMaster;
-import com.bul.zydex.model.LevelMaster;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.PaymentMode;
 import com.bul.zydex.model.PaymentTypeMaster;
-import com.bul.zydex.model.ShiftRotationInfo;
 import com.bul.zydex.model.TypeOfPayment;
 import com.bul.zydex.model.Vendors;
-import com.bul.zydex.service.payment.VendorService;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -203,6 +203,9 @@ public class PaymentController extends PaymentAbstract {
             mv.setViewName("Payment/PaymentTypeMasterCreate");
 
         } else {
+            
+            String date=LocalDate.now().toString();
+            employeeTypeMaster.setCreatedDate(date);
             paymentTypeMasterService.create(employeeTypeMaster);
 
             //---- Get data of payment mode

@@ -69,6 +69,12 @@ public class PaymentController extends PaymentAbstract {
         return mv;
     }
 
+    public ModelAndView PaymentConfirmation(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Payment/PaymentStatusPage");
+        return mv;
+    }
+
     public ModelAndView showPaymentMode(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 
@@ -263,33 +269,31 @@ public class PaymentController extends PaymentAbstract {
             referenceNo = referenceNo + suffix;
 
             String api = referenceNo + "INR" + employeeTypeMaster.getPaymentAmount();
-            
-              PaymentService juspayService = new PaymentService().withEnvironment(Environment.AXIS)
+
+            PaymentService juspayService = new PaymentService().withEnvironment(Environment.AXIS)
                     .withKey(AXIS_KEY_PRODUCTION).withMerchantId("GIPC_TEST");
-              
-             String randomOrderId =api;
-             CreateOrderResponse createOrderResponse=null;
-             
+
+            String randomOrderId = api;
+            CreateOrderResponse createOrderResponse = null;
+
             try {
-           
-                
-            CreateOrderRequest paymentRequest = new CreateOrderRequest()
-                    .withOrderId(randomOrderId)
-                    .withAmount(Double.valueOf(employeeTypeMaster.getPaymentAmount())).
-                    withReturnUrl("http://shop.merchant.com/payments/handleResponse");
 
-            paymentRequest.setCurrency("INR");
+                CreateOrderRequest paymentRequest = new CreateOrderRequest()
+                        .withOrderId(randomOrderId)
+                        .withAmount(Double.valueOf(employeeTypeMaster.getPaymentAmount())).
+                        withReturnUrl("http://shop.merchant.com/payments/handleResponse");
 
-            createOrderResponse = juspayService.createOrder(paymentRequest);
-            
-            System.out.print("Hello Worlds");
+                paymentRequest.setCurrency("INR");
+
+                createOrderResponse = juspayService.createOrder(paymentRequest);
+
+                System.out.print("Hello Worlds");
 
             } catch (Exception e) {
-                
-                System.out.print("Hello Worlds "+e.getMessage());
+
+                System.out.print("Hello Worlds " + e.getMessage());
             }
 
-           
             //paymentRequest.setCustomerEmail("customer@gmail.com");
             //paymentRequest.setProductId("prod-141833");
             // paymentRequest.setReturnUrl("http://shop.merchant.com/payments/handleResponse");
@@ -300,15 +304,14 @@ public class PaymentController extends PaymentAbstract {
 //            paymentRequest.setUdf4("udf4");
 //            paymentRequest.setUdf5("udf5");
             // paymentRequest.setReturnUrl("https://www.google.com/");
-           // CreateOrderResponse paymentResponse =juspayService.createOrder(paymentRequest);
+            // CreateOrderResponse paymentResponse =juspayService.createOrder(paymentRequest);
 //            PaymentService juspayService = new PaymentService().withEnvironment(Environment.PRODUCTION)
 //                .withKey(TEST_KEY).withMerchantId("juspay_test");
 //         //  String randomOrderId = "" + System.currentTimeMillis();
 //        CreateOrderRequest createOrderRequest = new CreateOrderRequest().withOrderId(randomOrderId)
 //                .withAmount(100.0)
 //                .withCustomerId("guest_user_101").withEmail(employeeTypeMaster.getEmailId());
-         //   log.info("Create order response:  " + createOrderResponse);
-
+            //   log.info("Create order response:  " + createOrderResponse);
         //Update Order example call
 //        UpdateOrderRequest updateOrderRequest = new UpdateOrderRequest().withOrderId(randomOrderId)
 //                .withAmount(200.0);
@@ -343,7 +346,6 @@ public class PaymentController extends PaymentAbstract {
 //            // Regular card transaction
 //            payRequest.withMerchantId("juspay_test").withOrderId(randomOrderId);//.withCardNumber("4242424242424242").
             //withCardExpYear("2020").withCardExpMonth("05").withCardSecurityCode("111");
-
             String test = "";
 
             //---- Get data of payment mode
@@ -358,16 +360,15 @@ public class PaymentController extends PaymentAbstract {
 //
 //            request.setAttribute("successMessage",
 //                    "Information : The Information is saved Successfully.");
-          //  mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+            //  mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
             //  mv.setViewName("Payment/paymentTypeMasterModeCreate");
-          //  mv.addAttribute("attribute", "forwardWithForwardPrefix");
-         //   PaymentResponse paymentResponse = juspayService.makePayment(payRequest);
-           // log.info("Payment Response is:" + paymentResponse);
-
+            //  mv.addAttribute("attribute", "forwardWithForwardPrefix");
+            //   PaymentResponse paymentResponse = juspayService.makePayment(payRequest);
+            // log.info("Payment Response is:" + paymentResponse);
             ModelMap model = new ModelMap();
             model.addAttribute("attribute", "redirectWithRedirectPrefix");
-            if(createOrderResponse.getPayment_links()!=null){
-                
+            if (createOrderResponse.getPayment_links() != null) {
+
                 mv = new ModelAndView("redirect:" + createOrderResponse.getPayment_links(), model);
             }
         }

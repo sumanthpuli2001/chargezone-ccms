@@ -73,8 +73,55 @@ public class PaymentController extends PaymentAbstract {
     public ModelAndView PaymentConfirmation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PaymentStatus paymentStatus = new PaymentStatus();
-        paymentStatus.setOrderId("099");
-        paymentStatus.setStatus("jhgdfgghfgfd   ytytjdgffh");
+        
+        String url = request.getRequestURL().toString();
+
+        // Getting servlet request query string.
+        String queryString = request.getQueryString();
+        
+         String orderId="";
+        if(queryString!=null&&queryString.length()>30){
+            
+            String tempString[]=queryString.split("&");
+            String []temp=tempString[0].split("=");
+            orderId=temp[1];
+        }
+        
+        
+        if(queryString!=null&&queryString.contains("NEW")){
+            
+            paymentStatus.setOrderId(orderId);
+            paymentStatus.setStatus("Newly created order");
+            
+        }else if(queryString!=null&&queryString.contains("CREATED")){
+            paymentStatus.setOrderId(orderId);
+            paymentStatus.setStatus("Order is in transistion state");
+        }
+        else if(queryString!=null&&queryString.contains("PENDING_VBV")){
+            paymentStatus.setOrderId(orderId);
+            paymentStatus.setStatus("Authentication is in progress");
+        }
+        else if(queryString!=null&&queryString.contains("CHARGED")){
+            paymentStatus.setOrderId(orderId);
+            paymentStatus.setStatus("Successful transaction");
+        }
+        else if(queryString!=null&&queryString.contains("AUTHENTICATION_FAILED")){
+            paymentStatus.setOrderId(orderId);
+            paymentStatus.setStatus("User did not complete authentication");
+        }
+        else if(queryString!=null&&queryString.contains("AUTHORIZATION_FAILED")){
+            paymentStatus.setOrderId(orderId);
+            paymentStatus.setStatus("User completed authentication, but bank refused the transaction");
+        }
+        else if(queryString!=null&&queryString.contains("JUSPAY_DECLINED")){
+            paymentStatus.setOrderId(orderId);
+            paymentStatus.setStatus("User input is not accepted by the underlying PG");
+        }
+        else if(queryString!=null&&queryString.contains("AUTHORIZING")){
+            paymentStatus.setOrderId(orderId);
+            paymentStatus.setStatus("Transaction status is pending from bank");
+        }
+        bind(request, paymentStatus);
         mv.getModelMap().put("paymentStatus", paymentStatus);
         mv.setViewName("Payment/PaymentStatusPage");
         return mv;
@@ -292,7 +339,7 @@ public class PaymentController extends PaymentAbstract {
                 CreateOrderRequest paymentRequest = new CreateOrderRequest()
                         .withOrderId(randomOrderId)
                         .withAmount(Double.valueOf(employeeTypeMaster.getPaymentAmount())).
-                        withReturnUrl("http://shop.merchant.com/payments/handleResponse");
+                        withReturnUrl("http://192.168.0.99:8089/web/payment.html?act=PaymentConfirmation");
 
                 paymentRequest.setCurrency("INR");
 

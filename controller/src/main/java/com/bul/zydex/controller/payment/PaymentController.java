@@ -21,6 +21,7 @@ import com.bul.zydex.controller.PaymentGateway.PaymentService;
 import com.bul.zydex.controller.PaymentGateway.UpdateOrderRequest;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.PaymentMode;
+import com.bul.zydex.model.PaymentStatus;
 import com.bul.zydex.model.PaymentTypeMaster;
 import com.bul.zydex.model.TypeOfPayment;
 import com.bul.zydex.model.Vendors;
@@ -71,7 +72,17 @@ public class PaymentController extends PaymentAbstract {
 
     public ModelAndView PaymentConfirmation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+        PaymentStatus paymentStatus = new PaymentStatus();
+        paymentStatus.setOrderId("099");
+        paymentStatus.setStatus("jhgdfgghfgfd   ytytjdgffh");
+        mv.getModelMap().put("paymentStatus", paymentStatus);
         mv.setViewName("Payment/PaymentStatusPage");
+        return mv;
+    }
+
+    public ModelAndView gotoHome(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Payment/Login");
         return mv;
     }
 
@@ -312,7 +323,7 @@ public class PaymentController extends PaymentAbstract {
 //                .withAmount(100.0)
 //                .withCustomerId("guest_user_101").withEmail(employeeTypeMaster.getEmailId());
             //   log.info("Create order response:  " + createOrderResponse);
-        //Update Order example call
+            //Update Order example call
 //        UpdateOrderRequest updateOrderRequest = new UpdateOrderRequest().withOrderId(randomOrderId)
 //                .withAmount(200.0);
             //  GetOrderStatusResponse updateOrderResponse = juspayService.updateOrder(updateOrderRequest);

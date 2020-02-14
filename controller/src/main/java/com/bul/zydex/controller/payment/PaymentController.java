@@ -5,10 +5,20 @@
  */
 package com.bul.zydex.controller.payment;
 
+import com.bul.zydex.controller.PaymentGateway.AddCardRequest;
+import com.bul.zydex.controller.PaymentGateway.AddCardResponse;
 import com.bul.zydex.controller.PaymentGateway.CreateOrderRequest;
 import com.bul.zydex.controller.PaymentGateway.CreateOrderResponse;
 import com.bul.zydex.controller.PaymentGateway.Environment;
+import com.bul.zydex.controller.PaymentGateway.GetOrderStatusRequest;
+import com.bul.zydex.controller.PaymentGateway.GetOrderStatusResponse;
+import com.bul.zydex.controller.PaymentGateway.JuspayPaymentExample;
+import com.bul.zydex.controller.PaymentGateway.ListCardsRequest;
+import com.bul.zydex.controller.PaymentGateway.ListCardsResponse;
+import com.bul.zydex.controller.PaymentGateway.PaymentRequest;
+import com.bul.zydex.controller.PaymentGateway.PaymentResponse;
 import com.bul.zydex.controller.PaymentGateway.PaymentService;
+import com.bul.zydex.controller.PaymentGateway.UpdateOrderRequest;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.PaymentMode;
 import com.bul.zydex.model.PaymentTypeMaster;
@@ -21,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,9 +41,15 @@ import org.springframework.web.servlet.ModelAndView;
  * @author admin
  */
 public class PaymentController extends PaymentAbstract {
-    
-    private String testKey = "7F3282CC43004D5A818E781F39440442";
+
+    private String testKey = "2E4C02A94F314D31BEC0D8C093DA94D7";
+    private static final String TEST_KEY = "7F3282CC43004D5A818E781F39440442";
+    private static final String AXIS_KEY = "782CB4B3F5B84BDDB3C9EAFA6A134DC3";
+    private static final String AXIS_KEY_TEST = "2E4C02A94F314D31BEC0D8C093DA94D7";
+    private static final String AXIS_KEY_PRODUCTION = "F57C7F540A7437A9C0831770B41EE1";
     private String testOrderId = "" + System.currentTimeMillis();
+
+    private static Logger log = Logger.getLogger(PaymentController.class);
 
     public ModelAndView showTypeOfPayment(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
@@ -245,38 +263,113 @@ public class PaymentController extends PaymentAbstract {
             referenceNo = referenceNo + suffix;
 
             String api = referenceNo + "INR" + employeeTypeMaster.getPaymentAmount();
-
-            PaymentService juspayService = new PaymentService().withEnvironment(Environment.DEVELOPMENT)
-                    .withKey(testKey).withMerchantId("juspay_test");
-
-            CreateOrderRequest paymentRequest = new CreateOrderRequest()
-                    .withOrderId(api)
-                    .withAmount(Double.valueOf(employeeTypeMaster.getPaymentAmount()))
-                    .withCustomerId(employeeTypeMaster.getPartyCode()).withEmail(employeeTypeMaster.getEmailId());
-            paymentRequest.setUdf1("udf1");
-            paymentRequest.setUdf2("udf2");
-            paymentRequest.setUdf3("udf3");
-            paymentRequest.setUdf4("udf4");
-            paymentRequest.setUdf5("udf5");
-            paymentRequest.setReturnUrl("https://www.google.com/");
             
-            CreateOrderResponse paymentResponse =juspayService.createOrder(paymentRequest);
+              PaymentService juspayService = new PaymentService().withEnvironment(Environment.AXIS)
+                    .withKey(AXIS_KEY_PRODUCTION).withMerchantId("GIPC_TEST");
+              
+             String randomOrderId =api;
+             CreateOrderResponse createOrderResponse=null;
+             
+            try {
+           
+                
+            CreateOrderRequest paymentRequest = new CreateOrderRequest()
+                    .withOrderId(randomOrderId)
+                    .withAmount(Double.valueOf(employeeTypeMaster.getPaymentAmount())).
+                    withReturnUrl("http://shop.merchant.com/payments/handleResponse");
+
+            paymentRequest.setCurrency("INR");
+
+            createOrderResponse = juspayService.createOrder(paymentRequest);
+            
+            System.out.print("Hello Worlds");
+
+            } catch (Exception e) {
+                
+                System.out.print("Hello Worlds "+e.getMessage());
+            }
+
+           
+            //paymentRequest.setCustomerEmail("customer@gmail.com");
+            //paymentRequest.setProductId("prod-141833");
+            // paymentRequest.setReturnUrl("http://shop.merchant.com/payments/handleResponse");
+            //paymentRequest.setDescription("Simple Test");
+//            paymentRequest.setUdf1("udf1");
+//            paymentRequest.setUdf2("udf2");
+//            paymentRequest.setUdf3("udf3");
+//            paymentRequest.setUdf4("udf4");
+//            paymentRequest.setUdf5("udf5");
+            // paymentRequest.setReturnUrl("https://www.google.com/");
+           // CreateOrderResponse paymentResponse =juspayService.createOrder(paymentRequest);
+//            PaymentService juspayService = new PaymentService().withEnvironment(Environment.PRODUCTION)
+//                .withKey(TEST_KEY).withMerchantId("juspay_test");
+//         //  String randomOrderId = "" + System.currentTimeMillis();
+//        CreateOrderRequest createOrderRequest = new CreateOrderRequest().withOrderId(randomOrderId)
+//                .withAmount(100.0)
+//                .withCustomerId("guest_user_101").withEmail(employeeTypeMaster.getEmailId());
+         //   log.info("Create order response:  " + createOrderResponse);
+
+        //Update Order example call
+//        UpdateOrderRequest updateOrderRequest = new UpdateOrderRequest().withOrderId(randomOrderId)
+//                .withAmount(200.0);
+            //  GetOrderStatusResponse updateOrderResponse = juspayService.updateOrder(updateOrderRequest);
+            //  log.info("Update order response:  " + updateOrderResponse);
+//        //AddCard example call
+//        AddCardRequest addCardRequest = new AddCardRequest().withNameOnCard("Customer Name")
+//                .withCardExpMonth("05").withCardExpYear("2020")
+//                .withCardNumber("4242424242424242").withCustomerEmail("customer@shop.in")
+//                .withCustomerId("customer_id");
+//        AddCardResponse addCardResponse = juspayService.addCard(addCardRequest);
+//        log.info("Add card response: " + addCardResponse);
+//
+//        //ListCard example call
+//        ListCardsRequest listCardsRequest = new ListCardsRequest().withCustomerId("customer_id");
+//        ListCardsResponse listCardsResponse = juspayService.listCards(listCardsRequest);
+//        log.info("List card response: " + listCardsResponse);
+            // OrderStatus example call
+//            GetOrderStatusRequest orderStatusRequest = new GetOrderStatusRequest();
+//            orderStatusRequest.withOrderId(randomOrderId);
+//            GetOrderStatusResponse orderStatusResponse = juspayService.getOrderStatus(orderStatusRequest);
+//            log.info("Order status response: " + orderStatusResponse);
+//
+//            // PaymentStatus example call
+//            PaymentRequest payRequest = new PaymentRequest();
+//
+//            PaymentService paymentService;
+//
+//            PaymentService paymentService1 = new PaymentService();
+//        //paymentService1.
+//
+//            // Regular card transaction
+//            payRequest.withMerchantId("juspay_test").withOrderId(randomOrderId);//.withCardNumber("4242424242424242").
+            //withCardExpYear("2020").withCardExpMonth("05").withCardSecurityCode("111");
+
+            String test = "";
 
             //---- Get data of payment mode
-            PaymentMode locationMaster = new PaymentMode();
-            List<?> level2 = paymentModeService.read();
-            Map<Integer, String> level3 = new HashMap<>();
-            for (Object o : level2) {
-                locationMaster = (PaymentMode) o;
-                level3.put(locationMaster.getId(), locationMaster.getModeOfPayment());
+//            PaymentMode locationMaster = new PaymentMode();
+//            List<?> level2 = paymentModeService.read();
+//            Map<Integer, String> level3 = new HashMap<>();
+//            for (Object o : level2) {
+//                locationMaster = (PaymentMode) o;
+//                level3.put(locationMaster.getId(), locationMaster.getModeOfPayment());
+//            }
+//            request.setAttribute("paymentModeMap", level3);
+//
+//            request.setAttribute("successMessage",
+//                    "Information : The Information is saved Successfully.");
+          //  mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+            //  mv.setViewName("Payment/paymentTypeMasterModeCreate");
+          //  mv.addAttribute("attribute", "forwardWithForwardPrefix");
+         //   PaymentResponse paymentResponse = juspayService.makePayment(payRequest);
+           // log.info("Payment Response is:" + paymentResponse);
+
+            ModelMap model = new ModelMap();
+            model.addAttribute("attribute", "redirectWithRedirectPrefix");
+            if(createOrderResponse.getPayment_links()!=null){
+                
+                mv = new ModelAndView("redirect:" + createOrderResponse.getPayment_links(), model);
             }
-            request.setAttribute("paymentModeMap", level3);
-
-            request.setAttribute("successMessage",
-                    "Information : The Information is saved Successfully.");
-
-            mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
-            mv.setViewName("Payment/paymentTypeMasterModeCreate");
         }
         return mv;
     }

@@ -5,6 +5,15 @@ public class CreateOrderResponse {
     public String status;
     public long statusId;
     public String orderId;
+     public String payment_links;
+
+    public String getPayment_links() {
+        return payment_links;
+    }
+
+    public void setPayment_links(String payment_links) {
+        this.payment_links = payment_links;
+    }
 
     //Setters
     public void setStatus(String status) {
@@ -39,6 +48,8 @@ public class CreateOrderResponse {
     public String toString() {
         StringBuilder buffer = new StringBuilder();
         buffer.append("{ ");
+        buffer.append("payment_links: ");
+        buffer.append(this.payment_links);
         buffer.append("status: ");
         buffer.append(this.status);
         buffer.append(" , ");

@@ -19,8 +19,8 @@ public class PaymentService {
 
     private static final Logger LOG = Logger.getLogger(PaymentService.class);
 
-    private int connectionTimeout = 5 * 1000;
-    private int readTimeout = 5 * 1000;
+    private int connectionTimeout = 8 * 1000;
+    private int readTimeout = 8 * 1000;
     //private static final Logger log = Logger.getLogger(PaymentService.class);
     private String baseUrl;
     private String key;
@@ -151,8 +151,13 @@ public class PaymentService {
         LinkedHashMap<String, String> params = new LinkedHashMap<String, String>();
         params.put("order_id", createOrderRequest.getOrderId());
         params.put("amount", String.valueOf(createOrderRequest.getAmount()));
-        params.put("customer_id", createOrderRequest.getCustomerId());
-        params.put("customer_email", createOrderRequest.getCustomerEmail());
+        if(createOrderRequest.getCustomerId()!=null){
+            params.put("customer_id", createOrderRequest.getCustomerId());
+        }
+       if(createOrderRequest.getCustomerEmail()!=null){
+           params.put("customer_email", createOrderRequest.getCustomerEmail());
+       }
+       
         params.put("customer_phone", createOrderRequest.getCustomerPhone() == null ? "" : createOrderRequest.getCustomerPhone());
         if(createOrderRequest.getGatewayId() != 0) {
             params.put("gateway_id", Integer.toString(createOrderRequest.getGatewayId()));
@@ -213,11 +218,17 @@ public class PaymentService {
         Long statusId = (Long) jsonResponse.get("status_id");
         String status = (String) jsonResponse.get("status");
         String orderId = (String) jsonResponse.get("order_id");
+        
+        
+        JSONObject links = (JSONObject)jsonResponse.get("payment_links");
+        
+        String payment_links = (String) links.get("web");
 
         CreateOrderResponse createOrderResponse = new CreateOrderResponse();
         createOrderResponse.setStatus(status);
         createOrderResponse.setOrderId(orderId);
         createOrderResponse.setStatusId(statusId);
+         createOrderResponse.setPayment_links(payment_links);
 
         return createOrderResponse;
     }

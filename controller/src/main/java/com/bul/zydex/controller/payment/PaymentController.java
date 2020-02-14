@@ -76,13 +76,34 @@ public class PaymentController extends PaymentAbstract {
         paymentStatus.setOrderId("099");
         paymentStatus.setStatus("jhgdfgghfgfd   ytytjdgffh");
         mv.getModelMap().put("paymentStatus", paymentStatus);
+        mv.setViewName("Payment/PaymentStatusDummyPage");
+        return mv;
+    }
+
+    public ModelAndView PaymentStatus(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+         PaymentStatus paymentStatus = new PaymentStatus();
+        paymentStatus.setOrderId("099");
+        paymentStatus.setStatus("jhgdfgghfgfd   ytytjdgffh");
+        mv.getModelMap().put("paymentStatus", paymentStatus);
         mv.setViewName("Payment/PaymentStatusPage");
         return mv;
     }
 
     public ModelAndView gotoHome(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("Payment/Login");
+        mv.setViewName("User/Login");
+        return mv;
+    }
+    
+    public ModelAndView SearchOrderId(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PaymentStatus paymentStatus = new PaymentStatus();
+         String orderid = request.getParameter("orderId");
+         String status = request.getParameter("status");
+           paymentStatus.setOrderId(orderid);
+           paymentStatus.setStatus(status);
+        mv.setViewName("Payment/PaymentStatusResult");
         return mv;
     }
 

@@ -41,37 +41,37 @@
                         </li>
                     </ul>
                     <!-- Navbar Right Menu -->
-<!--                    <div class="navbar-custom-menu">
+                    <div class="navbar-custom-menu">
                         
-                        <form class="navbar-form navbar-left navbar-search alt" role="search">
-                        <div class="navbar-form navbar-left navbar-search alt form-group">
+                        <!--<form class="navbar-form navbar-left navbar-search alt" role="search">-->
+<!--                        <div class="navbar-form navbar-left navbar-search alt form-group">
                             
                             <input type="text" id="searchBox" class="form-control" placeholder="Employee Search..." value="" style="border-radius: 10px;">
-                        </div>
-                        </form>
+                        </div>-->
+                        <!--</form>-->
                         <ul class="nav navbar-nav">
-                             User Account: style can be found in dropdown.less 
+                            <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="${sessionScope.profilePicturePath}" class="user-image" alt="User Image">
                                     <span class="hidden-xs">${sessionScope.employeeInfo.employeeName}</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                     User image 
+                                    <!-- User image -->
                                     <li class="user-header">
                                         <img src="${sessionScope.profilePicturePath}" class="img-circle" alt="User Image">
-                                        <p>${sessionScope.employeeInfo.employeeName}</p>
+                                        <!--<p>${sessionScope.employeeInfo.employeeName}</p>-->
                                         <p><a href="employeeMaster.htm?act=changePassWordClick&userid=${sessionScope.userRight.userMaster.id}" class=""  style="color: white">Change Password</a></p>
                                     </li>
                                     <li class="user-footer">
-                                        <div class="pull-left">
+<!--                                        <div class="pull-left">
                                             <a href="employeeMaster.htm?act=viewOwnProfile&id=${sessionScope.employeeInfo.id}&userid=${sessionScope.userRight.userMaster.id}" class="btn btn-default btn-flat">Profile</a>
                                             <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                        </div>
+                                        </div>-->
                                         <div class="pull-right">
                                             <a href="logOut.htm?act=logout" class="btn btn-default btn-flat">Sign out</a><br/>
-                                            - pageGenTimeSecS-
-                                            - replace last "S" with small for displaying response generated in milliSeconds."s"-
+                                            <!--- pageGenTimeSecS--->
+                                            <!--- replace last "S" with small for displaying response generated in milliSeconds."s"--->
                                         </div>
                                         <br>
 
@@ -79,7 +79,7 @@
                                 </ul>
                             </li>
                         </ul>
-                    </div>-->
+                    </div>
                 </nav>
             </header>
             <script>

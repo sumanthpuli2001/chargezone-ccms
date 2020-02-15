@@ -37,7 +37,7 @@
                         <div class="form-group">
                           
                             <div class="col-sm-2">
-                                <label>Order Id2:</label>
+                                <label>Order Id:</label>
                             </div>
                             <div class="col-sm-4">
                                 <form:input path="orderId" class="form-control" readonly="true"></form:input>

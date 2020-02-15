@@ -11,13 +11,55 @@ import java.io.Serializable;
  *
  * @author admin
  */
-public class PaymentStatus implements Serializable{
+public class PaymentStatus implements Serializable {
 
     private String orderId;
+    private String status;
+    private String createdDate;
+    private String Amount;
+    private String vendorName;
+    private String paymentType;
 
-    public PaymentStatus(String orderId, String status) {
+    public PaymentStatus(String orderId, String status, String createdDate, String Amount, String vendorName, String paymentType) {
         this.orderId = orderId;
         this.status = status;
+        this.status = createdDate;
+        this.status = Amount;
+        this.status = vendorName;
+        this.status = paymentType;
+
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getAmount() {
+        return Amount;
+    }
+
+    public void setAmount(String Amount) {
+        this.Amount = Amount;
+    }
+
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
 
     public PaymentStatus() {
@@ -38,6 +80,5 @@ public class PaymentStatus implements Serializable{
     public void setStatus(String status) {
         this.status = status;
     }
-    private String status;
 
 }

@@ -72,7 +72,7 @@ public class PaymentController extends PaymentAbstract {
         String queryString = request.getQueryString();
 
         String orderId = "";
-        String requestOrderId=(String) request.getAttribute("orderId");
+        String requestOrderId=(String) request.getParameter("orderId");
         if (queryString != null && queryString.length() > 30) {
 
             String tempString[] = queryString.split("&");

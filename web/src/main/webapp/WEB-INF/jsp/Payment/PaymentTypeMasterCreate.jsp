@@ -186,7 +186,7 @@
                                         </div>
                                     <div class="form-group">
                                         <div class="col-sm-6 col-sm-offset-5">
-                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="NEXT">
+                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="Submit">
                                         </div>
                                         <!--                                        <div class=" col-sm-offset-2 col-sm-3 ">
                                                                                     <button type="button" class="btn btn-danger" data-original-title="" title="" onclick="window.location = 'departmentMaster.htm?act=showList'">Cancel</button>

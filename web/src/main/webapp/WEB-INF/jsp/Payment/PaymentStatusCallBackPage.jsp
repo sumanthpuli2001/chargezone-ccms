@@ -18,20 +18,8 @@
         <link rel="stylesheet" href="StorageYard/CSS/bootstrap/bootstrap.min.css">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <!--<link rel="stylesheet" href="StorageYard/CSS/bootstrap/font-awesome.min.css">-->
         <link rel="stylesheet" href="StorageYard/CSS/login/form-elements.css">
         <link rel="stylesheet" href="StorageYard/CSS/login/style.css">
-
-
-
-        <!-- Favicon and touch icons -->
-        <!--<link rel="shortcut icon" href="../../dist/img/ico/logo.png">-->
-        <!--<link rel="shortcut icon" href="../../bootstrap/ico/favicon.png">-->
-        <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="StorageYard/Images/login/apple-touch-icon-144-precomposed.png">-->
-        <!--<link rel="apple-touch-icon-precomposed" sizes="114x114" href="StorageYard/Images/login/apple-touch-icon-114-precomposed.png">-->
-        <!--<link rel="apple-touch-icon-precomposed" sizes="72x72" href="StorageYard/Images/login/apple-touch-icon-72-precomposed.png">-->
-        <!--<link rel="apple-touch-icon-precomposed" href="StorageYard/Images/login/apple-touch-icon-57-precomposed.png">-->
-
 
     </head>
     <body>
@@ -47,51 +35,27 @@
                     <div>
 
                         <div class="form-group">
-                            <!--                            <div class="col-sm-4">
-                                                            <div for="inputPassword" class="control-label" style="color: black;font-weight: bold;margin-top:50px;">Order Id:</div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <input type="text" path="emailL1" class="form-control" style="margin-top:50px;" readonly="true">
-                                                        </div>
-                                                        <div class="col-sm-4">
-                                                            <div for="inputPassword" class="control-label" style="color: black;font-weight: bold;margin-top:50px;">Status:</div>
-                                                        </div>
-                                                        <div class="col-sm-6">
-                                                            <textarea type="text" path="emailL1" class="form-control" style="margin-top:50px;" readonly="true"></textarea>
-                                                        </div>-->
+                           
 
                             <div class="col-sm-2">
                                 <label>Order Id:</label>
                             </div>
                             <div class="col-sm-4">
-                                <input type="Text" id="orderId" name="orderId"  style="color: black;font-weight: bold;" class="form-control" readonly >
+                                <form:input path="orderId" class="form-control" ></form:input>
                             </div>
                             <div class="col-sm-2">
                                 <label>Status:</label>
                             </div>
                             <div class="col-sm-4">
-                                <textarea type="Text" class="form-control" name="status" style="color: black;font-weight: bold;" class="control-label" readonly  ></textarea>
+                                <form:input path="status" class="form-control" ></form:input>
+                                
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <button type="submit" class="btn btn-primary" id="saveSubmit1" >OK</button>
-
-                <!--<hr />-->
-
-                <!--<button type="button" class="btn btn-primary" id="saveSubmit1" onclick="window.location = 'logIn.html?act=loginClick';">Go To Login</button>-->
-
             </div>
-
-            <%--<spring:bind path="level">--%>
-            <%--<c:set value='${status.value}' var='levelValue' />--%>
-            <%--<c:choose>--%>
-            <%--<c:when test="${levelValue eq 1}"><script>click11();</script></c:when>--%>
-
-            <%--</c:choose>--%>
-            <%--</spring:bind>--%>
-
         </form:form>
 
         <!--</div>-->

@@ -115,11 +115,14 @@ public class PaymentController extends PaymentAbstract {
             paymentStatus.setStatus("Transaction status is pending from bank");
         }
         bind(request, paymentStatus);
+        //paymentStatus.setOrderId("dddsadsa");
+        //paymentStatus.setStatus("42342443sdfsdfsd");
         mv.getModelMap().put("paymentStatus", paymentStatus);
         request.setAttribute("orderId", orderId);
         request.setAttribute("status", paymentStatus.getStatus());
         request.setAttribute("paymentStatus", paymentStatus);
-        mv.setViewName("Payment/PaymentStatusPage");
+        mv.setViewName("Payment/PaymentStatusCallBackPage");
+      
         return mv;
     }
 
@@ -131,7 +134,8 @@ public class PaymentController extends PaymentAbstract {
 
     public ModelAndView PaymentConfirmationCallBack(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("Payment/PaymentStatusCallBackPage");
+          mv.setViewName("Payment/PaymentStatusPage");
+        
         return mv;
     }
 

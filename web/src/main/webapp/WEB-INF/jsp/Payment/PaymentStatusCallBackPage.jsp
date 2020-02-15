@@ -35,8 +35,7 @@
                     <div>
 
                         <div class="form-group">
-                           
-
+                          
                             <div class="col-sm-2">
                                 <label>Order Id:</label>
                             </div>
@@ -54,7 +53,7 @@
                     </div>
 
                 </div>
-                <button type="submit" class="btn btn-primary" id="saveSubmit1" >OK</button>
+                <button type="submit" class="btn btn-primary" id="saveSubmit1" >BACK HOME</button>
             </div>
         </form:form>
 

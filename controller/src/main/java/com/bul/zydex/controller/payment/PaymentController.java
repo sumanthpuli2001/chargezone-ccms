@@ -139,7 +139,7 @@ public class PaymentController extends PaymentAbstract {
 
     public ModelAndView gotoHome(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("Payment/Login");
+        mv.setViewName("User/Login");
         return mv;
     }
 

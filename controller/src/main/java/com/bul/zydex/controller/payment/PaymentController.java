@@ -72,6 +72,7 @@ public class PaymentController extends PaymentAbstract {
         String queryString = request.getQueryString();
 
         String orderId = "";
+        String requestOrderId=(String) request.getAttribute("orderId");
         if (queryString != null && queryString.length() > 30) {
 
             String tempString[] = queryString.split("&");
@@ -79,7 +80,7 @@ public class PaymentController extends PaymentAbstract {
             orderId = temp[1];
         }
 
-        if (orderId == null || orderId.isEmpty()) {
+        if ((orderId == null || orderId.isEmpty())&&(requestOrderId!=null&&!requestOrderId.isEmpty())) {
 
             bind(request, paymentStatus);
 

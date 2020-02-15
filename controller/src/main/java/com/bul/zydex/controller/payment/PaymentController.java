@@ -93,8 +93,55 @@ public class PaymentController extends PaymentAbstract {
 
             GetOrderStatusResponse orderStatusResponse = juspayService.getOrderStatus(orderStatusRequest);
             orderId = orderStatusResponse.getOrderId();
-            paymentStatus.setOrderId(orderId);
-            paymentStatus.setStatus(orderStatusResponse.getStatus());
+            queryString=orderStatusResponse.getStatus();
+            
+            if (queryString != null && queryString.contains("NOT_FOUND")) {
+
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("Order is not available");
+
+            }  else   if (queryString != null && queryString.contains("NEW")) {
+
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("Newly created order");
+
+            } else if (queryString != null && queryString.contains("CREATED")) {
+                
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("Order is in transistion state");
+                
+            } else if (queryString != null && queryString.contains("PENDING_VBV")) {
+                
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("Authentication is in progress");
+                
+            } else if (queryString != null && queryString.contains("CHARGED")) {
+                
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("Successful transaction");
+                
+            } else if (queryString != null && queryString.contains("AUTHENTICATION_FAILED")) {
+                
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("User did not complete authentication");
+                
+            } else if (queryString != null && queryString.contains("AUTHORIZATION_FAILED")) {
+                
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("User completed authentication, but bank refused the transaction");
+                
+            } else if (queryString != null && queryString.contains("JUSPAY_DECLINED")) {
+                
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("User input is not accepted by the underlying PG");
+                
+            } else if (queryString != null && queryString.contains("AUTHORIZING")) {
+                
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("Transaction status is pending from bank");
+                
+            }
+            
             log.info("Order status response: " + orderStatusResponse);
         } else {
 
@@ -104,31 +151,44 @@ public class PaymentController extends PaymentAbstract {
                 paymentStatus.setStatus("Newly created order");
 
             } else if (queryString != null && queryString.contains("CREATED")) {
+                
                 paymentStatus.setOrderId(orderId);
                 paymentStatus.setStatus("Order is in transistion state");
+                
             } else if (queryString != null && queryString.contains("PENDING_VBV")) {
+                
                 paymentStatus.setOrderId(orderId);
                 paymentStatus.setStatus("Authentication is in progress");
+                
             } else if (queryString != null && queryString.contains("CHARGED")) {
+                
                 paymentStatus.setOrderId(orderId);
                 paymentStatus.setStatus("Successful transaction");
+                
             } else if (queryString != null && queryString.contains("AUTHENTICATION_FAILED")) {
+                
                 paymentStatus.setOrderId(orderId);
                 paymentStatus.setStatus("User did not complete authentication");
+                
             } else if (queryString != null && queryString.contains("AUTHORIZATION_FAILED")) {
+                
                 paymentStatus.setOrderId(orderId);
                 paymentStatus.setStatus("User completed authentication, but bank refused the transaction");
+                
             } else if (queryString != null && queryString.contains("JUSPAY_DECLINED")) {
+                
                 paymentStatus.setOrderId(orderId);
                 paymentStatus.setStatus("User input is not accepted by the underlying PG");
+                
             } else if (queryString != null && queryString.contains("AUTHORIZING")) {
+                
                 paymentStatus.setOrderId(orderId);
                 paymentStatus.setStatus("Transaction status is pending from bank");
+                
             }
         }
-        bind(request, paymentStatus);
-        //paymentStatus.setOrderId("dddsadsa");
-        //paymentStatus.setStatus("42342443sdfsdfsd");
+        //bind(request, paymentStatus);
+        
         mv.getModelMap().put("paymentStatus", paymentStatus);
         request.setAttribute("orderId", orderId);
         request.setAttribute("status", paymentStatus.getStatus());

@@ -40,13 +40,13 @@
                                 <label>Order Id:</label>
                             </div>
                             <div class="col-sm-4">
-                                <form:input path="orderId" class="form-control" ></form:input>
+                                <form:input path="orderId" class="form-control" readonly="true"></form:input>
                             </div>
                             <div class="col-sm-2">
                                 <label>Status:</label>
                             </div>
                             <div class="col-sm-4">
-                                <form:input path="status" class="form-control" ></form:input>
+                            <form:input path="status" class="form-control" readonly="true"></form:input>
                                 
                             </div>
                         </div>
@@ -54,12 +54,12 @@
 
                 </div>
                 <button type="submit" class="btn btn-primary" id="saveSubmit1" >BACK HOME</button>
+                
             </div>
         </form:form>
 
         <!--</div>-->
     </div>
-</div>
 <!-- Javascript -->
 <script src="StorageYard/JS/JQuery/jquery-1.11.1.min.js"></script>
 <script src="StorageYard/JS/bootstrap/bootstrap.min.js"></script>

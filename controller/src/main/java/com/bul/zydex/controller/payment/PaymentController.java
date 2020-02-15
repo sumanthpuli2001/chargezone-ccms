@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindException;
@@ -72,7 +73,7 @@ public class PaymentController extends PaymentAbstract {
         String queryString = request.getQueryString();
 
         String orderId = "";
-        String requestOrderId=(String) request.getParameter("orderId");
+        String requestOrderId = (String) request.getParameter("orderId");
         if (queryString != null && queryString.length() > 30) {
 
             String tempString[] = queryString.split("&");
@@ -80,7 +81,7 @@ public class PaymentController extends PaymentAbstract {
             orderId = temp[1];
         }
 
-        if ((orderId == null || orderId.isEmpty())&&(requestOrderId!=null&&!requestOrderId.isEmpty())) {
+        if ((orderId == null || orderId.isEmpty()) && (requestOrderId != null && !requestOrderId.isEmpty())) {
 
             bind(request, paymentStatus);
 
@@ -137,9 +138,18 @@ public class PaymentController extends PaymentAbstract {
         return mv;
     }
 
-    public ModelAndView gotoHome(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//    public ModelAndView gotoHome(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("User/Login");
+//        return mv;
+//    }
+    public ModelAndView gotoHome(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("User/Login");
+        HttpSession session = request.getSession(false);
+        session.invalidate();
+        mv.setViewName("redirect:logIn.html?act=loginClick");
         return mv;
     }
 

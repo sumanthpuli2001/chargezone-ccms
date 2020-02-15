@@ -36,7 +36,7 @@
                                 <c:if test="${!empty successMessage}">
                                     <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
                                 </c:if>
-                                <form:form class="form-horizontal" method="post" action="payment.html?act=SearchOrderId" commandName="paymentStatus" >
+                                <form:form class="form-horizontal" method="post" action="payment.html?act=gotoHome" commandName="paymentStatus" >
                                     <div>
 
                                         <div class="form-group">

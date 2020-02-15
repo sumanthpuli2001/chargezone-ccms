@@ -73,58 +73,51 @@ public class PaymentController extends PaymentAbstract {
     public ModelAndView PaymentConfirmation(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PaymentStatus paymentStatus = new PaymentStatus();
-        
+
         String url = request.getRequestURL().toString();
 
         // Getting servlet request query string.
         String queryString = request.getQueryString();
-        
-         String orderId="";
-        if(queryString!=null&&queryString.length()>30){
-            
-            String tempString[]=queryString.split("&");
-            String []temp=tempString[0].split("=");
-            orderId=temp[1];
+
+        String orderId = "";
+        if (queryString != null && queryString.length() > 30) {
+
+            String tempString[] = queryString.split("&");
+            String[] temp = tempString[0].split("=");
+            orderId = temp[1];
         }
-        
-        
-        if(queryString!=null&&queryString.contains("NEW")){
-            
+
+        if (queryString != null && queryString.contains("NEW")) {
+
             paymentStatus.setOrderId(orderId);
             paymentStatus.setStatus("Newly created order");
-            
-        }else if(queryString!=null&&queryString.contains("CREATED")){
+
+        } else if (queryString != null && queryString.contains("CREATED")) {
             paymentStatus.setOrderId(orderId);
             paymentStatus.setStatus("Order is in transistion state");
-        }
-        else if(queryString!=null&&queryString.contains("PENDING_VBV")){
+        } else if (queryString != null && queryString.contains("PENDING_VBV")) {
             paymentStatus.setOrderId(orderId);
             paymentStatus.setStatus("Authentication is in progress");
-        }
-        else if(queryString!=null&&queryString.contains("CHARGED")){
+        } else if (queryString != null && queryString.contains("CHARGED")) {
             paymentStatus.setOrderId(orderId);
             paymentStatus.setStatus("Successful transaction");
-        }
-        else if(queryString!=null&&queryString.contains("AUTHENTICATION_FAILED")){
+        } else if (queryString != null && queryString.contains("AUTHENTICATION_FAILED")) {
             paymentStatus.setOrderId(orderId);
             paymentStatus.setStatus("User did not complete authentication");
-        }
-        else if(queryString!=null&&queryString.contains("AUTHORIZATION_FAILED")){
+        } else if (queryString != null && queryString.contains("AUTHORIZATION_FAILED")) {
             paymentStatus.setOrderId(orderId);
             paymentStatus.setStatus("User completed authentication, but bank refused the transaction");
-        }
-        else if(queryString!=null&&queryString.contains("JUSPAY_DECLINED")){
+        } else if (queryString != null && queryString.contains("JUSPAY_DECLINED")) {
             paymentStatus.setOrderId(orderId);
             paymentStatus.setStatus("User input is not accepted by the underlying PG");
-        }
-        else if(queryString!=null&&queryString.contains("AUTHORIZING")){
+        } else if (queryString != null && queryString.contains("AUTHORIZING")) {
             paymentStatus.setOrderId(orderId);
             paymentStatus.setStatus("Transaction status is pending from bank");
         }
         bind(request, paymentStatus);
         mv.getModelMap().put("paymentStatus", paymentStatus);
-         request.setAttribute("orderId", orderId);
-          request.setAttribute("status", paymentStatus.getStatus());
+        request.setAttribute("orderId", orderId);
+        request.setAttribute("status", paymentStatus.getStatus());
         request.setAttribute("paymentStatus", paymentStatus);
         mv.setViewName("Payment/PaymentStatusPage");
         return mv;
@@ -133,6 +126,23 @@ public class PaymentController extends PaymentAbstract {
     public ModelAndView gotoHome(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("Payment/Login");
+        return mv;
+    }
+
+    public ModelAndView PaymentConfirmationCallBack(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("Payment/PaymentStatusCallBackPage");
+        return mv;
+    }
+
+    public ModelAndView SearchOrderId(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PaymentStatus paymentStatus = new PaymentStatus();
+        String orderid = request.getParameter("orderId");
+        String status = request.getParameter("status");
+        paymentStatus.setOrderId(orderid);
+        paymentStatus.setStatus(status);
+        mv.setViewName("Payment/PaymentStatusResult");
         return mv;
     }
 

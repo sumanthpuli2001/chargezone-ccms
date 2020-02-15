@@ -117,8 +117,8 @@
                                         <!--<div class="col-sm-12"><a href="out.html?act=vacancyDetailListPage" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg2"></spring:message></a></div>-->
                                         <!--<div class="col-sm-12"><a href="trainerLogin.htm?act=Login" style="color:  #19b9e7;"><spring:message code="loginPage.label.msg3"></spring:message></a></div>-->
                                         <div class="col-sm-12"><a href="payment.html?act=createPaymentTypeMasterClick" style="color:  #19b9e7;">Payment Form</a></div>    
-                                        <div class="col-sm-12"><a href="payment.html?act=PaymentConfirmation" style="color:  #19b9e7;">Payment Dummy Status</a></div>    
-                                        <div class="col-sm-12"><a href="payment.html?act=PaymentStatus" style="color:  #19b9e7;">Payment Status</a></div>    
+                                        <div class="col-sm-12"><a href="payment.html?act=PaymentConfirmationCallBack" style="color:  #19b9e7;">Payment Dummy Status</a></div>    
+                                        <div class="col-sm-12"><a href="payment.html?act=PaymentConfirmation" style="color:  #19b9e7;">Payment Status</a></div>    
                                     </div>
                                 </div>
                         </form:form>

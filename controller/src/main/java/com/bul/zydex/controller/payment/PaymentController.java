@@ -5,20 +5,12 @@
  */
 package com.bul.zydex.controller.payment;
 
-import com.bul.zydex.controller.PaymentGateway.AddCardRequest;
-import com.bul.zydex.controller.PaymentGateway.AddCardResponse;
 import com.bul.zydex.controller.PaymentGateway.CreateOrderRequest;
 import com.bul.zydex.controller.PaymentGateway.CreateOrderResponse;
 import com.bul.zydex.controller.PaymentGateway.Environment;
 import com.bul.zydex.controller.PaymentGateway.GetOrderStatusRequest;
 import com.bul.zydex.controller.PaymentGateway.GetOrderStatusResponse;
-import com.bul.zydex.controller.PaymentGateway.JuspayPaymentExample;
-import com.bul.zydex.controller.PaymentGateway.ListCardsRequest;
-import com.bul.zydex.controller.PaymentGateway.ListCardsResponse;
-import com.bul.zydex.controller.PaymentGateway.PaymentRequest;
-import com.bul.zydex.controller.PaymentGateway.PaymentResponse;
 import com.bul.zydex.controller.PaymentGateway.PaymentService;
-import com.bul.zydex.controller.PaymentGateway.UpdateOrderRequest;
 import com.bul.zydex.model.LocationMaster;
 import com.bul.zydex.model.PaymentMode;
 import com.bul.zydex.model.PaymentStatus;
@@ -87,32 +79,50 @@ public class PaymentController extends PaymentAbstract {
             orderId = temp[1];
         }
 
-        if (queryString != null && queryString.contains("NEW")) {
+        if (orderId == null || orderId.isEmpty()) {
 
-            paymentStatus.setOrderId(orderId);
-            paymentStatus.setStatus("Newly created order");
+            bind(request, paymentStatus);
 
-        } else if (queryString != null && queryString.contains("CREATED")) {
+            PaymentService juspayService = new PaymentService().withEnvironment(Environment.AXIS)
+                    .withKey(AXIS_KEY_PRODUCTION).withMerchantId("GIPC_TEST");
+
+            GetOrderStatusRequest orderStatusRequest = new GetOrderStatusRequest();
+            orderStatusRequest.withOrderId(paymentStatus.getOrderId());
+
+            GetOrderStatusResponse orderStatusResponse = juspayService.getOrderStatus(orderStatusRequest);
+            orderId = orderStatusResponse.getOrderId();
             paymentStatus.setOrderId(orderId);
-            paymentStatus.setStatus("Order is in transistion state");
-        } else if (queryString != null && queryString.contains("PENDING_VBV")) {
-            paymentStatus.setOrderId(orderId);
-            paymentStatus.setStatus("Authentication is in progress");
-        } else if (queryString != null && queryString.contains("CHARGED")) {
-            paymentStatus.setOrderId(orderId);
-            paymentStatus.setStatus("Successful transaction");
-        } else if (queryString != null && queryString.contains("AUTHENTICATION_FAILED")) {
-            paymentStatus.setOrderId(orderId);
-            paymentStatus.setStatus("User did not complete authentication");
-        } else if (queryString != null && queryString.contains("AUTHORIZATION_FAILED")) {
-            paymentStatus.setOrderId(orderId);
-            paymentStatus.setStatus("User completed authentication, but bank refused the transaction");
-        } else if (queryString != null && queryString.contains("JUSPAY_DECLINED")) {
-            paymentStatus.setOrderId(orderId);
-            paymentStatus.setStatus("User input is not accepted by the underlying PG");
-        } else if (queryString != null && queryString.contains("AUTHORIZING")) {
-            paymentStatus.setOrderId(orderId);
-            paymentStatus.setStatus("Transaction status is pending from bank");
+            paymentStatus.setStatus(orderStatusResponse.getStatus());
+            log.info("Order status response: " + orderStatusResponse);
+        } else {
+
+            if (queryString != null && queryString.contains("NEW")) {
+
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("Newly created order");
+
+            } else if (queryString != null && queryString.contains("CREATED")) {
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("Order is in transistion state");
+            } else if (queryString != null && queryString.contains("PENDING_VBV")) {
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("Authentication is in progress");
+            } else if (queryString != null && queryString.contains("CHARGED")) {
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("Successful transaction");
+            } else if (queryString != null && queryString.contains("AUTHENTICATION_FAILED")) {
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("User did not complete authentication");
+            } else if (queryString != null && queryString.contains("AUTHORIZATION_FAILED")) {
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("User completed authentication, but bank refused the transaction");
+            } else if (queryString != null && queryString.contains("JUSPAY_DECLINED")) {
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("User input is not accepted by the underlying PG");
+            } else if (queryString != null && queryString.contains("AUTHORIZING")) {
+                paymentStatus.setOrderId(orderId);
+                paymentStatus.setStatus("Transaction status is pending from bank");
+            }
         }
         bind(request, paymentStatus);
         //paymentStatus.setOrderId("dddsadsa");
@@ -122,7 +132,7 @@ public class PaymentController extends PaymentAbstract {
         request.setAttribute("status", paymentStatus.getStatus());
         request.setAttribute("paymentStatus", paymentStatus);
         mv.setViewName("Payment/PaymentStatusCallBackPage");
-      
+
         return mv;
     }
 
@@ -134,8 +144,8 @@ public class PaymentController extends PaymentAbstract {
 
     public ModelAndView PaymentConfirmationCallBack(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-          mv.setViewName("Payment/PaymentStatusPage");
-        
+        mv.setViewName("Payment/PaymentStatusPage");
+
         return mv;
     }
 

@@ -45,33 +45,19 @@
                                                 <label>Order Id:</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="Text" id="orderId" name="orderId"  style="color: black;font-weight: bold;" class="form-control"  >
+                                               <form:input path="orderId" class="form-control" ></form:input>
                                             </div>
                                             <div class="col-sm-2">
                                                 <label>Status:</label>
                                             </div>
                                             <div class="col-sm-4">
-                                                <textarea type="Text" class="form-control" name="status" style="color: black;font-weight: bold;" class="control-label" readonly  ></textarea>
+                                                <form:input path="status" class="form-control" ></form:input>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-                                <!--<button type="submit" class="btn btn-primary" id="saveSubmit1" >SEARCH</button>-->
-
-                                <!--<hr />-->
-
-                                <!--<button type="button" class="btn btn-primary" id="saveSubmit1" onclick="window.location = 'logIn.html?act=loginClick';">Go To Login</button>-->
-
                             </div>
-
-                            <%--<spring:bind path="level">--%>
-                            <%--<c:set value='${status.value}' var='levelValue' />--%>
-                            <%--<c:choose>--%>
-                            <%--<c:when test="${levelValue eq 1}"><script>click11();</script></c:when>--%>
-
-                            <%--</c:choose>--%>
-                            <%--</spring:bind>--%>
+                
 
                         </form:form>
 

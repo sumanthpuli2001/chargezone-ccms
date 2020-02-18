@@ -46,8 +46,14 @@ public class PaymentTypeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements P
                 + " select a"
                 + " FROM PaymentTypeMaster a "
                 + " WHERE a.orderid=" + "'" + orderid + "'";
+        
         List list = getHibernateTemplate().find(query);
-        PaymentTypeMaster count = (PaymentTypeMaster) list.get(0);
+         PaymentTypeMaster count=null;
+        if(list!=null&&!list.isEmpty()){
+            
+            count = (PaymentTypeMaster) list.get(0);
+        }
+        
 
         return count;
 }

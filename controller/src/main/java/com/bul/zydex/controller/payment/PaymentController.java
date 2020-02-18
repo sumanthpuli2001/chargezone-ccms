@@ -191,16 +191,19 @@ public class PaymentController extends PaymentAbstract {
 
         PaymentTypeMaster paymentTypeMaster = paymentTypeMasterService.getPaymentTypeMasterByOrderId(orderId);
 
-        TypeOfPayment typeOfPayment=paymentTypeService.readById(paymentTypeMaster.getTypeOfPayment());
-        
         mv.getModelMap().put("paymentStatus", paymentStatus);
         request.setAttribute("orderId", orderId);
+        
+        if(paymentTypeMaster!=null){
+          TypeOfPayment typeOfPayment=paymentTypeService.readById(paymentTypeMaster.getTypeOfPayment());
         request.setAttribute("status", paymentStatus.getStatus());
         request.setAttribute("createdDate", paymentTypeMaster.getCreatedDate());
         request.setAttribute("Amount", paymentTypeMaster.getPaymentAmount());
         request.setAttribute("vendorName", paymentTypeMaster.getNameOfParty());
         request.setAttribute("paymentType", typeOfPayment.getTypeOfEmployee());
-        request.setAttribute("paymentStatus", paymentStatus);
+        request.setAttribute("paymentStatus", paymentStatus);  
+        }
+        
         if(queryString.contains("CHARGED")){
             
             mv.setViewName("Payment/PaymentSlip");

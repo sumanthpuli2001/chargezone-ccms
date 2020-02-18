@@ -17,7 +17,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Payment Status</title>
+        <title>Payment Slip</title>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
@@ -28,6 +28,18 @@
         <link rel="stylesheet" href="StorageYard/CSS/login/style.css">
 
     </head>
+    <script type="text/javascript">
+    function printDiv(divName ) {
+      //  var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+      //  document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
     <div class="content-wrapper" >
         <center>
         
@@ -75,7 +87,8 @@
         </table>
             </center>
             <br>
-            <button type="submit" class="btn btn-primary" id="saveSubmit1" >Print</button>
+           <input type="button" class="btn btn-primary"  style="width: 100px;" value="Print" onclick="printDiv('printableArea')">
+<!--            <button type="submit" class="btn btn-primary" id="saveSubmit1" >Print</button>-->
         
             
            

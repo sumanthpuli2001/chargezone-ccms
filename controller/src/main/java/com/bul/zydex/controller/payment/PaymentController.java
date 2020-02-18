@@ -201,7 +201,15 @@ public class PaymentController extends PaymentAbstract {
         request.setAttribute("vendorName", paymentTypeMaster.getNameOfParty());
         request.setAttribute("paymentType", typeOfPayment.getTypeOfEmployee());
         request.setAttribute("paymentStatus", paymentStatus);
-        mv.setViewName("Payment/PaymentSlip");
+        if(queryString.contains("CHARGED")){
+            
+            mv.setViewName("Payment/PaymentSlip");
+            
+        } else{
+            
+            mv.setViewName("Payment/PaymentStatusCallBackPage");
+        }
+        
 
         return mv;
     }

@@ -189,9 +189,17 @@ public class PaymentController extends PaymentAbstract {
         }
         //bind(request, paymentStatus);
 
+        PaymentTypeMaster paymentTypeMaster = paymentTypeMasterService.getPaymentTypeMasterByOrderId(orderId);
+
+        TypeOfPayment typeOfPayment=paymentTypeService.readById(paymentTypeMaster.getTypeOfPayment());
+        
         mv.getModelMap().put("paymentStatus", paymentStatus);
         request.setAttribute("orderId", orderId);
         request.setAttribute("status", paymentStatus.getStatus());
+        request.setAttribute("createdDate", paymentTypeMaster.getCreatedDate());
+        request.setAttribute("Amount", paymentTypeMaster.getPaymentAmount());
+        request.setAttribute("vendorName", paymentTypeMaster.getNameOfParty());
+        request.setAttribute("paymentType", typeOfPayment.getTypeOfEmployee());
         request.setAttribute("paymentStatus", paymentStatus);
         mv.setViewName("Payment/PaymentSlip");
 
@@ -226,7 +234,6 @@ public class PaymentController extends PaymentAbstract {
 //
 //        return mv;
 //    }
-
     public ModelAndView SearchOrderId(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PaymentStatus paymentStatus = new PaymentStatus();
@@ -397,7 +404,6 @@ public class PaymentController extends PaymentAbstract {
 
             String date = LocalDate.now().toString();
             employeeTypeMaster.setCreatedDate(date);
-            paymentTypeMasterService.create(employeeTypeMaster);
 
             Integer paymentCount = paymentTypeMasterService.paymentCountByDate(date);
 
@@ -432,6 +438,9 @@ public class PaymentController extends PaymentAbstract {
             referenceNo = referenceNo + suffix;
 
             String api = referenceNo + "INR" + employeeTypeMaster.getPaymentAmount();
+
+            employeeTypeMaster.setOrderid(api);
+            paymentTypeMasterService.create(employeeTypeMaster);
 
             PaymentService juspayService = new PaymentService().withEnvironment(Environment.AXIS)
                     .withKey(AXIS_KEY_PRODUCTION).withMerchantId("GIPC_TEST");

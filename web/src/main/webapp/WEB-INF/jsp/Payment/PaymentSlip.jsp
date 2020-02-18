@@ -45,27 +45,27 @@
         <table width="100%" style="align: left;">
             <tr>
                 <td width="25%" align="left">Receipt Ref. No.</td>
-                <td></td>
+                <td>${orderId}</td>
             </tr>
             <tr>
                 <td width="25%" align="left">Date (Time):</td>
-                <td></td>
+                <td>${createdDate}</td>
             </tr>
-            <tr>
+<!--            <tr>
                 <td width="25%" align="left">Received with thanks</td>
-                <td></td>
-            </tr>
+                
+            </tr>-->
             <tr>
                 <td width="25%" align="left">An Amount of :</td>
-                <td></td>
+                <td>${Amount}</td>
             </tr>
             <tr>
                 <td width="25%" align="left">from :</td>
-                <td></td>
+                <td>${vendorName}</td>
             </tr>
             <tr>
                 <td width="25%" align="left">Towards :</td>
-                <td></td>
+                <td>${paymentType}</td>
             </tr>
         </table>
         This receipt is electronically generated and no signature required.
@@ -74,7 +74,9 @@
             </tr>
         </table>
             </center>
-        <body>
+            <br>
+            <button type="submit" class="btn btn-primary" id="saveSubmit1" >Print</button>
+        
             
            
            

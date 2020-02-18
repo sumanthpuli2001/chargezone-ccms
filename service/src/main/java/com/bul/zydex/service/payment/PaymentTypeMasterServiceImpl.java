@@ -7,6 +7,7 @@ package com.bul.zydex.service.payment;
 
 import com.bul.zydex.dao.Payment.PaymentTypeDAO;
 import com.bul.zydex.dao.Payment.PaymentTypeMasterDAO;
+import com.bul.zydex.model.PaymentTypeMaster;
 import com.bul.zydex.service.GenericsServiceImpl;
 
 /**
@@ -31,4 +32,8 @@ public class PaymentTypeMasterServiceImpl<T> extends GenericsServiceImpl<T> impl
         return paymentTypeMasterDAO.paymentCountByDate(date);
     }
 
+     @Override
+    public PaymentTypeMaster getPaymentTypeMasterByOrderId(String orderid) {
+        return paymentTypeMasterDAO.getPaymentTypeMasterByOrderId(orderid);
+    }
 }

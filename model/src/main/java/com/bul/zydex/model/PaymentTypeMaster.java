@@ -35,6 +35,15 @@ public class PaymentTypeMaster {
     private String additionalRemarks;
     private Integer paymentMode;
     private String createdDate;
+    private String orderid;
+
+    public String getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(String orderid) {
+        this.orderid = orderid;
+    }
 
     private String status;
 
@@ -42,7 +51,7 @@ public class PaymentTypeMaster {
 
     }
 
-    public PaymentTypeMaster(Integer id, Integer typeOfPayment, String partyCode, String nameOfParty, String gstNo, String panNo, String emailId, String phoneNo, String mobileNo, String address, int location, String paymentAmount, String additionalRemarks, Integer paymentMode, String status,String createdDate) {
+    public PaymentTypeMaster(Integer id, Integer typeOfPayment, String partyCode, String nameOfParty, String gstNo, String panNo, String emailId, String phoneNo, String mobileNo, String address, int location, String paymentAmount, String additionalRemarks, Integer paymentMode, String status,String createdDate,String orderid) {
         this.id = id;
         this.typeOfPayment = typeOfPayment;
         this.partyCode = partyCode;
@@ -59,6 +68,7 @@ public class PaymentTypeMaster {
         this.paymentMode = paymentMode;
         this.status = status;
         this.createdDate= createdDate;
+        this.orderid=orderid;
     }
 
     public Integer getPaymentMode() {

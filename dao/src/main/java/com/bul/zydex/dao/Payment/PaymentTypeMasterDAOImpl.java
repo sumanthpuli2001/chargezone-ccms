@@ -36,4 +36,19 @@ public class PaymentTypeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements P
 
     }
 
+    
+    @Override
+    public PaymentTypeMaster getPaymentTypeMasterByOrderId(String orderid) {
+        
+         String query = "";
+
+        query += "  "
+                + " select a"
+                + " FROM PaymentTypeMaster a "
+                + " WHERE a.orderid=" + "'" + orderid + "'";
+        List list = getHibernateTemplate().find(query);
+        PaymentTypeMaster count = (PaymentTypeMaster) list.get(0);
+
+        return count;
+}
 }

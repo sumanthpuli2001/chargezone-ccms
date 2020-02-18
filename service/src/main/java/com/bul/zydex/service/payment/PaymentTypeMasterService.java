@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.payment;
 
+import com.bul.zydex.model.PaymentTypeMaster;
 import com.bul.zydex.service.GenericsService;
 
 /**
@@ -15,4 +16,6 @@ public interface PaymentTypeMasterService<T> extends GenericsService<T> {
   
     
     public Integer paymentCountByDate(String date);
+    
+    public PaymentTypeMaster getPaymentTypeMasterByOrderId(String orderid);
 }

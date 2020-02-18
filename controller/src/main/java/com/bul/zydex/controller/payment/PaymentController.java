@@ -193,7 +193,7 @@ public class PaymentController extends PaymentAbstract {
         request.setAttribute("orderId", orderId);
         request.setAttribute("status", paymentStatus.getStatus());
         request.setAttribute("paymentStatus", paymentStatus);
-        mv.setViewName("Payment/PaymentStatusCallBackPage");
+        mv.setViewName("Payment/PaymentSlip");
 
         return mv;
     }
@@ -220,12 +220,12 @@ public class PaymentController extends PaymentAbstract {
         return mv;
     }
 
-    public ModelAndView printPayment(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("Payment/PaymentSlip");
-
-        return mv;
-    }
+//    public ModelAndView printPayment(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//        ModelAndView mv = new ModelAndView();
+//        mv.setViewName("Payment/PaymentSlip");
+//
+//        return mv;
+//    }
 
     public ModelAndView SearchOrderId(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();

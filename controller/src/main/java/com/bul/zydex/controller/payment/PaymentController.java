@@ -28,6 +28,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -860,7 +861,9 @@ public class PaymentController extends PaymentAbstract {
 
                     errors = new BindException(vendors, "vendors");
                     try {
-                        if (row.getRowNum() > 0 ) {
+                        if (row.getRowNum()==0 ) {
+                        }else{
+                            
                             if (row.getCell(1) != null ) {
                                 try {
                                     vendorcode = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
@@ -879,6 +882,24 @@ public class PaymentController extends PaymentAbstract {
                                 mobileno = "" + (null == row.getCell((short) 7) ? "" : row.getCell((short) 7));
                                 address = "" + (null == row.getCell((short) 8) ? "" : row.getCell((short) 8));
 
+                                if (!vendorcode.isEmpty() && NumberUtils.isNumber(vendorcode)) {
+
+                                Long invNo = Double.valueOf(vendorcode).longValue();
+                                vendorcode = invNo.toString();
+
+                            }
+                                if (!mobileno.isEmpty() && NumberUtils.isNumber(mobileno)) {
+
+                                Long invNo = Double.valueOf(mobileno).longValue();
+                                mobileno = invNo.toString();
+
+                            }
+                                if (!phoneno.isEmpty() && NumberUtils.isNumber(phoneno)) {
+
+                                Long invNo = Double.valueOf(phoneno).longValue();
+                                phoneno = invNo.toString();
+
+                            }
                                
                                 vendors.setVendorCode(vendorcode);
                                 vendors.setVendor(vendorName);

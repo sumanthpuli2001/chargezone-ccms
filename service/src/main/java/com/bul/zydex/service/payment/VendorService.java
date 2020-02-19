@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service.payment;
 
+import com.bul.zydex.model.Vendors;
 import com.bul.zydex.service.GenericsService;
 
 /**
@@ -12,5 +13,7 @@ import com.bul.zydex.service.GenericsService;
  * @author admin
  */
 public interface VendorService<T> extends GenericsService<T>{
+
+    public Vendors readByVendorCode(String vendorCode);
     
 }

@@ -6,6 +6,7 @@
 package com.bul.zydex.service.payment;
 
 import com.bul.zydex.dao.Payment.VendorDAO;
+import com.bul.zydex.model.Vendors;
 import com.bul.zydex.service.GenericsServiceImpl;
 
 /**
@@ -15,6 +16,11 @@ import com.bul.zydex.service.GenericsServiceImpl;
 public class VendorServiceImpl<T> extends GenericsServiceImpl<T> implements VendorService<T> {
     
 private VendorDAO<T> vendorDAO;
+
+    @Override
+    public Vendors readByVendorCode(String vendorCode) {
+       return vendorDAO.readByVendorCode(vendorCode);
+    }
 
 public VendorDAO<T> getEmployeeTypeDAO() {
         return vendorDAO;

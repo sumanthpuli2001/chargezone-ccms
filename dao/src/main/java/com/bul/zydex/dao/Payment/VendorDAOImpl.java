@@ -7,6 +7,7 @@ package com.bul.zydex.dao.Payment;
 
 import com.bul.zydex.dao.GenericsDAOImpl;
 import com.bul.zydex.model.Vendors;
+import java.util.List;
 
 /**
  *
@@ -18,4 +19,23 @@ public class VendorDAOImpl<T> extends GenericsDAOImpl<T> implements VendorDAO<T>
     protected Class getDomainClass() {
         return Vendors.class;
     }
+    
+    
+    @Override
+    public Vendors readByVendorCode(String vendorCode) {
+        
+        String query = "";
+
+        query += "  "
+                + " select v"
+                + " FROM Vendors v "
+                + " WHERE v.vendorCode=" + "'" + vendorCode + "'";
+        List list = getHibernateTemplate().find(query);
+        Vendors vendor = null;
+        if(!list.isEmpty()){
+            
+          vendor= (Vendors) list.get(0);
+        }
+        return vendor;
+}
 }

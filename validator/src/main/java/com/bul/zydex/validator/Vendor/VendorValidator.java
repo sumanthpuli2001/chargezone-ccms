@@ -28,7 +28,7 @@ public class VendorValidator implements Validator {
 
         Vendors vendors = (Vendors) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "vendorId", "vendorId.required", "None");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "vendorCode", "vendorCode.required", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "vendor", "vendor.required", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gstNo", "gstNo.required", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNo", "phoneNo.required", "None");

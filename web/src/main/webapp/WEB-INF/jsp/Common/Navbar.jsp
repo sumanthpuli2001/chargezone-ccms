@@ -1087,6 +1087,12 @@
                     <i class="fa fa-user fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Vendor Registration</span>
                 </a>
             </li>
+            
+            <li class="active treeview">
+                <a href="payment.html?act=excelUpload">
+                    <i class="fa fa-user fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Vendor Registration By Excel</span>
+                </a>
+            </li>
 
         </section>
         <!-- /.sidebar -->

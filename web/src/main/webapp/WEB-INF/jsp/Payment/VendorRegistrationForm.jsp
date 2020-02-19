@@ -61,8 +61,8 @@
                                         </div>
                                         <div class="col-sm-7">
                                             <!--<input type="text" name="vendorId" class="form-control" placeholder="Enter Vendor Code" maxlength="30"/>-->
-                                            <form:input path="vendorId" class="form-control"  placeholder="Enter Vendor Code" ></form:input>
-                                            <form:errors path="vendorId" cssClass="errorDiv"></form:errors>
+                                            <form:input path="vendorCode" class="form-control"  placeholder="Enter Vendor Code" ></form:input>
+                                            <form:errors path="vendorCode" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
 

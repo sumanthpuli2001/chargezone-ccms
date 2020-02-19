@@ -17,6 +17,9 @@ import com.bul.zydex.model.PaymentStatus;
 import com.bul.zydex.model.PaymentTypeMaster;
 import com.bul.zydex.model.TypeOfPayment;
 import com.bul.zydex.model.Vendors;
+import com.bul.zydex.util.DownloadFile;
+import java.io.File;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -26,8 +29,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindException;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -40,9 +49,9 @@ public class PaymentController extends PaymentAbstract {
     private static final String TEST_KEY = "7F3282CC43004D5A818E781F39440442";
     private static final String AXIS_KEY = "782CB4B3F5B84BDDB3C9EAFA6A134DC3";
     private static final String AXIS_KEY_TEST = "2E4C02A94F314D31BEC0D8C093DA94D7";
-    private static final String AXIS_KEY_PRODUCTION = "F57C7F540A7437A9C0831770B41EE1";
+    private static final String AXIS_KEY_PRODUCTION = "6ED08801CF149BFB33044D5580100C";
     private String testOrderId = "" + System.currentTimeMillis();
-
+    
     private static Logger log = Logger.getLogger(PaymentController.class);
 
     public ModelAndView showTypeOfPayment(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -681,7 +690,7 @@ public class PaymentController extends PaymentAbstract {
     public ModelAndView createSubmit1(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         Vendors vendors = new Vendors();
-        String vendorCode = request.getParameter("vendorId");
+        String vendorcode = request.getParameter("vendorCode");
         String vendorName = request.getParameter("vendor");
         String gstno = request.getParameter("gstNo");
         String panno = request.getParameter("panNo");
@@ -701,7 +710,7 @@ public class PaymentController extends PaymentAbstract {
             mv.setViewName("Payment/VendorRegistrationForm");
 
         } else {
-            vendors.setVendorId(Integer.parseInt(vendorCode));
+            vendors.setVendorCode(vendorcode);
             vendors.setVendor(vendorName);
             vendors.setGstNo(gstno);
             vendors.setPanNo(panno);
@@ -718,7 +727,7 @@ public class PaymentController extends PaymentAbstract {
         return mv;
     }
 
-    public ModelAndView viewClick1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+     public ModelAndView viewClick1(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 
         int vendorId = Integer.parseInt(request.getParameter("vendorId"));
@@ -738,7 +747,7 @@ public class PaymentController extends PaymentAbstract {
             mv.setViewName("Payment/VendorRegistrationForm");
 
         } else {
-            request.setAttribute("vendorId", vendorId);
+//            request.setAttribute("vendorId", vendorId);
             request.setAttribute("vendor", vendors.getVendor());
             request.setAttribute("address", vendors.getAddress());
             request.setAttribute("gstNo", vendors.getGstNo());
@@ -746,6 +755,7 @@ public class PaymentController extends PaymentAbstract {
             request.setAttribute("phoneNo", vendors.getPhoneNo());
             request.setAttribute("panNo", vendors.getPanNo());
             request.setAttribute("emailId", vendors.getEmailId());
+             request.setAttribute("vendorCode", vendors.getVendorCode());
 
 //            vendorService.update(vendors);
 //            request.setAttribute("successMessage",
@@ -759,9 +769,9 @@ public class PaymentController extends PaymentAbstract {
 
     public ModelAndView editSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        int vendorId = Integer.parseInt(request.getParameter("vendorId"));
-        Vendors vendors = vendorService.readById(vendorId);
-        String vendorCode = request.getParameter("vendorId");
+        String vendorcode = request.getParameter("vendorCode");
+        Vendors vendors = vendorService.readByVendorCode(vendorcode);
+//        String vendorCode = request.getParameter("vendorId");
         String vendorName = request.getParameter("vendor");
         String gstno = request.getParameter("gstNo");
         String panno = request.getParameter("panNo");
@@ -781,7 +791,7 @@ public class PaymentController extends PaymentAbstract {
             mv.setViewName("Payment/VendorRegistrationForm");
 
         } else {
-            vendors.setVendorId(Integer.parseInt(vendorCode));
+            vendors.setVendorCode(vendorcode);
             vendors.setVendor(vendorName);
             vendors.setGstNo(gstno);
             vendors.setPanNo(panno);
@@ -796,5 +806,144 @@ public class PaymentController extends PaymentAbstract {
 
         }
         return mv;
+    }
+    
+    public ModelAndView excelUpload(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        PaymentMode employeeTypeMaster = new PaymentMode();
+//        mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
+        mv.setViewName("Payment/VendorExcel");
+        return mv;
+    }
+
+    public ModelAndView excelUploadRegistrationSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("file1");
+        Vendors vendors = new Vendors();
+
+        LocationMaster locationMaster = new LocationMaster();
+//        EmployeeMasterExtension employeeMasterExtension;
+        int counter = 0;
+        int counterOfException = 0;
+        String vendorcode = "";
+        String vendorName = "";
+        String gstno = "";
+        String panno = "";
+        String emailid = "";
+        String phoneno = "";
+        String mobileno = "";
+        String address = "";
+
+        StringBuffer stringBuffer = new StringBuffer();
+        StringBuffer stringBufferOfExceptions = new StringBuffer();
+        stringBufferOfExceptions.append("");
+
+        StringBuffer strBuffFailer = new StringBuffer();
+        StringBuffer stringBuffError = new StringBuffer();
+        StringBuffer stringBuffSuccess = new StringBuffer();
+
+        //----------------
+        BindException errors, errors2;
+        //---------------
+        try {
+            if (multipartFile.getSize() > 0) {
+                InputStream file = multipartFile.getInputStream();
+                Workbook workbook = WorkbookFactory.create(file);
+                Sheet sheet = workbook.getSheetAt(0);
+                for (Row row : sheet) {
+                    //--------------------------------------------
+//                    boolean createCheckFlags[] = new boolean[15];
+//                    boolean updateCheckFlags[] = new boolean[5];
+//                    boolean employeeCreateFlag = false;
+                    vendors = new Vendors();
+
+                    errors = new BindException(vendors, "vendors");
+                    try {
+                        if (row.getRowNum() > 0 ) {
+                            if (row.getCell(1) != null ) {
+                                try {
+                                    vendorcode = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
+//                                    vendorCode = vendorCode.split("\\.", 2)[0];
+                                } catch (Exception e) {
+                                    vendorcode = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
+                                }
+
+                                vendorName = "" + (null == row.getCell((short) 2) ? "" : row.getCell((short) 2));
+                                panno = "" + (null == row.getCell((short) 3) ? "" : row.getCell((short) 3));
+                                gstno = "" + (null == row.getCell((short) 4) ? "" : row.getCell((short) 4));
+                               
+
+                                emailid = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 5));
+                                phoneno = "" + (null == row.getCell((short) 6) ? "" : row.getCell((short) 6));
+                                mobileno = "" + (null == row.getCell((short) 7) ? "" : row.getCell((short) 7));
+                                address = "" + (null == row.getCell((short) 8) ? "" : row.getCell((short) 8));
+
+                               
+                                vendors.setVendorCode(vendorcode);
+                                vendors.setVendor(vendorName);
+                                vendors.setPanNo(panno);
+                                vendors.setGstNo(gstno);
+                                vendors.setEmailId(emailid);
+                                vendors.setPhoneNo(phoneno);
+                                vendors.setMobileNo(mobileno);
+                                vendors.setAddress(address);
+                                vendorService.create(vendors); 
+                            }
+                            
+                            
+                        }
+
+                    } catch (Exception e) {
+                        stringBufferOfExceptions.append(vendorcode);
+                        stringBufferOfExceptions.append(" , ");
+                        counterOfException++;
+                    }
+                }
+            }
+
+            if (counterOfException > 0) {
+                request.setAttribute("failureMessage", " " + stringBufferOfExceptions + " Records Not Inserted Due To Invalid Data");
+                //System.out.println("failureMessage," + stringBufferOfExceptions + " Rcecords Not Inserted Due To Invalid Data");
+            }
+            if (stringBuffError.length() > 0) {
+                request.setAttribute("failureMessage", "<br/> Information :  " + stringBuffError + " Errror in Employee informatation " + strBuffFailer);
+            }
+            if (stringBuffSuccess.length() > 0) {
+                request.setAttribute("successMessage", stringBuffSuccess);
+            }
+           
+            request.setAttribute("successMessage",
+                    "Information : The Information is saved Successfully.");
+            mv = VendorRegistration(request, response);
+//            mv.getModelMap().put("vendors", vendors);
+            //dont rename "list" because same used on getEmployeeDetailsBySearchString method and employeeRegistrationResult.jsp
+//            mv.getModelMap().put("vendors", vendors);
+//            mv.setViewName("Payment/VendorRegistrationResult");
+            //----------------------------------------------
+        } catch (Exception e) {
+            request.setAttribute("failureMessage", "Information : The Excel Not Upload Successfully. Please Check Excel Data.");
+            mv = excelUpload(request, response);
+        }
+        return mv;
+
+    }
+
+    public void readEmployeeFile1(HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
+        String fileName = request.getParameter("fileName");
+
+        String filePath = File.separator + "StorageYard" + File.separator
+                + "Other" + File.separator + "UserDoc" + File.separator
+                + "Payroll" + File.separator + fileName;
+
+        String appPath = request.getServletContext().getRealPath("");
+
+        String fullPath = appPath + filePath;
+
+        request.setAttribute("filePath", fullPath);
+
+        DownloadFile downloadFile = new DownloadFile();
+        downloadFile.doDownload(request, response);
     }
 }

@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="col-sm-7">
                                             <!--<input type="text" name="vendorId" class="form-control" placeholder="Enter Vendor Code" maxlength="30"/>-->
-                                            <form:input path="vendorCode" class="form-control" readonly="true"></form:input>
+                                            <form:input path="vendorCode" class="form-control" placeholder="Enter Vendor Code"></form:input>
                                             <form:errors path="vendorCode" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
@@ -134,6 +134,16 @@
                                                 <!--<input type="text" name="address" class="form-control" placeholder="Enter Address" maxlength="30"/>-->
                                             <form:input path="address" class="form-control"  placeholder="Enter Address" ></form:input>
                                             <form:errors path="address" cssClass="errorDiv"></form:errors>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-3">
+                                                <label class="control-label">Enter Password:<span style="color: red;font-size: 12px;">*</span></label>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                <!--<input type="text" name="vendorId" class="form-control" placeholder="Enter Vendor Code" maxlength="30"/>-->
+                                            <form:input path="password" class="form-control" placeholder="Enter Password"></form:input>
+                                            <form:errors path="password" cssClass="errorDiv"></form:errors>
                                             </div>
                                         </div>
 

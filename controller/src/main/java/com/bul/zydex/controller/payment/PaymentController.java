@@ -16,6 +16,7 @@ import com.bul.zydex.model.PaymentMode;
 import com.bul.zydex.model.PaymentStatus;
 import com.bul.zydex.model.PaymentTypeMaster;
 import com.bul.zydex.model.TypeOfPayment;
+import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.Vendors;
 import com.bul.zydex.util.DownloadFile;
 import java.io.File;
@@ -52,7 +53,8 @@ public class PaymentController extends PaymentAbstract {
     private static final String AXIS_KEY_TEST = "2E4C02A94F314D31BEC0D8C093DA94D7";
     private static final String AXIS_KEY_PRODUCTION = "6ED08801CF149BFB33044D5580100C";
     private String testOrderId = "" + System.currentTimeMillis();
-    
+    public static String VENDOR_CODE=null;
+
     private static Logger log = Logger.getLogger(PaymentController.class);
 
     public ModelAndView showTypeOfPayment(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -203,26 +205,25 @@ public class PaymentController extends PaymentAbstract {
 
         mv.getModelMap().put("paymentStatus", paymentStatus);
         request.setAttribute("orderId", orderId);
-        
-        if(paymentTypeMaster!=null){
-          TypeOfPayment typeOfPayment=paymentTypeService.readById(paymentTypeMaster.getTypeOfPayment());
-        request.setAttribute("status", paymentStatus.getStatus());
-        request.setAttribute("createdDate", paymentTypeMaster.getCreatedDate());
-        request.setAttribute("Amount", paymentTypeMaster.getPaymentAmount());
-        request.setAttribute("vendorName", paymentTypeMaster.getNameOfParty());
-        request.setAttribute("paymentType", typeOfPayment.getTypeOfEmployee());
-        request.setAttribute("paymentStatus", paymentStatus);  
+
+        if (paymentTypeMaster != null) {
+            TypeOfPayment typeOfPayment = paymentTypeService.readById(paymentTypeMaster.getTypeOfPayment());
+            request.setAttribute("status", paymentStatus.getStatus());
+            request.setAttribute("createdDate", paymentTypeMaster.getCreatedDate());
+            request.setAttribute("Amount", paymentTypeMaster.getPaymentAmount());
+            request.setAttribute("vendorName", paymentTypeMaster.getNameOfParty());
+            request.setAttribute("paymentType", typeOfPayment.getTypeOfEmployee());
+            request.setAttribute("paymentStatus", paymentStatus);
         }
-        
-        if(queryString.contains("CHARGED")){
-            
+
+        if (queryString.contains("CHARGED")) {
+
             mv.setViewName("Payment/PaymentSlip");
-            
-        } else{
-            
+
+        } else {
+
             mv.setViewName("Payment/PaymentStatusCallBackPage");
         }
-        
 
         return mv;
     }
@@ -379,6 +380,20 @@ public class PaymentController extends PaymentAbstract {
     public ModelAndView createPaymentTypeMasterClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
         PaymentTypeMaster employeeTypeMaster = new PaymentTypeMaster();
+        String vendorcode = VENDOR_CODE;
+        Vendors vendors = vendorService.readByVendorCode(vendorcode);
+        if (vendorcode != null) {
+            employeeTypeMaster.setPartyCode(vendors.getVendorCode());
+            employeeTypeMaster.setPhoneNo(vendors.getPhoneNo());
+            employeeTypeMaster.setPanNo(vendors.getPanNo());
+            employeeTypeMaster.setNameOfParty(vendors.getVendor());
+            employeeTypeMaster.setEmailId(vendors.getEmailId());
+            employeeTypeMaster.setGstNo(vendors.getGstNo());
+            employeeTypeMaster.setMobileNo(vendors.getMobileNo());
+            employeeTypeMaster.setAddress(vendors.getAddress());
+            bind(request, vendors);
+            VENDOR_CODE=null;  
+        }
 
         //----- Get data of payment type
         TypeOfPayment typeOfPayment = new TypeOfPayment();
@@ -399,7 +414,6 @@ public class PaymentController extends PaymentAbstract {
             level3.put(locationMaster.getId(), locationMaster.getLocation());
         }
         request.setAttribute("locationTypeMap", level3);
-
         mv.getModelMap().put("employeeTypeMaster", employeeTypeMaster);
         mv.setViewName("Payment/PaymentTypeMasterCreate");
         return mv;
@@ -415,6 +429,30 @@ public class PaymentController extends PaymentAbstract {
         //employeeTypeValidator.validate(employeeTypeMaster, errors);
         paymentTypeMasterValidator.validate(employeeTypeMaster, errors);
         if (errors.hasErrors()) {
+            
+             //----- Get data of payment type
+        TypeOfPayment typeOfPayment = new TypeOfPayment();
+        List<?> level = paymentTypeService.read();
+        Map<Integer, String> level1 = new HashMap<>();
+        for (Object o : level) {
+            typeOfPayment = (TypeOfPayment) o;
+            level1.put(typeOfPayment.getId(), typeOfPayment.getTypeOfEmployee());
+        }
+        request.setAttribute("paymentTypeMap", level1);
+
+        //---- Get data of location master
+        LocationMaster locationMaster = new LocationMaster();
+        List<?> level2 = locationMasterService.read();
+        Map<Integer, String> level3 = new HashMap<>();
+        for (Object o : level2) {
+            locationMaster = (LocationMaster) o;
+            level3.put(locationMaster.getId(), locationMaster.getLocation());
+        }
+        request.setAttribute("locationTypeMap", level3);
+        
+            
+            
+            
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
             mv.addAllObjects(errors.getModel());
@@ -699,6 +737,7 @@ public class PaymentController extends PaymentAbstract {
         String phoneno = request.getParameter("phoneNo");
         String mobileno = request.getParameter("mobileNo");
         String address = request.getParameter("address");
+        String password = request.getParameter("password");
 
         BindException errors = new BindException(vendors, "vendors");
         bind(request, vendors);
@@ -719,7 +758,12 @@ public class PaymentController extends PaymentAbstract {
             vendors.setPhoneNo(phoneno);
             vendors.setMobileNo(mobileno);
             vendors.setAddress(address);
+            vendors.setPassword(password);
             vendorService.create(vendors);
+            UserMaster userMaster = new UserMaster();
+            userMaster.setUserName(vendorcode);
+            userMaster.setPassword(password);
+            userMasterService.create(userMaster);
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
             mv = VendorRegistration(request, response);
@@ -728,7 +772,7 @@ public class PaymentController extends PaymentAbstract {
         return mv;
     }
 
-     public ModelAndView viewClick1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView viewClick1(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 
         int vendorId = Integer.parseInt(request.getParameter("vendorId"));
@@ -756,7 +800,7 @@ public class PaymentController extends PaymentAbstract {
             request.setAttribute("phoneNo", vendors.getPhoneNo());
             request.setAttribute("panNo", vendors.getPanNo());
             request.setAttribute("emailId", vendors.getEmailId());
-             request.setAttribute("vendorCode", vendors.getVendorCode());
+            request.setAttribute("vendorCode", vendors.getVendorCode());
 
 //            vendorService.update(vendors);
 //            request.setAttribute("successMessage",
@@ -808,7 +852,7 @@ public class PaymentController extends PaymentAbstract {
         }
         return mv;
     }
-    
+
     public ModelAndView excelUpload(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
 //        PaymentMode employeeTypeMaster = new PaymentMode();
@@ -861,10 +905,10 @@ public class PaymentController extends PaymentAbstract {
 
                     errors = new BindException(vendors, "vendors");
                     try {
-                        if (row.getRowNum()==0 ) {
-                        }else{
-                            
-                            if (row.getCell(1) != null ) {
+                        if (row.getRowNum() == 0) {
+                        } else {
+
+                            if (row.getCell(1) != null) {
                                 try {
                                     vendorcode = "" + (null == row.getCell((short) 1) ? "" : row.getCell((short) 1));
 //                                    vendorCode = vendorCode.split("\\.", 2)[0];
@@ -875,7 +919,6 @@ public class PaymentController extends PaymentAbstract {
                                 vendorName = "" + (null == row.getCell((short) 2) ? "" : row.getCell((short) 2));
                                 panno = "" + (null == row.getCell((short) 3) ? "" : row.getCell((short) 3));
                                 gstno = "" + (null == row.getCell((short) 4) ? "" : row.getCell((short) 4));
-                               
 
                                 emailid = "" + (null == row.getCell((short) 5) ? "" : row.getCell((short) 5));
                                 phoneno = "" + (null == row.getCell((short) 6) ? "" : row.getCell((short) 6));
@@ -884,23 +927,23 @@ public class PaymentController extends PaymentAbstract {
 
                                 if (!vendorcode.isEmpty() && NumberUtils.isNumber(vendorcode)) {
 
-                                Long invNo = Double.valueOf(vendorcode).longValue();
-                                vendorcode = invNo.toString();
+                                    Long invNo = Double.valueOf(vendorcode).longValue();
+                                    vendorcode = invNo.toString();
 
-                            }
+                                }
                                 if (!mobileno.isEmpty() && NumberUtils.isNumber(mobileno)) {
 
-                                Long invNo = Double.valueOf(mobileno).longValue();
-                                mobileno = invNo.toString();
+                                    Long invNo = Double.valueOf(mobileno).longValue();
+                                    mobileno = invNo.toString();
 
-                            }
+                                }
                                 if (!phoneno.isEmpty() && NumberUtils.isNumber(phoneno)) {
 
-                                Long invNo = Double.valueOf(phoneno).longValue();
-                                phoneno = invNo.toString();
+                                    Long invNo = Double.valueOf(phoneno).longValue();
+                                    phoneno = invNo.toString();
 
-                            }
-                               
+                                }
+
                                 vendors.setVendorCode(vendorcode);
                                 vendors.setVendor(vendorName);
                                 vendors.setPanNo(panno);
@@ -909,10 +952,9 @@ public class PaymentController extends PaymentAbstract {
                                 vendors.setPhoneNo(phoneno);
                                 vendors.setMobileNo(mobileno);
                                 vendors.setAddress(address);
-                                vendorService.create(vendors); 
+                                vendorService.create(vendors);
                             }
-                            
-                            
+
                         }
 
                     } catch (Exception e) {
@@ -933,7 +975,7 @@ public class PaymentController extends PaymentAbstract {
             if (stringBuffSuccess.length() > 0) {
                 request.setAttribute("successMessage", stringBuffSuccess);
             }
-           
+
             request.setAttribute("successMessage",
                     "Information : The Information is saved Successfully.");
             mv = VendorRegistration(request, response);

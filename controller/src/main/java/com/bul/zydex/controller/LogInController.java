@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.controller;
 
+import com.bul.zydex.controller.payment.PaymentController;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.model.support.User;
 import com.bul.zydex.util.ActionType;
@@ -118,7 +119,18 @@ public class LogInController extends LogInAbstract {
                 mv.setViewName("User/Login");
             } else {
                 List<?> tempList = userMasterService.read(user);
-                if (null == tempList || tempList.isEmpty()) {
+                
+                if(tempList!=null&&!tempList.isEmpty()&& !((UserMaster)tempList.get(0)).getUserName().equalsIgnoreCase("admin")){
+                   
+                    PaymentController.VENDOR_CODE=user.getUserName();
+                    mv.setViewName("redirect:payment.html?act=createPaymentTypeMasterClick");
+                    return mv;
+                    
+                }else{
+                    
+                    PaymentController.VENDOR_CODE=null;
+                
+                    if (null == tempList || tempList.isEmpty()) {
 
                     List<?> tempList2 = userMasterService.readByUserName(user);
                     if (!tempList2.isEmpty()) {
@@ -183,6 +195,7 @@ public class LogInController extends LogInAbstract {
                         request.setAttribute("user", user3);
                         mv = home(request, response);
                     }
+                }
                 }
             }
             request.setAttribute("lockCounter", lockCounter);

@@ -19,6 +19,7 @@ public class Vendors implements java.io.Serializable {
     private String mobileNo;
     private String address;
     private String vendorCode;
+    private String password;
 
     private Set PaymentTypeMaster = new HashSet(0);
 
@@ -29,7 +30,7 @@ public class Vendors implements java.io.Serializable {
         this.vendor = vendor;
     }
 
-    public Vendors(String vendor,String vendorCode, String comments, String gstNo, String panNo, String emailId, String phoneNo, String mobileNo, String address) {
+    public Vendors(String vendor,String vendorCode, String comments, String gstNo, String panNo, String emailId, String phoneNo, String mobileNo, String address,String password) {
         this.vendor = vendor;
         this.vendorCode = vendorCode;
         this.comments = comments;
@@ -39,6 +40,7 @@ public class Vendors implements java.io.Serializable {
         this.phoneNo = phoneNo;
         this.mobileNo = mobileNo;
         this.address = address;
+        this.password=password;
     }
 
     public Integer getVendorId() {
@@ -119,6 +121,14 @@ public class Vendors implements java.io.Serializable {
 
     public void setVendorCode(String vendorCode) {
         this.vendorCode = vendorCode;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }

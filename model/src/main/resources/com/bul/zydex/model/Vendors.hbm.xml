@@ -34,7 +34,10 @@
             <column name="comments" length="65535" />
         </property>
         <property name="vendorCode" type="string">
-            <column name="vendor_Code" length="65535" />
+            <column name="vendor_Code" length="100" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="100" />
         </property>
     </class>
 </hibernate-mapping>

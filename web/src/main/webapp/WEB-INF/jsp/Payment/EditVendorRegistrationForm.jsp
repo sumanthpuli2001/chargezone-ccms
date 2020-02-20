@@ -58,7 +58,7 @@
                                     </c:if>
                                     <div class="form-group">
                                         <div class="col-sm-3">
-                                            <label class="control-label">Enter Vendor Code:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <label class="control-label">Enter Vendor Code:</label>
                                         </div>
                                         <div class="col-sm-7">
                                             <!--<input type="text" name="vendorId" class="form-control" placeholder="Enter Vendor Code" maxlength="30"/>-->
@@ -79,7 +79,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-3">
-                                                <label class="control-label">Enter GST No:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <label class="control-label">Enter GST No:</label>
                                             </div>
                                             <div class="col-sm-7">
                                                 <!--<input type="text" name="gstNo" class="form-control" placeholder="Enter GST No" maxlength="30"/>-->
@@ -89,7 +89,7 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-3">
-                                                <label class="control-label">Enter PAN No:<span style="color: red;font-size: 12px;">*</span></label>
+                                                <label class="control-label">Enter PAN No:</label>
                                             </div>
                                             <div class="col-sm-7">
                                                 <!--<input type="text" name="panNo" class="form-control" placeholder="Enter Pan No" maxlength="30"/>-->

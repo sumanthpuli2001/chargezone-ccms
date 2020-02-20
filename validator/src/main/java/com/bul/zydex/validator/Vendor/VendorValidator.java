@@ -28,14 +28,14 @@ public class VendorValidator implements Validator {
 
         Vendors vendors = (Vendors) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "vendorCode", "vendorCode.required", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "vendorCode", "vendorCode.required", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "vendor", "vendor.required", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gstNo", "gstNo.required", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gstNo", "gstNo.required", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phoneNo", "phoneNo.required", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "mobileNo", "mobileNo.required", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "address", "address.required", "None");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "emailId", "emailId.required", "None");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "panNo", "panNo.required", "None");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "panNo", "panNo.required", "None");
 //        EmailValidator emailValidator = new EmailValidator();
 //        if (!emailValidator.validate(vendors.getEmailId()) && !vendors.getEmailId().isEmpty()) {
 //            errors.rejectValue("emailId", "emailId.error", "none");

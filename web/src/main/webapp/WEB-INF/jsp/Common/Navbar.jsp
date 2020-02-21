@@ -104,22 +104,22 @@
                 <%--</c:if>--%>
                 <!--here-->
                 <%--<c:if test="${sessionScope.userRight.employeeManagement}">--%>
-<!--                    <li class="treeview" style="color: #585858;">
-                        <a href="#" style="background: #fff;">
-                            <i class="fa fa-user fa-lg" style="color: #585858;"></i>
-                            <span style="color: #585858;">Employee Management</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </a> 
-                        <ul class="treeview-menu">
-
-                            <li><a href="employeeMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Employee Registration</a></li>
-                            <li><a href="employeeMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Employee Registration</a></li>
-                                                        <li><a href="employeeMaster.htm?act=formerEmployeeRecords"><i class="fa fa-circle-o"></i>Former Employee Details</a></li>
-                                                        <li><a href="employeeMaster.htm?act=excelUploadRegistration"><i class="fa fa-circle-o"></i>Employee Registration By Excel</a></li>
-                                                        <li><a href="employeeMaster.htm?act=excelUploadAllowance"><i class="fa fa-circle-o"></i>Allowance By Excel</a></li>
-                                                    <li><a href="userMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>User Right</a></li>
-                        </ul>
-                    </li>-->
+                <!--                    <li class="treeview" style="color: #585858;">
+                                        <a href="#" style="background: #fff;">
+                                            <i class="fa fa-user fa-lg" style="color: #585858;"></i>
+                                            <span style="color: #585858;">Employee Management</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a> 
+                                        <ul class="treeview-menu">
+                
+                                            <li><a href="employeeMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>Employee Registration</a></li>
+                                            <li><a href="employeeMaster.htm?act=searchSubmit"><i class="fa fa-circle-o"></i>Employee Registration</a></li>
+                                                                        <li><a href="employeeMaster.htm?act=formerEmployeeRecords"><i class="fa fa-circle-o"></i>Former Employee Details</a></li>
+                                                                        <li><a href="employeeMaster.htm?act=excelUploadRegistration"><i class="fa fa-circle-o"></i>Employee Registration By Excel</a></li>
+                                                                        <li><a href="employeeMaster.htm?act=excelUploadAllowance"><i class="fa fa-circle-o"></i>Allowance By Excel</a></li>
+                                                                    <li><a href="userMaster.htm?act=createClick"><i class="fa fa-circle-o"></i>User Right</a></li>
+                                        </ul>
+                                    </li>-->
                 <%--</c:if>--%>
 
 
@@ -1091,6 +1091,11 @@
             <li class="active treeview">
                 <a href="payment.html?act=excelUpload">
                     <i class="fa fa-user fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Vendor Registration By Excel</span>
+                </a>
+            </li>
+            <li class="active treeview">
+                <a href="payment.html?act=searchByOrderId">
+                    <i class="fa fa-user fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Serach Paymeny By OrderId</span>
                 </a>
             </li>
 

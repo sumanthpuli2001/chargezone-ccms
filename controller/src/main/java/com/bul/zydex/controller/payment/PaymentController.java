@@ -57,7 +57,7 @@ public class PaymentController extends PaymentAbstract {
     private static final String AXIS_KEY_TEST = "2E4C02A94F314D31BEC0D8C093DA94D7";
     private static final String AXIS_KEY_PRODUCTION = "6ED08801CF149BFB33044D5580100C";
     private String testOrderId = "" + System.currentTimeMillis();
-    public static String VENDOR_CODE=null;
+    public static String VENDOR_CODE = null;
 
     private static Logger log = Logger.getLogger(PaymentController.class);
 
@@ -396,7 +396,7 @@ public class PaymentController extends PaymentAbstract {
             employeeTypeMaster.setMobileNo(vendors.getMobileNo());
             employeeTypeMaster.setAddress(vendors.getAddress());
             bind(request, vendors);
-            VENDOR_CODE=null;  
+            VENDOR_CODE = null;
         }
 
         //----- Get data of payment type
@@ -433,30 +433,27 @@ public class PaymentController extends PaymentAbstract {
         //employeeTypeValidator.validate(employeeTypeMaster, errors);
         paymentTypeMasterValidator.validate(employeeTypeMaster, errors);
         if (errors.hasErrors()) {
-            
-             //----- Get data of payment type
-        TypeOfPayment typeOfPayment = new TypeOfPayment();
-        List<?> level = paymentTypeService.read();
-        Map<Integer, String> level1 = new HashMap<>();
-        for (Object o : level) {
-            typeOfPayment = (TypeOfPayment) o;
-            level1.put(typeOfPayment.getId(), typeOfPayment.getTypeOfEmployee());
-        }
-        request.setAttribute("paymentTypeMap", level1);
 
-        //---- Get data of location master
-        LocationMaster locationMaster = new LocationMaster();
-        List<?> level2 = locationMasterService.read();
-        Map<Integer, String> level3 = new HashMap<>();
-        for (Object o : level2) {
-            locationMaster = (LocationMaster) o;
-            level3.put(locationMaster.getId(), locationMaster.getLocation());
-        }
-        request.setAttribute("locationTypeMap", level3);
-        
-            
-            
-            
+            //----- Get data of payment type
+            TypeOfPayment typeOfPayment = new TypeOfPayment();
+            List<?> level = paymentTypeService.read();
+            Map<Integer, String> level1 = new HashMap<>();
+            for (Object o : level) {
+                typeOfPayment = (TypeOfPayment) o;
+                level1.put(typeOfPayment.getId(), typeOfPayment.getTypeOfEmployee());
+            }
+            request.setAttribute("paymentTypeMap", level1);
+
+            //---- Get data of location master
+            LocationMaster locationMaster = new LocationMaster();
+            List<?> level2 = locationMasterService.read();
+            Map<Integer, String> level3 = new HashMap<>();
+            for (Object o : level2) {
+                locationMaster = (LocationMaster) o;
+                level3.put(locationMaster.getId(), locationMaster.getLocation());
+            }
+            request.setAttribute("locationTypeMap", level3);
+
             request.setAttribute("failureMessage",
                     "Error : The Entered Information is not valid.");
             mv.addAllObjects(errors.getModel());
@@ -1013,4 +1010,25 @@ public class PaymentController extends PaymentAbstract {
         DownloadFile downloadFile = new DownloadFile();
         downloadFile.doDownload(request, response);
     }
+
+    public ModelAndView showOwnAttandanceOfSubordinate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        EmployeeAdvanceSearch employeeAdvanceSearch = new EmployeeAdvanceSearch();
+        EmployeeShiftData employeeShiftData = new EmployeeShiftData();
+        String startDate = request.getParameter("inDateTime");
+        String endDate = request.getParameter("outDateTime");
+        bind(request, employeeAdvanceSearch);
+        return mv;
+    }
+
+    public ModelAndView searchByOrderId(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        Date date = new Date();
+//        request.setAttribute("inDateTime", date);
+//        request.setAttribute("outDateTime", date);
+        mv.setViewName("Payment/SearchOrderId");
+        return mv;
+    }
 }
+
+   

@@ -1029,6 +1029,40 @@ public class PaymentController extends PaymentAbstract {
         mv.setViewName("Payment/SearchOrderId");
         return mv;
     }
-}
 
-   
+    public ModelAndView pastPayment(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        List<PaymentTypeMaster> list2 = (List<PaymentTypeMaster>) paymentTypeMasterService.read();
+        for (PaymentTypeMaster paymentTypeMaster : list2) {
+
+            // paymentTypeMaster.paymentType= 
+            TypeOfPayment ptype = paymentTypeService.readById(paymentTypeMaster.getTypeOfPayment());
+            paymentTypeMaster.paymentType = ptype.getTypeOfEmployee();
+
+            LocationMaster loc = locationMasterService.readById(paymentTypeMaster.getLocation());
+            paymentTypeMaster.locationValue = (loc.getLocation());
+
+        }
+        request.setAttribute("paymnt", list2);
+        mv.setViewName("Payment/SearchPastPayment");
+        return mv;
+    }
+
+    public ModelAndView view(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+//        PaymentStatus paymentStatus = new PaymentStatus();
+//        TypeOfPayment typeOfPayment = new TypeOfPayment();
+        String id = request.getParameter("id");
+        Integer idVal = Integer.parseInt(id);
+        PaymentTypeMaster paymentTypeMaster = paymentTypeMasterService.readById(idVal);
+        request.setAttribute("orderId", paymentTypeMaster.getOrderid());
+        request.setAttribute("createdDate", paymentTypeMaster.getCreatedDate());
+        request.setAttribute("Amount", paymentTypeMaster.getPaymentAmount());
+        request.setAttribute("vendorName", paymentTypeMaster.getNameOfParty());
+        request.setAttribute("paymentType", paymentTypeMaster.getPaymentType());
+//            request.setAttribute("paymentStatus", paymentStatus);
+        mv.setViewName("Payment/PaymentSlip");
+        return mv;
+    }
+
+}

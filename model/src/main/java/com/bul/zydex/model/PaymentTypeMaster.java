@@ -36,6 +36,9 @@ public class PaymentTypeMaster {
     private Integer paymentMode;
     private String createdDate;
     private String orderid;
+    public String paymentType;
+     public String locationValue;
+    
 
     public String getOrderid() {
         return orderid;
@@ -51,7 +54,7 @@ public class PaymentTypeMaster {
 
     }
 
-    public PaymentTypeMaster(Integer id, Integer typeOfPayment, String partyCode, String nameOfParty, String gstNo, String panNo, String emailId, String phoneNo, String mobileNo, String address, int location, String paymentAmount, String additionalRemarks, Integer paymentMode, String status,String createdDate,String orderid) {
+    public PaymentTypeMaster(Integer id, Integer typeOfPayment, String partyCode, String nameOfParty, String gstNo, String panNo, String emailId, String phoneNo, String mobileNo, String address, int location, String paymentAmount, String additionalRemarks, Integer paymentMode, String status, String createdDate, String orderid, String paymentType,String locationValue) {
         this.id = id;
         this.typeOfPayment = typeOfPayment;
         this.partyCode = partyCode;
@@ -67,8 +70,18 @@ public class PaymentTypeMaster {
         this.additionalRemarks = additionalRemarks;
         this.paymentMode = paymentMode;
         this.status = status;
-        this.createdDate= createdDate;
-        this.orderid=orderid;
+        this.createdDate = createdDate;
+        this.orderid = orderid;
+        this.paymentType=paymentType;
+        this.locationValue=locationValue;
+    }
+
+    public String getLocationValue() {
+        return locationValue;
+    }
+
+    public void setLocationValue(String locationValue) {
+        this.locationValue = locationValue;
     }
 
     public Integer getPaymentMode() {
@@ -199,4 +212,11 @@ public class PaymentTypeMaster {
         this.createdDate = createdDate;
     }
 
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
 }

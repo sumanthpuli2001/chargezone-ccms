@@ -1095,7 +1095,7 @@
             </li>
             <li class="active treeview">
                 <a href="payment.html?act=searchByOrderId">
-                    <i class="fa fa-user fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Serach Paymeny By OrderId</span>
+                    <i class="fa fa-user fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Search Payment By Date</span>
                 </a>
             </li>
 

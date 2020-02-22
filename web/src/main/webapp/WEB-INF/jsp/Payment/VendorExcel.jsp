@@ -11,7 +11,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
-        <title>Employee Shift Change</title>
+        <title>Vendor Excel</title>
     </head>
     <script>
         var flag3 = true;
@@ -53,10 +53,10 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>EMPLOYEE REGISTRATION THROUGH EXCEL</h1>
+            <h1>VENDOR REGISTRATION THROUGH EXCEL</h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Employee Registration Through Excel</li>
+                <li class="active">Vendor Registration Through Excel</li>
             </ol>
         </section>
         <c:if test="${!empty successMessage}">

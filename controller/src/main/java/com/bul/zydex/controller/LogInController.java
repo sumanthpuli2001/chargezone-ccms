@@ -120,6 +120,8 @@ public class LogInController extends LogInAbstract {
             } else {
                 List<?> tempList = userMasterService.read(user);
                 
+                PaymentController.VENDOR_CODE_ORDER=user.getUserName();
+                
                 if(tempList!=null&&!tempList.isEmpty()&& !((UserMaster)tempList.get(0)).getUserName().equalsIgnoreCase("admin")){
                    
                     PaymentController.VENDOR_CODE=user.getUserName();

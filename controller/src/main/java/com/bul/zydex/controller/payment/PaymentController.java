@@ -58,6 +58,7 @@ public class PaymentController extends PaymentAbstract {
     private static final String AXIS_KEY_PRODUCTION = "6ED08801CF149BFB33044D5580100C";
     private String testOrderId = "" + System.currentTimeMillis();
     public static String VENDOR_CODE = null;
+    public static String VENDOR_CODE_ORDER = null;
 
     private static Logger log = Logger.getLogger(PaymentController.class);
 
@@ -1032,7 +1033,8 @@ public class PaymentController extends PaymentAbstract {
 
     public ModelAndView pastPayment(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        List<PaymentTypeMaster> list2 = (List<PaymentTypeMaster>) paymentTypeMasterService.read();
+
+        List<PaymentTypeMaster> list2 = (List<PaymentTypeMaster>) paymentTypeMasterService.getPaymentByVendorCode(VENDOR_CODE_ORDER);
         for (PaymentTypeMaster paymentTypeMaster : list2) {
 
             // paymentTypeMaster.paymentType= 
@@ -1055,6 +1057,8 @@ public class PaymentController extends PaymentAbstract {
         String id = request.getParameter("id");
         Integer idVal = Integer.parseInt(id);
         PaymentTypeMaster paymentTypeMaster = paymentTypeMasterService.readById(idVal);
+        TypeOfPayment ptype = paymentTypeService.readById(paymentTypeMaster.getTypeOfPayment());
+         paymentTypeMaster.paymentType = ptype.getTypeOfEmployee();
         request.setAttribute("orderId", paymentTypeMaster.getOrderid());
         request.setAttribute("createdDate", paymentTypeMaster.getCreatedDate());
         request.setAttribute("Amount", paymentTypeMaster.getPaymentAmount());

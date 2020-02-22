@@ -72,14 +72,12 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                </div>
+                             </div>
+                                
                                 <button type="button" class="btn btn-primary" style="float: left; width: 100px;" >&nbsp&nbsp;Search</button>
                                 <!--<button type="submit" style="width: 100px;" sclass="btn btn-primary" style="width: 100px;">SEARCH</button>-->
 
-
-                            </div>
-
-                        </div>
                     </div>
                 </div>
             </section>

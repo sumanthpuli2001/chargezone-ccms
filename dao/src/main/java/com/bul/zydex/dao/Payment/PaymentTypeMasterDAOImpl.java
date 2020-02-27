@@ -71,4 +71,18 @@ public class PaymentTypeMasterDAOImpl<T> extends GenericsDAOImpl<T> implements P
 
         return list;
     }
+    
+      @Override
+    public List<?> getpaymentSearchByDate(String startDate,String endDate) {
+
+        String query = "";
+
+        query += "  "
+                + " select a"
+                + " FROM PaymentTypeMaster a "
+                +"where (STR_TO_DATE(a.createdDate, '%Y-%m-%d') >= STR_TO_DATE('" + startDate + "', '%Y-%m-%d') AND (STR_TO_DATE(a.createdDate, '%Y-%m-%d') <= STR_TO_DATE('" + endDate + "', '%Y-%m-%d')))";
+        List list = getHibernateTemplate().find(query);
+       
+        return list;
+    }
 }

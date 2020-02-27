@@ -37,8 +37,9 @@ public class PaymentTypeMaster {
     private String createdDate;
     private String orderid;
     public String paymentType;
-     public String locationValue;
-    
+    public String locationValue;
+    public String inDateTime;
+    public String outDateTime;
 
     public String getOrderid() {
         return orderid;
@@ -54,7 +55,7 @@ public class PaymentTypeMaster {
 
     }
 
-    public PaymentTypeMaster(Integer id, Integer typeOfPayment, String partyCode, String nameOfParty, String gstNo, String panNo, String emailId, String phoneNo, String mobileNo, String address, int location, String paymentAmount, String additionalRemarks, Integer paymentMode, String status, String createdDate, String orderid, String paymentType,String locationValue) {
+    public PaymentTypeMaster(Integer id, Integer typeOfPayment, String partyCode, String nameOfParty, String gstNo, String panNo, String emailId, String phoneNo, String mobileNo, String address, int location, String paymentAmount, String additionalRemarks, Integer paymentMode, String status, String createdDate, String orderid, String paymentType, String locationValue,String inDateTime,String outDateTime) {
         this.id = id;
         this.typeOfPayment = typeOfPayment;
         this.partyCode = partyCode;
@@ -72,8 +73,10 @@ public class PaymentTypeMaster {
         this.status = status;
         this.createdDate = createdDate;
         this.orderid = orderid;
-        this.paymentType=paymentType;
-        this.locationValue=locationValue;
+        this.paymentType = paymentType;
+        this.locationValue = locationValue;
+        this.inDateTime= inDateTime;
+        this.outDateTime = outDateTime;
     }
 
     public String getLocationValue() {
@@ -214,6 +217,22 @@ public class PaymentTypeMaster {
 
     public String getPaymentType() {
         return paymentType;
+    }
+
+    public String getInDateTime() {
+        return inDateTime;
+    }
+
+    public void setInDateTime(String inDateTime) {
+        this.inDateTime = inDateTime;
+    }
+
+    public String getOutDateTime() {
+        return outDateTime;
+    }
+
+    public void setOutDateTime(String outDateTime) {
+        this.outDateTime = outDateTime;
     }
 
     public void setPaymentType(String paymentType) {

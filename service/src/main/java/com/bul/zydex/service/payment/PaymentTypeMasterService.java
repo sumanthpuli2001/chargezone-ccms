@@ -20,4 +20,6 @@ public interface PaymentTypeMasterService<T> extends GenericsService<T> {
     public PaymentTypeMaster getPaymentTypeMasterByOrderId(String orderid);
 
     public List<?> getPaymentByVendorCode(String vendorCode);
+    
+    public List<?> getpaymentSearchByDate(String startDate,String endDate);
 }

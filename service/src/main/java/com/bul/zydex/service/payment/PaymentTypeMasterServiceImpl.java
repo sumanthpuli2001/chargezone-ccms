@@ -42,4 +42,9 @@ public class PaymentTypeMasterServiceImpl<T> extends GenericsServiceImpl<T> impl
     public List<?> getPaymentByVendorCode(String vendorCode) {
         return paymentTypeMasterDAO.getPaymentByVendorCode(vendorCode);
     }
+
+    @Override
+    public List<?> getpaymentSearchByDate(String startDate,String endDate) {
+       return paymentTypeMasterDAO.getpaymentSearchByDate(startDate,endDate);
+    }
 }

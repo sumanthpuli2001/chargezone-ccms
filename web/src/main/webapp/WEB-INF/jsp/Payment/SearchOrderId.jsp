@@ -13,7 +13,7 @@
     <%@include file="/WEB-INF/jsp/Common/Navbar.jsp"%>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Punch Data</title>
+        <title>Payment Search</title>
     </head>
     <style>
         .checkbox-grid li {
@@ -37,8 +37,7 @@
             <!--<div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>-->
         <%--</c:if>--%>
         <!-- Main content -->
-        <form:form  method="post" 
-                    name='form1' class="form-horizontal" action="payment.html?act=showOwnAttandanceOfSubordinate"  role="form">
+        <form:form  method="post" name='form' class="form-horizontal" action="payment.html?act=SearchByDate"  role="form">
  <!--<input type="hidden" name="id" id="id" value="${id}">-->
 
             <section class="content">
@@ -56,27 +55,33 @@
 
                                     <div class="col-sm-6">
                                         <label>Start Date<span style="color: red;font-size: 12px;">*</span></label>
-                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy" >
+                                        <div class="input-group date form_datetime" data-date-format="yyyy-mm-dd" >
                                             <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                            <input path="inDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true">
+                                            <!--<input type="Text" id="orderId" name="orderId"  style="color: black;font-weight: bold;" class="form-control"  >-->
+
+                                            <input type="text" name="inDateTime"  class="form-control" size="16" placeholder="DD-MM-YYYY" >
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <label>End Date<span style="color: red;font-size: 12px;">*</span></label>
-                                        <div class="input-group date form_datetime" data-date-format="dd/mm/yyyy">
+                                        <div class="input-group date form_datetime" data-date-format="yyyy-mm-dd">
                                             <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                            <input path="outDateTime"  class="form-control" size="16" placeholder="DD/MM/YYYY" readonly="true" >                                  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <input type="text" name="outDateTime"  class="form-control" size="16" placeholder="DD-MM-YYYY" >                                  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
                                     </div>
                                 </div>
-                                </div>
-                             </div>
-                                
-                                <button type="button" class="btn btn-primary" style="float: left; width: 100px;" >&nbsp&nbsp;Search</button>
-                                <!--<button type="submit" style="width: 100px;" sclass="btn btn-primary" style="width: 100px;">SEARCH</button>-->
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6 col-sm-offset-5">
+                                <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SEARCH">
+                            </div>
+                        </div>
+                        <!--<button type="button" class="btn btn-primary" style="float: left; width: 100px;">&nbsp&nbsp;Search</button>-->
+                        <!--<button type="submit" style="width: 100px;" sclass="btn btn-primary" style="width: 100px;">SEARCH</button>-->
 
                     </div>
                 </div>

@@ -1058,7 +1058,7 @@ public class PaymentController extends PaymentAbstract {
         Integer idVal = Integer.parseInt(id);
         PaymentTypeMaster paymentTypeMaster = paymentTypeMasterService.readById(idVal);
         TypeOfPayment ptype = paymentTypeService.readById(paymentTypeMaster.getTypeOfPayment());
-         paymentTypeMaster.paymentType = ptype.getTypeOfEmployee();
+        paymentTypeMaster.paymentType = ptype.getTypeOfEmployee();
         request.setAttribute("orderId", paymentTypeMaster.getOrderid());
         request.setAttribute("createdDate", paymentTypeMaster.getCreatedDate());
         request.setAttribute("Amount", paymentTypeMaster.getPaymentAmount());
@@ -1069,4 +1069,21 @@ public class PaymentController extends PaymentAbstract {
         return mv;
     }
 
+    public ModelAndView SearchByDate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PaymentTypeMaster paymentTypeMaster = new PaymentTypeMaster();
+        String Start = request.getParameter("inDateTime");
+        String End = request.getParameter("outDateTime");
+       List<PaymentTypeMaster> list = (List<PaymentTypeMaster>) paymentTypeMasterService.getpaymentSearchByDate(Start, End);
+    
+       for (int i=0;i< list.size();i++) {
+          
+            list.get(i).setLocationValue(locationMasterService.readById(list.get(i).getLocation()).getLocation());
+            list.get(i).setPaymentType(paymentTypeService.readById(list.get(i).getTypeOfPayment()).getTypeOfEmployee());
+
+        }
+       request.setAttribute("list", list);
+        mv.setViewName("Payment/PastVendorList");
+        return mv;
+    }
 }

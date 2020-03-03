@@ -85,7 +85,7 @@
 
                                     <div class="form-group">
                                         <div class="col-sm-3">
-                                            <label class="control-label">Enter Party Code:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <label class="control-label">Enter Party Code:</label>
                                         </div>
                                         <div class="col-sm-7">
                                             <form:input path="partyCode" class="form-control"  placeholder="Enter Party Code"  maxlength="30"/>
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-3">
-                                            <label class="control-label">Enter GST No:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <label class="control-label">Enter GST No:</label>
                                         </div>
                                         <div class="col-sm-7">
                                             <form:input path="gstNo" class="form-control"  placeholder="Enter GST No"  maxlength="30"/>
@@ -112,7 +112,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-3">
-                                            <label class="control-label">Enter PAN No:<span style="color: red;font-size: 12px;">*</span></label>
+                                            <label class="control-label">Enter PAN No:</label>
                                         </div>
                                         <div class="col-sm-7">
                                             <form:input path="panNo" class="form-control"  style="text-transform: uppercase" placeholder="(1-5: alphabets, 6-9: digits, 10th: alphabet) Example: ASDFG4567A"  />

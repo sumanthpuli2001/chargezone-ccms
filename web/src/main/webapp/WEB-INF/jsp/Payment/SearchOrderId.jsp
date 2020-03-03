@@ -59,7 +59,7 @@
                                             <!--<input class="form-control" size="16" type="text" value="" readonly>-->
                                             <!--<input type="Text" id="orderId" name="orderId"  style="color: black;font-weight: bold;" class="form-control"  >-->
 
-                                            <input type="text" name="inDateTime"  class="form-control" size="16" placeholder="DD-MM-YYYY" >
+                                            <input type="text" name="inDateTime"  class="form-control" size="16" placeholder="DD-MM-YYYY" readonly="" >
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
@@ -68,7 +68,7 @@
                                         <label>End Date<span style="color: red;font-size: 12px;">*</span></label>
                                         <div class="input-group date form_datetime" data-date-format="yyyy-mm-dd">
                                             <!--<input class="form-control" size="16" type="text" value="" readonly>-->
-                                            <input type="text" name="outDateTime"  class="form-control" size="16" placeholder="DD-MM-YYYY" >                                  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                            <input type="text" name="outDateTime"  class="form-control" size="16" placeholder="DD-MM-YYYY" readonly="" >                                  <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
                                             <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
                                         </div>
                                     </div>
@@ -86,9 +86,8 @@
                     </div>
                 </div>
             </section>
-        </div>
     </form:form>
-
+</div>
 </html>
 <script type="text/javascript">
     $('.form_datetime').datetimepicker({

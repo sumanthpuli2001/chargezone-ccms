@@ -514,7 +514,7 @@ public class PaymentController extends PaymentAbstract {
                 CreateOrderRequest paymentRequest = new CreateOrderRequest()
                         .withOrderId(randomOrderId)
                         .withAmount(Double.valueOf(employeeTypeMaster.getPaymentAmount())).
-                        withReturnUrl("http://192.168.0.29:8089/web/payment.html?act=PaymentConfirmation");
+                        withReturnUrl("http://localhost:8089/web/payment.html?act=PaymentConfirmation");
 
                 paymentRequest.setCurrency("INR");
 

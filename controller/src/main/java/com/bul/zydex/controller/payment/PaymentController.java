@@ -90,12 +90,16 @@ public class PaymentController extends PaymentAbstract {
         String queryString = request.getQueryString();
 
         String orderId = "";
+        String amount="";
         String requestOrderId = (String) request.getParameter("orderId");
         if (queryString != null && queryString.length() > 30) {
 
             String tempString[] = queryString.split("&");
             String[] temp = tempString[0].split("=");
             orderId = temp[1];
+            amount=orderId.split("INR")[1];
+            paymentStatus.setAmount(amount);
+            
         }
 
         if ((orderId == null || orderId.isEmpty()) && (requestOrderId != null && !requestOrderId.isEmpty())) {
@@ -215,7 +219,7 @@ public class PaymentController extends PaymentAbstract {
             TypeOfPayment typeOfPayment = paymentTypeService.readById(paymentTypeMaster.getTypeOfPayment());
             request.setAttribute("status", paymentStatus.getStatus());
             request.setAttribute("createdDate", paymentTypeMaster.getCreatedDate());
-            request.setAttribute("Amount", paymentTypeMaster.getPaymentAmount());
+            request.setAttribute("Amount", paymentStatus.getAmount());
             request.setAttribute("vendorName", paymentTypeMaster.getNameOfParty());
             request.setAttribute("paymentType", typeOfPayment.getTypeOfEmployee());
             request.setAttribute("paymentStatus", paymentStatus);
@@ -511,11 +515,17 @@ public class PaymentController extends PaymentAbstract {
 
             try {
 
+//                CreateOrderRequest paymentRequest = new CreateOrderRequest()
+//                        .withOrderId(randomOrderId)
+//                        .withAmount(Double.valueOf(employeeTypeMaster.getPaymentAmount())).
+//                        withReturnUrl("http://localhost:8089/web/payment.html?act=PaymentConfirmation");
+
                 CreateOrderRequest paymentRequest = new CreateOrderRequest()
                         .withOrderId(randomOrderId)
                         .withAmount(Double.valueOf(employeeTypeMaster.getPaymentAmount())).
-                        withReturnUrl("http://localhost:8089/web/payment.html?act=PaymentConfirmation");
+                        withReturnUrl("https://gipclsrmp.gipcl.com/web/payment.html?act=PaymentConfirmation");
 
+                
                 paymentRequest.setCurrency("INR");
 
                 createOrderResponse = juspayService.createOrder(paymentRequest);

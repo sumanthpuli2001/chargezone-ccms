@@ -86,6 +86,7 @@
                                             <input type="hidden" id="fileName" name="fileName" value=""/>
                                             <span>[ <a href="payment.html?act=readEmployeeFile1&amp;fileName=Staff Info for HRMS Demo1.xlsx">Sample Excel</a> ]</span>
                                         </div>
+                                         <div><button type="button" class="btn-primary"  onclick="window.history.back();" title="View">Back</button></div>
                                     </div>
                                 </div>
                                 <div class="form-group">

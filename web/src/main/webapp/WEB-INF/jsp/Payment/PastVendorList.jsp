@@ -67,6 +67,7 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
+                                <div><button type="button" class="btn-primary"  onclick="window.history.back();" title="View">Back</button></div>
                                 <!--<button type="submit" class="btn btn-danger" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp&nbsp;DELETE</button>-->
                                 <!--<button type="button" class="btn btn-primary" style="float: right; width: 100px;" onclick="window.location = 'payment.html?act=createClick1'"><i class="fa fa-plus"></i>&nbsp&nbsp;NEW</button>-->
                                 <!--<div class="scroll">-->

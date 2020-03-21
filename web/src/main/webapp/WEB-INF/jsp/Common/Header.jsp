@@ -23,7 +23,8 @@
             <!--         wrapper will close in footer and comment is given there by me-->
             <header class="main-header">
                 <!-- Logo -->
-                <a href="userMaster.htm?act=goToDashboard" class="logo" style="background-color: #ffffff;">
+                <!--<a href="userMaster.htm?act=goToDashboard" class="logo" style="background-color: #ffffff;">-->
+                     <a  class="logo" style="background-color: #ffffff;">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <!--<span class="logo-mini"><b>Z</b>ydex</span>-->
                     <!-- logo for regular state and mobile devices -->

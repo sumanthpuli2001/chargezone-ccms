@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+    <class name="com.bul.zydex.model.LogsMaster" table="logs_master" catalog="ccms" optimistic-lock="version">
+        <id name="srNoValue" type="java.lang.Long">
+            <column name="Sr_Number" />
+            <generator class="identity" />
+        </id>
+        <property name="lDate" type="string">
+            <column name="L_Date" length="30"  />
+        </property>
+        <property name="time" type="string">
+            <column name="Time" length="30"  />
+        </property>
+        <property name="userName" type="string">
+            <column name="User_Name" length="30"  />
+        </property>
+        <property name="ip" type="string">
+            <column name="IP" length="40"  />
+        </property>
+        <property name="action" type="string">
+            <column name="Action" length="30"  />
+        </property>
+        <property name="drow" type="string">
+            <column name="D_Row" length="30"  />
+        </property>
+    </class>
+
+</hibernate-mapping>

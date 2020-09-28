@@ -5,8 +5,6 @@
  */
 package com.bul.zydex.controller;
 
-import com.bul.zydex.model.VacancyMaster;
-import com.bul.zydex.service.Vacancy.VacancyMasterService;
 import com.bul.zydex.util.SendMail;
 import org.apache.log4j.Logger;
 import org.springframework.validation.Validator;
@@ -18,26 +16,7 @@ import org.springframework.validation.Validator;
 public abstract class OutAbstract extends CustomAbstract {
 
     protected static final Logger logger = Logger.getLogger(OutAbstract.class);
-    protected Validator userInitPwdValidator;
-    protected Validator ForgotPwdValidator;
     protected SendMail sendMail;
-    protected VacancyMasterService<VacancyMaster> vacancyMasterService;
-
-    public Validator getUserInitPwdValidator() {
-        return userInitPwdValidator;
-    }
-
-    public void setUserInitPwdValidator(Validator userInitPwdValidator) {
-        this.userInitPwdValidator = userInitPwdValidator;
-    }
-
-    public Validator getForgotPwdValidator() {
-        return ForgotPwdValidator;
-    }
-
-    public void setForgotPwdValidator(Validator ForgotPwdValidator) {
-        this.ForgotPwdValidator = ForgotPwdValidator;
-    }
 
     public SendMail getSendMail() {
         return sendMail;
@@ -46,14 +25,5 @@ public abstract class OutAbstract extends CustomAbstract {
     public void setSendMail(SendMail sendMail) {
         this.sendMail = sendMail;
     }
-
-    public VacancyMasterService<VacancyMaster> getVacancyMasterService() {
-        return vacancyMasterService;
-    }
-
-    public void setVacancyMasterService(VacancyMasterService<VacancyMaster> vacancyMasterService) {
-        this.vacancyMasterService = vacancyMasterService;
-    }
-    
 
 }

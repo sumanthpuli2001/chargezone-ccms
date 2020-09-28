@@ -38,32 +38,26 @@ public class UserMasterServiceImpl<T> extends GenericsServiceImpl<T>
         UserMaster user;
         UserMaster user2 = (UserMaster) object;
         return userMasterDAO.read(object);
-        
 
-//        List<?> list = userMasterDAO.read();
-//        Iterator i = list.iterator();
-//        while (i.hasNext()) {
-//            user = (UserMaster) i.next();
-//            if (!(user.getUserName().toLowerCase()
-//                    .equals(user2.getUserName().toLowerCase()) && user
-//                    .getPassword().toLowerCase()
-//                    .equals(user2.getPassword().toLowerCase()))) {
-//                i.remove();
-//            }
-//        }
-//        return list;
     }
 
     @Override
-    public boolean isExist(String userName) {
-
-        return userMasterDAO.isExist(userName);
+    public UserMaster read(String loginname) {
+        return userMasterDAO.read(loginname);
     }
-    
+
     @Override
-    public boolean isOtherUserExist(int userMatserId, String userName) {
-        
-        return userMasterDAO.isOtherUserExist(userMatserId, userName);
-        
+    public void deleteByLoginName(String loginName) {
+        userMasterDAO.deleteByLoginName(loginName);
+    }
+
+    @Override
+    public List readByDrow() {
+        return userMasterDAO.readByDrow();
+    }
+
+    @Override
+    public List readByDrowDisable() {
+           return userMasterDAO.readByDrowDisable();
     }
 }

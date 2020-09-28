@@ -1,0 +1,145 @@
+<%-- 
+    Document   : EditUser
+    Created on : Jun 10, 2020, 4:41:35 PM
+    Author     : Aman Bahukhandi
+--%>
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
+    <%@include file="/WEB-INF/jsp/Common/NavbarCmss.jsp"%>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Edit User</title>
+    </head>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>Edit User</h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Edit User</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Custom Tabs -->
+                    <div class="nav-tabs-custom">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_1">
+                                <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
+                                <c:if test="${!empty successMessage}">
+                                    <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
+                                </c:if>
+                                <c:if test="${!empty failureMessage}">
+                                    <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
+                                </c:if>
+                                <form:form action="userMaster.htm?act=editUserMaster" method="post" commandName="userMaster"
+                                           class="form-horizontal" role="form">
+                                    <form:input type="hidden" path="password"/>
+                                    <form:input type="hidden" path="dRow"/>
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">User Full Name :<span style="color: red;font-size: 12px;">*</span></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <form:input path="userFullName" class="form-control"   maxlength="30" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Login Name :<span style="color: red;font-size: 12px;">*</span></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <form:input path="loginName" class="form-control" readonly="true"  maxlength="30" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Department :<span style="color: red;font-size: 12px;">*</span></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <form:input path="department" class="form-control"   maxlength="30" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Designation :<span style="color: red;font-size: 12px;">*</span></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <form:input path="designation" class="form-control"   maxlength="30" required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Email Id :<span style="color: red;font-size: 12px;">*</span></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <form:input path="emailId" pattern="[^ @]*@[^ @]*" class="form-control"   required="required"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-3">
+                                            <label class="control-label">Rights :<span style="color: red;font-size: 12px;">*</span></label>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <form:select path="rights"  class="form-control " required="required">
+                                                <c:forEach var="rightsType" items="${rightsType}">
+                                                    <c:choose>
+                                                        <c:when test="${rightsType eq  userMaster.rights}">
+                                                            <form:option value="${rightsType}" selected="true">${rightsType}</form:option>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <form:option value="${rightsType}">${rightsType}</form:option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </c:forEach>
+                                            </form:select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-sm-6 col-sm-offset-5">
+                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
+                                        </div>
+                                    </div>
+                                </form:form>
+
+                            </div><!-- /.tab-pane -->
+                        </div><!-- /.tab-content -->
+                    </div><!-- nav-tabs-custom -->
+                </div><!-- /.col -->
+            </div>
+        </section><!-- /.content -->
+    </div><!-- /.content-wrapper -->
+    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+    <script>
+        function selectSchoolId(id) {
+            $.post("newClass.htm?act=readDivisionBySchool", {id: id},
+            function () {
+            }).done(function (content) {
+                var obj = JSON.parse(content);
+                var length1 = Object.keys(obj['divisionMap']).length;
+                var data1 = null;
+                var jSON1 = obj['divisionMap'];
+                var jSONKey1 = Object.keys(obj['divisionMap']);
+
+                for (var i = 0; i < length1; i++) {
+                    if (i === 0) {
+                        data1 = "<option value=''>-- Select --</option><option value=" + jSONKey1[i] + ">" + jSON1[jSONKey1[i]] + "</option>";
+                    } else {
+                        data1 += "<option value=" + jSONKey1[i] + ">" + jSON1[jSONKey1[i]] + "</option>";
+                    }
+                }
+                document.getElementById('divisionId').innerHTML = data1;
+            });
+        }
+    </script>
+
+</html>

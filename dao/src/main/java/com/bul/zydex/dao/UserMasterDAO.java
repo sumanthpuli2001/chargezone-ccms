@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.dao;
 
+import com.bul.zydex.model.UserMaster;
 import java.util.List;
 
 /**
@@ -15,7 +16,14 @@ import java.util.List;
 public interface UserMasterDAO<T> extends GenericsDAO<T> {
 
     public List<?> readByUserName(T object);
-    public boolean isExist(String userName);
+
     public List<?> read(T object);
-    public boolean isOtherUserExist(int userMatserId, String userName);
+
+    public UserMaster read(String loginname);
+
+    public void deleteByLoginName(String loginName);
+
+    public List readByDrow();
+
+    public List readByDrowDisable();
 }

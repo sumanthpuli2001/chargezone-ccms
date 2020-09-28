@@ -5,6 +5,7 @@
  */
 package com.bul.zydex.service;
 
+import com.bul.zydex.model.UserMaster;
 import java.util.List;
 
 /**
@@ -18,7 +19,13 @@ public interface UserMasterService<T> extends GenericsService<T> {
 
     public List<?> read(T object);
 
-    public boolean isExist(String userName);
+    public UserMaster read(String loginname);
 
-    public boolean isOtherUserExist(int userMatserId, String userName);
+    public void deleteByLoginName(String loginName);
+
+    public List readByDrow();
+
+    public List readByDrowDisable();
+
+   
 }

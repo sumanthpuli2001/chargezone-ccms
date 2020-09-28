@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ContractorMaster" table="contractor_master" catalog="ccms">
+        <id name="contractorCode" type="string">
+            <column name="Contractor_Code" />
+        </id>
+        <property name="name" type="string">
+            <column name="Name" length="30"  />
+        </property>
+        <property name="duration" type="string">
+            <column name="Duration" length="30"  />
+        </property>
+        <property name="startDate" type="string">
+            <column name="Start_Date" length="30"  />
+        </property>
+        <property name="endDate" type="string">
+            <column name="End_date" length="30"  />
+        </property>
+        <property name="approved" type="string">
+            <column name="Approved" length="30"  />
+        </property>
+        <property name="numberPerson" type="java.lang.Integer">
+            <column name="Number_Person" length="30"  />
+        </property>
+        <property name="department" type="string">
+            <column name="Department" length="30"  />
+        </property>
+        <property name="dRow" type="string">
+            <column name="D_Row" length="30"  />
+        </property>
+        <property name="rfId" type="string">
+            <column name="RF_ID" length="30"  />
+        </property>
+        
+    </class>
+  
+
+</hibernate-mapping>

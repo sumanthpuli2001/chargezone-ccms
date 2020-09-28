@@ -16,7 +16,7 @@
         <%@include file="/WEB-INF/jsp/Common/Top.jsp"%>
 
     </head>
-    
+
 
     <body class="hold-transition skin-blue sidebar-mini"><!--    closed in footer's second last line-->
         <div class="wrapper">
@@ -24,7 +24,7 @@
             <header class="main-header">
                 <!-- Logo -->
                 <!--<a href="userMaster.htm?act=goToDashboard" class="logo" style="background-color: #ffffff;">-->
-                     <a  class="logo" style="background-color: #ffffff;">
+                <a  class="logo" style="background-color: #ffffff;">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <!--<span class="logo-mini"><b>Z</b>ydex</span>-->
                     <!-- logo for regular state and mobile devices -->
@@ -43,43 +43,43 @@
                     </ul>
                     <!-- Navbar Right Menu -->
                     <div class="navbar-custom-menu">
-                        
-                        <!--<form class="navbar-form navbar-left navbar-search alt" role="search">-->
-<!--                        <div class="navbar-form navbar-left navbar-search alt form-group">
-                            
-                            <input type="text" id="searchBox" class="form-control" placeholder="Employee Search..." value="" style="border-radius: 10px;">
-                        </div>-->
-                        <!--</form>-->
-                        <ul class="nav navbar-nav">
-                            <!-- User Account: style can be found in dropdown.less -->
-                            <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="${sessionScope.profilePicturePath}" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">${sessionScope.employeeInfo.employeeName}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <!-- User image -->
-                                    <li class="user-header">
-                                        <img src="${sessionScope.profilePicturePath}" class="img-circle" alt="User Image">
-                                        <!--<p>${sessionScope.employeeInfo.employeeName}</p>-->
-                                        <p><a href="employeeMaster.htm?act=changePassWordClick&userid=${sessionScope.userRight.userMaster.id}" class=""  style="color: white">Change Password</a></p>
-                                    </li>
-                                    <li class="user-footer">
-<!--                                        <div class="pull-left">
-                                            <a href="employeeMaster.htm?act=viewOwnProfile&id=${sessionScope.employeeInfo.id}&userid=${sessionScope.userRight.userMaster.id}" class="btn btn-default btn-flat">Profile</a>
-                                            <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                        </div>-->
-                                        <div class="pull-right">
-                                            <a href="logOut.htm?act=logout" class="btn btn-default btn-flat">Sign out</a><br/>
-                                            <!--- pageGenTimeSecS--->
-                                            <!--- replace last "S" with small for displaying response generated in milliSeconds."s"--->
-                                        </div>
-                                        <br>
 
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <!--<form class="navbar-form navbar-left navbar-search alt" role="search">-->
+                        <!--                        <div class="navbar-form navbar-left navbar-search alt form-group">
+                                                    
+                                                    <input type="text" id="searchBox" class="form-control" placeholder="Employee Search..." value="" style="border-radius: 10px;">
+                                                </div>-->
+                        <!--</form>-->
+                        <!--                        <ul class="nav navbar-nav">
+                                                     User Account: style can be found in dropdown.less 
+                                                    <li class="dropdown user user-menu">
+                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                            <img src="${sessionScope.profilePicturePath}" class="user-image" alt="User Image">
+                                                            <span class="hidden-xs">${sessionScope.employeeInfo.employeeName}</span>
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                             User image 
+                                                            <li class="user-header">
+                                                                <img src="${sessionScope.profilePicturePath}" class="img-circle" alt="User Image">
+                                                                <p>${sessionScope.employeeInfo.employeeName}</p>
+                                                                <p><a href="employeeMaster.htm?act=changePassWordClick&userid=${sessionScope.userRight.userMaster.id}" class=""  style="color: white">Change Password</a></p>
+                                                            </li>
+                                                            <li class="user-footer">
+                                                                <div class="pull-left">
+                                                                    <a href="employeeMaster.htm?act=viewOwnProfile&id=${sessionScope.employeeInfo.id}&userid=${sessionScope.userRight.userMaster.id}" class="btn btn-default btn-flat">Profile</a>
+                                                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                                                </div>
+                                                                <div class="pull-right">
+                                                                    <a href="logOut.htm?act=logout" class="btn btn-default btn-flat">Sign out</a><br/>
+                                                                    - pageGenTimeSecS-
+                                                                    - replace last "S" with small for displaying response generated in milliSeconds."s"-
+                                                                </div>
+                                                                <br>
+                        
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>-->
                     </div>
                 </nav>
             </header>

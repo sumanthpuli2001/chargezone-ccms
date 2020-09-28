@@ -5,49 +5,43 @@
  */
 package com.bul.zydex.controller;
 
-import com.bul.zydex.model.Company;
-import com.bul.zydex.model.CurrencyMaster;
-import com.bul.zydex.model.DepartmentMaster;
-import com.bul.zydex.model.DesignationMaster;
-import com.bul.zydex.model.EmailAddMaster;
-import com.bul.zydex.model.EmailTemplate;
+import com.bul.zydex.model.ApprenticesMaster;
+import com.bul.zydex.model.ContractorMaster;
+import com.bul.zydex.model.CouponMaster;
+import com.bul.zydex.model.DeviceDetails;
 import com.bul.zydex.model.EmployeeMaster;
-import com.bul.zydex.model.EmployeeMasterExtension;
-import com.bul.zydex.model.MailMaster;
-import com.bul.zydex.model.ShiftRotationInfo;
-import com.bul.zydex.model.ShiftRotationMaster;
-import com.bul.zydex.model.SmsMaster;
-import com.bul.zydex.model.UserActivityLog;
-import com.bul.zydex.model.UserLoginLog;
+import com.bul.zydex.model.LogsMaster;
+import com.bul.zydex.model.PunchedDataMaster;
+import com.bul.zydex.model.RechargeInfoMaster;
+import com.bul.zydex.model.RechargeMaster;
+import com.bul.zydex.model.ReportMaster;
+import com.bul.zydex.model.RightMaster;
+import com.bul.zydex.model.SpecialCouponMaster;
 import com.bul.zydex.model.UserMaster;
-import com.bul.zydex.model.ZydexLocationMaster;
-import com.bul.zydex.service.CurrencyMasterService;
-import com.bul.zydex.service.EmailAddMasterService;
-import com.bul.zydex.service.EmailTemplateService;
-import com.bul.zydex.service.MailMasterService;
-import com.bul.zydex.service.SmsMasterService;
-import com.bul.zydex.service.UserActivityLogService;
-import com.bul.zydex.service.UserLoginLogService;
+import com.bul.zydex.service.Apprentices.ApprenticesService;
+import com.bul.zydex.service.Contractor.ContractorService;
+import com.bul.zydex.service.Coupon.CouponService;
+import com.bul.zydex.service.Device.DeviceService;
+import com.bul.zydex.service.Employee.EmployeeMasterService;
+import com.bul.zydex.service.Log.LogService;
+import com.bul.zydex.service.PunchedData.PunchedDataService;
+import com.bul.zydex.service.Recharge.RechargeService;
+import com.bul.zydex.service.RechargeInfo.RechargeInfoService;
+import com.bul.zydex.service.Report.ReportService;
+import com.bul.zydex.service.Right.RightService;
+import com.bul.zydex.service.SpecialCoupon.SpecialCouponService;
 import com.bul.zydex.service.UserMasterService;
-import com.bul.zydex.service.emp.DepartmentMasterService;
-import com.bul.zydex.service.emp.DesignationMasterService;
-import com.bul.zydex.service.emp.EmployeeMasterService;
-import com.bul.zydex.service.emp.EmployeeMasterServiceExtension;
-import com.bul.zydex.service.shift.ShiftRotationInfoService;
-import com.bul.zydex.service.shift.ShiftRotationMasterService;
-import com.bul.zydex.service.zydexLocation.ZydexLocationMasterService;
 import com.bul.zydex.util.SendMail;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import org.apache.poi.ss.usermodel.Header;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
@@ -58,40 +52,27 @@ import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
  */
 public abstract class CustomAbstract extends MultiActionController {
 
-    private UserActivityLogService<UserActivityLog> userActivityLogService;
-    private UserLoginLogService<UserLoginLog> userLoginLogService;
     protected UserMasterService<UserMaster> userMasterService;
     protected EmployeeMasterService<EmployeeMaster> employeeMasterService;
-    protected DepartmentMasterService<DepartmentMaster> departmentMasterService;
-    protected DesignationMasterService<DesignationMaster> designationMasterService;
-    protected MailMasterService<MailMaster> mailMasterService;
-    protected SmsMasterService<SmsMaster> smsMasterService;
-    protected CurrencyMasterService<CurrencyMaster> currencyMasterService;
-    protected DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+    protected ContractorService<ContractorMaster> contractorService;
+    protected ApprenticesService<ApprenticesMaster> apprenticesService;
+    protected DeviceService<DeviceDetails> deviceService;
+    protected CouponService<CouponMaster> couponService;
+    protected RechargeService<RechargeMaster> rechargeService;
+    protected SpecialCouponService<SpecialCouponMaster> specialCouponService;
+    protected PunchedDataService<PunchedDataMaster> punchedDataService;
+    protected RightService<RightMaster> rightService;
+    protected RechargeInfoService<RechargeInfoMaster> rechargeInfoService;
+    protected LogService<LogsMaster> logService;
+    protected ReportService<ReportMaster> reportService;
+
     protected Header header;
-    protected ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService;
-    protected EmailTemplateService<EmailTemplate> emailTemplateService;
     protected SendMail sendMail;
-    protected EmailAddMasterService<EmailAddMaster> emailAddMasterService;
-    protected EmployeeMasterServiceExtension<EmployeeMasterExtension> employeeMasterServiceExtension;
-    protected ShiftRotationMasterService<ShiftRotationMaster> shiftRotationMasterService;
-    protected ShiftRotationInfoService<ShiftRotationInfo> shiftRotationInfoService;
-    
-    public EmployeeMasterServiceExtension<EmployeeMasterExtension> getEmployeeMasterServiceExtension() {
-        return employeeMasterServiceExtension;
-    }
 
-    public void setEmployeeMasterServiceExtension(EmployeeMasterServiceExtension<EmployeeMasterExtension> employeeMasterServiceExtension) {
-        this.employeeMasterServiceExtension = employeeMasterServiceExtension;
-    }
+    public static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public static SimpleDateFormat timeFOrmat = new SimpleDateFormat("HH:mm:ss");
 
-    public EmailTemplateService<EmailTemplate> getEmailTemplateService() {
-        return emailTemplateService;
-    }
-
-    public void setEmailTemplateService(EmailTemplateService<EmailTemplate> emailTemplateService) {
-        this.emailTemplateService = emailTemplateService;
-    }
+    public static String myIp;
 
     public SendMail getSendMail() {
         return sendMail;
@@ -99,30 +80,6 @@ public abstract class CustomAbstract extends MultiActionController {
 
     public void setSendMail(SendMail sendMail) {
         this.sendMail = sendMail;
-    }
-
-    public ZydexLocationMasterService<ZydexLocationMaster> getZydexLocationMasterService() {
-        return zydexLocationMasterService;
-    }
-
-    public void setZydexLocationMasterService(ZydexLocationMasterService<ZydexLocationMaster> zydexLocationMasterService) {
-        this.zydexLocationMasterService = zydexLocationMasterService;
-    }
-
-    public UserActivityLogService<UserActivityLog> getUserActivityLogService() {
-        return userActivityLogService;
-    }
-
-    public void setUserActivityLogService(UserActivityLogService<UserActivityLog> userActivityLogService) {
-        this.userActivityLogService = userActivityLogService;
-    }
-
-    public UserLoginLogService<UserLoginLog> getUserLoginLogService() {
-        return userLoginLogService;
-    }
-
-    public void setUserLoginLogService(UserLoginLogService<UserLoginLog> userLoginLogService) {
-        this.userLoginLogService = userLoginLogService;
     }
 
     public UserMasterService<UserMaster> getUserMasterService() {
@@ -141,48 +98,92 @@ public abstract class CustomAbstract extends MultiActionController {
         this.employeeMasterService = employeeMasterService;
     }
 
-    public SimpleDateFormat getSimpleDateFormatObject(String pattern) {
-        return new SimpleDateFormat(pattern);
+    public ContractorService<ContractorMaster> getContractorService() {
+        return contractorService;
     }
 
-    public DepartmentMasterService<DepartmentMaster> getDepartmentMasterService() {
-        return departmentMasterService;
+    public void setContractorService(ContractorService<ContractorMaster> contractorService) {
+        this.contractorService = contractorService;
     }
 
-    public void setDepartmentMasterService(DepartmentMasterService<DepartmentMaster> departmentMasterService) {
-        this.departmentMasterService = departmentMasterService;
+    public ApprenticesService<ApprenticesMaster> getApprenticesService() {
+        return apprenticesService;
     }
 
-    public DesignationMasterService<DesignationMaster> getDesignationMasterService() {
-        return designationMasterService;
+    public void setApprenticesService(ApprenticesService<ApprenticesMaster> apprenticesService) {
+        this.apprenticesService = apprenticesService;
     }
 
-    public void setDesignationMasterService(DesignationMasterService<DesignationMaster> designationMasterService) {
-        this.designationMasterService = designationMasterService;
+    public DeviceService<DeviceDetails> getDeviceService() {
+        return deviceService;
     }
 
-    public MailMasterService<MailMaster> getMailMasterService() {
-        return mailMasterService;
+    public void setDeviceService(DeviceService<DeviceDetails> deviceService) {
+        this.deviceService = deviceService;
     }
 
-    public void setMailMasterService(MailMasterService<MailMaster> mailMasterService) {
-        this.mailMasterService = mailMasterService;
+    public CouponService<CouponMaster> getCouponService() {
+        return couponService;
     }
 
-    public SmsMasterService<SmsMaster> getSmsMasterService() {
-        return smsMasterService;
+    public void setCouponService(CouponService<CouponMaster> couponService) {
+        this.couponService = couponService;
     }
 
-    public void setSmsMasterService(SmsMasterService<SmsMaster> smsMasterService) {
-        this.smsMasterService = smsMasterService;
+    public RechargeService<RechargeMaster> getRechargeService() {
+        return rechargeService;
     }
 
-    public CurrencyMasterService<CurrencyMaster> getCurrencyMasterService() {
-        return currencyMasterService;
+    public void setRechargeService(RechargeService<RechargeMaster> rechargeService) {
+        this.rechargeService = rechargeService;
     }
 
-    public void setCurrencyMasterService(CurrencyMasterService<CurrencyMaster> currencyMasterService) {
-        this.currencyMasterService = currencyMasterService;
+    public SpecialCouponService<SpecialCouponMaster> getSpecialCouponService() {
+        return specialCouponService;
+    }
+
+    public void setSpecialCouponService(SpecialCouponService<SpecialCouponMaster> specialCouponService) {
+        this.specialCouponService = specialCouponService;
+    }
+
+    public PunchedDataService<PunchedDataMaster> getPunchedDataService() {
+        return punchedDataService;
+    }
+
+    public void setPunchedDataService(PunchedDataService<PunchedDataMaster> punchedDataService) {
+        this.punchedDataService = punchedDataService;
+    }
+
+    public RightService<RightMaster> getRightService() {
+        return rightService;
+    }
+
+    public void setRightService(RightService<RightMaster> rightService) {
+        this.rightService = rightService;
+    }
+
+    public RechargeInfoService<RechargeInfoMaster> getRechargeInfoService() {
+        return rechargeInfoService;
+    }
+
+    public void setRechargeInfoService(RechargeInfoService<RechargeInfoMaster> rechargeInfoService) {
+        this.rechargeInfoService = rechargeInfoService;
+    }
+
+    public LogService<LogsMaster> getLogService() {
+        return logService;
+    }
+
+    public void setLogService(LogService<LogsMaster> logService) {
+        this.logService = logService;
+    }
+
+    public ReportService<ReportMaster> getReportService() {
+        return reportService;
+    }
+
+    public void setReportService(ReportService<ReportMaster> reportService) {
+        this.reportService = reportService;
     }
 
     @Override
@@ -191,275 +192,83 @@ public abstract class CustomAbstract extends MultiActionController {
         ServletRequestDataBinder binder = createBinder(request, command);
         binder.bind(request);
     }
+    public static String encpass;
 
-    protected void log(HttpServletRequest request, String action, String disc) {
+    public String encription(String pass) {
 
-        UserActivityLog userActivityLog = new UserActivityLog();
-        HttpSession session = request.getSession();
-        UserMaster user = (UserMaster) session.getAttribute("user");
+        try {
+            MessageDigest algorithm = null;
 
-        userActivityLog.setUserMaster(user);
-        userActivityLog.setIpAddress(request.getRemoteAddr());
-        userActivityLog.setDateTime(new SimpleDateFormat("MM/dd/yyyy HH:mm")
-                .format(new Date()));
-        userActivityLog.setActionType(action);
-        userActivityLog.setActionDescription(disc);
-
-        userActivityLogService.create(userActivityLog);
-        switch (action) {
-            case "Login": {
-                UserLoginLog userLoginLog = new UserLoginLog();
-                userLoginLog.setUserActivityLogByStart(userActivityLog);
-                userLoginLogService.create(userLoginLog);
-                session.setAttribute("userLoginLogId", userLoginLog.getId());
-                session.setAttribute("userLoginLogStart",
-                        userActivityLog.getDateTime());
-                break;
-            }
-            case "Logout": {
-                UserLoginLog userLoginLog = userLoginLogService
-                        .readById((Integer) session.getAttribute("userLoginLogId"));
-                userLoginLog.setUserActivityLogByEnd(userActivityLog);
-                userLoginLogService.update(userLoginLog);
-                session.setAttribute("userLoginLogEnd",
-                        userActivityLog.getDateTime());
-                break;
-            }
-        }
-
-    }
-
-    public void selectEmployee(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        List<?> list = employeeMasterService.readForAliveEmployeesNew();
-        String tempStr = "[";
-        Object[] arrayOfObject;
-
-        EmployeeMaster employeeMaster;
-        boolean flag = false;
-        for (Iterator<? extends Object> it = list.iterator(); it.hasNext();) {
-            arrayOfObject = (Object[]) it.next();
-
-            if (flag) {
-                tempStr += ", ";
-            }
-            flag = true;
-            tempStr += "{id: \"" + arrayOfObject[0]
-                    + "\", name: \"" + arrayOfObject[1]
-                    + "  /" + arrayOfObject[2]
-                    + "  /" + arrayOfObject[7] + "\"}";
-//                    + "  /" + arrayOfObject[4]
-//                    + "  /" + arrayOfObject[5] 
-
-        }
-        tempStr += "]";
-
-        request.setAttribute("list", tempStr);
-    }
-
-    protected void departmentList(HttpServletRequest request) {
-        DepartmentMaster departmentMaster = new DepartmentMaster();
-        List<?> depttList = departmentMasterService.read();
-        Map<Integer, String> dm = new HashMap<>();
-        for (Object o : depttList) {
-            departmentMaster = (DepartmentMaster) o;
-            dm.put(departmentMaster.getId(), departmentMaster.getDepartmentName());
-        }
-
-        request.setAttribute("deptMap", dm);
-    }
-
-    protected void zydexLocationList(HttpServletRequest request) {
-        ZydexLocationMaster zydexLocationMaster = new ZydexLocationMaster();
-        List<?> zydexLocationList = zydexLocationMasterService.read();
-        Map<Integer, String> dm = new HashMap<>();
-        for (Object o : zydexLocationList) {
-            zydexLocationMaster = (ZydexLocationMaster) o;
-            dm.put(zydexLocationMaster.getId(), zydexLocationMaster.getZydexLocation());
-        }
-
-        request.setAttribute("deptMap", dm);
-    }
-
-    protected void designationList(HttpServletRequest request) {
-        DesignationMaster designationMaster = new DesignationMaster();
-        List<?> desigList = designationMasterService.read();
-        Map<Integer, String> dn = new HashMap<>();
-        for (Object o : desigList) {
-            designationMaster = (DesignationMaster) o;
-            dn.put(designationMaster.getId(), designationMaster.getDesignationName());
-        }
-
-        request.setAttribute("desigList", dn);
-    }
-
-    public void selectEmployee1(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        List<?> list = employeeMasterService.readEmployeeSearch();
-        String tempStr = "[";
-        Object[] arrayOfObject;
-
-        EmployeeMaster employeeMaster;
-        boolean flag = false;
-        for (Iterator<? extends Object> it = list.iterator(); it.hasNext();) {
-            arrayOfObject = (Object[]) it.next();
-
-            if (flag) {
-                tempStr += ", ";
-            }
-            flag = true;
-            tempStr += "{id: \"" + arrayOfObject[0]
-                    + "\", name: \"" + arrayOfObject[1]
-                    + "  /" + arrayOfObject[2]
-                    + "  /" + arrayOfObject[3] + "\"}";
-//            tempStr += "{id: \"" + arrayOfObject[0]
-//                    + "\", name: \"" + arrayOfObject[0]
-//                    + "  /" + arrayOfObject[1]
-//                    + "  /" + arrayOfObject[2] + "\"}";
-        }
-        tempStr += "]";
-
-        request.setAttribute("list", tempStr);
-    }
-
-    protected void readcurrencyList(HttpServletRequest request) {
-        CurrencyMaster currencyMaster = new CurrencyMaster();
-        List<?> currencyList = currencyMasterService.read();
-        Map<Integer, String> currencyMap = new HashMap<>();
-        for (Object o : currencyList) {
-            currencyMaster = (CurrencyMaster) o;
-            currencyMap.put(currencyMaster.getId(), currencyMaster.getCurrencyName() + "(" + currencyMaster.getCurrencyCode() + ")");
-        }
-
-        request.setAttribute("currencyMap", currencyMap);
-    }
-
-    public void selectedEmployeeFor360Feedback(HttpServletRequest request,
-            EmployeeMaster employeeMaster) throws Exception {
-        String tempStr = "";
-        tempStr += "[";
-        if (null != employeeMaster.getId() && !employeeMaster.getId().equals("")) {
-
-            EmployeeMaster employeeMaster1;
-            List<Object> list1 = new ArrayList<Object>();
-            employeeMaster = employeeMasterService.readById(employeeMaster.getId());
-            int dept_Id = employeeMaster.getDepartmentMaster().getId();
-            DepartmentMaster departmentMaster = new DepartmentMaster();
-            departmentMaster = departmentMasterService.readById(dept_Id);
-            employeeMaster.setDepartmentMaster(departmentMaster);
-            list1.add(employeeMaster);
-            boolean flag = false;
-
-            if (null != list1 && !list1.isEmpty()) {
-                EmployeeMaster arrayOfObject = (EmployeeMaster) list1.get(0);
-                if (flag) {
-                    tempStr += ", ";
+            for (int loop = 0; loop < 10; loop++) {
+                if (loop % 3 == 0) {
+                    algorithm = MessageDigest.getInstance("SHA");
+                } else {
+                    algorithm = MessageDigest.getInstance("md5");
                 }
-                flag = true;
-                tempStr += "{id: \"" + arrayOfObject.getId()
-                        + "\", name: \"" + arrayOfObject.getId()
-                        + "  /" + arrayOfObject.getEmployeeName()
-                        + "  /" + arrayOfObject.getDepartmentMaster().getDepartmentName() + "\"}";
+                algorithm.reset();
+                byte[] defaultBytes = pass.getBytes();
+                algorithm.update(defaultBytes);
+                byte messageDigest[] = algorithm.digest();
+
+                StringBuffer hexString = new StringBuffer();
+                for (int ij = 0; ij < messageDigest.length; ij++) {
+                    hexString.append(Integer.toHexString(0xFF & messageDigest[ij]));
+                }
+                String foo = messageDigest.toString();
+                pass = hexString.toString();
+                encpass = pass;
+
             }
+
+        }///END OF TRY
+        catch (NoSuchAlgorithmException nsae) {
+            System.out.println("ERROR!");
         }
-        tempStr += "]";
-        request.setAttribute("preList", tempStr);
+
+        return encpass;
     }
 
-    public void selectedEmployeeFor360Feedback1(HttpServletRequest request,
-            List<Object> list) throws Exception {
-        EmployeeMaster employeeMaster5 = new EmployeeMaster();
-        String tempStr = "[";
-        int i = 1;
+    public void readCoupon(HttpServletRequest request, HttpServletResponse response) {
+        List list = couponService.read();
+        HashSet<String> couponType = new HashSet<>();
+        Map<Integer, String> map = new HashMap<>();
         for (Object o : list) {
-            employeeMaster5 = (EmployeeMaster) o;
-            employeeMaster5 = employeeMasterService.readById(employeeMaster5.getId());
-            DepartmentMaster departmentMaster = new DepartmentMaster();
-            departmentMaster = departmentMasterService.readById(employeeMaster5.getDepartmentMaster().getId());
-            employeeMaster5.setDepartmentMaster(departmentMaster);
-            boolean flag = false;
-            if (flag) {
-                tempStr += ", ";
-            }
-            flag = true;
-            if (tempStr.contains("id")) {
-                tempStr += ',';
-            }
-            tempStr += "{id: \"" + employeeMaster5.getId()
-                    + "\", name: \"" + i + "Level :- " + employeeMaster5.getId()
-                    + "  /" + employeeMaster5.getEmployeeName()
-                    + "  /" + employeeMaster5.getDepartmentMaster().getDepartmentName() + "\"}";
-            i++;
+            CouponMaster cm = (CouponMaster) o;
+            couponType.add(cm.getCouponType());
+            map.put(cm.getSrNo(), cm.getCouponType());
         }
-        tempStr += "]";
-        request.setAttribute("preList1", tempStr);
-
+        request.setAttribute("couponType", couponType);
+        request.setAttribute("couponMap", map);
     }
 
-    public void selectEmployeeForLuna(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        List<?> list = employeeMasterService.readEmployeeForPlant();
-        String tempStr = "[";
-        Object[] arrayOfObject;
-
-        EmployeeMaster employeeMaster;
-        boolean flag = false;
-        for (Iterator<? extends Object> it = list.iterator(); it.hasNext();) {
-            arrayOfObject = (Object[]) it.next();
-
-            if (flag) {
-                tempStr += ", ";
-            }
-            if (arrayOfObject[3].equals("Luna Plant")) {
-                flag = true;
-                tempStr += "{id: \"" + arrayOfObject[0]
-                        + "\", name: \"" + arrayOfObject[1]
-                        + "  /" + arrayOfObject[2]
-                        + "  /" + arrayOfObject[3] + "\"}";
-            } else {
-                flag = false;
-            }
+    public void readDesignation(HttpServletRequest request, HttpServletResponse response) {
+        List list = employeeMasterService.read();
+        HashSet<String> designationType = new HashSet<>();
+        for (Object o : list) {
+            EmployeeMaster em = (EmployeeMaster) o;
+            designationType.add(em.getDesignation());
         }
-        tempStr += "]";
-
-        request.setAttribute("lunaList", tempStr);
+        request.setAttribute("designationType", designationType);
     }
 
-    public void selectEmployeeForGavasat(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
-        List<?> list = employeeMasterService.readEmployeeForPlant();
-        String tempStr = "[";
-        Object[] arrayOfObject;
-
-        EmployeeMaster employeeMaster;
-        boolean flag = false;
-        for (Iterator<? extends Object> it = list.iterator(); it.hasNext();) {
-            arrayOfObject = (Object[]) it.next();
-
-            if (flag) {
-                tempStr += ", ";
-            }
-            if (arrayOfObject[3].equals("Gavasad Plant")) {
-                flag = true;
-                tempStr += "{id: \"" + arrayOfObject[0]
-                        + "\", name: \"" + arrayOfObject[1]
-                        + "  /" + arrayOfObject[2]
-                        + "  /" + arrayOfObject[3] + "\"}";
-            } else {
-                flag = false;
-            }
+    public void readRights(HttpServletRequest request, HttpServletResponse response) {
+        List list = rightService.read();
+        HashSet<String> rightsType = new HashSet<>();
+        for (Object o : list) {
+            RightMaster cm = (RightMaster) o;
+            rightsType.add(cm.getRightName());
         }
-        tempStr += "]";
-
-        request.setAttribute("gavasatList", tempStr);
+        request.setAttribute("rightsType", rightsType);
     }
 
-    public EmailAddMasterService<EmailAddMaster> getEmailAddMasterService() {
-        return emailAddMasterService;
-    }
-
-    public void setEmailAddMasterService(EmailAddMasterService<EmailAddMaster> emailAddMasterService) {
-        this.emailAddMasterService = emailAddMasterService;
+    public void deviceNameIpRead(HttpServletRequest request) {
+        List list = deviceService.read();
+        Map<Integer, String> deviceList = new HashMap<>();
+        for (Object o : list) {
+            DeviceDetails dd = (DeviceDetails) o;
+            deviceList.put(dd.getId(), dd.getDeviceDescription() + " - " + dd.getDeviceIP());
+        }
+        request.setAttribute("deviceList", deviceList);
     }
 
 }

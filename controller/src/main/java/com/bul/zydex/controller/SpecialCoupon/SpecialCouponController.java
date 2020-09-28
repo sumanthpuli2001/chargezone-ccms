@@ -1,0 +1,235 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.bul.zydex.controller.SpecialCoupon;
+
+import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.ContractorMaster;
+import com.bul.zydex.model.CouponMaster;
+import com.bul.zydex.model.EmployeeMaster;
+import com.bul.zydex.model.LogsMaster;
+import com.bul.zydex.model.PunchedDataMaster;
+import com.bul.zydex.model.ReportMaster;
+import com.bul.zydex.model.SpecialCouponMaster;
+import com.bul.zydex.model.UserMaster;
+import java.util.Date;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.springframework.web.servlet.ModelAndView;
+
+/**
+ *
+ * @author Aman Bahukhandi
+ */
+public class SpecialCouponController extends CustomAbstract {
+
+    public ModelAndView showList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        SpecialCouponMaster specialCouponMaster = new SpecialCouponMaster();
+        List list = specialCouponService.read();
+        request.setAttribute("list", list);
+        mv.getModelMap().put("specialCouponMaster", specialCouponMaster);
+        mv.setViewName("Coupon/SpecialCouponList");
+        return mv;
+    }
+
+    public ModelAndView createSpecialCouponMaster(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        SpecialCouponMaster specialCouponMaster = new SpecialCouponMaster();
+        readCoupon(request, response);
+        readDesignation(request, response);
+        mv.getModelMap().put("specialCouponMaster", specialCouponMaster);
+        mv.setViewName("Coupon/SpecialCouponCreate");
+        return mv;
+    }
+
+    public ModelAndView submitSpecialCouponMaster(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        SpecialCouponMaster specialCouponMaster = new SpecialCouponMaster();
+        bind(request, specialCouponMaster);
+        specialCouponMaster.setdRow("N").setDepartment(" ");
+        if (specialCouponMaster.getSrNo() == 0) {
+            specialCouponService.create(specialCouponMaster);
+            request.setAttribute("successMessage",
+                    "Information: Coupon Created successfully");
+        } else {
+            request.setAttribute("successMessage",
+                    "Information: Coupon Updated successfully");
+            specialCouponService.update(specialCouponMaster);
+        }
+        mv = showList(request, response);
+        return mv;
+
+    }
+
+    public ModelAndView viewClick(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        int couponId = Integer.parseInt(request.getParameter("id"));
+        SpecialCouponMaster specialCouponMaster = specialCouponService.readById(couponId);
+        readCoupon(request, response);
+        readDesignation(request, response);
+        mv.getModelMap().put("specialCouponMaster", specialCouponMaster);
+        mv.setViewName("Coupon/SpecialCouponCreate");
+        return mv;
+    }
+
+    public ModelAndView deleteSpecialCouponMaster(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String[] checkId = request.getParameterValues("checkId");
+        for (String checkedValues : checkId) {
+            specialCouponService.delete(Integer.parseInt(checkedValues));
+        }
+        request.setAttribute("successMessage",
+                "Information: One or more Coupon deleted successfully");
+        mv = showList(request, response);
+        return mv;
+    }
+
+    public ModelAndView searchPunch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        PunchedDataMaster pdm = new PunchedDataMaster();
+        List list = couponService.read();
+        readCoupon(request, response);
+        request.setAttribute("list", list);
+        mv.getModelMap().put("pdm", pdm);
+        mv.setViewName("Coupon/SearchCoupon");
+        return mv;
+    }
+
+    public ModelAndView searchPunchData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String dFrom = request.getParameter("startDate");
+        String eFrom = request.getParameter("endDate");
+        String cardCode = request.getParameter("cardCode");
+        String item = request.getParameter("item");
+
+        List pds = punchedDataService.readBy(dFrom, eFrom, cardCode, item);
+        readCoupon(request, response);
+        request.setAttribute("pds", pds);
+        request.setAttribute("dFrom", dFrom);
+        request.setAttribute("eFrom", eFrom);
+        request.setAttribute("cardCode", cardCode);
+        request.setAttribute("item", item);
+        mv = searchPunch(request, response);
+        return mv;
+    }
+
+    public ModelAndView editPunched(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        int id = Integer.parseInt(request.getParameter("id"));
+        PunchedDataMaster punchedDataMaster = new PunchedDataMaster();
+        List list = punchedDataService.readBYId(id);
+        readCoupon(request, response);
+        request.setAttribute("punchedDataMaster", punchedDataMaster);
+        request.setAttribute("list", list);
+        mv.setViewName("Coupon/EditPunch");
+        return mv;
+    }
+
+    public ModelAndView editPunchedSubmit(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        int id = Integer.parseInt(request.getParameter("srNo"));
+        double price = Double.parseDouble(request.getParameter("price"));
+
+//        PunchedDataMaster punchedDataMaster = punchedDataService.readById(id);
+//        punchedDataMaster.setPrice(price);
+        punchedDataService.updateQuery(id, price);
+        request.setAttribute("successMessage",
+                "Information: Updated successfully");
+        mv = searchPunch(request, response);
+        return mv;
+    }
+
+    public ModelAndView deletePunched(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        ModelAndView mv = new ModelAndView();
+        String[] checkId = request.getParameterValues("checkId");
+        for (String checkedValues : checkId) {
+            punchedDataService.deleteBySrNo(checkedValues);
+        }
+        request.setAttribute("successMessage",
+                "Information: One or more Coupon deleted successfully");
+        mv = searchPunch(request, response);
+        return mv;
+    }
+
+    public ModelAndView addCouponPunch(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mv = new ModelAndView();
+        readCoupon(request, response);
+        mv.setViewName("Coupon/AddCouponPunch");
+        return mv;
+    }
+
+    public ModelAndView submitAddCopounPunch(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView mv = new ModelAndView();
+        String cardCode = request.getParameter("cardCode");
+        String date = request.getParameter("date");
+        Date date1 = new Date();
+        int couponTypeCount = Integer.parseInt(request.getParameter("couponTypeCount"));
+        for (int i = 1; i <= couponTypeCount; i++) {
+            if (null != request.getParameter("item" + i) && null != request.getParameter("quantity" + i) && null != request.getParameter("price" + i)) {
+//                if (!request.getParameter("item1" + i).equals("") && !request.getParameter("quantity" + i).equals("") && !request.getParameter("price" + i).equals("")) {
+                String department = "";
+                String designation = "";
+
+                List list = couponService.readByCoupon(request.getParameter("item" + i));
+                CouponMaster cmaster = (CouponMaster) list.get(0);
+
+                EmployeeMaster em = employeeMasterService.readByRfIdValue(cardCode);
+                if (em == null) {
+                    ContractorMaster cm = contractorService.readByRfIdValue(cardCode);
+                    if (cm != null) {
+                        department = cm.getDepartment();
+
+                        PunchedDataMaster pdm = new PunchedDataMaster();
+                        pdm.setItem("" + (cmaster.getSrNo() < 10 ? "0" + cmaster.getSrNo() : cmaster.getSrNo())).setEmpCode(cm.getRfId())
+                                .setlDate(date).setlTime(timeFOrmat.format(date1)).setQuantity(request.getParameter("quantity" + i)).setDisp(14).setRemark("0")
+                                .setPrice(request.getParameter("price" + i).equals("A") ? cmaster.getCouponPrice() : request.getParameter("price" + i).equals("S1") ? cmaster.getAcPrive() : cmaster.getSecondPrice()).setCid("01");
+                        punchedDataService.create(pdm);
+
+                        ReportMaster rm = new ReportMaster();
+                        rm.setCode(cm.getContractorCode()).setName(cm.getName()).setDesignation(designation).setDepartment(department).setTdate(date).settTime(timeFOrmat.format(date1)).setItem(request.getParameter("item" + i)).setNumberOfItem(Integer.parseInt(request.getParameter("quantity" + i))).setId("C");
+                        reportService.create(rm);
+
+                    } else {
+                        request.setAttribute("failureMessage",
+                                "Information: Employee Code not Found");
+                        mv = addCouponPunch(request, response);
+                        return mv;
+                    }
+                } else {
+                    department = em.getDepartment();
+                    designation = em.getDesignation();
+
+//                    
+                    PunchedDataMaster pdm = new PunchedDataMaster();
+                    pdm.setItem("" + (cmaster.getSrNo() < 10 ? "0" + cmaster.getSrNo() : cmaster.getSrNo())).setEmpCode(em.getRfId())
+                            .setlDate(date).setlTime(timeFOrmat.format(date1)).setQuantity(request.getParameter("quantity" + i)).setDisp(14).setRemark("0")
+                            .setPrice(request.getParameter("price" + i).equals("A") ? cmaster.getCouponPrice() : request.getParameter("price" + i).equals("S1") ? cmaster.getAcPrive() : cmaster.getSecondPrice()).setCid("01");
+                    punchedDataService.create(pdm);
+
+                    ReportMaster rm = new ReportMaster();
+                    rm.setCode(em.getEmployeeCode()).setName(em.getName()).setDesignation(designation).setDepartment(department).setTdate(date).settTime(timeFOrmat.format(date1)).setItem(request.getParameter("item" + i)).setNumberOfItem(Integer.parseInt(request.getParameter("quantity" + i))).setId("E");
+                    reportService.create(rm);
+
+                }
+
+            }
+//            }
+        }
+        //------for Log entry---------
+        HttpSession session = request.getSession(false);
+        UserMaster user = (UserMaster) session.getAttribute("user");
+        LogsMaster lm = new LogsMaster();
+        lm.setlDate(dateFormat.format(date1)).setTime(timeFOrmat.format(date1)).setUserName(user.getUserFullName()).setIp(myIp).setAction("Add Coupon punch").setDrow("Y");
+        logService.create(lm);
+        request.setAttribute("successMessage",
+                "Information: Data inserted successfully");
+        mv = addCouponPunch(request, response);
+        return mv;
+    }
+
+}

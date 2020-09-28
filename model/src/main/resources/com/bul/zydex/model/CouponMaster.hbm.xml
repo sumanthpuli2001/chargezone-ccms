@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.CouponMaster" table="coupon_master" catalog="ccms" optimistic-lock="version">
+        <id name="srNo" type="java.lang.Integer">
+            <column name="Sr_no" />
+            <generator class="identity" />
+        </id>
+        <property name="couponType" type="string">
+            <column name="Coupon_Type" />
+        </property>
+        <property name="couponPrice" type="java.lang.Double">
+            <column name="Coupon_Price" />
+        </property>
+        <property name="limitMonth" type="java.lang.Integer">
+            <column name="Limit_Month"/>
+        </property>
+        <property name="limitDay" type="java.lang.Integer">
+            <column name="Limit_Day"/>
+        </property>
+        <property name="acPrive" type="java.lang.Double">
+            <column name="Ac_Price" />
+        </property>
+        <property name="dRow" type="string">
+            <column name="D_Row"/>
+        </property>  
+        
+        
+        <property name="qty1" type="java.lang.Integer">
+            <column name="Qty1"/>
+        </property>
+        <property name="secondPrice" type="java.lang.Double">
+            <column name="SecondPrice" />
+        </property>
+        <property name="qty2" type="java.lang.Integer">
+            <column name="Qty2"/>
+        </property>
+        <property name="limitMonthSub1" type="java.lang.Integer">
+            <column name="Limit_Month_sub1"/>
+        </property>
+        <property name="limitMonthSub2" type="java.lang.Integer">
+            <column name="Limit_Month_sub2"/>
+        </property>
+        <property name="effectFrom" type="string">
+            <column name="Effect_From"/>
+        </property>  
+
+    </class>
+  
+
+</hibernate-mapping>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.RechargeInfoMaster" table="recharge_info_master" catalog="ccms" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="rfId" type="string">
+            <column name="RF_ID" />
+        </property>
+        <property name="amount" type="string">
+            <column name="Amount" />
+        </property>
+        <property name="date" type="string">
+            <column name="Date"/>
+        </property>
+        <property name="rAmount" type="string">
+            <column name="R_Amount"/>
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

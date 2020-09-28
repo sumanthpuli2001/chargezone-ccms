@@ -6,13 +6,13 @@
 package com.bul.zydex.controller;
 
 import com.bul.zydex.model.UserMaster;
-import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
-import org.springframework.validation.Validator;
 
 /**
  *
@@ -22,34 +22,15 @@ public abstract class LogInAbstract extends CustomAbstract {
 
     protected static final Logger logger = Logger
             .getLogger(LogInAbstract.class);
-    protected Validator loginValidator;
-    protected Validator userInitPwdValidator;
-    protected Validator forgotPwdValidator;
 //    protected static final String PATH = "User" + File.separator;
     protected static final String LOGIN_PAGE = "User/Login";
 
-    public Validator getLoginValidator() {
-        return loginValidator;
-    }
-
-    public void setLoginValidator(Validator loginValidator) {
-        this.loginValidator = loginValidator;
-    }
-
-    public Validator getUserInitPwdValidator() {
-        return userInitPwdValidator;
-    }
-
-    public void setUserInitPwdValidator(Validator userInitPwdValidator) {
-        this.userInitPwdValidator = userInitPwdValidator;
-    }
-
     protected void addUser(HttpServletRequest request, UserMaster user) {
         HttpSession session = request.getSession();
-        session.setAttribute("user", userMasterService.readById(user.getId()));
+        session.setAttribute("user", userMasterService.readByUserName(user).get(0));
     }
 
-    protected void setCookies(HttpServletRequest request, HttpServletResponse response)throws Exception {
+    protected void setCookies(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
@@ -64,7 +45,7 @@ public abstract class LogInAbstract extends CustomAbstract {
         response.addCookie(userNameCookie);
         response.addCookie(passwordCookie);
         response.addCookie(rememberMeCookie);
-         //        HttpSession session = request.getSession();
+        //        HttpSession session = request.getSession();
         //        session.setAttribute("user", userMasterService.readById(user.getId()));
     }
 

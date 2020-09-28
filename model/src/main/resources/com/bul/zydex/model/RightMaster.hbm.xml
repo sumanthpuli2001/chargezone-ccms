@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.RightMaster" table="rights_master" catalog="ccms">
+        <id name="rightName" type="string">
+            <column name="Right_Name" length="30"  />
+        </id>
+        <property name="right" type="string">
+            <column name="Rights" length="100"  />
+        </property>
+        <property name="dRow" type="string">
+            <column name="D_Row" length="30" />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

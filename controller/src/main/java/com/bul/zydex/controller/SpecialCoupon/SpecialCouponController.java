@@ -13,6 +13,7 @@ import com.bul.zydex.model.LogsMaster;
 import com.bul.zydex.model.PunchedDataMaster;
 import com.bul.zydex.model.ReportMaster;
 import com.bul.zydex.model.SpecialCouponMaster;
+import com.bul.zydex.model.SqlDataConnect;
 import com.bul.zydex.model.UserMaster;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  *
@@ -163,6 +168,74 @@ public class SpecialCouponController extends CustomAbstract {
         return mv;
     }
 
+//    public ModelAndView submitAddCopounPunch(HttpServletRequest request, HttpServletResponse response) {
+//        ModelAndView mv = new ModelAndView();
+//        String cardCode = request.getParameter("cardCode");
+//        String date = request.getParameter("date");
+//        Date date1 = new Date();
+//        int couponTypeCount = Integer.parseInt(request.getParameter("couponTypeCount"));
+//        for (int i = 1; i <= couponTypeCount; i++) {
+//            if (null != request.getParameter("item" + i) && null != request.getParameter("quantity" + i) && null != request.getParameter("price" + i)) {
+////                if (!request.getParameter("item1" + i).equals("") && !request.getParameter("quantity" + i).equals("") && !request.getParameter("price" + i).equals("")) {
+//                String department = "";
+//                String designation = "";
+//
+//                List list = couponService.readByCoupon(request.getParameter("item" + i));
+//                CouponMaster cmaster = (CouponMaster) list.get(0);
+//
+//                EmployeeMaster em = employeeMasterService.readByRfIdValue(cardCode);
+//                if (em == null) {
+//                    ContractorMaster cm = contractorService.readByRfIdValue(cardCode);
+//                    if (cm != null) {
+//                        department = cm.getDepartment();
+//
+//                        PunchedDataMaster pdm = new PunchedDataMaster();
+//                        pdm.setItem("" + (cmaster.getSrNo() < 10 ? "0" + cmaster.getSrNo() : cmaster.getSrNo())).setEmpCode(cm.getRfId())
+//                                .setlDate(date).setlTime(timeFOrmat.format(date1)).setQuantity(request.getParameter("quantity" + i)).setDisp(14).setRemark("0")
+//                                .setPrice(request.getParameter("price" + i).equals("A") ? cmaster.getCouponPrice() : request.getParameter("price" + i).equals("S1") ? cmaster.getAcPrive() : cmaster.getSecondPrice()).setCid("01");
+//                        punchedDataService.create(pdm);
+//
+//                        ReportMaster rm = new ReportMaster();
+//                        rm.setCode(cm.getContractorCode()).setName(cm.getName()).setDesignation(designation).setDepartment(department).setTdate(date).settTime(timeFOrmat.format(date1)).setItem(request.getParameter("item" + i)).setNumberOfItem(Integer.parseInt(request.getParameter("quantity" + i))).setId("C");
+//                        reportService.create(rm);
+//
+//                    } else {
+//                        request.setAttribute("failureMessage",
+//                                "Information: Employee Code not Found");
+//                        mv = addCouponPunch(request, response);
+//                        return mv;
+//                    }
+//                } else {
+//                    department = em.getDepartment();
+//                    designation = em.getDesignation();
+//
+////                    
+//                    PunchedDataMaster pdm = new PunchedDataMaster();
+//                    pdm.setItem("" + (cmaster.getSrNo() < 10 ? "0" + cmaster.getSrNo() : cmaster.getSrNo())).setEmpCode(em.getRfId())
+//                            .setlDate(date).setlTime(timeFOrmat.format(date1)).setQuantity(request.getParameter("quantity" + i)).setDisp(14).setRemark("0")
+//                            .setPrice(request.getParameter("price" + i).equals("A") ? cmaster.getCouponPrice() : request.getParameter("price" + i).equals("S1") ? cmaster.getAcPrive() : cmaster.getSecondPrice()).setCid("01");
+//                    punchedDataService.create(pdm);
+//
+//                    ReportMaster rm = new ReportMaster();
+//                    rm.setCode(em.getEmployeeCode()).setName(em.getName()).setDesignation(designation).setDepartment(department).setTdate(date).settTime(timeFOrmat.format(date1)).setItem(request.getParameter("item" + i)).setNumberOfItem(Integer.parseInt(request.getParameter("quantity" + i))).setId("E");
+//                    reportService.create(rm);
+//
+//                }
+//
+//            }
+////            }
+//        }
+//        //------for Log entry---------
+//        HttpSession session = request.getSession(false);
+//        UserMaster user = (UserMaster) session.getAttribute("user");
+//        LogsMaster lm = new LogsMaster();
+//        lm.setlDate(dateFormat.format(date1)).setTime(timeFOrmat.format(date1)).setUserName(user.getUserFullName()).setIp(myIp).setAction("Add Coupon punch").setDrow("Y");
+//        logService.create(lm);
+//        request.setAttribute("successMessage",
+//                "Information: Data inserted successfully");
+//        mv = addCouponPunch(request, response);
+//        return mv;
+//    }
     public ModelAndView submitAddCopounPunch(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mv = new ModelAndView();
         String cardCode = request.getParameter("cardCode");
@@ -170,24 +243,89 @@ public class SpecialCouponController extends CustomAbstract {
         Date date1 = new Date();
         int couponTypeCount = Integer.parseInt(request.getParameter("couponTypeCount"));
         for (int i = 1; i <= couponTypeCount; i++) {
-            if (null != request.getParameter("item" + i) && null != request.getParameter("quantity" + i) && null != request.getParameter("price" + i)) {
+            if (null != request.getParameter("item" + i) && null != request.getParameter("quantity" + i)) {
 //                if (!request.getParameter("item1" + i).equals("") && !request.getParameter("quantity" + i).equals("") && !request.getParameter("price" + i).equals("")) {
+                
+                SqlDataConnect sqlDataConnect = new SqlDataConnect();
+                
+                String connectString = "";
+            List<?> sqlDataConnectlist = sqlDataConnectService.read();
+            System.out.println("<--------------- -1. test ------------->");
+            Connection conn = null;
+            Statement stmt = null;
+            for (Object o : sqlDataConnectlist) {
+                
+                sqlDataConnect = (SqlDataConnect) o;
+                connectString = sqlDataConnect.getConnectString();
+                
+                try {
+                    System.out.println("<--------------- -2. test ------------->");
+                            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");	
+
+
+                    conn = DriverManager.getConnection(connectString);
+                    System.out.println("<--------------- -3. test ------------->");
+                    System.out.println("test");
+                    stmt = conn.createStatement();
+                    
+                    //Retrive Employee Name , and card code from emp table using cardCode
+                    String Sql = "select cardid,empname from emp where empid='"+cardCode+"'";
+                    
+                    String cardid="";
+                    String empid="";
+                    ResultSet rs = stmt.executeQuery(Sql);
+                    while (rs.next()) {
+			cardid=rs.getString(1);
+                        empid=rs.getString(2);
+                    }
+                    
+                    //Retrive item code from ItemMaster
+                    String item1 = request.getParameter("item" + i);
+                    String Sql1 = "select ItemID from ItemMaster where ItemName='"+item1+"'";
+                    ResultSet rs1 = stmt.executeQuery(Sql1);
+                    String itemcode="";
+                    while (rs1.next()) {
+			itemcode=rs1.getString(1);
+                    }
+                    
+                    //Insert data into [ItemTrans] table using quantity loop
+                    String quantity = request.getParameter("quantity" + i);
+                    int quantity1 = Integer.parseInt(quantity);
+                    for (int j=0;j<quantity1;j++)
+                    {
+                        String sql = "insert into ItemTrans (ItemID,CmpCode ,EmpID ,TrDate ,Qty ,Price ,DataSource ,location ,Cid ,ItemName ,EmpName ,SubSidy ,VCode ,VDesc ,Cardid ,Flag) values ('"+itemcode+"','Gipcl' ,'"+cardCode+"' ,'"+date+"' ,'1' ,'0' ,'0' ,'BRD' ,'01' ,'"+item1+"' ,'"+empid+"' ,'0' ,'00' ,'Default Vendor' ,'"+cardid+"' ,'E')  ";
+                        System.out.println(" Query 1 print " + sql);
+                        stmt.executeUpdate(sql);
+                    }
+                    
+                }
+                catch (Exception e) {
+                    System.out.println("Error in 1st:" + e.getStackTrace());
+                } finally {
+                    try {
+                        stmt.close();
+                        conn.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
                 String department = "";
                 String designation = "";
-
-                List list = couponService.readByCoupon(request.getParameter("item" + i));
-                CouponMaster cmaster = (CouponMaster) list.get(0);
-
+/*
                 EmployeeMaster em = employeeMasterService.readByRfIdValue(cardCode);
                 if (em == null) {
                     ContractorMaster cm = contractorService.readByRfIdValue(cardCode);
                     if (cm != null) {
+                        List list = couponService.readByShiftType(cm.getShiftType(), request.getParameter("item" + i));
+                        CouponMaster cmaster = (CouponMaster) list.get(0);
+
                         department = cm.getDepartment();
 
                         PunchedDataMaster pdm = new PunchedDataMaster();
                         pdm.setItem("" + (cmaster.getSrNo() < 10 ? "0" + cmaster.getSrNo() : cmaster.getSrNo())).setEmpCode(cm.getRfId())
-                                .setlDate(date).setlTime(timeFOrmat.format(date1)).setQuantity(request.getParameter("quantity" + i)).setDisp(14).setRemark("0")
-                                .setPrice(request.getParameter("price" + i).equals("A") ? cmaster.getCouponPrice() : request.getParameter("price" + i).equals("S1") ? cmaster.getAcPrive() : cmaster.getSecondPrice()).setCid("01");
+                                .setlDate(date).setlTime(timeFOrmat.format(date1)).setQuantity(request.getParameter("quantity" + i)).setDisp(1)
+                                .setPrice(request.getParameter("price" + i).equals("A") ? cmaster.getCouponPrice() : cmaster.getAcPrive()).setCid("01");
                         punchedDataService.create(pdm);
 
                         ReportMaster rm = new ReportMaster();
@@ -195,20 +333,41 @@ public class SpecialCouponController extends CustomAbstract {
                         reportService.create(rm);
 
                     } else {
-                        request.setAttribute("failureMessage",
-                                "Information: Employee Code not Found");
-                        mv = addCouponPunch(request, response);
-                        return mv;
+                        ApprenticesMaster am = apprenticesService.readByRfIdValue(cardCode);
+                        if (am != null) {
+                            List list = couponService.readByShiftType(am.getShiftType(), request.getParameter("item" + i));
+                            CouponMaster cmaster = (CouponMaster) list.get(0);
+
+                            PunchedDataMaster pdm = new PunchedDataMaster();
+                            pdm.setItem("" + (cmaster.getSrNo() < 10 ? "0" + cmaster.getSrNo() : cmaster.getSrNo())).setEmpCode(am.getRfId())
+                                    .setlDate(date).setlTime(timeFOrmat.format(date1)).setQuantity(request.getParameter("quantity" + i)).setDisp(1)
+                                    .setPrice(request.getParameter("price" + i).equals("A") ? cmaster.getCouponPrice() : cmaster.getAcPrive()).setCid("01");
+                            punchedDataService.create(pdm);
+
+                            ReportMaster rm = new ReportMaster();
+                            rm.setCode(am.getApprenticeCode()).setName(am.getName()).setDesignation(designation).setDepartment(department).setTdate(date).settTime(timeFOrmat.format(date1)).setItem(request.getParameter("item" + i)).setNumberOfItem(Integer.parseInt(request.getParameter("quantity" + i))).setId("A");
+                            reportService.create(rm);
+
+                        } else {
+                            request.setAttribute("failureMessage",
+                                    "Information: Employee Code not Found");
+                            mv = addCouponPunch(request, response);
+                            return mv;
+
+                        }
                     }
                 } else {
+                    List list = couponService.readByShiftType(em.getShiftType(), request.getParameter("item" + i));
+                    CouponMaster cmaster = (CouponMaster) list.get(0);
+
                     department = em.getDepartment();
                     designation = em.getDesignation();
 
 //                    
                     PunchedDataMaster pdm = new PunchedDataMaster();
                     pdm.setItem("" + (cmaster.getSrNo() < 10 ? "0" + cmaster.getSrNo() : cmaster.getSrNo())).setEmpCode(em.getRfId())
-                            .setlDate(date).setlTime(timeFOrmat.format(date1)).setQuantity(request.getParameter("quantity" + i)).setDisp(14).setRemark("0")
-                            .setPrice(request.getParameter("price" + i).equals("A") ? cmaster.getCouponPrice() : request.getParameter("price" + i).equals("S1") ? cmaster.getAcPrive() : cmaster.getSecondPrice()).setCid("01");
+                            .setlDate(date).setlTime(timeFOrmat.format(date1)).setQuantity(request.getParameter("quantity" + i)).setDisp(1)
+                            .setPrice(request.getParameter("price" + i).equals("A") ? cmaster.getCouponPrice() : cmaster.getAcPrive()).setCid("01");
                     punchedDataService.create(pdm);
 
                     ReportMaster rm = new ReportMaster();
@@ -216,16 +375,19 @@ public class SpecialCouponController extends CustomAbstract {
                     reportService.create(rm);
 
                 }
+                */
 
             }
 //            }
         }
+
         //------for Log entry---------
         HttpSession session = request.getSession(false);
         UserMaster user = (UserMaster) session.getAttribute("user");
         LogsMaster lm = new LogsMaster();
         lm.setlDate(dateFormat.format(date1)).setTime(timeFOrmat.format(date1)).setUserName(user.getUserFullName()).setIp(myIp).setAction("Add Coupon punch").setDrow("Y");
         logService.create(lm);
+
         request.setAttribute("successMessage",
                 "Information: Data inserted successfully");
         mv = addCouponPunch(request, response);

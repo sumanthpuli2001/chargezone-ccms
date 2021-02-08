@@ -26,4 +26,5 @@
     <bean id="reportDao1" class="com.bul.zydex.dao.Report.ReportDaoImpl" parent="sessionFactoryConfig" />
     <bean id="rechargeInfoDao1" class="com.bul.zydex.dao.RechargeInfo.RechargeInfoDaoImpl" parent="sessionFactoryConfig" />
     <bean id="logDao1" class="com.bul.zydex.dao.log.LogDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="sqlDataConnectDao1" class="com.bul.zydex.dao.SqlDataConnect.SqlDataConnectDaoImpl" parent="sessionFactoryConfig" />
 </beans>

@@ -111,7 +111,7 @@
                             <li><a href="report.htm?act=showListEmployee"><i class="fa fa-circle-o"></i>Day Coupon Report</a></li>
                             </c:if>
                             <c:if test="${fn:contains(sessionScope.wright[6],'R')}">
-                            <!--<li><a href="report.htm?act=showMachineList"><i class="fa fa-circle-o"></i>Machine Report</a></li>-->
+                            <li><a href="report.htm?act=showMachineList"><i class="fa fa-circle-o"></i>Machine Report</a></li>
                             <li><a href="report.htm?act=showAmountReport"><i class="fa fa-circle-o"></i>Actual Amount Report</a></li>
                             <li><a href="report.htm?act=showPaymentDeductionReport"><i class="fa fa-circle-o"></i>Payment Deduction Report</a></li>
                             <!--<li><a href="report.htm?act=searchOverTimeReport"><i class="fa fa-circle-o"></i>OverTime Report</a></li>-->

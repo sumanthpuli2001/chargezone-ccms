@@ -51,5 +51,8 @@
     <bean id="logService1" class="com.bul.zydex.service.Log.LogServiceImpl">
         <property name="logDao" ref="logDao1"/>
     </bean>
+    <bean id="sqlDataConnectService1" class="com.bul.zydex.service.SqlDataConnect.SqlDataConnectServiceImpl">
+        <property name="sqlDataConnectDao" ref="sqlDataConnectDao1"/>
+    </bean>
     
 </beans>

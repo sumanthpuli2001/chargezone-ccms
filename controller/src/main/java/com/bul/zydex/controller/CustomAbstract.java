@@ -17,6 +17,7 @@ import com.bul.zydex.model.RechargeMaster;
 import com.bul.zydex.model.ReportMaster;
 import com.bul.zydex.model.RightMaster;
 import com.bul.zydex.model.SpecialCouponMaster;
+import com.bul.zydex.model.SqlDataConnect;
 import com.bul.zydex.model.UserMaster;
 import com.bul.zydex.service.Apprentices.ApprenticesService;
 import com.bul.zydex.service.Contractor.ContractorService;
@@ -30,6 +31,7 @@ import com.bul.zydex.service.RechargeInfo.RechargeInfoService;
 import com.bul.zydex.service.Report.ReportService;
 import com.bul.zydex.service.Right.RightService;
 import com.bul.zydex.service.SpecialCoupon.SpecialCouponService;
+import com.bul.zydex.service.SqlDataConnect.SqlDataConnectService;
 import com.bul.zydex.service.UserMasterService;
 import com.bul.zydex.util.SendMail;
 import java.security.MessageDigest;
@@ -65,6 +67,7 @@ public abstract class CustomAbstract extends MultiActionController {
     protected RechargeInfoService<RechargeInfoMaster> rechargeInfoService;
     protected LogService<LogsMaster> logService;
     protected ReportService<ReportMaster> reportService;
+     protected SqlDataConnectService<SqlDataConnect> sqlDataConnectService;
 
     protected Header header;
     protected SendMail sendMail;
@@ -185,6 +188,15 @@ public abstract class CustomAbstract extends MultiActionController {
     public void setReportService(ReportService<ReportMaster> reportService) {
         this.reportService = reportService;
     }
+
+    public SqlDataConnectService<SqlDataConnect> getSqlDataConnectService() {
+        return sqlDataConnectService;
+    }
+
+    public void setSqlDataConnectService(SqlDataConnectService<SqlDataConnect> sqlDataConnectService) {
+        this.sqlDataConnectService = sqlDataConnectService;
+    }
+    
 
     @Override
     protected void bind(HttpServletRequest request, Object command)

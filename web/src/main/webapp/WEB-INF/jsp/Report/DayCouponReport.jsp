@@ -172,7 +172,7 @@
                                                                 <th rowspan="3">Code</th>
                                                                 <th rowspan="3">Name Of EMPLOYEE</th>
                                                                 <th colspan="25" style="text-align: center">Denomination No. of Coupons Issued</th>
-                                                                <th rowspan="2">Total</th>
+                                                                <!--<th rowspan="2">Total</th>-->
                                                             </tr>
                                                             <tr>
                                                                 <c:forEach var="coupon" items="${couponList}">
@@ -185,7 +185,7 @@
                                                                     <th colspan="1">Rs(S)${coupon.secondPrice}</th>
                                                                     <th colspan="1">Rs(A)${coupon.acPrive}</th>
                                                                     </c:forEach>
-                                                                <th> Amount </th>
+                                                                <th> Total Amount </th>
                                                             </tr>
                                                         </thead>
                                                     </c:otherwise>
@@ -280,7 +280,178 @@
                                                             <th style="text-align: center">${totalAmountFinal[status.count -1][0]}</th>
                                                         </tr>   
                                                     </c:forEach>
-                                                </tbody>                                           
+                                                </tbody>
+                                              
+                                                <thead>
+                                                    <tr>
+                                                        
+                                                        <th colspan="4" style="border: 1px solid black;">Total</th>
+                                                         
+                                                            <c:forEach var="coupon" items="${couponList}">
+                                                                <c:if test="${item ne 'All'}">
+                                                                    <c:if test="${coupon.srNo eq '1'}">
+                                                                    <th style="border: 1px solid black;">${teaActual}</th>
+                                                                    <th style="border: 1px solid black;">${teaSub}</th>
+                                                                    <th style="border: 1px solid black;">${tea}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '2'}">
+                                                                    <th style="border: 1px solid black;">${coffeeActual}</th>
+                                                                    <th style="border: 1px solid black;">${coffeeSub}</th>
+                                                                    <th style="border: 1px solid black;">${coffee}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '3'}">
+                                                                    <th style="border: 1px solid black;">${wetActual}</th>
+                                                                    <th style="border: 1px solid black;">${wetSub}</th>
+                                                                    <th style="border: 1px solid black;">${wet}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '4'}">
+                                                                     <th style="border: 1px solid black;">${dryActual}</th>
+                                                                    <th style="border: 1px solid black;">${drySub}</th>
+                                                                    <th style="border: 1px solid black;">${dry}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '5'}">
+                                                                    <th style="border: 1px solid black;">${mealActual}</th>
+                                                                    <th style="border: 1px solid black;">${mealsSub}</th>
+                                                                    <th style="border: 1px solid black;">${meals}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '6'}">
+                                                                   <th style="border: 1px solid black;">${ex1pActual}</th>
+                                                                    <th style="border: 1px solid black;">${ex1pSub}</th>
+                                                                    <th style="border: 1px solid black;">${ex1p}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '7'}">
+                                                                    <th style="border: 1px solid black;">${ex1dActual}</th>
+                                                                    <th style="border: 1px solid black;">${ex1dSub}</th>
+                                                                    <th style="border: 1px solid black;">${ex1d}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '8'}">
+                                                                    <th style="border: 1px solid black;">${ex1vActual}</th>
+                                                                    <th style="border: 1px solid black;">${ex1vSub}</th>
+                                                                    <th style="border: 1px solid black;">${ex1d}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '9'}">
+                                                                   <th style="border: 1px solid black;">${ex2cActual}</th>
+                                                                    <th style="border: 1px solid black;">${ex2cSub}</th>
+                                                                    <th style="border: 1px solid black;">${ex2c}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '10'}">
+                                                                    <th style="border: 1px solid black;">${ex2pActual}</th>
+                                                                    <th style="border: 1px solid black;">${ex2pSub}</th>
+                                                                    <th style="border: 1px solid black;">${ex2p}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '11'}">
+                                                                     <th style="border: 1px solid black;">${milkActual}</th>
+                                                                    <th style="border: 1px solid black;">${milkSub}</th>
+                                                                    <th style="border: 1px solid black;">${milk}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '12'}">
+                                                                    <th style="border: 1px solid black;">${agActual}</th>
+                                                                    <th style="border: 1px solid black;">${agSub}</th>
+                                                                    <th style="border: 1px solid black;">${ag}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '13'}">
+                                                                    <th style="border: 1px solid black;">${scActual}</th>
+                                                                    <th style="border: 1px solid black;">${scSub}</th>
+                                                                    <th style="border: 1px solid black;">${sc}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '14'}">
+                                                                    <th style="border: 1px solid black;">${buttermilkActual}</th>
+                                                                    <th style="border: 1px solid black;">${buttermilkSub}</th>
+                                                                    <th style="border: 1px solid black;">${buttermilk}</th>
+                                                                    <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                </c:if>
+                                                                <c:if test="${item eq 'All'}">
+                                                                    <c:if test="${coupon.srNo eq '1'}">
+                                                                    <th style="border: 1px solid black;">${teaActual}</th>
+                                                                    <th style="border: 1px solid black;">${teaSub}</th>
+                                                                    <th style="border: 1px solid black;">${tea}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '2'}">
+                                                                    <th style="border: 1px solid black;">${coffeeActual}</th>
+                                                                    <th style="border: 1px solid black;">${coffeeSub}</th>
+                                                                    <th style="border: 1px solid black;">${coffee}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '3'}">
+                                                                    <th style="border: 1px solid black;">${wetActual}</th>
+                                                                    <th style="border: 1px solid black;">${wetSub}</th>
+                                                                    <th style="border: 1px solid black;">${wet}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '4'}">
+                                                                    <th style="border: 1px solid black;">${dryActual}</th>
+                                                                    <th style="border: 1px solid black;">${drySub}</th>
+                                                                    <th style="border: 1px solid black;">${dry}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '5'}">
+                                                                    <th style="border: 1px solid black;">${mealActual}</th>
+                                                                    <th style="border: 1px solid black;">${mealsSub}</th>
+                                                                    <th style="border: 1px solid black;">${meals}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '6'}">
+                                                                    <th style="border: 1px solid black;">${ex1pActual}</th>
+                                                                    <th style="border: 1px solid black;">${ex1pSub}</th>
+                                                                    <th style="border: 1px solid black;">${ex1p}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '7'}">
+                                                                    <th style="border: 1px solid black;">${ex1dActual}</th>
+                                                                    <th style="border: 1px solid black;">${ex1dSub}</th>
+                                                                    <th style="border: 1px solid black;">${ex1d}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '8'}">
+                                                                    <th style="border: 1px solid black;">${ex1vActual}</th>
+                                                                    <th style="border: 1px solid black;">${ex1vSub}</th>
+                                                                    <th style="border: 1px solid black;">${ex1d}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '9'}">
+                                                                    <th style="border: 1px solid black;">${ex2cActual}</th>
+                                                                    <th style="border: 1px solid black;">${ex2cSub}</th>
+                                                                    <th style="border: 1px solid black;">${ex2c}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '10'}">
+                                                                    <th style="border: 1px solid black;">${ex2pActual}</th>
+                                                                    <th style="border: 1px solid black;">${ex2pSub}</th>
+                                                                    <th style="border: 1px solid black;">${ex2p}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '11'}">
+                                                                    <th style="border: 1px solid black;">${milkActual}</th>
+                                                                    <th style="border: 1px solid black;">${milkSub}</th>
+                                                                    <th style="border: 1px solid black;">${milk}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '12'}">
+                                                                    <th style="border: 1px solid black;">${agActual}</th>
+                                                                    <th style="border: 1px solid black;">${agSub}</th>
+                                                                    <th style="border: 1px solid black;">${ag}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '13'}">
+                                                                    <th style="border: 1px solid black;">${scActual}</th>
+                                                                    <th style="border: 1px solid black;">${scSub}</th>
+                                                                    <th style="border: 1px solid black;">${sc}</th>
+                                                                    </c:if>
+                                                                    <c:if test="${coupon.srNo eq '14'}">
+                                                                    <th style="border: 1px solid black;">${buttermilkActual}</th>
+                                                                    <th style="border: 1px solid black;">${buttermilkSub}</th>
+                                                                    <th style="border: 1px solid black;">${buttermilk}</th>
+                                                                   <th style="border: 1px solid black;">${newAmount}</th>
+                                                                    </c:if>
+                                                                </c:if>
+                                                            </c:forEach>
+                                                    </tr>
+                                                </thead>
+
                                             </table>
                                         </div>
                                     </div>

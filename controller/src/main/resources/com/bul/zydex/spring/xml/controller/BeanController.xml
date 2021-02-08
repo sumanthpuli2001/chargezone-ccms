@@ -33,6 +33,7 @@
         <property name="rechargeInfoService" ref="rechargeInfoService1"></property>
         <property name="logService" ref="logService1"></property>
         <property name="reportService" ref="reportService1"></property>
+        <property name="sqlDataConnectService" ref="sqlDataConnectService1"></property>
     </bean>
     <!--User-->
     <bean id="userMasterController1" class="com.bul.zydex.controller.UserMasterController" parent="controllerConfig" >

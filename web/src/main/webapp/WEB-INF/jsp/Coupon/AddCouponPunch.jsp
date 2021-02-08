@@ -69,7 +69,7 @@
                                                 <tr>
                                                     <th style="text-align: center; vertical-align: middle">Item</th>
                                                     <th style="text-align: center; vertical-align: middle">Quantity</th>
-                                                    <th style="text-align: center; vertical-align: middle">Price</th>
+                                                    <!--<th style="text-align: center; vertical-align: middle">Price</th>-->
                                                     <th style="text-align: center; vertical-align: middle">Add</th>
                                                         <c:choose>
                                                             <c:when test="${not empty finalFeeTypeList}">
@@ -94,13 +94,13 @@
                                                     <td style="text-align: center">
                                                         <input type="number" name="quantity1"  step="any" id="quantity1" min="0" class="form-control" >
                                                     </td>
-                                                    <td style="text-align: center">
+<!--                                                    <td style="text-align: center">
                                                         <select id="price1"  name="price1"  class="form-control">
                                                             <option value="A">Actual</option>
                                                             <option value="S1">Subsidies 1</option>
                                                             <option value="S2">Subsidies 2</option>
                                                         </select>   
-                                                    </td>
+                                                    </td>-->
                                                     <td style="text-align: center">
                                                         <span style='margin-top: 5px;'>
                                                             <input type="button" value="+" id="couponTypeCloneid" />
@@ -155,13 +155,13 @@
                         + "</select>"
                         + "</div></td>"
                         + "<td style=\"text-align: center\"><input type=\"number\" step=\"any\"  name='quantity" + tempCount6 + "' id='quantity" + tempCount6 + "' min=\"0\" class=\"form-control\"></td>"
-                        + "<td><div><select id=\"price" + tempCount6 + "\" name='price" + tempCount6 + "' class=\"form-control\">"
-//                        + "<option value =\"\"> --SELECT-- </option>"
-                        + "  <option value='A'>Actual</option>"
-                        + "<option value='S1'>Subsidies 1</option>"
-                        + "<option value='S2'>Subsidies 2</option>"
-                        + "</select>"
-                        + "</div></td>"
+//                        + "<td><div><select id=\"price" + tempCount6 + "\" name='price" + tempCount6 + "' class=\"form-control\">"
+////                        + "<option value =\"\"> --SELECT-- </option>"
+//                        + "  <option value='A'>Actual</option>"
+//                        + "<option value='S1'>Subsidies 1</option>"
+//                        + "<option value='S2'>Subsidies 2</option>"
+//                        + "</select>"
+//                        + "</div></td>"
                         + "<td style=\"text-align: center\">"
                         + "<span style='margin-top: 5px;'>"
                         + "<input type=\"button\"value=\"-\"  onclick=\"removeFeeType('" + tempCount6 + "');\"/>"

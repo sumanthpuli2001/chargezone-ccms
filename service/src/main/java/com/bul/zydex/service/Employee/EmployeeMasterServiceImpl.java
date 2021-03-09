@@ -66,5 +66,10 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
     public List readByRfId(String rfId) {
         return employeeMasterDao.readByRfId(rfId);
     }
+    
+    @Override
+     public List readByRFid(String rfId) {
+        return employeeMasterDao.readByRFid(rfId);
+    }
 
 }

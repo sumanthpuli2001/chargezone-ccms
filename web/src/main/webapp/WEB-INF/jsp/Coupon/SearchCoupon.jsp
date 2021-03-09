@@ -22,6 +22,18 @@
         function deleteClick(id) {
             window.location = 'specialCoupon.htm?act=deletePunched&checkId=' + id;
         }
+         function deleteCheck11() {
+         
+            var checkboxes = "";
+            checkboxes = document.getElementsByName('checkId');
+            for (var i = 0, n = checkboxes.length; i < n; i++) {
+                if (checkboxes[i].checked) {
+                    return true;
+                }
+            }
+            alert("Please, Select one or more record(s).");
+            return false;
+        }
     </script>
 
 
@@ -114,12 +126,17 @@
 
             </section>
         </form:form>
-        <form:form  method="post"  commandName="pdm"
+        <form:form  method="post" action="specialCoupon.htm?act=deleteCheck"  commandName="pdm"
                     name='form2'  onsubmit='return deleteCheck11();' class="form-horizontal" >
             <c:if test="${search ne 'none'}">
                 <section class="content">
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="col-md-12">
+                            <div>
+                                <button type="submit" class="btn btn-danger text-center" title=""  style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>
+                            </div>
+                            <br>
                             <div class="table table-bordered">
                                 <div class=" table table-bordered table-responsive">
                                     <table id="showEmpData" class="table table-bordered table-striped table-hover" style="" align="Center">
@@ -134,6 +151,7 @@
                                             <c:otherwise>
                                                 <thead>
                                                     <tr style="text-align: center">
+                                                         <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
                                                         <th>Sr.No</th>  
                                                         <th>Code</th>
                                                         <th>Name</th>
@@ -151,6 +169,9 @@
                                         <tbody>
                                             <c:forEach var="pds" items="${pds}" varStatus="status">
                                                 <tr>
+                                                    <td align="Center">
+                                                        <input type="checkbox" name="checkId" id="deptCheckId" value="${pds[1]}">
+                                                    </td>
                                                     <td> ${status.count}</td>
                                                     <td>${pds[2]}</td>
                                                     <td>${pds[0]}</td>

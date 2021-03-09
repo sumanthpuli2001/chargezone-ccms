@@ -103,5 +103,12 @@ public class EmployeeMasterDaoImpl<T> extends GenericsDAOImpl<T> implements Empl
                 + " WHERE a.rfId = '" + rfId + "'";
         return getHibernateTemplate().find(query);
     }
+    @Override
+    public List readByRFid(String rfId) {
+        String query = "Select a.employeeCode,a.rfId";
+        query += " FROM EmployeeMaster a"
+                + " WHERE a.rfId = '" + rfId + "'";
+        return getHibernateTemplate().find(query);
+    }
 
 }

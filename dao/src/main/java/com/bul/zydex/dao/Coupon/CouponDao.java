@@ -27,4 +27,5 @@ public interface CouponDao<T> extends GenericsDAO<T> {
     public List readByDrowDisable();
 
     public List readByCoupon(String parameter);
+    public List readByname(String item);
 }

@@ -71,4 +71,4 @@ public class ApprenticesDaoImpl<T> extends GenericsDAOImpl<T> implements Apprent
         return (ApprenticesMaster) getHibernateTemplate().find(query).get(0);
     }
 
-}
+        }

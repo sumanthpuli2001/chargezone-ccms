@@ -50,5 +50,10 @@ public class RechargeInfoServiceImpl<T> extends GenericsServiceImpl<T> implement
     public List readByRfidAndDate(String format, String rfId) {
         return rechargeInfoDao.readByRfidAndDate(format, rfId);
     }
+    
+     @Override
+    public List countAmount(String rfId) {
+      return rechargeInfoDao.countAmount(rfId);
+    }
 
 }

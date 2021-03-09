@@ -152,6 +152,7 @@ public class UserMasterController extends UserMasterAbstract {
         bind(request, userMaster);
         userMaster.setPassword(encription(userMaster.getPassword()));
         userMasterService.update(userMaster);
+        mv= showList(request, response);
         return mv;
 
     }

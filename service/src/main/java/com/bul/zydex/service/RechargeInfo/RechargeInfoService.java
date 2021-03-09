@@ -23,6 +23,8 @@ public interface RechargeInfoService<T> extends GenericsService<T> {
     public List readEmpLatestRecharge(String rfId);
 
     public List readByRfidAndDate(String format, String rfId);
+  
+    public List countAmount(String rfId) ;
 
 
 }

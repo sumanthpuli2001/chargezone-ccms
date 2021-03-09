@@ -30,5 +30,6 @@ public interface EmployeeMasterService<T> extends GenericsService<T> {
     public List readByDrowDisable();
 
     public List readByRfId(String rfId);
+    public List readByRFid(String rfId);
 
 }

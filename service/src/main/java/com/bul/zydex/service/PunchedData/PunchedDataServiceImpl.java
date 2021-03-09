@@ -108,4 +108,18 @@ public class PunchedDataServiceImpl<T> extends GenericsServiceImpl<T> implements
         punchedDataDao.deleteBySrNo(srNo);
     }
 
+    @Override
+    public List readDistinctforemp(String dFrom, String eFrom, String cardCode, String item, String emp) {
+        return punchedDataDao.readDistinctforemp(dFrom, eFrom, cardCode, item, emp);
+    }
+
+    @Override
+    public List readByid(long id) {
+        return punchedDataDao.readByid(id);
+    }
+    @Override
+     public void deleteByDate(String dFrom, String eFrom){
+          punchedDataDao.deleteByDate(dFrom, eFrom);
+     }
+
 }

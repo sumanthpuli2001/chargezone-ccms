@@ -60,5 +60,8 @@ public class CouponServiceImpl<T> extends GenericsServiceImpl<T> implements Coup
     public List readByCoupon(String coupon) {
         return couponDao.readByCoupon(coupon);
     }
-
-}
+    @Override
+    public List readByname(String item) {
+        return couponDao.readByname(item);
+    }
+    }

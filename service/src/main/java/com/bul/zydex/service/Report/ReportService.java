@@ -22,4 +22,9 @@ public interface ReportService<T> extends GenericsService<T> {
 
     public void delteDataByCodeDate(String code, String tdate);
 
+    public List readByEmp(String dFrom, String eFrom, String type, String cardCode, String item, String empcode);
+     
+    public List readReport(String code, String date, String time, String item) ;
+     public void delteDataByDate(String dFrom, String eFrom);
+
 }

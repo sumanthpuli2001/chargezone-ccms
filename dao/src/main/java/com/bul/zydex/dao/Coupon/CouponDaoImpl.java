@@ -73,5 +73,13 @@ public class CouponDaoImpl<T> extends GenericsDAOImpl<T> implements CouponDao<T>
         return getHibernateTemplate().find(query);
 
     }
+    
+     @Override
+    public List readByname(String item) {
+        String query = " Select a.srNo,a.couponType from CouponMaster a where a.srNo='" + item + "'";
+//                + " group by a.couponType ";
+        return getHibernateTemplate().find(query);
 
-}
+    }
+    
+    }

@@ -31,13 +31,14 @@ public class HomeController extends HomeAbstract {
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String CurrentDate = sdf.format(d);
+        String loginName = user.getLoginName();
 
         //------for Log entry---------
         LogsMaster lm = new LogsMaster();
         Date date = new Date();
         lm.setlDate(dateFormat.format(date)).setTime(timeFOrmat.format(date)).setUserName(user.getUserFullName()).setIp(myIp).setAction("Login").setDrow("Y");
         logService.create(lm);
-
+        request.setAttribute("loginName", loginName);
         request.setAttribute("CurrentDate", CurrentDate);
         mv.setViewName("Common/Home");
         return mv;
@@ -68,6 +69,6 @@ public class HomeController extends HomeAbstract {
         logService.create(lm);
         mv.setViewName("Log/Loglist");
         return mv;
-    }
+    } 
 
 }

@@ -46,5 +46,8 @@ public interface PunchedDataDao<T> extends GenericsDAO<T> {
     public List readByDateDiff(String dFrom, String eFrom);
 
     public void deleteBySrNo(long srNo);
+       public List readDistinctforemp(String dFrom, String eFrom, String cardCode, String item,String emp);
+       public List readByid(long id) ;
+        public void deleteByDate(String dFrom, String eFrom);
 
 }

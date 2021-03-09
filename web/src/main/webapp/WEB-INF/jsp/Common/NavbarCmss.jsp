@@ -27,7 +27,8 @@
                         <i class="fa fa-home fa-lg" style="color: #424242;"></i> <span style="color: #424242;">Homepage</span>
                     </a>
                 </li>
-                ${sessionScope.valueOfAll}
+              
+                <c:if test="${fn:contains(sessionScope.wright[6],'R')}">
                 <li class="treeview" style="color: #585858;">
                     <a href="#" style="background: #fff;">
                         <i class="fa fa-pie-chart fa-lg" style="color: #585858;"></i>
@@ -52,6 +53,8 @@
                             </c:if>
                     </ul>
                 </li>
+                </c:if>
+                <c:if test="${fn:contains(sessionScope.wright[6],'R')}">
                 <li class="treeview" style="color: #585858;">
                     <a href="#" style="background: #fff;">
                         <i class="glyphicon glyphicon-gift" style="color: #585858;"></i>
@@ -72,6 +75,8 @@
                         <li><a href="specialCoupon.htm?act=searchPunch"><i class="fa fa-circle-o"></i>Edit punch</a></li>
                     </ul>
                 </li>
+                </c:if>
+                <c:if test="${fn:contains(sessionScope.wright[6],'R')}">
                 <li class="treeview" style="color: #585858;">
                     <a href="#" style="background: #fff;">
                         <i class="fa fa-rupee fa-lg" style="color: #585858;"></i>
@@ -85,6 +90,7 @@
                             <%--</c:if>--%>
                     </ul>
                 </li>
+                </c:if>
                 <c:if test="${fn:contains(sessionScope.wright[6],'R')}">
                     <li class="treeview" style="color: #585858;">
                         <a href="#" style="background: #fff;">
@@ -97,6 +103,7 @@
                         </ul>
                     </li>
                 </c:if>
+                   
                 <li class="treeview" style="color: #585858;">
                     <a href="#" style="background: #fff;">
                         <i class="glyphicon glyphicon-filter" style="color: #585858;"></i>

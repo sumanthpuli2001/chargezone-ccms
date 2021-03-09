@@ -67,14 +67,14 @@
                             </c:if>
                             <div class="form-group" style="padding: 0px; margin-top: 50px;" >
                                 <div class="col-sm-12">
-                                    <form:input path="loginName" value="${userName}" cssClass="contact-subject form-control" placeholder="Enter User Name" onchange="formFieldManager();"></form:input>
+                                    <form:input path="loginName" value="${userName}" cssClass="contact-subject form-control" placeholder="Enter User Name" onchange="formFieldManager();" autocomplete="off" readonly="true" ></form:input>
                                     </div>
                                     <hr style="clear:both;border: 0px;">
                                     <div class="col-sm-12">
                                         <label class="sr-only" for="contact-subject">Password:</label>
                                     </div>
                                     <div class="col-sm-12">
-                                    <form:password path="password" value="${password}" cssClass="contact-subject form-control" placeholder="Password"></form:password>
+                                    <form:password path="password" value="${password}" cssClass="contact-subject form-control" placeholder="Password" autocomplete="off" readonly ="true"></form:password>
                                     </div>
                                     <div class="col-sm-4">
                                         <input type="hidden" value="1"/>

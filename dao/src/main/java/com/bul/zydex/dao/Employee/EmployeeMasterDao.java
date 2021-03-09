@@ -30,4 +30,5 @@ public interface EmployeeMasterDao<T> extends GenericsDAO<T> {
     public List readByDrowDisable();
 
     public List readByRfId(String rfId);
+     public List readByRFid(String rfId);
 }

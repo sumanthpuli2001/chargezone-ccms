@@ -67,5 +67,15 @@ public class RechargeInfoDaoImpl<T> extends GenericsDAOImpl<T> implements Rechar
                 + " and (STR_TO_DATE(a.date,'%Y-%m-%d') = STR_TO_DATE('" + date + "', '%Y-%m-%d')) ";
         return getHibernateTemplate().find(quey);
     }
+    
+     @Override
+    public List countAmount(String rfId) {
+        String quey = " select a.id,a.amount,a.rfId,a.date,a.rAmount "
+                + "From RechargeInfoMaster a "
+                + "where a.rfId='" + rfId + "'"
+                + " order by a.id desc limit 1 ";
+        return getHibernateTemplate().find(quey);
+
+    }
 
 }

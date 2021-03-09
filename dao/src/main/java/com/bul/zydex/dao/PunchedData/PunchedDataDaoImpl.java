@@ -260,6 +260,27 @@ public class PunchedDataDaoImpl<T> extends GenericsDAOImpl<T> implements Punched
         return getHibernateTemplate().find(query);
 
     }
+    
+     @Override
+    public List readDistinctforemp(String dFrom, String eFrom, String cardCode, String item,String emp) {
+        String Condition = " and 1 = 1 ";
+        if (cardCode != "" && cardCode != null) {
+            Condition += " and a.empCode='" + cardCode + "' ";
+        }
+        if (!item.equals("All") && item != "") {
+            String itemCode = Integer.parseInt(item) < 10 ? "0" + item : item;
+            Condition += " and a.item='" + itemCode + "'";
+        }
+
+        String query = " Select distinct a.empCode "
+                + " from PunchedDataMaster a "
+                + " where STR_TO_DATE(a.lDate,'%Y-%m-%d') BETWEEN STR_TO_DATE('" + dFrom + "', '%Y-%m-%d') and STR_TO_DATE('" + eFrom + "', '%Y-%m-%d')"
+                + "  and  a.empCode like '%" +emp +"'"
+                + Condition;
+
+        return getHibernateTemplate().find(query);
+
+    }
 
     @Override
     public List readByValues(String date, String empId, String item) {
@@ -317,5 +338,31 @@ public class PunchedDataDaoImpl<T> extends GenericsDAOImpl<T> implements Punched
         Query q = getSessionFactory().openSession().createQuery(query);
         q.executeUpdate();
     }
+    
+    @Override
+    public List readByid(long id) {
+        String query = " Select p.srNo, p.item,p.empCode,p.lDate,p.lTime,p.price"
+                
+                + " from PunchedDataMaster p "
+                + " where p.srNo ='" + id + "'";
+              
+
+//                + " and (STR_TO_DATE(c.lDate,'%Y-%m-%d') >= STR_TO_DATE('" + date + "', '%Y-%m-%d'))";
+        return getHibernateTemplate().find(query);
+
+    }
+    @Override
+    public void deleteByDate(String dFrom, String eFrom) {
+        String query = "";
+        query = " delete FROM PunchedDataMaster a"
+                //                + " WHERE a.srNo = '" + checkedValues + "'";
+                + " Where (STR_TO_DATE(a.lDate,'%Y-%m-%d') BETWEEN STR_TO_DATE('" + dFrom + "', '%Y-%m-%d') and STR_TO_DATE('" + eFrom + "', '%Y-%m-%d'))";
+
+        Query q = getSessionFactory().openSession().createQuery(query);
+        q.executeUpdate();
+
+    }
 
 }
+        
+        

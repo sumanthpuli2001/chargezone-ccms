@@ -6,6 +6,7 @@
 package com.bul.zydex.controller.Recharge;
 
 import com.bul.zydex.controller.CustomAbstract;
+import com.bul.zydex.model.ApprenticesMaster;
 import com.bul.zydex.model.ContractorMaster;
 import com.bul.zydex.model.EmployeeMaster;
 import com.bul.zydex.model.LogsMaster;
@@ -166,8 +167,40 @@ public class RechargeController extends CustomAbstract {
                 mv.setViewName("Recharge/RechargeCard");
             }
         } else {
-            request.setAttribute("failureMessage", "No User found with this RFID.");
-            mv = searchRecharge(request, response);
+            RechargeInfoMaster rechargeInfoMaster = new RechargeInfoMaster();
+            List empList = employeeMasterService.readByRfId(rfID);
+            if (!empList.isEmpty()) {
+                EmployeeMaster employeeMaster = (EmployeeMaster) empList.get(0);
+                name = employeeMaster.getName();
+            }
+            else {
+                empList = contractorService.readByRfId(rfID);
+                if (!empList.isEmpty()) {
+                    ContractorMaster contractorMaster = (ContractorMaster) empList.get(0);
+                    name = contractorMaster.getName();
+                }
+//                } else {
+//                    empList = apprenticesService.readByRfId(rfID);
+//                    if (!empList.isEmpty()) {
+//                        ApprenticesMaster apprenticesMaster = (ApprenticesMaster) empList.get(0);
+//                        name = apprenticesMaster.getName();
+//                    }
+//                }
+            }
+              
+                String number= "0";
+                  String rAmount= "0";
+                    String Date= (dateFormat.format(date));
+                      rechargeInfoMaster.setAmount(number);
+                      rechargeInfoMaster.setDate(Date);
+            rechargeInfoMaster.setrAmount(rAmount);
+            rechargeInfoMaster.setRfId(rfID);
+         
+//            rechargeInfoService.create(rechargeInfoMaster);
+            request.setAttribute("name", name);
+            request.setAttribute("rechargeInfoMaster", rechargeInfoMaster);
+//            request.setAttribute("failureMessage", "No User found with this RFID.");
+              mv.setViewName("Recharge/RechargeCard");
         }
         return mv;
     }

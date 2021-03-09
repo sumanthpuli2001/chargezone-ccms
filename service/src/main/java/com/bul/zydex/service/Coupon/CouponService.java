@@ -27,5 +27,6 @@ public interface CouponService<T> extends GenericsService<T> {
     public List readByDrowDisable();
 
     public List readByCoupon(String parameter);
-
+    public List readByname(String item);
+    
 }

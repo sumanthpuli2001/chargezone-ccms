@@ -87,9 +87,12 @@ public class ReportController extends ReportAbstract {
 
     public ModelAndView searchDayCoupon(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
+        HttpSession session = request.getSession(false);
+        UserMaster user = (UserMaster) session.getAttribute("user");
         String dFrom = request.getParameter("startDate");
         String eFrom = request.getParameter("endDate");
         String type = request.getParameter("type");
+        String empcd = "";
 //        String name = request.getParameter("name").trim();
         String cardCode = request.getParameter("cardCode");
         String item = request.getParameter("item");
@@ -169,11 +172,338 @@ public class ReportController extends ReportAbstract {
         int ex2ActualAvg = 0;
         int coffeeAvg = 0;
         int coffeeActualAvg = 0;
-        List rmDistinctList = punchedDataService.readDistinct(dFrom, eFrom, cardCode, item);
-        if (type.equals("D")) {
-            for (Object o : rmDistinctList) {
-                while (sdate.compareTo(edate) <= 0) {
-                    List rmList = punchedDataService.readByValues(sdf.format(sdate), "" + o, item);
+        if (user.getLoginName().equals("system")) {
+
+            List rmDistinctList = punchedDataService.readDistinct(dFrom, eFrom, cardCode, item);
+            if (type.equals("D")) {
+                for (Object o : rmDistinctList) {
+                    while (sdate.compareTo(edate) <= 0) {
+                        List rmList = punchedDataService.readByValues(sdf.format(sdate), "" + o, item);
+                        Double tAmount = 0.0;
+
+                        List personDetails = new ArrayList();
+                        List totalAmount = new ArrayList();
+
+                        List finalSubsActual = new ArrayList();
+
+                        if (flag) {
+                            couponListAll = couponService.readCoupon(item);
+                            flag = false;
+                        }
+                        for (Object o1 : rmList) {
+                            Object[] pdm = (Object[]) o1;
+                            CouponMaster cm = couponService.readById(Integer.parseInt("" + pdm[0]));
+                            finalSubsActual.add(cm.getCouponType());
+                            if (cm.getCouponPrice().equals(pdm[1])) {
+                                finalSubsActual.add(pdm[2]);
+                                finalSubsActual.add(0);
+                                finalSubsActual.add(0);
+                                //tea
+                                if (pdm[0].equals("01")) {
+                                    teaActual += Double.parseDouble("" + pdm[2]);
+                                    tea = tea + 0;
+                                    teaSub = 0;
+                                }
+                                //coffee
+                                if (pdm[0].equals("02")) {
+                                    coffeeActual += Double.parseDouble("" + pdm[2]);
+                                    coffee = coffee + 0;
+                                    coffeeSub = 0;
+                                }
+                                //ws
+                                if (pdm[0].equals("03")) {
+                                    wetActual += Double.parseDouble("" + pdm[2]);
+                                    wet = wet + 0;
+                                    wetSub = 0;
+                                }
+                                //ds
+                                if (pdm[0].equals("04")) {
+                                    dryActual += Double.parseDouble("" + pdm[2]);
+                                    dry = dry + 0;
+                                    drySub = 0;
+                                }
+                                //MEALS
+                                if (pdm[0].equals("05")) {
+                                    mealActual += Double.parseDouble("" + pdm[2]);
+                                    meals = meals + 0;
+                                    mealsSub = mealsSub + 0;
+
+                                }
+                                //ex1p
+                                if (pdm[0].equals("06")) {
+                                    ex1pActual += Double.parseDouble("" + pdm[2]);
+                                    ex1p = ex1p + 0;
+                                    ex1pSub = 0;
+                                }
+//                            //ex1d
+                                if (pdm[0].equals("07")) {
+                                    ex1dActual += Double.parseDouble("" + pdm[2]);
+                                    ex1d = ex1d + 0;
+                                    ex1dSub = 0;
+                                }
+                                //ex1v
+                                if (pdm[0].equals("08")) {
+                                    ex1vActual += Double.parseDouble("" + pdm[2]);
+                                    ex1v = ex1v + 0;
+                                    ex1vSub = 0;
+                                }
+                                //ex2c
+                                if (pdm[0].equals("09")) {
+                                    ex2cActual += Double.parseDouble("" + pdm[2]);
+                                    ex2c = ex2c + 0;
+
+                                    ex2cSub = 0;
+                                }
+                                //ex2p
+                                if (pdm[0].equals("10")) {
+                                    ex2pActual += Double.parseDouble("" + pdm[2]);
+                                    ex2p = ex2p + 0;
+                                    ex2pSub = 0;
+                                }
+                                //milk
+                                if (pdm[0].equals("11")) {
+                                    milkActual += Double.parseDouble("" + pdm[2]);
+                                    milk = milk + 0;
+                                    milkSub = 0;
+                                }
+                                //Ag
+                                if (pdm[0].equals("12")) {
+                                    agActual += Double.parseDouble("" + pdm[2]);
+                                    ag = ag + 0;
+                                    agSub = 0;
+                                }
+                                //sc
+                                if (pdm[0].equals("13")) {
+                                    scActual += Double.parseDouble("" + pdm[2]);
+                                    sc = sc + 0;
+                                    scSub = 0;
+                                }
+                                //bm
+                                if (pdm[0].equals("14")) {
+                                    buttermilkActual += Double.parseDouble("" + pdm[2]);
+                                    buttermilk = buttermilk + 0;
+                                    buttermilkSub = 0;
+
+                                }
+                            } else if (cm.getSecondPrice().equals(pdm[1])) {
+                                finalSubsActual.add(0);
+                                finalSubsActual.add(pdm[2]);
+                                finalSubsActual.add(0);
+
+                                //tea
+                                if (pdm[0].equals("01")) {
+                                    tea = tea + 0;
+                                    teaActual += Double.parseDouble("" + pdm[2]);
+                                    teaSub = 0;
+                                }
+                                //coffee
+                                if (pdm[0].equals("02")) {
+                                    coffee = coffee + 0;
+                                    coffeeActual += Double.parseDouble("" + pdm[2]);
+                                    coffeeSub = 0;
+                                }
+                                //ws
+                                if (pdm[0].equals("03")) {
+                                    wet = wet + 0;
+                                    wetActual += Double.parseDouble("" + pdm[2]);
+                                    wetSub = 0;
+                                }
+                                //ds
+                                if (pdm[0].equals("04")) {
+                                    dry = dry + 0;
+                                    dryActual += Double.parseDouble("" + pdm[2]);
+                                    drySub = 0;
+                                }
+                                //MEALS
+                                if (pdm[0].equals("05")) {
+                                    meals = meals + 0;
+                                    mealActual += Double.parseDouble("" + pdm[2]);
+                                    mealsSub = mealsSub + 0;
+                                }
+                                //ex1p
+                                if (pdm[0].equals("06")) {
+                                    ex1p = ex1p + 0;
+                                    ex1pActual += Double.parseDouble("" + pdm[2]);
+                                    ex1pSub = 0;
+                                }
+//                            //ex1d
+                                if (pdm[0].equals("07")) {
+                                    ex1d = ex1d + 0;
+                                    ex1dActual += Double.parseDouble("" + pdm[2]);
+                                    ex1dSub = 0;
+                                }
+                                //ex1v
+                                if (pdm[0].equals("08")) {
+                                    ex1v = ex1v + 0;
+                                    ex1vActual += Double.parseDouble("" + pdm[2]);
+                                    ex1vSub = 0;
+                                }
+                                //ex2c
+                                if (pdm[0].equals("09")) {
+                                    ex2c = ex2c + 0;
+                                    ex2cActual += Double.parseDouble("" + pdm[2]);
+                                    ex2cSub = 0;
+                                }
+                                //ex2p
+                                if (pdm[0].equals("10")) {
+                                    ex2p = ex2p + 0;
+                                    ex2pActual += Double.parseDouble("" + pdm[2]);
+                                    ex2pSub = 0;
+                                }
+                                //milk
+                                if (pdm[0].equals("11")) {
+                                    milk = milk + 0;
+                                    milkActual += Double.parseDouble("" + pdm[2]);
+                                    milkSub = 0;
+                                }
+                                //Ag
+                                if (pdm[0].equals("12")) {
+                                    ag = ag + 0;
+                                    agActual += Double.parseDouble("" + pdm[2]);
+                                    agSub = 0;
+                                }
+                                //sc
+                                if (pdm[0].equals("13")) {
+                                    sc = sc + 0;
+                                    scActual += Double.parseDouble("" + pdm[2]);
+                                    scSub = 0;
+                                }
+                                //bm
+                                if (pdm[0].equals("14")) {
+                                    buttermilk = buttermilk + 0;
+                                    buttermilkActual += Double.parseDouble("" + pdm[2]);
+                                    buttermilkSub = 0;
+
+                                }
+                            } else if (cm.getAcPrive().equals(pdm[1])) {
+                                finalSubsActual.add(0);
+                                finalSubsActual.add(0);
+                                finalSubsActual.add(pdm[2]);
+
+                                //tea
+                                if (pdm[0].equals("01")) {
+                                    tea = tea + 0;
+                                    teaSub = 0;
+                                    teaActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //coffee
+                                if (pdm[0].equals("02")) {
+                                    coffee = coffee + 0;
+                                    coffeeSub = 0;
+                                    coffeeActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //ws
+                                if (pdm[0].equals("03")) {
+                                    wet = wet + 0;
+                                    wetSub = 0;
+                                    wetActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //ds
+                                if (pdm[0].equals("04")) {
+                                    dry = dry + 0;
+                                    drySub = 0;
+                                    dryActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //MEALS
+                                if (pdm[0].equals("05")) {
+                                    meals = meals + 0;
+                                    mealsSub = mealsSub + 0;
+                                    mealActual += Double.parseDouble("" + pdm[2]);
+
+                                }
+                                //ex1p
+                                if (pdm[0].equals("06")) {
+                                    ex1p = ex1p + 0;
+                                    ex1pSub = 0;
+                                    ex1pActual += Double.parseDouble("" + pdm[2]);
+                                }
+//                            //ex1d
+                                if (pdm[0].equals("07")) {
+                                    ex1d = ex1d + 0;
+                                    ex1dSub = 0;
+                                    ex1dActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //ex1v
+                                if (pdm[0].equals("08")) {
+                                    ex1v = ex1v + 0;
+                                    ex1vSub = 0;
+                                    ex1vActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //ex2c
+                                if (pdm[0].equals("09")) {
+                                    ex2c = ex2c + 0;
+                                    ex2cSub = 0;
+                                    ex2cActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //ex2p
+                                if (pdm[0].equals("10")) {
+                                    ex2p = ex2p + 0;
+                                    ex2pSub = 0;
+                                    ex2pActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //milk
+                                if (pdm[0].equals("11")) {
+                                    milk = milk + 0;
+                                    milkSub = 0;
+                                    milkActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //Ag
+                                if (pdm[0].equals("12")) {
+                                    ag = ag + 0;
+                                    agSub = 0;
+                                    agActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //sc
+                                if (pdm[0].equals("13")) {
+                                    sc = sc + 0;
+                                    scSub = 0;
+                                    scActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //bm
+                                if (pdm[0].equals("14")) {
+                                    buttermilk = buttermilk + 0;
+                                    buttermilkSub = 0;
+                                    buttermilkActual += Double.parseDouble("" + pdm[2]);
+
+                                }
+                            }
+//                        finalSubsActual.add(pdm[2]);
+                            tAmount += (Double.parseDouble("" + pdm[1]) * Double.parseDouble("" + pdm[2]));
+
+                        }
+                        if (!rmList.isEmpty()) {
+                            finalList.add(finalSubsActual);
+
+                            totalAmount.add(tAmount);
+                            totalAmountFinal.add(totalAmount);
+                            newAmount = tAmount + newAmount;
+
+                            EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + o);
+
+                            personDetails.add(sdf.format(sdate));
+                            personDetails.add(o);
+                            personDetails.add(emp.getName());
+
+                            personDetailsFinal.add(personDetails);
+
+                        }
+                        String nxtDate = sdf.format(sdate.getTime() + MILLIS_IN_DAY);
+                        sdate = sdf.parse(nxtDate);
+                    }
+                    sdate = sdf.parse(dFrom);
+
+                }
+                //------for Log entry---------
+
+                LogsMaster lm = new LogsMaster();
+                Date date = new Date();
+                lm.setlDate(dateFormat.format(date)).setTime(timeFOrmat.format(date)).setUserName(user.getUserFullName()).setIp(myIp).setAction("Search Day Coupon").setDrow("Y");
+                logService.create(lm);
+            } else if (type.equals("M")) {
+                
+                for (Object o : rmDistinctList) {
+
+                    List rmList = punchedDataService.readBySumValues(sdf.format(sdate), sdf.format(edate), "" + o, item);
                     Double tAmount = 0.0;
 
                     List personDetails = new ArrayList();
@@ -193,7 +523,6 @@ public class ReportController extends ReportAbstract {
                             finalSubsActual.add(pdm[2]);
                             finalSubsActual.add(0);
                             finalSubsActual.add(0);
-                            //tea
                             if (pdm[0].equals("01")) {
                                 teaActual += Double.parseDouble("" + pdm[2]);
                                 tea = tea + 0;
@@ -284,8 +613,6 @@ public class ReportController extends ReportAbstract {
                             finalSubsActual.add(0);
                             finalSubsActual.add(pdm[2]);
                             finalSubsActual.add(0);
-
-                            //tea
                             if (pdm[0].equals("01")) {
                                 tea = tea + 0;
                                 teaActual += Double.parseDouble("" + pdm[2]);
@@ -374,8 +701,6 @@ public class ReportController extends ReportAbstract {
                             finalSubsActual.add(0);
                             finalSubsActual.add(0);
                             finalSubsActual.add(pdm[2]);
-
-                            //tea
                             if (pdm[0].equals("01")) {
                                 tea = tea + 0;
                                 teaSub = 0;
@@ -461,6 +786,7 @@ public class ReportController extends ReportAbstract {
                                 buttermilkActual += Double.parseDouble("" + pdm[2]);
 
                             }
+
                         }
 //                        finalSubsActual.add(pdm[2]);
                         tAmount += (Double.parseDouble("" + pdm[1]) * Double.parseDouble("" + pdm[2]));
@@ -472,32 +798,363 @@ public class ReportController extends ReportAbstract {
                         totalAmount.add(tAmount);
                         totalAmountFinal.add(totalAmount);
                         newAmount = tAmount + newAmount;
-
                         EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + o);
 
-                        personDetails.add(sdf.format(sdate));
+                        personDetails.add(sdf.format(sdate).split("-")[0] + "-" + sdf.format(sdate).split("-")[1]);
                         personDetails.add(o);
                         personDetails.add(emp.getName());
 
                         personDetailsFinal.add(personDetails);
 
                     }
-                    String nxtDate = sdf.format(sdate.getTime() + MILLIS_IN_DAY);
-                    sdate = sdf.parse(nxtDate);
-                }
-                sdate = sdf.parse(dFrom);
 
+                }
+                //------for Log entry---------
+
+                LogsMaster lm = new LogsMaster();
+                Date date = new Date();
+                lm.setlDate(dateFormat.format(date)).setTime(timeFOrmat.format(date)).setUserName(user.getUserFullName()).setIp(myIp).setAction("Searched Monthly coupon").setDrow("Y");
+                logService.create(lm);
             }
-            //------for Log entry---------
-            HttpSession session = request.getSession(false);
-            UserMaster user = (UserMaster) session.getAttribute("user");
-            LogsMaster lm = new LogsMaster();
-            Date date = new Date();
-            lm.setlDate(dateFormat.format(date)).setTime(timeFOrmat.format(date)).setUserName(user.getUserFullName()).setIp(myIp).setAction("Search Day Coupon").setDrow("Y");
-            logService.create(lm);
-        } else if (type.equals("M")) {
-            for (Object o : rmDistinctList) {
-                List rmList = punchedDataService.readBySumValues(sdf.format(sdate), sdf.format(edate), "" + o, item);
+        }
+        if (!user.getLoginName().equals("system")) {
+            List rmDistinctList1 = punchedDataService.readDistinctforemp(dFrom, eFrom, cardCode, item, user.getLoginName());
+            for (Object ob : rmDistinctList1) {
+                empcd = "" + ob;
+            }
+            List rmDistinctList = reportService.readByEmp(dFrom, eFrom, type, cardCode, item, user.getLoginName());
+            if (type.equals("D")) {
+                for (Object o : rmDistinctList) {
+                    Object[] reportName = (Object[]) o;
+                    while (sdate.compareTo(edate) <= 0) {
+                        List rmList = punchedDataService.readByValues(sdf.format(sdate), "" + "" + empcd, item);
+                        Double tAmount = 0.0;
+
+                        List personDetails = new ArrayList();
+                        List totalAmount = new ArrayList();
+
+                        List finalSubsActual = new ArrayList();
+
+                        if (flag) {
+                            couponListAll = couponService.readCoupon(item);
+                            flag = false;
+                        }
+                        for (Object o1 : rmList) {
+                            Object[] pdm = (Object[]) o1;
+                            CouponMaster cm = couponService.readById(Integer.parseInt("" + pdm[0]));
+                            finalSubsActual.add(cm.getCouponType());
+                            if (cm.getCouponPrice().equals(pdm[1])) {
+                                finalSubsActual.add(pdm[2]);
+                                finalSubsActual.add(0);
+                                finalSubsActual.add(0);
+                                //tea
+                                if (pdm[0].equals("01")) {
+                                    teaActual += Double.parseDouble("" + pdm[2]);
+                                    tea = tea + 0;
+                                    teaSub = 0;
+                                }
+                                //coffee
+                                if (pdm[0].equals("02")) {
+                                    coffeeActual += Double.parseDouble("" + pdm[2]);
+                                    coffee = coffee + 0;
+                                    coffeeSub = 0;
+                                }
+                                //ws
+                                if (pdm[0].equals("03")) {
+                                    wetActual += Double.parseDouble("" + pdm[2]);
+                                    wet = wet + 0;
+                                    wetSub = 0;
+                                }
+                                //ds
+                                if (pdm[0].equals("04")) {
+                                    dryActual += Double.parseDouble("" + pdm[2]);
+                                    dry = dry + 0;
+                                    drySub = 0;
+                                }
+                                //MEALS
+                                if (pdm[0].equals("05")) {
+                                    mealActual += Double.parseDouble("" + pdm[2]);
+                                    meals = meals + 0;
+                                    mealsSub = mealsSub + 0;
+
+                                }
+                                //ex1p
+                                if (pdm[0].equals("06")) {
+                                    ex1pActual += Double.parseDouble("" + pdm[2]);
+                                    ex1p = ex1p + 0;
+                                    ex1pSub = 0;
+                                }
+//                            //ex1d
+                                if (pdm[0].equals("07")) {
+                                    ex1dActual += Double.parseDouble("" + pdm[2]);
+                                    ex1d = ex1d + 0;
+                                    ex1dSub = 0;
+                                }
+                                //ex1v
+                                if (pdm[0].equals("08")) {
+                                    ex1vActual += Double.parseDouble("" + pdm[2]);
+                                    ex1v = ex1v + 0;
+                                    ex1vSub = 0;
+                                }
+                                //ex2c
+                                if (pdm[0].equals("09")) {
+                                    ex2cActual += Double.parseDouble("" + pdm[2]);
+                                    ex2c = ex2c + 0;
+
+                                    ex2cSub = 0;
+                                }
+                                //ex2p
+                                if (pdm[0].equals("10")) {
+                                    ex2pActual += Double.parseDouble("" + pdm[2]);
+                                    ex2p = ex2p + 0;
+                                    ex2pSub = 0;
+                                }
+                                //milk
+                                if (pdm[0].equals("11")) {
+                                    milkActual += Double.parseDouble("" + pdm[2]);
+                                    milk = milk + 0;
+                                    milkSub = 0;
+                                }
+                                //Ag
+                                if (pdm[0].equals("12")) {
+                                    agActual += Double.parseDouble("" + pdm[2]);
+                                    ag = ag + 0;
+                                    agSub = 0;
+                                }
+                                //sc
+                                if (pdm[0].equals("13")) {
+                                    scActual += Double.parseDouble("" + pdm[2]);
+                                    sc = sc + 0;
+                                    scSub = 0;
+                                }
+                                //bm
+                                if (pdm[0].equals("14")) {
+                                    buttermilkActual += Double.parseDouble("" + pdm[2]);
+                                    buttermilk = buttermilk + 0;
+                                    buttermilkSub = 0;
+
+                                }
+                            } else if (cm.getSecondPrice().equals(pdm[1])) {
+                                finalSubsActual.add(0);
+                                finalSubsActual.add(pdm[2]);
+                                finalSubsActual.add(0);
+
+                                //tea
+                                if (pdm[0].equals("01")) {
+                                    tea = tea + 0;
+                                    teaActual += Double.parseDouble("" + pdm[2]);
+                                    teaSub = 0;
+                                }
+                                //coffee
+                                if (pdm[0].equals("02")) {
+                                    coffee = coffee + 0;
+                                    coffeeActual += Double.parseDouble("" + pdm[2]);
+                                    coffeeSub = 0;
+                                }
+                                //ws
+                                if (pdm[0].equals("03")) {
+                                    wet = wet + 0;
+                                    wetActual += Double.parseDouble("" + pdm[2]);
+                                    wetSub = 0;
+                                }
+                                //ds
+                                if (pdm[0].equals("04")) {
+                                    dry = dry + 0;
+                                    dryActual += Double.parseDouble("" + pdm[2]);
+                                    drySub = 0;
+                                }
+                                //MEALS
+                                if (pdm[0].equals("05")) {
+                                    meals = meals + 0;
+                                    mealActual += Double.parseDouble("" + pdm[2]);
+                                    mealsSub = mealsSub + 0;
+                                }
+                                //ex1p
+                                if (pdm[0].equals("06")) {
+                                    ex1p = ex1p + 0;
+                                    ex1pActual += Double.parseDouble("" + pdm[2]);
+                                    ex1pSub = 0;
+                                }
+//                            //ex1d
+                                if (pdm[0].equals("07")) {
+                                    ex1d = ex1d + 0;
+                                    ex1dActual += Double.parseDouble("" + pdm[2]);
+                                    ex1dSub = 0;
+                                }
+                                //ex1v
+                                if (pdm[0].equals("08")) {
+                                    ex1v = ex1v + 0;
+                                    ex1vActual += Double.parseDouble("" + pdm[2]);
+                                    ex1vSub = 0;
+                                }
+                                //ex2c
+                                if (pdm[0].equals("09")) {
+                                    ex2c = ex2c + 0;
+                                    ex2cActual += Double.parseDouble("" + pdm[2]);
+                                    ex2cSub = 0;
+                                }
+                                //ex2p
+                                if (pdm[0].equals("10")) {
+                                    ex2p = ex2p + 0;
+                                    ex2pActual += Double.parseDouble("" + pdm[2]);
+                                    ex2pSub = 0;
+                                }
+                                //milk
+                                if (pdm[0].equals("11")) {
+                                    milk = milk + 0;
+                                    milkActual += Double.parseDouble("" + pdm[2]);
+                                    milkSub = 0;
+                                }
+                                //Ag
+                                if (pdm[0].equals("12")) {
+                                    ag = ag + 0;
+                                    agActual += Double.parseDouble("" + pdm[2]);
+                                    agSub = 0;
+                                }
+                                //sc
+                                if (pdm[0].equals("13")) {
+                                    sc = sc + 0;
+                                    scActual += Double.parseDouble("" + pdm[2]);
+                                    scSub = 0;
+                                }
+                                //bm
+                                if (pdm[0].equals("14")) {
+                                    buttermilk = buttermilk + 0;
+                                    buttermilkActual += Double.parseDouble("" + pdm[2]);
+                                    buttermilkSub = 0;
+
+                                }
+                            } else if (cm.getAcPrive().equals(pdm[1])) {
+                                finalSubsActual.add(0);
+                                finalSubsActual.add(0);
+                                finalSubsActual.add(pdm[2]);
+
+                                //tea
+                                if (pdm[0].equals("01")) {
+                                    tea = tea + 0;
+                                    teaSub = 0;
+                                    teaActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //coffee
+                                if (pdm[0].equals("02")) {
+                                    coffee = coffee + 0;
+                                    coffeeSub = 0;
+                                    coffeeActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //ws
+                                if (pdm[0].equals("03")) {
+                                    wet = wet + 0;
+                                    wetSub = 0;
+                                    wetActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //ds
+                                if (pdm[0].equals("04")) {
+                                    dry = dry + 0;
+                                    drySub = 0;
+                                    dryActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //MEALS
+                                if (pdm[0].equals("05")) {
+                                    meals = meals + 0;
+                                    mealsSub = mealsSub + 0;
+                                    mealActual += Double.parseDouble("" + pdm[2]);
+
+                                }
+                                //ex1p
+                                if (pdm[0].equals("06")) {
+                                    ex1p = ex1p + 0;
+                                    ex1pSub = 0;
+                                    ex1pActual += Double.parseDouble("" + pdm[2]);
+                                }
+//                            //ex1d
+                                if (pdm[0].equals("07")) {
+                                    ex1d = ex1d + 0;
+                                    ex1dSub = 0;
+                                    ex1dActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //ex1v
+                                if (pdm[0].equals("08")) {
+                                    ex1v = ex1v + 0;
+                                    ex1vSub = 0;
+                                    ex1vActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //ex2c
+                                if (pdm[0].equals("09")) {
+                                    ex2c = ex2c + 0;
+                                    ex2cSub = 0;
+                                    ex2cActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //ex2p
+                                if (pdm[0].equals("10")) {
+                                    ex2p = ex2p + 0;
+                                    ex2pSub = 0;
+                                    ex2pActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //milk
+                                if (pdm[0].equals("11")) {
+                                    milk = milk + 0;
+                                    milkSub = 0;
+                                    milkActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //Ag
+                                if (pdm[0].equals("12")) {
+                                    ag = ag + 0;
+                                    agSub = 0;
+                                    agActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //sc
+                                if (pdm[0].equals("13")) {
+                                    sc = sc + 0;
+                                    scSub = 0;
+                                    scActual += Double.parseDouble("" + pdm[2]);
+                                }
+                                //bm
+                                if (pdm[0].equals("14")) {
+                                    buttermilk = buttermilk + 0;
+                                    buttermilkSub = 0;
+                                    buttermilkActual += Double.parseDouble("" + pdm[2]);
+
+                                }
+                            }
+//                        finalSubsActual.add(pdm[2]);
+                            tAmount += (Double.parseDouble("" + pdm[1]) * Double.parseDouble("" + pdm[2]));
+
+                        }
+                        if (!rmList.isEmpty()) {
+                            finalList.add(finalSubsActual);
+
+                            totalAmount.add(tAmount);
+                            totalAmountFinal.add(totalAmount);
+                            newAmount = tAmount + newAmount;
+
+                            EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + empcd);
+
+                            personDetails.add(sdf.format(sdate));
+                            personDetails.add(empcd);
+                            personDetails.add(emp.getName());
+
+                            personDetailsFinal.add(personDetails);
+
+                        }
+                        String nxtDate = sdf.format(sdate.getTime() + MILLIS_IN_DAY);
+                        sdate = sdf.parse(nxtDate);
+                    }
+                    sdate = sdf.parse(dFrom);
+
+                }
+                //------for Log entry---------
+
+                LogsMaster lm = new LogsMaster();
+                Date date = new Date();
+                lm.setlDate(dateFormat.format(date)).setTime(timeFOrmat.format(date)).setUserName(user.getUserFullName()).setIp(myIp).setAction("Search Day Coupon").setDrow("Y");
+                logService.create(lm);
+            } else if (type.equals("M")) {
+
+                for (Object o : rmDistinctList1) {
+                    
+                    empcd = "" + o;
+                }
+                List rmList = punchedDataService.readBySumValues(sdf.format(sdate), sdf.format(edate), "" + empcd, item);
                 Double tAmount = 0.0;
 
                 List personDetails = new ArrayList();
@@ -792,24 +1449,22 @@ public class ReportController extends ReportAbstract {
                     totalAmount.add(tAmount);
                     totalAmountFinal.add(totalAmount);
                     newAmount = tAmount + newAmount;
-                    EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + o);
+                    EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + empcd);
 
                     personDetails.add(sdf.format(sdate).split("-")[0] + "-" + sdf.format(sdate).split("-")[1]);
-                    personDetails.add(o);
+                    personDetails.add(empcd);
                     personDetails.add(emp.getName());
 
                     personDetailsFinal.add(personDetails);
 
                 }
 
+                //------for Log entry---------
+                LogsMaster lm = new LogsMaster();
+                Date date = new Date();
+                lm.setlDate(dateFormat.format(date)).setTime(timeFOrmat.format(date)).setUserName(user.getUserFullName()).setIp(myIp).setAction("Searched Monthly coupon").setDrow("Y");
+                logService.create(lm);
             }
-            //------for Log entry---------
-            HttpSession session = request.getSession(false);
-            UserMaster user = (UserMaster) session.getAttribute("user");
-            LogsMaster lm = new LogsMaster();
-            Date date = new Date();
-            lm.setlDate(dateFormat.format(date)).setTime(timeFOrmat.format(date)).setUserName(user.getUserFullName()).setIp(myIp).setAction("Searched Monthly coupon").setDrow("Y");
-            logService.create(lm);
         }
 
         request.setAttribute("dFrom", dFrom);
@@ -1319,8 +1974,8 @@ public class ReportController extends ReportAbstract {
 
         FileWriter fw = new FileWriter(backupFile);
         Runtime runtime = Runtime.getRuntime();
-        Process child = runtime.exec("C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump --user=root --password=root --lock-all-tables --opt ccms");
-
+//        Process child = runtime.exec("C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump --user=root --password=root --lock-all-tables --opt ccms");
+        Process child = runtime.exec("C:\\Program Files (x86)\\MySQL\\MySQL Server 5.5\\bin\\mysqldump.exe --user=root --password=root --lock-all-tables --opt ccms");
         InputStreamReader irs = new InputStreamReader(child.getInputStream());
         BufferedReader br = new BufferedReader(irs);
 
@@ -1354,16 +2009,16 @@ public class ReportController extends ReportAbstract {
         String eFrom = request.getParameter("endDate");
 
         List<PunchedDataMaster> punchedData = punchedDataService.readByDateDiff(dFrom, eFrom);
-        punchedData.forEach(s -> {
+//        punchedData.forEach(s -> {
 
-            punchedDataService.deleteBySrNo(s.getSrNo());
-        });
-
+//            punchedDataService.deleteBySrNo(s.getSrNo());
+//        });
+        punchedDataService.deleteByDate(dFrom, eFrom);
         List<ReportMaster> reportData = reportService.readByDateDiff(dFrom, eFrom);
-        reportData.forEach(s -> {
-            reportService.delteDataByCodeDate(s.getCode(), s.getTdate());
-        });
-
+//        reportData.forEach(s -> {
+//            reportService.delteDataByCodeDate(s.getCode(), s.getTdate());
+//        });
+        reportService.delteDataByDate(dFrom, eFrom);
         //------for Log entry---------
         HttpSession session = request.getSession(false);
         UserMaster user = (UserMaster) session.getAttribute("user");

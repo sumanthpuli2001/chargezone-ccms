@@ -248,12 +248,24 @@
             <artifactId>jasperreports</artifactId>
             <version>5.2.0</version>
             <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.lowagie</groupId>
+                    <artifactId>itext</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>net.sourceforge.dynamicreports</groupId>
             <artifactId>dynamicreports-core</artifactId>
             <version>3.1.5</version>
             <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.lowagie</groupId>
+                    <artifactId>itext</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>commons-validator</groupId>

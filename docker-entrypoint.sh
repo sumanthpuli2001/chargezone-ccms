@@ -8,7 +8,7 @@ if [ -n "$PORT" ]; then
 fi
 
 # Set memory limits to fit within Render free tier (512MB RAM)
-export CATALINA_OPTS="$CATALINA_OPTS -Xms128m -Xmx384m -XX:+UseG1GC"
+export CATALINA_OPTS="-Xms128m -Xmx384m -XX:+UseG1GC"
 
 # Unpack ROOT.war if present using jar
 if [ -f /usr/local/tomcat/webapps/ROOT.war ]; then
@@ -20,30 +20,24 @@ if [ -f /usr/local/tomcat/webapps/ROOT.war ]; then
   cd /usr/local/tomcat
 fi
 
-PROP_FILE="/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/com/bul/zydex/property/jdbc.properties"
+PROP_DIR="/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/com/bul/zydex/property"
+PROP_FILE="$PROP_DIR/jdbc.properties"
 
-if [ -f "$PROP_FILE" ]; then
+if [ -d "$PROP_DIR" ]; then
   echo "==> Configuring database settings..."
-  if [ -n "$JDBC_URL" ]; then
-    echo "==> Setting jdbc.url: $JDBC_URL"
-    sed -i "s|^jdbc.url.*|jdbc.url = $JDBC_URL|g" "$PROP_FILE"
-    export CATALINA_OPTS="$CATALINA_OPTS -Djdbc.url=$JDBC_URL"
-  fi
-  if [ -n "$JDBC_USERNAME" ]; then
-    echo "==> Setting jdbc.username: $JDBC_USERNAME"
-    sed -i "s|^jdbc.username.*|jdbc.username = $JDBC_USERNAME|g" "$PROP_FILE"
-    export CATALINA_OPTS="$CATALINA_OPTS -Djdbc.username=$JDBC_USERNAME"
-  fi
-  if [ -n "$JDBC_PASSWORD" ]; then
-    echo "==> Setting jdbc.password"
-    sed -i "s|^jdbc.password.*|jdbc.password = $JDBC_PASSWORD|g" "$PROP_FILE"
-    export CATALINA_OPTS="$CATALINA_OPTS -Djdbc.password=$JDBC_PASSWORD"
-  fi
-  if [ -n "$JDBC_DATABASE" ]; then
-    echo "==> Setting jdbc.database: $JDBC_DATABASE"
-    sed -i "s|^jdbc.database.*|jdbc.database = $JDBC_DATABASE|g" "$PROP_FILE"
-    export CATALINA_OPTS="$CATALINA_OPTS -Djdbc.database=$JDBC_DATABASE"
-  fi
+  cat << EOF > "$PROP_FILE"
+jdbc.database = ${JDBC_DATABASE:-eprocsuite_chargezone}
+jdbc.driverClassName = com.mysql.jdbc.Driver
+jdbc.url = ${JDBC_URL:-jdbc:mysql://localhost:3306/eprocsuite_chargezone}
+jdbc.username = ${JDBC_USERNAME:-root}
+jdbc.password = ${JDBC_PASSWORD:-root}
+jdbc2.database = ${JDBC_DATABASE:-eprocsuite_chargezone}
+jdbc2.driverClassName = com.mysql.jdbc.Driver
+jdbc2.url = ${JDBC_URL:-jdbc:mysql://localhost:3306/eprocsuite_chargezone}
+jdbc2.username = ${JDBC_USERNAME:-root}
+jdbc2.password = ${JDBC_PASSWORD:-root}
+EOF
+  echo "==> Database properties configured successfully."
 fi
 
 # Ensure log directory exists

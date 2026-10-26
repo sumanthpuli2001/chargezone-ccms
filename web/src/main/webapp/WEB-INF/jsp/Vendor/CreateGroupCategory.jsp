@@ -1,0 +1,99 @@
+<%-- 
+    Document   : CreateGroupCategory
+    Created on : Nov 29, 2024, 5:40:09 PM
+    Author     : Admin
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <%@include file="/WEB-INF/jsp/Common/HeaderNew.jsp"%>
+    <head>
+        <title>Create Group Category</title>
+    </head>
+
+    <body>
+        <main class="d-flex align-items-end justify-content-end">
+            <%@include file="/WEB-INF/jsp/Common/NavbarNew.jsp"%>
+
+            <section class="main-content">
+                <form:form action="group.htm?act=submitGroupCategory" method="post" commandName=""
+                           class="form-horizontal" role="form">
+                    <div class="content-top rounded-3 mb-0 d-flex align-items-center justify-content-between sticky-model0">
+                        <div class="page-title d-flex align-items-center">
+                            <div class="toggle-sidebar d-flex align-items-center justify-content-center mr-2">
+                                <img src="StorageYard/assets/images/menu-collapse.svg" class="fa-bars" onload="SVGInject(this)" alt="Menu collapse">
+                                <img src="StorageYard/assets/images/menu-expand.svg" class="fa-bars-sort" onload="SVGInject(this)" alt="Menu collapse">
+                            </div>
+
+                            <h5 class="fw-600 mb-0">Create Group Category</h5>
+                        </div>
+                        <div class="cta d-flex align-items-center">
+                            <a href="group.htm?act=showGroupCategoryList" class="btn theme-btn light-btn mr-3">Back</a>
+                        </div>
+                    </div>
+                    
+                    <c:if test="${!empty failureMessage}">
+                        <div class="fadeOutEffect alert alert-danger mt-2 mb-2" style="display: flex; align-items: center; gap: 12px; background: #FFF3F3; color: #D8000C; font-size: 12px; padding: 5px 10px; border-radius: 8px; border: 1px solid #D8000C; box-shadow: 2px 2px 10px rgba(216, 0, 12, 0.2); position: relative; overflow: hidden; max-width: 100%; margin: auto;">
+                            <div style="background: #D8000C; color: white; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 14px;">!</div>
+                            <div>
+                                <strong>Note:</strong> <strong class="text-danger fs-13">${failureMessage} </strong><br>                            
+                            </div>
+                        </div>
+                    </c:if>
+                    <c:if test="${!empty successMessage}">
+                        <div class="fadeOutEffect alert alert-info mt-2 mb-2" style="display: flex; align-items: center; gap: 12px; background: #F0FFF4; color: #0F5132; font-size: 12px; padding: 5px 10px; border-radius: 8px; border: 1px solid #198754; box-shadow: 2px 2px 10px rgba(25, 135, 84, 0.2); position: relative; overflow: hidden; max-width: 100%; margin: auto;">                        
+                            <div style="background: #198754; color: white; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 14px; ">✓</div>  
+                            <div>                             
+                                <strong>Note:</strong> <strong class="text-success fs-13">${successMessage} </strong><br>                            
+                            </div>
+                        </div>
+                    </c:if>
+                    
+                    <hr>
+                    <div style="display: flex; align-items: center; gap: 12px; background: #FFF3F3; color: #D8000C; font-size: 12px; padding: 5px 10px; border-radius: 8px; border: 1px solid #D8000C; box-shadow: 2px 2px 10px rgba(216, 0, 12, 0.2); position: relative; overflow: hidden; max-width: 100%; margin: auto;">
+                        <div style="background: #D8000C; color: white; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 14px;">!</div>
+                        <div>
+                            <span style="font-weight: bold;">*</span> Fields marked with an asterisk are mandatory.
+                        </div>
+                    </div>
+                    
+
+                    <div class="rounded-4 mt-4">
+                        <div class="row mb-3">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">Group  Name :<span class="text-danger">*</span></label>
+                                    <select class="select-input" id="groupName" name="groupName" required>
+                                        <option value="">--select--</option>
+                                        <c:forEach var="list" items="${list}">
+                                            <option value="${list.id}">${list.groupName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label">Group Category Name :<span class="text-danger">*</span></label>
+                                    <input class="input-field" name="groupCategoryName" id="groupCategoryName"  required />
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-12">
+                                <div class="form-group">    
+                                    <div style="display: flex;  justify-content: center;">
+                                        <button type="submit" class="btn theme-btn">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </form:form>
+            </section>
+        </main> 
+    </body>
+
+    <%@include file="/WEB-INF/jsp/Common/NewUIFooter.jsp"%>
+</html>

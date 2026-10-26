@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.AocFormHistory" table="aoc_form_history" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="documentNo" type="string">    
+            <column name="document_no" />
+        </property>
+        <property name="hubDepoName" type="string">    
+            <column name="hub_depo_name"     />
+        </property>
+         <property name="bb2" type="string">    
+            <column name="b_2_b"     />
+        </property>
+         <property name="bbc22" type="string">    
+            <column name="b_2_b_2_c"     />
+        </property>
+          <property name="hubDepoAddress" type="string">    
+            <column name="hub_depo_address"     />
+        </property>
+        <property name="clientProjectName" type="string">    
+            <column name="client_project_name"     />
+        </property>
+         <property name="googleCoordinates" type="string">    
+            <column name="google_co_ordinates"     />
+        </property>
+        <property name="pcTypeCar" type="string">    
+            <column name="pc_type_car"     />
+        </property>
+        <property name="pcTypeBus" type="string">    
+            <column name="pc_type_bus"     />
+        </property>
+        <property name="pcTypeTruckLmv" type="string">    
+            <column name="pc_type_truck_lmv"     />
+        </property>
+        <property name="other" type="string">    
+            <column name="others"     />
+        </property>
+         <property name="finacialModelCapex" type="string">    
+            <column name="financial_model_capex"     />
+        </property>
+          <property name="finacialModelOpex" type="string">    
+            <column name="financial_model_opex"     />
+        </property>
+         <property name="coOrdinates" type="string">    
+            <column name="co_ordinates"     />
+        </property>
+          <property name="firstName" type="string">    
+            <column name="first_name"     />
+        </property>
+         <property name="middleName" type="string">    
+            <column name="middle_name"     />
+        </property>
+         <property name="lastName" type="string">    
+            <column name="last_name"     />
+        </property>
+         <property name="mobileNo" type="string">    
+            <column name="mobile_no"     />
+        </property>
+        <property name="alternateMobileNo" type="string">    
+            <column name="alternate_mobile_no"     />
+        </property>
+        <property name="email" type="string">    
+            <column name="email"     />
+        </property>
+        <property name="specificReqClients" type="string">    
+            <column name="specific_req_clinets"     />
+        </property>
+        <property name="assumptionSheet" type="string">    
+            <column name="assumption_sheet"     />
+        </property>
+         <property name="assumptionRefNo" type="string">    
+            <column name="assumption_ref_no"     />
+        </property>
+         <property name="assumptionDate" type="string">    
+            <column name="assumption_date"     />
+        </property>
+        <property name="estimatedBoq" type="string">    
+            <column name="estimated_boq"     />
+        </property>
+        <property name="estimatedRefNo" type="string">    
+            <column name="estimated_ref_no"     />
+        </property>
+         <property name="estimatedDate" type="string">    
+            <column name="estimated_date"     />
+        </property>
+         <property name="loaLoi" type="string">    
+            <column name="loa_loi"     />
+        </property>
+         <property name="loaLoiRefNo" type="string">    
+            <column name="loa_ref_no"     />
+        </property>
+         <property name="loaLoiDate" type="string">    
+            <column name="loa_date"     />
+        </property>
+          <property name="agreement" type="string">    
+            <column name="agreement"     />
+        </property>
+         <property name="agreementRefNo" type="string">    
+            <column name="agreement_ref_no"     />
+        </property>
+        <property name="agreementDate" type="string">    
+            <column name="agreement_date"     />
+        </property>
+        <property name="layoutDrawings" type="string">    
+            <column name="layout_drawings"     />
+        </property>
+        <property name="layoutRefNo" type="string">    
+            <column name="layout_ref_no"     />
+        </property>
+        <property name="layoutDate" type="string">    
+            <column name="layout_date"     />
+        </property>
+         <property name="operations" type="string">    
+            <column name="operations"     />
+        </property>
+        <property name="operationsSign" type="string">    
+            <column name="operations_sign"     />
+        </property>
+        <property name="maintenance" type="string">    
+            <column name="maintenance"     />
+        </property>
+         <property name="maintenanceSign" type="string">    
+            <column name="maintenance_sign"     />
+        </property>
+         <property name="zeroDate" type="string">    
+            <column name="zero_date"     />
+        </property>
+         <property name="completionDate" type="string">    
+            <column name="completion_date"     />
+        </property>        
+        <property name="projectBudgetAllocated" type="string">    
+            <column name="project_budget_allocated"     />
+        </property>
+        <property name="authorityComments" type="string">    
+            <column name="authority_comments"     />
+        </property>
+          <property name="orderEffcectiveDate" type="string">    
+            <column name="order_effective_date"     />
+        </property>
+         <property name="newRevisionNo" type="string">    
+            <column name="new_revison_no"     />
+        </property>
+         <property name="budjectAllocationDate" type="string">    
+            <column name="budget_allocation_date"     />
+        </property>
+        <property name="reviewedBy" type="string">    
+            <column name="reviewed_by"     />
+        </property>
+         <property name="designation" type="string">    
+            <column name="designation"     />
+        </property>
+        <property name="signatureDate" type="string">    
+            <column name="signature_date"     />
+        </property>
+         <property name="oapMaster" type="java.lang.Integer">    
+            <column name="oap_master_id" length="200"  />
+        </property>
+           <property name="userId" type="string">    
+            <column name="user_id"     />
+        </property>
+         <property name="createdDate" type="string">    
+            <column name="created_date"     />
+        </property>    
+        <property name="flagStatus" type="java.lang.Integer">    
+            <column name="flag_status" length="200"  />
+        </property>
+        <property name="assignedName" type="string">    
+            <column name="assigned_name"     />
+        </property>
+         <property name="bc2" type="string">    
+            <column name="b_2_c"     />
+        </property>
+          <property name="pcsType" type="string">    
+            <column name="pcs_type"     />
+        </property>
+         <property name="chargeScope" type="string">    
+            <column name="charge_zone_scope"     />
+        </property>
+          <property name="clientScope" type="string">    
+            <column name="client_scope"     />
+        </property>
+        
+         <property name="assumptionAttach" type="string">    
+            <column name="assumption_attach"     />
+        </property>
+         <property name="estimatedAttach" type="string">    
+            <column name="estimated_attach"     />
+        </property>
+         <property name="loaAttach" type="string">    
+            <column name="loa_attach"     />
+        </property>
+         <property name="agreementAttach" type="string">    
+            <column name="agreement_attach"     />
+        </property>
+         <property name="layoutAttach" type="string">    
+            <column name="layout_attach"     />
+        </property>
+         <property name="country" type="string">    
+            <column name="country"     />
+        </property>
+          <property name="state" type="string">    
+            <column name="state"     />
+        </property>
+         <property name="city" type="string">    
+            <column name="city"     />
+        </property>
+          <property name="district" type="string">    
+            <column name="district"     />
+        </property>
+          <property name="houseNo" type="string">    
+            <column name="house_no"     />
+        </property>
+         <property name="projectCoordinater" type="string">    
+            <column name="project_coordinater"     />
+        </property>
+        <property name="comment" type="string">    
+            <column name="comment"     />
+        </property>
+        <property name="projectProfile" type="string">    
+            <column name="project_profile"   />
+        </property>
+        <property name="projectCenter" type="string">    
+            <column name="project_center"   />
+        </property>
+        <property name="companyCode" type="string">    
+            <column name="company_code"   />
+        </property>
+        <property name="plant" type="string">    
+            <column name="plant"   />
+        </property>
+        <property name="projectType" type="string">    
+            <column name="project_type"   />
+        </property>
+        <property name="projectCurrency" type="string">    
+            <column name="project_currency"   />
+        </property>
+        <property name="inverstmentProfile" type="string">    
+            <column name="investment_profile"   />
+        </property>
+        <property name="discom" type="string">    
+            <column name="discom"   />
+        </property>
+        <property name="noOfChargePoints" type="string">    
+            <column name="no_of_charge_points"   />
+        </property>
+        <property name="noOfCharger" type="string">    
+            <column name="no_of_charger"   />
+        </property>
+        <property name="overallStationCapacityKw" type="string">    
+            <column name="overall_capacity"   />
+        </property>
+        <property name="stationAcCapacityKw" type="string">    
+            <column name="station_capacity_ac"   />
+        </property>
+        <property name="stationDcCapacityKw" type="string">    
+            <column name="station_capacity_dc"   />
+        </property>
+        <property name="stationName" type="string">    
+            <column name="station_name"   />
+        </property>
+        <property name="stationType" type="string">    
+            <column name="station_type"   />
+        </property>
+        <property name="tenant" type="string">    
+            <column name="tenant"   />
+        </property>
+         <property name="connectionType" type="string">    
+            <column name="connection_type"   />
+        </property>
+         <property name="chargingRatePerUnit" type="string">    
+            <column name="charging_rate_per_unit"   />
+        </property>
+          <property name="history" type="string">    
+            <column name="history"   />
+        </property>
+        <property name="dateTime" type="string">    
+            <column name="date_time"   />
+        </property>
+        
+          <property name="aocId" type="java.lang.Integer">    
+            <column name="aoc_id"  />
+        </property>
+        <property name="siteSurvey" type="string">    
+            <column name="site_survey"   />
+        </property>
+        <property name="surveyRadio" type="java.lang.Integer">    
+            <column name="survey_radio"   />
+        </property>
+         <property name="projectTimelineCategory" type="string">    
+            <column name="project_timeline_category"   />
+        </property>
+        <property name="totalKwRating" type="string">    
+            <column name="total_kw_rating"   />
+        </property>
+        <property name="totalChargerCapacity" type="string">    
+            <column name="total_charger_capacity"   />
+        </property>
+        <property name="chargerStationAccessType" type="string">    
+            <column name="charger_station_access_type"   />
+        </property>
+        <property name="auxiliaryLoadOfStation" type="string">    
+            <column name="auxiliary_load_of_station" />
+        </property>
+        <property name="chargingRetePerUnit" type="string">    
+            <column name="charging_rete_per_unit"   />
+        </property>
+        <property name="noOfEvsToBeChanged" type="string">    
+            <column name="no_of_evs_to_be_changed"   />
+        </property>
+        <property name="additionOfNewChargerCapacity" type="string">    
+            <column name="addition_of_new_charger_capacity"   />
+        </property>
+        <property name="specificDateFromClient" type="string">    
+            <column name="specific_date_from_client"   />
+        </property>
+        <property name="anchoreCustomer" type="string">    
+            <column name="anchore_customer"  />
+        </property>
+        <property name="canopyVarient" type="string">    
+            <column name="canopy_varient"  />
+        </property>
+        <property name="scopeOfchargeZone" type="string">    
+            <column name="scope_of_chargezone"  />
+        </property>
+        <property name="totalMegaWatt" type="string">    
+            <column name="total_mega_watt"  />
+        </property>
+    </class>
+</hibernate-mapping>

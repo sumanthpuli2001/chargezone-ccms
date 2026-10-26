@@ -1,0 +1,8 @@
+.git
+*.sql
+*.docx
+*.pdf
+*.xlsx
+.nb-configuration.xml
+nbproject/
+**/.git

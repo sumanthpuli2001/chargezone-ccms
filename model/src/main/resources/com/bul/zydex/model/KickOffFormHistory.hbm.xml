@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.KickOffFormHistory" table="kickoff_form_history" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="hubLocation" type="string">    
+            <column name="hub_location"  />
+        </property>
+        <property name="dateTime" type="string">    
+            <column name="date_time"  />
+        </property>
+        <property name="projectName" type="string">    
+            <column name="project_name"  />
+        </property>
+        <property name="minutues" type="string">    
+            <column name="minutues_prepared_by"  />
+        </property>
+        <property name="designBasic" type="string">    
+            <column name="design_basic_report"  />
+        </property>
+        <property name="boq" type="string">    
+            <column name="boq"  />
+        </property>
+        <property name="laoLoi" type="string">    
+            <column name="loa_loi"  />
+        </property>
+        <property name="agreement" type="string">    
+            <column name="agreement"  />
+        </property>
+        <property name="approvedLayout" type="string">    
+            <column name="approved_layout_drawings"  />
+        </property>        
+        <property name="agendas" type="string">    
+            <column name="agendas"  />
+        </property>
+        <property name="issues" type="string">    
+            <column name="issues"  />
+        </property>
+        <property name="decisions" type="string">    
+            <column name="decisions"  />
+        </property>
+        <property name="planLayout" type="string">    
+            <column name="plan_layout_by_client"  />
+        </property>
+        <property name="projectBudget" type="string">    
+            <column name="project_budget_aoc"  />
+        </property>
+        <property name="projectTimeLine" type="string">    
+            <column name="project_timeline_aoc"  />
+        </property>
+        <property name="comments" type="string">    
+            <column name="comments"  />
+        </property>
+        <property name="designBasicReport" type="string">    
+            <column name="design_basic_report_no"  />
+        </property>
+        <property name="approvedLayoutDrawings" type="string">    
+            <column name="approved_layout_drawing_no"  />
+        </property>
+        <property name="boqNo" type="string">    
+            <column name="boq_no"  />
+        </property>
+        <property name="deliverableReleaseDate" type="string">    
+            <column name="deliverable_released_date"  />
+        </property>
+        <property name="reviewsComments" type="string">    
+            <column name="reviewer_comments"  />
+        </property>
+        <property name="newRevisonNo" type="string">    
+            <column name="new_revision_no"  />
+        </property>
+        <property name="preparedBy" type="string">    
+            <column name="prepared_by"  />
+        </property>
+        <property name="designation" type="string">    
+            <column name="designation"  />
+        </property>        
+        <property name="signatureDate" type="string">    
+            <column name="signature_date"  />
+        </property>
+        <property name="oapMaster" type="java.lang.Integer">    
+            <column name="oap_master_id" length="100"  />
+        </property>
+        <property name="flagStatus" type="java.lang.Integer">    
+            <column name="flag_status"  />
+        </property>
+        <property name="aocForm" type="java.lang.Integer">    
+            <column name="aoc_form_id" length="100"  />
+        </property>
+        <property name="userId" type="string">    
+            <column name="user_id"  />         
+        </property>
+        <property name="documentNo" type="string">    
+            <column name="document_no"  />
+        </property>
+        <property name="history" type="string">    
+            <column name="history"   />
+        </property>
+        <property name="dateTime1" type="string">    
+            <column name="date_time1"   />
+        </property>
+        <property name="komId" type="java.lang.Integer">    
+            <column name="kom_id"  />
+        </property>
+    </class>
+</hibernate-mapping>

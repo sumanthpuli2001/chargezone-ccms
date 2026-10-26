@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.KickOffAttendencesHistory" table="kickoff_attendences_history" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+    
+        <property name="kickoffFormId" type="java.lang.Integer">    
+            <column name="kickoff_form_id" length="200"  />
+        </property>
+        <property name="name" type="string">    
+            <column name="name"  />
+        </property>
+        <property name="rollInProject" type="string">    
+            <column name="roll_in_project"  />
+        </property>
+        <property name="email" type="string">    
+            <column name="email"  />
+        </property>
+        <property name="cellNo" type="string">    
+            <column name="cell_no"  />
+        </property>
+        <property name="aocId" type="java.lang.Integer">    
+            <column name="aoc_id"   />
+        </property>
+        <property name="history" type="string">    
+            <column name="history"  />
+        </property>
+        <property name="komAttendId" type="java.lang.Integer">    
+            <column name="kom_attend_id"   />
+        </property>
+    </class>
+</hibernate-mapping>

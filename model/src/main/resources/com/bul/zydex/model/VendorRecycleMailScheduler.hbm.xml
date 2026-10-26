@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorRecycleMailScheduler" table="vendor_recycle_mail_scheduler" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+     
+   
+        <property name="vendorInfoId" type="string">    
+            <column name="vendor_info_id" length="1000"  />
+        </property>
+        <property name="approvalName" type="string">    
+            <column name="approval_name" length="1000"  />
+        </property>       
+        <property name="approvalStatus" type="string">    
+            <column name="approval_status" length="1000"  />
+        </property>
+        <property name="dateTime" type="string">    
+            <column name="date_time" length="1000"  />
+        </property>
+        <property name="mailStatus" type="string">    
+            <column name="mail_status" length="1000"  />
+        </property>
+        <property name="finacialDateTime" type="string">    
+            <column name="finacial_date_time" length="1000"  />
+        </property>
+        <property name="technicalDateTime" type="string">    
+            <column name="technical_date_time" length="1000"  />
+        </property>
+        <property name="hrDateTime" type="string">    
+            <column name="hr_date_time" length="1000"  />
+        </property>
+        <property name="hseDateTime" type="string">    
+            <column name="hse_date_time" length="1000"  />
+        </property>
+        <property name="itDateTime" type="string">    
+            <column name="it_date_time" length="1000"  />
+        </property>
+        
+    </class>
+</hibernate-mapping>

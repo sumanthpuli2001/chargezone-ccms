@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ServiceVendorTenderBid" table="service_vendor_tender_bid" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="tenderNo" type="string">    
+            <column name="tender_no" length="200"  />
+        </property>
+        <property name="vendorCode" type="string">    
+            <column name="vendor_code" length="200"  />
+        </property>
+        <property name="fileName" type="string">    
+            <column name="file_name" length="200"  />
+        </property>
+        <property name="itemTotal" type="string">    
+            <column name="item_total" length="200"  />
+        </property>
+        <property name="selectCommon" type="string">    
+            <column name="select_common" length="200"  />
+        </property>
+        <property name="discountType" type="string">    
+            <column name="discount_type" length="200"  />
+        </property>
+        <property name="discountValue" type="string">    
+            <column name="discount_value" length="200"  />
+        </property>
+        <property name="packingType" type="string">    
+            <column name="packing_type" length="200"  />
+        </property>
+        <property name="packingValue" type="string">    
+            <column name="packing_value" length="200"  />
+        </property>
+        <property name="freightType" type="string">    
+            <column name="freight_type" length="200"  />
+        </property>
+        <property name="freightValue" type="string">    
+            <column name="freight_value" length="200"  />
+        </property>
+        <property name="errectionValue" type="string">    
+            <column name="errection_value" length="200"  />
+        </property>
+        <property name="chargesValue" type="string">    
+            <column name="charges_value" length="200"  />
+        </property>
+        <property name="igstValue" type="string">    
+            <column name="igst_value" length="200"  />
+        </property>
+        <property name="cgstValue" type="string">    
+            <column name="cgst_value" length="200"  />
+        </property>
+        <property name="sgstValue" type="string">    
+            <column name="sgst_value" length="200"  />
+        </property>
+        <property name="insuranceValue" type="string">    
+            <column name="insurance_value" length="200"  />
+        </property>
+        <property name="grandTotal" type="string">    
+            <column name="grand_total" length="200"  />
+        </property>
+        <property name="otherRemark" type="string">    
+            <column name="other_remark" length="200"  />
+        </property>
+        <property name="currency" type="string">    
+            <column name="currency" length="200"  />
+        </property>
+        <property name="currencyRate" type="string">    
+            <column name="currency_rate" length="200"  />
+        </property>
+        <property name="srNo" type="string">    
+            <column name="sr_no" length="200"  />
+        </property>
+    </class>
+</hibernate-mapping>

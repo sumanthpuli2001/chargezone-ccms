@@ -66,10 +66,77 @@ public class EmployeeMasterServiceImpl<T> extends GenericsServiceImpl<T> impleme
     public List readByRfId(String rfId) {
         return employeeMasterDao.readByRfId(rfId);
     }
-    
+
     @Override
-     public List readByRFid(String rfId) {
+    public List readByRFid(String rfId) {
         return employeeMasterDao.readByRFid(rfId);
     }
+
+    @Override
+    public List readByEmailMobile(String emailid, String mobileNo) {
+        return employeeMasterDao.readByEmailMobile(emailid, mobileNo);
+    }
+
+    @Override
+    public EmployeeMaster readUser(String username) {
+        return employeeMasterDao.readUser(username);
+    }
+
+    @Override
+    public List readAuthorizserUser(String location, String department) {
+        return employeeMasterDao.readAuthorizserUser(location, department);
+    }
+
+    @Override
+    public List readByEmployeeId(String user_id, String full_name) {
+        return employeeMasterDao.readByEmployeeId(user_id, full_name);
+    }
+
+    @Override
+    public List readTenderEmployee() {
+        return employeeMasterDao.readTenderEmployee();
+    }
+
+    @Override
+    public List radByUserName(String username1) {
+        return employeeMasterDao.radByUserName(username1);
+    }
+
+    @Override
+    public EmployeeMaster readByfullname(String employee_code) {
+        return employeeMasterDao.readByfullname(employee_code);
+    }
+
+    @Override
+    public EmployeeMaster readByEmployeeName(String user1) {
+        return employeeMasterDao.readByEmployeeName(user1);
+    }
+
+    @Override
+    public List readByDepartName(String departName) {
+        return employeeMasterDao.readByDepartName(departName);
+    }
+
+    @Override
+    public List readByRightsName(String rigName) {
+        return employeeMasterDao.readByRightsName(rigName);
+    }
+
+    @Override
+    public List getEmployeeMasterPagination(int start, int length, String searchValue, String orderColumn, String orderDir) {
+        return employeeMasterDao.getEmployeeMasterPagination(start, length, searchValue, orderColumn, orderDir);
+    }
+
+    @Override
+    public int getTotalEmployeeMasterCount() {
+        return employeeMasterDao.getTotalEmployeeMasterCount();
+    }
+
+    @Override
+    public int getFilteredEmployeeMasterCount(String searchValue) {
+        return employeeMasterDao.getFilteredEmployeeMasterCount(searchValue);
+    }
+
+   
 
 }

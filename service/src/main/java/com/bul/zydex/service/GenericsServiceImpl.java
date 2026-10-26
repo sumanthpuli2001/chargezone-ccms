@@ -12,8 +12,9 @@ import java.util.List;
  *
  * @author dhruv
  */
-public class GenericsServiceImpl<T> implements GenericsService<T>{
-     private GenericsDAO<T> genericsDAO;
+public class GenericsServiceImpl<T> implements GenericsService<T> {
+
+    private GenericsDAO<T> genericsDAO;
 
     @Override
     public int count() {
@@ -58,6 +59,10 @@ public class GenericsServiceImpl<T> implements GenericsService<T>{
         genericsDAO.update(object);
     }
 
+    @Override
+    public boolean isExist(T object) {
 
+        return genericsDAO.isExist(object);
+    }
 
 }

@@ -76,24 +76,7 @@
 
     <!-- JSCSSMergeServlet starts -->
     <!-- Declaration -->
-    <servlet>
-        <servlet-name>JSCSSMergeServlet</servlet-name>
-        <servlet-class>com.googlecode.webutilities.servlets.JSCSSMergeServlet</servlet-class>
-        <init-param>
-            <param-name>expiresMinutes</param-name>
-            <param-value>43200</param-value> <!-- 30 days -->
-        </init-param>
-    </servlet>
-    <!-- Mapping -->
-    <servlet-mapping>
-        <servlet-name>JSCSSMergeServlet</servlet-name>
-        <url-pattern>*.js</url-pattern>
-        <url-pattern>*.json</url-pattern>
-        <url-pattern>*.css</url-pattern>
-        <url-pattern>*.png</url-pattern>
-        <url-pattern>*.jpg</url-pattern>
-        <url-pattern>*.gif</url-pattern>
-    </servlet-mapping>
+   
 
     <!-- CharacterEncodingFilter starts -->
     <!-- Declaration -->
@@ -110,7 +93,7 @@
         </init-param>
         <init-param>
             <param-name>ignoreURLPattern</param-name>
-            <param-value>.*\.(png|gif|jpg|tiff|bmp|mpg|jpeg)</param-value>
+            <param-value>.*\.(png|gif|jpg|tiff|bmp|mpg|jpeg|js)</param-value>
         </init-param>
     </filter>
     <!-- Mapping -->
@@ -118,63 +101,27 @@
         <filter-name>charEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+	
+	
+	<filter>
+    <filter-name>CorsFilter</filter-name>
+    <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>CorsFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
 
     <!-- ResponseCacheFilter -->
     <!-- Declaration -->
-    <filter>
-        <filter-name>responseCacheFilter</filter-name>
-        <filter-class>com.googlecode.webutilities.filters.ResponseCacheFilter</filter-class>
-    </filter>
-    <!-- Mapping -->
-    <filter-mapping>
-        <filter-name>responseCacheFilter</filter-name>
-        <url-pattern>*.js</url-pattern>
-        <url-pattern>*.json</url-pattern>
-        <url-pattern>*.css</url-pattern>
-    </filter-mapping>
+    
 
     <!-- CompressionFilter starts -->
     <!-- Declaration -->
-    <filter>
-        <filter-name>compressionFilter</filter-name>
-        <filter-class>com.googlecode.webutilities.filters.CompressionFilter</filter-class>
-        <init-param>
-            <param-name>compressionThreshold</param-name>
-            <param-value>1024</param-value> <!-- compress anything above 1kb -->
-        </init-param>
-        <init-param>
-            <param-name>ignoreURLPattern</param-name>
-            <param-value>.*\.(flv|mp3|mpg)</param-value> <!-- regex -->
-        </init-param>
-        <init-param>
-            <param-name>ignoreMimes</param-name>
-            <param-value>images/*, video/*, multipart/x-gzip</param-value> <!-- ignore -->
-        </init-param>
-        <init-param>
-            <param-name>ignoreUserAgentsPattern</param-name>
-            <param-value>.*MSIE.*</param-value> <!-- regex -->
-        </init-param>
-    </filter>
-    <!-- Mapping -->
-    <filter-mapping>
-        <filter-name>compressionFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-
+    
     <!-- YUIMinFilter starts -->
     <!-- Declaration -->
-    <filter>
-        <filter-name>yuiMinFilter</filter-name>
-        <filter-class>com.googlecode.webutilities.filters.YUIMinFilter</filter-class>
-        <!--         <init-param> <param-name>lineBreak</param-name> <param-value>8000</param-value>
-        </init-param> -->
-    </filter>
-    <filter-mapping>
-        <filter-name>yuiMinFilter</filter-name>
-        <url-pattern>*.js</url-pattern>
-        <url-pattern>*.json</url-pattern>
-        <url-pattern>*.css</url-pattern>
-    </filter-mapping>
+    
 
     <!-- gzip jsp starts -->
     <filter>
@@ -204,6 +151,10 @@
     
     <error-page>
         <error-code>403</error-code>
+        <location>/WEB-INF/jsp/Common/Error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>200</error-code>
         <location>/WEB-INF/jsp/Common/Error.jsp</location>
     </error-page>
     

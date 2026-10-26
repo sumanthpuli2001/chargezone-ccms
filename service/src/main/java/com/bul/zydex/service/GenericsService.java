@@ -26,4 +26,7 @@ public interface GenericsService<T> {
     public T readById(final Integer id);
 
     public void update(T object);
+
+    boolean isExist(T object);
+
 }

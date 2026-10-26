@@ -22,4 +22,10 @@ public interface RightDao<T> extends GenericsDAO<T> {
     public List readByDrow();
 
     public List readByDrowDisable();
+
+    public List getrightMasterPagination(int start, int length, String searchValue, String orderColumn, String orderDir);
+
+    public int getTotalrightMasterCount();
+
+    public int getFilteredrightMasterCount(String searchValue);
 }

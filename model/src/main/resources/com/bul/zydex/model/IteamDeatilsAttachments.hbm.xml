@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    
+    <class name="com.bul.zydex.model.IteamDetailsAttachments" table="iteam_details_attachments" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="sno" type="string">    
+            <column name="sno"  />
+        </property>
+         <property name="iteamCode" type="string">    
+            <column name="iteam_code"  />
+        </property>
+         <property name="iteamDescription" type="string">    
+            <column name="iteam_description"  />
+        </property>
+         <property name="purpose" type="string">    
+            <column name="purpose"  />
+        </property>
+        <property name="make" type="string">    
+            <column name="make"  />
+        </property>
+         <property name="uom" type="string">    
+            <column name="uom"  />
+        </property>
+          <property name="qty" type="string">    
+            <column name="qty"  />
+        </property>
+        <property name="flagStatus" type="java.lang.Integer">    
+            <column name="flag_status"  />
+        </property>
+        <property name="deliverableMultiId" type="java.lang.Integer">    
+            <column name="deliverable_multi_id"  />
+        </property>
+         <property name="accountCategory" type="string">    
+            <column name="account_category"  />
+        </property>
+         <property name="accountValue" type="string">    
+            <column name="account_value"  />
+        </property>
+         <property name="productType" type="string">    
+            <column name="product_type"  />
+        </property>
+         <property name="productGroup" type="string">    
+            <column name="product_group"  />
+        </property>
+         <property name="taxCode" type="string">    
+            <column name="tax_code"  />
+        </property>
+        <property name="price" type="string">    
+            <column name="price"  />
+        </property>
+        <property name="deliveryDate" type="string">    
+            <column name="delivery_date"  />
+        </property>
+        <property name="startDate" type="string">    
+            <column name="start_date"  />
+        </property>
+        <property name="endDate" type="string">    
+            <column name="end_date"  />
+        </property>
+
+    </class>
+    
+</hibernate-mapping>

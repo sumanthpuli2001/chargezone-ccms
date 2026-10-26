@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ProductGroupMaster" table="product_group_master" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="productGroup" type="string">
+            <column name="product_group" length="500"  />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="200"  />
+        </property>
+        
+        <property name="Gl" type="string">
+            <column name="gl" length="200"  />
+        </property>
+        
+        
+        <property name="variationClassId" type="java.lang.Integer">
+            <column name="variation_class_id"/>
+        </property>
+        
+    </class>
+
+</hibernate-mapping>

@@ -84,8 +84,8 @@ public class PunchedDataServiceImpl<T> extends GenericsServiceImpl<T> implements
     }
 
     @Override
-    public List readDistinct(String dFrom, String eFrom, String cardCode, String item) {
-        return punchedDataDao.readDistinct(dFrom, eFrom, cardCode, item);
+    public List readDistinct(String dFrom, String eFrom, String cardCode, String item, String type1) {
+        return punchedDataDao.readDistinct(dFrom, eFrom, cardCode, item, type1);
     }
 
     @Override

@@ -55,4 +55,945 @@
         <property name="sqlDataConnectDao" ref="sqlDataConnectDao1"/>
     </bean>
     
+    <bean id="approvalSettingService1" class="com.bul.zydex.service.Approval.ApprovalSettingServiceImpl">
+        <property name="approvalSettingDao" ref="approvalSettingDao1"/>
+    </bean>
+    
+    <bean id="vendorInvitationService1" class="com.bul.zydex.service.Vendor.VendorInvitationServiceImpl">
+        <property name="vendorInvitationDao" ref="vendorInvitationDao1"/>
+    </bean>
+    
+    <bean id="vendorInformationService1" class="com.bul.zydex.service.Vendor.VendorInformationServiceImpl">
+        <property name="vendorInformationDao" ref="vendorInformationDao1"/>
+    </bean>
+    
+    <bean id="vendorBusinessCertificateService1" class="com.bul.zydex.service.Vendor.VendorBusinessCertificateServiceImpl">
+        <property name="vendorBusinessCertificateDao" ref="vendorBusinessCertificateDao1"/>
+    </bean>
+    
+    <bean id="vendorQualityCertificateService1" class="com.bul.zydex.service.Vendor.VendorQualityCertificateServiceImpl">
+        <property name="vendorQualityCertificateDao" ref="vendorQualityCertificateDao1"/>
+    </bean>
+    
+    <bean id="vendorClearanceCertificateService1" class="com.bul.zydex.service.Vendor.VendorClearanceCertificateServiceImpl">
+        <property name="vendorClearanceCertificateDao" ref="vendorClearanceCertificateDao1"/>
+    </bean>
+    
+    <bean id="vendorApprovalService1" class="com.bul.zydex.service.Vendor.VendorApprovalServiceImpl">
+        <property name="vendorApprovalDao" ref="vendorApprovalDao1"/>
+    </bean>
+    
+    <bean id="vendorMasterService1" class="com.bul.zydex.service.Vendor.VendorMasterServiceImpl">
+        <property name="vendorMasterDao" ref="vendorMasterDao1"/>
+    </bean>
+    
+    <bean id="userRightsService1" class="com.bul.zydex.service.Right.UserRightsServiceImpl">
+        <property name="userRightsDao" ref="userRightsDao1"/>
+    </bean>
+    
+    <bean id="tenderMasterService1" class="com.bul.zydex.service.Tender.TenderMasterServiceImpl">
+        <property name="tenderMasterDao" ref="tenderMasterDao1"/>
+    </bean>
+    
+    <bean id="sapDeliSchService1" class="com.bul.zydex.service.Sap.SapDeliSchServiceImpl">
+        <property name="sapDeliSchDao" ref="sapDeliSchDao1"/>
+    </bean>
+    
+    <bean id="sapItemLongTxtService1" class="com.bul.zydex.service.Sap.SapItemLongTxtServiceImpl">
+        <property name="sapItemLongTxtDao" ref="sapItemLongTxtDao1"/>
+    </bean>
+    
+    <bean id="sapPurchaseItemTxtService1" class="com.bul.zydex.service.Sap.SapPurchaseItemTxtServiceImpl">
+        <property name="sapPurchaseItemTxtDao" ref="sapPurchaseItemTxtDao1"/>
+    </bean>
+    
+    <bean id="sapTenderItemService1" class="com.bul.zydex.service.Sap.SapTenderItemServiceImpl">
+        <property name="sapTenderItemDao" ref="sapTenderItemDao1"/>
+    </bean>
+    
+    <bean id="sapTenderMasterService1" class="com.bul.zydex.service.Sap.SapTenderMasterServiceImpl">
+        <property name="sapTenderMasterDao" ref="sapTenderMasterDao1"/>
+    </bean>
+    
+    <bean id="sapVendorEmailService1" class="com.bul.zydex.service.Sap.SapVendorEmailServiceImpl">
+        <property name="sapVendorEmailDao" ref="sapVendorEmailDao1"/>
+    </bean>
+    
+    <bean id="sapVendorTelephoneService1" class="com.bul.zydex.service.Sap.SapVendorTelephoneServiceImpl">
+        <property name="sapVendorTelephoneDao" ref="sapVendorTelephoneDao1"/>
+    </bean>
+    
+    <bean id="sapVendorMasterService1" class="com.bul.zydex.service.Sap.SapVendorMasterServiceImpl">
+        <property name="sapVendorMasterDao" ref="sapVendorMasterDao1"/>
+    </bean>
+    
+    <bean id="tenderGeneralDocService1" class="com.bul.zydex.service.Tender.TenderGeneralDocServiceImpl">
+        <property name="tenderGeneralDocDao" ref="tenderGeneralDocDao1"/>
+    </bean>
+    
+    <bean id="tenderAdditionalDocService1" class="com.bul.zydex.service.Tender.TenderAdditionalDocServiceImpl">
+        <property name="tenderAdditionalDocDao" ref="tenderAdditionalDocDao1"/>
+    </bean>
+    
+    <bean id="tenderTechnicalDocService1" class="com.bul.zydex.service.Tender.TenderTechnicalDocServiceImpl">
+        <property name="tenderTechnicalDocDao" ref="tenderTechnicalDocDao1"/>
+    </bean>
+    
+    <bean id="tenderPreQualificationService1" class="com.bul.zydex.service.Tender.TenderPreQualificationServiceImpl">
+        <property name="tenderPreQualificationDao" ref="tenderPreQualificationDao1"/>
+    </bean>
+    
+    <bean id="tenderTechnicalService1" class="com.bul.zydex.service.Tender.TenderTechnicalServiceImpl">
+        <property name="tenderTechnicalDao" ref="tenderTechnicalDao1"/>
+    </bean>
+    
+    <bean id="tenderVendorDocService1" class="com.bul.zydex.service.Tender.TenderVendorDocServiceImpl">
+        <property name="tenderVendorDocDao" ref="tenderVendorDocDao1"/>
+    </bean>
+    
+    <bean id="tenderItemMasterService1" class="com.bul.zydex.service.Tender.TenderItemMasterServiceImpl">
+        <property name="tenderItemMasterDao" ref="tenderItemMasterDao1"/>
+    </bean>
+    
+    <bean id="tenderItemAttachmentService1" class="com.bul.zydex.service.Tender.TenderItemAttachmentServiceImpl">
+        <property name="tenderItemAttachmentDao" ref="tenderItemAttachmentDao1"/>
+    </bean>
+    
+    <bean id="tenderVendorService1" class="com.bul.zydex.service.Tender.TenderVendorServiceImpl">
+        <property name="tenderVendorDao" ref="tenderVendorDao1"/>
+    </bean>
+    
+    <bean id="vendorPreBidAttachmentService1" class="com.bul.zydex.service.Vendor.VendorPreBidAttachmentServiceImpl">
+        <property name="vendorPreBidAttachmentDao" ref="vendorPreBidAttachmentDao1"/>
+    </bean>
+    
+    <bean id="vendorPreBidService1" class="com.bul.zydex.service.Vendor.VendorPreBidServiceImpl">
+        <property name="vendorPreBidDao" ref="vendorPreBidDao1"/>
+    </bean>
+    
+    <bean id="vendorAttachmentService1" class="com.bul.zydex.service.Vendor.VendorAttachmentServiceImpl">
+        <property name="vendorAttachmentDao" ref="vendorAttachmentDao1"/>
+    </bean>
+    
+    <bean id="vendorEmdService1" class="com.bul.zydex.service.Vendor.VendorEmdServiceImpl">
+        <property name="vendorEmdDao" ref="vendorEmdDao1"/>
+    </bean>
+    
+    <bean id="vendorFeeService1" class="com.bul.zydex.service.Vendor.VendorFeeServiceImpl">
+        <property name="vendorFeeDao" ref="vendorFeeDao1"/>
+    </bean>
+    
+    <bean id="vendorTechnicalBidService1" class="com.bul.zydex.service.Vendor.VendorTechnicalBidServiceImpl">
+        <property name="vendorTechnicalBidDao" ref="vendorTechnicalBidDao1"/>
+    </bean>
+    
+    <bean id="vendorTechnicalBidAttachmentService1" class="com.bul.zydex.service.Vendor.VendorTechnicalBidAttachmentServiceImpl">
+        <property name="vendorTechnicalBidAttachmentDao" ref="vendorTechnicalBidAttachmentDao1"/>
+    </bean>
+    
+    <bean id="vendorTechnicalBidTechService1" class="com.bul.zydex.service.Vendor.VendorTechnicalBidTechServiceImpl">
+        <property name="vendorTechnicalBidTechDao" ref="vendorTechnicalBidTechDao1"/>
+    </bean>
+    
+    <bean id="vendorTechnicalBidTermsService1" class="com.bul.zydex.service.Vendor.VendorTechnicalBidTermsServiceImpl">
+        <property name="vendorTechnicalBidTermsDao" ref="vendorTechnicalBidTermsDao1"/>
+    </bean>
+    
+    <bean id="vendorTechnicalBidTechAttachmentService1" class="com.bul.zydex.service.Vendor.VendorTechnicalBidTechAttachmentServiceImpl">
+        <property name="vendorTechnicalBidTechAttachmentDao" ref="vendorTechnicalBidTechAttachmentDao1"/>
+    </bean>
+    
+    <bean id="vendorTechnicalBidTermsAttachmentService1" class="com.bul.zydex.service.Vendor.VendorTechnicalBidTermsAttachmentServiceImpl">
+        <property name="vendorTechnicalBidTermsAttachmentDao" ref="vendorTechnicalBidTermsAttachmentDao1"/>
+    </bean>
+    
+    <bean id="vendorTenderBidService1" class="com.bul.zydex.service.Vendor.VendorTenderBidServiceImpl">
+        <property name="vendorTenderBidDao" ref="vendorTenderBidDao1"/>
+    </bean>
+    
+    <bean id="vendorTenderBidItemService1" class="com.bul.zydex.service.Vendor.VendorTenderBidItemServiceImpl">
+        <property name="vendorTenderBidItemDao" ref="vendorTenderBidItemDao1"/>
+    </bean>
+    
+    <bean id="authTenderMasterService1" class="com.bul.zydex.service.Tender.AuthTenderMasterServiceImpl">
+        <property name="authTenderMasterDao" ref="authTenderMasterDao1"/>
+    </bean>
+    
+    <bean id="authTenderGeneralDocService1" class="com.bul.zydex.service.Tender.AuthTenderGeneralDocServiceImpl">
+        <property name="authTenderGeneralDocDao" ref="authTenderGeneralDocDao1"/>
+    </bean>
+    
+    <bean id="authTenderAdditionalDocService1" class="com.bul.zydex.service.Tender.AuthTenderAdditionalDocServiceImpl">
+        <property name="authTenderAdditionalDocDao" ref="authTenderAdditionalDocDao1"/>
+    </bean>
+    
+    <bean id="authTenderTechnicalDocService1" class="com.bul.zydex.service.Tender.AuthTenderTechnicalDocServiceImpl">
+        <property name="authTenderTechnicalDocDao" ref="authTenderTechnicalDocDao1"/>
+    </bean>
+    
+    <bean id="authTenderPreQualificationService1" class="com.bul.zydex.service.Tender.AuthTenderPreQualificationServiceImpl">
+        <property name="authTenderPreQualificationDao" ref="authTenderPreQualificationDao1"/>
+    </bean>
+    
+    <bean id="authTenderTechnicalService1" class="com.bul.zydex.service.Tender.AuthTenderTechnicalServiceImpl">
+        <property name="authTenderTechnicalDao" ref="authTenderTechnicalDao1"/>
+    </bean>
+    
+    <bean id="authTenderVendorDocService1" class="com.bul.zydex.service.Tender.AuthTenderVendorDocServiceImpl">
+        <property name="authTenderVendorDocDao" ref="authTenderVendorDocDao1"/>
+    </bean>
+    
+    <bean id="authTenderItemMasterService1" class="com.bul.zydex.service.Tender.AuthTenderItemMasterServiceImpl">
+        <property name="authTenderItemMasterDao" ref="authTenderItemMasterDao1"/>
+    </bean>
+    
+    <bean id="authTenderItemAttachmentService1" class="com.bul.zydex.service.Tender.AuthTenderItemAttachmentServiceImpl">
+        <property name="authTenderItemAttachmentDao" ref="authTenderItemAttachmentDao1"/>
+    </bean>
+    
+    <bean id="authTenderVendorService1" class="com.bul.zydex.service.Tender.AuthTenderVendorServiceImpl">
+        <property name="authTenderVendorDao" ref="authTenderVendorDao1"/>
+    </bean>
+    
+    <bean id="tenderRegretService1" class="com.bul.zydex.service.Tender.TenderRegretServiceImpl">
+        <property name="tenderRegretDao" ref="tenderRegretDao1"/>
+    </bean>
+    
+    <bean id="tenderNoTempService1" class="com.bul.zydex.service.Tender.TenderNoTempServiceImpl">
+        <property name="tenderNoTempDao" ref="tenderNoTempDao1"/>
+    </bean>
+    
+    <bean id="tenderNoService1" class="com.bul.zydex.service.Tender.TenderNoServiceImpl">
+        <property name="tenderNoDao" ref="tenderNoDao1"/>
+    </bean>
+    
+    <bean id="fileDetailService1" class="com.bul.zydex.service.Tender.FileDetailServiceImpl">
+        <property name="fileDetailDao" ref="fileDetailDao1"/>
+    </bean>
+    
+    <bean id="serviceDetail1Service1" class="com.bul.zydex.service.Tender.ServiceDetail1ServiceImpl">
+        <property name="serviceDetail1Dao" ref="serviceDetail1Dao1"/>
+    </bean>
+    
+    <bean id="serviceDetail2Service1" class="com.bul.zydex.service.Tender.ServiceDetail2ServiceImpl">
+        <property name="serviceDetail2Dao" ref="serviceDetail2Dao1"/>
+    </bean>
+    
+    <bean id="serviceDetail3Service1" class="com.bul.zydex.service.Tender.ServiceDetail3ServiceImpl">
+        <property name="serviceDetail3Dao" ref="serviceDetail3Dao1"/>
+    </bean>
+    
+    <bean id="serviceDetail4Service1" class="com.bul.zydex.service.Tender.ServiceDetail4ServiceImpl">
+        <property name="serviceDetail4Dao" ref="serviceDetail4Dao1"/>
+    </bean>
+    
+    <bean id="serviceDetail5Service1" class="com.bul.zydex.service.Tender.ServiceDetail5ServiceImpl">
+        <property name="serviceDetail5Dao" ref="serviceDetail5Dao1"/>
+    </bean>
+    
+    <bean id="serviceDetail6Service1" class="com.bul.zydex.service.Tender.ServiceDetail6ServiceImpl">
+        <property name="serviceDetail6Dao" ref="serviceDetail6Dao1"/>
+    </bean>
+    
+    <bean id="serviceVendorTenderBidService1" class="com.bul.zydex.service.Tender.ServiceVendorTenderBidServiceImpl">
+        <property name="serviceVendorTenderBidDao" ref="serviceVendorTenderBidDao1"/>
+    </bean>
+    
+    <bean id="serviceVendorTenderBidItemService1" class="com.bul.zydex.service.Tender.ServiceVendorTenderBidItemServiceImpl">
+        <property name="serviceVendorTenderBidItemDao" ref="serviceVendorTenderBidItemDao1"/>
+    </bean>
+    
+    <bean id="serviceVendorTenderBidItem2Service1" class="com.bul.zydex.service.Tender.ServiceVendorTenderBidItem2ServiceImpl">
+        <property name="serviceVendorTenderBidItem2Dao" ref="serviceVendorTenderBidItem2Dao1"/>
+    </bean>
+    
+    <bean id="serviceVendorTenderBidItem3Service1" class="com.bul.zydex.service.Tender.ServiceVendorTenderBidItem3ServiceImpl">
+        <property name="serviceVendorTenderBidItem3Dao" ref="serviceVendorTenderBidItem3Dao1"/>
+    </bean>
+    
+    <bean id="serviceVendorTenderBidItem4Service1" class="com.bul.zydex.service.Tender.ServiceVendorTenderBidItem4ServiceImpl">
+        <property name="serviceVendorTenderBidItem4Dao" ref="serviceVendorTenderBidItem4Dao1"/>
+    </bean>
+    
+    <bean id="serviceVendorTenderBidItem6Service1" class="com.bul.zydex.service.Tender.ServiceVendorTenderBidItem6ServiceImpl">
+        <property name="serviceVendorTenderBidItem6Dao" ref="serviceVendorTenderBidItem6Dao1"/>
+    </bean>
+    
+    <bean id="tenderSendEmailService1" class="com.bul.zydex.service.Tender.TenderSendEmailServiceImpl">
+        <property name="tenderSendEmailDao" ref="tenderSendEmailDao1"/>
+    </bean>
+    
+    <bean id="emailTemplateService1" class="com.bul.zydex.service.Tender.EmailTemplateServiceImpl">
+        <property name="emailTemplateDao" ref="emailTemplateDao1"/>
+    </bean>
+    
+    <bean id="liveTenderService1" class="com.bul.zydex.service.Tender.LiveTenderServiceImpl">
+        <property name="liveTenderDao" ref="liveTenderDao1"/>
+    </bean>
+    
+    <bean id="vendorInfoService1" class="com.bul.zydex.service.Vendor.VendorInfoServiceImpl">
+        <property name="vendorInfoDao" ref="vendorInfoDao1"/>
+        
+    </bean>
+    
+    <bean id="tenderFollowupService1" class="com.bul.zydex.service.Tender.TenderFollowupServiceImpl">
+        <property name="tenderFollowupDao" ref="tenderFollowupDao1"/>
+    </bean>
+    
+    <bean id="commMasterService1" class="com.bul.zydex.service.Vendor.CommMasterServiceImpl">
+        <property name="commMasterDao" ref="commMasterDao1"/>
+    </bean>
+    
+    <bean id="commMasterAttachmentService1" class="com.bul.zydex.service.Vendor.CommMasterAttachmentServiceImpl">
+        <property name="commMasterAttachmentDao" ref="commMasterAttachmentDao1"/>
+    </bean>
+    
+    <bean id="serviceRightsService1" class="com.bul.zydex.service.Tender.ServiceRightsServiceImpl">
+        <property name="serviceRightsDao" ref="serviceRightsDao1"/>
+    </bean>
+    
+    <bean id="auctionMasterService1" class="com.bul.zydex.service.Auction.AuctionMasterServiceImpl">
+        <property name="auctionMasterDao" ref="auctionMasterDao1"/>
+    </bean>
+    
+    <bean id="auctionItemMasterService1" class="com.bul.zydex.service.Auction.AuctionItemMasterServiceImpl">
+        <property name="auctionItemMasterDao" ref="auctionItemMasterDao1"/>
+    </bean>
+    
+    <bean id="auctionVendorService1" class="com.bul.zydex.service.Auction.AuctionVendorServiceImpl">
+        <property name="auctionVendorDao" ref="auctionVendorDao1"/>
+    </bean>
+    
+    <bean id="auctionAttachmentService1" class="com.bul.zydex.service.Auction.AuctionAttachmentServiceImpl">
+        <property name="auctionAttachmentDao" ref="auctionAttachmentDao1"/>
+    </bean>
+    
+    <bean id="auctionNoTempService1" class="com.bul.zydex.service.Auction.AuctionNoTempServiceImpl">
+        <property name="auctionNoTempDao" ref="auctionNoTempDao1"/>
+    </bean>
+    
+    <bean id="auctionNoService1" class="com.bul.zydex.service.Auction.AuctionNoServiceImpl">
+        <property name="auctionNoDao" ref="auctionNoDao1"/>
+    </bean>
+    
+    <bean id="auctionVendorBidService1" class="com.bul.zydex.service.Auction.AuctionVendorBidServiceImpl">
+        <property name="auctionVendorBidDao" ref="auctionVendorBidDao1"/>
+    </bean>
+    
+    <bean id="auctionVendorBidHistoryService1" class="com.bul.zydex.service.Auction.AuctionVendorBidHistoryServiceImpl">
+        <property name="auctionVendorBidHistoryDao" ref="auctionVendorBidHistoryDao1"/>
+    </bean>
+    
+    <bean id="tenderCommitteeService1" class="com.bul.zydex.service.Tender.TenderCommitteeServiceImpl">
+        <property name="tenderCommitteeDao" ref="tenderCommitteeDao1"/>
+    </bean>
+    
+    <bean id="reviseVendorTenderBidService1" class="com.bul.zydex.service.Vendor.ReviseVendorTenderBidServiceImpl">
+        <property name="reviseVendorTenderBidDao" ref="reviseVendorTenderBidDao1"/>
+    </bean>
+    
+    <bean id="reviseVendorTenderBidItemService1" class="com.bul.zydex.service.Vendor.ReviseVendorTenderBidItemServiceImpl">
+        <property name="reviseVendorTenderBidItemDao" ref="reviseVendorTenderBidItemDao1"/>
+    </bean>
+    
+    <bean id="locationMasterService1" class="com.bul.zydex.service.Invoice.LocationMasterServiceImpl">
+        <property name="locationMasterDao" ref="locationMasterDao1"/>
+    </bean>
+    
+    <bean id="plantMasterService1" class="com.bul.zydex.service.Invoice.PlantMasterServiceImpl">
+        <property name="plantMasterDao" ref="plantMasterDao1"/>
+    </bean>
+    
+    <bean id="auctionItemVendorService1" class="com.bul.zydex.service.Auction.AuctionItemVendorServiceImpl">
+        <property name="auctionItemVendorDao" ref="auctionItemVendorDao1"/>
+    </bean>
+    
+    <bean id="auctionItemVendorBidService1" class="com.bul.zydex.service.Auction.AuctionItemVendorBidServiceImpl">
+        <property name="auctionItemVendorBidDao" ref="auctionItemVendorBidDao1"/>
+    </bean>
+    
+    <bean id="auctionItemVendorBidHistoryService1" class="com.bul.zydex.service.Auction.AuctionItemVendorBidHistoryServiceImpl">
+        <property name="auctionItemVendorBidHistoryDao" ref="auctionItemVendorBidHistoryDao1"/>
+    </bean>
+    
+    <bean id="sapConnectionService1" class="com.bul.zydex.service.SapConnection.SapConnectionServiceImpl">
+        <property name="sapConnectionDao" ref="sapConnectionDao1" /> 
+    </bean>
+  
+    <bean id="smtpDetailsService1" class="com.bul.zydex.service.SmtpDetails.SmtpDetailsServiceImpl">
+        <property name="smtpDetailsDao" ref="smtpDetailsDao1"/>
+    </bean>
+    
+    <bean id="tenderPriceApprovalService1" class="com.bul.zydex.service.Tender.TenderPriceApprovalServiceImpl">
+        <property name="tenderPriceApprovalDao" ref="tenderPriceApprovalDao1"/>
+    </bean>
+    <bean id="tenderPriceApprovalUserService1" class="com.bul.zydex.service.Tender.TenderPriceApprovalUserServiceImpl">
+        <property name="tenderPriceApprovalUserDao" ref="tenderPriceApprovalUserDao1"/>
+    </bean>
+    <bean id="tenderPriceApprovalCommentService1" class="com.bul.zydex.service.Tender.TenderPriceApprovalCommentServiceImpl">
+        <property name="tenderPriceApprovalCommentDao" ref="tenderPriceApprovalCommentDao1"/>
+    </bean>
+    <bean id="tenderApprovalSettingService1" class="com.bul.zydex.service.Tender.TenderApprovalSettingServiceImpl">
+        <property name="tenderApprovalSettingDao" ref="tenderApprovalSettingDao1"/>
+    </bean>
+    <bean id="tenderApprovalUserService1" class="com.bul.zydex.service.Tender.TenderApprovalUserServiceImpl">
+        <property name="tenderApprovalUserDao" ref="tenderApprovalUserDao1"/>
+    </bean>
+    <bean id="committeeApprovalSettingService1" class="com.bul.zydex.service.Tender.CommitteeApprovalSettingServiceImpl">
+        <property name="committeeApprovalSettingDao" ref="committeeApprovalSettingDao1"/>
+    </bean>
+    <bean id="committeeApprovalUserService1" class="com.bul.zydex.service.Tender.CommitteeApprovalUserServiceImpl">
+        <property name="committeeApprovalUserDao" ref="committeeApprovalUserDao1"/>
+    </bean>
+    <bean id="companyLocationService1" class="com.bul.zydex.service.Employee.CompanyLocationServiceImpl">
+        <property name="companyLocationDao" ref="companyLocationDao1"/>
+    </bean>
+    <bean id="departmentMasterService1" class="com.bul.zydex.service.Employee.DepartmentMasterServiceImpl">
+        <property name="departmentMasterDao" ref="departmentMasterDao1"/>
+    </bean>
+    <bean id="designationMasterService1" class="com.bul.zydex.service.Employee.DesignationMasterServiceImpl">
+        <property name="designationMasterDao" ref="designationMasterDao1"/>
+    </bean>
+    <bean id="auctionPriceApprovalService1" class="com.bul.zydex.service.Auction.AuctionPriceApprovalServiceImpl">
+        <property name="auctionPriceApprovalDao" ref="auctionPriceApprovalDao1"/>
+    </bean>
+    <bean id="auctionPriceApprovalUserService1" class="com.bul.zydex.service.Auction.AuctionPriceApprovalUserServiceImpl">
+        <property name="auctionPriceApprovalUserDao" ref="auctionPriceApprovalUserDao1"/>
+    </bean>
+    <bean id="auctionPriceApprovalCommentService1" class="com.bul.zydex.service.Auction.AuctionPriceApprovalCommentServiceImpl">
+        <property name="auctionPriceApprovalCommentDao" ref="auctionPriceApprovalCommentDao1"/>
+    </bean>
+    <bean id="reviseVendorTechnicalBidService1" class="com.bul.zydex.service.Vendor.ReviseVendorTechnicalBidServiceImpl">
+        <property name="reviseVendorTechnicalBidDao" ref="reviseVendorTechnicalBidDao1"/>
+    </bean>
+    <bean id="vendorCustomerRefrenceService1" class="com.bul.zydex.service.Vendor.VendorCustomerRefrenceServiceImpl">
+        <property name="vendorCustomerRefrenceDao" ref="vendorCustomerRefrenceDao1"/>
+    </bean>
+    
+    <bean id="technicalTenderPriceApprovalService1" class="com.bul.zydex.service.Tender.TechnicalTenderPriceApprovalServiceImpl">
+        <property name="technicalTenderPriceApprovalDao" ref="technicalTenderPriceApprovalDao1"/>
+    </bean>
+    
+    
+    <bean id="technicalTenderPriceApprovalUserService1" class="com.bul.zydex.service.Tender.TechnicalTenderPriceApprovalUserServiceImpl">
+        <property name="technicalTenderPriceApprovalUserDao" ref="technicalTenderPriceApprovalUserDao1"/>
+    </bean>
+    
+    
+    <bean id="technicalTenderPriceApprovalCommentService1" class="com.bul.zydex.service.Tender.TechnicalTenderPriceApprovalCommentServiceImpl">
+        <property name="technicalTenderPriceApprovalCommentDao" ref="technicalTenderPriceApprovalCommentDao1"/>
+    </bean>
+    
+    <bean id="materialGroupMasterService1" class="com.bul.zydex.service.MaterialGroupMaster.MaterialGroupMasterServiceImpl">
+        <property name="materialGroupMasterDao" ref="materialGroupMasterDao1"/>
+    </bean>
+    
+    <bean id="materialTypeMasterService1" class="com.bul.zydex.service.MaterialTypeMaster.MaterialTypeMasterServiceImpl">
+        <property name="materialTypeMasterDao" ref="materialTypeMasterDao1" /> 
+    </bean>
+    
+    <bean id="materialMasterService1" class="com.bul.zydex.service.MaterialMaster.MaterialMasterServiceImpl">
+        <property name="materialMasterDao" ref="materialMasterDao1" /> 
+    </bean>
+    
+    <bean id="prNoService1" class="com.bul.zydex.service.PR.PRNoServiceImpl">
+        <property name="prNoDao" ref="prNoDao1"/>
+    </bean>
+    
+    <bean id="prNoTempService1" class="com.bul.zydex.service.PR.PRNoTempServiceImpl">
+        <property name="prNoTempDao" ref="prNoTempDao1"/>
+    </bean>
+    
+    <bean id="prVendorService1" class="com.bul.zydex.service.PR.PRVendorServiceImpl">
+        <property name="prVendorDao" ref="prVendorDao1"/>
+    </bean>
+    
+    <bean id="prItemMasterService1" class="com.bul.zydex.service.PR.PRItemMasterServiceImpl">
+        <property name="prItemMasterDao" ref="prItemMasterDao1"/>
+    </bean>
+    
+    <bean id="prPriceApprovalService1" class="com.bul.zydex.service.PR.PRPriceApprovalServiceImpl">
+        <property name="prPriceApprovalDao" ref="prPriceApprovalDao1"/>
+    </bean>
+    
+    <bean id="prPriceApprovalCommentService1" class="com.bul.zydex.service.PR.PRPriceApprovalCommentServiceImpl">
+        <property name="prPriceApprovalCommentDao" ref="prPriceApprovalCommentDao1"/>
+    </bean>
+    
+    <bean id="prPriceApprovalUserService1" class="com.bul.zydex.service.PR.PRPriceApprovalUserServiceImpl">
+        <property name="prPriceApprovalUserDao" ref="prPriceApprovalUserDao1"/>
+    </bean>
+    
+    <bean id="prMasterService1" class="com.bul.zydex.service.PR.PRMasterServiceImpl">
+        <property name="prMasterDao" ref="prMasterDao1"/>
+    </bean>
+    <bean id="prDocService1" class="com.bul.zydex.service.PR.PRDocServiceImpl">
+        <property name="prDocDao" ref="prDocDao1"/>
+    </bean>
+    <bean id="prClassificationService1" class="com.bul.zydex.service.PR.PRClassificationServiceImpl">
+        <property name="prClassificationDao" ref="prClassificationDao1"/>
+    </bean>
+    <bean id="prBusinessTypeService1" class="com.bul.zydex.service.PR.PRBusinessTypeServiceImpl">
+        <property name="prBusinessTypeDao" ref="prBusinessTypeDao1"/>
+    </bean>
+    <bean id="prProjectTypeService1" class="com.bul.zydex.service.PR.PRProjectTypeServiceImpl">
+        <property name="prProjectTypeDao" ref="prProjectTypeDao1"/>
+    </bean>
+    <bean id="termsConditionService1" class="com.bul.zydex.service.TermsConditon.TermsConditionServiceImpl">
+        <property name="termsConditionDao" ref="termsConditionDao1"/>
+    </bean>
+    <bean id="termsConditionParameterService1" class="com.bul.zydex.service.TermsConditon.TermsConditionParameterServiceImpl">
+        <property name="termsConditionParameterDao" ref="termsConditionParameterDao1"/>
+    </bean>
+    <bean id="vendorTermsConditionService1" class="com.bul.zydex.service.TermsConditon.VendorTermsConditionServiceImpl">
+        <property name="vendorTermsConditionDao" ref="vendorTermsConditionDao1"/>
+    </bean>
+    <bean id="vendorTermsConditionPriceBidService1" class="com.bul.zydex.service.TermsConditon.VendorTermsConditionPriceBidServiceImpl">
+        <property name="vendorTermsConditionPriceBidDao" ref="vendorTermsConditionPriceBidDao1"/>
+    </bean>
+	
+    <bean id="multipleAddressService1" class="com.bul.zydex.service.PR.MultipleAddressServiceImpl">
+        <property name="multipleAddressDao" ref="multipleAddressDao1"/>
+    </bean>
+    
+    <bean id="prApprovalCommentService1" class="com.bul.zydex.service.PR.PRApprovalCommentServiceImpl">
+        <property name="prApprovalCommentDao" ref="prApprovalCommentDao1"/>
+    </bean>
+	
+    <bean id="electricalContractorService1" class="com.bul.zydex.service.ElectricalContractor.ElectricalContractorServiceImpl">
+        <property name="electricalContractorDao" ref="electricalContractorDao1"/>
+    </bean>
+    
+    <bean id="groupMasterService1" class="com.bul.zydex.service.Vendor.GroupMasterServiceImpl">
+        <property name="groupMasterDao" ref="groupMasterDao1"/>
+    </bean>
+    <bean id="groupCategoryService1" class="com.bul.zydex.service.Vendor.GroupCategoryServiceImpl">
+        <property name="groupCategoryDao" ref="groupCategoryDao1"/>
+    </bean>
+    <bean id="groupSubCategoryService1" class="com.bul.zydex.service.Vendor.GroupSubCategoryServiceImpl">
+        <property name="groupSubCategoryDao" ref="groupSubCategoryDao1"/>
+    </bean>
+    <bean id="vendorTechnicalCriteriaService1" class="com.bul.zydex.service.Vendor.VendorTechnicalCriteriaServiceImpl">
+        <property name="vendorTechnicalCriteriaDao" ref="vendorTechnicalCriteriaDao1"/>
+    </bean>
+    <bean id="vendorHrCriteriaService1" class="com.bul.zydex.service.Vendor.VendorHrCriteriaServiceImpl">
+        <property name="vendorHrCriteriaDao" ref="vendorHrCriteriaDao1"/>
+    </bean>
+    <bean id="vendorSafetyCriteriaService1" class="com.bul.zydex.service.Vendor.VendorSafetyCriteriaServiceImpl">
+        <property name="vendorSafetyCriteriaDao" ref="vendorSafetyCriteriaDao1"/>
+    </bean>
+    <bean id="productTypeMasterService1" class="com.bul.zydex.service.ProductTypeMaster.ProductTypeMasterServiceImpl">
+        <property name="productTypeMasterDao" ref="productTypeMasterDao1"/>
+    </bean>
+    
+    
+    <bean id="valuationClassMasterService1" class="com.bul.zydex.service.ValuationClassMaster.ValuationClassMasterServiceImpl">
+        <property name="valuationClassMasterDao" ref="valuationClassMasterDao1"/>
+    </bean>
+    
+    <bean id="productGroupMasterService1" class="com.bul.zydex.service.ProductGroupMaster.ProductGroupMasterServiceImpl">
+        <property name="productGroupMasterDao" ref="productGroupMasterDao1"/>
+        
+    </bean>
+    <bean id="companyMasterService1" class="com.bul.zydex.service.CompanyMaster.CompanyMasterServiceImpl">
+        <property name="companyMasterDao" ref="companyMasterDao1"/>
+    </bean>
+    
+    <bean id="purchasingOrganisationService1" class="com.bul.zydex.service.PurchasingOrganisation.PurchasingOrganisationServiceImpl">
+        <property name="purchasingOrganisationDao" ref="purchasingOrganisationDao1"/>
+    </bean>
+    <bean id="plantMastersService1" class="com.bul.zydex.service.PlantMasters.PlantMastersServiceImpl">
+        <property name="plantMastersDao" ref="plantMastersDao1"/>
+    </bean>
+    <bean id="locationMastersService1" class="com.bul.zydex.service.LocationMasters.LocationMastersServiceImpl">
+        <property name="locationMastersDao" ref="locationMastersDao1"/>
+    </bean>
+    
+    
+    <bean id="vendorInvitationCategoryService1" class="com.bul.zydex.service.Vendor.VendorInvitationCategoryServiceImpl">
+        <property name="vendorInvitationCategoryDao" ref="vendorInvitationCategoryDao1"/>
+    </bean>
+    
+    
+    <bean id="vendorSafetyCriteriaCommentService1" class="com.bul.zydex.service.Vendor.VendorSafetyCriteriaCommentServiceImpl">
+        <property name="vendorSafetyCriteriaCommentDao" ref="vendorSafetyCriteriaCommentDao1"/>
+    </bean>
+   
+   
+    <bean id="vendorHrCriteriaCommentService1" class="com.bul.zydex.service.Vendor.VendorHrCriteriaCommentServiceImpl">
+        <property name="vendorHrCriteriaCommentDao" ref="vendorHrCriteriaCommentDao1"/>
+    </bean>
+    <bean id="bpGroupService1" class="com.bul.zydex.service.BpGroup.BpGroupServiceImpl">
+        <property name="bpGroupDao" ref="bpGroupDao1"/>
+    </bean>
+    
+    <bean id="vendorPercentageService1" class="com.bul.zydex.service.VendorPercentage.VendorPercentageServiceImpl">
+        <property name="vendorPercentageDao" ref="vendorPercentageDao1"/>
+    </bean>
+    <bean id="vendorDepartmentApprovalService1" class="com.bul.zydex.service.VendorDepartmentApproval.VendorDepartmentApprovalServiceImpl">
+        <property name="vendorDepartmentApprovalDao" ref="vendorDepartmentApprovalDao1"/>
+    </bean>
+    <bean id="vendorApprovalSettingService1" class="com.bul.zydex.service.Vendor.VendorApprovalSettingServiceImpl">
+        <property name="vendorApprovalSettingDao" ref="vendorApprovalSettingDao1"/>
+    </bean>
+    <bean id="vendorApprovalUserService1" class="com.bul.zydex.service.Vendor.VendorApprovalUserServiceImpl">
+        <property name="vendorApprovalUserDao" ref="vendorApprovalUserDao1"/>
+    </bean>
+    <bean id="vendorRequestDetailsService1" class="com.bul.zydex.service.Vendor.VendorRequestDetailsServiceImpl">
+        <property name="vendorRequestDetailsDao" ref="vendorRequestDetailsDao1"/>
+    </bean>
+    <bean id="vendorRequestApprovalService1" class="com.bul.zydex.service.Vendor.VendorRequestApprovalServiceImpl">
+        <property name="vendorRequestApprovalDao" ref="vendorRequestApprovalDao1"/>
+    </bean>
+    <bean id="vendorRequestApprovalUserService1" class="com.bul.zydex.service.Vendor.VendorRequestApprovalUserServiceImpl">
+        <property name="vendorRequestApprovalUserDao" ref="vendorRequestApprovalUserDao1"/>
+    </bean>
+    <bean id="vendorRequestApprovalCommentService1" class="com.bul.zydex.service.Vendor.VendorRequestApprovalCommentServiceImpl">
+        <property name="vendorRequestApprovalCommentDao" ref="vendorRequestApprovalCommentDao1"/>
+    </bean>
+    <bean id="taxCategoryService1" class="com.bul.zydex.service.TaxCategory.TaxCategoryServiceImpl">
+        <property name="taxCategoryDao" ref="taxCategoryDao1"/>
+    </bean>
+   
+    <bean id="groupForCalculationService1" class="com.bul.zydex.service.GroupForCalculation.GroupForCalculationServiceImpl">
+        <property name="groupForCalculationDao" ref="groupForCalculationDao1"/>
+    </bean>
+    
+    <bean id="vendorRequestedInvitationCategoryService1" class="com.bul.zydex.service.Vendor.VendorRequestedInvitationCategoryServiceImpl">
+        <property name="vendorRequestedInvitationCategoryDao" ref="vendorRequestedInvitationCategoryDao1"/>
+    </bean>
+    
+    <bean id="profitCenterService1" class="com.bul.zydex.service.ProfitCenter.ProfitCenterServiceImpl">
+        <property name="profitCenterDao" ref="profitCenterDao1"/>
+    </bean>
+    <bean id="projectTypeService1" class="com.bul.zydex.service.ProjectType.ProjectTypeServiceImpl">
+        <property name="projectTypeDao" ref="projectTypeDao1"/>
+    </bean>
+    <bean id="currencyMasterService1" class="com.bul.zydex.service.Tender.CurrencyMasterServiceImpl">
+        <property name="currencyMasterDao" ref="currencyMasterDao1"/>
+    </bean>
+
+    <bean id="stationTypeService1" class="com.bul.zydex.service.StationType.StationTypeServiceImpl">
+        <property name="stationTypeDao" ref="stationTypeDao1"/>
+    </bean>
+    <bean id="tenantService1" class="com.bul.zydex.service.Tenant.TenantServiceImpl">
+        <property name="tenantDao" ref="tenantDao1"/>
+    </bean>
+    <bean id="projectProfileService1" class="com.bul.zydex.service.ProjectProfile.ProjectProfileServiceServiceImpl">
+        <property name="projectProfileDao" ref="projectProfileDao1"/>
+    </bean>
+    <bean id="investmentProfileService1" class="com.bul.zydex.service.InvestmentProfile.InvestmentProfileServiceImpl">
+        <property name="investmentProfileDao" ref="investmentProfileDao1"/>
+    </bean>
+	
+    <bean id="discomMasterService1" class="com.bul.zydex.service.DiscomMaster.DiscomMasterServiceImpl">
+        <property name="discomMasterDao" ref="discomMasterDao1"/>
+    </bean>
+    <bean id="connectionTypeService1" class="com.bul.zydex.service.ConnectionType.ConnectionTypeServiceImpl">
+        <property name="connectionTypeDao" ref="connectionTypeDao1"/>
+    </bean>
+    <bean id="projectNameMasterService1" class="com.bul.zydex.service.ProjectNameMaster.ProjectNameMasterServiceImpl">
+        <property name="projectNameMasterDao" ref="projectNameMasterDao1"/>
+    </bean>
+    <bean id="oapMasterService1" class="com.bul.zydex.service.OapMaster.OapMasterServiceImpl">
+        <property name="oapMasterDao" ref="oapMasterDao1"/>
+    </bean>
+    <bean id="oapMasterUserService1" class="com.bul.zydex.service.OapMasterUser.OapMasterUserServiceImpl">
+        <property name="oapMasterUserDao" ref="oapMasterUserDao1"/>
+    </bean>
+    <bean id="documentNameService1" class="com.bul.zydex.service.DocumentName.DocumentNameServiceImpl">
+        <property name="documentNameDao" ref="documentNameDao1"/>
+    </bean>
+    
+	
+	
+    <bean id="oapFormService1" class="com.bul.zydex.service.OapForm.OapFormServiceImpl">
+        <property name="oapFormDao" ref="oapFormDao1"/>
+    </bean>
+    <bean id="oapDocumentAttachmentService1" class="com.bul.zydex.service.OapDocumentAttachment.OapDocumentAttachmentServiceImpl">
+        <property name="oapDocumentAttachmentDao" ref="oapDocumentAttachmentDao1"/>
+    </bean>
+    
+    <bean id="oapMultiAttachmentService1" class="com.bul.zydex.service.OapMultiAttachment.OapMultiAttachmentServiceImpl">
+        <property name="oapMultiAttachmentDao" ref="oapMultiAttachmentDao1"/>
+    </bean>
+    <bean id="oapFormApprovalService1" class="com.bul.zydex.service.OapFormApproval.OapFormApprovalServiceImpl">
+        <property name="oapFormApprovalDao" ref="oapFormApprovalDao1"/>
+    </bean>
+    <bean id="oapFormApprovalCommentService1" class="com.bul.zydex.service.OapFormApprovalComment.OapFormApprovalCommentServiceImpl">
+        <property name="oapFormApprovalCommentDao" ref="oapFormApprovalCommentDao1"/>
+    </bean>
+    <bean id="oapFormApprovalUserService1" class="com.bul.zydex.service.OapFormApprovalUser.OapFormApprovalUserServiceImpl">
+        <property name="oapFormApprovalUserDao" ref="oapFormApprovalUserDao1"/>
+    </bean>
+    <bean id="aocFormService1" class="com.bul.zydex.service.AocForm.AocFormServiceImpl">
+        <property name="aocFormDao" ref="aocFormDao1"/>
+    </bean>
+    
+    <bean id="aocFormAttachmentService1" class="com.bul.zydex.service.AocFormAttachment.AocFormAttachmentServiceImpl">
+        <property name="aocFormAttachmentDao" ref="aocFormAttachmentDao1"/>
+    </bean>
+    
+    <bean id="aocFormMultiAttachmentService1" class="com.bul.zydex.service.AocFormMultiAttachment.AocFormMultiAttachmentServiceImpl">
+        <property name="aocFormMultiAttachmentDao" ref="aocFormMultiAttachmentDao1"/>
+    </bean>
+    <bean id="aocFormApprovalService1" class="com.bul.zydex.service.AocFormApproval.AocFormApprovalServiceImpl">
+        <property name="aocFormApprovalDao" ref="aocFormApprovalDao1"/>
+    </bean>
+    <bean id="aocFormApprovalUserService1" class="com.bul.zydex.service.AocFormApprovalUser.AocFormApprovalUserServiceImpl">
+        <property name="aocFormApprovalUserDao" ref="aocFormApprovalUserDao1"/>
+    </bean>
+    <bean id="aocFormApprovalCommentService1" class="com.bul.zydex.service.AocFormApprovalComment.AocFormApprovalCommentServiceImpl">
+        <property name="aocFormApprovalCommentDao" ref="aocFormApprovalCommentDao1"/>
+    </bean>
+    <bean id="crcFormService1" class="com.bul.zydex.service.CrcForm.CrcFormServiceImpl">
+        <property name="crcFormDao" ref="crcFormDao1"/>
+    </bean>
+    <bean id="crcFormApprovalService1" class="com.bul.zydex.service.CrcFormApproval.CrcFormApprovalServiceImpl">
+        <property name="crcFormApprovalDao" ref="crcFormApprovalDao1"/>
+    </bean>
+    <bean id="crcFormApprovalUserService1" class="com.bul.zydex.service.CrcFormApprovalUser.CrcFormApprovalUserServiceImpl">
+        <property name="crcFormApprovalUserDao" ref="crcFormApprovalUserDao1"/>
+    </bean>
+    <bean id="crcFormApprovalCommentService1" class="com.bul.zydex.service.CrcFormApprovalComment.CrcFormApprovalCommentServiceImpl">
+        <property name="crcFormApprovalCommentDao" ref="crcFormApprovalCommentDao1"/>
+    </bean>
+   
+    <bean id="kickOffAttendencesService1" class="com.bul.zydex.service.KickOffAttendences.KickOffAttendencesServiceImpl">
+        <property name="kickOffAttendencesDao" ref="kickOffAttendencesDao1"/>
+    </bean>
+    <bean id="kickOffFormApprovalService1" class="com.bul.zydex.service.KickOffFormApproval.KickOffFormApprovalServiceImpl">
+        <property name="kickOffFormApprovalDao" ref="kickOffFormApprovalDao1"/>
+    </bean>
+    <bean id="kickOffFormApprovalUserService1" class="com.bul.zydex.service.KickOffFormApprovalUser.KickOffFormApprovalUserServiceImpl">
+        <property name="kickOffFormApprovalUserDao" ref="kickOffFormApprovalUserDao1"/>
+    </bean>
+    <bean id="kickOffFormApprovalCommentService1" class="com.bul.zydex.service.KickOffFormApprovalComment.KickOffFormApprovalCommentServiceImpl">
+        <property name="kickOffFormApprovalCommentDao" ref="kickOffFormApprovalCommentDao1"/>
+    </bean>
+    <bean id="kickOffFormService1" class="com.bul.zydex.service.KickOffForm.KickOffFormServiceImpl">
+        <property name="kickOffFormDao" ref="kickOffFormDao1"/>
+    </bean>
+    <bean id="documentMasterIdService1" class="com.bul.zydex.service.DocumentMasterId.DocumentMasterIdServiceImpl">
+        <property name="documentMasterIdDao" ref="documentMasterIdDao1"/>
+    </bean>
+    <bean id="documentMastersIdService1" class="com.bul.zydex.service.DocumentMastersId.DocumentMastersIdServiceImpl">
+        <property name="documentMastersIdDao" ref="documentMastersIdDao1"/>
+    </bean>
+    <bean id="deliverableService1" class="com.bul.zydex.service.Deliverable.DeliverableServiceImpl">
+        <property name="deliverableDao" ref="deliverableDao1"/>
+    </bean>
+    <bean id="deliverableMultiService1" class="com.bul.zydex.service.DeliverableMulti.DeliverableMultiServiceImpl">
+        <property name="deliverableMultiDao" ref="deliverableMultiDao1"/>
+    </bean>
+    <bean id="iteamDetailsAttachmentsService1" class="com.bul.zydex.service.IteamDetailsAttachments.IteamDetailsAttachmentsServiceImpl">
+        <property name="iteamDetailsAttachmentsDao" ref="iteamDetailsAttachmentsDao1"/>
+    </bean>
+    <bean id="designCoordinatorMultiAttachService1" class="com.bul.zydex.service.DesignCoordinatorMultiAttach.DesignCoordinatorMultiAttachServiceImpl">
+        <property name="designCoordinatorMultiAttachDao" ref="designCoordinatorMultiAttachDao1"/>
+    </bean>
+    
+    <bean id="designCordinatorCommentsService1" class="com.bul.zydex.service.DesignCordinatorComments.DesignCordinatorCommentsServiceImpl">
+        <property name="designCordinatorCommentsDao" ref="designCordinatorCommentsDao1"/>
+    </bean>
+    <bean id="aocFormHistoryService1" class="com.bul.zydex.service.AocFormHistory.AocFormHistoryServiceImpl">
+        <property name="aocFormHistoryDao" ref="aocFormHistoryDao1"/>
+    </bean>
+    
+    <bean id="crcFormHistoryService1" class="com.bul.zydex.service.CrcFormHistory.CrcFormHistoryServiceImpl">
+        <property name="crcFormHistoryDao" ref="crcFormHistoryDao1"/>
+    </bean>
+    <bean id="kickOffFormHistoryService1" class="com.bul.zydex.service.KickOffFormHistory.KickOffFormHistoryServiceImpl">
+        <property name="kickoffFormHistoryDao" ref="kickoffFormHistoryDao1"/>
+    </bean>
+    
+    <bean id="oapFormHistoryService1" class="com.bul.zydex.service.OapFormHistory.OapFormHistoryServiceImpl">
+        <property name="oapFormHistoryDao" ref="oapFormHistoryDao1"/>
+    </bean>
+    
+    <bean id="aocFormMultiAttachmentHistoryService1" class="com.bul.zydex.service.AocFormMultiAttachmentHistory.AocFormMultiAttachmentHistoryServiceImpl">
+        <property name="aocFormMultiAttachementHistoryDao" ref="aocFormMultiAttachementHistoryDao1"/>
+    </bean>
+    <bean id="oapMultiAttachmentHistoryService1" class="com.bul.zydex.service.OapMultiAttachmentHistory.OapMultiAttachmentHistoryServiceImpl">
+        <property name="oapFormMultiAttachementHistoryDao" ref="oapFormMultiAttachementHistoryDao1"/>
+    </bean>
+    <bean id="kickOffAttendencesHistoryService1" class="com.bul.zydex.service.KickOffAttendencesHistory.KickOffAttendencesHistoryServiceImpl">
+        <property name="kickOffAttendencesHistoryDao" ref="kickOffAttendencesHistoryDao1"/>
+    </bean>
+	
+	
+    <bean id="poDetailsService1" class="com.bul.zydex.service.PoDetails.PoDetailsServiceImpl">
+        <property name="poDetailsDao" ref="poDetailsDao1"/>
+    </bean>
+    <bean id="riskCategoryService1" class="com.bul.zydex.service.RiskCategory.RiskCategorServiceImpl">
+        <property name="RiskCategoryDao" ref="riskCategoryDao1"/>
+    </bean>
+    <bean id="vendorInviteSourceService1" class="com.bul.zydex.service.VendorInviteSource.VendorInviteSourceServiceImpl">
+        <property name="VendorInviteSourceDao" ref="vendorInviteSourceDao1"/>
+    </bean>
+	
+    <bean id="siteSurveyCategoryDetailsService1" class="com.bul.zydex.service.SiteSurveyCategoryDetails.SiteSurveyCategoryDetailsServiceImpl">
+        <property name="siteSurveyCategoryDetailsDao" ref="siteSurveyCategoryDetailsDao1"/>
+    </bean>	
+    <!--	<bean id="surveyMasterService1" class="com.bul.zydex.service.SurveyMaster.SurveyMasterServiceImpl">
+        <property name="surveyMasterDao" ref="surveyMasterDao1"/>
+    </bean>-->
+    <!--    <bean id="surveyCategoryMasterService1" class="com.bul.zydex.service.SurveyMaster.SurveyCategoryMasterServiceImpl">
+        <property name="surveyCategoryMasterDao" ref="surveyCategoryMasterDao1"/>
+    </bean>-->
+    <!--    <bean id="surveySubCategoryMasterService1" class="com.bul.zydex.service.SurveyMaster.SurveySubCategoryMasterServiceImpl">
+        <property name="surveySubCategoryMasterDao" ref="surveySubCategoryMasterDao1"/>
+    </bean>-->
+    <bean id="surveyDocumentNoService1" class="com.bul.zydex.service.SurveyMaster.SurveyDocumentNoServiceImpl">
+        <property name="surveyDocumentNoDao" ref="surveyDocumentNoDao1"/>
+    </bean>
+    <bean id="documentForNewElectricityConnectionService1" class="com.bul.zydex.service.DocumentForNewElectricityConnection.DocumentForNewElectricityConnectionServiceImpl">
+        <property name="documentForNewElectricityConnectionDao" ref="documentForNewElectricityConnectionDao1"/>
+    </bean>
+    <bean id="siteSurveyService1" class="com.bul.zydex.service.SiteSurvey.SiteSurveyServiceImpl">
+        <property name="siteSurveyDao" ref="siteSurveyDao1"/>
+    </bean>
+    <bean id="oapLogMasterService1" class="com.bul.zydex.service.OapLogMaster.OapLogMasterServiceImpl">
+        <property name="oapLogMasterDao" ref="oapLogMasterDao1"/>
+    </bean>
+    <bean id="aocLogMasterService1" class="com.bul.zydex.service.AocLogMaster.AocLogMasterServiceImpl">
+        <property name="aocLogMasterDao" ref="aocLogMasterDao1"/>
+    </bean>
+    <bean id="siteSurveyAttachmentService1" class="com.bul.zydex.service.SiteSurveyAttachment.SiteSurveyAttachmentServiceImpl">
+        <property name="siteSurveyAttachmentDao" ref="siteSurveyAttachmentDao1"/>
+    </bean>
+    <bean id="oapSurveyAttachmentService1" class="com.bul.zydex.service.OapSurveyAttachment.OapSurveyAttachmentServiceImpl">
+        <property name="oapSurveyAttachmentDao" ref="oapSurveyAttachmentDao1"/>
+    </bean>
+    <bean id="oapSurveyAttachmentHistoryService1" class="com.bul.zydex.service.OapSurveyAttachmentHistory.OapSurveyAttachmentHistoryServiceImpl">
+        <property name="oapSurveyAttachmentHistoryDao" ref="oapSurveyAttachmentHistoryDao1"/>
+    </bean>
+    <bean id="aocSurveyAttachmentService1" class="com.bul.zydex.service.AocSurveyAttachment.AocSurveyAttachmentServiceImpl">
+        <property name="aocSurveyAttachmentDao" ref="aocSurveyAttachmentDao1"/>
+    </bean>
+    <bean id="aocSurveyAttachmentHistoryService1" class="com.bul.zydex.service.AocSurveyAttachmentHistory.AocSurveyAttachmentHistoryServiceImpl">
+        <property name="aocSurveyAttachmentHistoryDao" ref="aocSurveyAttachmentHistoryDao1"/>
+    </bean>
+	
+    <bean id="vendorCompanyDetailsService1" class="com.bul.zydex.service.Vendor.VendorCompanyDetailsServiceImpl">
+        <property name="VendorCompanyDetailsDao" ref="vendorCompanyDetailsDao1"/>
+    </bean>
+    
+    <bean id="declarationLetterService1" class="com.bul.zydex.service.DeclarationLetter.DeclarationLetterServiceImpl">
+        <property name="DeclarationLetterDao" ref="declarationLetterDao1"/>
+    </bean>
+    
+    <bean id="auditorMasterService1" class="com.bul.zydex.service.AuditorMaster.AuditorMasterServiceImpl">
+        <property name="auditorMasterDao" ref="auditorMasterDao1"/>
+    </bean>
+	
+        
+    <bean id="vendorSelfDeclarationService1" class="com.bul.zydex.service.VendorSelfDeclaration.VendorSelfDeclarationServiceImpl">
+        <property name="vendorSelfDeclarationDao" ref="vendorSelfDeclarationDao1"/>
+    </bean>
+    
+    <bean id="closePrService1" class="com.bul.zydex.service.ClosePr.ClosePrServiceImpl">
+        <property name="closePrDao" ref="closePrDao1"/>
+    </bean>
+    
+    <bean id="technicalMultiAttachmentService1" class="com.bul.zydex.service.Tender.TechnicalMultiAttachmentServiceImpl">
+        <property name="technicalMultiAttachmentDao" ref="technicalMultiAttachmentDao1"/>
+    </bean>
+	
+    <bean id="vendorCriteriaMasterService1" class="com.bul.zydex.service.VendorCriteriaMaster.VendorCriteriaMasterServiceImpl">
+        <property name="vendorCriteriaMasterDao" ref="vendorCriteriaMasterDao1"/>
+    </bean>
+    <bean id="vendorCriteriaMasterDetailsService1" class="com.bul.zydex.service.VendorCriteriaMaster.VendorCriteriaMasterDetailsServiceImpl">
+        <property name="vendorCriteriaMasterDetailsDao" ref="vendorCriteriaMasterDetailsDao1"/>
+    </bean>
+    
+    <bean id="vendorCriteriaMasterHistoryService1" class="com.bul.zydex.service.VendorCriteriaMaster.VendorCriteriaMasterHistoryServiceImpl">
+        <property name="vendorCriteriaMasterHistoryDao" ref="vendorCriteriaMasterHistoryDao1"/>
+    </bean>
+    <bean id="vendorCriteriaDetailsHistoryService1" class="com.bul.zydex.service.VendorCriteriaMaster.VendorCriteriaDetailsHistoryServiceImpl">
+        <property name="vendorCriteriaDetailsHistoryDao" ref="vendorCriteriaDetailsHistoryDao1"/>
+    </bean>
+    
+    <bean id="countryCodeService1" class="com.bul.zydex.service.CountryCode.CountryCodeServiceImpl">
+        <property name="countryCodeDao" ref="countryCodeDao1"/>
+    </bean>
+    <bean id="managerialPersonService1" class="com.bul.zydex.service.ManagerialPerson.ManagerialPersonServiceImpl">
+        <property name="managerialPersonDao" ref="managerialPersonDao1"/>
+    </bean>
+    
+    <bean id="lastWorkExpDeatilsService1" class="com.bul.zydex.service.LastWorkExpDeatils.LastWorkExpDeatilsServiceImpl">
+        <property name="lastWorkExpDeatilsDao" ref="lastWorkExpDeatilsDao1"/>
+    </bean>
+    <bean id="vendorItCriteriaCommentService1" class="com.bul.zydex.service.Vendor.VendorItCriteriaCommentServiceImpl">
+        <property name="vendorItCriteriaCommentDao" ref="vendorItCriteriaCommentDao1"/>
+    </bean>
+    
+    <bean id="vendorBuyerApprovalService1" class="com.bul.zydex.service.VendorBuyerApproval.VendorBuyerApprovalServiceImpl">
+        <property name="vendorBuyerApprovalDao" ref="vendorBuyerApprovalDao1"/>
+    </bean>
+    <bean id="vendorRecycleMailSchedulerService1" class="com.bul.zydex.service.VendorRecycleMailScheduler.VendorRecycleMailSchedulerServiceImpl">
+        <property name="vendorRecycleMailSchedulerDao" ref="vendorRecycleMailSchedulerDao1"/>
+    </bean>
+    <bean id="closePrMultiAttachService1" class="com.bul.zydex.service.ClosePrMultiAttach.ClosePrMultiAttachServiceImpl">
+        <property name="closePrMultiAttachDao" ref="closePrMultiAttachDao1"/>
+    </bean>
+    <bean id="anchorCustomerService1" class="com.bul.zydex.service.AnchorCustomer.AnchorCustomerServiceImpl">
+        <property name="anchorCustomerDao" ref="anchorCustomerDao1"/>
+    </bean>
+    <bean id="canopyVarientService1" class="com.bul.zydex.service.CanopyVarient.CanopyVarientServiceImpl">
+        <property name="canopyVarientDao" ref="canopyVarientDao1"/>
+    </bean>
+    
+    <bean id="chargerInstallationDetailsService1" class="com.bul.zydex.service.ChargerInstallationDetails.ChargerInstallationDetailsServiceImpl">
+        <property name="chargerInstallationDetailsDao" ref="chargerInstallationDetailsDao1"/>
+    </bean>
+    <bean id="chargerTypeService1" class="com.bul.zydex.service.ChargerType.ChargerTypeServiceImpl">
+        <property name="chargerTypeDao" ref="chargerTypeDao1"/>
+    </bean>
+    
+    <bean id="chargerMasterService1" class="com.bul.zydex.service.ChargerMaster.ChargerMasterServiceImpl">
+        <property name="chargerMasterDao" ref="chargerMasterDao1"/>
+    </bean>
+    
+    <bean id="connectorTypeService1" class="com.bul.zydex.service.ConnectorType.ConnectorTypeServiceImpl">
+        <property name="connectorTypeDao" ref="connectorTypeDao1"/>
+    </bean>
+    
+    <bean id="chargerInstallationDetailsHistoryService1" class="com.bul.zydex.service.ChargerInstallationDetailsHistory.ChargerInstallationDetailsHistoryServiceImpl">
+        <property name="chargerInstallationDetailsHistoryDao" ref="chargerInstallationDetailsHistoryDao1"/>
+    </bean>
+    
+    <bean id="ehMailService1" class="com.bul.zydex.service.Ehmail.EhMailServiceImpl">
+        <property name="ehMailDao" ref="ehMailDao1"/>
+    </bean>
+    
+    <bean id="vendorBlockListService1" class="com.bul.zydex.service.VendorBlockList.VendorBlockListServiceImpl">
+        <property name="vendorBlockListDao" ref="vendorBlockListDao1"/>
+    </bean>
+    <bean id="vendorFinancialApprovalDetailsService1" class="com.bul.zydex.service.VendorFinancialApprovalDetails.VendorFinancialApprovalDetailsServiceImpl">
+        <property name="vendorFinancialApprovalDetailsDao" ref="vendorFinancialApprovalDetailsDao1"/>
+    </bean>
+    
+    <bean id="vendorFinancialDetailsHistoryService1" class="com.bul.zydex.service.VendorFinancialDetailsHistory.VendorFinancialDetailsHistoryServiceImpl">
+        <property name="vendorFinancialDetailsHistoryDao" ref="vendorFinancialDetailsHistoryDao1"/>
+    </bean>
+    
+    <bean id="omsMasterService1" class="com.bul.zydex.service.OmsMaster.OmsMasterServiceImpl">
+        <property name="omsMasterDao" ref="omsMasterDao1"/>
+    </bean>
+    
+    
+    
+    <bean id="invoiceMasterService1" class="com.bul.zydex.service.Invoice.InvoiceMasterServiceImpl">
+        <property name="invoiceMasterDao" ref="invoiceMasterDao1"/>
+    </bean>
+    <bean id="invoiceAttachmentService1" class="com.bul.zydex.service.Invoice.InvoiceAttachmentServiceImpl">
+        <property name="invoiceAttachmentDao" ref="invoiceAttachmentDao1"/>
+    </bean>
+    
+    <bean id="documentTypeService1" class="com.bul.zydex.service.Invoice.DocumentTypeServiceImpl">
+        <property name="documentTypeDao" ref="documentTypeDao1"/>
+    </bean>
+    
+    
 </beans>

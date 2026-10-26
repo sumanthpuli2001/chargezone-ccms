@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorTechnicalBidTechAttachment" table="vendor_technical_bid_tech_attachment" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="refNo" type="string">    
+            <column name="ref_no" length="200"  />
+        </property>
+        <property name="vendorCode" type="string">    
+            <column name="vendor_code" length="500"  />
+        </property>
+        <property name="description" type="string">    
+            <column name="description" length="500"  />
+        </property>
+        <property name="attachment" type="string">    
+            <column name="attachment" length="500"  />
+        </property>
+       
+    </class>
+  
+</hibernate-mapping>

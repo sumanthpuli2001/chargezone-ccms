@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorPercentage" table="vendor_percentage" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        
+        <property name="technicalPercentage" type="string">    
+            <column name="technical_percentage" length="1000"  />
+        </property>
+        <property name="hrPercentage" type="string">    
+            <column name="hr_percentage" length="1000"  />
+        </property>
+         <property name="safteyPercentage" type="string">    
+            <column name="saftey_percentage" length="1000"  />
+        </property>
+         <property name="itPercentage" type="string">    
+            <column name="it_percentage" length="1000"  />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -7,9 +7,11 @@ package com.bul.zydex.controller;
 
 import com.bul.zydex.model.RightMaster;
 import com.bul.zydex.model.UserMaster;
+import com.bul.zydex.model.UserRights;
 import java.io.File;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.StringTokenizer;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,7 +47,7 @@ public abstract class UserMasterAbstract extends CustomAbstract {
     }
 
     public void getRights(HttpServletRequest request, HttpSession session, UserMaster user) throws Exception {
-        RightMaster rightMaster = rightService.read(user.getRights());
+        RightMaster rightMaster = rightService.read(user.getLoginName());
         int count = 0;
         ArrayList arr = new ArrayList();
         StringTokenizer st = new StringTokenizer(rightMaster.getRight(), "  ");
@@ -57,10 +59,21 @@ public abstract class UserMasterAbstract extends CustomAbstract {
         session.setAttribute("wright", arr);
 
     }
+    
+    public void addUserRight(HttpServletRequest request, UserMaster user) {
+        HttpSession session = request.getSession();
+      //  UserRights userRights = new UserRights();
+      //  userRights.setUsername(user.getLoginName());
+        List list = userRightsService.readByUserRight(user.getLoginName());
+        if (!list.isEmpty()) {
+            session.setAttribute("userRight", list.get(0));
+        }
+    }
 
     public String getCurrentIp(HttpServletRequest request, HttpSession session) throws Exception {
         InetAddress myIPvlaue = InetAddress.getLocalHost();
-        myIp = "" + myIPvlaue;
+        myIp = (String)request.getRemoteAddr();
+        //myIp = "" + myIPvlaue;
         return myIp;
     }
 

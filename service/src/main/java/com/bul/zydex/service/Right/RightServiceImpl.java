@@ -47,4 +47,18 @@ public class RightServiceImpl<T> extends GenericsServiceImpl<T> implements Right
         return rightDao.readByDrowDisable();
     }
 
+    @Override
+    public List getrightMasterPagination(int start, int length, String searchValue, String orderColumn, String orderDir) {
+        return rightDao.getrightMasterPagination(start, length, searchValue, orderColumn, orderDir);
+    }
+
+    @Override
+    public int getTotalrightMasterCount() {
+        return rightDao.getTotalrightMasterCount();
+    }
+
+    @Override
+    public int getFilteredrightMasterCount(String searchValue) {
+        return rightDao.getFilteredrightMasterCount(searchValue);
+    }
 }

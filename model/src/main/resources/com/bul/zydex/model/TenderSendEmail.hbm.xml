@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.TenderSendEmail" table="tender_send_email" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="refNo" type="string">    
+            <column name="ref_no" length="200"  />
+        </property>
+        <property name="vendorCode" type="string">    
+            <column name="vendor_code" length="500"  />
+        </property>
+        <property name="vendorName" type="string">    
+            <column name="vendor_name" length="200"  />
+        </property>
+        <property name="vendorAddress" type="string">    
+            <column name="vendor_address" length="200"  />
+        </property>
+        <property name="vendorEmail" type="string">    
+            <column name="vendor_email" length="200"  />
+        </property>
+        <property name="vendorMobile" type="string">    
+            <column name="vendor_mobile" length="200"  />
+        </property>
+        
+        <property name="checkStatus" type="java.lang.Integer">    
+            <column name="check_Status" length="200"  />
+        </property>
+    </class>
+  
+</hibernate-mapping>

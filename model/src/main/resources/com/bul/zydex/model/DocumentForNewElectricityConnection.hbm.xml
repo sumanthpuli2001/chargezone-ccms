@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.DocumentForNewElectricityConnection" table="document_for_new_electricity_connection" catalog="eprocsuite_chargezone" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="pointToBeNoted" type="string">
+            <column name="point_to_be_noted" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="remarks" />
+        </property>
+         <property name="guidelines" type="string">
+            <column name="guidelines" />
+        </property>
+         <property name="surveyMasterId" type="java.lang.Integer">
+            <column name="survey_master_id" />
+        </property>
+    </class>
+</hibernate-mapping>

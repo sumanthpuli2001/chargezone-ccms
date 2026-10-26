@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.SapItemLongTxt" table="sap_item_long_txt" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="number" type="string">
+            <column name="number" length="200"  />
+        </property>
+        <property name="txt" type="string">
+            <column name="txt" length="500"  />
+        </property>
+        <property name="PNumber" type="string">
+            <column name="p_number" length="200"  />
+        </property>
+        <property name="INumber" type="string">
+            <column name="i_number" length="200"  />
+        </property>
+    </class>
+
+</hibernate-mapping>

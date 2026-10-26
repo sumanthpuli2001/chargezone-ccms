@@ -6,7 +6,7 @@
 
 <hibernate-mapping>
 
-    <class name="com.bul.zydex.model.LogsMaster" table="logs_master" catalog="ccms" optimistic-lock="version">
+    <class name="com.bul.zydex.model.LogsMaster" table="logs_master" catalog="eprocsuite_chargezone" optimistic-lock="version">
         <id name="srNoValue" type="java.lang.Long">
             <column name="Sr_Number" />
             <generator class="identity" />

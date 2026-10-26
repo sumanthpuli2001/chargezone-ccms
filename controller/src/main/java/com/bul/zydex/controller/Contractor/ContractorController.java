@@ -91,8 +91,8 @@ public class ContractorController extends ContractorAbstract {
             cm.setRfId(RF_id).setDuration("0").setdRow("N").setApproved("Y");
             contractorService.create(cm);
             UserMaster um = new UserMaster();
-            um.setLoginName(cm.getContractorCode()).setPassword(encription(cm.getContractorCode())).setUserFullName(cm.getName()).setRights("Contractor").setDepartment(cm.getDepartment()).setDesignation(" ").setEmailId(" ").setdRow("N");
-            userMasterService.create(um);
+        //    um.setLoginName(cm.getContractorCode()).setPassword(encription(cm.getContractorCode())).setUserFullName(cm.getName()).setRights("Contractor").setDepartment(cm.getDepartment()).setDesignation(" ").setEmailId(" ").setdRow("N");
+        //    userMasterService.create(um);
             request.setAttribute("successMessage",
                     "Information: Employee Created successfully");
 
@@ -120,8 +120,8 @@ public class ContractorController extends ContractorAbstract {
         bind(request, contractorMaster);
         contractorService.update(contractorMaster);
         UserMaster um = userMasterService.read(contractorMaster.getContractorCode());
-        um.setUserFullName(contractorMaster.getName()).setDepartment(contractorMaster.getDepartment());
-        userMasterService.update(um);
+    //    um.setUserFullName(contractorMaster.getName()).setDepartment(contractorMaster.getDepartment());
+    //    userMasterService.update(um);
         request.setAttribute("successMessage",
                 "Information: Employee Updated successfully");
         //------for Log entry---------
@@ -152,7 +152,7 @@ public class ContractorController extends ContractorAbstract {
             contractorMaster.setdRow("Y");
             contractorService.update(contractorMaster);
             UserMaster um = userMasterService.read(contractorMaster.getContractorCode());
-            um.setdRow("Y");
+        //    um.setdRow("Y");
             userMasterService.update(um);
 
         }
@@ -193,7 +193,7 @@ public class ContractorController extends ContractorAbstract {
                 contractorMaster.setdRow("N");
                 contractorService.update(contractorMaster);
                 UserMaster um = userMasterService.read(contractorMaster.getContractorCode());
-                um.setdRow("N");
+            //    um.setdRow("N");
                 userMasterService.update(um);
 
             }

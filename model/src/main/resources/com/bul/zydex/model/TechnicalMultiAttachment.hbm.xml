@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.TechnicalMultiAttachment" table="technical_attachment" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="refNo" type="string">    
+            <column name="ref_no" length="200"  />
+        </property>
+        <property name="vendorCode" type="string">    
+            <column name="vendor_code" length="500"  />
+        </property>
+        <property name="technicalPersonName" type="string">    
+            <column name="technical_person_name" length="500"  />
+        </property>
+        <property name="attachment" type="string">    
+            <column name="attachment" length="500"  />
+        </property>
+        <property name="dateTime" type="string">    
+            <column name="date_time" length="50"  />
+        </property>
+        
+    </class>
+  
+</hibernate-mapping>

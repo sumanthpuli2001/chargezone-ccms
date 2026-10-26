@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.AuthTenderVendor" table="auth_tender_vendor" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="refNo" type="string">    
+            <column name="ref_no" length="200"  />
+        </property>
+        <property name="rfqNo" type="string">    
+            <column name="rfq_no" length="200"  />
+        </property>
+        <property name="vendorCode" type="string">    
+            <column name="vendor_code" length="500"  />
+        </property>
+        <property name="vendorName" type="string">    
+            <column name="vendor_name" length="200"  />
+        </property>
+        <property name="address" type="string">    
+            <column name="address" length="200"  />
+        </property>
+        <property name="emailId" type="string">    
+            <column name="email_id" length="200"  />
+        </property>
+        <property name="mobileNo" type="string">    
+            <column name="mobile_no" length="200"  />
+        </property>
+        <property name="contactPerson" type="string">    
+            <column name="contact_person" length="200"  />
+        </property>
+        <property name="checked" type="java.lang.Integer">    
+            <column name="checked" length="200"  />
+        </property>
+    </class>
+  
+</hibernate-mapping>

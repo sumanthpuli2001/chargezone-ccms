@@ -26,7 +26,7 @@
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
-                                <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
+                                <span style="color: red;font-size: 14px;">* Indicates Mandatory Field.</span>
                                 <c:if test="${!empty successMessage}">
                                     <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
                                 </c:if>
@@ -96,6 +96,16 @@
                 alert('Password not match');
                 return false;
             }
+            var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,20}$/;
+            if(pass.match(passw)) {
+                return true;
+            }
+            else
+            {
+                alert('Input Password and Submit [8 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter]');
+                return false;
+            }
+            
             return true;
         }
     </script>

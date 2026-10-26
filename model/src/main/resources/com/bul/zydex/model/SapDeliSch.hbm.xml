@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.SapDeliSch" table="sap_deli_sch" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="rfqNo" type="string">
+            <column name="rfq_no" length="200"  />
+        </property>
+        <property name="itemNumber" type="string">
+            <column name="item_number" length="200"  />
+        </property>
+        <property name="materialNumber" type="string">
+            <column name="material_number" length="200"  />
+        </property>
+        <property name="materialShortText" type="string">
+            <column name="material_short_text" length="200"  />
+        </property>
+        <property name="purchaseOrderQty" type="string">
+            <column name="purchase_order_qty" length="200"  />
+        </property>
+        <property name="itemDeliDate" type="string">
+            <column name="item_deli_date" length="200"  />
+        </property>
+        <property name="stageDate" type="string">
+            <column name="stage_date" length="200"  />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

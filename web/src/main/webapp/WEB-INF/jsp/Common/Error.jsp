@@ -3,103 +3,101 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <title>Error Page</title>
         <link rel="shortcut icon" href="StorageYard/Images/Icon/favicon.ico" type="image/x-icon">
         <link rel="icon" href="StorageYard/Images/Icon/favicon.ico" type="image/x-icon">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="/WEB-INF/jsp/Common/Top.jsp"%>
-        <title>Error Page</title>
+        <style>
+            body {
+                padding-top: 50px;
+                background-color: #f5f5f5;
+            }
+            .logo-img {
+                width: 160px;
+                margin: 20px auto;
+                display: block;
+            }
+            .stack-trace {
+                max-height: 150px;
+                overflow-y: auto;
+                background: #f9f9f9;
+                padding: 10px;
+            }
+            .error-img {
+                max-width: 100%;
+                height: auto;
+            }
+            .contact-info-box {
+                margin-top: 20px;
+                font-size: 15px;
+                background: #f2dede;
+                padding: 10px;
+                border-radius: 4px;
+                border: 1px solid #ebccd1;
+                color: #a94442;
+            }
+        </style>
     </head>
+    <body>
+        <div class="container">
+            <div class="text-center">
+                <img src="StorageYard/Images/logo.png" alt="Logo" class="logo-img">
+                <h1 class="text-danger">Oops! Something Went Wrong</h1>
+                <p class="lead">We're sorry, but an unexpected error has occurred.</p>
+            </div>
 
-    <!--    <body class="navbar-fixed">
-            <div style="background-color: #ffffff">
-                <div style="width: 100%;">
-                    <div class="title24 titleBold" style="margin: 20px;">Sorry, That's an Error.</div>
-                    <div style="margin: 20px;">
-                        <div style="margin: 20px">Description about Error : </div>
-    
-                        <div style="margin: 30px;overflow: hidden">
-                            <div style="float: left;width: 40%">The requested resource could not be found.</div>
-                            <div style="float: right;margin: 30px"><img src="StorageYard/Images/Error.jpg"></div>
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Error Information</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Error:</th>
+                                    <td>${pageContext.exception}</td>
+                                </tr>
+                                <tr>
+                                    <th>URI:</th>
+                                    <td>${pageContext.errorData.requestURI}</td>
+                                </tr>
+                                <tr>
+                                    <th>Status Code:</th>
+                                    <td>${pageContext.errorData.statusCode}</td>
+                                </tr>
+                                <tr>
+                                    <th>Stack Trace:</th>
+                                    <td class="stack-trace">
+                                        <c:forEach items="${pageContext.exception.stackTrace}" var="trace">
+                                            ${trace}<br/>
+                                        </c:forEach>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="text-right">
+                                <button class="btn btn-primary" onclick="window.history.back();">Go Back</button>
+                            </div>
+                            <div class="contact-info-box">
+                                <strong>If the issue persists, please contact the IT Department at:</strong><br><br>
+                                📧 <strong>Email:</strong> <a href="mailto:it.support@example.com" style="color: #a94442;">samir@bulwarks.com</a><br>
+                                📞 <strong>Phone:</strong> <a href="tel:+91 9099039811" style="color: #a94442;">+91 9099039811</a>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4 text-center">
+                            <img src="StorageYard/Images/disco.jpg" alt="Error Visual" class="error-img img-thumbnail">
                         </div>
                     </div>
                 </div>
-                <div class="title16" style="clear: both;margin: 20px;">If you want to go back then click <a href="" onclick="window.history.back();">here</a>.</div>
             </div>
-        </body>-->
-    <body class="navbar-fixed">
-        <div style="background-color: #ffffff; display: none;" id="errorId">
-            <div style="width: 100%;">
-                <div class="title24 titleBold" style="margin: 20px;">Sorry, That's an Error.</div>
-                <div style="margin: 20px;">
-                    <div style="margin: 20px">Description about Error : </div>
-
-
-                    <div style="margin: 30px;overflow: hidden">
-                        <!--<div style="float: left;width: 40%">The requested resource could not be found.</div>-->
-                        <table style="margin: 20px;" width="60%" border="1">
-                            <tr valign="top">
-                                <td ><b>Error:</b></td>
-                                <td>${pageContext.exception}</td>
-                            </tr>
-                            <tr valign="top">
-                                <td><b>URI:</b></td>
-                                <td>${pageContext.errorData.requestURI}</td>
-                            </tr>
-                            <tr valign="top">
-                                <td><b>Status code:</b></td>
-                                <td>${pageContext.errorData.statusCode}</td>
-                            </tr>
-                            <tr valign="top">
-                                <td><b>Stack trace:</b></td>
-                                <td>
-                                    ${pageContext.exception.stackTrace[0]}
-                                </td>
-                            </tr>
-                        </table>
-                        <div style="float: right;margin: 30px"><img src="StorageYard/Images/Error.jpg"></div>
-                    </div>
-                </div>
-            </div>
-            <!--<div class="title16" style="clear: both;margin: 20px;">If you want to go back then click <a href="" onclick="window.history.back();">here</a>.</div>-->
         </div>
-        <div style="background-color: #ffffff">
-            <div class="wrapper">
-                <table id="table_1" style="width: 100%">
-                    <tbody>
-                        <tr style="background-color: #3c8dbc"> 
-                            <td colspan="3">
-                                <a href="#" class="logo">
-                                    <span class="logo-lg"><img src="StorageYard/Images/logo.png" style="width: 160px; margin: 20px;" /></span>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="titleBold" style="font-size: 50px; margin: 20px;">Something is Wrong</div>
-                            </td> 
-                        </tr>
-                        <tr>
-                            <td style="width: 40%; padding-left:20px;font-size: 30px;">
-                                Description about it :<br /><br />
-                                - Your page is not Found Please Contact to IT Department.
-                            </td> 
-                            <td>
-                                <div style="margin: 20px"><img src="StorageYard/Images/disco.jpg" onclick="document.getElementById('errorId').style.display='block';"></div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-<!--                <div class="title16" style="clear: both;margin: 20px;">If you want to go to login page.
-                    <button type="button" class="btn btn-primary" onclick="location.href = 'logIn.html?act=loginClick';"  style="background-color: #0070c0;border-radius: 6px;width: auto;text-align: center; font-weight: bold; " >Click Here</button>
 
-                    <a href="logIn.html?act=loginClick">Click here</a>.
-                </div>-->
-            </div>
-        </div>                    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     </body>
 </html>

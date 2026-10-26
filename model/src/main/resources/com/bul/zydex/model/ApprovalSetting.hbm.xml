@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ApprovalSetting" table="approval_setting" catalog="eprocsuite_chargezone" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="approvalOne" type="string">
+            <column name="approval_one" />
+        </property>
+        <property name="approvalTwo" type="string">
+            <column name="approval_two" />
+        </property>
+        <property name="approvalThree" type="string">
+            <column name="approval_three" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

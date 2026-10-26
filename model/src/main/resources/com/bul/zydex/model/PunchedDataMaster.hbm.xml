@@ -5,7 +5,7 @@
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.PunchedDataMaster" table="punched_data" catalog="ccms" optimistic-lock="version">
+    <class name="com.bul.zydex.model.PunchedDataMaster" table="punched_data" catalog="eprocsuite_chargezone" optimistic-lock="version">
         <id name="srNo" type="java.lang.Long">
             <column name="sr_no" />
         </id>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.AuctionVendorBid" table="auction_vendor_bid" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="auctionNo" type="string">    
+            <column name="auction_no" length="200"  />
+        </property>
+        <property name="vendorCode" type="string">    
+            <column name="vendor_code" length="200"  />
+        </property>
+        <property name="currency" type="string">    
+            <column name="currency" length="200"  />
+        </property>
+        <property name="currencyConversion" type="string">    
+            <column name="currency_conversion" length="200"  />
+        </property>
+        <property name="vendorBasicStartPrice" type="string">    
+            <column name="vendor_basic_start_price" length="200"  />
+        </property>
+        <property name="loadingFactorPer" type="string">    
+            <column name="loading_factor_per" length="200"  />
+        </property>
+        <property name="loadingFactorVal" type="string">    
+            <column name="loading_factor_val" length="200"  />
+        </property>
+        <property name="finalPrice" type="string">    
+            <column name="final_price" length="200"  />
+        </property>
+        <property name="finalTotal" type="string">    
+            <column name="final_total" length="200"  />
+        </property>
+        <property name="dateTime" type="string">    
+            <column name="date_time" length="200"  />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

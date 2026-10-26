@@ -24,7 +24,7 @@ public class ReportDaoImpl<T> extends GenericsDAOImpl<T> implements ReportDao<T>
 
     @Override
     public List read(String dFrom, String eFrom, String type, String name, String cardCode, String item) {
-        String Condition = " and 1 = 1 ";
+        String Condition = " and 1 = 1 and a.id='"+type+"' ";
         if (name != "" && name != null) {
             Condition += "and a.name='" + name + "'";
         }

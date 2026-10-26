@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.AuthTenderMaster" table="auth_tender_master" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="refNo" type="string">    
+            <column name="ref_no" length="200"  />
+        </property>
+        <property name="title" type="string">    
+            <column name="title" length="500"  />
+        </property>
+        <property name="categoryId" type="string">    
+            <column name="category_id" length="200"  />
+        </property>
+        <property name="subCategoryId" type="string">    
+            <column name="sub_category_id" length="200"  />
+        </property>
+        <property name="value" type="string">    
+            <column name="value" length="200"  />
+        </property>
+        <property name="emd" type="string">    
+            <column name="emd" length="200"  />
+        </property>
+        <property name="docCost" type="string">    
+            <column name="doc_cost" length="200"  />
+        </property>
+        <property name="type" type="string">    
+            <column name="type" length="200"  />
+        </property>
+        <property name="contactPerson" type="string">    
+            <column name="contact_person" length="200"  />
+        </property>
+        <property name="location" type="string">    
+            <column name="location" length="200"  />
+        </property>
+        <property name="announceDate" type="string">    
+            <column name="announce_date" length="200"  />
+        </property>
+        <property name="portalDate" type="string">
+            <column name="portal_date" length="200"  />
+        </property>
+        <property name="collectionLastdate" type="string">    
+            <column name="collection_lastdate" length="200"  />
+        </property>
+        <property name="submitLastdate" type="string">    
+            <column name="submit_lastdate" length="200"  />
+        </property>
+        <property name="openingDate" type="string">    
+            <column name="opening_date" length="200"  />
+        </property>
+        <property name="workDesc" type="string">    
+            <column name="work_desc" length="2000"  />
+        </property>
+        <property name="prequalification" type="string">    
+            <column name="prequalification" length="200"  />
+        </property>
+        <property name="prebidDate" type="string">    
+            <column name="prebid_date" length="200"  />
+        </property>
+        <property name="prebidAddress" type="string">    
+            <column name="prebid_address" length="200"  />
+        </property>
+        <property name="tenderDocument" type="string">    
+            <column name="tender_document" length="200"  />
+        </property>
+        <property name="tenderBidDocument" type="string">    
+            <column name="tender_bid_document" length="200"  />
+        </property>
+        <property name="tenderTechDocument" type="string">    
+            <column name="tender_tech_document" length="200"  />
+        </property>
+        <property name="tenderRemark" type="string">    
+            <column name="tender_remark" length="2000"  />
+        </property>
+        <property name="vendorCode" type="java.lang.Integer">
+            <column name="vendor_code" length="100"  />
+        </property>
+        <property name="tenderAdmin" type="string">    
+            <column name="tender_admin" length="200"  />
+        </property>
+        <property name="tenderAdminContactNumber" type="string">    
+            <column name="tender_admin_contact_number" length="200"  />
+        </property>
+        <property name="tenderAuthorizePerson" type="string">    
+            <column name="tender_authorize_person" length="200"  />
+        </property>
+        <property name="tenderAuthorizeContactNo" type="string">    
+            <column name="tender_authorize_contact_no" length="200"  />
+        </property>
+        <property name="authorizeFlag" type="java.lang.Integer">
+            <column name="authorize_flag" length="100"  />
+        </property>
+        <property name="tenderAuthorizeUserName" type="string">    
+            <column name="tender_authorize_user_name" length="200"  />
+        </property>
+        <property name="reAuthoFlag" type="java.lang.Integer">
+            <column name="re_autho_flag" length="100"  />
+        </property>
+        <property name="isInAuthoTable" type="java.lang.Integer">
+            <column name="is_in_autho_table" length="100"  />
+        </property>
+        <property name="vendorFlag" type="java.lang.Integer">
+            <column name="vendor_flag" length="100"  />
+        </property>
+        <property name="itemFlag" type="java.lang.Integer">
+            <column name="item_flag" length="100"  />
+        </property>
+        <property name="emailFlag" type="java.lang.Integer">
+            <column name="email_flag" length="100"  />
+        </property>
+        <property name="authorizeDate" type="string">    
+            <column name="authorize_date" length="200"  />
+        </property>
+        <property name="returnFlag" type="java.lang.Integer">
+            <column name="return_flag" length="100"  />
+        </property>
+        <property name="returnText" type="string">    
+            <column name="return_text" length="200"  />
+        </property>
+        <property name="deleteFlag" type="java.lang.Integer">
+            <column name="delete_flag" length="100"  />
+        </property>
+        <property name="deleteRemark" type="string">    
+            <column name="delete_remark" length="200"  />
+        </property>
+        <property name="tenderPhase" type="java.lang.Integer">
+            <column name="tender_phase" length="100"  />
+        </property>
+        <property name="openBidFlag" type="java.lang.Integer">
+            <column name="open_bid_flag" length="100"  />
+        </property>
+        <property name="department" type="string">    
+            <column name="department" length="200"  />
+        </property>
+        <property name="prNo" type="string">
+            <column name="pr_no" length="100"  />
+        </property>
+        <property name="tenderType" type="string">
+            <column name="tender_type" length="100"  />
+        </property>
+         
+    </class>
+  
+
+</hibernate-mapping>

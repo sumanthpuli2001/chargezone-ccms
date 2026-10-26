@@ -1,0 +1,431 @@
+<%-- 
+    Document   : FinacialApprovalPrintPage
+    Created on : 19 Nov, 2024, 9:25:55 AM
+    Author     : Bulwarks-1
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Print</title>
+
+
+
+        <style>
+
+
+
+            /* Main container */
+            .main-container {
+                background-color: #f9f9f9;
+                font-family: Arial, sans-serif;
+            }
+
+            /* Flex container for top row */
+            .flex-row {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+
+            }
+
+            /* Styling for left and right tables */
+            .flex-table {
+                flex: 1;
+                border-collapse: collapse;
+                width: 100%;
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                background-color: #ffffff;
+            }
+
+            .table-title {
+                font-size: 15px;
+                font-weight: bold;
+                padding: 12px;
+
+                text-align: center;
+                background-color: #e0e7ff;
+            }
+
+            /* Table headers */
+            th, td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #dddddd;
+            }
+
+            /* Alternate row colors */
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+
+            tr:hover {
+                background-color: #e9f5ff;
+            }
+
+            /* Styling for bottom table */
+            .bottom-table {
+                width: 100%;
+                border-collapse: collapse;              
+                border-radius: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                background-color: #ffffff;
+            }
+
+            /* Link styling */
+            a {
+                color: #007BFF;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+
+            /* Table cell styling */
+            td:first-child {
+
+                width: 35%;
+                color: #333;
+            }
+
+
+            /* Center the Print button */
+            .button-container {
+                text-align: center; /* Center the button horizontally */
+                margin-top: 20px;   /* Optional: add space above the button */
+            }
+
+            .print-button {
+                border-radius: 2vh;
+                font-size: 2vh;
+                font-weight: 700;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                cursor: pointer;
+                margin-bottom: 2rem;
+            }
+
+            .print-button:hover {
+                background-color: #45a049;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            function printPage() {
+                var content = document.getElementById("content-to-print").innerHTML;
+                var originalContent = document.body.innerHTML;
+
+                // Set the content to print
+                document.body.innerHTML = content;
+
+                // Print the page
+                window.print();
+
+                // Restore the original content after printing
+                document.body.innerHTML = originalContent;
+            }
+        </script>
+        <div class="button-container">
+            <button class="print-button" onclick="printPage()">Print</button>
+        </div>
+        <div id="content-to-print">
+                <input type="hidden" id="id" name="id" value="${list.id}">
+                <input type="hidden" id="id1" name="id1" value="${list.id}">
+
+                <div class="main-container">
+                    <!-- Top row with Company Information and Policy File -->
+                    <div class="flex-row">
+                        <!-- Company Information Table (Left Side) -->
+                        <table  class="flex-table" id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                            <tr>
+
+                            <tr class="table-title">
+                                <td colspan="2">Company Information</td>
+                            </tr>
+                            <tr>
+                                <td>Company Name:</td>
+                                <td>${list.companyName}</td>
+                            </tr>     
+                            </tr>
+
+
+
+                        </table>
+
+                        <table  class="flex-table" id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+
+                            <tr class="table-title">
+                                <td colspan="2">Policy File</td>
+                            </tr>
+
+                            <tr>
+                                <td>Policy File:</td>
+                                <td>
+                                    <a href="vendorInformation.htm?act=downloadFileAprrove1&amp;fileName=${list.policy1File}&id=${list.id}"> ${list.policy1File}</a>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+
+
+                    <table class="bottom-table" id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+
+
+
+                        <tr>
+                            <td>Type Of Concern </td>
+                            <td>${list.typeOfConcern}</td>
+                        </tr>
+
+
+
+
+
+
+                    </table>
+
+
+                    <table class="bottom-table" id="table_1" class="table table-bordered table-striped table-hover" align="center">
+
+                        <tr class="table-title">
+                            <td colspan="2">Location Details</td>
+                        </tr>
+
+
+                        <tr>
+                            <td>Country</td>
+                            <td>${list.officeCountry}</td> <!-- Example Name -->
+
+
+                        </tr>
+                        <tr>
+                            <td>State</td>
+                            <td>${list.officeState}</td> <!-- Example Name -->
+                        </tr>
+                        <tr>
+                            <td>City</td>
+                            <td>${list.officeCity}</td> <!-- Example Name -->
+                        </tr>
+
+
+
+
+                    </table> 
+
+
+
+
+
+
+
+
+
+                    <table  class="bottom-table"  id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
+                        <tr class="table-title">
+                            <td colspan="2">External Provider Details</td>
+                        </tr>
+                        <tr>
+                            <td>Address </td>
+                            <td>Office</td>
+
+                        </tr>
+                        <tr>
+                            <td>House No.</td>
+                            <td>${list.officeAddressLine1}</td>
+
+                        </tr>
+                        <tr>
+                            <td>Street</td>
+                            <td>${list.officeAddressLine2}</td>
+
+                        </tr>
+                        <tr>
+                            <td>District</td>
+                            <td>${list.officeAddressLine3}</td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>Pin </td>
+                            <td>${list.officePin}</td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>Year of Establishment of Company </td>
+                            <td>${list.establishment}</td>
+
+                        </tr>
+
+                        <tr>
+                            <td>Company Website </td>
+                            <td>${list.officeWebsite}</td>
+
+                        </tr>
+
+                        <tr>
+                            <td>Primary Mobile No</td>
+                            <td>${list.officeTelephone}</td>
+
+                        </tr>
+
+                        <tr>
+                            <td>Secondary Mobile number </td>
+                            <td>${list.secoundMobile}</td>
+
+                        </tr>
+
+
+
+                    </table>
+
+                  
+
+
+
+                    <table  class="bottom-table" id="table_1" class="table table-bordered table-striped table-hover" align="center">
+                        <tr class="table-title">
+                            <td colspan="3">Company registration details:</td>
+                        </tr>
+
+                        <tbody>
+
+                            <tr>
+                                <td>GST No.</td>
+                                <td>${list.gstinNo}</td> <!-- Example Name -->
+
+                                <td>
+                                    <a href="vendorInformation.htm?act=downloadFileAprrove1&amp;fileName=${list.gstinFile}&id=${list.id}"> ${list.gstinFile}</a>
+                                </td>
+                                <!-- Example Job Title -->
+                            </tr>
+
+
+                            <tr>
+                                <td>PAN No.</td>
+                                <td>${list.panNo}</td> <!-- Example Name -->
+
+                                <td>
+                                    <a href="vendorInformation.htm?act=downloadFileAprrove1&amp;fileName=${list.panFile}&id=${list.id}"> ${list.panFile}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>MSME No</td>
+                                <td>${list.service_tax}</td> <!-- Example Name -->
+                                <!-- Example Job Title -->
+                                <td>
+                                    <a href="vendorInformation.htm?act=downloadFileAprrove1&amp;fileName=${list.service_file}&id=${list.id}"> ${list.service_file}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Import Export Code</td>
+                                <td>${list.ecc_no}</td> <!-- Example Name -->
+                                <!-- Example Job Title -->
+                                <td>
+                                    <a href="vendorInformation.htm?act=downloadFileAprrove1&amp;fileName=${list.ecc_file}&id=${list.id}"> ${list.ecc_file}</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="bottom-table" id="table_1" class="table table-bordered table-striped table-hover" align="center">
+                        <tr class="table-title">
+                            <td colspan="3">Payment/Banking Information:</td>
+                        </tr>
+                        <tbody>
+                            <tr>
+                                <td>Account Number.</td>
+                                <td>${list.accountNumber}</td> <!-- Example Name -->
+
+
+                            </tr>
+                            <tr>
+                                <td>Bank Name</td>
+                                <td>${list.bankName}</td> <!-- Example Name -->
+                            </tr>
+                            <tr>
+                                <td>Branch.</td>
+                                <td>${list.branch}</td> <!-- Example Name -->
+                            </tr>
+
+                            <tr>
+                                <td>IFSC Code.</td>
+                                <td>${list.ifscCode}</td> <!-- Example Name -->
+                            </tr>
+                            <tr>
+                                <td>Swift Code (if any)</td>
+                                <td>${list.swiftCode}</td> <!-- Example Name -->
+
+                            </tr>
+                            <tr>
+                                <td> Cancel Cheque</td>
+                                <!--<td>${list.cancelCheck}</td>  Example Name -->
+
+                                <td>
+                                    <a href="vendorInformation.htm?act=downloadFileAprrove1&amp;fileName=${list.cancelCheck}&id=${list.id}"> ${list.cancelCheck}</a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <table class="bottom-table"  class="table table-bordered table-striped table-hover" align="center">
+
+
+                        <tr class="table-title">
+                            <td colspan="7">FINANCIAL STATEMENT (PROFIT AND LOSS / BALANCE SHEET)</td>
+                        </tr>
+                        <tbody>
+                            <tr>
+                                <td>Financial Year 1</td>
+                                <td>${list.finical1}</td> <!-- Example Name -->
+                                <td>${list.finicalAmount1}</td>
+                                <td><a href="vendorInformation.htm?act=downloadFileAprrove1&amp;fileName=${list.finicalAttachment1}&id=${list.id}">${list.finicalAttachment1}</a></td>
+                            </tr>
+                            <tr>
+                                <td>Financial Year 2</td>
+                                <td>${list.finical2}</td> <!-- Example Name -->
+                                <td>${list.finicalAmount2}</td>
+                                <td><a href="vendorInformation.htm?act=downloadFileAprrove1&amp;fileName=${list.finicalAttachment2}&id=${list.id}">${list.finicalAttachment2}</a></td>
+                            </tr>
+                            <tr>
+                                <td>Financial Year 3</td>
+                                <td>${list.finical3}</td> <!-- Example Name -->
+                                <td>${list.finicalAmount3}</td>
+                                <td><a href="vendorInformation.htm?act=downloadFileAprrove1&amp;fileName=${list.finicalAttachment3}&id=${list.id}">${list.finicalAttachment3}</a></td>
+                            </tr>
+
+
+
+
+                        </tbody>
+                    </table>
+
+
+
+
+
+                </div>
+
+
+        </div>
+
+    </body>
+</html>

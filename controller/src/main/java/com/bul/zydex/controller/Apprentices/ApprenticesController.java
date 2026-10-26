@@ -45,8 +45,8 @@ public class ApprenticesController extends ApprenticesAbstract {
             apprenticesMaster.setRfId("" + (apprenticesMaster.getApprenticeCode().length() == 4 ? "0020" + apprenticesMaster.getApprenticeCode().substring(3) : apprenticesMaster.getApprenticeCode().length() == 3 ? "00200" + apprenticesMaster.getApprenticeCode().substring(3) : apprenticesMaster.getApprenticeCode().length() == 2 ? "002000" + apprenticesMaster.getApprenticeCode().substring(3) : "0020000" + apprenticesMaster.getApprenticeCode().substring(3))).setdRow("N").setDuration("0").setRightName("Apprentice");
             apprenticesService.create(apprenticesMaster);
             UserMaster um = new UserMaster();
-            um.setLoginName(apprenticesMaster.getApprenticeCode()).setPassword(encription(apprenticesMaster.getApprenticeCode())).setUserFullName(apprenticesMaster.getName()).setRights(apprenticesMaster.getRightName()).setDepartment(apprenticesMaster.getDepartment()).setDesignation(" ").setEmailId(" ").setdRow("N");
-            userMasterService.create(um);
+         //   um.setLoginName(apprenticesMaster.getApprenticeCode()).setPassword(encription(apprenticesMaster.getApprenticeCode())).setUserFullName(apprenticesMaster.getName()).setRights(apprenticesMaster.getRightName()).setDepartment(apprenticesMaster.getDepartment()).setDesignation(" ").setEmailId(" ").setdRow("N");
+         //   userMasterService.create(um);
             request.setAttribute("successMessage",
                     "Information: Apprentices Created successfully");
         } else {
@@ -66,8 +66,8 @@ public class ApprenticesController extends ApprenticesAbstract {
         bind(request, apprenticesMaster);
         apprenticesService.update(apprenticesMaster);
         UserMaster um = userMasterService.read(apprenticesMaster.getApprenticeCode());
-        um.setUserFullName(apprenticesMaster.getName()).setRights(apprenticesMaster.getRightName()).setDepartment(apprenticesMaster.getDepartment());
-        userMasterService.update(um);
+    //    um.setUserFullName(apprenticesMaster.getName()).setRights(apprenticesMaster.getRightName()).setDepartment(apprenticesMaster.getDepartment());
+    //    userMasterService.update(um);
         request.setAttribute("successMessage",
                 "Information: Apprentices Updated successfully");
         mv = showList(request, response);

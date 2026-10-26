@@ -1,17 +1,17 @@
 $(document).ready(function () {
-    $('input').iCheck({
-        checkboxClass: 'icheckbox_square-blue',
-        radioClass: 'iradio_square-blue',
-        increaseArea: '10%' // optional
-    });
-    $('#toggleId').on('ifChanged', function (event) {
-        if (event.target.checked === true) {
-            $("input[name='checkId']").iCheck('check');
-        } else {
-            $("input[name='checkId']").iCheck('uncheck');
-        }
-    });
-    $('#table_1').DataTable();
+//    $('input').iCheck({
+//        checkboxClass: 'icheckbox_square-blue',
+//        radioClass: 'iradio_square-blue',
+//        increaseArea: '10%' // optional
+//    });
+//    $('#toggleId').on('ifChanged', function (event) {
+//        if (event.target.checked === true) {
+//            $("input[name='checkId']").iCheck('check');
+//        } else {
+//            $("input[name='checkId']").iCheck('uncheck');
+//        }
+//    });
+//    $('#table_1').DataTable();
 
 
 });

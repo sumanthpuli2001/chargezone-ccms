@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorFinancialApprovalDetails" table="vendor_finacial_approval_details" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+
+        <property name="vendorInfoId" type="java.lang.Integer">
+            <column name="vendor_info_id" />
+        </property>
+
+        <property name="gstStatus" type="string">
+            <column name="gst_status" />
+        </property>
+
+        <property name="gstRemark" type="string">
+            <column name="gst_remark" />
+        </property>
+
+        <property name="gstResponces" type="string">
+            <column name="gst_responces" />
+        </property>
+
+        <property name="panStatus" type="string">
+            <column name="pan_status" />
+        </property>
+
+        <property name="panRemark" type="string">
+            <column name="pan_remark" />
+        </property>
+
+        <property name="panResponces" type="string">
+            <column name="pan_responces" />
+        </property>
+
+        <property name="msmeStatus" type="string">
+            <column name="msme_status" />
+        </property>
+
+        <property name="msmeRemark" type="string">
+            <column name="msme_remark" />
+        </property>
+
+        <property name="msmeResponces" type="string">
+            <column name="msme_responces" />
+        </property>
+
+        <property name="esicStatus" type="string">
+            <column name="esic_status" />
+        </property>
+
+        <property name="esicRemark" type="string">
+            <column name="esic_remark" />
+        </property>
+
+        <property name="esicResponce" type="string">
+            <column name="esic_responce" />
+        </property>
+
+        <property name="epfoStatus" type="string">
+            <column name="epfo_status" />
+        </property>
+
+        <property name="epfoRemark" type="string">
+            <column name="epfo_remark" />
+        </property>
+
+        <property name="epfoResponces" type="string">
+            <column name="epfo_responces" />
+        </property>
+
+        <property name="iecStatus" type="string">
+            <column name="iec_status" />
+        </property>
+
+        <property name="iecRemark" type="string">
+            <column name="iec_remark" />
+        </property>
+
+        <property name="iecReponces" type="string">
+            <column name="iec_reponces" />
+        </property>
+
+        <property name="firstYearStatus" type="string">
+            <column name="first_year_status" />
+        </property>
+
+        <property name="firstYearRemark" type="string">
+            <column name="first_year_remark" />
+        </property>
+
+        <property name="firstYearResponces" type="string">
+            <column name="first_year_responces" />
+        </property>
+
+        <property name="secondYearStatus" type="string">
+            <column name="second_year_status" />
+        </property>
+
+        <property name="secondYearRemark" type="string">
+            <column name="second_year_remark" />
+        </property>
+
+        <property name="secondYearResponces" type="string">
+            <column name="second_year_responces" />
+        </property>
+
+        <property name="thirdYearStatus" type="string">
+            <column name="third_year_status" />
+        </property>
+
+        <property name="thirdYearRemark" type="string">
+            <column name="third_year_remark" />
+        </property>
+
+        <property name="thirdYearResponces" type="string">
+            <column name="third_year_responces" />
+        </property>
+
+        <property name="finacialComment" type="text">
+            <column name="finacial_comment" />
+        </property>
+        
+        <property name="cancelCheckStatus" type="string">
+            <column name="cancel_check_status" />
+        </property>
+        <property name="cancelCheckRemark" type="string">
+            <column name="cancel_check_remark" />
+        </property>
+        <property name="cancelCheckResponse" type="string">
+            <column name="cancel_check_response" />
+        </property>
+       
+        
+    </class>
+
+</hibernate-mapping>

@@ -57,6 +57,8 @@ public class DeviceController extends CustomAbstract {
         request.setAttribute("successMessage",
                 "Information: One or more data deleted successfully");
         mv = showList(request, response);
+        
+        
         return mv;
     }
 

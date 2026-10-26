@@ -4,7 +4,7 @@
     <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
     <%@include file="/WEB-INF/jsp/Common/NavbarCmss.jsp"%>
     <head onload="rrshowSlides(1);">
-        <title>Homepage</title>
+        <title>Homepageeeee</title>
         <script>
             jQuery.noConflict();
             jQuery(document).ready(function () {
@@ -172,7 +172,7 @@
             <ol class="breadcrumb">
                 <li> ${CurrentDate}</li>
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home page</a></li>
-                <li class="active">My Dashboard</li>
+                <li class="active">Admin Dashboard</li>
             </ol>
         </section>
         <!-- Main content -->
@@ -204,7 +204,6 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                         <!--<span class="product-title">  ${thoughtMaster}</span>-->
-                                    <marquee scrollamount="2" style="font-size:18px !important;"><strong style="color: #006fad;">THOUGHT OF THE DAY : " Health is Wealth "</strong> <span style="color: #006fad">${thoughtMaster.thought}</span></marquee>
                                 </div>
                             </div>
 

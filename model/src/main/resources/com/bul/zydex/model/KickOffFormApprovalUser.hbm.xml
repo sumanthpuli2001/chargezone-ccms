@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.KickOffFormApprovalUser" table="kickoff_form_approval_user" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+         <property name="kickOffFormApproval" type="java.lang.Integer">
+            <column name="kickoff_form_approval_id" length="10"  />
+        </property>
+            <property name="kickOffForm" type="java.lang.Integer">
+            <column name="kickoff_form_id" length="10"  />
+        </property>
+          
+        <property name="userId" type="string">    
+            <column name="user_id"  />
+        </property>     
+        <property name="level" type="string">    
+            <column name="level"  />
+        </property> 
+        <property name="approvalStatus" type="string">    
+            <column name="approval_status"  />
+        </property>
+        
+    </class>
+</hibernate-mapping>

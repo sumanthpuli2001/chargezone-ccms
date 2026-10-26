@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.LastWorkExpDeatils" table="last_work_exp_details" catalog="eprocsuite_chargezone" optimistic-lock="version">
+        
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="vendorInformationId" type="java.lang.Integer">
+            <column name="vendor_info_id" />
+        </property>
+        <property name="companyName" type="string">
+            <column name="company_name" />
+        </property>
+        <property name="contactPersonName" type="string">
+            <column name="contact_person_name" />
+        </property>
+        <property name="designation" type="string">
+            <column name="designation" />
+        </property>
+        <property name="mobileNumber" type="string">
+            <column name="mobile_no" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" />
+        </property>
+        <property name="attchment" type="string">
+            <column name="attachment" />
+        </property>
+        <property name="countryCode" type="string">
+            <column name="country_code" />
+        </property>
+        
+        <property name="statuss" type="string">
+            <column name="statuss" />
+        </property>
+        <property name="remarkk" type="string">
+            <column name="remarkk" />
+        </property>
+        <property name="response" type="string">
+            <column name="response" />
+        </property>        
+    </class>
+</hibernate-mapping>

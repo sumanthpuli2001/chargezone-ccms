@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorBlockList" table="vendor_block_list" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="vendorInfoId" type="java.lang.Integer">    
+            <column name="vendor_info_id"   />
+        </property>
+        <property name="comments" type="string">    
+            <column name="comments"   />
+        </property>
+        <property name="attchment" type="string">    
+            <column name="attachment"   />
+        </property>
+        <property name="userName" type="string">    
+            <column name="user_name"   />
+        </property>
+        <property name="dateTime" type="string">    
+            <column name="date_time"   />
+        </property>
+        <property name="flagStatus" type="java.lang.Integer">    
+            <column name="flag_status"   />
+        </property>
+        
+    </class>
+
+</hibernate-mapping>

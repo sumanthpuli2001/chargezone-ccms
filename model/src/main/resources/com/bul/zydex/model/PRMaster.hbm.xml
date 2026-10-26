@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.PRMaster" table="pr_master" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="prNo" type="string">    
+            <column name="pr_no" length="200"  />
+        </property>
+        <property name="title" type="string">    
+            <column name="title" length="500"  />
+        </property>
+        
+        
+        <property name="projectId" type="string">    
+            <column name="project_id" length="500"  />
+        </property>
+        
+        
+        <property name="categoryId" type="string">    
+            <column name="category_id" length="200"  />
+        </property>
+       
+        <property name="value" type="string">    
+            <column name="value" length="200"  />
+        </property>
+       
+        <property name="type" type="string">    
+            <column name="type" length="200"  />
+        </property>
+        <property name="contactPerson" type="string">    
+            <column name="contact_person" length="200"  />
+        </property>
+        <property name="location" type="string">    
+            <column name="location" length="200"  />
+        </property>
+        <property name="announceDate" type="string">    
+            <column name="announce_date" length="200"  />
+        </property>
+       
+        <property name="workDesc" type="string">    
+            <column name="work_desc" length="2000"  />
+        </property>
+      
+        <property name="prRemark" type="string">    
+            <column name="pr_remark" length="2000"  />
+        </property>
+    
+        <property name="prAdmin" type="string">    
+            <column name="pr_admin" length="200"  />
+        </property>
+        <property name="prAdminContactNumber" type="string">    
+            <column name="pr_admin_contact_number" length="200"  />
+        </property>
+      
+        <property name="authorizeFlag" type="java.lang.Integer">
+            <column name="authorize_flag" length="100"  />
+        </property>
+        
+        <property name="authorizeDate" type="string">    
+            <column name="authorize_date" length="200"  />
+        </property>
+       
+        <property name="department" type="string">    
+            <column name="department" length="200"  />
+        </property>
+        
+        <property name="billingLocation" type="string">    
+            <column name="billing_location" length="200"  />
+        </property>
+        <property name="technicalContactName" type="string">    
+            <column name="technical_contact_name" length="200"  />
+        </property>
+        <property name="technicalContactNo" type="string">    
+            <column name="technical_contact_no" length="200"  />
+        </property>
+        <property name="address1" type="string">    
+            <column name="address1" length="200"  />
+        </property>
+        <property name="address2" type="string">    
+            <column name="address2" length="200"  />
+        </property>
+        <property name="state" type="string">    
+            <column name="state" length="200"  />
+        </property>
+        <property name="city" type="string">    
+            <column name="city" length="200"  />
+        </property>
+        <property name="pincode" type="string">    
+            <column name="pincode" length="200"  />
+        </property>
+        <property name="quotes" type="string">    
+            <column name="quotes" length="200"  />
+        </property>
+        <property name="businessType" type="string">    
+            <column name="business_type" length="200"  />
+        </property>
+        <property name="projectType" type="string">    
+            <column name="project_type" length="200"  />
+        </property>
+        <property name="tenderCreaterId" type="string">    
+            <column name="tender_creater_id" length="200"  />
+        </property>
+        <property name="tenderFlag" type="java.lang.Integer">    
+            <column name="tender_flag" length="200"  />
+        </property>
+        <property name="deliveryPeriod" type="string">    
+            <column name="delivery_period" length="200"  />
+        </property>
+        <property name="technicalCommittee" type="string">    
+            <column name="technical_committee" length="200"  />
+        </property>
+        <property name="priceCommittee" type="string">    
+            <column name="price_committee" length="200"  />
+        </property>
+        <property name="prAuthorizeUser" type="string">    
+            <column name="pr_authorize_user" length="200"  />
+        </property>
+        <property name="prAuthorizeDate" type="string">    
+            <column name="pr_authorize_date" length="200"  />
+        </property>
+        <property name="tenderAssignUser" type="string">    
+            <column name="tender_assign_user" length="200"  />
+        </property>
+        <property name="tenderAssignDate" type="string">    
+            <column name="tender_assign_date" length="200"  />
+        </property>
+        <property name="tenderCreaterUser" type="string">    
+            <column name="tender_creater_user" length="200"  />
+        </property>
+        <property name="tenderCreaterDate" type="string">    
+            <column name="tender_creater_date" length="200"  />
+        </property>
+        <property name="techBidOpenUser" type="string">    
+            <column name="tech_bid_open_user" length="200"  />
+        </property>
+        <property name="techBidOpenDate" type="string">    
+            <column name="tech_bid_open_date" length="200"  />
+        </property>
+        <property name="techBidApproveUser" type="string">    
+            <column name="tech_bid_approve_user" length="200"  />
+        </property>
+        <property name="techBidApproveDate" type="string">    
+            <column name="tech_bid_approve_date" length="200"  />
+        </property>
+        <property name="priceBidOpenUser" type="string">    
+            <column name="price_bid_open_user" length="200"  />
+        </property>
+        <property name="priceBidOpenDate" type="string">    
+            <column name="price_bid_open_date" length="200"  />
+        </property>
+        <property name="priceBidStartUser" type="string">    
+            <column name="price_bid_start_user" length="200"  />
+        </property>
+        <property name="priceBidStartDate" type="string">    
+            <column name="price_bid_start_date" length="200"  />
+        </property>
+        <property name="finalCloseUser" type="string">    
+            <column name="final_close_user" length="200"  />
+        </property>
+        <property name="finalCloseDate" type="string">    
+            <column name="final_close_date" length="200"  />
+        </property>
+        <property name="tenderAwardUser" type="string">    
+            <column name="tender_award_user" length="200"  />
+        </property>
+        <property name="tenderAwardDate" type="string">    
+            <column name="tender_award_date" length="200"  />
+        </property>
+        <property name="tenderAcceptUser" type="string">    
+            <column name="tender_accept_user" length="200"  />
+        </property>
+        <property name="tenderAcceptDate" type="string">    
+            <column name="tender_accept_date" length="200"  />
+        </property>
+        
+        <property name="plant" type="string">    
+            <column name="plant" length="200"  />
+        </property>
+        <property name="gst" type="string">    
+            <column name="gst" length="200"  />
+        </property>
+        <property name="purchaseOrganization" type="string">    
+            <column name="purchase_organization" length="200"  />
+        </property>
+         <property name="address" type="string">    
+            <column name="address" length="200"  />
+        </property>
+          <property name="locationName" type="string">    
+            <column name="location_name" length="200"  />
+        </property>
+         <property name="locationAddress" type="string">    
+            <column name="location_address" length="200"  />
+        </property>
+         <property name="remarks" type="string">    
+            <column name="remarks" length="1000"  />
+        </property>
+        
+        
+           <property name="prReworkBy" type="string">    
+            <column name="pr_rework_by" length="200"  />
+        </property>
+        
+           <property name="prReworkDate" type="string">    
+            <column name="pr_rework_date" length="200"  />
+        </property>
+        
+        
+         <property name="singleQuoteFlag" type="java.lang.Integer">    
+            <column name="single_quote_flag" length="200"  />
+        </property>
+        
+    
+           <property name="singleQuoteAttachment" type="string" >
+            <column name="single_quote_attachment" length="100"  />
+        </property>
+        
+        <property name="prComment" type="string" >
+            <column name="pr_comment" />
+        </property>
+        
+        <property name="nameofLocationPartner" type="string" >
+            <column name="name_of_location_partner" />
+        </property>
+        <property name="mobileNoLocationPartner" type="string" >
+            <column name="mobile_no_of_location_partner" />
+        </property>
+
+        <property name="projectIdUpdateDate" type="string" >
+            <column name="project_id_update_date" />
+        </property>
+        <property name="budgetAmountUpdateDate" type="string" >
+            <column name="budget_amount_update_date" />
+        </property>
+        <property name="currency" type="string" >
+            <column name="currency" />
+        </property>
+        
+    </class>
+  
+
+</hibernate-mapping>

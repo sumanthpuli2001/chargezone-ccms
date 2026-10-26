@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.OapMultiAttachmentHistory" table="oap_multi_attachment_history" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+       <property name="oapForm" type="java.lang.Integer">    
+            <column name="oap_form_id" length="100"  />
+        </property>
+               
+        <property name="attachment" type="string">    
+            <column name="attachment"  />
+        </property>
+          <property name="description" type="string">    
+            <column name="description"  />
+        </property>
+        
+          <property name="history" type="string">    
+            <column name="history"   />
+        </property>
+          <property name="oapHistoryId" type="java.lang.Integer">    
+            <column name="oap_history_id"  />
+        </property>
+         <property name="oapMultiId" type="java.lang.Integer">    
+            <column name="oap_multi_id"  />
+        </property>
+    </class>
+</hibernate-mapping>

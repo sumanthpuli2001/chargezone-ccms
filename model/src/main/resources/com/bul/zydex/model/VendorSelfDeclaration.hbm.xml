@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorSelfDeclaration" table="vendor_self_declaration" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        
+          <property name="vendorInformationId" type="java.lang.Integer">
+            <column name="vendor_information_id" length="100" />
+        </property>
+        
+        
+        <property name="desDecOne" type="string">    
+            <column name="des_dec_one" length="200"  />
+        </property>
+       
+        <property name="desDecOneFlag" type="java.lang.Integer">
+            <column name="des_dec_one_flag" length="100" />
+        </property>
+        
+        
+        <property name="desDecTwo" type="string">    
+            <column name="des_dec_two" length="200"  />
+        </property>
+       
+        <property name="desDecTwoFlag" type="java.lang.Integer">
+            <column name="des_dec_two_flag" length="100" />
+        </property>
+        
+        
+        <property name="altLocalAddress" type="string">    
+            <column name="alt_local_address" length="200"  />
+        </property>
+        <property name="altLocalAddress1" type="string">    
+            <column name="alt_local_address1" length="200"  />
+        </property>
+        <property name="altLocalAddress2" type="string">    
+            <column name="alt_local_address2" length="200"  />
+        </property>
+        
+        <property name="altCity" type="string">    
+            <column name="alt_city" length="200"  />
+        </property>
+        <property name="altDistrict" type="string">    
+            <column name="alt_district" length="200"  />
+        </property>
+        
+        
+        <property name="altState" type="string">    
+            <column name="alt_state" length="200"  />
+        </property>
+        
+        
+        <property name="altCountry" type="string">    
+            <column name="alt_country" length="200"  />
+        </property>
+        
+        
+        <property name="altPostalCode" type="string">    
+            <column name="alt_postal_code" length="200"  />
+        </property>
+        
+        
+        <property name="altTelephone" type="string">    
+            <column name="alt_telephone" length="200"  />
+        </property>
+        
+        
+        <property name="altEmail" type="string">    
+            <column name="alt_email" length="200"  />
+        </property>
+        
+        <property name="altWebsite" type="string">    
+            <column name="alt_website" length="200"  />
+        </property>
+        
+        <property name="infName" type="string">    
+            <column name="inf_name" length="200"  />
+        </property>
+        
+        <property name="infDesignatoin" type="string">    
+            <column name="inf_designation" length="200"  />
+        </property>
+        
+        <property name="infContactNo" type="string">    
+            <column name="inf_contact_no" length="200"  />
+        </property>
+        
+        <property name="infEmail" type="string">    
+            <column name="inf_email" length="200"  />
+        </property>
+        
+        <property name="infDob" type="string">    
+            <column name="inf_dob" length="200"  />
+        </property>
+        
+        <property name="infNationality" type="string">    
+            <column name="inf_nationality" length="200"  />
+        </property>
+        
+        <property name="infPostalAddress" type="string">    
+            <column name="inf_postal_address" length="200"  />
+        </property>
+        
+        <property name="infCity" type="string">    
+            <column name="inf_city" length="200"  />
+        </property>
+        
+        <property name="infState" type="string">    
+            <column name="inf_state" length="200"  />
+        </property>
+        
+        <property name="infCountry" type="string">    
+            <column name="inf_country" length="200"  />
+        </property>
+        
+        <property name="infPostalCode" type="string">    
+            <column name="inf_postal_code" length="200"  />
+        </property>
+        
+       
+        <property name="thirdName" type="string">    
+            <column name="third_name" length="200"  />
+        </property>
+        
+        <property name="thirdEmail" type="string">    
+            <column name="third_email" length="200"  />
+        </property>
+        
+        <property name="thirdTelephone" type="string">    
+            <column name="third_telephone" length="200"  />
+        </property>
+        
+        <property name="thirdCountry" type="string">    
+            <column name="third_country" length="200"  />
+        </property>
+        
+        <property name="thirdNameTwo" type="string">    
+            <column name="third_name_two" length="200"  />
+        </property>
+        
+        <property name="thirdEmailTwo" type="string">    
+            <column name="third_email_two" length="200"  />
+        </property>
+        
+        <property name="thirdTelephoneTwo" type="string">    
+            <column name="third_telephone_two" length="200"  />
+        </property>
+        
+        <property name="thirdCountryTwo" type="string">    
+            <column name="third_country_two" length="200"  />
+        </property>
+        
+        
+        
+        <property name="litigationHistoryDes" type="string">    
+            <column name="litigation_history_des" length="200"  />
+        </property>
+        
+        <property name="litigationHistoryDesFlag" type="java.lang.Integer">
+            <column name="litigation_history_des_flag" length="100" />
+        </property>
+        
+        
+        <property name="politicalContributionDes" type="string">    
+            <column name="political_contriution_des" length="200"  />
+        </property>
+        
+        <property name="politicalContributionDesFlag" type="java.lang.Integer">
+            <column name="political_contriution_des_flag" length="100" />
+        </property>
+        
+        
+        <property name="conflictInsterestDes" type="string">    
+            <column name="conflict_insterest_des" length="200"  />
+        </property>
+        
+        <property name="conflictInsterestDesFlag" type="java.lang.Integer">
+            <column name="conflict_insterest_des_flag" length="100" />
+        </property>
+        
+        
+        <property name="executiveJudicialDes" type="string">    
+            <column name="executive_judicial_des" length="200"  />
+        </property>
+        
+        <property name="executiveJudicialDesFlag" type="java.lang.Integer">
+            <column name="executive_judicial_des_flag" length="100" />
+        </property>
+        
+        <property name="politicallyExposedDesOne" type="string">    
+            <column name="politically_exposed_des_one" length="200"  />
+        </property>
+        
+        <property name="politicallyExposedDesOneFlag" type="java.lang.Integer">
+            <column name="politically_exposed_des_one_flag" length="100" />
+        </property>
+        
+        <property name="politicallyExposedDesTwo" type="string">    
+            <column name="politically_exposed_des_two" length="200"  />
+        </property>
+        
+        <property name="politicallyExposedDesTwoFlag" type="java.lang.Integer">
+            <column name="politically_exposed_des_two_flag" length="100" />
+        </property>
+        
+        <property name="politicallyExposedDesThree" type="string">    
+            <column name="politically_exposed_des_three" length="200"  />
+        </property>
+        
+        <property name="politicallyExposedDesThreeFlag" type="java.lang.Integer">
+            <column name="politically_exposed_des_three_flag" length="100" />
+        </property>
+        
+        
+        <property name="natureServicesOne" type="string">    
+            <column name="nature_services_one" length="200"  />
+        </property>
+        
+        <property name="natureServicesOneFlag" type="java.lang.Integer">
+            <column name="nature_services_one_flag" length="100" />
+        </property>
+        
+        
+        <property name="natureServicesTwo" type="string">    
+            <column name="nature_services_two" length="200"  />
+        </property>
+        
+        <property name="natureServicesTwoFlag" type="java.lang.Integer">
+            <column name="nature_services_two_flag" length="100" />
+        </property>
+        
+        <property name="ndaOne" type="string">    
+            <column name="nda_one" length="200"  />
+        </property>
+        
+        <property name="ndaOneFlag" type="java.lang.Integer">
+            <column name="nda_one_flag" length="100" />
+        </property>
+        
+        <property name="ndaTwo" type="string">    
+            <column name="nda_two" length="200"  />
+        </property>
+        
+        <property name="ndaTwoFlag" type="java.lang.Integer">
+            <column name="nda_two_flag" length="100" />
+        </property>
+                
+    </class>
+  
+</hibernate-mapping>

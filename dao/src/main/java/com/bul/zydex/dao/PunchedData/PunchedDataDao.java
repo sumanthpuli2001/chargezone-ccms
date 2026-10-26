@@ -37,7 +37,7 @@ public interface PunchedDataDao<T> extends GenericsDAO<T> {
 
     public List readEmp(String dFrom, String eFrom, String type);
 
-    public List readDistinct(String dFrom, String eFrom, String cardCode, String item);
+    public List readDistinct(String dFrom, String eFrom, String cardCode, String item, String type1);
 
     public List readByValues(String format, String string, String item);
 

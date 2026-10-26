@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ServiceRights" table="service_rights" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="department" type="string">    
+            <column name="department" length="200"  />
+        </property>
+        <property name="location" type="string">    
+            <column name="location" length="200"  />
+        </property>
+        <property name="sap" type="java.lang.Integer">    
+            <column name="sap" length="200"  />
+        </property>
+        <property name="service1" type="java.lang.Integer">    
+            <column name="service1" length="200"  />
+        </property>
+        <property name="service2" type="java.lang.Integer">    
+            <column name="service2" length="200"  />
+        </property>
+        <property name="service3" type="java.lang.Integer">    
+            <column name="service3" length="200"  />
+        </property>
+        <property name="service4" type="java.lang.Integer">    
+            <column name="service4" length="200"  />
+        </property>
+        <property name="service5" type="java.lang.Integer">    
+            <column name="service5" length="200"  />
+        </property>
+        <property name="service6" type="java.lang.Integer">    
+            <column name="service6" length="200"  />
+        </property>
+    </class>
+</hibernate-mapping>

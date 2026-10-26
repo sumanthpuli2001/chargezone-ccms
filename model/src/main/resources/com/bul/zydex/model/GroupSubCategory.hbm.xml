@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.GroupSubCategory" table="group_sub_category" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="subCategoryName" type="string">    
+            <column name="sub_category_name" length="200"  />
+        </property>
+        <property name="groupMasterId" type="java.lang.Integer">    
+            <column name="group_master_id" length="200"  />
+        </property>
+        <property name="groupCategoryId" type="java.lang.Integer">    
+            <column name="group_category_id" length="200"  />
+        </property>     
+        <property name="riskCategory" type="string">    
+            <column name="risk_category" length="200"  />
+        </property>     
+        <property name="hr" type="string">    
+            <column name="hr" length="200"  />
+        </property>
+        <property name="hsc" type="string">    
+            <column name="hsc" length="200"  />
+        </property>
+        <property name="it" type="string">    
+            <column name="it" length="200"  />
+        </property>
+        <property name="technical" type="string">    
+            <column name="technical" length="200"  />
+        </property>
+        
+         <property name="attachment" type="string">    
+            <column name="attachment" length="200"  />
+        </property>
+        <property name="remark" type="string">    
+            <column name="remark" length="200"  />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

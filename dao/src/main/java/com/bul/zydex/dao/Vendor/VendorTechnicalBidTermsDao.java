@@ -1,0 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.bul.zydex.dao.Vendor;
+
+import com.bul.zydex.dao.GenericsDAO;
+import com.bul.zydex.model.VendorTechnicalBidTerms;
+import java.util.List;
+
+/**
+ *
+ * @author admin
+ */
+public interface VendorTechnicalBidTermsDao<T> extends GenericsDAO<T> {
+
+    public List readByVendorRefNo(String refNo, String username);
+
+    public List readVendorRefNo(String refNo, String username, String description);
+
+    public void updateVendorRefNo(String refNo, String username, String description, int vendor_response, String remark);
+
+    public List readByReviseVendorBid(String refNo, String username, int revise_technical_bid_id);
+
+    public void updateAdminVendorRefNo(String refNo, String username, String vendor_terms_desc, int parseInt, String terms_vendor_remark, int revise_id);
+
+    public void readByDelete(String refNo, String username);
+    
+}

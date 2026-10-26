@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ChargerInstallationDetailsHistory" table="charger_installation_details_history" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="oapId" type="java.lang.Integer">    
+            <column name="oap_id"   />
+        </property>
+        <property name="chargerInstalId" type="java.lang.Integer">    
+            <column name="charger_instal_id"   />
+        </property>
+        <property name="chargerType" type="string">    
+            <column name="charger_type"   />
+        </property>
+        <property name="charger" type="string">    
+            <column name="charger"   />
+        </property>
+        <property name="chargerCapacityKW" type="string">    
+            <column name="charger_capacity_kw"   />
+        </property>
+        <property name="chargermodel" type="string">    
+            <column name="chager_model"   />
+        </property>
+        <property name="connectorType" type="string">    
+            <column name="connector_type"   />
+        </property>
+        <property name="noofconnectors" type="string">    
+            <column name="no_of_connectors"   />
+        </property>
+        <property name="noofchargers" type="string">    
+            <column name="no_of_chargers"   />
+        </property>
+        <property name="chargingrateperunit" type="string">    
+            <column name="Charging_rate_per_unit"   />
+        </property>
+        <property name="chargerOther" type="string">    
+            <column name="charger_other"   />
+        </property>
+        <property name="connectorTypeOther" type="string">    
+            <column name="connector_type_other"   />
+        </property>
+        
+        
+        
+    </class>
+
+</hibernate-mapping>

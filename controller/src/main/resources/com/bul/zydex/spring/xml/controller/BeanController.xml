@@ -19,6 +19,9 @@
  
     <!--Parent-->
     <bean id="controllerConfig" abstract="true">
+        <property name="auditorMasterService"  ref="auditorMasterService1"  />
+        <property name="closePrService"  ref="closePrService1"  />
+
         <property name="methodNameResolver" ref="methodNameResolver"></property>
         <property name="userMasterService" ref="userMasterService1"></property>
         <property name="employeeMasterService" ref="employeeMasterService1"></property>
@@ -34,6 +37,256 @@
         <property name="logService" ref="logService1"></property>
         <property name="reportService" ref="reportService1"></property>
         <property name="sqlDataConnectService" ref="sqlDataConnectService1"></property>
+        <property name="approvalSettingService" ref="approvalSettingService1"></property> 
+        <property name="vendorInvitationService" ref="vendorInvitationService1"></property>
+        <property name="vendorInformationService" ref="vendorInformationService1"></property>
+        <property name="vendorBusinessCertificateService" ref="vendorBusinessCertificateService1"></property>
+        <property name="vendorQualityCertificateService" ref="vendorQualityCertificateService1"></property>
+        <property name="vendorClearanceCertificateService" ref="vendorClearanceCertificateService1"></property>
+        <property name="vendorApprovalService" ref="vendorApprovalService1"></property>
+        <property name="vendorMasterService" ref="vendorMasterService1"></property>
+        <property name="userRightsService" ref="userRightsService1"></property>
+        <property name="tenderMasterService" ref="tenderMasterService1"></property>
+        <property name="sapDeliSchService" ref="sapDeliSchService1"></property>
+        <property name="sapItemLongTxtService" ref="sapItemLongTxtService1"></property>
+        <property name="sapPurchaseItemTxtService" ref="sapPurchaseItemTxtService1"></property>
+        <property name="sapTenderItemService" ref="sapTenderItemService1"></property>
+        <property name="sapTenderMasterService" ref="sapTenderMasterService1"></property>
+        <property name="sapVendorEmailService" ref="sapVendorEmailService1"></property>
+        <property name="sapVendorTelephoneService" ref="sapVendorTelephoneService1"></property>
+        <property name="sapVendorMasterService" ref="sapVendorMasterService1"></property>
+        <property name="tenderGeneralDocService" ref="tenderGeneralDocService1"></property>
+        <property name="tenderAdditionalDocService" ref="tenderAdditionalDocService1"></property>
+        <property name="tenderTechnicalDocService" ref="tenderTechnicalDocService1"></property>
+        <property name="tenderPreQualificationService" ref="tenderPreQualificationService1"></property>
+        <property name="tenderTechnicalService" ref="tenderTechnicalService1"></property>
+        <property name="tenderVendorDocService" ref="tenderVendorDocService1"></property>
+        <property name="tenderItemMasterService" ref="tenderItemMasterService1"></property>
+        <property name="tenderItemAttachmentService" ref="tenderItemAttachmentService1"></property>
+        <property name="tenderVendorService" ref="tenderVendorService1"></property>
+        <property name="vendorPreBidAttachmentService" ref="vendorPreBidAttachmentService1"></property>
+        <property name="vendorPreBidService" ref="vendorPreBidService1"></property>
+        <property name="vendorAttachmentService" ref="vendorAttachmentService1"></property>
+        <property name="vendorEmdService" ref="vendorEmdService1"></property>
+        <property name="vendorFeeService" ref="vendorFeeService1"></property>
+        <property name="vendorTechnicalBidService" ref="vendorTechnicalBidService1"></property>
+        <property name="vendorTechnicalBidAttachmentService" ref="vendorTechnicalBidAttachmentService1"></property>
+        <property name="vendorTechnicalBidTechService" ref="vendorTechnicalBidTechService1"></property>
+        <property name="vendorTechnicalBidTermsService" ref="vendorTechnicalBidTermsService1"></property>
+        <property name="vendorTechnicalBidTechAttachmentService" ref="vendorTechnicalBidTechAttachmentService1"></property>
+        <property name="vendorTechnicalBidTermsAttachmentService" ref="vendorTechnicalBidTermsAttachmentService1"></property>
+        <property name="vendorTenderBidService" ref="vendorTenderBidService1"></property>
+        <property name="vendorTenderBidItemService" ref="vendorTenderBidItemService1"></property>
+        <property name="authTenderMasterService" ref="authTenderMasterService1"></property>
+        <property name="authTenderGeneralDocService" ref="authTenderGeneralDocService1"></property>
+        <property name="authTenderAdditionalDocService" ref="authTenderAdditionalDocService1"></property>
+        <property name="authTenderTechnicalDocService" ref="authTenderTechnicalDocService1"></property>
+        <property name="authTenderPreQualificationService" ref="authTenderPreQualificationService1"></property>
+        <property name="authTenderTechnicalService" ref="authTenderTechnicalService1"></property>
+        <property name="authTenderVendorDocService" ref="authTenderVendorDocService1"></property>
+        <property name="authTenderItemMasterService" ref="authTenderItemMasterService1"></property>
+        <property name="authTenderItemAttachmentService" ref="authTenderItemAttachmentService1"></property>
+        <property name="authTenderVendorService" ref="authTenderVendorService1"></property>
+        <property name="tenderRegretService" ref="tenderRegretService1"></property>
+        <property name="tenderNoTempService" ref="tenderNoTempService1"></property>
+        <property name="tenderNoService" ref="tenderNoService1"></property>
+        <property name="fileDetailService" ref="fileDetailService1"></property>
+        <property name="serviceDetail1Service" ref="serviceDetail1Service1"></property>
+        <property name="serviceDetail2Service" ref="serviceDetail2Service1"></property>
+        <property name="serviceDetail3Service" ref="serviceDetail3Service1"></property>
+        <property name="serviceDetail4Service" ref="serviceDetail4Service1"></property>
+        <property name="serviceDetail5Service" ref="serviceDetail5Service1"></property>
+        <property name="serviceDetail6Service" ref="serviceDetail6Service1"></property>
+        <property name="serviceVendorTenderBidService" ref="serviceVendorTenderBidService1"></property>
+        <property name="serviceVendorTenderBidItemService" ref="serviceVendorTenderBidItemService1"></property>
+        <property name="serviceVendorTenderBidItem2Service" ref="serviceVendorTenderBidItem2Service1"></property>
+        <property name="serviceVendorTenderBidItem3Service" ref="serviceVendorTenderBidItem3Service1"></property>
+        <property name="serviceVendorTenderBidItem4Service" ref="serviceVendorTenderBidItem4Service1"></property>
+        <property name="serviceVendorTenderBidItem6Service" ref="serviceVendorTenderBidItem6Service1"></property>
+        <property name="tenderSendEmailService" ref="tenderSendEmailService1"></property>
+        <property name="emailTemplateService" ref="emailTemplateService1"></property>
+        <property name="liveTenderService" ref="liveTenderService1"></property>
+        <property name="vendorInfoService" ref="vendorInfoService1"></property>
+        <property name="tenderFollowupService" ref="tenderFollowupService1"></property>
+        <property name="commMasterService" ref="commMasterService1"></property>
+        <property name="commMasterAttachmentService" ref="commMasterAttachmentService1"></property>
+        <property name="serviceRightsService" ref="serviceRightsService1"></property>
+        <property name="auctionMasterService" ref="auctionMasterService1"></property>
+        <property name="auctionItemMasterService" ref="auctionItemMasterService1"></property>
+        <property name="auctionVendorService" ref="auctionVendorService1"></property>
+        <property name="auctionItemVendorService" ref="auctionItemVendorService1"></property>
+        <property name="auctionAttachmentService" ref="auctionAttachmentService1"></property>
+        <property name="auctionNoTempService" ref="auctionNoTempService1"></property>
+        <property name="auctionNoService" ref="auctionNoService1"></property>
+        <property name="auctionVendorBidService" ref="auctionVendorBidService1"></property>
+        <property name="auctionVendorBidHistoryService" ref="auctionVendorBidHistoryService1"></property>
+        
+        <property name="auctionItemVendorBidService" ref="auctionItemVendorBidService1"></property>
+        <property name="auctionItemVendorBidHistoryService" ref="auctionItemVendorBidHistoryService1"></property>
+        
+        <property name="tenderCommitteeService" ref="tenderCommitteeService1"></property>
+        <property name="reviseVendorTenderBidService" ref="reviseVendorTenderBidService1"></property>
+        <property name="reviseVendorTenderBidItemService" ref="reviseVendorTenderBidItemService1"></property>
+        <property name="locationMasterService" ref="locationMasterService1"></property>
+        <property name="plantMasterService" ref="plantMasterService1"></property>
+        <property name="smtpDetailsService" ref="smtpDetailsService1"></property>
+        <property name="sapConnectionService" ref="sapConnectionService1"></property>
+        <property name="tenderApprovalSettingService" ref="tenderApprovalSettingService1"></property>
+        <property name="tenderApprovalUserService" ref="tenderApprovalUserService1"></property>
+        <property name="tenderPriceApprovalService" ref="tenderPriceApprovalService1"></property>
+        <property name="tenderPriceApprovalUserService" ref="tenderPriceApprovalUserService1"></property>
+        <property name="tenderPriceApprovalCommentService" ref="tenderPriceApprovalCommentService1"></property>
+        <property name="committeeApprovalSettingService" ref="committeeApprovalSettingService1"></property>
+        <property name="committeeApprovalUserService" ref="committeeApprovalUserService1"></property>
+        <property name="companyLocationService" ref="companyLocationService1"></property>
+        <property name="departmentMasterService" ref="departmentMasterService1"></property>
+        <property name="designationMasterService" ref="designationMasterService1"></property>
+        <property name="auctionPriceApprovalService" ref="auctionPriceApprovalService1"></property>
+        <property name="auctionPriceApprovalUserService" ref="auctionPriceApprovalUserService1"></property>
+        <property name="auctionPriceApprovalCommentService" ref="auctionPriceApprovalCommentService1"></property>
+        <property name="reviseVendorTechnicalBidService" ref="reviseVendorTechnicalBidService1"></property>
+        <property name="vendorCustomerRefrenceService" ref="vendorCustomerRefrenceService1"></property>
+        
+        <property name="technicalTenderPriceApprovalService" ref="technicalTenderPriceApprovalService1"></property>
+        <property name="technicalTenderPriceApprovalUserService" ref="technicalTenderPriceApprovalUserService1"></property>
+        <property name="technicalTenderPriceApprovalCommentService" ref="technicalTenderPriceApprovalCommentService1"></property>
+        <property name="materialMasterService" ref="materialMasterService1"/> 
+        <property name="materialGroupMasterService" ref="materialGroupMasterService1"/> 
+        <property name="materialTypeMasterService" ref="materialTypeMasterService1"/>
+        
+        <property name="prNoService" ref="prNoService1"></property>
+        <property name="prNoTempService" ref="prNoTempService1"></property>
+        <property name="prVendorService" ref="prVendorService1"></property>
+        <property name="prItemMasterService" ref="prItemMasterService1"></property>
+        <property name="prPriceApprovalService" ref="prPriceApprovalService1"></property>
+        <property name="prPriceApprovalCommentService" ref="prPriceApprovalCommentService1"></property>
+        <property name="prPriceApprovalUserService" ref="prPriceApprovalUserService1"></property>
+        <property name="prMasterService" ref="prMasterService1"></property>
+        <property name="prDocService" ref="prDocService1"></property>
+        <property name="prClassificationService" ref="prClassificationService1"></property>
+        <property name="prBusinessTypeService" ref="prBusinessTypeService1"></property>
+        <property name="prProjectTypeService" ref="prProjectTypeService1"></property>
+        <property name="prApprovalCommentService" ref="prApprovalCommentService1"></property>
+        <property name="plantMastersService" ref="plantMastersService1"></property>
+        <property name="locationMastersService" ref="locationMastersService1"></property>
+        <property name="vendorSafetyCriteriaCommentService" ref="vendorSafetyCriteriaCommentService1"></property>
+        <property name="VendorHrCriteriaCommentService" ref="vendorHrCriteriaCommentService1"></property>
+        <property name="vendorTechnicalCriteriaService" ref="vendorTechnicalCriteriaService1"/> 
+        <property name="vendorHrCriteriaService" ref="vendorHrCriteriaService1"/>
+        <property name="vendorSafetyCriteriaService" ref="vendorSafetyCriteriaService1"/>
+        <property name="electricalContractorService" ref="electricalContractorService1"/>
+        <property name="vendorInvitationCategoryService" ref="vendorInvitationCategoryService1"></property>
+        <property name="bpGroupService" ref="bpGroupService1"></property>
+        <property name="vendorPercentageService" ref="vendorPercentageService1"></property>
+        <property name="vendorDepartmentApprovalService" ref="vendorDepartmentApprovalService1"></property>
+        <property name="vendorApprovalSettingService" ref="vendorApprovalSettingService1"></property>
+        <property name="vendorApprovalUserService" ref="vendorApprovalUserService1"></property>
+        <property name="vendorRequestDetailsService" ref="vendorRequestDetailsService1"></property>
+        <property name="vendorRequestApprovalService" ref="vendorRequestApprovalService1"></property>
+        <property name="vendorRequestApprovalUserService" ref="vendorRequestApprovalUserService1"></property>
+        <property name="vendorRequestApprovalCommentService" ref="vendorRequestApprovalCommentService1"></property>
+        <property name="taxCategoryService" ref="taxCategoryService1"></property>
+        <property name="groupForCalculationService" ref="groupForCalculationService1"/> 
+        <property name="purchasingOrganisationService" ref="purchasingOrganisationService1"></property>
+        <property name="vendorRequestedInvitationCategoryService" ref="vendorRequestedInvitationCategoryService1"></property>
+
+        <property name="documentMasterIdService" ref="documentMasterIdService1"></property>
+        <property name="documentMastersIdService" ref="documentMastersIdService1"></property>
+        <property name="deliverableService" ref="deliverableService1"></property>
+        <property name="deliverableMultiService" ref="deliverableMultiService1"></property>
+        <property name="iteamDetailsAttachmentsService" ref="iteamDetailsAttachmentsService1"></property>
+        <property name="profitCenterService" ref="profitCenterService1"></property>
+        <property name="projectTypeService" ref="projectTypeService1"></property>
+      
+        <property name="companyMasterService" ref="companyMasterService1"></property>
+        <property name="currencyMasterService" ref="currencyMasterService1"/> 
+        <property name="stationTypeService" ref="stationTypeService1"/> 
+        <property name="tenantService" ref="tenantService1"/> 
+        <property name="investmentProfileService" ref="investmentProfileService1"/> 
+        <property name="projectProfileService" ref="projectProfileService1"/> 
+        <property name="discomMasterService" ref="discomMasterService1"></property>
+        <property name="connectionTypeService" ref="connectionTypeService1"></property>
+        <property name="designCoordinatorMultiAttachService" ref="designCoordinatorMultiAttachService1"></property>
+        <property name="designCordinatorCommentsService" ref="designCordinatorCommentsService1"></property>
+        <property name="aocFormHistoryService" ref="aocFormHistoryService1"></property>
+        <property name="crcFormHistoryService" ref="crcFormHistoryService1"></property>
+        <property name="kickOffFormHistoryService" ref="kickOffFormHistoryService1"></property>
+        <property name="oapFormHistoryService" ref="oapFormHistoryService1"></property>
+        <property name="aocFormMultiAttachmentHistoryService" ref="aocFormMultiAttachmentHistoryService1"></property>
+        <property name="oapMultiAttachmentHistoryService" ref="oapMultiAttachmentHistoryService1"></property>
+        <property name="projectNameMasterService" ref="projectNameMasterService1"></property>
+        <property name="kickOffAttendencesHistoryService" ref="kickOffAttendencesHistoryService1"></property>
+        <property name="siteSurveyCategoryDetailsService" ref="siteSurveyCategoryDetailsService1"></property>
+        <property name="documentForNewElectricityConnectionService" ref="documentForNewElectricityConnectionService1"></property>
+        <property name="siteSurveyService" ref="siteSurveyService1"></property>
+        <property name="oapLogMasterService" ref="oapLogMasterService1"></property>
+        <property name="aocLogMasterService" ref="aocLogMasterService1"></property>
+        <property name="siteSurveyAttachmentService" ref="siteSurveyAttachmentService1"></property>
+        <property name="oapSurveyAttachmentService" ref="oapSurveyAttachmentService1"></property>
+        <property name="oapSurveyAttachmentHistoryService" ref="oapSurveyAttachmentHistoryService1"></property>
+        <property name="aocSurveyAttachmentService" ref="aocSurveyAttachmentService1"></property>
+        <property name="aocSurveyAttachmentHistoryService" ref="aocSurveyAttachmentHistoryService1"></property>
+        <property name="riskCategoryService" ref="riskCategoryService1"/> 
+        <property name="vendorInviteSourceService" ref="vendorInviteSourceService1"/> 
+        <property name="oapFormService" ref="oapFormService1"/>
+        <property name="aocFormService" ref="aocFormService1"/>
+        
+        <property name="groupMasterService" ref="groupMasterService1"/> 
+        <property name="groupCategoryService" ref="groupCategoryService1"/> 
+        <property name="groupSubCategoryService" ref="groupSubCategoryService1"/> 
+
+        <property name="vendorCompanyDetailsService" ref="vendorCompanyDetailsService1"/> 
+        <property name="declarationLetterService" ref="declarationLetterService1"/> 
+        <property name="vendorTermsConditionPriceBidService" ref="vendorTermsConditionPriceBidService1"></property>
+        
+        <property name="technicalMultiAttachmentService" ref="technicalMultiAttachmentService1"></property>
+
+        <property name="vendorCriteriaMasterService"  ref="vendorCriteriaMasterService1"  />
+        <property name="vendorCriteriaMasterDetailsService"  ref="vendorCriteriaMasterDetailsService1"  />
+        <property name="vendorCriteriaMasterHistoryService"  ref="vendorCriteriaMasterHistoryService1"  />
+        <property name="vendorCriteriaDetailsHistoryService"  ref="vendorCriteriaDetailsHistoryService1"  />
+   
+        <property name="countryCodeService"  ref="countryCodeService1"  />
+        <property name="managerialPersonService"  ref="managerialPersonService1"  />
+        <property name="vendorItCriteriaCommentService"  ref="vendorItCriteriaCommentService1"  />
+        <property name="lastWorkExpDeatilsService"  ref="lastWorkExpDeatilsService1"  />
+        
+        <property name="vendorBuyerApprovalService" ref="vendorBuyerApprovalService1"></property>
+        <property name="poDetailsService" ref="poDetailsService1"></property>
+        
+        <property name="vendorRecycleMailSchedulerService" ref="vendorRecycleMailSchedulerService1"></property>
+		
+        <property name="closePrMultiAttachService" ref="closePrMultiAttachService1"></property>
+        <property name="vendorTermsConditionService" ref="vendorTermsConditionService1"></property>
+
+        <property name="anchorCustomerService" ref="anchorCustomerService1"></property>
+        <property name="canopyVarientService" ref="canopyVarientService1"></property>
+
+        <property name="chargerTypeService" ref="chargerTypeService1"></property>
+        <property name="chargerMasterService" ref="chargerMasterService1"></property>
+        <property name="connectorTypeService" ref="connectorTypeService1"></property>
+        
+        <property name="chargerInstallationDetailsService" ref="chargerInstallationDetailsService1"></property>
+        <property name="chargerInstallationDetailsHistoryService" ref="chargerInstallationDetailsHistoryService1"></property>
+
+        <property name="ehMailService"  ref="ehMailService1"  />
+        
+        <property name="vendorBlockListService"  ref="vendorBlockListService1"  />
+        
+        <property name="vendorFinancialApprovalDetailsService"  ref="vendorFinancialApprovalDetailsService1"  />
+        
+        <property name="vendorFinancialDetailsHistoryService"  ref="vendorFinancialDetailsHistoryService1"  />
+
+        <property name="omsMasterService" ref="omsMasterService1"></property>
+
+        
+        <property name="crcFormService" ref="crcFormService1"/> 
+        <property name="kickOffFormService" ref="kickOffFormService1"/>
+        
+        <property name="invoiceMasterService" ref="invoiceMasterService1"></property>
+        <property name="invoiceAttachmentService" ref="invoiceAttachmentService1"></property>
+        <property name="documentTypeService" ref="documentTypeService1"></property>
+        
     </bean>
     <!--User-->
     <bean id="userMasterController1" class="com.bul.zydex.controller.UserMasterController" parent="controllerConfig" >
@@ -49,6 +302,60 @@
     <bean id="homeController1" class="com.bul.zydex.controller.HomeController" parent="controllerConfig" >
     </bean>
     <bean id="employeeMasterController1" class="com.bul.zydex.controller.Employee.EmployeeMasterController" parent="controllerConfig" >
+        <property name="companyLocationService" ref="companyLocationService1"></property>
+        <property name="departmentMasterService" ref="departmentMasterService1"></property>
+        <property name="designationMasterService" ref="designationMasterService1"></property>
+    </bean>
+    <bean id="approvalSettingController1" class="com.bul.zydex.controller.Approval.ApprovalSettingController" parent="controllerConfig" >
+    </bean>
+    <bean id="vendorInvitationController1" class="com.bul.zydex.controller.Vendor.VendorInvitationController" parent="controllerConfig" >
+        <property name="vendorInvitationCategoryService" ref="vendorInvitationCategoryService1"></property>
+        
+    </bean>
+    <bean id="vendorController1" class="com.bul.zydex.controller.Vendor.VendorController" parent="controllerConfig" >
+        <property name="vendorTermsConditionService" ref="vendorTermsConditionService1"></property>
+        <property name="termsConditionService" ref="termsConditionService1"/> 
+        <property name="termsConditionParameterService" ref="termsConditionParameterService1"/> 
+        <property name="multipleAddressService" ref="multipleAddressService1"/>
+        <property name="vendorPercentageService" ref="vendorPercentageService1"></property>
+       
+    </bean>
+    
+    
+   
+    <bean id="vendorInformationController1" class="com.bul.zydex.controller.Vendor.VendorInformationController" parent="controllerConfig" >
+        <property name="electricalContractorService" ref="electricalContractorService1"/>
+        <property name="vendorInvitationCategoryService" ref="vendorInvitationCategoryService1"></property>
+        <property name="VendorSelfDeclarationService" ref="vendorSelfDeclarationService1"></property>
+
+    </bean>
+    <bean id="tenderMasterController1" class="com.bul.zydex.controller.Tender.TenderMasterController" parent="controllerConfig" >
+        <property name="tenderPriceApprovalService" ref="tenderPriceApprovalService1"></property>
+        <property name="tenderPriceApprovalUserService" ref="tenderPriceApprovalUserService1"></property>
+        <property name="tenderPriceApprovalCommentService" ref="tenderPriceApprovalCommentService1"></property>
+        <property name="termsConditionService" ref="termsConditionService1"/>
+        <property name="technicalTenderPriceApprovalService" ref="technicalTenderPriceApprovalService1"></property>
+        <property name="technicalTenderPriceApprovalUserService" ref="technicalTenderPriceApprovalUserService1"></property>
+        <property name="technicalTenderPriceApprovalCommentService" ref="technicalTenderPriceApprovalCommentService1"></property>
+        <property name="termsConditionParameterService" ref="termsConditionParameterService1"/> 
+        <property name="multipleAddressService" ref="multipleAddressService1"/>
+    
+        <property name="vendorTermsConditionService" ref="vendorTermsConditionService1"></property>
+        <property name="vendorHrCriteriaService" ref="vendorHrCriteriaService1"></property>
+        
+        <property name="poDetailsService" ref="poDetailsService1"></property>
+
+        
+        
+        
+    </bean>
+    <bean id="auctionMasterController1" class="com.bul.zydex.controller.Auction.AuctionMasterController" parent="controllerConfig" >
+    </bean>
+    <bean id="vendorAuctionController1" class="com.bul.zydex.controller.Auction.VendorAuctionController" parent="controllerConfig" >
+    </bean>
+    <bean id="locationMasterController1" class="com.bul.zydex.controller.Invoice.LocationMasterController" parent="controllerConfig" >
+    </bean>
+    <bean id="plantMasterController1" class="com.bul.zydex.controller.Invoice.PlantMasterController" parent="controllerConfig" >
     </bean>
     <bean id="contractorController1" class="com.bul.zydex.controller.Contractor.ContractorController" parent="controllerConfig" >
     </bean>
@@ -65,8 +372,286 @@
     <bean id="rightController1" class="com.bul.zydex.controller.Right.RightController" parent="controllerConfig" >
     </bean>
     <bean id="reportController1" class="com.bul.zydex.controller.Report.ReportController" parent="controllerConfig" >
-        
+    </bean>
+    <bean id="sapConnectionController1" class="com.bul.zydex.controller.SapConnection.SapConnectionController" parent="controllerConfig" > 
+    </bean>
+    <bean id="smtpDetailsController1" class="com.bul.zydex.controller.SmtpDetails.SmtpDetailsController" parent="controllerConfig" >
+    </bean>
+    <bean id="tenderApprovalController1" class="com.bul.zydex.controller.Tender.TenderApprovalController" parent="controllerConfig" >
+    </bean>
+    <bean id="materialGroupMasterController1" class="com.bul.zydex.controller.MaterialGroupMaster.MaterialGroupMasterController" parent="controllerConfig">
+        <property name="materialGroupMasterService" ref="materialGroupMasterService1"></property>
     </bean>
     
+    <bean id="materialTypeMasterController1" class="com.bul.zydex.controller.MaterialTypeMaster.MaterialTypeMasterController" parent="controllerConfig">
+        <property name="materialTypeMasterService" ref="materialTypeMasterService1" /> 
+    </bean>
+    
+    <bean id="materialMasterController1" class="com.bul.zydex.controller.MaterialMaster.MaterialMasterController" parent="controllerConfig">
+        <property name="materialMasterService" ref="materialMasterService1"/> 
+        <property name="materialGroupMasterService" ref="materialGroupMasterService1"/> 
+        <property name="materialTypeMasterService" ref="materialTypeMasterService1"/> 
+
+    </bean>
+    
+    <bean id="prMasterController1" class="com.bul.zydex.controller.PR.PRMasterController" parent="controllerConfig" >
+        <property name="multipleAddressService" ref="multipleAddressService1"/>
+        <property name="plantMastersService" ref="plantMastersService1"></property>
+
+    </bean>
+    <bean id="termsConditionController1" class="com.bul.zydex.controller.TermsCondtion.TermsConditionController" parent="controllerConfig" >
+        <property name="termsConditionService" ref="termsConditionService1"/> 
+    </bean>
+    <bean id="termsConditionParameterController1" class="com.bul.zydex.controller.TermsCondtion.TermsConditionParameterController" parent="controllerConfig" >
+        <property name="termsConditionParameterService" ref="termsConditionParameterService1"/> 
+        <property name="termsConditionService" ref="termsConditionService1"/> 
+    </bean>
+    <bean id="groupController1" class="com.bul.zydex.controller.Vendor.GroupController" parent="controllerConfig" >
+        <property name="groupMasterService" ref="groupMasterService1"/> 
+        <property name="groupCategoryService" ref="groupCategoryService1"/> 
+        <property name="groupSubCategoryService" ref="groupSubCategoryService1"/> 
+        <property name="vendorTechnicalCriteriaService" ref="vendorTechnicalCriteriaService1"/> 
+        <property name="vendorHrCriteriaService" ref="vendorHrCriteriaService1"/>
+        <property name="vendorSafetyCriteriaService" ref="vendorSafetyCriteriaService1"/>
+    </bean>
+    <bean id="productTypeMasterController1" class="com.bul.zydex.controller.ProductTypeMaster.ProductTypeMasterController" parent="controllerConfig" >
+        <property name="productTypeMasterService" ref="productTypeMasterService1"/> 
+    </bean>
+    
+    
+    <bean id="valuationClassMasterController1" class="com.bul.zydex.controller.ValuationClassMaster.ValuationClassMasterController" parent="controllerConfig" >
+        <property name="valuationClassMasterService" ref="valuationClassMasterService1"/> 
+    </bean>
+    
+    <bean id="productGroupMasterController1" class="com.bul.zydex.controller.ProductGroupMaster.ProductGroupMasterController" parent="controllerConfig" >
+        <property name="productGroupMasterService" ref="productGroupMasterService1"/> 
+        <property name="valuationClassMasterService" ref="valuationClassMasterService1"/> 
+
+    </bean>
+    
+    <bean id="companyMasterController1" class="com.bul.zydex.controller.CompanyMaster.CompanyMasterController" parent="controllerConfig" >
+        <property name="companyMasterService" ref="companyMasterService1"></property>
+
+    </bean>
+    <bean id="purchasingOrganisationController1" class="com.bul.zydex.controller.PurchasingOrganisation.PurchasingOrganisationController" parent="controllerConfig" >
+        <property name="purchasingOrganisationService" ref="purchasingOrganisationService1"></property>
+        <property name="companyMasterService" ref="companyMasterService1"></property>
+
+    </bean>
+    <bean id="plantMastersController1" class="com.bul.zydex.controller.PlantMasters.PlantMastersController" parent="controllerConfig" >
+        <property name="plantMastersService" ref="plantMastersService1"></property>
+        <property name="companyMasterService" ref="companyMasterService1"></property>
+        <property name="purchasingOrganisationService" ref="purchasingOrganisationService1"></property>
+
+    </bean>
+    <bean id="locationMastersController1" class="com.bul.zydex.controller.LocationMasters.LocationMastersController" parent="controllerConfig" >
+        <property name="locationMastersService" ref="locationMastersService1"></property>
+        <property name="companyMasterService" ref="companyMasterService1"></property>
+        <property name="plantMastersService" ref="plantMastersService1"></property>
+
+
+    </bean>
+    <bean id="bpGroupController1" class="com.bul.zydex.controller.BpGroup.BpGroupController" parent="controllerConfig" >
+        <property name="bpGroupService" ref="bpGroupService1"></property>
+    </bean>
+    
+    <bean id="dashboardController1" class="com.bul.zydex.controller.Dashboard.DashboardController" parent="controllerConfig" >
+        <property name="locationMastersService" ref="locationMastersService1"></property>
+        <property name="companyMasterService" ref="companyMasterService1"></property>
+        <property name="plantMastersService" ref="plantMastersService1"></property>
+        <property name="userRightsService" ref="userRightsService1"></property>
+        <property name="tenderMasterService" ref="tenderMasterService1"></property>
+        <property name="vendorMasterService" ref="vendorMasterService1"></property>
+
+    </bean>
+    <bean id="vendorDepartmentApprovalController1" class="com.bul.zydex.controller.Vendor.VendorDepartmentApprovalController" parent="controllerConfig" >
+    </bean>
+    <bean id="vendorApprovalSettingController1" class="com.bul.zydex.controller.Vendor.VendorApprovalSettingController" parent="controllerConfig" >
+    </bean>
+    <bean id="profitCenterController1" class="com.bul.zydex.controller.ProfitCenter.ProfitCenterController" parent="controllerConfig" >
+        <property name="profitCenterService" ref="profitCenterService1"></property>
+
+    </bean>
+    <bean id="projectTypeController1" class="com.bul.zydex.controller.ProjectType.ProjectTypeController" parent="controllerConfig" >
+        <property name="projectTypeService" ref="projectTypeService1"></property>
+
+    </bean>
+    <bean id="currencyMasterController1" class="com.bul.zydex.controller.Tender.CurrencyMasterController" parent="controllerConfig" >
+    </bean>
+    <bean id="stationTypeController1" class="com.bul.zydex.controller.StationType.StationTypeController" parent="controllerConfig" >
+    </bean>
+    <bean id="tenantController1" class="com.bul.zydex.controller.Tenant.TenantController" parent="controllerConfig" >
+    </bean>
+    <bean id="investmentProfileController1" class="com.bul.zydex.controller.InvestmentProfile.InvestmentProfileController" parent="controllerConfig" >
+    </bean>
+    <bean id="projectProfileController1" class="com.bul.zydex.controller.ProjectProfile.ProjectProfileController" parent="controllerConfig" >
+    </bean>
+    <bean id="discomMasterController1" class="com.bul.zydex.controller.DiscomMaster.DiscomMasterController" parent="controllerConfig" >
+    </bean>
+    <bean id="connectionTypeController1" class="com.bul.zydex.controller.ConnectionType.ConnectionTypeController" parent="controllerConfig" >
+    </bean>
+	
+    <bean id="projectNameMasterController1" class="com.bul.zydex.controller.ProjectNameMaster.ProjectNameMasterController" parent="controllerConfig" >
+    </bean>
+    <bean id="oapMasterController1" class="com.bul.zydex.controller.OapMaster.OapMasterController" parent="controllerConfig" >
+        <property name="oapMasterService" ref="oapMasterService1"/> 
+        <property name="oapMasterUserService" ref="oapMasterUserService1"/> 
+
+    </bean>
+	
+    <bean id="oapFormController1" class="com.bul.zydex.controller.OapForm.OapFormController" parent="controllerConfig">
+        <property name="oapFormService" ref="oapFormService1"/>  
+        <property name="oapDocumentAttachmentService" ref="oapDocumentAttachmentService1"/>
+        <property name="documentNameService" ref="documentNameService1"/>
+        <property name="oapMasterService" ref="oapMasterService1"/> 
+        <property name="oapMultiAttachmentService" ref="oapMultiAttachmentService1"/>
+        <property name="oapFormApprovalService" ref="oapFormApprovalService1"/>
+        <property name="oapFormApprovalCommentService" ref="oapFormApprovalCommentService1"/>
+        <property name="oapFormApprovalUserService" ref="oapFormApprovalUserService1"/>
+        <property name="oapMasterUserService" ref="oapMasterUserService1"/> 
+        <property name="crcFormService" ref="crcFormService1"/> 
+        <property name="crcFormApprovalService" ref="crcFormApprovalService1"/> 
+        <property name="crcFormApprovalUserService" ref="crcFormApprovalUserService1"/> 
+        <property name="crcFormApprovalCommentService" ref="crcFormApprovalCommentService1"/> 
+        <property name="companyLocationService" ref="companyLocationService1"/> 
+        <property name="aocFormService" ref="aocFormService1"/>
+        <property name="aocFormAttachmentService" ref="aocFormAttachmentService1"/>
+        <property name="aocFormMultiAttachmentService" ref="aocFormMultiAttachmentService1"/>
+        <property name="aocFormApprovalService" ref="aocFormApprovalService1"/>
+        <property name="aocFormApprovalCommentService" ref="aocFormApprovalCommentService1"/> 
+        <property name="kickOffFormService" ref="kickOffFormService1"/> 
+        <property name="kickOffFormApprovalUserService" ref="kickOffFormApprovalUserService1"/> 
+        <property name="aocFormApprovalUserService" ref="aocFormApprovalUserService1"/> 
+        <!--<property name="surveyCategoryMasterService" ref="surveyCategoryMasterService1"></property>-->
+        <!--<property name="surveySubCategoryMasterService" ref="surveySubCategoryMasterService1"></property>-->
+        <!--<property name="surveyMasterService" ref="surveyMasterService1"></property>-->
+        <property name="surveyDocumentNoService" ref="surveyDocumentNoService1"></property>
+    </bean>
+	
+    <bean id="aocFormController1" class="com.bul.zydex.controller.AocForm.AocFormController" parent="controllerConfig">
+        <property name="aocFormService" ref="aocFormService1"/>
+        <property name="documentNameService" ref="documentNameService1"/>
+        <property name="aocFormAttachmentService" ref="aocFormAttachmentService1"/>
+        <property name="aocFormMultiAttachmentService" ref="aocFormMultiAttachmentService1"/>
+        <property name="oapMasterService" ref="oapMasterService1"/> 
+        <property name="aocFormApprovalService" ref="aocFormApprovalService1"/>
+        <property name="oapMasterUserService" ref="oapMasterUserService1"/> 
+        <property name="aocFormApprovalUserService" ref="aocFormApprovalUserService1"/> 
+        <property name="oapFormApprovalService" ref="oapFormApprovalService1"/>
+        <property name="aocFormApprovalCommentService" ref="aocFormApprovalCommentService1"/> 
+        <property name="kickOffAttendencesService" ref="kickOffAttendencesService1"/> 
+        <property name="kickOffFormApprovalService" ref="kickOffFormApprovalService1"/> 
+        <property name="kickOffFormApprovalUserService" ref="kickOffFormApprovalUserService1"/> 
+        <property name="kickOffFormApprovalCommentService" ref="kickOffFormApprovalCommentService1"/> 
+        <property name="kickOffFormService" ref="kickOffFormService1"/> 
+        <property name="companyLocationService" ref="companyLocationService1"/> 
+        <!--<property name="surveyCategoryMasterService" ref="surveyCategoryMasterService1"></property>-->
+        <!--<property name="surveySubCategoryMasterService" ref="surveySubCategoryMasterService1"></property>-->
+        <!--<property name="surveyMasterService" ref="surveyMasterService1"></property>-->
+        <property name="surveyDocumentNoService" ref="surveyDocumentNoService1"></property>
+
+    </bean>
+    <bean id="riskCategoryController1" class="com.bul.zydex.controller.RiskCategory.RiskCategoryController" parent="controllerConfig" >
+    </bean>
+    <bean id="vendorInviteSourceController1" class="com.bul.zydex.controller.VendorInviteSource.VendorInviteSourceController" parent="controllerConfig" >
+    </bean>
+    <!--	 <bean id="surveyMasterController1" class="com.bul.zydex.controller.SurveyMaster.SurveyMasterController" parent="controllerConfig" >
+        <property name="surveyMasterService" ref="surveyMasterService1"></property>
+        <property name="surveyDocumentNoService" ref="surveyDocumentNoService1"></property>
+    </bean>-->
+    <!--    <bean id="surveyCategoryMasterController1" class="com.bul.zydex.controller.SurveyMaster.SurveyCategoryMasterController" parent="controllerConfig" >
+        <property name="surveyCategoryMasterService" ref="surveyCategoryMasterService1"></property>
+        <property name="surveySubCategoryMasterService" ref="surveySubCategoryMasterService1"></property>
+    </bean>-->
+	
+    <bean id="declarationLetterController1" class="com.bul.zydex.controller.DeclarationLetter.DeclarationLetterController" parent="controllerConfig" >
+        <property name="declarationLetterService"  ref="declarationLetterService1"  />
+    </bean>
+    
+    <bean id="auditorMasterController1" class="com.bul.zydex.controller.AuditorMaster.AuditorMasterController" parent="controllerConfig" >
+        <property name="auditorMasterService"  ref="auditorMasterService1"  />
+        <property name="VendorSelfDeclarationService" ref="vendorSelfDeclarationService1"></property>
+
+    </bean>
+    <bean id="countryCodeController1" class="com.bul.zydex.controller.CountryCode.CountryCodeController" parent="controllerConfig" >
+        
+        <property name="countryCodeService"  ref="countryCodeService1"  />
+
+    </bean>
+    
+    <bean id="vendorCriteriaMasterController1" class="com.bul.zydex.controller.VendorCriteriaMaster.VendorCriteriaMasterController" parent="controllerConfig" >
+        <property name="vendorCriteriaMasterService"  ref="vendorCriteriaMasterService1"  />
+        <property name="vendorCriteriaMasterDetailsService"  ref="vendorCriteriaMasterDetailsService1"  />
+        <property name="vendorCriteriaMasterHistoryService"  ref="vendorCriteriaMasterHistoryService1"  />
+        <property name="vendorCriteriaDetailsHistoryService"  ref="vendorCriteriaDetailsHistoryService1"  />
+       
+
+    </bean>
+    <bean id="anchorCustomerController1" class="com.bul.zydex.controller.AnchorCustomer.AnchorCustomerController" parent="controllerConfig" >
+        <property name="anchorCustomerService"  ref="anchorCustomerService1"  />
+    </bean>
+    
+    <bean id="canopyVarientController1" class="com.bul.zydex.controller.CanopyVarient.CanopyVarientController" parent="controllerConfig" >
+        <property name="canopyVarientService"  ref="canopyVarientService1"  />
+    </bean>
+    
+    <bean id="chargerTypeController1" class="com.bul.zydex.controller.ChargerType.ChargerTypeController" parent="controllerConfig" >
+        <property name="chargerTypeService"  ref="chargerTypeService1"  />
+    </bean>
+    
+    <bean id="chargerMasterController1" class="com.bul.zydex.controller.ChargerMaster.ChargerMasterController" parent="controllerConfig" >
+        <property name="chargerMasterService"  ref="chargerMasterService1"  />
+    </bean>
+    
+    <bean id="connectorTypeController1" class="com.bul.zydex.controller.ConnectorType.ConnectorTypeController" parent="controllerConfig" >
+        <property name="connectorTypeService"  ref="connectorTypeService1"  />
+    </bean>
+
+    <bean id="formsCommonController1" class="com.bul.zydex.controller.OapForm.FormsCommonController" parent="controllerConfig">
+        <property name="oapFormService" ref="oapFormService1"/>  
+        <property name="oapDocumentAttachmentService" ref="oapDocumentAttachmentService1"/>
+        <property name="documentNameService" ref="documentNameService1"/>
+        <property name="oapMasterService" ref="oapMasterService1"/> 
+        <property name="oapMultiAttachmentService" ref="oapMultiAttachmentService1"/>
+        <property name="oapFormApprovalService" ref="oapFormApprovalService1"/>
+        <property name="oapFormApprovalCommentService" ref="oapFormApprovalCommentService1"/>
+        <property name="oapFormApprovalUserService" ref="oapFormApprovalUserService1"/>
+        <property name="oapMasterUserService" ref="oapMasterUserService1"/> 
+        <property name="crcFormService" ref="crcFormService1"/> 
+        <property name="crcFormApprovalService" ref="crcFormApprovalService1"/> 
+        <property name="crcFormApprovalUserService" ref="crcFormApprovalUserService1"/> 
+        <property name="crcFormApprovalCommentService" ref="crcFormApprovalCommentService1"/> 
+        <property name="aocFormApprovalService" ref="aocFormApprovalService1"/>
+        <property name="aocFormApprovalUserService" ref="aocFormApprovalUserService1"/> 
+        <property name="surveyDocumentNoService" ref="surveyDocumentNoService1"></property>
+        
+        
+        <property name="aocFormService" ref="aocFormService1"/>
+        <property name="aocFormAttachmentService" ref="aocFormAttachmentService1"/>
+        <property name="aocFormMultiAttachmentService" ref="aocFormMultiAttachmentService1"/>
+        <property name="aocFormApprovalCommentService" ref="aocFormApprovalCommentService1"/> 
+        <property name="kickOffAttendencesService" ref="kickOffAttendencesService1"/> 
+        <property name="kickOffFormApprovalService" ref="kickOffFormApprovalService1"/> 
+        <property name="kickOffFormApprovalUserService" ref="kickOffFormApprovalUserService1"/> 
+        <property name="kickOffFormApprovalCommentService" ref="kickOffFormApprovalCommentService1"/> 
+        <property name="kickOffFormService" ref="kickOffFormService1"/> 
+        <property name="companyLocationService" ref="companyLocationService1"/> 
+
+    </bean>
+    <bean id="ehMailController1" class="com.bul.zydex.controller.EhMail.EhMailController" parent="controllerConfig" >
+        <property name="ehMailService"  ref="ehMailService1"  />
+    </bean>
+    <bean id="omsMasterController1" class="com.bul.zydex.controller.OmsMaster.OmsMasterController" parent="controllerConfig" >
+        <property name="omsMasterService" ref="omsMasterService1"></property>
+    </bean>
+    
+    <bean id="oapAocDashboardController1" class="com.bul.zydex.controller.Dashboard.OapAocDashboardController" parent="controllerConfig" >
+        
+    </bean>
+    <bean id="poDetailsController1" class="com.bul.zydex.controller.Invoice.PODetailsController" parent="controllerConfig" >
+        <property name="invoiceMasterService" ref="invoiceMasterService1"></property>
+         <property name="invoiceAttachmentService" ref="invoiceAttachmentService1"></property>
+         <property name="documentTypeService" ref="documentTypeService1"></property>
+    </bean>
 </beans>
  

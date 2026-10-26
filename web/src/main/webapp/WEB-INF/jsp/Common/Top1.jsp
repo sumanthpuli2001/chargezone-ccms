@@ -10,41 +10,118 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<!--<div id="printCss">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-<link rel="shortcut icon" href="StorageYard/Images/Icon/favicon.ico" type="image/x-icon">
-<link rel="icon" href="StorageYard/Images/Icon/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="StorageYard/CSS/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="StorageYard/CSS/bootstrap/font-awesome.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="StorageYard/Plugins/fullcalendar/fullcalendar.min.css">
-<link rel="stylesheet" href="StorageYard/Plugins/fullcalendar/fullcalendar.print.css" media="print">
-<link rel="stylesheet" href="StorageYard/Plugins/datatables/jquery.dataTables.min.css">
-<link rel="stylesheet" href="StorageYard/Plugins/iCheck/square/blue.css">
- Theme style 
-<link rel="stylesheet" href="StorageYard/CSS/bootstrap/vms.css">
- Employyee Search css 
-<link rel="stylesheet" href="StorageYard/CSS/bootstrap/token-input.css">
-<link rel="stylesheet" href="StorageYard/CSS/bootstrap/token-input-fb.css">
-<link rel="stylesheet" href="StorageYard/CSS/bootstrap/_all-skins.min.css">
-<script type="text/javascript" src="StorageYard/Plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
-<link rel="stylesheet" href="StorageYard/CSS/bootstrap-datetimepicker.css">
-<script type="text/javascript" src="StorageYard/JS/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-</div>-->
+ <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="StorageYard/assets/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="StorageYard/assets/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="StorageYard/assets/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="StorageYard/assets/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="StorageYard/assets/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="StorageYard/assets/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="StorageYard/assets/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="StorageYard/assets/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="StorageYard/assets/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="StorageYard/assets/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="StorageYard/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="StorageYard/assets/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="StorageYard/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="StorageYard/assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="StorageYard/assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-
-
-
-<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="StorageYard/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="StorageYard/assets/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="StorageYard/assets/css/all.min.css">
+    <link rel="stylesheet" href="StorageYard/assets/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="StorageYard/assets/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="StorageYard/assets/css/bootoast.min.css" rel="stylesheet" type="text/css"/>
+    <link href="StorageYard/assets/css/flatpickr.min.css" rel="stylesheet" type="text/css"/>
 
 
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="StorageYard/assets/css/global.min.css">
+    <link rel="stylesheet" href="StorageYard/assets/css/style.min.css">
+    <link href="StorageYard/assets/css/global.css" rel="stylesheet" type="text/css"/>
+    
+    <!-- Js -->
+    <script src="StorageYard/assets/js/jquery-3.7.1.min.js"></script>
+    <script src="StorageYard/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="StorageYard/assets/js/bootstrap-select.min.js"></script>
+    <script src="StorageYard/assets/js/sweetalert2.all.min.js"></script>
+    
+    <!--Currency Handle Js-->
+    <script src="StorageYard/assets/js/currency.js" type="text/javascript"></script>
+    
+    <script src="StorageYard/assets/js/dataTables.min.js"></script>
+    <script src="StorageYard/assets/js/dataTables.bootstrap4.min.js"></script>
+    <!--<script src="StorageYard/assets/js/pr-scripts.js" type="text/javascript"></script>-->
+    <script src="StorageYard/assets/js/bootoast.min.js" type="text/javascript"></script>
+    <script src="StorageYard/assets/js/main.js"></script>
+    <script src="StorageYard/assets/js/flatpickr.min.js" type="text/javascript"></script>
+    <script>
+        function isJQueryLoaded() {
+    return typeof window.jQuery !== "undefined";
+}
+        if (isJQueryLoaded()) {
+    console.log("jQuery is loaded");
+} else {
+    console.log("jQuery is NOT loaded");
+}
+    </script>
+    <%-- Below code is for Text area counter Style --%>
+    <style>
+        textarea.limit-reached {
+            border-color: red;
+        }
+
+        .char-counter {
+            position: absolute;
+            bottom: -2px;
+            right: 4px;
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.0);
+            padding: 2px 6px;
+            border-radius: 4px;
+            pointer-events: none;
+            color: #666;
+        }
+
+        .char-counter .current-count {
+            color: red;
+        }
+    </style>
+
+    <style>
+        .middle-scrollbar {
+            overflow-x: auto;
+            overflow-y: hidden;
+            border-bottom: 1px solid #dee2e6;
+            background-color: #f8f9fa;
+        }
+        .middle-scrollbar div {
+            height: 1px;
+        }
+        .middle-scrollbar::-webkit-scrollbar {
+            height: 9px;
+        }
+        .middle-scrollbar::-webkit-scrollbar-track {
+            background: #ffffff;
+            border-radius: 4px;
+        }
+        .middle-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #afafb2;
+            border-radius: 10px;
+        }
+
+        .middle-scrollbar {
+            scrollbar-color: #afafb2 #e9ecef;
+            scrollbar-width: thin;
+        }
+    </style>
 

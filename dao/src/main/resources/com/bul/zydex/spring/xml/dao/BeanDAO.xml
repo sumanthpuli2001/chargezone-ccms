@@ -27,4 +27,284 @@
     <bean id="rechargeInfoDao1" class="com.bul.zydex.dao.RechargeInfo.RechargeInfoDaoImpl" parent="sessionFactoryConfig" />
     <bean id="logDao1" class="com.bul.zydex.dao.log.LogDaoImpl" parent="sessionFactoryConfig" />
     <bean id="sqlDataConnectDao1" class="com.bul.zydex.dao.SqlDataConnect.SqlDataConnectDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="approvalSettingDao1" class="com.bul.zydex.dao.Approval.ApprovalSettingDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorInvitationDao1" class="com.bul.zydex.dao.Vendor.VendorInvitationDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorInformationDao1" class="com.bul.zydex.dao.Vendor.VendorInformationDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorBusinessCertificateDao1" class="com.bul.zydex.dao.Vendor.VendorBusinessCertificateDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorQualityCertificateDao1" class="com.bul.zydex.dao.Vendor.VendorQualityCertificateDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorClearanceCertificateDao1" class="com.bul.zydex.dao.Vendor.VendorClearanceCertificateDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorApprovalDao1" class="com.bul.zydex.dao.Vendor.VendorApprovalDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorMasterDao1" class="com.bul.zydex.dao.Vendor.VendorMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="userRightsDao1" class="com.bul.zydex.dao.Right.UserRightsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderMasterDao1" class="com.bul.zydex.dao.Tender.TenderMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="sapDeliSchDao1" class="com.bul.zydex.dao.Sap.SapDeliSchDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="sapItemLongTxtDao1" class="com.bul.zydex.dao.Sap.SapItemLongTxtDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="sapPurchaseItemTxtDao1" class="com.bul.zydex.dao.Sap.SapPurchaseItemTxtDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="sapTenderItemDao1" class="com.bul.zydex.dao.Sap.SapTenderItemDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="sapTenderMasterDao1" class="com.bul.zydex.dao.Sap.SapTenderMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="sapVendorEmailDao1" class="com.bul.zydex.dao.Sap.SapVendorEmailDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="sapVendorTelephoneDao1" class="com.bul.zydex.dao.Sap.SapVendorTelephoneDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="sapVendorMasterDao1" class="com.bul.zydex.dao.Sap.SapVendorMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderGeneralDocDao1" class="com.bul.zydex.dao.Tender.TenderGeneralDocDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderAdditionalDocDao1" class="com.bul.zydex.dao.Tender.TenderAdditionalDocDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderTechnicalDocDao1" class="com.bul.zydex.dao.Tender.TenderTechnicalDocDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderPreQualificationDao1" class="com.bul.zydex.dao.Tender.TenderPreQualificationDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderTechnicalDao1" class="com.bul.zydex.dao.Tender.TenderTechnicalDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderVendorDocDao1" class="com.bul.zydex.dao.Tender.TenderVendorDocDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderItemMasterDao1" class="com.bul.zydex.dao.Tender.TenderItemMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderItemAttachmentDao1" class="com.bul.zydex.dao.Tender.TenderItemAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderVendorDao1" class="com.bul.zydex.dao.Tender.TenderVendorDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorPreBidAttachmentDao1" class="com.bul.zydex.dao.Vendor.VendorPreBidAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorPreBidDao1" class="com.bul.zydex.dao.Vendor.VendorPreBidDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorAttachmentDao1" class="com.bul.zydex.dao.Vendor.VendorAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorEmdDao1" class="com.bul.zydex.dao.Vendor.VendorEmdDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorFeeDao1" class="com.bul.zydex.dao.Vendor.VendorFeeDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorTechnicalBidDao1" class="com.bul.zydex.dao.Vendor.VendorTechnicalBidDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorTechnicalBidAttachmentDao1" class="com.bul.zydex.dao.Vendor.VendorTechnicalBidAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorTechnicalBidTechDao1" class="com.bul.zydex.dao.Vendor.VendorTechnicalBidTechDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorTechnicalBidTermsDao1" class="com.bul.zydex.dao.Vendor.VendorTechnicalBidTermsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorTechnicalBidTechAttachmentDao1" class="com.bul.zydex.dao.Vendor.VendorTechnicalBidTechAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorTechnicalBidTermsAttachmentDao1" class="com.bul.zydex.dao.Vendor.VendorTechnicalBidTermsAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorTenderBidDao1" class="com.bul.zydex.dao.Vendor.VendorTenderBidDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorTenderBidItemDao1" class="com.bul.zydex.dao.Vendor.VendorTenderBidItemDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="authTenderMasterDao1" class="com.bul.zydex.dao.Tender.AuthTenderMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="authTenderGeneralDocDao1" class="com.bul.zydex.dao.Tender.AuthTenderGeneralDocDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="authTenderAdditionalDocDao1" class="com.bul.zydex.dao.Tender.AuthTenderAdditionalDocDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="authTenderTechnicalDocDao1" class="com.bul.zydex.dao.Tender.AuthTenderTechnicalDocDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="authTenderPreQualificationDao1" class="com.bul.zydex.dao.Tender.AuthTenderPreQualificationDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="authTenderTechnicalDao1" class="com.bul.zydex.dao.Tender.AuthTenderTechnicalDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="authTenderVendorDocDao1" class="com.bul.zydex.dao.Tender.AuthTenderVendorDocDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="authTenderItemMasterDao1" class="com.bul.zydex.dao.Tender.AuthTenderItemMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="authTenderItemAttachmentDao1" class="com.bul.zydex.dao.Tender.AuthTenderItemAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="authTenderVendorDao1" class="com.bul.zydex.dao.Tender.AuthTenderVendorDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderRegretDao1" class="com.bul.zydex.dao.Tender.TenderRegretDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderNoTempDao1" class="com.bul.zydex.dao.Tender.TenderNoTempDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderNoDao1" class="com.bul.zydex.dao.Tender.TenderNoDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="fileDetailDao1" class="com.bul.zydex.dao.Tender.FileDetailDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceDetail1Dao1" class="com.bul.zydex.dao.Tender.ServiceDetail1DaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceDetail2Dao1" class="com.bul.zydex.dao.Tender.ServiceDetail2DaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceDetail3Dao1" class="com.bul.zydex.dao.Tender.ServiceDetail3DaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceDetail4Dao1" class="com.bul.zydex.dao.Tender.ServiceDetail4DaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceDetail5Dao1" class="com.bul.zydex.dao.Tender.ServiceDetail5DaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceDetail6Dao1" class="com.bul.zydex.dao.Tender.ServiceDetail6DaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceVendorTenderBidDao1" class="com.bul.zydex.dao.Tender.ServiceVendorTenderBidDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceVendorTenderBidItemDao1" class="com.bul.zydex.dao.Tender.ServiceVendorTenderBidItemDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceVendorTenderBidItem2Dao1" class="com.bul.zydex.dao.Tender.ServiceVendorTenderBidItem2DaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceVendorTenderBidItem3Dao1" class="com.bul.zydex.dao.Tender.ServiceVendorTenderBidItem3DaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceVendorTenderBidItem4Dao1" class="com.bul.zydex.dao.Tender.ServiceVendorTenderBidItem4DaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceVendorTenderBidItem6Dao1" class="com.bul.zydex.dao.Tender.ServiceVendorTenderBidItem6DaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderSendEmailDao1" class="com.bul.zydex.dao.Tender.TenderSendEmailDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="emailTemplateDao1" class="com.bul.zydex.dao.Tender.EmailTemplateDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="liveTenderDao1" class="com.bul.zydex.dao.Tender.LiveTenderDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorInfoDao1" class="com.bul.zydex.dao.Vendor.VendorInfoDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderFollowupDao1" class="com.bul.zydex.dao.Tender.TenderFollowupDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="commMasterDao1" class="com.bul.zydex.dao.Vendor.CommMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="commMasterAttachmentDao1" class="com.bul.zydex.dao.Vendor.CommMasterAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="serviceRightsDao1" class="com.bul.zydex.dao.Tender.ServiceRightsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionMasterDao1" class="com.bul.zydex.dao.Auction.AuctionMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionItemMasterDao1" class="com.bul.zydex.dao.Auction.AuctionItemMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionVendorDao1" class="com.bul.zydex.dao.Auction.AuctionVendorDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionAttachmentDao1" class="com.bul.zydex.dao.Auction.AuctionAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionNoTempDao1" class="com.bul.zydex.dao.Auction.AuctionNoTempDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionNoDao1" class="com.bul.zydex.dao.Auction.AuctionNoDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionVendorBidDao1" class="com.bul.zydex.dao.Auction.AuctionVendorBidDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionVendorBidHistoryDao1" class="com.bul.zydex.dao.Auction.AuctionVendorBidHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderCommitteeDao1" class="com.bul.zydex.dao.Tender.TenderCommitteeDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="reviseVendorTenderBidDao1" class="com.bul.zydex.dao.Vendor.ReviseVendorTenderBidDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="reviseVendorTenderBidItemDao1" class="com.bul.zydex.dao.Vendor.ReviseVendorTenderBidItemDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="locationMasterDao1" class="com.bul.zydex.dao.Invoice.LocationMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="plantMasterDao1" class="com.bul.zydex.dao.Invoice.PlantMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionItemVendorDao1" class="com.bul.zydex.dao.Auction.AuctionItemVendorDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionItemVendorBidDao1" class="com.bul.zydex.dao.Auction.AuctionItemVendorBidDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionItemVendorBidHistoryDao1" class="com.bul.zydex.dao.Auction.AuctionItemVendorBidHistoryDaoImpl" parent="sessionFactoryConfig" /> 
+    <bean id="sapConnectionDao1" class="com.bul.zydex.dao.SapConnection.SapConnectionDaoImpl" parent="sessionFactoryConfig" /> 
+    <bean id="smtpDetailsDao1" class="com.bul.zydex.dao.SmtpDetails.SmtpDetailsDaoImpl" parent="sessionFactoryConfig"/>
+    <bean id="tenderPriceApprovalDao1" class="com.bul.zydex.dao.Tender.TenderPriceApprovalDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenderPriceApprovalUserDao1" class="com.bul.zydex.dao.Tender.TenderPriceApprovalUserDaoImpl" parent="sessionFactoryConfig" />  
+    <bean id="tenderPriceApprovalCommentDao1" class="com.bul.zydex.dao.Tender.TenderPriceApprovalCommentDaoImpl" parent="sessionFactoryConfig" />    
+    <bean id="tenderApprovalSettingDao1" class="com.bul.zydex.dao.Tender.TenderApprovalSettingDaoImpl" parent="sessionFactoryConfig" />   
+    <bean id="tenderApprovalUserDao1" class="com.bul.zydex.dao.Tender.TenderApprovalUserDaoImpl" parent="sessionFactoryConfig" />   
+    <bean id="committeeApprovalSettingDao1" class="com.bul.zydex.dao.Tender.CommitteeApprovalSettingDaoImpl" parent="sessionFactoryConfig" />   
+    <bean id="committeeApprovalUserDao1" class="com.bul.zydex.dao.Tender.CommitteeApprovalUserDaoImpl" parent="sessionFactoryConfig" />  
+    <bean id="companyLocationDao1" class="com.bul.zydex.dao.Employee.CompanyLocationDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="departmentMasterDao1" class="com.bul.zydex.dao.Employee.DepartmentMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="designationMasterDao1" class="com.bul.zydex.dao.Employee.DesignationMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionPriceApprovalDao1" class="com.bul.zydex.dao.Auction.AuctionPriceApprovalDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="auctionPriceApprovalUserDao1" class="com.bul.zydex.dao.Auction.AuctionPriceApprovalUserDaoImpl" parent="sessionFactoryConfig" />  
+    <bean id="auctionPriceApprovalCommentDao1" class="com.bul.zydex.dao.Auction.AuctionPriceApprovalCommentDaoImpl" parent="sessionFactoryConfig" />    
+    <bean id="reviseVendorTechnicalBidDao1" class="com.bul.zydex.dao.Vendor.ReviseVendorTechnicalBidDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorCustomerRefrenceDao1" class="com.bul.zydex.dao.Vendor.VendorCustomerRefrenceDaoImpl" parent="sessionFactoryConfig" /> 
+    
+    
+    <bean id="technicalTenderPriceApprovalDao1" class="com.bul.zydex.dao.Tender.TechnicalTenderPriceApprovalDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="technicalTenderPriceApprovalUserDao1" class="com.bul.zydex.dao.Tender.TechnicalTenderPriceApprovalUserDaoImpl" parent="sessionFactoryConfig" />  
+    <bean id="technicalTenderPriceApprovalCommentDao1" class="com.bul.zydex.dao.Tender.TechnicalTenderPriceApprovalCommentDaoImpl" parent="sessionFactoryConfig" />  
+    <bean id="materialGroupMasterDao1" class="com.bul.zydex.dao.MaterialGroupMaster.MaterialGroupMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="materialTypeMasterDao1" class="com.bul.zydex.dao.MaterialTypeMaster.MaterialTypeMasterDaoImpl" parent="sessionFactoryConfig" /> 
+    <bean id="materialMasterDao1" class="com.bul.zydex.dao.MaterialMaster.MaterialMasterDaoImpl" parent="sessionFactoryConfig" /> 
+    
+    <bean id="prNoDao1" class="com.bul.zydex.dao.PR.PRNoDaoImpl" parent="sessionFactoryConfig" /> 
+    <bean id="prNoTempDao1" class="com.bul.zydex.dao.PR.PRNoTempDaoImpl" parent="sessionFactoryConfig" /> 
+    <bean id="prVendorDao1" class="com.bul.zydex.dao.PR.PRVendorDaoImp" parent="sessionFactoryConfig" />
+    <bean id="prItemMasterDao1" class="com.bul.zydex.dao.PR.PRItemMasterDaoImpl" parent="sessionFactoryConfig" /> 
+    <bean id="prPriceApprovalDao1" class="com.bul.zydex.dao.PR.PRPriceApprovalDaoImpl" parent="sessionFactoryConfig" /> 
+    <bean id="prPriceApprovalCommentDao1" class="com.bul.zydex.dao.PR.PRPriceApprovalCommentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="prPriceApprovalUserDao1" class="com.bul.zydex.dao.PR.PRPriceApprovalUserDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="prMasterDao1" class="com.bul.zydex.dao.PR.PRMasterDaoImpl" parent="sessionFactoryConfig" /> 
+    <bean id="prDocDao1" class="com.bul.zydex.dao.PR.PRDocDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="prClassificationDao1" class="com.bul.zydex.dao.PR.PRClassificationDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="prBusinessTypeDao1" class="com.bul.zydex.dao.PR.PRBusinessTypeDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="prProjectTypeDao1" class="com.bul.zydex.dao.PR.PRProjectTypeDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="termsConditionDao1" class="com.bul.zydex.dao.TermsCondition.TermsConditionDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="termsConditionParameterDao1" class="com.bul.zydex.dao.TermsCondition.TermsConditionParameterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorTermsConditionDao1" class="com.bul.zydex.dao.TermsCondition.VendorTermsConditionDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorTermsConditionPriceBidDao1" class="com.bul.zydex.dao.TermsCondition.VendorTermsConditionPriceBidDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="multipleAddressDao1" class="com.bul.zydex.dao.PR.MultipleAddressDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="prApprovalCommentDao1" class="com.bul.zydex.dao.PR.PRApprovalCommentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="electricalContractorDao1" class="com.bul.zydex.dao.ElectricalContractor.ElectricalContractorDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="groupMasterDao1" class="com.bul.zydex.dao.Vendor.GroupMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="groupCategoryDao1" class="com.bul.zydex.dao.Vendor.GroupCategoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="groupSubCategoryDao1" class="com.bul.zydex.dao.Vendor.GroupSubCategoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorTechnicalCriteriaDao1" class="com.bul.zydex.dao.Vendor.VendorTechnicalCriteriaDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorHrCriteriaDao1" class="com.bul.zydex.dao.Vendor.VendorHrCriteriaDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorSafetyCriteriaDao1" class="com.bul.zydex.dao.Vendor.VendorSafetyCriteriaDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="productTypeMasterDao1" class="com.bul.zydex.dao.ProductTypeMaster.ProductTypeMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="valuationClassMasterDao1" class="com.bul.zydex.dao.ValuationClassMaster.ValuationClassMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="productGroupMasterDao1" class="com.bul.zydex.dao.ProductGroupMaster.ProductGroupMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="companyMasterDao1" class="com.bul.zydex.dao.CompanyMaster.CompanyMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="purchasingOrganisationDao1" class="com.bul.zydex.dao.PurchasingOrganisation.PurchasingOrganisationDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="plantMastersDao1" class="com.bul.zydex.dao.PlantMasters.PlantMastersDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="locationMastersDao1" class="com.bul.zydex.dao.LocationMasters.LocationMastersDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorInvitationCategoryDao1" class="com.bul.zydex.dao.Vendor.VendorInvitationCategoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorSafetyCriteriaCommentDao1" class="com.bul.zydex.dao.Vendor.VendorSafetyCriteriaCommentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorHrCriteriaCommentDao1" class="com.bul.zydex.dao.Vendor.VendorHrCriteriaCommentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="bpGroupDao1" class="com.bul.zydex.dao.BpGroup.BpGroupDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorPercentageDao1" class="com.bul.zydex.dao.VendorPercentage.VendorPercentageDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorDepartmentApprovalDao1" class="com.bul.zydex.dao.VendorDepartmentApproval.VendorDepartmentApprovalDaoImpl" parent="sessionFactoryConfig" />  
+    <bean id="vendorApprovalSettingDao1" class="com.bul.zydex.dao.Vendor.VendorApprovalSettingDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorApprovalUserDao1" class="com.bul.zydex.dao.Vendor.VendorApprovalUserDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorRequestDetailsDao1" class="com.bul.zydex.dao.Vendor.VendorRequestDetailsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorRequestApprovalDao1" class="com.bul.zydex.dao.Vendor.VendorRequestApprovalDaoImpl" parent="sessionFactoryConfig" />
+
+    <bean id="vendorRequestApprovalUserDao1" class="com.bul.zydex.dao.Vendor.VendorRequestApprovalUserDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorRequestApprovalCommentDao1" class="com.bul.zydex.dao.Vendor.VendorRequestApprovalCommentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="taxCategoryDao1" class="com.bul.zydex.dao.TaxCategory.TaxCategoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="currencyMasterDao1" class="com.bul.zydex.dao.Tender.CurrencyMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="groupForCalculationDao1" class="com.bul.zydex.dao.GroupForCalculation.GroupForCalculationDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorRequestedInvitationCategoryDao1" class="com.bul.zydex.dao.Vendor.VendorRequestedInvitationCategoryDaoImpl" parent="sessionFactoryConfig" />
+
+
+    <bean id="documentNameDao1" class="com.bul.zydex.dao.DocumentName.DocumentNameDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="profitCenterDao1" class="com.bul.zydex.dao.ProfitCenter.ProfitCenterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="projectTypeDao1" class="com.bul.zydex.dao.ProjectType.ProjectTypeDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="stationTypeDao1" class="com.bul.zydex.dao.StationType.StationTypeDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="tenantDao1" class="com.bul.zydex.dao.Tenant.TenantDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="projectProfileDao1" class="com.bul.zydex.dao.ProjectProfile.ProjectProfileDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="investmentProfileDao1" class="com.bul.zydex.dao.InvestmentProfile.InvestmentProfileDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="discomMasterDao1" class="com.bul.zydex.dao.DiscomMaster.DiscomMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="connectionTypeDao1" class="com.bul.zydex.dao.ConnectionType.ConnectionTypeDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapMasterDao1" class="com.bul.zydex.dao.OapMaster.OapMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapMasterUserDao1" class="com.bul.zydex.dao.OapMasterUser.OapMasterUserDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="projectNameMasterDao1" class="com.bul.zydex.dao.ProjectNameMaster.ProjectNameMasterDaoImpl" parent="sessionFactoryConfig" />
+
+
+
+
+    <bean id="oapFormDao1" class="com.bul.zydex.dao.OapForm.OapFormDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapDocumentAttachmentDao1" class="com.bul.zydex.dao.OapDocumentAttachment.OapDocumentAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapMultiAttachmentDao1" class="com.bul.zydex.dao.OapMultiAttachment.OapMultiAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapFormApprovalDao1" class="com.bul.zydex.dao.OapFormApproval.OapFormApprovalDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapFormApprovalCommentDao1" class="com.bul.zydex.dao.OapFormApprovalComment.OapFormApprovalCommentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapFormApprovalUserDao1" class="com.bul.zydex.dao.OapFormApprovalUser.OapFormApprovalUserDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="aocFormDao1" class="com.bul.zydex.dao.AocForm.AocFormDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="aocFormAttachmentDao1" class="com.bul.zydex.dao.AocFormAttachment.AocFormAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="aocFormMultiAttachmentDao1" class="com.bul.zydex.dao.AocFormMultiAttachment.AocFormMultiAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="aocFormApprovalDao1" class="com.bul.zydex.dao.AocFormApproval.AocFormApprovalDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="aocFormApprovalUserDao1" class="com.bul.zydex.dao.AocFormApprovalUser.AocFormApprovalUserDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="aocFormApprovalCommentDao1" class="com.bul.zydex.dao.AocFormApprovalComment.AocFormApprovalCommentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="crcFormDao1" class="com.bul.zydex.dao.CrcForm.CrcFormDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="crcFormApprovalDao1" class="com.bul.zydex.dao.CrcFormApproval.CrcFormApprovalDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="crcFormApprovalUserDao1" class="com.bul.zydex.dao.CrcFormApprovalUser.CrcFormApprovalUserDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="crcFormApprovalCommentDao1" class="com.bul.zydex.dao.CrcFormApprovalComment.CrcFormApprovalCommentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="kickOffAttendencesDao1" class="com.bul.zydex.dao.KickOffAttendences.KickOffAttendencesDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="kickOffFormApprovalDao1" class="com.bul.zydex.dao.KickOffFormApproval.KickOffFormApprovalDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="kickOffFormApprovalUserDao1" class="com.bul.zydex.dao.KickOffFormApprovalUser.KickOffFormApprovalUserDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="kickOffFormApprovalCommentDao1" class="com.bul.zydex.dao.KickOffFormApprovalComment.KickOffFormApprovalCommentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="kickOffFormDao1" class="com.bul.zydex.dao.KickOffForm.KickOffFormDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="documentMasterIdDao1" class="com.bul.zydex.dao.DocumentMasterId.DocumentMasterIdDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="documentMastersIdDao1" class="com.bul.zydex.dao.DocumentMastersId.DocumentMastersIdDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="deliverableDao1" class="com.bul.zydex.dao.Deliverable.DeliverableDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="deliverableMultiDao1" class="com.bul.zydex.dao.DeliverableMulti.DeliverableMultiDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="iteamDetailsAttachmentsDao1" class="com.bul.zydex.dao.IteamDetailsAttachments.IteamDetailsAttachmentsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="designCoordinatorMultiAttachDao1" class="com.bul.zydex.dao.DesignCoordinatorMultiAttach.DesignCoordinatorMultiAttachDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="designCordinatorCommentsDao1" class="com.bul.zydex.dao.DesignCordinatorComments.DesignCordinatorCommentsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="aocFormHistoryDao1" class="com.bul.zydex.dao.AocFormHistory.AocFormHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="kickoffFormHistoryDao1" class="com.bul.zydex.dao.KickoffFormHistory.KickoffFormHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapFormHistoryDao1" class="com.bul.zydex.dao.OapFormHistory.OapFormHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="aocFormMultiAttachementHistoryDao1" class="com.bul.zydex.dao.AocFormMultiAttachementHistory.AocFormMultiAttachementHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapFormMultiAttachementHistoryDao1" class="com.bul.zydex.dao.OapFormMultiAttachementHistory.OapFormMultiAttachementHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="crcFormHistoryDao1" class="com.bul.zydex.dao.CrcFormHistory.CrcFormHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="kickOffAttendencesHistoryDao1" class="com.bul.zydex.dao.KickOffAttendencesHistory.KickOffAttendencesHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="poDetailsDao1" class="com.bul.zydex.dao.PoDetails.PoDetailsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="riskCategoryDao1" class="com.bul.zydex.dao.RiskCategory.RiskCategoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorInviteSourceDao1" class="com.bul.zydex.dao.VendorInviteSource.VendorInviteSourceDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="siteSurveyCategoryDetailsDao1" class="com.bul.zydex.dao.SiteSurveyCategoryDetails.SiteSurveyCategoryDetailsDaoImpl" parent="sessionFactoryConfig" />
+    <!--<bean id="surveyMasterDao1" class="com.bul.zydex.dao.SurveyMaster.SurveyMasterDaoImpl" parent="sessionFactoryConfig" />-->
+    <!--<bean id="surveyCategoryMasterDao1" class="com.bul.zydex.dao.SurveyMaster.SurveyCategoryMasterDaoImpl" parent="sessionFactoryConfig" />-->
+    <!--<bean id="surveySubCategoryMasterDao1" class="com.bul.zydex.dao.SurveyMaster.SurveySubCategoryMasterDaoImpl" parent="sessionFactoryConfig" />-->
+    <bean id="surveyDocumentNoDao1" class="com.bul.zydex.dao.SurveyMaster.SurveyDocumentNoDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="documentForNewElectricityConnectionDao1" class="com.bul.zydex.dao.DocumentForNewElectricityConnection.DocumentForNewElectricityConnectionDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="siteSurveyDao1" class="com.bul.zydex.dao.SiteSurvey.SiteSurveyDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapLogMasterDao1" class="com.bul.zydex.dao.OapLogMaster.OapLogMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="aocLogMasterDao1" class="com.bul.zydex.dao.AocLogMaster.AocLogMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="siteSurveyAttachmentDao1" class="com.bul.zydex.dao.SiteSurveyAttachment.SiteSurveyAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapSurveyAttachmentDao1" class="com.bul.zydex.dao.OapSurveyAttachment.OapSurveyAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="oapSurveyAttachmentHistoryDao1" class="com.bul.zydex.dao.OapSurveyAttachmentHistory.OapSurveyAttachmentHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="aocSurveyAttachmentDao1" class="com.bul.zydex.dao.AocSurveyAttachment.AocSurveyAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="aocSurveyAttachmentHistoryDao1" class="com.bul.zydex.dao.AocSurveyAttachmentHistory.AocSurveyAttachmentHistoryDaoImpl" parent="sessionFactoryConfig" />
+
+    <bean id="vendorCompanyDetailsDao1" class="com.bul.zydex.dao.Vendor.VendorCompanyDetailsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="declarationLetterDao1" class="com.bul.zydex.dao.DeclarationLetter.DeclarationLetterDaoImpl" parent="sessionFactoryConfig" />
+       
+    <bean id="auditorMasterDao1" class="com.bul.zydex.dao.AuditorMaster.AuditorMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorSelfDeclarationDao1" class="com.bul.zydex.dao.VendorSelfDeclaration.VendorSelfDeclarationDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="closePrDao1" class="com.bul.zydex.dao.ClosePr.ClosePrDaoImpl" parent="sessionFactoryConfig" />
+
+    <bean id="technicalMultiAttachmentDao1" class="com.bul.zydex.dao.Tender.TechnicalMultiAttachmentDaoImpl" parent="sessionFactoryConfig" />
+
+    <bean id="vendorCriteriaMasterDao1" class="com.bul.zydex.dao.VendorCriteriaMaster.VendorCriteriaMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorCriteriaMasterDetailsDao1" class="com.bul.zydex.dao.VendorCriteriaMaster.VendorCriteriaMasterDetailsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorCriteriaMasterHistoryDao1" class="com.bul.zydex.dao.VendorCriteriaMaster.VendorCriteriaMasterHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorCriteriaDetailsHistoryDao1" class="com.bul.zydex.dao.VendorCriteriaMaster.VendorCriteriaDetailsHistoryDaoImpl" parent="sessionFactoryConfig" />
+
+    <bean id="countryCodeDao1" class="com.bul.zydex.dao.CountryCode.CountryCodeDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="managerialPersonDao1" class="com.bul.zydex.dao.ManagerialPerson.ManagerialPersonDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="lastWorkExpDeatilsDao1" class="com.bul.zydex.dao.LastWorkExpDeatils.LastWorkExpDeatilsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorItCriteriaCommentDao1" class="com.bul.zydex.dao.Vendor.VendorItCriteriaCommentDaoImpl" parent="sessionFactoryConfig" />
+
+    <bean id="vendorBuyerApprovalDao1" class="com.bul.zydex.dao.VendorBuyerApproval.VendorBuyerApprovalDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorRecycleMailSchedulerDao1" class="com.bul.zydex.dao.VendorRecycleMailScheduler.VendorRecycleMailSchedulerDaoImpl" parent="sessionFactoryConfig" />
+
+    <bean id="closePrMultiAttachDao1" class="com.bul.zydex.dao.ClosePrMultiAttach.ClosePrMultiAttachDaoImpl" parent="sessionFactoryConfig" />
+
+    <bean id="anchorCustomerDao1" class="com.bul.zydex.dao.AnchorCustomer.AnchorCustomerDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="canopyVarientDao1" class="com.bul.zydex.dao.CanopyVarient.CanopyVarientDaoImpl" parent="sessionFactoryConfig" />
+    
+    <bean id="chargerInstallationDetailsDao1" class="com.bul.zydex.dao.ChargerInstallationDetails.ChargerInstallationDetailsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="chargerTypeDao1" class="com.bul.zydex.dao.ChargerType.ChargerTypeDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="chargerMasterDao1" class="com.bul.zydex.dao.ChargerMaster.ChargerMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="connectorTypeDao1" class="com.bul.zydex.dao.ConnectorType.ConnectorTypeDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="chargerInstallationDetailsHistoryDao1" class="com.bul.zydex.dao.ChargerInstallationDetailsHistory.ChargerInstallationDetailsHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="ehMailDao1" class="com.bul.zydex.dao.EhMail.EhMailDaoImpl" parent="sessionFactoryConfig" />
+    
+    <bean id="vendorBlockListDao1" class="com.bul.zydex.dao.VendorBlockList.VendorBlockListDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorFinancialApprovalDetailsDao1" class="com.bul.zydex.dao.VendorFinancialApprovalDetails.VendorFinancialApprovalDetailsDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="vendorFinancialDetailsHistoryDao1" class="com.bul.zydex.dao.VendorFinancialDetailsHistory.VendorFinancialDetailsHistoryDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="omsMasterDao1" class="com.bul.zydex.dao.OmsMaster.OmsMasterDaoImpl" parent="sessionFactoryConfig" />
+   
+
+    <bean id="invoiceMasterDao1" class="com.bul.zydex.dao.Invoice.InvoiceMasterDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="invoiceAttachmentDao1" class="com.bul.zydex.dao.Invoice.InvoiceAttachmentDaoImpl" parent="sessionFactoryConfig" />
+    <bean id="documentTypeDao1" class="com.bul.zydex.dao.Invoice.DocumentTypeDaoImpl" parent="sessionFactoryConfig" />
 </beans>
+

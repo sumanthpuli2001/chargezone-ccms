@@ -92,6 +92,7 @@ public class ReportController extends ReportAbstract {
         String dFrom = request.getParameter("startDate");
         String eFrom = request.getParameter("endDate");
         String type = request.getParameter("type");
+        String type1 = request.getParameter("type1");
         String empcd = "";
 //        String name = request.getParameter("name").trim();
         String cardCode = request.getParameter("cardCode");
@@ -174,7 +175,7 @@ public class ReportController extends ReportAbstract {
         int coffeeActualAvg = 0;
         if (user.getLoginName().equals("system")) {
 
-            List rmDistinctList = punchedDataService.readDistinct(dFrom, eFrom, cardCode, item);
+            List rmDistinctList = punchedDataService.readDistinct(dFrom, eFrom, cardCode, item,type1);
             if (type.equals("D")) {
                 for (Object o : rmDistinctList) {
                     while (sdate.compareTo(edate) <= 0) {
@@ -472,19 +473,51 @@ public class ReportController extends ReportAbstract {
 
                         }
                         if (!rmList.isEmpty()) {
-                            finalList.add(finalSubsActual);
+                            
+                            if (type1.equals("E"))
+                            {
+                                finalList.add(finalSubsActual);
 
-                            totalAmount.add(tAmount);
-                            totalAmountFinal.add(totalAmount);
-                            newAmount = tAmount + newAmount;
+                                totalAmount.add(tAmount);
+                                totalAmountFinal.add(totalAmount);
+                                newAmount = tAmount + newAmount;
+                                try
+                                {
+                                    EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + o);
 
-                            EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + o);
+                                    personDetails.add(sdf.format(sdate));
+                                    personDetails.add(o);
+                                    personDetails.add(emp.getName());
 
-                            personDetails.add(sdf.format(sdate));
-                            personDetails.add(o);
-                            personDetails.add(emp.getName());
+                                    personDetailsFinal.add(personDetails);
+                                }
+                                catch(Exception e1){
+                                    break;
+                                }
 
-                            personDetailsFinal.add(personDetails);
+                            }
+                            else if (type1.equals("C"))
+                            {
+                                finalList.add(finalSubsActual);
+
+                                totalAmount.add(tAmount);
+                                totalAmountFinal.add(totalAmount);
+                                newAmount = tAmount + newAmount;
+                                try
+                                {
+                                ContractorMaster emp = contractorService.readByRfIdValue("" + o);
+
+                                personDetails.add(sdf.format(sdate));
+                                personDetails.add(o);
+                                personDetails.add(emp.getName());
+
+                                personDetailsFinal.add(personDetails);
+                                }
+                                catch(Exception e2){
+                                    break;
+                                }
+                            }
+
 
                         }
                         String nxtDate = sdf.format(sdate.getTime() + MILLIS_IN_DAY);
@@ -531,7 +564,7 @@ public class ReportController extends ReportAbstract {
                             //coffee
                             if (pdm[0].equals("02")) {
                                 coffeeActual += Double.parseDouble("" + pdm[2]);
-                                coffee = coffee + 0;
+                                        coffee = coffee + 0;
                                 coffeeSub = 0;
                             }
                             //ws
@@ -793,19 +826,51 @@ public class ReportController extends ReportAbstract {
 
                     }
                     if (!rmList.isEmpty()) {
-                        finalList.add(finalSubsActual);
+                        
+                        if (type1.equals("E"))
+                        {
+                            finalList.add(finalSubsActual);
 
-                        totalAmount.add(tAmount);
-                        totalAmountFinal.add(totalAmount);
-                        newAmount = tAmount + newAmount;
-                        EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + o);
+                            totalAmount.add(tAmount);
+                            totalAmountFinal.add(totalAmount);
+                            newAmount = tAmount + newAmount;
+                            
+                            try
+                            {
+                                EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + o);
 
-                        personDetails.add(sdf.format(sdate).split("-")[0] + "-" + sdf.format(sdate).split("-")[1]);
-                        personDetails.add(o);
-                        personDetails.add(emp.getName());
+                                personDetails.add(sdf.format(sdate).split("-")[0] + "-" + sdf.format(sdate).split("-")[1]);
+                                personDetails.add(o);
+                                personDetails.add(emp.getName());
 
-                        personDetailsFinal.add(personDetails);
+                                personDetailsFinal.add(personDetails);
+                            }
+                            catch(Exception e1){
+                                break;
+                            }
+                        }
+                        else if (type1.equals("C"))
+                        {
+                            finalList.add(finalSubsActual);
 
+                            totalAmount.add(tAmount);
+                            totalAmountFinal.add(totalAmount);
+                            newAmount = tAmount + newAmount;
+                            
+                            try
+                            {
+                                ContractorMaster emp = contractorService.readByRfIdValue("" + o);
+
+                                personDetails.add(sdf.format(sdate).split("-")[0] + "-" + sdf.format(sdate).split("-")[1]);
+                                personDetails.add(o);
+                                personDetails.add(emp.getName());
+
+                                personDetailsFinal.add(personDetails);
+                            }
+                            catch(Exception e1){
+                                break;
+                            }
+                        }
                     }
 
                 }
@@ -1121,19 +1186,40 @@ public class ReportController extends ReportAbstract {
 
                         }
                         if (!rmList.isEmpty()) {
-                            finalList.add(finalSubsActual);
+                            
+                            if (type1.equals("E"))
+                            {
+                                finalList.add(finalSubsActual);
 
-                            totalAmount.add(tAmount);
-                            totalAmountFinal.add(totalAmount);
-                            newAmount = tAmount + newAmount;
+                                totalAmount.add(tAmount);
+                                totalAmountFinal.add(totalAmount);
+                                newAmount = tAmount + newAmount;
 
-                            EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + empcd);
+                                EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + empcd);
 
-                            personDetails.add(sdf.format(sdate));
-                            personDetails.add(empcd);
-                            personDetails.add(emp.getName());
+                                personDetails.add(sdf.format(sdate));
+                                personDetails.add(empcd);
+                                personDetails.add(emp.getName());
 
-                            personDetailsFinal.add(personDetails);
+                                personDetailsFinal.add(personDetails);
+                            }
+                            else if (type1.equals("C"))
+                            {
+                                finalList.add(finalSubsActual);
+
+                                totalAmount.add(tAmount);
+                                totalAmountFinal.add(totalAmount);
+                                newAmount = tAmount + newAmount;
+
+                                ContractorMaster emp = contractorService.readByRfIdValue("" + empcd);
+
+                                personDetails.add(sdf.format(sdate));
+                                personDetails.add(empcd);
+                                personDetails.add(emp.getName());
+
+                                personDetailsFinal.add(personDetails);
+                            }
+                            
 
                         }
                         String nxtDate = sdf.format(sdate.getTime() + MILLIS_IN_DAY);
@@ -1444,19 +1530,38 @@ public class ReportController extends ReportAbstract {
 
                 }
                 if (!rmList.isEmpty()) {
-                    finalList.add(finalSubsActual);
+                    
+                    if (type1.equals("E"))
+                    {
+                        finalList.add(finalSubsActual);
 
-                    totalAmount.add(tAmount);
-                    totalAmountFinal.add(totalAmount);
-                    newAmount = tAmount + newAmount;
-                    EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + empcd);
+                        totalAmount.add(tAmount);
+                        totalAmountFinal.add(totalAmount);
+                        newAmount = tAmount + newAmount;
+                        EmployeeMaster emp = employeeMasterService.readByRfIdValue("" + empcd);
 
-                    personDetails.add(sdf.format(sdate).split("-")[0] + "-" + sdf.format(sdate).split("-")[1]);
-                    personDetails.add(empcd);
-                    personDetails.add(emp.getName());
+                        personDetails.add(sdf.format(sdate).split("-")[0] + "-" + sdf.format(sdate).split("-")[1]);
+                        personDetails.add(empcd);
+                        personDetails.add(emp.getName());
 
-                    personDetailsFinal.add(personDetails);
+                        personDetailsFinal.add(personDetails);
+                    }
+                    else if (type1.equals("C"))
+                            {
+                                finalList.add(finalSubsActual);
 
+                                totalAmount.add(tAmount);
+                                totalAmountFinal.add(totalAmount);
+                                newAmount = tAmount + newAmount;
+
+                                ContractorMaster emp = contractorService.readByRfIdValue("" + empcd);
+
+                                personDetails.add(sdf.format(sdate));
+                                personDetails.add(empcd);
+                                personDetails.add(emp.getName());
+
+                                personDetailsFinal.add(personDetails);
+                            }
                 }
 
                 //------for Log entry---------
@@ -1549,7 +1654,7 @@ public class ReportController extends ReportAbstract {
                         empIdName.add(cm.getName());
                     }
                 } else {
-                    empIdName.add(em.getRfId());
+                //    empIdName.add(em.getRfId());
                     empIdName.add(em.getName());
                 }
                 empIdNameFinal.add(empIdName);
@@ -1810,7 +1915,7 @@ public class ReportController extends ReportAbstract {
             List list = new ArrayList();
             if (type.equals("E") || type.equals("D") || type.equals("G")) {
                 employeeMaster = employeeMasterService.read("" + reportName[1]);
-                list = punchedDataService.readSumOfPrice(employeeMaster.getRfId(), dFrom, eFrom);
+            //    list = punchedDataService.readSumOfPrice(employeeMaster.getRfId(), dFrom, eFrom);
             } else if (type.equals("C")) {
                 contractorMaster = contractorService.read("" + reportName[1]);
                 list = punchedDataService.readSumOfPrice(contractorMaster.getRfId(), dFrom, eFrom);
@@ -1828,7 +1933,7 @@ public class ReportController extends ReportAbstract {
                     employeeList.add(reportName[1]);
                     employeeList.add(os[1]);
                     if (type.equals("E")) {
-                        employeeList.add(employeeMaster.getRfId());
+                     //   employeeList.add(employeeMaster.getRfId());
                     } else if (type.equals("C")) {
                         employeeList.add(contractorMaster.getRfId());
                     }
@@ -1966,7 +2071,7 @@ public class ReportController extends ReportAbstract {
 
     public ModelAndView createBackup(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ModelAndView mv = new ModelAndView();
-        File backupFile = new File("d:\\ccms_backup.sql");
+        File backupFile = new File("d:\\eprocsuite_chargezone_backup.sql");
         File backupFile1 = new File("d:\\");
         if (!backupFile1.exists()) {
             backupFile1.mkdirs();
@@ -1974,8 +2079,8 @@ public class ReportController extends ReportAbstract {
 
         FileWriter fw = new FileWriter(backupFile);
         Runtime runtime = Runtime.getRuntime();
-//        Process child = runtime.exec("C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump --user=root --password=root --lock-all-tables --opt ccms");
-        Process child = runtime.exec("C:\\Program Files (x86)\\MySQL\\MySQL Server 5.5\\bin\\mysqldump.exe --user=root --password=root --lock-all-tables --opt ccms");
+//        Process child = runtime.exec("C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump --user=root --password=root --lock-all-tables --opt eprocsuite_chargezone");
+        Process child = runtime.exec("C:\\Program Files (x86)\\MySQL\\MySQL Server 5.5\\bin\\mysqldump.exe --user=root --password=root --lock-all-tables --opt eprocsuite_chargezone");
         InputStreamReader irs = new InputStreamReader(child.getInputStream());
         BufferedReader br = new BufferedReader(irs);
 

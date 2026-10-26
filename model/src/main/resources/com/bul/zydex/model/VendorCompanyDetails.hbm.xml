@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorCompanyDetails" table="vendor_company_details" catalog="eprocsuite_chargezone">
+
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+        </id>
+        
+        <property name="vendorCompanyName" type="string">    
+            <column name="vendor_company_name" length="1000"  />
+        </property>
+        
+        <property name="vendorPO" type="string">    
+            <column name="vendor_po" length="128"  />
+        </property>
+        
+        <property name="vendorCode" type="string">    
+            <column name="vendor_code" length="128"  />
+        </property>
+        
+        <property name="vendorEmail" type="string">    
+            <column name="vendor_email" length="128"  />
+        </property>
+        
+        <property name="vendorInformationId" type="string">    
+            <column name="vendor_information_id" length="128"  />
+        </property>
+        
+    </class>
+</hibernate-mapping>
+

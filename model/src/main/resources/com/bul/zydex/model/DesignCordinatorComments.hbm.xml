@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.DesignCordinatorComments" table="design_cordinator_comments" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        
+       
+        <property name="oapId" type="java.lang.Integer">    
+            <column name="oap_id"  />
+        </property>
+        <property name="aocId" type="java.lang.Integer">    
+            <column name="aoc_id"  />
+        </property>
+        <property name="deliverableId" type="java.lang.Integer">    
+            <column name="deliverable_multi_id"  />
+        </property>
+        <property name="comments" type="string">    
+            <column name="comments"  />
+        </property>
+         <property name="userId" type="string">    
+            <column name="user_id"  />
+        </property>
+         <property name="flagStatus" type="java.lang.Integer">    
+            <column name="flag_status"  />
+        </property>
+         <property name="dateTime" type="string">    
+            <column name="date_time"  />
+        </property>
+        
+        
+        
+        
+        
+    </class>
+  
+  
+
+</hibernate-mapping>

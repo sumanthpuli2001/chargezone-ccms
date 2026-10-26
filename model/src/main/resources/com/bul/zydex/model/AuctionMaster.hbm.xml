@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.AuctionMaster" table="auction_master" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="auctionNo" type="string">    
+            <column name="auction_no" length="200"  />
+        </property>
+        <property name="title" type="string">    
+            <column name="title" length="500"  />
+        </property>
+        <property name="categoryId" type="string">    
+            <column name="category_id" length="200"  />
+        </property>
+        <property name="subCategoryId" type="string">    
+            <column name="sub_category_id" length="200"  />
+        </property>
+        <property name="value" type="string">    
+            <column name="value" length="200"  />
+        </property>
+        <property name="emd" type="string">    
+            <column name="emd" length="200"  />
+        </property>
+        <property name="docCost" type="string">    
+            <column name="doc_cost" length="200"  />
+        </property>
+        <property name="type" type="string">    
+            <column name="type" length="200"  />
+        </property>
+        <property name="contactPerson" type="string">    
+            <column name="contact_person" length="200"  />
+        </property>
+        <property name="location" type="string">    
+            <column name="location" length="200"  />
+        </property>
+        <property name="biddingStartdate" type="string">    
+            <column name="bidding_startdate" length="200"  />
+        </property>
+        <property name="portalDate" type="string">
+            <column name="portal_date" length="200"  />
+        </property>
+        <property name="collectionLastdate" type="string">    
+            <column name="collection_lastdate" length="200"  />
+        </property>
+        <property name="biddingEnddate" type="string">    
+            <column name="bidding_enddate" length="200"  />
+        </property>
+        <property name="workDesc" type="string">    
+            <column name="work_desc" length="2000"  />
+        </property>
+        <property name="auctionRemark" type="string">    
+            <column name="auction_remark" length="2000"  />
+        </property>
+        <property name="auctionAdmin" type="string">    
+            <column name="auction_admin" length="200"  />
+        </property>
+        <property name="auctionAdminContactNumber" type="string">    
+            <column name="auction_admin_contact_number" length="200"  />
+        </property>
+        <property name="auctionAuthorizePerson" type="string">    
+            <column name="auction_authorize_person" length="200"  />
+        </property>
+        <property name="auctionAuthorizeContactNo" type="string">    
+            <column name="auction_authorize_contact_no" length="200"  />
+        </property>
+        <property name="authorizeFlag" type="java.lang.Integer">
+            <column name="authorize_flag" length="100"  />
+        </property>
+        <property name="auctionAuthorizeUserName" type="string">    
+            <column name="auction_authorize_user_name" length="200"  />
+        </property>
+        <property name="emailFlag" type="java.lang.Integer">
+            <column name="email_flag" length="100"  />
+        </property>
+        <property name="authorizeDate" type="string">    
+            <column name="authorize_date" length="200"  />
+        </property>
+        <property name="returnFlag" type="java.lang.Integer">
+            <column name="return_flag" length="100"  />
+        </property>
+        <property name="returnText" type="string">    
+            <column name="return_text" length="200"  />
+        </property>
+        <property name="deleteFlag" type="java.lang.Integer">
+            <column name="delete_flag" length="100"  />
+        </property>
+        <property name="deleteRemark" type="string">    
+            <column name="delete_remark" length="200"  />
+        </property>
+        <property name="department" type="string">    
+            <column name="department" length="200"  />
+        </property>
+        <property name="prNo" type="string">
+            <column name="pr_no" length="100"  />
+        </property>
+        <property name="auctionType" type="string">
+            <column name="auction_type" length="100"  />
+        </property>
+        <property name="lastBiddingTime" type="string">
+            <column name="last_bidding_time" length="100"  />
+        </property>
+        <property name="extendTime" type="string">
+            <column name="extend_time" length="100"  />
+        </property>
+        <property name="extendTimeNo" type="string">
+            <column name="extend_time_no" length="100"  />
+        </property> 
+        <property name="bidding" type="string">
+            <column name="bidding" length="100"  />
+        </property>
+        <property name="biddingDisplay" type="string">
+            <column name="bidding_display" length="100"  />
+        </property>
+        <property name="autoDecIncAmount" type="string">
+            <column name="auto_dec_inc_amount" length="100"  />
+        </property>
+        <property name="currency" type="string">
+            <column name="currency" length="100"  />
+        </property>
+        <property name="refreshRate" type="string">
+            <column name="refresh_rate" length="100"  />
+        </property>
+        <property name="biddingType" type="string">
+            <column name="bidding_type" length="100"  />
+        </property>
+        <property name="auctionBy" type="string">
+            <column name="auction_by" length="100"  />
+        </property>
+        <property name="auctionAmount" type="string">
+            <column name="auction_amount" length="100"  />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

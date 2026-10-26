@@ -32,7 +32,7 @@
                     <div class="nav-tabs-custom">
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_1">
-                                <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
+                                <span style="color: red;font-size: 14px;">* Indicates Mandatory Field.</span>
                                 <c:if test="${!empty successMessage}">
                                     <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
                                 </c:if>

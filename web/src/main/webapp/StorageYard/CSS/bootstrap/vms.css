@@ -31,6 +31,22 @@ body{
 .wrapper:after{
     clear:both
 }
+
+.sidebar-header{
+        position: fixed;
+        /*background-color:#223e4e;*/
+/*        background-color: #006fad;*/
+        padding: 3px 0px 3px 3px;
+}
+#exTab h3 {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
+}
+#exTab .nav-pills > li > a {
+    border-radius: 4px 4px 0 0;
+}
+
 .layout-boxed .wrapper{
     max-width:1250px;
     margin:0 auto;
@@ -46,7 +62,7 @@ body{
     -moz-transition:-moz-transform .3s ease-in-out,margin .3s ease-in-out;
     -o-transition:-o-transform .3s ease-in-out,margin .3s ease-in-out;
     transition:transform .3s ease-in-out,margin .3s ease-in-out;
-    margin-left:300px;
+    margin-left:210px;
     z-index:820
 }
 .layout-top-nav .content-wrapper,.layout-top-nav .right-side,.layout-top-nav .main-footer{
@@ -81,7 +97,7 @@ body{
 }
 .content-wrapper,.right-side{
     min-height:100%;
-    background-color:#ECECDF;
+    background-color:#ebebeb;
     z-index:800
 }
 .main-footer{
@@ -123,7 +139,7 @@ body.hold-transition .content-wrapper,body.hold-transition .right-side,body.hold
     padding-right:15px
 }
 h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6{
-    font-family:'Source Sans Pro',sans-serif
+    font-family: Roboto,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"
 }
 a{
     color:#3c8dbc
@@ -148,14 +164,18 @@ a:hover,a:active,a:focus{
     z-index:1030
 }
 .main-header>.navbar{
-    -webkit-transition:margin-left .3s ease-in-out;
-    -o-transition:margin-left .3s ease-in-out;
-    transition:margin-left .3s ease-in-out;
-    margin-bottom:0;
-    margin-left:300px;
-    border:0;
-    min-height:50px;
-    border-radius:0
+    position: fixed;
+    background: #303030;
+    z-index: 999;
+    left: 210px;
+    right: 0;
+    top: 0;
+    margin: 0 auto;
+    transition: all 0.3s;
+}
+.mini-navbar .main-header {
+    left: 80px;
+    transition: all 0.3s;
 }
 .layout-top-nav .main-header>.navbar{
     margin-left:0
@@ -230,7 +250,23 @@ a:hover,a:active,a:focus{
     padding:2px 3px;
     line-height:.9
 }
-.main-header .logo{
+.main-header .logo {
+    -webkit-transition: width .3s ease-in-out;
+    -o-transition: width .3s ease-in-out;
+    transition: width .3s ease-in-out;
+    display: block;
+    /* float: left; */
+    height: 48px;
+    font-size: 20px;
+    line-height: 50px;
+    text-align: center;
+    width: 207px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding: 0px 1px 0px 1px;
+    font-weight: 300;
+    overflow: hidden;
+}
+/*.main-header .logo{
     -webkit-transition:width .3s ease-in-out;
     -o-transition:width .3s ease-in-out;
     transition:width .3s ease-in-out;
@@ -245,7 +281,7 @@ a:hover,a:active,a:focus{
     padding:0 15px;
     font-weight:300;
     overflow:hidden
-}
+}*/
 .main-header .logo .logo-lg{
     display:block
 }
@@ -257,11 +293,11 @@ a:hover,a:active,a:focus{
 }
 .content-header{
     position:relative;
-    padding:15px 15px 0 15px
+    padding:15px 15px 15px 15px
 }
 .content-header>h1{
     margin:0;
-    font-size:24px
+    font-size:18px
 }
 .content-header>h1>small{
     font-size:15px;
@@ -290,7 +326,7 @@ a:hover,a:active,a:focus{
     margin-right:5px
 }
 .content-header>.breadcrumb>li+li:before{
-    content:'>\00a0'
+    /*content:'>\00a0'*/
 }
 @media(max-width:991px){
     .content-header>.breadcrumb{
@@ -352,18 +388,32 @@ a:hover,a:active,a:focus{
         right:40px
     }
 }
+.btn1{
+    width: 200px;
+    background: #006fad;
+    color: #f7f7f7;
+}
 .main-sidebar,.left-side{
-    position:absolute;
-    top:0;
+    position:fixed;
+    top:51px;
     left:0;
-    padding-top:50px;
+    background: #ffffff;
+/*    padding-top:50px;*/
     min-height:100%;
-    width:300px;
+    width:210px;
     z-index:810;
     -webkit-transition:-webkit-transform .3s ease-in-out,width .3s ease-in-out;
     -moz-transition:-moz-transform .3s ease-in-out,width .3s ease-in-out;
     -o-transition:-o-transform .3s ease-in-out,width .3s ease-in-out;
     transition:transform .3s ease-in-out,width .3s ease-in-out
+}
+.footer-copyright-area{
+    /*background: #223e4e;*/
+        background: #3c3c3b;
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 14%);
+    padding: 20px 0px;
+    text-align: center;
+    color: #ebebeb;
 }
 @media(max-width:767px){
     .main-sidebar,.left-side{
@@ -492,7 +542,7 @@ a:hover,a:active,a:focus{
     margin:0
 }
 .sidebar-menu .treeview-menu>li>a{
-    padding:5px 5px 5px 15px;
+    padding:5px 5px 5px 10px;
     display:block;
     font-size:14px
 }
@@ -565,7 +615,7 @@ a:hover,a:active,a:focus{
         display:none
     }
     .sidebar-mini.sidebar-collapse .main-header .navbar{
-        margin-left:50px
+        margin-left:-160px
     }
 }
 .sidebar-menu,.main-sidebar .user-panel,.sidebar-menu>li.header{
@@ -968,7 +1018,7 @@ a:hover,a:active,a:focus{
     }
 }
 .navbar-nav>.user-menu>.dropdown-menu>.user-footer{
-    background-color:#f9f9f9;
+    background-color:#223e4eed;
     padding:10px
 }
 .navbar-nav>.user-menu>.dropdown-menu>.user-footer:before,.navbar-nav>.user-menu>.dropdown-menu>.user-footer:after{
@@ -1955,10 +2005,10 @@ a:hover,a:active,a:focus{
     background-color:#e7e7e7
 }
 .btn-primary{
-    background-color:#3c8dbc;
-    border-color:#367fa9;
+    background-color:#00bcd4;
+    border-color:#00bcd4;
     width: 100px !important;
-    text-transform: uppercase !important;
+    text-transform: capitalize !important;
 }
 .btn-primary:hover,.btn-primary:active,.btn-primary.hover{
     background-color:#367fa9
@@ -1971,6 +2021,32 @@ a:hover,a:active,a:focus{
 }
 .btn-success:hover,.btn-success:active,.btn-success.hover{
     background-color:#008d4c
+}
+.bg-login{
+    background: url(StorageYard/Images/home-bg.jpg);
+    background-size: cover;
+    position: relative;
+    background-image: beige;
+}
+.btn-infoog{
+   color: white;
+    width: 32%;
+    background:#00a65a;  
+}
+.btn-infoob{
+     color: white;
+    width: 32%;
+    background:#37c5d8;
+}
+
+.btn-infoor{
+     color: white;
+    width: 32%;
+    background: #dd4b39;
+}
+.nav-link{
+      padding-right: 15px;
+       color: white;
 }
 .btn-info{
     background-color:#00c0ef;
@@ -2146,6 +2222,7 @@ a:hover,a:active,a:focus{
     text-transform:uppercase
 }
 .nav-tabs-custom{
+    border-top: 1px solid #00a65a;
     margin-bottom:20px;
     background:#fff;
     box-shadow:0 1px 1px rgba(0,0,0,0.1);
@@ -2288,22 +2365,22 @@ a:hover,a:active,a:focus{
     border-bottom-width:0
 }
 .table>thead>tr>th,.table>tbody>tr>th,.table>tfoot>tr>th,.table>thead>tr>td,.table>tbody>tr>td,.table>tfoot>tr>td{
-    border-top:1px solid #000
+    /*border-top:1px solid #000*/
 }
 .table>thead>tr>th{
-    border-bottom:1px solid #000
+    border-bottom:1px solid #ddd;
 }
 .table tr td .progress{
     margin-top:5px
 }
 .table-bordered{
-    border:1px solid #000
+    /*border:1px solid #000*/
 }
 .table-bordered>thead>tr>th,.table-bordered>tbody>tr>th,.table-bordered>tfoot>tr>th,.table-bordered>thead>tr>td,.table-bordered>tbody>tr>td,.table-bordered>tfoot>tr>td{
-    border:1px solid #000
+    /*border:1px solid #000*/
 }
 .table-bordered>thead>tr>th,.table-bordered>thead>tr>td{
-    /*border-bottom-width:2px*/
+  
 }
 .table.no-border,.table.no-border td,.table.no-border th{
     border:0
@@ -3736,9 +3813,9 @@ table.text-center,table.text-center td,table.text-center th{
 .flat{
     border-radius:0!important
 }
-.text-bold,.text-bold.table td,.text-bold.table th{
+/*.text-bold,.text-bold.table td,.text-bold.table th{
     font-weight:700
-}
+}*/
 .text-sm{
     font-size:12px
 }

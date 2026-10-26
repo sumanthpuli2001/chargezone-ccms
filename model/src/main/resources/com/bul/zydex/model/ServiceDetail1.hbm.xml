@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ServiceDetail1" table="service_detail_1" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="srNo" type="string">    
+            <column name="sr_no" length="200"  />
+        </property>
+        <property name="uom" type="string">    
+            <column name="uom" length="200"  />
+        </property>
+        <property name="itemDesc" type="string">    
+            <column name="item_desc" length="200"  />
+        </property>
+        <property name="qty" type="string">    
+            <column name="qty" length="200"  />
+        </property>
+        <property name="remark" type="string">    
+            <column name="remark" length="200"  />
+        </property>
+        <property name="tenderNo" type="string">    
+            <column name="tender_no" length="200"  />
+        </property>
+        <property name="fileName" type="string">    
+            <column name="file_name" length="200"  />
+        </property>
+        <property name="refNo" type="string">    
+            <column name="ref_no" length="200"  />
+        </property>
+    </class>
+</hibernate-mapping>

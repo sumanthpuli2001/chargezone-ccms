@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.OapFormHistory" table="oap_form_history" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="documentNo" type="string">    
+            <column name="document_no"  />
+        </property>
+        
+        <property name="pcsName" type="string">    
+            <column name="pcs_name"  />
+        </property>
+        <property name="date" type="string">    
+            <column name="date"  />
+        </property>
+        <property name="documentRevisionNo" type="string">    
+            <column name="document_revision_no"  />
+        </property>
+        <property name="projectName" type="string">    
+            <column name="project_name"  />
+        </property>
+        <property name="pcsCityHighway" type="string">    
+            <column name="pcs_city_highway"  />
+        </property>
+        <property name="pcsAddress" type="string">    
+            <column name="pcs_address"  />
+        </property>
+        <property name="pcsTypeCity" type="string">    
+            <column name="pcs_type_city"  />
+        </property>
+        <property name="pcsTypeHighway" type="string">    
+            <column name="pcs_type_highway"  />
+        </property>
+        <property name="pcsModelDoco" type="string">    
+            <column name="pcs_model_doco"  />
+        </property>
+        <property name="pcsModelCoco" type="string">    
+            <column name="pcs_model_coco"  />
+        </property>
+
+        <property name="pcsModelDodo" type="string">    
+            <column name="pcs_model_dodo"  />
+        </property>
+
+        <property name="pcsCoordinates" type="string">    
+            <column name="pcs_coordinates"  />
+        </property>
+
+        <property name="mobileNo" type="string">    
+            <column name="mobile_no"  />
+        </property>
+        <property name="email" type="string">    
+            <column name="email"  />
+        </property>
+        <property name="alternateMobileNo" type="string">    
+            <column name="alternate_mobile_no"  />
+        </property>
+        <property name="clientDetails" type="string">    
+            <column name="client_details"  />
+        </property>
+        <property name="specificRequriementsClients" type="string">    
+            <column name="specific_requriements_clients"  />
+        </property>
+        <property name="salesLeadName" type="string">    
+            <column name="sales_lead_name"  />
+        </property>
+        <property name="department" type="string">    
+            <column name="department"  />
+        </property>
+        <property name="designation" type="string">    
+            <column name="designation"  />
+        </property>
+        <property name="salesDate" type="string">    
+            <column name="sales_date"  />
+        </property>
+        <property name="signature" type="string">    
+            <column name="signature"  />
+        </property>
+        <property name="agreementLoa" type="string">    
+            <column name="agreement_loa"  />
+        </property>
+        <property name="ownerShipDocument" type="string">    
+            <column name="owner_ship_document"  />
+        </property>
+        <property name="preliminarySiteSurvey" type="string">    
+            <column name="preliminary_site_survey"  />
+        </property>
+        <property name="consentLetterNoc" type="string">    
+            <column name="consent_letter_noc"  />
+        </property>
+        <property name="noOfGuns" type="string">    
+            <column name="no_of_guns"  />
+        </property>
+        <property name="timeLineFromDate" type="string">    
+            <column name="time_line_from_date"  />
+        </property>   
+        <property name="timeLineToDate" type="string">    
+            <column name="time_line_to_date"  />
+        </property>
+        <property name="projectBudgetAllocated" type="string">    
+            <column name="project_budget_allocated"  />
+        </property>
+      
+        <property name="kwAc77" type="string">    
+            <column name="kw_ac_7_7"  />
+        </property>
+        <property name="kwDc15" type="string">    
+            <column name="kw_dc_15"  />
+        </property>
+        <property name="kwDc30" type="string">    
+            <column name="kw_dc_30"  />
+        </property>
+        <property name="kwDc60" type="string">    
+            <column name="kw_dc_60"  />
+        </property>
+        <property name="kwDc120" type="string">    
+            <column name="kw_dc_120"  />
+        </property>
+        <property name="kwDc180" type="string">    
+            <column name="kw_dc_180"  />
+        </property>
+        <property name="kw240" type="string">    
+            <column name="kw_240"  />
+        </property>
+        
+        <property name="oapMaster" type="java.lang.Integer">    
+            <column name="oap_master_id" length="200"  />
+        </property>
+        
+        <property name="userId" type="string">    
+            <column name="user_id" length="1000"  />
+        </property>
+        <property name="createdDate" type="string">    
+            <column name="created_date" length="1000"  />
+        </property>
+        <property name="flagStatus" type="java.lang.Integer">    
+            <column name="flag_status" length="200"  />
+        </property>
+        <property name="assignedName" type="string">    
+            <column name="assigned_name" length="1000"  />
+        </property>
+        
+        <property name="pcsTypeOther" type="string">    
+            <column name="pcs_type_other"  />
+        </property>
+        
+        <property name="pcsModelOther" type="string">    
+            <column name="pcs_model_other"  />
+        </property>
+        <property name="clientScope" type="string">    
+            <column name="client_scope"  />
+        </property>
+        
+        <property name="kwAcQuatity77" type="string">    
+            <column name="kw_ac_7_7_quatity"  />
+        </property>
+        
+        <property name="kwDcQuatity15" type="string">    
+            <column name="kw_dc_15_quatity"  />
+        </property>
+        
+        <property name="kwDcQuatity30" type="string">    
+            <column name="kw_dc_30_quatity"  />
+        </property>
+        <property name="kwDcQuatity60" type="string">    
+            <column name="kw_dc_60_quatity"  />
+        </property>
+        <property name="kwDcQuatity120" type="string">    
+            <column name="kw_dc_120_quatity"  />
+        </property>
+        <property name="kwDcQuatity180" type="string">    
+            <column name="kw_dc_180_quatity"  />
+        </property>
+        <property name="kwQuatity240" type="string">    
+            <column name="kw_240_quatity"  />
+        </property>
+        
+       
+        <property name="others" type="string">    
+            <column name="others"  />
+        </property>
+        <property name="othersDetails" type="string">    
+            <column name="others_details"  />
+        </property>
+        <property name="pcsTypeOtherCheck" type="string">    
+            <column name="pcs_type_other_check"  />
+        </property>
+        <property name="pcsModelOtherCheck" type="string">    
+            <column name="pcs_model_other_check"  />
+        </property>
+        <property name="aggrementAttach" type="string">    
+            <column name="aggrement_attach"  />
+        </property>
+        <property name="ownershipAttach" type="string">    
+            <column name="ownership_attach"  />
+        </property>
+        <property name="preliminaryAttach" type="string">    
+            <column name="preliminary_attach"  />
+        </property>
+        <property name="consentAttach" type="string">    
+            <column name="consent_attach"  />
+        </property>
+        <property name="country" type="string">    
+            <column name="country"  />
+        </property>
+        <property name="state" type="string">    
+            <column name="state"  />
+        </property>
+        <property name="city" type="string">    
+            <column name="city"  />
+        </property>
+        <property name="district" type="string">    
+            <column name="district"  />
+        </property>
+        <property name="houseNo" type="string">    
+            <column name="house_no"  />
+        </property>
+        
+        <property name="projectCoordinater" type="string">    
+            <column name="project_coordinater"   />
+        </property>
+        <property name="comment" type="string">    
+            <column name="comment"   />
+        </property>
+        <property name="projectProfile" type="string">    
+            <column name="project_profile"   />
+        </property>
+        <property name="projectCenter" type="string">    
+            <column name="project_center"   />
+        </property>
+        <property name="companyCode" type="string">    
+            <column name="company_code"   />
+        </property>
+        <property name="plant" type="string">    
+            <column name="plant"   />
+        </property>
+        <property name="projectType" type="string">    
+            <column name="project_type"   />
+        </property>
+        <property name="projectCurrency" type="string">    
+            <column name="project_currency"   />
+        </property>
+        <property name="inverstmentProfile" type="string">    
+            <column name="investment_profile"   />
+        </property>
+        <property name="discom" type="string">    
+            <column name="discom"   />
+        </property>
+        <property name="noOfChargePoints" type="string">    
+            <column name="no_of_charge_points"   />
+        </property>
+        <property name="noOfCharger" type="string">    
+            <column name="no_of_charger"   />
+        </property>
+        <property name="overallStationCapacityKw" type="string">    
+            <column name="overall_capacity"   />
+        </property>
+        <property name="stationAcCapacityKw" type="string">    
+            <column name="station_capacity_ac"   />
+        </property>
+        <property name="stationDcCapacityKw" type="string">    
+            <column name="station_capacity_dc"   />
+        </property>
+        <property name="stationName" type="string">    
+            <column name="station_name"   />
+        </property>
+        <property name="stationType" type="string">    
+            <column name="station_type"   />
+        </property>
+        <property name="tenant" type="string">    
+            <column name="tenant"   />
+        </property>
+        <property name="connectionType" type="string">    
+            <column name="connection_type"   />
+        </property>
+        <property name="chargingRatePerUnit" type="string">    
+            <column name="charging_rate_per_unit"   />
+        </property>
+        <property name="history" type="string">    
+            <column name="history"   />
+        </property>
+        <property name="dateTime" type="string">    
+            <column name="date_time"   />
+        </property>
+        <property name="oapId" type="java.lang.Integer">    
+            <column name="oap_id"  />
+        </property>
+        <property name="siteSurvey" type="string">    
+            <column name="site_survey"   />
+        </property>
+        <property name="surveyRadio" type="java.lang.Integer">    
+            <column name="survey_radio"  />
+        </property>
+        
+        
+        
+        <property name="projectTimelineCategory" type="string">    
+            <column name="project_timeline_category"   />
+        </property>
+        <property name="totalKwRating" type="string">    
+            <column name="total_kw_rating"   />
+        </property>
+        <property name="totalChargerCapacity" type="string">    
+            <column name="total_charger_capacity"   />
+        </property>
+        <property name="chargerStationAccessType" type="string">    
+            <column name="charger_station_access_type"   />
+        </property>
+        <property name="auxiliaryLoadOfStation" type="string">    
+            <column name="auxiliary_load_of_station"   />
+        </property>
+        <property name="chargingRetePerUnit" type="string">    
+            <column name="charging_rete_per_unit"   />
+        </property>
+        <property name="noOfEvsToBeChanged" type="string">    
+            <column name="no_of_evs_to_be_changed"   />
+        </property>
+        <property name="additionOfNewChargerCapacity" type="string">    
+            <column name="addition_of_new_charger_capacity"   />
+        </property>
+        <property name="specificDateFromClient" type="string">    
+            <column name="specific_date_from_client"   />
+        </property>
+        <property name="kwQuatity360" type="string">    
+            <column name="kw_360_quatity"  />
+        </property>
+        <property name="kwQuatity720" type="string">    
+            <column name="kw_720_quatity"  />
+        </property>
+        <property name="kw360" type="string">    
+            <column name="kw_360"  />
+        </property>
+        <property name="kw720" type="string">    
+            <column name="kw_720"  />
+        </property>
+        <property name="anchoreCustomer" type="string">    
+            <column name="anchore_customer"  />
+        </property>
+        <property name="canopyVarient" type="string">    
+            <column name="canopy_varient"  />
+        </property>
+        <property name="scopeOfchargeZone" type="string">    
+            <column name="scope_of_chargezone"  />
+        </property>
+        <property name="totalMegaWatt" type="string">    
+            <column name="total_mega_watt"  />
+        </property>
+        <property name="pcsModelSaas" type="string">    
+            <column name="pcs_model_saas"  />
+        </property>
+    </class>
+</hibernate-mapping>

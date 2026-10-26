@@ -57,7 +57,7 @@ public class ReqResFilter implements Filter {
                 + " $$ User Port: " + request.getRemotePort()
                 + " $$ Resource: " + file + " $$ Milliseconds used: "
                 + (System.currentTimeMillis() - start));
-    }
+      }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

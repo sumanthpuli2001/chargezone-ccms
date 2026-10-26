@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorMaster" table="vendor_master" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="vendorName" type="string">
+            <column name="vendor_name" length="200"  />
+        </property>
+        <property name="vendorRegNo" type="string">
+            <column name="vendor_reg_no" length="30"  />
+        </property>
+        <property name="vendorStxNo" type="string">
+            <column name="vendor_stx_no" length="30"  />
+        </property>
+        <property name="vendorCstxNo" type="string">
+            <column name="vendor_cstx_no" length="30"  />
+        </property>
+        <property name="vendorAddressLine1" type="string">
+            <column name="vendor_address_line_1" length="300"  />
+        </property>
+        <property name="vendorAddressLine2" type="string">
+            <column name="vendor_address_line_2" length="300"  />
+        </property>
+        <property name="vendorAddressLine3" type="string">
+            <column name="vendor_address_line_3" length="300"  />
+        </property>
+        <property name="vendorCity" type="string">
+            <column name="vendor_city" length="100"  />
+        </property>
+        <property name="vendorPincode" type="string">
+            <column name="vendor_pincode" length="30"  />
+        </property>
+        <property name="vendorDistrict" type="string">
+            <column name="vendor_district" length="100"  />
+        </property>
+        <property name="vendorState" type="string">
+            <column name="vendor_state" length="100"  />
+        </property>
+        <property name="vendorCountry" type="string">
+            <column name="vendor_country" length="100"  />
+        </property>
+        <property name="vendorPhNo" type="string">
+            <column name="vendor_ph_no" length="100"  />
+        </property>
+        <property name="vendorMobNo" type="string">
+            <column name="vendor_mob_no" length="100"  />
+        </property>
+        <property name="vendorFax" type="string">
+            <column name="vendor_fax" length="100"  />
+        </property>
+        <property name="vendorEmailID" type="string">
+            <column name="vendor_email_id" length="500"  />
+        </property>
+        <property name="vendorStatusId" type="java.lang.Integer">
+            <column name="vendor_status_id" length="100"  />
+        </property>
+        <property name="vendorTypeId" type="java.lang.Integer">
+            <column name="vendor_type_id" length="100"  />
+        </property>
+        <property name="flag" type="java.lang.Integer">
+            <column name="flag" length="100"  />
+        </property>
+        <property name="stceg" type="string">
+            <column name="stceg" length="500"  />
+        </property>
+        <property name="j1IpanNo" type="string">
+            <column name="J_1IPANNO" length="500"  />
+        </property>
+        <property name="J1Isern" type="string">
+            <column name="J_1ISERN" length="500"  />
+        </property>
+        <property name="vendorcc" type="string">
+            <column name="vendor_cc" length="500"  />
+        </property> 
+        <property name="vendorRemark" type="string">
+            <column name="vendor_remark" length="500"  />
+        </property>  
+        <property name="vendorStamp" type="string">
+            <column name="vendor_stamp" length="500"  />
+        </property>
+        <property name="vendorSign" type="string">
+            <column name="vendor_sign" length="500"  />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

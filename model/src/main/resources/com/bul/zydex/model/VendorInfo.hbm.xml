@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorInfo" table="vendor_info" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="fname" type="string">    
+            <column name="fname" length="1000"  />
+        </property>
+        <property name="sfirm" type="string">    
+            <column name="sfirm" length="1000"  />
+        </property>
+        <property name="rdate" type="string">    
+            <column name="rdate" length="1000"  />
+        </property>
+        <property name="addr" type="string">    
+            <column name="addr" length="1000"  />
+        </property>
+        <property name="location" type="string">    
+            <column name="location" length="1000"  />
+        </property>
+        <property name="cperson" type="string">    
+            <column name="cperson" length="1000"  />
+        </property>
+        <property name="officeno" type="string">    
+            <column name="officeno" length="1000"  />
+        </property>
+        <property name="resino" type="string">    
+            <column name="resino" length="1000"  />
+        </property>
+        <property name="mobno" type="string">    
+            <column name="mobno" length="1000"  />
+        </property>
+        <property name="faxno" type="string">    
+            <column name="faxno" length="1000"  />
+        </property>
+        <property name="emailid" type="string">    
+            <column name="emailid" length="1000"  />
+        </property>
+        <property name="panno" type="string">    
+            <column name="panno" length="1000"  />
+        </property>
+        <property name="tno" type="string">    
+            <column name="tno" length="1000"  />
+        </property>
+        <property name="cinnoFilePath" type="string">    
+            <column name="cinno_file_path" length="1000"  />
+        </property>
+        <property name="cinno" type="string">    
+            <column name="cinno" length="1000"  />
+        </property>
+        <property name="altemailid" type="string">    
+            <column name="altemailid" length="1000"  />
+        </property>
+        <property name="stno" type="string">    
+            <column name="stno" length="1000"  />
+        </property>
+        <property name="stnoFilePath" type="string">    
+            <column name="stno_file_path" length="1000"  />
+        </property>
+        <property name="cstno" type="string">    
+            <column name="cstno" length="1000"  />
+        </property>
+        <property name="cstnoFilePath" type="string">    
+            <column name="cstno_file_path" length="1000"  />
+        </property>
+        <property name="vatno" type="string">    
+            <column name="vatno" length="1000"  />
+        </property>
+        <property name="vatnoFilePath" type="string">    
+            <column name="vatno_file_path" length="1000"  />
+        </property>
+        <property name="vendorFilePath" type="string">    
+            <column name="vendor_file_path" length="1000"  />
+        </property>
+        <property name="panFilePath" type="string">    
+            <column name="pan_file_path" length="1000"  />
+        </property>
+        <property name="flag" type="java.lang.Integer">    
+            <column name="flag" length="1000"  />
+        </property>
+        <property name="vendorCode" type="string">    
+            <column name="vendor_code" length="1000"  />
+        </property>
+        <property name="pinno" type="string">    
+            <column name="pinno" length="1000"  />
+        </property>
+        <property name="servicetaxno" type="string">    
+            <column name="servicetaxno" length="1000"  />
+        </property>
+        <property name="servicetaxnoFilePath" type="string">    
+            <column name="servicetaxno_file_path" length="1000"  />
+        </property>
+        <property name="currentdate" type="string">    
+            <column name="currentdate" length="1000"  />
+        </property>
+    </class>
+</hibernate-mapping>

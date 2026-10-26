@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.SiteSurvey" table="site_survey" catalog="eprocsuite_chargezone" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="siteName" type="string">
+            <column name="site_name" />
+        </property>
+        <property name="siteAddress" type="string">
+            <column name="site_address" />
+        </property>
+        <property name="description" type="string">
+            <column name="description"/>
+        </property>
+        <property name="startDate" type="string">
+            <column name="start_date"/>
+        </property>
+          <property name="endDate" type="string">
+            <column name="end_date"/>
+        </property>
+         <property name="vendor" type="string">
+            <column name="vendor"/>
+        </property>
+         <property name="formFillType" type="string">
+            <column name="form_fill_type"/>
+        </property>
+         <property name="createdBy" type="string">
+            <column name="created_by"/>
+        </property>
+        <property name="flagStatus" type="java.lang.Integer">
+            <column name="flag_status"/>
+        </property>
+         <property name="location" type="string">
+            <column name="location"/>
+        </property>
+          <property name="typeOfCharge" type="string">
+            <column name="type_of_charge"/>
+        </property>
+         <property name="noOfCharges" type="string">
+            <column name="no_of_charge"/>
+        </property>
+         <property name="googleCoordinates" type="string">
+            <column name="google_coordinates"/>
+        </property>
+         <property name="surveyDocumentNo" type="string">
+            <column name="survey_document_no"/>
+        </property>
+         <property name="remark" type="string">
+            <column name="remark"/>
+        </property>
+         <property name="nameofLocationPartner" type="string">
+            <column name="name_of_location_partner"/>
+        </property>
+         <property name="mobileNoLocationPartner" type="string">
+            <column name="mobile_no_of_location_partner"/>
+        </property>
+        
+        
+    </class>
+</hibernate-mapping>

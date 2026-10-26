@@ -238,7 +238,7 @@ public class SpecialCouponController extends CustomAbstract {
                     if (numberitem > 1) {
 
                         Class.forName("com.mysql.jdbc.Driver");
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ccms", "root", "root");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/eprocsuite_chargezone", "root", "root");
 //here sonoo is database name, root is username and password  
                         Statement stmt = con.createStatement();
                         int nuberitemupdate = numberitem - 1;
@@ -265,7 +265,7 @@ public class SpecialCouponController extends CustomAbstract {
 
 //                        reportService.delete(emcode, pdate, ptime, item);
                         Class.forName("com.mysql.jdbc.Driver");
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ccms", "root", "root");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/eprocsuite_chargezone", "root", "root");
 //here sonoo is database name, root is username and password  
                         Statement stmt = con.createStatement();
                       
@@ -417,7 +417,7 @@ public class SpecialCouponController extends CustomAbstract {
                     if (numberitem > 1) {
 
                         Class.forName("com.mysql.jdbc.Driver");
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ccms", "root", "root");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/eprocsuite_chargezone", "root", "root");
 //here sonoo is database name, root is username and password  
                         Statement stmt = con.createStatement();
                         int nuberitemupdate = numberitem - 1;
@@ -444,7 +444,7 @@ public class SpecialCouponController extends CustomAbstract {
 
 //                        reportService.delete(emcode, pdate, ptime, item);
                         Class.forName("com.mysql.jdbc.Driver");
-                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/ccms", "root", "root");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/eprocsuite_chargezone", "root", "root");
 //here sonoo is database name, root is username and password  
                         Statement stmt = con.createStatement();
                       

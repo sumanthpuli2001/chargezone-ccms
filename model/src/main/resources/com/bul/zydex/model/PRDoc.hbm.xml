@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.PRDoc" table="pr_doc" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="prNo" type="string">    
+            <column name="pr_no" length="200"  />
+        </property>
+        <property name="docName" type="string">    
+            <column name="doc_name" length="500"  />
+        </property>
+        <property name="refNo" type="string">    
+            <column name="ref_no" length="200"  />
+        </property>
+        <property name="docTitle" type="string">    
+            <column name="doc_title" length="500"  />
+        </property>
+        <property name="attachmentRequired" type="java.lang.Integer">    
+            <column name="attachment_required" length="500"  />
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.AuthTenderItemAttachment" table="auth_tender_item_attachment" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="refNo" type="string">    
+            <column name="ref_no" length="200"  />
+        </property>
+        <property name="purNo" type="string">    
+            <column name="pur_no" length="500"  />
+        </property>
+        <property name="itemNo" type="string">    
+            <column name="item_no" length="500"  />
+        </property>
+        <property name="attachment" type="string">    
+            <column name="attachment" length="500"  />
+        </property>
+    </class>
+  
+</hibernate-mapping>

@@ -46,7 +46,7 @@
                         <!-- Custom Tabs -->
                         <div class="nav-tabs-custom">
                             <div class="tab-content">
-                                <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
+                                <span style="color: red;font-size: 14px;">* Indicates Mandatory Field.</span>
                                 <!--form horizontal starts here-->
 
                                 <div class="box-header">
@@ -109,6 +109,15 @@
                                                         <option value="M">Monthly Basis</option>
                                                     </select>
                                                 </div>
+                                                        
+                                                <div class="col-sm-3">
+                                                    <label class="control-label">Select Type :<span style="color: red;font-size: 12px;">*</span></label>
+                                                    <select name="type1" id="type" value="${type1}"  class="form-control">
+                                                        <option value="E">Employee</option>
+                                                        <option value="C">Contractor</option>
+                                                    </select>
+                                                </div>
+                                                        
                                             </div>
                                         </div>
                                     </div><!-- /.col -->

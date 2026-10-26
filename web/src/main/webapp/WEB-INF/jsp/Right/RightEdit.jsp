@@ -1,489 +1,507 @@
 <%-- 
-    Document   : RightEdit
-    Editd on : 24-Jun-2020, 23:47:46
-    Author     : Aman Bahukhandi 
+    Document   : CreateDepartment
+    Created on : 29 March, 2025, 9:35:37 AM
+    Author     : Prachi
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
-    <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
-    <%@include file="/WEB-INF/jsp/Common/NavbarCmss.jsp"%>
+    <%@include file="/WEB-INF/jsp/Common/HeaderNew.jsp"%>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Right</title>
     </head>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>Edit Right</h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Edit Right</li>
-            </ol>
-        </section>
+    <body>
+        <script>
+            function cancelClick() {
+                window.location = 'right.htm?act=showList';
+            }
+        </script>
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Custom Tabs -->
-                    <div class="nav-tabs-custom">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab_1">
-                                <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
-                                <c:if test="${!empty successMessage}">
-                                    <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
-                                </c:if>
-                                <c:if test="${!empty failureMessage}">
-                                    <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
-                                </c:if>
-                                <form:form action="right.htm?act=editSubmit" method="post" commandName="rightMaster"
-                                           class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Right Name :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <form:input path="rightName" readonly="true"  class="form-control"   required="required"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">User Right :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[0],'R')}">
-                                                        <input type="checkbox" name="u" checked="checked" value="R" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="u" value="R" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Read  </label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[0],'W')}">
-                                                        <input type="checkbox" name="u" checked="checked" value="W" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="u" value="W" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Write</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[0],'U')}">
-                                                        <input type="checkbox" name="u" checked="checked" value="U" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="u" value="U" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Update</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[0],'D')}">
-                                                        <input type="checkbox" name="u" checked="checked" value="D" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="u" value="D" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Delete</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Employee Rights ${wright[1]} :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[1],'R')}">
-                                                        <input type="checkbox" name="e" checked="checked" value="R" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="e" value="R" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Read  </label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[1],'W')}">
-                                                        <input type="checkbox" name="e" checked="checked" value="W" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="e" value="W" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Write</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[1],'U')}">
-                                                        <input type="checkbox" name="e" checked="checked" value="U" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="e" value="U" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Update</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[1],'D')}">
-                                                        <input type="checkbox" name="e" checked="checked" value="D" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="e" value="D" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Delete</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Contractor Rights :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[2],'R')}">
-                                                        <input type="checkbox" name="cn" checked="checked" value="R" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="cn" value="R" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Read  </label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[2],'W')}">
-                                                        <input type="checkbox" name="cn" checked="checked" value="W" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="cn" value="W" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Write</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[2],'U')}">
-                                                        <input type="checkbox" name="cn" checked="checked" value="U" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="cn" value="U" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Update</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[2],'D')}">
-                                                        <input type="checkbox" name="cn" checked="checked" value="D" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="cn" value="D" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Delete</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Apprentice Rights :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[3],'R')}">
-                                                        <input type="checkbox" name="a" checked="checked" value="R" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="a" value="R" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Read  </label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[3],'W')}">
-                                                        <input type="checkbox" name="a" checked="checked" value="W" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="a" value="W" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Write</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[3],'U')}">
-                                                        <input type="checkbox" name="a" checked="checked" value="U" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="a" value="U" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Update</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[3],'D')}">
-                                                        <input type="checkbox" name="a" checked="checked" value="D" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="a" value="D" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Delete</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Coupon Rights :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[4],'R')}">
-                                                        <input type="checkbox" name="co" checked="checked" value="R" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="co" value="R" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Read  </label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[4],'W')}">
-                                                        <input type="checkbox" name="co" checked="checked" value="W" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="co" value="W" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Write</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[4],'U')}">
-                                                        <input type="checkbox" name="co" checked="checked" value="U" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="co" value="U" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Update</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[4],'D')}">
-                                                        <input type="checkbox" name="co" checked="checked" value="D" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="co" value="D" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Delete</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Card Rights :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[5],'R')}">
-                                                        <input type="checkbox" name="ca" checked="checked" value="R" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="ca" value="R" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Read  </label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[5],'W')}">
-                                                        <input type="checkbox" name="ca" checked="checked" value="W" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="ca" value="W" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Write</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[5],'U')}">
-                                                        <input type="checkbox" name="ca" checked="checked" value="U" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="ca" value="U" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Update</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[5],'D')}">
-                                                        <input type="checkbox" name="ca" checked="checked" value="D" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="ca" value="D" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Delete</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Wright Rights :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[6],'R')}">
-                                                        <input type="checkbox" name="w" checked="checked" value="R" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="w" value="R" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Read  </label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[6],'W')}">
-                                                        <input type="checkbox" name="w" checked="checked" value="W" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="w" value="W" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Write</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[6],'U')}">
-                                                        <input type="checkbox" name="w" checked="checked" value="U" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="w" value="U" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Update</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[6],'D')}">
-                                                        <input type="checkbox" name="w" checked="checked" value="D" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="w" value="D" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Delete</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Report Rights :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[7],'R')}">
-                                                        <input type="checkbox" name="rp" checked="checked" value="R" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="rp" value="R" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Read  </label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[7],'W')}">
-                                                        <input type="checkbox" name="rp" checked="checked" value="W" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="rp" value="W" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Write</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Logs Rights :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[8],'R')}">
-                                                        <input type="checkbox" name="l" checked="checked" value="R" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="l" value="R" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Read      </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Recharge Rights :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[9],'R')}">
-                                                        <input type="checkbox" name="rc" checked="checked" value="R" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="rc" value="R" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Read  </label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[9],'W')}">
-                                                        <input type="checkbox" name="rc" checked="checked" value="W" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="rc" value="W" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Write</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[9],'U')}">
-                                                        <input type="checkbox" name="rc" checked="checked" value="U" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="rc" value="U" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Update</label>
-                                            <label>
-                                                <c:choose>
-                                                    <c:when test="${fn:contains(wright[9],'D')}">
-                                                        <input type="checkbox" name="rc" checked="checked" value="D" />
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="checkbox" name="rc" value="D" />
-                                                    </c:otherwise>
-                                                </c:choose>
-                                                Delete</label>
-                                        </div>
-                                    </div>
+        <main class="d-flex align-items-end justify-content-end">
+            <%@include file="/WEB-INF/jsp/Common/NavbarNew.jsp"%>
+            <section class="main-content">
+                <form:form action="right.htm?act=editSubmit" method="post" commandName="rightMaster"
+                           class="form-horizontal" role="form">
+                    <div class="content-top rounded-3 mb-3 d-flex align-items-center justify-content-between sticky-model0">
+                        <div class="page-title d-flex align-items-center">
+                            <div class="toggle-sidebar d-flex align-items-center justify-content-center mr-2">
+                                <img src="StorageYard/assets/images/menu-collapse.svg" class="fa-bars" onload="SVGInject(this)"
+                                     alt="Menu collapse">
+                                <img src="StorageYard/assets/images/menu-expand.svg" class="fa-bars-sort" onload="SVGInject(this)"
+                                     alt="Menu collapse">
+                            </div>
 
-                                    <div class="form-group">
-                                        <div class="col-sm-6 col-sm-offset-5">
-                                            <input type="submit" class="btn btn-primary" style="width: 100px;" onclick="return Validate()" title="" value="SUBMIT">
-                                        </div>
-                                    </div>
-                                </form:form>
+                            <h5 class="fw-600 mb-0">Edit Right</h5>
+                        </div>
 
-                            </div><!-- /.tab-pane -->
-                        </div><!-- /.tab-content -->
-                    </div><!-- nav-tabs-custom -->
-                </div><!-- /.col -->
-            </div>
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+                        <div class="cta d-flex align-items-center">
+                            <a onclick="cancelClick();" class="btn theme-btn light-btn mr-3">Back</a>
+                        </div>
+                    </div>
 
+                    <div style="display: flex; align-items: center; gap: 12px; background: #FFF3F3; color: #D8000C; font-size: 12px; padding: 5px 10px; border-radius: 8px; border: 1px solid #D8000C; box-shadow: 2px 2px 10px rgba(216, 0, 12, 0.2); position: relative; overflow: hidden; max-width: 100%; margin: auto;">
+                        <div style="background: #D8000C; color: white; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 14px;">!</div>
+                        <div>
+                            <span style="color: red; font-weight: bold;">*</span> Fields marked with an asterisk are mandatory.
+                        </div>
+                    </div>
+                    
+
+                    <input type="hidden" name="rigName" class="input-field" value="${rightMaster.rightName}"/>
+                    <div class="rounded-4 mt-4">
+                        <div class="row mb-3">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="role-name" class="label">Right Name<span class="text-danger">*</span></label>
+                                    <input name="rightName"  id="role-name" class="input-field"  placeholder="Enter Role Name" value="${rightMaster.rightName}" readonly/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <h6 class="fw-600 mr-4 mb-0 fs-18">Permissions</h6>
+                            <label class="mb-0 d-flex align-items-center">
+                                <input id="select_all" type="checkbox" class="switch-input">
+                                <span class="check mr-2"></span>
+                                Select All
+                            </label>
+                        </div>
+
+                        <hr>
+                        <br>
+                        <h5 class="fw-600 mr-4 mb-0 fs-17">Master Management</h5>
+                        <br>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-1" name="emp_mgt" class="switch-input" type="checkbox" value="1"
+                                           <c:if test="${rightMaster.empMgt == '1'}">checked</c:if> />
+                                           <span class="check mr-2"></span>
+                                           Master Management
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-3" name="vendor_mgt" class="switch-input" type="checkbox" value="1"
+                                        <c:if test="${rightMaster.vendorMgt == '1'}">checked</c:if> />
+                                        <span class="check mr-2"></span>
+                                        Vendor Management
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <hr>
+                        <h5 class="fw-600 mr-4 mb-0 fs-17">PR Management</h5>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-35" name="prManagement" class="switch-input" type="checkbox" value="1" 
+                                           <c:if test="${rightMaster.prManagement == '1'}">checked</c:if> />
+                                        <span class="check mr-2"></span>
+                                        PR Management<hr>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-35" name="omsCreator" class="switch-input" type="checkbox" value="1"
+                                               <c:if test="${rightMaster.omsCreator == '1'}">checked</c:if> /> 
+                                        <span class="check mr-2"></span>
+                                        OMS Approval<hr>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                                        
+                        <hr>    
+                        <br>
+                        <h5 class="fw-600 mr-4 mb-0 fs-17">Tender Management</h5>
+                        <br>
+                        <div class="row">     
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-4" name="create_tender" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.createTender == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Create Tender
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-5" name="authorize_tender" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.authorizeTender == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Purchase Manager
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-6" name="tender_bid_open" class="switch-input" type="checkbox" value="1"<c:if test="${rightMaster.tenderBidOpen == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Bid Open
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-56" name="grnExecutive" class="switch-input" type="checkbox" value="1"<c:if test="${rightMaster.grnExecutive == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        GRN Executive
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <br>
+                        <h5 class="fw-600 mr-4 mb-0 fs-17">Report Management</h5>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-7" name="user_report" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.userReport == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        User Report
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-8" name="tender_report" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.tenderReport == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Tender Report
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-9" name="oap_aoc_report" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.oapaocReport == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        OAP/AOC Report
+                                    </label>
+                                </div>
+                            </div>   
+                        </div>
+                        <hr>
+
+                        <br>
+                        <h5 class="fw-600 mr-4 mb-0 fs-17">OAP/AOC Management</h5>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-10" name="oap_creater" class="switch-input" type="checkbox" value="1"<c:if test="${rightMaster.oapCreater == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        OAP Creater
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-11" name="oap_Approval" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.oapApproval == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        OAP Approval
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-12" name="aoc_creater" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.aocCreater == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        AOC Creater
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-13" name="aoc_Approval" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.aocApproval == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        AOC Approval
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-14" name="oap_approval_creater" class="switch-input" type="checkbox" value="1"<c:if test="${rightMaster.oapApprovalCreater == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Design Manager
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-15" name="aoc_approval_creater"class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.aocApprovalCreater == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Design Co Ordinator
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-16" name="project_manager" class="switch-input" type="checkbox" value="1"<c:if test="${rightMaster.projectManager == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Project Manager
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-17" name="network_team" class="switch-input" type="checkbox" value="1"<c:if test="${rightMaster.networkTeam == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Network Team
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-18" name="finance_team" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.financeTeam == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Finance Team
+                                    </label>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-19" name="execitive_head" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.executiveHead == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Executive Head
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-20" name="project_Cordinator" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.projectCordinator == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Project Coordinator
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-21" name="site_survey"  class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.siteSurvey == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Site Survey
+                                    </label>
+                                </div>
+                            </div>       
+                        </div>
+                        <hr>
+
+                        <br>
+                        <h5 class="fw-600 mr-4 mb-0 fs-17">Vendor Management</h5>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-22" name="vendor_request"  class="switch-input" type="checkbox" value="1"<c:if test="${rightMaster.venderRequest== '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Vendor Request
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-23" name="vendor_invite" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.venderInvite == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Vendor Invite
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-24" name="vendor_information"  class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.venderInformation == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Vendor Information
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-25" name="active_vender" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.activeVendor == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Active Vendor
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-26" name="all_vender" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.allVendor == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        All Vendor
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-27" name="complianceOfficer" class="switch-input" type="checkbox" value="1"<c:if test="${rightMaster.complianceOfficer == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Compliance Officer
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-28" name="procurementHead" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.procurementHead == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Procurement Head
+                                    </label>
+                                </div>
+                            </div> 
+
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-29" name="buyer_approval" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.buyerApproval == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Buyer Approval
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-30" name="financial_approval"  class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.financialApproval == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Financial Approval
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-31" name="technical_approval" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.technicalApproval == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Technical Approval
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-32" name="hr_approval" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.hrApproval == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        HR Approval
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-33" name="safety_approval" class="switch-input" type="checkbox" value="1"<c:if test="${rightMaster.safetyApproval == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        Safety Approval
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-lg-4">
+                                <div class="form-group">
+                                    <label class="mb-0 d-flex align-items-center">
+                                        <input id="switch-34" name="it_approval" class="switch-input" type="checkbox" value="1" <c:if test="${rightMaster.itApproval == '1'}">checked</c:if>/>
+                                        <span class="check mr-2"></span>
+                                        IT Approval
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">    
+                        <div style="display: flex; justify-content: center;">
+                            <button type="submit" class="btn theme-btn">Submit</button>
+                        </div>
+                    </div>
+                </form:form>
+            </section>
+        </main>
+
+        <script>
+            function updateSelectAll() {
+                const switches = $('.switch-input').not('#select_all');
+
+                $('#select_all').prop(
+                    'checked',
+                    switches.length > 0 &&
+                    switches.length === switches.filter(':checked').length
+                );
+            }
+
+            $('#select_all').on('change', function () {
+                $('.switch-input')
+                    .not('#select_all')
+                    .prop('checked', this.checked);
+            });
+
+            $(document).on('change', '.switch-input:not(#select_all)', function () {
+                updateSelectAll();
+            });
+
+            $(document).ready(function () {
+                updateSelectAll();
+            });
+        </script>
+    </body>
+    <%@include file="/WEB-INF/jsp/Common/NewUIFooter.jsp"%>
 </html>

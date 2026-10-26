@@ -13,17 +13,38 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 
-<!--        <bean id="leaveUploadYearly"
+    <bean id="retrieveAllVendorId"
           class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-        <property name="targetObject" ref="leaveEmployeeDetailController1" />
-        <property name="targetMethod" value="PLLeaveWiseScheduler" />
+        <property name="targetObject" ref="tenderMasterController1" />
+        <property name="targetMethod" value="retrieveAllVendor" />
     </bean>
-    <bean id="cronTrigger52"
+    <bean id="cronTrigger1"
           class="org.springframework.scheduling.quartz.CronTriggerBean">
-        <property name="jobDetail" ref="leaveUploadYearly" />
-        <property name="cronExpression" value="0 0/3 * * * ?" />
-    </bean>-->
+        <property name="jobDetail" ref="retrieveAllVendorId" />
+        <property name="cronExpression" value="0 30 * * * ?" />
+    </bean>
     
+    
+    <bean id="bidAutoOpenId"
+          class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="tenderMasterController1" />
+        <property name="targetMethod" value="bidAutoOpen" />
+    </bean>
+    <bean id="cronTrigger2"
+          class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="bidAutoOpenId" />
+        <property name="cronExpression" value="0 30 11 * * ?" />
+    </bean>
+    
+    <bean id="vendorReminderJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="vendorInformationController1"/>
+        <property name="targetMethod" value="vendorRemainderScheduler"/>
+    </bean>
+    
+    <bean id="cronTrigger3" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="vendorReminderJob"/>
+        <property name="cronExpression" value="0 0 1 * * ?"/>
+    </bean>
     
     <!--Demo in comment-->
 <!--    <bean id="checkTimeEntryDailyId"
@@ -281,7 +302,9 @@
     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="jobDetails">
             <list>
-                <!--<ref bean="leaveUploadYearly" />-->
+                <!--   <ref bean="retrieveAllVendorId" /> -->
+                <ref bean="bidAutoOpenId" />
+                <ref bean="vendorReminderJob" />
                 <!--<ref bean="checkTimeEntryDailyId" />-->
                 <!--<ref bean="checkOddPunchId" />-->
                 <!--<ref bean="timeAttendanceDetail" />-->
@@ -308,7 +331,9 @@
                 <!--<ref bean="cronTrigger52" />-->
                 <!--<ref bean="cronTrigger16" />-->
                 <!--<ref bean="cronTrigger17" />-->
-                <!--<ref bean="cronTrigger1" />-->
+                <!-- <ref bean="cronTrigger1" /> -->
+                <ref bean="cronTrigger2" />
+                <ref bean="cronTrigger3"/>
                 <!--<ref bean="cronTrigger2" />-->
                 <!--<ref bean="cronTrigger16" />-->
                 <!--<ref bean="cronTrigger4" />-->

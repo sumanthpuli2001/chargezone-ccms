@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.DeclarationLetter" table="declaration_letter" catalog="eprocsuite_chargezone">
+
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+        </id>
+        
+        <property name="declarationLetter" type="string">    
+            <column name="declaration_letter" length="128"  />
+        </property>
+    
+    </class>
+
+</hibernate-mapping>

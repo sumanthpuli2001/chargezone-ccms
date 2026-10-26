@@ -12,7 +12,7 @@ import java.util.List;
  * @author dhruv
  */
 public interface GenericsDAO<T> {
-    
+
     public int count();
 
     public void create(T object);
@@ -25,5 +25,7 @@ public interface GenericsDAO<T> {
 
     public T readById(final Integer id);
 
-    public void update(T object);    
+    public void update(T object);
+
+    boolean isExist(T object);
 }

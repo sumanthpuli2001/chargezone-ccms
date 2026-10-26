@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: chargezone-ccms
+    runtime: docker
+    plan: free
+    region: oregon
+    envVars:
+      - key: JDBC_URL
+        sync: false
+      - key: JDBC_USERNAME
+        sync: false
+      - key: JDBC_PASSWORD
+        sync: false
+      - key: JDBC_DATABASE
+        value: eprocsuite_chargezone

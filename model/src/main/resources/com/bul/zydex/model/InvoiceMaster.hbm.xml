@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.InvoiceMaster" table="invoice_master" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="invoiceNo" type="string">    
+            <column name="invoice_no"  />
+        </property>
+        <property name="poNumber" type="string">    
+            <column name="po_number"  />
+        </property>
+        <property name="poType" type="string">    
+            <column name="po_type" />
+        </property>
+        <property name="grnNumber" type="string">    
+            <column name="grn_number" />
+        </property>
+        <property name="vendorCode" type="string">    
+            <column name="vendor_code" />
+        </property>
+        <property name="vendorName" type="string">    
+            <column name="vendor_name" />
+        </property>
+        <property name="invoiceDate" type="string">    
+            <column name="invoice_date" />
+        </property>
+        <property name="invoiceAmount" type="string">    
+            <column name="invoice_amount" />
+        </property>
+        <property name="status" type="java.lang.Integer">    
+            <column name="status"  />
+        </property>
+        <property name="vendorComment" type="string">    
+            <column name="vendor_comment"/>
+        </property>
+        <property name="buyerComment" type="string">    
+            <column name="buyer_comment"/>
+        </property>
+        <property name="grnFlag" type="java.lang.Integer">    
+            <column name="grn_flag" />
+        </property>
+        <property name="tenderNo" type="string">    
+            <column name="tender_no"/>
+        </property>
+        <property name="grnDate" type="string">    
+            <column name="grn_date"/>
+        </property>
+        <property name="grnComment" type="string">    
+            <column name="grn_comment"/>
+        </property>
+        <property name="bookingNo" type="string">    
+            <column name="booking_no"/>
+        </property>
+        <property name="bookingDate" type="string">    
+            <column name="booking_date"/>
+        </property>
+        <property name="financialComment" type="string">    
+            <column name="financial_comment"/>
+        </property>
+        <property name="financialFlag" type="java.lang.Integer">    
+            <column name="financial_flag"/>
+        </property>
+        <property name="buyerStatus" type="java.lang.Integer">    
+            <column name="buyer_status"/>
+        </property>
+        <property name="poId" type="java.lang.Integer">    
+            <column name="po_id"/>
+        </property>
+         <property name="grnExectiveCode" type="string">    
+            <column name="grn_exective_code"/>
+        </property>
+         <property name="financialPersonCode" type="string">    
+            <column name="financial_person_code"/>
+        </property>
+    </class>
+  
+
+</hibernate-mapping>

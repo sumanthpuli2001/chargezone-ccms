@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorBuyerApproval" table="vendor_buyer_approval" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="vInvitationId" type="string">
+            <column name="v_invitation_id" />
+        </property>
+        
+        <property name="cocStatuss" type="string">
+            <column name="coc_statuss" />
+        </property>
+        <property name="cocRemarkk" type="string">
+            <column name="coc_remarkk" />
+        </property>
+        <property name="cocResponse" type="string">
+            <column name="coc_response" />
+        </property>
+        
+        <property name="ndaStatuss" type="string">
+            <column name="nda_statuss" />
+        </property>
+        <property name="ndaRemarkk" type="string">
+            <column name="nda_remarkk" />
+        </property>
+        <property name="ndaResponse" type="string">
+            <column name="nda_response" />
+        </property>
+        
+        <property name="tocStatuss" type="string">
+            <column name="toc_statuss" />
+        </property>
+        <property name="tocRemarkk" type="string">
+            <column name="toc_remarkk" />
+        </property>
+        <property name="tocResponse" type="string">
+            <column name="toc_response" />
+        </property>
+        <property name="tocStatuss1" type="string">
+            <column name="toc_statuss1" />
+        </property>
+        <property name="tocRemarkk1" type="string">
+            <column name="toc_remarkk1" />
+        </property>
+        <property name="tocResponse1" type="string">
+            <column name="toc_response1" />
+        </property>
+        
+        <property name="gstStatuss" type="string">
+            <column name="gst_statuss" />
+        </property>
+        <property name="gstRemarkk" type="string">
+            <column name="gst_remarkk" />
+        </property>
+        <property name="gstResponse" type="string">
+            <column name="gst_response" />
+        </property>
+        
+        <property name="panStatuss" type="string">
+            <column name="pan_statuss" />
+        </property>
+        <property name="panRemarkk" type="string">
+            <column name="pan_remarkk" />
+        </property>
+        <property name="panResponse" type="string">
+            <column name="pan_response" />
+        </property>
+        
+        <property name="msmeStatuss" type="string">
+            <column name="msme_statuss" />
+        </property>
+        <property name="msmeRemarkk" type="string">
+            <column name="msme_remarkk" />
+        </property>
+        <property name="msmeResponse" type="string">
+            <column name="msme_response" />
+        </property>
+        
+        <property name="esicStatuss" type="string">
+            <column name="esic_statuss" />
+        </property>
+        <property name="esicRemarkk" type="string">
+            <column name="esic_remarkk" />
+        </property>
+        <property name="esicResponse" type="string">
+            <column name="esic_response" />
+        </property>
+        
+        <property name="epfoStatuss" type="string">
+            <column name="epfo_statuss" />
+        </property>
+        <property name="epfoRemarkk" type="string">
+            <column name="epfo_remarkk" />
+        </property>
+        <property name="epfoResponse" type="string">
+            <column name="epfo_response" />
+        </property>
+        
+        <property name="eccStatuss" type="string">
+            <column name="ecc_statuss" />
+        </property>
+        <property name="eccRemarkk" type="string">
+            <column name="ecc_remarkk" />
+        </property>
+        <property name="eccResponse" type="string">
+            <column name="ecc_response" />
+        </property>
+        
+        <property name="cancelChequeStatuss" type="string">
+            <column name="cancel_cheque_statuss" />
+        </property>
+        <property name="cancelChequeRemarkk" type="string">
+            <column name="cancel_cheque_remarkk" />
+        </property>
+        <property name="cancelChequeResponse" type="string">
+            <column name="cancel_cheque_response" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

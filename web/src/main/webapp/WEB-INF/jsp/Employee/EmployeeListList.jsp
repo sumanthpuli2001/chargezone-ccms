@@ -1,141 +1,298 @@
 <%-- 
     Document   : EmployeeListList
-    Created on : Jun 11, 2020, 2:38:52 PM
-    Author     : Aman Bahukhandi
+    Created on : 2 Jan, 2024, 6:01:06 PM
+    Author     : Bulwark-5
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
-    <%@include file="/WEB-INF/jsp/Common/NavbarCmss.jsp"%>
+    <%@include file="/WEB-INF/jsp/Common/HeaderNew.jsp"%>
+
     <head>
         <title>Employee List</title>
     </head>
+    <body>
+        <main class="d-flex align-items-end justify-content-end">
+            <%@include file="/WEB-INF/jsp/Common/NavbarNew.jsp"%>
+
+            <section class="main-content">
+                <div class="content-top rounded-3 mb-0 d-flex align-items-center justify-content-between sticky-model0">
+                    <div class="page-title d-flex align-items-center">
+                        <div class="toggle-sidebar d-flex align-items-center justify-content-center mr-2">
+                            <img src="StorageYard/assets/images/menu-collapse.svg" class="fa-bars" onload="SVGInject(this)"
+                                 alt="Menu collapse">
+                            <img src="StorageYard/assets/images/menu-expand.svg" class="fa-bars-sort" onload="SVGInject(this)"
+                                 alt="Menu collapse">
+                        </div>
+
+                        <h5 class="fw-600 mb-0">Employee List</h5>
+                    </div>
+
+                    <div class="cta d-flex align-items-center">
+                        <button id="deleteSelected" class="btn theme-btn delete-btn d-none">
+                            <img src="StorageYard/assets/images/delete-icon.svg" class="icon" onload="SVGInject(this)"
+                                 alt="Delete Icon">
+                            Delete Selected
+                        </button>
+                        <a onclick="window.location = 'employeeMaster.htm?act=createEmployeeMaster'" class="btn theme-btn flex ml-3">
+                            <img src="StorageYard/assets/images/plus.svg" onload="SVGInject(this)" class="mr-2 icon" alt="Plus Icon">
+                            Add New
+                        </a>
+                    </div>
+                </div>
+
+                <c:if test="${!empty failureMessage}">
+                    <div class="fadeOutEffect alert alert-danger mt-2 mb-2" style="display: flex; align-items: center; gap: 12px; background: #FFF3F3; color: #D8000C; font-size: 12px; padding: 5px 10px; border-radius: 8px; border: 1px solid #D8000C; box-shadow: 2px 2px 10px rgba(216, 0, 12, 0.2); position: relative; overflow: hidden; max-width: 100%; margin: auto;">
+                        <div style="background: #D8000C; color: white; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 14px;">!</div>
+                        <div>
+                            <strong>Note:</strong> <strong class="text-danger fs-13">${failureMessage} </strong><br>                            
+                        </div>
+                    </div>
+                </c:if>
+                <c:if test="${!empty successMessage}">
+                    <div class="fadeOutEffect alert alert-info mt-2 mb-2" style="display: flex; align-items: center; gap: 12px; background: #F0FFF4; color: #0F5132; font-size: 12px; padding: 5px 10px; border-radius: 8px; border: 1px solid #198754; box-shadow: 2px 2px 10px rgba(25, 135, 84, 0.2); position: relative; overflow: hidden; max-width: 100%; margin: auto;">                        
+                        <div style="background: #198754; color: white; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 14px; ">✓</div>  
+                        <div>
+                            <strong>Note:</strong> <strong class="text-success fs-13">${successMessage} </strong><br>
+                        </div>
+                    </div>
+                </c:if>
+
+                <%@include file="/WEB-INF/jsp/Common/TablePageNew.jsp"%>
+                <div class="bg-white card-full-h">
+                    <table id="employeemasterTable" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th class="text-center">
+                                    <input type="checkbox" name="select_all_rows" id="select_all">
+                                </th>
+                                <th>Sr.No.</th>
+                                <th>Username</th>
+                                <th>Name </th>
+                                <th>Email ID</th>
+                                <th>Department </th>
+                                <th>Designation </th>
+                                <th>Rights </th>
+                                <th class="text-center">Actions</th>                                        
+                            </tr>
+                        </thead> 
+                        <tbody></tbody>
+
+                    </table>
+                </div>
+
+            </section>
+        </main> 
+    </body>
+
+    <script type="text/javascript" src="StorageYard/JS/JQuery/common.js"></script>
+    <%@include file="/WEB-INF/jsp/Common/NewUIFooter.jsp"%>
+
     <script>
-        function viewClick(id) {
-            var loginName = $('#loginName' + id).val();
-            window.location = 'employeeMaster.htm?act=viewClick&id=' + loginName;
-        }
-        function deleteCheck11() {
-            var checkboxes = "";
-            checkboxes = document.getElementsByName('checkId');
-            for (var i = 0, n = checkboxes.length; i < n; i++) {
-                if (checkboxes[i].checked) {
-                    return true;
+        $(document).ready(function () {
+            var table = $('#employeemasterTable').DataTable({
+                processing: true,
+                serverSide: true,
+                stateSave: false,
+                ordering: true,
+                orderMulti: false,
+                aaSorting: [[1, 'asc']],
+
+                ajax: {
+                    url: 'employeeMaster.htm?act=employeeMasterAjax',
+                    type: 'POST',
+                    cache: false
+                },
+
+                columns: [
+                    {
+                        data: 'checkbox',
+                        orderable: false,
+                        searchable: false,
+                        className: 'text-center',
+                        render: function (data) {
+                            return data;
+                        }
+                    },
+                    {
+                        data: 'srNo'
+                    },    
+                    {
+                        data: 'employeeCode'
+                    },
+                    {
+                        data: 'name'
+                    },
+                    {
+                        data: 'emailId'
+                    },
+                    {
+                        data: 'department'
+                    },
+                    {
+                        data: 'designation'
+                    },
+                    {
+                        data: 'rightsName'
+                    },
+                    {
+                        data: 'action',
+                        orderable: false,
+                        searchable: false,
+                        render: function (data) {
+                            return data;
+                        }
+                    }
+                ],
+
+                pageLength: 10,
+                lengthChange: false,
+                searching: true,
+                info: true,
+                autoWidth: false,
+                responsive: true,
+                scrollX: true,
+                scrollCollapse: true,                    
+                scrollY: '80vh',
+                dom: 'rt<"table-bottom-info d-flex align-items-center justify-content-between pt-3"i p>'
+            });
+
+            $('#searchBox').on('keyup', function () {
+                table.search(this.value).draw();
+            });
+
+            $('#entriesPerPage').on('change', function () {
+                var val = $(this).val();
+
+                if (val === "" || val === "-1") {
+                    var total = table.page.info().recordsTotal;
+                    table.page.len(total > 0 ? total : 1).draw();
+                } else {
+                    table.page.len(parseInt(val, 10)).draw();
+                }
+            });
+
+            $(document).on( 'change', '#select_all', function () {
+                $('.rowCheckbox').prop('checked', this.checked);
+                toggleDeleteButton();
+            });
+
+            $(document).on( 'change', '.rowCheckbox', function () {
+                toggleDeleteButton();
+                if ($('.rowCheckbox:checked').length === $('.rowCheckbox').length) {
+                    $('#select_all').prop('checked', true);
+                } else {
+                    $('#select_all').prop('checked', false);
+                }
+            });
+
+            function toggleDeleteButton() {
+                if ($('.rowCheckbox:checked').length > 0) {
+                    $('#deleteSelected').removeClass('d-none').addClass('d-flex');
+                } else {
+                    $('#deleteSelected').addClass('d-none').removeClass('d-flex');
                 }
             }
-            alert("Please, Select one or more record(s).");
-            return false;
-        }
+
+            $(document).on('click','.delete-btn1',function (e) {
+                e.preventDefault();
+                var id = $(this).data('id');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'Do you really want to delete this Employee ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes Delete',
+                    customClass:{
+                        comfirmButton: 'confirm-delete',
+                        cancelButton: 'theme-btn light-btn'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: 'employeeMaster.htm?act=deleteEmpById',
+                            type: 'POST',
+                            data: {
+                                id: id
+                            },
+                            success: function () {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted',
+                                    text: 'Record deleted successfully'
+                                });
+                                table.ajax.reload(null, false);
+                            },
+
+                            error: function (xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Delete failed'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+            $(document).on('click', '#deleteSelected', function () {
+                var selectedIds = [];
+                $('.rowCheckbox:checked').each(function () {
+                    selectedIds.push($(this).val());
+                });
+
+                if (selectedIds.length === 0) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'No Selection',
+                        text: 'Please select at least one row.'
+                    });
+                    return;
+                }
+
+                Swal.fire({
+                    title: 'Are you sure ?',
+                    text: 'Delete selected records ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes Delete',
+                    customClass:{
+                        comfirmButton: 'confirm-delete',
+                        cancelButton: 'theme-btn light-btn'
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: 'employeeMaster.htm?act=deleteEmp',
+                            type: 'POST',
+                            data: {
+                                ids: selectedIds.join(',')
+                            },
+                            success: function () {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted',
+                                    text: 'Records deleted successfully'
+                                });
+                                table.ajax.reload(null, false);
+                                $('#deleteSelected').addClass('d-none').removeClass('d-flex');
+                                $('#select_all').prop('checked',false);
+                            },
+
+                            error: function (xhr) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Delete failed'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
     </script>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>Employee List</h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Employee List</li>
-            </ol>
-        </section>
-        <c:if test="${!empty successMessage}">
-            <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
-        </c:if>
-        <c:if test="${!empty failureMessage}">
-            <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
-        </c:if>
-        <!-- Main content -->
-        <form:form action="employeeMaster.htm?act=disableEmployee" method="post" commandName="employeeMaster"
-                   name='form1' onsubmit='return deleteCheck11();' class="form-horizontal" role="form">
-            <section class="content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Custom Tabs -->
-                        <div class="nav-tabs-custom">
-                            <div class="tab-content">
-                                <c:if test="${fn:contains(sessionScope.wright[1],'W')}">
-                                    <button type="button" class="btn btn-primary" title="" style="float: right;width: 100px;" onclick="window.location = 'employeeMaster.htm?act=createEmployeeMaster'"><i class="fa fa-plus"></i>&nbsp;&nbsp;New</button>
-                                </c:if>
-                                <c:if test="${fn:contains(sessionScope.wright[1],'D')}">
-                                    <button type="submit" class="btn btn-danger" title="" style="width: 100px;"><i class="fa fa-trash"></i>&nbsp;&nbsp;DELETE</button>
-                                </c:if>
-                                <div class="box-header">
-                                </div>
-                                <div class="box-body no-padding">
 
-                                    <div class="row">
-
-                                        <div class="col-md-12 col-sm-12">
-                                            <div class="table table-bordered">
-
-                                                <table id="table_1" class="table table-bordered table-striped table-hover" style="" align="Center"  >
-                                                    <c:choose>
-                                                        <c:when test="${empty list}">
-                                                            <tr>
-                                                                <td align="Center">There Is No Any Record</td>
-                                                            </tr>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <thead>
-                                                                <tr>
-                                                                    <th style="width: 1px;" align="Center"><input type="checkbox" id="toggleId" align="Center" ></th>
-                                                                    <th>Sr.No.</th>
-                                                                    <th>Employee Code</th>
-                                                                    <th>Card Code</th>
-                                                                    <th>Name </th>
-                                                                    <th>Department </th>
-                                                                    <th>Designation </th>
-                                                                    <th>Rights </th>
-                                                                        <c:if test="${fn:contains(sessionScope.wright[1],'U')}">
-                                                                        <th>View/Edit</th>
-                                                                        </c:if>
-                                                                </tr>
-                                                            </thead>
-                                                            <c:set var="count" value="0" scope="page" />
-                                                            <tbody>
-                                                                <c:forEach var="list" items="${list}" varStatus="status">
-                                                                    <tr>
-                                                                        <td align="Center">
-                                                                            <input type="checkbox" name="checkId" id="deptCheckId" value="${list.employeeCode}">
-                                                                        </td>
-                                                                        <td> ${status.count}</td>
-                                                                        <td>${list.employeeCode}</td>
-                                                                        <td>${list.rfId}</td>
-                                                                        <td>${list.name}</td>
-                                                                        <td>${list.department}</td>
-                                                                        <td>${list.designation}</td>
-                                                                        <td>${list.rightsName}</td>
-                                                                        <c:if test="${fn:contains(sessionScope.wright[1],'U')}">
-                                                                            <td>
-                                                                                <div class="btn-group">
-                                                                                    <button type="button" class="btn btn-default dropdown-toggle" id="loginName${status.count}" value="${list.employeeCode}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  onclick="viewClick(${status.count});">
-                                                                                        &nbsp;View/Edit
-                                                                                    </button>
-
-                                                                                </div>
-                                                                            </td>
-                                                                        </c:if>
-
-                                                                    </tr>
-                                                                </c:forEach>
-                                                            </tbody>
-
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                    </div><!-- /.tab-pane -->
-                                </div>
-                            </div><!-- /.tab-content -->
-                        </div><!-- nav-tabs-custom -->
-                    </div><!-- /.col -->
-                </div>
-            </section>
-        </form:form><!-- /.content -->
-    </div><!-- /.content-wrapper -->
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
 </html>
-

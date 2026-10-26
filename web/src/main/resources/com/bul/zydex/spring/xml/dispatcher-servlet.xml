@@ -42,7 +42,72 @@
                 <prop key="specialCoupon.htm">specialCouponController1</prop>
                 <prop key="right.htm">rightController1</prop>
                 <prop key="report.htm">reportController1</prop>
-               
+                <prop key="approvalSetting.htm">approvalSettingController1</prop>
+                <prop key="vendorInvitation.htm">vendorInvitationController1</prop>
+                <prop key="vendorInformation.htm">vendorInformationController1</prop>
+                <prop key="vendor.htm">vendorController1</prop>
+                <prop key="tenderMaster.htm">tenderMasterController1</prop>
+                <prop key="auctionMaster.htm">auctionMasterController1</prop>
+                <prop key="vendorAuction.htm">vendorAuctionController1</prop>
+                <prop key="locationMaster.htm">locationMasterController1</prop>
+                <prop key="plantMaster.htm">plantMasterController1</prop>
+                <prop key="sapConnection.htm">sapConnectionController1</prop>
+                <prop key="smtpDetails.htm">smtpDetailsController1</prop> 
+                <prop key="tenderApproval.htm">tenderApprovalController1</prop>
+                <prop key="materialGroupMaster.htm">materialGroupMasterController1</prop>
+                <prop key="materialTypeMaster.htm">materialTypeMasterController1</prop> 
+                <prop key="materialMaster.htm">materialMasterController1</prop> 
+                <prop key="prMaster.htm">prMasterController1</prop>
+                <prop key="termsCondition.htm">termsConditionController1</prop>
+                <prop key="termsConditionParameter.htm">termsConditionParameterController1</prop>
+                <prop key="termsConditionParameter.htm">termsConditionParameterController1</prop>
+                <prop key="group.htm">groupController1</prop>
+                <prop key="productTypeMaster.htm">productTypeMasterController1</prop>
+                <prop key="valuationClassMaster.htm">valuationClassMasterController1</prop>
+                <prop key="productGroupMaster.htm">productGroupMasterController1</prop>
+                <prop key="companyMaster.htm">companyMasterController1</prop>
+                <prop key="purchasingOrganisation.htm">purchasingOrganisationController1</prop>
+                <prop key="plantMasters.htm">plantMastersController1</prop>
+                <prop key="locationMasters.htm">locationMastersController1</prop>
+                <prop key="bpGroupMasters.htm">bpGroupController1</prop>
+                <prop key="vendorDepartmentApproval.htm">vendorDepartmentApprovalController1</prop>
+                <prop key="vendorApprovalSetting.htm">vendorApprovalSettingController1</prop>
+                <prop key="dashboard.htm">dashboardController1</prop>
+                
+                <prop key="profitCenter.htm">profitCenterController1</prop>
+                <prop key="projectType.htm">projectTypeController1</prop>
+                <prop key="currencyMaster.htm">currencyMasterController1</prop>
+                <prop key="stationType.htm">stationTypeController1</prop>
+                <prop key="tenant.htm">tenantController1</prop>
+                <prop key="investmentProfile.htm">investmentProfileController1</prop>
+                <prop key="projectProfile.htm">projectProfileController1</prop>
+                <prop key="discomMaster.htm">discomMasterController1</prop>
+                <prop key="connectionType.htm">connectionTypeController1</prop>
+                <prop key="projectNameMaster.htm">projectNameMasterController1</prop>
+                <prop key="oapMaster.htm">oapMasterController1</prop>
+                <prop key="oapForm.htm">oapFormController1</prop>
+                <prop key="aocForm.htm">aocFormController1</prop>
+                <prop key="riskCategory.htm">riskCategoryController1</prop>
+                <prop key="vendorInviteSource.htm">vendorInviteSourceController1</prop>
+                <prop key="declarationLetter.htm">declarationLetterController1</prop>
+                <prop key="auditorMaster.htm">auditorMasterController1</prop>
+
+                <prop key="vendorCriteriaMaster.htm">vendorCriteriaMasterController1</prop>
+                <prop key="countryCode.htm">countryCodeController1</prop>
+                
+                <prop key="anchorCustomer.htm">anchorCustomerController1</prop>
+                <prop key="canopyVarient.htm">canopyVarientController1</prop>
+                
+                <prop key="chargerType.htm">chargerTypeController1</prop>
+                <prop key="chargerMaster.htm">chargerMasterController1</prop>
+                <prop key="connectorType.htm">connectorTypeController1</prop>
+                <prop key="formsCommon.htm">formsCommonController1</prop>
+                <prop key="ehMail.htm">ehMailController1</prop>
+                <prop key="omsMaster.htm">omsMasterController1</prop>
+                
+                <prop key="oapAocDashboard.htm">oapAocDashboardController1</prop>
+                <prop key="poDetails.htm">poDetailsController1</prop>
+                
             </props>
         </property>
         <property name="order" value="0" />     

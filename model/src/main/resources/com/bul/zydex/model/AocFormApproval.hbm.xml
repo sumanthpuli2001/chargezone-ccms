@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.AocFormApproval" table="aoc_form_approval" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+         <many-to-one name="aocForm" class="com.bul.zydex.model.AocForm" fetch="select">
+            <column name="aoc_form_id"  />
+        </many-to-one>
+               
+        <property name="totalApproval" type="string">    
+            <column name="total_approval"  />
+        </property>
+        <property name="approvalStatus" type="string">    
+            <column name="approval_status"  />
+        </property>
+        <property name="approvalRemark" type="string">    
+            <column name="approval_remark"  />
+        </property>
+        <property name="userId" type="string">    
+            <column name="user_id"  />
+        </property>
+        <property name="currentApproval" type="string">    
+            <column name="current_approval"  />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.MaterialMaster" table="material_master" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="materialTypeMaster" class="com.bul.zydex.model.MaterialTypeMaster" fetch="select">
+            <column name="material_type_id"  />
+        </many-to-one>
+         <many-to-one name="materialGroupMaster" class="com.bul.zydex.model.MaterialGroupMaster" fetch="select">
+            <column name="material_group_id"  />
+        </many-to-one>
+        <property name="materialCode" type="string">    
+            <column name="material_code"  />
+        </property>
+       
+       <property name="materialDescription" type="string">    
+            <column name="material_description"  />
+        </property>
+        
+         <property name="materialLongDescription" type="string">    
+            <column name="material_long_description"  />
+        </property>
+        
+       <property name="uom" type="string">    
+            <column name="uom"   />
+        </property>
+       
+        <property name="hsnNo" type="string">    
+            <column name="hsn_no" />
+        </property>
+        
+          <property name="gst" type="string">    
+            <column name="gst" />
+        </property>
+       
+    </class>
+</hibernate-mapping>

@@ -9,24 +9,25 @@ public class UserMaster implements java.io.Serializable {
     private String loginName;
     private String password;
     private String userFullName;
-    private String rights;
-    private String department;
-    private String designation;
-    private String emailId;
-    private String dRow;
-
+    private int userType;
+    private int pwdChange;
+    private int userTry;
+    private int lock1;
+     private String vendorCode;
+    
     public UserMaster() {
     }
 
-    public UserMaster(String loginName, String password, String userFullName, String rights, String department, String designation, String emailId, String dRow) {
+    public UserMaster(String loginName, String password, String userFullName, int userType, int pwdChange, int userTry, int lock1,String vendorCode) {
         this.loginName = loginName;
         this.password = password;
         this.userFullName = userFullName;
-        this.rights = rights;
-        this.department = department;
-        this.designation = designation;
-        this.emailId = emailId;
-        this.dRow = dRow;
+        this.userType = userType;
+        this.pwdChange = pwdChange;
+        this.userTry = userTry;
+        this.lock1 = lock1;
+         this.vendorCode = vendorCode;
+        
     }
 
     public String getLoginName() {
@@ -56,49 +57,49 @@ public class UserMaster implements java.io.Serializable {
         return this;
     }
 
-    public String getRights() {
-        return rights;
+    public int getUserType() {
+        return userType;
     }
 
-    public UserMaster setRights(String rights) {
-        this.rights = rights;
+    public UserMaster setUserType(int userType) {
+        this.userType = userType;
         return this;
     }
 
-    public String getDepartment() {
-        return department;
+    public int getPwdChange() {
+        return pwdChange;
     }
 
-    public UserMaster setDepartment(String department) {
-        this.department = department;
+    public UserMaster setPwdChange(int pwdChange) {
+        this.pwdChange = pwdChange;
         return this;
     }
 
-    public String getDesignation() {
-        return designation;
+    public int getUserTry() {
+        return userTry;
     }
 
-    public UserMaster setDesignation(String designation) {
-        this.designation = designation;
+    public UserMaster setUserTry(int userTry) {
+        this.userTry = userTry;
         return this;
     }
 
-    public String getEmailId() {
-        return emailId;
+    public int getLock1() {
+        return lock1;
     }
 
-    public UserMaster setEmailId(String emailId) {
-        this.emailId = emailId;
+    public UserMaster setLock1(int lock1) {
+        this.lock1 = lock1;
         return this;
     }
 
-    public String getdRow() {
-        return dRow;
+    public String getVendorCode() {
+        return vendorCode;
     }
 
-    public UserMaster setdRow(String dRow) {
-        this.dRow = dRow;
-        return this;
+    public void setVendorCode(String vendorCode) {
+        this.vendorCode = vendorCode;
     }
 
+    
 }

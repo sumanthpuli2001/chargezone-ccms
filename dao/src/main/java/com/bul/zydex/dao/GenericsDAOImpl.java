@@ -5,6 +5,8 @@
  */
 package com.bul.zydex.dao;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -66,5 +68,72 @@ public abstract class GenericsDAOImpl<T> extends HibernateDaoSupport implements
     public void update(T object) {
         getHibernateTemplate().update(object);
 
+    }
+
+    @Override
+    public boolean isExist(T object) {
+
+        StringBuilder hql
+                = new StringBuilder(
+                        "select count(*) from "
+                        + domainClass.getName()
+                        + " x where ");
+
+        List<Object> values
+                = new ArrayList<Object>();
+
+        Field[] fields
+                = object.getClass()
+                .getDeclaredFields();
+
+        boolean firstCondition = true;
+
+        try {
+
+            for (Field field : fields) {
+
+                field.setAccessible(true);
+
+                Object value
+                        = field.get(object);
+
+                if (value != null) {
+
+                    if ("id".equalsIgnoreCase(
+                            field.getName())) {
+                        continue;
+                    }
+
+                    if (!firstCondition) {
+                        hql.append(" and ");
+                    }
+
+                    hql.append("x.")
+                            .append(field.getName())
+                            .append(" = ?");
+
+                    values.add(value);
+
+                    firstCondition = false;
+                }
+            }
+
+            if (values.isEmpty()) {
+                return false;
+            }
+
+            Long count
+                    = (Long) getHibernateTemplate()
+                    .find(
+                            hql.toString(),
+                            values.toArray()
+                    )
+                    .get(0);
+
+            return count > 0;
+
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

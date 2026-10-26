@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.SmtpDetails" table="smtp_details" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="port" type="string">    
+            <column name="port" length="1000"  />
+        </property>
+        <property name="userName" type="string">    
+            <column name="username" length="1000"  />
+        </property>
+        <property name="userPassword" type="string">    
+            <column name="user_password" length="1000"  />
+        </property>
+        <property name="sslApply" type="string">    
+            <column name="ssl_apply" length="1000"  />
+        </property>
+        <property name="ip" type="string">    
+            <column name="ip" length="1000"  />
+        </property>
+    </class>
+</hibernate-mapping>

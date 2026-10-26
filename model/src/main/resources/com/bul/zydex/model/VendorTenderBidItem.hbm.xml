@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorTenderBidItem" table="vendor_tender_bid_item" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="refNo" type="string">    
+            <column name="ref_no" length="200"  />
+        </property>
+        <property name="vendorCode" type="string">    
+            <column name="vendor_code" length="500"  />
+        </property>
+        <property name="itemCode" type="string">    
+            <column name="item_code" length="500"  />
+        </property>
+        <property name="itemDescription" type="string">    
+            <column name="item_description" length="500"  />
+        </property>
+        <property name="remark" type="string">    
+            <column name="remark" length="500"  />
+        </property>
+        <property name="uom" type="string">    
+            <column name="uom" length="500"  />
+        </property>
+        <property name="qty" type="string">    
+            <column name="qty" length="500"  />
+        </property>
+        <property name="attachmentRequired" type="string">    
+            <column name="attachment_required" length="500"  />
+        </property>
+        <property name="deliveryScheduleDate" type="string">    
+            <column name="delivery_schedule_date" length="500"  />
+        </property>
+        <property name="deliveryScheduleQty" type="string">    
+            <column name="delivery_schedule_qty" length="500"  />
+        </property>
+        <property name="location" type="string">    
+            <column name="location" length="500"  />
+        </property>
+        <property name="purNo" type="string">    
+            <column name="pur_no" length="500"  />
+        </property>
+        <property name="itemNo" type="string">    
+            <column name="item_no" length="500"  />
+        </property>
+        <property name="rate" type="string">    
+            <column name="rate" length="500"  />
+        </property>
+        <property name="netRate" type="string">    
+            <column name="net_rate" length="500"  />
+        </property>
+        <property name="hsnNo" type="string">    
+            <column name="hsn_no" length="500"  />
+        </property>
+        <property name="vendorRemark" type="string">    
+            <column name="vendor_remark" length="500"  />
+        </property>
+        <property name="discountType" type="string">    
+            <column name="discount_type" length="500"  />
+        </property>
+        <property name="discountValue" type="string">    
+            <column name="discount_value" length="500"  />
+        </property>
+        <property name="packingType" type="string">    
+            <column name="packing_type" length="500"  />
+        </property>
+        <property name="packingValue" type="string">    
+            <column name="packing_value" length="500"  />
+        </property>
+        <property name="freightType" type="string">    
+            <column name="freight_type" length="500"  />
+        </property>
+        <property name="freightValue" type="string">    
+            <column name="freight_value" length="500"  />
+        </property>
+        <property name="errectionValue" type="string">    
+            <column name="errection_value" length="500"  />
+        </property>
+        <property name="chargesValue" type="string">    
+            <column name="charges_value" length="500"  />
+        </property>
+        <property name="igstValue" type="string">    
+            <column name="igst_value" length="500"  />
+        </property>
+        <property name="cgstValue" type="string">    
+            <column name="cgst_value" length="500"  />
+        </property>
+        <property name="sgstValue" type="string">    
+            <column name="sgst_value" length="500"  />
+        </property>
+        <property name="insuranceValue" type="string">    
+            <column name="insurance_value" length="500"  />
+        </property>
+        <property name="totalValue" type="string">    
+            <column name="total_value" length="500"  />
+        </property>
+        <property name="itemRegret" type="string">    
+            <column name="item_regret" length="500"  />
+        </property>
+        <property name="srNo" type="string">
+            <column name="sr_no" length="200"  />
+        </property>
+        <property name="prNo" type="string">
+            <column name="pr_no" length="200"  />
+        </property>
+        <property name="itemType" type="java.lang.Integer">
+            <column name="item_type" length="100" />
+        </property>
+        
+        
+        <property name="accountAssigmentCategory" type="string">
+            <column name="account_assigment_category"   />
+        </property>
+        <property name="accountAssigmentValue" type="string">
+            <column name="account_assigment_value"  />
+        </property>
+        <property name="productType" type="string">
+            <column name="product_type"  />
+        </property>
+        <property name="productGroup" type="string">
+            <column name="product_group"  />
+        </property>
+        <property name="taxCode" type="string">
+            <column name="tax_code"   />
+        </property>
+        <property name="valuationPrice" type="string">
+            <column name="valuation_price"  />
+        </property>
+        <property name="deliveryDate" type="string">
+            <column name="delivery_date"   />
+        </property>
+        <property name="startDate" type="string">
+            <column name="start_date"   />
+        </property>
+        <property name="endDate" type="string">
+            <column name="end_date"  />
+        </property>
+        
+        
+        
+        
+        
+        
+        
+        
+    </class>
+  
+</hibernate-mapping>

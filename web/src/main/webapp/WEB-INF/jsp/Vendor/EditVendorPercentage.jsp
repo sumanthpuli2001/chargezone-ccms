@@ -1,0 +1,110 @@
+<%-- 
+    Document   : CreateDepartment
+    Created on : 29 March, 2025, 9:35:37 AM
+    Author     : Prachi
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+
+<html>
+    <%@include file="/WEB-INF/jsp/Common/HeaderNew.jsp"%>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Edit Vendor Percentage</title>
+    </head>
+
+    <body>
+
+        <main class="d-flex align-items-end justify-content-end">
+            <%@include file="/WEB-INF/jsp/Common/NavbarNew.jsp"%>
+            <section class="main-content">
+                <form:form action="vendor.htm?act=submitEditVendorPercentage" method="post">
+                    <input type="hidden" name="id" value="${vendorPercentage.id}">
+                    <div class="content-top rounded-3 mb-0 d-flex align-items-center justify-content-between sticky-model0">
+                        <div class="page-title d-flex align-items-center">
+                            <div class="toggle-sidebar d-flex align-items-center justify-content-center mr-2">
+                                <img src="StorageYard/assets/images/menu-collapse.svg" class="fa-bars" onload="SVGInject(this)"
+                                     alt="Menu collapse">
+                                <img src="StorageYard/assets/images/menu-expand.svg" class="fa-bars-sort" onload="SVGInject(this)"
+                                     alt="Menu collapse">
+                            </div>
+
+                            <h5 class="fw-600 mb-0">Edit Vendor Percentage</h5>
+                        </div>
+
+                        <div class="cta d-flex align-items-center">
+                            <a href="vendor.htm?act=showList" class="btn theme-btn light-btn mr-3">Back</a>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div style="display: flex; align-items: center; gap: 12px; background: #FFF3F3; color: #D8000C; font-size: 12px; padding: 5px 10px; border-radius: 8px; border: 1px solid #D8000C; box-shadow: 2px 2px 10px rgba(216, 0, 12, 0.2); position: relative; overflow: hidden; max-width: 100%; margin: auto;">
+                        <div style="background: #D8000C; color: white; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 14px;">!</div>
+                        <div>
+                            <span style="font-weight: bold;">*</span> Fields marked with an asterisk are mandatory.
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="row">
+
+                        <!-- Technical Percentage -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Technical Percentage <span style="color:red;font-size:10px;">*</span>
+                                </label>
+                                <input class="input-field" name="technicalPercentage" value="${vendorPercentage.technicalPercentage}" id="technicalPercentage"  required="required" />
+
+                            </div>
+                        </div>
+
+                        <!-- HR Percentage -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    HR Percentage <span style="color:red;font-size:10px;">*</span>
+                                </label>
+                                <input class="input-field" name="hrPercentage" value="${vendorPercentage.hrPercentage}" id="hrPercentage"  required="required" />
+
+                            </div>
+                        </div>
+
+                        <!-- Safety Percentage -->
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    Safety Percentage <span style="color:red;font-size:10px;">*</span>
+                                </label>
+                                <input class="input-field" name="safteyPercentage" value="${vendorPercentage.safteyPercentage}" id="safteyPercentage"  required="required" />
+
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="control-label">
+                                    IT Percentage <span style="color:red;font-size:10px;">*</span>
+                                </label>
+                                <input class="input-field" name="itPercentage" value="${vendorPercentage.itPercentage}" id="itPercentage"  required="required" />
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    </div>
+                    <br>
+
+                    <div style="display: flex;  justify-content: center;">
+                        <button type="submit" class="btn theme-btn">Submit</button>
+                    </div>
+                    </div>  
+
+                </form:form>
+            </section>
+        </main>
+      
+    </body>
+    <%@include file="/WEB-INF/jsp/Common/NewUIFooter.jsp"%>
+</html>

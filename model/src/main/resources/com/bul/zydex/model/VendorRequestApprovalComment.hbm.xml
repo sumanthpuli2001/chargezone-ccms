@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorRequestApprovalComment" table="vendor_request_approval_comment" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+     
+   
+        <property name="vendorRequestApprovalId" type="java.lang.Integer">    
+            <column name="vendor_request_approval_id" length="1000"  />
+        </property>
+        <property name="userId" type="string">    
+            <column name="user_id" length="1000"  />
+        </property>
+        <property name="approvalComment" type="string">    
+            <column name="approval_comment" length="1000"  />
+        </property>
+          <property name="approvalStatus" type="java.lang.Integer">    
+            <column name="approval_status" length="1000"  />
+        </property>
+           <property name="vendorRequestDetailsId" type="java.lang.Integer">    
+            <column name="vendor_request_details_id" length="1000"  />
+        </property>
+        
+    </class>
+</hibernate-mapping>

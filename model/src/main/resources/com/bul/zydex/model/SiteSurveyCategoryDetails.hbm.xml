@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    
+    <class name="com.bul.zydex.model.SiteSurveyCategoryDetails" table="site_survey_category_details" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="surveyMasterId" type="java.lang.Integer">    
+            <column name="survey_master_id"  />
+        </property>
+        <property name="subCategory" type="string">    
+            <column name="sub_category"  />
+        </property>
+        <property name="categoryName" type="string">    
+            <column name="category_name"  />
+        </property>
+        <property name="discription" type="string">    
+            <column name="description"  />
+        </property>
+        <property name="remarks" type="string">    
+            <column name="remarks"  />
+        </property>
+        <property name="guidelines" type="string">    
+            <column name="guidelines"  />
+        </property>
+    </class>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</hibernate-mapping>

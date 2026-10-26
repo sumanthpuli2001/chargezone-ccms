@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorInvitation" table="vendor_invitation" catalog="eprocsuite_chargezone" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="vendorEmailId" type="string">
+            <column name="vendor_email_id" />
+        </property>
+        <property name="companyName" type="string">
+            <column name="company_name" />
+        </property>
+        <property name="contactName" type="string">
+            <column name="contact_name" />
+        </property>
+        <property name="invitedDateTime" type="string">
+            <column name="invited_date_time" />
+        </property>
+        <property name="invitedBy" type="string">
+            <column name="invited_by" />
+        </property>
+        <property name="inviteStatus" type="string">
+            <column name="invite_status" />
+        </property>
+        <property name="approvalSettingId" type="java.lang.Integer">
+            <column name="approval_setting_id" />
+        </property>
+        <property name="vendorCode" type="string">
+            <column name="vendor_code" />
+        </property>
+        <property name="linkExpireDateTime" type="string">
+            <column name="link_expire_date_time" />
+        </property>
+        <property name="encryText" type="string">
+            <column name="encry_text" />
+        </property>
+        <property name="bpGroup" type="string">
+            <column name="bp_group" />
+        </property>
+        
+        <property name="vendorTypes" type="string">
+            <column name="vendor_types" />
+        </property>
+        <property name="groupCategory" type="string">
+            <column name="group_category" />
+        </property>
+        <property name="groupSubCategory" type="string">
+            <column name="group_sub_category" />
+        </property>
+        
+        <property name="technicalName" type="string">
+            <column name="technical_name" />
+        </property>
+        <property name="finanicailName" type="string">
+            <column name="finanicial_name" />
+        </property>
+        <property name="hrName" type="string">
+            <column name="hr_name" />
+        </property>
+        <property name="safetyName" type="string">
+            <column name="safety_name" />
+        </property>
+        
+        <property name="riskCategory" type="string">
+            <column name="risk_category" />
+        </property>
+        
+        
+        <property name="vendorInviteSource" type="string">
+            <column name="vendor_invite_source" />
+        </property>
+        
+        
+        <property name="auditorName" type="string">
+            <column name="auditor_name" />
+        </property>
+
+        <property name="vendorContactNo" type="string">
+            <column name="vendor_contact_no" />
+        </property>
+        
+        
+    </class>
+</hibernate-mapping>

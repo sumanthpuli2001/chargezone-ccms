@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.LocationMaster" table="location_master" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="locationName" type="string">    
+            <column name="location_name" length="1000"  />
+        </property>
+        <property name="locationCode" type="string">    
+            <column name="location_code" length="1000"  />
+        </property>
+        <property name="statusFlag" type="java.lang.Integer">    
+            <column name="status_flag" length="10"  />
+        </property>
+        
+    </class>
+</hibernate-mapping>

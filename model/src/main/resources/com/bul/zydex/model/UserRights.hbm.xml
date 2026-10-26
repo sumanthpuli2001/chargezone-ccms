@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.UserRights" table="user_rights" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="200"  />
+        </property>
+        <property name="employeeMgt" type="java.lang.Integer">
+            <column name="employee_mgt" length="100"  />
+        </property>
+        <property name="vendorMgt" type="java.lang.Integer">
+            <column name="vendor_mgt" length="100"  />
+        </property>
+        <property name="rightMgt" type="java.lang.Integer">
+            <column name="right_mgt" length="100"  />
+        </property>
+        <property name="createTender" type="java.lang.Integer">
+            <column name="create_tender" length="100"  />
+        </property>
+        <property name="authorizeTender" type="java.lang.Integer">
+            <column name="authorize_tender" length="100"  />
+        </property>
+        <property name="tenderBidOpen" type="java.lang.Integer">
+            <column name="tender_bid_open" length="100"  />
+        </property>
+        <property name="userReport" type="java.lang.Integer">
+            <column name="user_report" length="100"  />
+        </property>
+        <property name="tenderReport" type="java.lang.Integer">
+            <column name="tender_report" length="100"  />
+        </property>
+        
+        <property name="prManagement" type="java.lang.Integer">
+            <column name="pr_management" length="100"  />
+        </property>
+ 
+    
+    
+        <property name="oapCreater" type="java.lang.Integer">
+            <column name="oap_creater" length="100"  />
+        </property>
+        <property name="oapApproval" type="java.lang.Integer">
+            <column name="oap_approval" length="100"  />
+        </property>
+        <property name="aocCreater" type="java.lang.Integer">
+            <column name="aoc_creater" length="100"  />
+        </property>
+        <property name="aocApproval" type="java.lang.Integer">
+            <column name="aoc_approval" length="100"  />
+        </property>
+        
+        <property name="oapApprovalCreater" type="java.lang.Integer">
+            <column name="oap_approval_creater" length="100"  />
+        </property>
+        <property name="aocApprovalCreater" type="java.lang.Integer">
+            <column name="aoc_approval_creater" length="100"  />
+        </property>
+        <property name="projectManager" type="java.lang.Integer">
+            <column name="project_manger" length="100"  />
+        </property>
+        <property name="networkTeam" type="java.lang.Integer">
+            <column name="network_team" length="100"  />
+        </property>
+        <property name="financeTeam" type="java.lang.Integer">
+            <column name="finance_team" length="100"  />
+        </property>
+        <property name="oapaocReport" type="java.lang.Integer">
+            <column name="oap_aoc_report" length="100"  />
+        </property>
+        <property name="executiveHead" type="java.lang.Integer">
+            <column name="executive_head" length="100"  />
+        </property>
+        <property name="projectCordinator" type="java.lang.Integer">
+            <column name="project_cordinator" length="100"  />
+        </property>
+        
+        
+         
+        <property name="venderRequest" type="java.lang.Integer">
+            <column name="vender_request" length="100"  />
+        </property>
+        <property name="venderInvite" type="java.lang.Integer">
+            <column name="vender_invite" length="100"  />
+        </property>
+        <property name="venderInformation" type="java.lang.Integer">
+            <column name="vender_information" length="100"  />
+        </property>
+        
+        
+        <property name="buyerApproval" type="java.lang.Integer">
+            <column name="buyer_approval" length="100"  />
+        </property>
+        <property name="financialApproval" type="java.lang.Integer">
+            <column name="financial_approval" length="100"  />
+        </property>
+        <property name="technicalApproval" type="java.lang.Integer">
+            <column name="technical_approval" length="100"  />
+        </property>
+        <property name="hrApproval" type="java.lang.Integer">
+            <column name="hr_approval" length="100"  />
+        </property>
+        <property name="safetyApproval" type="java.lang.Integer">
+            <column name="safety_approval" length="100"  />
+        </property>
+        <property name="activeVendor" type="java.lang.Integer">
+            <column name="active_vendor" length="100"  />
+        </property>
+        <property name="allVendor" type="java.lang.Integer">
+            <column name="all_vendor" length="100"  />
+        </property>
+        <property name="vendorTechnicalCriteriaMaster" type="java.lang.Integer">
+            <column name="vendor_technical_criteria_master" length="100"  />
+        </property>
+        <property name="hrCriteriaMaster" type="java.lang.Integer">
+            <column name="hr_criteria_master" length="100"  />
+        </property>
+        <property name="safetyCriteriaMaster" type="java.lang.Integer">
+            <column name="safety_criteria_master" length="100"  />
+        </property>
+        <property name="siteSurvey" type="java.lang.Integer">
+            <column name="site_survey" length="100"  />
+        </property>
+        
+        <property name="itApproval" type="java.lang.Integer">
+            <column name="it_approval" length="100"  />
+        </property>
+        
+        <property name="complianceOfficer" type="java.lang.Integer">
+            <column name="compliance_officer" length="100"  />
+        </property>
+        
+        <property name="procurementHead" type="java.lang.Integer">
+            <column name="procurement_head" length="100"  />
+        </property>
+        
+        <property name="omsCreator" type="java.lang.Integer">
+            <column name="oms_creator" length="100"  />
+        </property>
+         <property name="grnExecutive" type="java.lang.Integer">
+            <column name="grn_executive" length="100"  />
+        </property>
+    </class>
+
+</hibernate-mapping>

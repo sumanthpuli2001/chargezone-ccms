@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.SapTenderMaster" table="sap_tender_master" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="tenderNo" type="java.lang.Integer">
+            <column name="tender_no" length="200"  />
+        </property>
+        <property name="vendorCode" type="string">
+            <column name="vendor_code" length="500"  />
+        </property>
+        <property name="collectionLastDate" type="string">
+            <column name="collection_last_date" length="200"  />
+        </property>
+        <property name="rfqNo" type="string">
+            <column name="rfq_no" length="200"  />
+        </property>
+        <property name="prNo" type="string">
+            <column name="pr_no" length="200"  />
+        </property>
+    </class>
+
+</hibernate-mapping>

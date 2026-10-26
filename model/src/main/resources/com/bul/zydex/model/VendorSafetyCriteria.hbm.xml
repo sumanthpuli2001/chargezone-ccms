@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorSafetyCriteria" table="vendor_safety_criteria" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="criteriaName" type="string">    
+            <column name="criteria_name" length="100"  />
+        </property>
+        <property name="criteriaDescription" type="string">    
+            <column name="criteria_description" length="250"  />
+        </property>
+        <property name="groupId" type="string">    
+            <column name="group_id" length="250"  />
+        </property>
+        <property name="mandatory" type="string">    
+            <column name="mandatory" length="250"  />
+        </property>
+        
+         <property name="compulsaryFlag" type="string">    
+            <column name="compulsary_flag" length="250"  />
+        </property>
+        
+    </class>
+  
+
+</hibernate-mapping>

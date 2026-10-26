@@ -5,7 +5,7 @@
   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.bul.zydex.model.EmployeeMaster" table="employee_master" catalog="ccms">
+    <class name="com.bul.zydex.model.EmployeeMaster" table="employee_master" catalog="eprocsuite_chargezone">
         <id name="employeeCode" type="string">
             <column name="Employee_Code" />
         </id>
@@ -21,17 +21,47 @@
         <property name="rightsName" type="string">
             <column name="Rights_Name" length="30"  />
         </property>
+        <property name="emailId" type="string">
+            <column name="email_id" length="300"  />
+        </property>
+        <property name="phNo" type="string">
+            <column name="ph_no" length="300"  />
+        </property>
+        <property name="mobileNo" type="string">
+            <column name="mobile_no" length="300"  />
+        </property>
+        <property name="addressLine1" type="string">
+            <column name="address_line1" length="300"  />
+        </property>
+        <property name="addressLine2" type="string">
+            <column name="address_line2" length="300"  />
+        </property>
+        <property name="addressLine3" type="string">
+            <column name="address_line3" length="300"  />
+        </property>
+        <property name="city" type="string">
+            <column name="city" length="300"  />
+        </property>
+        <property name="pincode" type="string">
+            <column name="pincode" length="300"  />
+        </property>
+        <property name="userType" type="java.lang.Integer">
+            <column name="user_type" length="100"  />
+        </property>
+        <property name="userStatus" type="java.lang.Integer">
+            <column name="user_status" length="100"  />
+        </property>
+        <property name="flag" type="java.lang.Integer">
+            <column name="flag" length="100"  />
+        </property>
+        <property name="userTry" type="java.lang.Integer">
+            <column name="user_try" length="100"  />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="100"  />
+        </property>
         <property name="dRow" type="string">
-            <column name="D_Row" length="30"  />
-        </property>
-        <property name="rfId" type="string">
-            <column name="RF_ID" length="30"  />
-        </property>
-        <property name="rfIdDept" type="string">
-            <column name="RF_ID_DEP" length="30"  />
-        </property>
-        <property name="rfIdGuest" type="string">
-            <column name="RF_ID_GUEST" length="30"  />
+            <column name="d_row" length="100"  />
         </property>
     </class>
   

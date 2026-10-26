@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorBusinessCertificate" table="vendor_business_certificate" catalog="eprocsuite_chargezone" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="vendorInformationId" type="java.lang.Integer">
+            <column name="vendor_information_id" />
+        </property>
+        <property name="certificateDetails" type="string">
+            <column name="certificate_details" />
+        </property>
+        <property name="certificateFile" type="string">
+            <column name="certificate_file" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

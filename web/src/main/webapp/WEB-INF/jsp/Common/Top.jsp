@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">-->
+<%--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">--%>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 <link rel="shortcut icon" href="StorageYard/Images/Icon/favicon.ico" type="image/x-icon">
 <link rel="icon" href="StorageYard/Images/Icon/favicon.ico" type="image/x-icon">
@@ -32,7 +32,7 @@
 <link rel="stylesheet" href="StorageYard/CSS/bootstrap/token-input-fb.css">
 <link rel="stylesheet" href="StorageYard/CSS/bootstrap/_all-skins.min.css">
 <script type="text/javascript" src="StorageYard/Plugins/jQuery/jQuery-2.1.4.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 <link rel="stylesheet" href="StorageYard/CSS/bootstrap-datetimepicker.css">
 <script type="text/javascript" src="StorageYard/JS/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 </div>

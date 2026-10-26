@@ -242,8 +242,15 @@ public class PunchedDataDaoImpl<T> extends GenericsDAOImpl<T> implements Punched
     }
 
     @Override
-    public List readDistinct(String dFrom, String eFrom, String cardCode, String item) {
+    public List readDistinct(String dFrom, String eFrom, String cardCode, String item, String type1) {
         String Condition = " and 1 = 1 ";
+        if (type1.equals("E")) {
+            Condition += " and empCode like '001%' ";
+        }
+        if (type1.equals("C")) {
+            Condition += " and empCode not like '001%' and empCode not like '002%' ";
+        }
+        
         if (cardCode != "" && cardCode != null) {
             Condition += " and a.empCode='" + cardCode + "' ";
         }
@@ -263,7 +270,23 @@ public class PunchedDataDaoImpl<T> extends GenericsDAOImpl<T> implements Punched
     
      @Override
     public List readDistinctforemp(String dFrom, String eFrom, String cardCode, String item,String emp) {
+        
+        
         String Condition = " and 1 = 1 ";
+        
+        
+        if(emp.length() == 5)
+            cardCode="001"+emp;
+        if(emp.length() == 4)
+            cardCode="0010"+emp;
+        if(emp.length() == 3)
+            cardCode="00100"+emp;
+        if(emp.length() == 2)
+            cardCode="00100"+emp;
+        if(emp.length() == 1)
+            cardCode="001000"+emp;
+        
+        
         if (cardCode != "" && cardCode != null) {
             Condition += " and a.empCode='" + cardCode + "' ";
         }
@@ -275,7 +298,7 @@ public class PunchedDataDaoImpl<T> extends GenericsDAOImpl<T> implements Punched
         String query = " Select distinct a.empCode "
                 + " from PunchedDataMaster a "
                 + " where STR_TO_DATE(a.lDate,'%Y-%m-%d') BETWEEN STR_TO_DATE('" + dFrom + "', '%Y-%m-%d') and STR_TO_DATE('" + eFrom + "', '%Y-%m-%d')"
-                + "  and  a.empCode like '%" +emp +"'"
+                + "  and  a.empCode like '%" +cardCode +"'"
                 + Condition;
 
         return getHibernateTemplate().find(query);

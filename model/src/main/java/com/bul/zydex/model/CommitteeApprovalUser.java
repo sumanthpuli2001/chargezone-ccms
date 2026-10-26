@@ -1,0 +1,64 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.bul.zydex.model;
+
+/**
+ *
+ * @author Bulwark-4
+ */
+public class CommitteeApprovalUser {
+    
+    private int id;
+    private CommitteeApprovalSetting committeeApprovalSetting;
+    private String userId;
+    private int level;
+
+    public CommitteeApprovalUser() {
+    }
+
+    public CommitteeApprovalUser(int id, CommitteeApprovalSetting committeeApprovalSetting, String userId, int level) {
+        this.id = id;
+        this.committeeApprovalSetting = committeeApprovalSetting;
+        this.userId = userId;
+        this.level = level;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public CommitteeApprovalSetting getCommitteeApprovalSetting() {
+        return committeeApprovalSetting;
+    }
+
+    public void setCommitteeApprovalSetting(CommitteeApprovalSetting committeeApprovalSetting) {
+        this.committeeApprovalSetting = committeeApprovalSetting;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+   
+    
+    
+}

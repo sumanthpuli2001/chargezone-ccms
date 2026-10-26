@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.CrcForm" table="crc_form" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="documentNo" type="string">    
+            <column name="document_no"  />
+        </property>
+        <property name="pcsName" type="string">    
+            <column name="pcs_name"  />
+        </property>
+         <property name="documentRevisionNo" type="string">    
+            <column name="document_revision_no"  />
+        </property>
+          <property name="oapNumber" type="string">    
+            <column name="oap_number"  />
+        </property>
+         <property name="siteSurveyAcceptance" type="string">    
+            <column name="site_survey_acceptance"  />
+        </property>
+           <property name="aggrementAcceptance" type="string">    
+            <column name="agreement_acceptance"  />
+        </property>
+        <property name="landOwnerShipDocument" type="string">    
+            <column name="land_ownership_document"  />
+        </property>
+         <property name="nocConsent" type="string">    
+            <column name="noc_consent"  />
+        </property>
+          <property name="comment" type="string">    
+            <column name="comment"  />
+        </property>
+         <property name="planLayoutSigned" type="string">    
+            <column name="plan_layout_signed"  />
+        </property>
+         <property name="projectBudgetOap" type="string">    
+            <column name="project_budget_oap"  />
+        </property>
+        <property name="projectTimelineOap" type="string">    
+            <column name="project_timeline_oap"  />
+        </property>
+         <property name="aaprovalComment" type="string">    
+            <column name="approval_comment"  />
+        </property>
+          <property name="billMaterialNo" type="string">    
+            <column name="bill_material_no"  />
+        </property>
+         <property name="pcsDrawingNumber" type="string">    
+            <column name="pcs_drawing_number"  />
+        </property>
+          <property name="scopeWork" type="string">    
+            <column name="scope_work"  />
+        </property>
+        <property name="deliverableReleaseDate" type="string">    
+            <column name="deliverable_released_date"  />
+        </property>
+        <property name="newRevisionNumber" type="string">    
+            <column name="new_revison_no"  />
+        </property>
+        <property name="reviewerComment" type="string">    
+            <column name="reviewer_comment"  />
+        </property>
+          <property name="preparedBy" type="string">    
+            <column name="prepared_by"  />
+        </property>      
+           <property name="designation" type="string">    
+            <column name="designation"  />
+        </property>
+         <property name="projectEngineer" type="string">    
+            <column name="project_engineer"  />
+        </property>
+         <property name="signatureDate" type="string">    
+            <column name="signature_date"  />
+        </property>
+           <many-to-one name="oapMaster" class="com.bul.zydex.model.OapMaster" fetch="select">
+            <column name="oap_master_id"  />
+        </many-to-one>
+        
+         <property name="flagStatus" type="java.lang.Integer">    
+            <column name="flag_status" length="200"  />
+        </property>
+         <many-to-one name="oapForm" class="com.bul.zydex.model.OapForm" fetch="select">
+            <column name="oap_form_id"  />
+        </many-to-one>
+          <property name="userid"  type="string">    
+            <column name="user_id"  />
+        </property>
+        
+        
+    </class>
+</hibernate-mapping>

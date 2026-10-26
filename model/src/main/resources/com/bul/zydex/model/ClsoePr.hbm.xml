@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.ClosePr" table="close_pr" catalog="eprocsuite_chargezone">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="tenderNo" type="string">    
+            <column name="tender_no" length="1000"  />
+        </property>
+        
+        <property name="vendorDetail" type="string">    
+            <column name="vendor_detail" length="1000"  />
+        </property>
+        
+        <property name="attachment" type="string">    
+            <column name="attachment" length="1000"  />
+        </property>
+        
+        <property name="remark" type="string">    
+            <column name="rematk" length="1000"  />
+        </property>
+        
+        <property name="prMasterId" type="java.lang.Integer">    
+            <column name="pr_master_id" length="10"  />
+        </property>
+        
+        <property name="closedBy" type="string">    
+            <column name="closed_by" length="1000"  />
+        </property>
+        
+        <property name="dateTime" type="string">    
+            <column name="dateTime" length="1000"  />
+        </property>
+        
+    </class>
+</hibernate-mapping>

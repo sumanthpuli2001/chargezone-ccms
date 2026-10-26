@@ -1,117 +1,214 @@
 <%-- 
     Document   : EmployeeEdit
-    Created on : Jun 11, 2020, 2:39:50 PM
-    Author     : Aman Bahukhandi
+    Created on : 29 March, 2025, 9:35:37 AM
+    Author     : Prachi
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
-    <%@include file="/WEB-INF/jsp/Common/Header.jsp"%>
-    <%@include file="/WEB-INF/jsp/Common/NavbarCmss.jsp"%>
+    <%@include file="/WEB-INF/jsp/Common/HeaderNew.jsp"%>
+
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Edit Employee</title>
     </head>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>Edit Employee</h1>
-            <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Edit Employee</li>
-            </ol>
-        </section>
 
-        <!-- Main content -->
-        <section class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Custom Tabs -->
-                    <div class="nav-tabs-custom">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tab_1">
-                                <span style="color: red;font-size: 14px;">* indicates mandatory field.</span>
-                                <c:if test="${!empty successMessage}">
-                                    <div class="fadeOutEffect alert alert-info" role="alert">${successMessage}</div>
-                                </c:if>
-                                <c:if test="${!empty failureMessage}">
-                                    <div class="fadeOutEffect alert alert-danger" role="alert">${failureMessage}</div>
-                                </c:if>
-                                <form:form action="employeeMaster.htm?act=editEmployeeMasterSubmit" method="post" commandName="employeeMaster"
-                                           class="form-horizontal" role="form">
-                                    <form:hidden path="rfId"></form:hidden>
-                                    <form:hidden path="dRow"></form:hidden>
-                                    <form:hidden path="rfIdDept"></form:hidden>
-                                    <form:hidden path="rfIdGuest"></form:hidden>
-                                        <div class="form-group">
-                                            <div class="col-sm-3">
-                                                <label class="control-label">Employee Code :<span style="color: red;font-size: 12px;">*</span></label>
-                                            </div>
-                                            <div class="col-sm-3">
-                                            <form:input path="employeeCode" class="form-control" readonly="true"  maxlength="30" required="required"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Name :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <form:input path="name" class="form-control"   maxlength="30" required="required"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Department :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <form:input path="department" class="form-control"   maxlength="30" required="required"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Designation :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <form:input path="designation" class="form-control"   maxlength="30" required="required"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-3">
-                                            <label class="control-label">Rights :<span style="color: red;font-size: 12px;">*</span></label>
-                                        </div>
-                                        <div class="col-sm-3">
-                                            <form:select path="rightsName"  class="form-control " required="required">
-                                                <c:forEach var="rightsType" items="${rightsType}">
-                                                    <c:choose>
-                                                        <c:when test="${rightsType eq  employeeMaster.rightsName}">
-                                                            <form:option value="${rightsType}" selected="true">${rightsType}</form:option>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <form:option value="${rightsType}">${rightsType}</form:option>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </c:forEach>
-                                            </form:select>
-                                        </div>
-                                    </div>
+    <body>
+        <main class="d-flex align-items-end justify-content-end">
+            <%@include file="/WEB-INF/jsp/Common/NavbarNew.jsp"%>
+            <section class="main-content">
+                <form:form action="employeeMaster.htm?act=editEmployeeMasterSubmit" method="post" commandName="employeeMaster"
+                           class="form-horizontal" role="form">
+                    <div class="content-top rounded-3 mb-3 d-flex align-items-center justify-content-between sticky-model0">
+                        <div class="page-title d-flex align-items-center">
+                            <div class="toggle-sidebar d-flex align-items-center justify-content-center mr-2">
+                                <img src="StorageYard/assets/images/menu-collapse.svg" class="fa-bars" onload="SVGInject(this)"
+                                     alt="Menu collapse">
+                                <img src="StorageYard/assets/images/menu-expand.svg" class="fa-bars-sort" onload="SVGInject(this)"
+                                     alt="Menu collapse">
+                            </div>
 
-                                    <div class="form-group">
-                                        <div class="col-sm-6 col-sm-offset-5">
-                                            <input type="submit" class="btn btn-primary" style="width: 100px;"  title="" value="SUBMIT">
-                                        </div>
-                                    </div>
-                                </form:form>
+                            <h5 class="fw-600 mb-0">Edit Employee</h5>
+                        </div>
 
-                            </div><!-- /.tab-pane -->
-                        </div><!-- /.tab-content -->
-                    </div><!-- nav-tabs-custom -->
-                </div><!-- /.col -->
-            </div>
-        </section><!-- /.content -->
-    </div><!-- /.content-wrapper -->
-    <%@include file="/WEB-INF/jsp/Common/Footer.jsp"%>
+                        <div class="cta d-flex align-items-center">
+                            <a href="employeeMaster.htm?act=showList" class="btn theme-btn light-btn mr-3">Back</a>
+                        </div>
+                    </div>
 
+                    <c:if test="${!empty failureMessage}">
+                        <div class="fadeOutEffect alert alert-danger mt-2 mb-2" style="display: flex; align-items: center; gap: 12px; background: #FFF3F3; color: #D8000C; font-size: 12px; padding: 5px 10px; border-radius: 8px; border: 1px solid #D8000C; box-shadow: 2px 2px 10px rgba(216, 0, 12, 0.2); position: relative; overflow: hidden; max-width: 100%; margin: auto;">
+                            <div style="background: #D8000C; color: white; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 14px;">!</div>
+                            <div>
+                                <strong>Note:</strong> <strong class="text-danger fs-13">${failureMessage} </strong><br>                            
+                            </div>
+                        </div>
+                    </c:if>
+                    <c:if test="${!empty successMessage}">
+                        <div class="fadeOutEffect alert alert-info mt-2 mb-2" style="display: flex; align-items: center; gap: 12px; background: #F0FFF4; color: #0F5132; font-size: 12px; padding: 5px 10px; border-radius: 8px; border: 1px solid #198754; box-shadow: 2px 2px 10px rgba(25, 135, 84, 0.2); position: relative; overflow: hidden; max-width: 100%; margin: auto;">                        
+                            <div style="background: #198754; color: white; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 14px; ">✓</div>  
+                            <div>
+                                <strong>Note:</strong> <strong class="text-success fs-13">${successMessage} </strong><br>
+                            </div>
+                        </div>
+                    </c:if>
+                    <div style="display: flex; align-items: center; gap: 12px; background: #FFF3F3; color: #D8000C; font-size: 12px; padding: 5px 10px; border-radius: 8px; border: 1px solid #D8000C; box-shadow: 2px 2px 10px rgba(216, 0, 12, 0.2); position: relative; overflow: hidden; max-width: 100%; margin: auto;">
+                        <div style="background: #D8000C; color: white; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: bold; font-size: 14px;">!</div>
+                        <div>
+                            <span style="font-weight: bold;">*</span> Fields marked with an asterisk are mandatory.
+                        </div>
+                    </div>
+
+                    <div class="rounded-4 mt-4">
+                        <div class="row mb-3">
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="label">Username<span
+                                            class="text-danger">*</span></label>
+                                        <form:input path="employeeCode" class="input-field" readonly="true"  maxlength="30" required="required"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="label">Full Name<span
+                                            class="text-danger">*</span></label>
+                                        <form:input path="name" class="input-field"   maxlength="30" required="required"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="label">Department :<span
+                                            class="text-danger">*</span></label>
+                                        <form:select path="department"  class="select-input " required="required">
+                                        <option value="">--select--</option>
+
+                                        <c:forEach var="departmentMaster" items="${departmentMaster}">
+                                            <form:option value="${departmentMaster.departmentName}">${departmentMaster.departmentName}</form:option>
+                                        </c:forEach>
+                                    </form:select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="label">Designation :<span
+                                            class="text-danger">*</span></label>
+                                        <form:select path="designation"  class="select-input " required="required">
+                                        <option value="">--select--</option>
+                                        <c:forEach var="designationMaster" items="${designationMaster}">
+                                            <form:option value="${designationMaster.designationName}">${designationMaster.designationName}</form:option>
+                                        </c:forEach>
+                                    </form:select>                                
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="label">Email Id<span
+                                            class="text-danger">*</span></label>
+                                        <form:input path="emailId" name="emailId" pattern="[^ @]*@[^ @]*" class="input-field"   required="required"/>  
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="label">Phone No :<span
+                                            class="text-danger">*</span></label>
+                                        <form:input path="phNo" name="phNo" class="input-field"  pattern="^\+[1-9][0-9]{0,3}\s?[0-9]{6,14}$"
+                                                    placeholder="Eg: +91 8765432198" title="Enter a valid phone number with country code (e.g. +91 8765432198)" required="required"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="label">Mobile No <span
+                                            class="text-danger">*</span></label>
+                                        <form:input path="mobileNo" name="mobileNo" class="input-field" pattern="^\+[1-9][0-9]{0,3}\s?[0-9]{6,14}$"
+                                                    placeholder="Eg: +91 8765432198" title="Enter a valid phone number with country code (e.g. +91 8765432198)" required="required"/>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="label">City :<span
+                                            class="text-danger">*</span></label>
+                                        <form:input path="city" name="city" class="input-field" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="label">Pin code :<span class="text-danger">*</span></label>
+                                    <form:input path="pincode" name="pincode" required="required" class="input-field" />
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="label">Location :<span class="text-danger">*</span></label>
+                                    <form:select path="location"  class="select-input " required="required">
+                                        <option value="">--select--</option>
+                                        <c:forEach var="companyLocation" items="${companyLocation}">
+                                            <form:option value="${companyLocation.locationName}">${companyLocation.locationName}</form:option>
+                                        </c:forEach>
+
+                                    </form:select>                               
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label for="name" class="label">Rights :<span class="text-danger">*</span></label>
+                                    <form:select path="rightsName" class="select-input " required="required">
+                                        <option value="">--select--</option>
+                                        <c:forEach var="rightsType" items="${rightsType}">
+                                            <c:choose>
+                                                <c:when test="${rightsType eq  employeeMaster.rightsName}">
+                                                    <form:option value="${rightsType}" selected="true">${rightsType}</form:option>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <form:option value="${rightsType}">${rightsType}</form:option>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </form:select>                               
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>
+                                        Address Line 1 :
+                                        <span style="color:red;font-size:12px;">*</span>
+                                    </label>
+                                    <form:input path="addressLine1" name="addressLine1" required="required" class="textarea-field comment" />
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>
+                                        Address Line 2 :<span style="color:red;font-size:12px;">*</span>
+                                    </label>
+                                    <form:input path="addressLine2" name="addressLine2" required="required" class="textarea-field comment" />                                </div>
+                            </div>
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label>
+                                        Address Line 3 :
+                                        <span style="color:red;font-size:12px;">*</span>
+                                    </label>
+                                    <form:input path="addressLine3" name="addressLine3" class="textarea-field comment" required="required" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">    
+                        <div style="display: flex;  justify-content: center;">
+                            <button type="submit" class="btn theme-btn">Submit</button>
+                        </div>
+                    </div>
+                </form:form>
+            </section>
+        </main>
+
+    </body>
+    <%@include file="/WEB-INF/jsp/Common/NewUIFooter.jsp"%>
 </html>
-

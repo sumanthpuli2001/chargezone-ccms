@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+  "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.bul.zydex.model.VendorInformation" table="vendor_information" catalog="eprocsuite_chargezone" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="vendorInvitationId" type="java.lang.Integer">
+            <column name="vendor_invitation_id" />
+        </property>
+        <property name="vendorEmailId" type="string">
+            <column name="vendor_email_id" />
+        </property>
+        <property name="companyName" type="string">
+            <column name="company_name" />
+        </property>
+        <property name="contactName" type="string">
+            <column name="contact_name" />
+        </property>
+        <property name="policyAccept" type="string">
+            <column name="policy_accept" />
+        </property>
+        
+        <property name="policyAccept2" type="string">
+            <column name="policy_accept2" />
+        </property>
+        
+        <property name="termsConditionAccept" type="string">
+            <column name="terms_condition_accept" />
+        </property>
+        <property name="termsConditionFile" type="string">
+            <column name="terms_condition_file" />
+        </property>
+        <property name="typeOfConcern" type="string">
+            <column name="type_of_concern" />
+        </property>
+        <property name="officeAddressLine1" type="string">
+            <column name="office_address_line1" />
+        </property>
+        <property name="officeAddressLine2" type="string">
+            <column name="office_address_line2" />
+        </property>
+        <property name="officeAddressLine3" type="string">
+            <column name="office_address_line3" />
+        </property>
+        <property name="officeCity" type="string">
+            <column name="office_city" />
+        </property>
+        <property name="officeDistrict" type="string">
+            <column name="office_district" />
+        </property>
+        <property name="officeState" type="string">
+            <column name="office_state" />
+        </property>
+        <property name="officePin" type="string">
+            <column name="office_pin" />
+        </property>
+        <property name="officeCountry" type="string">
+            <column name="office_country" />
+        </property>
+        <property name="officeTelephone" type="string">
+            <column name="office_telephone" />
+        </property>
+        <property name="officeMobile" type="string">
+            <column name="office_mobile" />
+        </property>
+        <property name="officeFax" type="string">
+            <column name="office_fax" />
+        </property>
+        <property name="officeEmail" type="string">
+            <column name="office_email" />
+        </property>
+        <property name="officeWebsite" type="string">
+            <column name="office_website" />
+        </property>
+        <property name="officeWeeklyHoliday" type="string">
+            <column name="office_weekly_holiday" />
+        </property>
+        <property name="officeContactPersonName" type="string">
+            <column name="office_contact_person_name" />
+        </property>
+        <property name="officeContactDesignation" type="string">
+            <column name="office_contact_designation" />
+        </property>
+        <property name="officeContactMobile" type="string">
+            <column name="office_contact_mobile" />
+        </property>
+        <property name="officeContactEmail" type="string">
+            <column name="office_contact_email" />
+        </property>
+        <property name="workAddressLine1" type="string">
+            <column name="work_address_line1" />
+        </property>
+        <property name="workAddressLine2" type="string">
+            <column name="work_address_line2" />
+        </property>
+        <property name="workAddressLine3" type="string">
+            <column name="work_address_line3" />
+        </property>
+        <property name="workCity" type="string">
+            <column name="work_city" />
+        </property>
+        <property name="workState" type="string">
+            <column name="work_state" />
+        </property>
+        <property name="workPin" type="string">
+            <column name="work_pin" />
+        </property>
+        <property name="workCountry" type="string">
+            <column name="work_country" />
+        </property>
+        <property name="workTelephone" type="string">
+            <column name="work_telephone" />
+        </property>
+        <property name="workMobile" type="string">
+            <column name="work_mobile" />
+        </property>
+        <property name="workFax" type="string">
+            <column name="work_fax" />
+        </property>
+        <property name="workEmail" type="string">
+            <column name="work_email" />
+        </property>
+        <property name="workWebsite" type="string">
+            <column name="work_website" />
+        </property>
+        <property name="workWeeklyHoliday" type="string">
+            <column name="work_weekly_holiday" />
+        </property>
+        <property name="workContactPersonName" type="string">
+            <column name="work_contact_person_name" />
+        </property>
+        <property name="workContactDesignation" type="string">
+            <column name="work_contact_designation" />
+        </property>
+        <property name="workContactMobile" type="string">
+            <column name="work_contact_mobile" />
+        </property>
+        <property name="workContactEmail" type="string">
+            <column name="work_contact_email" />
+        </property>
+        <property name="productService" type="string">
+            <column name="product_service" />
+        </property>
+        <property name="panNo" type="string">
+            <column name="pan_no" />
+        </property>
+        <property name="panFile" type="string">
+            <column name="pan_file" />
+        </property>
+        <property name="gstinNo" type="string">
+            <column name="gstin_no" />
+        </property>
+        <property name="gstinFile" type="string">
+            <column name="gstin_file" />
+        </property>
+        <property name="typeOfGst" type="string">
+            <column name="type_of_gst" />
+        </property>
+        <property name="productWiseCapacity" type="string">
+            <column name="product_wise_capacity" />
+        </property>
+        <property name="developmentCapabilities" type="string">
+            <column name="development_capabilities" />
+        </property>
+        <property name="machineryTechnology" type="string">
+            <column name="machinery_technology" />
+        </property>
+        <property name="materialHandling" type="string">
+            <column name="material_handling" />
+        </property>
+        <property name="firstYear" type="string">
+            <column name="first_year" />
+        </property>
+        <property name="firstYearFile" type="string">
+            <column name="first_year_file" />
+        </property>
+        <property name="secondYear" type="string">
+            <column name="second_year" />
+        </property>
+        <property name="secondYearFile" type="string">
+            <column name="second_year_file" />
+        </property>
+        <property name="thirdYear" type="string">
+            <column name="third_year" />
+        </property>
+        <property name="thirdYearFile" type="string">
+            <column name="third_year_file" />
+        </property>
+        <property name="balanceSheet" type="string">
+            <column name="balance_sheet" />
+        </property>
+        <property name="balanceSheetFile" type="string">
+            <column name="balance_sheet_file" />
+        </property>
+        <property name="msmeCertificate" type="string">
+            <column name="msme_certificate" />
+        </property>
+        <property name="msmeCertificateFile" type="string">
+            <column name="msme_certificate_file" />
+        </property>
+        <property name="majorCustomers" type="string">
+            <column name="major_customers" />
+        </property>
+        <property name="customerRatings" type="string">
+            <column name="customer_ratings" />
+        </property>
+        <property name="workCompletionCertificates" type="string">
+            <column name="work_completion_certificates" />
+        </property>
+        <property name="totalStaff" type="string">
+            <column name="total_staff" />
+        </property>
+        <property name="skilledWorkers" type="string">
+            <column name="skilled_workers" />
+        </property>
+        <property name="unskilledWorkers" type="string">
+            <column name="unskilled_workers" />
+        </property>
+        <property name="sexRatio" type="string">
+            <column name="sex_ratio" />
+        </property>
+        <property name="suspensionOfWork" type="string">
+            <column name="suspension_of_work" />
+        </property>
+        <property name="organizationOfQa" type="string">
+            <column name="organization_of_qa" />
+        </property>
+        <property name="environment" type="string">
+            <column name="environment" />
+        </property>
+        <property name="sustainability" type="string">
+            <column name="sustainability" />
+        </property>
+        <property name="fairLabourStandardFile" type="string">
+            <column name="fair_labour_standard_file" />
+        </property>
+        <property name="inspectionFacilities" type="string">
+            <column name="inspection_facilities" />
+        </property>
+        <property name="inspectionProcedure" type="string">
+            <column name="inspection_procedure" />
+        </property>
+        <property name="changeManagementProcess" type="string">
+            <column name="change_management_process" />
+        </property>
+        <property name="sustainabilityInitiativesFile" type="string">
+            <column name="sustainability_initiatives_file" />
+        </property>
+        <property name="carbonFootprint" type="string">
+            <column name="carbon_footprint" />
+        </property>
+        <property name="irReportFile" type="string">
+            <column name="ir_report_file" />
+        </property>
+        <property name="circularEconomyFile" type="string">
+            <column name="circular_economy_file" />
+        </property>
+        <property name="greenProductFile" type="string">
+            <column name="green_product_file" />
+        </property>
+        <property name="greenCompanyFile" type="string">
+            <column name="green_company_file" />
+        </property>
+        <property name="lifeCycleAnalysisFile" type="string">
+            <column name="life_cycle_analysis_file" />
+        </property>
+        <property name="awareAboutSafety" type="string">
+            <column name="aware_about_safety" />
+        </property>
+        <property name="incidentsDuringWork" type="string">
+            <column name="incidents_during_work" />
+        </property>
+        <property name="incidentsDetails" type="string">
+            <column name="incidents_details" />
+        </property>
+        <property name="additionalInformation" type="string">
+            <column name="additional_information" />
+        </property>
+        <property name="informationFurnishedByFile" type="string">
+            <column name="information_furnished_by_file" />
+        </property>
+        <property name="status1" type="java.lang.Integer">
+            <column name="status1" />
+        </property>
+        <property name="approvalOne" type="string">
+            <column name="approval_one" />
+        </property>
+        <property name="approvalTwo" type="string">
+            <column name="approval_two" />
+        </property>
+        <property name="vendorFile" type="string">
+            <column name="vendor_file" />
+        </property>
+        <property name="codeOfSupplier" type="string">
+            <column name="code_of_supplier" />
+        </property>
+        <property name="typeOfSupplier" type="string">
+            <column name="type_of_supplier" />
+        </property>
+        <property name="workingOfSupplier" type="string">
+            <column name="working_of_supplier" />
+        </property>
+        <property name="accountingGroup" type="string">
+            <column name="accounting_group" />
+        </property>
+        <property name="incoTerm" type="string">
+            <column name="inco_term" />
+        </property>
+        <property name="materialGroup" type="string">
+            <column name="material_group" />
+        </property>
+        <property name="materialSubGroup" type="string">
+            <column name="material_sub_group" />
+        </property>
+        <property name="policyFile" type="string">
+            <column name="policy_file" />
+        </property>
+        <property name="chequeFile" type="string">
+            <column name="cheque_file" />
+        </property>
+        <property name="approveDate" type="string">
+            <column name="approve_date" />
+        </property>
+        <property name="approvalThree" type="string">
+            <column name="approval_three" />
+        </property>
+        <property name="businessContinuity" type="string">
+            <column name="business_continuity" />
+        </property>
+        
+        
+        <property name="good" type="string">
+            <column name="good" />
+        </property>
+        <property name="service" type="string">
+            <column name="service" />
+        </property>
+        <property name="contract" type="string">
+            <column name="contract" />
+        </property>
+        <property name="general_traders" type="string">
+            <column name="general_traders" />
+        </property>
+        <property name="establishment" type="string">
+            <column name="establishment" />
+        </property>
+        
+        <property name="technical_job" type="string">
+            <column name="technical_job" />
+        </property>
+        <property name="quality_phone" type="string">
+            <column name="quality_phone" />
+        </property>
+        <property name="quality_job" type="string">
+            <column name="quality_job" />
+        </property>
+        <property name="quality_name" type="string">
+            <column name="quality_name" />
+        </property>
+        <property name="technical_phone" type="string">
+            <column name="technical_phone" />
+        </property>
+        
+        <property name="technical_name" type="string">
+            <column name="technical_name" />
+        </property>
+        <property name="sales_phone" type="string">
+            <column name="sales_phone" />
+        </property>
+        <property name="sales_job" type="string">
+            <column name="sales_job" />
+        </property>
+        <property name="sales_name" type="string">
+            <column name="sales_name" />
+        </property>
+        
+        
+        <property name="cst_no" type="string">
+            <column name="cst_no" />
+        </property>
+        <property name="cst_file" type="string">
+            <column name="cst_file" />
+        </property>
+        <property name="vat_pin" type="string">
+            <column name="vat_pin" />
+        </property>
+        <property name="vat_file" type="string">
+            <column name="vat_file" />
+        </property>
+        
+        <property name="ecc_no" type="string">
+            <column name="ecc_no" />
+        </property>
+        <property name="ecc_file" type="string">
+            <column name="ecc_file" />
+        </property>
+        <property name="service_tax" type="string">
+            <column name="service_tax" />
+        </property>
+        <property name="service_file" type="string">
+            <column name="service_file" />
+        </property>
+        
+        
+        <property name="accountNumber" type="string">
+            <column name="account_number" />
+        </property>
+        
+        <property name="bankName" type="string">
+            <column name="bank_name" />
+        </property>
+        <property name="branch" type="string">
+            <column name="branch" />
+        </property>
+        <property name="ifscCode" type="string">
+            <column name="ifsc_code" />
+        </property>
+        <property name="swiftCode" type="string">
+            <column name="swift_code" />
+        </property>
+        
+        
+        
+        <property name="manufacturer" type="string">
+            <column name="manufacturer" />
+        </property>
+        <property name="dealer" type="string">
+            <column name="dealer" />
+        </property>
+        <property name="traders" type="string">
+            <column name="traders" />
+        </property>
+        <property name="materialSupply" type="string">
+            <column name="material_supply" />
+        </property>
+        <property name="dealingServices" type="string">
+            <column name="dealing_service" />
+        </property>
+        
+        
+        <property name="capabilities1" type="string">
+            <column name="capabilities" />
+        </property>
+        <property name="specificProducts" type="string">
+            <column name="specific_products" />
+        </property>
+      
+      
+        <property name="qualityManagement" type="string">
+            <column name="quality_management" />
+        </property>
+        <property name="qualityIso" type="string">
+            <column name="quality_iso" />
+        </property>
+        <property name="qualityApi" type="string">
+            <column name="quality_api" />
+        </property>
+        <property name="qualityIs" type="string">
+            <column name="quality_is" />
+        </property>
+        <property name="qualityOthers" type="string">
+            <column name="quality_others" />
+        </property>
+        <property name="environmentManagement" type="string">
+            <column name="environment_management" />
+        </property>
+        <property name="indianChemical" type="string">
+            <column name="indian_chemical" />
+        </property>
+        
+        <property name="customerRemark" type="string">
+            <column name="customer_remark" />
+        </property>
+        
+        
+        <property name="policy1File" type="string">
+            <column name="policy1_file" />
+        </property>
+        
+        <property name="policy2File" type="string">
+            <column name="policy2_file" />
+        </property>
+        <property name="electricalService" type="string">
+            <column name="electrical_service" />
+        </property>
+
+        <property name="secoundMobile" type="string">
+            <column name="secound_mobile" />
+        </property>
+        
+        <property name="cancelCheck" type="string">
+            <column name="cancel_check" />
+        </property>
+        
+        
+        <property name="technicalApproval" type="string">
+            <column name="techincal_approval" />
+        </property>
+        <property name="finacialApproval" type="string">
+            <column name="finacial_approval"  />
+        </property>
+        
+        <property name="finacialFlag" type="java.lang.Integer">
+            <column name="finacial_flag" />
+        </property>
+        <property name="technicalFlag" type="java.lang.Integer">
+            <column name="techincal_flag" />
+        </property>
+        
+        
+        <property name="hrApproval" type="string">
+            <column name="hr_approval" />
+        </property>
+        <property name="safetyApproval" type="string">
+            <column name="saftey_approval" />
+        </property>
+        <property name="itApproval" type="string">
+            <column name="it_approval" />
+        </property>
+        
+        <property name="hrApprovalFlag" type="java.lang.Integer">
+            <column name="hr_approval_flag" />
+        </property>
+        
+        <property name="safteyApprovalFlag" type="java.lang.Integer">
+            <column name="safety_approval_flag" />
+        </property>
+        <property name="itApprovalFlag" type="java.lang.Integer">
+            <column name="it_approval_flag" />
+        </property>
+        
+        
+        <property name="saleEmail" type="string">
+            <column name="sale_email" />
+        </property>
+        
+        <property name="technicalContactEmail" type="string">
+            <column name="technical_contect_email" />
+        </property>
+        
+        <property name="qualityEmail" type="string">
+            <column name="quality_email" />
+        </property>
+        
+        
+        <property name="pfNo" type="string">
+            <column name="pf_no" />
+        </property>
+        <property name="cicNo" type="string">
+            <column name="cic_no" />
+        </property>
+        <property name="pfAttachment" type="string">
+            <column name="pf_attachment" />
+        </property>
+        <property name="cicAttachment" type="string">
+            <column name="cic_attachment" />
+        </property>
+        
+        
+        
+        
+        <property name="finical1" type="string">
+            <column name="finical_one" />
+        </property>
+        <property name="finical2" type="string">
+            <column name="finical_two" />
+        </property>
+        <property name="finical3" type="string">
+            <column name="finical_three" />
+        </property>
+        <property name="finicalAttachment1" type="string">
+            <column name="finical_one_attachment" />
+        </property>
+        <property name="finicalAttachment2" type="string">
+            <column name="finical_two_attachment" />
+        </property>
+        <property name="finicalAttachment3" type="string">
+            <column name="finical_three_attachment" />
+        </property>
+        <property name="finicalAmount1" type="string">
+            <column name="finical_one_amount" />
+        </property>
+        <property name="finicalAmount2" type="string">
+            <column name="finical_two_amount" />
+        </property>
+        <property name="finicalAmount3" type="string">
+            <column name="finical_three_amount" />
+        </property>
+        
+        <property name="vendorTypes" type="string">
+            <column name="vendor_types" />
+        </property>
+        <property name="groupCategory" type="string">
+            <column name="group_category" />
+        </property>
+        <property name="groupSubCategory" type="string">
+            <column name="group_sub_category" />
+        </property>
+        
+        <property name="bpGroup" type="string">
+            <column name="bp_group" />
+        </property>
+        <property name="email1" type="string">
+            <column name="email1" />
+        </property>
+        <property name="email2" type="string">
+            <column name="email2" />
+        </property>
+        <property name="email3" type="string">
+            <column name="email3" />
+        </property>
+        <property name="gstStatus" type="string">
+            <column name="gst_status" />
+        </property>
+        <property name="gstRemark" type="string">
+            <column name="gst_remark" />
+        </property>
+        
+        <property name="buyerCompany" type="string">
+            <column name="buyer_company" />
+        </property>
+        <property name="purchasingGroup" type="string">
+            <column name="purchasing_group" />
+        </property>
+        <property name="currency" type="string">
+            <column name="currency" />
+        </property>
+        <property name="groupCalculation" type="string">
+            <column name="group_calculation" />
+        </property>
+        <property name="termOfPayment" type="string">
+            <column name="term_of_payment" />
+        </property>
+        
+        
+        <property name="recAccountNo" type="string">
+            <column name="rec_account_no" />
+        </property>
+        <property name="bankKey" type="string">
+            <column name="bank_key" />
+        </property>
+        <property name="accountNo" type="string">
+            <column name="account_no" />
+        </property>
+        <property name="taxDetails" type="string">
+            <column name="tax_details" />
+        </property>
+        <property name="taxNumber" type="string">
+            <column name="tax_number" />
+        </property>
+        <property name="searchTerm1" type="string">
+            <column name="search_term_1" />
+        </property>
+        <property name="withoutHoldingTaxType" type="string">
+            <column name="without_holding_tax_type" />
+        </property>
+        <property name="withoutHoldingTaxCode" type="string">
+            <column name="without_holding_tax_code" />
+        </property>
+        <property name="managerialPersonDetails" type="string">
+            <column name="managerial_person_details" />
+        </property>
+        <property name="managerialPersonEmail" type="string">
+            <column name="managerial_person_email" />
+        </property>
+      
+        
+        <property name="managerialPersonJob" type="string">
+            <column name="managerial_person_job" />
+        </property>
+        <property name="managerialPersonPhone" type="string">
+            <column name="managerial_person_phone" />
+        </property>
+        <property name="managerialPersonDetails2" type="string">
+            <column name="managerial2_person_details" />
+        </property>
+        <property name="managerialPersonEmail2" type="string">
+            <column name="managerial2_person_email" />
+        </property>
+        <property name="managerialPersonJob2" type="string">
+            <column name="managerial2_person_job" />
+        </property>
+        
+        
+        <property name="managerialPersonPhone2" type="string">
+            <column name="managerial2_person1_phone" />
+        </property>
+        
+        
+        <property name="riskCategory" type="string">
+            <column name="risk_category" />
+        </property>
+        
+           <property name="vendorInviteSource" type="string">
+            <column name="vendor_invite_source" />
+        </property>
+        
+             <property name="msmeResponse" type="string">
+            <column name="msme_response" />
+        </property>
+        
+             <property name="epfoResponse" type="string">
+            <column name="epfo_response" />
+        </property>
+        
+        
+        <property name="gstStatuss" type="string">
+            <column name="gst_statuss" />
+        </property>
+        
+        <property name="gstRemarkk" type="string">
+            <column name="gst_remarkk" />
+        </property>
+        
+         <property name="panStatuss" type="string">
+            <column name="pan_statuss" />
+        </property>
+        
+        <property name="panRemarkk" type="string">
+            <column name="pan_remarkk" />
+        </property>
+        
+         <property name="msmeStatuss" type="string">
+            <column name="msme_statuss" />
+        </property>
+        
+        <property name="msmeRemarkk" type="string">
+            <column name="msme_remarkk" />
+        </property>
+        
+        
+         <property name="epfoStatuss" type="string">
+            <column name="epfo_statuss" />
+        </property>
+        
+        <property name="epfoRemarkk" type="string">
+            <column name="epfo_remarkk" />
+        </property>
+        
+        
+         <property name="cancelChequeStatuss" type="string">
+            <column name="cancel_cheque_statuss" />
+        </property>
+        
+        <property name="cancelChequeRemarkk" type="string">
+            <column name="cancel_cheque_remarkk" />
+        </property>
+        
+        
+           <property name="fin1Statuss" type="string">
+            <column name="fin1_statuss" />
+        </property>
+        
+        <property name="fin1Remarkk" type="string">
+            <column name="fin1_remarkk" />
+        </property>
+        
+        
+          <property name="fin2Statuss" type="string">
+            <column name="fin2_statuss" />
+        </property>
+        
+        <property name="fin2Remarkk" type="string">
+            <column name="fin2_remarkk" />
+        </property>
+        
+          <property name="fin3Statuss" type="string">
+            <column name="fin3_statuss" />
+        </property>
+        
+        <property name="fin3Remarkk" type="string">
+            <column name="fin3_remarkk" />
+        </property>
+        
+          
+        <property name="auditorName" type="string">
+            <column name="auditor_name" />
+        </property>
+        
+         <property name="auditorFlag" type="java.lang.Integer">
+            <column name="auditor_flag" />
+        </property>
+        
+            <property name="auditorAttachment" type="string">
+            <column name="auditor_attachment" />
+        </property>
+        
+            <property name="auditorRemark" type="string">
+            <column name="auditor_remark" />
+        </property>
+        
+          <property name="ndaPolicyFile" type="string">
+            <column name="nda_policy_file" />
+        </property>
+        
+        
+         <property name="ndaPolicyAccept" type="string">
+            <column name="nda_policy_accept" />
+        </property>
+        
+        <property name="companyProof" type="string">
+            <column name="company_proof" />
+        </property>
+        <property name="riskBand" type="string">
+            <column name="risk_band" />
+        </property>
+        <property name="specialComment" type="string">
+            <column name="special_comment" />
+        </property>
+        <property name="specialAttachment" type="string">
+            <column name="special_attachment" />
+        </property>
+        <property name="sapCode" type="string">
+            <column name="sap_code" />
+        </property>
+        
+        <property name="esicNo" type="string">
+            <column name="esic_no" />
+        </property>
+        <property name="esicFile" type="string">
+            <column name="esic_file" />
+        </property>
+        <property name="esicStatus" type="string">
+            <column name="esic_status" />
+        </property>
+        <property name="esicStatuss" type="string">
+            <column name="esic_statuss" />
+        </property>
+        <property name="esicRem" type="string">
+            <column name="esic_rem" />
+        </property>
+        <property name="esicRes" type="string">
+            <column name="esic_res" />
+        </property>
+        
+        
+        <property name="gstResponse" type="string">
+            <column name="gst_response" />
+        </property>
+        <property name="panResponse" type="string">
+            <column name="pan_response" />
+        </property>
+        <property name="panStatus" type="string">
+            <column name="pan_status" />
+        </property>
+        <property name="msmeStatus" type="string">
+            <column name="msme_status" />
+        </property>
+        <property name="epfoStatus" type="string">
+            <column name="epfo_status" />
+        </property>
+        <property name="eccStatus" type="string">
+            <column name="ecc_status" />
+        </property>
+        <property name="eccStatuss" type="string">
+            <column name="ecc_statuss" />
+        </property>
+        <property name="eccRemarkk" type="string">
+            <column name="ecc_remarkk" />
+        </property>
+        <property name="eccResponse" type="string">
+            <column name="ecc_response" />
+        </property>
+        <property name="cancelChequeResponse" type="string">
+            <column name="cancel_cheque_response" />
+        </property>
+        <property name="fin1Response" type="string">
+            <column name="fin1_response" />
+        </property>
+        <property name="fin2Response" type="string">
+            <column name="fin2_response" />
+        </property>
+        <property name="fin3Response" type="string">
+            <column name="fin3_response" />
+        </property>
+        
+        <property name="countryCodeoffTele" type="string">
+            <column name="country_code_off_tele" />
+        </property>
+        <property name="countryCodeNewMobiles" type="string">
+            <column name="country_code_new_mobiles" />
+        </property>
+        <property name="countryCodeVendorContact" type="string">
+            <column name="country_code_vendor_contact" />
+        </property>
+        <property name="countryCodeVendorContact1" type="string">
+            <column name="country_code_vendor_contact1" />
+        </property>
+        <property name="countryCodeVendorContact2" type="string">
+            <column name="country_code_vendor_contact2" />
+        </property>
+        <property name="companyProof2" type="string">
+            <column name="company_proof2" />
+        </property>
+        <property name="vendorActivatedDate" type="string">
+            <column name="vendor_activated_date" />
+        </property>
+        <property name="vendorCommentForBuyer" type="string">
+            <column name="vendor_comment_for_buyer" />
+        </property>
+        <property name="buyerCommentForApproval" type="string">
+            <column name="buyer_comments_for_approval" />
+        </property>
+        <property name="vendorFinancialUpdateComment" type="string">
+            <column name="vendor_financial_update_comment" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

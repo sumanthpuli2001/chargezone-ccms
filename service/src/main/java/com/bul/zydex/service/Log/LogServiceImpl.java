@@ -31,4 +31,24 @@ public class LogServiceImpl<T> extends GenericsServiceImpl<T> implements LogServ
         return logDao.readLogs(dFrom, eFrom);
     }
 
+    @Override
+    public List readLog(String user_name, String open_from_date, String open_to_date) {
+        return logDao.readLog(user_name, open_from_date, open_to_date);
+    }
+
+    @Override
+    public List getActivityLogsPagination(int start, int length, String searchValue, String userName, String fromDate, String toDate, String orderColumn, String orderDir) {
+        return logDao.getActivityLogsPagination(start, length, searchValue, userName, fromDate, toDate, orderColumn, orderDir);
+    }
+
+    @Override
+    public int getActivityLogsCount(String userName) {
+        return logDao.getActivityLogsCount(userName);
+    }
+
+    @Override
+    public int getFilteredActivityLogsCount(String searchValue, String userName, String fromDate, String toDate) {
+        return logDao.getFilteredActivityLogsCount(searchValue, userName, fromDate, toDate);
+    }
+
 }

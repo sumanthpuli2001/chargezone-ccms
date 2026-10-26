@@ -10,12 +10,14 @@ fi
 # Set memory limits to fit within Render free tier (512MB RAM)
 export CATALINA_OPTS="$CATALINA_OPTS -Xms128m -Xmx384m -XX:+UseG1GC"
 
-# Unpack ROOT.war if present
+# Unpack ROOT.war if present using jar
 if [ -f /usr/local/tomcat/webapps/ROOT.war ]; then
   echo "==> Extracting ROOT.war..."
   mkdir -p /usr/local/tomcat/webapps/ROOT
-  unzip -q /usr/local/tomcat/webapps/ROOT.war -d /usr/local/tomcat/webapps/ROOT
-  rm -f /usr/local/tomcat/webapps/ROOT.war
+  cd /usr/local/tomcat/webapps/ROOT
+  jar -xf ../ROOT.war
+  rm -f ../ROOT.war
+  cd /usr/local/tomcat
 fi
 
 PROP_FILE="/usr/local/tomcat/webapps/ROOT/WEB-INF/classes/com/bul/zydex/property/jdbc.properties"

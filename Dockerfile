@@ -5,7 +5,8 @@ FROM maven:3.8.6-openjdk-8-slim AS builder
 
 WORKDIR /build
 
-# Copy modules
+# Copy root pom.xml and all modules
+COPY pom.xml ./
 COPY controller ./controller
 COPY dao ./dao
 COPY model ./model
@@ -15,8 +16,8 @@ COPY validator ./validator
 COPY web ./web
 COPY zydex ./zydex
 
-# Build all modules (skipping tests for speed)
-RUN mvn -f zydex/pom.xml clean package -DskipTests -B
+# Build all modules using root pom.xml
+RUN mvn clean package -DskipTests -B
 
 # ==========================================
 # Step 2: Apache Tomcat 9 Runtime on Java 8
@@ -24,9 +25,6 @@ RUN mvn -f zydex/pom.xml clean package -DskipTests -B
 FROM tomcat:9.0-jdk8-openjdk-slim
 
 WORKDIR /usr/local/tomcat
-
-# Install unzip and curl
-RUN apt-get update && apt-get install -y --no-install-recommends unzip curl && rm -rf /var/lib/apt/lists/*
 
 # Remove default Tomcat webapps
 RUN rm -rf webapps/*

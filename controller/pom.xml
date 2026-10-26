@@ -146,6 +146,13 @@
         
         
 
+        <dependency>
+            <groupId>com.sap</groupId>
+            <artifactId>sapjco3</artifactId>
+            <version>3.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../web/src/main/webapp/WEB-INF/lib/sapjco3.jar</systemPath>
+        </dependency>
     </dependencies>
   
 </project>

@@ -18,8 +18,8 @@ for secfile in /usr/local/openjdk-8/jre/lib/security/java.security /usr/lib/jvm/
   fi
 done
 
-# Set JVM options: fit safely within 512MB RAM, prefer IPv4, enable TLS 1.2
-export CATALINA_OPTS="-Xms128m -Xmx288m -XX:MaxMetaspaceSize=128m -XX:+UseG1GC -Djava.net.preferIPv4Stack=true -Djdk.tls.client.protocols=TLSv1.2,TLSv1.3"
+# Set JVM options: fit safely within 512MB RAM, prefer IPv4, enable TLS 1.2, fast entropy & SerialGC
+export CATALINA_OPTS="-Xms128m -Xmx320m -XX:MaxMetaspaceSize=160m -XX:+UseSerialGC -Djava.security.egd=file:/dev/./urandom -Djava.net.preferIPv4Stack=true -Djdk.tls.client.protocols=TLSv1.2,TLSv1.3"
 
 # Unpack ROOT.war if present using jar
 if [ -f /usr/local/tomcat/webapps/ROOT.war ]; then

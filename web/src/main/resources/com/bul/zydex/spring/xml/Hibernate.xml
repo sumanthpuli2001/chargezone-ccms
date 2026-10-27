@@ -53,7 +53,7 @@
                 <!-- enable second level cache and query cache -->
                 <prop key="hibernate.cache.use_second_level_cache">true</prop>
                 <prop key="hibernate.cache.use_query_cache">true</prop>
-                <prop key="net.sf.ehcache.configurationResourceName">/com/bul/zydex/spring/xml/myehcache.xml</prop>
+                <prop key="net.sf.ehcache.configurationResourceName">/ehcache.xml</prop>
 
 
 

@@ -1,10 +1,14 @@
 #!/bin/bash
 set -e
 
+# Disable Tomcat shutdown port completely so Render port-scanner only sees the HTTP port
+sed -i 's/<Server port="8005"/<Server port="-1"/g' /usr/local/tomcat/conf/server.xml
+sed -i 's/<Server port="[0-9]*"/<Server port="-1"/g' /usr/local/tomcat/conf/server.xml
+
 # Render and other cloud platforms provide dynamic $PORT (e.g. 10000)
 if [ -n "$PORT" ]; then
-  echo "==> Configuring Tomcat port to $PORT and binding to 0.0.0.0"
-  sed -i "s/port=\"8080\"/port=\"$PORT\" address=\"0.0.0.0\"/g" /usr/local/tomcat/conf/server.xml
+  echo "==> Configuring Tomcat HTTP port to $PORT"
+  sed -i "s/port=\"8080\"/port=\"$PORT\"/g" /usr/local/tomcat/conf/server.xml
 fi
 
 # Optimize Tomcat JAR scanning to speed up boot by 60+ seconds

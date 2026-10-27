@@ -10,8 +10,16 @@ fi
 # Optimize Tomcat JAR scanning to speed up boot by 60+ seconds
 sed -i 's/tomcat.util.scan.StandardJarScanFilter.jarsToScan=/tomcat.util.scan.StandardJarScanFilter.jarsToScan=*jstl*,*standard*,*taglibs*,/g' /usr/local/tomcat/conf/catalina.properties
 
-# Set JVM options: fit safely within 512MB RAM, prefer IPv4 stack
-export CATALINA_OPTS="-Xms128m -Xmx288m -XX:MaxMetaspaceSize=128m -XX:+UseG1GC -Djava.net.preferIPv4Stack=true"
+# Allow legacy TLS algorithms in Java 8 security policy if needed
+for secfile in /usr/local/openjdk-8/jre/lib/security/java.security /usr/lib/jvm/*/jre/lib/security/java.security; do
+  if [ -f "$secfile" ]; then
+    sed -i 's/TLSv1, //g' "$secfile" 2>/dev/null || true
+    sed -i 's/TLSv1.1, //g' "$secfile" 2>/dev/null || true
+  fi
+done
+
+# Set JVM options: fit safely within 512MB RAM, prefer IPv4, enable TLS 1.2
+export CATALINA_OPTS="-Xms128m -Xmx288m -XX:MaxMetaspaceSize=128m -XX:+UseG1GC -Djava.net.preferIPv4Stack=true -Djdk.tls.client.protocols=TLSv1.2,TLSv1.3"
 
 # Unpack ROOT.war if present using jar
 if [ -f /usr/local/tomcat/webapps/ROOT.war ]; then
@@ -28,15 +36,20 @@ PROP_FILE="$PROP_DIR/jdbc.properties"
 
 if [ -d "$PROP_DIR" ]; then
   echo "==> Configuring database settings..."
+  FINAL_JDBC_URL="${JDBC_URL:-jdbc:mysql://localhost:3306/eprocsuite_chargezone}"
+  if [[ "$FINAL_JDBC_URL" == *"useSSL=true"* ]] && [[ "$FINAL_JDBC_URL" != *"enabledTLSProtocols"* ]]; then
+    FINAL_JDBC_URL="${FINAL_JDBC_URL}&enabledTLSProtocols=TLSv1.2"
+  fi
+
   cat << EOF > "$PROP_FILE"
 jdbc.database = ${JDBC_DATABASE:-eprocsuite_chargezone}
 jdbc.driverClassName = com.mysql.jdbc.Driver
-jdbc.url = ${JDBC_URL:-jdbc:mysql://localhost:3306/eprocsuite_chargezone}
+jdbc.url = $FINAL_JDBC_URL
 jdbc.username = ${JDBC_USERNAME:-root}
 jdbc.password = ${JDBC_PASSWORD:-root}
 jdbc2.database = ${JDBC_DATABASE:-eprocsuite_chargezone}
 jdbc2.driverClassName = com.mysql.jdbc.Driver
-jdbc2.url = ${JDBC_URL:-jdbc:mysql://localhost:3306/eprocsuite_chargezone}
+jdbc2.url = $FINAL_JDBC_URL
 jdbc2.username = ${JDBC_USERNAME:-root}
 jdbc2.password = ${JDBC_PASSWORD:-root}
 EOF

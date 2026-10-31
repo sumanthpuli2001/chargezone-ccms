@@ -29,14 +29,16 @@ WORKDIR /usr/local/tomcat
 # Remove default Tomcat webapps
 RUN rm -rf webapps/*
 
-# Copy built WAR as ROOT.war
-COPY --from=builder /build/web/target/web-*.war webapps/ROOT.war
+# Extract built WAR directly into webapps/ROOT during image build
+RUN mkdir -p webapps/ROOT
+COPY --from=builder /build/web/target/web-*.war webapps/ROOT/app.war
+RUN cd webapps/ROOT && jar -xf app.war && rm -f app.war
 
 # Copy entrypoint script and ensure Unix line endings
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN sed -i 's/\r$//' /usr/local/bin/docker-entrypoint.sh && chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Expose default port (Render overrides this with $PORT)
+# Expose default port
 EXPOSE 8080
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]

@@ -1,6 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context>
-    <JarScanner scanManifest="false" scanClassPath="false">
-        <JarScanFilter defaultPluggabilityScan="false" defaultTldScan="false" tldScan="*jstl*,*standard*,*taglibs*"/>
-    </JarScanner>
+<Context reloadable="false">
 </Context>

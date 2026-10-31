@@ -140,6 +140,11 @@ public class LogInController extends LogInAbstract {
             return mv;
         }
 //         ===== end reCAPTCHA v3 verification =====
+                if (user1 == null) {
+            request.setAttribute("faliureMessage", "Error : Username or Password is not valid or exist.");
+            mv = redirectToLogin(request, response);
+            return mv;
+        }
         if (user1.getUserType() == 0) {
             EmployeeMaster employeeMaster = employeeMasterService.read(login_name);
             try {
@@ -164,8 +169,8 @@ public class LogInController extends LogInAbstract {
         VendorMaster vendorMaster = vendorMasterService.readByRegNo(login_name);
         UserMaster u1 = userMasterService.read(login_name);
 
-        int flag = vendorMaster.getFlag();
-        String vendorId = u1.getLoginName();
+        int flag = (vendorMaster != null) ? vendorMaster.getFlag() : 0;
+        String vendorId = (u1 != null) ? u1.getLoginName() : "";
 
         if (user.getLoginName().equals("") & user.getPassword().equals("")) {
             request.setAttribute("faliureMessage",
@@ -187,7 +192,7 @@ public class LogInController extends LogInAbstract {
                 } else {
                     userMasterService.updateUserTry(user.getLoginName(), userTry);
                 }
-            } else if (u1.getUserType() == 0 || (u1.getLoginName().equals("Admin")) || (u1.getLoginName().equals("admin"))) {
+            } else if (u1 != null && (u1.getUserType() == 0 || "Admin".equalsIgnoreCase(u1.getLoginName()))) {
                 int lock = user.getLock1();
 
                 if (lock == 0) {
@@ -202,7 +207,7 @@ public class LogInController extends LogInAbstract {
                     mv = redirectToLogin(request, response);
 
                 }
-            } else if ((vendorMaster.getFlag() == 1 || vendorMaster.getFlag() == 2)) {
+            } else if (vendorMaster != null && (vendorMaster.getFlag() == 1 || vendorMaster.getFlag() == 2)) {
                 int lock = user.getLock1();
 
                 if (lock == 0) {
